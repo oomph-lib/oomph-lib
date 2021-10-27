@@ -286,6 +286,7 @@ namespace oomph
       Vector_of_vectors = 2,
     };
 
+
     /// Default constructor
     CRComplexMatrix() : CRMatrix<std::complex<double>>(), F_factors(0), Info(0)
     {

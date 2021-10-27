@@ -618,7 +618,8 @@ namespace oomph
 
     // METHOD 1
     // --------
-    if (this->Serial_matrix_matrix_multiply_method == SerialMatrixMultiplyMethod::Memory_efficient)
+    if (this->Serial_matrix_matrix_multiply_method ==
+        SerialMatrixMultiplyMethod::Memory_efficient)
     {
       // allocate storage for row starts
       row_start = new int[n + 1];
@@ -732,7 +733,8 @@ namespace oomph
     }
     // METHOD 2
     // --------
-    else if (this->Serial_matrix_matrix_multiply_method == SerialMatrixMultiplyMethod::Fastest)
+    else if (this->Serial_matrix_matrix_multiply_method ==
+             SerialMatrixMultiplyMethod::Fastest)
     {
       // generate array of maps to store values for result
       std::map<int, std::complex<double>>* result_maps =
@@ -804,7 +806,8 @@ namespace oomph
     }
     // METHOD 3
     // --------
-    else if (this->Serial_matrix_matrix_multiply_method == SerialMatrixMultiplyMethod::Vector_of_vectors)
+    else if (this->Serial_matrix_matrix_multiply_method ==
+             SerialMatrixMultiplyMethod::Vector_of_vectors)
     {
       // vectors of vectors to store results
       std::vector<std::vector<int>> result_cols(n);
