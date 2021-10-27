@@ -195,25 +195,25 @@ int main()
                                 n_col_square,
                                 n_row_square);
 
-  // test multiply method 2 (default)
+  // test multiply method Fastest (default)
   matrix_square.multiply(matrix_square_2, matrix_result);
   cout << "A B" << endl;
   print_complex_matrix(matrix_result);
 
-  // test default method is set to 2
-  cout << matrix_square.serial_matrix_matrix_multiply_method() << endl;
+  // test default method is set to 1 (equals Fastest in the enumeration)
+  cout << (matrix_square.serial_matrix_matrix_multiply_method() == CRComplexMatrix::SerialMatrixMultiplyMethod::Fastest) << endl;
 
   // test multiply method 1
-  matrix_square.serial_matrix_matrix_multiply_method() = 1;
+  matrix_square.serial_matrix_matrix_multiply_method() = CRComplexMatrix::SerialMatrixMultiplyMethod::Memory_efficient;
   matrix_square.multiply(matrix_square_2, matrix_result);
-  cout << matrix_square.serial_matrix_matrix_multiply_method() << endl;
+  cout << (matrix_square.serial_matrix_matrix_multiply_method() == CRComplexMatrix::SerialMatrixMultiplyMethod::Memory_efficient) << endl;
   cout << "A B" << endl;
   print_complex_matrix(matrix_result);
 
   // test multiply method 3
-  matrix_square.serial_matrix_matrix_multiply_method() = 3;
+  matrix_square.serial_matrix_matrix_multiply_method() = CRComplexMatrix::SerialMatrixMultiplyMethod::Vector_of_vectors;
   matrix_square.multiply(matrix_square_2, matrix_result);
-  cout << matrix_square.serial_matrix_matrix_multiply_method() << endl;
+  cout << (matrix_square.serial_matrix_matrix_multiply_method() == CRComplexMatrix::SerialMatrixMultiplyMethod::Vector_of_vectors) << endl;
   cout << "A B" << endl;
   print_complex_matrix(matrix_result);
 

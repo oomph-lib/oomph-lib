@@ -594,314 +594,303 @@ namespace oomph
     }
 #endif
 
-    // short name for Serial_matrix_matrix_multiply_method
-    unsigned method = this->Serial_matrix_matrix_multiply_method;
+    // NB n is number of rows!
+    const unsigned long n = this->nrow();
+    const unsigned long m = matrix_in.ncol();
+    unsigned long local_nnz = 0;
 
-    // if this matrix is not distributed and matrix in is not distributed
-    if ((method == 1) || (method == 2) || (method == 3))
+    // pointers to arrays which store result
+    int* row_start = 0;
+    std::complex<double>* value = 0;
+    int* column_index = 0;
+
+    // get pointers to matrix_in
+    const int* matrix_in_row_start = matrix_in.row_start();
+    const int* matrix_in_column_index = matrix_in.column_index();
+    const std::complex<double>* matrix_in_value = matrix_in.value();
+
+    // get pointers to this matrix
+    const std::complex<double>* i_value = this->value();
+    const int* i_row_start = this->row_start();
+    const int* i_column_index = this->column_index();
+
+    // clock_t clock1 = clock();
+
+    // METHOD 1
+    // --------
+    if (this->Serial_matrix_matrix_multiply_method == SerialMatrixMultiplyMethod::Memory_efficient)
     {
-      // NB n is number of rows!
-      const unsigned long n = this->nrow();
-      const unsigned long m = matrix_in.ncol();
-      unsigned long local_nnz = 0;
+      // allocate storage for row starts
+      row_start = new int[n + 1];
+      row_start[0] = 0;
 
-      // pointers to arrays which store result
-      int* row_start = 0;
-      std::complex<double>* value = 0;
-      int* column_index = 0;
+      // a set to store number of non-zero columns in each row of result
+      std::set<unsigned> columns;
 
-      // get pointers to matrix_in
-      const int* matrix_in_row_start = matrix_in.row_start();
-      const int* matrix_in_column_index = matrix_in.column_index();
-      const std::complex<double>* matrix_in_value = matrix_in.value();
-
-      // get pointers to this matrix
-      const std::complex<double>* i_value = this->value();
-      const int* i_row_start = this->row_start();
-      const int* i_column_index = this->column_index();
-
-      // clock_t clock1 = clock();
-
-      // METHOD 1
-      // --------
-      if (method == 1)
+      // run through rows of this matrix and matrix_in to find number of
+      // non-zero entries in each row of result
+      for (unsigned long i_row = 0; i_row < n; i_row++)
       {
-        // allocate storage for row starts
-        row_start = new int[n + 1];
-        row_start[0] = 0;
-
-        // a set to store number of non-zero columns in each row of result
-        std::set<unsigned> columns;
-
-        // run through rows of this matrix and matrix_in to find number of
-        // non-zero entries in each row of result
-        for (unsigned long i_row = 0; i_row < n; i_row++)
+        // run through non-zeros in i_row of this matrix
+        int i_row_end = i_row_start[i_row + 1];
+        for (int i_non_zero = i_row_start[i_row]; i_non_zero < i_row_end;
+             i_non_zero++)
         {
-          // run through non-zeros in i_row of this matrix
-          int i_row_end = i_row_start[i_row + 1];
-          for (int i_non_zero = i_row_start[i_row]; i_non_zero < i_row_end;
-               i_non_zero++)
-          {
-            // find column index for non-zero
-            int matrix_in_row = i_column_index[i_non_zero];
+          // find column index for non-zero
+          int matrix_in_row = i_column_index[i_non_zero];
 
-            // run through corresponding row in matrix_in
-            int matrix_in_row_end = matrix_in_row_start[matrix_in_row + 1];
-            for (int matrix_in_index = matrix_in_row_start[matrix_in_row];
-                 matrix_in_index < matrix_in_row_end;
-                 matrix_in_index++)
-            {
-              // find column index for non-zero in matrix_in and store in
-              // columns
-              columns.insert(matrix_in_column_index[matrix_in_index]);
-            }
+          // run through corresponding row in matrix_in
+          int matrix_in_row_end = matrix_in_row_start[matrix_in_row + 1];
+          for (int matrix_in_index = matrix_in_row_start[matrix_in_row];
+               matrix_in_index < matrix_in_row_end;
+               matrix_in_index++)
+          {
+            // find column index for non-zero in matrix_in and store in
+            // columns
+            columns.insert(matrix_in_column_index[matrix_in_index]);
           }
-          // update row_start
-          row_start[i_row + 1] = row_start[i_row] + columns.size();
-
-          // wipe values in columns
-          columns.clear();
         }
+        // update row_start
+        row_start[i_row + 1] = row_start[i_row] + columns.size();
 
-        // set local_nnz
-        local_nnz = row_start[n];
+        // wipe values in columns
+        columns.clear();
+      }
 
-        // allocate arrays for result
-        value = new std::complex<double>[local_nnz];
-        column_index = new int[local_nnz];
+      // set local_nnz
+      local_nnz = row_start[n];
 
-        // set all values of column_index to -1
-        for (unsigned long i = 0; i < local_nnz; i++)
+      // allocate arrays for result
+      value = new std::complex<double>[local_nnz];
+      column_index = new int[local_nnz];
+
+      // set all values of column_index to -1
+      for (unsigned long i = 0; i < local_nnz; i++)
+      {
+        column_index[i] = -1;
+      }
+
+      // Calculate values for result - first run through rows of this matrix
+      for (unsigned long i_row = 0; i_row < n; i_row++)
+      {
+        // run through non-zeros in i_row
+        int i_row_end = i_row_start[i_row + 1];
+        for (int i_non_zero = i_row_start[i_row]; i_non_zero < i_row_end;
+             i_non_zero++)
         {
-          column_index[i] = -1;
-        }
+          // find value of non-zero
+          std::complex<double> i_val = i_value[i_non_zero];
 
-        // Calculate values for result - first run through rows of this matrix
-        for (unsigned long i_row = 0; i_row < n; i_row++)
-        {
-          // run through non-zeros in i_row
-          int i_row_end = i_row_start[i_row + 1];
-          for (int i_non_zero = i_row_start[i_row]; i_non_zero < i_row_end;
-               i_non_zero++)
+          // find column associated with non-zero
+          int matrix_in_row = i_column_index[i_non_zero];
+
+          // run through corresponding row in matrix_in
+          int matrix_in_row_end = matrix_in_row_start[matrix_in_row + 1];
+          for (int matrix_in_index = matrix_in_row_start[matrix_in_row];
+               matrix_in_index < matrix_in_row_end;
+               matrix_in_index++)
           {
-            // find value of non-zero
-            std::complex<double> i_val = i_value[i_non_zero];
+            // find column index for non-zero in matrix_in
+            int col = matrix_in_column_index[matrix_in_index];
 
-            // find column associated with non-zero
-            int matrix_in_row = i_column_index[i_non_zero];
-
-            // run through corresponding row in matrix_in
-            int matrix_in_row_end = matrix_in_row_start[matrix_in_row + 1];
-            for (int matrix_in_index = matrix_in_row_start[matrix_in_row];
-                 matrix_in_index < matrix_in_row_end;
-                 matrix_in_index++)
+            // find position in result to insert value
+            int row_end = row_start[i_row + 1];
+            for (int insert_position = row_start[i_row];
+                 insert_position <= row_end;
+                 insert_position++)
             {
-              // find column index for non-zero in matrix_in
-              int col = matrix_in_column_index[matrix_in_index];
-
-              // find position in result to insert value
-              int row_end = row_start[i_row + 1];
-              for (int insert_position = row_start[i_row];
-                   insert_position <= row_end;
-                   insert_position++)
+              if (insert_position == row_end)
               {
-                if (insert_position == row_end)
-                {
-                  // error - have passed end of row without finding
-                  // correct column
-                  std::ostringstream error_message;
-                  error_message << "Error inserting value in result";
+                // error - have passed end of row without finding
+                // correct column
+                std::ostringstream error_message;
+                error_message << "Error inserting value in result";
 
-                  throw OomphLibError(error_message.str(),
-                                      OOMPH_CURRENT_FUNCTION,
-                                      OOMPH_EXCEPTION_LOCATION);
-                }
-                else if (column_index[insert_position] == -1)
-                {
-                  // first entry for this column index
-                  column_index[insert_position] = col;
-                  value[insert_position] =
-                    i_val * matrix_in_value[matrix_in_index];
-                  break;
-                }
-                else if (column_index[insert_position] == col)
-                {
-                  // column index already exists - add value
-                  value[insert_position] +=
-                    i_val * matrix_in_value[matrix_in_index];
-                  break;
-                }
+                throw OomphLibError(error_message.str(),
+                                    OOMPH_CURRENT_FUNCTION,
+                                    OOMPH_EXCEPTION_LOCATION);
+              }
+              else if (column_index[insert_position] == -1)
+              {
+                // first entry for this column index
+                column_index[insert_position] = col;
+                value[insert_position] =
+                  i_val * matrix_in_value[matrix_in_index];
+                break;
+              }
+              else if (column_index[insert_position] == col)
+              {
+                // column index already exists - add value
+                value[insert_position] +=
+                  i_val * matrix_in_value[matrix_in_index];
+                break;
               }
             }
           }
         }
       }
-
-      // METHOD 2
-      // --------
-      else if (method == 2)
-      {
-        // generate array of maps to store values for result
-        std::map<int, std::complex<double>>* result_maps =
-          new std::map<int, std::complex<double>>[n];
-
-        // run through rows of this matrix
-        for (unsigned long i_row = 0; i_row < n; i_row++)
-        {
-          // run through non-zeros in i_row
-          int i_row_end = i_row_start[i_row + 1];
-          for (int i_non_zero = i_row_start[i_row]; i_non_zero < i_row_end;
-               i_non_zero++)
-          {
-            // find value of non-zero
-            std::complex<double> i_val = i_value[i_non_zero];
-
-            // find column index associated with non-zero
-            int matrix_in_row = i_column_index[i_non_zero];
-
-            // run through corresponding row in matrix_in
-            int matrix_in_row_end = matrix_in_row_start[matrix_in_row + 1];
-            for (int matrix_in_index = matrix_in_row_start[matrix_in_row];
-                 matrix_in_index < matrix_in_row_end;
-                 matrix_in_index++)
-            {
-              // find column index for non-zero in matrix_in
-              int col =
-                matrix_in_column_index[matrix_in_index]; // This is the
-                                                         // offending line
-              // insert value
-              result_maps[i_row][col] +=
-                i_val * matrix_in_value[matrix_in_index];
-            }
-          }
-        }
-
-        // allocate row_start
-        row_start = new int[n + 1];
-
-        // copy across row starts
-        row_start[0] = 0;
-        for (unsigned long row = 0; row < n; row++)
-        {
-          int size = result_maps[row].size();
-          row_start[row + 1] = row_start[row] + size;
-        }
-
-        // set local_nnz
-        local_nnz = row_start[n];
-
-        // allocate other arrays
-        value = new std::complex<double>[local_nnz];
-        column_index = new int[local_nnz];
-
-        // copy values and column indices
-        for (unsigned long row = 0; row < n; row++)
-        {
-          unsigned insert_position = row_start[row];
-          for (std::map<int, std::complex<double>>::iterator i =
-                 result_maps[row].begin();
-               i != result_maps[row].end();
-               i++)
-          {
-            column_index[insert_position] = i->first;
-            value[insert_position] = i->second;
-            insert_position++;
-          }
-        }
-        // tidy up memory
-        delete[] result_maps;
-      }
-
-      // METHOD 3
-      // --------
-      else if (method == 3)
-      {
-        // vectors of vectors to store results
-        std::vector<std::vector<int>> result_cols(n);
-        std::vector<std::vector<std::complex<double>>> result_vals(n);
-
-        // run through the rows of this matrix
-        for (unsigned long i_row = 0; i_row < n; i_row++)
-        {
-          // run through non-zeros in i_row
-          int i_row_end = i_row_start[i_row + 1];
-          for (int i_non_zero = i_row_start[i_row]; i_non_zero < i_row_end;
-               i_non_zero++)
-          {
-            // find value of non-zero
-            std::complex<double> i_val = i_value[i_non_zero];
-
-            // find column index associated with non-zero
-            int matrix_in_row = i_column_index[i_non_zero];
-
-            // run through corresponding row in matrix_in
-            int matrix_in_row_end = matrix_in_row_start[matrix_in_row + 1];
-            for (int matrix_in_index = matrix_in_row_start[matrix_in_row];
-                 matrix_in_index < matrix_in_row_end;
-                 matrix_in_index++)
-            {
-              // find column index for non-zero in matrix_in
-              int col = matrix_in_column_index[matrix_in_index];
-
-              // insert value
-              int size = result_cols[i_row].size();
-              for (int i = 0; i <= size; i++)
-              {
-                if (i == size)
-                {
-                  // first entry for this column
-                  result_cols[i_row].push_back(col);
-                  result_vals[i_row].push_back(
-                    i_val * matrix_in_value[matrix_in_index]);
-                }
-                else if (col == result_cols[i_row][i])
-                {
-                  // column already exists
-                  result_vals[i_row][i] +=
-                    i_val * matrix_in_value[matrix_in_index];
-                  break;
-                }
-              }
-            }
-          }
-        }
-
-        // allocate row_start
-        row_start = new int[n + 1];
-
-        // copy across row starts
-        row_start[0] = 0;
-        for (unsigned long row = 0; row < n; row++)
-        {
-          int size = result_cols[row].size();
-          row_start[row + 1] = row_start[row] + size;
-        }
-
-        // set local_nnz
-        local_nnz = row_start[n];
-
-        // allocate other arrays
-        value = new std::complex<double>[local_nnz];
-        column_index = new int[local_nnz];
-
-        // copy across values and column indices
-        for (unsigned long row = 0; row < n; row++)
-        {
-          unsigned insert_position = row_start[row];
-          unsigned nnn = result_cols[row].size();
-          for (unsigned i = 0; i < nnn; i++)
-          {
-            column_index[insert_position] = result_cols[row][i];
-            value[insert_position] = result_vals[row][i];
-            insert_position++;
-          }
-        }
-      }
-
-      // build
-      const unsigned long n_nz = this->nnz();
-      result.build_without_copy(value, column_index, row_start, n_nz, m, n);
     }
+    // METHOD 2
+    // --------
+    else if (this->Serial_matrix_matrix_multiply_method == SerialMatrixMultiplyMethod::Fastest)
+    {
+      // generate array of maps to store values for result
+      std::map<int, std::complex<double>>* result_maps =
+        new std::map<int, std::complex<double>>[n];
+
+      // run through rows of this matrix
+      for (unsigned long i_row = 0; i_row < n; i_row++)
+      {
+        // run through non-zeros in i_row
+        int i_row_end = i_row_start[i_row + 1];
+        for (int i_non_zero = i_row_start[i_row]; i_non_zero < i_row_end;
+             i_non_zero++)
+        {
+          // find value of non-zero
+          std::complex<double> i_val = i_value[i_non_zero];
+
+          // find column index associated with non-zero
+          int matrix_in_row = i_column_index[i_non_zero];
+
+          // run through corresponding row in matrix_in
+          int matrix_in_row_end = matrix_in_row_start[matrix_in_row + 1];
+          for (int matrix_in_index = matrix_in_row_start[matrix_in_row];
+               matrix_in_index < matrix_in_row_end;
+               matrix_in_index++)
+          {
+            // find column index for non-zero in matrix_in
+            int col = matrix_in_column_index[matrix_in_index]; // This is the
+                                                               // offending line
+            // insert value
+            result_maps[i_row][col] += i_val * matrix_in_value[matrix_in_index];
+          }
+        }
+      }
+
+      // allocate row_start
+      row_start = new int[n + 1];
+
+      // copy across row starts
+      row_start[0] = 0;
+      for (unsigned long row = 0; row < n; row++)
+      {
+        int size = result_maps[row].size();
+        row_start[row + 1] = row_start[row] + size;
+      }
+
+      // set local_nnz
+      local_nnz = row_start[n];
+
+      // allocate other arrays
+      value = new std::complex<double>[local_nnz];
+      column_index = new int[local_nnz];
+
+      // copy values and column indices
+      for (unsigned long row = 0; row < n; row++)
+      {
+        unsigned insert_position = row_start[row];
+        for (std::map<int, std::complex<double>>::iterator i =
+               result_maps[row].begin();
+             i != result_maps[row].end();
+             i++)
+        {
+          column_index[insert_position] = i->first;
+          value[insert_position] = i->second;
+          insert_position++;
+        }
+      }
+      // tidy up memory
+      delete[] result_maps;
+    }
+    // METHOD 3
+    // --------
+    else if (this->Serial_matrix_matrix_multiply_method == SerialMatrixMultiplyMethod::Vector_of_vectors)
+    {
+      // vectors of vectors to store results
+      std::vector<std::vector<int>> result_cols(n);
+      std::vector<std::vector<std::complex<double>>> result_vals(n);
+
+      // run through the rows of this matrix
+      for (unsigned long i_row = 0; i_row < n; i_row++)
+      {
+        // run through non-zeros in i_row
+        int i_row_end = i_row_start[i_row + 1];
+        for (int i_non_zero = i_row_start[i_row]; i_non_zero < i_row_end;
+             i_non_zero++)
+        {
+          // find value of non-zero
+          std::complex<double> i_val = i_value[i_non_zero];
+
+          // find column index associated with non-zero
+          int matrix_in_row = i_column_index[i_non_zero];
+
+          // run through corresponding row in matrix_in
+          int matrix_in_row_end = matrix_in_row_start[matrix_in_row + 1];
+          for (int matrix_in_index = matrix_in_row_start[matrix_in_row];
+               matrix_in_index < matrix_in_row_end;
+               matrix_in_index++)
+          {
+            // find column index for non-zero in matrix_in
+            int col = matrix_in_column_index[matrix_in_index];
+
+            // insert value
+            int size = result_cols[i_row].size();
+            for (int i = 0; i <= size; i++)
+            {
+              if (i == size)
+              {
+                // first entry for this column
+                result_cols[i_row].push_back(col);
+                result_vals[i_row].push_back(i_val *
+                                             matrix_in_value[matrix_in_index]);
+              }
+              else if (col == result_cols[i_row][i])
+              {
+                // column already exists
+                result_vals[i_row][i] +=
+                  i_val * matrix_in_value[matrix_in_index];
+                break;
+              }
+            }
+          }
+        }
+      }
+
+      // allocate row_start
+      row_start = new int[n + 1];
+
+      // copy across row starts
+      row_start[0] = 0;
+      for (unsigned long row = 0; row < n; row++)
+      {
+        int size = result_cols[row].size();
+        row_start[row + 1] = row_start[row] + size;
+      }
+
+      // set local_nnz
+      local_nnz = row_start[n];
+
+      // allocate other arrays
+      value = new std::complex<double>[local_nnz];
+      column_index = new int[local_nnz];
+
+      // copy across values and column indices
+      for (unsigned long row = 0; row < n; row++)
+      {
+        unsigned insert_position = row_start[row];
+        unsigned nnn = result_cols[row].size();
+        for (unsigned i = 0; i < nnn; i++)
+        {
+          column_index[insert_position] = result_cols[row][i];
+          value[insert_position] = result_vals[row][i];
+          insert_position++;
+        }
+      }
+    }
+
+    // build
+    const unsigned long n_nz = this->nnz();
+    result.build_without_copy(value, column_index, row_start, n_nz, m, n);
   }
 
   //=============================================================================
