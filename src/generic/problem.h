@@ -2005,7 +2005,7 @@ namespace oomph
       Vector<DoubleVector> eigenvector_real;
       Vector<DoubleVector> eigenvector_imag;
       solve_eigenproblem(
-        n_eval, eigenvalue, eigenvector_real, eigenvector_imag, steady);
+        n_eval, eigenvalue, eigenvector_real, eigenvector_imag, make_timesteppers_steady);
     }
 
     /// Solve an eigenproblem as assembled by the Problem's constituent

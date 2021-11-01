@@ -543,16 +543,14 @@ namespace oomph
         Linear_solver_pt->enable_resolve();
       }
 
-      // Solve for the first vector (no need for a distribution)
-      DoubleVector X;
+      // Solve the first vector
+      DoubleVector X(x.distribution_pt());
 
       // Premultiply by mass matrix
       M_pt->multiply(x.doublevector(0), X);
 
-      // For some reason I need to create a new vector and copy here
-      // This is odd and not expected, examine carefully
-      DoubleVector Y;
-      Linear_solver_pt->solve(AsigmaM_pt, X, Y);
+      // Create output vector
+      DoubleVector Y(x.distribution_pt());
 
       // Need to synchronise
       //#ifdef OOMPH_HAS_MPI
@@ -590,16 +588,16 @@ namespace oomph
     : public DoubleMultiVectorOperator
   {
   private:
-    // Pointer to the problem
+    /// Pointer to the problem
     Problem* Problem_pt;
 
-    // Pointer to the linear solver used
+    /// Pointer to the linear solver used
     LinearSolver* Linear_solver_pt;
 
-    // Storage for the shift
+    /// Storage for the shift
     double Sigma;
 
-    // Storage for the matrices
+    /// Storage for the matrices
     CRDoubleMatrix *M_pt, *AsigmaM_pt;
 
   public:
@@ -609,26 +607,26 @@ namespace oomph
       const double& sigma = 0.0)
       : Problem_pt(problem_pt), Linear_solver_pt(linear_solver_pt), Sigma(sigma)
     {
-      // Before we get into the Arnoldi loop solve the shifted matrix problem
-      // Allocated Row compressed matrices for the mass matrix and shifted main
-      // matrix
+      /// Before we get into the Arnoldi loop solve the shifted matrix problem
+      /// Allocated Row compressed matrices for the mass matrix and shifted main
+      /// matrix
       M_pt = new CRDoubleMatrix(problem_pt->dof_distribution_pt());
       AsigmaM_pt = new CRDoubleMatrix(problem_pt->dof_distribution_pt());
 
-      // Assemble the matrices
+      /// Assemble the matrices
       problem_pt->get_eigenproblem_matrices(*M_pt, *AsigmaM_pt, Sigma);
 
-      // Get the transpose of the mass and jacobian
-      // NB Only difference to ProblemBasedShiftInvertOperator
+      /// Get the transpose of the mass and jacobian
+      /// NB Only difference to ProblemBasedShiftInvertOperator
       M_pt->get_matrix_transpose(M_pt);
       AsigmaM_pt->get_matrix_transpose(AsigmaM_pt);
 
-      // Do not report the time taken
+      /// Do not report the time taken
       Linear_solver_pt->disable_doc_time();
     }
 
 
-    // Now specify how to apply the operator
+    /// Now specify how to apply the operator
     void apply(const DoubleMultiVector& x, DoubleMultiVector& y) const
     {
       const unsigned n_vec = x.nvector();
@@ -637,13 +635,14 @@ namespace oomph
       {
         Linear_solver_pt->enable_resolve();
       }
-      // Solve the first vector
 
+      /// Solve the first vector
       DoubleVector X(x.distribution_pt());
-      // Premultiply by mass matrix
+
+      /// Premultiply by mass matrix
       M_pt->multiply(x.doublevector(0), X);
-      // For some reason I need to create a new vector and copy here
-      // This is odd and not expected, examine carefully
+
+      /// Create output vector
       DoubleVector Y(x.distribution_pt());
       Linear_solver_pt->solve(AsigmaM_pt, X, Y);
 
@@ -652,7 +651,7 @@ namespace oomph
         y(0, i) = Y[i];
       }
 
-      // Now loop over the others and resolve
+      /// Now loop over the others and resolve
       for (unsigned v = 1; v < n_vec; ++v)
       {
         M_pt->multiply(x.doublevector(v), X);
@@ -1081,7 +1080,7 @@ namespace oomph
                                     Vector<DoubleVector>& eigenvector)
     {
       // No access to sigma, so set from sigma real
-      Sigma = Sigma_real;
+      double Sigma = Sigma_real;
 
       // Initially be dumb here
       Linear_solver_pt = problem_pt->linear_solver_pt();
