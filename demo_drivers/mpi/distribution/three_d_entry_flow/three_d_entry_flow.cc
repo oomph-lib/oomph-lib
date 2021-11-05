@@ -23,7 +23,7 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
-///Driver for a 3D navier stokes entry flow problem in quarter tube domain
+/// Driver for a 3D navier stokes entry flow problem in quarter tube domain
 
 //Generic routines
 #include "generic.h"
@@ -72,7 +72,7 @@ public:
    Doc_info.number()++;
   }
 
- /// \short Update the problem specs before solve 
+ /// Update the problem specs before solve 
  void actions_before_newton_solve();
 
  /// After adaptation: Pin redudant pressure dofs.
@@ -86,7 +86,7 @@ public:
  /// Doc the solution
  void doc_solution();
 
- /// \short Overload generic access function by one that returns
+ /// Overload generic access function by one that returns
  /// a pointer to the specific  mesh
  RefineableQuarterTubeMesh<ELEMENT>* mesh_pt() 
   {
@@ -290,9 +290,9 @@ void EntryFlowProblem<ELEMENT>::doc_solution()
  
 
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
 
 
 //=start_of_main=======================================================

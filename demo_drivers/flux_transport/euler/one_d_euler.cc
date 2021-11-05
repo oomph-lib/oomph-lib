@@ -206,7 +206,7 @@ public:
 
  } // End of constructor
 
- ///Output the face element
+ /// Output the face element
  void output_faces(std::ostream &outfile)
   {
    //Loop over the elements
@@ -424,7 +424,7 @@ class EulerProblem : public Problem
 template<class ELEMENT>
 class DGProblem : public EulerProblem
  {
-  ///Pointer to a slope limiter
+  /// Pointer to a slope limiter
   SlopeLimiter* Slope_limiter_pt;
   
 
@@ -458,14 +458,14 @@ class DGProblem : public EulerProblem
               << std::endl;
    }
 
-  ///Clean-up memory
+  /// Clean-up memory
   ~DGProblem()
    {
     delete Slope_limiter_pt;
    }
 
 
- ///Slope limit the solution, if required
+ /// Slope limit the solution, if required
  //void actions_after_explicit_timestep()
  // {dynamic_cast<DGMesh*>(this->mesh_pt())->limit_slopes(Slope_limiter_pt);}
 

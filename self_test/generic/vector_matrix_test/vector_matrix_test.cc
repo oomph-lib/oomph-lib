@@ -90,7 +90,7 @@ int main(int argc, char* argv[])
   // should be 0
   out_file << vector_matrix_1.ncol() << "\n";
 
-  ////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////
   
   // Lastly, check other constructors.
   const unsigned nrow = 101;

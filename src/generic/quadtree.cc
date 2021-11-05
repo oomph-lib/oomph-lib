@@ -1314,7 +1314,7 @@ namespace oomph
   //================================================================
   /// Open output files that will stored any hanging nodes that are
   /// created in the mesh refinement process.
-  ///===============================================================
+  /// ===============================================================
   void QuadTreeForest::open_hanging_node_files(
     DocInfo& doc_info, Vector<std::ofstream*>& output_stream)
   {

@@ -1,85 +1,45 @@
 #! /bin/sh
 
 #=======================================================
-# Shell script to turn build *.php script that
-# randomly displays the gif files in the oomph-lib
-# documentation and provides a link to the relevant
-# tutorial.
-# 
-# Most of it is straightforard shell-scriptery
-# The clever bits are a customisation of the
-# script discussed at
-#
-#    http://www.i-fubar.com/rotation-ad-script.php
-# 
+# Shell script to build js file which contains an array
+# of figures, their titles and a link to their
+# corresponding documentations. Used in random picture
+# show.
 #=======================================================
 
+# Variable name, start array literal
+echo "var figures = [" > rotate_gifs.js
 
-#------------------------------
-# WRITE HEADER FOR PHP AND
-# INITIALISE COUNTER
-#------------------------------
-echo "<?php" > rotate_gifs.php
-echo "\$bannerCounter= 1;" >> rotate_gifs.php
+# Find all figures directories
+for dir in `find .. -path '../leftovers' -prune -o -name 'figures' -print `; do
 
+    # Find gifs in figures directories
+    for gif in `find $dir -name '*.gif' ` ; do
 
-#------------------------------
-# FIND ALL FIGURES DIRECTORIES 
-#------------------------------
-for dir in `find .. -path '../leftovers' -prune -o -name 'figures' -print `; do 
-
-    #------------------------------
-    # FIND GIFS IN FIGURES DIRECTORIES 
-    #------------------------------
-    for gif in `find $dir -name '*.gif' ` ; do 
-
-        #--------------------------------------
-        # THE LINK FROM THE FIGURE SHOULD POINT
-        # TO THE CORRESPONDING DOCUMENTATION
-        # WHICH IS LOCATED HERE:
-        #--------------------------------------
+        # Get corresponing documentation using figure directory
         link=` echo $dir"/../html/index.html " `
 
+        # Get the title by greping for mainpage in txt files,
+        # getting the first match, trimming off "\mainpage"
+        # and removing control characters and speech marks
+        grep -h mainpage ` echo $dir"/../*.txt" ` \
+            | head -1 \
+            | cut -c 10- \
+            | tr -d "[:cntrl:]" \
+            | tr -d \" \
+            > .tmp.txt
+        title=`cat .tmp.txt`
+        rm -f .tmp.txt
 
-        #--------------------------------------
-        # FIND THE DOXYGEN SOURCE FILE TO EXTRACT
-        # THE TITLE OF THE TUTORIAL; STRIP OUT
-        # THE /mainpage AND ANY QUOTATION MARKS
-        #--------------------------------------
-        grep mainpage ` echo $dir"/../*.txt" ` > .tmp.txt
-        sed 's/\\mainpage//g' < .tmp.txt > .tmp2.txt
-        sed 's/"//g' < .tmp2.txt > .tmp3.txt
-        title=`cat .tmp3.txt`
-        rm -f .tmp.txt .tmp2.txt .tmp3.txt
-
-        #--------------------------------------
-        # HERE'S THE BANNER CODE ITSELF
-        #--------------------------------------
-        echo "\$bannerCode[\$bannerCounter] = \"<CENTER><H2>$title</H2></CENTER><A HREF=\\\"$link\\\"><IMG SRC=\\\"$gif\\\" class=\\\"img-responsive centered\\\" border=0></A>\";" >> rotate_gifs.php
-        echo "\$bannerCounter++;" >> rotate_gifs.php
+        # Add this gif to the array
+        echo "{" >> rotate_gifs.js
+        echo "\"title\": \"$title\"", >> rotate_gifs.js
+        echo "\"link\": \"$link\"", >> rotate_gifs.js
+        echo "\"gif\": \"$gif\"" >> rotate_gifs.js
+        echo "}," >> rotate_gifs.js
 
     done
 done
 
-
-#------------------------------
-# WRITE FOOTER FOR PHP 
-#------------------------------
-echo "\$bannerAdTotals = \$bannerCounter - 1;" >> rotate_gifs.php
-echo "if(\$bannerAdTotals>1)" >> rotate_gifs.php
-echo "{" >> rotate_gifs.php
-echo "   mt_srand((double)microtime() * 1234567);" >> rotate_gifs.php
-echo "   \$bannerPicked = mt_rand(1, \$bannerAdTotals);" >> rotate_gifs.php
-echo "}" >> rotate_gifs.php
-echo "else" >> rotate_gifs.php
-echo "{" >> rotate_gifs.php
-echo "   \$bannerPicked = 1;" >> rotate_gifs.php
-echo "}" >> rotate_gifs.php
-echo "\$bannerAd = \$bannerCode[\$bannerPicked];" >> rotate_gifs.php
-echo " " >> rotate_gifs.php
-
-echo "\$bannerAd = str_replace('\"', '\'', \$bannerAd);" >> rotate_gifs.php
-echo "   print(\"document.write(\\\"\$bannerAd\\\")\");" >> rotate_gifs.php
-echo "?>" >> rotate_gifs.php
-
-
+# End array literal
+echo "];" >> rotate_gifs.js

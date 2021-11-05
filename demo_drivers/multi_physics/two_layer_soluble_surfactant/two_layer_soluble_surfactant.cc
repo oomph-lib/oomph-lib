@@ -77,16 +77,16 @@ namespace Global_Physical_Variables
   //----------------
   double L = 28.0;
 
-  ///Fluid property Ratios
+  /// Fluid property Ratios
   //----------------------------
   
   //Density ratio:
-  /// \short Ratio of density in upper fluid to density in lower
+  /// Ratio of density in upper fluid to density in lower
   /// fluid. Reynolds number etc. is based on density in lower fluid.
   double R = 1.0;
 
   //Vecosity ratio;
-  /// \short Ratio of viscosity in upper fluid to viscosity in lower
+  /// Ratio of viscosity in upper fluid to viscosity in lower
   /// fluid. Reynolds number etc. is based on viscosity in lower fluid.
   double M = 0.5;
 
@@ -107,7 +107,7 @@ namespace Global_Physical_Variables
   /// on the viscous scale and so multiplying the normal stress balanced by the
   /// Reynolds number gives a term in the Capillary number only (Ca Re = We).
   
-  /// \short Capillary number (of which the results are independent
+  /// Capillary number (of which the results are independent
   /// for a pinned surface)
   double Ca = 0.001;
   
@@ -120,40 +120,40 @@ namespace Global_Physical_Variables
   /// Surfactant Parameters
   //--------------------------
   
-  /// \short Marangoni number
+  /// Marangoni number
   double Ma = 10.0;
 
-  /// \short Surface Elasticity number (Capillary number x Marangoni number)
+  /// Surface Elasticity number (Capillary number x Marangoni number)
   double Beta_s =Ca*Ma;
 
-  /// \short Surface Peclet number
+  /// Surface Peclet number
   double Pe_s = 10.0;
   
-  /// \short Bulk Peclet number
+  /// Bulk Peclet number
   double Pe_b = 10.0;
   
-  /// \short Micelle Pelect number
+  /// Micelle Pelect number
   double Pe_m = 10.0;
 
   /// Solubility Parameters
   //-------------------------
  
-  /// \short Biot number
+  /// Biot number
  double Biot = 0.1; 
   
-  /// \short The ratio of adsorption-desorption times
+  /// The ratio of adsorption-desorption times
   double K_b = 3.0; // 5.0; 
 
-  // \short ratio of equilibrium concentrations
+  // ratio of equilibrium concentrations
   double Beta_b = 1.0;
 
-  // \short Reaction rate between bulk and micelle 
+  // Reaction rate between bulk and micelle 
  double K_m = 1.0;
 
  /// Power of the concentration in bulk -> micelle flux expression
  double N = 10.0;
   
- /// \short The imposed pressure gradient
+ /// The imposed pressure gradient
  double Delta_P = 1.0; 
   
  /// Timescales for transport equations (identically one from our
@@ -167,8 +167,8 @@ namespace Global_Physical_Variables
  /// Gravity vector, will be set in the main code
  Vector<double> Direction_of_gravity(2);
  
- ///This next set of functions is only used if we do NOT have
- ///periodic conditions
+ /// This next set of functions is only used if we do NOT have
+ /// periodic conditions
 
  
  /// Function that prescribes the hydrostatic pressure field at the outlet
@@ -222,17 +222,17 @@ namespace Global_Physical_Variables
   double Inlet_Angle = 2.0*atan(1.0);
 
   
- ///Direction of the wall normal vector (at the inlet)
+ /// Direction of the wall normal vector (at the inlet)
  Vector<double> Wall_normal;
 
- /// \short Function that specifies the wall unit normal at the inlet
+ /// Function that specifies the wall unit normal at the inlet
  void wall_unit_normal_inlet_fct(const Vector<double> &x, 
                                  Vector<double> &normal)
  {
   normal=Wall_normal;
  }
 
- /// \short Function that specified the wall unit normal at the outlet
+ /// Function that specified the wall unit normal at the outlet
  void wall_unit_normal_outlet_fct(const Vector<double> &x, 
                                  Vector<double> &normal)
  {
@@ -249,9 +249,9 @@ namespace Global_Physical_Variables
 
 } //end of oomph namespace
 
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
 
 //====== start_of_problem_class=======================================
 /// 2D surfactant transport problem on rectangular domain, discretised 
@@ -264,14 +264,14 @@ class SurfactantProblem : public Problem
 
 public:
 
- ///Constructor. The boolean indicates whether the free surface
+ /// Constructor. The boolean indicates whether the free surface
  //should be pinned or not in the first instance
  SurfactantProblem(const bool &pin=true);
 
  /// Destructor. Empty
  ~SurfactantProblem() {}
 
- /// \short Release the free surface so that it can move
+ /// Release the free surface so that it can move
  void unpin_surface()
   {
    //Only bother if the surface is pinned
@@ -351,7 +351,7 @@ public:
   }
 
 
- /// \short Update the problem specs before solve (empty)
+ /// Update the problem specs before solve (empty)
  void actions_before_newton_solve() {}
 
  /// Update the problem after solve (empty)
@@ -361,12 +361,12 @@ public:
  void actions_before_newton_convergence_check()
   {if(!Surface_pinned) {Bulk_mesh_pt->node_update();}}
 
- /// \short Actions before the timestep (update the the time-dependent 
+ /// Actions before the timestep (update the the time-dependent 
  /// boundary conditions)
  void actions_before_implicit_timestep() 
   {set_boundary_conditions(time_pt()->time());}
 
- ///Fix pressure in element e at pressure dof pdof and set to pvalue
+ /// Fix pressure in element e at pressure dof pdof and set to pvalue
  void fix_pressure(const unsigned &e, const unsigned &pdof, 
                    const double &pvalue)
   {
@@ -376,7 +376,7 @@ public:
   } // end_of_fix_pressure
 
 
- ///UnFix pressure in element e at pressure dof pdof and set to pvalue
+ /// UnFix pressure in element e at pressure dof pdof and set to pvalue
  void unfix_pressure(const unsigned &e, const unsigned &pdof)
   {
    //Cast to specific element and fix pressure
@@ -410,16 +410,16 @@ void deform_interface(const double &epsilon,
 } // End of deform_free_surface
 
   
- /// \short Doc the solution.
+ /// Doc the solution.
  void doc_solution(std::ofstream &trace);
 
- /// \short Set the boundary conditions
+ /// Set the boundary conditions
  void set_boundary_conditions(const double &time);
 
  //Return the global error norm to be used in adaptive timestepping
  double global_temporal_error_norm();
   
- /// \short Overloaded version of the problem's access function to 
+ /// Overloaded version of the problem's access function to 
  /// the mesh. Recasts the pointer to the base Mesh object to 
  /// the actual mesh type.
  TwoLayerSpineMesh<ELEMENT>* Bulk_mesh_pt;
@@ -525,8 +525,8 @@ void deform_interface(const double &epsilon,
   }
 
 
-  ///Return the total concentrations of the surfactant
-  ///integrated over the bulk or surface accordingly
+  /// Return the total concentrations of the surfactant
+  /// integrated over the bulk or surface accordingly
  void compute_integrated_concentrations(double &surface,
                                         double &bulk,
                                         double &micelle)
@@ -576,7 +576,7 @@ private:
 }; // end of problem class
 
 //===========start_of_constructor=========================================
-/// \short Constructor for convection problem
+/// Constructor for convection problem
 //========================================================================
 template<class ELEMENT, class INTERFACE_ELEMENT>
 SurfactantProblem<ELEMENT,INTERFACE_ELEMENT>::

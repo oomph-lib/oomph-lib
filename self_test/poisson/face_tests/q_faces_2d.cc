@@ -71,7 +71,7 @@ namespace MeshDeformation
  }
 
 
- ///The exact normal vector for each face at global coordinate x.
+ /// The exact normal vector for each face at global coordinate x.
  void exact_normal(const unsigned &face,
                    const Vector<double> &x, Vector<double> &n)
  {
@@ -121,13 +121,13 @@ public:
 
 };
 
-///The QPoissonElement<2,2> is linear
+/// The QPoissonElement<2,2> is linear
 template<>
 string FileStem<QPoissonElement<2,2> >::Stem = "linear"; 
-///The QPoissonElement<2,3> is quadratic
+/// The QPoissonElement<2,3> is quadratic
 template<>
 string FileStem<QPoissonElement<2,3> >::Stem = "quadratic"; 
-///The QPoissonElement<2,4> is cubic
+/// The QPoissonElement<2,4> is cubic
 template<>
 string FileStem<QPoissonElement<2,4> >::Stem = "cubic"; 
 
@@ -258,9 +258,9 @@ QFaceTestProblem(const unsigned& h_power) : H_power(h_power)
  output_error.close();
 }
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
 
 //========================================================================
 /// Demonstrate how to solve QFaceTest problem

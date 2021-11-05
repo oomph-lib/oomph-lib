@@ -54,7 +54,7 @@
 
 namespace oomph
 {
-  //// Templated helper functions for multi-domain methods using locate_zeta
+  /// / Templated helper functions for multi-domain methods using locate_zeta
 
 
   //============================================================================

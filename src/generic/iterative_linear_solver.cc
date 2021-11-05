@@ -42,20 +42,20 @@
 namespace oomph
 {
   //==================================================================
-  /// \short Default preconditioner for iterative solvers: The base
+  /// Default preconditioner for iterative solvers: The base
   /// class for preconditioners is a fully functional (if trivial!)
   /// preconditioner.
   //==================================================================
   IdentityPreconditioner IterativeLinearSolver::Default_preconditioner;
 
 
-  ///////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////
 
 
   //==================================================================
-  /// \short Re-solve the system defined by the last assembled Jacobian
+  /// Re-solve the system defined by the last assembled Jacobian
   /// and the rhs vector specified here. Solution is returned in
   /// the vector result.
   //==================================================================
@@ -589,9 +589,9 @@ namespace oomph
   }
 
 
-  //////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////
 
 
   //==================================================================
@@ -914,7 +914,7 @@ namespace oomph
 
 
   //==================================================================
-  /// \short Re-solve the system defined by the last assembled Jacobian
+  /// Re-solve the system defined by the last assembled Jacobian
   /// and the rhs vector specified here. Solution is returned in
   /// the vector result.
   //==================================================================
@@ -1015,13 +1015,13 @@ namespace oomph
   };
 
 
-  //////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////
 
 
   //==================================================================
-  /// \short Self-test to be called inside solve_helper to ensure
+  /// Self-test to be called inside solve_helper to ensure
   /// that all inputs are consistent and everything that needs to
   /// be built, is.
   //==================================================================
@@ -1090,13 +1090,13 @@ namespace oomph
   } // End of check_validity_of_solve_helper_inputs
 
 
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
 
 
   //==================================================================
-  /// \short Solver: Takes pointer to problem and returns the results
+  /// Solver: Takes pointer to problem and returns the results
   /// vector which contains the solution of the linear system defined
   /// by the problem's fully assembled Jacobian and residual vector.
   //==================================================================
@@ -1157,7 +1157,7 @@ namespace oomph
   } // End of solve
 
   //==================================================================
-  /// \short Linear-algebra-type solver: Takes pointer to a matrix and
+  /// Linear-algebra-type solver: Takes pointer to a matrix and
   /// rhs vector and returns the solution of the linear system.
   //==================================================================
   template<typename MATRIX>
@@ -1348,13 +1348,13 @@ namespace oomph
   } // End of solve_helper
 
 
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
 
 
   //==================================================================
-  /// \short Explicit template specialisation of the solver for CR
+  /// Explicit template specialisation of the solver for CR
   /// matrices: Takes pointer to problem and returns the results
   /// vector which contains the solution of the linear system defined
   /// by the problem's fully assembled Jacobian and residual vector.
@@ -1425,7 +1425,7 @@ namespace oomph
   } // End of solve
 
   //==================================================================
-  /// \short Explicit template specialisation of the smoother_setup
+  /// Explicit template specialisation of the smoother_setup
   /// function for CR matrices. Set up the smoother for the matrix
   /// specified by the pointer. This definition of the smoother_setup
   /// has the added functionality that it sorts the entries in the
@@ -1473,7 +1473,7 @@ namespace oomph
   } // End of setup_helper
 
   //==================================================================
-  /// \short Explicit template specialisation of the solve_helper
+  /// Explicit template specialisation of the solve_helper
   /// function for CR matrices. Exploiting the sparsity of the given
   /// matrix allows for a much faster iterative solver.
   //==================================================================
@@ -1844,13 +1844,13 @@ namespace oomph
   } // End of solve_helper
 
 
-  //////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////
 
 
   //==================================================================
-  /// \short Solver: Takes pointer to problem and returns the results
+  /// Solver: Takes pointer to problem and returns the results
   /// vector which contains the solution of the linear system defined
   /// by the problem's fully assembled Jacobian and residual vector.
   //==================================================================
@@ -1915,7 +1915,7 @@ namespace oomph
   } // End of solve
 
   //==================================================================
-  /// \short Linear-algebra-type solver: Takes pointer to a matrix and
+  /// Linear-algebra-type solver: Takes pointer to a matrix and
   /// rhs vector and returns the solution of the linear system.
   //==================================================================
   template<typename MATRIX>
@@ -2119,9 +2119,9 @@ namespace oomph
   } // End of solve_helper
 
 
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
 
 
   //==================================================================
@@ -2733,9 +2733,9 @@ namespace oomph
   } // End GMRES
 
 
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
 
 
   //==================================================================

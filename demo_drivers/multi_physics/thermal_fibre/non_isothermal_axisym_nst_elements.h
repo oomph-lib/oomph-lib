@@ -26,22 +26,22 @@
 #define USE_FD_JACOBIAN_FOR_NONISOTHERMAL_AXISYMMETRIC_NAVIER_STOKES
 
 //======================class definition======================
-///A class that solves the nonisothermal melt spinning problem using the 
-///axisymmetric Navier--Stokes and energy equations by coupling two pre-
-///existing classes. 
-///The QSteadyAxisymAdvectionDiffusionElement<Nnode1d> with bi-quadratic interpolation 
-///for the scalar variable (temperature) and QCrouzeixRaviartElement
-///which solves the Navier--Stokes equations
-///using bi-quadratic interpolation for the velocities and a discontinuous
-///bi-linear interpolation for the pressure. Note that we are free to 
-///choose the order in which we store the variables at the nodes. In this
-///case we choose to store the variables in the order fluid velocities
-///followed by temperature. We must, therefore, overload the function
-///AxisymAdvectionDiffusionEquations::u_index_axisym_adv_diff() to indicate that
-///the temperature is stored at the 3-th position not the 0-th. We do not
-///need to overload the corresponding function in the 
-///AxisymmetricNavierStokesEquations class because the velocities are stored
-///first.
+/// A class that solves the nonisothermal melt spinning problem using the 
+/// axisymmetric Navier--Stokes and energy equations by coupling two pre-
+/// existing classes. 
+/// The QSteadyAxisymAdvectionDiffusionElement<Nnode1d> with bi-quadratic interpolation 
+/// for the scalar variable (temperature) and QCrouzeixRaviartElement
+/// which solves the Navier--Stokes equations
+/// using bi-quadratic interpolation for the velocities and a discontinuous
+/// bi-linear interpolation for the pressure. Note that we are free to 
+/// choose the order in which we store the variables at the nodes. In this
+/// case we choose to store the variables in the order fluid velocities
+/// followed by temperature. We must, therefore, overload the function
+/// AxisymAdvectionDiffusionEquations::u_index_axisym_adv_diff() to indicate that
+/// the temperature is stored at the 3-th position not the 0-th. We do not
+/// need to overload the corresponding function in the 
+/// AxisymmetricNavierStokesEquations class because the velocities are stored
+/// first.
 //================================================================
 class NonIsothermalAxisymmetricQCrouzeixRaviartElement :
  public virtual QSteadyAxisymAdvectionDiffusionElement<3> ,
@@ -51,12 +51,12 @@ class NonIsothermalAxisymmetricQCrouzeixRaviartElement :
  public:
 
 
- /// \short Function pointer to the function that specifies the
+ /// Function pointer to the function that specifies the
  /// viscosity ratio as function of the temperature. 
  typedef void (*ViscosityRatioFctPt)(double& temperature,
                                      double& result);
 
- /// \short Constructor: call the QSteadyAxisymAdvectionDiffusionElement
+ /// Constructor: call the QSteadyAxisymAdvectionDiffusionElement
  /// and AxisymmetricQCrouzeixRaviartElement
  NonIsothermalAxisymmetricQCrouzeixRaviartElement() :  
   QSteadyAxisymAdvectionDiffusionElement<3>(),
@@ -65,22 +65,22 @@ class NonIsothermalAxisymmetricQCrouzeixRaviartElement :
   {}
 
 
- ///\short The required number of values stored at the nodes is the sum of the
- ///required values of the two single-physics  elements. Note that this step is
- ///generic for any multi-physics element of this type.
+ /// The required number of values stored at the nodes is the sum of the
+ /// required values of the two single-physics  elements. Note that this step is
+ /// generic for any multi-physics element of this type.
  unsigned required_nvalue(const unsigned &n) const
   {
    return ( QSteadyAxisymAdvectionDiffusionElement<3>::required_nvalue(n) +
             AxisymmetricQCrouzeixRaviartElement::required_nvalue(n) );
   }
 
- ///Overload the standard output function with the broken default
+ /// Overload the standard output function with the broken default
  void output(ostream &outfile) 
   {
    FiniteElement::output(outfile);
   }
 
- /// \short Output function:  
+ /// Output function:  
  ///  Output r, z, u, w, v, p, theta at Nplot^2 plot points
  // Start of output function
  void output(ostream &outfile, const unsigned &nplot)
@@ -123,19 +123,19 @@ class NonIsothermalAxisymmetricQCrouzeixRaviartElement :
   } //End of output function
 
 
- /// \short C-style output function: Broken default
+ /// C-style output function: Broken default
  void output(FILE* file_pt)
   {
    FiniteElement::output(file_pt);
   }
 
- ///  \short C-style output function: Broken default
+ ///  C-style output function: Broken default
  void output(FILE* file_pt, const unsigned &n_plot)
   {
    FiniteElement::output(file_pt,n_plot);
   }
 
- /// \short Output function for an exact solution: Broken default
+ /// Output function for an exact solution: Broken default
  void output_fct(ostream &outfile, 
                  const unsigned &Nplot,
                  FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
@@ -144,14 +144,14 @@ class NonIsothermalAxisymmetricQCrouzeixRaviartElement :
   }
 
 
- ///\short Overload the index at which the temperature 
- ///variable is stored. We choose to store it after the fluid velocities.
+ /// Overload the index at which the temperature 
+ /// variable is stored. We choose to store it after the fluid velocities.
  unsigned u_index_axisym_adv_diff() const 
   {
    return 3;
   }
 
- /// \short Validate against exact solution.
+ /// Validate against exact solution.
  /// Solution is provided via function pointer.
  /// Plot at a given number of plot points and compute L2 error
  /// and L2 norm of velocity solution over element
@@ -172,7 +172,7 @@ class NonIsothermalAxisymmetricQCrouzeixRaviartElement :
   {return Viscosity_ratio_fct_pt;}
 
 
- /// \short Overload the viscosity ratio in the Navier-Stokes equations
+ /// Overload the viscosity ratio in the Navier-Stokes equations
  /// This provides the coupling from axisymmetric advection-diffusion equations
  /// to the Axisymmetric Navier--Stokes equations.
  inline virtual void get_viscosity_ratio_axisym_nst(const unsigned& ipt,
@@ -209,7 +209,7 @@ class NonIsothermalAxisymmetricQCrouzeixRaviartElement :
 
 
 
- /// \short Overload the wind function in the advection-diffusion equations.
+ /// Overload the wind function in the advection-diffusion equations.
  /// This provides the coupling from the Navier--Stokes equations to the
  /// advection-diffusion equations because the wind is the fluid velocity.
  void get_wind_axisym_adv_diff(const unsigned& ipt,
@@ -221,7 +221,7 @@ class NonIsothermalAxisymmetricQCrouzeixRaviartElement :
    this->interpolated_u_axi_nst(s,wind);
  } // end of get_wind_axisym_adv_diff
 
- /// \short Calculate the element's contribution to the residual vector.
+ /// Calculate the element's contribution to the residual vector.
  /// Recall that fill_in_* functions MUST NOT initialise the entries 
  /// in the vector to zero. This allows us to call the 
  /// fill_in_* functions of the constituent single-physics elements
@@ -241,7 +241,7 @@ class NonIsothermalAxisymmetricQCrouzeixRaviartElement :
 #ifdef USE_FD_JACOBIAN_FOR_NONISOTHERMAL_AXISYMMETRIC_NAVIER_STOKES
 
 
- ///\short Compute the element's residual vector and the Jacobian matrix.
+ /// Compute the element's residual vector and the Jacobian matrix.
  /// Jacobian is computed by finite-differencing.
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                        DenseMatrix<double> &jacobian)
@@ -256,8 +256,8 @@ class NonIsothermalAxisymmetricQCrouzeixRaviartElement :
 //-----------------------------------------------------------------------
 #ifdef USE_OFF_DIAGONAL_FD_JACOBIAN_FOR_NONISOTHERMAL_AXISYMMETRIC_NAVIER_STOKES
 
- ///\short Helper function to get the off-diagonal blocks of the Jacobian
- ///matrix by finite differences
+ /// Helper function to get the off-diagonal blocks of the Jacobian
+ /// matrix by finite differences
  void fill_in_off_diagonal_jacobian_blocks_by_fd(Vector<double> &residuals,
                                                  DenseMatrix<double> &jacobian)
   {
@@ -391,7 +391,7 @@ class NonIsothermalAxisymmetricQCrouzeixRaviartElement :
   }
 
 
- ///\short Compute the element's residual Vector and the Jacobian matrix.
+ /// Compute the element's residual Vector and the Jacobian matrix.
  /// Use finite-differencing only for the off-diagonal blocks.
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                        DenseMatrix<double> &jacobian)
@@ -416,8 +416,8 @@ class NonIsothermalAxisymmetricQCrouzeixRaviartElement :
  //----------------------------------------------------------------------
 #else
 
- ///\short Helper function to get the off-diagonal blocks of the Jacobian
- ///matrix analytically
+ /// Helper function to get the off-diagonal blocks of the Jacobian
+ /// matrix analytically
  void fill_in_off_diagonal_jacobian_blocks_analytic(Vector<double> &residuals, 
                                                     DenseMatrix<double> &jacobian)
   {
@@ -522,7 +522,7 @@ class NonIsothermalAxisymmetricQCrouzeixRaviartElement :
   }
 
 
- ///\short Compute the element's residual Vector and the Jacobian matrix.
+ /// Compute the element's residual Vector and the Jacobian matrix.
  /// Use analytic expressions for the off-diagonal blocks
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                        DenseMatrix<double> &jacobian)
@@ -546,22 +546,22 @@ class NonIsothermalAxisymmetricQCrouzeixRaviartElement :
   private:
 
 
- /// \short Function pointer to the function that specifies the viscosity ratio
+ /// Function pointer to the function that specifies the viscosity ratio
  /// as a function of the temperature
  ViscosityRatioFctPt Viscosity_ratio_fct_pt;
 
 };
 
 
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
 
 namespace oomph
 {
  
 //=======================================================================
-/// \short Face geometry for the 
+/// Face geometry for the 
 /// NonIsothermalAxisymmetricQCrouzeixRaviartElementelements: 
 /// The spatial dimension of the face elements is one lower than that 
 /// of the bulk element but they have the same number of points along 
@@ -574,7 +574,7 @@ class FaceGeometry<NonIsothermalAxisymmetricQCrouzeixRaviartElement> :
   
  public:
   
-  /// \short Constructor: Call the constructor for the
+  /// Constructor: Call the constructor for the
   /// appropriate lower-dimensional QElement
   FaceGeometry() : QElement<1,3>() {}
   

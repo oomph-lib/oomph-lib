@@ -1893,7 +1893,7 @@ namespace oomph
 
 
   //====================================================================
-  //// Force build of templates
+  /// / Force build of templates
   //====================================================================
   template class RefineableGeneralisedNewtonianNavierStokesEquations<2>;
   template class RefineableGeneralisedNewtonianNavierStokesEquations<3>;

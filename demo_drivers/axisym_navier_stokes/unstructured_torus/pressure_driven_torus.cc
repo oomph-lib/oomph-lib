@@ -57,7 +57,7 @@ namespace Global_Physical_Variables
  /// Pseudo-solid (mesh) Poisson ratio
  double Nu=0.3;
  
- /// \short Pseudo-solid (mesh) "density" 
+ /// Pseudo-solid (mesh) "density" 
  /// Set to zero because we don't want inertia in the node update!
  double Lambda_sq=0.0;
  
@@ -70,7 +70,7 @@ namespace Global_Physical_Variables
  double Mu = 0.0;
 
 
-///A function to specify a constant axial body force
+/// A function to specify a constant axial body force
 void axial_pressure_gradient(const double &time,
                              const Vector<double> &x,
                              Vector<double> &result)
@@ -230,7 +230,7 @@ public:
 /// Destructor
 virtual ~GeneralCircle(){}
 
-///Lagrangian coordinate xi
+/// Lagrangian coordinate xi
 void position (const Vector<double>& xi, Vector<double>& r) const
 {
  Vector<double> r_circle(2);
@@ -294,7 +294,7 @@ void position(const unsigned& t,
 
  unsigned ngeom_data() const {return 0;}
 
- /// \short Return pointer to the j-th (only) Data item that the object's 
+ /// Return pointer to the j-th (only) Data item that the object's 
  /// shape depends on.
  Data* geom_data_pt(const unsigned& j) 
   {return 0;}
@@ -303,10 +303,10 @@ void position(const unsigned& t,
 
 private:
 
- ///Storage for the y-coordinate of the centre
+ /// Storage for the y-coordinate of the centre
  double Centre_y;
 
- ///Storage for the radius of the circle
+ /// Storage for the radius of the circle
  double Radius;
 
 };
@@ -318,13 +318,13 @@ template<class ELEMENT>
 class UnstructuredTorusProblem : public Problem
 {
 public:
- /// \short Constructor taking the maximum refinement level and
+ /// Constructor taking the maximum refinement level and
  /// the minimum and maximum error targets.
  UnstructuredTorusProblem(
               const double &min_error_target, 
               const double &max_error_target);
 
- /// \short Calculate the square of the l2 norm
+ /// Calculate the square of the l2 norm
  double calculate_square_of_l2_norm()
   {
    //Initialise
@@ -342,7 +342,7 @@ public:
   }
 
 
- /// \short Calculate the cross-sectional area of the domain
+ /// Calculate the cross-sectional area of the domain
  double calculate_area()
   {
    //Initialise
@@ -381,7 +381,7 @@ void set_initial_condition()
  void solve_system(const double &dt, const unsigned &nstep,
                    const std::string &directory);
 
- /// \short Update the problem specs before next timestep: 
+ /// Update the problem specs before next timestep: 
  void actions_before_implicit_timestep() 
   {set_boundary_conditions(time());}
 
@@ -495,7 +495,7 @@ void set_initial_condition()
   }
 
  
- ///Pointer to the Backedup Surface mesh
+ /// Pointer to the Backedup Surface mesh
  Vector<BackupMeshForProjection<TElement<1,3> >*> Backed_up_surface_mesh_pt;
 
  /// Pointers to mesh of Lagrange multiplier elements
@@ -587,7 +587,7 @@ void create_lagrange_multiplier_elements()
 
 
 //===============start_delete_lagrange_multiplier_elements==================
-/// \short Delete elements that impose the prescribed boundary displacement
+/// Delete elements that impose the prescribed boundary displacement
 /// and wipe the associated mesh
 //==========================================================================
 void delete_lagrange_multiplier_elements()
@@ -806,7 +806,7 @@ void UnstructuredTorusProblem<ELEMENT>::set_boundary_conditions(
 
 
 //==========================================================================
-///Solve the system for a number of different values of the Reynolds number
+/// Solve the system for a number of different values of the Reynolds number
 //==========================================================================
 template<class ELEMENT>
 void UnstructuredTorusProblem<ELEMENT>::solve_system(const double &dt, 
