@@ -958,7 +958,7 @@ namespace oomph
     ///   700 will be printed as 11m:40
     ///    59 will be printed as 59s
     std::string format_time(const double& time);
-    
+
   } // end of namespace TimingHelpers
 
 
