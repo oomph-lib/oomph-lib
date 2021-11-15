@@ -1306,6 +1306,41 @@ namespace oomph
         return double(t) / double(CLOCKS_PER_SEC);
       }
     }
+
+    /// Returns a nicely formatted string from an input time in seconds;
+    /// the format depends on the size of time, e.g.:
+    ///  3710 will be printed as 1h:01:50
+    ///   700 will be printed as 11m:40
+    ///    59 will be printed as 59s
+    std::string format_time(const double& time)
+    {
+      std::ostringstream ss;
+  
+      unsigned total_time = unsigned(time);
+      unsigned time_hrs = unsigned(total_time) / 3600;
+      unsigned time_min = (unsigned(total_time) % 3600) / 60;
+      unsigned time_sec = (unsigned(total_time) % 3600) % 60;
+
+      if(time_hrs > 0)
+      {
+	ss << time_hrs << "h:";
+	ss << std::setw(2) << std::setfill('0');
+	ss << time_min << ":";
+	ss << time_sec << "\n" << std::endl;
+      }
+      else if(time_min > 0)
+      {
+	ss << time_min << "m:";
+	ss << std::setw(2) << std::setfill('0');
+	ss << time_sec << "\n" << std::endl;
+      }
+      else
+      {
+	ss << time_sec << "s\n" << std::endl;
+      }
+
+      return ss.str();
+    }
   } // end of namespace TimingHelpers
 
 
