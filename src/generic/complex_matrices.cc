@@ -559,41 +559,6 @@ namespace oomph
   void CRComplexMatrix::multiply(const CRComplexMatrix& matrix_in,
                                  CRComplexMatrix& result) const
   {
-#ifdef PARANOID
-    // check that this matrix is built
-    if (!Built)
-    {
-      std::ostringstream error_message_stream;
-      error_message_stream << "This matrix has not been built";
-      throw OomphLibError(error_message_stream.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-    }
-    // check that this matrix is built
-    if (!matrix_in.built())
-    {
-      std::ostringstream error_message_stream;
-      error_message_stream << "This matrix matrix_in has not been built";
-      throw OomphLibError(error_message_stream.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-    }
-    // if soln is setup then it should have the same distribution as x
-    if (result.built())
-    {
-      if (!(*result.distribution_pt() == *this->distribution_pt()))
-      {
-        std::ostringstream error_message_stream;
-        error_message_stream
-          << "The matrix result is setup and therefore must have the same "
-          << "distribution as the vector x";
-        throw OomphLibError(error_message_stream.str(),
-                            OOMPH_CURRENT_FUNCTION,
-                            OOMPH_EXCEPTION_LOCATION);
-      }
-    }
-#endif
-
     // NB n is number of rows!
     const unsigned long n = this->nrow();
     const unsigned long m = matrix_in.ncol();
@@ -903,26 +868,6 @@ namespace oomph
                             CRComplexMatrix& result_matrix) const
   {
 #ifdef PARANOID
-    // Check if this matrix is built.
-    if (!this->built())
-    {
-      std::ostringstream error_message;
-      error_message << "The matrix is not built.\n"
-                    << "Please build the matrix!\n";
-      throw OomphLibError(
-        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-    }
-
-    // Check if this matrix_in is built.
-    if (!matrix_in.built())
-    {
-      std::ostringstream error_message;
-      error_message << "The matrix matrix_in is not built.\n"
-                    << "Please build the matrix!\n";
-      throw OomphLibError(
-        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-    }
-
     // Check if the dimensions of this matrix and matrix_in are the same.
     const unsigned long i_nrow = this->nrow();
     const unsigned long matrix_in_nrow = matrix_in.nrow();
@@ -945,38 +890,13 @@ namespace oomph
       throw OomphLibError(
         error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
-
-    // Check if the distribution is the same (Otherwise we may have to send and
-    // receive data from other processors - which is not implemented!)
-    if (*(this->distribution_pt()) != *(matrix_in.distribution_pt()))
-    {
-      std::ostringstream error_message;
-      error_message << "matrix_in must have the same distribution as\n"
-                    << "this matrix.\n";
-      throw OomphLibError(
-        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-    }
-
-    // If the matrix is built, check that it's existing distribution is the
-    // same as the in matrix. Since we'll use the same distribution instead
-    // of completely rebuilding it.
-    if (result_matrix.built() &&
-        (*result_matrix.distribution_pt() != *matrix_in.distribution_pt()))
-    {
-      std::ostringstream error_message;
-      error_message << "The result_matrix is built. "
-                    << "But has a different distribution from matrix_in \n"
-                    << "They need to be the same.\n";
-      throw OomphLibError(
-        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-    }
 #endif
 
-    // To add the elements of two CRDoubleMatrices, we need to know the union of
-    // the sparsity patterns. This is determined by the column indices.
-    // We add the column indices and values (entries) as a key-value pair in
-    // a map (per row). We then read these out into two column indices and
-    // values vector for the result matrix.
+    // To add the elements of two CRComplexMatrices, we need to know the union
+    // of the sparsity patterns. This is determined by the column indices. We
+    // add the column indices and values (entries) as a key-value pair in a map
+    // (per row). We then read these out into two column indices and values
+    // vector for the result matrix.
 
     unsigned nrow_local = this->nrow();
     Vector<int> res_column_indices;
@@ -1048,17 +968,7 @@ namespace oomph
                             CRComplexMatrix& result_matrix) const
   {
 #ifdef PARANOID
-    // Check if this matrix is built.
-    if (!this->built())
-    {
-      std::ostringstream error_message;
-      error_message << "The matrix is not built.\n"
-                    << "Please build the matrix!\n";
-      throw OomphLibError(
-        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-    }
-
-    // Check if this matrix_in is built.
+    // Check if matrix_in is built.
     if (!matrix_in.built())
     {
       std::ostringstream error_message;
@@ -1090,34 +1000,9 @@ namespace oomph
       throw OomphLibError(
         error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
-
-    // Check if the distribution is the same (Otherwise we may have to send and
-    // receive data from other processors - which is not implemented!)
-    if (*(this->distribution_pt()) != *(matrix_in.distribution_pt()))
-    {
-      std::ostringstream error_message;
-      error_message << "matrix_in must have the same distribution as\n"
-                    << "this matrix.\n";
-      throw OomphLibError(
-        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-    }
-
-    // If the matrix is built, check that it's existing distribution is the
-    // same as the in matrix. Since we'll use the same distribution instead
-    // of completely rebuilding it.
-    if (result_matrix.built() &&
-        (*result_matrix.distribution_pt() != *matrix_in.distribution_pt()))
-    {
-      std::ostringstream error_message;
-      error_message << "The result_matrix is built. "
-                    << "But has a different distribution from matrix_in \n"
-                    << "They need to be the same.\n";
-      throw OomphLibError(
-        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-    }
 #endif
 
-    // To add the elements of two CRDoubleMatrices, we need to know the union of
+    // To add the elements of two CRMatrices, we need to know the union of
     // the sparsity patterns. This is determined by the column indices.
     // We add the column indices and values (entries) as a key-value pair in
     // a map (per row). We then read these out into two column indices and

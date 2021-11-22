@@ -140,7 +140,11 @@ int main()
   matrix_square.multiply_transpose(x, soln);
   print_complex_vector(soln);
 
-  LinearAlgebraDistribution* dist_pt = new LinearAlgebraDistribution();
+  /// Create linear algebra distribution with the right number of rows.
+  /// Note that we are only testing the serial version here.
+  const OomphCommunicator* comm_pt;
+  const bool distributed = false;
+  LinearAlgebraDistribution* dist_pt = new LinearAlgebraDistribution(comm_pt, n_row_square, distributed);
 
   constexpr unsigned n_nz_double = 5;
 
@@ -201,19 +205,27 @@ int main()
   print_complex_matrix(matrix_result);
 
   // test default method is set to 1 (equals Fastest in the enumeration)
-  cout << (matrix_square.serial_matrix_matrix_multiply_method() == CRComplexMatrix::SerialMatrixMultiplyMethod::Fastest) << endl;
+  cout << (matrix_square.serial_matrix_matrix_multiply_method() ==
+           CRComplexMatrix::SerialMatrixMultiplyMethod::Fastest)
+       << endl;
 
   // test multiply method 1
-  matrix_square.serial_matrix_matrix_multiply_method() = CRComplexMatrix::SerialMatrixMultiplyMethod::Memory_efficient;
+  matrix_square.serial_matrix_matrix_multiply_method() =
+    CRComplexMatrix::SerialMatrixMultiplyMethod::Memory_efficient;
   matrix_square.multiply(matrix_square_2, matrix_result);
-  cout << (matrix_square.serial_matrix_matrix_multiply_method() == CRComplexMatrix::SerialMatrixMultiplyMethod::Memory_efficient) << endl;
+  cout << (matrix_square.serial_matrix_matrix_multiply_method() ==
+           CRComplexMatrix::SerialMatrixMultiplyMethod::Memory_efficient)
+       << endl;
   cout << "A B" << endl;
   print_complex_matrix(matrix_result);
 
   // test multiply method 3
-  matrix_square.serial_matrix_matrix_multiply_method() = CRComplexMatrix::SerialMatrixMultiplyMethod::Vector_of_vectors;
+  matrix_square.serial_matrix_matrix_multiply_method() =
+    CRComplexMatrix::SerialMatrixMultiplyMethod::Vector_of_vectors;
   matrix_square.multiply(matrix_square_2, matrix_result);
-  cout << (matrix_square.serial_matrix_matrix_multiply_method() == CRComplexMatrix::SerialMatrixMultiplyMethod::Vector_of_vectors) << endl;
+  cout << (matrix_square.serial_matrix_matrix_multiply_method() ==
+           CRComplexMatrix::SerialMatrixMultiplyMethod::Vector_of_vectors)
+       << endl;
   cout << "A B" << endl;
   print_complex_matrix(matrix_result);
 
