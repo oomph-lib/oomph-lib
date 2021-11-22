@@ -949,7 +949,7 @@ namespace oomph
             } // End of Jacobian calculation
           }
         }
-      } //End of loop over shape functions
+      } // End of loop over shape functions
     }
 
 
