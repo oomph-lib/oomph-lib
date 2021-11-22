@@ -916,7 +916,7 @@ namespace oomph
 
       int local_eqn = 0, local_unknown = 0;
 
-      // Loop over the shape functions
+      // Loop over the shape functions to assemble contributions
       for (unsigned l = 0; l < n_node; l++)
       {
         // Loop over the directions
@@ -949,7 +949,7 @@ namespace oomph
             } // End of Jacobian calculation
           }
         }
-      }
+      } // End of loop over shape functions
     }
 
 
