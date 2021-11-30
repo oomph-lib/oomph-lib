@@ -424,6 +424,7 @@ void superlu_dist_distributed_matrix(int opt_flag, int allow_permutations,
         ScalePermstruct->R = R;
         break;
       default:
+       printf("diagscale: %i %i %i %i\n",ScalePermstruct->DiagScale,NOEQUIL,ROW,COL);
        ABORT("Never get here.");
        break;
       }
@@ -1497,6 +1498,7 @@ void superlu_dist_global_matrix(int opt_flag, int allow_permutations,
         ScalePermstruct->R = R;
         break;
       default:
+       printf("diagscale: %i %i %i %i\n",ScalePermstruct->DiagScale,NOEQUIL,ROW,COL);
        ABORT("Never get here.");
        break;
       }
@@ -2223,7 +2225,9 @@ void superlu_dist_global_matrix(int opt_flag, int allow_permutations,
         SUPERLU_FREE(R);
         break;
       default:
-       ABORT("Never get here.");
+       /* Apparently this one is ok */
+       /* printf("diagscale: %i %i %i %i\n",ScalePermstruct->DiagScale,NOEQUIL,ROW,COL); */
+       /* ABORT("Never get here."); */
        break;
       }
     }
