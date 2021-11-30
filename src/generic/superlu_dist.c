@@ -184,7 +184,7 @@ void superlu_dist_distributed_matrix(int opt_flag, int allow_permutations,
   int_t *etree;  /* elimination tree */
   int_t *rowptr, *colind;  /* Local A in NR*/
   int_t job, rowequ, colequ, iinfo, need_value, i, j, irow, icol;
-  int_t m_loc, fst_row, nnz, nnz_loc, dist_mem_use;
+  int_t m_loc, fst_row, nnz, nnz_loc; /* dist_mem_use; */
   int_t *colptr, *rowind;
   NRformat_loc *Astore;
   SuperMatrix GA;      /* Global A in NC format */
@@ -199,7 +199,7 @@ void superlu_dist_distributed_matrix(int opt_flag, int allow_permutations,
   double  *berr;
   double *a, *X, *b_col;
   double *B=b;
-  double *C, *R, *C1, *R1, *bcol, *x_col;
+  double *C, *R, *C1, *R1, *x_col; /* *bcol, */
   double amax, t, colcnd, rowcnd, anorm;
   char equed[1], norm[1];
   int ldx;  /* LDA for matrix X (local). */
@@ -423,6 +423,9 @@ void superlu_dist_distributed_matrix(int opt_flag, int allow_permutations,
           ABORT("Malloc fails for R[].");
         ScalePermstruct->R = R;
         break;
+      default:
+       ABORT("Never get here.");
+       break;
       }
     }
 
@@ -529,7 +532,7 @@ void superlu_dist_distributed_matrix(int opt_flag, int allow_permutations,
       /* ------------------------------------------------------------
          Find the row permutation for A.
          ------------------------------------------------------------*/
-      if (options->RowPerm != NO)
+      if ((int) options->RowPerm != (int) NO)
       {
         t = SuperLU_timer_();
         if (Fact != SamePattern_SameRowPerm)
@@ -774,8 +777,9 @@ void superlu_dist_distributed_matrix(int opt_flag, int allow_permutations,
          NOTE: the row permutation Pc*Pr is applied internally in the
          distribution routine. */
       t = SuperLU_timer_();
-      dist_mem_use = pddistribute(Fact, n, A, ScalePermstruct,
-                                  Glu_freeable, LUstruct, grid);
+      /* dist_mem_use = */
+      pddistribute(Fact, n, A, ScalePermstruct,
+                   Glu_freeable, LUstruct, grid);
       stat.utime[DIST] = SuperLU_timer_() - t;
 
       /* Deallocate storage used in symbolic factorization. */
@@ -984,7 +988,7 @@ void superlu_dist_distributed_matrix(int opt_flag, int allow_permutations,
     {
       /* Improve the solution by iterative refinement. */
       int_t *it, *colind_gsmv = SOLVEstruct->A_colind_gsmv;
-      SOLVEstruct_t *SOLVEstruct1;  /* Used by refinement. */
+      /*SOLVEstruct_t *SOLVEstruct1;*/  /* Used by refinement. */
 
       t = SuperLU_timer_();
       if (options->RefineInitialized == NO || Fact == DOFACT)
@@ -1162,6 +1166,11 @@ void superlu_dist_distributed_matrix(int opt_flag, int allow_permutations,
       case COL:
         SUPERLU_FREE(R);
         break;
+      default:
+       /* Apparently this one is ok */
+       /* printf("diagscale: %i %i %i %i\n",ScalePermstruct->DiagScale,NOEQUIL,ROW,COL); */
+       /* ABORT("Never get here. THIS IS THE ONE");*/
+       break;
       }
     }
 
@@ -1256,10 +1265,10 @@ void superlu_dist_global_matrix(int opt_flag, int allow_permutations,
   int_t *perm_r; /* row permutations from partial pivoting */
   int_t *perm_c; /* column permutation vector */
   int_t *etree;  /* elimination tree */
-  int_t job, rowequ, colequ, iinfo, need_value, i, j, irow;
+  int_t job, rowequ, colequ, iinfo, i, j, irow; /* , need_value */
   int_t m, n, nnz;
   int_t *colptr, *rowind;
-  int_t Equil, factored, notran, permc_spec, dist_mem_use;
+  int_t Equil, factored, notran, permc_spec; /*, dist_mem_use; */
   NCformat *Astore;
   NCPformat *ACstore;
   Glu_persist_t *Glu_persist;
@@ -1269,7 +1278,7 @@ void superlu_dist_global_matrix(int opt_flag, int allow_permutations,
   double  *berr;
   double *a, *X, *b_col;
   double *B=b;
-  double *C, *R, *C1, *R1, *b_work, *bcol, *x_col;
+  double *C, *R, *C1, *R1, *b_work, *x_col; /* *bcol, */
   double amax, t, colcnd, rowcnd, anorm;
   char equed[1], norm[1];
   int ldx;  /* LDA for matrix X (local). */
@@ -1487,6 +1496,9 @@ void superlu_dist_global_matrix(int opt_flag, int allow_permutations,
           ABORT("Malloc fails for R[].");
         ScalePermstruct->R = R;
         break;
+      default:
+       ABORT("Never get here.");
+       break;
       }
     }
 
@@ -1615,7 +1627,7 @@ void superlu_dist_global_matrix(int opt_flag, int allow_permutations,
     /* ------------------------------------------------------------
        Permute rows of A.
        ------------------------------------------------------------*/
-    if (options->RowPerm != NO)
+    if ((int) options->RowPerm != (int) NO)
     {
       t = SuperLU_timer_();
 
@@ -1836,7 +1848,8 @@ void superlu_dist_global_matrix(int opt_flag, int allow_permutations,
 
       /* Distribute the L and U factors onto the process grid. */
       t = SuperLU_timer_();
-      dist_mem_use = ddistribute(Fact, n, AC, Glu_freeable, LUstruct, grid);
+      /* dist_mem_use = */
+      ddistribute(Fact, n, AC, Glu_freeable, LUstruct, grid);
       stat.utime[DIST] = SuperLU_timer_() - t;
 
       /* Deallocate storage used in symbolic factor. */
@@ -1990,7 +2003,7 @@ void superlu_dist_global_matrix(int opt_flag, int allow_permutations,
     /* ------------------------------------------------------------
        Permute the right-hand side to form Pr*B.
        ------------------------------------------------------------*/
-    if (options->RowPerm != NO)
+    if ((int) options->RowPerm != (int) NO)
     {
       if (notran)
       {
@@ -2209,6 +2222,9 @@ void superlu_dist_global_matrix(int opt_flag, int allow_permutations,
       case COL:
         SUPERLU_FREE(R);
         break;
+      default:
+       ABORT("Never get here.");
+       break;
       }
     }
     if (!factored || (factored && options->IterRefine))
