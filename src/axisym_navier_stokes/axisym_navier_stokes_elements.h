@@ -2307,17 +2307,16 @@ namespace oomph
     }
   };
 
-//=======================================================================
-/// Axisymmetric FSI Element 
-//=======================================================================
-  class FSIAxisymmetricQTaylorHoodElement :
-   public virtual AxisymmetricQTaylorHoodElement,
-   public virtual FSIFluidElement
-   {
-     public:
-
+  //=======================================================================
+  /// Axisymmetric FSI Element
+  //=======================================================================
+  class FSIAxisymmetricQTaylorHoodElement
+    : public virtual AxisymmetricQTaylorHoodElement,
+      public virtual FSIFluidElement
+  {
+  public:
     /// Constructor
-     FSIAxisymmetricQTaylorHoodElement() : AxisymmetricQTaylorHoodElement(){}
+    FSIAxisymmetricQTaylorHoodElement() : AxisymmetricQTaylorHoodElement() {}
 
     /// Add to the set \c paired_load_data pairs containing
     /// - the pointer to a Data object
@@ -2326,31 +2325,33 @@ namespace oomph
     /// .
     /// for all values (pressures, velocities) that affect the
     /// load computed in the \c get_load(...) function.
-    void identify_load_data(std::set<std::pair<Data*,unsigned> > &
-                            paired_load_data)
+    void identify_load_data(
+      std::set<std::pair<Data*, unsigned>>& paired_load_data)
     {
-     // We're in 3D!
-     unsigned DIM=3;
-     
-     //Find the index at which the velocity is stored
-     unsigned u_index[DIM];
-     for(unsigned i=0;i<DIM;i++) {u_index[i] = this->u_index_nst(i);}
-     
-     //Loop over the nodes
-     unsigned n_node = this->nnode();
-     for(unsigned n=0;n<n_node;n++)
+      // We're in 3D!
+      unsigned DIM = 3;
+
+      // Find the index at which the velocity is stored
+      unsigned u_index[DIM];
+      for (unsigned i = 0; i < DIM; i++)
       {
-       //Loop over the velocity components and add pointer to their data
-       //and indices to the vectors
-       for(unsigned i=0;i<DIM;i++)
+        u_index[i] = this->u_index_nst(i);
+      }
+
+      // Loop over the nodes
+      unsigned n_node = this->nnode();
+      for (unsigned n = 0; n < n_node; n++)
+      {
+        // Loop over the velocity components and add pointer to their data
+        // and indices to the vectors
+        for (unsigned i = 0; i < DIM; i++)
         {
-         paired_load_data.insert(std::make_pair(this->node_pt(n),u_index[i]));
+          paired_load_data.insert(std::make_pair(this->node_pt(n), u_index[i]));
         }
       }
-     
-     //Identify the pressure data
-     this->identify_pressure_data(paired_load_data);
-     
+
+      // Identify the pressure data
+      this->identify_pressure_data(paired_load_data);
     };
 
 
@@ -2361,83 +2362,85 @@ namespace oomph
     /// .
     /// for all values (pressures, velocities) that affect the
     /// load computed in the \c get_load(...) function.
-    void identify_pressure_data(std::set<std::pair<Data*, unsigned> > &
-                                paired_pressure_data)
+    void identify_pressure_data(
+      std::set<std::pair<Data*, unsigned>>& paired_pressure_data)
     {
-     //Find the index at which the pressure is stored 
-     unsigned p_index = static_cast<unsigned>(this->p_nodal_index_axi_nst());
-     
-     //Loop over the pressure data 
-     unsigned n_pres= npres_axi_nst();
-     for(unsigned l=0;l<n_pres;l++)
+      // Find the index at which the pressure is stored
+      unsigned p_index = static_cast<unsigned>(this->p_nodal_index_axi_nst());
+
+      // Loop over the pressure data
+      unsigned n_pres = npres_axi_nst();
+      for (unsigned l = 0; l < n_pres; l++)
       {
-       //The DIMth entry in each nodal data is the pressure, which
-       //affects the traction
-       paired_pressure_data.insert(std::make_pair(
-                                    this->node_pt(Pconv[l]),p_index));
+        // The DIMth entry in each nodal data is the pressure, which
+        // affects the traction
+        paired_pressure_data.insert(
+          std::make_pair(this->node_pt(Pconv[l]), p_index));
       }
     }
 
-    
+
     /// Compute the load vector that is applied by current
     /// element (at its local coordinate s) onto the adjacent
     /// SolidElement. N is the outer unit normal on the FSIFluidElement.
-    void get_load(const Vector<double> &s, const Vector<double> &N,
-                  Vector<double> &load)
+    void get_load(const Vector<double>& s,
+                  const Vector<double>& N,
+                  Vector<double>& load)
     {
-     get_traction(s,N,load);
+      get_traction(s, N, load);
     }
-    
-   };
+  };
 
 
-//=======================================================================
-/// Face geometry of the Axisymmetric Taylor_Hood elements
-//=======================================================================
-template<>
-class FaceGeometry<FSIAxisymmetricQTaylorHoodElement>: public virtual QElement<1,3>
-{
+  //=======================================================================
+  /// Face geometry of the Axisymmetric Taylor_Hood elements
+  //=======================================================================
+  template<>
+  class FaceGeometry<FSIAxisymmetricQTaylorHoodElement>
+    : public virtual QElement<1, 3>
+  {
   public:
- FaceGeometry() : QElement<1,3>() {}
-};
+    FaceGeometry() : QElement<1, 3>() {}
+  };
 
-//=======================================================================
-/// Face geometry of the face geometry of the Axisymmetric Taylor_Hood elements
-//=======================================================================
-template<>
-class FaceGeometry<FaceGeometry<FSIAxisymmetricQTaylorHoodElement> > : 
-public virtual PointElement
-{
+  //=======================================================================
+  /// Face geometry of the face geometry of the Axisymmetric Taylor_Hood
+  /// elements
+  //=======================================================================
+  template<>
+  class FaceGeometry<FaceGeometry<FSIAxisymmetricQTaylorHoodElement>>
+    : public virtual PointElement
+  {
   public:
- FaceGeometry() : PointElement() {}
-};
+    FaceGeometry() : PointElement() {}
+  };
 
 
-//=======================================================================
-/// Face geometry for element is the same as that for the underlying
-/// wrapped element
-//=======================================================================
-template<class ELEMENT>
- class FaceGeometry<ProjectableAxisymmetricCrouzeixRaviartElement<ELEMENT>>
- : public virtual FaceGeometry<ELEMENT>
-{
+  //=======================================================================
+  /// Face geometry for element is the same as that for the underlying
+  /// wrapped element
+  //=======================================================================
+  template<class ELEMENT>
+  class FaceGeometry<ProjectableAxisymmetricCrouzeixRaviartElement<ELEMENT>>
+    : public virtual FaceGeometry<ELEMENT>
+  {
   public:
-  FaceGeometry() : FaceGeometry<ELEMENT>() {}
-};
+    FaceGeometry() : FaceGeometry<ELEMENT>() {}
+  };
 
 
-//=======================================================================
-/// Face geometry of the Face Geometry for element is the same as
-/// that for the underlying wrapped element
-//=======================================================================
-template<class ELEMENT>
- class FaceGeometry<
- FaceGeometry<ProjectableAxisymmetricCrouzeixRaviartElement<ELEMENT>>>
- : public virtual FaceGeometry<FaceGeometry<ELEMENT>>
-{
+  //=======================================================================
+  /// Face geometry of the Face Geometry for element is the same as
+  /// that for the underlying wrapped element
+  //=======================================================================
+  template<class ELEMENT>
+  class FaceGeometry<
+    FaceGeometry<ProjectableAxisymmetricCrouzeixRaviartElement<ELEMENT>>>
+    : public virtual FaceGeometry<FaceGeometry<ELEMENT>>
+  {
   public:
-  FaceGeometry() : FaceGeometry<FaceGeometry<ELEMENT>>() {}
-};
+    FaceGeometry() : FaceGeometry<FaceGeometry<ELEMENT>>() {}
+  };
 
 
 } // namespace oomph
