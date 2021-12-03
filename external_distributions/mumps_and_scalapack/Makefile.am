@@ -127,13 +127,16 @@ endif
 	echo "#Install with blacs (downloaded on the fly)" >> build_script.bash
 	echo "echo \"Bypassing test of executables (because it breaks on hector, or any\"">> build_script.bash
 	echo "echo \"other machine where we cross compile)\"">> build_script.bash
-	echo "cp script/framework.py script/framework.py.orig" >> build_script.bash
-	echo "sed 's/.\/tmpf/date/g' script/framework.py.orig | sed 's/.\/tmpc/date/g' > script/framework.py ">> build_script.bash
-	echo "patch script/blacs.py < ../../build_scripts/blacs.py.patch  ">> build_script.bash
+#	echo "cp script/framework.py script/framework.py.orig" >> build_script.bash
+	echo "cp ../../scalapack_python3_scripts/*py script" >> build_script.bash
+#	echo "sed 's/.\/tmpf/date/g' script/framework.py.orig | sed 's/.\/tmpc/date/g' > script/framework.py ">> build_script.bash
+#	echo "patch script/blacs.py < ../../build_scripts/blacs.py.patch  ">> build_script.bash
 	echo "echo "Building... [this can take a while!]"" >> build_script.bash
 	echo "./setup.py --downblacs --lapacklib=$(lapack_lib) --blaslib=$(blas_lib) --mpiincdir=$(mpi_include) --mpicc=$(CC) --mpif77=$(F77) --ccflags=\"$(CFLAGS)\" --fcflags=\"$(FFLAGS)\"  --ldflags_c=\"$(CFLAGS)\" --ldflags_f77=\"$(FFLAGS)\" --noopt=\"$(FFLAGS_NO_OPT)\" > scalapack.log" >> build_script.bash
 	echo "" >> build_script.bash
-	echo "echo "...done!"" >> build_script.bash
+	echo "echo \"...done!\"" >> build_script.bash
+	echo "echo \"here's the scalapack.log:\"" >> build_script.bash
+	echo "cat scalapack.log" >> build_script.bash
 	echo "#Test success" >> build_script.bash
 	echo "success=\`grep 'ScaLAPACK installation completed' scalapack.log | wc -l\`" >> build_script.bash
 	echo  -e "if [ \044success -eq 1 ]" >> build_script.bash
@@ -162,6 +165,7 @@ endif
 	echo "" >> build_script.bash
 	echo "# Read out the Fortran mangling from scalapack" >> build_script.bash
 	printf "fortran_mangle=\`grep 'mangling' scalapack/scalapack_installer_*/scalapack.log | awk '{print \044NF;}'\`\n" >> build_script.bash
+	echo "hierher fortran mangle " $fortran_mangle >> build_script.bash
 	echo "#------------------------" >> build_script.bash
 	echo "# Make/install mumps" >> build_script.bash
 	echo "#------------------------" >> build_script.bash
@@ -180,7 +184,10 @@ endif
 	echo "" >> build_script.bash
 	echo "# Update Makefile" >> build_script.bash
 	echo "escaped_blas_lib=\`echo $(blas_lib) | awk '{gsub(\"/\",\"\\\\\\/\"); print}' \`" >> build_script.bash
+	echo "hierher escaled_blas_lib " $escaled_blas_lib >> build_script.bash
+	echo "hierher about to do sed " >> build_script.bash
 	echo -e "sed \"s/@mpicc@/"$(CC)"/g\" Makefile.inc.template  | sed \"s/@mpif90@/"$(F77)"/g\"  | sed \"s/@blas_lib@/\044escaped_blas_lib/g\" | sed \"s/@fopts@/"$(FFLAGS)"/g\" | sed \"s/@lopts@/"$(FFLAGS)"/g\" | sed \"s/@copts@/"$(CFLAGS)"/g\" | sed \"s/@mangle@/\044fortran_mangle/g\" > MUMPS_4.10.0/Makefile.inc" >> build_script.bash
+	echo "hierher done sed " >> build_script.bash
 	echo "" >> build_script.bash
 	echo "cd MUMPS_4.10.0" >> build_script.bash
 	echo "echo \"Building...\""
@@ -214,3 +221,7 @@ distclean-local:
 	rm -rf scalapack
 	rm -rf mumps_and_scalapack_default_installation
 
+
+
+junk:
+	echo $(F77)
