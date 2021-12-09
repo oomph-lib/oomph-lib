@@ -1,4 +1,4 @@
- #!/usr/bin/python
+#!/usr/bin/python
 
 # -----------------------------------------
 # ScaLAPACK installer
@@ -34,7 +34,9 @@ def reverse(retto):
     verso = ''.join(verso)
     return verso
 
-
+# Puneet's replacement for the original openPipe function (still
+# included below in half-edited stated for reference; prefixed by
+# "hierher_"
 def openPipe(command):
 
     import subprocess
@@ -46,13 +48,14 @@ def openPipe(command):
     return (input, output, err, pipe)
 
 
+# old version; now completely bypassed by function above
 def hierher_openPipe(command):
 
     import subprocess
     #import popen2
 
     pipe = None
-    # replace that entire thing from here
+
     #if hasattr(popen2, 'Popen3'):
     #    pipe   = popen2.Popen3(command, 1)
     #    input  = pipe.tochild
@@ -62,7 +65,6 @@ def hierher_openPipe(command):
     #else:
 
     # new from https://docs.python.org/2/library/subprocess.html#subprocess-replacements
-    print("about to do the subprocess thing: command = ",command)
     p = subprocess.Popen(command, shell=True,
                          stdin=subprocess.PIPE,
                          stdout=subprocess.PIPE,
@@ -76,7 +78,7 @@ def hierher_openPipe(command):
      # orig:
      #   import os
      #   (input, output, err) = os.popen3(command)
-    # up to here
+
     
     return (input, output, err, pipe)
     
@@ -85,8 +87,6 @@ def hierher_openPipe(command):
 def runShellCommand(command):
     """ runs a shell command """
     
-    print("in here! command = ",command)
-
     import select
 
     ret        = None
@@ -107,7 +107,6 @@ def runShellCommand(command):
           else:
             errorClosed = 1
             lst.remove(error)
-            print("bla!")
         if output in ready[0]:
           msg = output.readline()
           if msg:
@@ -120,11 +119,7 @@ def runShellCommand(command):
     output.close()
     error.close()
     if pipe:
-      print("about to do pipe.wait(); ret = ",ret)
       ret = pipe.wait()
-      print("done pipe.wait(); ret = ",ret)
-
-    print("about to return; ret = ",ret)
 
     if not isinstance(out,str):
         out=out.decode("utf-8")
@@ -134,7 +129,7 @@ def runShellCommand(command):
 
     if not isinstance(ret,str):
         ret=ret # .decode("utf-8")
-    print("HIERHER out error ret",out,err,ret)
+
     return (out, err, ret)
 
 

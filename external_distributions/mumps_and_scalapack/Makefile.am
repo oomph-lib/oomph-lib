@@ -165,7 +165,6 @@ endif
 	echo "" >> build_script.bash
 	echo "# Read out the Fortran mangling from scalapack" >> build_script.bash
 	printf "fortran_mangle=\`grep 'mangling' scalapack/scalapack_installer_*/scalapack.log | awk '{print \044NF;}'\`\n" >> build_script.bash
-	echo "hierher fortran mangle " $fortran_mangle >> build_script.bash
 	echo "#------------------------" >> build_script.bash
 	echo "# Make/install mumps" >> build_script.bash
 	echo "#------------------------" >> build_script.bash
@@ -184,10 +183,7 @@ endif
 	echo "" >> build_script.bash
 	echo "# Update Makefile" >> build_script.bash
 	echo "escaped_blas_lib=\`echo $(blas_lib) | awk '{gsub(\"/\",\"\\\\\\/\"); print}' \`" >> build_script.bash
-	echo "hierher escaled_blas_lib " $escaled_blas_lib >> build_script.bash
-	echo "hierher about to do sed " >> build_script.bash
 	echo -e "sed \"s/@mpicc@/"$(CC)"/g\" Makefile.inc.template  | sed \"s/@mpif90@/"$(F77)"/g\"  | sed \"s/@blas_lib@/\044escaped_blas_lib/g\" | sed \"s/@fopts@/"$(FFLAGS)"/g\" | sed \"s/@lopts@/"$(FFLAGS)"/g\" | sed \"s/@copts@/"$(CFLAGS)"/g\" | sed \"s/@mangle@/\044fortran_mangle/g\" > MUMPS_4.10.0/Makefile.inc" >> build_script.bash
-	echo "hierher done sed " >> build_script.bash
 	echo "" >> build_script.bash
 	echo "cd MUMPS_4.10.0" >> build_script.bash
 	echo "echo \"Building...\""

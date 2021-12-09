@@ -392,17 +392,14 @@ in the PATH environment variable.
         comm = 'date'
         print("before runShellcommand for date for mpicc")
         (output, error, retz) = runShellCommand(comm)
-        print("back from runShellcommand for date for mpicc")
         if(retz != 0):
             print('\n\nCOMMON: mpicc not working! aborting...')
             print('error is:\n','*'*40,'\n',error,'\n','*'*40)
             sys.exit()
-        print("date for mpicc")
 
         # cleanup
         killfiles(['tmpc.c','tmpc'])
         print('yes')
-        print("about to leave after mpicc")
 
         return 0;
 
@@ -457,6 +454,7 @@ in the PATH environment variable.
         """ Sets the INTFACE variable in Bmake.inc """
         # This one generates a program equivalent to that in BLACS/INSTALL
         # that checks the mangling in FORTRAN function symbols
+        print ('Setting Fortran Mangling...'),
         sys.stdout.flush()
         writefile('tmpf.f',"""
       program intface
@@ -497,6 +495,7 @@ in the PATH environment variable.
         Frame.mangling = str(output)
         killfiles(['xintface', 'tmpf.f', 'tmpf.o', 'tmpc.c', 'tmpc.o'])
         
+        print("mangling: ",Frame.mangling)
         return 1;
 
 
