@@ -32,7 +32,7 @@
 namespace oomph
 {
   //====================================================================
-  /// \short Constructor for deformable quarter tube mesh class.
+  /// Constructor for deformable quarter tube mesh class.
   /// The domain is specified by the GeomObject that
   /// identifies boundary 3. Pass pointer to geometric object that
   /// specifies the wall, start and end coordinates on the
@@ -624,11 +624,11 @@ namespace oomph
     setup_boundary_element_info();
   }
 
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
   // Algebraic-mesh-version of RefineableQuarterTubeMesh
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
 
 
   //======================================================================
@@ -954,7 +954,7 @@ namespace oomph
   }
 
   //======================================================================
-  /// \short Algebraic update function: Update in central region according
+  /// Algebraic update function: Update in central region according
   /// to wall shape at time level t (t=0: present; t>0: previous)
   //======================================================================
   template<class ELEMENT>

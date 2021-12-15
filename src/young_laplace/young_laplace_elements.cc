@@ -186,12 +186,12 @@ namespace oomph
       // further calculations
 
       /// "Simple" case
-      ///--------------
+      /// --------------
       double nonlinearterm = 1.0;
       double sqnorm = 0.0;
 
       /// Spine case
-      ///-----------
+      /// -----------
 
       // Derivs of position vector w.r.t. global intrinsic coords
       Vector<Vector<double>> dRdzeta;

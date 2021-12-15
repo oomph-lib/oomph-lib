@@ -54,7 +54,7 @@ class ElasticRefineableCollapsibleChannelMesh :
 
 public:
 
- /// \short Constructor: Build mesh and copy Eulerian coords to Lagrangian
+ /// Constructor: Build mesh and copy Eulerian coords to Lagrangian
  /// ones so that the initial configuration is the stress-free one.
  ElasticRefineableCollapsibleChannelMesh<ELEMENT>(const unsigned& nup, 
                                                   const unsigned& ncollapsible,
@@ -101,7 +101,7 @@ namespace BL_Squash
  /// Fraction of points in boundary layer
  double Fract_in_BL=0.5;
 
- /// \short Mapping [0,1] -> [0,1] that re-distributes
+ /// Mapping [0,1] -> [0,1] that re-distributes
  /// nodal points across the channel width
  double squash_fct(const double& s)
  {
@@ -127,9 +127,9 @@ namespace BL_Squash
 
 
 
-//////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////////
 
 
 //====start_of_underformed_wall============================================
@@ -142,7 +142,7 @@ class UndeformedWall : public GeomObject
 
 public:
 
- /// \short Constructor: arguments are the starting point and the height
+ /// Constructor: arguments are the starting point and the height
  /// above y=0.
  UndeformedWall(const double& x0, const double& h): GeomObject(1,2)
   {
@@ -151,7 +151,7 @@ public:
   }
  
 
- /// \short Position vector at Lagrangian coordinate zeta 
+ /// Position vector at Lagrangian coordinate zeta 
  void position(const Vector<double>& zeta, Vector<double>& r) const
   {
    // Position Vector
@@ -160,7 +160,7 @@ public:
   }
 
 
- /// \short Parametrised position on object: r(zeta). Evaluated at
+ /// Parametrised position on object: r(zeta). Evaluated at
  /// previous timestep. t=0: current time; t>0: previous
  /// timestep. Calls steady version.
  void position(const unsigned& t, const Vector<double>& zeta,
@@ -172,7 +172,7 @@ public:
   } // end of position
 
 
- /// \short Posn vector and its  1st & 2nd derivatives
+ /// Posn vector and its  1st & 2nd derivatives
  /// w.r.t. to coordinates:
  /// \f$ \frac{dR_i}{d \zeta_\alpha}\f$ = drdzeta(alpha,i). 
  /// \f$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}\f$ = 
@@ -253,7 +253,7 @@ namespace Global_Physical_Variables
  /// External pressure
  double P_ext=0.0;
 
- /// \short Load function: Apply a constant external pressure to the wall.
+ /// Load function: Apply a constant external pressure to the wall.
  /// Note:  This is the load without the fluid contribution!
  /// Fluid load gets added on by FSIWallElement.
  void load(const Vector<double>& xi, const Vector<double>& x,
@@ -266,7 +266,7 @@ namespace Global_Physical_Variables
  } //end of load
 
 
- /// \short Fluid structure interaction parameter: Ratio of stresses used for
+ /// Fluid structure interaction parameter: Ratio of stresses used for
  /// non-dimensionalisation of fluid to solid stresses. 
  double Q=1.0e-5;
 
@@ -277,7 +277,7 @@ namespace Global_Physical_Variables
 
 
 //====start_of_problem_class==========================================
-///Problem class
+/// Problem class
 //====================================================================
 template <class ELEMENT>
 class FSICollapsibleChannelProblem : public Problem
@@ -285,7 +285,7 @@ class FSICollapsibleChannelProblem : public Problem
 
  public :
 
-/// \short Constructor: The arguments are the number of elements and
+/// Constructor: The arguments are the number of elements and
 /// the lengths of the domain.
  FSICollapsibleChannelProblem(const unsigned& nup, 
                        const unsigned& ncollapsible,
@@ -325,13 +325,13 @@ class FSICollapsibleChannelProblem : public Problem
  /// and reset FSI
  void actions_after_adapt();
 
- /// \short Update the problem specs before solve (empty) 
+ /// Update the problem specs before solve (empty) 
  void actions_before_newton_solve() {}
 
  /// Update the problem after solve (empty)
  void actions_after_newton_solve(){}
   
- /// \short Update no slip before Newton convergence check
+ /// Update no slip before Newton convergence check
  void actions_before_newton_convergence_check()
   {
    // Moving wall: No slip; this implies that the velocity needs
@@ -365,7 +365,7 @@ private :
  /// Delete prescribed traction elements from the surface mesh
  void delete_traction_elements(Mesh* const &traction_mesh_pt);
 
- /// \short Create elements that enforce prescribed boundary motion
+ /// Create elements that enforce prescribed boundary motion
  /// by Lagrange multiplilers
  void create_lagrange_multiplier_elements();
 
@@ -373,35 +373,35 @@ private :
  /// by Lagrange multiplilers
  void delete_lagrange_multiplier_elements();
 
- ///Number of elements in the x direction in the upstream part of the channel
+ /// Number of elements in the x direction in the upstream part of the channel
  unsigned Nup;
 
- /// \short Number of elements in the x direction in the collapsible part of 
+ /// Number of elements in the x direction in the collapsible part of 
  /// the channel
  unsigned Ncollapsible;
 
- ///Number of elements in the x direction in the downstream part of the channel
+ /// Number of elements in the x direction in the downstream part of the channel
  unsigned Ndown;
 
- ///Number of elements across the channel
+ /// Number of elements across the channel
  unsigned Ny;
 
- ///x-length in the upstream part of the channel
+ /// x-length in the upstream part of the channel
  double Lup;
 
- ///x-length in the collapsible part of the channel
+ /// x-length in the collapsible part of the channel
  double Lcollapsible;
 
- ///x-length in the downstream part of the channel
+ /// x-length in the downstream part of the channel
  double Ldown;
 
- ///Transverse length
+ /// Transverse length
  double Ly;
  
  /// Pointer to the "bulk" mesh 
  ElasticRefineableCollapsibleChannelMesh<ELEMENT>* Bulk_mesh_pt;
 
- /// \short Pointer to the "surface" mesh that applies the traction at the
+ /// Pointer to the "surface" mesh that applies the traction at the
  /// inflow
  Mesh* Applied_fluid_traction_mesh_pt; 
  
@@ -414,10 +414,10 @@ private :
  /// Geometric object incarnation of the wall mesh
  MeshAsGeomObject* Wall_geom_object_pt;
 
- ///Pointer to the left control node
+ /// Pointer to the left control node
  Node* Left_node_pt;
  
- ///Pointer to right control node
+ /// Pointer to right control node
  Node* Right_node_pt;
  
  /// Pointer to control node on the wall

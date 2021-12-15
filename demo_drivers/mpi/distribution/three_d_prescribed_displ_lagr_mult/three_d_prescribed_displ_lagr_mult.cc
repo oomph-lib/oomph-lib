@@ -110,7 +110,7 @@ public:
  /// Empty Destructor
  ~WarpedPlane(){}
 
- /// \short Position vector at Lagrangian coordinate zeta 
+ /// Position vector at Lagrangian coordinate zeta 
  void position(const Vector<double>& zeta, Vector<double>& r) const
   {
    // Position vector
@@ -122,7 +122,7 @@ public:
     (1.0-cos(2.0*MathematicalConstants::Pi*zeta[1]));
   }
  
- /// \short Parametrised position on object: r(zeta). Evaluated at
+ /// Parametrised position on object: r(zeta). Evaluated at
  /// previous timestep. t=0: current time; t>0: previous
  /// timestep. Forward to steady version
  void position(const unsigned& t, const Vector<double>& zeta,
@@ -134,7 +134,7 @@ public:
  /// Access to amplitude
  double& ampl() {return Ampl;}
 
- /// \short How many items of Data does the shape of the object depend on?
+ /// How many items of Data does the shape of the object depend on?
  /// None.
  unsigned ngeom_data() const
   {
@@ -150,9 +150,9 @@ private:
 
 
 
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
 
 
 //=======start_namespace==========================================
@@ -173,9 +173,9 @@ namespace Global_Physical_Variables
 } //end namespace
 
 
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
 
 
 //=========================================================================
@@ -189,7 +189,7 @@ class RefineableElasticCubicMesh : public virtual SimpleCubicMesh<ELEMENT>,
 
 public:
 
- /// \short Constructor: 
+ /// Constructor: 
  RefineableElasticCubicMesh(const unsigned &nx, const unsigned &ny, 
                             const unsigned &nz,
                             const double &a, const double &b, 
@@ -231,9 +231,9 @@ public:
 
 
 
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
 
 
 
@@ -253,13 +253,13 @@ public:
  /// Update function (empty)
  void actions_after_newton_solve() {}
 
- /// \short Update function (empty)
+ /// Update function (empty)
  void actions_before_newton_solve() {}
 
- /// \short Before distribute: Flush face submesh
+ /// Before distribute: Flush face submesh
  void actions_before_distribute();
  
- /// \short After distribute: Rebuild face element submesh
+ /// After distribute: Rebuild face element submesh
  void actions_after_distribute();
 
  /// Access function for the solid mesh
@@ -277,7 +277,7 @@ public:
 
 private:
 
- /// \short Create elements that enforce prescribed boundary motion
+ /// Create elements that enforce prescribed boundary motion
  /// by Lagrange multiplilers
  void create_lagrange_multiplier_elements();
 

@@ -55,7 +55,7 @@ namespace Global_Physical_Variables
  /// 1/Prandtl number
  double Inverse_Prandtl=1.0;
 
- /// \short Rayleigh number, set to be greater than 
+ /// Rayleigh number, set to be greater than 
  /// the threshold for linear instability
  double Rayleigh = 1800.0;
  
@@ -65,9 +65,9 @@ namespace Global_Physical_Variables
 } // end_of_namespace
 
 
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
 
 
 
@@ -82,19 +82,19 @@ class RefineableConvectionProblem : public Problem
 
 public:
 
- ///Constructor
+ /// Constructor
  RefineableConvectionProblem();
 
  /// Destructor. Empty
  ~RefineableConvectionProblem() {}
 
- /// \short Update the problem specs before solve:
+ /// Update the problem specs before solve:
  void actions_before_newton_solve();
 
  /// Update the problem after solve (empty)
  void actions_after_newton_solve(){}
 
- /// \short Access function to the NST mesh. 
+ /// Access function to the NST mesh. 
  /// Casts the pointer to the base Mesh object to 
  /// the actual mesh type.
  RefineableRectangularQuadMesh<NST_ELEMENT>* nst_mesh_pt() 
@@ -103,7 +103,7 @@ public:
     (Nst_mesh_pt);
   } // end_of_nst_mesh
 
- /// \short Access function to the AD mesh. 
+ /// Access function to the AD mesh. 
  /// Casts the pointer to the base Mesh object to 
  /// the actual mesh type.
  RefineableRectangularQuadMesh<AD_ELEMENT>* adv_diff_mesh_pt() 
@@ -115,7 +115,7 @@ public:
  /// Actions before adapt:(empty)
  void actions_before_adapt() {}
 
- /// \short Actions after adaptation, reset all sources, then
+ /// Actions after adaptation, reset all sources, then
  /// re-pin a single pressure degree of freedom
  void actions_after_adapt()
   {
@@ -135,7 +135,7 @@ public:
   } //end_of_actions_after_adapt
 
 
- ///Fix pressure in element e at pressure dof pdof and set to pvalue
+ /// Fix pressure in element e at pressure dof pdof and set to pvalue
  void fix_pressure(const unsigned &e, const unsigned &pdof, 
                    const double &pvalue)
   {
@@ -148,16 +148,16 @@ public:
   } // end_of_fix_pressure
 
  
- /// \short Set the
+ /// Set the
  /// boundary condition on the upper wall to be perturbed slightly
  /// to force the solution into the symmetry broken state.
  void enable_imperfection() {Imperfect = true;}
 
- /// \short Set th
+ /// Set th
  /// boundary condition on the upper wall to be unperturbed.
  void disable_imperfection() {Imperfect = false;}
  
- /// \short Doc the solution.
+ /// Doc the solution.
  void doc_solution();
 
 private:

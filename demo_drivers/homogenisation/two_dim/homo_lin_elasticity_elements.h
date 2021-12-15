@@ -54,11 +54,11 @@ namespace oomph
   {
     public:
 
-   /// \short Function pointer to a return a pointer to an  elasticity tensor
+   /// Function pointer to a return a pointer to an  elasticity tensor
    typedef void (*HomLinElasticityTensorFctPt)(const Vector<double> &x,
                                                ElasticityTensor* &E_pt);
    
-   /// \short Return the index at which the i-th unknown displacement 
+   /// Return the index at which the i-th unknown displacement 
    /// component is stored. The default value, i, is appropriate for
    /// single-physics problems.
    virtual inline unsigned u_index_linear_elasticity(const unsigned i) const
@@ -115,17 +115,17 @@ namespace oomph
      return(interpolated_u);
     }
    
-   /// \short Constructor: Set null pointers for constitutive law and for
+   /// Constructor: Set null pointers for constitutive law and for
    /// isotropic growth function. Set physical parameter values to 
    /// default values, switch off inertia and set body force to zero.
    HomogenisedLinearElasticityEquationsBase() : Elasticity_tensor_fct_pt(0),
     Lambda_sq_pt(&Default_lambda_sq_value), P_pt(0), M_pt(0), Unsteady(false)
     {}
 
-   ///Access function for the pointer to the p value
+   /// Access function for the pointer to the p value
    unsigned* &p_pt() {return P_pt;}
    
-   ///Get the value of p
+   /// Get the value of p
    unsigned get_p()
    {
     if(P_pt==0) 
@@ -138,10 +138,10 @@ namespace oomph
     else {return *P_pt;}
    }
 
-   ///Access function for the pointer to the m value
+   /// Access function for the pointer to the m value
    unsigned* &m_pt() {return M_pt;}
  
-   ///Get the value of m
+   /// Get the value of m
    unsigned get_m()
    {
     if(M_pt==0) 
@@ -163,7 +163,7 @@ namespace oomph
    HomLinElasticityTensorFctPt elasticity_tensor_fct_pt() const
     {return  Elasticity_tensor_fct_pt;}
 
-   /// \short Function to get the specific value of elasticity tensor 
+   /// Function to get the specific value of elasticity tensor 
    /// at the given position
    inline void get_E_pt(const Vector<double> &x, ElasticityTensor*  &E_pt)
    {
@@ -179,16 +179,16 @@ namespace oomph
      }
    }
 
-   ///Access function for timescale ratio (nondim density)
+   /// Access function for timescale ratio (nondim density)
    const double& lambda_sq() const {return *Lambda_sq_pt;}
    
    /// Access function for pointer to timescale ratio (nondim density)
    double* &lambda_sq_pt() {return Lambda_sq_pt;}
    
-   ///Access function to flag that switches inertia on/off
+   /// Access function to flag that switches inertia on/off
    bool& unsteady() {return Unsteady;}
    
-   ///Access function to flag that switches inertia on/off (const version)
+   /// Access function to flag that switches inertia on/off (const version)
    bool unsteady() const {return Unsteady;}
 
    virtual FaceElement* make_face_element(const unsigned &s_fixed_index,
@@ -208,10 +208,10 @@ namespace oomph
    /// Timescale ratio (non-dim. density)
    double* Lambda_sq_pt;
    
-   /// \short Pointer to the index P in the cell problem
+   /// Pointer to the index P in the cell problem
    unsigned *P_pt;
    
-   /// \short Pointer to the index M in the cell problem
+   /// Pointer to the index M in the cell problem
    unsigned *M_pt;
    
    /// Flag that switches inertia on/off
@@ -233,13 +233,13 @@ template<unsigned DIM>
    {
     public:
     
-   /// \short  Constructor
+   ///  Constructor
    HomogenisedLinearElasticityEquations() {}
 
    /// Always have three displacement components
    unsigned required_nvalue(const unsigned &n) const {return 3;}
    
-   /// \short Return the residuals for the solid equations (the discretised
+   /// Return the residuals for the solid equations (the discretised
    /// principle of virtual displacements)
    void fill_in_contribution_to_residuals(Vector<double> &residuals)
     {
@@ -247,7 +247,7 @@ template<unsigned DIM>
       residuals,GeneralisedElement::Dummy_matrix,0);
     }
 
-   /// \short Return the generic contribuion to the residuals and (optionally) 
+   /// Return the generic contribuion to the residuals and (optionally) 
    /// the jacobian matrix depending on the flag
    virtual void fill_in_generic_contribution_to_residuals_linear_elasticity(
     Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag);

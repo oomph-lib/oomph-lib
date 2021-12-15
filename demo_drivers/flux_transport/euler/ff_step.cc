@@ -37,15 +37,15 @@
 using namespace oomph;
 using namespace std;
 
-///===========================================================
-///Strong Stability preserving Runge Kutta Timestepping
+/// ===========================================================
+/// Strong Stability preserving Runge Kutta Timestepping
 //============================================================
 template<unsigned ORDER>
 class SSP_RungeKutta : public ExplicitTimeStepper
 {
 public:
  
- ///Constructor, set the type
+ /// Constructor, set the type
  SSP_RungeKutta()
   {
    Type="SSP_RungeKutta";
@@ -86,7 +86,7 @@ void SSP_RungeKutta<ORDER>::timestep(
 }
 
 //===================================================================
-///Explicit specialisation for second-order RK scheme
+/// Explicit specialisation for second-order RK scheme
 //==================================================================
 template<>
 void SSP_RungeKutta<2>::timestep(ExplicitTimeSteppableObject* const &object_pt,

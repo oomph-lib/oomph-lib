@@ -44,9 +44,9 @@ using namespace oomph;
 using namespace MathematicalConstants;
 
 
-/////////////////////////////////////////////////////////////////////// 
-///////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////// 
+/// //////////////////////////////////////////////////////////////////// 
+/// ////////////////////////////////////////////////////////////////////
+/// //////////////////////////////////////////////////////////////////// 
 
 //======start_of_ExactSolnForUnsteadyHeat=====================
 /// Namespace for unforced exact solution for UnsteadyHeat equation 
@@ -98,9 +98,9 @@ namespace ExactSolnForUnsteadyHeat
 
 } // end of ExactSolnForUnsteadyHeat
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
 
 //=====start_of_problem_class=========================================
 /// UnsteadyHeat problem 
@@ -121,17 +121,17 @@ public:
  /// Update the problem specs after solve (empty)
  void actions_after_newton_solve() {}
 
- /// \short Update the problem specs before solve (empty)
+ /// Update the problem specs before solve (empty)
  void actions_before_newton_solve() {}
 
  /// Update the problem specs after solve (empty)
  void actions_after_implicit_timestep() {}
 
- /// \short Update the problem specs before next timestep: 
+ /// Update the problem specs before next timestep: 
  /// Set Dirchlet boundary conditions from exact solution.
  void actions_before_implicit_timestep();
 
- /// \short Set initial condition (incl previous timesteps) according
+ /// Set initial condition (incl previous timesteps) according
  /// to specified function. 
  void set_initial_condition();
 
@@ -300,7 +300,7 @@ void UnsteadyHeatProblem<ELEMENT>::create_flux_elements()
 
 
 //=========start of actions_before_implicit_timestep===============================
-/// \short Actions before timestep: update the domain, then reset the 
+/// Actions before timestep: update the domain, then reset the 
 /// boundary conditions for the current time.
 //========================================================================
 template<class ELEMENT>
@@ -333,7 +333,7 @@ void UnsteadyHeatProblem<ELEMENT>::actions_before_implicit_timestep()
 
 
 //======================start_of_set_initial_condition====================
-/// \short Set initial condition: Assign previous and current values
+/// Set initial condition: Assign previous and current values
 /// from exact solution.
 //========================================================================
 template<class ELEMENT>
@@ -481,14 +481,14 @@ doc_solution(DocInfo& doc_info,ofstream& trace_file)
 
 
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
 
 
 
 //=======start_of_main====================================================
-/// \short Driver code for unsteady heat equation
+/// Driver code for unsteady heat equation
 //========================================================================
 int main()
 {

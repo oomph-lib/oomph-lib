@@ -38,10 +38,10 @@
 
 using namespace oomph;
 //======================================================================
-///Quater of a canieon mesh
-///Mesh with outer part cubic and inner part cilindric 
+/// Quater of a canieon mesh
+/// Mesh with outer part cubic and inner part cilindric 
 /// The outer face is given by the plane z = zmin 
-///The cilinder axis is given by the line x = xmin, z = zmax
+/// The cilinder axis is given by the line x = xmin, z = zmax
 // Rhe cilinder radius is radius
 // The cilinder may be the part of an ellipe if (xmax - xmi)n noneq ro (zmax -zmin)
 /// coincides with the numeration of the spines
@@ -53,7 +53,7 @@ class MyTipMesh : public  SimpleCubicMesh<ELEMENT >,
 
 public:
 
- /// \short Constructor: Pass number of elements in x-direction, number of
+ /// Constructor: Pass number of elements in x-direction, number of
  /// elements in y-direction, axial length, height of layer, and pointer 
  /// to timestepper (defaults to Steady timestepper)
  MyTipMesh(const unsigned &nx, 
@@ -78,11 +78,11 @@ public:
  /// Number of elements on interface
  unsigned long ninterface_element() const {return Interface_element_pt.size();}
  
- ///Access functions for pointers to elements in bulk
+ /// Access functions for pointers to elements in bulk
  FiniteElement* &bulk_element_pt(const unsigned long &i) 
   {return Bulk_element_pt[i];}
 
- ///Number of elements in bulk 
+ /// Number of elements in bulk 
  unsigned long nbulk() const {return Bulk_element_pt.size();}
 
 // Reurn radius of the canyon
@@ -109,7 +109,7 @@ public:
   }
 
 
- /// \short General node update function implements pure virtual function 
+ /// General node update function implements pure virtual function 
  /// defined in SpineMesh base class and performs specific node update
  /// actions:  along vertical spines
 
@@ -194,7 +194,7 @@ protected:
 /// Sacled radius of the canyon (must be between 0 and one
  double Radius;
 
- /// \short Helper function to actually build the single-layer spine mesh 
+ /// Helper function to actually build the single-layer spine mesh 
  /// (called from various constructors)
  virtual void build_single_layer_mesh(TimeStepper* time_stepper_pt);
  

@@ -161,12 +161,13 @@ accumulated_cpp_flags=''
 # anything under GNU< Linux (MH 12/01/2007)
 #
 AC_HEADER_STDC
-AC_CHECK_HEADERS([limits.h stdlib.h string.h sys/time.h],
-                  [echo "Congratulations -- required headers were found";],
-                  [echo "==================================================";
-                   echo "Trouble -- missing header[s]! ";
-                   echo "==================================================";
-                   exit])
+
+#AC_CHECK_HEADERS([limits.h stdlib.h string.h sys/time.h],
+#                  [echo "Congratulations -- required headers were found";],
+#                  [echo "==================================================";
+#                   echo "Trouble -- missing header[s]! ";
+#                   echo "==================================================";
+#                   exit])
 
 
 #Check for the execinfo header
@@ -438,8 +439,8 @@ else \
   # accomodate up to three digits for each part version id
   doxygen_version=`doxygen --version | \
     $AWK 'BEGIN { FS = "."; } { printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
-  # Need at least version 1.3.4 --> 1003004
-  if test "$doxygen_version" -ge 1003004; then
+  # Need at least version 1.9.2 --> 1009002
+  if test "$doxygen_version" -ge 1009002; then
     echo "Congratulations!"
     echo "I have located a (sufficiently) up-to-date version of doxygen:" \
          `doxygen --version`
@@ -448,7 +449,7 @@ else \
     echo " "; \
     echo "==============================================================="; \
     echo "Trouble: Your version of doxygen is: " `doxygen --version`
-    echo "Please upgrade to version 1.3.4 or higher."
+    echo "Please upgrade to version 1.9.3 or higher."
     echo " "; \
     echo "          http://www.doxygen.org/ "; \
     echo " "; \

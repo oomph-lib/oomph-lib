@@ -55,10 +55,10 @@ namespace Global_Physical_Variables
  /// Pseudo-solid Poisson ratio
  double Nu=0.1;
 
- ///Direction of the wall normal vector
+ /// Direction of the wall normal vector
  Vector<double> Wall_normal;
 
- /// \short Function that specifies the wall unit normal
+ /// Function that specifies the wall unit normal
  void wall_unit_normal_fct(const Vector<double> &x, 
                       Vector<double> &normal)
  {
@@ -70,8 +70,8 @@ namespace Global_Physical_Variables
 
 
 //============================================================================
-///A Problem class that solves the Navier--Stokes equations + free surface
-///in an axisymmetric geometry using a spine-based node update
+/// A Problem class that solves the Navier--Stokes equations + free surface
+/// in an axisymmetric geometry using a spine-based node update
 //============================================================================
 template<class ELEMENT>
 class CapProblem : public Problem
@@ -504,17 +504,17 @@ void CapProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
 
 //===========start_of_pseudo_elastic_class====================================
-///\short A class that solves the Navier--Stokes equations
-///to compute the shape of a static interface in a rectangular container
-///with imposed contact angle at the boundary.
+/// A class that solves the Navier--Stokes equations
+/// to compute the shape of a static interface in a rectangular container
+/// with imposed contact angle at the boundary.
 //============================================================================
 template<class ELEMENT>
 class PseudoSolidCapProblem : public Problem
 {
 public:
 
- ///Constructor: Boolean flag indicates if volume constraint is
- ///applied by hijacking internal or external pressure
+ /// Constructor: Boolean flag indicates if volume constraint is
+ /// applied by hijacking internal or external pressure
  PseudoSolidCapProblem(const bool& hijack_internal);
 
  /// Destructor: clean up memory allocated by the object
@@ -564,7 +564,7 @@ private:
  /// Trace file
  ofstream Trace_file;
 
- ///Storage for the bulk mesh
+ /// Storage for the bulk mesh
  Mesh* Bulk_mesh_pt;
 
  /// Storage for the free surface mesh
@@ -1018,7 +1018,7 @@ void PseudoSolidCapProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  
 //===start_of_main=======================================================
-///Main driver: Build problem and initiate parameter study
+/// Main driver: Build problem and initiate parameter study
 //======================================================================
 int main()
 {

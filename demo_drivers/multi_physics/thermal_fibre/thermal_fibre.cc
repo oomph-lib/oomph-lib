@@ -123,9 +123,9 @@ namespace Global_Physical_Variables
 
 } // end_of_namespace
 
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
 
 //====== start_of_problem_class=======================================
 /// 2D Convection  problem on rectangular domain, discretised 
@@ -138,7 +138,7 @@ class AxisymFreeSurfaceNozzleAdvDiffRobinProblem : public Problem
 
 public:
 
- ///Constructor: Pass the number of elements and the lengths of the
+ /// Constructor: Pass the number of elements and the lengths of the
  /// domain in the r and z directions (h is the height of the fluid layer
  /// i.e. the length of the domain in the z direction)
  AxisymFreeSurfaceNozzleAdvDiffRobinProblem(const unsigned &n_r, 
@@ -158,7 +158,7 @@ public:
    Bulk_mesh_pt->node_update();
   }
 
- /// \short Doc the solution.
+ /// Doc the solution.
  void doc_solution(DocInfo& doc_info);
 
  /// Do steady run up to maximum time t_max with given timestep dt
@@ -166,21 +166,21 @@ public:
 
 private:
 
- /// \short Update the problem specs before solve
+ /// Update the problem specs before solve
  /// Re-set velocity boundary conditions just to be on the safe side...
  void actions_before_newton_solve(); 
 
  /// Update the problem after solve (empty)
  void actions_after_newton_solve(){}
   
- /// \short Create Axisymmetric Advection Diffusion flux elements on boundary b of 
+ /// Create Axisymmetric Advection Diffusion flux elements on boundary b of 
  /// the Mesh pointed to by bulk_mesh_pt and add them to the Mesh 
  /// object pointed to by surface_mesh_pt
  void create_flux_elements(const unsigned &b, 
                            Mesh* const &bulk_mesh_pt,
                            Mesh* const &surface_mesh_pt);
 
- /// \short Delete Axisymmetric Advection Diffusion flux elements and wipe the surface mesh
+ /// Delete Axisymmetric Advection Diffusion flux elements and wipe the surface mesh
  void delete_flux_elements(Mesh* const &surface_mesh_pt);
 
  /// Pointer to the "bulk" mesh
@@ -228,7 +228,7 @@ private:
 }; // end of problem class
 
 //===========start_of_constructor=========================================
-/// \short Constructor for convection problem
+/// Constructor for convection problem
 //========================================================================
 template<class ELEMENT>
 AxisymFreeSurfaceNozzleAdvDiffRobinProblem<ELEMENT>::
@@ -443,7 +443,7 @@ AxisymFreeSurfaceNozzleAdvDiffRobinProblem(const unsigned &n_r,
 } // end of constructor
 
 //===================start_of_actions_before_newton_solve================
-/// \short Update the problem specs before solve: (Re-)set boundary conditions
+/// Update the problem specs before solve: (Re-)set boundary conditions
 /// just to be on the safe side...
 //========================================================================
 template<class ELEMENT>
@@ -698,9 +698,9 @@ steady_run()
 
 } // End of steady_run
 
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
 
 //=======start_of_main================================================
 /// Driver code for 2D Boussinesq convection problem

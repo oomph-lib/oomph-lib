@@ -42,9 +42,9 @@ using namespace oomph;
 using namespace std;
 
 
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
 
 
 //======start_of_namespace============================================
@@ -59,7 +59,7 @@ namespace Global_Physical_Variables
  /// 1/Prandtl number
  double Inverse_Prandtl=1.0;
 
- /// \short Rayleigh number, set to be greater than 
+ /// Rayleigh number, set to be greater than 
  /// the threshold for linear instability
  double Rayleigh = 1800.0;
  
@@ -69,9 +69,9 @@ namespace Global_Physical_Variables
 } // end_of_namespace
 
 
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
 
 
 
@@ -86,19 +86,19 @@ class RefineableConvectionProblem : public Problem
 
 public:
 
- ///Constructor
+ /// Constructor
  RefineableConvectionProblem();
 
  /// Destructor. Empty
  ~RefineableConvectionProblem() {}
 
- /// \short Update the problem specs before solve:
+ /// Update the problem specs before solve:
  void actions_before_newton_solve();
 
  /// Update the problem after solve (empty)
  void actions_after_newton_solve(){}
 
- /// \short Overloaded version of the problem's access function to 
+ /// Overloaded version of the problem's access function to 
  /// the mesh. Recasts the pointer to the base Mesh object to 
  /// the actual mesh type.
  RectangularQuadMesh<ELEMENT>* mesh_pt() 
@@ -110,7 +110,7 @@ public:
  /// Actions before adapt:(empty)
  void actions_before_adapt() {}
 
- /// \short Actions after adaptation,
+ /// Actions after adaptation,
  /// Re-pin a single pressure degree of freedom
  void actions_after_adapt()
   {
@@ -123,7 +123,7 @@ public:
    fix_pressure(0,0,0.0);
   }
 
- ///Fix pressure in element e at pressure dof pdof and set to pvalue
+ /// Fix pressure in element e at pressure dof pdof and set to pvalue
  void fix_pressure(const unsigned &e, const unsigned &pdof, 
                    const double &pvalue)
   {
@@ -132,16 +132,16 @@ public:
     fix_pressure(pdof,pvalue);
   } // end_of_fix_pressure
 
- /// \short Set the
+ /// Set the
  /// boundary condition on the upper wall to be perturbed slightly
  /// to force the solution into the symmetry broken state.
  void enable_imperfection() {Imperfect = true;}
 
- /// \short Set the
+ /// Set the
  /// boundary condition on the upper wall to be unperturbed.
  void disable_imperfection() {Imperfect = false;}
  
- /// \short Doc the solution.
+ /// Doc the solution.
  void doc_solution();
  
 private:

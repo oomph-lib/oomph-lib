@@ -34,9 +34,9 @@ namespace oomph
 {
 
 
-//////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////////
 
 
 //  CHECK WE DETECT OF HANGING NODES SOMEWHERE IN TRACTION MESH
@@ -45,9 +45,9 @@ namespace oomph
 template <class ELEMENT> class NavierStokesFluxControlElement;
 
 //======================================================================
-///A class for the elements that applies a net fluid flux across a 
-///boundary by the imposition of an applied traction
-///to the Navier--Stokes equations 
+/// A class for the elements that applies a net fluid flux across a 
+/// boundary by the imposition of an applied traction
+/// to the Navier--Stokes equations 
 //======================================================================
 template <class ELEMENT>
 class NetFluxControlElement : public virtual GeneralisedElement 
@@ -98,13 +98,13 @@ public:
    BrokenCopy::broken_copy("NetFluxControlElement");
   } 
  
- /// \short Function return pointer to the Data object whose
+ /// Function return pointer to the Data object whose
  /// single value is the pressure applied by the elements in 
  /// Flux_control_mesh_pt
  Data* pressure_data_pt() const {return Pressure_data_pt;}
 
 
- /// \short Add the element's contribution to its residual vector:
+ /// Add the element's contribution to its residual vector:
  /// The flow constraint. [Note: Jacobian is computed 
  /// automatically by finite-differencing]
  void fill_in_contribution_to_residuals(Vector<double> &residuals)
@@ -133,7 +133,7 @@ public:
 
 
 
- /// \short The number of "blocks" that degrees of freedom in this element
+ /// The number of "blocks" that degrees of freedom in this element
  /// are sub-divided into
  /// 
  /// IMPORTANT:
@@ -147,7 +147,7 @@ public:
 //   return 2;
 //  }
 
- /// \short Create a list of pairs for all unknowns in this element,
+ /// Create a list of pairs for all unknowns in this element,
  /// so that the first entry in each pair contains the global equation
  /// number of the unknown, while the second one contains the number
  /// of the "block" that this unknown is associated with.
@@ -177,32 +177,32 @@ public:
  
 private:
  
- /// \short Data object whose single value is the pressure 
+ /// Data object whose single value is the pressure 
  /// applied by the elements in the Flux_control_mesh_pt
  Data* Pressure_data_pt;
  
- /// \short Mesh of elements which impose a pressure which controls
+ /// Mesh of elements which impose a pressure which controls
  /// the net flux
  Mesh* Flux_control_mesh_pt;
  
- /// \short Pointer to the value that stores the prescribed outflow
+ /// Pointer to the value that stores the prescribed outflow
  double* Prescribed_outflow_value_pt;
 
 };
 
-//////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////////
 
 
 
 //======================================================================
-///A class for elements that allows a pressure to be imposed for volume
-///flux control by the the imposition of an applied traction
-///to the Navier--Stokes equations 
-///The geometrical information can be read from the FaceGeometery<ELEMENT> 
-///class and and thus, we can be generic enough without the need to have
-///a separate equations class
+/// A class for elements that allows a pressure to be imposed for volume
+/// flux control by the the imposition of an applied traction
+/// to the Navier--Stokes equations 
+/// The geometrical information can be read from the FaceGeometery<ELEMENT> 
+/// class and and thus, we can be generic enough without the need to have
+/// a separate equations class
 //======================================================================
 template <class ELEMENT>
 class NavierStokesFluxControlElement : 
@@ -210,8 +210,8 @@ class NavierStokesFluxControlElement :
 {
 public:
  
- ///Constructor, which takes a "bulk" element and the value of the index
- ///and its limit
+ /// Constructor, which takes a "bulk" element and the value of the index
+ /// and its limit
  NavierStokesFluxControlElement(FiniteElement* const &element_pt, 
                                 const int &face_index) : 
   NavierStokesSurfacePowerElement<ELEMENT>(element_pt, face_index)
@@ -247,20 +247,20 @@ public:
  /// Destructor should not delete anything
  ~NavierStokesFluxControlElement() {}
 
- /// \short The number of "blocks" that degrees of freedom in this element
+ /// The number of "blocks" that degrees of freedom in this element
  /// are sub-divided into
  unsigned nblock_types()
   {
    return 2;
   }
 
- /// \short Create a list of pairs for all unknowns in this element,
+ /// Create a list of pairs for all unknowns in this element,
  /// Do nothing since this element adds no new dofs
  void get_dof_numbers_for_unknowns(
   std::list<std::pair<unsigned long, unsigned> >& block_lookup_list)
   {}
  
- ///This function returns just the residuals
+ /// This function returns just the residuals
  inline void fill_in_contribution_to_residuals(Vector<double> &residuals)
   {
    //Call the generic residuals function using a dummy matrix argument
@@ -276,14 +276,14 @@ public:
 /*    fill_in_generic_residual_contribution_fluid_traction(residuals,jacobian); */
 /*   } */
  
- ///Overload the output function
+ /// Overload the output function
  void output(std::ostream &outfile) {FiniteElement::output(outfile);}
  
  /// Output function: x,y,[z],u,v,[w],p in tecplot format
  void output(std::ostream &outfile, const unsigned &nplot)
   {FiniteElement::output(outfile,nplot);}
  
- /// \short Function to add to external data the Data object whose
+ /// Function to add to external data the Data object whose
  /// single value is the pressure applied by the element
  void add_pressure_data(Data* pressure_data_pt)
   {
@@ -293,7 +293,7 @@ public:
 protected:
  
  
- /// \short Access function that returns the local equation numbers
+ /// Access function that returns the local equation numbers
  /// for velocity components.
  /// u_local_eqn(n,i) = local equation number or < 0 if pinned.
  /// The default is to asssume that n is the local node number
@@ -301,8 +301,8 @@ protected:
  virtual inline int u_local_eqn(const unsigned &n, const unsigned &i)
   {return this->nodal_local_eqn(n,i);}
  
- ///\short Function to compute the shape and test functions and to return 
- ///the Jacobian of mapping 
+ /// Function to compute the shape and test functions and to return 
+ /// the Jacobian of mapping 
  inline double shape_and_test_at_knot(const unsigned &ipt, 
                                       Shape &psi, Shape &test)
   const
@@ -318,9 +318,9 @@ protected:
   }
  
  
- ///\short This function returns the residuals for the 
+ /// This function returns the residuals for the 
  /// traction function.
- ///flag=1(or 0): do (or don't) compute the Jacobian as well. 
+ /// flag=1(or 0): do (or don't) compute the Jacobian as well. 
  void fill_in_generic_residual_contribution_fluid_traction(
   Vector<double> &residuals, 
   DenseMatrix<double> &jacobian)
@@ -405,11 +405,11 @@ protected:
  
 private:
  
- /// \short Id of external Data object whose single value is the 
+ /// Id of external Data object whose single value is the 
  /// pressure applied by the elements
  unsigned Pressure_data_id;
  
- ///The highest dimension of the problem 
+ /// The highest dimension of the problem 
  unsigned Dim;
  
  
