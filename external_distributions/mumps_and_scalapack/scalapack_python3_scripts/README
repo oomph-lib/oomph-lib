@@ -8,18 +8,22 @@ contained in the scalapack tar file.
  mangling, so adding debug statements to the python scripts can have
  unintended consequences (as I found out).
 
-  To compare the modified files against the original ones:
+To compare the modified files against the original ones:
 
-    cd external_distributions/mumps_and_scalapack/scalapack_python3_scripts/
-    mkdir junk
-    cp scalapack_installer.tgz junk/
-    cd junk/
-    tar xvfz scalapack_installer.tgz 
-    cd scalapack_installer_0.94/script/
-    find . -name '*.py' -exec meld {} ../../../scalapack_python3_scripts/{} \;
+  cd external_distributions/mumps_and_scalapack/scalapack_python3_scripts/
+  mkdir junk
+  cp scalapack_installer.tgz junk/
+  cd junk/
+  tar xvfz scalapack_installer.tgz 
+  cd scalapack_installer_0.94/script/
+  find . -name '*.py' -exec meld {} ../../../scalapack_python3_scripts/{} \;
 
-  Note that test are bypassed to allow for cross-compilation (where OS on
-  the building machine is different from the one where code is executed; this
-  was a problem on Hector. Python code is hacked by replacing the relevant
-  command with "date".
+
+(The last command assumes you have meld; use diff, sdiff or any other
+file comparison code on your machine if you don't.)
+  
+Note that test are bypassed to allow for cross-compilation (where the OS on
+the building machine is different from the one where code is executed); this
+was a problem on Hector. Python code is hacked by replacing the relevant
+command with "date".
 

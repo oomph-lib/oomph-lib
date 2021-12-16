@@ -182,22 +182,22 @@ void superlu_dist_distributed_matrix(int opt_flag, int allow_permutations,
   int_t *perm_r; /* row permutations from partial pivoting */
   int_t *perm_c; /* column permutation vector */
   int_t *etree;  /* elimination tree */
-  int_t *rowptr=0; int_t *colind;  /* Local A in NR*/
+  int_t *rowptr=NULL; int_t *colind;  /* Local A in NR*/
   int_t job, rowequ, colequ, iinfo, need_value, i, j, irow, icol;
   int_t m_loc, fst_row, nnz, nnz_loc; /* dist_mem_use; */
   int_t *colptr, *rowind;
   NRformat_loc *Astore;
   SuperMatrix GA;      /* Global A in NC format */
   NCformat *GAstore;
-  double *a_GA=0;
+  double *a_GA=NULL;
   SuperMatrix GAC;      /* Global A in NCP format (add n end pointers) */
   NCPformat *GACstore;
   Glu_persist_t *Glu_persist;
-  Glu_freeable_t *Glu_freeable=0;
+  Glu_freeable_t *Glu_freeable=NULL;
 
   /* Other stuff needed by SuperLU */
-  double  *berr=0;
-  double *a=0; double *X, *b_col;
+  double  *berr=NULL;
+  double *a=NULL; double *X, *b_col;
   double *B=b;
   double *C, *R, *C1, *R1, *x_col; /* *bcol, */
   double amax, t, colcnd, rowcnd; double anorm=0.0;
@@ -1273,10 +1273,10 @@ void superlu_dist_global_matrix(int opt_flag, int allow_permutations,
   NCformat *Astore;
   NCPformat *ACstore;
   Glu_persist_t *Glu_persist;
-  Glu_freeable_t *Glu_freeable=0;
+  Glu_freeable_t *Glu_freeable=NULL;
 
   /* Other stuff needed by SuperLU */
-  double  *berr=0;
+  double  *berr=NULL;
   double *a, *X, *b_col;
   double *B=b;
   double *C, *R, *C1, *R1, *b_work, *x_col; /* *bcol, */
