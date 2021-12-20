@@ -26,6 +26,10 @@ jobs:
       - name: Install MPI requirements (if required)
         if: ${{ matrix.mpi_options.enable == true }}
         run: sudo apt-get install openmpi-bin libopenmpi-dev
+        
+      - name: Get external distribution tar files (if MPI is used)
+        if: ${{ matrix.mpi_options.enable == true }}
+        run: bin/get_external_distribution_tar_files.bash 
 
       - name: Build
         run: |

@@ -52,15 +52,6 @@ namespace oomph
     // be pinned through an initial condition.
     for (unsigned i = NNODE_1D * NNODE_1D; i < n_node; i++)
     {
-      // Storage for the local time slice ID (0<=i_temporal<=NNODE_1D-1)
-      unsigned i_temporal = 0;
-
-      // The spatial node number
-      unsigned i_spatial = i % (NNODE_1D * NNODE_1D);
-
-      // Which local time slice are we in?
-      i_temporal = (i - i_spatial) / (NNODE_1D * NNODE_1D);
-
       // Find the index at which the variable is stored
       unsigned u_nodal_index = this->u_index_ust_heat();
 
@@ -106,15 +97,6 @@ namespace oomph
     // be pinned through an initial condition.
     for (unsigned i = NNODE_1D * NNODE_1D; i < n_node; i++)
     {
-      // Storage for the local time slice ID (0<=i_temporal<=NNODE_1D-1)
-      unsigned i_temporal = 0;
-
-      // The spatial node number
-      unsigned i_spatial = i % (NNODE_1D * NNODE_1D);
-
-      // Which local time slice are we in?
-      i_temporal = (i - i_spatial) / (NNODE_1D * NNODE_1D);
-
       // Find the index at which the variable is stored
       unsigned u_nodal_index = this->u_index_ust_heat();
 
