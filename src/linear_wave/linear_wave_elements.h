@@ -44,10 +44,7 @@ namespace oomph
   //=============================================================
   /// A class for all isoparametric elements that solve the
   /// LinearWave equations.
-  /// \f[
-  /// \frac{\partial^2 u}{\partial x_i^2}=
-  /// \frac{\partial^2 u}{\partial t^2}+f(t,x_j)
-  /// \f]
+  /// \f[ \frac{\partial^2 u}{\partial x_i^2}= \frac{\partial^2 u}{\partial t^2}+f(t,x_j) \f]
   /// This contains the generic maths. Shape functions, geometric
   /// mapping etc. must get implemented in derived class.
   //=============================================================

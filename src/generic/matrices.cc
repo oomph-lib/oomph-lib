@@ -3982,12 +3982,12 @@ namespace oomph
     }
 
     //============================================================================
-    /// Calculates the largest Gershgorin disc whilst preserving the
-    /// sign. Let A be an n by n matrix, with entries aij. For \f$ i \in \{
-    /// 1,...,n \} \f$ let \f$ R_i = \sum_{i\neq j} |a_{ij}| \f$ be the sum of
-    /// the absolute values of the non-diagonal entries in the i-th row. Let \f$
-    /// D(a_{ii},R_i) \f$ be the closed disc centered at \f$ a_{ii} \f$ with
-    /// radius \f$ R_i \f$, such a disc is called a Gershgorin disc.
+    /// Calculates the largest Gershgorin disc whilst preserving the sign. Let
+    /// A be an n by n matrix, with entries aij. For \f$ i \in \{ 1,...,n \} \f$
+    /// let \f$ R_i = \sum_{i\neq j} |a_{ij}| \f$ be the sum of the absolute
+    /// values of the non-diagonal entries in the i-th row. Let \f$ D(a_{ii},R_i) \f$
+    /// be the closed disc centered at \f$ a_{ii} \f$ with radius \f$ R_i \f$,
+    /// such a disc is called a Gershgorin disc.
     ///
     /// \n
     ///

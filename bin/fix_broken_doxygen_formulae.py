@@ -113,7 +113,7 @@ def process_file(fname: Path, pattern: str, add_newline: bool, in_place: bool = 
             processed_match = process_doxygen_formula_block(match.group())
 
             # Make sure the formula starts on its own line if it doesn't already
-            if add_newline and (updated_text[-4:] != "/// "):
+            if add_newline and (updated_text.rstrip(" ")[-2:] != "//"):
                 updated_text += new_comment_line + " "
 
             # Place the processed formula on a new line

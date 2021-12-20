@@ -728,9 +728,9 @@ namespace oomph
   /// of hanging nodes must be linear combinations of the
   /// values and positions on certain adjacent "master" nodes.
   /// For every hanging node \f$ J \f$ ,
-  ///  \f[ {\bf U}_J = \sum_{K} {\bf U}_{K} \omega_{JK}  \f]
+  /// \f[ {\bf U}_J = \sum_{K} {\bf U}_{K} \omega_{JK} \f]
   /// and
-  ///  \f[ {\bf X}_J = \sum_{K} {\bf X}_{K} \omega_{JK} \f],
+  /// \f[ {\bf X}_J = \sum_{K} {\bf X}_{K} \omega_{JK} \f],
   /// where \f$ {\bf U}_I \f$ and \f$ {\bf U}_I \f$ are Vectors containing
   /// the nodal values and positions of node
   /// \f$ I \f$ respectively; the sum is taken over the hanging node's
@@ -858,17 +858,17 @@ namespace oomph
   /// between local and global coordinates and in the simplest
   /// case (stationary nodes in Lagrange-type elements) this mapping
   /// is given by
-  /// \f[  x_i = \sum_{j=1}^{N_{node}} X_{ij} \psi_{j}(s_k) \f]
+  /// \f[ x_i = \sum_{j=1}^{N_{node}} X_{ij} \psi_{j}(s_k) \f]
   /// so we need only access to the nodal coordinates
   /// \f$ X_{ij}\ (i=1..DIM) \f$ of all nodes \f$ j \f$ : provided
   /// by the Node member function
   /// \code Node::x(i) \endcode
   ///
   /// If the nodal positions are time-dependent, the mapping becomes
-  /// \f[  x_i(t) = \sum_{j=1}^{N_{node}}  X_{ij}(t) \ \psi_{j}(s_k). \f]
+  /// \f[ x_i(t) = \sum_{j=1}^{N_{node}} X_{ij}(t) \ \psi_{j}(s_k). \f]
   /// Within the computation (where time is only evaluated at discrete
   /// levels) this becomes
-  /// \f[  x_{ti} = \sum_{j=1}^{N_{node}} X_{ijt} \ \psi_{j}(s_k). \f]
+  /// \f[ x_{ti} = \sum_{j=1}^{N_{node}} X_{ijt} \ \psi_{j}(s_k). \f]
   /// and we need access to the nodal coordinates \f$ X_{ijt} \ (i=1..DIM) \f$
   /// of all nodes \f$ j \f$ at the present (t=0) and previous (t>0) timesteps:
   /// provided by the Node member function
@@ -887,8 +887,7 @@ namespace oomph
   /// is based on an independent interpolation for the global coordinates
   /// and their derivative w.r.t. to the local coordinates. In such
   /// elements, the mapping becomes
-  /// \f[  x_i = \sum_{j=1}^{N_{node}} \sum_{k=1}^{N_{type}} X_{ijk}
-  ///    \psi_{jk}(s_k) \f]
+  /// \f[ x_i = \sum_{j=1}^{N_{node}} \sum_{k=1}^{N_{type}} X_{ijk} \psi_{jk}(s_k) \f]
   /// where \f$ N_{type} \f$ is the number of the different types of generalised
   /// coordinates involved in the mapping. For instance, in 1D Hermite elements
   /// \f$ N_{type}=2 \f$ and k=0 corresponds to the global coordinates while

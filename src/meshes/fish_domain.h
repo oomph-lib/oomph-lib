@@ -209,8 +209,7 @@ namespace oomph
       f[1] = -f[1];
     }
 
-    /// Southern boundary of lower body macro element zeta \f$\in [-1,1]
-    /// \f$
+    /// Southern boundary of lower body macro element zeta \f$\in [-1,1] \f$
     void r_lower_body_S(const unsigned& t,
                         const Vector<double>& zeta,
                         Vector<double>& f)

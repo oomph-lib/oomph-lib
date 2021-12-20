@@ -2735,17 +2735,13 @@ namespace oomph
   /// coordinates \f$ X_{pq} \f$ of the derivative of the shape functions
   /// \f$ \psi_j \f$ w.r.t. the global eulerian coordinates \f$ x_i \f$.
   /// I.e. this function calculates
-  /// \f[
-  /// \frac{\partial}{\partial X_{pq}}
-  /// \left( \frac{\partial \psi_j}{\partial x_i} \right).
-  /// \f]
+  /// \f[ \frac{\partial}{\partial X_{pq}} \left( \frac{\partial \psi_j}{\partial x_i} \right). \f]
   /// To do this it requires the determinant of the jacobian mapping, its
   /// derivative w.r.t. the nodal coordinates \f$ X_{pq} \f$, the inverse
   /// jacobian and the derivatives of the shape functions w.r.t. the local
   /// coordinates. The result is returned as a tensor of rank four.
   ///  Numbering:
-  /// d_dpsidx_dX(p,q,j,i) = \f$ \frac{\partial}{\partial X_{pq}}
-  /// \left( \frac{\partial \psi_j}{\partial x_i} \right) \f$
+  /// d_dpsidx_dX(p,q,j,i) = \f$ \frac{\partial}{\partial X_{pq}} \left( \frac{\partial \psi_j}{\partial x_i} \right) \f$
   /// This function is slightly inefficient, given that it uses a switch
   /// statement. It can always be overloaded in specific geometric elements,
   /// for efficiency reasons.
@@ -7369,12 +7365,7 @@ namespace oomph
   //=======================================================================
   /// Helper function to fill in the residuals and (if flag==1) the Jacobian
   /// for the setup of an initial condition. The global equations are:
-  /// \f[
-  /// 0 = \int \left( \sum_{j=1}^N \sum_{k=1}^K X_{ijk} \psi_{jk}(\xi_n)
-  /// - \frac{\partial^D R^{(IC)}_i(\xi_n)}{\partial t^D}
-  /// \right) \psi_{lm}(\xi_n) \ dv
-  /// \mbox{ \ \ \ \ for \ \ \ $l=1,...,N, \ \ m=1,...,K$}
-  /// \f]
+  /// \f[ 0 = \int \left( \sum_{j=1}^N \sum_{k=1}^K X_{ijk} \psi_{jk}(\xi_n) - \frac{\partial^D R^{(IC)}_i(\xi_n)}{\partial t^D} \right) \psi_{lm}(\xi_n) \ dv \mbox{ \ \ \ \ for \ \ \ $l=1,...,N, \ \ m=1,...,K$} \f]
   /// where \f$ N \f$ is the number of nodes in the mesh and \f$ K \f$
   /// the number of generalised nodal coordinates. The initial shape
   /// of the solid body, \f$ {\bf R}^{(IC)},\f$ and its time-derivatives
