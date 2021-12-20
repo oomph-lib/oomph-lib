@@ -1309,34 +1309,43 @@ namespace oomph
 
     /// Returns a nicely formatted string from an input time in seconds;
     /// the format depends on the size of time, e.g.:
+    /// 86510 will be printed as 1d 1m:50
     ///  3710 will be printed as 1h:01:50
     ///   700 will be printed as 11m:40
     ///    59 will be printed as 59s
-    std::string format_time(const double& time)
+    std::string convert_secs_to_formatted_string(
+      const long unsigned& time_in_sec)
     {
       std::ostringstream ss;
 
-      unsigned total_time = unsigned(time);
-      unsigned time_hrs = unsigned(total_time) / 3600;
-      unsigned time_min = (unsigned(total_time) % 3600) / 60;
-      unsigned time_sec = (unsigned(total_time) % 3600) % 60;
+      unsigned sec_within_day = time_in_sec % (3600 * 24);
 
+      unsigned time_days = time_in_sec / (3600 * 24);
+      unsigned time_hrs  = sec_within_day / 3600;
+      unsigned time_min  = (sec_within_day % 3600) / 60;
+      unsigned time_sec  = (sec_within_day % 3600) % 60;
+
+      if (time_days > 0)
+      {
+	ss << time_days << "d ";
+      }
+      
       if (time_hrs > 0)
       {
         ss << time_hrs << "h:";
         ss << std::setw(2) << std::setfill('0');
         ss << time_min << ":";
-        ss << time_sec << "\n" << std::endl;
+        ss << time_sec;
       }
       else if (time_min > 0)
       {
         ss << time_min << "m:";
         ss << std::setw(2) << std::setfill('0');
-        ss << time_sec << "\n" << std::endl;
+        ss << time_sec;
       }
       else
       {
-        ss << time_sec << "s\n" << std::endl;
+        ss << time_sec << "s";
       }
 
       return ss.str();
