@@ -44,12 +44,7 @@ namespace oomph
   //=============================================================
   /// A class for all elements that solve the Advection
   /// Diffusion Reaction equations using isoparametric elements.
-  /// \f[
-  /// \tau_{i} \frac{\partial C_{i}}{\partial t}
-  /// + w_{j} \frac{\partial C_{i}}{\partial x_{j}} =
-  /// D_{i}\frac{\partial^2 C_{i}}{\partial x_j^2} =
-  /// - R_{i}(C_{i}) + f_{i}
-  /// \f]
+  /// \f[ \tau_{i} \frac{\partial C_{i}}{\partial t} + w_{j} \frac{\partial C_{i}}{\partial x_{j}} = D_{i}\frac{\partial^2 C_{i}}{\partial x_j^2} = - R_{i}(C_{i}) + f_{i} \f]
   /// This contains the generic maths. Shape functions, geometric
   /// mapping etc. must get implemented in derived class.
   //=============================================================

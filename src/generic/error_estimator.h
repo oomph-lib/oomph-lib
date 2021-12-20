@@ -161,15 +161,11 @@ namespace oomph
   /// As an example consider the finite element solution of the Laplace problem,
   /// \f$ \partial^2 u/\partial x_i^2 = 0 \f$. If we approximate the
   /// unknown \f$ u \f$ on a finite element mesh with \f$ N \f$ nodes as
-  /// \f[
-  /// u^{[FE]}(x_k) = \sum_{j=1}^{N} U_j \ \psi_j(x_k),
-  /// \f]
+  /// \f[ u^{[FE]}(x_k) = \sum_{j=1}^{N} U_j \ \psi_j(x_k), \f]
   /// where the \f$ \psi_j(x_k) \f$ are the (global) \f$ C^0 \f$ basis
   /// functions, the finite-element representation of the flux,
   /// \f$ f_i = \partial u/\partial x_i \f$,
-  /// \f[
-  /// f_i^{[FE]} = \sum_{j=1}^{N} U_j \ \frac{\partial \psi_j}{\partial x_i}
-  /// \f]
+  /// \f[ f_i^{[FE]} = \sum_{j=1}^{N} U_j \ \frac{\partial \psi_j}{\partial x_i} \f]
   /// is discontinuous between elements but the magnitude of the jump
   /// decreases under mesh refinement.  We denote the number
   /// of flux terms by \f$N_{flux}\f$, so for a 2D (3D) Laplace problem,
@@ -210,25 +206,20 @@ namespace oomph
   ///    which consist of all elements that share a common vertex node.
   ///    Most elements will therefore be members of multiple patches.
   /// -# Within each patch \f$p\f$, we expand the "recovered flux" as
-  ///    \f[
-  ///    f^{[rec](p)}_i(x_k) = \sum_{j=1}^{N_{rec}}
-  ///    F^{(p)}_{ij} \ \psi^{[rec]}_j(x_k) \mbox{ \ \ \ for
-  ///    $i=1,...,N_{flux}$,} \f] where the functions \f$ \psi^{[rec]}_j(x_k)\f$
+  ///
+  ///    \f[ f^{[rec](p)}_i(x_k) = \sum_{j=1}^{N_{rec}} F^{(p)}_{ij} \ \psi^{[rec]}_j(x_k) \mbox{ \ \ \ for $i=1,...,N_{flux}$,} \f]
+  ///    where the functions \f$ \psi^{[rec]}_j(x_k)\f$
   ///    are the recovery shape functions, which are functions of the global,
   ///    Eulerian coordinates. Typically, these are chosen to be low-order
-  ///    polynomials. For instance, in 2D, a bilinear representation of \f$
-  ///    f^{(p)}_i(x_0,x_1) \f$ involves the \f$N_{rec}=3\f$ recovery shape
-  ///    functions \f$ \psi^{[rec]}_0(x_0,x_1)=1, \ \psi^{[rec]}_1(x_0,x_1)=x_0
-  ///    \f$ and \f$ \psi^{[rec]}_2(x_0,x_1)=x_1\f$.
+  ///    polynomials. For instance, in 2D, a bilinear representation of
+  ///    \f$ f^{(p)}_i(x_0,x_1) \f$ involves the \f$N_{rec}=3\f$ recovery shape
+  ///    functions \f$ \psi^{[rec]}_0(x_0,x_1)=1, \ \psi^{[rec]}_1(x_0,x_1)=x_0 \f$
+  ///    and \f$ \psi^{[rec]}_2(x_0,x_1)=x_1\f$.
   ///
   ///    We determine the coefficients \f$ F^{(p)}_{ij} \f$ by enforcing
-  ///    \f$ f^{(p)}_i(x_k) =  f^{[FE]}_i(x_k)\f$ in its weak form:
-  ///    \f[
-  ///    \int_{\mbox{Patch $p$}} \left(
-  ///    f^{[FE]}_i(x_k) - \sum_{j=1}^{N_{rec}}
-  ///    F^{(p)}_{ij} \ \psi^{[rec]}_j(x_k) \right) \psi^{[rec]}_l(x_k)\ dv = 0
-  ///    \mbox{ \ \ \ \ for $l=1,...,N_{rec}$ and $i=1,...,N_{flux}$}.
-  ///    \f]
+  ///    \f$ f^{(p)}_i(x_k) = f^{[FE]}_i(x_k)\f$ in its weak form:
+  ///
+  ///    \f[ \int_{\mbox{Patch $p$}} \left( f^{[FE]}_i(x_k) - \sum_{j=1}^{N_{rec}} F^{(p)}_{ij} \ \psi^{[rec]}_j(x_k) \right) \psi^{[rec]}_l(x_k)\ dv = 0 \mbox{ \ \ \ \ for $l=1,...,N_{rec}$ and $i=1,...,N_{flux}$}. \f]
   ///    Once the \f$ F^{(p)}_{ij} \f$  are determined in a given patch,
   ///    we determine the values of the recovered flux at
   ///    all nodes that are part of the patch. We denote the
@@ -238,30 +229,19 @@ namespace oomph
   ///    We repeat this procedure for every patch. For nodes that are part of
   ///    multiple patches, the procedure
   ///    will provide multiple, slightly different nodal values for the
-  ///    recovered flux. We average these values via \f[
-  ///    {\cal F}_{ij} = \frac{1}{N_p(j)}
-  ///    \sum_{\mbox{Node $j \in $ patch $p$}}
-  ///    {\cal F}^{(p)}_{ij},
-  ///    \f]
+  ///    recovered flux. We average these values via
+  ///    \f[ {\cal F}_{ij} = \frac{1}{N_p(j)} \sum_{\mbox{Node $j \in $ patch $p$}} {\cal F}^{(p)}_{ij}, \f]
   ///    where \f$N_p(j)\f$ denotes the number of patches that node \f$ j\f$ is
   ///    a member of. This allows us to obtain a globally-continuous,
-  ///    finite-element based representation of the recovered flux as \f[
-  ///    f_i^{[rec]} = \sum_{j=1}^{N} {\cal F}_{ij}\ \psi_j,
-  ///    \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1)
-  ///    \f]
+  ///    finite-element based representation of the recovered flux as
+  ///    \f[ f_i^{[rec]} = \sum_{j=1}^{N} {\cal F}_{ij}\ \psi_j, \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1) \f]
   ///    where the \f$ \psi_j \f$ are the (global) finite element
   ///    shape functions.
   /// -# Since the recovered flux in (1), is based on nodal values, we can
   ///    evaluate it locally within each of the \f$ N_e\f$ elements in the mesh
   ///    to obtain a normalised elemental error estimate via
-  ///    \f[
-  ///    E_{e} =  \sqrt{ \frac{
-  ///             \int_{\mbox{$e$}} \left(
-  ///              f_i^{[rec]}  - f_i^{[FE]} \right)^2 dv}
-  ///              {\sum_{e'=1}^{N_e}
-  ///               \int_{\mbox{$e'$}} \left(
-  ///                f_i^{[rec]} \right)^2 dv} } \mbox{\ \ \ for $e=1,...,N_e$.}
-  ///    \f]
+  ///
+  ///    \f[ E_{e} = \sqrt{ \frac{ \int_{\mbox{$e$}} \left( f_i^{[rec]} - f_i^{[FE]} \right)^2 dv} {\sum_{e'=1}^{N_e} \int_{\mbox{$e'$}} \left( f_i^{[rec]} \right)^2 dv} } \mbox{\ \ \ for $e=1,...,N_e$.} \f]
   ///    In this (default) form, mesh refinement, based on this error estimate
   ///    will lead to an equidistribution of the error across all elements.
   ///    Usually, this is the desired behaviour. However, there are

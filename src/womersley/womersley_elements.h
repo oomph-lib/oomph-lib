@@ -152,10 +152,7 @@ namespace oomph
   //=============================================================
   /// A class for all isoparametric elements that solve the
   /// Womersley (parallel flow) equations.
-  /// \f[
-  /// Re St \frac{\partial u}{\partial t} = - g +
-  /// \frac{\partial^2 u}{\partial x_i^2}
-  /// \f]
+  /// \f[ Re St \frac{\partial u}{\partial t} = - g + \frac{\partial^2 u}{\partial x_i^2} \f]
   /// which may be derived from the full Navier-Stokes equations
   /// (with a viscous scaling of the pressure) under the assumption of
   /// parallel flow in the z direction. u then represents the axial

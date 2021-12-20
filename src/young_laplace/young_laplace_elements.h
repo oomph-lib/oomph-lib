@@ -44,13 +44,9 @@ namespace oomph
   //=============================================================
   /// A class for all isoparametric elements that solve the
   /// YoungLaplace equations.
-  /// \f[
-  /// div  (\frac{1}{W} \nabla u) = \kappa
-  /// \f]
+  /// \f[ div (\frac{1}{W} \nabla u) = \kappa \f]
   /// with
-  /// \f[
-  /// W^2=1+\|\nabla u\|^2
-  /// \f]
+  /// \f[ W^2=1+\|\nabla u\|^2 \f]
   /// These equations can either be solved in the above (cartesian)
   /// form, or in a parametric representation using the method
   /// of spines. See the theory write-up in the documentation for
