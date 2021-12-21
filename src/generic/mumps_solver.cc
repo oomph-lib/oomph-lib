@@ -354,7 +354,8 @@ namespace oomph
           oomph_info << "Time for copying matrix into MumpsSolver data "
                         "structure : "
                      << TimingHelpers::convert_secs_to_formatted_string(
-		       t_end_copy - t_start_copy) << std::endl;
+                          t_end_copy - t_start_copy)
+                     << std::endl;
         }
 
         // Call mumps factorisation
@@ -384,8 +385,8 @@ namespace oomph
           double t_end_analyse = TimingHelpers::timer();
           oomph_info
             << "Time for mumps analysis stage in MumpsSolver            : "
-            << TimingHelpers::convert_secs_to_formatted_string(
-	      t_end_analyse - t_start_analyse)
+            << TimingHelpers::convert_secs_to_formatted_string(t_end_analyse -
+                                                               t_start_analyse)
             << "\n(Ordering generated using: ";
 
           switch (Mumps_struc_pt->INFOG(7))
@@ -475,7 +476,8 @@ namespace oomph
           oomph_info << "Time for actual mumps factorisation in MumpsSolver"
                         "      : "
                      << TimingHelpers::convert_secs_to_formatted_string(
-		       t_end_factor - t_start_factor) << std::endl;
+                          t_end_factor - t_start_factor)
+                     << std::endl;
         }
       }
       // else the CRDoubleMatrix is not distributed
@@ -506,8 +508,9 @@ namespace oomph
     {
       double t_end = TimingHelpers::timer();
       oomph_info << "Time for MumpsSolver factorisation                      : "
-                 << TimingHelpers::convert_secs_to_formatted_string(
-		   t_end - t_start) << std::endl;
+                 << TimingHelpers::convert_secs_to_formatted_string(t_end -
+                                                                    t_start)
+                 << std::endl;
     }
 
     // Switch off docing again by setting output stream for global info on
@@ -691,8 +694,9 @@ namespace oomph
     {
       double t_end = TimingHelpers::timer();
       oomph_info << "Time for MumpsSolver backsub                            : "
-                 << TimingHelpers::convert_secs_to_formatted_string(
-		   t_end - t_start) << std::endl;
+                 << TimingHelpers::convert_secs_to_formatted_string(t_end -
+                                                                    t_start)
+                 << std::endl;
     }
 
     // Switch off docing again by setting output stream for global info on
@@ -866,8 +870,9 @@ namespace oomph
         (this->distribution_pt()->communicator_pt()->my_rank() == 0))
     {
       oomph_info << "Time for MumpsSolver solve                              : "
-                 << TimingHelpers::convert_secs_to_formatted_string(
-		   t_end - t_start) << std::endl;
+                 << TimingHelpers::convert_secs_to_formatted_string(t_end -
+                                                                    t_start)
+                 << std::endl;
     }
 
     // Switch off docing again by setting output stream for global info on
@@ -948,7 +953,8 @@ namespace oomph
     {
       oomph_info << "Time to set up CRDoubleMatrix Jacobian                  : "
                  << TimingHelpers::convert_secs_to_formatted_string(
-		   Jacobian_setup_time) << std::endl;
+                      Jacobian_setup_time)
+                 << std::endl;
     }
 
 
@@ -984,8 +990,9 @@ namespace oomph
                  << "(np="
                  << this->distribution_pt()->communicator_pt()->nproc()
                  << ",N=" << problem_pt->ndof() << ")                : "
-		 << TimingHelpers::convert_secs_to_formatted_string(
-		   t_end - t_start) << std::endl;
+                 << TimingHelpers::convert_secs_to_formatted_string(t_end -
+                                                                    t_start)
+                 << std::endl;
     }
   }
 
@@ -1050,8 +1057,9 @@ namespace oomph
         (this->distribution_pt()->communicator_pt()->my_rank() == 0))
     {
       oomph_info << "Time for MumpsSolver solve: "
-		 << TimingHelpers::convert_secs_to_formatted_string(
-		   t_end - t_start) << std::endl;
+                 << TimingHelpers::convert_secs_to_formatted_string(t_end -
+                                                                    t_start)
+                 << std::endl;
     }
   }
 

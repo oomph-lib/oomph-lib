@@ -8986,8 +8986,9 @@ namespace oomph
       {
         oomph_info << std::endl;
         oomph_info << "Time for linear solver (ndof=" << n_dofs << "): "
-		   << TimingHelpers::convert_secs_to_formatted_string(
-		     t_solver_end - t_solver_start) << std::endl
+                   << TimingHelpers::convert_secs_to_formatted_string(
+                        t_solver_end - t_solver_start)
+                   << std::endl
                    << std::endl;
       }
 
@@ -9104,8 +9105,9 @@ namespace oomph
     {
       oomph_info << std::endl;
       oomph_info << "Total time for linear solver (ndof=" << n_dofs << "): "
-		 << TimingHelpers::convert_secs_to_formatted_string(
-		   total_linear_solver_time) << std::endl;
+                 << TimingHelpers::convert_secs_to_formatted_string(
+                      total_linear_solver_time)
+                 << std::endl;
     }
 
     double t_end = TimingHelpers::timer();
@@ -9114,8 +9116,8 @@ namespace oomph
     if (!Shut_up_in_newton_solve)
     {
       oomph_info << "Total time for Newton solver (ndof=" << n_dofs << "): "
-		 << TimingHelpers::convert_secs_to_formatted_string(total_time)
-		 << std::endl;
+                 << TimingHelpers::convert_secs_to_formatted_string(total_time)
+                 << std::endl;
     }
     if (total_time > 0.0)
     {

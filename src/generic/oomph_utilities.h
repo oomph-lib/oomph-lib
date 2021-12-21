@@ -958,8 +958,7 @@ namespace oomph
     ///  3710 will be printed as 1h:01:50
     ///   700 will be printed as 11m:40
     /// 59.15 will be printed as 59.2s
-    std::string convert_secs_to_formatted_string(
-      const double& time_in_sec);
+    std::string convert_secs_to_formatted_string(const double& time_in_sec);
 
   } // end of namespace TimingHelpers
 

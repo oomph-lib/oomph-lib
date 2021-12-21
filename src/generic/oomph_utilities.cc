@@ -1313,23 +1313,22 @@ namespace oomph
     ///  3710 will be printed as 1h:01:50
     ///   700 will be printed as 11m:40
     ///    59 will be printed as 59s
-    std::string convert_secs_to_formatted_string(
-      const double& time_in_sec)
+    std::string convert_secs_to_formatted_string(const double& time_in_sec)
     {
       std::ostringstream ss;
 
       unsigned sec_within_day = unsigned(time_in_sec) % (3600 * 24);
 
-      unsigned days    = unsigned(time_in_sec) / (3600 * 24);
-      unsigned hours   = sec_within_day / 3600;
+      unsigned days = unsigned(time_in_sec) / (3600 * 24);
+      unsigned hours = sec_within_day / 3600;
       unsigned minutes = (sec_within_day % 3600) / 60;
       unsigned seconds = (sec_within_day % 3600) % 60;
 
       if (days > 0)
       {
-	ss << days << "d ";
+        ss << days << "d ";
       }
-      
+
       if (hours > 0)
       {
         ss << hours << "h:";
