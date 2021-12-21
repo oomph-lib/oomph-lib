@@ -378,13 +378,7 @@ namespace oomph
   ///
   /// We're solving:
   ///
-  ///  \f$ { Re \left( St \frac{\partial u_i}{\partial t} +
-  ///              (u_j - u_j^{M}) \frac{\partial u_i}{\partial x_j} \right) =
-  ///      - \frac{\partial p}{\partial x_i}  - R_\rho B_i(x_j) -
-  ///       \frac{Re}{Fr} G_i +
-  ///        \frac{\partial }{\partial x_j} \left[  R_\mu \left(
-  ///        \frac{\partial u_i}{\partial x_j} +
-  ///         \frac{\partial u_j}{\partial x_i} \right) \right] } \f$
+  ///  \f$ { Re \left( St \frac{\partial u_i}{\partial t} + (u_j - u_j^{M}) \frac{\partial u_i}{\partial x_j} \right) = - \frac{\partial p}{\partial x_i} - R_\rho B_i(x_j) - \frac{Re}{Fr} G_i + \frac{\partial }{\partial x_j} \left[ R_\mu \left( \frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i} \right) \right] } \f$
   ///
   ///  and
   ///

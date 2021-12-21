@@ -40,8 +40,7 @@
 namespace oomph
 {
   //=====================================================================
-  // DOXYERROR: I removed a \f from the formula \f$\mbox{\boldmath$F$} =
-  // \mbox{\boldmath$F$}^{*}/\mu U\f$ below because it broke doxygen. Someone
+  // DOXYERROR: I removed a \f from the formula \f$\mbox{\boldmath$F$} = \mbox{\boldmath$F$}^{*}/\mu U\f$ below because it broke doxygen. Someone
   // who knows the maths should check that this still makes sense.
   /// Class that solves the equations of motion for a general
   /// two-dimensional rigid body subject to a particular imposed force and
@@ -54,11 +53,7 @@ namespace oomph
   ///
   /// The non-dimensionalisation is based on the viscous scales of
   /// the surrounding fluid, in which case, the governing equations are
-  /// \f[  Re St^{2} M \frac{\mbox{d}^{2} \mbox{\boldmath$X$}}{\mbox{d} t^{2}}
-  /// = \mbox{\boldmath$F$} + \oint \mbox{\boldmath$t$} \mbox{d} s
-  /// \quad\mbox{and}\quad Re St^{2} I \frac{\mbox{d}^{2}\Phi}{\mbox{d} t^{2}}
-  /// = \mbox{\boldmath$T$} + \oint \mbox{\boldmath$q$} \mbox{d} s,
-  /// \f]
+  /// \f[ Re St^{2} M \frac{\mbox{d}^{2} \mbox{\boldmath$X$}}{\mbox{d} t^{2}} = \mbox{\boldmath$F$} + \oint \mbox{\boldmath$t$} \mbox{d} s \quad\mbox{and}\quad Re St^{2} I \frac{\mbox{d}^{2}\Phi}{\mbox{d} t^{2}} = \mbox{\boldmath$T$} + \oint \mbox{\boldmath$q$} \mbox{d} s, \f]
   /// where \f$\mbox{\boldmath$F$} = \mbox{\boldmath$F$}^{*}/\mu U\f$ is the
   /// external force per unit length;
   /// \f$\mbox{\boldmath$t$}\f$ is the net force per unit length

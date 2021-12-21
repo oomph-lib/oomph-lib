@@ -45,26 +45,14 @@ namespace oomph
   /// large-displacement (but linearly-elastic) thin-beam theory.
   ///
   /// The variational principle has the form
-  /// \f[
-  /// \int_0^{L}   \left[
-  /// (\sigma_0 + \gamma) \ \delta
-  /// \gamma +
-  /// \frac{1}{12} \left(\frac{h}{R_0}\right)^2 \kappa
-  ///  \ \delta \kappa   -
-  /// \left( \left(\frac{R_0}{h}\right)  {\bf f} - \Lambda^2
-  /// \frac{\partial^2 {\bf R}_w}{\partial t^2} \right) \cdot
-  /// \delta {\bf R}_w
-  ///  \right] \ d\xi  = 0,
-  /// \f]
+  /// \f[ \int_0^{L} \left[ (\sigma_0 + \gamma) \ \delta \gamma + \frac{1}{12} \left(\frac{h}{R_0}\right)^2 \kappa \ \delta \kappa - \left( \left(\frac{R_0}{h}\right) {\bf f} - \Lambda^2 \frac{\partial^2 {\bf R}_w}{\partial t^2} \right) \cdot \delta {\bf R}_w \right] \ d\xi = 0, \f]
   /// where all lengths have been non-dimensionalised w.r.t. \f$ R_0 \f$.
   /// The strain and and bending "tensors" \f$\gamma\f$ and \f$\kappa\f$
   /// are computed relative to the shape of the beam's undeformed shape
   /// which is specified as a GeomObject.
   ///
   /// Time is scaled on the timescale \f$T\f$ and
-  /// \f[
-  /// \Lambda = \frac{a}{T} \sqrt{\frac{\rho}{E_{eff}}},
-  /// \f]
+  /// \f[ \Lambda = \frac{a}{T} \sqrt{\frac{\rho}{E_{eff}}}, \f]
   /// the ratio of the timescale used in the non-dimensionalisation of the
   /// equations to the natural timescale of the wall oscillations (in the
   /// wall's in-plane mode). \f$ \Lambda^2 \f$ can be interpreted as
@@ -96,11 +84,7 @@ namespace oomph
   /// beam to deform into a shape specified by a SolidInitialCondition object.
   /// If \c SolidFiniteElement::solid_ic_pt()!=0 we solve the
   /// the equations
-  /// \f[
-  /// \int_0^{L}   \left(
-  /// \frac{\partial^i {\bf R}_{IC}}{\partial t^i} -  {\bf R}_w
-  /// \right) \psi_{jk} \ d\xi  = 0,
-  /// \f]
+  /// \f[ \int_0^{L} \left( \frac{\partial^i {\bf R}_{IC}}{\partial t^i} - {\bf R}_w \right) \psi_{jk} \ d\xi = 0, \f]
   /// where  \f$ \partial^i {\bf R}_{IC}/\partial t^i\f$ is
   /// implemented by the SolidInitialCondition object, pointed to by
   /// \c SolidFiniteElement::shell_ic_pt().

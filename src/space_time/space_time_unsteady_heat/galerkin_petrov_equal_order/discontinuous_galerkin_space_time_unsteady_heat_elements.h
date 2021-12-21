@@ -63,9 +63,7 @@ namespace oomph
   //============================================================================
   /// A class for all isoparametric elements that solve the
   /// SpaceTimeUnsteadyHeat equations.
-  /// \f[
-  /// \frac{\partial^2 u}{\partial x_i^2}=\frac{\partial u}{\partial t}+f(t,x_j)
-  /// \f]
+  /// \f[ \frac{\partial^2 u}{\partial x_i^2}=\frac{\partial u}{\partial t}+f(t,x_j) \f]
   /// This contains the generic maths. Shape functions, geometric
   /// mapping etc. must get implemented in derived class.
   /// Note that this class assumes an isoparametric formulation, i.e. that
