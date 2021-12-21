@@ -72,7 +72,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00068}00068                                                   \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00069}00069 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00070}00070       \textcolor{comment}{// Get the timestepper}}
-\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00071}00071       \mbox{\hyperlink{classoomph_1_1TimeStepper}{TimeStepper}}* \mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\_stepper\_pt}} = \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n)-\/>time\_stepper\_pt();}
+\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00071}00071       \mbox{\hyperlink{classoomph_1_1TimeStepper}{TimeStepper}}* \mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\_stepper\_pt}} = \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n)-\/>\mbox{\hyperlink{classoomph_1_1Data_a065d7bffcec82bf4d4bd7b41f9aa80b3}{time\_stepper\_pt}}();}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00072}00072 }
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00073}00073       \textcolor{comment}{// Storage for the derivative -\/ initialise to 0}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00074}00074       \textcolor{keywordtype}{double} d2u\_dt2 = 0.0;}
@@ -105,7 +105,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00101}00101                                                 \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00102}00102 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00103}00103       \textcolor{comment}{// Get the timestepper}}
-\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00104}00104       \mbox{\hyperlink{classoomph_1_1TimeStepper}{TimeStepper}}* \mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\_stepper\_pt}} = \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n)-\/>time\_stepper\_pt();}
+\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00104}00104       \mbox{\hyperlink{classoomph_1_1TimeStepper}{TimeStepper}}* \mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\_stepper\_pt}} = \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n)-\/>\mbox{\hyperlink{classoomph_1_1Data_a065d7bffcec82bf4d4bd7b41f9aa80b3}{time\_stepper\_pt}}();}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00105}00105 }
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00106}00106       \textcolor{comment}{// Storage for the derivative -\/ initialise to 0}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00107}00107       \textcolor{keywordtype}{double} du\_dt = 0.0;}
@@ -252,7 +252,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00248}00248 \textcolor{comment}{    /// as a function of the Cartesian coordinates and time FCT(x,b) -\/-\/}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00249}00249 \textcolor{comment}{    /// x and b are  Vectors!}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00250}\mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_afa35b69a888eecae4b5f199a1adf88c5}{00250}} \textcolor{comment}{}    \textcolor{keyword}{typedef} void (*\mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_afa35b69a888eecae4b5f199a1adf88c5}{BodyForceFctPt}})(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
-\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00251}00251                                    \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00251}00251                                    \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00252}00252                                    \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& b);}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00253}00253 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00254}00254 \textcolor{comment}{    /// Constructor: Set null pointers for constitutive law.}}
@@ -327,7 +327,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00323}00323 \textcolor{comment}{    /// Evaluate body force at Eulerian coordinate x at present time}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00324}00324 \textcolor{comment}{    /// (returns zero vector if no body force function pointer has been set)}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00325}\mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_ad388a41f086f181a3c1608a5fb337ac6}{00325}} \textcolor{comment}{}    \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_ad388a41f086f181a3c1608a5fb337ac6}{body\_force}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
-\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00326}00326                            \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00326}00326                            \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00327}00327                            \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& b)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00328}00328 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00329}00329       \textcolor{comment}{// If no function has been set, return zero vector}}
@@ -342,7 +342,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00338}00338       \}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00339}00339       \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00340}00340       \{}
-\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00341}00341         (*Body\_force\_fct\_pt)(time, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, b);}
+\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00341}00341         (*Body\_force\_fct\_pt)(time, x, b);}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00342}00342       \}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00343}00343     \}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00344}00344 \textcolor{comment}{}}
@@ -459,12 +459,12 @@
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00455}00455 \textcolor{comment}{    /// We need only to take finite differences w.r.t. positional variables}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00456}00456 \textcolor{comment}{    /// For this element}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00457}\mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquations_ab773f8081f53cd71666eca2d0031ecec}{00457}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquations_ab773f8081f53cd71666eca2d0031ecec}{fill\_in\_contribution\_to\_jacobian}}(\mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00458}00458                                           \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})}
+\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00458}00458                                           \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian)}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00459}00459     \{}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00460}00460       \textcolor{comment}{// Add the contribution to the residuals}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00461}00461       \textcolor{keyword}{this}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00462}00462         -\/>fill\_in\_generic\_contribution\_to\_residuals\_axisymmetric\_linear\_elasticity(}
-\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00463}00463           residuals, \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, 1);}
+\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00463}00463           residuals, jacobian, 1);}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00464}00464     \}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00465}00465 }
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00466}00466 \textcolor{comment}{}}
@@ -525,7 +525,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00521}00521 \textcolor{comment}{    /// Private helper function to compute residuals and (if requested}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00522}00522 \textcolor{comment}{    /// via flag) also the Jacobian matrix.}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00523}00523 \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquations_a47f493fe9f183efebce35bd708cbb78d}{fill\_in\_generic\_contribution\_to\_residuals\_axisymmetric\_linear\_elasticity}}(}
-\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00524}00524       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \textcolor{keywordtype}{unsigned} flag);}
+\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00524}00524       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian, \textcolor{keywordtype}{unsigned} flag);}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00525}00525   \};}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00526}00526 }
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00527}00527 \textcolor{comment}{}}
@@ -712,14 +712,14 @@
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00708}00708           error\_stream.str(), OOMPH\_CURRENT\_FUNCTION, OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00709}00709       \}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00710}00710 \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00711}00711       \textcolor{keywordflow}{return} this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>ntstorage();}
+\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00711}00711       \textcolor{keywordflow}{return} this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Data_a9752205c5fb3bb886200b3fae9181e94}{ntstorage}}();}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00712}00712     \}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00713}00713 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00714}00714 \textcolor{comment}{    /// Number of positional history values: Read out from}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00715}00715 \textcolor{comment}{    /// positional timestepper  (Note: count includes current value!)}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00716}\mbox{\hyperlink{classoomph_1_1ProjectableAxisymLinearElasticityElement_a56a9ecb113858a8ab28a1125e879416d}{00716}} \textcolor{comment}{}    \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1ProjectableAxisymLinearElasticityElement_a56a9ecb113858a8ab28a1125e879416d}{nhistory\_values\_for\_coordinate\_projection}}()}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00717}00717     \{}
-\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00718}00718       \textcolor{keywordflow}{return} this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>position\_time\_stepper\_pt()-\/>ntstorage();}
+\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00718}00718       \textcolor{keywordflow}{return} this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Node_a32b32940186f9d1e2abc5d4bedb6ff0d}{position\_time\_stepper\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1TimeStepper_a3939b77ec3578e4bd5b453c85649d631}{ntstorage}}();}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00719}00719     \}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00720}00720 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__elements_8h_source_l00721}00721 \textcolor{comment}{    /// Return Jacobian of mapping and shape functions of field fld}}

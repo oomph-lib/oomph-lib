@@ -166,7 +166,7 @@
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00162}00162           \textcolor{keywordtype}{unsigned} j\_local = i0 + i1 * n\_node\_1d;}
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00163}00163 }
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00164}00164           \textcolor{comment}{// Create the node and store pointer to it}}
-\DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00165}00165           Node* node\_pt =}
+\DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00165}00165           \mbox{\hyperlink{classoomph_1_1Node}{Node}}* node\_pt =}
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00166}00166             finite\_element\_pt(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>construct\_node(j\_local, time\_stepper\_pt);}
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00167}00167 }
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00168}00168           \textcolor{comment}{// Work out the node's coordinates in the finite element's local}}
@@ -180,8 +180,8 @@
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00176}00176           Domain\_pt-\/>macro\_element\_pt(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>macro\_map(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, r);}
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00177}00177 }
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00178}00178           \textcolor{comment}{// Set the nodal position}}
-\DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00179}00179           node\_pt-\/>x(0) = r[0];}
-\DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00180}00180           node\_pt-\/>x(1) = r[1];}
+\DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00179}00179           node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0) = r[0];}
+\DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00180}00180           node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1) = r[1];}
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00181}00181         \}}
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00182}00182       \}}
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00183}00183     \} \textcolor{comment}{// end of loop over elements}}
@@ -284,8 +284,8 @@
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00280}00280           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00281}00281           \{}
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00282}00282             \textcolor{keywordtype}{double} error = std::fabs(}
-\DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00283}00283               finite\_element\_pt(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>node\_pt(j\_local)-\/>\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) -\/}
-\DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00284}00284               finite\_element\_pt(e\_neigh)-\/>node\_pt(j\_local\_neigh)-\/>\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
+\DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00283}00283               finite\_element\_pt(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>node\_pt(j\_local)-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) -\/}
+\DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00284}00284               finite\_element\_pt(e\_neigh)-\/>node\_pt(j\_local\_neigh)-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00285}00285             \textcolor{keywordflow}{if} (error > Max\_tol\_in\_node\_killing)}
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00286}00286             \{}
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00287}00287               \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}} << \textcolor{stringliteral}{"{}Error in node killing for i "{}} << \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} << \textcolor{stringliteral}{"{} "{}} << error}
@@ -370,8 +370,8 @@
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00366}00366           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00367}00367           \{}
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00368}00368             \textcolor{keywordtype}{double} error = std::fabs(}
-\DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00369}00369               finite\_element\_pt(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>node\_pt(j\_local)-\/>\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) -\/}
-\DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00370}00370               finite\_element\_pt(e\_neigh)-\/>node\_pt(j\_local\_neigh)-\/>\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
+\DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00369}00369               finite\_element\_pt(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>node\_pt(j\_local)-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) -\/}
+\DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00370}00370               finite\_element\_pt(e\_neigh)-\/>node\_pt(j\_local\_neigh)-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00371}00371             \textcolor{keywordflow}{if} (error > Max\_tol\_in\_node\_killing)}
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00372}00372             \{}
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00373}00373               \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}} << \textcolor{stringliteral}{"{}Error in node killing for i "{}} << \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} << \textcolor{stringliteral}{"{} "{}} << error}
@@ -463,8 +463,8 @@
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00459}00459           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00460}00460           \{}
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00461}00461             \textcolor{keywordtype}{double} error = std::fabs(}
-\DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00462}00462               finite\_element\_pt(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>node\_pt(j\_local)-\/>\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) -\/}
-\DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00463}00463               finite\_element\_pt(e\_neigh)-\/>node\_pt(j\_local\_neigh)-\/>\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
+\DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00462}00462               finite\_element\_pt(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>node\_pt(j\_local)-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) -\/}
+\DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00463}00463               finite\_element\_pt(e\_neigh)-\/>node\_pt(j\_local\_neigh)-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00464}00464             \textcolor{keywordflow}{if} (error > Max\_tol\_in\_node\_killing)}
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00465}00465             \{}
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00466}00466               \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}} << \textcolor{stringliteral}{"{}Error in node killing for i "{}} << \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} << \textcolor{stringliteral}{"{} "{}} << error}
@@ -500,8 +500,8 @@
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00496}00496           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00497}00497           \{}
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00498}00498             \textcolor{keywordtype}{double} error = std::fabs(}
-\DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00499}00499               finite\_element\_pt(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>node\_pt(j\_local)-\/>\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) -\/}
-\DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00500}00500               finite\_element\_pt(e\_neigh)-\/>node\_pt(j\_local\_neigh)-\/>\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
+\DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00499}00499               finite\_element\_pt(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>node\_pt(j\_local)-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) -\/}
+\DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00500}00500               finite\_element\_pt(e\_neigh)-\/>node\_pt(j\_local\_neigh)-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00501}00501             \textcolor{keywordflow}{if} (error > Max\_tol\_in\_node\_killing)}
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00502}00502             \{}
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00503}00503               \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}} << \textcolor{stringliteral}{"{}Error in node killing for i "{}} << \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} << \textcolor{stringliteral}{"{} "{}} << error}
@@ -615,7 +615,7 @@
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00611}00611             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00612}00612             \{}
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00613}00613               \textcolor{keywordtype}{double} error =}
-\DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00614}00614                 std::fabs(r[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ boundary\_node\_pt(ibound, inod)-\/>\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
+\DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00614}00614                 std::fabs(r[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ boundary\_node\_pt(ibound, inod)-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00615}00615               \textcolor{keywordflow}{if} (error > Max\_tol\_in\_node\_killing)}
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00616}00616               \{}
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00617}00617                 \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}} << \textcolor{stringliteral}{"{}Error in boundary coordinate for direction "{}} << \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}}
@@ -940,8 +940,8 @@
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00936}00936     r\_sym[1] = 0.0;}
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00937}00937 }
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00938}00938     \textcolor{comment}{// Assign new nodal coordinate}}
-\DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00939}00939     node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 0) = r\_sym[0] + fract\_y * (r\_back[0] -\/ r\_sym[0]);}
-\DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00940}00940     node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 1) = sign * (r\_sym[1] + fract\_y * (r\_back[1] -\/ r\_sym[1]));}
+\DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00939}00939     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 0) = r\_sym[0] + fract\_y * (r\_back[0] -\/ r\_sym[0]);}
+\DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00940}00940     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 1) = sign * (r\_sym[1] + fract\_y * (r\_back[1] -\/ r\_sym[1]));}
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00941}00941   \}}
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00942}00942 }
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00943}00943 }
@@ -987,8 +987,8 @@
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00983}00983     \textcolor{keywordtype}{double} y\_fin\_edge = r\_back[1] + fract\_x * (y\_tail -\/ r\_back[1]);}
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00984}00984 }
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00985}00985     \textcolor{comment}{// Assign new nodal coordinate}}
-\DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00986}00986     node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 0) = r\_back[0] + fract\_x * (x\_tail -\/ r\_back[0]);}
-\DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00987}00987     node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 1) = sign * fract\_y * y\_fin\_edge;}
+\DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00986}00986     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 0) = r\_back[0] + fract\_x * (x\_tail -\/ r\_back[0]);}
+\DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00987}00987     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 1) = sign * fract\_y * y\_fin\_edge;}
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00988}00988   \}}
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00989}00989 }
 \DoxyCodeLine{\Hypertarget{fish__mesh_8template_8cc_source_l00990}00990 \} \textcolor{comment}{// namespace oomph}}

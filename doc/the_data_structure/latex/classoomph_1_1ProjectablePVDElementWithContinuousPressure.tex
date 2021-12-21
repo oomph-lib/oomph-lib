@@ -20,21 +20,21 @@ Inheritance diagram for oomph\+::Projectable\+PVDElement\+With\+Continuous\+Pres
 \item 
 \mbox{\hyperlink{classoomph_1_1ProjectablePVDElementWithContinuousPressure_a973f20aa3b0a7daffd6295f1aa51b475}{Projectable\+PVDElement\+With\+Continuous\+Pressure}} ()
 \begin{DoxyCompactList}\small\item\em Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards...\mbox{]}. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectablePVDElementWithContinuousPressure_a3eed8cb70df348c51e16de4ccda60ba1}{data\+\_\+values\+\_\+of\+\_\+field}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&fld)
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectablePVDElementWithContinuousPressure_a3eed8cb70df348c51e16de4ccda60ba1}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. In the underlying PVD elements the pressures (the first field) are the first values at the vertex nodes etc. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectablePVDElementWithContinuousPressure_a022141e748543a3d95230707d64f8baf}{nfields\+\_\+for\+\_\+projection}} ()
 \begin{DoxyCompactList}\small\item\em Number of fields to be projected\+: 1, corresponding to the pressure only. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1ProjectablePVDElementWithContinuousPressure_ae2e030a1740d31e491e9083c6b0107b4}{nhistory\+\_\+values\+\_\+for\+\_\+projection}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&fld)
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectablePVDElementWithContinuousPressure_ae2e030a1740d31e491e9083c6b0107b4}{nhistory\+\_\+values\+\_\+for\+\_\+projection}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Number of history values to be stored for fld-\/th field. (Includes the current value!) \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectablePVDElementWithContinuousPressure_a67bdc9b19979dc1b77330fb1ab5f9493}{nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection}} ()
 \begin{DoxyCompactList}\small\item\em Number of positional history values (Includes the current value!) \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1ProjectablePVDElementWithContinuousPressure_a9da58f06068f1f3b48e87bb6cbc97018}{jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&fld, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi)
+double \mbox{\hyperlink{classoomph_1_1ProjectablePVDElementWithContinuousPressure_a9da58f06068f1f3b48e87bb6cbc97018}{jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field}} (const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi)
 \begin{DoxyCompactList}\small\item\em Return Jacobian of mapping and shape functions of field fld at local coordinate s. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1ProjectablePVDElementWithContinuousPressure_a541a3577c83ffd547e6504bebcbda836}{get\+\_\+field}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&fld, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
+double \mbox{\hyperlink{classoomph_1_1ProjectablePVDElementWithContinuousPressure_a541a3577c83ffd547e6504bebcbda836}{get\+\_\+field}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
 \begin{DoxyCompactList}\small\item\em Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: history values) \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1ProjectablePVDElementWithContinuousPressure_a2705856446a53ee4e3944ae8b5006391}{nvalue\+\_\+of\+\_\+field}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&fld)
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectablePVDElementWithContinuousPressure_a2705856446a53ee4e3944ae8b5006391}{nvalue\+\_\+of\+\_\+field}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Return number of values in field fld. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{classoomph_1_1ProjectablePVDElementWithContinuousPressure_a90cc8c352dc5c6dfca3bd26f642c998f}{local\+\_\+equation}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&fld, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&j)
+int \mbox{\hyperlink{classoomph_1_1ProjectablePVDElementWithContinuousPressure_a90cc8c352dc5c6dfca3bd26f642c998f}{local\+\_\+equation}} (const unsigned \&fld, const unsigned \&j)
 \begin{DoxyCompactList}\small\item\em Return local equation number of value j in field fld. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -72,7 +72,7 @@ Definition at line \mbox{\hyperlink{solid__elements_8h_source_l02500}{2500}} of 
 \index{data\_values\_of\_field@{data\_values\_of\_field}!oomph::ProjectablePVDElementWithContinuousPressure$<$ PVD\_ELEMENT $>$@{oomph::ProjectablePVDElementWithContinuousPressure$<$ PVD\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{data\_values\_of\_field()}{data\_values\_of\_field()}}
 {\footnotesize\ttfamily template$<$class PVD\+\_\+\+ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectablePVDElementWithContinuousPressure}{oomph\+::\+Projectable\+PVDElement\+With\+Continuous\+Pressure}}$<$ PVD\+\_\+\+ELEMENT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectablePVDElementWithContinuousPressure}{oomph\+::\+Projectable\+PVDElement\+With\+Continuous\+Pressure}}$<$ PVD\+\_\+\+ELEMENT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -88,14 +88,14 @@ Definition at line \mbox{\hyperlink{solid__elements_8h_source_l02508}{2508}} of 
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectablePVDElementWithContinuousPressure_a541a3577c83ffd547e6504bebcbda836}\label{classoomph_1_1ProjectablePVDElementWithContinuousPressure_a541a3577c83ffd547e6504bebcbda836}} 
 \index{oomph::ProjectablePVDElementWithContinuousPressure$<$ PVD\_ELEMENT $>$@{oomph::ProjectablePVDElementWithContinuousPressure$<$ PVD\_ELEMENT $>$}!get\_field@{get\_field}}
 \index{get\_field@{get\_field}!oomph::ProjectablePVDElementWithContinuousPressure$<$ PVD\_ELEMENT $>$@{oomph::ProjectablePVDElementWithContinuousPressure$<$ PVD\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{get\_field()}{get\_field()}}
 {\footnotesize\ttfamily template$<$class PVD\+\_\+\+ELEMENT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1ProjectablePVDElementWithContinuousPressure}{oomph\+::\+Projectable\+PVDElement\+With\+Continuous\+Pressure}}$<$ PVD\+\_\+\+ELEMENT $>$\+::get\+\_\+field (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{fld,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+double \mbox{\hyperlink{classoomph_1_1ProjectablePVDElementWithContinuousPressure}{oomph\+::\+Projectable\+PVDElement\+With\+Continuous\+Pressure}}$<$ PVD\+\_\+\+ELEMENT $>$\+::get\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const unsigned \&}]{fld,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -118,7 +118,7 @@ References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 \index{jacobian\_and\_shape\_of\_field@{jacobian\_and\_shape\_of\_field}!oomph::ProjectablePVDElementWithContinuousPressure$<$ PVD\_ELEMENT $>$@{oomph::ProjectablePVDElementWithContinuousPressure$<$ PVD\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{jacobian\_and\_shape\_of\_field()}{jacobian\_and\_shape\_of\_field()}}
 {\footnotesize\ttfamily template$<$class PVD\+\_\+\+ELEMENT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1ProjectablePVDElementWithContinuousPressure}{oomph\+::\+Projectable\+PVDElement\+With\+Continuous\+Pressure}}$<$ PVD\+\_\+\+ELEMENT $>$\+::jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{fld,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+double \mbox{\hyperlink{classoomph_1_1ProjectablePVDElementWithContinuousPressure}{oomph\+::\+Projectable\+PVDElement\+With\+Continuous\+Pressure}}$<$ PVD\+\_\+\+ELEMENT $>$\+::jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -134,14 +134,14 @@ Definition at line \mbox{\hyperlink{solid__elements_8h_source_l02550}{2550}} of 
 
 
 
-References \mbox{\hyperlink{classoomph_1_1FiniteElement_a808557a124b98d5bbe3bb3b22c81b44b}{oomph\+::\+Finite\+Element\+::\+J\+\_\+eulerian()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References \mbox{\hyperlink{elements_8cc_source_l04103}{oomph\+::\+Finite\+Element\+::\+J\+\_\+eulerian()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectablePVDElementWithContinuousPressure_a90cc8c352dc5c6dfca3bd26f642c998f}\label{classoomph_1_1ProjectablePVDElementWithContinuousPressure_a90cc8c352dc5c6dfca3bd26f642c998f}} 
 \index{oomph::ProjectablePVDElementWithContinuousPressure$<$ PVD\_ELEMENT $>$@{oomph::ProjectablePVDElementWithContinuousPressure$<$ PVD\_ELEMENT $>$}!local\_equation@{local\_equation}}
 \index{local\_equation@{local\_equation}!oomph::ProjectablePVDElementWithContinuousPressure$<$ PVD\_ELEMENT $>$@{oomph::ProjectablePVDElementWithContinuousPressure$<$ PVD\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{local\_equation()}{local\_equation()}}
 {\footnotesize\ttfamily template$<$class PVD\+\_\+\+ELEMENT $>$ \\
-int \mbox{\hyperlink{classoomph_1_1ProjectablePVDElementWithContinuousPressure}{oomph\+::\+Projectable\+PVDElement\+With\+Continuous\+Pressure}}$<$ PVD\+\_\+\+ELEMENT $>$\+::local\+\_\+equation (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{fld,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+int \mbox{\hyperlink{classoomph_1_1ProjectablePVDElementWithContinuousPressure}{oomph\+::\+Projectable\+PVDElement\+With\+Continuous\+Pressure}}$<$ PVD\+\_\+\+ELEMENT $>$\+::local\+\_\+equation (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -195,14 +195,14 @@ Definition at line \mbox{\hyperlink{solid__elements_8h_source_l02543}{2543}} of 
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, and \mbox{\hyperlink{nodes_8h_source_l01022}{oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectablePVDElementWithContinuousPressure_ae2e030a1740d31e491e9083c6b0107b4}\label{classoomph_1_1ProjectablePVDElementWithContinuousPressure_ae2e030a1740d31e491e9083c6b0107b4}} 
 \index{oomph::ProjectablePVDElementWithContinuousPressure$<$ PVD\_ELEMENT $>$@{oomph::ProjectablePVDElementWithContinuousPressure$<$ PVD\_ELEMENT $>$}!nhistory\_values\_for\_projection@{nhistory\_values\_for\_projection}}
 \index{nhistory\_values\_for\_projection@{nhistory\_values\_for\_projection}!oomph::ProjectablePVDElementWithContinuousPressure$<$ PVD\_ELEMENT $>$@{oomph::ProjectablePVDElementWithContinuousPressure$<$ PVD\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{nhistory\_values\_for\_projection()}{nhistory\_values\_for\_projection()}}
 {\footnotesize\ttfamily template$<$class PVD\+\_\+\+ELEMENT $>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1ProjectablePVDElementWithContinuousPressure}{oomph\+::\+Projectable\+PVDElement\+With\+Continuous\+Pressure}}$<$ PVD\+\_\+\+ELEMENT $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectablePVDElementWithContinuousPressure}{oomph\+::\+Projectable\+PVDElement\+With\+Continuous\+Pressure}}$<$ PVD\+\_\+\+ELEMENT $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -221,7 +221,7 @@ Definition at line \mbox{\hyperlink{solid__elements_8h_source_l02535}{2535}} of 
 \index{nvalue\_of\_field@{nvalue\_of\_field}!oomph::ProjectablePVDElementWithContinuousPressure$<$ PVD\_ELEMENT $>$@{oomph::ProjectablePVDElementWithContinuousPressure$<$ PVD\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{nvalue\_of\_field()}{nvalue\_of\_field()}}
 {\footnotesize\ttfamily template$<$class PVD\+\_\+\+ELEMENT $>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1ProjectablePVDElementWithContinuousPressure}{oomph\+::\+Projectable\+PVDElement\+With\+Continuous\+Pressure}}$<$ PVD\+\_\+\+ELEMENT $>$\+::nvalue\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectablePVDElementWithContinuousPressure}{oomph\+::\+Projectable\+PVDElement\+With\+Continuous\+Pressure}}$<$ PVD\+\_\+\+ELEMENT $>$\+::nvalue\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 

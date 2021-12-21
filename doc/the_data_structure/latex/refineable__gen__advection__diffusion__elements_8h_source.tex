@@ -56,14 +56,14 @@
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00052}00052 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00053}00053   \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00054}\mbox{\hyperlink{classoomph_1_1RefineableGeneralisedAdvectionDiffusionEquations}{00054}}   \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1RefineableGeneralisedAdvectionDiffusionEquations}{RefineableGeneralisedAdvectionDiffusionEquations}}}
-\DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00055}00055     : \textcolor{keyword}{public} \textcolor{keyword}{virtual} GeneralisedAdvectionDiffusionEquations<DIM>,}
+\DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00055}00055     : \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1GeneralisedAdvectionDiffusionEquations}{GeneralisedAdvectionDiffusionEquations}}<DIM>,}
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00056}00056       \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1RefineableElement}{RefineableElement}},}
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00057}00057       \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator}{ElementWithZ2ErrorEstimator}}}
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00058}00058   \{}
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00059}00059   \textcolor{keyword}{public}:\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00060}00060 \textcolor{comment}{    /// Empty Constructor}}
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00061}\mbox{\hyperlink{classoomph_1_1RefineableGeneralisedAdvectionDiffusionEquations_aaf60df44fee48a9cc07f7f7cefa4f29c}{00061}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedAdvectionDiffusionEquations_aaf60df44fee48a9cc07f7f7cefa4f29c}{RefineableGeneralisedAdvectionDiffusionEquations}}()}
-\DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00062}00062       : GeneralisedAdvectionDiffusionEquations<DIM>(),}
+\DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00062}00062       : \mbox{\hyperlink{classoomph_1_1GeneralisedAdvectionDiffusionEquations}{GeneralisedAdvectionDiffusionEquations}}<DIM>(),}
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00063}00063         \mbox{\hyperlink{classoomph_1_1RefineableElement}{RefineableElement}}(),}
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00064}00064         \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator}{ElementWithZ2ErrorEstimator}}()}
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00065}00065     \{}
@@ -89,7 +89,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00085}00085 \textcolor{comment}{    /// Standard flux.from GeneralisedAdvectionDiffusion equations}}
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00086}\mbox{\hyperlink{classoomph_1_1RefineableGeneralisedAdvectionDiffusionEquations_a097fa9a13ecaebe0c3801c98a057d5ec}{00086}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedAdvectionDiffusionEquations_a097fa9a13ecaebe0c3801c98a057d5ec}{get\_Z2\_flux}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& flux)}
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00087}00087     \{}
-\DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00088}00088       this-\/>get\_flux(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, flux);}
+\DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00088}00088       this-\/>\mbox{\hyperlink{classoomph_1_1GeneralisedAdvectionDiffusionEquations_a708e237798252ad6b207b14a627e7ec0}{get\_flux}}(s, flux);}
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00089}00089     \}}
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00090}00090 }
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00091}00091 \textcolor{comment}{}}
@@ -107,7 +107,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00103}00103       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_node = \mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00104}00104 }
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00105}00105       \textcolor{comment}{// Find the index at which the unknown is stored}}
-\DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00106}00106       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} u\_nodal\_index = this-\/>u\_index\_cons\_adv\_diff();}
+\DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00106}00106       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} u\_nodal\_index = this-\/>\mbox{\hyperlink{classoomph_1_1GeneralisedAdvectionDiffusionEquations_a95e7c3bb9ff924a284fd83850f464967}{u\_index\_cons\_adv\_diff}}();}
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00107}00107 }
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00108}00108       \textcolor{comment}{// Local shape function}}
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00109}00109       \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} psi(n\_node);}
@@ -140,7 +140,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00136}00136       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_node = \mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00137}00137 }
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00138}00138       \textcolor{comment}{// Find the nodal index at which the unknown is stored}}
-\DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00139}00139       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} u\_nodal\_index = this-\/>u\_index\_cons\_adv\_diff();}
+\DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00139}00139       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} u\_nodal\_index = this-\/>\mbox{\hyperlink{classoomph_1_1GeneralisedAdvectionDiffusionEquations_a95e7c3bb9ff924a284fd83850f464967}{u\_index\_cons\_adv\_diff}}();}
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00140}00140 }
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00141}00141       \textcolor{comment}{// Shape functions}}
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00142}00142       \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} psi(n\_node);}
@@ -168,16 +168,16 @@
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00164}00164             this-\/>\mbox{\hyperlink{classoomph_1_1RefineableElement_a637964a7a9892fe0f0b05692c2e8d153}{father\_element\_pt}}());}
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00165}00165 }
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00166}00166       \textcolor{comment}{// Set the values of the pointers from the father}}
-\DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00167}00167       this-\/>Source\_fct\_pt = cast\_father\_element\_pt-\/>source\_fct\_pt();}
-\DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00168}00168       this-\/>Wind\_fct\_pt = cast\_father\_element\_pt-\/>wind\_fct\_pt();}
-\DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00169}00169       this-\/>Conserved\_wind\_fct\_pt =}
-\DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00170}00170         cast\_father\_element\_pt-\/>conserved\_wind\_fct\_pt();}
-\DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00171}00171       this-\/>Diff\_fct\_pt = cast\_father\_element\_pt-\/>diff\_fct\_pt();}
-\DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00172}00172       this-\/>Pe\_pt = cast\_father\_element\_pt-\/>pe\_pt();}
-\DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00173}00173       this-\/>PeSt\_pt = cast\_father\_element\_pt-\/>pe\_st\_pt();}
+\DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00167}00167       this-\/>\mbox{\hyperlink{classoomph_1_1GeneralisedAdvectionDiffusionEquations_a7ceace6c5f2b7d02e118d0cdd9b69125}{Source\_fct\_pt}} = cast\_father\_element\_pt-\/>\mbox{\hyperlink{classoomph_1_1GeneralisedAdvectionDiffusionEquations_a233e6cb6293707f73e002a69a7a1eab4}{source\_fct\_pt}}();}
+\DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00168}00168       this-\/>\mbox{\hyperlink{classoomph_1_1GeneralisedAdvectionDiffusionEquations_a50dd69aaff906d837a29171c6b1690c9}{Wind\_fct\_pt}} = cast\_father\_element\_pt-\/>\mbox{\hyperlink{classoomph_1_1GeneralisedAdvectionDiffusionEquations_a96c2aea38e57787792b7c3a756476c1b}{wind\_fct\_pt}}();}
+\DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00169}00169       this-\/>\mbox{\hyperlink{classoomph_1_1GeneralisedAdvectionDiffusionEquations_a56787086fb90a6af6e7e2e3e4e1e3a59}{Conserved\_wind\_fct\_pt}} =}
+\DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00170}00170         cast\_father\_element\_pt-\/>\mbox{\hyperlink{classoomph_1_1GeneralisedAdvectionDiffusionEquations_ab259f0836c0868087e7e6cdb5f7e6507}{conserved\_wind\_fct\_pt}}();}
+\DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00171}00171       this-\/>\mbox{\hyperlink{classoomph_1_1GeneralisedAdvectionDiffusionEquations_a461bd7e2efcdd4620aa94ba70961bcc0}{Diff\_fct\_pt}} = cast\_father\_element\_pt-\/>\mbox{\hyperlink{classoomph_1_1GeneralisedAdvectionDiffusionEquations_a0875f6fb21a1aa078bb8b1cd127ae182}{diff\_fct\_pt}}();}
+\DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00172}00172       this-\/>\mbox{\hyperlink{classoomph_1_1GeneralisedAdvectionDiffusionEquations_a1d8bbbe41954ea99f8eec70882f84932}{Pe\_pt}} = cast\_father\_element\_pt-\/>\mbox{\hyperlink{classoomph_1_1GeneralisedAdvectionDiffusionEquations_a5050c7a67b6c41a36148fb18307603d0}{pe\_pt}}();}
+\DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00173}00173       this-\/>\mbox{\hyperlink{classoomph_1_1GeneralisedAdvectionDiffusionEquations_a8f77e17bba1c7666679abf0fa6150733}{PeSt\_pt}} = cast\_father\_element\_pt-\/>\mbox{\hyperlink{classoomph_1_1GeneralisedAdvectionDiffusionEquations_acb1e23d0c2ec07409f2405cf878f66f0}{pe\_st\_pt}}();}
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00174}00174 }
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00175}00175       \textcolor{comment}{// Set the ALE status}}
-\DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00176}00176       this-\/>ALE\_is\_disabled = cast\_father\_element\_pt-\/>ALE\_is\_disabled;}
+\DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00176}00176       this-\/>\mbox{\hyperlink{classoomph_1_1GeneralisedAdvectionDiffusionEquations_aa984fe8aeae0f3aedfd8e92c76ce9cd0}{ALE\_is\_disabled}} = cast\_father\_element\_pt-\/>\mbox{\hyperlink{classoomph_1_1GeneralisedAdvectionDiffusionEquations_aa984fe8aeae0f3aedfd8e92c76ce9cd0}{ALE\_is\_disabled}};}
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00177}00177     \}}
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00178}00178 }
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00179}00179   \textcolor{keyword}{protected}:\textcolor{comment}{}}
@@ -187,7 +187,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00183}00183 \textcolor{comment}{    /// flag=0: compute only residual vector}}
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00184}00184 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedAdvectionDiffusionEquations_abd0535533c7133651ac18ad8e025f139}{fill\_in\_generic\_residual\_contribution\_cons\_adv\_diff}}(}
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00185}00185       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00186}00186       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}},}
+\DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00186}00186       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian,}
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00187}00187       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& mass\_matrix,}
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00188}00188       \textcolor{keywordtype}{unsigned} flag);}
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00189}00189   \};}
@@ -239,7 +239,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00235}00235     \}}
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00236}00236 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00237}00237 \textcolor{comment}{    /// Pointer to the j-\/th vertex node in the element}}
-\DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00238}\mbox{\hyperlink{classoomph_1_1RefineableQGeneralisedAdvectionDiffusionElement_acc47fcec252c1be356b1812ed0dafafe}{00238}} \textcolor{comment}{}    Node* \mbox{\hyperlink{classoomph_1_1RefineableQGeneralisedAdvectionDiffusionElement_acc47fcec252c1be356b1812ed0dafafe}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00238}\mbox{\hyperlink{classoomph_1_1RefineableQGeneralisedAdvectionDiffusionElement_acc47fcec252c1be356b1812ed0dafafe}{00238}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1RefineableQGeneralisedAdvectionDiffusionElement_acc47fcec252c1be356b1812ed0dafafe}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00239}00239 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00240}00240       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1QGeneralisedAdvectionDiffusionElement}{QGeneralisedAdvectionDiffusionElement}}<DIM,}
 \DoxyCodeLine{\Hypertarget{refineable__gen__advection__diffusion__elements_8h_source_l00241}00241                                                    NNODE\_1D>\mbox{\hyperlink{classoomph_1_1RefineableQGeneralisedAdvectionDiffusionElement_acc47fcec252c1be356b1812ed0dafafe}{::vertex\_node\_pt}}(j);}

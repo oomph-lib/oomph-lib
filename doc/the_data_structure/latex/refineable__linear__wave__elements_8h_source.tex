@@ -49,14 +49,14 @@
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00045}00045 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00046}00046   \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00047}\mbox{\hyperlink{classoomph_1_1RefineableLinearWaveEquations}{00047}}   \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1RefineableLinearWaveEquations}{RefineableLinearWaveEquations}}}
-\DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00048}00048     : \textcolor{keyword}{public} \textcolor{keyword}{virtual} LinearWaveEquations<DIM>,}
+\DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00048}00048     : \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{LinearWaveEquations}}<DIM>,}
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00049}00049       \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1RefineableElement}{RefineableElement}},}
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00050}00050       \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator}{ElementWithZ2ErrorEstimator}}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00051}00051   \{}
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00052}00052   \textcolor{keyword}{public}:\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00053}00053 \textcolor{comment}{    /// Constructor}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00054}\mbox{\hyperlink{classoomph_1_1RefineableLinearWaveEquations_a40fca9fa73b5e7f2cdbd4725a41777f2}{00054}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1RefineableLinearWaveEquations_a40fca9fa73b5e7f2cdbd4725a41777f2}{RefineableLinearWaveEquations}}()}
-\DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00055}00055       : LinearWaveEquations<DIM>(),}
+\DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00055}00055       : \mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{LinearWaveEquations}}<DIM>(),}
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00056}00056         \mbox{\hyperlink{classoomph_1_1RefineableElement}{RefineableElement}}(),}
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00057}00057         \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator}{ElementWithZ2ErrorEstimator}}()}
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00058}00058     \{}
@@ -80,7 +80,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00076}00076 \textcolor{comment}{    /// equations}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00077}\mbox{\hyperlink{classoomph_1_1RefineableLinearWaveEquations_af5b91e3507fc1ef71d9e1e1d9d0b4fe2}{00077}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1RefineableLinearWaveEquations_af5b91e3507fc1ef71d9e1e1d9d0b4fe2}{get\_Z2\_flux}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& flux)}
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00078}00078     \{}
-\DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00079}00079       this-\/>get\_flux(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, flux);}
+\DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00079}00079       this-\/>\mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a36ca5b4691a27beacd433a4f5279e1bf}{get\_flux}}(s, flux);}
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00080}00080     \}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00081}00081 }
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00082}00082 \textcolor{comment}{}}
@@ -98,7 +98,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00094}00094       \textcolor{keywordtype}{unsigned} n\_node = \mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00095}00095 }
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00096}00096       \textcolor{comment}{// Find the index at which the unknown is stored}}
-\DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00097}00097       \textcolor{keywordtype}{unsigned} u\_nodal\_index = this-\/>u\_index\_lin\_wave();}
+\DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00097}00097       \textcolor{keywordtype}{unsigned} u\_nodal\_index = this-\/>\mbox{\hyperlink{classoomph_1_1LinearWaveEquations_aba49f677e10850fc49d76a982522ce69}{u\_index\_lin\_wave}}();}
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00098}00098 }
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00099}00099       \textcolor{comment}{// Local shape function}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00100}00100       \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} psi(n\_node);}
@@ -135,7 +135,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00131}00131       \textcolor{keywordtype}{unsigned} n\_node = \mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00132}00132 }
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00133}00133       \textcolor{comment}{// Find the index at which the unknown is stored}}
-\DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00134}00134       \textcolor{keywordtype}{unsigned} u\_nodal\_index = this-\/>u\_index\_lin\_wave();}
+\DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00134}00134       \textcolor{keywordtype}{unsigned} u\_nodal\_index = this-\/>\mbox{\hyperlink{classoomph_1_1LinearWaveEquations_aba49f677e10850fc49d76a982522ce69}{u\_index\_lin\_wave}}();}
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00135}00135 }
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00136}00136       \textcolor{comment}{// Shape functions}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00137}00137       \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} psi(n\_node);}
@@ -152,9 +152,9 @@
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00148}00148 \textcolor{comment}{    ///  Further build: Copy source function pointer from father element}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00149}\mbox{\hyperlink{classoomph_1_1RefineableLinearWaveEquations_ad737613ce4a9b64210bf55230d0dcf47}{00149}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1RefineableLinearWaveEquations_ad737613ce4a9b64210bf55230d0dcf47}{further\_build}}()}
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00150}00150     \{}
-\DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00151}00151       this-\/>Source\_fct\_pt = \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1RefineableLinearWaveEquations}{RefineableLinearWaveEquations<DIM>}}*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00151}00151       this-\/>\mbox{\hyperlink{classoomph_1_1LinearWaveEquations_abdbae7c7594a53c7d5d5e73c13ea7cb2}{Source\_fct\_pt}} = \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1RefineableLinearWaveEquations}{RefineableLinearWaveEquations<DIM>}}*\textcolor{keyword}{>}(}
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00152}00152                               this-\/>\mbox{\hyperlink{classoomph_1_1RefineableElement_a637964a7a9892fe0f0b05692c2e8d153}{father\_element\_pt}}())}
-\DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00153}00153                               -\/>source\_fct\_pt();}
+\DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00153}00153                               -\/>\mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a6183c8a58b8aeebe505f158012b80934}{source\_fct\_pt}}();}
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00154}00154     \}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00155}00155 }
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00156}00156 }
@@ -164,7 +164,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00160}00160 \textcolor{comment}{    /// flag=1: compute both}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00161}00161 \textcolor{comment}{    /// flag=0: compute only residual vector}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00162}00162 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1RefineableLinearWaveEquations_a0521c661521a3934edd4c25733196932}{fill\_in\_generic\_residual\_contribution\_lin\_wave}}(}
-\DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00163}00163       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \textcolor{keywordtype}{unsigned} flag);}
+\DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00163}00163       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian, \textcolor{keywordtype}{unsigned} flag);}
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00164}00164   \};}
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00165}00165 }
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00166}00166 }
@@ -206,13 +206,13 @@
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00202}00202 \textcolor{comment}{    /// Number of vertex nodes in the element}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00203}\mbox{\hyperlink{classoomph_1_1RefineableQLinearWaveElement_a79ebae3de0485161b4d47c904530ae85}{00203}} \textcolor{comment}{}    \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1RefineableQLinearWaveElement_a79ebae3de0485161b4d47c904530ae85}{nvertex\_node}}()\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00204}00204 \textcolor{keyword}{    }\{}
-\DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00205}00205       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{QLinearWaveElement<DIM, NNODE\_1D>::nvertex\_node}}();}
+\DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00205}00205       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1FiniteElement_a45631a7aa50efc3123a921d114f84cba}{QLinearWaveElement<DIM, NNODE\_1D>::nvertex\_node}}();}
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00206}00206     \}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00207}00207 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00208}00208 \textcolor{comment}{    /// Pointer to the j-\/th vertex node in the element}}
-\DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00209}\mbox{\hyperlink{classoomph_1_1RefineableQLinearWaveElement_a3cf1e015d04cc6fcb6423a595c0e4f7c}{00209}} \textcolor{comment}{}    Node* \mbox{\hyperlink{classoomph_1_1RefineableQLinearWaveElement_a3cf1e015d04cc6fcb6423a595c0e4f7c}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00209}\mbox{\hyperlink{classoomph_1_1RefineableQLinearWaveElement_a3cf1e015d04cc6fcb6423a595c0e4f7c}{00209}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1RefineableQLinearWaveElement_a3cf1e015d04cc6fcb6423a595c0e4f7c}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00210}00210 \textcolor{keyword}{    }\{}
-\DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00211}00211       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{QLinearWaveElement<DIM, NNODE\_1D>::vertex\_node\_pt}}(j);}
+\DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00211}00211       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1FiniteElement_ac8b551c9d6f1f8e30e8b18fe2f9ae072}{QLinearWaveElement<DIM, NNODE\_1D>::vertex\_node\_pt}}(j);}
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00212}00212     \}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00213}00213 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__wave__elements_8h_source_l00214}00214 \textcolor{comment}{    /// Rebuild from sons: empty}}

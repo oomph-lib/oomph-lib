@@ -12,7 +12,7 @@
 Inheritance diagram for oomph\+::Macro\+Element\+Node\+Update\+Node\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=2.000000cm]{classoomph_1_1MacroElementNodeUpdateNode}
+\includegraphics[height=3.000000cm]{classoomph_1_1MacroElementNodeUpdateNode}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
@@ -20,7 +20,7 @@ Inheritance diagram for oomph\+::Macro\+Element\+Node\+Update\+Node\+:\begin{fig
 \item 
 \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateNode_a3a5f0c384b32c6ba31bc6ed06c142384}{Macro\+Element\+Node\+Update\+Node}} (const unsigned \&n\+\_\+dim, const unsigned \&n\+\_\+position\+\_\+type, const unsigned \&initial\+\_\+nvalue)
 \begin{DoxyCompactList}\small\item\em Constructor for steady node of spatial dimension n\+\_\+dim, with n\+\_\+position\+\_\+type generalised coordinates and with initial\+\_\+nvalue dofs. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateNode_a4088c7ab89b11b5e60900082e076ffc9}{Macro\+Element\+Node\+Update\+Node}} (\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt, const unsigned \&n\+\_\+dim, const unsigned \&n\+\_\+position\+\_\+type, const unsigned \&initial\+\_\+nvalue)
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateNode_a4088c7ab89b11b5e60900082e076ffc9}{Macro\+Element\+Node\+Update\+Node}} (\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$\mbox{\hyperlink{classoomph_1_1Data_a065d7bffcec82bf4d4bd7b41f9aa80b3}{time\+\_\+stepper\+\_\+pt}}, const unsigned \&n\+\_\+dim, const unsigned \&n\+\_\+position\+\_\+type, const unsigned \&initial\+\_\+nvalue)
 \begin{DoxyCompactList}\small\item\em Constructor for bog-\/standard node of spatial dimension n\+\_\+dim, with n\+\_\+position\+\_\+type generalised coordinates, with initial\+\_\+nvalue dofs and with time dependence. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateNode_a1ec718d5a7b6e69b2432921d66e46031}{Macro\+Element\+Node\+Update\+Node}} (const \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateNode}{Macro\+Element\+Node\+Update\+Node}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
@@ -53,6 +53,7 @@ void \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateNode_ad12704b416585f4e
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} containing the node\textquotesingle{}s local coordinates in node update element. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateNode_ab387f86ea45654eacc37c5f69127dc02}{Geom\+\_\+object\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of geometric objects that are involved in the node update operation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
@@ -124,11 +125,15 @@ Definition at line \mbox{\hyperlink{macro__element__node__update__element_8h_sou
 \index{oomph::MacroElementNodeUpdateNode@{oomph::MacroElementNodeUpdateNode}!all\_geom\_object\_pt@{all\_geom\_object\_pt}}
 \index{all\_geom\_object\_pt@{all\_geom\_object\_pt}!oomph::MacroElementNodeUpdateNode@{oomph::MacroElementNodeUpdateNode}}
 \doxysubsubsection{\texorpdfstring{all\_geom\_object\_pt()}{all\_geom\_object\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$$\ast$ oomph\+::\+Macro\+Element\+Node\+Update\+Node\+::all\+\_\+geom\+\_\+object\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$$\ast$ oomph\+::\+Macro\+Element\+Node\+Update\+Node\+::all\+\_\+geom\+\_\+object\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
 Return all geometric objects that affect the node update. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Node_a3aa7050d81ace38d73d37279beaa5577}{oomph\+::\+Node}}.
 
 
 
@@ -182,11 +187,15 @@ References \mbox{\hyperlink{macro__element__node__update__element_8h_source_l001
 \index{oomph::MacroElementNodeUpdateNode@{oomph::MacroElementNodeUpdateNode}!ngeom\_object@{ngeom\_object}}
 \index{ngeom\_object@{ngeom\_object}!oomph::MacroElementNodeUpdateNode@{oomph::MacroElementNodeUpdateNode}}
 \doxysubsubsection{\texorpdfstring{ngeom\_object()}{ngeom\_object()}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Macro\+Element\+Node\+Update\+Node\+::ngeom\+\_\+object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Macro\+Element\+Node\+Update\+Node\+::ngeom\+\_\+object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
 Number of geometric objects involved in node update function. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Node_a2c0fb79493f94d2ce19736737ebf5447}{oomph\+::\+Node}}.
 
 
 
@@ -200,7 +209,7 @@ References \mbox{\hyperlink{macro__element__node__update__element_8h_source_l001
 \index{oomph::MacroElementNodeUpdateNode@{oomph::MacroElementNodeUpdateNode}!node\_update@{node\_update}}
 \index{node\_update@{node\_update}!oomph::MacroElementNodeUpdateNode@{oomph::MacroElementNodeUpdateNode}}
 \doxysubsubsection{\texorpdfstring{node\_update()}{node\_update()}}
-{\footnotesize\ttfamily void oomph\+::\+Macro\+Element\+Node\+Update\+Node\+::node\+\_\+update (\begin{DoxyParamCaption}\item[{const bool \&}]{update\+\_\+all\+\_\+time\+\_\+levels\+\_\+for\+\_\+new\+\_\+node = {\ttfamily false} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void oomph\+::\+Macro\+Element\+Node\+Update\+Node\+::node\+\_\+update (\begin{DoxyParamCaption}\item[{const bool \&}]{update\+\_\+all\+\_\+time\+\_\+levels\+\_\+for\+\_\+new\+\_\+node = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -210,11 +219,15 @@ Update the current nodal position. If required, perform the auxiliary update of 
 
 //////////////////////////////////////////////////////////////////// Excute the update function\+: Update the current (and if update\+\_\+all\+\_\+time\+\_\+levels\+\_\+for\+\_\+new\+\_\+node==true also the previous) nodal position. Also update the current nodal values if an auxiliary update function is defined. Note\+: Updating of previous positions is only required (and should only be performed for) newly created Macro\+Element\+Node\+Update\+Nodes i.\+e. when this function is called from... If a node is hanging, its position is determined via its hanging node constraints after updating the position of its master nodes. 
 
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Node_aecf8c979266300d3609de2b4ddfa3cc8}{oomph\+::\+Node}}.
+
+
+
 Definition at line \mbox{\hyperlink{macro__element__node__update__element_8cc_source_l00048}{48}} of file \mbox{\hyperlink{macro__element__node__update__element_8cc_source}{macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+cc}}.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01890}{oomph\+::\+Finite\+Element\+::get\+\_\+x()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{macro__element__node__update__element_8cc_source_l00048}{node\+\_\+update()}}, \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00174}{Node\+\_\+update\+\_\+element\+\_\+pt}}, \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00178}{S\+\_\+in\+\_\+node\+\_\+update\+\_\+element}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{nodes_8h_source_l00967}{oomph\+::\+Node\+::\+Aux\+\_\+node\+\_\+update\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l01885}{oomph\+::\+Finite\+Element\+::get\+\_\+x()}}, \mbox{\hyperlink{nodes_8h_source_l01228}{oomph\+::\+Node\+::hanging\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l01285}{oomph\+::\+Node\+::is\+\_\+hanging()}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, \mbox{\hyperlink{macro__element__node__update__element_8cc_source_l00048}{node\+\_\+update()}}, \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00174}{Node\+\_\+update\+\_\+element\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TimeStepper_a0f38713ed304c18d9f7b5cf8131664c1}{oomph\+::\+Time\+Stepper\+::nprev\+\_\+values()}}, \mbox{\hyperlink{nodes_8h_source_l00932}{oomph\+::\+Node\+::\+Position\+\_\+time\+\_\+stepper\+\_\+pt}}, \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00178}{S\+\_\+in\+\_\+node\+\_\+update\+\_\+element}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{nodes_8h_source_l01060}{oomph\+::\+Node\+::x()}}.
 
 
 

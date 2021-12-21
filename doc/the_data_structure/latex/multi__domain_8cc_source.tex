@@ -559,7 +559,7 @@
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00555}00555 \textcolor{comment}{    /// Helper function to add external haloed nodes, including any masters}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00556}00556 \textcolor{comment}{}    \textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00557}\mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aea9c2b1984158b8f560c6fff7c0adea7}{00557}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aea9c2b1984158b8f560c6fff7c0adea7}{add\_external\_haloed\_node\_to\_storage}}(\textcolor{keywordtype}{int}\& iproc,}
-\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00558}00558                                              Node* nod\_pt,}
+\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00558}00558                                              \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00559}00559                                              \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}* problem\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00560}00560                                              \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}* \textcolor{keyword}{const}\& external\_mesh\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00561}00561                                              \textcolor{keywordtype}{int}\& n\_cont\_inter\_values)}
@@ -580,7 +580,7 @@
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00576}00576 \textcolor{comment}{}    \textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00577}\mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_abaafd14a3e78c1965c294797913b44bf}{00577}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_abaafd14a3e78c1965c294797913b44bf}{recursively\_add\_masters\_of\_external\_haloed\_node}}(}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00578}00578       \textcolor{keywordtype}{int}\& iproc,}
-\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00579}00579       Node* nod\_pt,}
+\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00579}00579       \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00580}00580       \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}* problem\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00581}00581       \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}* \textcolor{keyword}{const}\& external\_mesh\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00582}00582       \textcolor{keywordtype}{int}\& n\_cont\_inter\_values)}
@@ -588,7 +588,7 @@
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00584}00584       \textcolor{comment}{// Loop over continuously interpolated values and add masters}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00585}00585       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i\_cont = -\/1; i\_cont < n\_cont\_inter\_values; i\_cont++)}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00586}00586       \{}
-\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00587}00587         \textcolor{keywordflow}{if} (nod\_pt-\/>is\_hanging(i\_cont))}
+\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00587}00587         \textcolor{keywordflow}{if} (nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_af0e6237dfafad62cf427ff5013ddcfef}{is\_hanging}}(i\_cont))}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00588}00588         \{}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00589}00589           \textcolor{comment}{// Indicate that this node is a hanging node so the other}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00590}00590           \textcolor{comment}{// process knows to create HangInfo and masters, etc.}}
@@ -598,7 +598,7 @@
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00594}00594 \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00595}00595           \textcolor{comment}{// If this is a hanging node then add all its masters as}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00596}00596           \textcolor{comment}{// external halo nodes if they have not yet been added}}
-\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00597}00597           \mbox{\hyperlink{classoomph_1_1HangInfo}{HangInfo}}* hang\_pt = nod\_pt-\/>hanging\_pt(i\_cont);}
+\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00597}00597           \mbox{\hyperlink{classoomph_1_1HangInfo}{HangInfo}}* hang\_pt = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_afefa22db8b28e783b8647e3577ee01d9}{hanging\_pt}}(i\_cont);}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00598}00598           \textcolor{comment}{// Loop over masters}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00599}00599           \textcolor{keywordtype}{unsigned} n\_master = hang\_pt-\/>\mbox{\hyperlink{classoomph_1_1HangInfo_aa9c1130b58db2ff6d5eee4f923ba365c}{nmaster}}();}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00600}00600 }
@@ -609,7 +609,7 @@
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00605}00605 \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00606}00606           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} m = 0; m < n\_master; m++)}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00607}00607           \{}
-\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00608}00608             Node* master\_nod\_pt = hang\_pt-\/>\mbox{\hyperlink{classoomph_1_1HangInfo_a7a935ae7eeca594a648ca1800444827c}{master\_node\_pt}}(m);}
+\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00608}00608             \mbox{\hyperlink{classoomph_1_1Node}{Node}}* master\_nod\_pt = hang\_pt-\/>\mbox{\hyperlink{classoomph_1_1HangInfo_a7a935ae7eeca594a648ca1800444827c}{master\_node\_pt}}(m);}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00609}00609 }
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00610}00610             \textcolor{comment}{// Call the helper function for master nodes}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00611}00611             \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a7116b75de2083297cc1ab4e4b1ca2e48}{add\_external\_haloed\_master\_node\_helper}}(iproc,}
@@ -645,7 +645,7 @@
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00641}00641 \textcolor{comment}{    /// Helper to add external haloed node that is not a master}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00642}00642 \textcolor{comment}{}    \textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00643}\mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aac4036d305c98081e778e16d568ae560}{00643}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aac4036d305c98081e778e16d568ae560}{add\_external\_haloed\_node\_helper}}(\textcolor{keywordtype}{int}\& iproc,}
-\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00644}00644                                          Node* nod\_pt,}
+\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00644}00644                                          \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00645}00645                                          \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}* problem\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00646}00646                                          \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}* \textcolor{keyword}{const}\& external\_mesh\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00647}00647                                          \textcolor{keywordtype}{int}\& n\_cont\_inter\_values)}
@@ -701,7 +701,7 @@
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00697}00697 \textcolor{comment}{    /// Helper function to add external haloed node that is a master}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00698}00698 \textcolor{comment}{}    \textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00699}\mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a7116b75de2083297cc1ab4e4b1ca2e48}{00699}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a7116b75de2083297cc1ab4e4b1ca2e48}{add\_external\_haloed\_master\_node\_helper}}(\textcolor{keywordtype}{int}\& iproc,}
-\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00700}00700                                                 Node* master\_nod\_pt,}
+\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00700}00700                                                 \mbox{\hyperlink{classoomph_1_1Node}{Node}}* master\_nod\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00701}00701                                                 \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}* problem\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00702}00702                                                 \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}* \textcolor{keyword}{const}\& external\_mesh\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00703}00703                                                 \textcolor{keywordtype}{int}\& n\_cont\_inter\_values)}
@@ -756,7 +756,7 @@
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00752}00752 \textcolor{comment}{    /// node (and therefore element) can be created on the receiving process}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00753}00753 \textcolor{comment}{}    \textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00754}\mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aaf7f6048aab50adfe33d24f8ff9f8390}{00754}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aaf7f6048aab50adfe33d24f8ff9f8390}{get\_required\_nodal\_information\_helper}}(\textcolor{keywordtype}{int}\& iproc,}
-\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00755}00755                                                Node* nod\_pt,}
+\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00755}00755                                                \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00756}00756                                                \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}* problem\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00757}00757                                                \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}* \textcolor{keyword}{const}\& external\_mesh\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00758}00758                                                \textcolor{keywordtype}{int}\& n\_cont\_inter\_values)}
@@ -764,14 +764,14 @@
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00760}00760       \textcolor{comment}{// Tell the halo copy of this node how many values there are}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00761}00761       \textcolor{comment}{// [NB this may be different for nodes within the same element, e.g.}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00762}00762       \textcolor{comment}{//  when using Lagrange multipliers]}}
-\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00763}00763       \textcolor{keywordtype}{unsigned} n\_val = nod\_pt-\/>nvalue();}
+\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00763}00763       \textcolor{keywordtype}{unsigned} n\_val = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}{nvalue}}();}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00764}00764       \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a5748b2389912d36f8f05cb175105c0a3}{Flat\_packed\_unsigneds}}.push\_back(n\_val);}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00765}00765 \textcolor{preprocessor}{\#ifdef ANNOTATE\_MULTI\_DOMAIN\_COMMUNICATION}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00766}00766       \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a910c65c750d007e76f9175993179d151}{Flat\_packed\_unsigneds\_string}}.push\_back(\textcolor{stringliteral}{"{}Number of values"{}});}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00767}00767 \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00768}00768 }
-\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00769}00769       \textcolor{keywordtype}{unsigned} n\_dim = nod\_pt-\/>ndim();}
-\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00770}00770       \mbox{\hyperlink{classoomph_1_1TimeStepper}{TimeStepper}}* time\_stepper\_pt = nod\_pt-\/>time\_stepper\_pt();}
+\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00769}00769       \textcolor{keywordtype}{unsigned} n\_dim = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
+\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00770}00770       \mbox{\hyperlink{classoomph_1_1TimeStepper}{TimeStepper}}* time\_stepper\_pt = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a065d7bffcec82bf4d4bd7b41f9aa80b3}{time\_stepper\_pt}}();}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00771}00771 }
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00772}00772       \textcolor{comment}{// Find the timestepper in the list of problem timesteppers}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00773}00773       \textcolor{keywordtype}{bool} found\_timestepper = \textcolor{keyword}{false};}
@@ -816,7 +816,7 @@
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00812}00812       \}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00813}00813 }
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00814}00814       \textcolor{comment}{// Is the node on any boundaries?}}
-\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00815}00815       \textcolor{keywordflow}{if} (nod\_pt-\/>is\_on\_boundary())}
+\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00815}00815       \textcolor{keywordflow}{if} (nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a2ca215e42116ee8a2acc7d6a35e37788}{is\_on\_boundary}}())}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00816}00816       \{}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00817}00817         \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a5748b2389912d36f8f05cb175105c0a3}{Flat\_packed\_unsigneds}}.push\_back(1);}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00818}00818 \textcolor{preprocessor}{\#ifdef ANNOTATE\_MULTI\_DOMAIN\_COMMUNICATION}}
@@ -829,7 +829,7 @@
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00825}00825         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i\_bnd = 0; i\_bnd < n\_bnd; i\_bnd++)}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00826}00826         \{}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00827}00827           \textcolor{comment}{// Which boundaries (could be more than one) is it on?}}
-\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00828}00828           \textcolor{keywordflow}{if} (nod\_pt-\/>is\_on\_boundary(i\_bnd))}
+\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00828}00828           \textcolor{keywordflow}{if} (nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a2ca215e42116ee8a2acc7d6a35e37788}{is\_on\_boundary}}(i\_bnd))}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00829}00829           \{}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00830}00830             boundaries.push\_back(i\_bnd);}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00831}00831           \}}
@@ -991,7 +991,7 @@
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00987}00987       \{}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00988}00988         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}} = 0; \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}} < n\_prev; \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}++)}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00989}00989         \{}
-\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00990}00990           \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a2fa0a4a4e31700e161441b19f88c4bf3}{Flat\_packed\_doubles}}.push\_back(nod\_pt-\/>value(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, i\_val));}
+\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00990}00990           \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a2fa0a4a4e31700e161441b19f88c4bf3}{Flat\_packed\_doubles}}.push\_back(nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_afcc5cdba40bca251826ae5bee5ca15b4}{value}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, i\_val));}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00991}00991         \}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00992}00992       \}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00993}00993 }
@@ -1000,7 +1000,7 @@
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00996}00996       \{}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00997}00997         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}} = 0; \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}} < n\_prev; \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}++)}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00998}00998         \{}
-\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00999}00999           \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a2fa0a4a4e31700e161441b19f88c4bf3}{Flat\_packed\_doubles}}.push\_back(nod\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, idim));}
+\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l00999}00999           \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a2fa0a4a4e31700e161441b19f88c4bf3}{Flat\_packed\_doubles}}.push\_back(nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, idim));}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01000}01000         \}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01001}01001       \}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01002}01002     \}}
@@ -1013,21 +1013,21 @@
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01009}01009 \textcolor{comment}{}    \textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01010}\mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a3b08cda68388e72b4159bbc0fa0826ee}{01010}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a3b08cda68388e72b4159bbc0fa0826ee}{get\_required\_master\_nodal\_information\_helper}}(}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01011}01011       \textcolor{keywordtype}{int}\& iproc,}
-\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01012}01012       Node* master\_nod\_pt,}
+\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01012}01012       \mbox{\hyperlink{classoomph_1_1Node}{Node}}* master\_nod\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01013}01013       \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}* problem\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01014}01014       \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}* \textcolor{keyword}{const}\& external\_mesh\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01015}01015       \textcolor{keywordtype}{int}\& n\_cont\_inter\_values)}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01016}01016     \{}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01017}01017       \textcolor{comment}{// Need to send over dimension, position type and number of values}}
-\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01018}01018       \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a5748b2389912d36f8f05cb175105c0a3}{Flat\_packed\_unsigneds}}.push\_back(master\_nod\_pt-\/>ndim());}
+\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01018}01018       \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a5748b2389912d36f8f05cb175105c0a3}{Flat\_packed\_unsigneds}}.push\_back(master\_nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}());}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01019}01019 \textcolor{preprocessor}{\#ifdef ANNOTATE\_MULTI\_DOMAIN\_COMMUNICATION}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01020}01020       \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a910c65c750d007e76f9175993179d151}{Flat\_packed\_unsigneds\_string}}.push\_back(\textcolor{stringliteral}{"{}Master node ndim"{}});}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01021}01021 \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01022}01022       \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a5748b2389912d36f8f05cb175105c0a3}{Flat\_packed\_unsigneds}}.push\_back(master\_nod\_pt-\/>nposition\_type());}
+\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01022}01022       \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a5748b2389912d36f8f05cb175105c0a3}{Flat\_packed\_unsigneds}}.push\_back(master\_nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_aee6f2b7a46fc9d875c6736895d7fc095}{nposition\_type}}());}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01023}01023 \textcolor{preprocessor}{\#ifdef ANNOTATE\_MULTI\_DOMAIN\_COMMUNICATION}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01024}01024       \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a910c65c750d007e76f9175993179d151}{Flat\_packed\_unsigneds\_string}}.push\_back(\textcolor{stringliteral}{"{}Master node npos\_type"{}});}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01025}01025 \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01026}01026       \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a5748b2389912d36f8f05cb175105c0a3}{Flat\_packed\_unsigneds}}.push\_back(master\_nod\_pt-\/>nvalue());}
+\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01026}01026       \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a5748b2389912d36f8f05cb175105c0a3}{Flat\_packed\_unsigneds}}.push\_back(master\_nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}{nvalue}}());}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01027}01027 \textcolor{preprocessor}{\#ifdef ANNOTATE\_MULTI\_DOMAIN\_COMMUNICATION}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01028}01028       \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a910c65c750d007e76f9175993179d151}{Flat\_packed\_unsigneds\_string}}.push\_back(\textcolor{stringliteral}{"{}Master node nvalue"{}});}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01029}01029 \textcolor{preprocessor}{\#endif}}
@@ -1046,8 +1046,8 @@
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01042}01042 \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01043}01043       \}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01044}01044 }
-\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01045}01045       \textcolor{keywordtype}{unsigned} n\_dim = master\_nod\_pt-\/>ndim();}
-\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01046}01046       \mbox{\hyperlink{classoomph_1_1TimeStepper}{TimeStepper}}* time\_stepper\_pt = master\_nod\_pt-\/>time\_stepper\_pt();}
+\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01045}01045       \textcolor{keywordtype}{unsigned} n\_dim = master\_nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
+\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01046}01046       \mbox{\hyperlink{classoomph_1_1TimeStepper}{TimeStepper}}* time\_stepper\_pt = master\_nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a065d7bffcec82bf4d4bd7b41f9aa80b3}{time\_stepper\_pt}}();}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01047}01047 }
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01048}01048       \textcolor{comment}{// Find the timestepper in the list of problem timesteppers}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01049}01049       \textcolor{keywordtype}{bool} found\_timestepper = \textcolor{keyword}{false};}
@@ -1094,7 +1094,7 @@
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01090}01090       \}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01091}01091 }
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01092}01092       \textcolor{comment}{// Is the node on any boundaries?}}
-\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01093}01093       \textcolor{keywordflow}{if} (master\_nod\_pt-\/>is\_on\_boundary())}
+\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01093}01093       \textcolor{keywordflow}{if} (master\_nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a2ca215e42116ee8a2acc7d6a35e37788}{is\_on\_boundary}}())}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01094}01094       \{}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01095}01095         \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a5748b2389912d36f8f05cb175105c0a3}{Flat\_packed\_unsigneds}}.push\_back(1);}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01096}01096 \textcolor{preprocessor}{\#ifdef ANNOTATE\_MULTI\_DOMAIN\_COMMUNICATION}}
@@ -1106,7 +1106,7 @@
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01102}01102         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i\_bnd = 0; i\_bnd < n\_bnd; i\_bnd++)}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01103}01103         \{}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01104}01104           \textcolor{comment}{// Which boundaries (could be more than one) is it on?}}
-\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01105}01105           \textcolor{keywordflow}{if} (master\_nod\_pt-\/>is\_on\_boundary(i\_bnd))}
+\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01105}01105           \textcolor{keywordflow}{if} (master\_nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a2ca215e42116ee8a2acc7d6a35e37788}{is\_on\_boundary}}(i\_bnd))}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01106}01106           \{}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01107}01107             boundaries.push\_back(i\_bnd);}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01108}01108           \}}
@@ -1341,7 +1341,7 @@
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01337}01337           \textcolor{keywordtype}{unsigned} n\_node = macro\_node\_update\_finite\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01338}01338           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < n\_node; j++)}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01339}01339           \{}
-\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01340}01340             Node* new\_nod\_pt = macro\_node\_update\_finite\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j);}
+\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01340}01340             \mbox{\hyperlink{classoomph_1_1Node}{Node}}* new\_nod\_pt = macro\_node\_update\_finite\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j);}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01341}01341             \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aea9c2b1984158b8f560c6fff7c0adea7}{add\_external\_haloed\_node\_to\_storage}}(iproc,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01342}01342                                                 new\_nod\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01343}01343                                                 problem\_pt,}
@@ -1382,12 +1382,12 @@
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01378}01378       \textcolor{comment}{// Finally copy info required for all node types}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01379}01379 }
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01380}01380       \textcolor{comment}{// Halo copy needs to know all the history values}}
-\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01381}01381       \textcolor{keywordtype}{unsigned} n\_val = master\_nod\_pt-\/>nvalue();}
+\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01381}01381       \textcolor{keywordtype}{unsigned} n\_val = master\_nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}{nvalue}}();}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01382}01382       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i\_val = 0; i\_val < n\_val; i\_val++)}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01383}01383       \{}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01384}01384         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}} = 0; \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}} < n\_prev; \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}++)}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01385}01385         \{}
-\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01386}01386           \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a2fa0a4a4e31700e161441b19f88c4bf3}{Flat\_packed\_doubles}}.push\_back(master\_nod\_pt-\/>value(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, i\_val));}
+\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01386}01386           \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a2fa0a4a4e31700e161441b19f88c4bf3}{Flat\_packed\_doubles}}.push\_back(master\_nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_afcc5cdba40bca251826ae5bee5ca15b4}{value}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, i\_val));}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01387}01387         \}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01388}01388       \}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01389}01389 }
@@ -1396,7 +1396,7 @@
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01392}01392       \{}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01393}01393         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}} = 0; \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}} < n\_prev; \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}++)}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01394}01394         \{}
-\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01395}01395           \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a2fa0a4a4e31700e161441b19f88c4bf3}{Flat\_packed\_doubles}}.push\_back(master\_nod\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, idim));}
+\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01395}01395           \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a2fa0a4a4e31700e161441b19f88c4bf3}{Flat\_packed\_doubles}}.push\_back(master\_nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, idim));}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01396}01396         \}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01397}01397       \}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01398}01398     \}}
@@ -1405,7 +1405,7 @@
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01401}01401     \textcolor{comment}{//=======start of add\_external\_halo\_node\_helper===========================}\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01402}01402 \textcolor{comment}{    /// Helper functiono to add external halo node that is not a master}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01403}01403 \textcolor{comment}{}    \textcolor{comment}{//========================================================================}}
-\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01404}\mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_abbec3c28e0cdbe77c6ce3c9021528247}{01404}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_abbec3c28e0cdbe77c6ce3c9021528247}{add\_external\_halo\_node\_helper}}(Node*\& new\_nod\_pt,}
+\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01404}\mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_abbec3c28e0cdbe77c6ce3c9021528247}{01404}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_abbec3c28e0cdbe77c6ce3c9021528247}{add\_external\_halo\_node\_helper}}(\mbox{\hyperlink{classoomph_1_1Node}{Node}}*\& new\_nod\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01405}01405                                        \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}* \textcolor{keyword}{const}\& external\_mesh\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01406}01406                                        \textcolor{keywordtype}{unsigned}\& loc\_p,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01407}01407                                        \textcolor{keywordtype}{unsigned}\& node\_index,}
@@ -1454,7 +1454,7 @@
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01450}01450 \textcolor{comment}{    /// element) with the required information sent from the haloed process}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01451}01451 \textcolor{comment}{}    \textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01452}\mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aa0a1707ca80a12f948616e016a1ed191}{01452}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aa0a1707ca80a12f948616e016a1ed191}{construct\_new\_external\_halo\_node\_helper}}(}
-\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01453}01453       Node*\& new\_nod\_pt,}
+\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01453}01453       \mbox{\hyperlink{classoomph_1_1Node}{Node}}*\& new\_nod\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01454}01454       \textcolor{keywordtype}{unsigned}\& loc\_p,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01455}01455       \textcolor{keywordtype}{unsigned}\& node\_index,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01456}01456       \mbox{\hyperlink{classoomph_1_1FiniteElement}{FiniteElement}}* \textcolor{keyword}{const}\& new\_el\_pt,}
@@ -1764,10 +1764,10 @@
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01760}01760       \}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01761}01761 }
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01762}01762       \textcolor{comment}{// If there are additional values, resize the node}}
-\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01763}01763       \textcolor{keywordtype}{unsigned} n\_new\_val = new\_nod\_pt-\/>nvalue();}
+\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01763}01763       \textcolor{keywordtype}{unsigned} n\_new\_val = new\_nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}{nvalue}}();}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01764}01764       \textcolor{keywordflow}{if} (n\_val > n\_new\_val)}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01765}01765       \{}
-\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01766}01766         new\_nod\_pt-\/>resize(n\_val);}
+\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01766}01766         new\_nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ae6598da29d403889020ccd47a2c07cc4}{resize}}(n\_val);}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01767}01767       \}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01768}01768 }
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01769}01769       \textcolor{comment}{// Get copied history values}}
@@ -1776,19 +1776,19 @@
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01772}01772       \{}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01773}01773         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}} = 0; \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}} < n\_prev; \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}++)}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01774}01774         \{}
-\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01775}01775           new\_nod\_pt-\/>set\_value(}
+\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01775}01775           new\_nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7289ca322725c6fd493970a19474b382}{set\_value}}(}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01776}01776             \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, i\_val, \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a2fa0a4a4e31700e161441b19f88c4bf3}{Flat\_packed\_doubles}}[\mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aeb7431547acc61e750fcc456a25ffc13}{Counter\_for\_flat\_packed\_doubles}}++]);}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01777}01777         \}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01778}01778       \}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01779}01779 }
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01780}01780       \textcolor{comment}{// Get copied history values for positions}}
-\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01781}01781       \textcolor{keywordtype}{unsigned} n\_dim = new\_nod\_pt-\/>ndim();}
+\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01781}01781       \textcolor{keywordtype}{unsigned} n\_dim = new\_nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01782}01782       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} idim = 0; idim < n\_dim; idim++)}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01783}01783       \{}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01784}01784         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}} = 0; \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}} < n\_prev; \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}++)}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01785}01785         \{}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01786}01786           \textcolor{comment}{// Copy to coordinate}}
-\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01787}01787           new\_nod\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, idim) =}
+\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01787}01787           new\_nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, idim) =}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01788}01788             \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a2fa0a4a4e31700e161441b19f88c4bf3}{Flat\_packed\_doubles}}[\mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aeb7431547acc61e750fcc456a25ffc13}{Counter\_for\_flat\_packed\_doubles}}++];}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01789}01789         \}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l01790}01790       \}}
@@ -2063,7 +2063,7 @@
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l02059}02059                 \textcolor{keywordtype}{unsigned} n\_node = source\_finite\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l02060}02060                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < n\_node; j++)}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l02061}02061                 \{}
-\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l02062}02062                   Node* nod\_pt = source\_finite\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j);}
+\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l02062}02062                   \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = source\_finite\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j);}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l02063}02063 }
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l02064}02064                   \textcolor{comment}{// Add the node to the storage; this routine}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l02065}02065                   \textcolor{comment}{// also takes care of any master nodes if the}}
@@ -2200,7 +2200,7 @@
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l02196}02196 \#endif}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l02197}02197           \{}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l02198}02198             \textcolor{comment}{// Find number of Gauss points and element dimension}}
-\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l02199}02199             \textcolor{keywordtype}{unsigned} n\_intpt = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l02199}02199             \textcolor{keywordtype}{unsigned} n\_intpt = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l02200}02200             \textcolor{keywordtype}{unsigned} el\_dim = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5f8fe59f06da1da9f6b7bbcbdb90ef93}{dim}}();}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l02201}02201 }
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l02202}02202 }
@@ -2230,7 +2230,7 @@
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l02226}02226                 \textcolor{comment}{// Get local coordinates}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l02227}02227                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < el\_dim; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l02228}02228                 \{}
-\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l02229}02229                   s\_local[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>knot(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l02229}02229                   s\_local[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{knot}}(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l02230}02230                 \}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l02231}02231                 \textcolor{comment}{// Interpolate to global coordinates}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8cc_source_l02232}02232                 el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a4407a4f0fb5bf5b883530742ee3153df}{interpolated\_zeta}}(s\_local, x\_global);}

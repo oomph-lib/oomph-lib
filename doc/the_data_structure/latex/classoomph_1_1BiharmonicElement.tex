@@ -18,29 +18,29 @@ Inheritance diagram for oomph\+::Biharmonic\+Element\texorpdfstring{$<$}{<} DIM 
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-double \mbox{\hyperlink{classoomph_1_1BiharmonicElement_ada3127693270368783121dfbef92d35d}{u}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&k) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1BiharmonicElement_ada3127693270368783121dfbef92d35d}{u}} (const unsigned \&n, const unsigned \&k) const
 \begin{DoxyCompactList}\small\item\em access function for value, kth dof of node n \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1BiharmonicElement_ae7ea696a05373fc4105a99bf4a8e49d7}{Biharmonic\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1QElement}{QElement}} and Poisson equations. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1BiharmonicElement_afa00029c6b72aec12a6dbc4d888c9144}{$\sim$\+Biharmonic\+Element}} ()
 \item 
-unsigned \mbox{\hyperlink{classoomph_1_1BiharmonicElement_a11be94bc01db0e91409e5471693e8e0b}{required\+\_\+nvalue}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1BiharmonicElement_a11be94bc01db0e91409e5471693e8e0b}{required\+\_\+nvalue}} (const unsigned \&n) const
 \begin{DoxyCompactList}\small\item\em Required \# of `values' (pinned or dofs) at node n. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BiharmonicElement_a03e56665ab48baab03924992830976c6}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Output. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1BiharmonicElement_ae21ebdb90932f2643157d2949093ea78}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1BiharmonicElement_ae21ebdb90932f2643157d2949093ea78}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em output wrapper \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BiharmonicElement_a405526be1bc18d1b758410767c1d1cae}{output}} (FILE $\ast$file\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em C-\/style output. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1BiharmonicElement_a6466cb310679bf54811011f086ffb957}{output}} (FILE $\ast$file\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1BiharmonicElement_a6466cb310679bf54811011f086ffb957}{output}} (FILE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em C\+\_\+style output at n\+\_\+plot points. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1BiharmonicElement_a1c2dd136ac2a0f263c6a444a3db5a750}{output\+\_\+fct}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&nplot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1BiharmonicElement_a1c2dd136ac2a0f263c6a444a3db5a750}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&nplot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em analytic solution wrapper \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1BiharmonicElement_ad8a8d7e9f534480b7acf45716dc62721}{output\+\_\+fct}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&nplot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1BiharmonicElement_ad8a8d7e9f534480b7acf45716dc62721}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&nplot, const double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Final override. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BiharmonicElement_a456d89dce0ecf60aafab33c035838581}{compute\+\_\+error}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt, double \&error, double \&norm)
 \begin{DoxyCompactList}\small\item\em computes error \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1BiharmonicElement_a0b1d07f8300afffeacaabb3aef2841fb}{compute\+\_\+error}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, double \&error, double \&norm)
+void \mbox{\hyperlink{classoomph_1_1BiharmonicElement_a0b1d07f8300afffeacaabb3aef2841fb}{compute\+\_\+error}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt, const double \&time, double \&error, double \&norm)
 \begin{DoxyCompactList}\small\item\em Call the equations-\/class overloaded unsteady error calculation. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -50,7 +50,7 @@ void \mbox{\hyperlink{classoomph_1_1BiharmonicElement_a0b1d07f8300afffeacaabb3ae
 class oomph\+::\+Biharmonic\+Element$<$ DIM $>$}
 biharmonic element class 
 
-Definition at line \mbox{\hyperlink{biharmonic__elements_8h_source_l00526}{526}} of file \mbox{\hyperlink{biharmonic__elements_8h_source}{biharmonic\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{biharmonic__elements_8h_source_l00525}{525}} of file \mbox{\hyperlink{biharmonic__elements_8h_source}{biharmonic\+\_\+elements.\+h}}.
 
 
 
@@ -68,7 +68,7 @@ Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1QElement}{QE
 
 
 
-Definition at line \mbox{\hyperlink{biharmonic__elements_8h_source_l00539}{539}} of file \mbox{\hyperlink{biharmonic__elements_8h_source}{biharmonic\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{biharmonic__elements_8h_source_l00538}{538}} of file \mbox{\hyperlink{biharmonic__elements_8h_source}{biharmonic\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicElement_afa00029c6b72aec12a6dbc4d888c9144}\label{classoomph_1_1BiharmonicElement_afa00029c6b72aec12a6dbc4d888c9144}} 
 \index{oomph::BiharmonicElement$<$ DIM $>$@{oomph::BiharmonicElement$<$ DIM $>$}!````~BiharmonicElement@{$\sim$BiharmonicElement}}
@@ -79,7 +79,7 @@ Definition at line \mbox{\hyperlink{biharmonic__elements_8h_source_l00539}{539}}
 
 
 
-Definition at line \mbox{\hyperlink{biharmonic__elements_8h_source_l00542}{542}} of file \mbox{\hyperlink{biharmonic__elements_8h_source}{biharmonic\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{biharmonic__elements_8h_source_l00541}{541}} of file \mbox{\hyperlink{biharmonic__elements_8h_source}{biharmonic\+\_\+elements.\+h}}.
 
 
 
@@ -101,7 +101,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a914c46acc
 
 
 
-Definition at line \mbox{\hyperlink{biharmonic__elements_8h_source_l00598}{598}} of file \mbox{\hyperlink{biharmonic__elements_8h_source}{biharmonic\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{biharmonic__elements_8h_source_l00597}{597}} of file \mbox{\hyperlink{biharmonic__elements_8h_source}{biharmonic\+\_\+elements.\+h}}.
 
 
 
@@ -112,7 +112,7 @@ References \mbox{\hyperlink{biharmonic__elements_8h_source_l00283}{oomph\+::\+Bi
 \index{compute\_error@{compute\_error}!oomph::BiharmonicElement$<$ DIM $>$@{oomph::BiharmonicElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{compute\_error()}{compute\_error()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1BiharmonicElement}{oomph\+::\+Biharmonic\+Element}}$<$ DIM $>$\+::compute\+\_\+error (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{time,  }\item[{double \&}]{error,  }\item[{double \&}]{norm }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1BiharmonicElement}{oomph\+::\+Biharmonic\+Element}}$<$ DIM $>$\+::compute\+\_\+error (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt,  }\item[{const double \&}]{time,  }\item[{double \&}]{error,  }\item[{double \&}]{norm }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -120,11 +120,11 @@ Call the equations-\/class overloaded unsteady error calculation.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_add6cd9c41b7e944cb6c030cc9d0bf0bf}{oomph\+::\+Biharmonic\+Equations$<$ DIM $>$}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a33e635f29e497c978a68bf5094391038}{oomph\+::\+Biharmonic\+Equations$<$ DIM $>$}}.
 
 
 
-Definition at line \mbox{\hyperlink{biharmonic__elements_8h_source_l00608}{608}} of file \mbox{\hyperlink{biharmonic__elements_8h_source}{biharmonic\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{biharmonic__elements_8h_source_l00607}{607}} of file \mbox{\hyperlink{biharmonic__elements_8h_source}{biharmonic\+\_\+elements.\+h}}.
 
 
 
@@ -147,7 +147,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_aab220ac5f
 
 
 
-Definition at line \mbox{\hyperlink{biharmonic__elements_8h_source_l00566}{566}} of file \mbox{\hyperlink{biharmonic__elements_8h_source}{biharmonic\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{biharmonic__elements_8h_source_l00565}{565}} of file \mbox{\hyperlink{biharmonic__elements_8h_source}{biharmonic\+\_\+elements.\+h}}.
 
 
 
@@ -158,7 +158,7 @@ References \mbox{\hyperlink{biharmonic__elements_8h_source_l00113}{oomph\+::\+Bi
 \index{output@{output}!oomph::BiharmonicElement$<$ DIM $>$@{oomph::BiharmonicElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1BiharmonicElement}{oomph\+::\+Biharmonic\+Element}}$<$ DIM $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1BiharmonicElement}{oomph\+::\+Biharmonic\+Element}}$<$ DIM $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -170,7 +170,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_af0fa36f6c
 
 
 
-Definition at line \mbox{\hyperlink{biharmonic__elements_8h_source_l00572}{572}} of file \mbox{\hyperlink{biharmonic__elements_8h_source}{biharmonic\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{biharmonic__elements_8h_source_l00571}{571}} of file \mbox{\hyperlink{biharmonic__elements_8h_source}{biharmonic\+\_\+elements.\+h}}.
 
 
 
@@ -193,7 +193,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a2e34f7e11
 
 
 
-Definition at line \mbox{\hyperlink{biharmonic__elements_8h_source_l00554}{554}} of file \mbox{\hyperlink{biharmonic__elements_8h_source}{biharmonic\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{biharmonic__elements_8h_source_l00553}{553}} of file \mbox{\hyperlink{biharmonic__elements_8h_source}{biharmonic\+\_\+elements.\+h}}.
 
 
 
@@ -204,7 +204,7 @@ References \mbox{\hyperlink{biharmonic__elements_8h_source_l00113}{oomph\+::\+Bi
 \index{output@{output}!oomph::BiharmonicElement$<$ DIM $>$@{oomph::BiharmonicElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1BiharmonicElement}{oomph\+::\+Biharmonic\+Element}}$<$ DIM $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1BiharmonicElement}{oomph\+::\+Biharmonic\+Element}}$<$ DIM $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -216,7 +216,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a65124187a
 
 
 
-Definition at line \mbox{\hyperlink{biharmonic__elements_8h_source_l00560}{560}} of file \mbox{\hyperlink{biharmonic__elements_8h_source}{biharmonic\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{biharmonic__elements_8h_source_l00559}{559}} of file \mbox{\hyperlink{biharmonic__elements_8h_source}{biharmonic\+\_\+elements.\+h}}.
 
 
 
@@ -227,7 +227,7 @@ References \mbox{\hyperlink{biharmonic__elements_8h_source_l00113}{oomph\+::\+Bi
 \index{output\_fct@{output\_fct}!oomph::BiharmonicElement$<$ DIM $>$@{oomph::BiharmonicElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{output\_fct()}{output\_fct()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1BiharmonicElement}{oomph\+::\+Biharmonic\+Element}}$<$ DIM $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{nplot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1BiharmonicElement}{oomph\+::\+Biharmonic\+Element}}$<$ DIM $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot,  }\item[{const double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -239,7 +239,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a4899086db
 
 
 
-Definition at line \mbox{\hyperlink{biharmonic__elements_8h_source_l00588}{588}} of file \mbox{\hyperlink{biharmonic__elements_8h_source}{biharmonic\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{biharmonic__elements_8h_source_l00587}{587}} of file \mbox{\hyperlink{biharmonic__elements_8h_source}{biharmonic\+\_\+elements.\+h}}.
 
 
 
@@ -250,7 +250,7 @@ References \mbox{\hyperlink{biharmonic__elements_8h_source_l00228}{oomph\+::\+Bi
 \index{output\_fct@{output\_fct}!oomph::BiharmonicElement$<$ DIM $>$@{oomph::BiharmonicElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{output\_fct()}{output\_fct()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1BiharmonicElement}{oomph\+::\+Biharmonic\+Element}}$<$ DIM $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{nplot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1BiharmonicElement}{oomph\+::\+Biharmonic\+Element}}$<$ DIM $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -262,7 +262,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_aca4e6ea18
 
 
 
-Definition at line \mbox{\hyperlink{biharmonic__elements_8h_source_l00579}{579}} of file \mbox{\hyperlink{biharmonic__elements_8h_source}{biharmonic\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{biharmonic__elements_8h_source_l00578}{578}} of file \mbox{\hyperlink{biharmonic__elements_8h_source}{biharmonic\+\_\+elements.\+h}}.
 
 
 
@@ -273,7 +273,7 @@ References \mbox{\hyperlink{biharmonic__elements_8h_source_l00228}{oomph\+::\+Bi
 \index{required\_nvalue@{required\_nvalue}!oomph::BiharmonicElement$<$ DIM $>$@{oomph::BiharmonicElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{required\_nvalue()}{required\_nvalue()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1BiharmonicElement}{oomph\+::\+Biharmonic\+Element}}$<$ DIM $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+unsigned \mbox{\hyperlink{classoomph_1_1BiharmonicElement}{oomph\+::\+Biharmonic\+Element}}$<$ DIM $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -285,14 +285,14 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a56610c60d5bc2d7
 
 
 
-Definition at line \mbox{\hyperlink{biharmonic__elements_8h_source_l00547}{547}} of file \mbox{\hyperlink{biharmonic__elements_8h_source}{biharmonic\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{biharmonic__elements_8h_source_l00546}{546}} of file \mbox{\hyperlink{biharmonic__elements_8h_source}{biharmonic\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicElement_ada3127693270368783121dfbef92d35d}\label{classoomph_1_1BiharmonicElement_ada3127693270368783121dfbef92d35d}} 
 \index{oomph::BiharmonicElement$<$ DIM $>$@{oomph::BiharmonicElement$<$ DIM $>$}!u@{u}}
 \index{u@{u}!oomph::BiharmonicElement$<$ DIM $>$@{oomph::BiharmonicElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{u()}{u()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1BiharmonicElement}{oomph\+::\+Biharmonic\+Element}}$<$ DIM $>$\+::u (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{k }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+double \mbox{\hyperlink{classoomph_1_1BiharmonicElement}{oomph\+::\+Biharmonic\+Element}}$<$ DIM $>$\+::u (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{k }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -304,11 +304,11 @@ Implements \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_aebe4e72a90f24cde0
 
 
 
-Definition at line \mbox{\hyperlink{biharmonic__elements_8h_source_l00531}{531}} of file \mbox{\hyperlink{biharmonic__elements_8h_source}{biharmonic\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{biharmonic__elements_8h_source_l00530}{530}} of file \mbox{\hyperlink{biharmonic__elements_8h_source}{biharmonic\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8cc_source_l02408}{oomph\+::\+Node\+::value()}}.
 
 
 

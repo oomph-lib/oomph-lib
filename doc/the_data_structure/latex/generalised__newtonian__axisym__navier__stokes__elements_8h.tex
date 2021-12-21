@@ -3,6 +3,8 @@
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
+class \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricNavierStokesEquations}{oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations}}
+\begin{DoxyCompactList}\small\item\em A class for elements that solve the unsteady axisymmetric Navier--Stokes equations in cylindrical polar coordinates, $ x_0^* = r^*$ and $ x_1^* = z^* $ with $ \partial / \partial \theta = 0 $. We\textquotesingle{}re solving for the radial, axial and azimuthal (swirl) velocities, $ u_0^* = u_r^*(r^*,z^*,t^*) = u^*(r^*,z^*,t^*), \ u_1^* = u_z^*(r^*,z^*,t^*) = w^*(r^*,z^*,t^*)$ and $ u_2^* = u_\theta^*(r^*,z^*,t^*) = v^*(r^*,z^*,t^*) $, respectively, and the pressure $ p(r^*,z^*,t^*) $. This class contains the generic maths -- any concrete implementation must be derived from this. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}{oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+QCrouzeix\+Raviart\+Element}}
 \begin{DoxyCompactList}\small\item\em /////////////////////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_01_4}{oomph\+::\+Face\+Geometry$<$ Generalised\+Newtonian\+Axisymmetric\+QCrouzeix\+Raviart\+Element $>$}}
@@ -32,10 +34,3 @@ class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01Generalis
 \item 
 namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
 \begin{DoxyCompactList}\small\item\em //////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Functions}
-\begin{DoxyCompactItemize}
-\item 
-u\+\_\+1 f rho \mbox{\hyperlink{namespaceoomph_a550bca442f95a0c982eaa8861967b041}{oomph\+::left}} (\textbackslash{}frac\{\textbackslash{}partial w$^\wedge$ $\ast$\}\{\textbackslash{}partial \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}$^\wedge$ $\ast$\}+\{u$^\wedge$ $\ast$\}\textbackslash{}frac\{\textbackslash{}partial w$^\wedge$ $\ast$\}\{\textbackslash{}partial r$^\wedge$ $\ast$\}+\{w$^\wedge$ $\ast$\}\textbackslash{}frac\{\textbackslash{}partial w$^\wedge$ $\ast$\}\{\textbackslash{}partial z$^\wedge$ $\ast$\} \textbackslash{}right)
-\item 
-u\+\_\+1 f rho f rho \mbox{\hyperlink{namespaceoomph_a025c5e30778534ccf276e3dc7485c817}{oomph\+::left}} (\textbackslash{}frac\{\textbackslash{}partial v$^\wedge$ $\ast$\}\{\textbackslash{}partial \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}$^\wedge$ $\ast$\}+\{u$^\wedge$ $\ast$\}\textbackslash{}frac\{\textbackslash{}partial v$^\wedge$ $\ast$\}\{\textbackslash{}partial r$^\wedge$ $\ast$\}+\textbackslash{}frac\{u$^\wedge$ $\ast$v$^\wedge$ $\ast$\}\{r$^\wedge$ $\ast$\}+\{w$^\wedge$ $\ast$\}\textbackslash{}frac\{\textbackslash{}partial v$^\wedge$ $\ast$\}\{\textbackslash{}partial z$^\wedge$ $\ast$\} \textbackslash{}right)
-\end{DoxyCompactItemize}

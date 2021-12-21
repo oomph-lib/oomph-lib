@@ -18,40 +18,40 @@ Inheritance diagram for oomph\+::Darcy\+Face\+Element\texorpdfstring{$<$}{<} ELE
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1DarcyFaceElement_a71513f63463e069ac1cc1ae267f6ba5b}{Darcy\+Face\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&element\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}})
+\mbox{\hyperlink{classoomph_1_1DarcyFaceElement_a71513f63463e069ac1cc1ae267f6ba5b}{Darcy\+Face\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&element\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}})
 \begin{DoxyCompactList}\small\item\em Constructor, which takes a \char`\"{}bulk\char`\"{} element and the value of the index and its limit. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1DarcyFaceElement_a11467dd44ab18f3551d52823612f289b}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em Return the residuals. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DarcyFaceElement_a7b114cbc2c42545d84be0342801ae7c0}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})
+void \mbox{\hyperlink{classoomph_1_1DarcyFaceElement_a7b114cbc2c42545d84be0342801ae7c0}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em Fill in contribution from Jacobian. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1DarcyFaceElement_aeee8ea8c6a62b345269c6339ffe8eed4}{zeta\+\_\+nodal}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&k, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1DarcyFaceElement_aeee8ea8c6a62b345269c6339ffe8eed4}{zeta\+\_\+nodal}} (const unsigned \&n, const unsigned \&k, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Specify the value of nodal zeta from the face geometry The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} representation, by default (needed to break indeterminacy if bulk element is Solid\+Element) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1DarcyFaceElement_aff94487a830df70d037c56d15fd4c462}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Output function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DarcyFaceElement_a74a836ffad2d7a2f219228fb01009026}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1DarcyFaceElement_a74a836ffad2d7a2f219228fb01009026}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em Output function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1DarcyFaceElement_a5231113fc85a786c280ebfc4b316a19c}{output}} (FILE $\ast$file\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em C\+\_\+style output function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DarcyFaceElement_a52b0382a8519d2efcb599cdd52400477}{output}} (FILE $\ast$file\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1DarcyFaceElement_a52b0382a8519d2efcb599cdd52400477}{output}} (FILE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em C-\/style output function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DarcyFaceElement_acb4492022eed505e3b41ee47a6b3bcaa}{pressure}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, double \&pressure)
+void \mbox{\hyperlink{classoomph_1_1DarcyFaceElement_acb4492022eed505e3b41ee47a6b3bcaa}{pressure}} (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, double \&pressure)
 \begin{DoxyCompactList}\small\item\em Compute pressure value at specified local coordinate Should only be used for post-\/processing; ignores dependence on integration point! \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-void($\ast$\&)(\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&n, double \&\mbox{\hyperlink{classoomph_1_1DarcyFaceElement_acb4492022eed505e3b41ee47a6b3bcaa}{pressure}}) \mbox{\hyperlink{classoomph_1_1DarcyFaceElement_a879c92237eb386a886d78009078b711a}{pressure\+\_\+fct\+\_\+pt}} ()
+void($\ast$\&)(const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&n, double \&\mbox{\hyperlink{classoomph_1_1DarcyFaceElement_acb4492022eed505e3b41ee47a6b3bcaa}{pressure}}) \mbox{\hyperlink{classoomph_1_1DarcyFaceElement_a879c92237eb386a886d78009078b711a}{pressure\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Reference to the pressure function pointer. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-virtual void \mbox{\hyperlink{classoomph_1_1DarcyFaceElement_afedbc8695e027c9d1bb80843f2548bc1}{get\+\_\+pressure}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&intpt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&n, double \&\mbox{\hyperlink{classoomph_1_1DarcyFaceElement_acb4492022eed505e3b41ee47a6b3bcaa}{pressure}})
+virtual void \mbox{\hyperlink{classoomph_1_1DarcyFaceElement_afedbc8695e027c9d1bb80843f2548bc1}{get\+\_\+pressure}} (const double \&time, const unsigned \&intpt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&n, double \&\mbox{\hyperlink{classoomph_1_1DarcyFaceElement_acb4492022eed505e3b41ee47a6b3bcaa}{pressure}})
 \begin{DoxyCompactList}\small\item\em Get the pressure value\+: Pass number of integration point (dummy), Eulerlian coordinate and normal vector and return the pressure (not all of the input arguments will be required for all specific load functions but the list should cover all cases). This function is virtual so it can be overloaded for FSI. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1DarcyFaceElement_a456b5876a2966eafb5bfe68e7210534d}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+darcy\+\_\+face}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em Helper function that actually calculates the residuals. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-void($\ast$ \mbox{\hyperlink{classoomph_1_1DarcyFaceElement_a39c6156b3067d3ff047eb7cf62d36b4c}{Pressure\+\_\+fct\+\_\+pt}} )(\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&n, double \&result)
+void($\ast$ \mbox{\hyperlink{classoomph_1_1DarcyFaceElement_a39c6156b3067d3ff047eb7cf62d36b4c}{Pressure\+\_\+fct\+\_\+pt}} )(const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&n, double \&result)
 \begin{DoxyCompactList}\small\item\em Pointer to an imposed pressure function. Arguments\+: Eulerian coordinate; outer unit normal; applied pressure. (Not all of the input arguments will be required for all specific load functions but the list should cover all cases) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -71,7 +71,7 @@ Definition at line \mbox{\hyperlink{darcy__face__elements_8h_source_l00071}{71}}
 \index{DarcyFaceElement@{DarcyFaceElement}!oomph::DarcyFaceElement$<$ ELEMENT $>$@{oomph::DarcyFaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{DarcyFaceElement()}{DarcyFaceElement()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1DarcyFaceElement}{oomph\+::\+Darcy\+Face\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1DarcyFaceElement}{Darcy\+Face\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{element\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1DarcyFaceElement}{oomph\+::\+Darcy\+Face\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1DarcyFaceElement}{Darcy\+Face\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{element\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -83,7 +83,7 @@ Definition at line \mbox{\hyperlink{darcy__face__elements_8h_source_l00111}{111}
 
 
 
-References \mbox{\hyperlink{classoomph_1_1FiniteElement_a025ab56ef9c6eea66fb34416fdf19152}{oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{elements_8h_source_l04654}{oomph\+::\+Face\+Element\+::face\+\_\+index()}}, \mbox{\hyperlink{elements_8h_source_l02475}{oomph\+::\+Finite\+Element\+::has\+\_\+hanging\+\_\+nodes()}}, \mbox{\hyperlink{darcy__face__elements_8h_source_l00079}{oomph\+::\+Darcy\+Face\+Element$<$ ELEMENT $>$\+::\+Pressure\+\_\+fct\+\_\+pt}}, and \mbox{\hyperlink{darcy__face__elements_8h_source_l00052}{oomph\+::\+Darcy\+Face\+Element\+Helper\+::\+Zero\+\_\+pressure\+\_\+fct()}}.
+References \mbox{\hyperlink{elements_8cc_source_l05132}{oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{elements_8h_source_l04626}{oomph\+::\+Face\+Element\+::face\+\_\+index()}}, \mbox{\hyperlink{elements_8h_source_l02470}{oomph\+::\+Finite\+Element\+::has\+\_\+hanging\+\_\+nodes()}}, \mbox{\hyperlink{darcy__face__elements_8h_source_l00079}{oomph\+::\+Darcy\+Face\+Element$<$ ELEMENT $>$\+::\+Pressure\+\_\+fct\+\_\+pt}}, and \mbox{\hyperlink{darcy__face__elements_8h_source_l00052}{oomph\+::\+Darcy\+Face\+Element\+Helper\+::\+Zero\+\_\+pressure\+\_\+fct()}}.
 
 
 
@@ -151,7 +151,7 @@ Definition at line \mbox{\hyperlink{darcy__face__elements_8h_source_l00253}{253}
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
 
 
 
@@ -162,7 +162,7 @@ Referenced by \mbox{\hyperlink{darcy__face__elements_8h_source_l00165}{oomph\+::
 \index{get\_pressure@{get\_pressure}!oomph::DarcyFaceElement$<$ ELEMENT $>$@{oomph::DarcyFaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{get\_pressure()}{get\_pressure()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-virtual void \mbox{\hyperlink{classoomph_1_1DarcyFaceElement}{oomph\+::\+Darcy\+Face\+Element}}$<$ ELEMENT $>$\+::get\+\_\+pressure (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{intpt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{n,  }\item[{double \&}]{pressure }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+virtual void \mbox{\hyperlink{classoomph_1_1DarcyFaceElement}{oomph\+::\+Darcy\+Face\+Element}}$<$ ELEMENT $>$\+::get\+\_\+pressure (\begin{DoxyParamCaption}\item[{const double \&}]{time,  }\item[{const unsigned \&}]{intpt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{n,  }\item[{double \&}]{pressure }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -174,7 +174,7 @@ Definition at line \mbox{\hyperlink{darcy__face__elements_8h_source_l00090}{90}}
 
 
 
-References \mbox{\hyperlink{darcy__face__elements_8h_source_l00227}{oomph\+::\+Darcy\+Face\+Element$<$ ELEMENT $>$\+::pressure()}}, \mbox{\hyperlink{darcy__face__elements_8h_source_l00079}{oomph\+::\+Darcy\+Face\+Element$<$ ELEMENT $>$\+::\+Pressure\+\_\+fct\+\_\+pt}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{darcy__face__elements_8h_source_l00227}{oomph\+::\+Darcy\+Face\+Element$<$ ELEMENT $>$\+::pressure()}}, and \mbox{\hyperlink{darcy__face__elements_8h_source_l00079}{oomph\+::\+Darcy\+Face\+Element$<$ ELEMENT $>$\+::\+Pressure\+\_\+fct\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1DarcyFaceElement_a5231113fc85a786c280ebfc4b316a19c}\label{classoomph_1_1DarcyFaceElement_a5231113fc85a786c280ebfc4b316a19c}} 
 \index{oomph::DarcyFaceElement$<$ ELEMENT $>$@{oomph::DarcyFaceElement$<$ ELEMENT $>$}!output@{output}}
@@ -204,7 +204,7 @@ References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Comma
 \index{output@{output}!oomph::DarcyFaceElement$<$ ELEMENT $>$@{oomph::DarcyFaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1DarcyFaceElement}{oomph\+::\+Darcy\+Face\+Element}}$<$ ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1DarcyFaceElement}{oomph\+::\+Darcy\+Face\+Element}}$<$ ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -250,7 +250,7 @@ References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Comma
 \index{output@{output}!oomph::DarcyFaceElement$<$ ELEMENT $>$@{oomph::DarcyFaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1DarcyFaceElement}{oomph\+::\+Darcy\+Face\+Element}}$<$ ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1DarcyFaceElement}{oomph\+::\+Darcy\+Face\+Element}}$<$ ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -273,7 +273,7 @@ References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Comma
 \index{pressure@{pressure}!oomph::DarcyFaceElement$<$ ELEMENT $>$@{oomph::DarcyFaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{pressure()}{pressure()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1DarcyFaceElement}{oomph\+::\+Darcy\+Face\+Element}}$<$ ELEMENT $>$\+::pressure (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{double \&}]{pressure }\end{DoxyParamCaption})}
+void \mbox{\hyperlink{classoomph_1_1DarcyFaceElement}{oomph\+::\+Darcy\+Face\+Element}}$<$ ELEMENT $>$\+::pressure (\begin{DoxyParamCaption}\item[{const double \&}]{time,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{double \&}]{pressure }\end{DoxyParamCaption})}
 
 
 
@@ -287,7 +287,7 @@ Definition at line \mbox{\hyperlink{darcy__face__elements_8h_source_l00227}{227}
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 
 
@@ -298,7 +298,7 @@ Referenced by \mbox{\hyperlink{darcy__face__elements_8h_source_l00090}{oomph\+::
 \index{zeta\_nodal@{zeta\_nodal}!oomph::DarcyFaceElement$<$ ELEMENT $>$@{oomph::DarcyFaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{zeta\_nodal()}{zeta\_nodal()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1DarcyFaceElement}{oomph\+::\+Darcy\+Face\+Element}}$<$ ELEMENT $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{k,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+double \mbox{\hyperlink{classoomph_1_1DarcyFaceElement}{oomph\+::\+Darcy\+Face\+Element}}$<$ ELEMENT $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{k,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -314,7 +314,7 @@ Definition at line \mbox{\hyperlink{darcy__face__elements_8h_source_l00177}{177}
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l04525}{oomph\+::\+Face\+Element\+::zeta\+\_\+nodal()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l04497}{oomph\+::\+Face\+Element\+::zeta\+\_\+nodal()}}.
 
 
 
@@ -324,7 +324,7 @@ References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink
 \index{pressure\_fct\_pt@{pressure\_fct\_pt}!oomph::DarcyFaceElement$<$ ELEMENT $>$@{oomph::DarcyFaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{pressure\_fct\_pt}{pressure\_fct\_pt}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-void($\ast$\&)(\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&n, double \&\mbox{\hyperlink{classoomph_1_1DarcyFaceElement_acb4492022eed505e3b41ee47a6b3bcaa}{pressure}}) \mbox{\hyperlink{classoomph_1_1DarcyFaceElement}{oomph\+::\+Darcy\+Face\+Element}}$<$ ELEMENT $>$\+::pressure\+\_\+fct\+\_\+pt()\hspace{0.3cm}{\ttfamily [inline]}}
+void($\ast$\&)(const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&n, double \&\mbox{\hyperlink{classoomph_1_1DarcyFaceElement_acb4492022eed505e3b41ee47a6b3bcaa}{pressure}}) \mbox{\hyperlink{classoomph_1_1DarcyFaceElement}{oomph\+::\+Darcy\+Face\+Element}}$<$ ELEMENT $>$\+::pressure\+\_\+fct\+\_\+pt()\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -339,7 +339,7 @@ Definition at line \mbox{\hyperlink{darcy__face__elements_8h_source_l00148}{148}
 \index{Pressure\_fct\_pt@{Pressure\_fct\_pt}!oomph::DarcyFaceElement$<$ ELEMENT $>$@{oomph::DarcyFaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Pressure\_fct\_pt}{Pressure\_fct\_pt}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-void($\ast$ \mbox{\hyperlink{classoomph_1_1DarcyFaceElement}{oomph\+::\+Darcy\+Face\+Element}}$<$ ELEMENT $>$\+::Pressure\+\_\+fct\+\_\+pt) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&n, double \&result)\hspace{0.3cm}{\ttfamily [protected]}}
+void($\ast$ \mbox{\hyperlink{classoomph_1_1DarcyFaceElement}{oomph\+::\+Darcy\+Face\+Element}}$<$ ELEMENT $>$\+::Pressure\+\_\+fct\+\_\+pt) (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&n, double \&result)\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 

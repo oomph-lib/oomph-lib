@@ -57,7 +57,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00053}00053 \textcolor{comment}{    /// Default load function (zero traction)}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00054}00054 \textcolor{comment}{}    \textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00055}\mbox{\hyperlink{namespaceoomph_1_1AxisymmetricLinearElasticityTractionElementHelper_a1a493ca2845b4c81260fa82e9219063f}{00055}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1AxisymmetricLinearElasticityTractionElementHelper_a1a493ca2845b4c81260fa82e9219063f}{Zero\_traction\_fct}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
-\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00056}00056                            \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00056}00056                            \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00057}00057                            \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7dabc60bec4cc294aa2adf92726c6d6823a}{N}},}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00058}00058                            \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& load)}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00059}00059     \{}
@@ -93,7 +93,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00089}00089 \textcolor{comment}{    /// required for all specific load functions but the list should}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00090}00090 \textcolor{comment}{    /// cover all cases)}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00091}\mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityTractionElement_a4e8f5cdb73984c400c4297a0f963a520}{00091}} \textcolor{comment}{}    void (*\mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityTractionElement_a4e8f5cdb73984c400c4297a0f963a520}{Traction\_fct\_pt}})(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
-\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00092}00092                             \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00092}00092                             \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00093}00093                             \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& n,}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00094}00094                             \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& result);}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00095}00095 }
@@ -105,11 +105,11 @@
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00101}00101 \textcolor{comment}{    /// virtual so it can be overloaded for FSI.}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00102}\mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityTractionElement_a4ec6aee7438ab15aef197407e9c7ef8b}{00102}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityTractionElement_a4ec6aee7438ab15aef197407e9c7ef8b}{get\_traction}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00103}00103                               \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& intpt,}
-\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00104}00104                               \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00104}00104                               \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00105}00105                               \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& n,}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00106}00106                               \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityTractionElement_a28af87bac3d8d0c935564e69277e215e}{traction}})}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00107}00107     \{}
-\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00108}00108       \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityTractionElement_a4e8f5cdb73984c400c4297a0f963a520}{Traction\_fct\_pt}}(time, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, n, \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityTractionElement_a28af87bac3d8d0c935564e69277e215e}{traction}});}
+\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00108}00108       \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityTractionElement_a4e8f5cdb73984c400c4297a0f963a520}{Traction\_fct\_pt}}(time, x, n, \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityTractionElement_a28af87bac3d8d0c935564e69277e215e}{traction}});}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00109}00109     \}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00110}00110 }
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00111}00111 \textcolor{comment}{}}
@@ -130,7 +130,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00126}00126     \{}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00127}00127       \textcolor{comment}{// Attach the geometrical information to the element. N.B. This function}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00128}00128       \textcolor{comment}{// also assigns nbulk\_value from the required\_nvalue of the bulk element}}
-\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00129}00129       element\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a025ab56ef9c6eea66fb34416fdf19152}{build\_face\_element}}(\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\_index}}, \textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00129}00129       element\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_aaf7bead5b462cfd5401d97b3dbdc7af7}{build\_face\_element}}(\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\_index}}, \textcolor{keyword}{this});}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00130}00130 }
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00131}00131       \textcolor{comment}{// Find the dimension of the problem}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00132}00132       \textcolor{keywordtype}{unsigned} n\_dim = element\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_ab6602b43c3a2f1a5e48729b0b23c0d91}{nodal\_dimension}}();}
@@ -152,7 +152,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00148}00148 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00149}00149 \textcolor{comment}{    /// Reference to the traction function pointer}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00150}\mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityTractionElement_a4fb4d60f1274e323747630c03a518cf0}{00150}} \textcolor{comment}{}    void (*\&\mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityTractionElement_a4fb4d60f1274e323747630c03a518cf0}{traction\_fct\_pt}}())(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
-\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00151}00151                                \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00151}00151                                \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00152}00152                                \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& n,}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00153}00153                                \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityTractionElement_a28af87bac3d8d0c935564e69277e215e}{traction}})}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00154}00154     \{}
@@ -170,7 +170,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00166}00166 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00167}00167 \textcolor{comment}{    /// Fill in contribution from Jacobian}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00168}\mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityTractionElement_a2a94d08c2f96f71ecd6edcfdfbceb4ab}{00168}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityTractionElement_a2a94d08c2f96f71ecd6edcfdfbceb4ab}{fill\_in\_contribution\_to\_jacobian}}(\mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00169}00169                                           \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})}
+\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00169}00169                                           \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian)}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00170}00170     \{}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00171}00171       \textcolor{comment}{// Call the residuals}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00172}00172       \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityTractionElement_aa263f7ced169d93b2e4fbb03738d059b}{fill\_in\_contribution\_to\_residuals\_axisymmetric\_linear\_elasticity\_traction}}(}
@@ -206,7 +206,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00202}00202       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_node = \mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00203}00203 }
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00204}00204       \textcolor{comment}{// Get continuous time from timestepper of first node}}
-\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00205}00205       \textcolor{keywordtype}{double} time = \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>time\_stepper\_pt()-\/>time\_pt()-\/>time();}
+\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00205}00205       \textcolor{keywordtype}{double} time = \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Data_a065d7bffcec82bf4d4bd7b41f9aa80b3}{time\_stepper\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1TimeStepper_ac73981d5a68161d7b317bebb4ee04adb}{time\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Time_a43461269b799134f4b7a9aca3e79a7c8}{time}}();}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00206}00206 }
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00207}00207       \textcolor{comment}{// Set up memory for the shape functions}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00208}00208       \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} psi(n\_node);}
@@ -314,8 +314,8 @@
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00310}00310     \textcolor{keywordtype}{unsigned} n\_dim = this-\/>nodal\_dimension();}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00311}00311 }
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00312}00312     \textcolor{comment}{// Position vector}}
-\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00313}00313     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(n\_dim);}
-\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00314}00314     interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00313}00313     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(n\_dim);}
+\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00314}00314     interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00315}00315 }
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00316}00316     \textcolor{comment}{// Outer unit normal (only in r and z direction!)}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00317}00317     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} unit\_normal(n\_dim);}
@@ -325,7 +325,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00321}00321     \textcolor{keywordtype}{unsigned} ipt = 0;}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00322}00322 }
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00323}00323     \textcolor{comment}{// Traction vector}}
-\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00324}00324     get\_traction(time, ipt, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, unit\_normal, traction);}
+\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00324}00324     get\_traction(time, ipt, x, unit\_normal, traction);}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00325}00325   \}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00326}00326 }
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00327}00327 }
@@ -453,7 +453,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00449}00449 }
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00450}00450       \textcolor{comment}{// Premultiply the weights and the square-\/root of the determinant of}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00451}00451       \textcolor{comment}{// the metric tensor}}
-\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00452}00452       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * sqrt(Adet);}
+\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00452}00452       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * sqrt(Adet);}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00453}00453 }
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00454}00454       \textcolor{comment}{// Now calculate the load}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00455}00455       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} traction(n\_dim + 1);}
@@ -472,7 +472,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00468}00468           \{}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00469}00469             \textcolor{comment}{// Add the loading terms to the residuals}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00470}00470             residuals[local\_eqn] -\/=}
-\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00471}00471               traction[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * psi(l) * interpolated\_x[0] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00471}00471               traction[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * psi(l) * interpolated\_x[0] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00472}00472           \}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00473}00473         \}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00474}00474       \} \textcolor{comment}{// End of loop over shape functions}}
@@ -534,7 +534,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00530}00530 }
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00531}00531       \textcolor{comment}{// Attach the geometrical information to the element. N.B. This function}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00532}00532       \textcolor{comment}{// also assigns nbulk\_value from the required\_nvalue of the bulk element}}
-\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00533}00533       element\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a025ab56ef9c6eea66fb34416fdf19152}{build\_face\_element}}(\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\_index}}, \textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00533}00533       element\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_aaf7bead5b462cfd5401d97b3dbdc7af7}{build\_face\_element}}(\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\_index}}, \textcolor{keyword}{this});}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00534}00534 }
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00535}00535       \textcolor{comment}{// Find the dimension of the problem}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00536}00536       \textcolor{keywordtype}{unsigned} n\_dim = element\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_ab6602b43c3a2f1a5e48729b0b23c0d91}{nodal\_dimension}}();}
@@ -560,13 +560,13 @@
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00556}00556 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00557}00557 \textcolor{comment}{    /// Fill in contribution from Jacobian}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00558}\mbox{\hyperlink{classoomph_1_1FSIAxisymmetricLinearElasticityTractionElement_ac2ec9591abe96af1cc68da123c554feb}{00558}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1FSIAxisymmetricLinearElasticityTractionElement_ac2ec9591abe96af1cc68da123c554feb}{fill\_in\_contribution\_to\_jacobian}}(\mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00559}00559                                           \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})}
+\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00559}00559                                           \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian)}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00560}00560     \{}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00561}00561       \textcolor{comment}{// Call the residuals}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00562}00562       \mbox{\hyperlink{classoomph_1_1FSIAxisymmetricLinearElasticityTractionElement_a73cd868800f66ddb79fcc8f2dcf05a70}{fill\_in\_contribution\_to\_residuals\_axisym\_fsi\_traction}}(residuals);}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00563}00563 }
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00564}00564       \textcolor{comment}{// Derivatives w.r.t. external data}}
-\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00565}00565       \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_a80731cecc55aee156fb92aa72a77e882}{fill\_in\_jacobian\_from\_external\_interaction\_by\_fd}}(residuals, \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}});}
+\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00565}00565       \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_a80731cecc55aee156fb92aa72a77e882}{fill\_in\_jacobian\_from\_external\_interaction\_by\_fd}}(residuals, jacobian);}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00566}00566     \}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00567}00567 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00568}00568 \textcolor{comment}{    /// Return the ratio of the stress scales used to non-\/dimensionalise}}
@@ -611,13 +611,13 @@
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00607}00607       outfile << \textcolor{stringliteral}{"{}ZONE\(\backslash\)n"{}};}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00608}00608 }
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00609}00609       \textcolor{comment}{// Set the value of n\_intpt}}
-\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00610}00610       \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00610}00610       \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00611}00611 }
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00612}00612       \textcolor{comment}{// Loop over the integration points}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00613}00613       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ipt = 0; ipt < n\_intpt; ipt++)}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00614}00614       \{}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00615}00615         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} s\_int(n\_dim -\/ 1);}
-\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00616}00616         s\_int[0] = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>knot(ipt, 0);}
+\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00616}00616         s\_int[0] = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{knot}}(ipt, 0);}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00617}00617 }
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00618}00618         \textcolor{comment}{// Get the outer unit normal}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00619}00619         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} interpolated\_normal(n\_dim);}
@@ -797,7 +797,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00793}00793 }
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00794}00794       \textcolor{comment}{// Premultiply the weights and the square-\/root of the determinant of}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00795}00795       \textcolor{comment}{// the metric tensor}}
-\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00796}00796       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * sqrt(Adet);}
+\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00796}00796       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * sqrt(Adet);}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00797}00797 }
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00798}00798       \textcolor{comment}{// Get bulk element for traction}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00799}00799       NAVIER\_STOKES\_BULK\_ELEMENT* ext\_el\_pt =}
@@ -822,7 +822,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00818}00818             \textcolor{comment}{// Add the loading terms (multiplied by fsi scaling factor)}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00819}00819             \textcolor{comment}{// to the residuals}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00820}00820             residuals[local\_eqn] -\/=}
-\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00821}00821               q\_value * traction[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * psi(l) * interpolated\_x[0] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00821}00821               q\_value * traction[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * psi(l) * interpolated\_x[0] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00822}00822           \}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00823}00823         \}}
 \DoxyCodeLine{\Hypertarget{axisym__linear__elasticity__traction__elements_8h_source_l00824}00824       \} \textcolor{comment}{// End of loop over shape functions}}

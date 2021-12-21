@@ -54,23 +54,7 @@ namespace oomph
   ///
   /// Here are the details: An "ideal" preconditioner
   /// would solve the saddle point system
-  /// \f[
-  /// \left(
-  /// \begin{array}{cc}
-  /// {\bf F} & {\bf G} \\ {\bf D} & {\bf 0}
-  /// \end{array}
-  /// \right)
-  /// \left(
-  /// \begin{array}{c}
-  /// {\bf z}_u \\ {\bf z}_p
-  /// \end{array}
-  /// \right) =
-  /// \left(
-  /// \begin{array}{c}
-  /// {\bf r}_u \\ {\bf r}_p
-  /// \end{array}
-  /// \right)
-  /// \f]
+  /// \f[ \left( \begin{array}{cc} {\bf F} & {\bf G} \\ {\bf D} & {\bf 0} \end{array} \right) \left( \begin{array}{c} {\bf z}_u \\ {\bf z}_p \end{array} \right) = \left( \begin{array}{c} {\bf r}_u \\ {\bf r}_p \end{array} \right) \f]
   /// where \f$ {\bf F}\f$,  \f$ {\bf G} \f$, and \f$ {\bf D}\f$ are
   /// the blocks that arise in the Jacobian of the pressure-based
   /// equations of linear and nonlinear elasticity (with dofs in order
@@ -80,59 +64,27 @@ namespace oomph
   /// application is, of course, exactly as expensive as a direct solve.
   /// The LSC/BFBT preconditioner replaces the exact Jacobian by
   /// a block-triangular approximation
-  /// \f[
-  /// \left(
-  /// \begin{array}{cc}
-  /// {\bf F} & {\bf G} \\ {\bf 0} & -{\bf M}_s
-  /// \end{array}
-  /// \right)
-  /// \left(
-  /// \begin{array}{c}
-  /// {\bf z}_u \\ {\bf z}_p
-  /// \end{array}
-  /// \right) =
-  /// \left(
-  /// \begin{array}{c}
-  /// {\bf r}_u \\ {\bf r}_p
-  /// \end{array}
-  /// \right),
-  /// \f]
+  /// \f[ \left( \begin{array}{cc} {\bf F} & {\bf G} \\ {\bf 0} & -{\bf M}_s \end{array} \right) \left( \begin{array}{c} {\bf z}_u \\ {\bf z}_p \end{array} \right) = \left( \begin{array}{c} {\bf r}_u \\ {\bf r}_p \end{array} \right), \f]
   /// where \f${\bf M}_s\f$ is an approximation to the pressure
   /// Schur-complement \f$ {\bf S} = {\bf D} {\bf F}^{-1}{\bf G}. \f$
   /// This system can be solved in two steps:
   /// -# Solve the second row for \f$ {\bf z}_p\f$ via
-  ///    \f[
-  ///    {\bf z}_p = - {\bf M}_s^{-1} {\bf r}_p
-  ///    \f]
+  /// \f[ {\bf z}_p = - {\bf M}_s^{-1} {\bf r}_p \f]
   /// -# Given \f$ {\bf z}_p \f$ , solve the first row for \f$ {\bf z}_u\f$ via
-  ///    \f[
-  ///    {\bf z}_u = {\bf F}^{-1} \big( {\bf r}_u - {\bf G} {\bf z}_p \big)
-  ///    \f]
-  /// .
+  /// \f[ {\bf z}_u = {\bf F}^{-1} \big( {\bf r}_u - {\bf G} {\bf z}_p \big) \f].
   /// In the LSC/BFBT preconditioner, the action of the inverse pressure
   /// Schur complement
-  /// \f[
-  /// {\bf z}_p = - {\bf M}_s^{-1} {\bf r}_p
-  /// \f]
+  /// \f[ {\bf z}_p = - {\bf M}_s^{-1} {\bf r}_p \f]
   /// is approximated by
-  /// \f[
-  /// {\bf z}_p = -
-  /// \big({\bf D} \widehat{\bf Q}^{-1}{\bf G} \big)^{-1}
-  /// \big({\bf D} \widehat{\bf Q}^{-1}{\bf F} \widehat{\bf Q}^{-1}{\bf G}\big)
-  /// \big({\bf D} \widehat{\bf Q}^{-1}{\bf G} \big)^{-1}
-  /// {\bf r}_p,
-  /// \f]
+  /// \f[ {\bf z}_p = - \big({\bf D} \widehat{\bf Q}^{-1}{\bf G} \big)^{-1} \big({\bf D} \widehat{\bf Q}^{-1}{\bf F} \widehat{\bf Q}^{-1}{\bf G}\big) \big({\bf D} \widehat{\bf Q}^{-1}{\bf G} \big)^{-1} {\bf r}_p, \f]
   /// where  \f$ \widehat{\bf Q} \f$ is the diagonal of the
   /// displacement/position mass matrix. The evaluation of this expression
-  /// involves two linear solves involving the matrix \f[
-  /// {\bf P} = \big({\bf D} \widehat{\bf Q}^{-1}{\bf G} \big)
-  /// \f]
+  /// involves two linear solves involving the matrix
+  /// \f[ {\bf P} = \big({\bf D} \widehat{\bf Q}^{-1}{\bf G} \big) \f]
   /// which has the character of a matrix arising from the discretisation
   /// of a Poisson problem on the pressure space. We also have
   /// to evaluate matrix-vector products with the matrix
-  /// \f[
-  /// {\bf E}={\bf D}\widehat{\bf Q}^{-1}{\bf F}\widehat{\bf Q}^{-1}{\bf G}
-  /// \f]
+  /// \f[ {\bf E}={\bf D}\widehat{\bf Q}^{-1}{\bf F}\widehat{\bf Q}^{-1}{\bf G} \f]
   /// Details of the theory can be found in "Finite Elements and
   /// Fast Iterative Solvers with Applications in Incompressible Fluid
   /// Dynamics" by Howard C. Elman, David J. Silvester, and Andrew J. Wathen,

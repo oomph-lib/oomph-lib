@@ -214,7 +214,7 @@
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00210}00210       CRDoubleMatrix* j\_pt = \textcolor{keyword}{new} CRDoubleMatrix;}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00211}00211 }
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00212}00212       \textcolor{comment}{// Concatenate the sub-\/blocks to get the full matrix}}
-\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00213}00213       \mbox{\hyperlink{namespaceoomph_1_1DoubleVectorHelpers_acf43b80ace3f8a4633190ab36136083b}{CRDoubleMatrixHelpers::concatenate}}(block\_matrix\_pt, *j\_pt);}
+\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00213}00213       \mbox{\hyperlink{namespaceoomph_1_1CRDoubleMatrixHelpers_ab7e3ac344aa644292a143a3917a03e65}{CRDoubleMatrixHelpers::concatenate}}(block\_matrix\_pt, *j\_pt);}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00214}00214 }
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00215}00215       \textcolor{comment}{// Output the matrix in MATLAB form}}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00216}00216       j\_pt-\/>sparse\_indexed\_output\_with\_offset(\textcolor{stringliteral}{"{}j\_"{}} + suffix + \textcolor{stringliteral}{"{}.csv"{}});}
@@ -576,23 +576,23 @@
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00572}00572     \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}} << \textcolor{stringliteral}{"{}Number of block types: "{}} << n\_block\_type << std::endl;}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00573}00573 }
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00574}00574     \textcolor{comment}{// Space for the concatenated block matrix}}
-\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00575}00575     \mbox{\hyperlink{classoomph_1_1Preconditioner_a04caf49de41802ef112e4b8b644b1d4d}{Matrix\_pt}} = \textcolor{keyword}{new} CRDoubleMatrix;}
+\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00575}00575     \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_ab4b84bc2dec36b26196f466a43ced299}{Matrix\_pt}} = \textcolor{keyword}{new} CRDoubleMatrix;}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00576}00576 }
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00577}00577     \textcolor{comment}{// Get the (one and only) block to be used by this block preconditioner}}
-\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00578}00578     this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a72b4dbe167da59d9ba12c7eff97d77e6}{get\_block}}(0, 0, *\mbox{\hyperlink{classoomph_1_1Preconditioner_a04caf49de41802ef112e4b8b644b1d4d}{Matrix\_pt}});}
+\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00578}00578     this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a72b4dbe167da59d9ba12c7eff97d77e6}{get\_block}}(0, 0, *\mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_ab4b84bc2dec36b26196f466a43ced299}{Matrix\_pt}});}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00579}00579 }
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00580}00580     \textcolor{comment}{// Create a new instance of the NS subsidiary preconditioner}}
-\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00581}00581     \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a05385552adb400003801a8468a2186ae}{Navier\_stokes\_subsidiary\_preconditioner\_pt}} =}
+\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00581}00581     \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a66b8ac42169d3247d5e3d9678e905b88}{Navier\_stokes\_subsidiary\_preconditioner\_pt}} =}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00582}00582       \textcolor{keyword}{new} SpaceTimeNavierStokesSubsidiaryPreconditioner;}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00583}00583 }
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00584}00584     \textcolor{comment}{// Do we need to doc. the memory statistics?}}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00585}00585     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a727af6ccb23868b93a074e07f885b5e8}{Compute\_memory\_statistics}})}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00586}00586     \{}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00587}00587       \textcolor{comment}{// How many rows are there in this block?}}
-\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00588}00588       \textcolor{keywordtype}{unsigned} n\_row = \mbox{\hyperlink{classoomph_1_1Preconditioner_a04caf49de41802ef112e4b8b644b1d4d}{Matrix\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_acdcd6e1ea2bf2380f1a2fa32c7829cb5}{nrow}}();}
+\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00588}00588       \textcolor{keywordtype}{unsigned} n\_row = \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_ab4b84bc2dec36b26196f466a43ced299}{Matrix\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_abd8d231b0549540144b4739a667b1e75}{nrow}}();}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00589}00589 }
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00590}00590       \textcolor{comment}{// How many nonzeros are there in this block?}}
-\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00591}00591       \textcolor{keywordtype}{unsigned} n\_nnz = \mbox{\hyperlink{classoomph_1_1Preconditioner_a04caf49de41802ef112e4b8b644b1d4d}{Matrix\_pt}}-\/>nnz();}
+\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00591}00591       \textcolor{keywordtype}{unsigned} n\_nnz = \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_ab4b84bc2dec36b26196f466a43ced299}{Matrix\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a9482dafc0a17ebc5b7431369d8d07565}{nnz}}();}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00592}00592 }
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00593}00593       \textcolor{comment}{// Compute the memory usage. The only memory overhead here (for the}}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00594}00594       \textcolor{comment}{// setup phase) is storing the system matrix}}
@@ -601,7 +601,7 @@
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00597}00597 }
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00598}00598       \textcolor{comment}{// We might as well doc. the memory statistics of the Navier-\/Stokes}}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00599}00599       \textcolor{comment}{// subsidiary block preconditioner while we're at it...}}
-\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00600}00600       \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a05385552adb400003801a8468a2186ae}{Navier\_stokes\_subsidiary\_preconditioner\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_aa1831727caf588508438eec1776ede6d}{enable\_doc\_memory\_usage}}();}
+\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00600}00600       \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a66b8ac42169d3247d5e3d9678e905b88}{Navier\_stokes\_subsidiary\_preconditioner\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_aa1831727caf588508438eec1776ede6d}{enable\_doc\_memory\_usage}}();}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00601}00601     \}}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00602}00602 }
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00603}00603     \textcolor{comment}{// Create a map to declare which of the 3 dof types in the GMRES}}
@@ -619,12 +619,12 @@
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00615}00615     \}}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00616}00616 }
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00617}00617     \textcolor{comment}{// Now turn it into an "{}proper"{} subsidiary preconditioner}}
-\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00618}00618     \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a05385552adb400003801a8468a2186ae}{Navier\_stokes\_subsidiary\_preconditioner\_pt}}}
+\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00618}00618     \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a66b8ac42169d3247d5e3d9678e905b88}{Navier\_stokes\_subsidiary\_preconditioner\_pt}}}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00619}00619       -\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_ab8e2478caa8370dd12462f17e1cc8082}{turn\_into\_subsidiary\_block\_preconditioner}}(\textcolor{keyword}{this}, dof\_map);}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00620}00620 }
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00621}00621     \textcolor{comment}{// Setup: The NS subsidiary preconditioner is itself a block preconditioner}}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00622}00622     \textcolor{comment}{// so we need to pass it a pointer to full-\/size matrix!}}
-\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00623}00623     \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a05385552adb400003801a8468a2186ae}{Navier\_stokes\_subsidiary\_preconditioner\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a416c107b8095d5083b7a84775bae9881}{setup}}(this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_aec1a6eda2d78d1e3b41ced805534d72d}{matrix\_pt}}());}
+\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00623}00623     \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a66b8ac42169d3247d5e3d9678e905b88}{Navier\_stokes\_subsidiary\_preconditioner\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a416c107b8095d5083b7a84775bae9881}{setup}}(this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_aec1a6eda2d78d1e3b41ced805534d72d}{matrix\_pt}}());}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00624}00624 }
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00625}00625     \textcolor{comment}{// Remember that the preconditioner has been setup so the stored}}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00626}00626     \textcolor{comment}{// information can be wiped when we come here next...}}
@@ -717,7 +717,7 @@
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00713}00713       this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a1dd4d3cd6b64fa64e1ff6730b0deecc7}{return\_block\_vector}}(0, block\_r[0], r\_updated);}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00714}00714 }
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00715}00715       \textcolor{comment}{// Solve on the global-\/sized vectors}}
-\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00716}00716       \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a05385552adb400003801a8468a2186ae}{Navier\_stokes\_subsidiary\_preconditioner\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a95fa1d146686ea3b0dbf42104117f4d0}{preconditioner\_solve}}(}
+\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00716}00716       \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a66b8ac42169d3247d5e3d9678e905b88}{Navier\_stokes\_subsidiary\_preconditioner\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a95fa1d146686ea3b0dbf42104117f4d0}{preconditioner\_solve}}(}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00717}00717         r\_updated, block\_z\_with\_size\_of\_full\_z);}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00718}00718 }
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00719}00719       \textcolor{comment}{// Now grab the part of the solution associated with this preconditioner}}
@@ -846,7 +846,7 @@
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00842}00842           \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a9cd47798800f479265b762b8ce48dfdb}{Preconditioner\_LHS}})}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00843}00843           \{}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00844}00844             \textcolor{comment}{// Calculate temp=Jv[i]}}
-\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00845}00845             \mbox{\hyperlink{classoomph_1_1Preconditioner_a04caf49de41802ef112e4b8b644b1d4d}{Matrix\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a78204eab557e0dc99618e41a28a5c092}{multiply}}(v[iter\_restart], temp);}
+\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00845}00845             \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_ab4b84bc2dec36b26196f466a43ced299}{Matrix\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a54b75960df52e3aebd21aaab20e9869d}{multiply}}(v[iter\_restart], temp);}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00846}00846 }
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00847}00847             \textcolor{comment}{// Get the current time}}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00848}00848             \textcolor{keywordtype}{double} t\_prec\_application\_start = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
@@ -863,7 +863,7 @@
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00859}00859 }
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00860}00860             \textcolor{comment}{// Apply the NSSP to the global-\/sized vectors (this will extract}}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00861}00861             \textcolor{comment}{// the appropriate sub-\/vectors and solve on the reduced system)}}
-\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00862}00862             \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a05385552adb400003801a8468a2186ae}{Navier\_stokes\_subsidiary\_preconditioner\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a95fa1d146686ea3b0dbf42104117f4d0}{preconditioner\_solve}}(}
+\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00862}00862             \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a66b8ac42169d3247d5e3d9678e905b88}{Navier\_stokes\_subsidiary\_preconditioner\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a95fa1d146686ea3b0dbf42104117f4d0}{preconditioner\_solve}}(}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00863}00863               r\_updated, block\_z\_with\_size\_of\_full\_z);}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00864}00864 }
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00865}00865             \textcolor{comment}{// Now grab the part of the solution associated with this}}
@@ -894,7 +894,7 @@
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00890}00890             this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a1dd4d3cd6b64fa64e1ff6730b0deecc7}{return\_block\_vector}}(0, v[iter\_restart], r\_updated);}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00891}00891 }
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00892}00892             \textcolor{comment}{// Solve on the global-\/sized vectors}}
-\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00893}00893             \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a05385552adb400003801a8468a2186ae}{Navier\_stokes\_subsidiary\_preconditioner\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a95fa1d146686ea3b0dbf42104117f4d0}{preconditioner\_solve}}(}
+\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00893}00893             \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a66b8ac42169d3247d5e3d9678e905b88}{Navier\_stokes\_subsidiary\_preconditioner\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a95fa1d146686ea3b0dbf42104117f4d0}{preconditioner\_solve}}(}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00894}00894               r\_updated, block\_z\_with\_size\_of\_full\_z);}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00895}00895 }
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00896}00896             \textcolor{comment}{// Now grab the part of the solution associated with this}}
@@ -909,7 +909,7 @@
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00905}00905               (t\_prec\_application\_end -\/ t\_prec\_application\_start);}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00906}00906 }
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00907}00907             \textcolor{comment}{// Calculate w=Jv\_m where v\_m=M\string^\{-\/1\}v}}
-\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00908}00908             \mbox{\hyperlink{classoomph_1_1Preconditioner_a04caf49de41802ef112e4b8b644b1d4d}{Matrix\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a78204eab557e0dc99618e41a28a5c092}{multiply}}(temp, w);}
+\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00908}00908             \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_ab4b84bc2dec36b26196f466a43ced299}{Matrix\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a54b75960df52e3aebd21aaab20e9869d}{multiply}}(temp, w);}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00909}00909           \}}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00910}00910         \} \textcolor{comment}{// End of solve for w}}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00911}00911 }
@@ -951,25 +951,25 @@
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00947}00947         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < iter\_restart; k++)}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00948}00948         \{}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00949}00949           \textcolor{comment}{// Apply a Givens rotation to entries of H}}
-\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00950}00950           apply\_plane\_rotation(}
+\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00950}00950           \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a08f44c37760a84bcae876aaca5a406f5}{apply\_plane\_rotation}}(}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00951}00951             H[iter\_restart][k], H[iter\_restart][k + 1], cs[k], sn[k]);}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00952}00952         \}}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00953}00953 }
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00954}00954         \textcolor{comment}{// Now generate the cs and sn entries for a plane rotation}}
-\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00955}00955         generate\_plane\_rotation(H[iter\_restart][iter\_restart],}
+\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00955}00955         \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_aeb5c45d896251c829edd2e214d441187}{generate\_plane\_rotation}}(H[iter\_restart][iter\_restart],}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00956}00956                                 H[iter\_restart][iter\_restart + 1],}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00957}00957                                 cs[iter\_restart],}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00958}00958                                 sn[iter\_restart]);}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00959}00959 }
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00960}00960         \textcolor{comment}{// Use the newly generated entries in cs and sn to apply a Givens}}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00961}00961         \textcolor{comment}{// rotation to those same entries}}
-\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00962}00962         apply\_plane\_rotation(H[iter\_restart][iter\_restart],}
+\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00962}00962         \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a08f44c37760a84bcae876aaca5a406f5}{apply\_plane\_rotation}}(H[iter\_restart][iter\_restart],}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00963}00963                              H[iter\_restart][iter\_restart + 1],}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00964}00964                              cs[iter\_restart],}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00965}00965                              sn[iter\_restart]);}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00966}00966 }
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00967}00967         \textcolor{comment}{// Now apply the Givens rotation to the entries in s}}
-\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00968}00968         apply\_plane\_rotation(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[iter\_restart],}
+\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00968}00968         \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a08f44c37760a84bcae876aaca5a406f5}{apply\_plane\_rotation}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[iter\_restart],}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00969}00969                              \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[iter\_restart + 1],}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00970}00970                              cs[iter\_restart],}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l00971}00971                              sn[iter\_restart]);}
@@ -1081,7 +1081,7 @@
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l01077}01077         DoubleVector temp(block\_r[0].\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}(), 0.0);}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l01078}01078 }
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l01079}01079         \textcolor{comment}{// Calculate temp=b-\/Jx}}
-\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l01080}01080         \mbox{\hyperlink{classoomph_1_1Preconditioner_a04caf49de41802ef112e4b8b644b1d4d}{Matrix\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a971bdc2d9297fc582af8467178f4e00e}{residual}}(block\_z[0], block\_r[0], temp);}
+\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l01080}01080         \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_ab4b84bc2dec36b26196f466a43ced299}{Matrix\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a971bdc2d9297fc582af8467178f4e00e}{residual}}(block\_z[0], block\_r[0], temp);}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l01081}01081 }
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l01082}01082         \textcolor{comment}{// If we're using LHS preconditioning}}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l01083}01083         \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a9cd47798800f479265b762b8ce48dfdb}{Preconditioner\_LHS}})}
@@ -1100,7 +1100,7 @@
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l01096}01096           this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a1dd4d3cd6b64fa64e1ff6730b0deecc7}{return\_block\_vector}}(0, temp, r\_updated);}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l01097}01097 }
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l01098}01098           \textcolor{comment}{// Solve on the global-\/sized vectors}}
-\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l01099}01099           \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a05385552adb400003801a8468a2186ae}{Navier\_stokes\_subsidiary\_preconditioner\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a95fa1d146686ea3b0dbf42104117f4d0}{preconditioner\_solve}}(}
+\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l01099}01099           \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a66b8ac42169d3247d5e3d9678e905b88}{Navier\_stokes\_subsidiary\_preconditioner\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a95fa1d146686ea3b0dbf42104117f4d0}{preconditioner\_solve}}(}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l01100}01100             r\_updated, block\_z\_with\_size\_of\_full\_z);}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l01101}01101 }
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditioner_8cc_source_l01102}01102           \textcolor{comment}{// Now grab the part of the solution associated with this}}

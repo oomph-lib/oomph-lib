@@ -36,7 +36,7 @@
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00032}00032 \{\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00033}00033 \textcolor{comment}{  /// Default Womersley number}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00034}00034 \textcolor{comment}{}  \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00035}00035   \textcolor{keywordtype}{double} WomersleyEquations<DIM>::Default\_ReSt\_value = 0.0;}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00035}00035   \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1WomersleyEquations_a9f25fbad09d6e3b14971755ea81f0189}{WomersleyEquations<DIM>::Default\_ReSt\_value}} = 0.0;}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00036}00036 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00037}00037 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00038}00038   \textcolor{comment}{//========================================================================}\textcolor{comment}{}}
@@ -68,8 +68,8 @@
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00064}00064 \textcolor{comment}{  /// Pure version without hanging nodes}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00065}00065 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00066}00066   \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00067}00067   \textcolor{keywordtype}{void} WomersleyEquations<DIM>::fill\_in\_generic\_residual\_contribution\_womersley(}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00068}00068     Vector<double>\& residuals, DenseMatrix<double>\& jacobian, \textcolor{keywordtype}{unsigned} flag)}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00067}\mbox{\hyperlink{classoomph_1_1WomersleyEquations_a5aebac86c117c1cc99437d26686d000e}{00067}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1WomersleyEquations_a5aebac86c117c1cc99437d26686d000e}{WomersleyEquations<DIM>::fill\_in\_generic\_residual\_contribution\_womersley}}(}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00068}00068     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian, \textcolor{keywordtype}{unsigned} flag)}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00069}00069   \{}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00070}00070     \textcolor{comment}{// Find out how many nodes there are}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00071}00071     \textcolor{keywordtype}{unsigned} n\_node = nnode();}
@@ -78,14 +78,14 @@
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00074}00074     \textcolor{keywordtype}{unsigned} u\_nodal\_index = u\_index\_womersley();}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00075}00075 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00076}00076     \textcolor{comment}{// Set up memory for the shape and test functions}}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00077}00077     Shape psi(n\_node), test(n\_node);}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00078}00078     DShape dpsidx(n\_node, DIM), dtestdx(n\_node, DIM);}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00077}00077     \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} psi(n\_node), test(n\_node);}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00078}00078     \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} dpsidx(n\_node, DIM), dtestdx(n\_node, DIM);}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00079}00079 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00080}00080     \textcolor{comment}{// Set the value of n\_intpt}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00081}00081     \textcolor{keywordtype}{unsigned} n\_intpt = integral\_pt()-\/>nweight();}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00082}00082 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00083}00083     \textcolor{comment}{// Set the Vector to hold local coordinates}}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00084}00084     Vector<double> \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00084}00084     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00085}00085 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00086}00086     \textcolor{comment}{// Integers to hold the local equation and unknowns}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00087}00087     \textcolor{keywordtype}{int} local\_eqn = 0, local\_unknown = 0;}
@@ -104,13 +104,13 @@
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00100}00100         ipt, psi, dpsidx, test, dtestdx);}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00101}00101 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00102}00102       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00103}00103       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00103}00103       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00104}00104 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00105}00105       \textcolor{comment}{// Allocate memory for local quantities and initialise to zero}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00106}00106       \textcolor{keywordtype}{double} interpolated\_u = 0.0;}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00107}00107       \textcolor{keywordtype}{double} dudt = 0.0;}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00108}00108       Vector<double> interpolated\_x(DIM, 0.0);}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00109}00109       Vector<double> interpolated\_dudx(DIM, 0.0);}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00108}00108       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} interpolated\_x(DIM, 0.0);}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00109}00109       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} interpolated\_dudx(DIM, 0.0);}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00110}00110 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00111}00111       \textcolor{comment}{// Calculate function value and derivatives:}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00112}00112       \textcolor{comment}{// Loop over nodes}}
@@ -155,12 +155,12 @@
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00151}00151         \textcolor{keywordflow}{if} (local\_eqn >= 0)}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00152}00152         \{}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00153}00153           \textcolor{comment}{// Add dpdz term and time derivative}}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00154}00154           residuals[local\_eqn] += (re\_st() * dudt + dpdz) * test(l) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00154}00154           residuals[local\_eqn] += (re\_st() * dudt + dpdz) * test(l) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00155}00155 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00156}00156           \textcolor{comment}{// Laplace operator}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00157}00157           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < DIM; k++)}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00158}00158           \{}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00159}00159             residuals[local\_eqn] += interpolated\_dudx[k] * dtestdx(l, k) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00159}00159             residuals[local\_eqn] += interpolated\_dudx[k] * dtestdx(l, k) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00160}00160           \}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00161}00161 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00162}00162 }
@@ -178,13 +178,13 @@
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00174}00174                 \textcolor{comment}{// Mass matrix}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00175}00175                 jacobian(local\_eqn, local\_unknown) +=}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00176}00176                   re\_st() * test(l) * psi(l2) *}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00177}00177                   node\_pt(l2)-\/>time\_stepper\_pt()-\/>weight(1, 0) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00177}00177                   node\_pt(l2)-\/>time\_stepper\_pt()-\/>weight(1, 0) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00178}00178 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00179}00179                 \textcolor{comment}{// Laplace operator \& mesh velocity bit}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00180}00180                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00181}00181                 \{}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00182}00182                   \textcolor{keywordtype}{double} tmp = dtestdx(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00183}00183                   jacobian(local\_eqn, local\_unknown) += dpsidx(l2, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * tmp * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00183}00183                   jacobian(local\_eqn, local\_unknown) += dpsidx(l2, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * tmp * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00184}00184                 \}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00185}00185               \}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00186}00186             \}}
@@ -197,7 +197,7 @@
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00193}00193               local\_unknown = external\_local\_eqn(0, 0);}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00194}00194               \textcolor{keywordflow}{if} (local\_unknown >= 0)}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00195}00195               \{}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00196}00196                 jacobian(local\_eqn, local\_unknown) += test(l) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00196}00196                 jacobian(local\_eqn, local\_unknown) += test(l) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00197}00197               \}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00198}00198 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00199}00199               \textcolor{comment}{// Derivatives of the final eqn (volume flux constraint}}
@@ -205,7 +205,7 @@
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00201}00201               \textcolor{keywordtype}{unsigned} final\_local\_eqn = external\_local\_eqn(0, 0);}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00202}00202               \textcolor{keywordtype}{unsigned} local\_unknown = local\_eqn; \textcolor{comment}{//  [from above just renaming}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00203}00203               \textcolor{comment}{//                                //   for clarity(!?)]}}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00204}00204               jacobian(final\_local\_eqn, local\_unknown) += psi(l) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00204}00204               jacobian(final\_local\_eqn, local\_unknown) += psi(l) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00205}00205             \}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00206}00206           \}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00207}00207         \}}
@@ -220,7 +220,7 @@
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00216}00216 \textcolor{comment}{  /// Compute volume flux through element}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00217}00217 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00218}00218   \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00219}00219   \textcolor{keywordtype}{double} WomersleyEquations<DIM>::get\_volume\_flux()}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00219}\mbox{\hyperlink{classoomph_1_1WomersleyEquations_ab04034e44e876ea9935a4ae102c34ce9}{00219}}   \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1WomersleyEquations_ab04034e44e876ea9935a4ae102c34ce9}{WomersleyEquations<DIM>::get\_volume\_flux}}()}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00220}00220   \{}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00221}00221     \textcolor{comment}{// Find out how many nodes there are}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00222}00222     \textcolor{keywordtype}{unsigned} n\_node = nnode();}
@@ -229,14 +229,14 @@
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00225}00225     \textcolor{keywordtype}{unsigned} u\_nodal\_index = u\_index\_womersley();}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00226}00226 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00227}00227     \textcolor{comment}{// Set up memory for the shape fcs}}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00228}00228     Shape psi(n\_node);}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00229}00229     DShape dpsidx(n\_node, DIM);}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00228}00228     \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} psi(n\_node);}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00229}00229     \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} dpsidx(n\_node, DIM);}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00230}00230 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00231}00231     \textcolor{comment}{// Set the value of n\_intpt}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00232}00232     \textcolor{keywordtype}{unsigned} n\_intpt = integral\_pt()-\/>nweight();}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00233}00233 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00234}00234     \textcolor{comment}{// Set the Vector to hold local coordinates}}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00235}00235     Vector<double> \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00235}00235     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00236}00236 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00237}00237     \textcolor{comment}{// Initialise flux}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00238}00238     \textcolor{keywordtype}{double} flux = 0.0;}
@@ -254,7 +254,7 @@
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00250}00250       \textcolor{keywordtype}{double} J = dshape\_eulerian\_at\_knot(ipt, psi, dpsidx);}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00251}00251 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00252}00252       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00253}00253       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00253}00253       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00254}00254 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00255}00255       \textcolor{comment}{// Allocate memory for local quantities and initialise to zero}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00256}00256       \textcolor{keywordtype}{double} interpolated\_u = 0.0;}
@@ -270,7 +270,7 @@
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00266}00266       \}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00267}00267 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00268}00268       \textcolor{comment}{// Add to flux}}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00269}00269       flux += interpolated\_u * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00269}00269       flux += interpolated\_u * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00270}00270 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00271}00271     \} \textcolor{comment}{// End of loop over integration points}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00272}00272 }
@@ -282,12 +282,12 @@
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00278}00278 \textcolor{comment}{  /// Self-\/test:  Return 0 for OK}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00279}00279 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00280}00280   \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00281}00281   \textcolor{keywordtype}{unsigned} WomersleyEquations<DIM>::self\_test()}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00281}\mbox{\hyperlink{classoomph_1_1WomersleyEquations_acdcc63b1f495caa704aec0c5c170b030}{00281}}   \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1WomersleyEquations_acdcc63b1f495caa704aec0c5c170b030}{WomersleyEquations<DIM>::self\_test}}()}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00282}00282   \{}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00283}00283     \textcolor{keywordtype}{bool} passed = \textcolor{keyword}{true};}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00284}00284 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00285}00285     \textcolor{comment}{// Check lower-\/level stuff}}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00286}00286     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1FiniteElement_af04bf6f6a9a60946e6afeee7afdd709c}{FiniteElement::self\_test}}() != 0)}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00286}00286     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1FiniteElement_af94c5a5e22175d5420b33b3b79e46ed3}{FiniteElement::self\_test}}() != 0)}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00287}00287     \{}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00288}00288       passed = \textcolor{keyword}{false};}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00289}00289     \}}
@@ -309,12 +309,12 @@
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00305}00305 \textcolor{comment}{  /// against full Navier Stokes at n\_nplot x n\_plot points (2D)}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00306}00306 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00307}00307   \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00308}00308   \textcolor{keywordtype}{void} WomersleyEquations<DIM>::output\_3d(std::ostream\& outfile,}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00308}\mbox{\hyperlink{classoomph_1_1WomersleyEquations_af97b58e933b49d84f2eda3c10fec9cd1}{00308}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1WomersleyEquations_af97b58e933b49d84f2eda3c10fec9cd1}{WomersleyEquations<DIM>::output\_3d}}(std::ostream\& outfile,}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00309}00309                                           \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nplot,}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00310}00310                                           \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& z\_out)}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00311}00311   \{}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00312}00312     \textcolor{comment}{// Vector of local coordinates}}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00313}00313     Vector<double> \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00313}00313     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00314}00314 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00315}00315     \textcolor{comment}{// Tecplot header info}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00316}00316     outfile << tecplot\_zone\_string(nplot);}
@@ -347,11 +347,11 @@
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00343}00343 \textcolor{comment}{  /// nplot points in each coordinate direction}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00344}00344 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00345}00345   \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00346}00346   \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_aca07d359a96b9c7b566142112604ea87}{WomersleyEquations<DIM>::output}}(std::ostream\& outfile,}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00346}\mbox{\hyperlink{classoomph_1_1WomersleyEquations_acf07411d652b5c2fc16d5dc309eb6ffc}{00346}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1WomersleyEquations_a9c1246d883f937888bf052b7078aee9a}{WomersleyEquations<DIM>::output}}(std::ostream\& outfile,}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00347}00347                                        \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nplot)}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00348}00348   \{}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00349}00349     \textcolor{comment}{// Vector of local coordinates}}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00350}00350     Vector<double> \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00350}00350     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00351}00351 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00352}00352     \textcolor{comment}{// Tecplot header info}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00353}00353     outfile << tecplot\_zone\_string(nplot);}
@@ -383,10 +383,10 @@
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00379}00379 \textcolor{comment}{  /// nplot points in each coordinate direction}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00380}00380 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00381}00381   \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00382}00382   \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_aca07d359a96b9c7b566142112604ea87}{WomersleyEquations<DIM>::output}}(FILE* file\_pt, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nplot)}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00382}\mbox{\hyperlink{classoomph_1_1WomersleyEquations_ad5254560613d0c22280f15cc9cb42dc7}{00382}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1WomersleyEquations_a9c1246d883f937888bf052b7078aee9a}{WomersleyEquations<DIM>::output}}(FILE* file\_pt, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nplot)}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00383}00383   \{}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00384}00384     \textcolor{comment}{// Vector of local coordinates}}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00385}00385     Vector<double> \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00385}00385     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00386}00386 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00387}00387     \textcolor{comment}{// Tecplot header info}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00388}00388     fprintf(file\_pt, \textcolor{stringliteral}{"{}\%s"{}}, tecplot\_zone\_string(nplot).c\_str());}
@@ -419,22 +419,22 @@
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00415}00415 \textcolor{comment}{  ///   x,y,u\_exact    or    x,y,z,u\_exact}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00416}00416 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00417}00417   \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00418}00418   \textcolor{keywordtype}{void} WomersleyEquations<DIM>::output\_fct(}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00418}\mbox{\hyperlink{classoomph_1_1WomersleyEquations_aebc178cae7a5f50da1f76eed2ea3972d}{00418}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1WomersleyEquations_aebc178cae7a5f50da1f76eed2ea3972d}{WomersleyEquations<DIM>::output\_fct}}(}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00419}00419     std::ostream\& outfile,}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00420}00420     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nplot,}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00421}00421     \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{FiniteElement::SteadyExactSolutionFctPt}} exact\_soln\_pt)}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00422}00422   \{}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00423}00423     \textcolor{comment}{// Vector of local coordinates}}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00424}00424     Vector<double> \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00424}00424     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00425}00425 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00426}00426     \textcolor{comment}{// Vector for coordintes}}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00427}00427     Vector<double> \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(DIM);}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00427}00427     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(DIM);}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00428}00428 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00429}00429     \textcolor{comment}{// Tecplot header info}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00430}00430     outfile << tecplot\_zone\_string(nplot);}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00431}00431 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00432}00432     \textcolor{comment}{// Exact solution Vector (here a scalar)}}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00433}00433     Vector<double> exact\_soln(1);}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00433}00433     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} exact\_soln(1);}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00434}00434 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00435}00435     \textcolor{comment}{// Loop over plot points}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00436}00436     \textcolor{keywordtype}{unsigned} num\_plot\_points = nplot\_points(nplot);}
@@ -444,15 +444,15 @@
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00440}00440       get\_s\_plot(iplot, nplot, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00441}00441 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00442}00442       \textcolor{comment}{// Get x position as Vector}}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00443}00443       interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00443}00443       interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00444}00444 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00445}00445       \textcolor{comment}{// Get exact solution at this point}}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00446}00446       (*exact\_soln\_pt)(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, exact\_soln);}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00446}00446       (*exact\_soln\_pt)(x, exact\_soln);}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00447}00447 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00448}00448       \textcolor{comment}{// Output x,y,...,u\_exact}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00449}00449       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00450}00450       \{}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00451}00451         outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00451}00451         outfile << x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00452}00452       \}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00453}00453       outfile << exact\_soln[0] << std::endl;}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00454}00454     \}}
@@ -471,7 +471,7 @@
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00467}00467 \textcolor{comment}{  ///   x,y,u\_exact    or    x,y,z,u\_exact}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00468}00468 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00469}00469   \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00470}00470   \textcolor{keywordtype}{void} WomersleyEquations<DIM>::output\_fct(}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00470}\mbox{\hyperlink{classoomph_1_1WomersleyEquations_ab1468b769eeb97f0a603526531e01564}{00470}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1WomersleyEquations_aebc178cae7a5f50da1f76eed2ea3972d}{WomersleyEquations<DIM>::output\_fct}}(}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00471}00471     std::ostream\& outfile,}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00472}00472     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nplot,}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00473}00473     \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
@@ -479,17 +479,17 @@
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00475}00475 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00476}00476   \{}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00477}00477     \textcolor{comment}{// Vector of local coordinates}}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00478}00478     Vector<double> \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00478}00478     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00479}00479 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00480}00480     \textcolor{comment}{// Vector for coordintes}}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00481}00481     Vector<double> \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(DIM);}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00481}00481     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(DIM);}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00482}00482 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00483}00483 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00484}00484     \textcolor{comment}{// Tecplot header info}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00485}00485     outfile << tecplot\_zone\_string(nplot);}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00486}00486 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00487}00487     \textcolor{comment}{// Exact solution Vector (here a scalar)}}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00488}00488     Vector<double> exact\_soln(1);}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00488}00488     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} exact\_soln(1);}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00489}00489 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00490}00490     \textcolor{comment}{// Loop over plot points}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00491}00491     \textcolor{keywordtype}{unsigned} num\_plot\_points = nplot\_points(nplot);}
@@ -499,15 +499,15 @@
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00495}00495       get\_s\_plot(iplot, nplot, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00496}00496 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00497}00497       \textcolor{comment}{// Get x position as Vector}}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00498}00498       interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00498}00498       interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00499}00499 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00500}00500       \textcolor{comment}{// Get exact solution at this point}}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00501}00501       (*exact\_soln\_pt)(time, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, exact\_soln);}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00501}00501       (*exact\_soln\_pt)(time, x, exact\_soln);}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00502}00502 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00503}00503       \textcolor{comment}{// Output x,y,...,u\_exact}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00504}00504       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00505}00505       \{}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00506}00506         outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00506}00506         outfile << x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00507}00507       \}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00508}00508       outfile << exact\_soln[0] << std::endl;}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00509}00509     \}}
@@ -525,7 +525,7 @@
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00521}00521 \textcolor{comment}{  ///}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00522}00522 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00523}00523   \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00524}00524   \textcolor{keywordtype}{void} WomersleyEquations<DIM>::compute\_error(}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00524}\mbox{\hyperlink{classoomph_1_1WomersleyEquations_a29f1f7483545f64e8e04b24dcdce29ef}{00524}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1WomersleyEquations_a29f1f7483545f64e8e04b24dcdce29ef}{WomersleyEquations<DIM>::compute\_error}}(}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00525}00525     std::ostream\& outfile,}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00526}00526     \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{FiniteElement::SteadyExactSolutionFctPt}} exact\_soln\_pt,}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00527}00527     \textcolor{keywordtype}{double}\& error,}
@@ -536,15 +536,15 @@
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00532}00532     norm = 0.0;}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00533}00533 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00534}00534     \textcolor{comment}{// Vector of local coordinates}}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00535}00535     Vector<double> \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00535}00535     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00536}00536 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00537}00537     \textcolor{comment}{// Vector for coordintes}}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00538}00538     Vector<double> \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(DIM);}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00538}00538     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(DIM);}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00539}00539 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00540}00540     \textcolor{comment}{// Find out how many nodes there are in the element}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00541}00541     \textcolor{keywordtype}{unsigned} n\_node = nnode();}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00542}00542 }
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00543}00543     Shape psi(n\_node);}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00543}00543     \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} psi(n\_node);}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00544}00544 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00545}00545     \textcolor{comment}{// Set the value of n\_intpt}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00546}00546     \textcolor{keywordtype}{unsigned} n\_intpt = integral\_pt()-\/>nweight();}
@@ -553,7 +553,7 @@
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00549}00549     outfile << \textcolor{stringliteral}{"{}ZONE"{}} << std::endl;}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00550}00550 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00551}00551     \textcolor{comment}{// Exact solution Vector (here a scalar)}}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00552}00552     Vector<double> exact\_soln(1);}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00552}00552     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} exact\_soln(1);}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00553}00553 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00554}00554     \textcolor{comment}{// Loop over the integration points}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00555}00555     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ipt = 0; ipt < n\_intpt; ipt++)}
@@ -571,27 +571,27 @@
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00567}00567       \textcolor{keywordtype}{double} J = J\_eulerian(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00568}00568 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00569}00569       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00570}00570       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00570}00570       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00571}00571 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00572}00572       \textcolor{comment}{// Get x position as Vector}}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00573}00573       interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00573}00573       interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00574}00574 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00575}00575       \textcolor{comment}{// Get FE function value}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00576}00576       \textcolor{keywordtype}{double} u\_fe = interpolated\_u\_womersley(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00577}00577 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00578}00578       \textcolor{comment}{// Get exact solution at this point}}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00579}00579       (*exact\_soln\_pt)(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, exact\_soln);}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00579}00579       (*exact\_soln\_pt)(x, exact\_soln);}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00580}00580 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00581}00581       \textcolor{comment}{// Output x,y,...,error}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00582}00582       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00583}00583       \{}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00584}00584         outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00584}00584         outfile << x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00585}00585       \}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00586}00586       outfile << exact\_soln[0] << \textcolor{stringliteral}{"{} "{}} << exact\_soln[0] -\/ u\_fe << std::endl;}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00587}00587 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00588}00588       \textcolor{comment}{// Add to error and norm}}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00589}00589       norm += exact\_soln[0] * exact\_soln[0] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00590}00590       error += (exact\_soln[0] -\/ u\_fe) * (exact\_soln[0] -\/ u\_fe) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00589}00589       norm += exact\_soln[0] * exact\_soln[0] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00590}00590       error += (exact\_soln[0] -\/ u\_fe) * (exact\_soln[0] -\/ u\_fe) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00591}00591     \}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00592}00592   \}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00593}00593 }
@@ -604,7 +604,7 @@
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00600}00600 \textcolor{comment}{  ///}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00601}00601 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00602}00602   \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00603}00603   \textcolor{keywordtype}{void} WomersleyEquations<DIM>::compute\_error(}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00603}\mbox{\hyperlink{classoomph_1_1WomersleyEquations_a5db020d180881321f3dbd18e2971c407}{00603}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1WomersleyEquations_a29f1f7483545f64e8e04b24dcdce29ef}{WomersleyEquations<DIM>::compute\_error}}(}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00604}00604     std::ostream\& outfile,}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00605}00605     \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{FiniteElement::UnsteadyExactSolutionFctPt}} exact\_soln\_pt,}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00606}00606     \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
@@ -617,16 +617,16 @@
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00613}00613     norm = 0.0;}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00614}00614 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00615}00615     \textcolor{comment}{// Vector of local coordinates}}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00616}00616     Vector<double> \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00616}00616     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00617}00617 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00618}00618     \textcolor{comment}{// Vector for coordintes}}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00619}00619     Vector<double> \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(DIM);}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00619}00619     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(DIM);}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00620}00620 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00621}00621 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00622}00622     \textcolor{comment}{// Find out how many nodes there are in the element}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00623}00623     \textcolor{keywordtype}{unsigned} n\_node = nnode();}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00624}00624 }
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00625}00625     Shape psi(n\_node);}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00625}00625     \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} psi(n\_node);}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00626}00626 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00627}00627     \textcolor{comment}{// Set the value of n\_intpt}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00628}00628     \textcolor{keywordtype}{unsigned} n\_intpt = integral\_pt()-\/>nweight();}
@@ -635,7 +635,7 @@
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00631}00631     outfile << \textcolor{stringliteral}{"{}ZONE"{}} << std::endl;}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00632}00632 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00633}00633     \textcolor{comment}{// Exact solution Vector (here a scalar)}}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00634}00634     Vector<double> exact\_soln(1);}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00634}00634     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} exact\_soln(1);}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00635}00635 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00636}00636     \textcolor{comment}{// Loop over the integration points}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00637}00637     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ipt = 0; ipt < n\_intpt; ipt++)}
@@ -653,27 +653,27 @@
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00649}00649       \textcolor{keywordtype}{double} J = J\_eulerian(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00650}00650 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00651}00651       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00652}00652       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00652}00652       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00653}00653 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00654}00654       \textcolor{comment}{// Get x position as Vector}}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00655}00655       interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00655}00655       interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00656}00656 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00657}00657       \textcolor{comment}{// Get FE function value}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00658}00658       \textcolor{keywordtype}{double} u\_fe = interpolated\_u\_womersley(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00659}00659 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00660}00660       \textcolor{comment}{// Get exact solution at this point}}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00661}00661       (*exact\_soln\_pt)(time, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, exact\_soln);}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00661}00661       (*exact\_soln\_pt)(time, x, exact\_soln);}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00662}00662 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00663}00663       \textcolor{comment}{// Output x,y,...,error}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00664}00664       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00665}00665       \{}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00666}00666         outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00666}00666         outfile << x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00667}00667       \}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00668}00668       outfile << exact\_soln[0] << \textcolor{stringliteral}{"{} "{}} << exact\_soln[0] -\/ u\_fe << std::endl;}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00669}00669 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00670}00670       \textcolor{comment}{// Add to error and norm}}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00671}00671       norm += exact\_soln[0] * exact\_soln[0] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00672}00672       error += (exact\_soln[0] -\/ u\_fe) * (exact\_soln[0] -\/ u\_fe) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00671}00671       norm += exact\_soln[0] * exact\_soln[0] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00672}00672       error += (exact\_soln[0] -\/ u\_fe) * (exact\_soln[0] -\/ u\_fe) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00673}00673     \}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00674}00674   \}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00675}00675 }
@@ -682,17 +682,17 @@
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00678}00678   \textcolor{comment}{// Force build of templates}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00679}00679   \textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00680}00680 }
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00681}00681   \textcolor{keyword}{template} \textcolor{keyword}{class }WomersleyEquations<1>;}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00681}00681   \textcolor{keyword}{template} \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1WomersleyEquations}{WomersleyEquations<1>}};}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00682}00682 }
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00683}00683   \textcolor{keyword}{template} \textcolor{keyword}{class }QWomersleyElement<1, 2>;}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00684}00684   \textcolor{keyword}{template} \textcolor{keyword}{class }QWomersleyElement<1, 3>;}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00685}00685   \textcolor{keyword}{template} \textcolor{keyword}{class }QWomersleyElement<1, 4>;}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00683}00683   \textcolor{keyword}{template} \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1QWomersleyElement}{QWomersleyElement<1, 2>}};}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00684}00684   \textcolor{keyword}{template} \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1QWomersleyElement}{QWomersleyElement<1, 3>}};}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00685}00685   \textcolor{keyword}{template} \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1QWomersleyElement}{QWomersleyElement<1, 4>}};}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00686}00686 }
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00687}00687   \textcolor{keyword}{template} \textcolor{keyword}{class }WomersleyEquations<2>;}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00687}00687   \textcolor{keyword}{template} \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1WomersleyEquations}{WomersleyEquations<2>}};}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00688}00688 }
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00689}00689   \textcolor{keyword}{template} \textcolor{keyword}{class }QWomersleyElement<2, 2>;}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00690}00690   \textcolor{keyword}{template} \textcolor{keyword}{class }QWomersleyElement<2, 3>;}
-\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00691}00691   \textcolor{keyword}{template} \textcolor{keyword}{class }QWomersleyElement<2, 4>;}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00689}00689   \textcolor{keyword}{template} \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1QWomersleyElement}{QWomersleyElement<2, 2>}};}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00690}00690   \textcolor{keyword}{template} \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1QWomersleyElement}{QWomersleyElement<2, 3>}};}
+\DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00691}00691   \textcolor{keyword}{template} \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1QWomersleyElement}{QWomersleyElement<2, 4>}};}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00692}00692 }
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00693}00693   \textcolor{comment}{// template class QWomersleyElement<3,2>;}}
 \DoxyCodeLine{\Hypertarget{womersley__elements_8cc_source_l00694}00694   \textcolor{comment}{// template class QWomersleyElement<3,3>;}}

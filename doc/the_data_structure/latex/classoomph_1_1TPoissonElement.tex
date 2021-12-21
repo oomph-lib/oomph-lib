@@ -12,7 +12,7 @@
 Inheritance diagram for oomph\+::TPoisson\+Element\texorpdfstring{$<$}{<} DIM, NNODE\+\_\+1D \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=1.985816cm]{classoomph_1_1TPoissonElement}
+\includegraphics[height=1.588652cm]{classoomph_1_1TPoissonElement}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
@@ -20,47 +20,47 @@ Inheritance diagram for oomph\+::TPoisson\+Element\texorpdfstring{$<$}{<} DIM, N
 \item 
 \mbox{\hyperlink{classoomph_1_1TPoissonElement_a63f38f2a34b1b9663eb3089423043243}{TPoisson\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1TElement}{TElement}} and Poisson equations. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1TPoissonElement_adf56870e7350238fbebff965dc05b736}{TPoisson\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1TPoissonElement}{TPoisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$ \&dummy)=delete
+\mbox{\hyperlink{classoomph_1_1TPoissonElement_adf56870e7350238fbebff965dc05b736}{TPoisson\+Element}} (const \mbox{\hyperlink{classoomph_1_1TPoissonElement}{TPoisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$ \&dummy)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TPoissonElement_ad37f9028293a303c4e234f56401f8894}{operator=}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1TPoissonElement}{TPoisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$ \&)=delete
+void \mbox{\hyperlink{classoomph_1_1TPoissonElement_ad37f9028293a303c4e234f56401f8894}{operator=}} (const \mbox{\hyperlink{classoomph_1_1TPoissonElement}{TPoisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$ \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1TPoissonElement_aa79feab5549359f30145c96ee89023e1}{required\+\_\+nvalue}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1TPoissonElement_aa79feab5549359f30145c96ee89023e1}{required\+\_\+nvalue}} (const unsigned \&n) const
 \begin{DoxyCompactList}\small\item\em Access function for Nvalue\+: \# of `values' (pinned or dofs) at node n (always returns the same value at every node, 1) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TPoissonElement_a44da26efce008c0c7c986f9277cd3302}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Output function\+: x,y,u or x,y,z,u. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TPoissonElement_a8a9139cd1265c160c2c88df86fae8b6c}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1TPoissonElement_a8a9139cd1265c160c2c88df86fae8b6c}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+DIM plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TPoissonElement_a289c196b8a84337341e306887c82e3db}{output}} (FILE $\ast$file\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em C-\/style output function\+: x,y,u or x,y,z,u. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TPoissonElement_a9abacba6348984ea82fa08bdf8ff2f9e}{output}} (FILE $\ast$file\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1TPoissonElement_a9abacba6348984ea82fa08bdf8ff2f9e}{output}} (FILE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em C-\/style output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+DIM plot points. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TPoissonElement_a69344016c42eb40d39a0061175a6db94}{output\+\_\+fct}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1TPoissonElement_a69344016c42eb40d39a0061175a6db94}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Output function for an exact solution\+: x,y,u\+\_\+exact. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TPoissonElement_a06d4e2f4c6bf67caf316af96e85b61d8}{output\+\_\+fct}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1TPoissonElement_a06d4e2f4c6bf67caf316af96e85b61d8}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot, const double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Output function for a time-\/dependent exact solution. x,y,u\+\_\+exact (calls the steady version) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-double \mbox{\hyperlink{classoomph_1_1TPoissonElement_aa15655fd7d9489a77b6d6c82f18946e4}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+poisson}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1TPoissonElement_aa15655fd7d9489a77b6d6c82f18946e4}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+poisson}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) const
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1TPoissonElement_a957fae1b510200732d7da2594d1a69c2}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+poisson}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1TPoissonElement_a957fae1b510200732d7da2594d1a69c2}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+poisson}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) const
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1TPoissonElement_af4a23d9088cdc834530545fd554ab906}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+poisson}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&d\+\_\+dpsidx\+\_\+dX, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx, \mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&d\+\_\+dtestdx\+\_\+dX, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_ab808fc2c7224b2ca13cbe287ad906f32}{djacobian\+\_\+dX}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1TPoissonElement_af4a23d9088cdc834530545fd554ab906}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+poisson}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&d\+\_\+dpsidx\+\_\+dX, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx, \mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&d\+\_\+dtestdx\+\_\+dX, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&djacobian\+\_\+dX) const
 \begin{DoxyCompactList}\small\item\em Shape/test functions and derivs w.\+r.\+t. to global coords at integration point ipt; return Jacobian of mapping (J). Also compute derivatives of dpsidx, dtestdx and J w.\+r.\+t. nodal coordinates. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1TPoissonElement_af9b5501d7aba59f31b9030e57d997af9}{nrecovery\+\_\+order}} ()
 \begin{DoxyCompactList}\small\item\em Order of recovery shape functions for Z2 error estimation\+: Same order as shape functions. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1TPoissonElement_a73f3da4bd164baf56515f2244769a199}{num\+\_\+\+Z2\+\_\+flux\+\_\+terms}} ()
 \begin{DoxyCompactList}\small\item\em Number of \textquotesingle{}flux\textquotesingle{} terms for Z2 error estimation. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TPoissonElement_adf66ac73ecb1a80c2c86ee01f26f52ae}{get\+\_\+\+Z2\+\_\+flux}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux)
+void \mbox{\hyperlink{classoomph_1_1TPoissonElement_adf66ac73ecb1a80c2c86ee01f26f52ae}{get\+\_\+\+Z2\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux)
 \begin{DoxyCompactList}\small\item\em Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: Standard flux.\+from Poisson equations. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1TPoissonElement_a86423f2dcb0bf2a440036ad0128a8bc6}{nvertex\+\_\+node}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1TPoissonElement_a86423f2dcb0bf2a440036ad0128a8bc6}{nvertex\+\_\+node}} () const
 \begin{DoxyCompactList}\small\item\em Number of vertex nodes in the element. \end{DoxyCompactList}\item 
-Node $\ast$ \mbox{\hyperlink{classoomph_1_1TPoissonElement_ac395d8bfca4cc87aad680065adc2e799}{vertex\+\_\+node\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&j) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1TPoissonElement_ac395d8bfca4cc87aad680065adc2e799}{vertex\+\_\+node\+\_\+pt}} (const unsigned \&j) const
 \begin{DoxyCompactList}\small\item\em Pointer to the j-\/th vertex node in the element. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \mbox{\hyperlink{classoomph_1_1TPoissonElement_ae2cd9ed9da1a72cd8b172884dae47d6d}{Initial\+\_\+\+Nvalue}} = 1
+static const unsigned \mbox{\hyperlink{classoomph_1_1TPoissonElement_ae2cd9ed9da1a72cd8b172884dae47d6d}{Initial\+\_\+\+Nvalue}} = 1
 \begin{DoxyCompactList}\small\item\em Static unsigned that holds the (same) number of variables at every node. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -70,7 +70,7 @@ static \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde16
 class oomph\+::\+TPoisson\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}
 ////////////////////////////////////////////////////////////////////// 
 
-///////////////////////////////////////////////////////////////////// TPoisson\+Element$<$\+DIM,\+NNODE\+\_\+1\+D$>$ elements are isoparametric triangular DIM-\/dimensional Poisson elements with NNODE\+\_\+1D nodal points along each element edge. Inherits from \mbox{\hyperlink{classoomph_1_1TElement}{TElement}} and Poisson\+Equations 
+///////////////////////////////////////////////////////////////////// TPoisson\+Element$<$\+DIM,\+NNODE\+\_\+1\+D$>$ elements are isoparametric triangular DIM-\/dimensional Poisson elements with NNODE\+\_\+1D nodal points along each element edge. Inherits from \mbox{\hyperlink{classoomph_1_1TElement}{TElement}} and \mbox{\hyperlink{classoomph_1_1PoissonEquations}{Poisson\+Equations}} 
 
 Definition at line \mbox{\hyperlink{Tpoisson__elements_8h_source_l00059}{59}} of file \mbox{\hyperlink{Tpoisson__elements_8h_source}{Tpoisson\+\_\+elements.\+h}}.
 
@@ -97,7 +97,7 @@ Definition at line \mbox{\hyperlink{Tpoisson__elements_8h_source_l00066}{66}} of
 \index{TPoissonElement@{TPoissonElement}!oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$@{oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{TPoissonElement()}{TPoissonElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-\mbox{\hyperlink{classoomph_1_1TPoissonElement}{oomph\+::\+TPoisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1TPoissonElement}{TPoisson\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1TPoissonElement}{TPoisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+\mbox{\hyperlink{classoomph_1_1TPoissonElement}{oomph\+::\+TPoisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1TPoissonElement}{TPoisson\+Element}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1TPoissonElement}{TPoisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
@@ -111,7 +111,7 @@ Broken copy constructor.
 \index{dshape\_and\_dtest\_eulerian\_at\_knot\_poisson@{dshape\_and\_dtest\_eulerian\_at\_knot\_poisson}!oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$@{oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_at\_knot\_poisson()}{dshape\_and\_dtest\_eulerian\_at\_knot\_poisson()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-double \mbox{\hyperlink{classoomph_1_1TPoissonElement}{oomph\+::\+TPoisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+poisson (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&}]{d\+\_\+dpsidx\+\_\+dX,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx,  }\item[{\mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&}]{d\+\_\+dtestdx\+\_\+dX,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{djacobian\+\_\+dX }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+double \mbox{\hyperlink{classoomph_1_1TPoissonElement}{oomph\+::\+TPoisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+poisson (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&}]{d\+\_\+dpsidx\+\_\+dX,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx,  }\item[{\mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&}]{d\+\_\+dtestdx\+\_\+dX,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{djacobian\+\_\+dX }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -121,6 +121,10 @@ Define the shape functions (psi) and test functions (test) and their derivatives
 
 Galerkin\+: Test functions = shape functions 
 
+Implements \mbox{\hyperlink{classoomph_1_1PoissonEquations_a09f816da9c9b23fd6a308601fe536cef}{oomph\+::\+Poisson\+Equations$<$ DIM $>$}}.
+
+
+
 Definition at line \mbox{\hyperlink{Tpoisson__elements_8h_source_l00273}{273}} of file \mbox{\hyperlink{Tpoisson__elements_8h_source}{Tpoisson\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1TPoissonElement_a957fae1b510200732d7da2594d1a69c2}\label{classoomph_1_1TPoissonElement_a957fae1b510200732d7da2594d1a69c2}} 
@@ -128,7 +132,7 @@ Definition at line \mbox{\hyperlink{Tpoisson__elements_8h_source_l00273}{273}} o
 \index{dshape\_and\_dtest\_eulerian\_at\_knot\_poisson@{dshape\_and\_dtest\_eulerian\_at\_knot\_poisson}!oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$@{oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_at\_knot\_poisson()}{dshape\_and\_dtest\_eulerian\_at\_knot\_poisson()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-double \mbox{\hyperlink{classoomph_1_1TPoissonElement}{oomph\+::\+TPoisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+poisson (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+double \mbox{\hyperlink{classoomph_1_1TPoissonElement}{oomph\+::\+TPoisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+poisson (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -137,6 +141,10 @@ double \mbox{\hyperlink{classoomph_1_1TPoissonElement}{oomph\+::\+TPoisson\+Elem
 Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping.
 
 Galerkin\+: Test functions = shape functions 
+
+Implements \mbox{\hyperlink{classoomph_1_1PoissonEquations_af68ad067d9a9d1bcbcc1ee3094b77a7a}{oomph\+::\+Poisson\+Equations$<$ DIM $>$}}.
+
+
 
 Definition at line \mbox{\hyperlink{Tpoisson__elements_8h_source_l00245}{245}} of file \mbox{\hyperlink{Tpoisson__elements_8h_source}{Tpoisson\+\_\+elements.\+h}}.
 
@@ -145,7 +153,7 @@ Definition at line \mbox{\hyperlink{Tpoisson__elements_8h_source_l00245}{245}} o
 \index{dshape\_and\_dtest\_eulerian\_poisson@{dshape\_and\_dtest\_eulerian\_poisson}!oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$@{oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_poisson()}{dshape\_and\_dtest\_eulerian\_poisson()}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-double \mbox{\hyperlink{classoomph_1_1TPoissonElement}{oomph\+::\+TPoisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+poisson (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+double \mbox{\hyperlink{classoomph_1_1TPoissonElement}{oomph\+::\+TPoisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+poisson (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -154,6 +162,10 @@ double \mbox{\hyperlink{classoomph_1_1TPoissonElement}{oomph\+::\+TPoisson\+Elem
 Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping.
 
 Galerkin\+: Test functions = shape functions 
+
+Implements \mbox{\hyperlink{classoomph_1_1PoissonEquations_a88afb41d8733fb3488754cb579f44770}{oomph\+::\+Poisson\+Equations$<$ DIM $>$}}.
+
+
 
 Definition at line \mbox{\hyperlink{Tpoisson__elements_8h_source_l00212}{212}} of file \mbox{\hyperlink{Tpoisson__elements_8h_source}{Tpoisson\+\_\+elements.\+h}}.
 
@@ -166,7 +178,7 @@ References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink
 \index{get\_Z2\_flux@{get\_Z2\_flux}!oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$@{oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{get\_Z2\_flux()}{get\_Z2\_flux()}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1TPoissonElement}{oomph\+::\+TPoisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::get\+\_\+\+Z2\+\_\+flux (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1TPoissonElement}{oomph\+::\+TPoisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::get\+\_\+\+Z2\+\_\+flux (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -182,7 +194,7 @@ Definition at line \mbox{\hyperlink{Tpoisson__elements_8h_source_l00179}{179}} o
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References \mbox{\hyperlink{poisson__elements_8h_source_l00364}{oomph\+::\+Poisson\+Equations$<$ DIM $>$\+::get\+\_\+flux()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TPoissonElement_af9b5501d7aba59f31b9030e57d997af9}\label{classoomph_1_1TPoissonElement_af9b5501d7aba59f31b9030e57d997af9}} 
 \index{oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$@{oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$}!nrecovery\_order@{nrecovery\_order}}
@@ -246,7 +258,7 @@ Definition at line \mbox{\hyperlink{Tpoisson__elements_8h_source_l00185}{185}} o
 \index{operator=@{operator=}!oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$@{oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1TPoissonElement}{oomph\+::\+TPoisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1TPoissonElement}{TPoisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+void \mbox{\hyperlink{classoomph_1_1TPoissonElement}{oomph\+::\+TPoisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1TPoissonElement}{TPoisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
@@ -265,7 +277,7 @@ C-\/style output function\+: x,y,u or x,y,z,u.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a72cddd09f8ddbee1a20a1ff404c6943e}{oomph\+::\+Finite\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1PoissonEquations_afeaa8b136b9cc9649635b41bde1b5cda}{oomph\+::\+Poisson\+Equations$<$ DIM $>$}}.
 
 
 
@@ -273,14 +285,14 @@ Definition at line \mbox{\hyperlink{Tpoisson__elements_8h_source_l00099}{99}} of
 
 
 
-References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
+References \mbox{\hyperlink{poisson__elements_8h_source_l00214}{oomph\+::\+Poisson\+Equations$<$ DIM $>$\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TPoissonElement_a9abacba6348984ea82fa08bdf8ff2f9e}\label{classoomph_1_1TPoissonElement_a9abacba6348984ea82fa08bdf8ff2f9e}} 
 \index{oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$@{oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$@{oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1TPoissonElement}{oomph\+::\+TPoisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1TPoissonElement}{oomph\+::\+TPoisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -288,7 +300,7 @@ C-\/style output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+DIM plot 
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f03320eeb9d110d48c}{oomph\+::\+Finite\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1PoissonEquations_abc30eee5faaa50a65b272012d17ba604}{oomph\+::\+Poisson\+Equations$<$ DIM $>$}}.
 
 
 
@@ -296,7 +308,7 @@ Definition at line \mbox{\hyperlink{Tpoisson__elements_8h_source_l00107}{107}} o
 
 
 
-References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
+References \mbox{\hyperlink{poisson__elements_8h_source_l00214}{oomph\+::\+Poisson\+Equations$<$ DIM $>$\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TPoissonElement_a44da26efce008c0c7c986f9277cd3302}\label{classoomph_1_1TPoissonElement_a44da26efce008c0c7c986f9277cd3302}} 
 \index{oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$@{oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
@@ -311,7 +323,7 @@ Output function\+: x,y,u or x,y,z,u.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999f1bef62c0ff13f2a7}{oomph\+::\+Finite\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1PoissonEquations_a2417afb77d428846d7a1eada342ea8bb}{oomph\+::\+Poisson\+Equations$<$ DIM $>$}}.
 
 
 
@@ -319,14 +331,14 @@ Definition at line \mbox{\hyperlink{Tpoisson__elements_8h_source_l00084}{84}} of
 
 
 
-References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
+References \mbox{\hyperlink{poisson__elements_8h_source_l00214}{oomph\+::\+Poisson\+Equations$<$ DIM $>$\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TPoissonElement_a8a9139cd1265c160c2c88df86fae8b6c}\label{classoomph_1_1TPoissonElement_a8a9139cd1265c160c2c88df86fae8b6c}} 
 \index{oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$@{oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$@{oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1TPoissonElement}{oomph\+::\+TPoisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1TPoissonElement}{oomph\+::\+TPoisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -334,7 +346,7 @@ Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+DIM plot points.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b43e6679c9dd28c457}{oomph\+::\+Finite\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1PoissonEquations_a6683dd0afc16bfddf4e79b6e0e449d43}{oomph\+::\+Poisson\+Equations$<$ DIM $>$}}.
 
 
 
@@ -342,14 +354,14 @@ Definition at line \mbox{\hyperlink{Tpoisson__elements_8h_source_l00091}{91}} of
 
 
 
-References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
+References \mbox{\hyperlink{poisson__elements_8h_source_l00214}{oomph\+::\+Poisson\+Equations$<$ DIM $>$\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TPoissonElement_a06d4e2f4c6bf67caf316af96e85b61d8}\label{classoomph_1_1TPoissonElement_a06d4e2f4c6bf67caf316af96e85b61d8}} 
 \index{oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$@{oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$}!output\_fct@{output\_fct}}
 \index{output\_fct@{output\_fct}!oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$@{oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output\_fct()}{output\_fct()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1TPoissonElement}{oomph\+::\+TPoisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1TPoissonElement}{oomph\+::\+TPoisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot,  }\item[{const double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -357,18 +369,22 @@ Output function for a time-\/dependent exact solution. x,y,u\+\_\+exact (calls t
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2a8426dccd57b927be0ae0eec00d0479}{oomph\+::\+Finite\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1PoissonEquations_a6d98964a14b38f4b2e89a2744478f706}{oomph\+::\+Poisson\+Equations$<$ DIM $>$}}.
 
 
 
 Definition at line \mbox{\hyperlink{Tpoisson__elements_8h_source_l00125}{125}} of file \mbox{\hyperlink{Tpoisson__elements_8h_source}{Tpoisson\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{poisson__elements_8cc_source_l00400}{oomph\+::\+Poisson\+Equations$<$ DIM $>$\+::output\+\_\+fct()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TPoissonElement_a69344016c42eb40d39a0061175a6db94}\label{classoomph_1_1TPoissonElement_a69344016c42eb40d39a0061175a6db94}} 
 \index{oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$@{oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$}!output\_fct@{output\_fct}}
 \index{output\_fct@{output\_fct}!oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$@{oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output\_fct()}{output\_fct()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1TPoissonElement}{oomph\+::\+TPoisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1TPoissonElement}{oomph\+::\+TPoisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -376,18 +392,22 @@ Output function for an exact solution\+: x,y,u\+\_\+exact.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a22b695c714f60ee6cd145be348042035}{oomph\+::\+Finite\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1PoissonEquations_ad6c637c8a5221313c2220e8e8c27ec42}{oomph\+::\+Poisson\+Equations$<$ DIM $>$}}.
 
 
 
 Definition at line \mbox{\hyperlink{Tpoisson__elements_8h_source_l00115}{115}} of file \mbox{\hyperlink{Tpoisson__elements_8h_source}{Tpoisson\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{poisson__elements_8cc_source_l00400}{oomph\+::\+Poisson\+Equations$<$ DIM $>$\+::output\+\_\+fct()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TPoissonElement_aa79feab5549359f30145c96ee89023e1}\label{classoomph_1_1TPoissonElement_aa79feab5549359f30145c96ee89023e1}} 
 \index{oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$@{oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$}!required\_nvalue@{required\_nvalue}}
 \index{required\_nvalue@{required\_nvalue}!oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$@{oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{required\_nvalue()}{required\_nvalue()}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1TPoissonElement}{oomph\+::\+TPoisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+unsigned \mbox{\hyperlink{classoomph_1_1TPoissonElement}{oomph\+::\+TPoisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -410,7 +430,7 @@ References \mbox{\hyperlink{Tpoisson__elements_8h_source_l00198}{oomph\+::\+TPoi
 \index{vertex\_node\_pt@{vertex\_node\_pt}!oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$@{oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{vertex\_node\_pt()}{vertex\_node\_pt()}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-Node $\ast$ \mbox{\hyperlink{classoomph_1_1TPoissonElement}{oomph\+::\+TPoisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1TPoissonElement}{oomph\+::\+TPoisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -432,7 +452,7 @@ Definition at line \mbox{\hyperlink{Tpoisson__elements_8h_source_l00191}{191}} o
 \index{Initial\_Nvalue@{Initial\_Nvalue}!oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$@{oomph::TPoissonElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{Initial\_Nvalue}{Initial\_Nvalue}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \mbox{\hyperlink{classoomph_1_1TPoissonElement}{oomph\+::\+TPoisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::Initial\+\_\+\+Nvalue = 1\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+const unsigned \mbox{\hyperlink{classoomph_1_1TPoissonElement}{oomph\+::\+TPoisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::Initial\+\_\+\+Nvalue = 1\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 
 

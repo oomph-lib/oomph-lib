@@ -18,13 +18,13 @@ Inheritance diagram for oomph\+::DGEuler\+Face\+Element\texorpdfstring{$<$}{<} E
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1DGEulerFaceElement_aca3a63a2db78b06d13272c3f8f137616}{DGEuler\+Face\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&element\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}})
+\mbox{\hyperlink{classoomph_1_1DGEulerFaceElement_aca3a63a2db78b06d13272c3f8f137616}{DGEuler\+Face\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&element\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}})
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1DGEulerFaceElement_af109fc02678e54552d8a63407731ddb1}{zeta\+\_\+nodal}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&k, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1DGEulerFaceElement_af109fc02678e54552d8a63407731ddb1}{zeta\+\_\+nodal}} (const unsigned \&n, const unsigned \&k, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Specify the value of nodal zeta from the face geometry The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} representation, by default (needed to break indeterminacy if bulk element is Solid\+Element) \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1DGEulerFaceElement_aa20647527c6e5dc1febb13e575d971bb}{required\+\_\+nflux}} ()
 \begin{DoxyCompactList}\small\item\em Set the number of flux components. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DGEulerFaceElement_a44655910de79b442bfffaefe0152f776}{numerical\+\_\+flux}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&n\+\_\+out, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&u\+\_\+int, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&u\+\_\+ext, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux)
+void \mbox{\hyperlink{classoomph_1_1DGEulerFaceElement_a44655910de79b442bfffaefe0152f776}{numerical\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&n\+\_\+out, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&u\+\_\+int, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&u\+\_\+ext, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux)
 \begin{DoxyCompactList}\small\item\em Calculate the normal flux, so this is the dot product of the numerical flux with n\+\_\+out. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -51,7 +51,7 @@ Definition at line \mbox{\hyperlink{euler__elements_8h_source_l00441}{441}} of f
 \index{DGEulerFaceElement@{DGEulerFaceElement}!oomph::DGEulerFaceElement$<$ ELEMENT $>$@{oomph::DGEulerFaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{DGEulerFaceElement()}{DGEulerFaceElement()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1DGEulerFaceElement}{oomph\+::\+DGEuler\+Face\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1DGEulerFaceElement}{DGEuler\+Face\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{element\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1DGEulerFaceElement}{oomph\+::\+DGEuler\+Face\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1DGEulerFaceElement}{DGEuler\+Face\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{element\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -63,7 +63,7 @@ Definition at line \mbox{\hyperlink{euler__elements_8h_source_l00450}{450}} of f
 
 
 
-References \mbox{\hyperlink{classoomph_1_1FiniteElement_a025ab56ef9c6eea66fb34416fdf19152}{oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{elements_8h_source_l02616}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8h_source_l04654}{oomph\+::\+Face\+Element\+::face\+\_\+index()}}, \mbox{\hyperlink{euler__elements_8h_source_l00444}{oomph\+::\+DGEuler\+Face\+Element$<$ ELEMENT $>$\+::\+Nflux}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a9b8ff92232a3d17ed7d403fbd3419569}{oomph\+::\+Finite\+Element\+::set\+\_\+integration\+\_\+scheme()}}.
+References \mbox{\hyperlink{elements_8cc_source_l05132}{oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8h_source_l04626}{oomph\+::\+Face\+Element\+::face\+\_\+index()}}, \mbox{\hyperlink{euler__elements_8h_source_l00444}{oomph\+::\+DGEuler\+Face\+Element$<$ ELEMENT $>$\+::\+Nflux}}, and \mbox{\hyperlink{elements_8cc_source_l03210}{oomph\+::\+Finite\+Element\+::set\+\_\+integration\+\_\+scheme()}}.
 
 
 
@@ -73,7 +73,7 @@ References \mbox{\hyperlink{classoomph_1_1FiniteElement_a025ab56ef9c6eea66fb3441
 \index{numerical\_flux@{numerical\_flux}!oomph::DGEulerFaceElement$<$ ELEMENT $>$@{oomph::DGEulerFaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{numerical\_flux()}{numerical\_flux()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1DGEulerFaceElement}{oomph\+::\+DGEuler\+Face\+Element}}$<$ ELEMENT $>$\+::numerical\+\_\+flux (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{n\+\_\+out,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{u\+\_\+int,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{u\+\_\+ext,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1DGEulerFaceElement}{oomph\+::\+DGEuler\+Face\+Element}}$<$ ELEMENT $>$\+::numerical\+\_\+flux (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{n\+\_\+out,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{u\+\_\+int,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{u\+\_\+ext,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -89,7 +89,7 @@ Definition at line \mbox{\hyperlink{euler__elements_8h_source_l00488}{488}} of f
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l04763}{oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02616}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{Vector_8h_source_l00167}{oomph\+::\+Vector$<$ \+\_\+\+Tp $>$\+::initialise()}}, \mbox{\hyperlink{euler__elements_8h_source_l00444}{oomph\+::\+DGEuler\+Face\+Element$<$ ELEMENT $>$\+::\+Nflux}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}.
+References \mbox{\hyperlink{elements_8h_source_l04735}{oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{Vector_8h_source_l00167}{oomph\+::\+Vector$<$ \+\_\+\+Tp $>$\+::initialise()}}, \mbox{\hyperlink{euler__elements_8h_source_l00444}{oomph\+::\+DGEuler\+Face\+Element$<$ ELEMENT $>$\+::\+Nflux}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}.
 
 \mbox{\Hypertarget{classoomph_1_1DGEulerFaceElement_aa20647527c6e5dc1febb13e575d971bb}\label{classoomph_1_1DGEulerFaceElement_aa20647527c6e5dc1febb13e575d971bb}} 
 \index{oomph::DGEulerFaceElement$<$ ELEMENT $>$@{oomph::DGEulerFaceElement$<$ ELEMENT $>$}!required\_nflux@{required\_nflux}}
@@ -119,7 +119,7 @@ References \mbox{\hyperlink{euler__elements_8h_source_l00444}{oomph\+::\+DGEuler
 \index{zeta\_nodal@{zeta\_nodal}!oomph::DGEulerFaceElement$<$ ELEMENT $>$@{oomph::DGEulerFaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{zeta\_nodal()}{zeta\_nodal()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1DGEulerFaceElement}{oomph\+::\+DGEuler\+Face\+Element}}$<$ ELEMENT $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{k,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+double \mbox{\hyperlink{classoomph_1_1DGEulerFaceElement}{oomph\+::\+DGEuler\+Face\+Element}}$<$ ELEMENT $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{k,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -135,7 +135,7 @@ Definition at line \mbox{\hyperlink{euler__elements_8h_source_l00472}{472}} of f
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l04525}{oomph\+::\+Face\+Element\+::zeta\+\_\+nodal()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l04497}{oomph\+::\+Face\+Element\+::zeta\+\_\+nodal()}}.
 
 
 

@@ -20,21 +20,21 @@ Inheritance diagram for oomph\+::Kirchhoff\+Love\+Shell\+Equations\+:\begin{figu
 \item 
 \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a4d3fc7a2533f590a243323c7bf9c1320}{Kirchhoff\+Love\+Shell\+Equations}} ()
 \begin{DoxyCompactList}\small\item\em Constructor\+: Initialise physical parameter values to defaults. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_ad404001c9a8c9587ece41bc4ff8c1ce1}{load\+\_\+vector}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&intpt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&N, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&load)
+virtual void \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_ad404001c9a8c9587ece41bc4ff8c1ce1}{load\+\_\+vector}} (const unsigned \&intpt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&N, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&load)
 \begin{DoxyCompactList}\small\item\em Get the load vector\+: Pass number of integration point (dummy), Lagr. coordinate and normal vector and return the load vector (not all of the input arguments will be required for all specific load functions but the list should cover all cases). This function is virtual so it can be overloaded for FSI. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_abbe7f5f484c4baa0b5859e46aa5e587a}{set\+\_\+prestress\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&j, double $\ast$value\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_abbe7f5f484c4baa0b5859e46aa5e587a}{set\+\_\+prestress\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned \&j, double $\ast$value\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Set pointer to (i,j)-\/th component of second Piola Kirchhoff membrane prestress to specified value (automatically imposes symmetry for off-\/diagonal entries) \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a5e088d691fff72ff1bce3e528d245018}{prestress}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&j)
+double \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a5e088d691fff72ff1bce3e528d245018}{prestress}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned \&j)
 \begin{DoxyCompactList}\small\item\em Return (i,j)-\/th component of second Piola Kirchhoff membrane prestress. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_ae4a6f1de19bfed4958d9975a57e66438}{disable\+\_\+membrane\+\_\+terms}} ()
 \begin{DoxyCompactList}\small\item\em Set to disable the calculation of membrane terms. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_adb97ea9255be485cf1f542a4d5771472}{enable\+\_\+membrane\+\_\+terms}} ()
 \begin{DoxyCompactList}\small\item\em Set to renable the calculation of membrane terms (default) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \& \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_ad23e213c6f5fd10575a4fb1aba27eed3}{nu}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+const double \& \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_ad23e213c6f5fd10575a4fb1aba27eed3}{nu}} () const
 \begin{DoxyCompactList}\small\item\em Return the Poisson\textquotesingle{}s ratio. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \& \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a5228ebb72cceae574ba2a824ddab6725}{h}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+const double \& \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a5228ebb72cceae574ba2a824ddab6725}{h}} () const
 \begin{DoxyCompactList}\small\item\em Return the wall thickness to undeformed radius ratio. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \& \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a0c11eef145483321f7376b6a09057520}{lambda\+\_\+sq}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+const double \& \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a0c11eef145483321f7376b6a09057520}{lambda\+\_\+sq}} () const
 \begin{DoxyCompactList}\small\item\em Return the timescale ratio (non-\/dimensional density) \end{DoxyCompactList}\item 
 double $\ast$\& \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a27e79e7aa791153cf5a60e8bfc6d83cd}{nu\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return a pointer to the Poisson ratio. \end{DoxyCompactList}\item 
@@ -44,30 +44,30 @@ double $\ast$\& \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a47c0
 \begin{DoxyCompactList}\small\item\em Return a pointer to timescale ratio (nondim density) \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$\& \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_ac988160fd483ba21196dce1f31f6b26e}{undeformed\+\_\+midplane\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return a reference to geometric object that specifies the shell\textquotesingle{}s undeformed geometry. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a797e455634ac8b8e8669c4adff84e644}{get\+\_\+normal}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&N)
+void \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a797e455634ac8b8e8669c4adff84e644}{get\+\_\+normal}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&N)
 \begin{DoxyCompactList}\small\item\em Get normal vector. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a98020c975dd08c1faf3ecbe8f127788d}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em Overload the standard fill in residuals contribution. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a2c8049fa371d484a43e157ebef54b474}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})
+void \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a2c8049fa371d484a43e157ebef54b474}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em Return the jacobian is calculated by finite differences by default,. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a766bde0ab2904a6d73e2fa116dfa8738}{get\+\_\+energy}} (double \&pot\+\_\+en, double \&kin\+\_\+en)
 \begin{DoxyCompactList}\small\item\em Get potential (strain) and kinetic energy of the element. \end{DoxyCompactList}\item 
-std\+::pair$<$ double, double $>$ \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_ad5a82826cad1b458c849e44114ea7d63}{get\+\_\+strain\+\_\+and\+\_\+bend}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix}{Dense\+Double\+Matrix}} \&strain, \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix}{Dense\+Double\+Matrix}} \&bend)
+std\+::pair$<$ double, double $>$ \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_ad5a82826cad1b458c849e44114ea7d63}{get\+\_\+strain\+\_\+and\+\_\+bend}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix}{Dense\+Double\+Matrix}} \&strain, \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix}{Dense\+Double\+Matrix}} \&bend)
 \begin{DoxyCompactList}\small\item\em Get strain and bending tensors; returns pair comprising the determinant of the undeformed ($\ast$.first) and deformed ($\ast$.second) midplane metric tensor. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a98601ae4af61f4a3fa7159afeeec2535}{load\+\_\+rate\+\_\+of\+\_\+work}} ()
 \begin{DoxyCompactList}\small\item\em Get integral of instantaneous rate of work done on the wall due to the load returned by the virtual function load\+\_\+vector\+\_\+for\+\_\+rate\+\_\+of\+\_\+work\+\_\+computation(...). In the current class the latter function simply de-\/references the external load but this can be overloaded in derived classes (e.\+g. in FSI elements) to determine the rate of work done by individual constituents of this load (e.\+g. the fluid load in an FSI problem). \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a78954c3bd74225e91c7433c0009860dc}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Generic \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} output function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a5173eb461b8c893b0dc657aae90192c7}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a5173eb461b8c893b0dc657aae90192c7}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em Generic \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} output function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_adf7b87a8ee3ae1a594cd88772b7ac694}{output}} (FILE $\ast$file\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Generic \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} output function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a27202721c38e55112bede54676946a27}{output}} (FILE $\ast$file\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a27202721c38e55112bede54676946a27}{output}} (FILE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em Generic \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} output function. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-void($\ast$\&)(\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&N, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&load) \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a9d824cbf386963c57a4de407ef830e61}{load\+\_\+vector\+\_\+fct\+\_\+pt}} ()
+void($\ast$\&)(const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&N, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&load) \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a9d824cbf386963c57a4de407ef830e61}{load\+\_\+vector\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access to the load vector function pointer. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -76,17 +76,17 @@ double \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a6badfc9d15c8f
 \begin{DoxyCompactList}\small\item\em Invert a DIM by DIM matrix. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a083c16732460cb430553239b9eaa1325}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+shell}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em Helper function to Return the residuals for the equations of KL shell theory. This is used to prevent a call of fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals in the function fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian that can lead to virtual inheritance woes if this element is ever used as part of a multi-\/physics element. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_ae565dc5fcdf60d733f6d19361e88d22d}{load\+\_\+vector\+\_\+for\+\_\+rate\+\_\+of\+\_\+work\+\_\+computation}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&intpt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&N, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&load)
+virtual void \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_ae565dc5fcdf60d733f6d19361e88d22d}{load\+\_\+vector\+\_\+for\+\_\+rate\+\_\+of\+\_\+work\+\_\+computation}} (const unsigned \&intpt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&N, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&load)
 \begin{DoxyCompactList}\small\item\em Get the load vector for the computation of the rate of work done by the load. Here we simply forward this to load\+\_\+vector(...) but allow it to be overloaded in derived classes to allow the computation of the rate of work due to constituent parts of the load vector (e.\+g. the fluid traction in an FSI problem). Pass number of integration point (dummy), Lagr. coordinate and normal vector and return the load vector (not all of the input arguments will be required for all specific load functions but the list should cover all cases). \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static void \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a13cfb1791eee82943ca56fef1a4f9dbe}{Zero\+\_\+traction\+\_\+fct}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&N, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&load)
+static void \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a13cfb1791eee82943ca56fef1a4f9dbe}{Zero\+\_\+traction\+\_\+fct}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&N, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&load)
 \begin{DoxyCompactList}\small\item\em Default load function (zero traction) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-void($\ast$ \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a9f4a216ad08e35795d0a3a6080fb9ce0}{Load\+\_\+vector\+\_\+fct\+\_\+pt}} )(\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&N, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&load)
+void($\ast$ \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a9f4a216ad08e35795d0a3a6080fb9ce0}{Load\+\_\+vector\+\_\+fct\+\_\+pt}} )(const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&N, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&load)
 \begin{DoxyCompactList}\small\item\em Pointer to load vector function\+: Its arguments are\+: Lagrangian coordinate, Eulerian coordinate, normal vector and load vector itself (not all of the input arguments will be required for all specific load functions but the list should cover all cases) \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$ \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_aec919dec7bab41fe5f7012ae8ebc8411}{Undeformed\+\_\+midplane\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to the \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} that specifies the undeformed midplane of the shell. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -224,7 +224,7 @@ Definition at line \mbox{\hyperlink{shell__elements_8cc_source_l00744}{744}} of 
 
 
 
-References \mbox{\hyperlink{shell__elements_8cc_source_l00357}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+shell()}}, \mbox{\hyperlink{elements_8cc_source_l01199}{oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+by\+\_\+fd()}}, \mbox{\hyperlink{elements_8cc_source_l06989}{oomph\+::\+Solid\+Finite\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+solid\+\_\+position\+\_\+by\+\_\+fd()}}, \mbox{\hyperlink{elements_8h_source_l00980}{oomph\+::\+Generalised\+Element\+::get\+\_\+residuals()}}, \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, and \mbox{\hyperlink{elements_8h_source_l04330}{oomph\+::\+Solid\+Finite\+Element\+::\+Solve\+\_\+for\+\_\+consistent\+\_\+newmark\+\_\+accel\+\_\+flag}}.
+References \mbox{\hyperlink{shell__elements_8cc_source_l00357}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+shell()}}, \mbox{\hyperlink{elements_8cc_source_l07227}{oomph\+::\+Solid\+Finite\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+for\+\_\+newmark\+\_\+accel()}}, \mbox{\hyperlink{elements_8cc_source_l01199}{oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+by\+\_\+fd()}}, \mbox{\hyperlink{elements_8cc_source_l06985}{oomph\+::\+Solid\+Finite\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+solid\+\_\+position\+\_\+by\+\_\+fd()}}, \mbox{\hyperlink{elements_8h_source_l00980}{oomph\+::\+Generalised\+Element\+::get\+\_\+residuals()}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, and \mbox{\hyperlink{elements_8h_source_l04302}{oomph\+::\+Solid\+Finite\+Element\+::\+Solve\+\_\+for\+\_\+consistent\+\_\+newmark\+\_\+accel\+\_\+flag}}.
 
 
 
@@ -268,7 +268,7 @@ Definition at line \mbox{\hyperlink{shell__elements_8cc_source_l00357}{357}} of 
 
 
 
-References \mbox{\hyperlink{octree_8h_source_l00073}{oomph\+::\+Oc\+Tree\+Names\+::B}}, \mbox{\hyperlink{shell__elements_8h_source_l00321}{calculate\+\_\+contravariant()}}, \mbox{\hyperlink{geom__objects_8h_source_l00341}{oomph\+::\+Geom\+Object\+::d2position()}}, \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a1854ec49f297e92d050433e59045356c}{oomph\+::\+Solid\+Finite\+Element\+::d2psidxi()}}, \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{oomph\+::f()}}, \mbox{\hyperlink{shell__elements_8h_source_l00219}{h()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{shell__elements_8h_source_l00061}{Ignore\+\_\+membrane\+\_\+terms}}, \mbox{\hyperlink{elements_8h_source_l01968}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8cc_source_l07108}{oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi()}}, \mbox{\hyperlink{shell__elements_8h_source_l00225}{lambda\+\_\+sq()}}, \mbox{\hyperlink{shell__elements_8h_source_l00172}{load\+\_\+vector()}}, \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}, \mbox{\hyperlink{elements_8h_source_l02468}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{shell__elements_8h_source_l00213}{nu()}}, \mbox{\hyperlink{elements_8h_source_l04165}{oomph\+::\+Solid\+Finite\+Element\+::position\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{shell__elements_8h_source_l00074}{Prestress\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l02299}{oomph\+::\+Finite\+Element\+::raw\+\_\+dnodal\+\_\+position\+\_\+gen\+\_\+dt()}}, \mbox{\hyperlink{elements_8h_source_l03906}{oomph\+::\+Solid\+Finite\+Element\+::raw\+\_\+lagrangian\+\_\+position\+\_\+gen()}}, \mbox{\hyperlink{elements_8h_source_l02277}{oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+position\+\_\+gen()}}, \mbox{\hyperlink{shell__elements_8h_source_l00102}{Undeformed\+\_\+midplane\+\_\+pt}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}.
+References \mbox{\hyperlink{octree_8h_source_l00073}{oomph\+::\+Oc\+Tree\+Names\+::B}}, \mbox{\hyperlink{shell__elements_8h_source_l00321}{calculate\+\_\+contravariant()}}, \mbox{\hyperlink{geom__objects_8h_source_l00341}{oomph\+::\+Geom\+Object\+::d2position()}}, \mbox{\hyperlink{elements_8cc_source_l06832}{oomph\+::\+Solid\+Finite\+Element\+::d2shape\+\_\+lagrangian\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{shell__elements_8h_source_l00219}{h()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{shell__elements_8h_source_l00061}{Ignore\+\_\+membrane\+\_\+terms}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8cc_source_l07104}{oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi()}}, \mbox{\hyperlink{shell__elements_8h_source_l00225}{lambda\+\_\+sq()}}, \mbox{\hyperlink{shell__elements_8h_source_l00172}{load\+\_\+vector()}}, \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}, \mbox{\hyperlink{elements_8h_source_l02463}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{shell__elements_8h_source_l00213}{nu()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{elements_8h_source_l04137}{oomph\+::\+Solid\+Finite\+Element\+::position\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{shell__elements_8h_source_l00074}{Prestress\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l02294}{oomph\+::\+Finite\+Element\+::raw\+\_\+dnodal\+\_\+position\+\_\+gen\+\_\+dt()}}, \mbox{\hyperlink{elements_8h_source_l03897}{oomph\+::\+Solid\+Finite\+Element\+::raw\+\_\+lagrangian\+\_\+position\+\_\+gen()}}, \mbox{\hyperlink{elements_8h_source_l02272}{oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+position\+\_\+gen()}}, \mbox{\hyperlink{shell__elements_8h_source_l00102}{Undeformed\+\_\+midplane\+\_\+pt}}, \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}, and \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral\+::weight()}}.
 
 
 
@@ -290,13 +290,13 @@ Definition at line \mbox{\hyperlink{shell__elements_8cc_source_l00777}{777}} of 
 
 
 
-References \mbox{\hyperlink{octree_8h_source_l00073}{oomph\+::\+Oc\+Tree\+Names\+::B}}, \mbox{\hyperlink{shell__elements_8h_source_l00321}{calculate\+\_\+contravariant()}}, \mbox{\hyperlink{geom__objects_8h_source_l00341}{oomph\+::\+Geom\+Object\+::d2position()}}, \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a1854ec49f297e92d050433e59045356c}{oomph\+::\+Solid\+Finite\+Element\+::d2psidxi()}}, \mbox{\hyperlink{elements_8h_source_l02374}{oomph\+::\+Finite\+Element\+::dnodal\+\_\+position\+\_\+gen\+\_\+dt()}}, \mbox{\hyperlink{shell__elements_8h_source_l00219}{h()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01968}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8cc_source_l07108}{oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi()}}, \mbox{\hyperlink{elements_8h_source_l03921}{oomph\+::\+Solid\+Finite\+Element\+::lagrangian\+\_\+position\+\_\+gen()}}, \mbox{\hyperlink{shell__elements_8h_source_l00225}{lambda\+\_\+sq()}}, \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}, \mbox{\hyperlink{geom__objects_8h_source_l00177}{oomph\+::\+Geom\+Object\+::ndim()}}, \mbox{\hyperlink{geom__objects_8h_source_l00171}{oomph\+::\+Geom\+Object\+::nlagrangian()}}, \mbox{\hyperlink{elements_8h_source_l02468}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02354}{oomph\+::\+Finite\+Element\+::nodal\+\_\+position\+\_\+gen()}}, \mbox{\hyperlink{shell__elements_8h_source_l00213}{nu()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{shell__elements_8h_source_l00195}{prestress()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, \mbox{\hyperlink{shell__elements_8h_source_l00102}{Undeformed\+\_\+midplane\+\_\+pt}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}.
+References \mbox{\hyperlink{octree_8h_source_l00073}{oomph\+::\+Oc\+Tree\+Names\+::B}}, \mbox{\hyperlink{shell__elements_8h_source_l00321}{calculate\+\_\+contravariant()}}, \mbox{\hyperlink{geom__objects_8h_source_l00341}{oomph\+::\+Geom\+Object\+::d2position()}}, \mbox{\hyperlink{elements_8cc_source_l06832}{oomph\+::\+Solid\+Finite\+Element\+::d2shape\+\_\+lagrangian\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{elements_8h_source_l02369}{oomph\+::\+Finite\+Element\+::dnodal\+\_\+position\+\_\+gen\+\_\+dt()}}, \mbox{\hyperlink{shell__elements_8h_source_l00219}{h()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8cc_source_l07104}{oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi()}}, \mbox{\hyperlink{elements_8h_source_l03912}{oomph\+::\+Solid\+Finite\+Element\+::lagrangian\+\_\+position\+\_\+gen()}}, \mbox{\hyperlink{shell__elements_8h_source_l00225}{lambda\+\_\+sq()}}, \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}, \mbox{\hyperlink{geom__objects_8h_source_l00177}{oomph\+::\+Geom\+Object\+::ndim()}}, \mbox{\hyperlink{geom__objects_8h_source_l00171}{oomph\+::\+Geom\+Object\+::nlagrangian()}}, \mbox{\hyperlink{elements_8h_source_l02463}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02349}{oomph\+::\+Finite\+Element\+::nodal\+\_\+position\+\_\+gen()}}, \mbox{\hyperlink{shell__elements_8h_source_l00213}{nu()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{shell__elements_8h_source_l00195}{prestress()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, \mbox{\hyperlink{shell__elements_8h_source_l00102}{Undeformed\+\_\+midplane\+\_\+pt}}, \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}, and \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral\+::weight()}}.
 
 \mbox{\Hypertarget{classoomph_1_1KirchhoffLoveShellEquations_a797e455634ac8b8e8669c4adff84e644}\label{classoomph_1_1KirchhoffLoveShellEquations_a797e455634ac8b8e8669c4adff84e644}} 
 \index{oomph::KirchhoffLoveShellEquations@{oomph::KirchhoffLoveShellEquations}!get\_normal@{get\_normal}}
 \index{get\_normal@{get\_normal}!oomph::KirchhoffLoveShellEquations@{oomph::KirchhoffLoveShellEquations}}
 \doxysubsubsection{\texorpdfstring{get\_normal()}{get\_normal()}}
-{\footnotesize\ttfamily void oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::get\+\_\+normal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{N }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::get\+\_\+normal (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{N }\end{DoxyParamCaption})}
 
 
 
@@ -308,7 +308,7 @@ Definition at line \mbox{\hyperlink{shell__elements_8cc_source_l00072}{72}} of f
 
 
 
-References \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a1854ec49f297e92d050433e59045356c}{oomph\+::\+Solid\+Finite\+Element\+::d2psidxi()}}, \mbox{\hyperlink{elements_8cc_source_l06714}{oomph\+::\+Solid\+Finite\+Element\+::dshape\+\_\+lagrangian()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}, \mbox{\hyperlink{elements_8h_source_l02468}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02277}{oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+position\+\_\+gen()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References \mbox{\hyperlink{elements_8cc_source_l06710}{oomph\+::\+Solid\+Finite\+Element\+::dshape\+\_\+lagrangian()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}, \mbox{\hyperlink{elements_8h_source_l02463}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02272}{oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+position\+\_\+gen()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 
 
@@ -318,7 +318,7 @@ Referenced by \mbox{\hyperlink{shell__elements_8cc_source_l01520}{oomph\+::\+Cla
 \index{oomph::KirchhoffLoveShellEquations@{oomph::KirchhoffLoveShellEquations}!get\_strain\_and\_bend@{get\_strain\_and\_bend}}
 \index{get\_strain\_and\_bend@{get\_strain\_and\_bend}!oomph::KirchhoffLoveShellEquations@{oomph::KirchhoffLoveShellEquations}}
 \doxysubsubsection{\texorpdfstring{get\_strain\_and\_bend()}{get\_strain\_and\_bend()}}
-{\footnotesize\ttfamily std\+::pair$<$ double, double $>$ oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::get\+\_\+strain\+\_\+and\+\_\+bend (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix}{Dense\+Double\+Matrix}} \&}]{strain,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix}{Dense\+Double\+Matrix}} \&}]{bend }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily std\+::pair$<$ double, double $>$ oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::get\+\_\+strain\+\_\+and\+\_\+bend (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix}{Dense\+Double\+Matrix}} \&}]{strain,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix}{Dense\+Double\+Matrix}} \&}]{bend }\end{DoxyParamCaption})}
 
 
 
@@ -330,13 +330,13 @@ Definition at line \mbox{\hyperlink{shell__elements_8cc_source_l00154}{154}} of 
 
 
 
-References \mbox{\hyperlink{octree_8h_source_l00073}{oomph\+::\+Oc\+Tree\+Names\+::B}}, \mbox{\hyperlink{shell__elements_8h_source_l00321}{calculate\+\_\+contravariant()}}, \mbox{\hyperlink{geom__objects_8h_source_l00341}{oomph\+::\+Geom\+Object\+::d2position()}}, \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a1854ec49f297e92d050433e59045356c}{oomph\+::\+Solid\+Finite\+Element\+::d2psidxi()}}, \mbox{\hyperlink{elements_8cc_source_l06785}{oomph\+::\+Solid\+Finite\+Element\+::d2shape\+\_\+lagrangian()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8cc_source_l07108}{oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi()}}, \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}, \mbox{\hyperlink{elements_8h_source_l02468}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02299}{oomph\+::\+Finite\+Element\+::raw\+\_\+dnodal\+\_\+position\+\_\+gen\+\_\+dt()}}, \mbox{\hyperlink{elements_8h_source_l03906}{oomph\+::\+Solid\+Finite\+Element\+::raw\+\_\+lagrangian\+\_\+position\+\_\+gen()}}, \mbox{\hyperlink{elements_8h_source_l02277}{oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+position\+\_\+gen()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{shell__elements_8h_source_l00102}{Undeformed\+\_\+midplane\+\_\+pt}}.
+References \mbox{\hyperlink{octree_8h_source_l00073}{oomph\+::\+Oc\+Tree\+Names\+::B}}, \mbox{\hyperlink{shell__elements_8h_source_l00321}{calculate\+\_\+contravariant()}}, \mbox{\hyperlink{geom__objects_8h_source_l00341}{oomph\+::\+Geom\+Object\+::d2position()}}, \mbox{\hyperlink{elements_8cc_source_l06781}{oomph\+::\+Solid\+Finite\+Element\+::d2shape\+\_\+lagrangian()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8cc_source_l07104}{oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi()}}, \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}, \mbox{\hyperlink{elements_8h_source_l02463}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02294}{oomph\+::\+Finite\+Element\+::raw\+\_\+dnodal\+\_\+position\+\_\+gen\+\_\+dt()}}, \mbox{\hyperlink{elements_8h_source_l03897}{oomph\+::\+Solid\+Finite\+Element\+::raw\+\_\+lagrangian\+\_\+position\+\_\+gen()}}, \mbox{\hyperlink{elements_8h_source_l02272}{oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+position\+\_\+gen()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{shell__elements_8h_source_l00102}{Undeformed\+\_\+midplane\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1KirchhoffLoveShellEquations_a5228ebb72cceae574ba2a824ddab6725}\label{classoomph_1_1KirchhoffLoveShellEquations_a5228ebb72cceae574ba2a824ddab6725}} 
 \index{oomph::KirchhoffLoveShellEquations@{oomph::KirchhoffLoveShellEquations}!h@{h}}
 \index{h@{h}!oomph::KirchhoffLoveShellEquations@{oomph::KirchhoffLoveShellEquations}}
 \doxysubsubsection{\texorpdfstring{h()}{h()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \& oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::h (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const double \& oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::h (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -376,7 +376,7 @@ References \mbox{\hyperlink{shell__elements_8h_source_l00067}{H\+\_\+pt}}.
 \index{oomph::KirchhoffLoveShellEquations@{oomph::KirchhoffLoveShellEquations}!lambda\_sq@{lambda\_sq}}
 \index{lambda\_sq@{lambda\_sq}!oomph::KirchhoffLoveShellEquations@{oomph::KirchhoffLoveShellEquations}}
 \doxysubsubsection{\texorpdfstring{lambda\_sq()}{lambda\_sq()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \& oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::lambda\+\_\+sq (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const double \& oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::lambda\+\_\+sq (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -428,7 +428,7 @@ Definition at line \mbox{\hyperlink{shell__elements_8cc_source_l01080}{1080}} of
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02374}{oomph\+::\+Finite\+Element\+::dnodal\+\_\+position\+\_\+gen\+\_\+dt()}}, \mbox{\hyperlink{elements_8cc_source_l06714}{oomph\+::\+Solid\+Finite\+Element\+::dshape\+\_\+lagrangian()}}, \mbox{\hyperlink{shell__elements_8cc_source_l00072}{get\+\_\+normal()}}, \mbox{\hyperlink{shell__elements_8h_source_l00219}{h()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01968}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}, \mbox{\hyperlink{elements_8h_source_l03921}{oomph\+::\+Solid\+Finite\+Element\+::lagrangian\+\_\+position\+\_\+gen()}}, \mbox{\hyperlink{shell__elements_8h_source_l00123}{load\+\_\+vector\+\_\+for\+\_\+rate\+\_\+of\+\_\+work\+\_\+computation()}}, \mbox{\hyperlink{elements_8h_source_l02468}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02354}{oomph\+::\+Finite\+Element\+::nodal\+\_\+position\+\_\+gen()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{elements_8h_source_l02369}{oomph\+::\+Finite\+Element\+::dnodal\+\_\+position\+\_\+gen\+\_\+dt()}}, \mbox{\hyperlink{elements_8cc_source_l06710}{oomph\+::\+Solid\+Finite\+Element\+::dshape\+\_\+lagrangian()}}, \mbox{\hyperlink{shell__elements_8cc_source_l00072}{get\+\_\+normal()}}, \mbox{\hyperlink{shell__elements_8h_source_l00219}{h()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral\+::knot()}}, \mbox{\hyperlink{elements_8h_source_l03912}{oomph\+::\+Solid\+Finite\+Element\+::lagrangian\+\_\+position\+\_\+gen()}}, \mbox{\hyperlink{shell__elements_8h_source_l00123}{load\+\_\+vector\+\_\+for\+\_\+rate\+\_\+of\+\_\+work\+\_\+computation()}}, \mbox{\hyperlink{elements_8h_source_l02463}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02349}{oomph\+::\+Finite\+Element\+::nodal\+\_\+position\+\_\+gen()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}, and \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral\+::weight()}}.
 
 
 
@@ -438,7 +438,7 @@ Referenced by \mbox{\hyperlink{shell__elements_8h_source_l00513}{oomph\+::\+FSID
 \index{oomph::KirchhoffLoveShellEquations@{oomph::KirchhoffLoveShellEquations}!load\_vector@{load\_vector}}
 \index{load\_vector@{load\_vector}!oomph::KirchhoffLoveShellEquations@{oomph::KirchhoffLoveShellEquations}}
 \doxysubsubsection{\texorpdfstring{load\_vector()}{load\_vector()}}
-{\footnotesize\ttfamily virtual void oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::load\+\_\+vector (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{intpt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{xi,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{N,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{load }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::load\+\_\+vector (\begin{DoxyParamCaption}\item[{const unsigned \&}]{intpt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{xi,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{N,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{load }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -454,7 +454,7 @@ Definition at line \mbox{\hyperlink{shell__elements_8h_source_l00172}{172}} of f
 
 
 
-References \mbox{\hyperlink{shell__elements_8h_source_l00094}{Load\+\_\+vector\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{shell__elements_8h_source_l00094}{Load\+\_\+vector\+\_\+fct\+\_\+pt}}, and \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}.
 
 
 
@@ -464,7 +464,7 @@ Referenced by \mbox{\hyperlink{shell__elements_8cc_source_l00357}{fill\+\_\+in\+
 \index{oomph::KirchhoffLoveShellEquations@{oomph::KirchhoffLoveShellEquations}!load\_vector\_for\_rate\_of\_work\_computation@{load\_vector\_for\_rate\_of\_work\_computation}}
 \index{load\_vector\_for\_rate\_of\_work\_computation@{load\_vector\_for\_rate\_of\_work\_computation}!oomph::KirchhoffLoveShellEquations@{oomph::KirchhoffLoveShellEquations}}
 \doxysubsubsection{\texorpdfstring{load\_vector\_for\_rate\_of\_work\_computation()}{load\_vector\_for\_rate\_of\_work\_computation()}}
-{\footnotesize\ttfamily virtual void oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::load\+\_\+vector\+\_\+for\+\_\+rate\+\_\+of\+\_\+work\+\_\+computation (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{intpt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{xi,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{N,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{load }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::load\+\_\+vector\+\_\+for\+\_\+rate\+\_\+of\+\_\+work\+\_\+computation (\begin{DoxyParamCaption}\item[{const unsigned \&}]{intpt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{xi,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{N,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{load }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -480,7 +480,7 @@ Definition at line \mbox{\hyperlink{shell__elements_8h_source_l00123}{123}} of f
 
 
 
-References \mbox{\hyperlink{shell__elements_8h_source_l00172}{load\+\_\+vector()}}, \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{shell__elements_8h_source_l00172}{load\+\_\+vector()}}, and \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}.
 
 
 
@@ -490,7 +490,7 @@ Referenced by \mbox{\hyperlink{shell__elements_8cc_source_l01080}{load\+\_\+rate
 \index{oomph::KirchhoffLoveShellEquations@{oomph::KirchhoffLoveShellEquations}!nu@{nu}}
 \index{nu@{nu}!oomph::KirchhoffLoveShellEquations@{oomph::KirchhoffLoveShellEquations}}
 \doxysubsubsection{\texorpdfstring{nu()}{nu()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \& oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::nu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const double \& oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::nu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -550,13 +550,13 @@ Definition at line \mbox{\hyperlink{shell__elements_8h_source_l00305}{305}} of f
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
+References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1KirchhoffLoveShellEquations_a27202721c38e55112bede54676946a27}\label{classoomph_1_1KirchhoffLoveShellEquations_a27202721c38e55112bede54676946a27}} 
 \index{oomph::KirchhoffLoveShellEquations@{oomph::KirchhoffLoveShellEquations}!output@{output}}
 \index{output@{output}!oomph::KirchhoffLoveShellEquations@{oomph::KirchhoffLoveShellEquations}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
-{\footnotesize\ttfamily void oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -576,7 +576,7 @@ Definition at line \mbox{\hyperlink{shell__elements_8h_source_l00311}{311}} of f
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
+References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1KirchhoffLoveShellEquations_a78954c3bd74225e91c7433c0009860dc}\label{classoomph_1_1KirchhoffLoveShellEquations_a78954c3bd74225e91c7433c0009860dc}} 
 \index{oomph::KirchhoffLoveShellEquations@{oomph::KirchhoffLoveShellEquations}!output@{output}}
@@ -602,13 +602,13 @@ Definition at line \mbox{\hyperlink{shell__elements_8h_source_l00293}{293}} of f
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
+References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1KirchhoffLoveShellEquations_a5173eb461b8c893b0dc657aae90192c7}\label{classoomph_1_1KirchhoffLoveShellEquations_a5173eb461b8c893b0dc657aae90192c7}} 
 \index{oomph::KirchhoffLoveShellEquations@{oomph::KirchhoffLoveShellEquations}!output@{output}}
 \index{output@{output}!oomph::KirchhoffLoveShellEquations@{oomph::KirchhoffLoveShellEquations}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
-{\footnotesize\ttfamily void oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -628,13 +628,13 @@ Definition at line \mbox{\hyperlink{shell__elements_8h_source_l00299}{299}} of f
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
+References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1KirchhoffLoveShellEquations_a5e088d691fff72ff1bce3e528d245018}\label{classoomph_1_1KirchhoffLoveShellEquations_a5e088d691fff72ff1bce3e528d245018}} 
 \index{oomph::KirchhoffLoveShellEquations@{oomph::KirchhoffLoveShellEquations}!prestress@{prestress}}
 \index{prestress@{prestress}!oomph::KirchhoffLoveShellEquations@{oomph::KirchhoffLoveShellEquations}}
 \doxysubsubsection{\texorpdfstring{prestress()}{prestress()}}
-{\footnotesize\ttfamily double oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::prestress (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::prestress (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -656,7 +656,7 @@ Referenced by \mbox{\hyperlink{shell__elements_8cc_source_l00777}{get\+\_\+energ
 \index{oomph::KirchhoffLoveShellEquations@{oomph::KirchhoffLoveShellEquations}!set\_prestress\_pt@{set\_prestress\_pt}}
 \index{set\_prestress\_pt@{set\_prestress\_pt}!oomph::KirchhoffLoveShellEquations@{oomph::KirchhoffLoveShellEquations}}
 \doxysubsubsection{\texorpdfstring{set\_prestress\_pt()}{set\_prestress\_pt()}}
-{\footnotesize\ttfamily void oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::set\+\_\+prestress\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{j,  }\item[{double $\ast$}]{value\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::set\+\_\+prestress\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{j,  }\item[{double $\ast$}]{value\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -692,7 +692,7 @@ References \mbox{\hyperlink{shell__elements_8h_source_l00102}{Undeformed\+\_\+mi
 \index{oomph::KirchhoffLoveShellEquations@{oomph::KirchhoffLoveShellEquations}!Zero\_traction\_fct@{Zero\_traction\_fct}}
 \index{Zero\_traction\_fct@{Zero\_traction\_fct}!oomph::KirchhoffLoveShellEquations@{oomph::KirchhoffLoveShellEquations}}
 \doxysubsubsection{\texorpdfstring{Zero\_traction\_fct()}{Zero\_traction\_fct()}}
-{\footnotesize\ttfamily void oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::\+Zero\+\_\+traction\+\_\+fct (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{xi,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{N,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{load }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily void oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::\+Zero\+\_\+traction\+\_\+fct (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{xi,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{N,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{load }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
 
 
 
@@ -825,7 +825,7 @@ Referenced by \mbox{\hyperlink{shell__elements_8h_source_l00136}{Kirchhoff\+Love
 \index{oomph::KirchhoffLoveShellEquations@{oomph::KirchhoffLoveShellEquations}!load\_vector\_fct\_pt@{load\_vector\_fct\_pt}}
 \index{load\_vector\_fct\_pt@{load\_vector\_fct\_pt}!oomph::KirchhoffLoveShellEquations@{oomph::KirchhoffLoveShellEquations}}
 \doxysubsubsection{\texorpdfstring{load\_vector\_fct\_pt}{load\_vector\_fct\_pt}}
-{\footnotesize\ttfamily void($\ast$\&)(\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&N, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&load) oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::load\+\_\+vector\+\_\+fct\+\_\+pt()\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void($\ast$\&)(const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&N, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&load) oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::load\+\_\+vector\+\_\+fct\+\_\+pt()\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -839,7 +839,7 @@ Definition at line \mbox{\hyperlink{shell__elements_8h_source_l00158}{158}} of f
 \index{oomph::KirchhoffLoveShellEquations@{oomph::KirchhoffLoveShellEquations}!Load\_vector\_fct\_pt@{Load\_vector\_fct\_pt}}
 \index{Load\_vector\_fct\_pt@{Load\_vector\_fct\_pt}!oomph::KirchhoffLoveShellEquations@{oomph::KirchhoffLoveShellEquations}}
 \doxysubsubsection{\texorpdfstring{Load\_vector\_fct\_pt}{Load\_vector\_fct\_pt}}
-{\footnotesize\ttfamily void($\ast$ oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::\+Load\+\_\+vector\+\_\+fct\+\_\+pt) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&N, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&load)\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily void($\ast$ oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::\+Load\+\_\+vector\+\_\+fct\+\_\+pt) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&N, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&load)\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 

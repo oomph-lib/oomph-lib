@@ -61,13 +61,13 @@
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00057}00057 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00058}00058   \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM, \textcolor{keywordtype}{unsigned} NNODE\_1D>}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00059}\mbox{\hyperlink{classoomph_1_1THelmholtzElement}{00059}}   \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1THelmholtzElement}{THelmholtzElement}} : \textcolor{keyword}{public} \mbox{\hyperlink{classoomph_1_1TElement}{TElement}}<DIM, NNODE\_1D>,}
-\DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00060}00060                             \textcolor{keyword}{public} HelmholtzEquations<DIM>,}
+\DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00060}00060                             \textcolor{keyword}{public} \mbox{\hyperlink{classoomph_1_1HelmholtzEquations}{HelmholtzEquations}}<DIM>,}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00061}00061                             \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator}{ElementWithZ2ErrorEstimator}}}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00062}00062   \{}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00063}00063   \textcolor{keyword}{public}:\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00064}00064 \textcolor{comment}{    /// Constructor: Call constructors for TElement and}}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00065}00065 \textcolor{comment}{    /// Helmholtz equations}}
-\DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00066}\mbox{\hyperlink{classoomph_1_1THelmholtzElement_af122fd610721ab511e4cc62b48974ed3}{00066}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1THelmholtzElement_af122fd610721ab511e4cc62b48974ed3}{THelmholtzElement}}() : \mbox{\hyperlink{classoomph_1_1TElement}{TElement}}<DIM, NNODE\_1D>(), HelmholtzEquations<DIM>()}
+\DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00066}\mbox{\hyperlink{classoomph_1_1THelmholtzElement_af122fd610721ab511e4cc62b48974ed3}{00066}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1THelmholtzElement_af122fd610721ab511e4cc62b48974ed3}{THelmholtzElement}}() : \mbox{\hyperlink{classoomph_1_1TElement}{TElement}}<DIM, NNODE\_1D>(), \mbox{\hyperlink{classoomph_1_1HelmholtzEquations}{HelmholtzEquations}}<DIM>()}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00067}00067     \{}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00068}00068     \}}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00069}00069 }
@@ -94,14 +94,14 @@
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00090}00090 \textcolor{comment}{    ///  x,y,u   or    x,y,z,u}}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00091}\mbox{\hyperlink{classoomph_1_1THelmholtzElement_a563752a21a9e84091bd5c6c8c5a3e750}{00091}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1THelmholtzElement_a563752a21a9e84091bd5c6c8c5a3e750}{output}}(std::ostream\& outfile)}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00092}00092     \{}
-\DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00093}00093       \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_aca07d359a96b9c7b566142112604ea87}{HelmholtzEquations<DIM>::output}}(outfile);}
+\DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00093}00093       \mbox{\hyperlink{classoomph_1_1HelmholtzEquations_ad06140cef8a602246cf45f1b38d201e3}{HelmholtzEquations<DIM>::output}}(outfile);}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00094}00094     \}}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00095}00095 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00096}00096 \textcolor{comment}{    ///  Output function:}}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00097}00097 \textcolor{comment}{    ///   x,y,u   or    x,y,z,u at n\_plot\string^DIM plot points}}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00098}\mbox{\hyperlink{classoomph_1_1THelmholtzElement_ad16215e9aac2518284b9e5a0b8b535d1}{00098}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1THelmholtzElement_ad16215e9aac2518284b9e5a0b8b535d1}{output}}(std::ostream\& outfile, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_plot)}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00099}00099     \{}
-\DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00100}00100       \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_aca07d359a96b9c7b566142112604ea87}{HelmholtzEquations<DIM>::output}}(outfile, n\_plot);}
+\DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00100}00100       \mbox{\hyperlink{classoomph_1_1HelmholtzEquations_ad06140cef8a602246cf45f1b38d201e3}{HelmholtzEquations<DIM>::output}}(outfile, n\_plot);}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00101}00101     \}}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00102}00102 }
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00103}00103 \textcolor{comment}{}}
@@ -109,7 +109,7 @@
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00105}00105 \textcolor{comment}{    ///  x,y,u   or    x,y,z,u}}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00106}\mbox{\hyperlink{classoomph_1_1THelmholtzElement_a43d1c573a4c51b9e146d5e9f767ea65c}{00106}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1THelmholtzElement_a43d1c573a4c51b9e146d5e9f767ea65c}{output}}(FILE* file\_pt)}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00107}00107     \{}
-\DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00108}00108       \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_aca07d359a96b9c7b566142112604ea87}{HelmholtzEquations<DIM>::output}}(file\_pt);}
+\DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00108}00108       \mbox{\hyperlink{classoomph_1_1HelmholtzEquations_ad06140cef8a602246cf45f1b38d201e3}{HelmholtzEquations<DIM>::output}}(file\_pt);}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00109}00109     \}}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00110}00110 }
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00111}00111 \textcolor{comment}{}}
@@ -117,7 +117,7 @@
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00113}00113 \textcolor{comment}{    ///   x,y,u   or    x,y,z,u at n\_plot\string^DIM plot points}}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00114}\mbox{\hyperlink{classoomph_1_1THelmholtzElement_a156cee7b91f59f380139ce6551468b2c}{00114}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1THelmholtzElement_a156cee7b91f59f380139ce6551468b2c}{output}}(FILE* file\_pt, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_plot)}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00115}00115     \{}
-\DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00116}00116       \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_aca07d359a96b9c7b566142112604ea87}{HelmholtzEquations<DIM>::output}}(file\_pt, n\_plot);}
+\DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00116}00116       \mbox{\hyperlink{classoomph_1_1HelmholtzEquations_ad06140cef8a602246cf45f1b38d201e3}{HelmholtzEquations<DIM>::output}}(file\_pt, n\_plot);}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00117}00117     \}}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00118}00118 }
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00119}00119 \textcolor{comment}{}}
@@ -127,7 +127,7 @@
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00123}00123                     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_plot,}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00124}00124                     \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{FiniteElement::SteadyExactSolutionFctPt}} exact\_soln\_pt)}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00125}00125     \{}
-\DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00126}00126       HelmholtzEquations<DIM>::output\_fct(outfile, n\_plot, exact\_soln\_pt);}
+\DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00126}00126       \mbox{\hyperlink{classoomph_1_1HelmholtzEquations_a18bda8e96ef3abc2d247018592f15f56}{HelmholtzEquations<DIM>::output\_fct}}(outfile, n\_plot, exact\_soln\_pt);}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00127}00127     \}}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00128}00128 }
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00129}00129 \textcolor{comment}{}}
@@ -138,7 +138,7 @@
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00134}00134                     \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00135}00135                     \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{FiniteElement::UnsteadyExactSolutionFctPt}} exact\_soln\_pt)}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00136}00136     \{}
-\DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00137}00137       HelmholtzEquations<DIM>::output\_fct(outfile, n\_plot, time, exact\_soln\_pt);}
+\DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00137}00137       \mbox{\hyperlink{classoomph_1_1HelmholtzEquations_a18bda8e96ef3abc2d247018592f15f56}{HelmholtzEquations<DIM>::output\_fct}}(outfile, n\_plot, time, exact\_soln\_pt);}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00138}00138     \}}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00139}00139 }
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00140}00140   \textcolor{keyword}{protected}:\textcolor{comment}{}}
@@ -179,7 +179,7 @@
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00175}\mbox{\hyperlink{classoomph_1_1THelmholtzElement_a3dd24eadad0eb550d205d5438f042748}{00175}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1THelmholtzElement_a3dd24eadad0eb550d205d5438f042748}{get\_Z2\_flux}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& flux)}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00176}00176     \{}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00177}00177       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<std::complex<double>}}> complex\_flux(DIM);}
-\DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00178}00178       this-\/>get\_flux(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, complex\_flux);}
+\DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00178}00178       this-\/>\mbox{\hyperlink{classoomph_1_1HelmholtzEquations_a5a572831004e521f58d5a54c8392262f}{get\_flux}}(s, complex\_flux);}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00179}00179       \textcolor{keywordtype}{unsigned} count = 0;}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00180}00180       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00181}00181       \{}
@@ -195,7 +195,7 @@
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00191}00191     \}}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00192}00192 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00193}00193 \textcolor{comment}{    /// Pointer to the j-\/th vertex node in the element}}
-\DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00194}\mbox{\hyperlink{classoomph_1_1THelmholtzElement_a53aefec2745069e1be44cf322cb801b3}{00194}} \textcolor{comment}{}    Node* \mbox{\hyperlink{classoomph_1_1THelmholtzElement_a53aefec2745069e1be44cf322cb801b3}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00194}\mbox{\hyperlink{classoomph_1_1THelmholtzElement_a53aefec2745069e1be44cf322cb801b3}{00194}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1THelmholtzElement_a53aefec2745069e1be44cf322cb801b3}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00195}00195 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00196}00196       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1TElement}{TElement<DIM, NNODE\_1D>::vertex\_node\_pt}}(j);}
 \DoxyCodeLine{\Hypertarget{Thelmholtz__elements_8h_source_l00197}00197     \}}

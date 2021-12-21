@@ -759,8 +759,8 @@
 \DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l00755}00755       \textcolor{keywordtype}{unsigned} n\_boundary\_node = this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a034677ceb48c67769acb83f304c84f7d}{nboundary\_node}}(4);}
 \DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l00756}00756       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < n\_boundary\_node; ++n)}
 \DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l00757}00757       \{}
-\DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l00758}00758         zeta[0] = this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(4, n)-\/>x(0);}
-\DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l00759}00759         this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(4, n)-\/>set\_coordinates\_on\_boundary(4, zeta);}
+\DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l00758}00758         zeta[0] = this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(4, n)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0);}
+\DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l00759}00759         this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(4, n)-\/>\mbox{\hyperlink{classoomph_1_1Node_a94c19e165ab4e88aabbfa27443c530b7}{set\_coordinates\_on\_boundary}}(4, zeta);}
 \DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l00760}00760       \}}
 \DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l00761}00761     \}}
 \DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l00762}00762 }
@@ -1272,7 +1272,7 @@
 \DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l01268}01268           \textcolor{comment}{// Get the Lagrangian coordinate in the Lower Wall}}
 \DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l01269}01269           zeta[0] = zeta\_lo + double(i1) * dzeta\_node;}
 \DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l01270}01270           \textcolor{comment}{// Reset the boundary coordinate}}
-\DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l01271}01271           nod\_pt-\/>set\_coordinates\_on\_boundary(0, zeta);}
+\DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l01271}01271           nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a94c19e165ab4e88aabbfa27443c530b7}{set\_coordinates\_on\_boundary}}(0, zeta);}
 \DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l01272}01272           \textcolor{comment}{// Get the geometric object and local coordinate}}
 \DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l01273}01273           Lower\_wall\_pt-\/>locate\_zeta(zeta, lower\_sub\_geom\_object\_pt, s\_lo);}
 \DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l01274}01274 }
@@ -1334,7 +1334,7 @@
 \DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l01330}01330           \textcolor{comment}{// Get the Lagrangian coordinate in the Lower Wall}}
 \DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l01331}01331           zeta[0] = zeta\_lo + double(i1) * dzeta\_node;}
 \DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l01332}01332           \textcolor{comment}{// Reset the boundary coordinate}}
-\DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l01333}01333           nod\_pt-\/>set\_coordinates\_on\_boundary(0, zeta);}
+\DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l01333}01333           nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a94c19e165ab4e88aabbfa27443c530b7}{set\_coordinates\_on\_boundary}}(0, zeta);}
 \DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l01334}01334           \textcolor{comment}{// Get the sub geometric object and local coordinate}}
 \DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l01335}01335           Lower\_wall\_pt-\/>locate\_zeta(zeta, lower\_sub\_geom\_object\_pt, s\_lo);}
 \DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l01336}01336 }
@@ -1542,7 +1542,7 @@
 \DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l01538}01538           \textcolor{comment}{// Get the Lagrangian coordinate in the Lower Wall}}
 \DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l01539}01539           zeta[0] = zeta\_lo -\/ double(i1) * dzeta\_node;}
 \DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l01540}01540           \textcolor{comment}{// Reset the boundary coordinate}}
-\DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l01541}01541           el\_pt-\/>node\_pt(i1)-\/>set\_coordinates\_on\_boundary(2, zeta);}
+\DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l01541}01541           el\_pt-\/>node\_pt(i1)-\/>\mbox{\hyperlink{classoomph_1_1Node_a94c19e165ab4e88aabbfa27443c530b7}{set\_coordinates\_on\_boundary}}(2, zeta);}
 \DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l01542}01542           \textcolor{comment}{// Get the sub geometric object and local coordinate}}
 \DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l01543}01543           Upper\_wall\_pt-\/>locate\_zeta(zeta, upper\_sub\_geom\_object\_pt, s\_up);}
 \DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l01544}01544 }
@@ -1606,7 +1606,7 @@
 \DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l01602}01602           \textcolor{comment}{// Get the Lagrangian coordinate in the Upper wall}}
 \DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l01603}01603           zeta[0] = zeta\_lo -\/ double(i1) * dzeta\_node;}
 \DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l01604}01604           \textcolor{comment}{// Reset coordinate on boundary}}
-\DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l01605}01605           nod\_pt-\/>set\_coordinates\_on\_boundary(2, zeta);}
+\DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l01605}01605           nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a94c19e165ab4e88aabbfa27443c530b7}{set\_coordinates\_on\_boundary}}(2, zeta);}
 \DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l01606}01606           \textcolor{comment}{// Get the geometric object and local coordinate}}
 \DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l01607}01607           Upper\_wall\_pt-\/>locate\_zeta(zeta, upper\_sub\_geom\_object\_pt, s\_up);}
 \DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l01608}01608 }
@@ -1698,7 +1698,7 @@
 \DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l01694}01694           zeta[0] =}
 \DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l01695}01695             zeta\_lo\_transition\_end + j * dzeta\_el\_lower + l2 * dzeta\_nod\_lower;}
 \DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l01696}01696           \textcolor{comment}{// Reset the boundary coordinate}}
-\DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l01697}01697           nod\_pt-\/>set\_coordinates\_on\_boundary(0, zeta);}
+\DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l01697}01697           nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a94c19e165ab4e88aabbfa27443c530b7}{set\_coordinates\_on\_boundary}}(0, zeta);}
 \DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l01698}01698 }
 \DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l01699}01699           \textcolor{comment}{// Get the sub geometric objects}}
 \DoxyCodeLine{\Hypertarget{bretherton__spine__mesh_8template_8cc_source_l01700}01700           Lower\_wall\_pt-\/>locate\_zeta(zeta, lower\_sub\_geom\_object\_pt, s\_lo);}

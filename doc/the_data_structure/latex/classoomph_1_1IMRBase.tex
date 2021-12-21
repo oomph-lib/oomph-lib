@@ -34,7 +34,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1IMRBase_a973faf88d44644bde495ffd6b9acbef
 \begin{DoxyCompactList}\small\item\em ??ds \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1IMRBase_a34c72011189de014a69288fbcfac54f4}{shift\+\_\+time\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&data\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em This function advances the \mbox{\hyperlink{classoomph_1_1Data}{Data}}\textquotesingle{}s time history so that we can move on to the next timestep. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1IMRBase_a61d4487fcf0a9eb7a829b08027a9500f}{shift\+\_\+time\+\_\+positions}} (Node $\ast$const \&node\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1IMRBase_a61d4487fcf0a9eb7a829b08027a9500f}{shift\+\_\+time\+\_\+positions}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&node\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em This function advances the time history of the positions at a node. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1IMRBase_a8122f3fa05e8622db6a98072d88685e2}{set\+\_\+error\+\_\+weights}} ()
 \begin{DoxyCompactList}\small\item\em Set the weights for the error computation. This is not used by midpoint rule. \end{DoxyCompactList}\item 
@@ -42,11 +42,11 @@ void \mbox{\hyperlink{classoomph_1_1IMRBase_a68771c915a13f5a3e3655fff12cb73a3}{s
 \begin{DoxyCompactList}\small\item\em Set the weights for the predictor previous timestep. This is not used by midpint rule. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1IMRBase_a2de3063187cd9d18db4cd36c36806f2f}{assign\+\_\+initial\+\_\+values\+\_\+impulsive}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&data\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em not implemented (??ds TODO) \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1IMRBase_ae9c3433ed870a32d2f94f7aa7b39104e}{assign\+\_\+initial\+\_\+positions\+\_\+impulsive}} (Node $\ast$const \&node\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1IMRBase_ae9c3433ed870a32d2f94f7aa7b39104e}{assign\+\_\+initial\+\_\+positions\+\_\+impulsive}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&node\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Initialiset the positions for the node corresponding to an impulsive start. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1IMRBase_ac206f72b8054828b715756417dcd230a}{calculate\+\_\+predicted\+\_\+positions}} (Node $\ast$const \&node\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1IMRBase_ac206f72b8054828b715756417dcd230a}{calculate\+\_\+predicted\+\_\+positions}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&node\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Do the predictor step for the positions at a node (currently empty --- overwrite for a specific scheme) \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1IMRBase_a6e57fd5364c261cd7c1bd49688899a13}{temporal\+\_\+error\+\_\+in\+\_\+position}} (Node $\ast$const \&node\+\_\+pt, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+double \mbox{\hyperlink{classoomph_1_1IMRBase_a6e57fd5364c261cd7c1bd49688899a13}{temporal\+\_\+error\+\_\+in\+\_\+position}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&node\+\_\+pt, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Compute the error in the position i at a node zero here -- overwrite for specific scheme. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1IMRBase_a1512b1a47e5b6dc6c8540fd024c44d1d}{calculate\+\_\+predicted\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&data\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Dummy -\/ just check that the values that problem\+::calculate\+\_\+predicted\+\_\+values() has been called right. \end{DoxyCompactList}\item 
@@ -102,7 +102,7 @@ Definition at line \mbox{\hyperlink{implicit__midpoint__rule_8h_source_l00081}{8
 \index{oomph::IMRBase@{oomph::IMRBase}!assign\_initial\_positions\_impulsive@{assign\_initial\_positions\_impulsive}}
 \index{assign\_initial\_positions\_impulsive@{assign\_initial\_positions\_impulsive}!oomph::IMRBase@{oomph::IMRBase}}
 \doxysubsubsection{\texorpdfstring{assign\_initial\_positions\_impulsive()}{assign\_initial\_positions\_impulsive()}}
-{\footnotesize\ttfamily void oomph\+::\+IMRBase\+::assign\+\_\+initial\+\_\+positions\+\_\+impulsive (\begin{DoxyParamCaption}\item[{Node $\ast$const \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+IMRBase\+::assign\+\_\+initial\+\_\+positions\+\_\+impulsive (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -146,7 +146,7 @@ References \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Glo
 \index{oomph::IMRBase@{oomph::IMRBase}!calculate\_predicted\_positions@{calculate\_predicted\_positions}}
 \index{calculate\_predicted\_positions@{calculate\_predicted\_positions}!oomph::IMRBase@{oomph::IMRBase}}
 \doxysubsubsection{\texorpdfstring{calculate\_predicted\_positions()}{calculate\_predicted\_positions()}}
-{\footnotesize\ttfamily void oomph\+::\+IMRBase\+::calculate\+\_\+predicted\+\_\+positions (\begin{DoxyParamCaption}\item[{Node $\ast$const \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+IMRBase\+::calculate\+\_\+predicted\+\_\+positions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -328,7 +328,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1IMR_aecea8cd9ec75a6e3efde89e451d71
 \index{oomph::IMRBase@{oomph::IMRBase}!shift\_time\_positions@{shift\_time\_positions}}
 \index{shift\_time\_positions@{shift\_time\_positions}!oomph::IMRBase@{oomph::IMRBase}}
 \doxysubsubsection{\texorpdfstring{shift\_time\_positions()}{shift\_time\_positions()}}
-{\footnotesize\ttfamily void oomph\+::\+IMRBase\+::shift\+\_\+time\+\_\+positions (\begin{DoxyParamCaption}\item[{Node $\ast$const \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+IMRBase\+::shift\+\_\+time\+\_\+positions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -344,7 +344,7 @@ Definition at line \mbox{\hyperlink{implicit__midpoint__rule_8cc_source_l00057}{
 
 
 
-References \mbox{\hyperlink{timesteppers_8h_source_l00623}{oomph\+::\+Time\+Stepper\+::adaptive\+\_\+flag()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{implicit__midpoint__rule_8h_source_l00097}{ndt()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{timesteppers_8h_source_l00237}{oomph\+::\+Time\+Stepper\+::\+Weight}}.
+References \mbox{\hyperlink{timesteppers_8h_source_l00623}{oomph\+::\+Time\+Stepper\+::adaptive\+\_\+flag()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{implicit__midpoint__rule_8h_source_l00097}{ndt()}}, \mbox{\hyperlink{nodes_8h_source_l01016}{oomph\+::\+Node\+::nposition\+\_\+type()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, \mbox{\hyperlink{nodes_8h_source_l01113}{oomph\+::\+Node\+::position\+\_\+is\+\_\+a\+\_\+copy()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{timesteppers_8h_source_l00237}{oomph\+::\+Time\+Stepper\+::\+Weight}}, and \mbox{\hyperlink{nodes_8h_source_l01126}{oomph\+::\+Node\+::x\+\_\+gen()}}.
 
 \mbox{\Hypertarget{classoomph_1_1IMRBase_a34c72011189de014a69288fbcfac54f4}\label{classoomph_1_1IMRBase_a34c72011189de014a69288fbcfac54f4}} 
 \index{oomph::IMRBase@{oomph::IMRBase}!shift\_time\_values@{shift\_time\_values}}
@@ -372,7 +372,7 @@ References \mbox{\hyperlink{nodes_8h_source_l00253}{oomph\+::\+Data\+::is\+\_\+a
 \index{oomph::IMRBase@{oomph::IMRBase}!temporal\_error\_in\_position@{temporal\_error\_in\_position}}
 \index{temporal\_error\_in\_position@{temporal\_error\_in\_position}!oomph::IMRBase@{oomph::IMRBase}}
 \doxysubsubsection{\texorpdfstring{temporal\_error\_in\_position()}{temporal\_error\_in\_position()}}
-{\footnotesize\ttfamily double oomph\+::\+IMRBase\+::temporal\+\_\+error\+\_\+in\+\_\+position (\begin{DoxyParamCaption}\item[{Node $\ast$const \&}]{node\+\_\+pt,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily double oomph\+::\+IMRBase\+::temporal\+\_\+error\+\_\+in\+\_\+position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&}]{node\+\_\+pt,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 

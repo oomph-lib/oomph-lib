@@ -132,7 +132,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>A template Class for BoundaryNodes; that is Nodes that MAY live on the boundary of a <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a>. The class is formed by a simple composition of the template parameter NODE_TYPE, which must be a Node class and the <a class="el" href="classoomph_1_1BoundaryNodeBase.html" title="A class that contains the information required by Nodes that are located on Mesh boundaries....">BoundaryNodeBase</a> class. Final overloading of functions is always in favour of the <a class="el" href="classoomph_1_1BoundaryNodeBase.html" title="A class that contains the information required by Nodes that are located on Mesh boundaries....">BoundaryNodeBase</a> implementation; i.e. these nodes can live on boundaries.  
+<p>A template Class for BoundaryNodes; that is Nodes that MAY live on the boundary of a <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a>. The class is formed by a simple composition of the template parameter NODE_TYPE, which must be a <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a> class and the <a class="el" href="classoomph_1_1BoundaryNodeBase.html" title="A class that contains the information required by Nodes that are located on Mesh boundaries....">BoundaryNodeBase</a> class. Final overloading of functions is always in favour of the <a class="el" href="classoomph_1_1BoundaryNodeBase.html" title="A class that contains the information required by Nodes that are located on Mesh boundaries....">BoundaryNodeBase</a> implementation; i.e. these nodes can live on boundaries.  
  <a href="classoomph_1_1BoundaryNode.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="nodes_8h_source.html">nodes.h</a>&gt;</code></p>
@@ -157,16 +157,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:aae4348d85debf5606c286e582bf0e475"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default Constructor.  <a href="classoomph_1_1BoundaryNode.html#aae4348d85debf5606c286e582bf0e475">More...</a><br /></td></tr>
 <tr class="separator:aae4348d85debf5606c286e582bf0e475"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3d76a60cda13edec1549693fc6e49214"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BoundaryNode.html#a3d76a60cda13edec1549693fc6e49214">BoundaryNode</a> (const unsigned &amp;n_dim, const unsigned &amp;n_position_type, const unsigned &amp;initial_n_value)</td></tr>
-<tr class="memdesc:a3d76a60cda13edec1549693fc6e49214"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Steady.html" title="////////////////////////////////////////////////////////////////////// //////////////////////////////...">Steady</a> constructor, for a <a class="el" href="classoomph_1_1BoundaryNode.html" title="A template Class for BoundaryNodes; that is Nodes that MAY live on the boundary of a Mesh....">BoundaryNode</a> of spatial dimension n_dim. Simply passes all arguments through to the underlying Node constructor which allocates storage for initial_n_value values. NPosition_type is the number of coordinate types needed in the mapping between local and global coordinates (e.g. 1 for Lagrange-type elements; 2 for 1D Hermite elements; 4 for 2D Hermite elements, etc).  <a href="classoomph_1_1BoundaryNode.html#a3d76a60cda13edec1549693fc6e49214">More...</a><br /></td></tr>
+<tr class="memdesc:a3d76a60cda13edec1549693fc6e49214"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Steady.html" title="////////////////////////////////////////////////////////////////////// //////////////////////////////...">Steady</a> constructor, for a <a class="el" href="classoomph_1_1BoundaryNode.html" title="A template Class for BoundaryNodes; that is Nodes that MAY live on the boundary of a Mesh....">BoundaryNode</a> of spatial dimension n_dim. Simply passes all arguments through to the underlying <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a> constructor which allocates storage for initial_n_value values. NPosition_type is the number of coordinate types needed in the mapping between local and global coordinates (e.g. 1 for Lagrange-type elements; 2 for 1D Hermite elements; 4 for 2D Hermite elements, etc).  <a href="classoomph_1_1BoundaryNode.html#a3d76a60cda13edec1549693fc6e49214">More...</a><br /></td></tr>
 <tr class="separator:a3d76a60cda13edec1549693fc6e49214"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a18c0a20d10ae670671de9600846edb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BoundaryNode.html#a1a18c0a20d10ae670671de9600846edb">BoundaryNode</a> (<a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *const &amp;time_stepper_pt, const unsigned &amp;n_dim, const unsigned &amp;n_position_type, const unsigned &amp;initial_n_value)</td></tr>
-<tr class="memdesc:a1a18c0a20d10ae670671de9600846edb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unsteady constructor for a <a class="el" href="classoomph_1_1BoundaryNode.html" title="A template Class for BoundaryNodes; that is Nodes that MAY live on the boundary of a Mesh....">BoundaryNode</a> of spatial dimension n_dim. Simply passes all arguments through to the underlygin Node constructor which allocates storage for initial_n_value values with history values as required by the timestepper. n_position_type: # of coordinate types needed in the mapping between local and global coordinates (e.g. 1 for Lagrange-type elements; 2 for 1D Hermite elements; 4 for 2D Hermite elements).  <a href="classoomph_1_1BoundaryNode.html#a1a18c0a20d10ae670671de9600846edb">More...</a><br /></td></tr>
+<tr class="memdesc:a1a18c0a20d10ae670671de9600846edb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unsteady constructor for a <a class="el" href="classoomph_1_1BoundaryNode.html" title="A template Class for BoundaryNodes; that is Nodes that MAY live on the boundary of a Mesh....">BoundaryNode</a> of spatial dimension n_dim. Simply passes all arguments through to the underlygin <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a> constructor which allocates storage for initial_n_value values with history values as required by the timestepper. n_position_type: # of coordinate types needed in the mapping between local and global coordinates (e.g. 1 for Lagrange-type elements; 2 for 1D Hermite elements; 4 for 2D Hermite elements).  <a href="classoomph_1_1BoundaryNode.html#a1a18c0a20d10ae670671de9600846edb">More...</a><br /></td></tr>
 <tr class="separator:a1a18c0a20d10ae670671de9600846edb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65d27f75e6e015ceb1978be7d3cd83bc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BoundaryNode.html#a65d27f75e6e015ceb1978be7d3cd83bc">BoundaryNode</a> (const unsigned &amp;n_lagrangian, const unsigned &amp;n_lagrangian_type, const unsigned &amp;n_dim, const unsigned &amp;n_position_type, const unsigned &amp;initial_n_value)</td></tr>
-<tr class="memdesc:a65d27f75e6e015ceb1978be7d3cd83bc"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Steady.html" title="////////////////////////////////////////////////////////////////////// //////////////////////////////...">Steady</a> constructor for Solid-type boundary nodes. The node has n_lagrangian Lagrangian coordinates of n_lagrangian_type types (1 for Lagrange elements, 2 for 1D Hermite etc.). The Eulerian dimension of the Node is n_dim and we have n_position_type (generalised) Eulerian coordinates. There are initial_n_value values stored at this node.  <a href="classoomph_1_1BoundaryNode.html#a65d27f75e6e015ceb1978be7d3cd83bc">More...</a><br /></td></tr>
+<tr class="memdesc:a65d27f75e6e015ceb1978be7d3cd83bc"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Steady.html" title="////////////////////////////////////////////////////////////////////// //////////////////////////////...">Steady</a> constructor for Solid-type boundary nodes. The node has n_lagrangian Lagrangian coordinates of n_lagrangian_type types (1 for Lagrange elements, 2 for 1D Hermite etc.). The Eulerian dimension of the <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a> is n_dim and we have n_position_type (generalised) Eulerian coordinates. There are initial_n_value values stored at this node.  <a href="classoomph_1_1BoundaryNode.html#a65d27f75e6e015ceb1978be7d3cd83bc">More...</a><br /></td></tr>
 <tr class="separator:a65d27f75e6e015ceb1978be7d3cd83bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a969b9b49766f702d755c71f3981cfe98"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BoundaryNode.html#a969b9b49766f702d755c71f3981cfe98">BoundaryNode</a> (<a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *const &amp;time_stepper_pt, const unsigned &amp;n_lagrangian, const unsigned &amp;n_lagrangian_type, const unsigned &amp;n_dim, const unsigned &amp;n_position_type, const unsigned &amp;initial_n_value)</td></tr>
-<tr class="memdesc:a969b9b49766f702d755c71f3981cfe98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unsteady constructor for Solid-type boundary nodes Allocates storage for initial_n_value nodal values with history values as required by timestepper. The node has n_lagrangian Lagrangian coordinates of n_lagrangian_type types (1 for Lagrange elements, 2 for 1D Hermite etc.)/ The Eulerian dimension of the Node is n_dim and we have n_position_type generalised Eulerian coordinates.  <a href="classoomph_1_1BoundaryNode.html#a969b9b49766f702d755c71f3981cfe98">More...</a><br /></td></tr>
+<tr class="memdesc:a969b9b49766f702d755c71f3981cfe98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unsteady constructor for Solid-type boundary nodes Allocates storage for initial_n_value nodal values with history values as required by timestepper. The node has n_lagrangian Lagrangian coordinates of n_lagrangian_type types (1 for Lagrange elements, 2 for 1D Hermite etc.)/ The Eulerian dimension of the <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a> is n_dim and we have n_position_type generalised Eulerian coordinates.  <a href="classoomph_1_1BoundaryNode.html#a969b9b49766f702d755c71f3981cfe98">More...</a><br /></td></tr>
 <tr class="separator:a969b9b49766f702d755c71f3981cfe98"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a29f6d775e2f97943ad0588ed4df5de51"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BoundaryNode.html#a29f6d775e2f97943ad0588ed4df5de51">~BoundaryNode</a> ()</td></tr>
 <tr class="memdesc:a29f6d775e2f97943ad0588ed4df5de51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor resets pointers if.  <a href="classoomph_1_1BoundaryNode.html#a29f6d775e2f97943ad0588ed4df5de51">More...</a><br /></td></tr>
@@ -214,12 +214,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ac3a1c7120899518a10ae86bb8b1b6f17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number of values associated with the i-th face element field. If no argument is specified we return the value associated with the first (and assumed to be only) face element attached to this node. Throws error only in paranoid mode if no values have been set by any FaceElements. If you want to catch such cases gracefully in all circumstances (there are examples with complex unstructured 3D meshes where it's not clear a priori if a node has been resized by FaceElements) use alternative version (with leading bool arguments) that always checks and throws so exceptions can be caught gracefully. Returns UINT_MAX if error.  <a href="classoomph_1_1BoundaryNode.html#ac3a1c7120899518a10ae86bb8b1b6f17">More...</a><br /></td></tr>
 <tr class="separator:ac3a1c7120899518a10ae86bb8b1b6f17"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a04ba9bf0b13ec5a8da2e2a27d41a1ef5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BoundaryNode.html#a04ba9bf0b13ec5a8da2e2a27d41a1ef5">assign_additional_values_with_face_id</a> (const unsigned &amp;n_additional_value, const unsigned &amp;face_id=0)</td></tr>
-<tr class="memdesc:a04ba9bf0b13ec5a8da2e2a27d41a1ef5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Member function to allocates storage for a given number of additional degrees of freedom, n_additional_value, associated with a particular face_id to the Node node_pt. Needs to be filled in here so that access to the nodal values is available.  <a href="classoomph_1_1BoundaryNode.html#a04ba9bf0b13ec5a8da2e2a27d41a1ef5">More...</a><br /></td></tr>
+<tr class="memdesc:a04ba9bf0b13ec5a8da2e2a27d41a1ef5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Member function to allocates storage for a given number of additional degrees of freedom, n_additional_value, associated with a particular face_id to the <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a> node_pt. Needs to be filled in here so that access to the nodal values is available.  <a href="classoomph_1_1BoundaryNode.html#a04ba9bf0b13ec5a8da2e2a27d41a1ef5">More...</a><br /></td></tr>
 <tr class="separator:a04ba9bf0b13ec5a8da2e2a27d41a1ef5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a96a34bd1911f8a125be570f361d3a211"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BoundaryNode.html#a96a34bd1911f8a125be570f361d3a211">make_periodic</a> (Node *const &amp;node_pt)</td></tr>
+<tr class="memitem:a96a34bd1911f8a125be570f361d3a211"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BoundaryNode.html#a96a34bd1911f8a125be570f361d3a211">make_periodic</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;node_pt)</td></tr>
 <tr class="memdesc:a96a34bd1911f8a125be570f361d3a211"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make the node periodic.  <a href="classoomph_1_1BoundaryNode.html#a96a34bd1911f8a125be570f361d3a211">More...</a><br /></td></tr>
 <tr class="separator:a96a34bd1911f8a125be570f361d3a211"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a540781a9eecfc8b4c2fa28723d088745"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BoundaryNode.html#a540781a9eecfc8b4c2fa28723d088745">make_periodic_nodes</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; Node * &gt; &amp;periodic_nodes_pt)</td></tr>
+<tr class="memitem:a540781a9eecfc8b4c2fa28723d088745"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BoundaryNode.html#a540781a9eecfc8b4c2fa28723d088745">make_periodic_nodes</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Node.html">Node</a> * &gt; &amp;periodic_nodes_pt)</td></tr>
 <tr class="memdesc:a540781a9eecfc8b4c2fa28723d088745"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make the nodes passed in periodic_nodes periodic from this node.  <a href="classoomph_1_1BoundaryNode.html#a540781a9eecfc8b4c2fa28723d088745">More...</a><br /></td></tr>
 <tr class="separator:a540781a9eecfc8b4c2fa28723d088745"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a373e3a5c0f617eb91a54fa88c8e83c9e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BoundaryNode.html#a373e3a5c0f617eb91a54fa88c8e83c9e">is_a_copy</a> () const</td></tr>
@@ -228,7 +228,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a787efb1b118065987222b4c40c15570d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BoundaryNode.html#a787efb1b118065987222b4c40c15570d">is_a_copy</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) const</td></tr>
 <tr class="memdesc:a787efb1b118065987222b4c40c15570d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a boolean to indicate whether the i-th value is a copied value. If the node is periodic all values are copies.  <a href="classoomph_1_1BoundaryNode.html#a787efb1b118065987222b4c40c15570d">More...</a><br /></td></tr>
 <tr class="separator:a787efb1b118065987222b4c40c15570d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac9fa4614f6410c5e845b62019d1070f0"><td class="memItemLeft" align="right" valign="top">Node *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BoundaryNode.html#ac9fa4614f6410c5e845b62019d1070f0">copied_node_pt</a> () const</td></tr>
+<tr class="memitem:ac9fa4614f6410c5e845b62019d1070f0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Node.html">Node</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BoundaryNode.html#ac9fa4614f6410c5e845b62019d1070f0">copied_node_pt</a> () const</td></tr>
 <tr class="memdesc:ac9fa4614f6410c5e845b62019d1070f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return pointer to copied node (null if the current node is not a copy)  <a href="classoomph_1_1BoundaryNode.html#ac9fa4614f6410c5e845b62019d1070f0">More...</a><br /></td></tr>
 <tr class="separator:ac9fa4614f6410c5e845b62019d1070f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86dd914c93b468a84d5c3d202a34f33e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BoundaryNode.html#a86dd914c93b468a84d5c3d202a34f33e">assign_eqn_numbers</a> (unsigned long &amp;global_ndof, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double * &gt; &amp;dof_pt)</td></tr>
@@ -237,7 +237,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8ceaf97ad0211572e251091f84e4f607"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BoundaryNode.html#a8ceaf97ad0211572e251091f84e4f607">resize</a> (const unsigned &amp;n_value)</td></tr>
 <tr class="memdesc:a8ceaf97ad0211572e251091f84e4f607"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize the number of equations.  <a href="classoomph_1_1BoundaryNode.html#a8ceaf97ad0211572e251091f84e4f607">More...</a><br /></td></tr>
 <tr class="separator:a8ceaf97ad0211572e251091f84e4f607"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a11c0b14661482e08d65fb9ecaa9d73ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BoundaryNode.html#a11c0b14661482e08d65fb9ecaa9d73ec">make_periodic</a> (Node *const &amp;node_pt)</td></tr>
+<tr class="memitem:a11c0b14661482e08d65fb9ecaa9d73ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BoundaryNode.html#a11c0b14661482e08d65fb9ecaa9d73ec">make_periodic</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;node_pt)</td></tr>
 <tr class="memdesc:a11c0b14661482e08d65fb9ecaa9d73ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make the node periodic.  <a href="classoomph_1_1BoundaryNode.html#a11c0b14661482e08d65fb9ecaa9d73ec">More...</a><br /></td></tr>
 <tr class="separator:a11c0b14661482e08d65fb9ecaa9d73ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classoomph_1_1BoundaryNodeBase"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1BoundaryNodeBase')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1BoundaryNodeBase.html">oomph::BoundaryNodeBase</a></td></tr>
@@ -308,25 +308,25 @@ Private Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pro_methods_classoomph_1_1BoundaryNodeBase"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classoomph_1_1BoundaryNodeBase')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classoomph_1_1BoundaryNodeBase.html">oomph::BoundaryNodeBase</a></td></tr>
-<tr class="memitem:a335936260b9a5d6ed4e191e4c44ab3a2 inherit pro_methods_classoomph_1_1BoundaryNodeBase"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BoundaryNodeBase.html#a335936260b9a5d6ed4e191e4c44ab3a2">make_node_periodic</a> (Node *const &amp;node_pt, Node *const &amp;original_node_pt)</td></tr>
+<tr class="memitem:a335936260b9a5d6ed4e191e4c44ab3a2 inherit pro_methods_classoomph_1_1BoundaryNodeBase"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BoundaryNodeBase.html#a335936260b9a5d6ed4e191e4c44ab3a2">make_node_periodic</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;node_pt, <a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;original_node_pt)</td></tr>
 <tr class="memdesc:a335936260b9a5d6ed4e191e4c44ab3a2 inherit pro_methods_classoomph_1_1BoundaryNodeBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function that is used to turn BoundaryNodes into peridic boundary nodes by setting the data values of copied_node_pt to those of original_node_pt.  <a href="classoomph_1_1BoundaryNodeBase.html#a335936260b9a5d6ed4e191e4c44ab3a2">More...</a><br /></td></tr>
 <tr class="separator:a335936260b9a5d6ed4e191e4c44ab3a2 inherit pro_methods_classoomph_1_1BoundaryNodeBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a37f55f9018ae7dcd5cb194f030fccfd6 inherit pro_methods_classoomph_1_1BoundaryNodeBase"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BoundaryNodeBase.html#a37f55f9018ae7dcd5cb194f030fccfd6">make_nodes_periodic</a> (Node *const &amp;node_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; Node * &gt; const &amp;periodic_copies_pt)</td></tr>
+<tr class="memitem:a37f55f9018ae7dcd5cb194f030fccfd6 inherit pro_methods_classoomph_1_1BoundaryNodeBase"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BoundaryNodeBase.html#a37f55f9018ae7dcd5cb194f030fccfd6">make_nodes_periodic</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;node_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Node.html">Node</a> * &gt; const &amp;periodic_copies_pt)</td></tr>
 <tr class="memdesc:a37f55f9018ae7dcd5cb194f030fccfd6 inherit pro_methods_classoomph_1_1BoundaryNodeBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function that is used to turn BoundaryNodes into periodic boundary nodes by setting the data values of the nodes in the vector periodic_copies_pt to be the same as those in node_pt.  <a href="classoomph_1_1BoundaryNodeBase.html#a37f55f9018ae7dcd5cb194f030fccfd6">More...</a><br /></td></tr>
 <tr class="separator:a37f55f9018ae7dcd5cb194f030fccfd6 inherit pro_methods_classoomph_1_1BoundaryNodeBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classoomph_1_1BoundaryNodeBase"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1BoundaryNodeBase')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1BoundaryNodeBase.html">oomph::BoundaryNodeBase</a></td></tr>
 <tr class="memitem:a950c7d3ab5b9ee0473b45b2a134728a7 inherit pro_attribs_classoomph_1_1BoundaryNodeBase"><td class="memItemLeft" align="right" valign="top">std::map&lt; unsigned, unsigned &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BoundaryNodeBase.html#a950c7d3ab5b9ee0473b45b2a134728a7">Index_of_first_value_assigned_by_face_element_pt</a></td></tr>
-<tr class="memdesc:a950c7d3ab5b9ee0473b45b2a134728a7 inherit pro_attribs_classoomph_1_1BoundaryNodeBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to a map, indexed by the face element identifier it returns the position of the first face element value. If the Node does not lie on a face element this map should never be queried.  <a href="classoomph_1_1BoundaryNodeBase.html#a950c7d3ab5b9ee0473b45b2a134728a7">More...</a><br /></td></tr>
+<tr class="memdesc:a950c7d3ab5b9ee0473b45b2a134728a7 inherit pro_attribs_classoomph_1_1BoundaryNodeBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to a map, indexed by the face element identifier it returns the position of the first face element value. If the <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a> does not lie on a face element this map should never be queried.  <a href="classoomph_1_1BoundaryNodeBase.html#a950c7d3ab5b9ee0473b45b2a134728a7">More...</a><br /></td></tr>
 <tr class="separator:a950c7d3ab5b9ee0473b45b2a134728a7 inherit pro_attribs_classoomph_1_1BoundaryNodeBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4afcc250ee4d601a60f06d0d39ebaca0 inherit pro_attribs_classoomph_1_1BoundaryNodeBase"><td class="memItemLeft" align="right" valign="top">Node *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BoundaryNodeBase.html#a4afcc250ee4d601a60f06d0d39ebaca0">Copied_node_pt</a></td></tr>
+<tr class="memitem:a4afcc250ee4d601a60f06d0d39ebaca0 inherit pro_attribs_classoomph_1_1BoundaryNodeBase"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Node.html">Node</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BoundaryNodeBase.html#a4afcc250ee4d601a60f06d0d39ebaca0">Copied_node_pt</a></td></tr>
 <tr class="memdesc:a4afcc250ee4d601a60f06d0d39ebaca0 inherit pro_attribs_classoomph_1_1BoundaryNodeBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">If the <a class="el" href="classoomph_1_1BoundaryNode.html" title="A template Class for BoundaryNodes; that is Nodes that MAY live on the boundary of a Mesh....">BoundaryNode</a> is periodic, this pointer is set to the <a class="el" href="classoomph_1_1BoundaryNode.html" title="A template Class for BoundaryNodes; that is Nodes that MAY live on the boundary of a Mesh....">BoundaryNode</a> whose data it shares.  <a href="classoomph_1_1BoundaryNodeBase.html#a4afcc250ee4d601a60f06d0d39ebaca0">More...</a><br /></td></tr>
 <tr class="separator:a4afcc250ee4d601a60f06d0d39ebaca0 inherit pro_attribs_classoomph_1_1BoundaryNodeBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;class NODE_TYPE&gt;<br />
-class oomph::BoundaryNode&lt; NODE_TYPE &gt;</div><p >A template Class for BoundaryNodes; that is Nodes that MAY live on the boundary of a <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a>. The class is formed by a simple composition of the template parameter NODE_TYPE, which must be a Node class and the <a class="el" href="classoomph_1_1BoundaryNodeBase.html" title="A class that contains the information required by Nodes that are located on Mesh boundaries....">BoundaryNodeBase</a> class. Final overloading of functions is always in favour of the <a class="el" href="classoomph_1_1BoundaryNodeBase.html" title="A class that contains the information required by Nodes that are located on Mesh boundaries....">BoundaryNodeBase</a> implementation; i.e. these nodes can live on boundaries. </p>
+class oomph::BoundaryNode&lt; NODE_TYPE &gt;</div><p >A template Class for BoundaryNodes; that is Nodes that MAY live on the boundary of a <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a>. The class is formed by a simple composition of the template parameter NODE_TYPE, which must be a <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a> class and the <a class="el" href="classoomph_1_1BoundaryNodeBase.html" title="A class that contains the information required by Nodes that are located on Mesh boundaries....">BoundaryNodeBase</a> class. Final overloading of functions is always in favour of the <a class="el" href="classoomph_1_1BoundaryNodeBase.html" title="A class that contains the information required by Nodes that are located on Mesh boundaries....">BoundaryNodeBase</a> implementation; i.e. these nodes can live on boundaries. </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02242">2242</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02241">2241</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aae4348d85debf5606c286e582bf0e475" name="aae4348d85debf5606c286e582bf0e475"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aae4348d85debf5606c286e582bf0e475">&#9670;&nbsp;</a></span>BoundaryNode() <span class="overload">[1/6]</span></h2>
@@ -355,7 +355,7 @@ template&lt;class NODE_TYPE &gt; </div>
 
 <p>Default Constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02383">2383</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02382">2382</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
 </div>
 </div>
@@ -401,9 +401,9 @@ template&lt;class NODE_TYPE &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="classoomph_1_1Steady.html" title="////////////////////////////////////////////////////////////////////// //////////////////////////////...">Steady</a> constructor, for a <a class="el" href="classoomph_1_1BoundaryNode.html" title="A template Class for BoundaryNodes; that is Nodes that MAY live on the boundary of a Mesh....">BoundaryNode</a> of spatial dimension n_dim. Simply passes all arguments through to the underlying Node constructor which allocates storage for initial_n_value values. NPosition_type is the number of coordinate types needed in the mapping between local and global coordinates (e.g. 1 for Lagrange-type elements; 2 for 1D Hermite elements; 4 for 2D Hermite elements, etc). </p>
+<p><a class="el" href="classoomph_1_1Steady.html" title="////////////////////////////////////////////////////////////////////// //////////////////////////////...">Steady</a> constructor, for a <a class="el" href="classoomph_1_1BoundaryNode.html" title="A template Class for BoundaryNodes; that is Nodes that MAY live on the boundary of a Mesh....">BoundaryNode</a> of spatial dimension n_dim. Simply passes all arguments through to the underlying <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a> constructor which allocates storage for initial_n_value values. NPosition_type is the number of coordinate types needed in the mapping between local and global coordinates (e.g. 1 for Lagrange-type elements; 2 for 1D Hermite elements; 4 for 2D Hermite elements, etc). </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02392">2392</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02391">2391</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
 </div>
 </div>
@@ -455,9 +455,9 @@ template&lt;class NODE_TYPE &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Unsteady constructor for a <a class="el" href="classoomph_1_1BoundaryNode.html" title="A template Class for BoundaryNodes; that is Nodes that MAY live on the boundary of a Mesh....">BoundaryNode</a> of spatial dimension n_dim. Simply passes all arguments through to the underlygin Node constructor which allocates storage for initial_n_value values with history values as required by the timestepper. n_position_type: # of coordinate types needed in the mapping between local and global coordinates (e.g. 1 for Lagrange-type elements; 2 for 1D Hermite elements; 4 for 2D Hermite elements). </p>
+<p>Unsteady constructor for a <a class="el" href="classoomph_1_1BoundaryNode.html" title="A template Class for BoundaryNodes; that is Nodes that MAY live on the boundary of a Mesh....">BoundaryNode</a> of spatial dimension n_dim. Simply passes all arguments through to the underlygin <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a> constructor which allocates storage for initial_n_value values with history values as required by the timestepper. n_position_type: # of coordinate types needed in the mapping between local and global coordinates (e.g. 1 for Lagrange-type elements; 2 for 1D Hermite elements; 4 for 2D Hermite elements). </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02408">2408</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02407">2407</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
 </div>
 </div>
@@ -515,9 +515,9 @@ template&lt;class NODE_TYPE &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="classoomph_1_1Steady.html" title="////////////////////////////////////////////////////////////////////// //////////////////////////////...">Steady</a> constructor for Solid-type boundary nodes. The node has n_lagrangian Lagrangian coordinates of n_lagrangian_type types (1 for Lagrange elements, 2 for 1D Hermite etc.). The Eulerian dimension of the Node is n_dim and we have n_position_type (generalised) Eulerian coordinates. There are initial_n_value values stored at this node. </p>
+<p><a class="el" href="classoomph_1_1Steady.html" title="////////////////////////////////////////////////////////////////////// //////////////////////////////...">Steady</a> constructor for Solid-type boundary nodes. The node has n_lagrangian Lagrangian coordinates of n_lagrangian_type types (1 for Lagrange elements, 2 for 1D Hermite etc.). The Eulerian dimension of the <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a> is n_dim and we have n_position_type (generalised) Eulerian coordinates. There are initial_n_value values stored at this node. </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02425">2425</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02424">2424</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
 </div>
 </div>
@@ -581,9 +581,9 @@ template&lt;class NODE_TYPE &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Unsteady constructor for Solid-type boundary nodes Allocates storage for initial_n_value nodal values with history values as required by timestepper. The node has n_lagrangian Lagrangian coordinates of n_lagrangian_type types (1 for Lagrange elements, 2 for 1D Hermite etc.)/ The Eulerian dimension of the Node is n_dim and we have n_position_type generalised Eulerian coordinates. </p>
+<p>Unsteady constructor for Solid-type boundary nodes Allocates storage for initial_n_value nodal values with history values as required by timestepper. The node has n_lagrangian Lagrangian coordinates of n_lagrangian_type types (1 for Lagrange elements, 2 for 1D Hermite etc.)/ The Eulerian dimension of the <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a> is n_dim and we have n_position_type generalised Eulerian coordinates. </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02446">2446</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02445">2445</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
 </div>
 </div>
@@ -614,9 +614,9 @@ template&lt;class NODE_TYPE &gt; </div>
 
 <p>Destructor resets pointers if. </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02463">2463</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02462">2462</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8h_source.html#l02289">oomph::BoundaryNode&lt; NODE_TYPE &gt;::clear_additional_copied_pointers()</a>, <a class="el" href="nodes_8h_source.html#l02022">oomph::BoundaryNodeBase::Copied_node_pt</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="nodes_8h_source.html#l02018">oomph::BoundaryNodeBase::Index_of_first_value_assigned_by_face_element_pt</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l02288">oomph::BoundaryNode&lt; NODE_TYPE &gt;::clear_additional_copied_pointers()</a>, <a class="el" href="nodes_8h_source.html#l02021">oomph::BoundaryNodeBase::Copied_node_pt</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="nodes_8h_source.html#l02017">oomph::BoundaryNodeBase::Index_of_first_value_assigned_by_face_element_pt</a>, and <a class="el" href="nodes_8cc_source.html#l00102">oomph::Data::remove_copy()</a>.</p>
 
 </div>
 </div>
@@ -679,7 +679,7 @@ template&lt;class NODE_TYPE &gt; </div>
 
 <p>Add the node to mesh boundary b, final overload. </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02546">2546</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02545">2545</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
 <p class="reference">References <a class="el" href="nodes_8cc_source.html#l03028">oomph::BoundaryNodeBase::add_to_boundary()</a>.</p>
 
@@ -721,13 +721,13 @@ template&lt;class NODE_TYPE &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Member function to allocates storage for a given number of additional degrees of freedom, n_additional_value, associated with a particular face_id to the Node node_pt. Needs to be filled in here so that access to the nodal values is available. </p>
+<p>Member function to allocates storage for a given number of additional degrees of freedom, n_additional_value, associated with a particular face_id to the <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a> node_pt. Needs to be filled in here so that access to the nodal values is available. </p>
 
 <p>Implements <a class="el" href="classoomph_1_1BoundaryNodeBase.html#a2af96b956e59182fe8bfe8e2a87e02ce">oomph::BoundaryNodeBase</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02678">2678</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02677">2677</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8h_source.html#l02018">oomph::BoundaryNodeBase::Index_of_first_value_assigned_by_face_element_pt</a>, <a class="el" href="nodes_8h_source.html#l02611">oomph::BoundaryNode&lt; NODE_TYPE &gt;::nvalue_assigned_by_face_element()</a>, and <a class="el" href="nodes_8h_source.html#l02855">oomph::BoundaryNode&lt; NODE_TYPE &gt;::resize()</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l02017">oomph::BoundaryNodeBase::Index_of_first_value_assigned_by_face_element_pt</a>, <a class="el" href="nodes_8h_source.html#l02610">oomph::BoundaryNode&lt; NODE_TYPE &gt;::nvalue_assigned_by_face_element()</a>, and <a class="el" href="nodes_8h_source.html#l02854">oomph::BoundaryNode&lt; NODE_TYPE &gt;::resize()</a>.</p>
 
 </div>
 </div>
@@ -769,9 +769,9 @@ template&lt;class NODE_TYPE &gt; </div>
 
 <p>Overload the equation assignment operation. </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02829">2829</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02828">2828</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8cc_source.html#l00896">oomph::Data::assign_eqn_numbers()</a>, <a class="el" href="nodes_8h_source.html#l02022">oomph::BoundaryNodeBase::Copied_node_pt</a>, and <a class="el" href="nodes_8h_source.html#l01766">oomph::SolidNode::variable_position_pt()</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8cc_source.html#l00896">oomph::Data::assign_eqn_numbers()</a>, <a class="el" href="nodes_8h_source.html#l02021">oomph::BoundaryNodeBase::Copied_node_pt</a>, and <a class="el" href="nodes_8h_source.html#l01765">oomph::SolidNode::variable_position_pt()</a>.</p>
 
 </div>
 </div>
@@ -802,9 +802,9 @@ template&lt;class NODE_TYPE &gt; </div>
 
 <p>Have boundary coordinates been set up? </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02518">2518</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02517">2517</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8h_source.html#l02171">oomph::BoundaryNodeBase::boundary_coordinates_have_been_set_up()</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l02170">oomph::BoundaryNodeBase::boundary_coordinates_have_been_set_up()</a>.</p>
 
 </div>
 </div>
@@ -835,11 +835,11 @@ template&lt;class NODE_TYPE &gt; </div>
 
 <p>Copy over additional information so that if the node is periodic it can remain active if the node that holds the periodic data is deleted. </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02289">2289</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02288">2288</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8h_source.html#l02022">oomph::BoundaryNodeBase::Copied_node_pt</a>, and <a class="el" href="nodes_8h_source.html#l02047">oomph::BoundaryNodeBase::index_of_first_value_assigned_by_face_element_pt()</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l02021">oomph::BoundaryNodeBase::Copied_node_pt</a>, and <a class="el" href="nodes_8h_source.html#l02046">oomph::BoundaryNodeBase::index_of_first_value_assigned_by_face_element_pt()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="nodes_8h_source.html#l02463">oomph::BoundaryNode&lt; NODE_TYPE &gt;::~BoundaryNode()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="nodes_8h_source.html#l02462">oomph::BoundaryNode&lt; NODE_TYPE &gt;::~BoundaryNode()</a>.</p>
 
 </div>
 </div>
@@ -870,9 +870,9 @@ template&lt;class NODE_TYPE &gt; </div>
 
 <p>Clear pointers to the copied data used when we have periodic nodes. The shallow (pointer) copy is turned into a deep copy by allocating new data and copying the actual values across. </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02333">2333</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02332">2332</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8h_source.html#l02022">oomph::BoundaryNodeBase::Copied_node_pt</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="cfortran_8h_source.html#l00568">t</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l02021">oomph::BoundaryNodeBase::Copied_node_pt</a>, <a class="el" href="nodes_8h_source.html#l00367">oomph::Data::eqn_number()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, and <a class="el" href="nodes_8cc_source.html#l02408">oomph::Node::value()</a>.</p>
 
 </div>
 </div>
@@ -888,7 +888,7 @@ template&lt;class NODE_TYPE &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">Node * <a class="el" href="classoomph_1_1BoundaryNode.html">oomph::BoundaryNode</a>&lt; NODE_TYPE &gt;::copied_node_pt </td>
+          <td class="memname"><a class="el" href="classoomph_1_1Node.html">Node</a> * <a class="el" href="classoomph_1_1BoundaryNode.html">oomph::BoundaryNode</a>&lt; NODE_TYPE &gt;::copied_node_pt </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -903,9 +903,9 @@ template&lt;class NODE_TYPE &gt; </div>
 
 <p>Return pointer to copied node (null if the current node is not a copy) </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02823">2823</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02822">2822</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8h_source.html#l02022">oomph::BoundaryNodeBase::Copied_node_pt</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l02021">oomph::BoundaryNodeBase::Copied_node_pt</a>.</p>
 
 </div>
 </div>
@@ -937,9 +937,9 @@ template&lt;class NODE_TYPE &gt; </div>
 
 <p>Access to pointer to set of mesh boundaries that this node occupies; NULL if the node is not on any boundary Final overload. </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02526">2526</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02525">2525</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8h_source.html#l02178">oomph::BoundaryNodeBase::get_boundaries_pt()</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l02177">oomph::BoundaryNodeBase::get_boundaries_pt()</a>.</p>
 
 </div>
 </div>
@@ -987,9 +987,9 @@ template&lt;class NODE_TYPE &gt; </div>
 
 <p>Return the vector of k-th generalised boundary coordinates on mesh boundary b Final overload. </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02584">2584</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02583">2583</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8h_source.html#l02202">oomph::BoundaryNodeBase::get_coordinates_on_boundary()</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l02201">oomph::BoundaryNodeBase::get_coordinates_on_boundary()</a>.</p>
 
 </div>
 </div>
@@ -1031,9 +1031,9 @@ template&lt;class NODE_TYPE &gt; </div>
 
 <p>Return the vector of coordinates on mesh boundary b Final overload. </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02567">2567</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02566">2566</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8h_source.html#l02202">oomph::BoundaryNodeBase::get_coordinates_on_boundary()</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l02201">oomph::BoundaryNodeBase::get_coordinates_on_boundary()</a>.</p>
 
 </div>
 </div>
@@ -1064,9 +1064,9 @@ template&lt;class NODE_TYPE &gt; </div>
 
 <p>Return a boolean to indicate whether the data contains any copied values. If the node is periodic all values are copied. </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02793">2793</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02792">2792</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8h_source.html#l02022">oomph::BoundaryNodeBase::Copied_node_pt</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l02021">oomph::BoundaryNodeBase::Copied_node_pt</a>.</p>
 
 </div>
 </div>
@@ -1098,9 +1098,9 @@ template&lt;class NODE_TYPE &gt; </div>
 
 <p>Return a boolean to indicate whether the i-th value is a copied value. If the node is periodic all values are copies. </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02808">2808</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02807">2807</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8h_source.html#l02022">oomph::BoundaryNodeBase::Copied_node_pt</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l02021">oomph::BoundaryNodeBase::Copied_node_pt</a>.</p>
 
 </div>
 </div>
@@ -1131,9 +1131,9 @@ template&lt;class NODE_TYPE &gt; </div>
 
 <p>Test whether the node lies on a boundary Final overload. </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02533">2533</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02532">2532</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8h_source.html#l02190">oomph::BoundaryNodeBase::is_on_boundary()</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l02189">oomph::BoundaryNodeBase::is_on_boundary()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="hermite__element__quad__mesh_8template_8cc_source.html#l00116">oomph::HermiteQuadMesh&lt; ELEMENT &gt;::set_position_of_boundary_node()</a>.</p>
 
@@ -1167,9 +1167,9 @@ template&lt;class NODE_TYPE &gt; </div>
 
 <p>Test whether the node lies on mesh boundary b Final overload. </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02540">2540</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02539">2539</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8h_source.html#l02190">oomph::BoundaryNodeBase::is_on_boundary()</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l02189">oomph::BoundaryNodeBase::is_on_boundary()</a>.</p>
 
 </div>
 </div>
@@ -1187,7 +1187,7 @@ template&lt;class NODE_TYPE &gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classoomph_1_1BoundaryNode.html">oomph::BoundaryNode</a>&lt; NODE_TYPE &gt;::make_periodic </td>
           <td>(</td>
-          <td class="paramtype">Node *const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;&#160;</td>
           <td class="paramname"><em>node_pt</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1201,7 +1201,7 @@ template&lt;class NODE_TYPE &gt; </div>
 
 <p>Make the node periodic. </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02779">2779</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02778">2778</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
 <p class="reference">References <a class="el" href="nodes_8cc_source.html#l02951">oomph::BoundaryNodeBase::make_node_periodic()</a>.</p>
 
@@ -1219,7 +1219,7 @@ template&lt;class NODE_TYPE &gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classoomph_1_1BoundaryNode.html">oomph::BoundaryNode</a>&lt; <a class="el" href="classoomph_1_1SolidNode.html">SolidNode</a> &gt;::make_periodic </td>
           <td>(</td>
-          <td class="paramtype">Node *const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;&#160;</td>
           <td class="paramname"><em>node_pt</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1233,7 +1233,7 @@ template&lt;class NODE_TYPE &gt; </div>
 
 <p>Make the node periodic. </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02886">2886</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02885">2885</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
 <p class="reference">References <a class="el" href="nodes_8cc_source.html#l02951">oomph::BoundaryNodeBase::make_node_periodic()</a>.</p>
 
@@ -1253,7 +1253,7 @@ template&lt;class NODE_TYPE &gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classoomph_1_1BoundaryNode.html">oomph::BoundaryNode</a>&lt; NODE_TYPE &gt;::make_periodic_nodes </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; Node * &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Node.html">Node</a> * &gt; &amp;&#160;</td>
           <td class="paramname"><em>periodic_nodes_pt</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1267,7 +1267,7 @@ template&lt;class NODE_TYPE &gt; </div>
 
 <p>Make the nodes passed in periodic_nodes periodic from this node. </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02786">2786</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02785">2785</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
 <p class="reference">References <a class="el" href="nodes_8cc_source.html#l02896">oomph::BoundaryNodeBase::make_nodes_periodic()</a>.</p>
 
@@ -1301,7 +1301,7 @@ template&lt;class NODE_TYPE &gt; </div>
 
 <p>Get the number of boundary coordinates on mesh boundary b. </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02559">2559</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02558">2558</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
 <p class="reference">References <a class="el" href="nodes_8cc_source.html#l03119">oomph::BoundaryNodeBase::ncoordinates_on_boundary()</a>.</p>
 
@@ -1337,11 +1337,11 @@ template&lt;class NODE_TYPE &gt; </div>
 
 <p>Implements <a class="el" href="classoomph_1_1BoundaryNodeBase.html#ae0d9f15e311861a09073ee01e5fb5cd2">oomph::BoundaryNodeBase</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02611">2611</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02610">2610</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8h_source.html#l02018">oomph::BoundaryNodeBase::Index_of_first_value_assigned_by_face_element_pt</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l02017">oomph::BoundaryNodeBase::Index_of_first_value_assigned_by_face_element_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="nodes_8h_source.html#l02678">oomph::BoundaryNode&lt; NODE_TYPE &gt;::assign_additional_values_with_face_id()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="nodes_8h_source.html#l02677">oomph::BoundaryNode&lt; NODE_TYPE &gt;::assign_additional_values_with_face_id()</a>.</p>
 
 </div>
 </div>
@@ -1403,7 +1403,7 @@ template&lt;class NODE_TYPE &gt; </div>
 
 <p>Remover the node from mesh boundary b, final overload. </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02552">2552</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02551">2551</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
 <p class="reference">References <a class="el" href="nodes_8cc_source.html#l03062">oomph::BoundaryNodeBase::remove_from_boundary()</a>.</p>
 
@@ -1436,9 +1436,9 @@ template&lt;class NODE_TYPE &gt; </div>
 
 <p>Set pointers to the copied data used when we have periodic nodes. </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02246">2246</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02245">2245</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8h_source.html#l02022">oomph::BoundaryNodeBase::Copied_node_pt</a>, and <a class="el" href="nodes_8h_source.html#l02047">oomph::BoundaryNodeBase::index_of_first_value_assigned_by_face_element_pt()</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l02021">oomph::BoundaryNodeBase::Copied_node_pt</a>, <a class="el" href="nodes_8h_source.html#l00116">oomph::Data::Eqn_number</a>, <a class="el" href="nodes_8h_source.html#l02046">oomph::BoundaryNodeBase::index_of_first_value_assigned_by_face_element_pt()</a>, <a class="el" href="nodes_8h_source.html#l00483">oomph::Data::nvalue()</a>, and <a class="el" href="nodes_8h_source.html#l00112">oomph::Data::Value</a>.</p>
 
 </div>
 </div>
@@ -1470,11 +1470,11 @@ template&lt;class NODE_TYPE &gt; </div>
 
 <p>Resize the number of equations. </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02855">2855</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02854">2854</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8h_source.html#l02022">oomph::BoundaryNodeBase::Copied_node_pt</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l02021">oomph::BoundaryNodeBase::Copied_node_pt</a>, and <a class="el" href="nodes_8h_source.html#l00483">oomph::Data::nvalue()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="nodes_8h_source.html#l02678">oomph::BoundaryNode&lt; NODE_TYPE &gt;::assign_additional_values_with_face_id()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="nodes_8h_source.html#l02677">oomph::BoundaryNode&lt; NODE_TYPE &gt;::assign_additional_values_with_face_id()</a>.</p>
 
 </div>
 </div>
@@ -1522,9 +1522,9 @@ template&lt;class NODE_TYPE &gt; </div>
 
 <p>Set the vector of k-th generalised boundary coordinates on mesh boundary b. Final overload. </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02593">2593</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02592">2592</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8h_source.html#l02211">oomph::BoundaryNodeBase::set_coordinates_on_boundary()</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l02210">oomph::BoundaryNodeBase::set_coordinates_on_boundary()</a>.</p>
 
 </div>
 </div>
@@ -1566,9 +1566,9 @@ template&lt;class NODE_TYPE &gt; </div>
 
 <p>Set the vector of coordinates on mesh boundary b Final overload. </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02575">2575</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02574">2574</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8h_source.html#l02211">oomph::BoundaryNodeBase::set_coordinates_on_boundary()</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l02210">oomph::BoundaryNodeBase::set_coordinates_on_boundary()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="hermite__element__quad__mesh_8template_8cc_source.html#l00116">oomph::HermiteQuadMesh&lt; ELEMENT &gt;::set_position_of_boundary_node()</a>.</p>
 
@@ -1605,7 +1605,7 @@ template&lt;class NODE_TYPE &gt; </div>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Nov 2 2021 16:31:42
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Dec 21 2021 17:35:27
         </div>
       </div>
     </footer>

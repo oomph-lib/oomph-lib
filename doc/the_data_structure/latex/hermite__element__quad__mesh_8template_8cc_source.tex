@@ -50,7 +50,7 @@
 \DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l00046}00046 \textcolor{comment}{}  \textcolor{comment}{//=============================================================================}}
 \DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l00047}00047   \textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l00048}\mbox{\hyperlink{classoomph_1_1HermiteQuadMesh_abaac1dedc4a2e578b73b0d849c9a68e8}{00048}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh_abaac1dedc4a2e578b73b0d849c9a68e8}{HermiteQuadMesh<ELEMENT>::set\_position\_of\_node}}(}
-\DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l00049}00049     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& node\_num\_x, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& node\_num\_y, Node* node\_pt)}
+\DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l00049}00049     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& node\_num\_x, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& node\_num\_y, \mbox{\hyperlink{classoomph_1_1Node}{Node}}* node\_pt)}
 \DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l00050}00050   \{}
 \DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l00051}00051     \textcolor{comment}{// get the generalised macro element position of the node}}
 \DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l00052}00052     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} m\_gen(4, 2);}
@@ -77,9 +77,9 @@
 \DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l00073}00073       node\_macro\_position, jacobian2\_MX);}
 \DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l00074}00074 }
 \DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l00075}00075     \textcolor{comment}{// set x\_0}}
-\DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l00076}00076     node\_pt-\/>x\_gen(0, 0) = x\_node[0];}
+\DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l00076}00076     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_af7fdc0dfda495d69bd31c790ee77da73}{x\_gen}}(0, 0) = x\_node[0];}
 \DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l00077}00077     \textcolor{comment}{// set x\_1}}
-\DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l00078}00078     node\_pt-\/>x\_gen(0, 1) = x\_node[1];}
+\DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l00078}00078     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_af7fdc0dfda495d69bd31c790ee77da73}{x\_gen}}(0, 1) = x\_node[1];}
 \DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l00079}00079 }
 \DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l00080}00080     \textcolor{comment}{// set dxi/dsj for i = 0,1 and j = 0,1}}
 \DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l00081}00081     \textcolor{comment}{// computation : dxi/dsj = dm0/dsj*dxi/dm0 + dm1/dsj*dxi/dm1}}
@@ -87,7 +87,7 @@
 \DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l00083}00083     \{}
 \DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l00084}00084       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < 2; j++)}
 \DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l00085}00085       \{}
-\DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l00086}00086         node\_pt-\/>x\_gen(j + 1, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = m\_gen(j + 1, 0) * jacobian\_MX(0, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) +}
+\DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l00086}00086         node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_af7fdc0dfda495d69bd31c790ee77da73}{x\_gen}}(j + 1, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = m\_gen(j + 1, 0) * jacobian\_MX(0, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) +}
 \DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l00087}00087                                    m\_gen(j + 1, 1) * jacobian\_MX(1, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l00088}00088       \}}
 \DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l00089}00089     \}}
@@ -99,7 +99,7 @@
 \DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l00095}00095     \textcolor{comment}{//               + (dm0/ds1*d2xi/dm0dm1 + dm1/ds1*d2xi/dm1\string^2)*dm1/ds0}}
 \DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l00096}00096     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l00097}00097     \{}
-\DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l00098}00098       node\_pt-\/>x\_gen(3, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) =}
+\DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l00098}00098       node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_af7fdc0dfda495d69bd31c790ee77da73}{x\_gen}}(3, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) =}
 \DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l00099}00099         m\_gen(3, 0) * jacobian\_MX(0, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) + m\_gen(3, 1) * jacobian\_MX(1, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) +}
 \DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l00100}00100         m\_gen(1, 0) * (m\_gen(2, 0) * jacobian2\_MX(0, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) +}
 \DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l00101}00101                        m\_gen(2, 1) * jacobian2\_MX(2, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})) +}
@@ -1324,7 +1324,7 @@
 \DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l01320}01320             \textcolor{comment}{// Get pointer to vector of boundaries that this}}
 \DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l01321}01321             \textcolor{comment}{// node lives on}}
 \DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l01322}01322             std::set<unsigned>* boundaries\_pt = 0;}
-\DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l01323}01323             fe\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j)-\/>get\_boundaries\_pt(boundaries\_pt);}
+\DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l01323}01323             fe\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j)-\/>\mbox{\hyperlink{classoomph_1_1Node_a33092a3d51285282ae8ec8e702d1cbf5}{get\_boundaries\_pt}}(boundaries\_pt);}
 \DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l01324}01324 }
 \DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l01325}01325             \textcolor{comment}{// If the node lives on some boundaries....}}
 \DoxyCodeLine{\Hypertarget{hermite__element__quad__mesh_8template_8cc_source_l01326}01326             \textcolor{keywordflow}{if} (boundaries\_pt != 0)}

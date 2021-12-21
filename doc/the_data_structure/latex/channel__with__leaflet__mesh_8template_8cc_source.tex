@@ -106,7 +106,7 @@
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00102}00102     \{}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00103}00103       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < nnode\_1d; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00104}00104       \{}
-\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00105}00105         Node* nod\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00105}00105         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00106}00106         \textcolor{comment}{// do not add the last node : it will go to boundary 6}}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00107}00107         \textcolor{keywordflow}{if} (\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}} != nleft -\/ 1 || \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} != 2)}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00108}00108         \{}
@@ -119,7 +119,7 @@
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00115}00115     \{}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00116}00116       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < nnode\_1d; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00117}00117       \{}
-\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00118}00118         Node* nod\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00118}00118         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00119}00119         this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a007b102ac8e42328872ad658d7110bfc}{add\_boundary\_node}}(6, nod\_pt);}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00120}00120       \}}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00121}00121     \}}
@@ -133,7 +133,7 @@
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00129}00129       \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}} = (nleft + nright) * k + nleft -\/ 1;}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00130}00130       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < nnode\_1d; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00131}00131       \{}
-\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00132}00132         Node* nod\_pt =}
+\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00132}00132         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt =}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00133}00133           this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(e)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}((\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} + 1) * nnode\_1d -\/ 1);}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00134}00134         this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_aa864cbb7f3ff399eef871c63067894df}{convert\_to\_boundary\_node}}(nod\_pt);}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00135}00135         this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a007b102ac8e42328872ad658d7110bfc}{add\_boundary\_node}}(4, nod\_pt);}
@@ -141,7 +141,7 @@
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00137}00137         \textcolor{comment}{// Set coordinates}}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00138}00138         zeta[0] = double(k) * hleaflet / double(ny1) +}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00139}00139                   double(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * hleaflet / double(ny1) / double(nnode\_1d -\/ 1);}
-\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00140}00140         nod\_pt-\/>set\_coordinates\_on\_boundary(4, zeta);}
+\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00140}00140         nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a94c19e165ab4e88aabbfa27443c530b7}{set\_coordinates\_on\_boundary}}(4, zeta);}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00141}00141       \}}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00142}00142     \}}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00143}00143 }
@@ -162,7 +162,7 @@
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00158}00158 }
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00159}00159     \textcolor{comment}{// Allocate storage for newly created node outside}}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00160}00160     \textcolor{comment}{// so we can refer to the most recently created one below.}}
-\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00161}00161     Node* nod\_pt = 0;}
+\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00161}00161     \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = 0;}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00162}00162 }
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00163}00163     \textcolor{comment}{// duplicate the east nodes and add them to the 6th boundary}}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00164}00164     \textcolor{comment}{// Add the first node to the 0th boundary (horizontal)}}
@@ -178,7 +178,7 @@
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00174}00174       this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_ac09a9bfeb6d70d8bbefe13c86948a6fc}{add\_node\_pt}}(nod\_pt);}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00175}00175       \textcolor{comment}{// Set coordinates}}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00176}00176       zeta[0] = \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} * hleaflet / double(ny1) / double(nnode\_1d -\/ 1);}
-\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00177}00177       nod\_pt-\/>set\_coordinates\_on\_boundary(5, zeta);}
+\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00177}00177       nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a94c19e165ab4e88aabbfa27443c530b7}{set\_coordinates\_on\_boundary}}(5, zeta);}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00178}00178     \}}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00179}00179 }
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00180}00180 }
@@ -192,7 +192,7 @@
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00188}00188       this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a007b102ac8e42328872ad658d7110bfc}{add\_boundary\_node}}(5, nod\_pt);}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00189}00189       \textcolor{comment}{// Set coordinates}}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00190}00190       zeta[0] = k * hleaflet / double(ny1);}
-\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00191}00191       nod\_pt-\/>set\_coordinates\_on\_boundary(5, zeta);}
+\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00191}00191       nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a94c19e165ab4e88aabbfa27443c530b7}{set\_coordinates\_on\_boundary}}(5, zeta);}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00192}00192 }
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00193}00193       \textcolor{comment}{// Loop over other nodes on element's eastern edge}}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00194}00194       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 1; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < nnode\_1d; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
@@ -216,7 +216,7 @@
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00212}00212         \textcolor{comment}{// Set coordinates}}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00213}00213         zeta[0] = double(k) * hleaflet / double(ny1) +}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00214}00214                   double(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * hleaflet / double(ny1) / double(nnode\_1d -\/ 1);}
-\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00215}00215         nod\_pt-\/>set\_coordinates\_on\_boundary(5, zeta);}
+\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00215}00215         nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a94c19e165ab4e88aabbfa27443c530b7}{set\_coordinates\_on\_boundary}}(5, zeta);}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00216}00216       \}}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00217}00217     \}}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00218}00218 }
@@ -259,8 +259,8 @@
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00255}00255       \mbox{\hyperlink{classoomph_1_1AlgebraicNode}{AlgebraicNode}}* nod\_pt = node\_pt(j);}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00256}00256 }
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00257}00257       \textcolor{comment}{// Get coordinates}}
-\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00258}00258       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}} = nod\_pt-\/>x(0);}
-\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00259}00259       \textcolor{keywordtype}{double} y = nod\_pt-\/>x(1);}
+\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00258}00258       \textcolor{keywordtype}{double} x = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0);}
+\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00259}00259       \textcolor{keywordtype}{double} y = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1);}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00260}00260 }
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00261}00261       \textcolor{comment}{// Quick check to know if the wall is in its undeformed position}}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00262}00262       \textcolor{comment}{// It actually checks that the top of the wall is in (x\_0,hleaflet)}}
@@ -284,7 +284,7 @@
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00280}00280       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} ref\_value(4);}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00281}00281 }
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00282}00282       \textcolor{comment}{// Part I}}
-\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00283}00283       \textcolor{keywordflow}{if} ((\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}} <= X\_0) \&\& (y <= hleaflet))}
+\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00283}00283       \textcolor{keywordflow}{if} ((x <= X\_0) \&\& (y <= hleaflet))}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00284}00284       \{}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00285}00285         \textcolor{comment}{// First reference value: y0}}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00286}00286         ref\_value[0] = y;}
@@ -310,7 +310,7 @@
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00306}00306 }
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00307}00307         \textcolor{comment}{// Third reference value:fraction of the horizontal line}}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00308}00308         \textcolor{comment}{// between the edge and the wall}}
-\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00309}00309         ref\_value[2] = (lleft + \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}} -\/ X\_0) / lleft;}
+\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00309}00309         ref\_value[2] = (lleft + x -\/ X\_0) / lleft;}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00310}00310 }
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00311}00311 }
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00312}00312         \textcolor{comment}{// Setup algebraic update for node: Pass update information}}
@@ -321,7 +321,7 @@
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00317}00317                                      ref\_value); \textcolor{comment}{// vector of ref. values}}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00318}00318       \}}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00319}00319       \textcolor{comment}{// Part II}}
-\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00320}00320       \textcolor{keywordflow}{if} ((\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}} >= X\_0) \&\& (y <= hleaflet))}
+\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00320}00320       \textcolor{keywordflow}{if} ((x >= X\_0) \&\& (y <= hleaflet))}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00321}00321       \{}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00322}00322         \textcolor{comment}{// First reference value: y0}}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00323}00323         ref\_value[0] = y;}
@@ -347,7 +347,7 @@
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00343}00343 }
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00344}00344         \textcolor{comment}{// Third reference value:fraction of the horizontal line}}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00345}00345         \textcolor{comment}{// between the edge and the wall}}
-\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00346}00346         ref\_value[2] = (\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}} -\/ X\_0) / lright;}
+\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00346}00346         ref\_value[2] = (x -\/ X\_0) / lright;}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00347}00347 }
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00348}00348         \textcolor{comment}{// Setup algebraic update for node: Pass update information}}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00349}00349         \textcolor{comment}{// to AlgebraicNode:}}
@@ -357,7 +357,7 @@
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00353}00353                                      ref\_value); \textcolor{comment}{// vector of ref. values}}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00354}00354       \}}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00355}00355       \textcolor{comment}{// Part III}}
-\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00356}00356       \textcolor{keywordflow}{if} ((\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}} <= X\_0) \&\& (y >= hleaflet))}
+\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00356}00356       \textcolor{keywordflow}{if} ((x <= X\_0) \&\& (y >= hleaflet))}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00357}00357       \{}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00358}00358         \textcolor{comment}{// First reference value: y0}}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00359}00359         ref\_value[0] = y;}
@@ -367,7 +367,7 @@
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00363}00363 }
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00364}00364         \textcolor{comment}{// Third reference value:fraction of the horizontal line}}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00365}00365         \textcolor{comment}{// between the edge and the middle line}}
-\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00366}00366         ref\_value[2] = (lleft + \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}} -\/ X\_0) / lleft;}
+\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00366}00366         ref\_value[2] = (lleft + x -\/ X\_0) / lleft;}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00367}00367 }
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00368}00368         \textcolor{comment}{// geomobject}}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00369}00369         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<GeomObject*>}} geom\_object\_pt(1);}
@@ -381,7 +381,7 @@
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00377}00377                                      ref\_value); \textcolor{comment}{// vector of ref. values}}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00378}00378       \}}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00379}00379       \textcolor{comment}{// Part IV}}
-\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00380}00380       \textcolor{keywordflow}{if} ((\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}} >= X\_0) \&\& (y >= hleaflet))}
+\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00380}00380       \textcolor{keywordflow}{if} ((x >= X\_0) \&\& (y >= hleaflet))}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00381}00381       \{}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00382}00382         \textcolor{comment}{// First reference value: y0}}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00383}00383         ref\_value[0] = y;}
@@ -391,7 +391,7 @@
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00387}00387 }
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00388}00388         \textcolor{comment}{// Third reference value:fraction of the horizontal line}}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00389}00389         \textcolor{comment}{// between the edge and the wall}}
-\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00390}00390         ref\_value[2] = (\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}} -\/ X\_0) / lright;}
+\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00390}00390         ref\_value[2] = (x -\/ X\_0) / lright;}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00391}00391 }
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00392}00392         \textcolor{comment}{// geomobject}}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00393}00393         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<GeomObject*>}} geom\_object\_pt(1);}
@@ -492,8 +492,8 @@
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00488}00488 }
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00489}00489 }
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00490}00490     \textcolor{comment}{// Assign new nodal coordinates}}
-\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00491}00491     node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 0) = x0 + r * (r\_wall[0] -\/ x0);}
-\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00492}00492     node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 1) = y0 + r * (r\_wall[1] -\/ y0);}
+\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00491}00491     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 0) = x0 + r * (r\_wall[0] -\/ x0);}
+\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00492}00492     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 1) = y0 + r * (r\_wall[1] -\/ y0);}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00493}00493   \}}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00494}00494 }
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00495}00495 }
@@ -534,8 +534,8 @@
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00530}00530     \textcolor{keywordtype}{double} r = ref\_value[2];}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00531}00531 }
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00532}00532     \textcolor{comment}{// Assign new nodal coordinates}}
-\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00533}00533     node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 0) = r\_wall[0] + r * (x0 -\/ r\_wall[0]);}
-\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00534}00534     node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 1) = r\_wall[1] + r * (y0 -\/ r\_wall[1]);}
+\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00533}00533     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 0) = r\_wall[0] + r * (x0 -\/ r\_wall[0]);}
+\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00534}00534     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 1) = r\_wall[1] + r * (y0 -\/ r\_wall[1]);}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00535}00535   \}}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00536}00536 }
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00537}00537 }
@@ -591,8 +591,8 @@
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00587}00587     \textcolor{keywordtype}{double} r = ref\_value[2];}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00588}00588 }
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00589}00589     \textcolor{comment}{// Assign new nodal coordinates}}
-\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00590}00590     node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 0) = x0 + r * (r\_line[0] -\/ x0);}
-\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00591}00591     node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 1) = y0 + r * (r\_line[1] -\/ y0);}
+\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00590}00590     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 0) = x0 + r * (r\_line[0] -\/ x0);}
+\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00591}00591     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 1) = y0 + r * (r\_line[1] -\/ y0);}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00592}00592   \}}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00593}00593 }
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00594}00594   \textcolor{comment}{//=================================================================}\textcolor{comment}{}}
@@ -626,8 +626,8 @@
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00622}00622     \textcolor{keywordtype}{double} r = ref\_value[2];}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00623}00623 }
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00624}00624     \textcolor{comment}{// Assign new nodal coordinates}}
-\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00625}00625     node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 0) = r\_line[0] + r * (x0 -\/ r\_line[0]);}
-\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00626}00626     node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 1) = r\_line[1] + r * (y0 -\/ r\_line[1]);}
+\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00625}00625     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 0) = r\_line[0] + r * (x0 -\/ r\_line[0]);}
+\DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00626}00626     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 1) = r\_line[1] + r * (y0 -\/ r\_line[1]);}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00627}00627   \}}
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00628}00628 }
 \DoxyCodeLine{\Hypertarget{channel__with__leaflet__mesh_8template_8cc_source_l00629}00629 \textcolor{comment}{}}

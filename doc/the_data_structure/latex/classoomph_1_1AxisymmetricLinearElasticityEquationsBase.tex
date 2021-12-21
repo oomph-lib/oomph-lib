@@ -18,48 +18,48 @@ Inheritance diagram for oomph\+::Axisymmetric\+Linear\+Elasticity\+Equations\+Ba
 \doxysubsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_afa35b69a888eecae4b5f199a1adf88c5}{Body\+Force\+Fct\+Pt}}) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&b)
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_afa35b69a888eecae4b5f199a1adf88c5}{Body\+Force\+Fct\+Pt}}) (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&b)
 \begin{DoxyCompactList}\small\item\em Function pointer to function that specifies the body force as a function of the Cartesian coordinates and time FCT(x,b) -- x and b are Vectors! \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-virtual unsigned \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_a89f40d1bc15ebc4128ea8a22032d31f5}{u\+\_\+index\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+virtual unsigned \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_a89f40d1bc15ebc4128ea8a22032d31f5}{u\+\_\+index\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Return the index at which the i-\/th (i=0\+: r, i=1\+: z; i=2\+: theta) unknown displacement component is stored at the nodes. The default assignment here (u\+\_\+r, u\+\_\+z, u\+\_\+theta) is appropriate for single-\/physics problems. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_a352c704cb283b27e5c4d8549f5e380d7}{d2u\+\_\+dt2\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_a352c704cb283b27e5c4d8549f5e380d7}{d2u\+\_\+dt2\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity}} (const unsigned \&n, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em d$^\wedge$2u/dt$^\wedge$2 at local node n \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_aa340a3d1068cb5f65ebbfabf1bf07b1e}{du\+\_\+dt\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_aa340a3d1068cb5f65ebbfabf1bf07b1e}{du\+\_\+dt\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity}} (const unsigned \&n, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em du/dt at local node n \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_afeb2209aa0968aed5fa1ac59bc942991}{interpolated\+\_\+u\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&disp) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_afeb2209aa0968aed5fa1ac59bc942991}{interpolated\+\_\+u\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&disp) const
 \begin{DoxyCompactList}\small\item\em Compute vector of FE interpolated displacement u at local coordinate s. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_af7660a53ff93c55f3c0c6f634ac2dd80}{interpolated\+\_\+u\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_af7660a53ff93c55f3c0c6f634ac2dd80}{interpolated\+\_\+u\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Return FE interpolated displacement u\mbox{[}i\mbox{]} (i=0\+: r, i=1\+: z; i=2\+: theta) at local coordinate s. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_a9b517ddf75cc1a62fbce45d8333cbcaa}{interpolated\+\_\+du\+\_\+dt\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&du\+\_\+dt) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_a9b517ddf75cc1a62fbce45d8333cbcaa}{interpolated\+\_\+du\+\_\+dt\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&du\+\_\+dt) const
 \begin{DoxyCompactList}\small\item\em Compute vector of FE interpolated velocity du/dt at local coordinate s. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_a5fd012d570d52057193e0799a3150f20}{interpolated\+\_\+d2u\+\_\+dt2\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&d2u\+\_\+dt2) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_a5fd012d570d52057193e0799a3150f20}{interpolated\+\_\+d2u\+\_\+dt2\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&d2u\+\_\+dt2) const
 \begin{DoxyCompactList}\small\item\em Compute vector of FE interpolated accel d2u/dt2 at local coordinate s. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_aa37df6e9aef3ee1326187b1c51197527}{Axisymmetric\+Linear\+Elasticity\+Equations\+Base}} ()
 \begin{DoxyCompactList}\small\item\em Constructor\+: Set null pointers for constitutive law. Set physical parameter values to default values, and set body force to zero. \end{DoxyCompactList}\item 
 double $\ast$\& \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_ab254de51c8a16aa65764db77a89c92ed}{youngs\+\_\+modulus\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return the pointer to Young\textquotesingle{}s modulus. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_a8e7ec15db5634c6fd8fac7a848baf19d}{youngs\+\_\+modulus}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_a8e7ec15db5634c6fd8fac7a848baf19d}{youngs\+\_\+modulus}} () const
 \begin{DoxyCompactList}\small\item\em Access function to Young\textquotesingle{}s modulus. \end{DoxyCompactList}\item 
-double \& \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_a932b84dec76f7dc53fbce7ef4d062b34}{nu}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \& \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_a932b84dec76f7dc53fbce7ef4d062b34}{nu}} () const
 \begin{DoxyCompactList}\small\item\em Access function for Poisson\textquotesingle{}s ratio. \end{DoxyCompactList}\item 
 double $\ast$\& \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_a5d148cf8c37b988e8217c6aa18e71252}{nu\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for pointer to Poisson\textquotesingle{}s ratio. \end{DoxyCompactList}\item 
 double $\ast$\& \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_a940345f31341e69a8afbd59e879a4451}{lambda\+\_\+sq\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for pointer to timescale ratio (nondim density) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \& \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_a3dd89f0ad59f589f4052765d9dc32e7d}{lambda\+\_\+sq}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+const double \& \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_a3dd89f0ad59f589f4052765d9dc32e7d}{lambda\+\_\+sq}} () const
 \begin{DoxyCompactList}\small\item\em Access function for timescale ratio (nondim density) \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_afa35b69a888eecae4b5f199a1adf88c5}{Body\+Force\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_a8067c3682f9e1c10c846dabba6ca4315}{body\+\_\+force\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to body force function. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_afa35b69a888eecae4b5f199a1adf88c5}{Body\+Force\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_add2664f22e677925a3163547a1dd5ffa}{body\+\_\+force\+\_\+fct\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+\mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_afa35b69a888eecae4b5f199a1adf88c5}{Body\+Force\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_add2664f22e677925a3163547a1dd5ffa}{body\+\_\+force\+\_\+fct\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to body force function (const version) \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_ad388a41f086f181a3c1608a5fb337ac6}{body\+\_\+force}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&b) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_ad388a41f086f181a3c1608a5fb337ac6}{body\+\_\+force}} (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&b) const
 \begin{DoxyCompactList}\small\item\em Evaluate body force at Eulerian coordinate x at present time (returns zero vector if no body force function pointer has been set) \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_a46c5dca6d1bc3e471f71cb44bdc06284}{ndof\+\_\+types}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_a46c5dca6d1bc3e471f71cb44bdc06284}{ndof\+\_\+types}} () const
 \begin{DoxyCompactList}\small\item\em The number of \char`\"{}\+DOF types\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: for now lump them all into one DOF type. Can be adjusted later. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_a714fb359257e5a262e2e1368fcfc1ccb}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_a714fb359257e5a262e2e1368fcfc1ccb}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const
 \begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+DOF type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -94,7 +94,7 @@ Definition at line \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_sour
 \index{oomph::AxisymmetricLinearElasticityEquationsBase@{oomph::AxisymmetricLinearElasticityEquationsBase}!BodyForceFctPt@{BodyForceFctPt}}
 \index{BodyForceFctPt@{BodyForceFctPt}!oomph::AxisymmetricLinearElasticityEquationsBase@{oomph::AxisymmetricLinearElasticityEquationsBase}}
 \doxysubsubsection{\texorpdfstring{BodyForceFctPt}{BodyForceFctPt}}
-{\footnotesize\ttfamily typedef void($\ast$ oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::\+Body\+Force\+Fct\+Pt) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&b)}
+{\footnotesize\ttfamily typedef void($\ast$ oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::\+Body\+Force\+Fct\+Pt) (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&b)}
 
 
 
@@ -128,7 +128,7 @@ Definition at line \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_sour
 \index{oomph::AxisymmetricLinearElasticityEquationsBase@{oomph::AxisymmetricLinearElasticityEquationsBase}!body\_force@{body\_force}}
 \index{body\_force@{body\_force}!oomph::AxisymmetricLinearElasticityEquationsBase@{oomph::AxisymmetricLinearElasticityEquationsBase}}
 \doxysubsubsection{\texorpdfstring{body\_force()}{body\_force()}}
-{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::body\+\_\+force (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{b }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::body\+\_\+force (\begin{DoxyParamCaption}\item[{const double \&}]{time,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{b }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -140,7 +140,7 @@ Definition at line \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_sour
 
 
 
-References \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_source_l00408}{Body\+\_\+force\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l02616}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_source_l00408}{Body\+\_\+force\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
 
 
 
@@ -186,7 +186,7 @@ References \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_source_l0040
 \index{oomph::AxisymmetricLinearElasticityEquationsBase@{oomph::AxisymmetricLinearElasticityEquationsBase}!d2u\_dt2\_axisymmetric\_linear\_elasticity@{d2u\_dt2\_axisymmetric\_linear\_elasticity}}
 \index{d2u\_dt2\_axisymmetric\_linear\_elasticity@{d2u\_dt2\_axisymmetric\_linear\_elasticity}!oomph::AxisymmetricLinearElasticityEquationsBase@{oomph::AxisymmetricLinearElasticityEquationsBase}}
 \doxysubsubsection{\texorpdfstring{d2u\_dt2\_axisymmetric\_linear\_elasticity()}{d2u\_dt2\_axisymmetric\_linear\_elasticity()}}
-{\footnotesize\ttfamily double oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::d2u\+\_\+dt2\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::d2u\+\_\+dt2\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -198,7 +198,7 @@ Definition at line \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_sour
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{timesteppers_8h_source_l00389}{oomph\+::\+Time\+Stepper\+::is\+\_\+steady()}}, \mbox{\hyperlink{elements_8h_source_l02598}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_source_l00060}{u\+\_\+index\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity()}}, and \mbox{\hyperlink{timesteppers_8h_source_l00594}{oomph\+::\+Time\+Stepper\+::weight()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{timesteppers_8h_source_l00389}{oomph\+::\+Time\+Stepper\+::is\+\_\+steady()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00238}{oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_source_l00060}{u\+\_\+index\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity()}}, and \mbox{\hyperlink{timesteppers_8h_source_l00594}{oomph\+::\+Time\+Stepper\+::weight()}}.
 
 
 
@@ -208,7 +208,7 @@ Referenced by \mbox{\hyperlink{axisym__linear__elasticity__elements_8cc_source_l
 \index{oomph::AxisymmetricLinearElasticityEquationsBase@{oomph::AxisymmetricLinearElasticityEquationsBase}!du\_dt\_axisymmetric\_linear\_elasticity@{du\_dt\_axisymmetric\_linear\_elasticity}}
 \index{du\_dt\_axisymmetric\_linear\_elasticity@{du\_dt\_axisymmetric\_linear\_elasticity}!oomph::AxisymmetricLinearElasticityEquationsBase@{oomph::AxisymmetricLinearElasticityEquationsBase}}
 \doxysubsubsection{\texorpdfstring{du\_dt\_axisymmetric\_linear\_elasticity()}{du\_dt\_axisymmetric\_linear\_elasticity()}}
-{\footnotesize\ttfamily double oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::du\+\_\+dt\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::du\+\_\+dt\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -220,7 +220,7 @@ Definition at line \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_sour
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{timesteppers_8h_source_l00389}{oomph\+::\+Time\+Stepper\+::is\+\_\+steady()}}, \mbox{\hyperlink{elements_8h_source_l02598}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_source_l00060}{u\+\_\+index\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity()}}, and \mbox{\hyperlink{timesteppers_8h_source_l00594}{oomph\+::\+Time\+Stepper\+::weight()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{timesteppers_8h_source_l00389}{oomph\+::\+Time\+Stepper\+::is\+\_\+steady()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00238}{oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_source_l00060}{u\+\_\+index\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity()}}, and \mbox{\hyperlink{timesteppers_8h_source_l00594}{oomph\+::\+Time\+Stepper\+::weight()}}.
 
 
 
@@ -246,13 +246,13 @@ Definition at line \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_sour
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00704}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}.
+References \mbox{\hyperlink{elements_8h_source_l00704}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_a5fd012d570d52057193e0799a3150f20}\label{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_a5fd012d570d52057193e0799a3150f20}} 
 \index{oomph::AxisymmetricLinearElasticityEquationsBase@{oomph::AxisymmetricLinearElasticityEquationsBase}!interpolated\_d2u\_dt2\_axisymmetric\_linear\_elasticity@{interpolated\_d2u\_dt2\_axisymmetric\_linear\_elasticity}}
 \index{interpolated\_d2u\_dt2\_axisymmetric\_linear\_elasticity@{interpolated\_d2u\_dt2\_axisymmetric\_linear\_elasticity}!oomph::AxisymmetricLinearElasticityEquationsBase@{oomph::AxisymmetricLinearElasticityEquationsBase}}
 \doxysubsubsection{\texorpdfstring{interpolated\_d2u\_dt2\_axisymmetric\_linear\_elasticity()}{interpolated\_d2u\_dt2\_axisymmetric\_linear\_elasticity()}}
-{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::interpolated\+\_\+d2u\+\_\+dt2\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{d2u\+\_\+dt2 }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::interpolated\+\_\+d2u\+\_\+dt2\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{d2u\+\_\+dt2 }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -264,7 +264,7 @@ Definition at line \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_sour
 
 
 
-References \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_source_l00067}{d2u\+\_\+dt2\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
+References \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_source_l00067}{d2u\+\_\+dt2\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
 
 
 
@@ -274,7 +274,7 @@ Referenced by \mbox{\hyperlink{axisym__linear__elasticity__elements_8cc_source_l
 \index{oomph::AxisymmetricLinearElasticityEquationsBase@{oomph::AxisymmetricLinearElasticityEquationsBase}!interpolated\_du\_dt\_axisymmetric\_linear\_elasticity@{interpolated\_du\_dt\_axisymmetric\_linear\_elasticity}}
 \index{interpolated\_du\_dt\_axisymmetric\_linear\_elasticity@{interpolated\_du\_dt\_axisymmetric\_linear\_elasticity}!oomph::AxisymmetricLinearElasticityEquationsBase@{oomph::AxisymmetricLinearElasticityEquationsBase}}
 \doxysubsubsection{\texorpdfstring{interpolated\_du\_dt\_axisymmetric\_linear\_elasticity()}{interpolated\_du\_dt\_axisymmetric\_linear\_elasticity()}}
-{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::interpolated\+\_\+du\+\_\+dt\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{du\+\_\+dt }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::interpolated\+\_\+du\+\_\+dt\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{du\+\_\+dt }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -286,7 +286,7 @@ Definition at line \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_sour
 
 
 
-References \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_source_l00100}{du\+\_\+dt\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
+References \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_source_l00100}{du\+\_\+dt\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
 
 
 
@@ -296,7 +296,7 @@ Referenced by \mbox{\hyperlink{axisym__linear__elasticity__elements_8cc_source_l
 \index{oomph::AxisymmetricLinearElasticityEquationsBase@{oomph::AxisymmetricLinearElasticityEquationsBase}!interpolated\_u\_axisymmetric\_linear\_elasticity@{interpolated\_u\_axisymmetric\_linear\_elasticity}}
 \index{interpolated\_u\_axisymmetric\_linear\_elasticity@{interpolated\_u\_axisymmetric\_linear\_elasticity}!oomph::AxisymmetricLinearElasticityEquationsBase@{oomph::AxisymmetricLinearElasticityEquationsBase}}
 \doxysubsubsection{\texorpdfstring{interpolated\_u\_axisymmetric\_linear\_elasticity()}{interpolated\_u\_axisymmetric\_linear\_elasticity()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily double oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::interpolated\+\_\+u\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::interpolated\+\_\+u\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -308,13 +308,13 @@ Definition at line \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_sour
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02598}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, and \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_source_l00060}{u\+\_\+index\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, and \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_source_l00060}{u\+\_\+index\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_afeb2209aa0968aed5fa1ac59bc942991}\label{classoomph_1_1AxisymmetricLinearElasticityEquationsBase_afeb2209aa0968aed5fa1ac59bc942991}} 
 \index{oomph::AxisymmetricLinearElasticityEquationsBase@{oomph::AxisymmetricLinearElasticityEquationsBase}!interpolated\_u\_axisymmetric\_linear\_elasticity@{interpolated\_u\_axisymmetric\_linear\_elasticity}}
 \index{interpolated\_u\_axisymmetric\_linear\_elasticity@{interpolated\_u\_axisymmetric\_linear\_elasticity}!oomph::AxisymmetricLinearElasticityEquationsBase@{oomph::AxisymmetricLinearElasticityEquationsBase}}
 \doxysubsubsection{\texorpdfstring{interpolated\_u\_axisymmetric\_linear\_elasticity()}{interpolated\_u\_axisymmetric\_linear\_elasticity()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::interpolated\+\_\+u\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{disp }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::interpolated\+\_\+u\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{disp }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -326,7 +326,7 @@ Definition at line \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_sour
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02598}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, and \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_source_l00060}{u\+\_\+index\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, and \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_source_l00060}{u\+\_\+index\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity()}}.
 
 
 
@@ -336,7 +336,7 @@ Referenced by \mbox{\hyperlink{axisym__linear__elasticity__elements_8cc_source_l
 \index{oomph::AxisymmetricLinearElasticityEquationsBase@{oomph::AxisymmetricLinearElasticityEquationsBase}!lambda\_sq@{lambda\_sq}}
 \index{lambda\_sq@{lambda\_sq}!oomph::AxisymmetricLinearElasticityEquationsBase@{oomph::AxisymmetricLinearElasticityEquationsBase}}
 \doxysubsubsection{\texorpdfstring{lambda\_sq()}{lambda\_sq()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \& oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::lambda\+\_\+sq (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const double \& oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::lambda\+\_\+sq (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -434,7 +434,7 @@ References \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_source_l0040
 \index{oomph::AxisymmetricLinearElasticityEquationsBase@{oomph::AxisymmetricLinearElasticityEquationsBase}!u\_index\_axisymmetric\_linear\_elasticity@{u\_index\_axisymmetric\_linear\_elasticity}}
 \index{u\_index\_axisymmetric\_linear\_elasticity@{u\_index\_axisymmetric\_linear\_elasticity}!oomph::AxisymmetricLinearElasticityEquationsBase@{oomph::AxisymmetricLinearElasticityEquationsBase}}
 \doxysubsubsection{\texorpdfstring{u\_index\_axisymmetric\_linear\_elasticity()}{u\_index\_axisymmetric\_linear\_elasticity()}}
-{\footnotesize\ttfamily virtual unsigned oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::u\+\_\+index\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual unsigned oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::u\+\_\+index\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 

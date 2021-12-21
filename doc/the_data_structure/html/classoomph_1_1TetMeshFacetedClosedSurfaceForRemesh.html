@@ -150,7 +150,7 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a7b391693935d08cc63a41d6accbabd57"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetMeshFacetedClosedSurfaceForRemesh.html#a7b391693935d08cc63a41d6accbabd57">TetMeshFacetedClosedSurfaceForRemesh</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; Node * &gt; const &amp;vertex_node_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &gt; const &amp;facet_connectivity, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; const &amp;facet_boundary_id)</td></tr>
+<tr class="memitem:a7b391693935d08cc63a41d6accbabd57"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetMeshFacetedClosedSurfaceForRemesh.html#a7b391693935d08cc63a41d6accbabd57">TetMeshFacetedClosedSurfaceForRemesh</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Node.html">Node</a> * &gt; const &amp;vertex_node_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &gt; const &amp;facet_connectivity, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; const &amp;facet_boundary_id)</td></tr>
 <tr class="memdesc:a7b391693935d08cc63a41d6accbabd57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for a FacetedSurface created from a list of nodes and connectivity information. This is used in remeshing.  <a href="classoomph_1_1TetMeshFacetedClosedSurfaceForRemesh.html#a7b391693935d08cc63a41d6accbabd57">More...</a><br /></td></tr>
 <tr class="separator:a7b391693935d08cc63a41d6accbabd57"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a25c25f16a18e2ff4551a4683fbdb3686"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetMeshFacetedClosedSurfaceForRemesh.html#a25c25f16a18e2ff4551a4683fbdb3686">~TetMeshFacetedClosedSurfaceForRemesh</a> ()</td></tr>
@@ -251,7 +251,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa9c92e3c5ba628cdcc91086c9cb38c22 inherit pub_methods_classoomph_1_1TetMeshFacetedSurface"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetMeshFacetedSurface.html#aa9c92e3c5ba628cdcc91086c9cb38c22">boundary_zeta20</a> (const unsigned &amp;facet_id, const double &amp;zeta_boundary, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;zeta)</td></tr>
 <tr class="memdesc:aa9c92e3c5ba628cdcc91086c9cb38c22 inherit pub_methods_classoomph_1_1TetMeshFacetedSurface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual function that specifies the variation of the zeta coordinates in the <a class="el" href="classoomph_1_1GeomObject.html" title="/////////////////////////////////////////////////////////////////////">GeomObject</a> along the boundary connecting vertices 2 and 0 in facet facet_id. Default implementation: Linear interpolation between edges. zeta_boundary=0.0: we're on vertex 2; zeta_boundary=1.0: we're on vertex 0.  <a href="classoomph_1_1TetMeshFacetedSurface.html#aa9c92e3c5ba628cdcc91086c9cb38c22">More...</a><br /></td></tr>
 <tr class="separator:aa9c92e3c5ba628cdcc91086c9cb38c22 inherit pub_methods_classoomph_1_1TetMeshFacetedSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ed1b3038fb88005c2c637543fd20433 inherit pub_methods_classoomph_1_1TetMeshFacetedSurface"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetMeshFacetedSurface.html#a6ed1b3038fb88005c2c637543fd20433">vertex_index_in_tetgen</a> (const unsigned &amp;<a class="el" href="namespaceoomph.html#ad835af913df4cbdc5648440f91b794ab">f</a>)</td></tr>
+<tr class="memitem:a6ed1b3038fb88005c2c637543fd20433 inherit pub_methods_classoomph_1_1TetMeshFacetedSurface"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetMeshFacetedSurface.html#a6ed1b3038fb88005c2c637543fd20433">vertex_index_in_tetgen</a> (const unsigned &amp;f)</td></tr>
 <tr class="memdesc:a6ed1b3038fb88005c2c637543fd20433 inherit pub_methods_classoomph_1_1TetMeshFacetedSurface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Facet connectivity: vertex_index[j] is the index of the j-th vertex (in the Vertex_pt vector) in facet f. Bit of an obscure functionality that's only needed for setup tetgen_io.  <a href="classoomph_1_1TetMeshFacetedSurface.html#a6ed1b3038fb88005c2c637543fd20433">More...</a><br /></td></tr>
 <tr class="separator:a6ed1b3038fb88005c2c637543fd20433 inherit pub_methods_classoomph_1_1TetMeshFacetedSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -288,7 +288,7 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">oomph::TetMeshFacetedClosedSurfaceForRemesh::TetMeshFacetedClosedSurfaceForRemesh </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; Node * &gt; const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Node.html">Node</a> * &gt; const &amp;&#160;</td>
           <td class="paramname"><em>vertex_node_pt</em>, </td>
         </tr>
         <tr>
@@ -315,7 +315,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="tet__mesh_8cc_source.html#l00040">40</a> of file <a class="el" href="tet__mesh_8cc_source.html">tet_mesh.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="namespaceoomph.html#ad835af913df4cbdc5648440f91b794ab">oomph::f()</a>, <a class="el" href="tet__mesh_8h_source.html#l00486">oomph::TetMeshFacetedSurface::Facet_pt</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="tet__mesh_8h_source.html#l00483">oomph::TetMeshFacetedSurface::Vertex_pt</a>.</p>
+<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00486">oomph::TetMeshFacetedSurface::Facet_pt</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="tet__mesh_8h_source.html#l00483">oomph::TetMeshFacetedSurface::Vertex_pt</a>.</p>
 
 </div>
 </div>
@@ -346,7 +346,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="tet__mesh_8cc_source.html#l00073">73</a> of file <a class="el" href="tet__mesh_8cc_source.html">tet_mesh.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="namespaceoomph.html#ad835af913df4cbdc5648440f91b794ab">oomph::f()</a>, <a class="el" href="tet__mesh_8h_source.html#l00486">oomph::TetMeshFacetedSurface::Facet_pt</a>, <a class="el" href="tet__mesh_8h_source.html#l00325">oomph::TetMeshFacetedSurface::nfacet()</a>, <a class="el" href="tet__mesh_8h_source.html#l00319">oomph::TetMeshFacetedSurface::nvertex()</a>, and <a class="el" href="tet__mesh_8h_source.html#l00483">oomph::TetMeshFacetedSurface::Vertex_pt</a>.</p>
+<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00486">oomph::TetMeshFacetedSurface::Facet_pt</a>, <a class="el" href="tet__mesh_8h_source.html#l00325">oomph::TetMeshFacetedSurface::nfacet()</a>, <a class="el" href="tet__mesh_8h_source.html#l00319">oomph::TetMeshFacetedSurface::nvertex()</a>, and <a class="el" href="tet__mesh_8h_source.html#l00483">oomph::TetMeshFacetedSurface::Vertex_pt</a>.</p>
 
 </div>
 </div>
@@ -382,7 +382,7 @@ Additional Inherited Members</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Nov 2 2021 16:35:17
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Dec 21 2021 17:38:34
         </div>
       </div>
     </footer>

@@ -79,7 +79,7 @@
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00075}00075 }
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00076}00076     \textcolor{comment}{// Generate the vertex nodes of all cells}}
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00077}00077     \textcolor{comment}{//=======================================}}
-\DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00078}00078     Node* \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}};}
+\DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00078}00078     \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}};}
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00079}00079     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < n\_z + 1; k++)}
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00080}00080     \{}
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00081}00081       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < n\_y + 1; j++)}
@@ -95,15 +95,15 @@
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00091}00091           \}}
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00092}00092           \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00093}00093           \{}
-\DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00094}00094             \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}} = \textcolor{keyword}{new} Node(3, 1, 0);}
+\DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00094}00094             \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}} = \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1Node}{Node}}(3, 1, 0);}
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00095}00095           \}}
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00096}00096 }
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00097}00097           vertex\_node\_pt(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j, k) = \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}};}
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00098}00098 }
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00099}00099           \textcolor{comment}{// Coordinates}}
-\DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00100}00100           \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}-\/>x(0) = x\_0 + double(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * dx;}
-\DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00101}00101           \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}-\/>x(1) = y\_0 + double(j) * dy;}
-\DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00102}00102           \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}-\/>x(2) = z\_0 + double(k) * dz;}
+\DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00100}00100           \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0) = x\_0 + double(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * dx;}
+\DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00101}00101           \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1) = y\_0 + double(j) * dy;}
+\DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00102}00102           \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2) = z\_0 + double(k) * dz;}
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00103}00103 }
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00104}00104           \textcolor{comment}{// Real node?}}
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00105}00105           \textcolor{keywordflow}{if} ((\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_x + 1) \&\& (j < n\_y + 1) \&\& (k < n\_z + 1))}
@@ -166,15 +166,15 @@
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00162}00162           \}}
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00163}00163           \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00164}00164           \{}
-\DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00165}00165             \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}} = \textcolor{keyword}{new} Node(3, 1, 0);}
+\DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00165}00165             \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}} = \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1Node}{Node}}(3, 1, 0);}
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00166}00166           \}}
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00167}00167           front\_face\_node\_pt(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j, k) = \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}};}
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00168}00168 }
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00169}00169 }
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00170}00170           \textcolor{comment}{// Coordinates}}
-\DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00171}00171           \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}-\/>x(0) = x\_0 + 0.5 * dx + double(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * dx;}
-\DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00172}00172           \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}-\/>x(1) = y\_0 + double(j) * dy;}
-\DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00173}00173           \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}-\/>x(2) = z\_0 + 0.5 * dz + double(k) * dz;}
+\DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00171}00171           \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0) = x\_0 + 0.5 * dx + double(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * dx;}
+\DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00172}00172           \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1) = y\_0 + double(j) * dy;}
+\DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00173}00173           \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2) = z\_0 + 0.5 * dz + double(k) * dz;}
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00174}00174 }
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00175}00175           \textcolor{comment}{// Real node?}}
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00176}00176           \textcolor{keywordflow}{if} ((\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_x) \&\& (k < n\_z))}
@@ -203,14 +203,14 @@
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00199}00199           \}}
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00200}00200           \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00201}00201           \{}
-\DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00202}00202             \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}} = \textcolor{keyword}{new} Node(3, 1, 0);}
+\DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00202}00202             \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}} = \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1Node}{Node}}(3, 1, 0);}
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00203}00203           \}}
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00204}00204           left\_face\_node\_pt(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j, k) = \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}};}
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00205}00205 }
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00206}00206           \textcolor{comment}{// Coordinates}}
-\DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00207}00207           \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}-\/>x(0) = x\_0 + double(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * dx;}
-\DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00208}00208           \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}-\/>x(1) = y\_0 + 0.5 * dy + double(j) * dy;}
-\DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00209}00209           \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}-\/>x(2) = z\_0 + 0.5 * dz + double(k) * dz;}
+\DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00207}00207           \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0) = x\_0 + double(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * dx;}
+\DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00208}00208           \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1) = y\_0 + 0.5 * dy + double(j) * dy;}
+\DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00209}00209           \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2) = z\_0 + 0.5 * dz + double(k) * dz;}
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00210}00210 }
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00211}00211 }
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00212}00212           \textcolor{comment}{// Real node?}}
@@ -239,14 +239,14 @@
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00235}00235           \}}
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00236}00236           \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00237}00237           \{}
-\DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00238}00238             \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}} = \textcolor{keyword}{new} Node(3, 1, 0);}
+\DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00238}00238             \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}} = \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1Node}{Node}}(3, 1, 0);}
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00239}00239           \}}
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00240}00240           down\_face\_node\_pt(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j, k) = \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}};}
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00241}00241 }
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00242}00242           \textcolor{comment}{// Coordinates}}
-\DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00243}00243           \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}-\/>x(0) = x\_0 + 0.5 * dx + double(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * dx;}
-\DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00244}00244           \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}-\/>x(1) = y\_0 + 0.5 * dy + double(j) * dy;}
-\DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00245}00245           \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}-\/>x(2) = z\_0 + double(k) * dz;}
+\DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00243}00243           \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0) = x\_0 + 0.5 * dx + double(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * dx;}
+\DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00244}00244           \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1) = y\_0 + 0.5 * dy + double(j) * dy;}
+\DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00245}00245           \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2) = z\_0 + double(k) * dz;}
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00246}00246 }
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00247}00247 }
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00248}00248           \textcolor{comment}{// Real node?}}
@@ -278,12 +278,12 @@
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00274}00274       \{}
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00275}00275         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_x; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00276}00276         \{}
-\DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00277}00277           \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}} = \textcolor{keyword}{new} Node(3, 1, 0);}
+\DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00277}00277           \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}} = \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1Node}{Node}}(3, 1, 0);}
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00278}00278           central\_node\_pt(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j, k) = \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}};}
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00279}00279           \mbox{\hyperlink{classoomph_1_1Mesh_a0a42111e7eb200e5831f8b73c018b7dc}{Node\_pt}}.push\_back(\mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}});}
-\DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00280}00280           \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}-\/>x(0) = x\_0 + 0.5 * dx + double(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * dx;}
-\DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00281}00281           \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}-\/>x(1) = y\_0 + 0.5 * dy + double(j) * dy;}
-\DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00282}00282           \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}-\/>x(2) = z\_0 + 0.5 * dz + double(k) * dz;}
+\DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00280}00280           \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0) = x\_0 + 0.5 * dx + double(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * dx;}
+\DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00281}00281           \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1) = y\_0 + 0.5 * dy + double(j) * dy;}
+\DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00282}00282           \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2) = z\_0 + 0.5 * dz + double(k) * dz;}
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00283}00283         \}}
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00284}00284       \}}
 \DoxyCodeLine{\Hypertarget{simple__cubic__scaffold__tet__mesh_8cc_source_l00285}00285     \}}

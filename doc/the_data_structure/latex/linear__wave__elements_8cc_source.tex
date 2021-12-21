@@ -80,7 +80,7 @@
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00076}00076 \textcolor{comment}{  /// Pure version without hanging nodes}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00077}00077 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00078}00078   \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00079}00079   \textcolor{keywordtype}{void} LinearWaveEquations<DIM>::fill\_in\_generic\_residual\_contribution\_lin\_wave(}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00079}\mbox{\hyperlink{classoomph_1_1LinearWaveEquations_ae6017a229d5eccb3fb342e34a10382ec}{00079}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_ae6017a229d5eccb3fb342e34a10382ec}{LinearWaveEquations<DIM>::fill\_in\_generic\_residual\_contribution\_lin\_wave}}(}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00080}00080     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian, \textcolor{keywordtype}{unsigned} flag)}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00081}00081   \{}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00082}00082     \textcolor{comment}{// Find out how many nodes there are}}
@@ -119,7 +119,7 @@
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00115}00115         ipt, psi, dpsidx, test, dtestdx);}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00116}00116 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00117}00117       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00118}00118       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00118}00118       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00119}00119 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00120}00120       \textcolor{comment}{// Allocate memory for local quantities and initialise to zero}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00121}00121       \textcolor{keywordtype}{double} interpolated\_u = 0.0;}
@@ -160,12 +160,12 @@
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00156}00156         \textcolor{keywordflow}{if} (local\_eqn >= 0)}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00157}00157         \{}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00158}00158           \textcolor{comment}{// Add body force/source term and time derivative}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00159}00159           residuals[local\_eqn] += (ddudt + source) * test(l) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00159}00159           residuals[local\_eqn] += (ddudt + source) * test(l) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00160}00160 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00161}00161           \textcolor{comment}{// Laplace operator}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00162}00162           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < DIM; k++)}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00163}00163           \{}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00164}00164             residuals[local\_eqn] += interpolated\_dudx[k] * dtestdx(l, k) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00164}00164             residuals[local\_eqn] += interpolated\_dudx[k] * dtestdx(l, k) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00165}00165           \}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00166}00166 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00167}00167 }
@@ -183,13 +183,13 @@
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00179}00179                 \textcolor{comment}{// Mass matrix}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00180}00180                 jacobian(local\_eqn, local\_unknown) +=}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00181}00181                   test(l) * psi(l2) *}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00182}00182                   node\_pt(l2)-\/>time\_stepper\_pt()-\/>weight(2, 0) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00182}00182                   node\_pt(l2)-\/>time\_stepper\_pt()-\/>weight(2, 0) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00183}00183 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00184}00184                 \textcolor{comment}{// Laplace operator}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00185}00185                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00186}00186                 \{}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00187}00187                   jacobian(local\_eqn, local\_unknown) +=}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00188}00188                     dpsidx(l2, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * dtestdx(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00188}00188                     dpsidx(l2, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * dtestdx(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00189}00189                 \}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00190}00190               \}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00191}00191             \}}
@@ -206,12 +206,12 @@
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00202}00202 \textcolor{comment}{  /// Self-\/test:  Return 0 for OK}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00203}00203 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00204}00204   \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00205}00205   \textcolor{keywordtype}{unsigned} LinearWaveEquations<DIM>::self\_test()}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00205}\mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a2e4ced01331ace59c6d8fe95a756ca73}{00205}}   \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a2e4ced01331ace59c6d8fe95a756ca73}{LinearWaveEquations<DIM>::self\_test}}()}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00206}00206   \{}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00207}00207     \textcolor{keywordtype}{bool} passed = \textcolor{keyword}{true};}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00208}00208 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00209}00209     \textcolor{comment}{// Check lower-\/level stuff}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00210}00210     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1FiniteElement_af04bf6f6a9a60946e6afeee7afdd709c}{FiniteElement::self\_test}}() != 0)}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00210}00210     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1FiniteElement_af94c5a5e22175d5420b33b3b79e46ed3}{FiniteElement::self\_test}}() != 0)}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00211}00211     \{}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00212}00212       passed = \textcolor{keyword}{false};}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00213}00213     \}}
@@ -236,11 +236,11 @@
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00232}00232 \textcolor{comment}{  /// nplot points in each coordinate direction}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00233}00233 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00234}00234   \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00235}00235   \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_aca07d359a96b9c7b566142112604ea87}{LinearWaveEquations<DIM>::output}}(std::ostream\& outfile,}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00235}\mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a1830b4405d4ab215e91e01914dd426f3}{00235}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_ad5d68d2b3ec9fe3c6102ae91b9c61cc6}{LinearWaveEquations<DIM>::output}}(std::ostream\& outfile,}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00236}00236                                         \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nplot)}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00237}00237   \{}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00238}00238     \textcolor{comment}{// Vector of local coordinates}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00239}00239     Vector<double> \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00239}00239     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00240}00240 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00241}00241     \textcolor{comment}{// Tecplot header info}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00242}00242     outfile << tecplot\_zone\_string(nplot);}
@@ -272,10 +272,10 @@
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00268}00268 \textcolor{comment}{  /// nplot points in each coordinate direction}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00269}00269 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00270}00270   \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00271}00271   \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_aca07d359a96b9c7b566142112604ea87}{LinearWaveEquations<DIM>::output}}(FILE* file\_pt, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nplot)}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00271}\mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a2e3dd0d7c46d095fea74969c3648f0ca}{00271}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_ad5d68d2b3ec9fe3c6102ae91b9c61cc6}{LinearWaveEquations<DIM>::output}}(FILE* file\_pt, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nplot)}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00272}00272   \{}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00273}00273     \textcolor{comment}{// Vector of local coordinates}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00274}00274     Vector<double> \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00274}00274     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00275}00275 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00276}00276     \textcolor{comment}{// Tecplot header info}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00277}00277     fprintf(file\_pt, \textcolor{stringliteral}{"{}\%s"{}}, tecplot\_zone\_string(nplot).c\_str());}
@@ -310,22 +310,22 @@
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00306}00306 \textcolor{comment}{  ///   x,y,u\_exact    or    x,y,z,u\_exact}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00307}00307 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00308}00308   \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00309}00309   \textcolor{keywordtype}{void} LinearWaveEquations<DIM>::output\_fct(}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00309}\mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a3ae24c98f2d190e56fe24e754de682d8}{00309}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a3ae24c98f2d190e56fe24e754de682d8}{LinearWaveEquations<DIM>::output\_fct}}(}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00310}00310     std::ostream\& outfile,}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00311}00311     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nplot,}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00312}00312     \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{FiniteElement::SteadyExactSolutionFctPt}} exact\_soln\_pt)}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00313}00313   \{}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00314}00314     \textcolor{comment}{// Vector of local coordinates}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00315}00315     Vector<double> \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00315}00315     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00316}00316 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00317}00317     \textcolor{comment}{// Vector for coordintes}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00318}00318     Vector<double> \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(DIM);}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00318}00318     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(DIM);}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00319}00319 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00320}00320     \textcolor{comment}{// Tecplot header info}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00321}00321     outfile << tecplot\_zone\_string(nplot);}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00322}00322 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00323}00323     \textcolor{comment}{// Exact solution Vector (value and first and second time derivs)}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00324}00324     Vector<double> exact\_soln(3);}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00324}00324     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} exact\_soln(3);}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00325}00325 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00326}00326     \textcolor{comment}{// Loop over plot points}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00327}00327     \textcolor{keywordtype}{unsigned} num\_plot\_points = nplot\_points(nplot);}
@@ -335,15 +335,15 @@
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00331}00331       get\_s\_plot(iplot, nplot, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00332}00332 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00333}00333       \textcolor{comment}{// Get x position as Vector}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00334}00334       interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00334}00334       interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00335}00335 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00336}00336       \textcolor{comment}{// Get exact solution at this point}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00337}00337       (*exact\_soln\_pt)(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, exact\_soln);}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00337}00337       (*exact\_soln\_pt)(x, exact\_soln);}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00338}00338 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00339}00339       \textcolor{comment}{// Output x,y,...,u\_exact}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00340}00340       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00341}00341       \{}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00342}00342         outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00342}00342         outfile << x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00343}00343       \}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00344}00344       outfile << exact\_soln[0] << std::endl;}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00345}00345     \}}
@@ -362,23 +362,23 @@
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00358}00358 \textcolor{comment}{  ///   x,y,u\_exact    or    x,y,z,u\_exact}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00359}00359 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00360}00360   \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00361}00361   \textcolor{keywordtype}{void} LinearWaveEquations<DIM>::output\_fct(}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00361}\mbox{\hyperlink{classoomph_1_1LinearWaveEquations_aa0089c4e106d9bd525639d3215ed6825}{00361}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a3ae24c98f2d190e56fe24e754de682d8}{LinearWaveEquations<DIM>::output\_fct}}(}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00362}00362     std::ostream\& outfile,}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00363}00363     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nplot,}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00364}00364     \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00365}00365     \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{FiniteElement::UnsteadyExactSolutionFctPt}} exact\_soln\_pt)}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00366}00366   \{}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00367}00367     \textcolor{comment}{// Vector of local coordinates}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00368}00368     Vector<double> \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00368}00368     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00369}00369 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00370}00370     \textcolor{comment}{// Vector for coordintes}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00371}00371     Vector<double> \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(DIM);}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00371}00371     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(DIM);}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00372}00372 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00373}00373     \textcolor{comment}{// Tecplot header info}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00374}00374     outfile << tecplot\_zone\_string(nplot);}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00375}00375 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00376}00376     \textcolor{comment}{// Exact solution Vector u, dudt, d2udt2}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00377}00377     Vector<double> exact\_soln(3);}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00377}00377     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} exact\_soln(3);}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00378}00378 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00379}00379     \textcolor{comment}{// Loop over plot points}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00380}00380     \textcolor{keywordtype}{unsigned} num\_plot\_points = nplot\_points(nplot);}
@@ -388,15 +388,15 @@
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00384}00384       get\_s\_plot(iplot, nplot, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00385}00385 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00386}00386       \textcolor{comment}{// Get x position as Vector}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00387}00387       interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00387}00387       interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00388}00388 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00389}00389       \textcolor{comment}{// Get exact solution at this point}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00390}00390       (*exact\_soln\_pt)(time, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, exact\_soln);}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00390}00390       (*exact\_soln\_pt)(time, x, exact\_soln);}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00391}00391 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00392}00392       \textcolor{comment}{// Output x,y,...,u\_exact}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00393}00393       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00394}00394       \{}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00395}00395         outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00395}00395         outfile << x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00396}00396       \}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00397}00397       outfile << exact\_soln[0] << \textcolor{stringliteral}{"{} "{}} << exact\_soln[1] << \textcolor{stringliteral}{"{} "{}} << exact\_soln[2]}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00398}00398               << \textcolor{stringliteral}{"{} "{}} << std::endl;}
@@ -415,7 +415,7 @@
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00411}00411 \textcolor{comment}{  ///}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00412}00412 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00413}00413   \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00414}00414   \textcolor{keywordtype}{void} LinearWaveEquations<DIM>::compute\_error(}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00414}\mbox{\hyperlink{classoomph_1_1LinearWaveEquations_acf05d02ed25f46d2b0b8310fb8bc448b}{00414}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_acf05d02ed25f46d2b0b8310fb8bc448b}{LinearWaveEquations<DIM>::compute\_error}}(}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00415}00415     std::ostream\& outfile,}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00416}00416     \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{FiniteElement::SteadyExactSolutionFctPt}} exact\_soln\_pt,}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00417}00417     \textcolor{keywordtype}{double}\& error,}
@@ -426,16 +426,16 @@
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00422}00422     norm = 0.0;}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00423}00423 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00424}00424     \textcolor{comment}{// Vector of local coordinates}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00425}00425     Vector<double> \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00425}00425     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00426}00426 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00427}00427     \textcolor{comment}{// Vector for coordintes}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00428}00428     Vector<double> \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(DIM);}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00428}00428     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(DIM);}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00429}00429 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00430}00430 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00431}00431     \textcolor{comment}{// Find out how many nodes there are in the element}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00432}00432     \textcolor{keywordtype}{unsigned} n\_node = nnode();}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00433}00433 }
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00434}00434     Shape psi(n\_node);}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00434}00434     \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} psi(n\_node);}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00435}00435 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00436}00436     \textcolor{comment}{// Set the value of n\_intpt}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00437}00437     \textcolor{keywordtype}{unsigned} n\_intpt = integral\_pt()-\/>nweight();}
@@ -444,7 +444,7 @@
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00440}00440     outfile << \textcolor{stringliteral}{"{}ZONE"{}} << std::endl;}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00441}00441 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00442}00442     \textcolor{comment}{// Exact solution Vector (value, and first and second time derivs)}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00443}00443     Vector<double> exact\_soln(3);}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00443}00443     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} exact\_soln(3);}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00444}00444 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00445}00445     \textcolor{comment}{// Loop over the integration points}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00446}00446     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ipt = 0; ipt < n\_intpt; ipt++)}
@@ -462,27 +462,27 @@
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00458}00458       \textcolor{keywordtype}{double} J = J\_eulerian(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00459}00459 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00460}00460       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00461}00461       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00461}00461       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00462}00462 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00463}00463       \textcolor{comment}{// Get x position as Vector}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00464}00464       interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00464}00464       interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00465}00465 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00466}00466       \textcolor{comment}{// Get FE function value}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00467}00467       \textcolor{keywordtype}{double} u\_fe = interpolated\_u\_lin\_wave(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00468}00468 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00469}00469       \textcolor{comment}{// Get exact solution at this point}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00470}00470       (*exact\_soln\_pt)(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, exact\_soln);}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00470}00470       (*exact\_soln\_pt)(x, exact\_soln);}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00471}00471 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00472}00472       \textcolor{comment}{// Output x,y,...,error}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00473}00473       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00474}00474       \{}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00475}00475         outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00475}00475         outfile << x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00476}00476       \}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00477}00477       outfile << exact\_soln[0] << \textcolor{stringliteral}{"{} "{}} << exact\_soln[0] -\/ u\_fe << std::endl;}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00478}00478 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00479}00479       \textcolor{comment}{// Add to error and norm}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00480}00480       norm += exact\_soln[0] * exact\_soln[0] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00481}00481       error += (exact\_soln[0] -\/ u\_fe) * (exact\_soln[0] -\/ u\_fe) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00480}00480       norm += exact\_soln[0] * exact\_soln[0] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00481}00481       error += (exact\_soln[0] -\/ u\_fe) * (exact\_soln[0] -\/ u\_fe) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00482}00482     \}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00483}00483   \}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00484}00484 }
@@ -495,7 +495,7 @@
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00491}00491 \textcolor{comment}{  ///}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00492}00492 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00493}00493   \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00494}00494   \textcolor{keywordtype}{void} LinearWaveEquations<DIM>::compute\_error(}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00494}\mbox{\hyperlink{classoomph_1_1LinearWaveEquations_ae2dedf5d1dc024da927b05f532dde540}{00494}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_acf05d02ed25f46d2b0b8310fb8bc448b}{LinearWaveEquations<DIM>::compute\_error}}(}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00495}00495     std::ostream\& outfile,}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00496}00496     \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{FiniteElement::UnsteadyExactSolutionFctPt}} exact\_soln\_pt,}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00497}00497     \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
@@ -508,15 +508,15 @@
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00504}00504     norm = 0.0;}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00505}00505 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00506}00506     \textcolor{comment}{// Vector of local coordinates}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00507}00507     Vector<double> \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00507}00507     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00508}00508 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00509}00509     \textcolor{comment}{// Vector for coordintes}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00510}00510     Vector<double> \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(DIM);}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00510}00510     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(DIM);}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00511}00511 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00512}00512     \textcolor{comment}{// Find out how many nodes there are in the element}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00513}00513     \textcolor{keywordtype}{unsigned} n\_node = nnode();}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00514}00514 }
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00515}00515     Shape psi(n\_node);}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00515}00515     \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} psi(n\_node);}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00516}00516 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00517}00517     \textcolor{comment}{// Set the value of n\_intpt}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00518}00518     \textcolor{keywordtype}{unsigned} n\_intpt = integral\_pt()-\/>nweight();}
@@ -525,7 +525,7 @@
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00521}00521     outfile << \textcolor{stringliteral}{"{}ZONE"{}} << std::endl;}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00522}00522 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00523}00523     \textcolor{comment}{// Exact solution Vector (value, and first and second time derivs)}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00524}00524     Vector<double> exact\_soln(3);}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00524}00524     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} exact\_soln(3);}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00525}00525 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00526}00526     \textcolor{comment}{// Loop over the integration points}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00527}00527     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ipt = 0; ipt < n\_intpt; ipt++)}
@@ -543,27 +543,27 @@
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00539}00539       \textcolor{keywordtype}{double} J = J\_eulerian(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00540}00540 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00541}00541       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00542}00542       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00542}00542       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00543}00543 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00544}00544       \textcolor{comment}{// Get x position as Vector}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00545}00545       interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00545}00545       interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00546}00546 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00547}00547       \textcolor{comment}{// Get FE function value}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00548}00548       \textcolor{keywordtype}{double} u\_fe = interpolated\_u\_lin\_wave(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00549}00549 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00550}00550       \textcolor{comment}{// Get exact solution at this point}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00551}00551       (*exact\_soln\_pt)(time, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, exact\_soln);}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00551}00551       (*exact\_soln\_pt)(time, x, exact\_soln);}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00552}00552 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00553}00553       \textcolor{comment}{// Output x,y,...,error}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00554}00554       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00555}00555       \{}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00556}00556         outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00556}00556         outfile << x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00557}00557       \}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00558}00558       outfile << exact\_soln[0] << \textcolor{stringliteral}{"{} "{}} << exact\_soln[0] -\/ u\_fe << std::endl;}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00559}00559 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00560}00560       \textcolor{comment}{// Add to error and norm}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00561}00561       norm += exact\_soln[0] * exact\_soln[0] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00562}00562       error += (exact\_soln[0] -\/ u\_fe) * (exact\_soln[0] -\/ u\_fe) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00561}00561       norm += exact\_soln[0] * exact\_soln[0] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00562}00562       error += (exact\_soln[0] -\/ u\_fe) * (exact\_soln[0] -\/ u\_fe) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00563}00563     \}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00564}00564   \}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00565}00565 }
@@ -571,17 +571,17 @@
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00567}00567   \textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00568}00568   \textcolor{comment}{// Force build of templates}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00569}00569   \textcolor{comment}{//====================================================================}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00570}00570   \textcolor{keyword}{template} \textcolor{keyword}{class }QLinearWaveElement<1, 2>;}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00571}00571   \textcolor{keyword}{template} \textcolor{keyword}{class }QLinearWaveElement<1, 3>;}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00572}00572   \textcolor{keyword}{template} \textcolor{keyword}{class }QLinearWaveElement<1, 4>;}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00570}00570   \textcolor{keyword}{template} \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{QLinearWaveElement<1, 2>}};}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00571}00571   \textcolor{keyword}{template} \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{QLinearWaveElement<1, 3>}};}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00572}00572   \textcolor{keyword}{template} \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{QLinearWaveElement<1, 4>}};}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00573}00573 }
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00574}00574   \textcolor{keyword}{template} \textcolor{keyword}{class }QLinearWaveElement<2, 2>;}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00575}00575   \textcolor{keyword}{template} \textcolor{keyword}{class }QLinearWaveElement<2, 3>;}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00576}00576   \textcolor{keyword}{template} \textcolor{keyword}{class }QLinearWaveElement<2, 4>;}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00574}00574   \textcolor{keyword}{template} \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{QLinearWaveElement<2, 2>}};}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00575}00575   \textcolor{keyword}{template} \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{QLinearWaveElement<2, 3>}};}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00576}00576   \textcolor{keyword}{template} \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{QLinearWaveElement<2, 4>}};}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00577}00577 }
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00578}00578   \textcolor{keyword}{template} \textcolor{keyword}{class }QLinearWaveElement<3, 2>;}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00579}00579   \textcolor{keyword}{template} \textcolor{keyword}{class }QLinearWaveElement<3, 3>;}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00580}00580   \textcolor{keyword}{template} \textcolor{keyword}{class }QLinearWaveElement<3, 4>;}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00578}00578   \textcolor{keyword}{template} \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{QLinearWaveElement<3, 2>}};}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00579}00579   \textcolor{keyword}{template} \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{QLinearWaveElement<3, 3>}};}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00580}00580   \textcolor{keyword}{template} \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{QLinearWaveElement<3, 4>}};}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00581}00581 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00582}00582 }
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8cc_source_l00583}00583 \} \textcolor{comment}{// namespace oomph}}

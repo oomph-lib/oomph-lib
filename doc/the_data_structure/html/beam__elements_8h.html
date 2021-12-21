@@ -126,8 +126,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle"><div class="title">beam_elements.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -137,10 +136,10 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1KirchhoffLoveBeamEquations.html">oomph::KirchhoffLoveBeamEquations</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">where <img class="formulaInl" alt="$ \partial^i {\bf R}_{IC}/\partial t^i$" src="form_60.png" width="58" height="15"/> is implemented by the <a class="el" href="classoomph_1_1SolidInitialCondition.html" title="A class to specify the initial conditions for a solid body. Solid bodies are often discretised with H...">SolidInitialCondition</a> object, pointed to by <code>SolidFiniteElement::shell_ic_pt()</code>.  <a href="classoomph_1_1KirchhoffLoveBeamEquations.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A class for elements that solve the equations of Kirchhoff-Love large-displacement (but linearly-elastic) thin-beam theory.  <a href="classoomph_1_1KirchhoffLoveBeamEquations.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HermiteBeamElement.html">oomph::HermiteBeamElement</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hermite Kirchhoff Love beam. Implements <a class="el" href="classoomph_1_1KirchhoffLoveBeamEquations.html" title="where  is implemented by the SolidInitialCondition object, pointed to by SolidFiniteElement::shell_ic...">KirchhoffLoveBeamEquations</a> using 2-node Hermite elements as the underlying geometrical elements.  <a href="classoomph_1_1HermiteBeamElement.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hermite Kirchhoff Love beam. Implements <a class="el" href="classoomph_1_1KirchhoffLoveBeamEquations.html" title="A class for elements that solve the equations of Kirchhoff-Love large-displacement (but linearly-elas...">KirchhoffLoveBeamEquations</a> using 2-node Hermite elements as the underlying geometrical elements.  <a href="classoomph_1_1HermiteBeamElement.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FSIHermiteBeamElement.html">oomph::FSIHermiteBeamElement</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hermite Kirchhoff Love beam "upgraded" to a <a class="el" href="classoomph_1_1FSIWallElement.html" title="////////////////////////////////////////////////////////////////////////// //////////////////////////...">FSIWallElement</a> (and thus, by inheritance, a <a class="el" href="classoomph_1_1GeomObject.html" title="/////////////////////////////////////////////////////////////////////">GeomObject</a>), so it can be used in FSI.  <a href="classoomph_1_1FSIHermiteBeamElement.html#details">More...</a><br /></td></tr>
@@ -157,15 +156,6 @@ Namespaces</h2></td></tr>
 <tr class="memitem:namespaceoomph"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html">oomph</a></td></tr>
 <tr class="memdesc:namespaceoomph"><td class="mdescLeft">&#160;</td><td class="mdescRight">//////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:ae776ac53a2026959aeef7ac6a2fcf5f0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#ae776ac53a2026959aeef7ac6a2fcf5f0">oomph::int_0</a></td></tr>
-<tr class="memdesc:ae776ac53a2026959aeef7ac6a2fcf5f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">A class for elements that solve the equations of Kirchhoff-Love large-displacement (but linearly-elastic) thin-beam theory.  <a href="namespaceoomph.html#ae776ac53a2026959aeef7ac6a2fcf5f0">More...</a><br /></td></tr>
-<tr class="separator:ae776ac53a2026959aeef7ac6a2fcf5f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4d210785111dc7153f716866a99cb13a"><td class="memItemLeft" align="right" valign="top">f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#a4d210785111dc7153f716866a99cb13a">oomph::Lambda</a> = \frac{a}{T} \sqrt{\frac{\rho}{E_{eff}}}</td></tr>
-<tr class="memdesc:a4d210785111dc7153f716866a99cb13a"><td class="mdescLeft">&#160;</td><td class="mdescRight">where all lengths have been non-dimensionalised w.r.t. <img class="formulaInl" alt="$ R_0 $" src="form_47.png" width="14" height="13"/>. The strain and and bending "tensors" <img class="formulaInl" alt="$\gamma$" src="form_48.png" width="9" height="9"/> and <img class="formulaInl" alt="$\kappa$" src="form_49.png" width="8" height="6"/> are computed relative to the shape of the beam's undeformed shape which is specified as a <a class="el" href="classoomph_1_1GeomObject.html" title="/////////////////////////////////////////////////////////////////////">GeomObject</a>.  <a href="namespaceoomph.html#a4d210785111dc7153f716866a99cb13a">More...</a><br /></td></tr>
-<tr class="separator:a4d210785111dc7153f716866a99cb13a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 
@@ -195,7 +185,7 @@ Variables</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Nov 2 2021 16:31:15
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Dec 21 2021 17:35:12
         </div>
       </div>
     </footer>

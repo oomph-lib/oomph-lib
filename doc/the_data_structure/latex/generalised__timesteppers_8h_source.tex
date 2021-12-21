@@ -178,7 +178,7 @@
 \DoxyCodeLine{\Hypertarget{generalised__timesteppers_8h_source_l00174}00174 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{generalised__timesteppers_8h_source_l00175}00175 \textcolor{comment}{    /// Broken initialisation of}}
 \DoxyCodeLine{\Hypertarget{generalised__timesteppers_8h_source_l00176}00176 \textcolor{comment}{    /// the positions for the node corresponding to an impulsive start}}
-\DoxyCodeLine{\Hypertarget{generalised__timesteppers_8h_source_l00177}\mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_a6d8eb64dca810444b461cd893ad7526c}{00177}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_a6d8eb64dca810444b461cd893ad7526c}{assign\_initial\_positions\_impulsive}}(Node* \textcolor{keyword}{const}\& node\_pt)}
+\DoxyCodeLine{\Hypertarget{generalised__timesteppers_8h_source_l00177}\mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_a6d8eb64dca810444b461cd893ad7526c}{00177}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_a6d8eb64dca810444b461cd893ad7526c}{assign\_initial\_positions\_impulsive}}(\mbox{\hyperlink{classoomph_1_1Node}{Node}}* \textcolor{keyword}{const}\& node\_pt)}
 \DoxyCodeLine{\Hypertarget{generalised__timesteppers_8h_source_l00178}00178     \{}
 \DoxyCodeLine{\Hypertarget{generalised__timesteppers_8h_source_l00179}00179       \mbox{\hyperlink{classoomph_1_1OomphLibWarning}{OomphLibWarning}}(}
 \DoxyCodeLine{\Hypertarget{generalised__timesteppers_8h_source_l00180}00180         \textcolor{stringliteral}{"{}Cannot perform impulsive start for ContinuationStorageScheme"{}},}
@@ -196,7 +196,7 @@
 \DoxyCodeLine{\Hypertarget{generalised__timesteppers_8h_source_l00192}00192     \}}
 \DoxyCodeLine{\Hypertarget{generalised__timesteppers_8h_source_l00193}00193 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{generalised__timesteppers_8h_source_l00194}00194 \textcolor{comment}{    /// Broken shifting of time positions}}
-\DoxyCodeLine{\Hypertarget{generalised__timesteppers_8h_source_l00195}\mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_a2271fd0ad65dda38686851df5a3970d5}{00195}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_a2271fd0ad65dda38686851df5a3970d5}{shift\_time\_positions}}(Node* \textcolor{keyword}{const}\& node\_pt)}
+\DoxyCodeLine{\Hypertarget{generalised__timesteppers_8h_source_l00195}\mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_a2271fd0ad65dda38686851df5a3970d5}{00195}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_a2271fd0ad65dda38686851df5a3970d5}{shift\_time\_positions}}(\mbox{\hyperlink{classoomph_1_1Node}{Node}}* \textcolor{keyword}{const}\& node\_pt)}
 \DoxyCodeLine{\Hypertarget{generalised__timesteppers_8h_source_l00196}00196     \{}
 \DoxyCodeLine{\Hypertarget{generalised__timesteppers_8h_source_l00197}00197       \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
 \DoxyCodeLine{\Hypertarget{generalised__timesteppers_8h_source_l00198}00198         \textcolor{stringliteral}{"{}Cannot shift time positions forContinuationStorageScheme"{}},}
@@ -262,7 +262,7 @@
 \DoxyCodeLine{\Hypertarget{generalised__timesteppers_8h_source_l00258}00258 \textcolor{comment}{    /// Set consistent values of the derivatives and current value when}}
 \DoxyCodeLine{\Hypertarget{generalised__timesteppers_8h_source_l00259}00259 \textcolor{comment}{    /// the Nodes position is pinned. This must be done by the "{}timestepper"{}}}
 \DoxyCodeLine{\Hypertarget{generalised__timesteppers_8h_source_l00260}00260 \textcolor{comment}{    /// because only it knows the local storage scheme}}
-\DoxyCodeLine{\Hypertarget{generalised__timesteppers_8h_source_l00261}\mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_ad08f35407fff9e171312d482cfdeacc0}{00261}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_ad08f35407fff9e171312d482cfdeacc0}{set\_consistent\_pinned\_positions}}(Node* \textcolor{keyword}{const}\& node\_pt)}
+\DoxyCodeLine{\Hypertarget{generalised__timesteppers_8h_source_l00261}\mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_ad08f35407fff9e171312d482cfdeacc0}{00261}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_ad08f35407fff9e171312d482cfdeacc0}{set\_consistent\_pinned\_positions}}(\mbox{\hyperlink{classoomph_1_1Node}{Node}}* \textcolor{keyword}{const}\& node\_pt)}
 \DoxyCodeLine{\Hypertarget{generalised__timesteppers_8h_source_l00262}00262     \{}
 \DoxyCodeLine{\Hypertarget{generalised__timesteppers_8h_source_l00263}00263       \textcolor{comment}{// Only need to do anything if this is a solid node}}
 \DoxyCodeLine{\Hypertarget{generalised__timesteppers_8h_source_l00264}00264       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1SolidNode}{SolidNode}}* \textcolor{keyword}{const} solid\_node\_pt = \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1SolidNode}{SolidNode}}*\textcolor{keyword}{>}(node\_pt))}
@@ -270,12 +270,12 @@
 \DoxyCodeLine{\Hypertarget{generalised__timesteppers_8h_source_l00266}00266 \textcolor{preprocessor}{\#ifdef PARANOID}}
 \DoxyCodeLine{\Hypertarget{generalised__timesteppers_8h_source_l00267}00267         \textcolor{comment}{// If the data is not associated with the continuation time stepper then}}
 \DoxyCodeLine{\Hypertarget{generalised__timesteppers_8h_source_l00268}00268         \textcolor{comment}{// complain}}
-\DoxyCodeLine{\Hypertarget{generalised__timesteppers_8h_source_l00269}00269         \textcolor{keywordflow}{if} (\textcolor{keyword}{this} != node\_pt-\/>position\_time\_stepper\_pt())}
+\DoxyCodeLine{\Hypertarget{generalised__timesteppers_8h_source_l00269}00269         \textcolor{keywordflow}{if} (\textcolor{keyword}{this} != node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a32b32940186f9d1e2abc5d4bedb6ff0d}{position\_time\_stepper\_pt}}())}
 \DoxyCodeLine{\Hypertarget{generalised__timesteppers_8h_source_l00270}00270         \{}
 \DoxyCodeLine{\Hypertarget{generalised__timesteppers_8h_source_l00271}00271           std::ostringstream error\_stream;}
 \DoxyCodeLine{\Hypertarget{generalised__timesteppers_8h_source_l00272}00272           error\_stream}
 \DoxyCodeLine{\Hypertarget{generalised__timesteppers_8h_source_l00273}00273             << \textcolor{stringliteral}{"{}Node object "{}} << node\_pt << \textcolor{stringliteral}{"{} has position timestepper of type "{}}}
-\DoxyCodeLine{\Hypertarget{generalised__timesteppers_8h_source_l00274}00274             << \textcolor{keyword}{typeid}(node\_pt-\/>position\_time\_stepper\_pt()).name() << \textcolor{stringliteral}{"{}\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{generalised__timesteppers_8h_source_l00274}00274             << \textcolor{keyword}{typeid}(node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a32b32940186f9d1e2abc5d4bedb6ff0d}{position\_time\_stepper\_pt}}()).name() << \textcolor{stringliteral}{"{}\(\backslash\)n"{}}}
 \DoxyCodeLine{\Hypertarget{generalised__timesteppers_8h_source_l00275}00275             << \textcolor{stringliteral}{"{}Please set the Node's position timestepper to be a "{}}}
 \DoxyCodeLine{\Hypertarget{generalised__timesteppers_8h_source_l00276}00276             << \textcolor{stringliteral}{"{}ContinuationStorageScheme before calling this function\(\backslash\)n"{}};}
 \DoxyCodeLine{\Hypertarget{generalised__timesteppers_8h_source_l00277}00277           \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_stream.str(),}

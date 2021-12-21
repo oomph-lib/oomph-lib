@@ -1232,7 +1232,7 @@
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01228}01228   \textcolor{keyword}{public}:\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01229}01229 \textcolor{comment}{    /// Constructor}}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01230}\mbox{\hyperlink{classoomph_1_1GMRES_a6f19644223af4b8f2fb9f327239b6497}{01230}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1GMRES_a6f19644223af4b8f2fb9f327239b6497}{GMRES}}()}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01231}01231       : Iterations(0),}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01231}01231       : \mbox{\hyperlink{classoomph_1_1GMRES_a6d261875800a43842579287fa1275ccb}{Iterations}}(0),}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01232}01232         \mbox{\hyperlink{classoomph_1_1GMRES_a2edf4333ceb415b8ba9126e1c5d51ce8}{Matrix\_pt}}(0),}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01233}01233         \mbox{\hyperlink{classoomph_1_1GMRES_a0f520f14d3c16894db4fded7e9dac4f2}{Resolving}}(false),}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01234}01234         \mbox{\hyperlink{classoomph_1_1GMRES_a4d5464a324bf0a190a5a979f899c8542}{Matrix\_can\_be\_deleted}}(true),}
@@ -1315,7 +1315,7 @@
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01311}01311 \textcolor{comment}{    /// Number of iterations taken}}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01312}\mbox{\hyperlink{classoomph_1_1GMRES_a879927e08b79ad4744a10b360ccd5ff3}{01312}} \textcolor{comment}{}    \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1GMRES_a879927e08b79ad4744a10b360ccd5ff3}{iterations}}()\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01313}01313 \textcolor{keyword}{    }\{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01314}01314       \textcolor{keywordflow}{return} Iterations;}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01314}01314       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1GMRES_a6d261875800a43842579287fa1275ccb}{Iterations}};}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01315}01315     \}}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01316}01316 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01317}01317 \textcolor{comment}{    /// access function indicating whether restarted GMRES is used}}
@@ -1329,7 +1329,7 @@
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01325}01325 \textcolor{comment}{    /// orthogonalisation basis vectors should be restarted}}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01326}\mbox{\hyperlink{classoomph_1_1GMRES_a95bf6049e720b55f13044704ade4c418}{01326}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1GMRES_a95bf6049e720b55f13044704ade4c418}{enable\_iteration\_restart}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& restart)}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01327}01327     \{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01328}01328       \mbox{\hyperlink{classoomph_1_1GMRES_a5b8fd2912c105c4d06cc22f80cb73273}{Restart}} = restart;}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01328}01328       \mbox{\hyperlink{classoomph_1_1GMRES_aa45a0faa6609689d44ac0df3dade8db1}{Restart}} = restart;}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01329}01329       \mbox{\hyperlink{classoomph_1_1GMRES_af3eead7d42ad5190cbe6a5510ce352ea}{Iteration\_restart}} = \textcolor{keyword}{true};}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01330}01330     \}}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01331}01331 \textcolor{comment}{}}
@@ -1373,7 +1373,7 @@
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01369}01369                 \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<\mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}>\& H,}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01370}01370                 \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01371}01371                 \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<DoubleVector>}}\& v,}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01372}01372                 \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}})}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01372}01372                 \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& x)}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01373}01373     \{}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01374}01374       \textcolor{comment}{// Make a local copy of s}}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01375}01375       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} y(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
@@ -1393,13 +1393,13 @@
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01389}01389       \} \textcolor{comment}{// for (int i=int(k);i>=0;i-\/-\/)}}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01390}01390 }
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01391}01391       \textcolor{comment}{// Store the number of rows in the result vector}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01392}01392       \textcolor{keywordtype}{unsigned} n\_x = \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.nrow();}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01392}01392       \textcolor{keywordtype}{unsigned} n\_x = x.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow}}();}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01393}01393 }
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01394}01394       \textcolor{comment}{// Build a temporary vector with entries initialised to 0.0}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01395}01395       \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} temp(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.distribution\_pt(), 0.0);}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01395}01395       \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} temp(x.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}(), 0.0);}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01396}01396 }
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01397}01397       \textcolor{comment}{// Build a temporary vector with entries initialised to 0.0}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01398}01398       \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} z(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.distribution\_pt(), 0.0);}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01398}01398       \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} z(x.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}(), 0.0);}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01399}01399 }
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01400}01400       \textcolor{comment}{// Get access to the underlying values}}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01401}01401       \textcolor{keywordtype}{double}* temp\_pt = temp.\mbox{\hyperlink{classoomph_1_1DoubleVector_ae3484a5eb4cb663e09640806ef1bf05a}{values\_pt}}();}
@@ -1422,7 +1422,7 @@
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01418}01418       \{}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01419}01419         \textcolor{comment}{// Since we're using LHS preconditioning the preconditioner is applied}}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01420}01420         \textcolor{comment}{// to the matrix and RHS vector so we simply update the value of x}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01421}01421         \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}} += temp;}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01421}01421         x += temp;}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01422}01422       \}}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01423}01423       \textcolor{comment}{// If we're using RHS preconditioning}}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01424}01424       \textcolor{keywordflow}{else}}
@@ -1440,598 +1440,534 @@
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01436}01436 }
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01437}01437         \textcolor{comment}{// Use the update: x\_m=x\_0+inv(M)Vy [see Saad Y,"{}Iterative methods for}}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01438}01438         \textcolor{comment}{// sparse linear systems"{}, p.284]}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01439}01439         \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}} += z;}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01439}01439         x += z;}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01440}01440       \}}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01441}01441     \} \textcolor{comment}{// End of update}}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01442}01442 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01443}01443 \textcolor{comment}{    /// Helper function: Generate a plane rotation. This is done by}}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01444}01444 \textcolor{comment}{    /// finding the values of \(\backslash\)f\$ \(\backslash\)cos(\(\backslash\)theta) \(\backslash\)f\$ (i.e. cs) and \(\backslash\)sin(\(\backslash\)theta)}}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01445}01445 \textcolor{comment}{    /// (i.e. sn) such that:}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01446}01446 \textcolor{comment}{    /// \(\backslash\)f[}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01447}\mbox{\hyperlink{classoomph_1_1GMRES_aa21239e0bb8592c8c4eabda21092ea1e}{01447}} \textcolor{comment}{    /// \(\backslash\)begin\{bmatrix\}}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01448}01448 \textcolor{comment}{    /// \(\backslash\)cos\(\backslash\)theta \& \(\backslash\)sin\(\backslash\)theta \(\backslash\)newline}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01449}01449 \textcolor{comment}{    /// -\/\(\backslash\)sin\(\backslash\)theta \& \(\backslash\)cos\(\backslash\)theta}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01450}01450 \textcolor{comment}{    /// \(\backslash\)end\{bmatrix\}}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01451}01451 \textcolor{comment}{    /// \(\backslash\)begin\{bmatrix\}}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01452}01452 \textcolor{comment}{    /// dx \(\backslash\)newline}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01453}01453 \textcolor{comment}{    /// dy}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01454}01454 \textcolor{comment}{    /// \(\backslash\)end\{bmatrix\}}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01455}01455 \textcolor{comment}{    /// =}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01456}01456 \textcolor{comment}{    /// \(\backslash\)begin\{bmatrix\}}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01457}01457 \textcolor{comment}{    /// r \(\backslash\)newline}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01458}01458 \textcolor{comment}{    /// 0}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01459}01459 \textcolor{comment}{    /// \(\backslash\)end\{bmatrix\},}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01460}01460 \textcolor{comment}{    /// \(\backslash\)f]}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01461}01461 \textcolor{comment}{    /// where \(\backslash\)f\$ r=\(\backslash\)sqrt\{pow(dx,2)+pow(dy,2)\} \(\backslash\)f\$. The values of a and b are}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01462}01462 \textcolor{comment}{    /// given by:}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01463}01463 \textcolor{comment}{    /// \(\backslash\)f[}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01464}01464 \textcolor{comment}{    /// \(\backslash\)cos\(\backslash\)theta\&=\(\backslash\)dfrac\{dx\}\{\(\backslash\)sqrt\{pow(dx,2)+pow(dy,2)\}\},}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01465}01465 \textcolor{comment}{    /// \(\backslash\)f]}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01466}01466 \textcolor{comment}{    /// and}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01467}01467 \textcolor{comment}{    /// \(\backslash\)f[}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01468}01468 \textcolor{comment}{    /// \(\backslash\)sin\(\backslash\)theta\&=\(\backslash\)dfrac\{dy\}\{\(\backslash\)sqrt\{pow(dx,2)+pow(dy,2)\}\}.}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01469}01469 \textcolor{comment}{    /// \(\backslash\)f]}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01470}01470 \textcolor{comment}{    /// Taken from: Saad Y."{}Iterative methods for sparse linear systems"{}, p.192}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01471}01471 \textcolor{comment}{}    \textcolor{keywordtype}{void} generate\_plane\_rotation(\textcolor{keywordtype}{double}\& dx, \textcolor{keywordtype}{double}\& dy, \textcolor{keywordtype}{double}\& cs, \textcolor{keywordtype}{double}\& sn)}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01472}01472     \{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01473}01473       \textcolor{comment}{// If dy=0 then we do not need to apply a rotation}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01474}01474       \textcolor{keywordflow}{if} (dy == 0.0)}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01475}01475       \{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01476}01476         \textcolor{comment}{// Using theta=0 gives cos(theta)=1}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01477}01477         cs = 1.0;}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01478}01478 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01479}01479         \textcolor{comment}{// Using theta=0 gives sin(theta)=0}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01480}01480         sn = 0.0;}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01481}01481       \}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01482}01482       \textcolor{comment}{// If dx or dy is large using the normal form of calculting cs and sn}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01483}01483       \textcolor{comment}{// is naive since this may overflow or underflow so instead we calculate}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01484}01484       \textcolor{comment}{// r=sqrt(pow(dx,2)+pow(dy,2)) by using r=|dy|sqrt(1+pow(dx/dy,2)) if}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01485}01485       \textcolor{comment}{// |dy|>|dx| [see <A}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01486}01486       \textcolor{comment}{// HREF=https://en.wikipedia.org/wiki/Hypot"{}>Hypot</A>.].}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01487}01487       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (fabs(dy) > fabs(dx))}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01488}01488       \{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01489}01489         \textcolor{comment}{// Since |dy|>|dx| calculate the ratio dx/dy}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01490}01490         \textcolor{keywordtype}{double} temp = dx / dy;}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01491}01491 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01492}01492         \textcolor{comment}{// Calculate sin(theta)=dy/sqrt(pow(dx,2)+pow(dy,2))}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01493}01493         sn = 1.0 / sqrt(1.0 + temp * temp);}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01494}01494 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01495}01495         \textcolor{comment}{// Calculate cos(theta)=dx/sqrt(pow(dx,2)+pow(dy,2))=(dx/dy)*sin(theta)}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01496}01496         cs = temp * sn;}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01497}01497       \}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01498}01498       \textcolor{comment}{// Otherwise, we have |dx|>=|dy| so to, again, avoid overflow or underflow}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01499}01499       \textcolor{comment}{// calculate the values of cs and sn using the method above}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01500}01500       \textcolor{keywordflow}{else}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01501}01501       \{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01502}01502         \textcolor{comment}{// Since |dx|>=|dy| calculate the ratio dy/dx}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01503}01503         \textcolor{keywordtype}{double} temp = dy / dx;}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01504}01504 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01505}01505         \textcolor{comment}{// Calculate cos(theta)=dx/sqrt(pow(dx,2)+pow(dy,2))}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01506}01506         cs = 1.0 / sqrt(1.0 + temp * temp);}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01507}01507 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01508}01508         \textcolor{comment}{// Calculate sin(theta)=dy/sqrt(pow(dx,2)+pow(dy,2))=(dy/dx)*cos(theta)}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01509}01509         sn = temp * cs;}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01510}01510       \}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01511}01511     \} \textcolor{comment}{// End of generate\_plane\_rotation}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01446}01446 \textcolor{comment}{    /// \(\backslash\)f[ \(\backslash\)begin\{bmatrix\} \(\backslash\)cos\(\backslash\)theta \& \(\backslash\)sin\(\backslash\)theta \(\backslash\)newline -\/\(\backslash\)sin\(\backslash\)theta \& \(\backslash\)cos\(\backslash\)theta \(\backslash\)end\{bmatrix\} \(\backslash\)begin\{bmatrix\} dx \(\backslash\)newline dy \(\backslash\)end\{bmatrix\} = \(\backslash\)begin\{bmatrix\} r \(\backslash\)newline 0 \(\backslash\)end\{bmatrix\}, \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01447}01447 \textcolor{comment}{    /// where \(\backslash\)f\$ r=\(\backslash\)sqrt\{pow(dx,2)+pow(dy,2)\} \(\backslash\)f\$. The values of a and b are}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01448}01448 \textcolor{comment}{    /// given by:}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01449}01449 \textcolor{comment}{    /// \(\backslash\)f[ \(\backslash\)cos\(\backslash\)theta\&=\(\backslash\)dfrac\{dx\}\{\(\backslash\)sqrt\{pow(dx,2)+pow(dy,2)\}\}, \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01450}01450 \textcolor{comment}{    /// and}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01451}01451 \textcolor{comment}{    /// \(\backslash\)f[ \(\backslash\)sin\(\backslash\)theta\&=\(\backslash\)dfrac\{dy\}\{\(\backslash\)sqrt\{pow(dx,2)+pow(dy,2)\}\}. \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01452}01452 \textcolor{comment}{    /// Taken from: Saad Y."{}Iterative methods for sparse linear systems"{}, p.192}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01453}\mbox{\hyperlink{classoomph_1_1GMRES_ad076ed019b21fa5348e3e65aeba1e27c}{01453}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1GMRES_ad076ed019b21fa5348e3e65aeba1e27c}{generate\_plane\_rotation}}(\textcolor{keywordtype}{double}\& dx, \textcolor{keywordtype}{double}\& dy, \textcolor{keywordtype}{double}\& cs, \textcolor{keywordtype}{double}\& sn)}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01454}01454     \{}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01455}01455       \textcolor{comment}{// If dy=0 then we do not need to apply a rotation}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01456}01456       \textcolor{keywordflow}{if} (dy == 0.0)}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01457}01457       \{}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01458}01458         \textcolor{comment}{// Using theta=0 gives cos(theta)=1}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01459}01459         cs = 1.0;}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01460}01460 }
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01461}01461         \textcolor{comment}{// Using theta=0 gives sin(theta)=0}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01462}01462         sn = 0.0;}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01463}01463       \}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01464}01464       \textcolor{comment}{// If dx or dy is large using the normal form of calculting cs and sn}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01465}01465       \textcolor{comment}{// is naive since this may overflow or underflow so instead we calculate}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01466}01466       \textcolor{comment}{// r=sqrt(pow(dx,2)+pow(dy,2)) by using r=|dy|sqrt(1+pow(dx/dy,2)) if}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01467}01467       \textcolor{comment}{// |dy|>|dx| [see <A}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01468}01468       \textcolor{comment}{// HREF=https://en.wikipedia.org/wiki/Hypot"{}>Hypot</A>.].}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01469}01469       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (fabs(dy) > fabs(dx))}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01470}01470       \{}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01471}01471         \textcolor{comment}{// Since |dy|>|dx| calculate the ratio dx/dy}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01472}01472         \textcolor{keywordtype}{double} temp = dx / dy;}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01473}01473 }
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01474}01474         \textcolor{comment}{// Calculate sin(theta)=dy/sqrt(pow(dx,2)+pow(dy,2))}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01475}01475         sn = 1.0 / sqrt(1.0 + temp * temp);}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01476}01476 }
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01477}01477         \textcolor{comment}{// Calculate cos(theta)=dx/sqrt(pow(dx,2)+pow(dy,2))=(dx/dy)*sin(theta)}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01478}01478         cs = temp * sn;}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01479}01479       \}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01480}01480       \textcolor{comment}{// Otherwise, we have |dx|>=|dy| so to, again, avoid overflow or underflow}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01481}01481       \textcolor{comment}{// calculate the values of cs and sn using the method above}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01482}01482       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01483}01483       \{}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01484}01484         \textcolor{comment}{// Since |dx|>=|dy| calculate the ratio dy/dx}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01485}01485         \textcolor{keywordtype}{double} temp = dy / dx;}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01486}01486 }
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01487}01487         \textcolor{comment}{// Calculate cos(theta)=dx/sqrt(pow(dx,2)+pow(dy,2))}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01488}01488         cs = 1.0 / sqrt(1.0 + temp * temp);}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01489}01489 }
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01490}01490         \textcolor{comment}{// Calculate sin(theta)=dy/sqrt(pow(dx,2)+pow(dy,2))=(dy/dx)*cos(theta)}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01491}01491         sn = temp * cs;}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01492}01492       \}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01493}01493     \} \textcolor{comment}{// End of generate\_plane\_rotation}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01494}01494 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01495}01495 \textcolor{comment}{    /// Helper function: Apply plane rotation. This is done using the}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01496}01496 \textcolor{comment}{    /// update:}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01497}01497 \textcolor{comment}{    /// \(\backslash\)f[ \(\backslash\)begin\{bmatrix\} dx \(\backslash\)newline dy \(\backslash\)end\{bmatrix\} \(\backslash\)leftarrow \(\backslash\)begin\{bmatrix\} \(\backslash\)cos\(\backslash\)theta \& \(\backslash\)sin\(\backslash\)theta \(\backslash\)newline -\/\(\backslash\)sin\(\backslash\)theta \& \(\backslash\)cos\(\backslash\)theta \(\backslash\)end\{bmatrix\} \(\backslash\)begin\{bmatrix\} dx \(\backslash\)newline dy \(\backslash\)end\{bmatrix\}. \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01498}\mbox{\hyperlink{classoomph_1_1GMRES_aac9196b17069716323d535922bdb512d}{01498}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1GMRES_aac9196b17069716323d535922bdb512d}{apply\_plane\_rotation}}(\textcolor{keywordtype}{double}\& dx, \textcolor{keywordtype}{double}\& dy, \textcolor{keywordtype}{double}\& cs, \textcolor{keywordtype}{double}\& sn)}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01499}01499     \{}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01500}01500       \textcolor{comment}{// Calculate the value of dx but don't update it yet}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01501}01501       \textcolor{keywordtype}{double} temp = cs * dx + sn * dy;}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01502}01502 }
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01503}01503       \textcolor{comment}{// Set the value of dy}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01504}01504       dy = -\/sn * dx + cs * dy;}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01505}01505 }
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01506}01506       \textcolor{comment}{// Set the value of dx using the correct values of dx and dy}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01507}01507       dx = temp;}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01508}01508     \}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01509}01509 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01510}01510 \textcolor{comment}{    /// Number of iterations taken}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01511}\mbox{\hyperlink{classoomph_1_1GMRES_a6d261875800a43842579287fa1275ccb}{01511}} \textcolor{comment}{}    \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1GMRES_a6d261875800a43842579287fa1275ccb}{Iterations}};}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01512}01512 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01513}01513 \textcolor{comment}{    /// Helper function: Apply plane rotation. This is done using the}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01514}01514 \textcolor{comment}{    /// update:}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01515}01515 \textcolor{comment}{    /// \(\backslash\)f[}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01516}01516 \textcolor{comment}{    /// \(\backslash\)begin\{bmatrix\}}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01517}01517 \textcolor{comment}{    /// dx \(\backslash\)newline}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01518}01518 \textcolor{comment}{    /// dy}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01519}01519 \textcolor{comment}{    /// \(\backslash\)end\{bmatrix\}}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01520}01520 \textcolor{comment}{    /// \(\backslash\)leftarrow}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01521}01521 \textcolor{comment}{    /// \(\backslash\)begin\{bmatrix\}}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01522}01522 \textcolor{comment}{    /// \(\backslash\)cos\(\backslash\)theta \& \(\backslash\)sin\(\backslash\)theta \(\backslash\)newline}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01523}01523 \textcolor{comment}{    /// -\/\(\backslash\)sin\(\backslash\)theta \& \(\backslash\)cos\(\backslash\)theta}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01524}01524 \textcolor{comment}{    /// \(\backslash\)end\{bmatrix\}}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01525}01525 \textcolor{comment}{    /// \(\backslash\)begin\{bmatrix\}}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01526}01526 \textcolor{comment}{    /// dx \(\backslash\)newline}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01527}01527 \textcolor{comment}{    /// dy}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01528}01528 \textcolor{comment}{    /// \(\backslash\)end\{bmatrix\}.}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01529}01529 \textcolor{comment}{    /// \(\backslash\)f]}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01530}01530 \textcolor{comment}{}    \textcolor{keywordtype}{void} apply\_plane\_rotation(\textcolor{keywordtype}{double}\& dx, \textcolor{keywordtype}{double}\& dy, \textcolor{keywordtype}{double}\& cs, \textcolor{keywordtype}{double}\& sn)}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01531}01531     \{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01532}01532       \textcolor{comment}{// Calculate the value of dx but don't update it yet}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01533}01533       \textcolor{keywordtype}{double} temp = cs * dx + sn * dy;}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01534}01534 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01535}01535       \textcolor{comment}{// Set the value of dy}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01536}01536       dy = -\/sn * dx + cs * dy;}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01537}01537 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01538}01538       \textcolor{comment}{// Set the value of dx using the correct values of dx and dy}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01539}01539       dx = temp;}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01540}01540     \}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01541}01541 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01542}01542 \textcolor{comment}{    /// Number of iterations taken}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01543}01543 \textcolor{comment}{}    \textcolor{keywordtype}{unsigned} Iterations;}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01544}01544 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01545}01545 \textcolor{comment}{    /// The number of iterations before the iteration proceedure is}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01546}01546 \textcolor{comment}{    /// restarted if iteration restart is used}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01547}\mbox{\hyperlink{classoomph_1_1GMRES_a5b8fd2912c105c4d06cc22f80cb73273}{01547}} \textcolor{comment}{}    \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1GMRES_a5b8fd2912c105c4d06cc22f80cb73273}{Restart}};}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01548}01548 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01549}01549 \textcolor{comment}{    /// boolean indicating if iteration restarting is used}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01550}\mbox{\hyperlink{classoomph_1_1GMRES_af3eead7d42ad5190cbe6a5510ce352ea}{01550}} \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{classoomph_1_1GMRES_af3eead7d42ad5190cbe6a5510ce352ea}{Iteration\_restart}};}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01551}01551 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01552}01552 \textcolor{comment}{    /// Pointer to matrix}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01553}\mbox{\hyperlink{classoomph_1_1GMRES_a2edf4333ceb415b8ba9126e1c5d51ce8}{01553}} \textcolor{comment}{}    MATRIX* \mbox{\hyperlink{classoomph_1_1GMRES_a2edf4333ceb415b8ba9126e1c5d51ce8}{Matrix\_pt}};}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01554}01554 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01555}01555 \textcolor{comment}{    /// Boolean flag to indicate if the solve is done in re-\/solve mode,}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01556}01556 \textcolor{comment}{    /// bypassing setup of matrix and preconditioner}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01557}\mbox{\hyperlink{classoomph_1_1GMRES_a0f520f14d3c16894db4fded7e9dac4f2}{01557}} \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{classoomph_1_1GMRES_a0f520f14d3c16894db4fded7e9dac4f2}{Resolving}};}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01558}01558 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01559}01559 \textcolor{comment}{    /// Boolean flag to indicate if the matrix pointed to be Matrix\_pt}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01560}01560 \textcolor{comment}{    /// can be deleted.}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01561}\mbox{\hyperlink{classoomph_1_1GMRES_a4d5464a324bf0a190a5a979f899c8542}{01561}} \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{classoomph_1_1GMRES_a4d5464a324bf0a190a5a979f899c8542}{Matrix\_can\_be\_deleted}};}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01562}01562 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01563}01563 \textcolor{comment}{    /// boolean indicating use of left hand preconditioning (if true)}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01564}01564 \textcolor{comment}{    /// or right hand preconditioning (if false)}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01565}\mbox{\hyperlink{classoomph_1_1GMRES_a19814405efef12cb87cf18b795e55fb4}{01565}} \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{classoomph_1_1GMRES_a19814405efef12cb87cf18b795e55fb4}{Preconditioner\_LHS}};}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01566}01566 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01567}01567 \textcolor{comment}{    /// Storage for the time spent applying the preconditioner}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01568}\mbox{\hyperlink{classoomph_1_1GMRES_a25476d7eda81efbf1265715d3d42c894}{01568}} \textcolor{comment}{}    \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1GMRES_a25476d7eda81efbf1265715d3d42c894}{Preconditioner\_application\_time}};}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01569}01569   \};}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01570}01570 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01571}01571 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01572}01572 \textcolor{comment}{  /// ////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01573}01573 \textcolor{comment}{  /// ////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01574}01574 \textcolor{comment}{  /// ////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01513}01513 \textcolor{comment}{    /// The number of iterations before the iteration proceedure is}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01514}01514 \textcolor{comment}{    /// restarted if iteration restart is used}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01515}\mbox{\hyperlink{classoomph_1_1GMRES_aa45a0faa6609689d44ac0df3dade8db1}{01515}} \textcolor{comment}{}    \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1GMRES_aa45a0faa6609689d44ac0df3dade8db1}{Restart}};}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01516}01516 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01517}01517 \textcolor{comment}{    /// boolean indicating if iteration restarting is used}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01518}\mbox{\hyperlink{classoomph_1_1GMRES_af3eead7d42ad5190cbe6a5510ce352ea}{01518}} \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{classoomph_1_1GMRES_af3eead7d42ad5190cbe6a5510ce352ea}{Iteration\_restart}};}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01519}01519 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01520}01520 \textcolor{comment}{    /// Pointer to matrix}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01521}\mbox{\hyperlink{classoomph_1_1GMRES_a2edf4333ceb415b8ba9126e1c5d51ce8}{01521}} \textcolor{comment}{}    MATRIX* \mbox{\hyperlink{classoomph_1_1GMRES_a2edf4333ceb415b8ba9126e1c5d51ce8}{Matrix\_pt}};}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01522}01522 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01523}01523 \textcolor{comment}{    /// Boolean flag to indicate if the solve is done in re-\/solve mode,}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01524}01524 \textcolor{comment}{    /// bypassing setup of matrix and preconditioner}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01525}\mbox{\hyperlink{classoomph_1_1GMRES_a0f520f14d3c16894db4fded7e9dac4f2}{01525}} \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{classoomph_1_1GMRES_a0f520f14d3c16894db4fded7e9dac4f2}{Resolving}};}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01526}01526 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01527}01527 \textcolor{comment}{    /// Boolean flag to indicate if the matrix pointed to be Matrix\_pt}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01528}01528 \textcolor{comment}{    /// can be deleted.}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01529}\mbox{\hyperlink{classoomph_1_1GMRES_a4d5464a324bf0a190a5a979f899c8542}{01529}} \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{classoomph_1_1GMRES_a4d5464a324bf0a190a5a979f899c8542}{Matrix\_can\_be\_deleted}};}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01530}01530 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01531}01531 \textcolor{comment}{    /// boolean indicating use of left hand preconditioning (if true)}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01532}01532 \textcolor{comment}{    /// or right hand preconditioning (if false)}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01533}\mbox{\hyperlink{classoomph_1_1GMRES_a19814405efef12cb87cf18b795e55fb4}{01533}} \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{classoomph_1_1GMRES_a19814405efef12cb87cf18b795e55fb4}{Preconditioner\_LHS}};}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01534}01534 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01535}01535 \textcolor{comment}{    /// Storage for the time spent applying the preconditioner}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01536}\mbox{\hyperlink{classoomph_1_1GMRES_a25476d7eda81efbf1265715d3d42c894}{01536}} \textcolor{comment}{}    \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1GMRES_a25476d7eda81efbf1265715d3d42c894}{Preconditioner\_application\_time}};}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01537}01537   \};}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01538}01538 }
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01539}01539 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01540}01540 \textcolor{comment}{  /// ////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01541}01541 \textcolor{comment}{  /// ////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01542}01542 \textcolor{comment}{  /// ////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01543}01543 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01544}01544 }
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01545}01545   \textcolor{comment}{//======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01546}01546 \textcolor{comment}{  /// The GMRES method.}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01547}01547 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01548}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES}{01548}}   \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES}{AugmentedProblemGMRES}} : \textcolor{keyword}{public} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver}{IterativeLinearSolver}}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01549}01549   \{}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01550}01550   \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01551}01551 \textcolor{comment}{    /// Constructor}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01552}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a04987cc3a1440855435d2c26cfbfc0bf}{01552}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a04987cc3a1440855435d2c26cfbfc0bf}{AugmentedProblemGMRES}}(\mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}* b\_pt,}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01553}01553                           \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}* c\_pt,}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01554}01554                           \textcolor{keywordtype}{double}* x\_pt,}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01555}01555                           \textcolor{keywordtype}{double}* rhs\_pt)}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01556}01556       : \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a9be7f8a66aefc1352e95741c5f265443}{Iterations}}(0),}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01557}01557         \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a2dd7330c78b780ccc87c0922656a72b2}{Matrix\_pt}}(0),}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01558}01558         \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_aaab9daf6e2eb2bae858f48027754a93e}{B\_pt}}(b\_pt),}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01559}01559         \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a1f483fcae38f24ceda96c111333ebd2b}{C\_pt}}(c\_pt),}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01560}01560         \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a947a6617c3909fc2ffaebb9ebf001cfa}{X\_pt}}(x\_pt),}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01561}01561         \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a5f7815e661ee9a79da7fdc485a8bc652}{Rhs\_pt}}(rhs\_pt),}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01562}01562         \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a837e46fe93f07fa0740b5a7a9f40ebcb}{Schur\_complement\_scalar}}(1.0),}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01563}01563         \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a1c8bdfdfbba0518cf24ad56970186714}{Resolving}}(false),}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01564}01564         \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a9e906e80cad4f9261729e75f2448fc63}{Matrix\_can\_be\_deleted}}(true)}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01565}01565     \{}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01566}01566       \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_ab32f761ac00fb98acfc66f07a62932c9}{Preconditioner\_LHS}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01567}01567       \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a447c3077e0763deb70e7e9ac34748d74}{Iteration\_restart}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01568}01568     \}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01569}01569 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01570}01570 \textcolor{comment}{    /// Destructor: Clean up storage}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01571}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_ab2593fd534e6db559b93c1301306c69b}{01571}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_ab2593fd534e6db559b93c1301306c69b}{\string~AugmentedProblemGMRES}}()}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01572}01572     \{}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01573}01573       \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_aa4fbf2fd3d7ce466e7ea74620c4bdcea}{clean\_up\_memory}}();}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01574}01574     \}}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01575}01575 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01576}01576 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01577}01577   \textcolor{comment}{//======================================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01578}01578 \textcolor{comment}{  /// The GMRES method.}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01579}01579 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01580}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES}{01580}}   \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES}{AugmentedProblemGMRES}} : \textcolor{keyword}{public} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver}{IterativeLinearSolver}}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01581}01581   \{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01582}01582   \textcolor{keyword}{public}:\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01583}01583 \textcolor{comment}{    /// Constructor}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01584}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a04987cc3a1440855435d2c26cfbfc0bf}{01584}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a04987cc3a1440855435d2c26cfbfc0bf}{AugmentedProblemGMRES}}(\mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}* b\_pt,}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01585}01585                           \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}* c\_pt,}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01586}01586                           \textcolor{keywordtype}{double}* x\_pt,}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01587}01587                           \textcolor{keywordtype}{double}* rhs\_pt)}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01588}01588       : Iterations(0),}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01589}01589         \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a2dd7330c78b780ccc87c0922656a72b2}{Matrix\_pt}}(0),}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01590}01590         \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_aaab9daf6e2eb2bae858f48027754a93e}{B\_pt}}(b\_pt),}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01591}01591         \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a1f483fcae38f24ceda96c111333ebd2b}{C\_pt}}(c\_pt),}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01592}01592         \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a947a6617c3909fc2ffaebb9ebf001cfa}{X\_pt}}(x\_pt),}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01593}01593         \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a5f7815e661ee9a79da7fdc485a8bc652}{Rhs\_pt}}(rhs\_pt),}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01594}01594         \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a837e46fe93f07fa0740b5a7a9f40ebcb}{Schur\_complement\_scalar}}(1.0),}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01595}01595         \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a1c8bdfdfbba0518cf24ad56970186714}{Resolving}}(false),}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01596}01596         \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a9e906e80cad4f9261729e75f2448fc63}{Matrix\_can\_be\_deleted}}(true)}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01597}01597     \{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01598}01598       \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_ab32f761ac00fb98acfc66f07a62932c9}{Preconditioner\_LHS}} = \textcolor{keyword}{true};}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01599}01599       \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a447c3077e0763deb70e7e9ac34748d74}{Iteration\_restart}} = \textcolor{keyword}{false};}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01600}01600     \}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01601}01601 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01602}01602 \textcolor{comment}{    /// Destructor: Clean up storage}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01603}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_ab2593fd534e6db559b93c1301306c69b}{01603}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_ab2593fd534e6db559b93c1301306c69b}{\string~AugmentedProblemGMRES}}()}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01604}01604     \{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01605}01605       \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_aa4fbf2fd3d7ce466e7ea74620c4bdcea}{clean\_up\_memory}}();}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01606}01606     \}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01607}01607 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01608}01608 \textcolor{comment}{    /// Broken copy constructor}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01609}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a5c19aa1ff1b23b8400f1e81b29f7e7de}{01609}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a5c19aa1ff1b23b8400f1e81b29f7e7de}{AugmentedProblemGMRES}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES}{AugmentedProblemGMRES}}\&) = \textcolor{keyword}{delete};}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01610}01610 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01611}01611 \textcolor{comment}{    /// Broken assignment operator}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01612}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_aa59dc0dfad8c26eeba778dde0cdc0d8d}{01612}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_aa59dc0dfad8c26eeba778dde0cdc0d8d}{operator=}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES}{AugmentedProblemGMRES}}\&) = \textcolor{keyword}{delete};}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01613}01613 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01614}01614 \textcolor{comment}{    /// Overload disable resolve so that it cleans up memory too}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01615}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a338c1108f68089ba78104a93ec2cbbca}{01615}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a338c1108f68089ba78104a93ec2cbbca}{disable\_resolve}}()}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01616}01616     \{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01617}01617       \mbox{\hyperlink{classoomph_1_1LinearSolver_ad61c63af94c5961830bd9807225a48d6}{LinearSolver::disable\_resolve}}();}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01618}01618       \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_aa4fbf2fd3d7ce466e7ea74620c4bdcea}{clean\_up\_memory}}();}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01619}01619     \} \textcolor{comment}{// End of disable\_resolve}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01620}01620 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01621}01621 \textcolor{comment}{    /// Solver: Takes pointer to problem and returns the results vector}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01622}01622 \textcolor{comment}{    /// which contains the solution of the linear system defined by}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01623}01623 \textcolor{comment}{    /// the problem's fully assembled Jacobian and residual vector.}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01624}01624 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a73d8d3d8b161084e6291560cdd7984dc}{solve}}(\mbox{\hyperlink{classoomph_1_1Problem}{Problem}}* \textcolor{keyword}{const}\& problem\_pt, \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& result);}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01625}01625 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01626}01626 \textcolor{comment}{    /// Linear-\/algebra-\/type solver: Takes pointer to a matrix and rhs}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01627}01627 \textcolor{comment}{    /// vector and returns the solution of the linear system.}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01628}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a0e7809509296cc1b6d355a7e02d0f989}{01628}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a0e7809509296cc1b6d355a7e02d0f989}{solve}}(\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{DoubleMatrixBase}}* \textcolor{keyword}{const}\& matrix\_pt,}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01629}01629                \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& rhs,}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01630}01630                \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& solution)}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01631}01631     \{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01632}01632       \textcolor{comment}{// Upcast to a CRDoubleMatrix}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01633}01633       \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}}* cr\_matrix\_pt = \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}}*\textcolor{keyword}{>}(matrix\_pt);}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01634}01634 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01635}01635       \textcolor{comment}{// If we can't upcast to a CRDoubleMatrix then this won't work...}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01636}01636       \textcolor{keywordflow}{if} (cr\_matrix\_pt == 0)}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01637}01637       \{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01638}01638         \textcolor{comment}{// Throw an error}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01639}01639         \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(\textcolor{stringliteral}{"{}Can't upcast input matrix to a CRDoubleMatrix!"{}},}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01640}01640                             OOMPH\_CURRENT\_FUNCTION,}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01641}01641                             OOMPH\_EXCEPTION\_LOCATION);}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01642}01642       \}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01643}01643 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01644}01644       \textcolor{comment}{// Set up the distribution}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01645}01645       this-\/>\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ac5340bac40b9559b0378037b57005203}{build\_distribution}}(cr\_matrix\_pt-\/>\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}());}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01646}01646 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01647}01647       \textcolor{comment}{// Store the matrix if required}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01648}01648       \textcolor{keywordflow}{if} ((\mbox{\hyperlink{classoomph_1_1LinearSolver_a5f5e7e7a44ff0897b0e4cd9524000edc}{Enable\_resolve}}) \&\& (!\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a1c8bdfdfbba0518cf24ad56970186714}{Resolving}}))}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01649}01649       \{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01650}01650         \textcolor{comment}{// Store a pointer to the upcasted matrix}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01651}01651         \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a2dd7330c78b780ccc87c0922656a72b2}{Matrix\_pt}} = cr\_matrix\_pt;}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01652}01652 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01653}01653         \textcolor{comment}{// Matrix has been passed in from the outside so we must not}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01654}01654         \textcolor{comment}{// delete it}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01655}01655         \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a9e906e80cad4f9261729e75f2448fc63}{Matrix\_can\_be\_deleted}} = \textcolor{keyword}{false};}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01656}01656       \}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01657}01657 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01658}01658       \textcolor{comment}{// Call the helper function}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01659}01659       this-\/>\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a1ff5a4b43235b43d2254af0db6195dc7}{solve\_helper}}(matrix\_pt, rhs, solution);}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01660}01660     \} \textcolor{comment}{// End of solve}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01661}01661 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01662}01662 \textcolor{comment}{    /// Linear-\/algebra-\/type solver: Takes pointer to a matrix}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01663}01663 \textcolor{comment}{    /// and rhs vector and returns the solution of the linear system}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01664}01664 \textcolor{comment}{    /// Call the broken base-\/class version. If you want this, please}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01665}01665 \textcolor{comment}{    /// implement it}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01666}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a6dc70380e15f0c35f3d4e1d3dc827c97}{01666}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a6dc70380e15f0c35f3d4e1d3dc827c97}{solve}}(\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{DoubleMatrixBase}}* \textcolor{keyword}{const}\& matrix\_pt,}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01667}01667                \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& rhs,}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01668}01668                \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& result)}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01576}01576 \textcolor{comment}{    /// Broken copy constructor}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01577}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a5c19aa1ff1b23b8400f1e81b29f7e7de}{01577}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a5c19aa1ff1b23b8400f1e81b29f7e7de}{AugmentedProblemGMRES}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES}{AugmentedProblemGMRES}}\&) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01578}01578 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01579}01579 \textcolor{comment}{    /// Broken assignment operator}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01580}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_aa59dc0dfad8c26eeba778dde0cdc0d8d}{01580}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_aa59dc0dfad8c26eeba778dde0cdc0d8d}{operator=}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES}{AugmentedProblemGMRES}}\&) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01581}01581 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01582}01582 \textcolor{comment}{    /// Overload disable resolve so that it cleans up memory too}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01583}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a338c1108f68089ba78104a93ec2cbbca}{01583}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a338c1108f68089ba78104a93ec2cbbca}{disable\_resolve}}()}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01584}01584     \{}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01585}01585       \mbox{\hyperlink{classoomph_1_1LinearSolver_ad61c63af94c5961830bd9807225a48d6}{LinearSolver::disable\_resolve}}();}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01586}01586       \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_aa4fbf2fd3d7ce466e7ea74620c4bdcea}{clean\_up\_memory}}();}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01587}01587     \} \textcolor{comment}{// End of disable\_resolve}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01588}01588 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01589}01589 \textcolor{comment}{    /// Solver: Takes pointer to problem and returns the results vector}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01590}01590 \textcolor{comment}{    /// which contains the solution of the linear system defined by}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01591}01591 \textcolor{comment}{    /// the problem's fully assembled Jacobian and residual vector.}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01592}01592 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a73d8d3d8b161084e6291560cdd7984dc}{solve}}(\mbox{\hyperlink{classoomph_1_1Problem}{Problem}}* \textcolor{keyword}{const}\& problem\_pt, \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& result);}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01593}01593 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01594}01594 \textcolor{comment}{    /// Linear-\/algebra-\/type solver: Takes pointer to a matrix and rhs}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01595}01595 \textcolor{comment}{    /// vector and returns the solution of the linear system.}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01596}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a0e7809509296cc1b6d355a7e02d0f989}{01596}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a0e7809509296cc1b6d355a7e02d0f989}{solve}}(\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{DoubleMatrixBase}}* \textcolor{keyword}{const}\& matrix\_pt,}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01597}01597                \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& rhs,}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01598}01598                \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& solution)}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01599}01599     \{}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01600}01600       \textcolor{comment}{// Upcast to a CRDoubleMatrix}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01601}01601       \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}}* cr\_matrix\_pt = \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}}*\textcolor{keyword}{>}(matrix\_pt);}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01602}01602 }
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01603}01603       \textcolor{comment}{// If we can't upcast to a CRDoubleMatrix then this won't work...}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01604}01604       \textcolor{keywordflow}{if} (cr\_matrix\_pt == 0)}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01605}01605       \{}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01606}01606         \textcolor{comment}{// Throw an error}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01607}01607         \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(\textcolor{stringliteral}{"{}Can't upcast input matrix to a CRDoubleMatrix!"{}},}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01608}01608                             OOMPH\_CURRENT\_FUNCTION,}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01609}01609                             OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01610}01610       \}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01611}01611 }
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01612}01612       \textcolor{comment}{// Set up the distribution}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01613}01613       this-\/>\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ac5340bac40b9559b0378037b57005203}{build\_distribution}}(cr\_matrix\_pt-\/>\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}());}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01614}01614 }
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01615}01615       \textcolor{comment}{// Store the matrix if required}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01616}01616       \textcolor{keywordflow}{if} ((\mbox{\hyperlink{classoomph_1_1LinearSolver_a5f5e7e7a44ff0897b0e4cd9524000edc}{Enable\_resolve}}) \&\& (!\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a1c8bdfdfbba0518cf24ad56970186714}{Resolving}}))}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01617}01617       \{}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01618}01618         \textcolor{comment}{// Store a pointer to the upcasted matrix}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01619}01619         \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a2dd7330c78b780ccc87c0922656a72b2}{Matrix\_pt}} = cr\_matrix\_pt;}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01620}01620 }
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01621}01621         \textcolor{comment}{// Matrix has been passed in from the outside so we must not}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01622}01622         \textcolor{comment}{// delete it}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01623}01623         \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a9e906e80cad4f9261729e75f2448fc63}{Matrix\_can\_be\_deleted}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01624}01624       \}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01625}01625 }
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01626}01626       \textcolor{comment}{// Call the helper function}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01627}01627       this-\/>\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a1ff5a4b43235b43d2254af0db6195dc7}{solve\_helper}}(matrix\_pt, rhs, solution);}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01628}01628     \} \textcolor{comment}{// End of solve}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01629}01629 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01630}01630 \textcolor{comment}{    /// Linear-\/algebra-\/type solver: Takes pointer to a matrix}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01631}01631 \textcolor{comment}{    /// and rhs vector and returns the solution of the linear system}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01632}01632 \textcolor{comment}{    /// Call the broken base-\/class version. If you want this, please}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01633}01633 \textcolor{comment}{    /// implement it}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01634}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a6dc70380e15f0c35f3d4e1d3dc827c97}{01634}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a6dc70380e15f0c35f3d4e1d3dc827c97}{solve}}(\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{DoubleMatrixBase}}* \textcolor{keyword}{const}\& matrix\_pt,}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01635}01635                \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& rhs,}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01636}01636                \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& result)}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01637}01637     \{}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01638}01638       \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485edacbeb6e}{LinearSolver::solve}}(matrix\_pt, rhs, result);}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01639}01639     \}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01640}01640 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01641}01641 \textcolor{comment}{    /// Re-\/solve the system defined by the last assembled Jacobian}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01642}01642 \textcolor{comment}{    /// and the rhs vector specified here. Solution is returned in the}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01643}01643 \textcolor{comment}{    /// vector result.}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01644}01644 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a2a452417f612f30e3ae2a2701fa1e6de}{resolve}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& result);}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01645}01645 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01646}01646 \textcolor{comment}{    /// Number of iterations taken}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01647}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a0e6fb26306985fc6bde851d372b78708}{01647}} \textcolor{comment}{}    \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a0e6fb26306985fc6bde851d372b78708}{iterations}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01648}01648 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01649}01649       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a9be7f8a66aefc1352e95741c5f265443}{Iterations}};}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01650}01650     \}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01651}01651 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01652}01652 \textcolor{comment}{    /// access function indicating whether restarted GMRES is used}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01653}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a5e3a50ebf6ce2d2c3a0a53b7e6f24300}{01653}} \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a5e3a50ebf6ce2d2c3a0a53b7e6f24300}{iteration\_restart}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01654}01654 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01655}01655       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a447c3077e0763deb70e7e9ac34748d74}{Iteration\_restart}};}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01656}01656     \}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01657}01657 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01658}01658 \textcolor{comment}{    /// switches on iteration restarting and takes as an argument the}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01659}01659 \textcolor{comment}{    /// number of iterations after which the construction of the}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01660}01660 \textcolor{comment}{    /// orthogonalisation basis vectors should be restarted}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01661}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a7baee709b4066c7e3dce35afe76a0792}{01661}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a7baee709b4066c7e3dce35afe76a0792}{enable\_iteration\_restart}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& restart)}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01662}01662     \{}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01663}01663       \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a472af506241c412c2a6fe4c53529118e}{Restart}} = restart;}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01664}01664       \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a447c3077e0763deb70e7e9ac34748d74}{Iteration\_restart}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01665}01665     \}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01666}01666 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01667}01667 \textcolor{comment}{    /// Switches off iteration restart}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01668}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a478992300f83afa08cde46ac11569986}{01668}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a478992300f83afa08cde46ac11569986}{disable\_iteration\_restart}}()}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01669}01669     \{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01670}01670       \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485edacbeb6e}{LinearSolver::solve}}(matrix\_pt, rhs, result);}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01671}01671     \}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01670}01670       \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a447c3077e0763deb70e7e9ac34748d74}{Iteration\_restart}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01671}01671     \} \textcolor{comment}{// End of disable\_iteration\_restart}}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01672}01672 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01673}01673 \textcolor{comment}{    /// Re-\/solve the system defined by the last assembled Jacobian}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01674}01674 \textcolor{comment}{    /// and the rhs vector specified here. Solution is returned in the}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01675}01675 \textcolor{comment}{    /// vector result.}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01676}01676 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a2a452417f612f30e3ae2a2701fa1e6de}{resolve}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& result);}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01677}01677 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01678}01678 \textcolor{comment}{    /// Number of iterations taken}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01679}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a0e6fb26306985fc6bde851d372b78708}{01679}} \textcolor{comment}{}    \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a0e6fb26306985fc6bde851d372b78708}{iterations}}()\textcolor{keyword}{ const}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01680}01680 \textcolor{keyword}{    }\{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01681}01681       \textcolor{keywordflow}{return} Iterations;}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01682}01682     \}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01683}01683 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01684}01684 \textcolor{comment}{    /// access function indicating whether restarted GMRES is used}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01685}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a5e3a50ebf6ce2d2c3a0a53b7e6f24300}{01685}} \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a5e3a50ebf6ce2d2c3a0a53b7e6f24300}{iteration\_restart}}()\textcolor{keyword}{ const}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01686}01686 \textcolor{keyword}{    }\{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01687}01687       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a447c3077e0763deb70e7e9ac34748d74}{Iteration\_restart}};}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01688}01688     \}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01689}01689 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01690}01690 \textcolor{comment}{    /// switches on iteration restarting and takes as an argument the}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01691}01691 \textcolor{comment}{    /// number of iterations after which the construction of the}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01692}01692 \textcolor{comment}{    /// orthogonalisation basis vectors should be restarted}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01693}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a7baee709b4066c7e3dce35afe76a0792}{01693}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a7baee709b4066c7e3dce35afe76a0792}{enable\_iteration\_restart}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& restart)}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01694}01694     \{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01695}01695       \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_ade82d55b66084e9eaefa867315e85ab9}{Restart}} = restart;}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01696}01696       \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a447c3077e0763deb70e7e9ac34748d74}{Iteration\_restart}} = \textcolor{keyword}{true};}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01697}01697     \}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01698}01698 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01699}01699 \textcolor{comment}{    /// Switches off iteration restart}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01700}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a478992300f83afa08cde46ac11569986}{01700}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a478992300f83afa08cde46ac11569986}{disable\_iteration\_restart}}()}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01701}01701     \{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01702}01702       \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a447c3077e0763deb70e7e9ac34748d74}{Iteration\_restart}} = \textcolor{keyword}{false};}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01703}01703     \} \textcolor{comment}{// End of disable\_iteration\_restart}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01704}01704 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01705}01705 \textcolor{comment}{    /// Set left preconditioning (the default)}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01706}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_ae29f07a20c4e1290ae1c85f4c5756adc}{01706}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_ae29f07a20c4e1290ae1c85f4c5756adc}{set\_preconditioner\_LHS}}()}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01707}01707     \{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01708}01708       \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_ab32f761ac00fb98acfc66f07a62932c9}{Preconditioner\_LHS}} = \textcolor{keyword}{true};}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01709}01709     \}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01710}01710 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01711}01711 \textcolor{comment}{    /// Enable right preconditioning}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01712}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_ab9349ea974f4e84d4ae3d7de096e60bd}{01712}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_ab9349ea974f4e84d4ae3d7de096e60bd}{set\_preconditioner\_RHS}}()}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01713}01713     \{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01714}01714       \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_ab32f761ac00fb98acfc66f07a62932c9}{Preconditioner\_LHS}} = \textcolor{keyword}{false};}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01715}01715     \}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01673}01673 \textcolor{comment}{    /// Set left preconditioning (the default)}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01674}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_ae29f07a20c4e1290ae1c85f4c5756adc}{01674}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_ae29f07a20c4e1290ae1c85f4c5756adc}{set\_preconditioner\_LHS}}()}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01675}01675     \{}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01676}01676       \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_ab32f761ac00fb98acfc66f07a62932c9}{Preconditioner\_LHS}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01677}01677     \}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01678}01678 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01679}01679 \textcolor{comment}{    /// Enable right preconditioning}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01680}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_ab9349ea974f4e84d4ae3d7de096e60bd}{01680}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_ab9349ea974f4e84d4ae3d7de096e60bd}{set\_preconditioner\_RHS}}()}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01681}01681     \{}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01682}01682       \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_ab32f761ac00fb98acfc66f07a62932c9}{Preconditioner\_LHS}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01683}01683     \}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01684}01684 }
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01685}01685   \textcolor{keyword}{private}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01686}01686 \textcolor{comment}{    /// Cleanup data that's stored for resolve (if any has been stored)}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01687}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_aa4fbf2fd3d7ce466e7ea74620c4bdcea}{01687}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_aa4fbf2fd3d7ce466e7ea74620c4bdcea}{clean\_up\_memory}}()}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01688}01688     \{}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01689}01689       \textcolor{keywordflow}{if} ((\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a2dd7330c78b780ccc87c0922656a72b2}{Matrix\_pt}} != 0) \&\& (\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a9e906e80cad4f9261729e75f2448fc63}{Matrix\_can\_be\_deleted}}))}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01690}01690       \{}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01691}01691         \textcolor{keyword}{delete} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a2dd7330c78b780ccc87c0922656a72b2}{Matrix\_pt}};}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01692}01692         \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a2dd7330c78b780ccc87c0922656a72b2}{Matrix\_pt}} = 0;}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01693}01693       \}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01694}01694     \} \textcolor{comment}{// End of clean\_up\_memory}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01695}01695 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01696}01696 \textcolor{comment}{    /// Multiply the vector x by the augmented system matrix}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01697}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a98bde93ede0909eb0170ef490c6d184d}{01697}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a98bde93ede0909eb0170ef490c6d184d}{augmented\_matrix\_multiply}}(\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}}* matrix\_pt,}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01698}01698                                    \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& x,}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01699}01699                                    \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& soln)}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01700}01700     \{}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01701}01701       \textcolor{comment}{// How many dofs are there in the non-\/augmented system?}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01702}01702       \textcolor{keywordtype}{unsigned} n\_dof = matrix\_pt-\/>\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_abd8d231b0549540144b4739a667b1e75}{nrow}}();}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01703}01703 }
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01704}01704       \textcolor{comment}{// Allocate space for the non-\/augmented component of x}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01705}01705       \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} x\_small(this-\/>\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}(), 0.0);}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01706}01706 }
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01707}01707       \textcolor{comment}{// Loop over the first n\_dof entries of x}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01708}01708       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_dof; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01709}01709       \{}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01710}01710         \textcolor{comment}{// Copy the i-\/th entry over}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01711}01711         x\_small[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01712}01712       \}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01713}01713 }
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01714}01714       \textcolor{comment}{// Allocate space for the product of the matrix and x\_small}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01715}01715       \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} a\_prod\_xsmall(this-\/>\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}(), 0.0);}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01716}01716 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01717}01717   \textcolor{keyword}{private}:\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01718}01718 \textcolor{comment}{    /// Cleanup data that's stored for resolve (if any has been stored)}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01719}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_aa4fbf2fd3d7ce466e7ea74620c4bdcea}{01719}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_aa4fbf2fd3d7ce466e7ea74620c4bdcea}{clean\_up\_memory}}()}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01720}01720     \{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01721}01721       \textcolor{keywordflow}{if} ((\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a2dd7330c78b780ccc87c0922656a72b2}{Matrix\_pt}} != 0) \&\& (\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a9e906e80cad4f9261729e75f2448fc63}{Matrix\_can\_be\_deleted}}))}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01722}01722       \{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01723}01723         \textcolor{keyword}{delete} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a2dd7330c78b780ccc87c0922656a72b2}{Matrix\_pt}};}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01724}01724         \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a2dd7330c78b780ccc87c0922656a72b2}{Matrix\_pt}} = 0;}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01725}01725       \}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01726}01726     \} \textcolor{comment}{// End of clean\_up\_memory}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01727}01727 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01728}01728 \textcolor{comment}{    /// Multiply the vector x by the augmented system matrix}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01729}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a98bde93ede0909eb0170ef490c6d184d}{01729}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a98bde93ede0909eb0170ef490c6d184d}{augmented\_matrix\_multiply}}(\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}}* matrix\_pt,}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01730}01730                                    \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01731}01731                                    \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& soln)}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01732}01732     \{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01733}01733       \textcolor{comment}{// How many dofs are there in the non-\/augmented system?}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01734}01734       \textcolor{keywordtype}{unsigned} n\_dof = matrix\_pt-\/>\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_abd8d231b0549540144b4739a667b1e75}{nrow}}();}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01735}01735 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01736}01736       \textcolor{comment}{// Allocate space for the non-\/augmented component of x}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01737}01737       \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} x\_small(this-\/>\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}(), 0.0);}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01738}01738 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01739}01739       \textcolor{comment}{// Loop over the first n\_dof entries of x}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01740}01740       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_dof; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01741}01741       \{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01742}01742         \textcolor{comment}{// Copy the i-\/th entry over}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01743}01743         x\_small[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01744}01744       \}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01745}01745 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01746}01746       \textcolor{comment}{// Allocate space for the product of the matrix and x\_small}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01747}01747       \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} a\_prod\_xsmall(this-\/>\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}(), 0.0);}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01717}01717       \textcolor{comment}{// Now multiply the matrix and x\_small}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01718}01718       matrix\_pt-\/>\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a54b75960df52e3aebd21aaab20e9869d}{multiply}}(x\_small, a\_prod\_xsmall);}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01719}01719 }
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01720}01720       \textcolor{comment}{// Get the scalar component of x associated with the system augmentation}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01721}01721       \textcolor{keywordtype}{double} y = x[n\_dof];}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01722}01722 }
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01723}01723       \textcolor{comment}{// Loop over the first n\_dof entries of soln}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01724}01724       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_dof; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01725}01725       \{}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01726}01726         \textcolor{comment}{// Compute the i-\/th entry}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01727}01727         soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = a\_prod\_xsmall[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] + y * (*B\_pt)[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01728}01728       \}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01729}01729 }
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01730}01730       \textcolor{comment}{// Compute the final entry of soln}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01731}01731       soln[n\_dof] = \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a1f483fcae38f24ceda96c111333ebd2b}{C\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1DoubleVector_abd20e2e394c8e08749ed34c7228c8506}{dot}}(x\_small);}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01732}01732     \} \textcolor{comment}{// End of augmented\_matrix\_multiply}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01733}01733 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01734}01734 \textcolor{comment}{    /// Apply the block-\/diagonal Schur complement preconditioner to}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01735}01735 \textcolor{comment}{    /// compute the LHS which has size N+1 (the augmented system size)}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01736}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a71199dc59da3f5077803829e36ad4aec}{01736}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a71199dc59da3f5077803829e36ad4aec}{apply\_schur\_complement\_preconditioner}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& rhs,}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01737}01737                                                \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& soln)}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01738}01738     \{}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01739}01739       \textcolor{comment}{// How many dofs are there in the non-\/augmented system?}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01740}01740       \textcolor{keywordtype}{unsigned} n\_dof = this-\/>\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_aafad0b69de2284808366b65bd63e493b}{nrow}}();}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01741}01741 }
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01742}01742       \textcolor{comment}{// Compute the final entry of r first}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01743}01743       soln[n\_dof] = rhs[n\_dof] / \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a837e46fe93f07fa0740b5a7a9f40ebcb}{Schur\_complement\_scalar}};}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01744}01744 }
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01745}01745       \textcolor{comment}{// Do we want to use a block-\/diagonal approximation? The default is to}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01746}01746       \textcolor{comment}{// use a block upper-\/triangular approximation for the preconditioner}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01747}01747       \textcolor{keywordtype}{bool} use\_block\_diagonal\_preconditioner = \textcolor{keyword}{false};}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01748}01748 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01749}01749       \textcolor{comment}{// Now multiply the matrix and x\_small}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01750}01750       matrix\_pt-\/>\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a54b75960df52e3aebd21aaab20e9869d}{multiply}}(x\_small, a\_prod\_xsmall);}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01749}01749       \textcolor{comment}{// Allocate space for (the non-\/augmented part of) r satisfying b-\/Jx = Mr}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01750}01750       \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} r\_small(this-\/>\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}(), 0.0);}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01751}01751 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01752}01752       \textcolor{comment}{// Get the scalar component of x associated with the system augmentation}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01753}01753       \textcolor{keywordtype}{double} y = \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[n\_dof];}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01752}01752       \textcolor{comment}{// Allocate space for the non-\/augmented system part of the RHS vector}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01753}01753       \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} rhs\_small(this-\/>\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}(), 0.0);}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01754}01754 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01755}01755       \textcolor{comment}{// Loop over the first n\_dof entries of soln}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01755}01755       \textcolor{comment}{// Loop over the first n\_dof entries of the RHS vector}}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01756}01756       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_dof; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01757}01757       \{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01758}01758         \textcolor{comment}{// Compute the i-\/th entry}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01759}01759         soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = a\_prod\_xsmall[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] + y * (*B\_pt)[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01760}01760       \}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01761}01761 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01762}01762       \textcolor{comment}{// Compute the final entry of soln}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01763}01763       soln[n\_dof] = \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a1f483fcae38f24ceda96c111333ebd2b}{C\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1DoubleVector_abd20e2e394c8e08749ed34c7228c8506}{dot}}(x\_small);}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01764}01764     \} \textcolor{comment}{// End of augmented\_matrix\_multiply}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01765}01765 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01766}01766 \textcolor{comment}{    /// Apply the block-\/diagonal Schur complement preconditioner to}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01767}01767 \textcolor{comment}{    /// compute the LHS which has size N+1 (the augmented system size)}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01768}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a71199dc59da3f5077803829e36ad4aec}{01768}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a71199dc59da3f5077803829e36ad4aec}{apply\_schur\_complement\_preconditioner}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& rhs,}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01769}01769                                                \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& soln)}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01770}01770     \{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01771}01771       \textcolor{comment}{// How many dofs are there in the non-\/augmented system?}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01772}01772       \textcolor{keywordtype}{unsigned} n\_dof = this-\/>\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_aafad0b69de2284808366b65bd63e493b}{nrow}}();}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01773}01773 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01774}01774       \textcolor{comment}{// Compute the final entry of r first}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01775}01775       soln[n\_dof] = rhs[n\_dof] / \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a837e46fe93f07fa0740b5a7a9f40ebcb}{Schur\_complement\_scalar}};}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01776}01776 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01777}01777       \textcolor{comment}{// Do we want to use a block-\/diagonal approximation? The default is to}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01778}01778       \textcolor{comment}{// use a block upper-\/triangular approximation for the preconditioner}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01779}01779       \textcolor{keywordtype}{bool} use\_block\_diagonal\_preconditioner = \textcolor{keyword}{false};}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01780}01780 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01781}01781       \textcolor{comment}{// Allocate space for (the non-\/augmented part of) r satisfying b-\/Jx = Mr}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01782}01782       \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} r\_small(this-\/>\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}(), 0.0);}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01783}01783 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01784}01784       \textcolor{comment}{// Allocate space for the non-\/augmented system part of the RHS vector}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01785}01785       \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} rhs\_small(this-\/>\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}(), 0.0);}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01786}01786 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01787}01787       \textcolor{comment}{// Loop over the first n\_dof entries of the RHS vector}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01788}01788       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_dof; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01789}01789       \{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01790}01790         \textcolor{comment}{// If we want to use the block-\/diagonal preconditioner}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01791}01791         \textcolor{keywordflow}{if} (use\_block\_diagonal\_preconditioner)}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01792}01792         \{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01793}01793           \textcolor{comment}{// Copy the i-\/th entry over}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01794}01794           rhs\_small[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = rhs[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01795}01795         \}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01796}01796         \textcolor{comment}{// If we want to use the block upper-\/triangular preconditioner}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01797}01797         \textcolor{keywordflow}{else}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01798}01798         \{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01799}01799           \textcolor{comment}{// Copy the i-\/th entry over}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01800}01800           rhs\_small[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = rhs[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ soln[n\_dof] * (*B\_pt)[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01801}01801         \}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01802}01802       \} \textcolor{comment}{// for (unsigned i=0;i<n\_dof;i++)}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01803}01803 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01804}01804       \textcolor{comment}{// Apply the preconditioner}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01805}01805       \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_ad4ae617ce8304f17bd42f4dc39813e22}{preconditioner\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34884bb64ec8}{preconditioner\_solve}}(rhs\_small, r\_small);}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01806}01806 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01807}01807       \textcolor{comment}{// Loop over the first n\_dof entries of the solution vector}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01808}01808       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_dof; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01809}01809       \{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01810}01810         \textcolor{comment}{// Copy the i-\/th entry over}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01811}01811         soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = r\_small[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01812}01812       \}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01813}01813     \} \textcolor{comment}{// End of apply\_schur\_complement\_preconditioner}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01814}01814 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01815}01815 \textcolor{comment}{    /// General interface to solve function}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01816}01816 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a1ff5a4b43235b43d2254af0db6195dc7}{solve\_helper}}(\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{DoubleMatrixBase}}* \textcolor{keyword}{const}\& matrix\_pt,}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01817}01817                       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& rhs,}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01818}01818                       \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& solution);}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01819}01819 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01820}01820 \textcolor{comment}{    /// Helper function to update the result vector using the result,}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01821}01821 \textcolor{comment}{    /// x=x\_0+V\_m*y}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01822}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_ab7513cfa22054fa1bff319c72aac8313}{01822}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_ab7513cfa22054fa1bff319c72aac8313}{update}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& k,}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01823}01823                 \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<\mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}>\& H,}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01824}01824                 \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01825}01825                 \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<DoubleVector>}}\& v,}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01826}01826                 \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}})}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01827}01827     \{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01828}01828       \textcolor{comment}{// Make a local copy of s}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01829}01829       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} y(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01758}01758         \textcolor{comment}{// If we want to use the block-\/diagonal preconditioner}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01759}01759         \textcolor{keywordflow}{if} (use\_block\_diagonal\_preconditioner)}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01760}01760         \{}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01761}01761           \textcolor{comment}{// Copy the i-\/th entry over}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01762}01762           rhs\_small[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = rhs[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01763}01763         \}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01764}01764         \textcolor{comment}{// If we want to use the block upper-\/triangular preconditioner}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01765}01765         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01766}01766         \{}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01767}01767           \textcolor{comment}{// Copy the i-\/th entry over}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01768}01768           rhs\_small[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = rhs[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ soln[n\_dof] * (*B\_pt)[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01769}01769         \}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01770}01770       \} \textcolor{comment}{// for (unsigned i=0;i<n\_dof;i++)}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01771}01771 }
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01772}01772       \textcolor{comment}{// Apply the preconditioner}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01773}01773       \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_ad4ae617ce8304f17bd42f4dc39813e22}{preconditioner\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34884bb64ec8}{preconditioner\_solve}}(rhs\_small, r\_small);}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01774}01774 }
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01775}01775       \textcolor{comment}{// Loop over the first n\_dof entries of the solution vector}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01776}01776       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_dof; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01777}01777       \{}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01778}01778         \textcolor{comment}{// Copy the i-\/th entry over}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01779}01779         soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = r\_small[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01780}01780       \}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01781}01781     \} \textcolor{comment}{// End of apply\_schur\_complement\_preconditioner}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01782}01782 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01783}01783 \textcolor{comment}{    /// General interface to solve function}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01784}01784 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a1ff5a4b43235b43d2254af0db6195dc7}{solve\_helper}}(\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{DoubleMatrixBase}}* \textcolor{keyword}{const}\& matrix\_pt,}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01785}01785                       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& rhs,}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01786}01786                       \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& solution);}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01787}01787 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01788}01788 \textcolor{comment}{    /// Helper function to update the result vector using the result,}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01789}01789 \textcolor{comment}{    /// x=x\_0+V\_m*y}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01790}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_ab7513cfa22054fa1bff319c72aac8313}{01790}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_ab7513cfa22054fa1bff319c72aac8313}{update}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& k,}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01791}01791                 \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<\mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}>\& H,}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01792}01792                 \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01793}01793                 \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<DoubleVector>}}\& v,}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01794}01794                 \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& x)}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01795}01795     \{}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01796}01796       \textcolor{comment}{// Make a local copy of s}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01797}01797       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} y(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01798}01798 }
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01799}01799       \textcolor{comment}{// Backsolve:}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01800}01800       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = \textcolor{keywordtype}{int}(k); \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} >= 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}-\/-\/)}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01801}01801       \{}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01802}01802         \textcolor{comment}{// Divide the i-\/th entry of y by the i-\/th diagonal entry of H}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01803}01803         y[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] /= H[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}][\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01804}01804 }
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01805}01805         \textcolor{comment}{// Loop over the previous values of y and update}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01806}01806         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} -\/ 1; j >= 0; j-\/-\/)}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01807}01807         \{}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01808}01808           \textcolor{comment}{// Update the j-\/th entry of y}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01809}01809           y[j] -\/= H[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}][j] * y[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01810}01810         \}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01811}01811       \} \textcolor{comment}{// for (int i=int(k);i>=0;i-\/-\/)}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01812}01812 }
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01813}01813       \textcolor{comment}{// Store the number of rows in the result vector}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01814}01814       \textcolor{keywordtype}{unsigned} n\_x = x.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow}}();}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01815}01815 }
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01816}01816       \textcolor{comment}{// Build a temporary vector with entries initialised to 0.0}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01817}01817       \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} temp(x.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}(), 0.0);}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01818}01818 }
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01819}01819       \textcolor{comment}{// Build a temporary vector with entries initialised to 0.0}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01820}01820       \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} z(x.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}(), 0.0);}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01821}01821 }
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01822}01822       \textcolor{comment}{// Get access to the underlying values}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01823}01823       \textcolor{keywordtype}{double}* temp\_pt = temp.\mbox{\hyperlink{classoomph_1_1DoubleVector_ae3484a5eb4cb663e09640806ef1bf05a}{values\_pt}}();}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01824}01824 }
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01825}01825       \textcolor{comment}{// Calculate x=Vy}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01826}01826       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j <= k; j++)}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01827}01827       \{}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01828}01828         \textcolor{comment}{// Get access to j-\/th column of v}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01829}01829         \textcolor{keyword}{const} \textcolor{keywordtype}{double}* vj\_pt = v[j].values\_pt();}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01830}01830 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01831}01831       \textcolor{comment}{// Backsolve:}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01832}01832       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = \textcolor{keywordtype}{int}(k); \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} >= 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}-\/-\/)}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01833}01833       \{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01834}01834         \textcolor{comment}{// Divide the i-\/th entry of y by the i-\/th diagonal entry of H}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01835}01835         y[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] /= H[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}][\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01836}01836 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01837}01837         \textcolor{comment}{// Loop over the previous values of y and update}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01838}01838         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} -\/ 1; j >= 0; j-\/-\/)}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01839}01839         \{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01840}01840           \textcolor{comment}{// Update the j-\/th entry of y}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01841}01841           y[j] -\/= H[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}][j] * y[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01842}01842         \}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01843}01843       \} \textcolor{comment}{// for (int i=int(k);i>=0;i-\/-\/)}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01844}01844 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01845}01845       \textcolor{comment}{// Store the number of rows in the result vector}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01846}01846       \textcolor{keywordtype}{unsigned} n\_x = \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.nrow();}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01847}01847 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01848}01848       \textcolor{comment}{// Build a temporary vector with entries initialised to 0.0}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01849}01849       \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} temp(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.distribution\_pt(), 0.0);}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01850}01850 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01851}01851       \textcolor{comment}{// Build a temporary vector with entries initialised to 0.0}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01852}01852       \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} z(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.distribution\_pt(), 0.0);}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01853}01853 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01854}01854       \textcolor{comment}{// Get access to the underlying values}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01855}01855       \textcolor{keywordtype}{double}* temp\_pt = temp.\mbox{\hyperlink{classoomph_1_1DoubleVector_ae3484a5eb4cb663e09640806ef1bf05a}{values\_pt}}();}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01856}01856 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01857}01857       \textcolor{comment}{// Calculate x=Vy}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01858}01858       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j <= k; j++)}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01859}01859       \{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01860}01860         \textcolor{comment}{// Get access to j-\/th column of v}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01861}01861         \textcolor{keyword}{const} \textcolor{keywordtype}{double}* vj\_pt = v[j].values\_pt();}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01862}01862 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01863}01863         \textcolor{comment}{// Loop over the entries of the vector, temp}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01864}01864         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_x; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01865}01865         \{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01866}01866           temp\_pt[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += vj\_pt[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * y[j];}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01867}01867         \}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01868}01868       \} \textcolor{comment}{// for (unsigned j=0;j<=k;j++)}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01869}01869 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01870}01870       \textcolor{comment}{// If we're using LHS preconditioning}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01871}01871       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_ab32f761ac00fb98acfc66f07a62932c9}{Preconditioner\_LHS}})}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01831}01831         \textcolor{comment}{// Loop over the entries of the vector, temp}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01832}01832         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_x; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01833}01833         \{}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01834}01834           temp\_pt[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += vj\_pt[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * y[j];}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01835}01835         \}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01836}01836       \} \textcolor{comment}{// for (unsigned j=0;j<=k;j++)}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01837}01837 }
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01838}01838       \textcolor{comment}{// If we're using LHS preconditioning}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01839}01839       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_ab32f761ac00fb98acfc66f07a62932c9}{Preconditioner\_LHS}})}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01840}01840       \{}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01841}01841         \textcolor{comment}{// Since we're using LHS preconditioning the preconditioner is applied}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01842}01842         \textcolor{comment}{// to the matrix and RHS vector so we simply update the value of x}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01843}01843         x += temp;}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01844}01844       \}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01845}01845       \textcolor{comment}{// If we're using RHS preconditioning}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01846}01846       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01847}01847       \{}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01848}01848         \textcolor{comment}{// Since we're using RHS preconditioning the preconditioner is applied}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01849}01849         \textcolor{comment}{// to the solution vector}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01850}01850         \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a71199dc59da3f5077803829e36ad4aec}{apply\_schur\_complement\_preconditioner}}(temp, z);}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01851}01851 }
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01852}01852         \textcolor{comment}{// Use the update: x\_m=x\_0+inv(M)Vy [see Saad Y,"{}Iterative methods for}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01853}01853         \textcolor{comment}{// sparse linear systems"{}, p.284]}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01854}01854         x += z;}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01855}01855       \}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01856}01856     \} \textcolor{comment}{// End of update}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01857}01857 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01858}01858 \textcolor{comment}{    /// Helper function: Generate a plane rotation. This is done by}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01859}01859 \textcolor{comment}{    /// finding the values of \(\backslash\)f\$ \(\backslash\)cos(\(\backslash\)theta) \(\backslash\)f\$ (i.e. cs) and \(\backslash\)sin(\(\backslash\)theta)}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01860}01860 \textcolor{comment}{    /// (i.e. sn) such that:}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01861}01861 \textcolor{comment}{    /// \(\backslash\)f[ \(\backslash\)begin\{bmatrix\} \(\backslash\)cos\(\backslash\)theta \& \(\backslash\)sin\(\backslash\)theta \(\backslash\)newline -\/\(\backslash\)sin\(\backslash\)theta \& \(\backslash\)cos\(\backslash\)theta \(\backslash\)end\{bmatrix\} \(\backslash\)begin\{bmatrix\} dx \(\backslash\)newline dy \(\backslash\)end\{bmatrix\} = \(\backslash\)begin\{bmatrix\} r \(\backslash\)newline 0 \(\backslash\)end\{bmatrix\}, \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01862}01862 \textcolor{comment}{    /// where \(\backslash\)f\$ r=\(\backslash\)sqrt\{pow(dx,2)+pow(dy,2)\} \(\backslash\)f\$. The values of a and b are}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01863}01863 \textcolor{comment}{    /// given by:}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01864}01864 \textcolor{comment}{    /// \(\backslash\)f[ \(\backslash\)cos\(\backslash\)theta\&=\(\backslash\)dfrac\{dx\}\{\(\backslash\)sqrt\{pow(dx,2)+pow(dy,2)\}\}, \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01865}01865 \textcolor{comment}{    /// and}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01866}01866 \textcolor{comment}{    /// \(\backslash\)f[ \(\backslash\)sin\(\backslash\)theta\&=\(\backslash\)dfrac\{dy\}\{\(\backslash\)sqrt\{pow(dx,2)+pow(dy,2)\}\}. \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01867}01867 \textcolor{comment}{    /// Taken from: Saad Y."{}Iterative methods for sparse linear systems"{}, p.192}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01868}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a74bb2d9ceab6473c1922b166ebf48681}{01868}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a74bb2d9ceab6473c1922b166ebf48681}{generate\_plane\_rotation}}(\textcolor{keywordtype}{double}\& dx, \textcolor{keywordtype}{double}\& dy, \textcolor{keywordtype}{double}\& cs, \textcolor{keywordtype}{double}\& sn)}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01869}01869     \{}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01870}01870       \textcolor{comment}{// If dy=0 then we do not need to apply a rotation}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01871}01871       \textcolor{keywordflow}{if} (dy == 0.0)}
 \DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01872}01872       \{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01873}01873         \textcolor{comment}{// Since we're using LHS preconditioning the preconditioner is applied}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01874}01874         \textcolor{comment}{// to the matrix and RHS vector so we simply update the value of x}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01875}01875         \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}} += temp;}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01876}01876       \}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01877}01877       \textcolor{comment}{// If we're using RHS preconditioning}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01878}01878       \textcolor{keywordflow}{else}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01879}01879       \{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01880}01880         \textcolor{comment}{// Since we're using RHS preconditioning the preconditioner is applied}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01881}01881         \textcolor{comment}{// to the solution vector}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01882}01882         \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a71199dc59da3f5077803829e36ad4aec}{apply\_schur\_complement\_preconditioner}}(temp, z);}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01883}01883 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01884}01884         \textcolor{comment}{// Use the update: x\_m=x\_0+inv(M)Vy [see Saad Y,"{}Iterative methods for}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01885}01885         \textcolor{comment}{// sparse linear systems"{}, p.284]}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01886}01886         \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}} += z;}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01887}01887       \}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01888}01888     \} \textcolor{comment}{// End of update}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01889}01889 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01890}01890 \textcolor{comment}{    /// Helper function: Generate a plane rotation. This is done by}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01891}01891 \textcolor{comment}{    /// finding the values of \(\backslash\)f\$ \(\backslash\)cos(\(\backslash\)theta) \(\backslash\)f\$ (i.e. cs) and \(\backslash\)sin(\(\backslash\)theta)}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01892}01892 \textcolor{comment}{    /// (i.e. sn) such that:}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01893}01893 \textcolor{comment}{    /// \(\backslash\)f[}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01894}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a291e94349dab093547e89d755c81c171}{01894}} \textcolor{comment}{    /// \(\backslash\)begin\{bmatrix\}}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01895}01895 \textcolor{comment}{    /// \(\backslash\)cos\(\backslash\)theta \& \(\backslash\)sin\(\backslash\)theta \(\backslash\)newline}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01896}01896 \textcolor{comment}{    /// -\/\(\backslash\)sin\(\backslash\)theta \& \(\backslash\)cos\(\backslash\)theta}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01897}01897 \textcolor{comment}{    /// \(\backslash\)end\{bmatrix\}}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01898}01898 \textcolor{comment}{    /// \(\backslash\)begin\{bmatrix\}}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01899}01899 \textcolor{comment}{    /// dx \(\backslash\)newline}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01900}01900 \textcolor{comment}{    /// dy}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01901}01901 \textcolor{comment}{    /// \(\backslash\)end\{bmatrix\}}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01902}01902 \textcolor{comment}{    /// =}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01903}01903 \textcolor{comment}{    /// \(\backslash\)begin\{bmatrix\}}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01904}01904 \textcolor{comment}{    /// r \(\backslash\)newline}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01905}01905 \textcolor{comment}{    /// 0}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01906}01906 \textcolor{comment}{    /// \(\backslash\)end\{bmatrix\},}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01907}01907 \textcolor{comment}{    /// \(\backslash\)f]}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01908}01908 \textcolor{comment}{    /// where \(\backslash\)f\$ r=\(\backslash\)sqrt\{pow(dx,2)+pow(dy,2)\} \(\backslash\)f\$. The values of a and b are}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01909}01909 \textcolor{comment}{    /// given by:}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01910}01910 \textcolor{comment}{    /// \(\backslash\)f[}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01911}01911 \textcolor{comment}{    /// \(\backslash\)cos\(\backslash\)theta\&=\(\backslash\)dfrac\{dx\}\{\(\backslash\)sqrt\{pow(dx,2)+pow(dy,2)\}\},}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01912}01912 \textcolor{comment}{    /// \(\backslash\)f]}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01913}01913 \textcolor{comment}{    /// and}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01914}01914 \textcolor{comment}{    /// \(\backslash\)f[}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01915}01915 \textcolor{comment}{    /// \(\backslash\)sin\(\backslash\)theta\&=\(\backslash\)dfrac\{dy\}\{\(\backslash\)sqrt\{pow(dx,2)+pow(dy,2)\}\}.}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01916}01916 \textcolor{comment}{    /// \(\backslash\)f]}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01917}01917 \textcolor{comment}{    /// Taken from: Saad Y."{}Iterative methods for sparse linear systems"{}, p.192}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01918}01918 \textcolor{comment}{}    \textcolor{keywordtype}{void} generate\_plane\_rotation(\textcolor{keywordtype}{double}\& dx, \textcolor{keywordtype}{double}\& dy, \textcolor{keywordtype}{double}\& cs, \textcolor{keywordtype}{double}\& sn)}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01919}01919     \{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01920}01920       \textcolor{comment}{// If dy=0 then we do not need to apply a rotation}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01921}01921       \textcolor{keywordflow}{if} (dy == 0.0)}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01922}01922       \{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01923}01923         \textcolor{comment}{// Using theta=0 gives cos(theta)=1}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01924}01924         cs = 1.0;}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01925}01925 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01926}01926         \textcolor{comment}{// Using theta=0 gives sin(theta)=0}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01927}01927         sn = 0.0;}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01928}01928       \}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01929}01929       \textcolor{comment}{// If dx or dy is large using the normal form of calculting cs and sn}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01930}01930       \textcolor{comment}{// is naive since this may overflow or underflow so instead we calculate}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01931}01931       \textcolor{comment}{// r=sqrt(pow(dx,2)+pow(dy,2)) by using r=|dy|sqrt(1+pow(dx/dy,2)) if}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01932}01932       \textcolor{comment}{// |dy|>|dx| [see <A}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01933}01933       \textcolor{comment}{// HREF=https://en.wikipedia.org/wiki/Hypot"{}>Hypot</A>.].}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01934}01934       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (fabs(dy) > fabs(dx))}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01935}01935       \{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01936}01936         \textcolor{comment}{// Since |dy|>|dx| calculate the ratio dx/dy}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01937}01937         \textcolor{keywordtype}{double} temp = dx / dy;}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01938}01938 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01939}01939         \textcolor{comment}{// Calculate sin(theta)=dy/sqrt(pow(dx,2)+pow(dy,2))}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01940}01940         sn = 1.0 / sqrt(1.0 + temp * temp);}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01941}01941 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01942}01942         \textcolor{comment}{// Calculate cos(theta)=dx/sqrt(pow(dx,2)+pow(dy,2))=(dx/dy)*sin(theta)}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01943}01943         cs = temp * sn;}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01944}01944       \}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01945}01945       \textcolor{comment}{// Otherwise, we have |dx|>=|dy| so to, again, avoid overflow or underflow}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01946}01946       \textcolor{comment}{// calculate the values of cs and sn using the method above}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01947}01947       \textcolor{keywordflow}{else}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01948}01948       \{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01949}01949         \textcolor{comment}{// Since |dx|>=|dy| calculate the ratio dy/dx}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01950}01950         \textcolor{keywordtype}{double} temp = dy / dx;}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01951}01951 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01952}01952         \textcolor{comment}{// Calculate cos(theta)=dx/sqrt(pow(dx,2)+pow(dy,2))}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01953}01953         cs = 1.0 / sqrt(1.0 + temp * temp);}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01954}01954 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01955}01955         \textcolor{comment}{// Calculate sin(theta)=dy/sqrt(pow(dx,2)+pow(dy,2))=(dy/dx)*cos(theta)}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01956}01956         sn = temp * cs;}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01957}01957       \}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01958}01958     \} \textcolor{comment}{// End of generate\_plane\_rotation}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01959}01959 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01960}01960 \textcolor{comment}{    /// Helper function: Apply plane rotation. This is done using the}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01961}01961 \textcolor{comment}{    /// update:}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01962}01962 \textcolor{comment}{    /// \(\backslash\)f[}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01963}01963 \textcolor{comment}{    /// \(\backslash\)begin\{bmatrix\}}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01964}01964 \textcolor{comment}{    /// dx \(\backslash\)newline}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01965}01965 \textcolor{comment}{    /// dy}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01966}01966 \textcolor{comment}{    /// \(\backslash\)end\{bmatrix\}}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01967}01967 \textcolor{comment}{    /// \(\backslash\)leftarrow}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01968}01968 \textcolor{comment}{    /// \(\backslash\)begin\{bmatrix\}}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01969}01969 \textcolor{comment}{    /// \(\backslash\)cos\(\backslash\)theta \& \(\backslash\)sin\(\backslash\)theta \(\backslash\)newline}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01970}01970 \textcolor{comment}{    /// -\/\(\backslash\)sin\(\backslash\)theta \& \(\backslash\)cos\(\backslash\)theta}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01971}01971 \textcolor{comment}{    /// \(\backslash\)end\{bmatrix\}}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01972}01972 \textcolor{comment}{    /// \(\backslash\)begin\{bmatrix\}}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01973}01973 \textcolor{comment}{    /// dx \(\backslash\)newline}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01974}01974 \textcolor{comment}{    /// dy}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01975}01975 \textcolor{comment}{    /// \(\backslash\)end\{bmatrix\}.}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01976}01976 \textcolor{comment}{    /// \(\backslash\)f]}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01977}01977 \textcolor{comment}{}    \textcolor{keywordtype}{void} apply\_plane\_rotation(\textcolor{keywordtype}{double}\& dx, \textcolor{keywordtype}{double}\& dy, \textcolor{keywordtype}{double}\& cs, \textcolor{keywordtype}{double}\& sn)}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01978}01978     \{}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01979}01979       \textcolor{comment}{// Calculate the value of dx but don't update it yet}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01980}01980       \textcolor{keywordtype}{double} temp = cs * dx + sn * dy;}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01981}01981 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01982}01982       \textcolor{comment}{// Set the value of dy}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01983}01983       dy = -\/sn * dx + cs * dy;}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01984}01984 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01985}01985       \textcolor{comment}{// Set the value of dx using the correct values of dx and dy}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01986}01986       dx = temp;}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01987}01987     \}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01988}01988 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01989}01989 \textcolor{comment}{    /// Number of iterations taken}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01990}01990 \textcolor{comment}{}    \textcolor{keywordtype}{unsigned} Iterations;}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01991}01991 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01992}01992 \textcolor{comment}{    /// The number of iterations before the iteration proceedure is}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01993}01993 \textcolor{comment}{    /// restarted if iteration restart is used}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01994}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_ade82d55b66084e9eaefa867315e85ab9}{01994}} \textcolor{comment}{}    \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_ade82d55b66084e9eaefa867315e85ab9}{Restart}};}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01995}01995 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01996}01996 \textcolor{comment}{    /// boolean indicating if iteration restarting is used}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01997}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a447c3077e0763deb70e7e9ac34748d74}{01997}} \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a447c3077e0763deb70e7e9ac34748d74}{Iteration\_restart}};}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01998}01998 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01999}01999 \textcolor{comment}{    /// Pointer to matrix}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l02000}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a2dd7330c78b780ccc87c0922656a72b2}{02000}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}}* \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a2dd7330c78b780ccc87c0922656a72b2}{Matrix\_pt}};}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l02001}02001 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l02002}02002 \textcolor{comment}{    /// Pointer to the column vector in the bordered system}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l02003}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_aaab9daf6e2eb2bae858f48027754a93e}{02003}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}* \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_aaab9daf6e2eb2bae858f48027754a93e}{B\_pt}};}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l02004}02004 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l02005}02005 \textcolor{comment}{    /// Pointer to the row vector in the bordered system}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l02006}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a1f483fcae38f24ceda96c111333ebd2b}{02006}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}* \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a1f483fcae38f24ceda96c111333ebd2b}{C\_pt}};}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l02007}02007 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l02008}02008 \textcolor{comment}{    /// Pointer to the last entry of the LHS vector in the bordered system}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l02009}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a947a6617c3909fc2ffaebb9ebf001cfa}{02009}} \textcolor{comment}{}    \textcolor{keywordtype}{double}* \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a947a6617c3909fc2ffaebb9ebf001cfa}{X\_pt}};}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l02010}02010 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l02011}02011 \textcolor{comment}{    /// Pointer to the last entry of the RHS vector in the bordered system}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l02012}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a5f7815e661ee9a79da7fdc485a8bc652}{02012}} \textcolor{comment}{}    \textcolor{keywordtype}{double}* \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a5f7815e661ee9a79da7fdc485a8bc652}{Rhs\_pt}};}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l02013}02013 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l02014}02014 \textcolor{comment}{    /// The scalar component of the Schur complement preconditioner}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l02015}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a837e46fe93f07fa0740b5a7a9f40ebcb}{02015}} \textcolor{comment}{}    \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a837e46fe93f07fa0740b5a7a9f40ebcb}{Schur\_complement\_scalar}};}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l02016}02016 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l02017}02017 \textcolor{comment}{    /// Boolean flag to indicate if the solve is done in re-\/solve mode,}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l02018}02018 \textcolor{comment}{    /// bypassing setup of matrix and preconditioner}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l02019}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a1c8bdfdfbba0518cf24ad56970186714}{02019}} \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a1c8bdfdfbba0518cf24ad56970186714}{Resolving}};}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l02020}02020 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l02021}02021 \textcolor{comment}{    /// Boolean flag to indicate if the matrix pointed to be Matrix\_pt}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l02022}02022 \textcolor{comment}{    /// can be deleted.}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l02023}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a9e906e80cad4f9261729e75f2448fc63}{02023}} \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a9e906e80cad4f9261729e75f2448fc63}{Matrix\_can\_be\_deleted}};}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l02024}02024 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l02025}02025 \textcolor{comment}{    /// boolean indicating use of left hand preconditioning (if true)}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l02026}02026 \textcolor{comment}{    /// or right hand preconditioning (if false)}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l02027}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_ab32f761ac00fb98acfc66f07a62932c9}{02027}} \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_ab32f761ac00fb98acfc66f07a62932c9}{Preconditioner\_LHS}};}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l02028}02028   \};}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l02029}02029 \} \textcolor{comment}{// End of namespace oomph}}
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l02030}02030 }
-\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l02031}02031 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01873}01873         \textcolor{comment}{// Using theta=0 gives cos(theta)=1}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01874}01874         cs = 1.0;}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01875}01875 }
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01876}01876         \textcolor{comment}{// Using theta=0 gives sin(theta)=0}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01877}01877         sn = 0.0;}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01878}01878       \}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01879}01879       \textcolor{comment}{// If dx or dy is large using the normal form of calculting cs and sn}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01880}01880       \textcolor{comment}{// is naive since this may overflow or underflow so instead we calculate}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01881}01881       \textcolor{comment}{// r=sqrt(pow(dx,2)+pow(dy,2)) by using r=|dy|sqrt(1+pow(dx/dy,2)) if}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01882}01882       \textcolor{comment}{// |dy|>|dx| [see <A}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01883}01883       \textcolor{comment}{// HREF=https://en.wikipedia.org/wiki/Hypot"{}>Hypot</A>.].}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01884}01884       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (fabs(dy) > fabs(dx))}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01885}01885       \{}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01886}01886         \textcolor{comment}{// Since |dy|>|dx| calculate the ratio dx/dy}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01887}01887         \textcolor{keywordtype}{double} temp = dx / dy;}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01888}01888 }
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01889}01889         \textcolor{comment}{// Calculate sin(theta)=dy/sqrt(pow(dx,2)+pow(dy,2))}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01890}01890         sn = 1.0 / sqrt(1.0 + temp * temp);}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01891}01891 }
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01892}01892         \textcolor{comment}{// Calculate cos(theta)=dx/sqrt(pow(dx,2)+pow(dy,2))=(dx/dy)*sin(theta)}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01893}01893         cs = temp * sn;}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01894}01894       \}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01895}01895       \textcolor{comment}{// Otherwise, we have |dx|>=|dy| so to, again, avoid overflow or underflow}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01896}01896       \textcolor{comment}{// calculate the values of cs and sn using the method above}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01897}01897       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01898}01898       \{}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01899}01899         \textcolor{comment}{// Since |dx|>=|dy| calculate the ratio dy/dx}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01900}01900         \textcolor{keywordtype}{double} temp = dy / dx;}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01901}01901 }
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01902}01902         \textcolor{comment}{// Calculate cos(theta)=dx/sqrt(pow(dx,2)+pow(dy,2))}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01903}01903         cs = 1.0 / sqrt(1.0 + temp * temp);}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01904}01904 }
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01905}01905         \textcolor{comment}{// Calculate sin(theta)=dy/sqrt(pow(dx,2)+pow(dy,2))=(dy/dx)*cos(theta)}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01906}01906         sn = temp * cs;}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01907}01907       \}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01908}01908     \} \textcolor{comment}{// End of generate\_plane\_rotation}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01909}01909 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01910}01910 \textcolor{comment}{    /// Helper function: Apply plane rotation. This is done using the}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01911}01911 \textcolor{comment}{    /// update:}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01912}01912 \textcolor{comment}{    /// \(\backslash\)f[ \(\backslash\)begin\{bmatrix\} dx \(\backslash\)newline dy \(\backslash\)end\{bmatrix\} \(\backslash\)leftarrow \(\backslash\)begin\{bmatrix\} \(\backslash\)cos\(\backslash\)theta \& \(\backslash\)sin\(\backslash\)theta \(\backslash\)newline -\/\(\backslash\)sin\(\backslash\)theta \& \(\backslash\)cos\(\backslash\)theta \(\backslash\)end\{bmatrix\} \(\backslash\)begin\{bmatrix\} dx \(\backslash\)newline dy \(\backslash\)end\{bmatrix\}. \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01913}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a175361cb4600f20511213636f2e645ce}{01913}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a175361cb4600f20511213636f2e645ce}{apply\_plane\_rotation}}(\textcolor{keywordtype}{double}\& dx, \textcolor{keywordtype}{double}\& dy, \textcolor{keywordtype}{double}\& cs, \textcolor{keywordtype}{double}\& sn)}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01914}01914     \{}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01915}01915       \textcolor{comment}{// Calculate the value of dx but don't update it yet}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01916}01916       \textcolor{keywordtype}{double} temp = cs * dx + sn * dy;}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01917}01917 }
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01918}01918       \textcolor{comment}{// Set the value of dy}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01919}01919       dy = -\/sn * dx + cs * dy;}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01920}01920 }
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01921}01921       \textcolor{comment}{// Set the value of dx using the correct values of dx and dy}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01922}01922       dx = temp;}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01923}01923     \}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01924}01924 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01925}01925 \textcolor{comment}{    /// Number of iterations taken}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01926}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a9be7f8a66aefc1352e95741c5f265443}{01926}} \textcolor{comment}{}    \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a9be7f8a66aefc1352e95741c5f265443}{Iterations}};}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01927}01927 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01928}01928 \textcolor{comment}{    /// The number of iterations before the iteration proceedure is}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01929}01929 \textcolor{comment}{    /// restarted if iteration restart is used}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01930}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a472af506241c412c2a6fe4c53529118e}{01930}} \textcolor{comment}{}    \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a472af506241c412c2a6fe4c53529118e}{Restart}};}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01931}01931 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01932}01932 \textcolor{comment}{    /// boolean indicating if iteration restarting is used}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01933}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a447c3077e0763deb70e7e9ac34748d74}{01933}} \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a447c3077e0763deb70e7e9ac34748d74}{Iteration\_restart}};}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01934}01934 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01935}01935 \textcolor{comment}{    /// Pointer to matrix}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01936}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a2dd7330c78b780ccc87c0922656a72b2}{01936}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}}* \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a2dd7330c78b780ccc87c0922656a72b2}{Matrix\_pt}};}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01937}01937 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01938}01938 \textcolor{comment}{    /// Pointer to the column vector in the bordered system}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01939}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_aaab9daf6e2eb2bae858f48027754a93e}{01939}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}* \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_aaab9daf6e2eb2bae858f48027754a93e}{B\_pt}};}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01940}01940 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01941}01941 \textcolor{comment}{    /// Pointer to the row vector in the bordered system}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01942}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a1f483fcae38f24ceda96c111333ebd2b}{01942}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}* \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a1f483fcae38f24ceda96c111333ebd2b}{C\_pt}};}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01943}01943 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01944}01944 \textcolor{comment}{    /// Pointer to the last entry of the LHS vector in the bordered system}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01945}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a947a6617c3909fc2ffaebb9ebf001cfa}{01945}} \textcolor{comment}{}    \textcolor{keywordtype}{double}* \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a947a6617c3909fc2ffaebb9ebf001cfa}{X\_pt}};}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01946}01946 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01947}01947 \textcolor{comment}{    /// Pointer to the last entry of the RHS vector in the bordered system}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01948}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a5f7815e661ee9a79da7fdc485a8bc652}{01948}} \textcolor{comment}{}    \textcolor{keywordtype}{double}* \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a5f7815e661ee9a79da7fdc485a8bc652}{Rhs\_pt}};}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01949}01949 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01950}01950 \textcolor{comment}{    /// The scalar component of the Schur complement preconditioner}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01951}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a837e46fe93f07fa0740b5a7a9f40ebcb}{01951}} \textcolor{comment}{}    \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a837e46fe93f07fa0740b5a7a9f40ebcb}{Schur\_complement\_scalar}};}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01952}01952 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01953}01953 \textcolor{comment}{    /// Boolean flag to indicate if the solve is done in re-\/solve mode,}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01954}01954 \textcolor{comment}{    /// bypassing setup of matrix and preconditioner}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01955}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a1c8bdfdfbba0518cf24ad56970186714}{01955}} \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a1c8bdfdfbba0518cf24ad56970186714}{Resolving}};}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01956}01956 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01957}01957 \textcolor{comment}{    /// Boolean flag to indicate if the matrix pointed to be Matrix\_pt}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01958}01958 \textcolor{comment}{    /// can be deleted.}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01959}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a9e906e80cad4f9261729e75f2448fc63}{01959}} \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a9e906e80cad4f9261729e75f2448fc63}{Matrix\_can\_be\_deleted}};}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01960}01960 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01961}01961 \textcolor{comment}{    /// boolean indicating use of left hand preconditioning (if true)}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01962}01962 \textcolor{comment}{    /// or right hand preconditioning (if false)}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01963}\mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_ab32f761ac00fb98acfc66f07a62932c9}{01963}} \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_ab32f761ac00fb98acfc66f07a62932c9}{Preconditioner\_LHS}};}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01964}01964   \};}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01965}01965 \} \textcolor{comment}{// End of namespace oomph}}
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01966}01966 }
+\DoxyCodeLine{\Hypertarget{iterative__linear__solver_8h_source_l01967}01967 \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

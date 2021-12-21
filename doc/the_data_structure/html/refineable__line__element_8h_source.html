@@ -236,7 +236,7 @@ $(function() {
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="comment">    /// present element, s_fraction, return a pointer to that node. If</span></div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="comment">    /// not, return NULL (0). If the node is on a periodic boundary the</span></div>
 <div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="comment">    /// flag is_periodic is true, otherwise it will be false.</span></div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="comment"></span>    Node* node_created_by_neighbour(<span class="keyword">const</span> <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a>&amp; s_fraction,</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="comment"></span>    <a class="code hl_class" href="classoomph_1_1Node.html">Node</a>* node_created_by_neighbour(<span class="keyword">const</span> <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a>&amp; s_fraction,</div>
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>                                    <span class="keywordtype">bool</span>&amp; is_periodic);</div>
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="comment"></span> </div>
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="comment">    /// If a neighbouring element has already created a node at a</span></div>
@@ -244,7 +244,7 @@ $(function() {
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="comment">    /// present element, s_fraction, return a pointer to that node. If</span></div>
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="comment">    /// not, return NULL (0). If the node is on a periodic boundary the</span></div>
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="comment">    /// flag is_periodic is true, otherwise it will be false.</span></div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineableQElement_3_011_01_4.html#a3a429449a67ebd5bfe4215c3c0a4a018">  118</a></span><span class="comment"></span>    Node* <a class="code hl_function" href="classoomph_1_1RefineableQElement_3_011_01_4.html#a3a429449a67ebd5bfe4215c3c0a4a018">node_created_by_son_of_neighbour</a>(<span class="keyword">const</span> <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a>&amp; s_fraction,</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineableQElement_3_011_01_4.html#a3a429449a67ebd5bfe4215c3c0a4a018">  118</a></span><span class="comment"></span>    <a class="code hl_class" href="classoomph_1_1Node.html">Node</a>* <a class="code hl_function" href="classoomph_1_1RefineableQElement_3_011_01_4.html#a3a429449a67ebd5bfe4215c3c0a4a018">node_created_by_son_of_neighbour</a>(<span class="keyword">const</span> <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a>&amp; s_fraction,</div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>                                           <span class="keywordtype">bool</span>&amp; is_periodic)</div>
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    {</div>
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>      <span class="comment">// It is impossible for this situation to arise in meshes</span></div>
@@ -388,6 +388,7 @@ $(function() {
 <div class="ttc" id="aclassoomph_1_1LineElementBase_html"><div class="ttname"><a href="classoomph_1_1LineElementBase.html">oomph::LineElementBase</a></div><div class="ttdoc">Base class for all line elements.</div><div class="ttdef"><b>Definition:</b> <a href="Qelements_8h_source.html#l00465">Qelements.h:466</a></div></div>
 <div class="ttc" id="aclassoomph_1_1MacroElement_html"><div class="ttname"><a href="classoomph_1_1MacroElement.html">oomph::MacroElement</a></div><div class="ttdoc">Base class for MacroElement s that are used during mesh refinement in domains with curvlinear and/or ...</div><div class="ttdef"><b>Definition:</b> <a href="macro__element_8h_source.html#l00072">macro_element.h:73</a></div></div>
 <div class="ttc" id="aclassoomph_1_1Mesh_html"><div class="ttname"><a href="classoomph_1_1Mesh.html">oomph::Mesh</a></div><div class="ttdoc">A general mesh class.</div><div class="ttdef"><b>Definition:</b> <a href="mesh_8h_source.html#l00066">mesh.h:67</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Node_html"><div class="ttname"><a href="classoomph_1_1Node.html">oomph::Node</a></div><div class="ttdoc">Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...</div><div class="ttdef"><b>Definition:</b> <a href="nodes_8h_source.html#l00905">nodes.h:906</a></div></div>
 <div class="ttc" id="aclassoomph_1_1OomphLibError_html"><div class="ttname"><a href="classoomph_1_1OomphLibError.html">oomph::OomphLibError</a></div><div class="ttdoc">An OomphLibError object which should be thrown when an run-time error is encountered....</div><div class="ttdef"><b>Definition:</b> <a href="oomph__definitions_8h_source.html#l00221">oomph_definitions.h:222</a></div></div>
 <div class="ttc" id="aclassoomph_1_1OomphLibWarning_html"><div class="ttname"><a href="classoomph_1_1OomphLibWarning.html">oomph::OomphLibWarning</a></div><div class="ttdoc">An OomphLibWarning object which should be created as a temporary object to issue a warning....</div><div class="ttdef"><b>Definition:</b> <a href="oomph__definitions_8h_source.html#l00266">oomph_definitions.h:267</a></div></div>
 <div class="ttc" id="aclassoomph_1_1QSolidElementBase_html"><div class="ttname"><a href="classoomph_1_1QSolidElementBase.html">oomph::QSolidElementBase</a></div><div class="ttdoc">/////////////////////////////////////////////////////////////////////// /////////////////////////////...</div><div class="ttdef"><b>Definition:</b> <a href="Qelements_8h_source.html#l00329">Qelements.h:331</a></div></div>
@@ -451,7 +452,7 @@ $(function() {
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Nov 2 2021 16:31:11
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Dec 21 2021 17:35:08
         </div>
       </div>
     </footer>

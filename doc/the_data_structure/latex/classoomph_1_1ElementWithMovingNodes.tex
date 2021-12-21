@@ -28,33 +28,33 @@ enum \{ \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_a95a2aba98758542cd
 \item 
 \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_a498ce4d6bc4a92f1baa6e10aba3abe12}{Element\+With\+Moving\+Nodes}} ()
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_a4ac72d373d8b7a1edeb366541545f84a}{Element\+With\+Moving\+Nodes}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes}{Element\+With\+Moving\+Nodes}} \&)=delete
+\mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_a4ac72d373d8b7a1edeb366541545f84a}{Element\+With\+Moving\+Nodes}} (const \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes}{Element\+With\+Moving\+Nodes}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_a39cd75628d79a8ef21ba57016b99c82c}{operator=}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes}{Element\+With\+Moving\+Nodes}} \&)=delete
+void \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_a39cd75628d79a8ef21ba57016b99c82c}{operator=}} (const \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes}{Element\+With\+Moving\+Nodes}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_ab80f172afa65872255959c1af3fb7809}{describe\+\_\+local\+\_\+dofs}} (std\+::ostream \&out, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} std\+::string \&current\+\_\+string) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_ab80f172afa65872255959c1af3fb7809}{describe\+\_\+local\+\_\+dofs}} (std\+::ostream \&out, const std\+::string \&current\+\_\+string) const
 \begin{DoxyCompactList}\small\item\em Function to describe the local dofs of the element. The ostream specifies the output stream to which the description is written; the string stores the currently assembled output that is ultimately written to the output stream by Data\+::describe\+\_\+dofs(...); it is typically built up incrementally as we descend through the call hierarchy of this function when called from Problem\+::describe\+\_\+dofs(...) \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_a418b966b3bc0322da2e26273a3b737cb}{$\sim$\+Element\+With\+Moving\+Nodes}} ()
 \begin{DoxyCompactList}\small\item\em Virtual destructor (clean up and allocated memory) \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_a14f1abd33151ddaa8705b23d93d57037}{ngeom\+\_\+dof}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_a14f1abd33151ddaa8705b23d93d57037}{ngeom\+\_\+dof}} () const
 \begin{DoxyCompactList}\small\item\em Number of geometric dofs. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_a2005bd9a0f38ad2eab3ec1250c8a7ba4}{geometric\+\_\+data\+\_\+local\+\_\+eqn}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+int \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_a2005bd9a0f38ad2eab3ec1250c8a7ba4}{geometric\+\_\+data\+\_\+local\+\_\+eqn}} (const unsigned \&n, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Return the local equation number corresponding to the i-\/th value at the n-\/th geometric data object. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_ace3d71716d0b99c174582917486dbb7d}{assemble\+\_\+set\+\_\+of\+\_\+all\+\_\+geometric\+\_\+data}} (std\+::set$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ $>$ \&unique\+\_\+geom\+\_\+data\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Return a set of all geometric data associated with the element. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_ac85f9921f2ed1020f734f5c47a612809}{identify\+\_\+geometric\+\_\+data}} (std\+::set$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ $>$ \&geometric\+\_\+data\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Specify \mbox{\hyperlink{classoomph_1_1Data}{Data}} that affects the geometry of the element by adding the element\textquotesingle{}s geometric \mbox{\hyperlink{classoomph_1_1Data}{Data}} to the set that\textquotesingle{}s passed in. (This functionality is required in FSI problems; set is used to avoid double counting). \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_a372374d0b2541faca710bcd7705db058}{are\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates\+\_\+always\+\_\+evaluated\+\_\+by\+\_\+fd}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+bool \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_a372374d0b2541faca710bcd7705db058}{are\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates\+\_\+always\+\_\+evaluated\+\_\+by\+\_\+fd}} () const
 \begin{DoxyCompactList}\small\item\em Return whether shape derivatives are evaluated by fd. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_af3b9389f9b34d941ca1b9a058ce4cc2c}{enable\+\_\+always\+\_\+evaluate\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates\+\_\+by\+\_\+fd}} ()
-\begin{DoxyCompactList}\small\item\em Insist that shape derivatives are always evaluated by fd (using \mbox{\hyperlink{classoomph_1_1FiniteElement_ad3e5e89f43bd6e4a2a46e524a71da0ff}{Finite\+Element\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates()}}) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Insist that shape derivatives are always evaluated by fd (using \mbox{\hyperlink{classoomph_1_1FiniteElement_ae4b85a31a983a52d3010930f9e0851b8}{Finite\+Element\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates()}}) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_ad8493e8dbf92f44106c10f8f58bfffa3}{disable\+\_\+always\+\_\+evaluate\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates\+\_\+by\+\_\+fd}} ()
 \begin{DoxyCompactList}\small\item\em Insist that shape derivatives are always evaluated using the overloaded version of this function that may have been implemented in a derived class. (The default behaviour will still be finite differences unless the function has actually been overloaded. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_aad094d008fb6aa1531f730c012c46494}{evaluate\+\_\+shape\+\_\+derivs\+\_\+by\+\_\+direct\+\_\+fd}} ()
 \begin{DoxyCompactList}\small\item\em Evaluate shape derivatives by direct finite differencing. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_aba14c845323dc4ef435afd18314ede70}{evaluate\+\_\+shape\+\_\+derivs\+\_\+by\+\_\+chain\+\_\+rule}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} bool \&i\+\_\+know\+\_\+what\+\_\+i\+\_\+am\+\_\+doing=false)
+void \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_aba14c845323dc4ef435afd18314ede70}{evaluate\+\_\+shape\+\_\+derivs\+\_\+by\+\_\+chain\+\_\+rule}} (const bool \&i\+\_\+know\+\_\+what\+\_\+i\+\_\+am\+\_\+doing=false)
 \begin{DoxyCompactList}\small\item\em Evaluate shape derivatives by chain rule. Currently disabled by default because it\textquotesingle{}s broken; can re-\/enable use by setting optional boolean to true. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_ae49a756cbadda1b02c1599db34f9e019}{evaluate\+\_\+shape\+\_\+derivs\+\_\+by\+\_\+fastest\+\_\+method}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} bool \&i\+\_\+know\+\_\+what\+\_\+i\+\_\+am\+\_\+doing=false)
+void \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_ae49a756cbadda1b02c1599db34f9e019}{evaluate\+\_\+shape\+\_\+derivs\+\_\+by\+\_\+fastest\+\_\+method}} (const bool \&i\+\_\+know\+\_\+what\+\_\+i\+\_\+am\+\_\+doing=false)
 \begin{DoxyCompactList}\small\item\em Evaluate shape derivatives by (anticipated) fastest method. Currently disabled by default because it\textquotesingle{}s broken; can re-\/enable use by setting optional boolean to true. \end{DoxyCompactList}\item 
 int \& \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_aa3559717ddcceb96109cc5dafbc11de2}{method\+\_\+for\+\_\+shape\+\_\+derivs}} ()
 \begin{DoxyCompactList}\small\item\em Access to method (enumerated flag) for determination of shape derivs. \end{DoxyCompactList}\item 
@@ -62,9 +62,9 @@ void \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_a580ecb70417536ceb112
 \begin{DoxyCompactList}\small\item\em Bypass the call to fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_a4f1d999320dd5bbece88b33241816e9e}{disable\+\_\+bypass\+\_\+fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data}} ()
 \begin{DoxyCompactList}\small\item\em Do not bypass the call to fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_a9e6450d4fff45393640ab3043d17ac96}{is\+\_\+fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data\+\_\+bypassed}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+bool \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_a9e6450d4fff45393640ab3043d17ac96}{is\+\_\+fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data\+\_\+bypassed}} () const
 \begin{DoxyCompactList}\small\item\em Test whether the call to fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data is bypassed. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_acd9274afc02b66bb15b368e359c40a6f}{ngeom\+\_\+data}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_acd9274afc02b66bb15b368e359c40a6f}{ngeom\+\_\+data}} () const
 \begin{DoxyCompactList}\small\item\em Return the number of geometric data upon which the shape of the element depends. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -73,11 +73,11 @@ virtual void \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_a639f9c0e3cf3
 \begin{DoxyCompactList}\small\item\em Compute derivatives of the nodal coordinates w.\+r.\+t. to the geometric dofs. Default implementation by FD can be overwritten for specific elements. dnodal\+\_\+coordinates\+\_\+dgeom\+\_\+dofs(l,i,j) = d\+X\+\_\+\{ij\} / d s\+\_\+l. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_a6d2fa178f36d4b8413a9ce4f24e9c87e}{complete\+\_\+setup\+\_\+of\+\_\+dependencies}} ()
 \begin{DoxyCompactList}\small\item\em Construct the vector of (unique) geometric data. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_a5fdaf955e508b80e5fd5673f574472d5}{assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} bool \&store\+\_\+local\+\_\+dof\+\_\+pt)
+virtual void \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_a5fdaf955e508b80e5fd5673f574472d5}{assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers}} (const bool \&store\+\_\+local\+\_\+dof\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Assign local equation numbers for the geometric \mbox{\hyperlink{classoomph_1_1Data}{Data}} in the element If the boolean argument is true then the degrees of freedom are stored in Dof\+\_\+pt. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_ad0f8a6ecdbc0e410fee8ae90f7464ded}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})
+void \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_ad0f8a6ecdbc0e410fee8ae90f7464ded}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em Calculate the contributions to the Jacobian matrix from the geometric data. This version assumes that the (full) residuals vector has already been calculated and is passed in as the first argument -- needed in case the derivatives are computed by FD. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_ac9750cea96c52b31fe059ba109fea076}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data}} (\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})
+void \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_ac9750cea96c52b31fe059ba109fea076}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data}} (\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em Calculate the contributions to the Jacobian matrix from the geometric data. This version computes the residuals vector before calculating the Jacobian terms. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -94,7 +94,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_a346ca61cbdd37468
 bool \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_a69258bc20d31d8212f4096e46aa80b6b}{Bypass\+\_\+fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data}}
 \begin{DoxyCompactList}\small\item\em Set flag to true to bypass calculation of Jacobain entries resulting from geometric data. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_a48a91f84864bc2346ee4b9d50d2250b1}{Evaluate\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates\+\_\+by\+\_\+fd}}
-\begin{DoxyCompactList}\small\item\em Boolean to decide if shape derivatives are to be evaluated by fd (using \mbox{\hyperlink{classoomph_1_1FiniteElement_ad3e5e89f43bd6e4a2a46e524a71da0ff}{Finite\+Element\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates()}}) or analytically, using the overloaded version of this function in this class. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Boolean to decide if shape derivatives are to be evaluated by fd (using \mbox{\hyperlink{classoomph_1_1FiniteElement_ae4b85a31a983a52d3010930f9e0851b8}{Finite\+Element\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates()}}) or analytically, using the overloaded version of this function in this class. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_a7b02491715adf7a315631938138362af}{Method\+\_\+for\+\_\+shape\+\_\+derivs}}
 \begin{DoxyCompactList}\small\item\em Choose method for evaluation of shape derivatives (this takes one of the values in the enumeration) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
@@ -103,7 +103,7 @@ int \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_a7b02491715adf7a315631
 \doxysubsection{Detailed Description}
 /////////////////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////////////// 
 
-A policy class that serves to establish the common interfaces for elements that contain moving nodes. This class provides storage for the geometric data that affect the update of all the nodes of the element, i.\+e. USUALLY all data that are using during a call to the Element\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1FiniteElement_a7ae3f437c142fbdef17db914698ffb10}{node\+\_\+update()}} function. In some cases (e.\+g. Fluid\+Interface\+Edge elements), \mbox{\hyperlink{classoomph_1_1FiniteElement_a7ae3f437c142fbdef17db914698ffb10}{node\+\_\+update()}} is overloaded to perform an update of the bulk element, in which case the additional bulk geometric data become external data of the element and the function Generalised\+Element\+::update\+\_\+in\+\_\+external\+\_\+fd(i) is overloaded to also perform the bulk node update. The storage is populated during the assignment of the equation numbers via the \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_a6d2fa178f36d4b8413a9ce4f24e9c87e}{complete\+\_\+setup\+\_\+of\+\_\+dependencies()}} function and then local equations numbers are assigned to these data, accessible via geometric\+\_\+data\+\_\+local\+\_\+eqn(n,i). Finally, a function is provided that calculates the terms in the jacobian matrix by due to these geometric data by finite differences. 
+A policy class that serves to establish the common interfaces for elements that contain moving nodes. This class provides storage for the geometric data that affect the update of all the nodes of the element, i.\+e. USUALLY all data that are using during a call to the Element\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1FiniteElement_ac27d707cb4f7c1429793c0fdb2fd093b}{node\+\_\+update()}} function. In some cases (e.\+g. Fluid\+Interface\+Edge elements), \mbox{\hyperlink{classoomph_1_1FiniteElement_ac27d707cb4f7c1429793c0fdb2fd093b}{node\+\_\+update()}} is overloaded to perform an update of the bulk element, in which case the additional bulk geometric data become external data of the element and the function Generalised\+Element\+::update\+\_\+in\+\_\+external\+\_\+fd(i) is overloaded to also perform the bulk node update. The storage is populated during the assignment of the equation numbers via the \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_a6d2fa178f36d4b8413a9ce4f24e9c87e}{complete\+\_\+setup\+\_\+of\+\_\+dependencies()}} function and then local equations numbers are assigned to these data, accessible via geometric\+\_\+data\+\_\+local\+\_\+eqn(n,i). Finally, a function is provided that calculates the terms in the jacobian matrix by due to these geometric data by finite differences. 
 
 Definition at line \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00064}{64}} of file \mbox{\hyperlink{element__with__moving__nodes_8h_source}{element\+\_\+with\+\_\+moving\+\_\+nodes.\+h}}.
 
@@ -157,7 +157,7 @@ Definition at line \mbox{\hyperlink{element__with__moving__nodes_8h_source_l0007
 \index{oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}!ElementWithMovingNodes@{ElementWithMovingNodes}}
 \index{ElementWithMovingNodes@{ElementWithMovingNodes}!oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}}
 \doxysubsubsection{\texorpdfstring{ElementWithMovingNodes()}{ElementWithMovingNodes()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily oomph\+::\+Element\+With\+Moving\+Nodes\+::\+Element\+With\+Moving\+Nodes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes}{Element\+With\+Moving\+Nodes}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+{\footnotesize\ttfamily oomph\+::\+Element\+With\+Moving\+Nodes\+::\+Element\+With\+Moving\+Nodes (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes}{Element\+With\+Moving\+Nodes}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
@@ -220,7 +220,7 @@ Definition at line \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l000
 
 
 
-References \mbox{\hyperlink{geom__objects_8h_source_l00233}{oomph\+::\+Geom\+Object\+::geom\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{geom__objects_8h_source_l00209}{oomph\+::\+Geom\+Object\+::ngeom\+\_\+data()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References \mbox{\hyperlink{nodes_8h_source_l01632}{oomph\+::\+Node\+::all\+\_\+geom\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l01647}{oomph\+::\+Node\+::all\+\_\+geom\+\_\+object\+\_\+pt()}}, \mbox{\hyperlink{geom__objects_8h_source_l00233}{oomph\+::\+Geom\+Object\+::geom\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l01228}{oomph\+::\+Node\+::hanging\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l01285}{oomph\+::\+Node\+::is\+\_\+hanging()}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{geom__objects_8h_source_l00209}{oomph\+::\+Geom\+Object\+::ngeom\+\_\+data()}}, \mbox{\hyperlink{nodes_8h_source_l01625}{oomph\+::\+Node\+::ngeom\+\_\+data()}}, \mbox{\hyperlink{nodes_8h_source_l01639}{oomph\+::\+Node\+::ngeom\+\_\+object()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
 
 
 
@@ -230,7 +230,7 @@ Referenced by \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l00138}{c
 \index{oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}!assign\_all\_generic\_local\_eqn\_numbers@{assign\_all\_generic\_local\_eqn\_numbers}}
 \index{assign\_all\_generic\_local\_eqn\_numbers@{assign\_all\_generic\_local\_eqn\_numbers}!oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}}
 \doxysubsubsection{\texorpdfstring{assign\_all\_generic\_local\_eqn\_numbers()}{assign\_all\_generic\_local\_eqn\_numbers()}}
-{\footnotesize\ttfamily void oomph\+::\+Element\+With\+Moving\+Nodes\+::assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} bool \&}]{store\+\_\+local\+\_\+dof\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Element\+With\+Moving\+Nodes\+::assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers (\begin{DoxyParamCaption}\item[{const bool \&}]{store\+\_\+local\+\_\+dof\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -290,7 +290,7 @@ Referenced by \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00485}{oo
 \index{oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}!describe\_local\_dofs@{describe\_local\_dofs}}
 \index{describe\_local\_dofs@{describe\_local\_dofs}!oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}}
 \doxysubsubsection{\texorpdfstring{describe\_local\_dofs()}{describe\_local\_dofs()}}
-{\footnotesize\ttfamily void oomph\+::\+Element\+With\+Moving\+Nodes\+::describe\+\_\+local\+\_\+dofs (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} std\+::string \&}]{current\+\_\+string }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Element\+With\+Moving\+Nodes\+::describe\+\_\+local\+\_\+dofs (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out,  }\item[{const std\+::string \&}]{current\+\_\+string }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -360,7 +360,7 @@ References \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00361}{Bypas
 
 
 
-Insist that shape derivatives are always evaluated by fd (using \mbox{\hyperlink{classoomph_1_1FiniteElement_ad3e5e89f43bd6e4a2a46e524a71da0ff}{Finite\+Element\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates()}}) 
+Insist that shape derivatives are always evaluated by fd (using \mbox{\hyperlink{classoomph_1_1FiniteElement_ae4b85a31a983a52d3010930f9e0851b8}{Finite\+Element\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates()}}) 
 
 
 
@@ -400,7 +400,7 @@ Referenced by \mbox{\hyperlink{refineable__brick__element_8cc_source_l01293}{oom
 \index{oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}!evaluate\_shape\_derivs\_by\_chain\_rule@{evaluate\_shape\_derivs\_by\_chain\_rule}}
 \index{evaluate\_shape\_derivs\_by\_chain\_rule@{evaluate\_shape\_derivs\_by\_chain\_rule}!oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}}
 \doxysubsubsection{\texorpdfstring{evaluate\_shape\_derivs\_by\_chain\_rule()}{evaluate\_shape\_derivs\_by\_chain\_rule()}}
-{\footnotesize\ttfamily void oomph\+::\+Element\+With\+Moving\+Nodes\+::evaluate\+\_\+shape\+\_\+derivs\+\_\+by\+\_\+chain\+\_\+rule (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} bool \&}]{i\+\_\+know\+\_\+what\+\_\+i\+\_\+am\+\_\+doing = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Element\+With\+Moving\+Nodes\+::evaluate\+\_\+shape\+\_\+derivs\+\_\+by\+\_\+chain\+\_\+rule (\begin{DoxyParamCaption}\item[{const bool \&}]{i\+\_\+know\+\_\+what\+\_\+i\+\_\+am\+\_\+doing = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -436,7 +436,7 @@ References \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00371}{Metho
 \index{oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}!evaluate\_shape\_derivs\_by\_fastest\_method@{evaluate\_shape\_derivs\_by\_fastest\_method}}
 \index{evaluate\_shape\_derivs\_by\_fastest\_method@{evaluate\_shape\_derivs\_by\_fastest\_method}!oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}}
 \doxysubsubsection{\texorpdfstring{evaluate\_shape\_derivs\_by\_fastest\_method()}{evaluate\_shape\_derivs\_by\_fastest\_method()}}
-{\footnotesize\ttfamily void oomph\+::\+Element\+With\+Moving\+Nodes\+::evaluate\+\_\+shape\+\_\+derivs\+\_\+by\+\_\+fastest\+\_\+method (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} bool \&}]{i\+\_\+know\+\_\+what\+\_\+i\+\_\+am\+\_\+doing = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Element\+With\+Moving\+Nodes\+::evaluate\+\_\+shape\+\_\+derivs\+\_\+by\+\_\+fastest\+\_\+method (\begin{DoxyParamCaption}\item[{const bool \&}]{i\+\_\+know\+\_\+what\+\_\+i\+\_\+am\+\_\+doing = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -466,7 +466,7 @@ Definition at line \mbox{\hyperlink{element__with__moving__nodes_8h_source_l0032
 
 
 
-References \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00361}{Bypass\+\_\+fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data}}, \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l00323}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data()}}, \mbox{\hyperlink{elements_8h_source_l00980}{oomph\+::\+Generalised\+Element\+::get\+\_\+residuals()}}, \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}, and \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}.
+References \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00361}{Bypass\+\_\+fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data}}, \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l00323}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data()}}, \mbox{\hyperlink{elements_8h_source_l00980}{oomph\+::\+Generalised\+Element\+::get\+\_\+residuals()}}, and \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithMovingNodes_ad0f8a6ecdbc0e410fee8ae90f7464ded}\label{classoomph_1_1ElementWithMovingNodes_ad0f8a6ecdbc0e410fee8ae90f7464ded}} 
 \index{oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}!fill\_in\_jacobian\_from\_geometric\_data@{fill\_in\_jacobian\_from\_geometric\_data}}
@@ -484,7 +484,7 @@ Definition at line \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l003
 
 
 
-References \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00361}{Bypass\+\_\+fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data}}, \mbox{\hyperlink{elements_8h_source_l01198}{oomph\+::\+Generalised\+Element\+::\+Default\+\_\+fd\+\_\+jacobian\+\_\+step}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00367}{Evaluate\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates\+\_\+by\+\_\+fd}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00340}{Geom\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00126}{geometric\+\_\+data\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l00538}{get\+\_\+dnodal\+\_\+coordinates\+\_\+dgeom\+\_\+dofs()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad3e5e89f43bd6e4a2a46e524a71da0ff}{oomph\+::\+Finite\+Element\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates()}}, \mbox{\hyperlink{elements_8h_source_l00980}{oomph\+::\+Generalised\+Element\+::get\+\_\+residuals()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00371}{Method\+\_\+for\+\_\+shape\+\_\+derivs}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00345}{ngeom\+\_\+data()}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00357}{Ngeom\+\_\+dof}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a7ae3f437c142fbdef17db914698ffb10}{oomph\+::\+Finite\+Element\+::node\+\_\+update()}}, \mbox{\hyperlink{refineable__elements_8h_source_l00627}{oomph\+::\+Refineable\+Element\+::nshape\+\_\+controlling\+\_\+nodes()}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00070}{Shape\+\_\+derivs\+\_\+by\+\_\+chain\+\_\+rule}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00071}{Shape\+\_\+derivs\+\_\+by\+\_\+direct\+\_\+fd}}, and \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00072}{Shape\+\_\+derivs\+\_\+by\+\_\+fastest\+\_\+method}}.
+References \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00361}{Bypass\+\_\+fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data}}, \mbox{\hyperlink{elements_8h_source_l01198}{oomph\+::\+Generalised\+Element\+::\+Default\+\_\+fd\+\_\+jacobian\+\_\+step}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00367}{Evaluate\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates\+\_\+by\+\_\+fd}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00340}{Geom\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00126}{geometric\+\_\+data\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l00538}{get\+\_\+dnodal\+\_\+coordinates\+\_\+dgeom\+\_\+dofs()}}, \mbox{\hyperlink{elements_8cc_source_l03744}{oomph\+::\+Finite\+Element\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates()}}, \mbox{\hyperlink{elements_8h_source_l00980}{oomph\+::\+Generalised\+Element\+::get\+\_\+residuals()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00371}{Method\+\_\+for\+\_\+shape\+\_\+derivs}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00345}{ngeom\+\_\+data()}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00357}{Ngeom\+\_\+dof}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{elements_8cc_source_l05072}{oomph\+::\+Finite\+Element\+::node\+\_\+update()}}, \mbox{\hyperlink{refineable__elements_8h_source_l00627}{oomph\+::\+Refineable\+Element\+::nshape\+\_\+controlling\+\_\+nodes()}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00070}{Shape\+\_\+derivs\+\_\+by\+\_\+chain\+\_\+rule}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00071}{Shape\+\_\+derivs\+\_\+by\+\_\+direct\+\_\+fd}}, and \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00072}{Shape\+\_\+derivs\+\_\+by\+\_\+fastest\+\_\+method}}.
 
 
 
@@ -494,7 +494,7 @@ Referenced by \mbox{\hyperlink{constrained__volume__elements_8h_source_l00442}{o
 \index{oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}!geometric\_data\_local\_eqn@{geometric\_data\_local\_eqn}}
 \index{geometric\_data\_local\_eqn@{geometric\_data\_local\_eqn}!oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}}
 \doxysubsubsection{\texorpdfstring{geometric\_data\_local\_eqn()}{geometric\_data\_local\_eqn()}}
-{\footnotesize\ttfamily int oomph\+::\+Element\+With\+Moving\+Nodes\+::geometric\+\_\+data\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily int oomph\+::\+Element\+With\+Moving\+Nodes\+::geometric\+\_\+data\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -528,7 +528,7 @@ Definition at line \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l005
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01198}{oomph\+::\+Generalised\+Element\+::\+Default\+\_\+fd\+\_\+jacobian\+\_\+step}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00340}{Geom\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00126}{geometric\+\_\+data\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00345}{ngeom\+\_\+data()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a7ae3f437c142fbdef17db914698ffb10}{oomph\+::\+Finite\+Element\+::node\+\_\+update()}}, \mbox{\hyperlink{refineable__elements_8h_source_l00627}{oomph\+::\+Refineable\+Element\+::nshape\+\_\+controlling\+\_\+nodes()}}, and \mbox{\hyperlink{refineable__elements_8h_source_l00636}{oomph\+::\+Refineable\+Element\+::shape\+\_\+controlling\+\_\+node\+\_\+lookup()}}.
+References \mbox{\hyperlink{elements_8h_source_l01198}{oomph\+::\+Generalised\+Element\+::\+Default\+\_\+fd\+\_\+jacobian\+\_\+step}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00340}{Geom\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00126}{geometric\+\_\+data\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00345}{ngeom\+\_\+data()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{elements_8cc_source_l05072}{oomph\+::\+Finite\+Element\+::node\+\_\+update()}}, \mbox{\hyperlink{refineable__elements_8h_source_l00627}{oomph\+::\+Refineable\+Element\+::nshape\+\_\+controlling\+\_\+nodes()}}, \mbox{\hyperlink{nodes_8cc_source_l02499}{oomph\+::\+Node\+::position()}}, and \mbox{\hyperlink{refineable__elements_8h_source_l00636}{oomph\+::\+Refineable\+Element\+::shape\+\_\+controlling\+\_\+node\+\_\+lookup()}}.
 
 
 
@@ -644,7 +644,7 @@ References \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00357}{Ngeom
 \index{oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
-{\footnotesize\ttfamily void oomph\+::\+Element\+With\+Moving\+Nodes\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes}{Element\+With\+Moving\+Nodes}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+{\footnotesize\ttfamily void oomph\+::\+Element\+With\+Moving\+Nodes\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes}{Element\+With\+Moving\+Nodes}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
@@ -679,7 +679,7 @@ Referenced by \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00280}{di
 
 
 
-Boolean to decide if shape derivatives are to be evaluated by fd (using \mbox{\hyperlink{classoomph_1_1FiniteElement_ad3e5e89f43bd6e4a2a46e524a71da0ff}{Finite\+Element\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates()}}) or analytically, using the overloaded version of this function in this class. 
+Boolean to decide if shape derivatives are to be evaluated by fd (using \mbox{\hyperlink{classoomph_1_1FiniteElement_ae4b85a31a983a52d3010930f9e0851b8}{Finite\+Element\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates()}}) or analytically, using the overloaded version of this function in this class. 
 
 
 

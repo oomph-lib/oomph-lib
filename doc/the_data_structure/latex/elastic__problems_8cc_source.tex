@@ -70,7 +70,7 @@
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00066}00066 \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00067}00067 }
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00068}00068       \textcolor{comment}{// Get spatial dimension of node}}
-\DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00069}00069       \textcolor{keywordtype}{unsigned} ndim = node\_pt-\/>ndim();}
+\DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00069}00069       \textcolor{keywordtype}{unsigned} ndim = node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00070}00070 }
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00071}00071       \textcolor{comment}{// Find out how many positional dofs there are}}
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00072}00072       \mbox{\hyperlink{classoomph_1_1SolidFiniteElement}{SolidFiniteElement}}* elem\_pt =}
@@ -99,11 +99,11 @@
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00095}00095       \}}
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00096}00096 }
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00097}00097       \textcolor{comment}{// Loop over nodal values}}
-\DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00098}00098       \textcolor{keywordtype}{unsigned} nval = node\_pt-\/>nvalue();}
+\DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00098}00098       \textcolor{keywordtype}{unsigned} nval = node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}{nvalue}}();}
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00099}00099       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ival = 0; ival < nval; ival++)}
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00100}00100       \{}
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00101}00101         \textcolor{comment}{// Pin them}}
-\DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00102}00102         node\_pt-\/>pin(ival);}
+\DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00102}00102         node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a422231c58e423f0b43822827aa334d79}{pin}}(ival);}
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00103}00103       \}}
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00104}00104     \}}
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00105}00105 }
@@ -220,7 +220,7 @@
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00216}00216 \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00217}00217 }
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00218}00218       \textcolor{comment}{// Get spatial dimension of node}}
-\DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00219}00219       \textcolor{keywordtype}{unsigned} ndim = node\_pt-\/>ndim();}
+\DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00219}00219       \textcolor{keywordtype}{unsigned} ndim = node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00220}00220 }
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00221}00221       \textcolor{comment}{// Find out how many positional dofs there are}}
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00222}00222       \mbox{\hyperlink{classoomph_1_1SolidFiniteElement}{SolidFiniteElement}}* elem\_pt =}
@@ -250,11 +250,11 @@
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00246}00246       \}}
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00247}00247 }
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00248}00248       \textcolor{comment}{// Loop over nodal values}}
-\DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00249}00249       \textcolor{keywordtype}{unsigned} nval = node\_pt-\/>nvalue();}
+\DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00249}00249       \textcolor{keywordtype}{unsigned} nval = node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}{nvalue}}();}
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00250}00250       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ival = 0; ival < nval; ival++)}
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00251}00251       \{}
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00252}00252         \textcolor{comment}{// Backup pinned status}}
-\DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00253}00253         \mbox{\hyperlink{classoomph_1_1SolidICProblem_a75eca35ec7eeb8fa9b52dc074b9cb184}{Backup\_pinned}}.push\_back(node\_pt-\/>is\_pinned(ival));}
+\DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00253}00253         \mbox{\hyperlink{classoomph_1_1SolidICProblem_a75eca35ec7eeb8fa9b52dc074b9cb184}{Backup\_pinned}}.push\_back(node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_aedd0c445396ddcd650c814d17fef77dc}{is\_pinned}}(ival));}
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00254}00254       \}}
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00255}00255     \}}
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00256}00256 }
@@ -368,7 +368,7 @@
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00364}00364 \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00365}00365 }
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00366}00366       \textcolor{comment}{// Get spatial dimension of node}}
-\DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00367}00367       \textcolor{keywordtype}{unsigned} ndim = node\_pt-\/>ndim();}
+\DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00367}00367       \textcolor{keywordtype}{unsigned} ndim = node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00368}00368 }
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00369}00369       \textcolor{comment}{// Find out how many positional dofs there are}}
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00370}00370       \mbox{\hyperlink{classoomph_1_1SolidFiniteElement}{SolidFiniteElement}}* elem\_pt =}
@@ -401,13 +401,13 @@
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00397}00397       \}}
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00398}00398 }
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00399}00399       \textcolor{comment}{// Loop over nodal values}}
-\DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00400}00400       \textcolor{keywordtype}{unsigned} nval = node\_pt-\/>nvalue();}
+\DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00400}00400       \textcolor{keywordtype}{unsigned} nval = node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}{nvalue}}();}
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00401}00401       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ival = 0; ival < nval; ival++)}
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00402}00402       \{}
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00403}00403         \textcolor{comment}{// Reset pinned status (nodal values were all pinned)}}
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00404}00404         \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1SolidICProblem_a75eca35ec7eeb8fa9b52dc074b9cb184}{Backup\_pinned}}[count])}
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00405}00405         \{}
-\DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00406}00406           node\_pt-\/>unpin(ival);}
+\DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00406}00406           node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a4e5cb031bf8eceb8f97c2c4fbd74cb05}{unpin}}(ival);}
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00407}00407         \}}
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00408}00408       \}}
 \DoxyCodeLine{\Hypertarget{elastic__problems_8cc_source_l00409}00409     \}}

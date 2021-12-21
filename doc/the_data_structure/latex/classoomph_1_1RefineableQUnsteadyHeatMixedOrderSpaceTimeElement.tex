@@ -12,7 +12,7 @@ Refineable version of 2D \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatMixedOrderS
 Inheritance diagram for oomph\+::Refineable\+QUnsteady\+Heat\+Mixed\+Order\+Space\+Time\+Element\texorpdfstring{$<$}{<} SPATIAL\+\_\+\+DIM, NNODE\+\_\+1D \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=0.768000cm]{classoomph_1_1RefineableQUnsteadyHeatMixedOrderSpaceTimeElement}
+\includegraphics[height=0.796444cm]{classoomph_1_1RefineableQUnsteadyHeatMixedOrderSpaceTimeElement}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
@@ -20,17 +20,17 @@ Inheritance diagram for oomph\+::Refineable\+QUnsteady\+Heat\+Mixed\+Order\+Spac
 \item 
 \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatMixedOrderSpaceTimeElement_ac9d29f5be8056a8df50d8cbf65ac51f8}{Refineable\+QUnsteady\+Heat\+Mixed\+Order\+Space\+Time\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatMixedOrderSpaceTimeElement_a861f322e1e4dc663f8788799f98d7d22}{Refineable\+QUnsteady\+Heat\+Mixed\+Order\+Space\+Time\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatMixedOrderSpaceTimeElement}{Refineable\+QUnsteady\+Heat\+Mixed\+Order\+Space\+Time\+Element}}$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1D $>$ \&dummy)=delete
+\mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatMixedOrderSpaceTimeElement_a861f322e1e4dc663f8788799f98d7d22}{Refineable\+QUnsteady\+Heat\+Mixed\+Order\+Space\+Time\+Element}} (const \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatMixedOrderSpaceTimeElement}{Refineable\+QUnsteady\+Heat\+Mixed\+Order\+Space\+Time\+Element}}$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1D $>$ \&dummy)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatMixedOrderSpaceTimeElement_a468f9a4e97a86fbf81f4f02e255906f8}{rebuild\+\_\+from\+\_\+sons}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&mesh\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Rebuild from sons (empty) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatMixedOrderSpaceTimeElement_abd877388e223ed430949f98a476705ae}{further\+\_\+setup\+\_\+hanging\+\_\+nodes}} ()
 \begin{DoxyCompactList}\small\item\em Perform additional hanging node procedures for variables that are not interpolated by all nodes (empty). \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatMixedOrderSpaceTimeElement_ac7871404c5977fa9515347e036b5c701}{ncont\+\_\+interpolated\+\_\+values}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatMixedOrderSpaceTimeElement_ac7871404c5977fa9515347e036b5c701}{ncont\+\_\+interpolated\+\_\+values}} () const
 \begin{DoxyCompactList}\small\item\em Number of continuously interpolated values\+: 1. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatMixedOrderSpaceTimeElement_ac3ecf7633b6e61e32687527562714b39}{nvertex\+\_\+node}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatMixedOrderSpaceTimeElement_ac3ecf7633b6e61e32687527562714b39}{nvertex\+\_\+node}} () const
 \begin{DoxyCompactList}\small\item\em Number of vertex nodes in the element. \end{DoxyCompactList}\item 
-Node $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatMixedOrderSpaceTimeElement_a2cefbaddbf2e7a489a9b6dd4de307cc1}{vertex\+\_\+node\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&j) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatMixedOrderSpaceTimeElement_a2cefbaddbf2e7a489a9b6dd4de307cc1}{vertex\+\_\+node\+\_\+pt}} (const unsigned \&j) const
 \begin{DoxyCompactList}\small\item\em Pointer to the j-\/th vertex node in the element. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatMixedOrderSpaceTimeElement_af0300d79fc96a0db1ba6bb22da774701}{nrecovery\+\_\+order}} ()
 \begin{DoxyCompactList}\small\item\em Order of recovery shape functions for Z2 error estimation\+: Same order as shape functions. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -67,7 +67,7 @@ Definition at line \mbox{\hyperlink{refineable__discontinuous__galerkin__space__
 \index{RefineableQUnsteadyHeatMixedOrderSpaceTimeElement@{RefineableQUnsteadyHeatMixedOrderSpaceTimeElement}!oomph::RefineableQUnsteadyHeatMixedOrderSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::RefineableQUnsteadyHeatMixedOrderSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{RefineableQUnsteadyHeatMixedOrderSpaceTimeElement()}{RefineableQUnsteadyHeatMixedOrderSpaceTimeElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned SPATIAL\+\_\+\+DIM, unsigned NNODE\+\_\+1D$>$ \\
-\mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatMixedOrderSpaceTimeElement}{oomph\+::\+Refineable\+QUnsteady\+Heat\+Mixed\+Order\+Space\+Time\+Element}}$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatMixedOrderSpaceTimeElement}{Refineable\+QUnsteady\+Heat\+Mixed\+Order\+Space\+Time\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatMixedOrderSpaceTimeElement}{Refineable\+QUnsteady\+Heat\+Mixed\+Order\+Space\+Time\+Element}}$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1D $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+\mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatMixedOrderSpaceTimeElement}{oomph\+::\+Refineable\+QUnsteady\+Heat\+Mixed\+Order\+Space\+Time\+Element}}$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatMixedOrderSpaceTimeElement}{Refineable\+QUnsteady\+Heat\+Mixed\+Order\+Space\+Time\+Element}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatMixedOrderSpaceTimeElement}{Refineable\+QUnsteady\+Heat\+Mixed\+Order\+Space\+Time\+Element}}$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1D $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
@@ -184,7 +184,7 @@ Definition at line \mbox{\hyperlink{refineable__discontinuous__galerkin__space__
 \index{vertex\_node\_pt@{vertex\_node\_pt}!oomph::RefineableQUnsteadyHeatMixedOrderSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::RefineableQUnsteadyHeatMixedOrderSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{vertex\_node\_pt()}{vertex\_node\_pt()}}
 {\footnotesize\ttfamily template$<$unsigned SPATIAL\+\_\+\+DIM, unsigned NNODE\+\_\+1D$>$ \\
-Node $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatMixedOrderSpaceTimeElement}{oomph\+::\+Refineable\+QUnsteady\+Heat\+Mixed\+Order\+Space\+Time\+Element}}$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1D $>$\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatMixedOrderSpaceTimeElement}{oomph\+::\+Refineable\+QUnsteady\+Heat\+Mixed\+Order\+Space\+Time\+Element}}$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1D $>$\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -197,6 +197,10 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a6d852edae
 
 
 Definition at line \mbox{\hyperlink{refineable__discontinuous__galerkin__space__time__unsteady__heat__mixed__order__elements_8h_source_l00270}{270}} of file \mbox{\hyperlink{refineable__discontinuous__galerkin__space__time__unsteady__heat__mixed__order__elements_8h_source}{refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+mixed\+\_\+order\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{elements_8h_source_l02500}{oomph\+::\+Finite\+Element\+::vertex\+\_\+node\+\_\+pt()}}.
 
 
 

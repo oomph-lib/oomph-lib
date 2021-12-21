@@ -58,12 +58,12 @@
 \DoxyCodeLine{\Hypertarget{implicit__midpoint__rule_8cc_source_l00054}00054 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{implicit__midpoint__rule_8cc_source_l00055}00055 \textcolor{comment}{  /// This function advances the time history of the positions}}
 \DoxyCodeLine{\Hypertarget{implicit__midpoint__rule_8cc_source_l00056}00056 \textcolor{comment}{  /// at a node. ??ds Untested: I have no problems with moving nodes.}}
-\DoxyCodeLine{\Hypertarget{implicit__midpoint__rule_8cc_source_l00057}\mbox{\hyperlink{classoomph_1_1IMRBase_a61d4487fcf0a9eb7a829b08027a9500f}{00057}} \textcolor{comment}{}  \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1IMRBase_a61d4487fcf0a9eb7a829b08027a9500f}{IMRBase::shift\_time\_positions}}(Node* \textcolor{keyword}{const}\& node\_pt)}
+\DoxyCodeLine{\Hypertarget{implicit__midpoint__rule_8cc_source_l00057}\mbox{\hyperlink{classoomph_1_1IMRBase_a61d4487fcf0a9eb7a829b08027a9500f}{00057}} \textcolor{comment}{}  \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1IMRBase_a61d4487fcf0a9eb7a829b08027a9500f}{IMRBase::shift\_time\_positions}}(\mbox{\hyperlink{classoomph_1_1Node}{Node}}* \textcolor{keyword}{const}\& node\_pt)}
 \DoxyCodeLine{\Hypertarget{implicit__midpoint__rule_8cc_source_l00058}00058   \{}
 \DoxyCodeLine{\Hypertarget{implicit__midpoint__rule_8cc_source_l00059}00059     \textcolor{comment}{// Find the number of coordinates}}
-\DoxyCodeLine{\Hypertarget{implicit__midpoint__rule_8cc_source_l00060}00060     \textcolor{keywordtype}{unsigned} n\_dim = node\_pt-\/>ndim();}
+\DoxyCodeLine{\Hypertarget{implicit__midpoint__rule_8cc_source_l00060}00060     \textcolor{keywordtype}{unsigned} n\_dim = node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
 \DoxyCodeLine{\Hypertarget{implicit__midpoint__rule_8cc_source_l00061}00061     \textcolor{comment}{// Find the number of position types}}
-\DoxyCodeLine{\Hypertarget{implicit__midpoint__rule_8cc_source_l00062}00062     \textcolor{keywordtype}{unsigned} n\_position\_type = node\_pt-\/>nposition\_type();}
+\DoxyCodeLine{\Hypertarget{implicit__midpoint__rule_8cc_source_l00062}00062     \textcolor{keywordtype}{unsigned} n\_position\_type = node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_aee6f2b7a46fc9d875c6736895d7fc095}{nposition\_type}}();}
 \DoxyCodeLine{\Hypertarget{implicit__midpoint__rule_8cc_source_l00063}00063 }
 \DoxyCodeLine{\Hypertarget{implicit__midpoint__rule_8cc_source_l00064}00064     \textcolor{comment}{// Find number of stored timesteps}}
 \DoxyCodeLine{\Hypertarget{implicit__midpoint__rule_8cc_source_l00065}00065     \textcolor{keywordtype}{unsigned} n\_tstorage = \mbox{\hyperlink{classoomph_1_1TimeStepper_a3939b77ec3578e4bd5b453c85649d631}{ntstorage}}();}
@@ -84,7 +84,7 @@
 \DoxyCodeLine{\Hypertarget{implicit__midpoint__rule_8cc_source_l00080}00080           \textcolor{comment}{// Loop over all history data}}
 \DoxyCodeLine{\Hypertarget{implicit__midpoint__rule_8cc_source_l00081}00081           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}} = 0; \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}} < n\_tstorage; \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}++)}
 \DoxyCodeLine{\Hypertarget{implicit__midpoint__rule_8cc_source_l00082}00082           \{}
-\DoxyCodeLine{\Hypertarget{implicit__midpoint__rule_8cc_source_l00083}00083             velocity[k][\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += \mbox{\hyperlink{classoomph_1_1TimeStepper_a0dbf867c7f0e06f790a470d547b6b3f2}{Weight}}(1, \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}) * node\_pt-\/>x\_gen(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, k, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{implicit__midpoint__rule_8cc_source_l00083}00083             velocity[k][\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += \mbox{\hyperlink{classoomph_1_1TimeStepper_a0dbf867c7f0e06f790a470d547b6b3f2}{Weight}}(1, \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}) * node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_af7fdc0dfda495d69bd31c790ee77da73}{x\_gen}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, k, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{implicit__midpoint__rule_8cc_source_l00084}00084           \}}
 \DoxyCodeLine{\Hypertarget{implicit__midpoint__rule_8cc_source_l00085}00085         \}}
 \DoxyCodeLine{\Hypertarget{implicit__midpoint__rule_8cc_source_l00086}00086       \}}
@@ -94,7 +94,7 @@
 \DoxyCodeLine{\Hypertarget{implicit__midpoint__rule_8cc_source_l00090}00090     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_dim; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{implicit__midpoint__rule_8cc_source_l00091}00091     \{}
 \DoxyCodeLine{\Hypertarget{implicit__midpoint__rule_8cc_source_l00092}00092       \textcolor{comment}{// If the position is not a copy}}
-\DoxyCodeLine{\Hypertarget{implicit__midpoint__rule_8cc_source_l00093}00093       \textcolor{keywordflow}{if} (node\_pt-\/>position\_is\_a\_copy(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) == \textcolor{keyword}{false})}
+\DoxyCodeLine{\Hypertarget{implicit__midpoint__rule_8cc_source_l00093}00093       \textcolor{keywordflow}{if} (node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a80fe9192b35baa5321e8d0ffba4b8b8a}{position\_is\_a\_copy}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) == \textcolor{keyword}{false})}
 \DoxyCodeLine{\Hypertarget{implicit__midpoint__rule_8cc_source_l00094}00094       \{}
 \DoxyCodeLine{\Hypertarget{implicit__midpoint__rule_8cc_source_l00095}00095         \textcolor{comment}{// Loop over the position types}}
 \DoxyCodeLine{\Hypertarget{implicit__midpoint__rule_8cc_source_l00096}00096         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < n\_position\_type; k++)}
@@ -102,7 +102,7 @@
 \DoxyCodeLine{\Hypertarget{implicit__midpoint__rule_8cc_source_l00098}00098           \textcolor{comment}{// Loop over stored times, and set values to previous values}}
 \DoxyCodeLine{\Hypertarget{implicit__midpoint__rule_8cc_source_l00099}00099           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}} = \mbox{\hyperlink{classoomph_1_1IMRBase_a7d7c5c2dedead518b9b0882e74914f54}{ndt}}(); \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}} > 0; \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}-\/-\/)}
 \DoxyCodeLine{\Hypertarget{implicit__midpoint__rule_8cc_source_l00100}00100           \{}
-\DoxyCodeLine{\Hypertarget{implicit__midpoint__rule_8cc_source_l00101}00101             node\_pt-\/>x\_gen(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, k, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = node\_pt-\/>x\_gen(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}} -\/ 1, k, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{implicit__midpoint__rule_8cc_source_l00101}00101             node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_af7fdc0dfda495d69bd31c790ee77da73}{x\_gen}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, k, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_af7fdc0dfda495d69bd31c790ee77da73}{x\_gen}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}} -\/ 1, k, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{implicit__midpoint__rule_8cc_source_l00102}00102           \}}
 \DoxyCodeLine{\Hypertarget{implicit__midpoint__rule_8cc_source_l00103}00103         \}}
 \DoxyCodeLine{\Hypertarget{implicit__midpoint__rule_8cc_source_l00104}00104       \}}

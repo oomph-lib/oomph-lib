@@ -209,7 +209,7 @@ $(function() {
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>      this-&gt;d2shape_local(<a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, psi, dpsids, d2psids);</div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>      <span class="comment">// premultiply weight by jacobian</span></div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>      <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a> = w * J;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>      <span class="keywordtype">double</span> <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a> = w * J;</div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>      <span class="comment">// initialise storage for d2u_interpolated</span></div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>      <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> d2u_interpolated(DIM);</div>
@@ -254,7 +254,7 @@ $(function() {
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>          <span class="keywordflow">if</span> (local_eqn_number &gt;= 0)</div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>          {</div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>            <span class="comment">// add source contribution to residual</span></div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>            residuals[local_eqn_number] -= source * psi(n1, k1) * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a>;</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>            residuals[local_eqn_number] -= source * psi(n1, k1) * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a>;</div>
 <div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
 <div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>            <span class="comment">// loop over dimension of d2u interpolated</span></div>
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>            <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> d1 = 0; d1 &lt; DIM; d1++)</div>
@@ -264,7 +264,7 @@ $(function() {
 <div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>              {</div>
 <div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>                <span class="comment">// add residual contribution</span></div>
 <div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>                residuals[local_eqn_number] +=</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>                  d2u_interpolated[d1] * d2psidx(n1, k1, d2) * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a>;</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>                  d2u_interpolated[d1] * d2psidx(n1, k1, d2) * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a>;</div>
 <div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>              }</div>
 <div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span> </div>
 <div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>              <span class="comment">// calculate the jacobian</span></div>
@@ -287,7 +287,7 @@ $(function() {
 <div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>                      {</div>
 <div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>                        <span class="comment">// add contribution to jacobian</span></div>
 <div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>                        jacobian(local_eqn_number, local_dof_number) +=</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>                          d2psidx(n1, k1, d1) * d2psidx(n2, k2, d2) * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a>;</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>                          d2psidx(n1, k1, d1) * d2psidx(n2, k2, d2) * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a>;</div>
 <div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>                      }</div>
 <div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>                    }</div>
 <div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>                  }</div>
@@ -307,14 +307,14 @@ $(function() {
 <div class="ttc" id="abiharmonic__elements_8h_html"><div class="ttname"><a href="biharmonic__elements_8h.html">biharmonic_elements.h</a></div></div>
 <div class="ttc" id="acfortran_8h_html_ab7123126e4885ef647dd9c6e3807a21c"><div class="ttname"><a href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a></div><div class="ttdeci">static char t char * s</div><div class="ttdef"><b>Definition:</b> <a href="cfortran_8h_source.html#l00568">cfortran.h:568</a></div></div>
 <div class="ttc" id="acfortran_8h_html_adb50e893b86b3e55e751a42eab3cba82"><div class="ttname"><a href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a></div><div class="ttdeci">cstr elem_len * i</div><div class="ttdef"><b>Definition:</b> <a href="cfortran_8h_source.html#l00603">cfortran.h:603</a></div></div>
-<div class="ttc" id="aclassoomph_1_1BiharmonicElement_html"><div class="ttname"><a href="classoomph_1_1BiharmonicElement.html">oomph::BiharmonicElement</a></div><div class="ttdoc">biharmonic element class</div><div class="ttdef"><b>Definition:</b> <a href="biharmonic__elements_8h_source.html#l00526">biharmonic_elements.h:528</a></div></div>
+<div class="ttc" id="aclassoomph_1_1BiharmonicElement_html"><div class="ttname"><a href="classoomph_1_1BiharmonicElement.html">oomph::BiharmonicElement</a></div><div class="ttdoc">biharmonic element class</div><div class="ttdef"><b>Definition:</b> <a href="biharmonic__elements_8h_source.html#l00525">biharmonic_elements.h:527</a></div></div>
 <div class="ttc" id="aclassoomph_1_1BiharmonicEquations_html_a63bf0dbf59b9355563e71cf0b9eff2ee"><div class="ttname"><a href="classoomph_1_1BiharmonicEquations.html#a63bf0dbf59b9355563e71cf0b9eff2ee">oomph::BiharmonicEquations::fill_in_generic_residual_contribution_biharmonic</a></div><div class="ttdeci">virtual void fill_in_generic_residual_contribution_biharmonic(Vector&lt; double &gt; &amp;residuals, DenseMatrix&lt; double &gt; &amp;jacobian, unsigned JFLAG)</div><div class="ttdoc">Compute element residual Vector only (if JFLAG=and/or element Jacobian matrix.</div><div class="ttdef"><b>Definition:</b> <a href="biharmonic__elements_8cc_source.html#l00040">biharmonic_elements.cc:41</a></div></div>
 <div class="ttc" id="aclassoomph_1_1DShape_html"><div class="ttname"><a href="classoomph_1_1DShape.html">oomph::DShape</a></div><div class="ttdoc">A Class for the derivatives of shape functions The class design is essentially the same as Shape,...</div><div class="ttdef"><b>Definition:</b> <a href="shape_8h_source.html#l00277">shape.h:278</a></div></div>
 <div class="ttc" id="aclassoomph_1_1DenseMatrix_html"><div class="ttname"><a href="classoomph_1_1DenseMatrix.html">oomph::DenseMatrix&lt; double &gt;</a></div></div>
 <div class="ttc" id="aclassoomph_1_1Shape_html"><div class="ttname"><a href="classoomph_1_1Shape.html">oomph::Shape</a></div><div class="ttdoc">A Class for shape functions. In simple cases, the shape functions have only one index that can be tho...</div><div class="ttdef"><b>Definition:</b> <a href="shape_8h_source.html#l00075">shape.h:76</a></div></div>
 <div class="ttc" id="aclassoomph_1_1Vector_html"><div class="ttname"><a href="classoomph_1_1Vector.html">oomph::Vector&lt; double &gt;</a></div></div>
+<div class="ttc" id="anamespaceoomph_1_1QuadTreeNames_html_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6"><div class="ttname"><a href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">oomph::QuadTreeNames::W</a></div><div class="ttdeci">@ W</div><div class="ttdef"><b>Definition:</b> <a href="quadtree_8h_source.html#l00063">quadtree.h:63</a></div></div>
 <div class="ttc" id="anamespaceoomph_html"><div class="ttname"><a href="namespaceoomph.html">oomph</a></div><div class="ttdoc">//////////////////////////////////////////////////////////////////// ////////////////////////////////...</div><div class="ttdef"><b>Definition:</b> <a href="advection__diffusion__elements_8cc_source.html#l00029">advection_diffusion_elements.cc:30</a></div></div>
-<div class="ttc" id="anamespaceoomph_html_ab40f6d5233caa62dd428818b4cba72d5"><div class="ttname"><a href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">oomph::W</a></div><div class="ttdeci">W</div><div class="ttdoc">///////////////////////////////////////////////////////////////// ///////////////////////////////////...</div><div class="ttdef"><b>Definition:</b> <a href="constitutive__laws_8h_source.html#l00142">constitutive_laws.h:142</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 
     <!-- jQuery for Bootstrap and Doxygen -->
@@ -343,7 +343,7 @@ $(function() {
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Nov 2 2021 16:31:07
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Dec 21 2021 17:35:05
         </div>
       </div>
     </footer>

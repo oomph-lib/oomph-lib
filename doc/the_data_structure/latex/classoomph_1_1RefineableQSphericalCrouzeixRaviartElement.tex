@@ -20,19 +20,19 @@ Inheritance diagram for oomph\+::Refineable\+QSpherical\+Crouzeix\+Raviart\+Elem
 \item 
 \mbox{\hyperlink{classoomph_1_1RefineableQSphericalCrouzeixRaviartElement_a410be200f53a4a5e5d18c9e09a58d78d}{Refineable\+QSpherical\+Crouzeix\+Raviart\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Constructor\+: \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1RefineableQSphericalCrouzeixRaviartElement_ab2d2448ca25da6b58a565a8ca18c5e06}{ncont\+\_\+interpolated\+\_\+values}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableQSphericalCrouzeixRaviartElement_ab2d2448ca25da6b58a565a8ca18c5e06}{ncont\+\_\+interpolated\+\_\+values}} () const
 \begin{DoxyCompactList}\small\item\em Number of continuously interpolated values\+: 3 (velocities) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableQSphericalCrouzeixRaviartElement_a956defebeb39dd292746c03b935e92b3}{rebuild\+\_\+from\+\_\+sons}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&mesh\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Rebuild from sons\+: Reconstruct pressure from the (merged) sons. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1RefineableQSphericalCrouzeixRaviartElement_a1e1489874c8a952f2556c14fdea41010}{nrecovery\+\_\+order}} ()
 \begin{DoxyCompactList}\small\item\em Order of recovery shape functions for Z2 error estimation\+: Same order as shape functions. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1RefineableQSphericalCrouzeixRaviartElement_a9784f4a6c9cc49169b0089b85373c434}{nvertex\+\_\+node}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableQSphericalCrouzeixRaviartElement_a9784f4a6c9cc49169b0089b85373c434}{nvertex\+\_\+node}} () const
 \begin{DoxyCompactList}\small\item\em Number of vertex nodes in the element. \end{DoxyCompactList}\item 
-Node $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQSphericalCrouzeixRaviartElement_a20cd740c91195a250844abdd8d23fcfa}{vertex\+\_\+node\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&j) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQSphericalCrouzeixRaviartElement_a20cd740c91195a250844abdd8d23fcfa}{vertex\+\_\+node\+\_\+pt}} (const unsigned \&j) const
 \begin{DoxyCompactList}\small\item\em Pointer to the j-\/th vertex node in the element. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableQSphericalCrouzeixRaviartElement_ae7b97936d1e84361c3000ce3fb037573}{get\+\_\+interpolated\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&values)
+void \mbox{\hyperlink{classoomph_1_1RefineableQSphericalCrouzeixRaviartElement_ae7b97936d1e84361c3000ce3fb037573}{get\+\_\+interpolated\+\_\+values}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&values)
 \begin{DoxyCompactList}\small\item\em Get the function value u in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableQSphericalCrouzeixRaviartElement_a3af230cefbdc3d938f90251a8269a9b4}{get\+\_\+interpolated\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&values)
+void \mbox{\hyperlink{classoomph_1_1RefineableQSphericalCrouzeixRaviartElement_a3af230cefbdc3d938f90251a8269a9b4}{get\+\_\+interpolated\+\_\+values}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&values)
 \begin{DoxyCompactList}\small\item\em Get all function values \mbox{[}u,v..,p\mbox{]} at previous timestep t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous timestep). ~\newline
 Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. ~\newline
 Note\+: No pressure history is kept, so pressure is always the current value. \end{DoxyCompactList}\item 
@@ -117,7 +117,7 @@ Definition at line \mbox{\hyperlink{refineable__spherical__navier__stokes__eleme
 \index{oomph::RefineableQSphericalCrouzeixRaviartElement@{oomph::RefineableQSphericalCrouzeixRaviartElement}!get\_interpolated\_values@{get\_interpolated\_values}}
 \index{get\_interpolated\_values@{get\_interpolated\_values}!oomph::RefineableQSphericalCrouzeixRaviartElement@{oomph::RefineableQSphericalCrouzeixRaviartElement}}
 \doxysubsubsection{\texorpdfstring{get\_interpolated\_values()}{get\_interpolated\_values()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void oomph\+::\+Refineable\+QSpherical\+Crouzeix\+Raviart\+Element\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Refineable\+QSpherical\+Crouzeix\+Raviart\+Element\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -135,13 +135,13 @@ Definition at line \mbox{\hyperlink{refineable__spherical__navier__stokes__eleme
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02598}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{spherical__navier__stokes__elements_8h_source_l00387}{oomph\+::\+Spherical\+Navier\+Stokes\+Equations\+::u\+\_\+index\+\_\+spherical\+\_\+nst()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{spherical__navier__stokes__elements_8h_source_l00387}{oomph\+::\+Spherical\+Navier\+Stokes\+Equations\+::u\+\_\+index\+\_\+spherical\+\_\+nst()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQSphericalCrouzeixRaviartElement_ae7b97936d1e84361c3000ce3fb037573}\label{classoomph_1_1RefineableQSphericalCrouzeixRaviartElement_ae7b97936d1e84361c3000ce3fb037573}} 
 \index{oomph::RefineableQSphericalCrouzeixRaviartElement@{oomph::RefineableQSphericalCrouzeixRaviartElement}!get\_interpolated\_values@{get\_interpolated\_values}}
 \index{get\_interpolated\_values@{get\_interpolated\_values}!oomph::RefineableQSphericalCrouzeixRaviartElement@{oomph::RefineableQSphericalCrouzeixRaviartElement}}
 \doxysubsubsection{\texorpdfstring{get\_interpolated\_values()}{get\_interpolated\_values()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void oomph\+::\+Refineable\+QSpherical\+Crouzeix\+Raviart\+Element\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Refineable\+QSpherical\+Crouzeix\+Raviart\+Element\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -215,7 +215,7 @@ Definition at line \mbox{\hyperlink{refineable__spherical__navier__stokes__eleme
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02496}{oomph\+::\+Finite\+Element\+::nvertex\+\_\+node()}}.
+References \mbox{\hyperlink{elements_8h_source_l02491}{oomph\+::\+Finite\+Element\+::nvertex\+\_\+node()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQSphericalCrouzeixRaviartElement_a956defebeb39dd292746c03b935e92b3}\label{classoomph_1_1RefineableQSphericalCrouzeixRaviartElement_a956defebeb39dd292746c03b935e92b3}} 
 \index{oomph::RefineableQSphericalCrouzeixRaviartElement@{oomph::RefineableQSphericalCrouzeixRaviartElement}!rebuild\_from\_sons@{rebuild\_from\_sons}}
@@ -265,7 +265,7 @@ References \mbox{\hyperlink{elements_8h_source_l00622}{oomph\+::\+Generalised\+E
 \index{oomph::RefineableQSphericalCrouzeixRaviartElement@{oomph::RefineableQSphericalCrouzeixRaviartElement}!vertex\_node\_pt@{vertex\_node\_pt}}
 \index{vertex\_node\_pt@{vertex\_node\_pt}!oomph::RefineableQSphericalCrouzeixRaviartElement@{oomph::RefineableQSphericalCrouzeixRaviartElement}}
 \doxysubsubsection{\texorpdfstring{vertex\_node\_pt()}{vertex\_node\_pt()}}
-{\footnotesize\ttfamily Node $\ast$ oomph\+::\+Refineable\+QSpherical\+Crouzeix\+Raviart\+Element\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ oomph\+::\+Refineable\+QSpherical\+Crouzeix\+Raviart\+Element\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -281,7 +281,7 @@ Definition at line \mbox{\hyperlink{refineable__spherical__navier__stokes__eleme
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02505}{oomph\+::\+Finite\+Element\+::vertex\+\_\+node\+\_\+pt()}}.
+References \mbox{\hyperlink{elements_8h_source_l02500}{oomph\+::\+Finite\+Element\+::vertex\+\_\+node\+\_\+pt()}}.
 
 
 

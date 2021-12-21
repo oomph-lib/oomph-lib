@@ -40,7 +40,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1TR_ac41d1d10629140a3a18da92701d3b5a5}{nd
 \begin{DoxyCompactList}\small\item\em Number of timestep increments that need to be stored by the scheme. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TR_aa73845654866b5cf65ee801f67baa6b3}{assign\+\_\+initial\+\_\+values\+\_\+impulsive}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&data\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Initialise the time-\/history for the \mbox{\hyperlink{classoomph_1_1Data}{Data}} values, corresponding to an impulsive start. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TR_a46878c5cd5b9d20afb2f5d9ab7a7df26}{assign\+\_\+initial\+\_\+positions\+\_\+impulsive}} (Node $\ast$const \&node\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1TR_a46878c5cd5b9d20afb2f5d9ab7a7df26}{assign\+\_\+initial\+\_\+positions\+\_\+impulsive}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&node\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Initialise the time-\/history for the nodal positions corresponding to an impulsive start. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TR_ae6a606637401e9ed5ca030fa7b28d89a}{actions\+\_\+after\+\_\+timestep}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Interface for any actions that need to be performed after a time step. \end{DoxyCompactList}\item 
@@ -50,13 +50,13 @@ void \mbox{\hyperlink{classoomph_1_1TR_abde5c3804dd51162f11c50dacb65b315}{setup\
 \item 
 void \mbox{\hyperlink{classoomph_1_1TR_a4f8cc75e39263619c073076ae5bbab36}{shift\+\_\+time\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&data\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em This function updates the \mbox{\hyperlink{classoomph_1_1Data}{Data}}\textquotesingle{}s time history so that we can advance to the next timestep. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TR_a15ab8859ae1a87f14687dcec94f68e03}{shift\+\_\+time\+\_\+positions}} (Node $\ast$const \&node\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1TR_a15ab8859ae1a87f14687dcec94f68e03}{shift\+\_\+time\+\_\+positions}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&node\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em This function advances the time history of the positions at a node. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TR_a5ef44b410f646c0f94eb2f5a2d80bb03}{calculate\+\_\+predicted\+\_\+positions}} (Node $\ast$const \&node\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1TR_a5ef44b410f646c0f94eb2f5a2d80bb03}{calculate\+\_\+predicted\+\_\+positions}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&node\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Function to calculate predicted positions at a node. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TR_a345daded718d96bb4b7d4cd2996892c8}{calculate\+\_\+predicted\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&data\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Function to calculate predicted data values in a \mbox{\hyperlink{classoomph_1_1Data}{Data}} object. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1TR_ae77caf45f731bfc2cd5212f5934918d7}{temporal\+\_\+error\+\_\+in\+\_\+position}} (Node $\ast$const \&node\+\_\+pt, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+double \mbox{\hyperlink{classoomph_1_1TR_ae77caf45f731bfc2cd5212f5934918d7}{temporal\+\_\+error\+\_\+in\+\_\+position}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&node\+\_\+pt, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Compute the error in the position i at a node. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1TR_afbaa1753914d49942f07b601563c2cec}{temporal\+\_\+error\+\_\+in\+\_\+value}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&data\+\_\+pt, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Compute the error in the value i in a \mbox{\hyperlink{classoomph_1_1Data}{Data}} structure. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -191,7 +191,7 @@ References \mbox{\hyperlink{trapezoid__rule_8h_source_l00251}{Initial\+\_\+deriv
 \index{oomph::TR@{oomph::TR}!assign\_initial\_positions\_impulsive@{assign\_initial\_positions\_impulsive}}
 \index{assign\_initial\_positions\_impulsive@{assign\_initial\_positions\_impulsive}!oomph::TR@{oomph::TR}}
 \doxysubsubsection{\texorpdfstring{assign\_initial\_positions\_impulsive()}{assign\_initial\_positions\_impulsive()}}
-{\footnotesize\ttfamily void oomph\+::\+TR\+::assign\+\_\+initial\+\_\+positions\+\_\+impulsive (\begin{DoxyParamCaption}\item[{Node $\ast$const \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+TR\+::assign\+\_\+initial\+\_\+positions\+\_\+impulsive (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -227,7 +227,7 @@ Definition at line \mbox{\hyperlink{trapezoid__rule_8h_source_l00155}{155}} of f
 \index{oomph::TR@{oomph::TR}!calculate\_predicted\_positions@{calculate\_predicted\_positions}}
 \index{calculate\_predicted\_positions@{calculate\_predicted\_positions}!oomph::TR@{oomph::TR}}
 \doxysubsubsection{\texorpdfstring{calculate\_predicted\_positions()}{calculate\_predicted\_positions()}}
-{\footnotesize\ttfamily void oomph\+::\+TR\+::calculate\+\_\+predicted\+\_\+positions (\begin{DoxyParamCaption}\item[{Node $\ast$const \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+TR\+::calculate\+\_\+predicted\+\_\+positions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -243,7 +243,7 @@ Definition at line \mbox{\hyperlink{trapezoid__rule_8h_source_l00264}{264}} of f
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{trapezoid__rule_8h_source_l00142}{predicted\+\_\+value\+\_\+index()}}, and \mbox{\hyperlink{trapezoid__rule_8h_source_l00331}{Predictor\+\_\+weight}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{nodes_8h_source_l01113}{oomph\+::\+Node\+::position\+\_\+is\+\_\+a\+\_\+copy()}}, \mbox{\hyperlink{trapezoid__rule_8h_source_l00142}{predicted\+\_\+value\+\_\+index()}}, \mbox{\hyperlink{trapezoid__rule_8h_source_l00331}{Predictor\+\_\+weight}}, and \mbox{\hyperlink{nodes_8h_source_l01060}{oomph\+::\+Node\+::x()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TR_a345daded718d96bb4b7d4cd2996892c8}\label{classoomph_1_1TR_a345daded718d96bb4b7d4cd2996892c8}} 
 \index{oomph::TR@{oomph::TR}!calculate\_predicted\_values@{calculate\_predicted\_values}}
@@ -459,7 +459,7 @@ References \mbox{\hyperlink{trapezoid__rule_8h_source_l00128}{derivative\+\_\+in
 \index{oomph::TR@{oomph::TR}!shift\_time\_positions@{shift\_time\_positions}}
 \index{shift\_time\_positions@{shift\_time\_positions}!oomph::TR@{oomph::TR}}
 \doxysubsubsection{\texorpdfstring{shift\_time\_positions()}{shift\_time\_positions()}}
-{\footnotesize\ttfamily void oomph\+::\+TR\+::shift\+\_\+time\+\_\+positions (\begin{DoxyParamCaption}\item[{Node $\ast$const \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+TR\+::shift\+\_\+time\+\_\+positions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -499,7 +499,7 @@ References \mbox{\hyperlink{trapezoid__rule_8h_source_l00128}{derivative\+\_\+in
 \index{oomph::TR@{oomph::TR}!temporal\_error\_in\_position@{temporal\_error\_in\_position}}
 \index{temporal\_error\_in\_position@{temporal\_error\_in\_position}!oomph::TR@{oomph::TR}}
 \doxysubsubsection{\texorpdfstring{temporal\_error\_in\_position()}{temporal\_error\_in\_position()}}
-{\footnotesize\ttfamily double oomph\+::\+TR\+::temporal\+\_\+error\+\_\+in\+\_\+position (\begin{DoxyParamCaption}\item[{Node $\ast$const \&}]{node\+\_\+pt,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily double oomph\+::\+TR\+::temporal\+\_\+error\+\_\+in\+\_\+position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&}]{node\+\_\+pt,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -515,7 +515,7 @@ Definition at line \mbox{\hyperlink{trapezoid__rule_8h_source_l00315}{315}} of f
 
 
 
-References \mbox{\hyperlink{trapezoid__rule_8h_source_l00334}{Error\+\_\+weight}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{trapezoid__rule_8h_source_l00142}{predicted\+\_\+value\+\_\+index()}}.
+References \mbox{\hyperlink{trapezoid__rule_8h_source_l00334}{Error\+\_\+weight}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{trapezoid__rule_8h_source_l00142}{predicted\+\_\+value\+\_\+index()}}, and \mbox{\hyperlink{nodes_8h_source_l01060}{oomph\+::\+Node\+::x()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TR_afbaa1753914d49942f07b601563c2cec}\label{classoomph_1_1TR_afbaa1753914d49942f07b601563c2cec}} 
 \index{oomph::TR@{oomph::TR}!temporal\_error\_in\_value@{temporal\_error\_in\_value}}

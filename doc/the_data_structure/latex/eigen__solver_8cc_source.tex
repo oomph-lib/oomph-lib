@@ -222,7 +222,7 @@
 \DoxyCodeLine{\Hypertarget{eigen__solver_8cc_source_l00218}00218 }
 \DoxyCodeLine{\Hypertarget{eigen__solver_8cc_source_l00219}00219     \textcolor{comment}{// Allocate storage for the vectors to be used in matrix vector products}}
 \DoxyCodeLine{\Hypertarget{eigen__solver_8cc_source_l00220}00220     \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} rhs(this-\/>\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}(), 0.0);}
-\DoxyCodeLine{\Hypertarget{eigen__solver_8cc_source_l00221}00221     \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(this-\/>\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}(), 0.0);}
+\DoxyCodeLine{\Hypertarget{eigen__solver_8cc_source_l00221}00221     \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} x(this-\/>\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}(), 0.0);}
 \DoxyCodeLine{\Hypertarget{eigen__solver_8cc_source_l00222}00222 }
 \DoxyCodeLine{\Hypertarget{eigen__solver_8cc_source_l00223}00223 }
 \DoxyCodeLine{\Hypertarget{eigen__solver_8cc_source_l00224}00224     \textcolor{keywordtype}{bool} LOOP\_FLAG = \textcolor{keyword}{true};}
@@ -277,9 +277,9 @@
 \DoxyCodeLine{\Hypertarget{eigen__solver_8cc_source_l00273}00273         \textcolor{comment}{// Firstly multiply by mx}}
 \DoxyCodeLine{\Hypertarget{eigen__solver_8cc_source_l00274}00274         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{eigen__solver_8cc_source_l00275}00275         \{}
-\DoxyCodeLine{\Hypertarget{eigen__solver_8cc_source_l00276}00276           \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = workd[ipntr[0] -\/ 1 + \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{eigen__solver_8cc_source_l00276}00276           x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = workd[ipntr[0] -\/ 1 + \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
 \DoxyCodeLine{\Hypertarget{eigen__solver_8cc_source_l00277}00277         \}}
-\DoxyCodeLine{\Hypertarget{eigen__solver_8cc_source_l00278}00278         M.multiply(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, rhs);}
+\DoxyCodeLine{\Hypertarget{eigen__solver_8cc_source_l00278}00278         M.multiply(x, rhs);}
 \DoxyCodeLine{\Hypertarget{eigen__solver_8cc_source_l00279}00279 }
 \DoxyCodeLine{\Hypertarget{eigen__solver_8cc_source_l00280}00280         \textcolor{comment}{// Now solve the system}}
 \DoxyCodeLine{\Hypertarget{eigen__solver_8cc_source_l00281}00281         \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} temp(rhs);}
@@ -335,9 +335,9 @@
 \DoxyCodeLine{\Hypertarget{eigen__solver_8cc_source_l00331}00331         \textcolor{comment}{// Vector<double> x(n);}}
 \DoxyCodeLine{\Hypertarget{eigen__solver_8cc_source_l00332}00332         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{eigen__solver_8cc_source_l00333}00333         \{}
-\DoxyCodeLine{\Hypertarget{eigen__solver_8cc_source_l00334}00334           \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = workd[ipntr[0] -\/ 1 + \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{eigen__solver_8cc_source_l00334}00334           x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = workd[ipntr[0] -\/ 1 + \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
 \DoxyCodeLine{\Hypertarget{eigen__solver_8cc_source_l00335}00335         \}}
-\DoxyCodeLine{\Hypertarget{eigen__solver_8cc_source_l00336}00336         M.multiply(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, rhs);}
+\DoxyCodeLine{\Hypertarget{eigen__solver_8cc_source_l00336}00336         M.multiply(x, rhs);}
 \DoxyCodeLine{\Hypertarget{eigen__solver_8cc_source_l00337}00337 }
 \DoxyCodeLine{\Hypertarget{eigen__solver_8cc_source_l00338}00338         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{eigen__solver_8cc_source_l00339}00339         \{}

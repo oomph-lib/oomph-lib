@@ -148,7 +148,7 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:ad4ed9d81ba7718bf747e0abdd41cdaa1"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1VorticitySmootherElement.html#ad4ed9d81ba7718bf747e0abdd41cdaa1">ExactVorticityFctPt</a>) (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &gt; &amp;vort_and_derivs)</td></tr>
+<tr class="memitem:ad4ed9d81ba7718bf747e0abdd41cdaa1"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1VorticitySmootherElement.html#ad4ed9d81ba7718bf747e0abdd41cdaa1">ExactVorticityFctPt</a>) (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;x, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &gt; &amp;vort_and_derivs)</td></tr>
 <tr class="memdesc:ad4ed9d81ba7718bf747e0abdd41cdaa1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Typedef for pointer to function that specifies the exact vorticity and derivatives (for validation)  <a href="classoomph_1_1VorticitySmootherElement.html#ad4ed9d81ba7718bf747e0abdd41cdaa1">More...</a><br /></td></tr>
 <tr class="separator:ad4ed9d81ba7718bf747e0abdd41cdaa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -305,7 +305,7 @@ class oomph::VorticitySmootherElement&lt; ELEMENT &gt;</div><p >Overloaded eleme
 template&lt;class ELEMENT &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef void(* <a class="el" href="classoomph_1_1VorticitySmootherElement.html">oomph::VorticitySmootherElement</a>&lt; ELEMENT &gt;::ExactVorticityFctPt) (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &gt; &amp;vort_and_derivs)</td>
+          <td class="memname">typedef void(* <a class="el" href="classoomph_1_1VorticitySmootherElement.html">oomph::VorticitySmootherElement</a>&lt; ELEMENT &gt;::ExactVorticityFctPt) (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;x, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &gt; &amp;vort_and_derivs)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1272,7 +1272,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01159">1159</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l00273">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::create_container_for_vorticity_and_derivatives()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01787">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::N_dim</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="shape_8h_source.html#l00564">oomph::OneDimLagrange::shape()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01740">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::vorticity_and_its_derivs()</a>, and <a class="el" href="pseudo__buckling__ring_8h_source.html#l00049">oomph::x</a>.</p>
+<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l00273">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::create_container_for_vorticity_and_derivatives()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01787">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::N_dim</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="shape_8h_source.html#l00564">oomph::OneDimLagrange::shape()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l01740">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::vorticity_and_its_derivs()</a>.</p>
 
 </div>
 </div>
@@ -1316,7 +1316,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00825">825</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l00273">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::create_container_for_vorticity_and_derivatives()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01823">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Exact_vorticity_fct_pt</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01787">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::N_dim</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="pseudo__buckling__ring_8h_source.html#l00049">oomph::x</a>.</p>
+<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l00273">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::create_container_for_vorticity_and_derivatives()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01823">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Exact_vorticity_fct_pt</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01787">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::N_dim</a>, and <a class="el" href="cfortran_8h_source.html#l00568">s</a>.</p>
 
 </div>
 </div>
@@ -1360,7 +1360,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00899">899</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l00273">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::create_container_for_vorticity_and_derivatives()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01787">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::N_dim</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01740">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::vorticity_and_its_derivs()</a>, and <a class="el" href="pseudo__buckling__ring_8h_source.html#l00049">oomph::x</a>.</p>
+<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l00273">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::create_container_for_vorticity_and_derivatives()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01787">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::N_dim</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l01740">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::vorticity_and_its_derivs()</a>.</p>
 
 </div>
 </div>
@@ -1393,7 +1393,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l00801">801</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01810">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Number_of_values_per_field</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l01791">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Smoothed_vorticity_index</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01810">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Number_of_values_per_field</a>, <a class="el" href="nodes_8h_source.html#l00385">oomph::Data::pin()</a>, and <a class="el" href="vorticity__smoother_8h_source.html#l01791">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Smoothed_vorticity_index</a>.</p>
 
 </div>
 </div>
@@ -1730,7 +1730,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="vorticity__smoother_8h_source.html#l01628">1628</a> of file <a class="el" href="vorticity__smoother_8h_source.html">vorticity_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l00273">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::create_container_for_vorticity_and_derivatives()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01823">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Exact_vorticity_fct_pt</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="Vector_8h_source.html#l00167">oomph::Vector&lt; _Tp &gt;::initialise()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01787">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::N_dim</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00683">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::nvelocity_derivatives_to_recover()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00663">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::nvorticity_derivatives_to_recover()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00460">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::recovered_dof_to_container_id()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01791">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Smoothed_vorticity_index</a>, <a class="el" href="constitutive__laws_8h_source.html#l00142">oomph::W</a>, and <a class="el" href="pseudo__buckling__ring_8h_source.html#l00049">oomph::x</a>.</p>
+<p class="reference">References <a class="el" href="vorticity__smoother_8h_source.html#l00273">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::create_container_for_vorticity_and_derivatives()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01823">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Exact_vorticity_fct_pt</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="Vector_8h_source.html#l00167">oomph::Vector&lt; _Tp &gt;::initialise()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01787">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::N_dim</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00683">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::nvelocity_derivatives_to_recover()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00663">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::nvorticity_derivatives_to_recover()</a>, <a class="el" href="vorticity__smoother_8h_source.html#l00460">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::recovered_dof_to_container_id()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="vorticity__smoother_8h_source.html#l01791">oomph::VorticitySmootherElement&lt; ELEMENT &gt;::Smoothed_vorticity_index</a>, and <a class="el" href="quadtree_8h_source.html#l00063">oomph::QuadTreeNames::W</a>.</p>
 
 </div>
 </div>
@@ -2006,7 +2006,7 @@ template&lt;class ELEMENT &gt; </div>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Nov 2 2021 16:35:33
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Dec 21 2021 17:38:47
         </div>
       </div>
     </footer>

@@ -612,22 +612,22 @@
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l00608}00608     \textcolor{comment}{// temporary storage for the eulerian dim}}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l00609}00609     \textcolor{keywordtype}{unsigned} current\_dim = Bin\_array\_pt-\/>ndim\_zeta();}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l00610}00610     min\_and\_max\_coordinates.resize(current\_dim);}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l00611}00611     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}} = 0; \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}} < current\_dim; \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}++)}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l00611}00611     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} u = 0; u < current\_dim; u++)}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l00612}00612     \{}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l00613}00613       \textcolor{comment}{// The number of bins there are according to the u-\/th dimension}}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l00614}00614       \textcolor{keywordtype}{double} nbin\_in\_dir = n\_bin \% Bin\_array\_pt-\/>dimension\_of\_bin\_array(\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}});}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l00615}00615       n\_bin /= Bin\_array\_pt-\/>dimension\_of\_bin\_array(\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}});}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l00614}00614       \textcolor{keywordtype}{double} nbin\_in\_dir = n\_bin \% Bin\_array\_pt-\/>dimension\_of\_bin\_array(u);}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l00615}00615       n\_bin /= Bin\_array\_pt-\/>dimension\_of\_bin\_array(u);}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l00616}00616 }
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l00617}00617       \textcolor{comment}{// The range between the maximum and minimum u-\/th coordinates of a bin}}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l00618}00618       \textcolor{keywordtype}{double} range = (Bin\_array\_pt-\/>min\_and\_max\_coordinates(\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}).second -\/}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l00619}00619                       Bin\_array\_pt-\/>min\_and\_max\_coordinates(\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}).first) /}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l00620}00620                      \textcolor{keywordtype}{double}(Bin\_array\_pt-\/>dimension\_of\_bin\_array(\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}));}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l00618}00618       \textcolor{keywordtype}{double} range = (Bin\_array\_pt-\/>min\_and\_max\_coordinates(u).second -\/}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l00619}00619                       Bin\_array\_pt-\/>min\_and\_max\_coordinates(u).first) /}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l00620}00620                      \textcolor{keywordtype}{double}(Bin\_array\_pt-\/>dimension\_of\_bin\_array(u));}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l00621}00621 }
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l00622}00622       \textcolor{comment}{// Now updating the minimum and maximum u-\/th coordinates for this bin.}}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l00623}00623       min\_and\_max\_coordinates[\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}].first =}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l00624}00624         Bin\_array\_pt-\/>min\_and\_max\_coordinates(\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}).first + nbin\_in\_dir * range;}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l00625}00625       min\_and\_max\_coordinates[\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}].second =}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l00626}00626         min\_and\_max\_coordinates[\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}].first + range;}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l00623}00623       min\_and\_max\_coordinates[u].first =}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l00624}00624         Bin\_array\_pt-\/>min\_and\_max\_coordinates(u).first + nbin\_in\_dir * range;}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l00625}00625       min\_and\_max\_coordinates[u].second =}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l00626}00626         min\_and\_max\_coordinates[u].first + range;}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l00627}00627     \}}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l00628}00628   \}}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l00629}00629 }
@@ -1005,22 +1005,22 @@
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01001}01001     \textcolor{comment}{// temporary storage for the eulerian dim}}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01002}01002     \textcolor{keywordtype}{unsigned} current\_dim = \mbox{\hyperlink{classBinArray_a8e0c4a67385d7dcc714de95ce9965f34}{ndim\_zeta}}();}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01003}01003     min\_and\_max\_coordinates\_of\_bin.resize(current\_dim);}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01004}01004     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}} = 0; \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}} < current\_dim; \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}++)}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01004}01004     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} u = 0; u < current\_dim; u++)}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01005}01005     \{}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01006}01006       \textcolor{comment}{// The number of bins there are according to the u-\/th dimension}}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01007}01007       \textcolor{keywordtype}{unsigned} nbin\_in\_dir = bin\_index\_local \% \mbox{\hyperlink{classBinArray_a0148631c80ef91ad21b985986ae24394}{dimension\_of\_bin\_array}}(\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}});}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01008}01008       bin\_index\_local /= \mbox{\hyperlink{classBinArray_a0148631c80ef91ad21b985986ae24394}{dimension\_of\_bin\_array}}(\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}});}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01007}01007       \textcolor{keywordtype}{unsigned} nbin\_in\_dir = bin\_index\_local \% \mbox{\hyperlink{classBinArray_a0148631c80ef91ad21b985986ae24394}{dimension\_of\_bin\_array}}(u);}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01008}01008       bin\_index\_local /= \mbox{\hyperlink{classBinArray_a0148631c80ef91ad21b985986ae24394}{dimension\_of\_bin\_array}}(u);}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01009}01009 }
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01010}01010       \textcolor{comment}{// The range between the maximum and minimum u-\/th coordinates of a bin}}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01011}01011       \textcolor{keywordtype}{double} range =}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01012}01012         (\mbox{\hyperlink{classSamplePointContainer_a1607ff8abb3f3b6364bc169a6ea4a79c}{Min\_and\_max\_coordinates}}[\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}].second -\/ \mbox{\hyperlink{classSamplePointContainer_a1607ff8abb3f3b6364bc169a6ea4a79c}{Min\_and\_max\_coordinates}}[\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}].first) /}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01013}01013         \textcolor{keywordtype}{double}(\mbox{\hyperlink{classBinArray_aaab4005f8563e42df5fc8e7ac626fedc}{Dimensions\_of\_bin\_array}}[\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}]);}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01012}01012         (\mbox{\hyperlink{classSamplePointContainer_a1607ff8abb3f3b6364bc169a6ea4a79c}{Min\_and\_max\_coordinates}}[u].second -\/ \mbox{\hyperlink{classSamplePointContainer_a1607ff8abb3f3b6364bc169a6ea4a79c}{Min\_and\_max\_coordinates}}[u].first) /}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01013}01013         \textcolor{keywordtype}{double}(\mbox{\hyperlink{classBinArray_aaab4005f8563e42df5fc8e7ac626fedc}{Dimensions\_of\_bin\_array}}[u]);}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01014}01014 }
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01015}01015       \textcolor{comment}{// Now updating the minimum and maximum u-\/th coordinates for this bin.}}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01016}01016       min\_and\_max\_coordinates\_of\_bin[\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}].first =}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01017}01017         \mbox{\hyperlink{classSamplePointContainer_a1607ff8abb3f3b6364bc169a6ea4a79c}{Min\_and\_max\_coordinates}}[\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}].first + double(nbin\_in\_dir) * range;}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01018}01018       min\_and\_max\_coordinates\_of\_bin[\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}].second =}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01019}01019         min\_and\_max\_coordinates\_of\_bin[\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}].first + range;}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01016}01016       min\_and\_max\_coordinates\_of\_bin[u].first =}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01017}01017         \mbox{\hyperlink{classSamplePointContainer_a1607ff8abb3f3b6364bc169a6ea4a79c}{Min\_and\_max\_coordinates}}[u].first + double(nbin\_in\_dir) * range;}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01018}01018       min\_and\_max\_coordinates\_of\_bin[u].second =}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01019}01019         min\_and\_max\_coordinates\_of\_bin[u].first + range;}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01020}01020     \}}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01021}01021   \}}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01022}01022 }
@@ -1678,24 +1678,24 @@
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01674}01674 }
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01675}01675         \textcolor{comment}{// First initializing this MyArrays for the active dimensions}}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01676}01676         \textcolor{keywordtype}{unsigned} coef = 1;}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01677}01677         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}} = 0; \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}} < dim; \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}++)}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01677}01677         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} u = 0; u < dim; u++)}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01678}01678         \{}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01679}01679           vector\_of\_positions[\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}] =}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01680}01680             (((bin\_index / coef) \% (\mbox{\hyperlink{classBinArray_aaab4005f8563e42df5fc8e7ac626fedc}{Dimensions\_of\_bin\_array}}[\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}])));}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01681}01681           vector\_of\_coef[\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}] = coef;}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01682}01682           coef *= \mbox{\hyperlink{classBinArray_aaab4005f8563e42df5fc8e7ac626fedc}{Dimensions\_of\_bin\_array}}[\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}];}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01683}01683           vector\_of\_dimensions[\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}] = \mbox{\hyperlink{classBinArray_aaab4005f8563e42df5fc8e7ac626fedc}{Dimensions\_of\_bin\_array}}[\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}];}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01684}01684           vector\_of\_radiuses[\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}] = radius;}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01685}01685           vector\_of\_active\_dim[\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}] = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01679}01679           vector\_of\_positions[u] =}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01680}01680             (((bin\_index / coef) \% (\mbox{\hyperlink{classBinArray_aaab4005f8563e42df5fc8e7ac626fedc}{Dimensions\_of\_bin\_array}}[u])));}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01681}01681           vector\_of\_coef[u] = coef;}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01682}01682           coef *= \mbox{\hyperlink{classBinArray_aaab4005f8563e42df5fc8e7ac626fedc}{Dimensions\_of\_bin\_array}}[u];}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01683}01683           vector\_of\_dimensions[u] = \mbox{\hyperlink{classBinArray_aaab4005f8563e42df5fc8e7ac626fedc}{Dimensions\_of\_bin\_array}}[u];}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01684}01684           vector\_of\_radiuses[u] = radius;}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01685}01685           vector\_of\_active\_dim[u] = \textcolor{keyword}{true};}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01686}01686         \}}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01687}01687         \textcolor{comment}{// Filling the rest with default values}}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01688}01688         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}} = dim; \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}} < 3; \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}++)}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01688}01688         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} u = dim; u < 3; u++)}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01689}01689         \{}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01690}01690           vector\_of\_positions[\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}] = 0;}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01691}01691           vector\_of\_coef[\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}] = 0;}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01692}01692           vector\_of\_dimensions[\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}] = 1;}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01693}01693           vector\_of\_radiuses[\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}] = 0;}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01694}01694           vector\_of\_active\_dim[\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}] = \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01690}01690           vector\_of\_positions[u] = 0;}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01691}01691           vector\_of\_coef[u] = 0;}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01692}01692           vector\_of\_dimensions[u] = 1;}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01693}01693           vector\_of\_radiuses[u] = 0;}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01694}01694           vector\_of\_active\_dim[u] = \textcolor{keyword}{false};}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01695}01695         \}}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01696}01696 }
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01697}01697         \textcolor{comment}{// First we fill the bins which corresponds to x+radius and x-\/radius in}}
@@ -1848,32 +1848,32 @@
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01844}01844     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} dim = \mbox{\hyperlink{classBinArray_a8e0c4a67385d7dcc714de95ce9965f34}{ndim\_zeta}}();}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01845}01845 }
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01846}01846     \textcolor{comment}{// Loop over all the dimensions}}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01847}01847     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}} = 0; \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}} < dim; \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}++)}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01847}01847     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} u = 0; u < dim; u++)}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01848}01848     \{}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01849}01849       \textcolor{comment}{// for each one get the correct bin "{}coordinate"{}}}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01850}01850       \textcolor{keywordtype}{unsigned} local\_bin\_number = 0;}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01851}01851 }
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01852}01852       \textcolor{keywordflow}{if} (zeta[\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}] < \mbox{\hyperlink{classSamplePointContainer_a1607ff8abb3f3b6364bc169a6ea4a79c}{Min\_and\_max\_coordinates}}[\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}].first)}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01852}01852       \textcolor{keywordflow}{if} (zeta[u] < \mbox{\hyperlink{classSamplePointContainer_a1607ff8abb3f3b6364bc169a6ea4a79c}{Min\_and\_max\_coordinates}}[u].first)}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01853}01853       \{}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01854}01854         local\_bin\_number = 0;}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01855}01855       \}}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01856}01856       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (zeta[\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}] > \mbox{\hyperlink{classSamplePointContainer_a1607ff8abb3f3b6364bc169a6ea4a79c}{Min\_and\_max\_coordinates}}[\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}].second)}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01856}01856       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (zeta[u] > \mbox{\hyperlink{classSamplePointContainer_a1607ff8abb3f3b6364bc169a6ea4a79c}{Min\_and\_max\_coordinates}}[u].second)}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01857}01857       \{}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01858}01858         local\_bin\_number = \mbox{\hyperlink{classBinArray_a55a09b07aea56637d29ba63e28f21f1b}{dimensions\_of\_bin\_array}}(\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}) -\/ 1;}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01858}01858         local\_bin\_number = \mbox{\hyperlink{classBinArray_a55a09b07aea56637d29ba63e28f21f1b}{dimensions\_of\_bin\_array}}(u) -\/ 1;}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01859}01859       \}}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01860}01860       \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01861}01861       \{}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01862}01862         local\_bin\_number = (int(std::min(}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01863}01863           \mbox{\hyperlink{classBinArray_a55a09b07aea56637d29ba63e28f21f1b}{dimensions\_of\_bin\_array}}(\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}) -\/ 1,}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01864}01864           \textcolor{keywordtype}{unsigned}(floor(\textcolor{keywordtype}{double}(zeta[\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}] -\/ \mbox{\hyperlink{classSamplePointContainer_a1607ff8abb3f3b6364bc169a6ea4a79c}{Min\_and\_max\_coordinates}}[\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}].first) /}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01865}01865                          \textcolor{keywordtype}{double}(\mbox{\hyperlink{classSamplePointContainer_a1607ff8abb3f3b6364bc169a6ea4a79c}{Min\_and\_max\_coordinates}}[\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}].second -\/}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01866}01866                                 \mbox{\hyperlink{classSamplePointContainer_a1607ff8abb3f3b6364bc169a6ea4a79c}{Min\_and\_max\_coordinates}}[\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}].first) *}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01867}01867                          \textcolor{keywordtype}{double}(\mbox{\hyperlink{classBinArray_a55a09b07aea56637d29ba63e28f21f1b}{dimensions\_of\_bin\_array}}(\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}})))))));}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01863}01863           \mbox{\hyperlink{classBinArray_a55a09b07aea56637d29ba63e28f21f1b}{dimensions\_of\_bin\_array}}(u) -\/ 1,}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01864}01864           \textcolor{keywordtype}{unsigned}(floor(\textcolor{keywordtype}{double}(zeta[u] -\/ \mbox{\hyperlink{classSamplePointContainer_a1607ff8abb3f3b6364bc169a6ea4a79c}{Min\_and\_max\_coordinates}}[u].first) /}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01865}01865                          \textcolor{keywordtype}{double}(\mbox{\hyperlink{classSamplePointContainer_a1607ff8abb3f3b6364bc169a6ea4a79c}{Min\_and\_max\_coordinates}}[u].second -\/}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01866}01866                                 \mbox{\hyperlink{classSamplePointContainer_a1607ff8abb3f3b6364bc169a6ea4a79c}{Min\_and\_max\_coordinates}}[u].first) *}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01867}01867                          \textcolor{keywordtype}{double}(\mbox{\hyperlink{classBinArray_a55a09b07aea56637d29ba63e28f21f1b}{dimensions\_of\_bin\_array}}(u)))))));}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01868}01868       \}}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01869}01869 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01870}01870 \textcolor{comment}{      /// Update the coef and the bin index}}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01871}01871 \textcolor{comment}{}      n\_bin += local\_bin\_number * coef;}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01872}01872       coef *= \mbox{\hyperlink{classBinArray_a55a09b07aea56637d29ba63e28f21f1b}{dimensions\_of\_bin\_array}}(\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}});}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01872}01872       coef *= \mbox{\hyperlink{classBinArray_a55a09b07aea56637d29ba63e28f21f1b}{dimensions\_of\_bin\_array}}(u);}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01873}01873     \}}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01874}01874 }
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01875}01875     \textcolor{comment}{// return the correct bin index}}
@@ -1975,24 +1975,24 @@
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01971}01971   \{}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01972}01972     \textcolor{keywordtype}{unsigned} dim = \mbox{\hyperlink{classBinArray_a8e0c4a67385d7dcc714de95ce9965f34}{ndim\_zeta}}();}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01973}01973     bin\_index.resize(dim);}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01974}01974     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}} = 0; \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}} < dim; \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}++)}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01974}01974     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} u = 0; u < dim; u++)}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01975}01975     \{}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01976}01976       \textcolor{keywordflow}{if} (zeta[\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}] < \mbox{\hyperlink{classSamplePointContainer_a1607ff8abb3f3b6364bc169a6ea4a79c}{Min\_and\_max\_coordinates}}[\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}].first)}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01976}01976       \textcolor{keywordflow}{if} (zeta[u] < \mbox{\hyperlink{classSamplePointContainer_a1607ff8abb3f3b6364bc169a6ea4a79c}{Min\_and\_max\_coordinates}}[u].first)}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01977}01977       \{}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01978}01978         bin\_index[\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}] = 0;}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01978}01978         bin\_index[u] = 0;}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01979}01979       \}}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01980}01980       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (zeta[\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}] > \mbox{\hyperlink{classSamplePointContainer_a1607ff8abb3f3b6364bc169a6ea4a79c}{Min\_and\_max\_coordinates}}[\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}].second)}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01980}01980       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (zeta[u] > \mbox{\hyperlink{classSamplePointContainer_a1607ff8abb3f3b6364bc169a6ea4a79c}{Min\_and\_max\_coordinates}}[u].second)}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01981}01981       \{}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01982}01982         bin\_index[\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}] = \mbox{\hyperlink{classBinArray_a55a09b07aea56637d29ba63e28f21f1b}{dimensions\_of\_bin\_array}}(\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}) -\/ 1;}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01982}01982         bin\_index[u] = \mbox{\hyperlink{classBinArray_a55a09b07aea56637d29ba63e28f21f1b}{dimensions\_of\_bin\_array}}(u) -\/ 1;}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01983}01983       \}}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01984}01984       \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01985}01985       \{}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01986}01986         bin\_index[\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}] = (int(}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01987}01987           std::min(\mbox{\hyperlink{classBinArray_a55a09b07aea56637d29ba63e28f21f1b}{dimensions\_of\_bin\_array}}(\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}) -\/ 1,}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01988}01988                    \textcolor{keywordtype}{unsigned}(floor((zeta[\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}] -\/ \mbox{\hyperlink{classSamplePointContainer_a1607ff8abb3f3b6364bc169a6ea4a79c}{Min\_and\_max\_coordinates}}[\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}].first) /}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01989}01989                                   \textcolor{keywordtype}{double}(\mbox{\hyperlink{classSamplePointContainer_a1607ff8abb3f3b6364bc169a6ea4a79c}{Min\_and\_max\_coordinates}}[\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}].second -\/}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01990}01990                                          \mbox{\hyperlink{classSamplePointContainer_a1607ff8abb3f3b6364bc169a6ea4a79c}{Min\_and\_max\_coordinates}}[\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}].first) *}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01991}01991                                   \textcolor{keywordtype}{double}(\mbox{\hyperlink{classBinArray_a55a09b07aea56637d29ba63e28f21f1b}{dimensions\_of\_bin\_array}}(\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}})))))));}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01986}01986         bin\_index[u] = (int(}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01987}01987           std::min(\mbox{\hyperlink{classBinArray_a55a09b07aea56637d29ba63e28f21f1b}{dimensions\_of\_bin\_array}}(u) -\/ 1,}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01988}01988                    \textcolor{keywordtype}{unsigned}(floor((zeta[u] -\/ \mbox{\hyperlink{classSamplePointContainer_a1607ff8abb3f3b6364bc169a6ea4a79c}{Min\_and\_max\_coordinates}}[u].first) /}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01989}01989                                   \textcolor{keywordtype}{double}(\mbox{\hyperlink{classSamplePointContainer_a1607ff8abb3f3b6364bc169a6ea4a79c}{Min\_and\_max\_coordinates}}[u].second -\/}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01990}01990                                          \mbox{\hyperlink{classSamplePointContainer_a1607ff8abb3f3b6364bc169a6ea4a79c}{Min\_and\_max\_coordinates}}[u].first) *}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01991}01991                                   \textcolor{keywordtype}{double}(\mbox{\hyperlink{classBinArray_a55a09b07aea56637d29ba63e28f21f1b}{dimensions\_of\_bin\_array}}(u)))))));}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01992}01992       \}}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01993}01993     \}}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l01994}01994   \}}
@@ -2722,8 +2722,8 @@
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l02718}02718             \{}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l02719}02719               FiniteElement* el\_pt = \mbox{\hyperlink{classNonRefineableBinArray_aab1a7f3687936a21af92124a4ae7bd86}{Bin\_object\_coord\_pairs}}[neigh\_bin][j].first;}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l02720}02720               Vector<double> \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(\mbox{\hyperlink{classNonRefineableBinArray_aab1a7f3687936a21af92124a4ae7bd86}{Bin\_object\_coord\_pairs}}[neigh\_bin][j].second);}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l02721}02721               Vector<double> \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(2);}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l02722}02722               el\_pt-\/>interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l02721}02721               Vector<double> x(2);}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l02722}02722               el\_pt-\/>interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l02723}02723               \textcolor{comment}{// Get minimum distance of sample point from any of the vertices}}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l02724}02724               \textcolor{comment}{// of current bin}}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l02725}02725               \textcolor{comment}{// hierher Louis questions if this is the right thing to do!}}
@@ -2731,7 +2731,7 @@
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l02727}02727               \textcolor{comment}{// with him but hasn't done anything yet...}}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l02728}02728               \textcolor{comment}{// should use the distance to the centre of gravity of}}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l02729}02729               \textcolor{comment}{// the empty bin instead!}}
-\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l02730}02730               \textcolor{keywordtype}{double} dist = \mbox{\hyperlink{classNonRefineableBinArray_aeec23360643e8a4581d8d841a97f2f2b}{min\_distance}}(bin, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l02730}02730               \textcolor{keywordtype}{double} dist = \mbox{\hyperlink{classNonRefineableBinArray_aeec23360643e8a4581d8d841a97f2f2b}{min\_distance}}(bin, x);}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l02731}02731               \textcolor{keywordflow}{if} (dist < min\_dist)}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l02732}02732               \{}
 \DoxyCodeLine{\Hypertarget{sample__point__container_8cc_source_l02733}02733                 min\_dist = dist;}

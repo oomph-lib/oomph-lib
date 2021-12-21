@@ -130,7 +130,7 @@
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00126}00126     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < 4; j++)}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00127}00127     \{}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00128}00128       dummy\_element.node\_pt(j) =}
-\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00129}00129         \textcolor{keyword}{new} Node(n\_dim, n\_position\_type, initial\_n\_value);}
+\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00129}00129         \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1Node}{Node}}(n\_dim, n\_position\_type, initial\_n\_value);}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00130}00130     \}}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00131}00131 }
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00132}00132     \textcolor{comment}{// Local node number of each quad element corner}}
@@ -178,15 +178,15 @@
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00174}00174         triangle\_vertex[j].resize(2);}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00175}00175 }
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00176}00176         \textcolor{comment}{// Get the coordinates}}
-\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00177}00177         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}} = tmp\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j)-\/>x(0);}
-\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00178}00178         \textcolor{keywordtype}{double} y = tmp\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j)-\/>x(1);}
+\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00177}00177         \textcolor{keywordtype}{double} x = tmp\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0);}
+\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00178}00178         \textcolor{keywordtype}{double} y = tmp\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1);}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00179}00179 }
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00180}00180         \textcolor{comment}{// Increment the centroid coordinates}}
-\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00181}00181         centroid[0] += \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}};}
+\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00181}00181         centroid[0] += x;}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00182}00182         centroid[1] += y;}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00183}00183 }
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00184}00184         \textcolor{comment}{// Assign the triangle\_vertex coordinates}}
-\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00185}00185         triangle\_vertex[j][0] = \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}};}
+\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00185}00185         triangle\_vertex[j][0] = x;}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00186}00186         triangle\_vertex[j][1] = y;}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00187}00187       \}}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00188}00188 }
@@ -219,10 +219,10 @@
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00215}00215       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < 3; j++)}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00216}00216       \{}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00217}00217         \textcolor{comment}{// Pointer to node in the scaffold mesh}}
-\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00218}00218         Node* scaffold\_node\_pt = tmp\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j);}
+\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00218}00218         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* scaffold\_node\_pt = tmp\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j);}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00219}00219 }
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00220}00220         \textcolor{comment}{// Check if the node has been set up yet}}
-\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00221}00221         Node* qmesh\_node\_pt = scaffold\_to\_quad\_mesh\_node[scaffold\_node\_pt];}
+\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00221}00221         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* qmesh\_node\_pt = scaffold\_to\_quad\_mesh\_node[scaffold\_node\_pt];}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00222}00222 }
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00223}00223         \textcolor{comment}{// Haven't done this one yet}}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00224}00224         \textcolor{keywordflow}{if} (qmesh\_node\_pt == 0)}
@@ -230,7 +230,7 @@
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00226}00226           \textcolor{comment}{// Get pointer to set of mesh boundaries that this}}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00227}00227           \textcolor{comment}{// scaffold node occupies; NULL if the node is not on any boundary}}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00228}00228           std::set<unsigned>* boundaries\_pt;}
-\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00229}00229           scaffold\_node\_pt-\/>get\_boundaries\_pt(boundaries\_pt);}
+\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00229}00229           scaffold\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a33092a3d51285282ae8ec8e702d1cbf5}{get\_boundaries\_pt}}(boundaries\_pt);}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00230}00230 }
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00231}00231           \textcolor{comment}{// Check to see if it's on any boundaries}}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00232}00232           \textcolor{keywordflow}{if} (boundaries\_pt != 0)}
@@ -434,13 +434,13 @@
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00430}00430       \textcolor{comment}{// pointer to it with each element:}}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00431}00431       \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00432}00432       \textcolor{comment}{// Construct the centroid node}}
-\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00433}00433       Node* nod\_pt = el0\_pt-\/>construct\_node(corner\_3, time\_stepper\_pt);}
+\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00433}00433       \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = el0\_pt-\/>construct\_node(corner\_3, time\_stepper\_pt);}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00434}00434 }
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00435}00435       \textcolor{comment}{// Add the pointer to the vector of nodal pointers}}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00436}00436       Node\_pt.push\_back(nod\_pt);}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00437}00437 }
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00438}00438       \textcolor{comment}{// Quad 0}}
-\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00439}00439       el0\_pt-\/>node\_pt(corner\_3)-\/>x(0) = centroid[0];}
+\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00439}00439       el0\_pt-\/>node\_pt(corner\_3)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0) = centroid[0];}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00440}00440       el0\_pt-\/>node\_pt(corner\_3)-\/>x(1) = centroid[1];}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00441}00441 }
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00442}00442       \textcolor{comment}{// Quad 1}}
@@ -478,7 +478,7 @@
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00474}00474       \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00475}00475       \textcolor{comment}{// Local and global coordinate vectors for the nodes}}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00476}00476       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(2);}
-\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00477}00477       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(2);}
+\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00477}00477       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(2);}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00478}00478 }
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00479}00479       \textcolor{comment}{// Loop over all of nodes in Q0 noting that the lower left corner node}}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00480}00480       \textcolor{comment}{// (node 0) and the upper right corner node (centroid) have already}}
@@ -512,7 +512,7 @@
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00508}00508             \textcolor{keywordflow}{if} (q0\_lower\_boundary\_id > 0)}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00509}00509             \{}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00510}00510               \textcolor{comment}{// Construct a boundary node}}
-\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00511}00511               Node* nod\_pt =}
+\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00511}00511               \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt =}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00512}00512                 el0\_pt-\/>construct\_boundary\_node(j, time\_stepper\_pt);}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00513}00513 }
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00514}00514               \textcolor{comment}{// Add it to the list of boundary nodes}}
@@ -533,7 +533,7 @@
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00529}00529           \textcolor{keywordflow}{if} (!done)}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00530}00530           \{}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00531}00531             \textcolor{comment}{// Construct a normal node}}
-\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00532}00532             Node* nod\_pt = el0\_pt-\/>construct\_node(j, time\_stepper\_pt);}
+\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00532}00532             \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = el0\_pt-\/>construct\_node(j, time\_stepper\_pt);}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00533}00533 }
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00534}00534             \textcolor{comment}{// Add the node into the vector of nodes on edge 0}}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00535}00535             edge0\_vector\_pt[j] = nod\_pt;}
@@ -566,7 +566,7 @@
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00562}00562             \textcolor{keywordflow}{if} (q0\_left\_boundary\_id > 0)}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00563}00563             \{}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00564}00564               \textcolor{comment}{// Construct a boundary node}}
-\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00565}00565               Node* nod\_pt =}
+\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00565}00565               \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt =}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00566}00566                 el0\_pt-\/>construct\_boundary\_node(j, time\_stepper\_pt);}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00567}00567 }
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00568}00568               \textcolor{comment}{// Add it to the list of boundary nodes}}
@@ -588,7 +588,7 @@
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00584}00584           \textcolor{keywordflow}{if} (!done)}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00585}00585           \{}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00586}00586             \textcolor{comment}{// Construct a normal node}}
-\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00587}00587             Node* nod\_pt = el0\_pt-\/>construct\_node(j, time\_stepper\_pt);}
+\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00587}00587             \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = el0\_pt-\/>construct\_node(j, time\_stepper\_pt);}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00588}00588 }
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00589}00589             \textcolor{comment}{// Add the node into the vector of nodes on edge 2 in clockwise}}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00590}00590             \textcolor{comment}{// order}}
@@ -606,7 +606,7 @@
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00602}00602         \textcolor{keywordflow}{if} (!done)}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00603}00603         \{}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00604}00604           \textcolor{comment}{// Construct a normal node}}
-\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00605}00605           Node* nod\_pt = el0\_pt-\/>construct\_node(j, time\_stepper\_pt);}
+\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00605}00605           \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = el0\_pt-\/>construct\_node(j, time\_stepper\_pt);}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00606}00606 }
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00607}00607           \textcolor{comment}{// Add it to the list of nodes in the mesh}}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00608}00608           Node\_pt.push\_back(nod\_pt);}
@@ -616,9 +616,9 @@
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00612}00612         el0\_pt-\/>local\_coordinate\_of\_node(j, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00613}00613 }
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00614}00614         \textcolor{comment}{// Interpolate position linearly between vertex nodes}}
-\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00615}00615         dummy\_element.interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
-\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00616}00616         el0\_pt-\/>node\_pt(j)-\/>x(0) = \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[0];}
-\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00617}00617         el0\_pt-\/>node\_pt(j)-\/>x(1) = \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[1];}
+\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00615}00615         dummy\_element.interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
+\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00616}00616         el0\_pt-\/>node\_pt(j)-\/>x(0) = x[0];}
+\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00617}00617         el0\_pt-\/>node\_pt(j)-\/>x(1) = x[1];}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00618}00618       \}}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00619}00619 }
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00620}00620 }
@@ -682,7 +682,7 @@
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00678}00678             \textcolor{keywordflow}{if} (q1\_lower\_boundary\_id > 0)}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00679}00679             \{}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00680}00680               \textcolor{comment}{// Construct a boundary node}}
-\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00681}00681               Node* nod\_pt =}
+\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00681}00681               \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt =}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00682}00682                 el1\_pt-\/>construct\_boundary\_node(j, time\_stepper\_pt);}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00683}00683 }
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00684}00684               \textcolor{comment}{// Add it to the list of boundary nodes}}
@@ -703,7 +703,7 @@
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00699}00699           \textcolor{keywordflow}{if} (!done)}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00700}00700           \{}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00701}00701             \textcolor{comment}{// Construct a normal node}}
-\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00702}00702             Node* nod\_pt = el1\_pt-\/>construct\_node(j, time\_stepper\_pt);}
+\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00702}00702             \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = el1\_pt-\/>construct\_node(j, time\_stepper\_pt);}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00703}00703 }
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00704}00704             \textcolor{comment}{// Add the node into the vector of nodes on edge 1}}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00705}00705             edge1\_vector\_pt[j] = nod\_pt;}
@@ -736,7 +736,7 @@
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00732}00732             \textcolor{keywordflow}{if} (q1\_left\_boundary\_id > 0)}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00733}00733             \{}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00734}00734               \textcolor{comment}{// Construct a boundary node}}
-\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00735}00735               Node* nod\_pt =}
+\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00735}00735               \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt =}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00736}00736                 el1\_pt-\/>construct\_boundary\_node(j, time\_stepper\_pt);}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00737}00737 }
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00738}00738               \textcolor{comment}{// Add it to the list of boundary nodes}}
@@ -758,7 +758,7 @@
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00754}00754           \textcolor{keywordflow}{if} (!done)}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00755}00755           \{}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00756}00756             \textcolor{comment}{// Construct a normal node}}
-\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00757}00757             Node* nod\_pt = el1\_pt-\/>construct\_node(j, time\_stepper\_pt);}
+\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00757}00757             \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = el1\_pt-\/>construct\_node(j, time\_stepper\_pt);}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00758}00758 }
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00759}00759             \textcolor{comment}{// Add the node into the vector of nodes on edge 0 in clockwise}}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00760}00760             \textcolor{comment}{// order}}
@@ -776,7 +776,7 @@
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00772}00772         \textcolor{keywordflow}{if} (!done)}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00773}00773         \{}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00774}00774           \textcolor{comment}{// Construct a normal node}}
-\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00775}00775           Node* nod\_pt = el1\_pt-\/>construct\_node(j, time\_stepper\_pt);}
+\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00775}00775           \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = el1\_pt-\/>construct\_node(j, time\_stepper\_pt);}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00776}00776 }
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00777}00777           \textcolor{comment}{// Add it to the list of nodes in the mesh}}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00778}00778           Node\_pt.push\_back(nod\_pt);}
@@ -786,9 +786,9 @@
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00782}00782         el1\_pt-\/>local\_coordinate\_of\_node(j, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00783}00783 }
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00784}00784         \textcolor{comment}{// Interpolate position linearly between vertex nodes}}
-\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00785}00785         dummy\_element.interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
-\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00786}00786         el1\_pt-\/>node\_pt(j)-\/>x(0) = \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[0];}
-\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00787}00787         el1\_pt-\/>node\_pt(j)-\/>x(1) = \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[1];}
+\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00785}00785         dummy\_element.interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
+\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00786}00786         el1\_pt-\/>node\_pt(j)-\/>x(0) = x[0];}
+\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00787}00787         el1\_pt-\/>node\_pt(j)-\/>x(1) = x[1];}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00788}00788       \}}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00789}00789 }
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00790}00790 }
@@ -865,7 +865,7 @@
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00861}00861             \textcolor{keywordflow}{if} (q2\_lower\_boundary\_id > 0)}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00862}00862             \{}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00863}00863               \textcolor{comment}{// Construct a boundary node}}
-\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00864}00864               Node* nod\_pt =}
+\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00864}00864               \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt =}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00865}00865                 el2\_pt-\/>construct\_boundary\_node(j, time\_stepper\_pt);}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00866}00866 }
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00867}00867               \textcolor{comment}{// Add it to the list of boundary nodes}}
@@ -886,7 +886,7 @@
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00882}00882           \textcolor{keywordflow}{if} (!done)}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00883}00883           \{}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00884}00884             \textcolor{comment}{// Construct a normal node}}
-\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00885}00885             Node* nod\_pt = el2\_pt-\/>construct\_node(j, time\_stepper\_pt);}
+\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00885}00885             \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = el2\_pt-\/>construct\_node(j, time\_stepper\_pt);}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00886}00886 }
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00887}00887             \textcolor{comment}{// Add the node into the vector of nodes on edge 2}}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00888}00888             edge2\_vector\_pt[j] = nod\_pt;}
@@ -930,7 +930,7 @@
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00926}00926             \textcolor{keywordflow}{if} (q2\_left\_boundary\_id > 0)}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00927}00927             \{}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00928}00928               \textcolor{comment}{// Construct a boundary node}}
-\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00929}00929               Node* nod\_pt =}
+\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00929}00929               \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt =}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00930}00930                 el2\_pt-\/>construct\_boundary\_node(j, time\_stepper\_pt);}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00931}00931 }
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00932}00932               \textcolor{comment}{// Add it to the list of boundary nodes}}
@@ -952,7 +952,7 @@
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00948}00948           \textcolor{keywordflow}{if} (!done)}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00949}00949           \{}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00950}00950             \textcolor{comment}{// Construct a normal node}}
-\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00951}00951             Node* nod\_pt = el2\_pt-\/>construct\_node(j, time\_stepper\_pt);}
+\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00951}00951             \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = el2\_pt-\/>construct\_node(j, time\_stepper\_pt);}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00952}00952 }
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00953}00953             \textcolor{comment}{// Add the node into the vector of nodes on edge 1 in clockwise}}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00954}00954             \textcolor{comment}{// order}}
@@ -970,7 +970,7 @@
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00966}00966         \textcolor{keywordflow}{if} (!done)}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00967}00967         \{}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00968}00968           \textcolor{comment}{// Construct a normal node}}
-\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00969}00969           Node* nod\_pt = el2\_pt-\/>construct\_node(j, time\_stepper\_pt);}
+\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00969}00969           \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = el2\_pt-\/>construct\_node(j, time\_stepper\_pt);}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00970}00970 }
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00971}00971           \textcolor{comment}{// Add it to the list of nodes in the mesh}}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00972}00972           Node\_pt.push\_back(nod\_pt);}
@@ -980,9 +980,9 @@
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00976}00976         el2\_pt-\/>local\_coordinate\_of\_node(j, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00977}00977 }
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00978}00978         \textcolor{comment}{// Interpolate position linearly between vertex nodes}}
-\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00979}00979         dummy\_element.interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
-\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00980}00980         el2\_pt-\/>node\_pt(j)-\/>x(0) = \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[0];}
-\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00981}00981         el2\_pt-\/>node\_pt(j)-\/>x(1) = \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[1];}
+\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00979}00979         dummy\_element.interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
+\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00980}00980         el2\_pt-\/>node\_pt(j)-\/>x(0) = x[0];}
+\DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00981}00981         el2\_pt-\/>node\_pt(j)-\/>x(1) = x[1];}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00982}00982       \}}
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00983}00983 }
 \DoxyCodeLine{\Hypertarget{quad__from__triangle__mesh_8template_8cc_source_l00984}00984       \textcolor{comment}{// We now need to loop over nodes corner\_2 to (corner\_3-\/1) and copy the}}

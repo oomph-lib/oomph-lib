@@ -8,11 +8,11 @@
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{namespaceoomph_1_1PressureAdvectionDiffusionValidation_a7bb38b47b4d4efe2e775baf918dda476}{wind\+\_\+function}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&wind)
+void \mbox{\hyperlink{namespaceoomph_1_1PressureAdvectionDiffusionValidation_a7bb38b47b4d4efe2e775baf918dda476}{wind\+\_\+function}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&wind)
 \begin{DoxyCompactList}\small\item\em Wind. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceoomph_1_1PressureAdvectionDiffusionValidation_a4f01cf3a330e714439119ccd6e79f11e}{get\+\_\+exact\+\_\+u}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}})
+void \mbox{\hyperlink{namespaceoomph_1_1PressureAdvectionDiffusionValidation_a4f01cf3a330e714439119ccd6e79f11e}{get\+\_\+exact\+\_\+u}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&u)
 \begin{DoxyCompactList}\small\item\em Exact solution as a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceoomph_1_1PressureAdvectionDiffusionValidation_a5edd580baaf74648e888f4deff481218}{get\+\_\+exact\+\_\+u}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, double \&\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}})
+void \mbox{\hyperlink{namespaceoomph_1_1PressureAdvectionDiffusionValidation_a5edd580baaf74648e888f4deff481218}{get\+\_\+exact\+\_\+u}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&u)
 \begin{DoxyCompactList}\small\item\em Exact solution as a scalar. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceoomph_1_1PressureAdvectionDiffusionValidation_a704323835d1c48a60a83670d8694c938}{source\+\_\+function}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x\+\_\+vect)
 \begin{DoxyCompactList}\small\item\em Source function required to make the solution above an exact solution. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -47,7 +47,7 @@ Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l
 
 
 
-References \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00042}{Flag}}, \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00045}{Peclet}}, \mbox{\hyperlink{error__estimator_8h_source_l00165}{oomph\+::u}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00042}{Flag}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00045}{Peclet}}.
 
 \mbox{\Hypertarget{namespaceoomph_1_1PressureAdvectionDiffusionValidation_a4f01cf3a330e714439119ccd6e79f11e}\label{namespaceoomph_1_1PressureAdvectionDiffusionValidation_a4f01cf3a330e714439119ccd6e79f11e}} 
 \index{oomph::PressureAdvectionDiffusionValidation@{oomph::PressureAdvectionDiffusionValidation}!get\_exact\_u@{get\_exact\_u}}
@@ -65,7 +65,7 @@ Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l
 
 
 
-References \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00042}{Flag}}, \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00045}{Peclet}}, \mbox{\hyperlink{error__estimator_8h_source_l00165}{oomph\+::u}}, \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00048}{wind\+\_\+function()}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00042}{Flag}}, \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00045}{Peclet}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00048}{wind\+\_\+function()}}.
 
 
 
@@ -87,7 +87,7 @@ Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l
 
 
 
-References \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00042}{Flag}}, \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00045}{Peclet}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00042}{Flag}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00045}{Peclet}}.
 
 
 
@@ -109,7 +109,7 @@ Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l
 
 
 
-References \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00042}{Flag}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00042}{Flag}}.
 
 
 

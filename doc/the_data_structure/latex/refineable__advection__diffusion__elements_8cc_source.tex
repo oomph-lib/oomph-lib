@@ -91,7 +91,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00087}00087         ipt, psi, dpsidx, test, dtestdx);}
 \DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00088}00088 }
 \DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00089}00089       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00090}00090       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00090}00090       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00091}00091 }
 \DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00092}00092       \textcolor{comment}{// Calculate local values of the function, initialise to zero}}
 \DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00093}00093       \textcolor{keywordtype}{double} dudt = 0.0;}
@@ -196,7 +196,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00192}00192           \{}
 \DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00193}00193             \textcolor{comment}{// Add du/dt and body force/source term here}}
 \DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00194}00194             residuals[local\_eqn] -\/=}
-\DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00195}00195               (peclet\_st * dudt + source) * test(l) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight;}
+\DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00195}00195               (peclet\_st * dudt + source) * test(l) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight;}
 \DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00196}00196 }
 \DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00197}00197             \textcolor{comment}{// The Mesh velocity and Advection-\/-\/Diffusion bit}}
 \DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00198}00198             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < DIM; k++)}
@@ -207,7 +207,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00203}00203               \textcolor{keywordflow}{if} (!ALE\_is\_disabled\_flag) tmp -\/= peclet\_st * mesh\_velocity[k];}
 \DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00204}00204               \textcolor{comment}{// Now combine the terms into the residual}}
 \DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00205}00205               residuals[local\_eqn] -\/= interpolated\_dudx[k] *}
-\DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00206}00206                                       (tmp * test(l) + dtestdx(l, k)) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} *}
+\DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00206}00206                                       (tmp * test(l) + dtestdx(l, k)) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} *}
 \DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00207}00207                                       hang\_weight;}
 \DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00208}00208             \}}
 \DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00209}00209 }
@@ -264,14 +264,14 @@
 \DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00260}00260                     \textcolor{comment}{// Mass matrix du/dt term}}
 \DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00261}00261                     jacobian(local\_eqn, local\_unknown) -\/=}
 \DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00262}00262                       peclet\_st * test(l) * psi(l2) *}
-\DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00263}00263                       this-\/>node\_pt(l2)-\/>time\_stepper\_pt()-\/>weight(1, 0) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} *}
+\DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00263}00263                       this-\/>node\_pt(l2)-\/>time\_stepper\_pt()-\/>weight(1, 0) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} *}
 \DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00264}00264                       hang\_weight * hang\_weight2;}
 \DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00265}00265 }
 \DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00266}00266                     \textcolor{comment}{// Add contribution to mass matrix}}
 \DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00267}00267                     \textcolor{keywordflow}{if} (flag == 2)}
 \DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00268}00268                     \{}
 \DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00269}00269                       mass\_matrix(local\_eqn, local\_unknown) +=}
-\DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00270}00270                         peclet\_st * test(l) * psi(l2) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight *}
+\DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00270}00270                         peclet\_st * test(l) * psi(l2) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight *}
 \DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00271}00271                         hang\_weight2;}
 \DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00272}00272                     \}}
 \DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00273}00273 }
@@ -287,7 +287,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00283}00283                       \}}
 \DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00284}00284                       \textcolor{comment}{// Construct the jacobian term}}
 \DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00285}00285                       jacobian(local\_eqn, local\_unknown) -\/=}
-\DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00286}00286                         dpsidx(l2, k) * (tmp * test(l) + dtestdx(l, k)) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} *}
+\DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00286}00286                         dpsidx(l2, k) * (tmp * test(l) + dtestdx(l, k)) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} *}
 \DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00287}00287                         hang\_weight * hang\_weight2;}
 \DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00288}00288                     \}}
 \DoxyCodeLine{\Hypertarget{refineable__advection__diffusion__elements_8cc_source_l00289}00289                   \}}

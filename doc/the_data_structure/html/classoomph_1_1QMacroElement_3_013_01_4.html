@@ -232,13 +232,13 @@ Additional Inherited Members</h2></td></tr>
 <p >The macro element mapping is based on the member function pointer to the associated <a class="el" href="classoomph_1_1Domain.html" title="Base class for Domains with curvilinear and/or time-dependent boundaries. Domain boundaries are typic...">Domain</a> 's </p><div class="fragment"><div class="line"><a class="code hl_function" href="classoomph_1_1Domain.html#a95f3e00d28ea37e6c4d3027bfac91096">Domain::macro_element_boundary</a>(...) </div>
 <div class="ttc" id="aclassoomph_1_1Domain_html_a95f3e00d28ea37e6c4d3027bfac91096"><div class="ttname"><a href="classoomph_1_1Domain.html#a95f3e00d28ea37e6c4d3027bfac91096">oomph::Domain::macro_element_boundary</a></div><div class="ttdeci">virtual void macro_element_boundary(const unsigned &amp;t, const unsigned &amp;i_macro, const unsigned &amp;i_direct, const Vector&lt; double &gt; &amp;s, Vector&lt; double &gt; &amp;f)=0</div><div class="ttdoc">Vector representation of the i_macro-th macro element boundary i_direct (e.g. N/S/W/E in 2D) at time ...</div></div>
 </div><!-- fragment --><p> function which provides a parametrisation of the macro element's boundaries in the form: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\[ {\bf f}_{i} (t,{\bf S}) \]" src="form_186.png" width="36" height="14"/>
+<img class="formulaDsp" alt="\[ {\bf f}_{i} (t,{\bf S}) \]" src="form_315.png"/>
 </p>
 <p> where</p><ul>
-<li><img class="formulaInl" alt="$ i $" src="form_187.png" width="5" height="9"/> labels the boundary (L/R/D/U/B/F)</li>
-<li><img class="formulaInl" alt="$ {\bf S} \in [-1,1]^2 $" src="form_189.png" width="63" height="15"/> is the (2D) <a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> of local coordinate(s) along the boundary.</li>
-<li><img class="formulaInl" alt="$ {\bf f} $" src="form_53.png" width="8" height="10"/> is the position <a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> to the boundary.</li>
-<li><img class="formulaInl" alt="$ t $" src="form_20.png" width="5" height="9"/> is the time level (t=0: current; t&gt;0 previous timestep) </li>
+<li><img class="formulaInl" alt="$ i $" src="form_316.png"/> labels the boundary (L/R/D/U/B/F)</li>
+<li><img class="formulaInl" alt="$ {\bf S} \in [-1,1]^2 $" src="form_318.png"/> is the (2D) <a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> of local coordinate(s) along the boundary.</li>
+<li><img class="formulaInl" alt="$ {\bf f} $" src="form_101.png"/> is the position <a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> to the boundary.</li>
+<li><img class="formulaInl" alt="$ t $" src="form_20.png"/> is the time level (t=0: current; t&gt;0 previous timestep) </li>
 </ul>
 
 <p class="definition">Definition at line <a class="el" href="macro__element_8h_source.html#l00372">372</a> of file <a class="el" href="macro__element_8h_source.html">macro_element.h</a>.</p>
@@ -496,7 +496,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="macro__element_8h_source.html#l00400">400</a> of file <a class="el" href="macro__element_8h_source.html">macro_element.h</a>.</p>
 
-<p class="reference">References <a class="el" href="namespaceoomph.html#ad835af913df4cbdc5648440f91b794ab">oomph::f()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="macro__element_8h_source.html#l00126">oomph::MacroElement::macro_map()</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, and <a class="el" href="pseudo__buckling__ring_8h_source.html#l00049">oomph::x</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="macro__element_8h_source.html#l00126">oomph::MacroElement::macro_map()</a>, and <a class="el" href="cfortran_8h_source.html#l00568">t</a>.</p>
 
 </div>
 </div>
@@ -540,7 +540,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="macro__element_8cc_source.html#l00659">659</a> of file <a class="el" href="macro__element_8cc_source.html">macro_element.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="macro__element_8h_source.html#l00236">oomph::MacroElement::Domain_pt</a>, <a class="el" href="namespaceoomph.html#ad835af913df4cbdc5648440f91b794ab">oomph::f()</a>, <a class="el" href="octree_8h_source.html#l00074">oomph::OcTreeNames::F</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="binary__tree_8h_source.html#l00050">oomph::BinaryTreeNames::L</a>, <a class="el" href="classoomph_1_1Domain.html#a95f3e00d28ea37e6c4d3027bfac91096">oomph::Domain::macro_element_boundary()</a>, <a class="el" href="macro__element_8h_source.html#l00239">oomph::MacroElement::Macro_element_number</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="cfortran_8h_source.html#l00568">t</a>.</p>
+<p class="reference">References <a class="el" href="macro__element_8h_source.html#l00236">oomph::MacroElement::Domain_pt</a>, <a class="el" href="octree_8h_source.html#l00074">oomph::OcTreeNames::F</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="binary__tree_8h_source.html#l00050">oomph::BinaryTreeNames::L</a>, <a class="el" href="classoomph_1_1Domain.html#a95f3e00d28ea37e6c4d3027bfac91096">oomph::Domain::macro_element_boundary()</a>, <a class="el" href="macro__element_8h_source.html#l00239">oomph::MacroElement::Macro_element_number</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="cfortran_8h_source.html#l00568">t</a>.</p>
 
 </div>
 </div>
@@ -576,7 +576,7 @@ Additional Inherited Members</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Nov 2 2021 16:34:13
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Dec 21 2021 17:37:39
         </div>
       </div>
     </footer>

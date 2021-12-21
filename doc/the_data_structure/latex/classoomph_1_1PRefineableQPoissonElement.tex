@@ -12,7 +12,7 @@ p-\/refineable version of 2D \mbox{\hyperlink{classoomph_1_1QPoissonElement}{QPo
 Inheritance diagram for oomph\+::PRefineable\+QPoisson\+Element\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=1.449275cm]{classoomph_1_1PRefineableQPoissonElement}
+\includegraphics[height=1.352657cm]{classoomph_1_1PRefineableQPoissonElement}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
@@ -22,17 +22,17 @@ Inheritance diagram for oomph\+::PRefineable\+QPoisson\+Element\texorpdfstring{$
 \begin{DoxyCompactList}\small\item\em Constructor, simply call the other constructors. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1PRefineableQPoissonElement_a9ba8ab37c3a1e129050b9e2f45d82ce4}{$\sim$\+PRefineable\+QPoisson\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Destructor (to avoid memory leaks) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1PRefineableQPoissonElement_a99d55d6f9dd8a243f0e364fe5aa6c7e4}{PRefineable\+QPoisson\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1PRefineableQPoissonElement}{PRefineable\+QPoisson\+Element}}$<$ DIM $>$ \&dummy)=delete
+\mbox{\hyperlink{classoomph_1_1PRefineableQPoissonElement_a99d55d6f9dd8a243f0e364fe5aa6c7e4}{PRefineable\+QPoisson\+Element}} (const \mbox{\hyperlink{classoomph_1_1PRefineableQPoissonElement}{PRefineable\+QPoisson\+Element}}$<$ DIM $>$ \&dummy)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PRefineableQPoissonElement_a0dd30f370e4827c42abbda27b7839532}{operator=}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1PRefineableQPoissonElement}{PRefineable\+QPoisson\+Element}}$<$ DIM $>$ \&)=delete
+void \mbox{\hyperlink{classoomph_1_1PRefineableQPoissonElement_a0dd30f370e4827c42abbda27b7839532}{operator=}} (const \mbox{\hyperlink{classoomph_1_1PRefineableQPoissonElement}{PRefineable\+QPoisson\+Element}}$<$ DIM $>$ \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PRefineableQPoissonElement_a953633adeb9bc3875113d3672c7d525f}{further\+\_\+build}} ()
 \begin{DoxyCompactList}\small\item\em Further build\+: Copy source function pointer from father element. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1PRefineableQPoissonElement_a1841e8c6ebcea0efc212a871e03dec24}{ncont\+\_\+interpolated\+\_\+values}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1PRefineableQPoissonElement_a1841e8c6ebcea0efc212a871e03dec24}{ncont\+\_\+interpolated\+\_\+values}} () const
 \begin{DoxyCompactList}\small\item\em Number of continuously interpolated values\+: 1. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1PRefineableQPoissonElement_a9640f654f06259a532a62a23ed5f3ac7}{nvertex\+\_\+node}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1PRefineableQPoissonElement_a9640f654f06259a532a62a23ed5f3ac7}{nvertex\+\_\+node}} () const
 \begin{DoxyCompactList}\small\item\em Number of vertex nodes in the element. \end{DoxyCompactList}\item 
-Node $\ast$ \mbox{\hyperlink{classoomph_1_1PRefineableQPoissonElement_aea2eb5066cf1c4613b5bf548eb659a3b}{vertex\+\_\+node\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&j) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1PRefineableQPoissonElement_aea2eb5066cf1c4613b5bf548eb659a3b}{vertex\+\_\+node\+\_\+pt}} (const unsigned \&j) const
 \begin{DoxyCompactList}\small\item\em Pointer to the j-\/th vertex node in the element. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1PRefineableQPoissonElement_a19ed70ed56d1e15f8af6eb6ad4a2d892}{nrecovery\+\_\+order}} ()
 \begin{DoxyCompactList}\small\item\em Order of recovery shape functions for Z2 error estimation\+: \end{DoxyCompactList}\item 
@@ -68,7 +68,7 @@ Definition at line \mbox{\hyperlink{refineable__poisson__elements_8h_source_l002
 
 
 
-References \mbox{\hyperlink{classoomph_1_1FiniteElement_a9b8ff92232a3d17ed7d403fbd3419569}{oomph\+::\+Finite\+Element\+::set\+\_\+integration\+\_\+scheme()}}.
+References \mbox{\hyperlink{elements_8cc_source_l03210}{oomph\+::\+Finite\+Element\+::set\+\_\+integration\+\_\+scheme()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableQPoissonElement_a9ba8ab37c3a1e129050b9e2f45d82ce4}\label{classoomph_1_1PRefineableQPoissonElement_a9ba8ab37c3a1e129050b9e2f45d82ce4}} 
 \index{oomph::PRefineableQPoissonElement$<$ DIM $>$@{oomph::PRefineableQPoissonElement$<$ DIM $>$}!````~PRefineableQPoissonElement@{$\sim$PRefineableQPoissonElement}}
@@ -87,14 +87,14 @@ Definition at line \mbox{\hyperlink{refineable__poisson__elements_8h_source_l002
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01968}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}.
+References \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableQPoissonElement_a99d55d6f9dd8a243f0e364fe5aa6c7e4}\label{classoomph_1_1PRefineableQPoissonElement_a99d55d6f9dd8a243f0e364fe5aa6c7e4}} 
 \index{oomph::PRefineableQPoissonElement$<$ DIM $>$@{oomph::PRefineableQPoissonElement$<$ DIM $>$}!PRefineableQPoissonElement@{PRefineableQPoissonElement}}
 \index{PRefineableQPoissonElement@{PRefineableQPoissonElement}!oomph::PRefineableQPoissonElement$<$ DIM $>$@{oomph::PRefineableQPoissonElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{PRefineableQPoissonElement()}{PRefineableQPoissonElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-\mbox{\hyperlink{classoomph_1_1PRefineableQPoissonElement}{oomph\+::\+PRefineable\+QPoisson\+Element}}$<$ DIM $>$\+::\mbox{\hyperlink{classoomph_1_1PRefineableQPoissonElement}{PRefineable\+QPoisson\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1PRefineableQPoissonElement}{PRefineable\+QPoisson\+Element}}$<$ DIM $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+\mbox{\hyperlink{classoomph_1_1PRefineableQPoissonElement}{oomph\+::\+PRefineable\+QPoisson\+Element}}$<$ DIM $>$\+::\mbox{\hyperlink{classoomph_1_1PRefineableQPoissonElement}{PRefineable\+QPoisson\+Element}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1PRefineableQPoissonElement}{PRefineable\+QPoisson\+Element}}$<$ DIM $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
@@ -120,7 +120,7 @@ Definition at line \mbox{\hyperlink{refineable__poisson__elements_8cc_source_l00
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{poisson__elements_8h_source_l00364}{oomph\+::\+Poisson\+Equations$<$ DIM $>$\+::get\+\_\+flux()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableQPoissonElement_a953633adeb9bc3875113d3672c7d525f}\label{classoomph_1_1PRefineableQPoissonElement_a953633adeb9bc3875113d3672c7d525f}} 
 \index{oomph::PRefineableQPoissonElement$<$ DIM $>$@{oomph::PRefineableQPoissonElement$<$ DIM $>$}!further\_build@{further\_build}}
@@ -206,12 +206,16 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a19495a0e7
 
 Definition at line \mbox{\hyperlink{refineable__poisson__elements_8h_source_l00292}{292}} of file \mbox{\hyperlink{refineable__poisson__elements_8h_source}{refineable\+\_\+poisson\+\_\+elements.\+h}}.
 
+
+
+References \mbox{\hyperlink{elements_8h_source_l02491}{oomph\+::\+Finite\+Element\+::nvertex\+\_\+node()}}.
+
 \mbox{\Hypertarget{classoomph_1_1PRefineableQPoissonElement_a0dd30f370e4827c42abbda27b7839532}\label{classoomph_1_1PRefineableQPoissonElement_a0dd30f370e4827c42abbda27b7839532}} 
 \index{oomph::PRefineableQPoissonElement$<$ DIM $>$@{oomph::PRefineableQPoissonElement$<$ DIM $>$}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::PRefineableQPoissonElement$<$ DIM $>$@{oomph::PRefineableQPoissonElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1PRefineableQPoissonElement}{oomph\+::\+PRefineable\+QPoisson\+Element}}$<$ DIM $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1PRefineableQPoissonElement}{PRefineable\+QPoisson\+Element}}$<$ DIM $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+void \mbox{\hyperlink{classoomph_1_1PRefineableQPoissonElement}{oomph\+::\+PRefineable\+QPoisson\+Element}}$<$ DIM $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1PRefineableQPoissonElement}{PRefineable\+QPoisson\+Element}}$<$ DIM $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
@@ -222,7 +226,7 @@ Broken assignment operator.
 \index{vertex\_node\_pt@{vertex\_node\_pt}!oomph::PRefineableQPoissonElement$<$ DIM $>$@{oomph::PRefineableQPoissonElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{vertex\_node\_pt()}{vertex\_node\_pt()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-Node $\ast$ \mbox{\hyperlink{classoomph_1_1PRefineableQPoissonElement}{oomph\+::\+PRefineable\+QPoisson\+Element}}$<$ DIM $>$\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1PRefineableQPoissonElement}{oomph\+::\+PRefineable\+QPoisson\+Element}}$<$ DIM $>$\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -235,6 +239,10 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a6d852edae
 
 
 Definition at line \mbox{\hyperlink{refineable__poisson__elements_8h_source_l00298}{298}} of file \mbox{\hyperlink{refineable__poisson__elements_8h_source}{refineable\+\_\+poisson\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{elements_8h_source_l02500}{oomph\+::\+Finite\+Element\+::vertex\+\_\+node\+\_\+pt()}}.
 
 
 

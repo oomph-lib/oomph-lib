@@ -51,7 +51,7 @@
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00047}00047     \textcolor{comment}{//========================================================================}\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00048}00048 \textcolor{comment}{    /// Legendre polynomials depending on one parameter}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00049}00049 \textcolor{comment}{}    \textcolor{comment}{//========================================================================}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00050}\mbox{\hyperlink{namespaceoomph_1_1Legendre__functions__helper_ab30701a5b66d96424a97e10e389be377}{00050}}     \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1Legendre__functions__helper_ab30701a5b66d96424a97e10e389be377}{plgndr1}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n, \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}})}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00050}\mbox{\hyperlink{namespaceoomph_1_1Legendre__functions__helper_ab30701a5b66d96424a97e10e389be377}{00050}}     \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1Legendre__functions__helper_ab30701a5b66d96424a97e10e389be377}{plgndr1}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n, \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& x)}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00051}00051     \{}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00052}00052       \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}};}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00053}00053       \textcolor{keywordtype}{double} pmm, pmm1;}
@@ -59,10 +59,10 @@
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00055}00055 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00056}00056 \textcolor{preprocessor}{\#ifdef PARANOID}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00057}00057       \textcolor{comment}{// Shout if things went wrong}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00058}00058       \textcolor{keywordflow}{if} (std::fabs(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}) > 1.0)}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00058}00058       \textcolor{keywordflow}{if} (std::fabs(x) > 1.0)}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00059}00059       \{}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00060}00060         std::ostringstream error\_stream;}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00061}00061         error\_stream << \textcolor{stringliteral}{"{}Bad arguments in routine plgndr1: x="{}} << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00061}00061         error\_stream << \textcolor{stringliteral}{"{}Bad arguments in routine plgndr1: x="{}} << x}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00062}00062                      << \textcolor{stringliteral}{"{} but should be less than 1 in absolute value.\(\backslash\)n"{}};}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00063}00063         \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00064}00064           error\_stream.str(), OOMPH\_CURRENT\_FUNCTION, OOMPH\_EXCEPTION\_LOCATION);}
@@ -76,7 +76,7 @@
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00072}00072         \textcolor{keywordflow}{return} pmm;}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00073}00073       \}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00074}00074 }
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00075}00075       pmm1 = \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}} * 1.0;}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00075}00075       pmm1 = x * 1.0;}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00076}00076       \textcolor{keywordflow}{if} (n == 1)}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00077}00077       \{}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00078}00078         \textcolor{keywordflow}{return} pmm1;}
@@ -85,7 +85,7 @@
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00081}00081       \{}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00082}00082         \textcolor{keywordflow}{for} (\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} <= n; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00083}00083         \{}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00084}00084           pmm2 = (\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}} * (2 * \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} -\/ 1) * pmm1 -\/ (\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} -\/ 1) * pmm) / \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}};}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00084}00084           pmm2 = (x * (2 * \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} -\/ 1) * pmm1 -\/ (\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} -\/ 1) * pmm) / \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}};}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00085}00085           pmm = pmm1;}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00086}00086           pmm1 = pmm2;}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00087}00087         \}}
@@ -98,7 +98,7 @@
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00094}00094     \textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00095}00095     \textcolor{comment}{// Legendre polynomials depending on two parameters}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00096}00096     \textcolor{comment}{//========================================================================}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00097}\mbox{\hyperlink{namespaceoomph_1_1Legendre__functions__helper_ad67fdae863cee220b1051883aac923aa}{00097}}     \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1Legendre__functions__helper_ad67fdae863cee220b1051883aac923aa}{plgndr2}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& l, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& m, \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}})}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00097}\mbox{\hyperlink{namespaceoomph_1_1Legendre__functions__helper_ad67fdae863cee220b1051883aac923aa}{00097}}     \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1Legendre__functions__helper_ad67fdae863cee220b1051883aac923aa}{plgndr2}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& l, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& m, \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& x)}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00098}00098     \{}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00099}00099       \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, ll;}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00100}00100       \textcolor{keywordtype}{double} fact, pmm, pmmp1, somx2;}
@@ -106,10 +106,10 @@
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00102}00102 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00103}00103 \textcolor{preprocessor}{\#ifdef PARANOID}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00104}00104       \textcolor{comment}{// Shout if things went wrong}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00105}00105       \textcolor{keywordflow}{if} (std::fabs(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}) > 1.0)}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00105}00105       \textcolor{keywordflow}{if} (std::fabs(x) > 1.0)}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00106}00106       \{}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00107}00107         std::ostringstream error\_stream;}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00108}00108         error\_stream << \textcolor{stringliteral}{"{}Bad arguments in routine plgndr2: x="{}} << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00108}00108         error\_stream << \textcolor{stringliteral}{"{}Bad arguments in routine plgndr2: x="{}} << x}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00109}00109                      << \textcolor{stringliteral}{"{} but should be less than 1 in absolute value.\(\backslash\)n"{}};}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00110}00110         \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00111}00111           error\_stream.str(), OOMPH\_CURRENT\_FUNCTION, OOMPH\_EXCEPTION\_LOCATION);}
@@ -126,7 +126,7 @@
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00122}00122       pmm = 1.0;}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00123}00123       \textcolor{keywordflow}{if} (m > 0)}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00124}00124       \{}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00125}00125         somx2 = sqrt((1.0 -\/ \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}) * (1.0 + \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}));}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00125}00125         somx2 = sqrt((1.0 -\/ x) * (1.0 + x));}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00126}00126         fact = 1.0;}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00127}00127         \textcolor{keywordflow}{for} (\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 1; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} <= m; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00128}00128         \{}
@@ -139,7 +139,7 @@
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00135}00135       \textcolor{comment}{// Compute pmmp1 : if l=m+1 it's finished}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00136}00136       \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00137}00137       \{}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00138}00138         pmmp1 = \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}} * (2 * m + 1) * pmm;}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00138}00138         pmmp1 = x * (2 * m + 1) * pmm;}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00139}00139         \textcolor{keywordflow}{if} (l == (m + 1))}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00140}00140         \{}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00141}00141           \textcolor{keywordflow}{return} pmmp1;}
@@ -149,7 +149,7 @@
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00145}00145         \{}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00146}00146           \textcolor{keywordflow}{for} (ll = m + 2; ll <= l; ll++)}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00147}00147           \{}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00148}00148             pll = (\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}} * (2 * ll -\/ 1) * pmmp1 -\/ (ll + m -\/ 1) * pmm) / (ll -\/ m);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00148}00148             pll = (x * (2 * ll -\/ 1) * pmmp1 -\/ (ll + m -\/ 1) * pmm) / (ll -\/ m);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00149}00149             pmm = pmmp1;}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00150}00150             pmmp1 = pll;}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00151}00151           \}}
@@ -183,21 +183,21 @@
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00179}00179 \textcolor{comment}{  ///}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00180}00180 \textcolor{comment}{  /// Pure version without hanging nodes}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00181}00181 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00182}00182   \textcolor{keywordtype}{void} FourierDecomposedHelmholtzEquations::}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00183}00183     fill\_in\_generic\_residual\_contribution\_fourier\_decomposed\_helmholtz(}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00184}00184       Vector<double>\& residuals,}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00185}00185       DenseMatrix<double>\& jacobian,}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00182}\mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_a0ada3466d3e5ee8e8a548fee6414e3ad}{00182}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_a0ada3466d3e5ee8e8a548fee6414e3ad}{FourierDecomposedHelmholtzEquations::}}}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00183}00183 \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_a0ada3466d3e5ee8e8a548fee6414e3ad}{    fill\_in\_generic\_residual\_contribution\_fourier\_decomposed\_helmholtz}}(}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00184}00184       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00185}00185       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian,}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00186}00186       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& flag)}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00187}00187   \{}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00188}00188     \textcolor{comment}{// Find out how many nodes there are}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00189}00189     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_node = nnode();}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00189}00189     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_node = \mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00190}00190 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00191}00191     \textcolor{comment}{// Set up memory for the shape and test functions}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00192}00192     Shape psi(n\_node), test(n\_node);}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00193}00193     DShape dpsidx(n\_node, 2), dtestdx(n\_node, 2);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00192}00192     \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} psi(n\_node), test(n\_node);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00193}00193     \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} dpsidx(n\_node, 2), dtestdx(n\_node, 2);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00194}00194 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00195}00195     \textcolor{comment}{// Set the value of n\_intpt}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00196}00196     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = integral\_pt()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00196}00196     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00197}00197 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00198}00198     \textcolor{comment}{// Integers to store the local equation and unknown numbers}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00199}00199     \textcolor{keywordtype}{int} local\_eqn\_real = 0, local\_unknown\_real = 0;}
@@ -207,20 +207,20 @@
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00203}00203     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ipt = 0; ipt < n\_intpt; ipt++)}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00204}00204     \{}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00205}00205       \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00206}00206       \textcolor{keywordtype}{double} w = integral\_pt()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00206}00206       \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00207}00207 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00208}00208       \textcolor{comment}{// Call the derivatives of the shape and test functions}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00209}00209       \textcolor{keywordtype}{double} J = dshape\_and\_dtest\_eulerian\_at\_knot\_fourier\_decomposed\_helmholtz(}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00209}00209       \textcolor{keywordtype}{double} J = \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_aa19bdb12fe50805a9ad1f75912c85678}{dshape\_and\_dtest\_eulerian\_at\_knot\_fourier\_decomposed\_helmholtz}}(}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00210}00210         ipt, psi, dpsidx, test, dtestdx);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00211}00211 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00212}00212       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00213}00213       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00213}00213       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00214}00214 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00215}00215       \textcolor{comment}{// Calculate local values of unknown}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00216}00216       \textcolor{comment}{// Allocate and initialise to zero}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00217}00217       std::complex<double> interpolated\_u(0.0, 0.0);}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00218}00218       Vector<double> interpolated\_x(2, 0.0);}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00219}00219       Vector<std::complex<double>> interpolated\_dudx(2);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00218}00218       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(2, 0.0);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00219}00219       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<std::complex<double>}}> interpolated\_dudx(2);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00220}00220 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00221}00221       \textcolor{comment}{// Calculate function value and derivatives:}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00222}00222       \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
@@ -230,13 +230,13 @@
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00226}00226         \textcolor{comment}{// Loop over directions}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00227}00227         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < 2; j++)}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00228}00228         \{}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00229}00229           interpolated\_x[j] += raw\_nodal\_position(l, j) * psi(l);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00229}00229           \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}[j] += \mbox{\hyperlink{classoomph_1_1FiniteElement_abe831900a6d6a08ee4a43fd9c07af32e}{raw\_nodal\_position}}(l, j) * psi(l);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00230}00230         \}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00231}00231 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00232}00232         \textcolor{comment}{// Get the nodal value of the helmholtz unknown}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00233}00233         \textcolor{keyword}{const} std::complex<double> u\_value(}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00234}00234           raw\_nodal\_value(l, u\_index\_fourier\_decomposed\_helmholtz().real()),}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00235}00235           raw\_nodal\_value(l, u\_index\_fourier\_decomposed\_helmholtz().imag()));}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00234}00234           \mbox{\hyperlink{classoomph_1_1FiniteElement_abdc430bef622e0257397407416e6aac8}{raw\_nodal\_value}}(l, \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_a11d0d4fed593d75d60ef555a100c75cd}{u\_index\_fourier\_decomposed\_helmholtz}}().real()),}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00235}00235           \mbox{\hyperlink{classoomph_1_1FiniteElement_abdc430bef622e0257397407416e6aac8}{raw\_nodal\_value}}(l, \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_a11d0d4fed593d75d60ef555a100c75cd}{u\_index\_fourier\_decomposed\_helmholtz}}().imag()));}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00236}00236 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00237}00237         \textcolor{comment}{// Add to the interpolated value}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00238}00238         interpolated\_u += u\_value * psi(l);}
@@ -251,11 +251,11 @@
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00247}00247       \textcolor{comment}{// Get source function}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00248}00248       \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00249}00249       std::complex<double> source(0.0, 0.0);}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00250}00250       get\_source\_fourier\_decomposed\_helmholtz(ipt, interpolated\_x, source);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00250}00250       \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_af35f759fbed7364ef09250161dc32e93}{get\_source\_fourier\_decomposed\_helmholtz}}(ipt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}, source);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00251}00251 }
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00252}00252       \textcolor{keywordtype}{double} r = interpolated\_x[0];}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00252}00252       \textcolor{keywordtype}{double} r = \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}[0];}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00253}00253       \textcolor{keywordtype}{double} rr = r * r;}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00254}00254       \textcolor{keywordtype}{double} n = (double)fourier\_wavenumber();}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00254}00254       \textcolor{keywordtype}{double} n = (double)\mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_afef1039f83ac578a7e41b4f29387e4ea}{fourier\_wavenumber}}();}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00255}00255       \textcolor{keywordtype}{double} n\_squared = n * n;}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00256}00256 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00257}00257       \textcolor{comment}{// Assemble residuals and Jacobian}}
@@ -269,7 +269,7 @@
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00265}00265 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00266}00266         \textcolor{comment}{// Get the local equation}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00267}00267         local\_eqn\_real =}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00268}00268           nodal\_local\_eqn(l, u\_index\_fourier\_decomposed\_helmholtz().real());}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00268}00268           \mbox{\hyperlink{classoomph_1_1FiniteElement_a5da80bbed97543e586f698251d67941d}{nodal\_local\_eqn}}(l, \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_a11d0d4fed593d75d60ef555a100c75cd}{u\_index\_fourier\_decomposed\_helmholtz}}().real());}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00269}00269 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00270}00270         \textcolor{comment}{/*IF it's not a boundary condition*/}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00271}00271         \textcolor{keywordflow}{if} (local\_eqn\_real >= 0)}
@@ -278,14 +278,14 @@
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00274}00274 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00275}00275           residuals[local\_eqn\_real] +=}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00276}00276             (source.real() -\/}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00277}00277              ((-\/n\_squared / rr) + k\_squared()) * interpolated\_u.real()) *}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00278}00278             test(l) * r * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00277}00277              ((-\/n\_squared / rr) + \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_a859c683de91b55aef60d1489978598b5}{k\_squared}}()) * interpolated\_u.real()) *}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00278}00278             test(l) * r * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00279}00279 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00280}00280           \textcolor{comment}{// The Helmholtz bit itself}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00281}00281           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < 2; k++)}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00282}00282           \{}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00283}00283             residuals[local\_eqn\_real] +=}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00284}00284               interpolated\_dudx[k].real() * dtestdx(l, k) * r * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00284}00284               interpolated\_dudx[k].real() * dtestdx(l, k) * r * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00285}00285           \}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00286}00286 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00287}00287           \textcolor{comment}{// Calculate the jacobian}}
@@ -295,8 +295,8 @@
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00291}00291             \textcolor{comment}{// Loop over the velocity shape functions again}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00292}00292             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} l2 = 0; l2 < n\_node; l2++)}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00293}00293             \{}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00294}00294               local\_unknown\_real = nodal\_local\_eqn(}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00295}00295                 l2, u\_index\_fourier\_decomposed\_helmholtz().real());}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00294}00294               local\_unknown\_real = \mbox{\hyperlink{classoomph_1_1FiniteElement_a5da80bbed97543e586f698251d67941d}{nodal\_local\_eqn}}(}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00295}00295                 l2, \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_a11d0d4fed593d75d60ef555a100c75cd}{u\_index\_fourier\_decomposed\_helmholtz}}().real());}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00296}00296 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00297}00297               \textcolor{comment}{// If at a non-\/zero degree of freedom add in the entry}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00298}00298               \textcolor{keywordflow}{if} (local\_unknown\_real >= 0)}
@@ -305,12 +305,12 @@
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00301}00301                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00302}00302                 \{}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00303}00303                   jacobian(local\_eqn\_real, local\_unknown\_real) +=}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00304}00304                     dpsidx(l2, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * dtestdx(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * r * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00304}00304                     dpsidx(l2, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * dtestdx(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * r * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00305}00305                 \}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00306}00306 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00307}00307                 \textcolor{comment}{// Add the helmholtz contribution}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00308}00308                 jacobian(local\_eqn\_real, local\_unknown\_real) -\/=}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00309}00309                   ((-\/n\_squared / rr) + k\_squared()) * psi(l2) * test(l) * r * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00309}00309                   ((-\/n\_squared / rr) + \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_a859c683de91b55aef60d1489978598b5}{k\_squared}}()) * psi(l2) * test(l) * r * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00310}00310 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00311}00311               \} \textcolor{comment}{// end of local\_unknown}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00312}00312             \}}
@@ -322,7 +322,7 @@
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00318}00318 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00319}00319         \textcolor{comment}{// Get the local equation}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00320}00320         local\_eqn\_imag =}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00321}00321           nodal\_local\_eqn(l, u\_index\_fourier\_decomposed\_helmholtz().imag());}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00321}00321           \mbox{\hyperlink{classoomph_1_1FiniteElement_a5da80bbed97543e586f698251d67941d}{nodal\_local\_eqn}}(l, \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_a11d0d4fed593d75d60ef555a100c75cd}{u\_index\_fourier\_decomposed\_helmholtz}}().imag());}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00322}00322 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00323}00323         \textcolor{comment}{/*IF it's not a boundary condition*/}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00324}00324         \textcolor{keywordflow}{if} (local\_eqn\_imag >= 0)}
@@ -330,14 +330,14 @@
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00326}00326           \textcolor{comment}{// Add body force/source term and Helmholtz bit}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00327}00327           residuals[local\_eqn\_imag] +=}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00328}00328             (source.imag() -\/}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00329}00329              ((-\/n\_squared / rr) + k\_squared()) * interpolated\_u.imag()) *}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00330}00330             test(l) * r * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00329}00329              ((-\/n\_squared / rr) + \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_a859c683de91b55aef60d1489978598b5}{k\_squared}}()) * interpolated\_u.imag()) *}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00330}00330             test(l) * r * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00331}00331 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00332}00332           \textcolor{comment}{// The Helmholtz bit itself}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00333}00333           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < 2; k++)}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00334}00334           \{}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00335}00335             residuals[local\_eqn\_imag] +=}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00336}00336               interpolated\_dudx[k].imag() * dtestdx(l, k) * r * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00336}00336               interpolated\_dudx[k].imag() * dtestdx(l, k) * r * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00337}00337           \}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00338}00338 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00339}00339           \textcolor{comment}{// Calculate the jacobian}}
@@ -347,8 +347,8 @@
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00343}00343             \textcolor{comment}{// Loop over the velocity shape functions again}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00344}00344             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} l2 = 0; l2 < n\_node; l2++)}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00345}00345             \{}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00346}00346               local\_unknown\_imag = nodal\_local\_eqn(}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00347}00347                 l2, u\_index\_fourier\_decomposed\_helmholtz().imag());}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00346}00346               local\_unknown\_imag = \mbox{\hyperlink{classoomph_1_1FiniteElement_a5da80bbed97543e586f698251d67941d}{nodal\_local\_eqn}}(}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00347}00347                 l2, \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_a11d0d4fed593d75d60ef555a100c75cd}{u\_index\_fourier\_decomposed\_helmholtz}}().imag());}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00348}00348 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00349}00349               \textcolor{comment}{// If at a non-\/zero degree of freedom add in the entry}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00350}00350               \textcolor{keywordflow}{if} (local\_unknown\_imag >= 0)}
@@ -357,11 +357,11 @@
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00353}00353                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00354}00354                 \{}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00355}00355                   jacobian(local\_eqn\_imag, local\_unknown\_imag) +=}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00356}00356                     dpsidx(l2, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * dtestdx(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * r * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00356}00356                     dpsidx(l2, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * dtestdx(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * r * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00357}00357                 \}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00358}00358                 \textcolor{comment}{// Add the helmholtz contribution}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00359}00359                 jacobian(local\_eqn\_imag, local\_unknown\_imag) -\/=}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00360}00360                   ((-\/n\_squared / rr) + k\_squared()) * psi(l2) * test(l) * r * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00360}00360                   ((-\/n\_squared / rr) + \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_a859c683de91b55aef60d1489978598b5}{k\_squared}}()) * psi(l2) * test(l) * r * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00361}00361               \}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00362}00362             \}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00363}00363           \}}
@@ -374,12 +374,12 @@
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00370}00370   \textcolor{comment}{//======================================================================}\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00371}00371 \textcolor{comment}{  /// Self-\/test:  Return 0 for OK}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00372}00372 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00373}00373   \textcolor{keywordtype}{unsigned} FourierDecomposedHelmholtzEquations::self\_test()}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00373}\mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_a5cf034d730e1f1f87be5400d20a57031}{00373}}   \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_a5cf034d730e1f1f87be5400d20a57031}{FourierDecomposedHelmholtzEquations::self\_test}}()}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00374}00374   \{}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00375}00375     \textcolor{keywordtype}{bool} passed = \textcolor{keyword}{true};}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00376}00376 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00377}00377     \textcolor{comment}{// Check lower-\/level stuff}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00378}00378     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1FiniteElement_af04bf6f6a9a60946e6afeee7afdd709c}{FiniteElement::self\_test}}() != 0)}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00378}00378     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1FiniteElement_af94c5a5e22175d5420b33b3b79e46ed3}{FiniteElement::self\_test}}() != 0)}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00379}00379     \{}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00380}00380       passed = \textcolor{keyword}{false};}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00381}00381     \}}
@@ -403,31 +403,31 @@
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00399}00399 \textcolor{comment}{  ///}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00400}00400 \textcolor{comment}{  /// nplot points in each coordinate direction}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00401}00401 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00402}00402   \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_aca07d359a96b9c7b566142112604ea87}{FourierDecomposedHelmholtzEquations::output}}(std::ostream\& outfile,}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00402}\mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_a19e2628564b587b97db37c9a4820be60}{00402}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_aaa7d646147698753b363fe2f5adadeb1}{FourierDecomposedHelmholtzEquations::output}}(std::ostream\& outfile,}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00403}00403                                                    \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nplot)}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00404}00404   \{}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00405}00405     \textcolor{comment}{// Vector of local coordinates}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00406}00406     Vector<double> \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(2);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00406}00406     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(2);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00407}00407 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00408}00408     \textcolor{comment}{// Tecplot header info}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00409}00409     outfile << tecplot\_zone\_string(nplot);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00409}00409     outfile << \mbox{\hyperlink{classoomph_1_1FiniteElement_a3193df31f9ce38e0609d17a8ffb386c6}{tecplot\_zone\_string}}(nplot);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00410}00410 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00411}00411     \textcolor{comment}{// Loop over plot points}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00412}00412     \textcolor{keywordtype}{unsigned} num\_plot\_points = nplot\_points(nplot);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00412}00412     \textcolor{keywordtype}{unsigned} num\_plot\_points = \mbox{\hyperlink{classoomph_1_1FiniteElement_a8ed563c7ff0cfd8bafdbb0132b388106}{nplot\_points}}(nplot);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00413}00413     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} iplot = 0; iplot < num\_plot\_points; iplot++)}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00414}00414     \{}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00415}00415       \textcolor{comment}{// Get local coordinates of plot point}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00416}00416       get\_s\_plot(iplot, nplot, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00417}00417       std::complex<double> \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}(interpolated\_u\_fourier\_decomposed\_helmholtz(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}));}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00416}00416       \mbox{\hyperlink{classoomph_1_1FiniteElement_a82da844fd3ebb2005842464cdc148a03}{get\_s\_plot}}(iplot, nplot, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00417}00417       std::complex<double> u(\mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_a2712a250e2a35c896de17bac5a29710f}{interpolated\_u\_fourier\_decomposed\_helmholtz}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}));}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00418}00418       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00419}00419       \{}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00420}00420         outfile << interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00420}00420         outfile << \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00421}00421       \}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00422}00422       outfile << \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}.real() << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}.imag() << std::endl;}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00422}00422       outfile << u.real() << \textcolor{stringliteral}{"{} "{}} << u.imag() << std::endl;}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00423}00423     \}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00424}00424 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00425}00425     \textcolor{comment}{// Write tecplot footer (e.g. FE connectivity lists)}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00426}00426     write\_tecplot\_zone\_footer(outfile, nplot);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00426}00426     \mbox{\hyperlink{classoomph_1_1FiniteElement_ac3987a5ead7dc20c63d86b333466e2b5}{write\_tecplot\_zone\_footer}}(outfile, nplot);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00427}00427   \}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00428}00428 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00429}00429 }
@@ -442,32 +442,32 @@
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00438}00438 \textcolor{comment}{  ///}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00439}00439 \textcolor{comment}{  /// Output at nplot points in each coordinate direction}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00440}00440 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00441}00441   \textcolor{keywordtype}{void} FourierDecomposedHelmholtzEquations::output\_real(std::ostream\& outfile,}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00441}\mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_a6be7366b3597e5191ee9dbf872b7554c}{00441}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_a6be7366b3597e5191ee9dbf872b7554c}{FourierDecomposedHelmholtzEquations::output\_real}}(std::ostream\& outfile,}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00442}00442                                                         \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& phi,}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00443}00443                                                         \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nplot)}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00444}00444   \{}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00445}00445     \textcolor{comment}{// Vector of local coordinates}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00446}00446     Vector<double> \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(2);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00446}00446     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(2);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00447}00447 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00448}00448     \textcolor{comment}{// Tecplot header info}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00449}00449     outfile << tecplot\_zone\_string(nplot);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00449}00449     outfile << \mbox{\hyperlink{classoomph_1_1FiniteElement_a3193df31f9ce38e0609d17a8ffb386c6}{tecplot\_zone\_string}}(nplot);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00450}00450 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00451}00451     \textcolor{comment}{// Loop over plot points}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00452}00452     \textcolor{keywordtype}{unsigned} num\_plot\_points = nplot\_points(nplot);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00452}00452     \textcolor{keywordtype}{unsigned} num\_plot\_points = \mbox{\hyperlink{classoomph_1_1FiniteElement_a8ed563c7ff0cfd8bafdbb0132b388106}{nplot\_points}}(nplot);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00453}00453     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} iplot = 0; iplot < num\_plot\_points; iplot++)}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00454}00454     \{}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00455}00455       \textcolor{comment}{// Get local coordinates of plot point}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00456}00456       get\_s\_plot(iplot, nplot, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00457}00457       std::complex<double> \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}(interpolated\_u\_fourier\_decomposed\_helmholtz(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}));}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00456}00456       \mbox{\hyperlink{classoomph_1_1FiniteElement_a82da844fd3ebb2005842464cdc148a03}{get\_s\_plot}}(iplot, nplot, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00457}00457       std::complex<double> u(\mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_a2712a250e2a35c896de17bac5a29710f}{interpolated\_u\_fourier\_decomposed\_helmholtz}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}));}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00458}00458       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00459}00459       \{}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00460}00460         outfile << interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00460}00460         outfile << \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00461}00461       \}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00462}00462       outfile << \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}.real() * cos(phi) + \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}.imag() * sin(phi) << std::endl;}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00462}00462       outfile << u.real() * cos(phi) + u.imag() * sin(phi) << std::endl;}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00463}00463     \}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00464}00464 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00465}00465     \textcolor{comment}{// Write tecplot footer (e.g. FE connectivity lists)}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00466}00466     write\_tecplot\_zone\_footer(outfile, nplot);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00466}00466     \mbox{\hyperlink{classoomph_1_1FiniteElement_ac3987a5ead7dc20c63d86b333466e2b5}{write\_tecplot\_zone\_footer}}(outfile, nplot);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00467}00467   \}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00468}00468 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00469}00469 }
@@ -478,38 +478,38 @@
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00474}00474 \textcolor{comment}{  ///}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00475}00475 \textcolor{comment}{  /// nplot points in each coordinate direction}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00476}00476 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00477}00477   \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_aca07d359a96b9c7b566142112604ea87}{FourierDecomposedHelmholtzEquations::output}}(FILE* file\_pt,}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00477}\mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_a1cd04195d40d3d411cda8f0323fc2e7b}{00477}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_aaa7d646147698753b363fe2f5adadeb1}{FourierDecomposedHelmholtzEquations::output}}(FILE* file\_pt,}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00478}00478                                                    \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nplot)}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00479}00479   \{}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00480}00480     \textcolor{comment}{// Vector of local coordinates}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00481}00481     Vector<double> \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(2);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00481}00481     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(2);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00482}00482 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00483}00483     \textcolor{comment}{// Tecplot header info}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00484}00484     fprintf(file\_pt, \textcolor{stringliteral}{"{}\%s"{}}, tecplot\_zone\_string(nplot).c\_str());}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00484}00484     fprintf(file\_pt, \textcolor{stringliteral}{"{}\%s"{}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a3193df31f9ce38e0609d17a8ffb386c6}{tecplot\_zone\_string}}(nplot).c\_str());}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00485}00485 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00486}00486     \textcolor{comment}{// Loop over plot points}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00487}00487     \textcolor{keywordtype}{unsigned} num\_plot\_points = nplot\_points(nplot);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00487}00487     \textcolor{keywordtype}{unsigned} num\_plot\_points = \mbox{\hyperlink{classoomph_1_1FiniteElement_a8ed563c7ff0cfd8bafdbb0132b388106}{nplot\_points}}(nplot);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00488}00488     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} iplot = 0; iplot < num\_plot\_points; iplot++)}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00489}00489     \{}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00490}00490       \textcolor{comment}{// Get local coordinates of plot point}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00491}00491       get\_s\_plot(iplot, nplot, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00492}00492       std::complex<double> \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}(interpolated\_u\_fourier\_decomposed\_helmholtz(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}));}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00491}00491       \mbox{\hyperlink{classoomph_1_1FiniteElement_a82da844fd3ebb2005842464cdc148a03}{get\_s\_plot}}(iplot, nplot, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00492}00492       std::complex<double> u(\mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_a2712a250e2a35c896de17bac5a29710f}{interpolated\_u\_fourier\_decomposed\_helmholtz}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}));}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00493}00493 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00494}00494       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00495}00495       \{}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00496}00496         fprintf(file\_pt, \textcolor{stringliteral}{"{}\%g "{}}, interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00496}00496         fprintf(file\_pt, \textcolor{stringliteral}{"{}\%g "{}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00497}00497       \}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00498}00498 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00499}00499       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00500}00500       \{}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00501}00501         fprintf(file\_pt, \textcolor{stringliteral}{"{}\%g "{}}, interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00501}00501         fprintf(file\_pt, \textcolor{stringliteral}{"{}\%g "{}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00502}00502       \}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00503}00503       fprintf(file\_pt, \textcolor{stringliteral}{"{}\%g "{}}, \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}.real());}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00504}00504       fprintf(file\_pt, \textcolor{stringliteral}{"{}\%g \(\backslash\)n"{}}, \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}.imag());}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00503}00503       fprintf(file\_pt, \textcolor{stringliteral}{"{}\%g "{}}, u.real());}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00504}00504       fprintf(file\_pt, \textcolor{stringliteral}{"{}\%g \(\backslash\)n"{}}, u.imag());}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00505}00505     \}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00506}00506 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00507}00507     \textcolor{comment}{// Write tecplot footer (e.g. FE connectivity lists)}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00508}00508     write\_tecplot\_zone\_footer(file\_pt, nplot);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00508}00508     \mbox{\hyperlink{classoomph_1_1FiniteElement_ac3987a5ead7dc20c63d86b333466e2b5}{write\_tecplot\_zone\_footer}}(file\_pt, nplot);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00509}00509   \}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00510}00510 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00511}00511 }
@@ -521,46 +521,46 @@
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00517}00517 \textcolor{comment}{  ///}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00518}00518 \textcolor{comment}{  ///   r,z,u\_exact}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00519}00519 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00520}00520   \textcolor{keywordtype}{void} FourierDecomposedHelmholtzEquations::output\_fct(}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00520}\mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_a9024cd81a80a4709b127560b6f15cd43}{00520}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_a9024cd81a80a4709b127560b6f15cd43}{FourierDecomposedHelmholtzEquations::output\_fct}}(}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00521}00521     std::ostream\& outfile,}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00522}00522     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nplot,}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00523}00523     \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{FiniteElement::SteadyExactSolutionFctPt}} exact\_soln\_pt)}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00524}00524   \{}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00525}00525     \textcolor{comment}{// Vector of local coordinates}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00526}00526     Vector<double> \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(2);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00526}00526     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(2);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00527}00527 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00528}00528     \textcolor{comment}{// Vector for coordintes}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00529}00529     Vector<double> \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(2);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00529}00529     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(2);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00530}00530 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00531}00531     \textcolor{comment}{// Tecplot header info}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00532}00532     outfile << tecplot\_zone\_string(nplot);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00532}00532     outfile << \mbox{\hyperlink{classoomph_1_1FiniteElement_a3193df31f9ce38e0609d17a8ffb386c6}{tecplot\_zone\_string}}(nplot);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00533}00533 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00534}00534     \textcolor{comment}{// Exact solution Vector}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00535}00535     Vector<double> exact\_soln(2);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00535}00535     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} exact\_soln(2);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00536}00536 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00537}00537     \textcolor{comment}{// Loop over plot points}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00538}00538     \textcolor{keywordtype}{unsigned} num\_plot\_points = nplot\_points(nplot);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00538}00538     \textcolor{keywordtype}{unsigned} num\_plot\_points = \mbox{\hyperlink{classoomph_1_1FiniteElement_a8ed563c7ff0cfd8bafdbb0132b388106}{nplot\_points}}(nplot);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00539}00539     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} iplot = 0; iplot < num\_plot\_points; iplot++)}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00540}00540     \{}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00541}00541       \textcolor{comment}{// Get local coordinates of plot point}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00542}00542       get\_s\_plot(iplot, nplot, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00542}00542       \mbox{\hyperlink{classoomph_1_1FiniteElement_a82da844fd3ebb2005842464cdc148a03}{get\_s\_plot}}(iplot, nplot, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00543}00543 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00544}00544       \textcolor{comment}{// Get x position as Vector}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00545}00545       interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00545}00545       \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00546}00546 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00547}00547       \textcolor{comment}{// Get exact solution at this point}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00548}00548       (*exact\_soln\_pt)(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, exact\_soln);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00548}00548       (*exact\_soln\_pt)(x, exact\_soln);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00549}00549 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00550}00550       \textcolor{comment}{// Output r,z,u\_exact}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00551}00551       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00552}00552       \{}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00553}00553         outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00553}00553         outfile << x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00554}00554       \}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00555}00555       outfile << exact\_soln[0] << \textcolor{stringliteral}{"{} "{}} << exact\_soln[1] << std::endl;}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00556}00556     \}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00557}00557 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00558}00558     \textcolor{comment}{// Write tecplot footer (e.g. FE connectivity lists)}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00559}00559     write\_tecplot\_zone\_footer(outfile, nplot);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00559}00559     \mbox{\hyperlink{classoomph_1_1FiniteElement_ac3987a5ead7dc20c63d86b333466e2b5}{write\_tecplot\_zone\_footer}}(outfile, nplot);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00560}00560   \}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00561}00561 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00562}00562 }
@@ -575,48 +575,48 @@
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00571}00571 \textcolor{comment}{  ///}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00572}00572 \textcolor{comment}{  /// Output at nplot points in each coordinate direction}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00573}00573 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00574}00574   \textcolor{keywordtype}{void} FourierDecomposedHelmholtzEquations::output\_real\_fct(}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00574}\mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_a08a9a9f9bc2fa29c994cb78533b72b34}{00574}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_a08a9a9f9bc2fa29c994cb78533b72b34}{FourierDecomposedHelmholtzEquations::output\_real\_fct}}(}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00575}00575     std::ostream\& outfile,}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00576}00576     \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& phi,}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00577}00577     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nplot,}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00578}00578     \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{FiniteElement::SteadyExactSolutionFctPt}} exact\_soln\_pt)}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00579}00579   \{}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00580}00580     \textcolor{comment}{// Vector of local coordinates}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00581}00581     Vector<double> \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(2);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00581}00581     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(2);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00582}00582 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00583}00583     \textcolor{comment}{// Vector for coordintes}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00584}00584     Vector<double> \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(2);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00584}00584     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(2);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00585}00585 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00586}00586     \textcolor{comment}{// Tecplot header info}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00587}00587     outfile << tecplot\_zone\_string(nplot);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00587}00587     outfile << \mbox{\hyperlink{classoomph_1_1FiniteElement_a3193df31f9ce38e0609d17a8ffb386c6}{tecplot\_zone\_string}}(nplot);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00588}00588 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00589}00589     \textcolor{comment}{// Exact solution Vector}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00590}00590     Vector<double> exact\_soln(2);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00590}00590     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} exact\_soln(2);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00591}00591 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00592}00592     \textcolor{comment}{// Loop over plot points}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00593}00593     \textcolor{keywordtype}{unsigned} num\_plot\_points = nplot\_points(nplot);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00593}00593     \textcolor{keywordtype}{unsigned} num\_plot\_points = \mbox{\hyperlink{classoomph_1_1FiniteElement_a8ed563c7ff0cfd8bafdbb0132b388106}{nplot\_points}}(nplot);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00594}00594     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} iplot = 0; iplot < num\_plot\_points; iplot++)}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00595}00595     \{}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00596}00596       \textcolor{comment}{// Get local coordinates of plot point}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00597}00597       get\_s\_plot(iplot, nplot, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00597}00597       \mbox{\hyperlink{classoomph_1_1FiniteElement_a82da844fd3ebb2005842464cdc148a03}{get\_s\_plot}}(iplot, nplot, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00598}00598 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00599}00599       \textcolor{comment}{// Get x position as Vector}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00600}00600       interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00600}00600       \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00601}00601 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00602}00602       \textcolor{comment}{// Get exact solution at this point}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00603}00603       (*exact\_soln\_pt)(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, exact\_soln);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00603}00603       (*exact\_soln\_pt)(x, exact\_soln);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00604}00604 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00605}00605       \textcolor{comment}{// Output x,y,...,u\_exact}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00606}00606       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00607}00607       \{}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00608}00608         outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00608}00608         outfile << x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00609}00609       \}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00610}00610       outfile << exact\_soln[0] * cos(phi) + exact\_soln[1] * sin(phi)}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00611}00611               << std::endl;}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00612}00612     \}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00613}00613 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00614}00614     \textcolor{comment}{// Write tecplot footer (e.g. FE connectivity lists)}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00615}00615     write\_tecplot\_zone\_footer(outfile, nplot);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00615}00615     \mbox{\hyperlink{classoomph_1_1FiniteElement_ac3987a5ead7dc20c63d86b333466e2b5}{write\_tecplot\_zone\_footer}}(outfile, nplot);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00616}00616   \}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00617}00617 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00618}00618 }
@@ -627,7 +627,7 @@
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00623}00623 \textcolor{comment}{  /// Plot error at a given number of plot points.}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00624}00624 \textcolor{comment}{  ///}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00625}00625 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00626}00626   \textcolor{keywordtype}{void} FourierDecomposedHelmholtzEquations::compute\_error(}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00626}\mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_acb86a7b5d92e82a96a6aa8df90057551}{00626}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_acb86a7b5d92e82a96a6aa8df90057551}{FourierDecomposedHelmholtzEquations::compute\_error}}(}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00627}00627     std::ostream\& outfile,}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00628}00628     \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{FiniteElement::SteadyExactSolutionFctPt}} exact\_soln\_pt,}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00629}00629     \textcolor{keywordtype}{double}\& error,}
@@ -638,24 +638,24 @@
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00634}00634     norm = 0.0;}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00635}00635 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00636}00636     \textcolor{comment}{// Vector of local coordinates}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00637}00637     Vector<double> \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(2);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00637}00637     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(2);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00638}00638 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00639}00639     \textcolor{comment}{// Vector for coordintes}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00640}00640     Vector<double> \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(2);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00640}00640     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(2);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00641}00641 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00642}00642     \textcolor{comment}{// Find out how many nodes there are in the element}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00643}00643     \textcolor{keywordtype}{unsigned} n\_node = nnode();}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00643}00643     \textcolor{keywordtype}{unsigned} n\_node = \mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00644}00644 }
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00645}00645     Shape psi(n\_node);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00645}00645     \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} psi(n\_node);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00646}00646 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00647}00647     \textcolor{comment}{// Set the value of n\_intpt}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00648}00648     \textcolor{keywordtype}{unsigned} n\_intpt = integral\_pt()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00648}00648     \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00649}00649 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00650}00650     \textcolor{comment}{// Tecplot}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00651}00651     outfile << \textcolor{stringliteral}{"{}ZONE"{}} << std::endl;}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00652}00652 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00653}00653     \textcolor{comment}{// Exact solution Vector}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00654}00654     Vector<double> exact\_soln(2);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00654}00654     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} exact\_soln(2);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00655}00655 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00656}00656     \textcolor{comment}{// Loop over the integration points}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00657}00657     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ipt = 0; ipt < n\_intpt; ipt++)}
@@ -663,32 +663,32 @@
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00659}00659       \textcolor{comment}{// Assign values of s}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00660}00660       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00661}00661       \{}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00662}00662         \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = integral\_pt()-\/>knot(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00662}00662         \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{knot}}(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00663}00663       \}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00664}00664 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00665}00665       \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00666}00666       \textcolor{keywordtype}{double} w = integral\_pt()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00666}00666       \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00667}00667 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00668}00668       \textcolor{comment}{// Get jacobian of mapping}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00669}00669       \textcolor{keywordtype}{double} J = J\_eulerian(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00669}00669       \textcolor{keywordtype}{double} J = \mbox{\hyperlink{classoomph_1_1FiniteElement_a089e58d5ad9b8efee637221b0e264563}{J\_eulerian}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00670}00670 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00671}00671       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00672}00672       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00672}00672       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00673}00673 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00674}00674       \textcolor{comment}{// Get x position as Vector}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00675}00675       interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00675}00675       \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00676}00676 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00677}00677       \textcolor{comment}{// Get FE function value}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00678}00678       std::complex<double> u\_fe =}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00679}00679         interpolated\_u\_fourier\_decomposed\_helmholtz(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00679}00679         \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_a2712a250e2a35c896de17bac5a29710f}{interpolated\_u\_fourier\_decomposed\_helmholtz}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00680}00680 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00681}00681       \textcolor{comment}{// Get exact solution at this point}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00682}00682       (*exact\_soln\_pt)(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, exact\_soln);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00682}00682       (*exact\_soln\_pt)(x, exact\_soln);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00683}00683 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00684}00684       \textcolor{comment}{// Output r,z,error}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00685}00685       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00686}00686       \{}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00687}00687         outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00687}00687         outfile << x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00688}00688       \}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00689}00689       outfile << exact\_soln[0] << \textcolor{stringliteral}{"{} "{}} << exact\_soln[1] << \textcolor{stringliteral}{"{} "{}}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00690}00690               << exact\_soln[0] -\/ u\_fe.real() << \textcolor{stringliteral}{"{} "{}}}
@@ -696,10 +696,10 @@
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00692}00692 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00693}00693       \textcolor{comment}{// Add to error and norm}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00694}00694       norm +=}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00695}00695         (exact\_soln[0] * exact\_soln[0] + exact\_soln[1] * exact\_soln[1]) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00695}00695         (exact\_soln[0] * exact\_soln[0] + exact\_soln[1] * exact\_soln[1]) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00696}00696       error += ((exact\_soln[0] -\/ u\_fe.real()) * (exact\_soln[0] -\/ u\_fe.real()) +}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00697}00697                 (exact\_soln[1] -\/ u\_fe.imag()) * (exact\_soln[1] -\/ u\_fe.imag())) *}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00698}00698                \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00698}00698                \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00699}00699     \}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00700}00700   \}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00701}00701 }
@@ -707,24 +707,24 @@
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00703}00703   \textcolor{comment}{//======================================================================}\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00704}00704 \textcolor{comment}{  /// Compute norm of fe solution}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00705}00705 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00706}00706   \textcolor{keywordtype}{void} FourierDecomposedHelmholtzEquations::compute\_norm(\textcolor{keywordtype}{double}\& norm)}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00706}\mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_a8139e48ff406de0f7b2c76d007b9e7e3}{00706}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_a8139e48ff406de0f7b2c76d007b9e7e3}{FourierDecomposedHelmholtzEquations::compute\_norm}}(\textcolor{keywordtype}{double}\& norm)}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00707}00707   \{}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00708}00708     \textcolor{comment}{// Initialise}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00709}00709     norm = 0.0;}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00710}00710 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00711}00711     \textcolor{comment}{// Vector of local coordinates}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00712}00712     Vector<double> \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(2);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00712}00712     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(2);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00713}00713 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00714}00714     \textcolor{comment}{// Vector for coordintes}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00715}00715     Vector<double> \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(2);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00715}00715     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(2);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00716}00716 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00717}00717     \textcolor{comment}{// Find out how many nodes there are in the element}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00718}00718     \textcolor{keywordtype}{unsigned} n\_node = nnode();}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00718}00718     \textcolor{keywordtype}{unsigned} n\_node = \mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00719}00719 }
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00720}00720     Shape psi(n\_node);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00720}00720     \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} psi(n\_node);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00721}00721 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00722}00722     \textcolor{comment}{// Set the value of n\_intpt}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00723}00723     \textcolor{keywordtype}{unsigned} n\_intpt = integral\_pt()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00723}00723     \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00724}00724 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00725}00725     \textcolor{comment}{// Loop over the integration points}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00726}00726     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ipt = 0; ipt < n\_intpt; ipt++)}
@@ -732,24 +732,24 @@
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00728}00728       \textcolor{comment}{// Assign values of s}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00729}00729       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00730}00730       \{}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00731}00731         \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = integral\_pt()-\/>knot(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00731}00731         \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{knot}}(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00732}00732       \}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00733}00733 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00734}00734       \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00735}00735       \textcolor{keywordtype}{double} w = integral\_pt()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00735}00735       \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00736}00736 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00737}00737       \textcolor{comment}{// Get jacobian of mapping}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00738}00738       \textcolor{keywordtype}{double} J = J\_eulerian(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00738}00738       \textcolor{keywordtype}{double} J = \mbox{\hyperlink{classoomph_1_1FiniteElement_a089e58d5ad9b8efee637221b0e264563}{J\_eulerian}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00739}00739 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00740}00740       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00741}00741       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00741}00741       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00742}00742 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00743}00743       \textcolor{comment}{// Get FE function value}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00744}00744       std::complex<double> u\_fe =}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00745}00745         interpolated\_u\_fourier\_decomposed\_helmholtz(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00745}00745         \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzEquations_a2712a250e2a35c896de17bac5a29710f}{interpolated\_u\_fourier\_decomposed\_helmholtz}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00746}00746 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00747}00747       \textcolor{comment}{// Add to  norm}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00748}00748       norm += (u\_fe.real() * u\_fe.real() + u\_fe.imag() * u\_fe.imag()) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00748}00748       norm += (u\_fe.real() * u\_fe.real() + u\_fe.imag() * u\_fe.imag()) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00749}00749     \}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00750}00750   \}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00751}00751 }
@@ -757,9 +757,9 @@
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00753}00753   \textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00754}00754   \textcolor{comment}{// Force build of templates}}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00755}00755   \textcolor{comment}{//====================================================================}}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00756}00756   \textcolor{keyword}{template} \textcolor{keyword}{class }QFourierDecomposedHelmholtzElement<2>;}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00757}00757   \textcolor{keyword}{template} \textcolor{keyword}{class }QFourierDecomposedHelmholtzElement<3>;}
-\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00758}00758   \textcolor{keyword}{template} \textcolor{keyword}{class }QFourierDecomposedHelmholtzElement<4>;}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00756}00756   \textcolor{keyword}{template} \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1QFourierDecomposedHelmholtzElement}{QFourierDecomposedHelmholtzElement<2>}};}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00757}00757   \textcolor{keyword}{template} \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1QFourierDecomposedHelmholtzElement}{QFourierDecomposedHelmholtzElement<3>}};}
+\DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00758}00758   \textcolor{keyword}{template} \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1QFourierDecomposedHelmholtzElement}{QFourierDecomposedHelmholtzElement<4>}};}
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00759}00759 }
 \DoxyCodeLine{\Hypertarget{fourier__decomposed__helmholtz__elements_8cc_source_l00760}00760 \} \textcolor{comment}{// namespace oomph}}
 

@@ -89,8 +89,8 @@
 \DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00085}00085       \mbox{\hyperlink{classoomph_1_1Data}{Data}}* dat\_pt = \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a3b83389f2c80788013421c6d59604f0b}{internal\_data\_pt}}(0);}
 \DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00086}00086 }
 \DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00087}00087       \textcolor{comment}{// Get it's values}}
-\DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00088}00088       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}(\mbox{\hyperlink{classoomph_1_1ODEElement_ad968e4ce7f28115bf97f5854446bb5c4}{nvalue}}(), 0.0);}
-\DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00089}00089       dat\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a9383101536882db34e618cbe30dba2da}{value}}(\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}});}
+\DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00088}00088       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} u(\mbox{\hyperlink{classoomph_1_1ODEElement_ad968e4ce7f28115bf97f5854446bb5c4}{nvalue}}(), 0.0);}
+\DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00089}00089       dat\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a9383101536882db34e618cbe30dba2da}{value}}(u);}
 \DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00090}00090 }
 \DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00091}00091       \textcolor{comment}{// Get time stepper}}
 \DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00092}00092       \mbox{\hyperlink{classoomph_1_1TimeStepper}{TimeStepper}}* time\_stepper\_pt = dat\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a065d7bffcec82bf4d4bd7b41f9aa80b3}{time\_stepper\_pt}}();}
@@ -98,7 +98,7 @@
 \DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00094}00094       \textcolor{comment}{// Get continuous time}}
 \DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00095}00095       \textcolor{keywordtype}{double} \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}} = time\_stepper\_pt-\/>\mbox{\hyperlink{classoomph_1_1TimeStepper_a5a69b6874b36b2f594cbee45719d4c7b}{time}}();}
 \DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00096}00096 }
-\DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00097}00097       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} deriv = \mbox{\hyperlink{classoomph_1_1ODEElement_a2bcb0934042157ff4bd03a316b65c0ff}{derivative\_function}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}});}
+\DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00097}00097       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} deriv = \mbox{\hyperlink{classoomph_1_1ODEElement_a2bcb0934042157ff4bd03a316b65c0ff}{derivative\_function}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, u);}
 \DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00098}00098       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0, nj = deriv.size(); j < nj; j++)}
 \DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00099}00099       \{}
 \DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00100}00100         \textcolor{comment}{// Get dudt approximation from time stepper}}
@@ -120,9 +120,9 @@
 \DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00116}00116       \{}
 \DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00117}00117         \textcolor{comment}{// get df/du jacobian}}
 \DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00118}00118         \textcolor{keywordtype}{double} \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}} = \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a3b83389f2c80788013421c6d59604f0b}{internal\_data\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Data_a065d7bffcec82bf4d4bd7b41f9aa80b3}{time\_stepper\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1TimeStepper_a5a69b6874b36b2f594cbee45719d4c7b}{time}}();}
-\DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00119}00119         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} dummy, \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}(\mbox{\hyperlink{classoomph_1_1ODEElement_ad968e4ce7f28115bf97f5854446bb5c4}{nvalue}}(), 0.0);}
-\DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00120}00120         \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a3b83389f2c80788013421c6d59604f0b}{internal\_data\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Data_a9383101536882db34e618cbe30dba2da}{value}}(\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}});}
-\DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00121}00121         \mbox{\hyperlink{classoomph_1_1ODEElement_a57144f54edb040be5d139d2768fcd396}{Exact\_solution\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a53482fed2379500a8f279498aed07d56}{jacobian}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, dummy, \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}, jacobian);}
+\DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00119}00119         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} dummy, u(\mbox{\hyperlink{classoomph_1_1ODEElement_ad968e4ce7f28115bf97f5854446bb5c4}{nvalue}}(), 0.0);}
+\DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00120}00120         \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a3b83389f2c80788013421c6d59604f0b}{internal\_data\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Data_a9383101536882db34e618cbe30dba2da}{value}}(u);}
+\DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00121}00121         \mbox{\hyperlink{classoomph_1_1ODEElement_a57144f54edb040be5d139d2768fcd396}{Exact\_solution\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a53482fed2379500a8f279498aed07d56}{jacobian}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, dummy, u, jacobian);}
 \DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00122}00122 }
 \DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00123}00123         \textcolor{comment}{// We need jacobian of residual = f -\/ dudt so subtract diagonal}}
 \DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00124}00124         \textcolor{comment}{// (dudt)/du term.}}
@@ -167,7 +167,7 @@
 \DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00163}00163     \}}
 \DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00164}00164 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00165}00165 \textcolor{comment}{    /// Exact solution}}
-\DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00166}\mbox{\hyperlink{classoomph_1_1ODEElement_a2bcb0934042157ff4bd03a316b65c0ff}{00166}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{classoomph_1_1ODEElement_a2bcb0934042157ff4bd03a316b65c0ff}{derivative\_function}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}})}
+\DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00166}\mbox{\hyperlink{classoomph_1_1ODEElement_a2bcb0934042157ff4bd03a316b65c0ff}{00166}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{classoomph_1_1ODEElement_a2bcb0934042157ff4bd03a316b65c0ff}{derivative\_function}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& u)}
 \DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00167}00167     \{}
 \DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00168}00168 \textcolor{preprocessor}{\#ifdef PARANOID}}
 \DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00169}00169       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1ODEElement_a57144f54edb040be5d139d2768fcd396}{Exact\_solution\_pt}} == 0)}
@@ -178,7 +178,7 @@
 \DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00174}00174       \}}
 \DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00175}00175 \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00176}00176       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} dummy\_x;}
-\DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00177}00177       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1ODEElement_a57144f54edb040be5d139d2768fcd396}{Exact\_solution\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a794f59127c33dec7e177aade170b3584}{derivative}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, dummy\_x, \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}});}
+\DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00177}00177       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1ODEElement_a57144f54edb040be5d139d2768fcd396}{Exact\_solution\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a794f59127c33dec7e177aade170b3584}{derivative}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, dummy\_x, u);}
 \DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00178}00178     \}}
 \DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00179}00179 }
 \DoxyCodeLine{\Hypertarget{ode__elements_8h_source_l00180}\mbox{\hyperlink{classoomph_1_1ODEElement_a57144f54edb040be5d139d2768fcd396}{00180}}     \mbox{\hyperlink{classoomph_1_1SolutionFunctorBase}{SolutionFunctorBase}}* \mbox{\hyperlink{classoomph_1_1ODEElement_a57144f54edb040be5d139d2768fcd396}{Exact\_solution\_pt}};}

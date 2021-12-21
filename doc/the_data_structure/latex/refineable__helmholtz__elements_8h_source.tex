@@ -59,14 +59,14 @@
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00055}00055 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00056}00056   \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00057}\mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations}{00057}}   \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations}{RefineableHelmholtzEquations}}}
-\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00058}00058     : \textcolor{keyword}{public} \textcolor{keyword}{virtual} HelmholtzEquations<DIM>,}
+\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00058}00058     : \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1HelmholtzEquations}{HelmholtzEquations}}<DIM>,}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00059}00059       \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1RefineableElement}{RefineableElement}},}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00060}00060       \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator}{ElementWithZ2ErrorEstimator}}}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00061}00061   \{}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00062}00062   \textcolor{keyword}{public}:\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00063}00063 \textcolor{comment}{    /// Constructor, simply call other constructors}}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00064}\mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations_a7b33736187e9f98fcdae1c8187cd819b}{00064}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations_a7b33736187e9f98fcdae1c8187cd819b}{RefineableHelmholtzEquations}}()}
-\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00065}00065       : HelmholtzEquations<DIM>(),}
+\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00065}00065       : \mbox{\hyperlink{classoomph_1_1HelmholtzEquations}{HelmholtzEquations}}<DIM>(),}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00066}00066         \mbox{\hyperlink{classoomph_1_1RefineableElement}{RefineableElement}}(),}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00067}00067         \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator}{ElementWithZ2ErrorEstimator}}()}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00068}00068     \{}
@@ -95,7 +95,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00091}\mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations_ae3981b8ad03d951b0d661d223ad8e560}{00091}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations_ae3981b8ad03d951b0d661d223ad8e560}{get\_Z2\_flux}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& flux)}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00092}00092     \{}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00093}00093       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<std::complex<double>}}> actual\_flux(DIM);}
-\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00094}00094       this-\/>get\_flux(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, actual\_flux);}
+\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00094}00094       this-\/>\mbox{\hyperlink{classoomph_1_1HelmholtzEquations_a5a572831004e521f58d5a54c8392262f}{get\_flux}}(s, actual\_flux);}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00095}00095       \textcolor{keywordtype}{unsigned} count = 0;}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00096}00096       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00097}00097       \{}
@@ -128,9 +128,9 @@
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00124}00124       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} l = 0; l < n\_node; l++)}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00125}00125       \{}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00126}00126         values[0] +=}
-\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00127}00127           this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a28fd5c2d4aeba5ef65bee0e0d72569f5}{nodal\_value}}(l, this-\/>u\_index\_helmholtz().real()) * psi[l];}
+\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00127}00127           this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a28fd5c2d4aeba5ef65bee0e0d72569f5}{nodal\_value}}(l, this-\/>\mbox{\hyperlink{classoomph_1_1HelmholtzEquations_aa358171d391002d64aa2fcd69d5e1caa}{u\_index\_helmholtz}}().real()) * psi[l];}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00128}00128         values[1] +=}
-\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00129}00129           this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a28fd5c2d4aeba5ef65bee0e0d72569f5}{nodal\_value}}(l, this-\/>u\_index\_helmholtz().imag()) * psi[l];}
+\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00129}00129           this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a28fd5c2d4aeba5ef65bee0e0d72569f5}{nodal\_value}}(l, this-\/>\mbox{\hyperlink{classoomph_1_1HelmholtzEquations_aa358171d391002d64aa2fcd69d5e1caa}{u\_index\_helmholtz}}().imag()) * psi[l];}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00130}00130       \}}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00131}00131     \}}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00132}00132 }
@@ -165,13 +165,13 @@
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00161}00161 \textcolor{comment}{    ///  Further build: Copy source function pointer from father element}}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00162}\mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations_a6b58f755f6ab936ab633ecee05998899}{00162}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations_a6b58f755f6ab936ab633ecee05998899}{further\_build}}()}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00163}00163     \{}
-\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00164}00164       this-\/>Source\_fct\_pt = \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations}{RefineableHelmholtzEquations<DIM>}}*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00164}00164       this-\/>\mbox{\hyperlink{classoomph_1_1HelmholtzEquations_a896c6598347fd09c47b2aaf57841db85}{Source\_fct\_pt}} = \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations}{RefineableHelmholtzEquations<DIM>}}*\textcolor{keyword}{>}(}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00165}00165                               this-\/>\mbox{\hyperlink{classoomph_1_1RefineableElement_a637964a7a9892fe0f0b05692c2e8d153}{father\_element\_pt}}())}
-\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00166}00166                               -\/>source\_fct\_pt();}
+\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00166}00166                               -\/>\mbox{\hyperlink{classoomph_1_1HelmholtzEquations_a81f1adcc51f8ec33e0c09f6f28314c14}{source\_fct\_pt}}();}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00167}00167 }
-\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00168}00168       this-\/>K\_squared\_pt = \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations}{RefineableHelmholtzEquations<DIM>}}*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00168}00168       this-\/>\mbox{\hyperlink{classoomph_1_1HelmholtzEquations_a4c7cc6c365429927ab113b2fc26988c0}{K\_squared\_pt}} = \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations}{RefineableHelmholtzEquations<DIM>}}*\textcolor{keyword}{>}(}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00169}00169                              this-\/>\mbox{\hyperlink{classoomph_1_1RefineableElement_a637964a7a9892fe0f0b05692c2e8d153}{father\_element\_pt}}())}
-\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00170}00170                              -\/>k\_squared\_pt();}
+\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00170}00170                              -\/>\mbox{\hyperlink{classoomph_1_1HelmholtzEquations_a4c93b3be6939a45a47a3af51d767fe05}{k\_squared\_pt}}();}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00171}00171     \}}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00172}00172 }
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00173}00173 }
@@ -182,7 +182,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00178}00178 \textcolor{comment}{    /// flag=0: compute only residual vector}}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00179}00179 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations_a3762ea1eef3fa5e835686643c25e8cec}{fill\_in\_generic\_residual\_contribution\_helmholtz}}(}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00180}00180       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00181}00181       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}},}
+\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00181}00181       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian,}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00182}00182       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& flag);}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00183}00183   \};}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00184}00184 }
@@ -226,13 +226,13 @@
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00222}00222 \textcolor{comment}{    /// Number of vertex nodes in the element}}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00223}\mbox{\hyperlink{classoomph_1_1RefineableQHelmholtzElement_aef66f141dff057f7ceb589d5e1142292}{00223}} \textcolor{comment}{}    \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1RefineableQHelmholtzElement_aef66f141dff057f7ceb589d5e1142292}{nvertex\_node}}()\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00224}00224 \textcolor{keyword}{    }\{}
-\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00225}00225       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1QHelmholtzElement}{QHelmholtzElement<DIM, NNODE\_1D>::nvertex\_node}}();}
+\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00225}00225       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1FiniteElement_a45631a7aa50efc3123a921d114f84cba}{QHelmholtzElement<DIM, NNODE\_1D>::nvertex\_node}}();}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00226}00226     \}}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00227}00227 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00228}00228 \textcolor{comment}{    /// Pointer to the j-\/th vertex node in the element}}
-\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00229}\mbox{\hyperlink{classoomph_1_1RefineableQHelmholtzElement_a7f7b59eab5c855cc81736f085a5a5b5b}{00229}} \textcolor{comment}{}    Node* \mbox{\hyperlink{classoomph_1_1RefineableQHelmholtzElement_a7f7b59eab5c855cc81736f085a5a5b5b}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00229}\mbox{\hyperlink{classoomph_1_1RefineableQHelmholtzElement_a7f7b59eab5c855cc81736f085a5a5b5b}{00229}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1RefineableQHelmholtzElement_a7f7b59eab5c855cc81736f085a5a5b5b}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00230}00230 \textcolor{keyword}{    }\{}
-\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00231}00231       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1QHelmholtzElement}{QHelmholtzElement<DIM, NNODE\_1D>::vertex\_node\_pt}}(j);}
+\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00231}00231       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1FiniteElement_ac8b551c9d6f1f8e30e8b18fe2f9ae072}{QHelmholtzElement<DIM, NNODE\_1D>::vertex\_node\_pt}}(j);}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00232}00232     \}}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00233}00233 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8h_source_l00234}00234 \textcolor{comment}{    /// Rebuild from sons: empty}}

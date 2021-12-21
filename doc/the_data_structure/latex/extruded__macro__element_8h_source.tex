@@ -204,7 +204,7 @@
 \DoxyCodeLine{\Hypertarget{extruded__macro__element_8h_source_l00200}00200       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(3, 0.0);}
 \DoxyCodeLine{\Hypertarget{extruded__macro__element_8h_source_l00201}00201 }
 \DoxyCodeLine{\Hypertarget{extruded__macro__element_8h_source_l00202}00202       \textcolor{comment}{// Storage for the global (space-\/time) coordinates}}
-\DoxyCodeLine{\Hypertarget{extruded__macro__element_8h_source_l00203}00203       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(3, 0.0);}
+\DoxyCodeLine{\Hypertarget{extruded__macro__element_8h_source_l00203}00203       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(3, 0.0);}
 \DoxyCodeLine{\Hypertarget{extruded__macro__element_8h_source_l00204}00204 }
 \DoxyCodeLine{\Hypertarget{extruded__macro__element_8h_source_l00205}00205       \textcolor{comment}{// Output the header}}
 \DoxyCodeLine{\Hypertarget{extruded__macro__element_8h_source_l00206}00206       outfile << \textcolor{stringliteral}{"{}ZONE I="{}} << nplot << \textcolor{stringliteral}{"{}, J="{}} << nplot << \textcolor{stringliteral}{"{}, K="{}} << nplot}
@@ -234,10 +234,10 @@
 \DoxyCodeLine{\Hypertarget{extruded__macro__element_8h_source_l00230}00230             \textcolor{comment}{// the time level. To make the call function normally, we simply}}
 \DoxyCodeLine{\Hypertarget{extruded__macro__element_8h_source_l00231}00231             \textcolor{comment}{// pass the argument t=0 and the appropriate function will be}}
 \DoxyCodeLine{\Hypertarget{extruded__macro__element_8h_source_l00232}00232             \textcolor{comment}{// called.}}
-\DoxyCodeLine{\Hypertarget{extruded__macro__element_8h_source_l00233}00233             \mbox{\hyperlink{classoomph_1_1MacroElement_a85e7842ad949bb4062a9ff302fa452e5}{macro\_map}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{extruded__macro__element_8h_source_l00233}00233             \mbox{\hyperlink{classoomph_1_1MacroElement_a85e7842ad949bb4062a9ff302fa452e5}{macro\_map}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{extruded__macro__element_8h_source_l00234}00234 }
 \DoxyCodeLine{\Hypertarget{extruded__macro__element_8h_source_l00235}00235             \textcolor{comment}{// Output the global coordinates}}
-\DoxyCodeLine{\Hypertarget{extruded__macro__element_8h_source_l00236}00236             outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[0] << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[1] << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[2] << \textcolor{stringliteral}{"{} "{}} << 0.0}
+\DoxyCodeLine{\Hypertarget{extruded__macro__element_8h_source_l00236}00236             outfile << x[0] << \textcolor{stringliteral}{"{} "{}} << x[1] << \textcolor{stringliteral}{"{} "{}} << x[2] << \textcolor{stringliteral}{"{} "{}} << 0.0}
 \DoxyCodeLine{\Hypertarget{extruded__macro__element_8h_source_l00237}00237                     << std::endl;}
 \DoxyCodeLine{\Hypertarget{extruded__macro__element_8h_source_l00238}00238           \}}
 \DoxyCodeLine{\Hypertarget{extruded__macro__element_8h_source_l00239}00239         \} \textcolor{comment}{// for (unsigned j=0;j<nplot;j++)}}

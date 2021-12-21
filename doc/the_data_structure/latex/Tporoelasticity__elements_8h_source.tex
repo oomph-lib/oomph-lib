@@ -291,7 +291,7 @@
 \DoxyCodeLine{\Hypertarget{Tporoelasticity__elements_8h_source_l00287}00287 \textcolor{comment}{    /// Returns the global coordinates of the nth gauss point along an edge}}
 \DoxyCodeLine{\Hypertarget{Tporoelasticity__elements_8h_source_l00288}\mbox{\hyperlink{classoomph_1_1TPoroelasticityElement_ae16942ca84bf7bc23eed93cdeb08efce}{00288}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1TPoroelasticityElement_ae16942ca84bf7bc23eed93cdeb08efce}{edge\_gauss\_point\_global}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& edge,}
 \DoxyCodeLine{\Hypertarget{Tporoelasticity__elements_8h_source_l00289}00289                                  \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n,}
-\DoxyCodeLine{\Hypertarget{Tporoelasticity__elements_8h_source_l00290}00290                                  \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}})\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{Tporoelasticity__elements_8h_source_l00290}00290                                  \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{Tporoelasticity__elements_8h_source_l00291}00291 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{Tporoelasticity__elements_8h_source_l00292}00292 \textcolor{preprocessor}{\#ifdef RANGE\_CHECKING}}
 \DoxyCodeLine{\Hypertarget{Tporoelasticity__elements_8h_source_l00293}00293       \textcolor{keywordflow}{if} (edge >= 3)}
@@ -344,7 +344,7 @@
 \DoxyCodeLine{\Hypertarget{Tporoelasticity__elements_8h_source_l00340}00340       \}}
 \DoxyCodeLine{\Hypertarget{Tporoelasticity__elements_8h_source_l00341}00341 }
 \DoxyCodeLine{\Hypertarget{Tporoelasticity__elements_8h_source_l00342}00342       \textcolor{comment}{// Calculate the global coordinates from the local ones}}
-\DoxyCodeLine{\Hypertarget{Tporoelasticity__elements_8h_source_l00343}00343       \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(s\_gauss, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{Tporoelasticity__elements_8h_source_l00343}00343       \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(s\_gauss, x);}
 \DoxyCodeLine{\Hypertarget{Tporoelasticity__elements_8h_source_l00344}00344     \}}
 \DoxyCodeLine{\Hypertarget{Tporoelasticity__elements_8h_source_l00345}00345 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{Tporoelasticity__elements_8h_source_l00346}00346 \textcolor{comment}{    /// Pin the nth internal q value}}
@@ -435,10 +435,10 @@
 \DoxyCodeLine{\Hypertarget{Tporoelasticity__elements_8h_source_l00431}00431       \textcolor{comment}{// space)}}
 \DoxyCodeLine{\Hypertarget{Tporoelasticity__elements_8h_source_l00432}00432       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 3; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{Tporoelasticity__elements_8h_source_l00433}00433       \{}
-\DoxyCodeLine{\Hypertarget{Tporoelasticity__elements_8h_source_l00434}00434         x0 = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})-\/>x(0);}
-\DoxyCodeLine{\Hypertarget{Tporoelasticity__elements_8h_source_l00435}00435         y0 = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})-\/>x(1);}
-\DoxyCodeLine{\Hypertarget{Tporoelasticity__elements_8h_source_l00436}00436         x1 = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}((\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} + 1) \% 3)-\/>x(0);}
-\DoxyCodeLine{\Hypertarget{Tporoelasticity__elements_8h_source_l00437}00437         y1 = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}((\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} + 1) \% 3)-\/>x(1);}
+\DoxyCodeLine{\Hypertarget{Tporoelasticity__elements_8h_source_l00434}00434         x0 = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0);}
+\DoxyCodeLine{\Hypertarget{Tporoelasticity__elements_8h_source_l00435}00435         y0 = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1);}
+\DoxyCodeLine{\Hypertarget{Tporoelasticity__elements_8h_source_l00436}00436         x1 = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}((\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} + 1) \% 3)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0);}
+\DoxyCodeLine{\Hypertarget{Tporoelasticity__elements_8h_source_l00437}00437         y1 = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}((\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} + 1) \% 3)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1);}
 \DoxyCodeLine{\Hypertarget{Tporoelasticity__elements_8h_source_l00438}00438 }
 \DoxyCodeLine{\Hypertarget{Tporoelasticity__elements_8h_source_l00439}00439         length[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = std::sqrt(std::pow(y1 -\/ y0, 2) + std::pow(x1 -\/ x0, 2));}
 \DoxyCodeLine{\Hypertarget{Tporoelasticity__elements_8h_source_l00440}00440       \}}
@@ -547,7 +547,7 @@
 \DoxyCodeLine{\Hypertarget{Tporoelasticity__elements_8h_source_l00543}00543       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(2);}
 \DoxyCodeLine{\Hypertarget{Tporoelasticity__elements_8h_source_l00544}00544       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{Tporoelasticity__elements_8h_source_l00545}00545       \{}
-\DoxyCodeLine{\Hypertarget{Tporoelasticity__elements_8h_source_l00546}00546         \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>knot(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{Tporoelasticity__elements_8h_source_l00546}00546         \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{knot}}(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{Tporoelasticity__elements_8h_source_l00547}00547       \}}
 \DoxyCodeLine{\Hypertarget{Tporoelasticity__elements_8h_source_l00548}00548 }
 \DoxyCodeLine{\Hypertarget{Tporoelasticity__elements_8h_source_l00549}00549       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1TPoroelasticityElement_a309bfa8c38a43d062ffe7395e32e6d5f}{shape\_basis\_test\_local}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},}

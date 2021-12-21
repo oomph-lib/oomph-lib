@@ -214,8 +214,8 @@
 \DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00210}00210     object\_pt-\/>\mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject_a74eb2ebff3fc3066edccdfe4d3b6bc07}{actions\_before\_explicit\_stage}}();}
 \DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00211}00211 }
 \DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00212}00212     \textcolor{comment}{// Store the initial values and initial time}}
-\DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00213}00213     \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}};}
-\DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00214}00214     object\_pt-\/>\mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject_a0fcf43487590dd723f25184067f26219}{get\_dofs}}(\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}});}
+\DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00213}00213     \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} u;}
+\DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00214}00214     object\_pt-\/>\mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject_a0fcf43487590dd723f25184067f26219}{get\_dofs}}(u);}
 \DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00215}00215 }
 \DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00216}00216     \textcolor{comment}{// Now get the first unknowns}}
 \DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00217}00217     \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} k1;}
@@ -237,7 +237,7 @@
 \DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00233}00233     object\_pt-\/>\mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject_ab1e7d8d7ec548b26ed039b61a9eba9c4}{get\_dvaluesdt}}(k2);}
 \DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00234}00234 }
 \DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00235}00235     \textcolor{comment}{// Now reset the residuals}}
-\DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00236}00236     object\_pt-\/>\mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject_a76a8d64f2d6aa8de955b44c86e9b3ecb}{set\_dofs}}(\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}});}
+\DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00236}00236     object\_pt-\/>\mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject_a76a8d64f2d6aa8de955b44c86e9b3ecb}{set\_dofs}}(u);}
 \DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00237}00237     object\_pt-\/>\mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject_a00f10d9ad6de867dd72ba175a5f0ec89}{add\_to\_dofs}}(0.5 * dt, k2);}
 \DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00238}00238     \textcolor{comment}{// Time remains the same}}
 \DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00239}00239     object\_pt-\/>\mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject_ad1eb700abad36e868a84c475f9866b7d}{actions\_after\_explicit\_stage}}();}
@@ -251,7 +251,7 @@
 \DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00247}00247     object\_pt-\/>\mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject_ab1e7d8d7ec548b26ed039b61a9eba9c4}{get\_dvaluesdt}}(k3);}
 \DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00248}00248 }
 \DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00249}00249     \textcolor{comment}{// Now reset the residuals}}
-\DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00250}00250     object\_pt-\/>\mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject_a76a8d64f2d6aa8de955b44c86e9b3ecb}{set\_dofs}}(\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}});}
+\DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00250}00250     object\_pt-\/>\mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject_a76a8d64f2d6aa8de955b44c86e9b3ecb}{set\_dofs}}(u);}
 \DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00251}00251     object\_pt-\/>\mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject_a00f10d9ad6de867dd72ba175a5f0ec89}{add\_to\_dofs}}(dt, k3);}
 \DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00252}00252     \textcolor{comment}{// Increment the time (now at initial\_time + dt)}}
 \DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00253}00253     object\_pt-\/>\mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject_a42fde674301963f01b8e41b3f333cc65}{time}}() += 0.5 * dt;}
@@ -266,7 +266,7 @@
 \DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00262}00262     object\_pt-\/>\mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject_ab1e7d8d7ec548b26ed039b61a9eba9c4}{get\_dvaluesdt}}(k4);}
 \DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00263}00263 }
 \DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00264}00264     \textcolor{comment}{// Set the final values of the unknowns}}
-\DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00265}00265     object\_pt-\/>\mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject_a76a8d64f2d6aa8de955b44c86e9b3ecb}{set\_dofs}}(\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}});}
+\DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00265}00265     object\_pt-\/>\mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject_a76a8d64f2d6aa8de955b44c86e9b3ecb}{set\_dofs}}(u);}
 \DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00266}00266     object\_pt-\/>\mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject_a00f10d9ad6de867dd72ba175a5f0ec89}{add\_to\_dofs}}((dt / 6.0), k1);}
 \DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00267}00267     object\_pt-\/>\mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject_a00f10d9ad6de867dd72ba175a5f0ec89}{add\_to\_dofs}}((dt / 3.0), k2);}
 \DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00268}00268     object\_pt-\/>\mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject_a00f10d9ad6de867dd72ba175a5f0ec89}{add\_to\_dofs}}((dt / 3.0), k3);}
@@ -290,8 +290,8 @@
 \DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00286}00286     object\_pt-\/>\mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject_a74eb2ebff3fc3066edccdfe4d3b6bc07}{actions\_before\_explicit\_stage}}();}
 \DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00287}00287 }
 \DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00288}00288     \textcolor{comment}{// Store the initial values}}
-\DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00289}00289     \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}};}
-\DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00290}00290     object\_pt-\/>\mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject_a0fcf43487590dd723f25184067f26219}{get\_dofs}}(\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}});}
+\DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00289}00289     \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} u;}
+\DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00290}00290     object\_pt-\/>\mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject_a0fcf43487590dd723f25184067f26219}{get\_dofs}}(u);}
 \DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00291}00291 }
 \DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00292}00292     \textcolor{comment}{// Get f1 (time derivative at t0, y0) and add to dofs}}
 \DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00293}00293     \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} f1;}
@@ -313,7 +313,7 @@
 \DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00309}00309     object\_pt-\/>\mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject_ab1e7d8d7ec548b26ed039b61a9eba9c4}{get\_dvaluesdt}}(f2);}
 \DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00310}00310 }
 \DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00311}00311     \textcolor{comment}{// Final answer is starting dofs + h/2 * (f1 + f2)}}
-\DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00312}00312     object\_pt-\/>\mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject_a76a8d64f2d6aa8de955b44c86e9b3ecb}{set\_dofs}}(\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}});}
+\DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00312}00312     object\_pt-\/>\mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject_a76a8d64f2d6aa8de955b44c86e9b3ecb}{set\_dofs}}(u);}
 \DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00313}00313     object\_pt-\/>\mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject_a00f10d9ad6de867dd72ba175a5f0ec89}{add\_to\_dofs}}(0.5 * dt, f1);}
 \DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00314}00314     object\_pt-\/>\mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject_a00f10d9ad6de867dd72ba175a5f0ec89}{add\_to\_dofs}}(0.5 * dt, f2);}
 \DoxyCodeLine{\Hypertarget{explicit__timesteppers_8cc_source_l00315}00315 }

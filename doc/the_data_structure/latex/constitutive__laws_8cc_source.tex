@@ -37,10 +37,10 @@
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00033}00033   \textcolor{comment}{//===============================================================}\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00034}00034 \textcolor{comment}{  /// This function is used to check whether a matrix is square}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00035}00035 \textcolor{comment}{}  \textcolor{comment}{//===============================================================}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00036}00036   \textcolor{keywordtype}{bool} ConstitutiveLaw::is\_matrix\_square(\textcolor{keyword}{const} DenseMatrix<double>\& M)}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00036}\mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a73f01e1459e7ba998ef78f7ece6baa37}{00036}}   \textcolor{keywordtype}{bool} \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a73f01e1459e7ba998ef78f7ece6baa37}{ConstitutiveLaw::is\_matrix\_square}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& M)}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00037}00037   \{}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00038}00038     \textcolor{comment}{// If the number rows and columns is not equal, the matrix is not square}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00039}00039     \textcolor{keywordflow}{if} (M.nrow() != M.ncol())}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00039}00039     \textcolor{keywordflow}{if} (M.\mbox{\hyperlink{classoomph_1_1DenseMatrix_a1b425094510d833ffe91920747a0a962}{nrow}}() != M.\mbox{\hyperlink{classoomph_1_1DenseMatrix_a9937181f1cb4cfaed7aaf3b483c42456}{ncol}}())}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00040}00040     \{}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00041}00041       \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00042}00042     \}}
@@ -53,12 +53,12 @@
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00049}00049   \textcolor{comment}{//========================================================================}\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00050}00050 \textcolor{comment}{  /// This function is used to check whether matrices are of equal dimension}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00051}00051 \textcolor{comment}{}  \textcolor{comment}{//========================================================================}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00052}00052   \textcolor{keywordtype}{bool} ConstitutiveLaw::are\_matrices\_of\_equal\_dimensions(}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00053}00053     \textcolor{keyword}{const} DenseMatrix<double>\& M1, \textcolor{keyword}{const} DenseMatrix<double>\& M2)}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00052}\mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a8a89bb96a9b922294509923563a13063}{00052}}   \textcolor{keywordtype}{bool} \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a8a89bb96a9b922294509923563a13063}{ConstitutiveLaw::are\_matrices\_of\_equal\_dimensions}}(}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00053}00053     \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& M1, \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& M2)}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00054}00054   \{}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00055}00055     \textcolor{comment}{// If the numbers of rows and columns are not the same, then the}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00056}00056     \textcolor{comment}{// matrices are not of equal dimension}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00057}00057     \textcolor{keywordflow}{if} ((M1.nrow() != M2.nrow()) || (M1.ncol() != M2.ncol()))}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00057}00057     \textcolor{keywordflow}{if} ((M1.\mbox{\hyperlink{classoomph_1_1DenseMatrix_a1b425094510d833ffe91920747a0a962}{nrow}}() != M2.\mbox{\hyperlink{classoomph_1_1DenseMatrix_a1b425094510d833ffe91920747a0a962}{nrow}}()) || (M1.\mbox{\hyperlink{classoomph_1_1DenseMatrix_a9937181f1cb4cfaed7aaf3b483c42456}{ncol}}() != M2.\mbox{\hyperlink{classoomph_1_1DenseMatrix_a9937181f1cb4cfaed7aaf3b483c42456}{ncol}}()))}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00058}00058     \{}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00059}00059       \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00060}00060     \}}
@@ -72,40 +72,40 @@
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00068}00068 \textcolor{comment}{  /// This function is used to provide simple error (bounce) checks on the}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00069}00069 \textcolor{comment}{  /// input to any calculate\_second\_piola\_kirchhoff\_stress}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00070}00070 \textcolor{comment}{}  \textcolor{comment}{//=======================================================================}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00071}00071   \textcolor{keywordtype}{void} ConstitutiveLaw::error\_checking\_in\_input(\textcolor{keyword}{const} DenseMatrix<double>\& g,}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00072}00072                                                 \textcolor{keyword}{const} DenseMatrix<double>\& G,}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00073}00073                                                 DenseMatrix<double>\& \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}})}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00071}\mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a01763658a56a962460a80607653a33b4}{00071}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a01763658a56a962460a80607653a33b4}{ConstitutiveLaw::error\_checking\_in\_input}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& g,}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00072}00072                                                 \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& G,}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00073}00073                                                 \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& sigma)}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00074}00074   \{}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00075}00075     \textcolor{comment}{// Test whether the undeformed metric tensor is square}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00076}00076     \textcolor{keywordflow}{if} (!is\_matrix\_square(g))}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00076}00076     \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a73f01e1459e7ba998ef78f7ece6baa37}{is\_matrix\_square}}(g))}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00077}00077     \{}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00078}00078       \textcolor{keywordflow}{throw} OomphLibError(\textcolor{stringliteral}{"{}Undeformed metric tensor not square"{}},}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00078}00078       \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(\textcolor{stringliteral}{"{}Undeformed metric tensor not square"{}},}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00079}00079                           OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00080}00080                           OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00081}00081     \}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00082}00082 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00083}00083     \textcolor{comment}{// If the deformed metric tensor does not have the same dimension as}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00084}00084     \textcolor{comment}{// the undeformed tensor, complain}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00085}00085     \textcolor{keywordflow}{if} (!are\_matrices\_of\_equal\_dimensions(g, G))}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00085}00085     \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a8a89bb96a9b922294509923563a13063}{are\_matrices\_of\_equal\_dimensions}}(g, G))}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00086}00086     \{}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00087}00087       \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} error\_message = \textcolor{stringliteral}{"{}Deformed metric tensor does  \(\backslash\)n"{}};}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00088}00088       error\_message +=}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00089}00089         \textcolor{stringliteral}{"{}not have same dimensions as the undeformed metric tensor\(\backslash\)n"{}};}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00090}00090 }
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00091}00091       \textcolor{keywordflow}{throw} OomphLibError(}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00091}00091       \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00092}00092         error\_message, OOMPH\_CURRENT\_FUNCTION, OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00093}00093     \}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00094}00094 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00095}00095     \textcolor{comment}{// If the stress tensor does not have the same dimensions as the others}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00096}00096     \textcolor{comment}{// complain.}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00097}00097     \textcolor{keywordflow}{if} (!are\_matrices\_of\_equal\_dimensions(g, \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}))}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00097}00097     \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a8a89bb96a9b922294509923563a13063}{are\_matrices\_of\_equal\_dimensions}}(g, sigma))}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00098}00098     \{}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00099}00099       \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} error\_message =}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00100}00100         \textcolor{stringliteral}{"{}Strain tensor passed to calculate\_green\_strain() does  \(\backslash\)n"{}};}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00101}00101       error\_message +=}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00102}00102         \textcolor{stringliteral}{"{}not have same dimensions as the undeformed metric tensor\(\backslash\)n"{}};}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00103}00103 }
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00104}00104       \textcolor{keywordflow}{throw} OomphLibError(}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00104}00104       \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00105}00105         error\_message, OOMPH\_CURRENT\_FUNCTION, OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00106}00106     \}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00107}00107   \}}
@@ -114,15 +114,15 @@
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00110}00110   \textcolor{comment}{//===========================================================================}\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00111}00111 \textcolor{comment}{  /// The function to calculate the contravariant tensor from a covariant one}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00112}00112 \textcolor{comment}{}  \textcolor{comment}{//===========================================================================}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00113}00113   \textcolor{keywordtype}{double} ConstitutiveLaw::calculate\_contravariant(}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00114}00114     \textcolor{keyword}{const} DenseMatrix<double>\& Gdown, DenseMatrix<double>\& Gup)}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00113}\mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a5c188df10b08b340b923c3a733c0d178}{00113}}   \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a5c188df10b08b340b923c3a733c0d178}{ConstitutiveLaw::calculate\_contravariant}}(}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00114}00114     \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& Gdown, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& Gup)}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00115}00115   \{}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00116}00116     \textcolor{comment}{// Initial error checking}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00117}00117 \textcolor{preprocessor}{\#ifdef PARANOID}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00118}00118     \textcolor{comment}{// Test that the matrices are of the same dimension}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00119}00119     \textcolor{keywordflow}{if} (!are\_matrices\_of\_equal\_dimensions(Gdown, Gup))}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00119}00119     \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a8a89bb96a9b922294509923563a13063}{are\_matrices\_of\_equal\_dimensions}}(Gdown, Gup))}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00120}00120     \{}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00121}00121       \textcolor{keywordflow}{throw} OomphLibError(\textcolor{stringliteral}{"{}Matrices passed to calculate\_contravariant() are "{}}}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00121}00121       \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(\textcolor{stringliteral}{"{}Matrices passed to calculate\_contravariant() are "{}}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00122}00122                           \textcolor{stringliteral}{"{}not of equal dimension"{}},}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00123}00123                           OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00124}00124                           OOMPH\_EXCEPTION\_LOCATION);}
@@ -130,17 +130,17 @@
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00126}00126 \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00127}00127 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00128}00128     \textcolor{comment}{// Find the dimension of the matrix}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00129}00129     \textcolor{keywordtype}{unsigned} dim = Gdown.ncol();}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00129}00129     \textcolor{keywordtype}{unsigned} dim = Gdown.\mbox{\hyperlink{classoomph_1_1DenseMatrix_a9937181f1cb4cfaed7aaf3b483c42456}{ncol}}();}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00130}00130 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00131}00131     \textcolor{comment}{// If it's not square, I don't know what to do (yet)}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00132}00132 \textcolor{preprocessor}{\#ifdef PARANOID}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00133}00133     \textcolor{keywordflow}{if} (!is\_matrix\_square(Gdown))}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00133}00133     \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a73f01e1459e7ba998ef78f7ece6baa37}{is\_matrix\_square}}(Gdown))}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00134}00134     \{}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00135}00135       \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} error\_message =}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00136}00136         \textcolor{stringliteral}{"{}Matrix passed to calculate\_contravariant() is not square\(\backslash\)n"{}};}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00137}00137       error\_message += \textcolor{stringliteral}{"{}non-\/square matrix inversion not implemented yet!\(\backslash\)n"{}};}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00138}00138 }
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00139}00139       \textcolor{keywordflow}{throw} OomphLibError(}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00139}00139       \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00140}00140         error\_message, OOMPH\_CURRENT\_FUNCTION, OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00141}00141     \}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00142}00142 \textcolor{preprocessor}{\#endif}}
@@ -153,7 +153,7 @@
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00149}00149     \{}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00150}00150         \textcolor{comment}{// Zero dimensions}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00151}00151       \textcolor{keywordflow}{case} 0:}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00152}00152         \textcolor{keywordflow}{throw} OomphLibError(\textcolor{stringliteral}{"{}Zero dimensional matrix"{}},}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00152}00152         \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(\textcolor{stringliteral}{"{}Zero dimensional matrix"{}},}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00153}00153                             OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00154}00154                             OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00155}00155         \textcolor{keywordflow}{break};}
@@ -210,7 +210,7 @@
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00206}00206         \textcolor{keywordflow}{break};}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00207}00207 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00208}00208       \textcolor{keywordflow}{default}:}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00209}00209         \textcolor{keywordflow}{throw} OomphLibError(\textcolor{stringliteral}{"{}Dimension of matrix must be 0, 1, 2 or 3\(\backslash\)n"{}},}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00209}00209         \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(\textcolor{stringliteral}{"{}Dimension of matrix must be 0, 1, 2 or 3\(\backslash\)n"{}},}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00210}00210                             OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00211}00211                             OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00212}00212         \textcolor{keywordflow}{break};}
@@ -226,23 +226,23 @@
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00222}00222 \textcolor{comment}{  /// and determinant of covariant tensor with respect to the components of}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00223}00223 \textcolor{comment}{  /// the covariant tensor}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00224}00224 \textcolor{comment}{}  \textcolor{comment}{//===========================================================================}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00225}00225   \textcolor{keywordtype}{void} ConstitutiveLaw::calculate\_d\_contravariant\_dG(}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00226}00226     \textcolor{keyword}{const} DenseMatrix<double>\& Gdown,}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00227}00227     RankFourTensor<double>\& d\_Gup\_dG,}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00228}00228     DenseMatrix<double>\& d\_detG\_dG)}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00225}\mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a6dda64e60ed8128cb4603041dc66036f}{00225}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a6dda64e60ed8128cb4603041dc66036f}{ConstitutiveLaw::calculate\_d\_contravariant\_dG}}(}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00226}00226     \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& Gdown,}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00227}00227     \mbox{\hyperlink{classoomph_1_1RankFourTensor}{RankFourTensor<double>}}\& d\_Gup\_dG,}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00228}00228     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& d\_detG\_dG)}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00229}00229   \{}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00230}00230     \textcolor{comment}{// Find the dimension of the matrix}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00231}00231     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} dim = Gdown.ncol();}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00231}00231     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} dim = Gdown.\mbox{\hyperlink{classoomph_1_1DenseMatrix_a9937181f1cb4cfaed7aaf3b483c42456}{ncol}}();}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00232}00232 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00233}00233     \textcolor{comment}{// If it's not square, I don't know what to do (yet)}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00234}00234 \textcolor{preprocessor}{\#ifdef PARANOID}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00235}00235     \textcolor{keywordflow}{if} (!is\_matrix\_square(Gdown))}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00235}00235     \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a73f01e1459e7ba998ef78f7ece6baa37}{is\_matrix\_square}}(Gdown))}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00236}00236     \{}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00237}00237       \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} error\_message =}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00238}00238         \textcolor{stringliteral}{"{}Matrix passed to calculate\_contravariant() is not square\(\backslash\)n"{}};}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00239}00239       error\_message += \textcolor{stringliteral}{"{}non-\/square matrix inversion not implemented yet!\(\backslash\)n"{}};}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00240}00240 }
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00241}00241       \textcolor{keywordflow}{throw} OomphLibError(}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00241}00241       \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00242}00242         error\_message, OOMPH\_CURRENT\_FUNCTION, OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00243}00243     \}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00244}00244 \textcolor{preprocessor}{\#endif}}
@@ -255,7 +255,7 @@
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00251}00251     \{}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00252}00252         \textcolor{comment}{// Zero dimensions}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00253}00253       \textcolor{keywordflow}{case} 0:}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00254}00254         \textcolor{keywordflow}{throw} OomphLibError(\textcolor{stringliteral}{"{}Zero dimensional matrix"{}},}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00254}00254         \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(\textcolor{stringliteral}{"{}Zero dimensional matrix"{}},}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00255}00255                             OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00256}00256                             OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00257}00257         \textcolor{keywordflow}{break};}
@@ -309,7 +309,7 @@
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00305}00305 \textcolor{comment}{        /// Three dimensions}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00306}00306 \textcolor{comment}{}      \textcolor{keywordflow}{case} 3:}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00307}00307         \textcolor{comment}{// This is not yet implemented}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00308}00308         \textcolor{keywordflow}{throw} OomphLibError(}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00308}00308         \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00309}00309           \textcolor{stringliteral}{"{}Analytic derivatives of metric tensors not yet implemented in 3D\(\backslash\)n"{}},}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00310}00310           OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00311}00311           OOMPH\_EXCEPTION\_LOCATION);}
@@ -335,7 +335,7 @@
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00331}00331         \textcolor{keywordflow}{break};}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00332}00332 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00333}00333       \textcolor{keywordflow}{default}:}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00334}00334         \textcolor{keywordflow}{throw} OomphLibError(\textcolor{stringliteral}{"{}Dimension of matrix must be 0, 1, 2 or 3\(\backslash\)n"{}},}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00334}00334         \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(\textcolor{stringliteral}{"{}Dimension of matrix must be 0, 1, 2 or 3\(\backslash\)n"{}},}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00335}00335                             OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00336}00336                             OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00337}00337         \textcolor{keywordflow}{break};}
@@ -353,34 +353,34 @@
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00349}00349 \textcolor{comment}{  /// overloaded for constitutive laws in which an analytic formulation}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00350}00350 \textcolor{comment}{  /// is possible.}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00351}00351 \textcolor{comment}{}  \textcolor{comment}{//==========================================================================}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00352}00352   \textcolor{keywordtype}{void} ConstitutiveLaw::calculate\_d\_second\_piola\_kirchhoff\_stress\_dG(}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00353}00353     \textcolor{keyword}{const} DenseMatrix<double>\& g,}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00354}00354     \textcolor{keyword}{const} DenseMatrix<double>\& G,}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00355}00355     \textcolor{keyword}{const} DenseMatrix<double>\& \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}},}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00356}00356     RankFourTensor<double>\& d\_sigma\_dG,}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00352}\mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a6076752384082cfa3de3e0cf17daa9aa}{00352}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a6076752384082cfa3de3e0cf17daa9aa}{ConstitutiveLaw::calculate\_d\_second\_piola\_kirchhoff\_stress\_dG}}(}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00353}00353     \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& g,}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00354}00354     \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& G,}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00355}00355     \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& sigma,}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00356}00356     \mbox{\hyperlink{classoomph_1_1RankFourTensor}{RankFourTensor<double>}}\& d\_sigma\_dG,}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00357}00357     \textcolor{keyword}{const} \textcolor{keywordtype}{bool}\& symmetrize\_tensor)}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00358}00358   \{}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00359}00359     \textcolor{comment}{// Initial error checking}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00360}00360 \textcolor{preprocessor}{\#ifdef PARANOID}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00361}00361     \textcolor{comment}{// Test that the matrices are of the same dimension}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00362}00362     \textcolor{keywordflow}{if} (!are\_matrices\_of\_equal\_dimensions(g, G))}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00362}00362     \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a8a89bb96a9b922294509923563a13063}{are\_matrices\_of\_equal\_dimensions}}(g, G))}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00363}00363     \{}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00364}00364       \textcolor{keywordflow}{throw} OomphLibError(\textcolor{stringliteral}{"{}Matrices passed are not of equal dimension"{}},}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00364}00364       \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(\textcolor{stringliteral}{"{}Matrices passed are not of equal dimension"{}},}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00365}00365                           OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00366}00366                           OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00367}00367     \}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00368}00368 \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00369}00369 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00370}00370     \textcolor{comment}{// Find the dimension of the matrix (assuming that it's square)}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00371}00371     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} dim = G.ncol();}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00371}00371     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} dim = G.\mbox{\hyperlink{classoomph_1_1DenseMatrix_a9937181f1cb4cfaed7aaf3b483c42456}{ncol}}();}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00372}00372 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00373}00373     \textcolor{comment}{// Find the dimension}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00374}00374     \textcolor{comment}{// FD step}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00375}00375     \textcolor{keyword}{const} \textcolor{keywordtype}{double} eps\_fd = \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a156163c9f6fbd17548a9fa836616d19b}{GeneralisedElement::Default\_fd\_jacobian\_step}};}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00376}00376 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00377}00377     \textcolor{comment}{// Advanced metric tensor}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00378}00378     DenseMatrix<double> G\_pls(dim, dim);}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00379}00379     DenseMatrix<double> sigma\_pls(dim, dim);}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00378}00378     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} G\_pls(dim, dim);}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00379}00379     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} sigma\_pls(dim, dim);}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00380}00380 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00381}00381     \textcolor{comment}{// Copy across the original value}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00382}00382     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < dim; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
@@ -405,14 +405,14 @@
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00401}00401         G\_pls(j, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = G\_pls(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j);}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00402}00402 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00403}00403         \textcolor{comment}{// Get advanced stress}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00404}00404         this-\/>calculate\_second\_piola\_kirchhoff\_stress(g, G\_pls, sigma\_pls);}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00404}00404         this-\/>\mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a93527d910de908035feb8f41b0401065}{calculate\_second\_piola\_kirchhoff\_stress}}(g, G\_pls, sigma\_pls);}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00405}00405 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00406}00406         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ii = 0; ii < dim; ii++)}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00407}00407         \{}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00408}00408           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} jj = ii; jj < dim; jj++)}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00409}00409           \{}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00410}00410             d\_sigma\_dG(ii, jj, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j) =}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00411}00411               (sigma\_pls(ii, jj) -\/ \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(ii, jj)) / eps\_fd;}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00411}00411               (sigma\_pls(ii, jj) -\/ sigma(ii, jj)) / eps\_fd;}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00412}00412           \}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00413}00413         \}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00414}00414 }
@@ -454,37 +454,37 @@
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00450}00450 \textcolor{comment}{  /// derivatives that depend on the constitutive law, but not}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00451}00451 \textcolor{comment}{  /// for the derivatives of the determinant, which are generic.}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00452}00452 \textcolor{comment}{}  \textcolor{comment}{//========================================================================}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00453}00453   \textcolor{keywordtype}{void} ConstitutiveLaw::calculate\_d\_second\_piola\_kirchhoff\_stress\_dG(}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00454}00454     \textcolor{keyword}{const} DenseMatrix<double>\& g,}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00455}00455     \textcolor{keyword}{const} DenseMatrix<double>\& G,}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00456}00456     \textcolor{keyword}{const} DenseMatrix<double>\& \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}},}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00453}\mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_af13f9d05db09870d1b90b7ef389bdb71}{00453}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a6076752384082cfa3de3e0cf17daa9aa}{ConstitutiveLaw::calculate\_d\_second\_piola\_kirchhoff\_stress\_dG}}(}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00454}00454     \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& g,}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00455}00455     \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& G,}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00456}00456     \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& sigma,}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00457}00457     \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& detG,}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00458}00458     \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& interpolated\_solid\_p,}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00459}00459     RankFourTensor<double>\& d\_sigma\_dG,}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00460}00460     DenseMatrix<double>\& d\_detG\_dG,}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00459}00459     \mbox{\hyperlink{classoomph_1_1RankFourTensor}{RankFourTensor<double>}}\& d\_sigma\_dG,}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00460}00460     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& d\_detG\_dG,}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00461}00461     \textcolor{keyword}{const} \textcolor{keywordtype}{bool}\& symmetrize\_tensor)}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00462}00462   \{}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00463}00463     \textcolor{comment}{// Initial error checking}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00464}00464 \textcolor{preprocessor}{\#ifdef PARANOID}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00465}00465     \textcolor{comment}{// Test that the matrices are of the same dimension}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00466}00466     \textcolor{keywordflow}{if} (!are\_matrices\_of\_equal\_dimensions(g, G))}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00466}00466     \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a8a89bb96a9b922294509923563a13063}{are\_matrices\_of\_equal\_dimensions}}(g, G))}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00467}00467     \{}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00468}00468       \textcolor{keywordflow}{throw} OomphLibError(\textcolor{stringliteral}{"{}Matrices passed are not of equal dimension"{}},}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00468}00468       \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(\textcolor{stringliteral}{"{}Matrices passed are not of equal dimension"{}},}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00469}00469                           OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00470}00470                           OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00471}00471     \}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00472}00472 \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00473}00473 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00474}00474     \textcolor{comment}{// Find the dimension of the matrix (assuming that it's square)}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00475}00475     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} dim = G.ncol();}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00475}00475     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} dim = G.\mbox{\hyperlink{classoomph_1_1DenseMatrix_a9937181f1cb4cfaed7aaf3b483c42456}{ncol}}();}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00476}00476 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00477}00477     \textcolor{comment}{// FD step}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00478}00478     \textcolor{keyword}{const} \textcolor{keywordtype}{double} eps\_fd = \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a156163c9f6fbd17548a9fa836616d19b}{GeneralisedElement::Default\_fd\_jacobian\_step}};}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00479}00479 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00480}00480     \textcolor{comment}{// Advanced metric tensor etc.}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00481}00481     DenseMatrix<double> G\_pls(dim, dim);}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00482}00482     DenseMatrix<double> sigma\_dev\_pls(dim, dim);}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00483}00483     DenseMatrix<double> Gup\_pls(dim, dim);}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00481}00481     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} G\_pls(dim, dim);}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00482}00482     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} sigma\_dev\_pls(dim, dim);}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00483}00483     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} Gup\_pls(dim, dim);}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00484}00484     \textcolor{keywordtype}{double} detG\_pls;}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00485}00485 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00486}00486     \textcolor{comment}{// Copy across}}
@@ -510,7 +510,7 @@
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00506}00506         G\_pls(j, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = G\_pls(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j);}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00507}00507 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00508}00508         \textcolor{comment}{// Get advanced stress}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00509}00509         this-\/>calculate\_second\_piola\_kirchhoff\_stress(}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00509}00509         this-\/>\mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a93527d910de908035feb8f41b0401065}{calculate\_second\_piola\_kirchhoff\_stress}}(}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00510}00510           g, G\_pls, sigma\_dev\_pls, Gup\_pls, detG\_pls);}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00511}00511 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00512}00512 }
@@ -525,7 +525,7 @@
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00521}00521           \{}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00522}00522             d\_sigma\_dG(ii, jj, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j) =}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00523}00523               (sigma\_dev\_pls(ii, jj) -\/ interpolated\_solid\_p * Gup\_pls(ii, jj) -\/}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00524}00524                \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(ii, jj)) /}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00524}00524                sigma(ii, jj)) /}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00525}00525               eps\_fd;}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00526}00526           \}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00527}00527         \}}
@@ -567,38 +567,38 @@
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00563}00563 \textcolor{comment}{  /// for near-\/incompressible materials.}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00564}00564 \textcolor{comment}{  /// The default implementation uses finite differences.}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00565}00565 \textcolor{comment}{}  \textcolor{comment}{//=======================================================================}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00566}00566   \textcolor{keywordtype}{void} ConstitutiveLaw::calculate\_d\_second\_piola\_kirchhoff\_stress\_dG(}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00567}00567     \textcolor{keyword}{const} DenseMatrix<double>\& g,}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00568}00568     \textcolor{keyword}{const} DenseMatrix<double>\& G,}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00569}00569     \textcolor{keyword}{const} DenseMatrix<double>\& \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}},}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00566}\mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a8a4f1bcac8d308d9ad0013ddf5def505}{00566}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a6076752384082cfa3de3e0cf17daa9aa}{ConstitutiveLaw::calculate\_d\_second\_piola\_kirchhoff\_stress\_dG}}(}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00567}00567     \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& g,}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00568}00568     \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& G,}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00569}00569     \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& sigma,}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00570}00570     \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& gen\_dil,}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00571}00571     \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& inv\_kappa,}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00572}00572     \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& interpolated\_solid\_p,}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00573}00573     RankFourTensor<double>\& d\_sigma\_dG,}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00574}00574     DenseMatrix<double>\& d\_gen\_dil\_dG,}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00573}00573     \mbox{\hyperlink{classoomph_1_1RankFourTensor}{RankFourTensor<double>}}\& d\_sigma\_dG,}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00574}00574     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& d\_gen\_dil\_dG,}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00575}00575     \textcolor{keyword}{const} \textcolor{keywordtype}{bool}\& symmetrize\_tensor)}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00576}00576   \{}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00577}00577     \textcolor{comment}{// Initial error checking}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00578}00578 \textcolor{preprocessor}{\#ifdef PARANOID}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00579}00579     \textcolor{comment}{// Test that the matrices are of the same dimension}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00580}00580     \textcolor{keywordflow}{if} (!are\_matrices\_of\_equal\_dimensions(g, G))}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00580}00580     \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a8a89bb96a9b922294509923563a13063}{are\_matrices\_of\_equal\_dimensions}}(g, G))}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00581}00581     \{}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00582}00582       \textcolor{keywordflow}{throw} OomphLibError(\textcolor{stringliteral}{"{}Matrices passed are not of equal dimension"{}},}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00582}00582       \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(\textcolor{stringliteral}{"{}Matrices passed are not of equal dimension"{}},}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00583}00583                           OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00584}00584                           OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00585}00585     \}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00586}00586 \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00587}00587 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00588}00588     \textcolor{comment}{// Find the dimension of the matrix (assuming that it's square)}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00589}00589     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} dim = G.ncol();}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00589}00589     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} dim = G.\mbox{\hyperlink{classoomph_1_1DenseMatrix_a9937181f1cb4cfaed7aaf3b483c42456}{ncol}}();}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00590}00590 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00591}00591     \textcolor{comment}{// FD step}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00592}00592     \textcolor{keyword}{const} \textcolor{keywordtype}{double} eps\_fd = \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a156163c9f6fbd17548a9fa836616d19b}{GeneralisedElement::Default\_fd\_jacobian\_step}};}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00593}00593 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00594}00594     \textcolor{comment}{// Advanced metric tensor etc}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00595}00595     DenseMatrix<double> G\_pls(dim, dim);}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00596}00596     DenseMatrix<double> sigma\_dev\_pls(dim, dim);}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00597}00597     DenseMatrix<double> Gup\_pls(dim, dim);}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00595}00595     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} G\_pls(dim, dim);}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00596}00596     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} sigma\_dev\_pls(dim, dim);}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00597}00597     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} Gup\_pls(dim, dim);}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00598}00598     \textcolor{keywordtype}{double} gen\_dil\_pls;}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00599}00599     \textcolor{keywordtype}{double} inv\_kappa\_pls;}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00600}00600 }
@@ -625,7 +625,7 @@
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00621}00621         G\_pls(j, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = G\_pls(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j);}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00622}00622 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00623}00623         \textcolor{comment}{// Get advanced stress}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00624}00624         this-\/>calculate\_second\_piola\_kirchhoff\_stress(}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00624}00624         this-\/>\mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a93527d910de908035feb8f41b0401065}{calculate\_second\_piola\_kirchhoff\_stress}}(}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00625}00625           g, G\_pls, sigma\_dev\_pls, Gup\_pls, gen\_dil\_pls, inv\_kappa\_pls);}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00626}00626 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00627}00627         \textcolor{comment}{// Derivative of generalised dilatation}}
@@ -639,7 +639,7 @@
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00635}00635           \{}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00636}00636             d\_sigma\_dG(ii, jj, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j) =}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00637}00637               (sigma\_dev\_pls(ii, jj) -\/ interpolated\_solid\_p * Gup\_pls(ii, jj) -\/}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00638}00638                \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(ii, jj)) /}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00638}00638                sigma(ii, jj)) /}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00639}00639               eps\_fd;}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00640}00640           \}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00641}00641         \}}
@@ -683,30 +683,30 @@
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00679}00679 \textcolor{comment}{  /// covariant undeformed (stress-\/free) and deformed metric}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00680}00680 \textcolor{comment}{  /// tensors, g and G, and the matrix in which to return the stress tensor.}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00681}00681 \textcolor{comment}{}  \textcolor{comment}{//=====================================================================}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00682}00682   \textcolor{keywordtype}{void} GeneralisedHookean::calculate\_second\_piola\_kirchhoff\_stress(}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00683}00683     \textcolor{keyword}{const} DenseMatrix<double>\& g,}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00684}00684     \textcolor{keyword}{const} DenseMatrix<double>\& G,}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00685}00685     DenseMatrix<double>\& \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}})}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00682}\mbox{\hyperlink{classoomph_1_1GeneralisedHookean_a5beca3e59f04d109c394bf9fd24bb7c1}{00682}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1GeneralisedHookean_a5beca3e59f04d109c394bf9fd24bb7c1}{GeneralisedHookean::calculate\_second\_piola\_kirchhoff\_stress}}(}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00683}00683     \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& g,}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00684}00684     \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& G,}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00685}00685     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& sigma)}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00686}00686   \{}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00687}00687     \textcolor{comment}{// Error checking}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00688}00688 \textcolor{preprocessor}{\#ifdef PARANOID}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00689}00689     error\_checking\_in\_input(g, G, \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}});}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00689}00689     \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a01763658a56a962460a80607653a33b4}{error\_checking\_in\_input}}(g, G, sigma);}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00690}00690 \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00691}00691 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00692}00692     \textcolor{comment}{// Find the dimension of the problem}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00693}00693     \textcolor{keywordtype}{unsigned} dim = G.nrow();}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00693}00693     \textcolor{keywordtype}{unsigned} dim = G.\mbox{\hyperlink{classoomph_1_1DenseMatrix_a1b425094510d833ffe91920747a0a962}{nrow}}();}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00694}00694 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00695}00695     \textcolor{comment}{// Calculate the contravariant Deformed metric tensor}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00696}00696     DenseMatrix<double> Gup(dim);}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00696}00696     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} Gup(dim);}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00697}00697     \textcolor{comment}{// We don't need the Jacobian so cast the function to void}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00698}00698     (void)calculate\_contravariant(G, Gup);}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00698}00698     (void)\mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a5c188df10b08b340b923c3a733c0d178}{calculate\_contravariant}}(G, Gup);}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00699}00699 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00700}00700     \textcolor{comment}{// Premultiply some constants}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00701}00701     \textcolor{keywordtype}{double} C1 = (*E\_pt) / (2.0 * (1.0 + (*Nu\_pt)));}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00702}00702     \textcolor{keywordtype}{double} C2 = 2.0 * (*Nu\_pt) / (1.0 -\/ 2.0 * (*Nu\_pt));}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00703}00703 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00704}00704     \textcolor{comment}{// Strain tensor}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00705}00705     DenseMatrix<double> strain(dim, dim);}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00705}00705     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} strain(dim, dim);}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00706}00706 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00707}00707     \textcolor{comment}{// Upper triangle}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00708}00708     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < dim; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
@@ -732,12 +732,12 @@
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00728}00728       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}; j < dim; j++)}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00729}00729       \{}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00730}00730         \textcolor{comment}{// Initialise this component of sigma}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00731}00731         \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j) = 0.0;}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00731}00731         sigma(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j) = 0.0;}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00732}00732         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < dim; k++)}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00733}00733         \{}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00734}00734           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} l = 0; l < dim; l++)}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00735}00735           \{}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00736}00736             \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j) += C1 *}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00736}00736             sigma(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j) += C1 *}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00737}00737                            (Gup(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, k) * Gup(j, l) + Gup(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, l) * Gup(j, k) +}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00738}00738                             C2 * Gup(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j) * Gup(k, l)) *}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00739}00739                            strain(k, l);}
@@ -751,7 +751,7 @@
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00747}00747     \{}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00748}00748       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}; j++)}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00749}00749       \{}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00750}00750         \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j) = \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(j, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00750}00750         sigma(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j) = sigma(j, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00751}00751       \}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00752}00752     \}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00753}00753   \}}
@@ -766,27 +766,27 @@
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00762}00762 \textcolor{comment}{  /// where the "{}pressure"{} \(\backslash\)f\$ p \(\backslash\)f\$ is determined from}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00763}00763 \textcolor{comment}{  /// \(\backslash\)f\$ p / \(\backslash\)kappa -\/ d =0 \(\backslash\)f\$.}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00764}00764 \textcolor{comment}{}  \textcolor{comment}{//===========================================================================}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00765}00765   \textcolor{keywordtype}{void} GeneralisedHookean::calculate\_second\_piola\_kirchhoff\_stress(}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00766}00766     \textcolor{keyword}{const} DenseMatrix<double>\& g,}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00767}00767     \textcolor{keyword}{const} DenseMatrix<double>\& G,}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00768}00768     DenseMatrix<double>\& sigma\_dev,}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00769}00769     DenseMatrix<double>\& Gup,}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00765}\mbox{\hyperlink{classoomph_1_1GeneralisedHookean_ad19b5e80755f5d8e5513c4199f62fe03}{00765}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1GeneralisedHookean_a5beca3e59f04d109c394bf9fd24bb7c1}{GeneralisedHookean::calculate\_second\_piola\_kirchhoff\_stress}}(}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00766}00766     \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& g,}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00767}00767     \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& G,}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00768}00768     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& sigma\_dev,}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00769}00769     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& Gup,}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00770}00770     \textcolor{keywordtype}{double}\& gen\_dil,}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00771}00771     \textcolor{keywordtype}{double}\& inv\_kappa)}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00772}00772   \{}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00773}00773     \textcolor{comment}{// Find the dimension of the problem}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00774}00774     \textcolor{keywordtype}{unsigned} dim = G.nrow();}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00774}00774     \textcolor{keywordtype}{unsigned} dim = G.\mbox{\hyperlink{classoomph_1_1DenseMatrix_a1b425094510d833ffe91920747a0a962}{nrow}}();}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00775}00775 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00776}00776     \textcolor{comment}{// Assign memory for the determinant of the deformed metric tensor}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00777}00777     \textcolor{keywordtype}{double} detG = 0.0;}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00778}00778 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00779}00779     \textcolor{comment}{// Compute deviatoric stress by calling the incompressible}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00780}00780     \textcolor{comment}{// version of this function}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00781}00781     calculate\_second\_piola\_kirchhoff\_stress(g, G, sigma\_dev, Gup, detG);}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00781}00781     \mbox{\hyperlink{classoomph_1_1GeneralisedHookean_a5beca3e59f04d109c394bf9fd24bb7c1}{calculate\_second\_piola\_kirchhoff\_stress}}(g, G, sigma\_dev, Gup, detG);}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00782}00782 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00783}00783     \textcolor{comment}{// Calculate the inverse of the "{}bulk"{} modulus}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00784}00784     inv\_kappa =}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00785}00785       (1.0 -\/ 2.0 * (*Nu\_pt)) * (1.0 + (*Nu\_pt)) / ((*E\_pt) * (*Nu\_pt));}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00785}00785       (1.0 -\/ 2.0 * (*Nu\_pt)) * (1.0 + (*\mbox{\hyperlink{classoomph_1_1GeneralisedHookean_ad719ee5ed6d1bcacb18fec3339ae98de}{Nu\_pt}})) / ((*\mbox{\hyperlink{classoomph_1_1GeneralisedHookean_a7a68b35f227848a065a7a844766b4eeb}{E\_pt}}) * (*Nu\_pt));}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00786}00786 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00787}00787     \textcolor{comment}{// Finally compute the generalised dilatation (i.e. the term that}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00788}00788     \textcolor{comment}{// must be zero if \(\backslash\)kappa \(\backslash\)to \(\backslash\)infty}}
@@ -812,29 +812,29 @@
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00808}00808 \textcolor{comment}{  /// where the "{}pressure"{} \(\backslash\)f\$ p \(\backslash\)f\$ is determined by}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00809}00809 \textcolor{comment}{  /// \(\backslash\)f\$ \(\backslash\)det G\_\{ij\} -\/ \(\backslash\)det g\_\{ij\} = 0 \(\backslash\)f\$.}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00810}00810 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00811}00811   \textcolor{keywordtype}{void} GeneralisedHookean::calculate\_second\_piola\_kirchhoff\_stress(}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00812}00812     \textcolor{keyword}{const} DenseMatrix<double>\& g,}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00813}00813     \textcolor{keyword}{const} DenseMatrix<double>\& G,}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00814}00814     DenseMatrix<double>\& sigma\_dev,}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00815}00815     DenseMatrix<double>\& Gup,}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00811}\mbox{\hyperlink{classoomph_1_1GeneralisedHookean_a641d0893e485df52b48b15e189a850ed}{00811}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1GeneralisedHookean_a5beca3e59f04d109c394bf9fd24bb7c1}{GeneralisedHookean::calculate\_second\_piola\_kirchhoff\_stress}}(}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00812}00812     \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& g,}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00813}00813     \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& G,}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00814}00814     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& sigma\_dev,}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00815}00815     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& Gup,}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00816}00816     \textcolor{keywordtype}{double}\& detG)}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00817}00817   \{}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00818}00818     \textcolor{comment}{// Error checking}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00819}00819 \textcolor{preprocessor}{\#ifdef PARANOID}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00820}00820     error\_checking\_in\_input(g, G, sigma\_dev);}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00820}00820     \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a01763658a56a962460a80607653a33b4}{error\_checking\_in\_input}}(g, G, sigma\_dev);}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00821}00821 \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00822}00822 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00823}00823     \textcolor{comment}{// Find the dimension of the problem}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00824}00824     \textcolor{keywordtype}{unsigned} dim = G.nrow();}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00824}00824     \textcolor{keywordtype}{unsigned} dim = G.\mbox{\hyperlink{classoomph_1_1DenseMatrix_a1b425094510d833ffe91920747a0a962}{nrow}}();}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00825}00825 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00826}00826     \textcolor{comment}{// Calculate the contravariant Deformed metric tensor}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00827}00827     detG = calculate\_contravariant(G, Gup);}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00827}00827     detG = \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a5c188df10b08b340b923c3a733c0d178}{calculate\_contravariant}}(G, Gup);}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00828}00828 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00829}00829     \textcolor{comment}{// Premultiply the appropriate physical constant}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00830}00830     \textcolor{keywordtype}{double} C1 = (*E\_pt) / (2.0 * (1.0 + (*Nu\_pt)));}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00831}00831 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00832}00832     \textcolor{comment}{// Strain tensor}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00833}00833     DenseMatrix<double> strain(dim, dim);}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00833}00833     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} strain(dim, dim);}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00834}00834 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00835}00835     \textcolor{comment}{// Upper triangle}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00836}00836     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < dim; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
@@ -899,11 +899,11 @@
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00895}\mbox{\hyperlink{classoomph_1_1IsotropicStrainEnergyFunctionConstitutiveLaw_af6c25617b8be6cc454d6b526ec6121fc}{00895}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1IsotropicStrainEnergyFunctionConstitutiveLaw_af6c25617b8be6cc454d6b526ec6121fc}{IsotropicStrainEnergyFunctionConstitutiveLaw::}}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00896}00896 \mbox{\hyperlink{classoomph_1_1IsotropicStrainEnergyFunctionConstitutiveLaw_af6c25617b8be6cc454d6b526ec6121fc}{    calculate\_second\_piola\_kirchhoff\_stress}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& g,}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00897}00897                                             \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& G,}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00898}00898                                             \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}})}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00898}00898                                             \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& sigma)}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00899}00899   \{}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00900}00900 \textcolor{comment}{// Error checking}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00901}00901 \textcolor{preprocessor}{\#ifdef PARANOID}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00902}00902     error\_checking\_in\_input(g, G, \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}});}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00902}00902     \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a01763658a56a962460a80607653a33b4}{error\_checking\_in\_input}}(g, G, sigma);}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00903}00903 \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00904}00904 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00905}00905     \textcolor{comment}{// Find the dimension of the problem}}
@@ -925,8 +925,8 @@
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00921}00921     \textcolor{comment}{// Calculate the contravariant undeformed and deformed metric tensors}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00922}00922     \textcolor{comment}{// and get the determinants of the metric tensors}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00923}00923     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} gup(dim), Gup(dim);}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00924}00924     \textcolor{keywordtype}{double} detg = calculate\_contravariant(g, gup);}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00925}00925     \textcolor{keywordtype}{double} detG = calculate\_contravariant(G, Gup);}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00924}00924     \textcolor{keywordtype}{double} detg = \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a5c188df10b08b340b923c3a733c0d178}{calculate\_contravariant}}(g, gup);}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00925}00925     \textcolor{keywordtype}{double} detG = \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a5c188df10b08b340b923c3a733c0d178}{calculate\_contravariant}}(G, Gup);}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00926}00926 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00927}00927     \textcolor{comment}{// Calculate the strain invariants}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00928}00928     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_1_1MathematicalConstants_a609ab3b897b174e49ddf7a19fd95f2ef}{I}}(3, 0.0);}
@@ -996,7 +996,7 @@
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00992}00992     \{}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00993}00993       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < dim; j++)}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00994}00994       \{}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00995}00995         \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j) = phi * gup(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j) + psi * Bup(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j) + p * Gup(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j);}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00995}00995         sigma(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j) = phi * gup(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j) + psi * Bup(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j) + p * Gup(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j);}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00996}00996       \}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00997}00997     \}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l00998}00998   \}}
@@ -1019,7 +1019,7 @@
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l01015}01015   \{}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l01016}01016 \textcolor{comment}{// Error checking}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l01017}01017 \textcolor{preprocessor}{\#ifdef PARANOID}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l01018}01018     error\_checking\_in\_input(g, G, sigma\_dev);}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l01018}01018     \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a01763658a56a962460a80607653a33b4}{error\_checking\_in\_input}}(g, G, sigma\_dev);}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l01019}01019 \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l01020}01020 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l01021}01021     \textcolor{comment}{// Find the dimension of the problem}}
@@ -1042,9 +1042,9 @@
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l01038}01038     \textcolor{comment}{// Calculate the contravariant undeformed and deformed metric tensors}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l01039}01039     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} gup(dim);}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l01040}01040     \textcolor{comment}{// Don't need this determinant}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l01041}01041     (void)calculate\_contravariant(g, gup);}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l01041}01041     (void)\mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a5c188df10b08b340b923c3a733c0d178}{calculate\_contravariant}}(g, gup);}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l01042}01042     \textcolor{comment}{// These are passed back}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l01043}01043     detG = calculate\_contravariant(G, Gup);}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l01043}01043     detG = \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a5c188df10b08b340b923c3a733c0d178}{calculate\_contravariant}}(G, Gup);}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l01044}01044 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l01045}01045     \textcolor{comment}{// Calculate the strain invariants}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l01046}01046     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_1_1MathematicalConstants_a609ab3b897b174e49ddf7a19fd95f2ef}{I}}(3, 0.0);}
@@ -1147,7 +1147,7 @@
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l01143}01143   \{}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l01144}01144 \textcolor{comment}{// Error checking}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l01145}01145 \textcolor{preprocessor}{\#ifdef PARANOID}}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l01146}01146     error\_checking\_in\_input(g, G, sigma\_dev);}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l01146}01146     \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a01763658a56a962460a80607653a33b4}{error\_checking\_in\_input}}(g, G, sigma\_dev);}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l01147}01147 \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l01148}01148 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l01149}01149     \textcolor{comment}{// Find the dimension of the problem}}
@@ -1169,8 +1169,8 @@
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l01165}01165     \textcolor{comment}{// Calculate the contravariant undeformed and deformed metric tensors}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l01166}01166     \textcolor{comment}{// and get the determinants of the metric tensors}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l01167}01167     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} gup(dim);}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l01168}01168     \textcolor{keywordtype}{double} detg = calculate\_contravariant(g, gup);}
-\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l01169}01169     \textcolor{keywordtype}{double} detG = calculate\_contravariant(G, Gup);}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l01168}01168     \textcolor{keywordtype}{double} detg = \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a5c188df10b08b340b923c3a733c0d178}{calculate\_contravariant}}(g, gup);}
+\DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l01169}01169     \textcolor{keywordtype}{double} detG = \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a5c188df10b08b340b923c3a733c0d178}{calculate\_contravariant}}(G, Gup);}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l01170}01170 }
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l01171}01171     \textcolor{comment}{// Calculate the strain invariants}}
 \DoxyCodeLine{\Hypertarget{constitutive__laws_8cc_source_l01172}01172     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_1_1MathematicalConstants_a609ab3b897b174e49ddf7a19fd95f2ef}{I}}(3, 0.0);}

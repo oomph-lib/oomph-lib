@@ -90,7 +90,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8cc_source_l00086}00086         ipt, psi, dpsidx, test, dtestdx);}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8cc_source_l00087}00087 }
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8cc_source_l00088}00088       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8cc_source_l00089}00089       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8cc_source_l00089}00089       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8cc_source_l00090}00090 }
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8cc_source_l00091}00091       \textcolor{comment}{// Calculate local values of the function}}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8cc_source_l00092}00092       \textcolor{keywordtype}{double} dudt = 0.0;}
@@ -191,7 +191,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8cc_source_l00187}00187           \{}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8cc_source_l00188}00188             \textcolor{comment}{// Add body force/source term and time derivative}}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8cc_source_l00189}00189             residuals[local\_eqn] +=}
-\DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8cc_source_l00190}00190               (alpha\_local * dudt + source) * test(l) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight;}
+\DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8cc_source_l00190}00190               (alpha\_local * dudt + source) * test(l) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight;}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8cc_source_l00191}00191 }
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8cc_source_l00192}00192             \textcolor{comment}{// Mesh velocity and  Laplace operator itself}}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8cc_source_l00193}00193             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < DIM; k++)}
@@ -200,7 +200,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8cc_source_l00196}00196               \textcolor{keywordflow}{if} (!ALE\_is\_disabled\_flag)}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8cc_source_l00197}00197                 tmp -\/= alpha\_local * mesh\_velocity[k] * test(l);}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8cc_source_l00198}00198               residuals[local\_eqn] +=}
-\DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8cc_source_l00199}00199                 interpolated\_dudx[k] * tmp * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight;}
+\DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8cc_source_l00199}00199                 interpolated\_dudx[k] * tmp * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight;}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8cc_source_l00200}00200             \}}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8cc_source_l00201}00201 }
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8cc_source_l00202}00202             \textcolor{comment}{// Calculate the Jacobian}}
@@ -256,7 +256,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8cc_source_l00252}00252                     \textcolor{comment}{// Mass matrix}}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8cc_source_l00253}00253                     jacobian(local\_eqn, local\_unknown) +=}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8cc_source_l00254}00254                       alpha\_local * test(l) * psi(l2) *}
-\DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8cc_source_l00255}00255                       this-\/>node\_pt(l2)-\/>time\_stepper\_pt()-\/>weight(1, 0) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} *}
+\DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8cc_source_l00255}00255                       this-\/>node\_pt(l2)-\/>time\_stepper\_pt()-\/>weight(1, 0) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} *}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8cc_source_l00256}00256                       hang\_weight * hang\_weight2;}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8cc_source_l00257}00257 }
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8cc_source_l00258}00258                     \textcolor{comment}{// Laplace operator and mesh veloc bit}}
@@ -268,7 +268,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8cc_source_l00264}00264                         tmp -\/= alpha\_local * mesh\_velocity[k] * test(l);}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8cc_source_l00265}00265                       \}}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8cc_source_l00266}00266                       jacobian(local\_eqn, local\_unknown) +=}
-\DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8cc_source_l00267}00267                         dpsidx(l2, k) * tmp * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight * hang\_weight2;}
+\DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8cc_source_l00267}00267                         dpsidx(l2, k) * tmp * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight * hang\_weight2;}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8cc_source_l00268}00268                     \}}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8cc_source_l00269}00269                   \}}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8cc_source_l00270}00270                 \} \textcolor{comment}{// End of loop over master nodes}}

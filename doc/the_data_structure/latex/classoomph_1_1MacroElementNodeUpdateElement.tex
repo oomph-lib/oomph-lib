@@ -20,13 +20,13 @@ Inheritance diagram for oomph\+::Macro\+Element\+Node\+Update\+Element\texorpdfs
 \item 
 \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElement_ab49b2589181fe58687ae0d628d02ed4c}{Macro\+Element\+Node\+Update\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Constructor\+: Call constructor of underlying element. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElement_a9c5e49933712f3dd500068b021f8dfdc}{Macro\+Element\+Node\+Update\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&element\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&face\+\_\+index)
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElement_a9c5e49933712f3dd500068b021f8dfdc}{Macro\+Element\+Node\+Update\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&element\+\_\+pt, const int \&face\+\_\+index)
 \begin{DoxyCompactList}\small\item\em Constructor used for face elements. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElement_ade87a7c41a7a8a338a791146b537f920}{Macro\+Element\+Node\+Update\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElement}{Macro\+Element\+Node\+Update\+Element}} \&)=delete
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElement_ade87a7c41a7a8a338a791146b537f920}{Macro\+Element\+Node\+Update\+Element}} (const \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElement}{Macro\+Element\+Node\+Update\+Element}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElement_a0010eb32e2ef063ef8911c63a66ab515}{$\sim$\+Macro\+Element\+Node\+Update\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Empty destructor to clean up allocated memory. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElement_a9a9671e70a90435f36a971495ba342cf}{set\+\_\+node\+\_\+update\+\_\+info}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$ $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElementBase_afcffd290cc0292a571e7a443bc23728b}{geom\+\_\+object\+\_\+pt}})
+void \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElement_a9a9671e70a90435f36a971495ba342cf}{set\+\_\+node\+\_\+update\+\_\+info}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$ $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElementBase_afcffd290cc0292a571e7a443bc23728b}{geom\+\_\+object\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElement_a42c232507a0a46b065615dabad1304eb}{rebuild\+\_\+from\+\_\+sons}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&mesh\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Rebuild after unrefinement\+: Reset the node update information for all nodes so that the nodes get updated by this element. If we don\textquotesingle{}t do that, some nodes might still want to be updated by elements that no longer exist which leads to the most wonderful seg fault... Afterwards, call the template element\textquotesingle{}s own rebuild\+\_\+from\+\_\+son() function (if it\textquotesingle{}s a \mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}}) \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -65,7 +65,7 @@ Definition at line \mbox{\hyperlink{macro__element__node__update__element_8h_sou
 \index{MacroElementNodeUpdateElement@{MacroElementNodeUpdateElement}!oomph::MacroElementNodeUpdateElement$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{MacroElementNodeUpdateElement()}{MacroElementNodeUpdateElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElement}{oomph\+::\+Macro\+Element\+Node\+Update\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElement}{Macro\+Element\+Node\+Update\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{element\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElement}{oomph\+::\+Macro\+Element\+Node\+Update\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElement}{Macro\+Element\+Node\+Update\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{element\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -80,7 +80,7 @@ Definition at line \mbox{\hyperlink{macro__element__node__update__element_8h_sou
 \index{MacroElementNodeUpdateElement@{MacroElementNodeUpdateElement}!oomph::MacroElementNodeUpdateElement$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{MacroElementNodeUpdateElement()}{MacroElementNodeUpdateElement()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElement}{oomph\+::\+Macro\+Element\+Node\+Update\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElement}{Macro\+Element\+Node\+Update\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElement}{Macro\+Element\+Node\+Update\+Element}}$<$ ELEMENT $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElement}{oomph\+::\+Macro\+Element\+Node\+Update\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElement}{Macro\+Element\+Node\+Update\+Element}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElement}{Macro\+Element\+Node\+Update\+Element}}$<$ ELEMENT $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
@@ -121,14 +121,14 @@ Definition at line \mbox{\hyperlink{macro__element__node__update__element_8h_sou
 
 
 
-References \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00243}{oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::\+Geom\+\_\+object\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l01847}{oomph\+::\+Finite\+Element\+::local\+\_\+coordinate\+\_\+of\+\_\+node()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00297}{oomph\+::\+Macro\+Element\+Node\+Update\+Element$<$ ELEMENT $>$\+::set\+\_\+node\+\_\+update\+\_\+info()}}.
+References \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00243}{oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::\+Geom\+\_\+object\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l01842}{oomph\+::\+Finite\+Element\+::local\+\_\+coordinate\+\_\+of\+\_\+node()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00297}{oomph\+::\+Macro\+Element\+Node\+Update\+Element$<$ ELEMENT $>$\+::set\+\_\+node\+\_\+update\+\_\+info()}}.
 
 \mbox{\Hypertarget{classoomph_1_1MacroElementNodeUpdateElement_a9a9671e70a90435f36a971495ba342cf}\label{classoomph_1_1MacroElementNodeUpdateElement_a9a9671e70a90435f36a971495ba342cf}} 
 \index{oomph::MacroElementNodeUpdateElement$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateElement$<$ ELEMENT $>$}!set\_node\_update\_info@{set\_node\_update\_info}}
 \index{set\_node\_update\_info@{set\_node\_update\_info}!oomph::MacroElementNodeUpdateElement$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{set\_node\_update\_info()}{set\_node\_update\_info()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElement}{oomph\+::\+Macro\+Element\+Node\+Update\+Element}}$<$ ELEMENT $>$\+::set\+\_\+node\+\_\+update\+\_\+info (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$ $>$ \&}]{geom\+\_\+object\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElement}{oomph\+::\+Macro\+Element\+Node\+Update\+Element}}$<$ ELEMENT $>$\+::set\+\_\+node\+\_\+update\+\_\+info (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$ $>$ \&}]{geom\+\_\+object\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -144,7 +144,7 @@ Definition at line \mbox{\hyperlink{macro__element__node__update__element_8h_sou
 
 
 
-References \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00227}{oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::geom\+\_\+object\+\_\+pt()}}, \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00243}{oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::\+Geom\+\_\+object\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01847}{oomph\+::\+Finite\+Element\+::local\+\_\+coordinate\+\_\+of\+\_\+node()}}, \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00220}{oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::ngeom\+\_\+object()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00297}{oomph\+::\+Macro\+Element\+Node\+Update\+Element$<$ ELEMENT $>$\+::set\+\_\+node\+\_\+update\+\_\+info()}}.
+References \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00227}{oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::geom\+\_\+object\+\_\+pt()}}, \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00243}{oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::\+Geom\+\_\+object\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01842}{oomph\+::\+Finite\+Element\+::local\+\_\+coordinate\+\_\+of\+\_\+node()}}, \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00220}{oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::ngeom\+\_\+object()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00297}{oomph\+::\+Macro\+Element\+Node\+Update\+Element$<$ ELEMENT $>$\+::set\+\_\+node\+\_\+update\+\_\+info()}}.
 
 
 

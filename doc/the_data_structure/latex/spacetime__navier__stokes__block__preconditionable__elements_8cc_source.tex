@@ -43,13 +43,13 @@
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditionable__elements_8cc_source_l00039}00039     std::list<std::pair<unsigned long, unsigned>>\& dof\_lookup\_list)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditionable__elements_8cc_source_l00040}00040 \textcolor{keyword}{  }\{}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditionable__elements_8cc_source_l00041}00041     \textcolor{comment}{// Number of nodes}}
-\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditionable__elements_8cc_source_l00042}00042     \textcolor{keywordtype}{unsigned} n\_node = this-\/>nnode();}
+\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditionable__elements_8cc_source_l00042}00042     \textcolor{keywordtype}{unsigned} n\_node = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditionable__elements_8cc_source_l00043}00043 }
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditionable__elements_8cc_source_l00044}00044     \textcolor{comment}{// Temporary pair (used to store dof lookup prior to being added to list)}}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditionable__elements_8cc_source_l00045}00045     std::pair<unsigned, unsigned> dof\_lookup;}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditionable__elements_8cc_source_l00046}00046 }
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditionable__elements_8cc_source_l00047}00047     \textcolor{comment}{// The number of nodes in the each direction}}
-\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditionable__elements_8cc_source_l00048}00048     \textcolor{keywordtype}{unsigned} n\_node\_1d = this-\/>nnode\_1d();}
+\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditionable__elements_8cc_source_l00048}00048     \textcolor{keywordtype}{unsigned} n\_node\_1d = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_ab65c7a94dda80c1876a09ac12be4e39c}{nnode\_1d}}();}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditionable__elements_8cc_source_l00049}00049 }
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditionable__elements_8cc_source_l00050}00050     \textcolor{comment}{// Make sure that we're using quadratic interpolation otherwise this might}}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditionable__elements_8cc_source_l00051}00051     \textcolor{comment}{// go wrong...}}
@@ -74,7 +74,7 @@
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditionable__elements_8cc_source_l00070}00070     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < n\_node; j++)}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditionable__elements_8cc_source_l00071}00071     \{}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditionable__elements_8cc_source_l00072}00072       \textcolor{comment}{// Only bother if the node isn't a copy...}}
-\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditionable__elements_8cc_source_l00073}00073       \textcolor{keywordflow}{if} (!(this-\/>node\_pt(j)-\/>is\_a\_copy()))}
+\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditionable__elements_8cc_source_l00073}00073       \textcolor{keywordflow}{if} (!(this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j)-\/>is\_a\_copy()))}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditionable__elements_8cc_source_l00074}00074       \{}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditionable__elements_8cc_source_l00075}00075         \textcolor{comment}{// Storage for the local time slice ID (0<i\_local<n\_node\_1d)}}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditionable__elements_8cc_source_l00076}00076         \textcolor{keywordtype}{unsigned} i\_local = 0;}
@@ -115,13 +115,13 @@
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditionable__elements_8cc_source_l00111}00111         \}}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditionable__elements_8cc_source_l00112}00112 }
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditionable__elements_8cc_source_l00113}00113         \textcolor{comment}{// The number of dofs at this node}}
-\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditionable__elements_8cc_source_l00114}00114         \textcolor{keywordtype}{unsigned} n\_dof = this-\/>node\_pt(j)-\/>nvalue();}
+\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditionable__elements_8cc_source_l00114}00114         \textcolor{keywordtype}{unsigned} n\_dof = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j)-\/>\mbox{\hyperlink{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}{nvalue}}();}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditionable__elements_8cc_source_l00115}00115 }
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditionable__elements_8cc_source_l00116}00116         \textcolor{comment}{// Loop over components}}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditionable__elements_8cc_source_l00117}00117         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_dof; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditionable__elements_8cc_source_l00118}00118         \{}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditionable__elements_8cc_source_l00119}00119           \textcolor{comment}{// Determine local eqn number}}
-\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditionable__elements_8cc_source_l00120}00120           \textcolor{keywordtype}{int} \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a3d46b71d27f94aeba21aff1ef84fd0a6}{local\_eqn\_number}} = this-\/>nodal\_local\_eqn(j, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditionable__elements_8cc_source_l00120}00120           \textcolor{keywordtype}{int} \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a3d46b71d27f94aeba21aff1ef84fd0a6}{local\_eqn\_number}} = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5da80bbed97543e586f698251d67941d}{nodal\_local\_eqn}}(j, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditionable__elements_8cc_source_l00121}00121 }
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditionable__elements_8cc_source_l00122}00122           \textcolor{comment}{// Ignore pinned values -\/ far away degrees of freedom resulting}}
 \DoxyCodeLine{\Hypertarget{spacetime__navier__stokes__block__preconditionable__elements_8cc_source_l00123}00123           \textcolor{comment}{// from hanging nodes can be ignored since these are be dealt}}

@@ -1,0 +1,760 @@
+\hypertarget{classoomph_1_1LinearWaveEquations}{}\doxysection{oomph\+::Linear\+Wave\+Equations\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>} Class Template Reference}
+\label{classoomph_1_1LinearWaveEquations}\index{oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}}
+
+
+A class for all isoparametric elements that solve the Linear\+Wave equations.  
+
+
+
+
+{\ttfamily \#include $<$linear\+\_\+wave\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Linear\+Wave\+Equations\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.794038cm]{classoomph_1_1LinearWaveEquations}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a9648dd63c18bab6854d362d16f01e33d}{Linear\+Wave\+Source\+Fct\+Pt}}) (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&u)
+\begin{DoxyCompactList}\small\item\em Function pointer to source function fct(x,f(x)) -- x is a Vector! \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a3c434f9aef855a40403b74127fb36984}{Linear\+Wave\+Equations}} ()
+\begin{DoxyCompactList}\small\item\em Constructor (must initialise the Source\+\_\+fct\+\_\+pt to null) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a123c1b2cc777c6e409ebbc0d5b0b2b76}{Linear\+Wave\+Equations}} (const \mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{Linear\+Wave\+Equations}} \&dummy)=delete
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a3552f2d32359d79533b28f6ca387eee6}{operator=}} (const \mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{Linear\+Wave\+Equations}} \&)=delete
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+virtual unsigned \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_aba49f677e10850fc49d76a982522ce69}{u\+\_\+index\+\_\+lin\+\_\+wave}} () const
+\begin{DoxyCompactList}\small\item\em Return the index at which the unknown value is stored. The default value, 0, is appropriate for single-\/physics problems, when there is only one variable, the value that satisfies the linear wave equation. In derived multi-\/physics elements, this function should be overloaded to reflect the chosen storage scheme. Note that these equations require that the unknown is always stored at the same index at each node. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a207b45abfb3197cabe7f375a458c1a0f}{du\+\_\+dt\+\_\+lin\+\_\+wave}} (const unsigned \&n) const
+\begin{DoxyCompactList}\small\item\em du/dt at local node n. Uses suitably interpolated value for hanging nodes. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_ac249d0568e64e09da880f7b1b0f80cdd}{d2u\+\_\+dt2\+\_\+lin\+\_\+wave}} (const unsigned \&n) const
+\begin{DoxyCompactList}\small\item\em d$^\wedge$2u/dt$^\wedge$2 at local node n. Uses suitably interpolated value for hanging nodes. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_ad5d68d2b3ec9fe3c6102ae91b9c61cc6}{output}} (std\+::ostream \&outfile)
+\begin{DoxyCompactList}\small\item\em Output with default number of plot points. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a1830b4405d4ab215e91e01914dd426f3}{output}} (std\+::ostream \&outfile, const unsigned \&nplot)
+\begin{DoxyCompactList}\small\item\em Output FE representation of soln\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+DIM plot points. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a7a1464dbadf5fb3542979951b389694b}{output}} (FILE $\ast$file\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Output with default number of plot points. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a2e3dd0d7c46d095fea74969c3648f0ca}{output}} (FILE $\ast$file\+\_\+pt, const unsigned \&nplot)
+\begin{DoxyCompactList}\small\item\em Output FE representation of soln\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+DIM plot points. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a3ae24c98f2d190e56fe24e754de682d8}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&nplot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Output exact soln\+: x,y,u\+\_\+exact or x,y,z,u\+\_\+exact at nplot$^\wedge$\+DIM plot points. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_aa0089c4e106d9bd525639d3215ed6825}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&nplot, const double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Output exact soln\+: x,y,u\+\_\+exact or x,y,z,u\+\_\+exact at nplot$^\wedge$\+DIM plot points (time-\/dependent version) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_acf05d02ed25f46d2b0b8310fb8bc448b}{compute\+\_\+error}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt, double \&error, double \&norm)
+\begin{DoxyCompactList}\small\item\em Get error against and norm of exact solution. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_ae2dedf5d1dc024da927b05f532dde540}{compute\+\_\+error}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt, const double \&time, double \&error, double \&norm)
+\begin{DoxyCompactList}\small\item\em Get error against and norm of exact solution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a9648dd63c18bab6854d362d16f01e33d}{Linear\+Wave\+Source\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a6183c8a58b8aeebe505f158012b80934}{source\+\_\+fct\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function\+: Pointer to source function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a9648dd63c18bab6854d362d16f01e33d}{Linear\+Wave\+Source\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a61de270efb6fb0149da99d221580d13f}{source\+\_\+fct\+\_\+pt}} () const
+\begin{DoxyCompactList}\small\item\em Access function\+: Pointer to source function. Const version. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a1f2ef4ab9b1b50c29dc64ae4491265d1}{get\+\_\+source\+\_\+lin\+\_\+wave}} (const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&ipt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&source) const
+\begin{DoxyCompactList}\small\item\em Get source term at continous time t and (Eulerian) position x. Virtual so it can be overloaded in derived multiphysics elements. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a36ca5b4691a27beacd433a4f5279e1bf}{get\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux) const
+\begin{DoxyCompactList}\small\item\em Get flux\+: flux\mbox{[}i\mbox{]} = du/dx\+\_\+i. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a51319cb9bbb054c6a79d63b203d7d163}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
+\begin{DoxyCompactList}\small\item\em Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} (wrapper) \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a40f640d6f90bc3c4adb88d4aba3effce}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
+\begin{DoxyCompactList}\small\item\em Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} and element Jacobian matrix (wrapper) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_ac05d4cc1db9dd20b8e6975e5d6ccd530}{interpolated\+\_\+u\+\_\+lin\+\_\+wave}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) const
+\begin{DoxyCompactList}\small\item\em Return FE representation of function value u(s) at local coordinate s. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a79c7bb4d574bffa81227fa93bc08fb4b}{interpolated\+\_\+du\+\_\+dt\+\_\+lin\+\_\+wave}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) const
+\begin{DoxyCompactList}\small\item\em Return FE representation of function value u(s) at local coordinate s. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a86abe5e3b3473823368cb81f6f749707}{interpolated\+\_\+d2u\+\_\+dt2\+\_\+lin\+\_\+wave}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) const
+\begin{DoxyCompactList}\small\item\em Return FE representation of function value u(s) at local coordinate s. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a2e4ced01331ace59c6d8fe95a756ca73}{self\+\_\+test}} ()
+\begin{DoxyCompactList}\small\item\em Self-\/test\+: Return 0 for OK. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual double \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a57ed864bd1ecad66fc115bf3b956e4c6}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+lin\+\_\+wave}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) const =0
+\begin{DoxyCompactList}\small\item\em Shape/test functions and derivs w.\+r.\+t. to global coords at local coord. s; return Jacobian of mapping. \end{DoxyCompactList}\item 
+virtual double \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a8033ffc13e61d7adcd4b7e1154ea12af}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+lin\+\_\+wave}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) const =0
+\begin{DoxyCompactList}\small\item\em Shape/test functions and derivs w.\+r.\+t. to global coords at integration point ipt; return Jacobian of mapping. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_ae6017a229d5eccb3fb342e34a10382ec}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+lin\+\_\+wave}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, unsigned flag)
+\begin{DoxyCompactList}\small\item\em Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} only (if flag=and/or element Jacobian matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a9648dd63c18bab6854d362d16f01e33d}{Linear\+Wave\+Source\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_abdbae7c7594a53c7d5d5e73c13ea7cb2}{Source\+\_\+fct\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to source function\+: \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$unsigned DIM$>$\newline
+class oomph\+::\+Linear\+Wave\+Equations$<$ DIM $>$}
+A class for all isoparametric elements that solve the Linear\+Wave equations. 
+
+\[ \frac{\partial^2 u}{\partial x_i^2}= \frac{\partial^2 u}{\partial t^2}+f(t,x_j) \] This contains the generic maths. \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} functions, geometric mapping etc. must get implemented in derived class. 
+
+Definition at line \mbox{\hyperlink{linear__wave__elements_8h_source_l00052}{52}} of file \mbox{\hyperlink{linear__wave__elements_8h_source}{linear\+\_\+wave\+\_\+elements.\+h}}.
+
+
+
+\doxysubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{classoomph_1_1LinearWaveEquations_a9648dd63c18bab6854d362d16f01e33d}\label{classoomph_1_1LinearWaveEquations_a9648dd63c18bab6854d362d16f01e33d}} 
+\index{oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}!LinearWaveSourceFctPt@{LinearWaveSourceFctPt}}
+\index{LinearWaveSourceFctPt@{LinearWaveSourceFctPt}!oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{LinearWaveSourceFctPt}{LinearWaveSourceFctPt}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{oomph\+::\+Linear\+Wave\+Equations}}$<$ DIM $>$\+::Linear\+Wave\+Source\+Fct\+Pt) (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&u)}
+
+
+
+Function pointer to source function fct(x,f(x)) -- x is a Vector! 
+
+
+
+Definition at line \mbox{\hyperlink{linear__wave__elements_8h_source_l00057}{57}} of file \mbox{\hyperlink{linear__wave__elements_8h_source}{linear\+\_\+wave\+\_\+elements.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1LinearWaveEquations_a3c434f9aef855a40403b74127fb36984}\label{classoomph_1_1LinearWaveEquations_a3c434f9aef855a40403b74127fb36984}} 
+\index{oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}!LinearWaveEquations@{LinearWaveEquations}}
+\index{LinearWaveEquations@{LinearWaveEquations}!oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{LinearWaveEquations()}{LinearWaveEquations()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{oomph\+::\+Linear\+Wave\+Equations}}$<$ DIM $>$\+::\mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{Linear\+Wave\+Equations}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor (must initialise the Source\+\_\+fct\+\_\+pt to null) 
+
+
+
+Definition at line \mbox{\hyperlink{linear__wave__elements_8h_source_l00062}{62}} of file \mbox{\hyperlink{linear__wave__elements_8h_source}{linear\+\_\+wave\+\_\+elements.\+h}}.
+
+\mbox{\Hypertarget{classoomph_1_1LinearWaveEquations_a123c1b2cc777c6e409ebbc0d5b0b2b76}\label{classoomph_1_1LinearWaveEquations_a123c1b2cc777c6e409ebbc0d5b0b2b76}} 
+\index{oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}!LinearWaveEquations@{LinearWaveEquations}}
+\index{LinearWaveEquations@{LinearWaveEquations}!oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{LinearWaveEquations()}{LinearWaveEquations()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{oomph\+::\+Linear\+Wave\+Equations}}$<$ DIM $>$\+::\mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{Linear\+Wave\+Equations}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{Linear\+Wave\+Equations}}$<$ DIM $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1LinearWaveEquations_acf05d02ed25f46d2b0b8310fb8bc448b}\label{classoomph_1_1LinearWaveEquations_acf05d02ed25f46d2b0b8310fb8bc448b}} 
+\index{oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}!compute\_error@{compute\_error}}
+\index{compute\_error@{compute\_error}!oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{compute\_error()}{compute\_error()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{oomph\+::\+Linear\+Wave\+Equations}}$<$ DIM $>$\+::compute\+\_\+error (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt,  }\item[{double \&}]{error,  }\item[{double \&}]{norm }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get error against and norm of exact solution. 
+
+Validate against exact solution.
+
+Solution is provided via function pointer. Plot error at a given number of plot points. 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a73c79a1f1e5b1d334757812a6bbd58ff}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line \mbox{\hyperlink{linear__wave__elements_8cc_source_l00414}{414}} of file \mbox{\hyperlink{linear__wave__elements_8cc_source}{linear\+\_\+wave\+\_\+elements.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
+
+\mbox{\Hypertarget{classoomph_1_1LinearWaveEquations_ae2dedf5d1dc024da927b05f532dde540}\label{classoomph_1_1LinearWaveEquations_ae2dedf5d1dc024da927b05f532dde540}} 
+\index{oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}!compute\_error@{compute\_error}}
+\index{compute\_error@{compute\_error}!oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{compute\_error()}{compute\_error()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{oomph\+::\+Linear\+Wave\+Equations}}$<$ DIM $>$\+::compute\+\_\+error (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt,  }\item[{const double \&}]{time,  }\item[{double \&}]{error,  }\item[{double \&}]{norm }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get error against and norm of exact solution. 
+
+Validate against exact solution at time t.
+
+Solution is provided via function pointer. Plot error at a given number of plot points. 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a7f67853506dc73fa6b7505108de22d1f}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line \mbox{\hyperlink{linear__wave__elements_8cc_source_l00494}{494}} of file \mbox{\hyperlink{linear__wave__elements_8cc_source}{linear\+\_\+wave\+\_\+elements.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
+
+\mbox{\Hypertarget{classoomph_1_1LinearWaveEquations_ac249d0568e64e09da880f7b1b0f80cdd}\label{classoomph_1_1LinearWaveEquations_ac249d0568e64e09da880f7b1b0f80cdd}} 
+\index{oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}!d2u\_dt2\_lin\_wave@{d2u\_dt2\_lin\_wave}}
+\index{d2u\_dt2\_lin\_wave@{d2u\_dt2\_lin\_wave}!oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{d2u\_dt2\_lin\_wave()}{d2u\_dt2\_lin\_wave()}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+double \mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{oomph\+::\+Linear\+Wave\+Equations}}$<$ DIM $>$\+::d2u\+\_\+dt2\+\_\+lin\+\_\+wave (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+d$^\wedge$2u/dt$^\wedge$2 at local node n. Uses suitably interpolated value for hanging nodes. 
+
+
+
+Definition at line \mbox{\hyperlink{linear__wave__elements_8h_source_l00112}{112}} of file \mbox{\hyperlink{linear__wave__elements_8h_source}{linear\+\_\+wave\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{timesteppers_8h_source_l00389}{oomph\+::\+Time\+Stepper\+::is\+\_\+steady()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00238}{oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{linear__wave__elements_8h_source_l00077}{oomph\+::\+Linear\+Wave\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+lin\+\_\+wave()}}, and \mbox{\hyperlink{timesteppers_8h_source_l00594}{oomph\+::\+Time\+Stepper\+::weight()}}.
+
+
+
+Referenced by \mbox{\hyperlink{linear__wave__elements_8h_source_l00326}{oomph\+::\+Linear\+Wave\+Equations$<$ DIM $>$\+::interpolated\+\_\+d2u\+\_\+dt2\+\_\+lin\+\_\+wave()}}.
+
+\mbox{\Hypertarget{classoomph_1_1LinearWaveEquations_a8033ffc13e61d7adcd4b7e1154ea12af}\label{classoomph_1_1LinearWaveEquations_a8033ffc13e61d7adcd4b7e1154ea12af}} 
+\index{oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}!dshape\_and\_dtest\_eulerian\_at\_knot\_lin\_wave@{dshape\_and\_dtest\_eulerian\_at\_knot\_lin\_wave}}
+\index{dshape\_and\_dtest\_eulerian\_at\_knot\_lin\_wave@{dshape\_and\_dtest\_eulerian\_at\_knot\_lin\_wave}!oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_at\_knot\_lin\_wave()}{dshape\_and\_dtest\_eulerian\_at\_knot\_lin\_wave()}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+virtual double \mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{oomph\+::\+Linear\+Wave\+Equations}}$<$ DIM $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+lin\+\_\+wave (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
+
+Shape/test functions and derivs w.\+r.\+t. to global coords at integration point ipt; return Jacobian of mapping. 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_a96e8d0a3deace8fe691b5576607f1c0c}{oomph\+::\+QLinear\+Wave\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}.
+
+\mbox{\Hypertarget{classoomph_1_1LinearWaveEquations_a57ed864bd1ecad66fc115bf3b956e4c6}\label{classoomph_1_1LinearWaveEquations_a57ed864bd1ecad66fc115bf3b956e4c6}} 
+\index{oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}!dshape\_and\_dtest\_eulerian\_lin\_wave@{dshape\_and\_dtest\_eulerian\_lin\_wave}}
+\index{dshape\_and\_dtest\_eulerian\_lin\_wave@{dshape\_and\_dtest\_eulerian\_lin\_wave}!oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_lin\_wave()}{dshape\_and\_dtest\_eulerian\_lin\_wave()}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+virtual double \mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{oomph\+::\+Linear\+Wave\+Equations}}$<$ DIM $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+lin\+\_\+wave (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
+
+Shape/test functions and derivs w.\+r.\+t. to global coords at local coord. s; return Jacobian of mapping. 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_a97bfe7e067f0b8f3cf82b02ca1e7421e}{oomph\+::\+QLinear\+Wave\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}.
+
+\mbox{\Hypertarget{classoomph_1_1LinearWaveEquations_a207b45abfb3197cabe7f375a458c1a0f}\label{classoomph_1_1LinearWaveEquations_a207b45abfb3197cabe7f375a458c1a0f}} 
+\index{oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}!du\_dt\_lin\_wave@{du\_dt\_lin\_wave}}
+\index{du\_dt\_lin\_wave@{du\_dt\_lin\_wave}!oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{du\_dt\_lin\_wave()}{du\_dt\_lin\_wave()}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+double \mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{oomph\+::\+Linear\+Wave\+Equations}}$<$ DIM $>$\+::du\+\_\+dt\+\_\+lin\+\_\+wave (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+du/dt at local node n. Uses suitably interpolated value for hanging nodes. 
+
+
+
+Definition at line \mbox{\hyperlink{linear__wave__elements_8h_source_l00084}{84}} of file \mbox{\hyperlink{linear__wave__elements_8h_source}{linear\+\_\+wave\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{timesteppers_8h_source_l00389}{oomph\+::\+Time\+Stepper\+::is\+\_\+steady()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00238}{oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{linear__wave__elements_8h_source_l00077}{oomph\+::\+Linear\+Wave\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+lin\+\_\+wave()}}, and \mbox{\hyperlink{timesteppers_8h_source_l00594}{oomph\+::\+Time\+Stepper\+::weight()}}.
+
+
+
+Referenced by \mbox{\hyperlink{linear__wave__elements_8h_source_l00302}{oomph\+::\+Linear\+Wave\+Equations$<$ DIM $>$\+::interpolated\+\_\+du\+\_\+dt\+\_\+lin\+\_\+wave()}}.
+
+\mbox{\Hypertarget{classoomph_1_1LinearWaveEquations_a40f640d6f90bc3c4adb88d4aba3effce}\label{classoomph_1_1LinearWaveEquations_a40f640d6f90bc3c4adb88d4aba3effce}} 
+\index{oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
+\index{fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}!oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_jacobian()}{fill\_in\_contribution\_to\_jacobian()}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+virtual void \mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{oomph\+::\+Linear\+Wave\+Equations}}$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} and element Jacobian matrix (wrapper) 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0d53bf283dc85bdfea}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line \mbox{\hyperlink{linear__wave__elements_8h_source_l00265}{265}} of file \mbox{\hyperlink{linear__wave__elements_8h_source}{linear\+\_\+wave\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{linear__wave__elements_8cc_source_l00079}{oomph\+::\+Linear\+Wave\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+lin\+\_\+wave()}}.
+
+\mbox{\Hypertarget{classoomph_1_1LinearWaveEquations_a51319cb9bbb054c6a79d63b203d7d163}\label{classoomph_1_1LinearWaveEquations_a51319cb9bbb054c6a79d63b203d7d163}} 
+\index{oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
+\index{fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}!oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_residuals()}{fill\_in\_contribution\_to\_residuals()}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{oomph\+::\+Linear\+Wave\+Equations}}$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} (wrapper) 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515e8504a48179c0e72c550d7}{oomph\+::\+Generalised\+Element}}.
+
+
+
+Definition at line \mbox{\hyperlink{linear__wave__elements_8h_source_l00255}{255}} of file \mbox{\hyperlink{linear__wave__elements_8h_source}{linear\+\_\+wave\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{elements_8h_source_l00227}{oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix}}, and \mbox{\hyperlink{linear__wave__elements_8cc_source_l00079}{oomph\+::\+Linear\+Wave\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+lin\+\_\+wave()}}.
+
+\mbox{\Hypertarget{classoomph_1_1LinearWaveEquations_ae6017a229d5eccb3fb342e34a10382ec}\label{classoomph_1_1LinearWaveEquations_ae6017a229d5eccb3fb342e34a10382ec}} 
+\index{oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}!fill\_in\_generic\_residual\_contribution\_lin\_wave@{fill\_in\_generic\_residual\_contribution\_lin\_wave}}
+\index{fill\_in\_generic\_residual\_contribution\_lin\_wave@{fill\_in\_generic\_residual\_contribution\_lin\_wave}!oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_generic\_residual\_contribution\_lin\_wave()}{fill\_in\_generic\_residual\_contribution\_lin\_wave()}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{oomph\+::\+Linear\+Wave\+Equations}}$<$ DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+lin\+\_\+wave (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{unsigned}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} only (if flag=and/or element Jacobian matrix. 
+
+Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} and/or element Jacobian matrix.
+
+flag=1\+: compute both flag=0\+: compute only residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}
+
+Pure version without hanging nodes 
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableLinearWaveEquations_a0521c661521a3934edd4c25733196932}{oomph\+::\+Refineable\+Linear\+Wave\+Equations$<$ DIM $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{linear__wave__elements_8cc_source_l00079}{79}} of file \mbox{\hyperlink{linear__wave__elements_8cc_source}{linear\+\_\+wave\+\_\+elements.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
+
+
+
+Referenced by \mbox{\hyperlink{linear__wave__elements_8h_source_l00265}{oomph\+::\+Linear\+Wave\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, and \mbox{\hyperlink{linear__wave__elements_8h_source_l00255}{oomph\+::\+Linear\+Wave\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}.
+
+\mbox{\Hypertarget{classoomph_1_1LinearWaveEquations_a36ca5b4691a27beacd433a4f5279e1bf}\label{classoomph_1_1LinearWaveEquations_a36ca5b4691a27beacd433a4f5279e1bf}} 
+\index{oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}!get\_flux@{get\_flux}}
+\index{get\_flux@{get\_flux}!oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{get\_flux()}{get\_flux()}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{oomph\+::\+Linear\+Wave\+Equations}}$<$ DIM $>$\+::get\+\_\+flux (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{flux }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get flux\+: flux\mbox{[}i\mbox{]} = du/dx\+\_\+i. 
+
+
+
+Definition at line \mbox{\hyperlink{linear__wave__elements_8h_source_l00221}{221}} of file \mbox{\hyperlink{linear__wave__elements_8h_source}{linear\+\_\+wave\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{elements_8cc_source_l03298}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{linear__wave__elements_8h_source_l00077}{oomph\+::\+Linear\+Wave\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+lin\+\_\+wave()}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__linear__wave__elements_8h_source_l00077}{oomph\+::\+Refineable\+Linear\+Wave\+Equations$<$ DIM $>$\+::get\+\_\+\+Z2\+\_\+flux()}}.
+
+\mbox{\Hypertarget{classoomph_1_1LinearWaveEquations_a1f2ef4ab9b1b50c29dc64ae4491265d1}\label{classoomph_1_1LinearWaveEquations_a1f2ef4ab9b1b50c29dc64ae4491265d1}} 
+\index{oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}!get\_source\_lin\_wave@{get\_source\_lin\_wave}}
+\index{get\_source\_lin\_wave@{get\_source\_lin\_wave}!oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{get\_source\_lin\_wave()}{get\_source\_lin\_wave()}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{oomph\+::\+Linear\+Wave\+Equations}}$<$ DIM $>$\+::get\+\_\+source\+\_\+lin\+\_\+wave (\begin{DoxyParamCaption}\item[{const double \&}]{t,  }\item[{const unsigned \&}]{ipt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{double \&}]{source }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get source term at continous time t and (Eulerian) position x. Virtual so it can be overloaded in derived multiphysics elements. 
+
+
+
+Definition at line \mbox{\hyperlink{linear__wave__elements_8h_source_l00202}{202}} of file \mbox{\hyperlink{linear__wave__elements_8h_source}{linear\+\_\+wave\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{linear__wave__elements_8h_source_l00380}{oomph\+::\+Linear\+Wave\+Equations$<$ DIM $>$\+::\+Source\+\_\+fct\+\_\+pt}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+
+\mbox{\Hypertarget{classoomph_1_1LinearWaveEquations_a86abe5e3b3473823368cb81f6f749707}\label{classoomph_1_1LinearWaveEquations_a86abe5e3b3473823368cb81f6f749707}} 
+\index{oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}!interpolated\_d2u\_dt2\_lin\_wave@{interpolated\_d2u\_dt2\_lin\_wave}}
+\index{interpolated\_d2u\_dt2\_lin\_wave@{interpolated\_d2u\_dt2\_lin\_wave}!oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{interpolated\_d2u\_dt2\_lin\_wave()}{interpolated\_d2u\_dt2\_lin\_wave()}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+double \mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{oomph\+::\+Linear\+Wave\+Equations}}$<$ DIM $>$\+::interpolated\+\_\+d2u\+\_\+dt2\+\_\+lin\+\_\+wave (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return FE representation of function value u(s) at local coordinate s. 
+
+
+
+Definition at line \mbox{\hyperlink{linear__wave__elements_8h_source_l00326}{326}} of file \mbox{\hyperlink{linear__wave__elements_8h_source}{linear\+\_\+wave\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{linear__wave__elements_8h_source_l00112}{oomph\+::\+Linear\+Wave\+Equations$<$ DIM $>$\+::d2u\+\_\+dt2\+\_\+lin\+\_\+wave()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
+
+\mbox{\Hypertarget{classoomph_1_1LinearWaveEquations_a79c7bb4d574bffa81227fa93bc08fb4b}\label{classoomph_1_1LinearWaveEquations_a79c7bb4d574bffa81227fa93bc08fb4b}} 
+\index{oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}!interpolated\_du\_dt\_lin\_wave@{interpolated\_du\_dt\_lin\_wave}}
+\index{interpolated\_du\_dt\_lin\_wave@{interpolated\_du\_dt\_lin\_wave}!oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{interpolated\_du\_dt\_lin\_wave()}{interpolated\_du\_dt\_lin\_wave()}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+double \mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{oomph\+::\+Linear\+Wave\+Equations}}$<$ DIM $>$\+::interpolated\+\_\+du\+\_\+dt\+\_\+lin\+\_\+wave (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return FE representation of function value u(s) at local coordinate s. 
+
+
+
+Definition at line \mbox{\hyperlink{linear__wave__elements_8h_source_l00302}{302}} of file \mbox{\hyperlink{linear__wave__elements_8h_source}{linear\+\_\+wave\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{linear__wave__elements_8h_source_l00084}{oomph\+::\+Linear\+Wave\+Equations$<$ DIM $>$\+::du\+\_\+dt\+\_\+lin\+\_\+wave()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
+
+\mbox{\Hypertarget{classoomph_1_1LinearWaveEquations_ac05d4cc1db9dd20b8e6975e5d6ccd530}\label{classoomph_1_1LinearWaveEquations_ac05d4cc1db9dd20b8e6975e5d6ccd530}} 
+\index{oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}!interpolated\_u\_lin\_wave@{interpolated\_u\_lin\_wave}}
+\index{interpolated\_u\_lin\_wave@{interpolated\_u\_lin\_wave}!oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{interpolated\_u\_lin\_wave()}{interpolated\_u\_lin\_wave()}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+double \mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{oomph\+::\+Linear\+Wave\+Equations}}$<$ DIM $>$\+::interpolated\+\_\+u\+\_\+lin\+\_\+wave (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return FE representation of function value u(s) at local coordinate s. 
+
+
+
+Definition at line \mbox{\hyperlink{linear__wave__elements_8h_source_l00274}{274}} of file \mbox{\hyperlink{linear__wave__elements_8h_source}{linear\+\_\+wave\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, and \mbox{\hyperlink{linear__wave__elements_8h_source_l00077}{oomph\+::\+Linear\+Wave\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+lin\+\_\+wave()}}.
+
+\mbox{\Hypertarget{classoomph_1_1LinearWaveEquations_a3552f2d32359d79533b28f6ca387eee6}\label{classoomph_1_1LinearWaveEquations_a3552f2d32359d79533b28f6ca387eee6}} 
+\index{oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{oomph\+::\+Linear\+Wave\+Equations}}$<$ DIM $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{Linear\+Wave\+Equations}}$<$ DIM $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken assignment operator. 
+
+\mbox{\Hypertarget{classoomph_1_1LinearWaveEquations_a7a1464dbadf5fb3542979951b389694b}\label{classoomph_1_1LinearWaveEquations_a7a1464dbadf5fb3542979951b389694b}} 
+\index{oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}!output@{output}}
+\index{output@{output}!oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{oomph\+::\+Linear\+Wave\+Equations}}$<$ DIM $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Output with default number of plot points. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a72cddd09f8ddbee1a20a1ff404c6943e}{oomph\+::\+Finite\+Element}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_a9b6c23f23a7f8e188241fe2698c7543d}{oomph\+::\+QLinear\+Wave\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{linear__wave__elements_8h_source_l00151}{151}} of file \mbox{\hyperlink{linear__wave__elements_8h_source}{linear\+\_\+wave\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{linear__wave__elements_8h_source_l00139}{oomph\+::\+Linear\+Wave\+Equations$<$ DIM $>$\+::output()}}.
+
+\mbox{\Hypertarget{classoomph_1_1LinearWaveEquations_a2e3dd0d7c46d095fea74969c3648f0ca}\label{classoomph_1_1LinearWaveEquations_a2e3dd0d7c46d095fea74969c3648f0ca}} 
+\index{oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}!output@{output}}
+\index{output@{output}!oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{oomph\+::\+Linear\+Wave\+Equations}}$<$ DIM $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Output FE representation of soln\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+DIM plot points. 
+
+C-\/style output function\+:
+
+x,y,u or x,y,z,u
+
+nplot points in each coordinate direction 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f03320eeb9d110d48c}{oomph\+::\+Finite\+Element}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_a4fe8053385a090049e459faa0e0cc3be}{oomph\+::\+QLinear\+Wave\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{linear__wave__elements_8cc_source_l00271}{271}} of file \mbox{\hyperlink{linear__wave__elements_8cc_source}{linear\+\_\+wave\+\_\+elements.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+
+\mbox{\Hypertarget{classoomph_1_1LinearWaveEquations_ad5d68d2b3ec9fe3c6102ae91b9c61cc6}\label{classoomph_1_1LinearWaveEquations_ad5d68d2b3ec9fe3c6102ae91b9c61cc6}} 
+\index{oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}!output@{output}}
+\index{output@{output}!oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{oomph\+::\+Linear\+Wave\+Equations}}$<$ DIM $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Output with default number of plot points. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999f1bef62c0ff13f2a7}{oomph\+::\+Finite\+Element}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_ae7176ab05b31f360cc7c774e857242d9}{oomph\+::\+QLinear\+Wave\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{linear__wave__elements_8h_source_l00139}{139}} of file \mbox{\hyperlink{linear__wave__elements_8h_source}{linear\+\_\+wave\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{linear__wave__elements_8h_source_l00139}{oomph\+::\+Linear\+Wave\+Equations$<$ DIM $>$\+::output()}}.
+
+
+
+Referenced by \mbox{\hyperlink{linear__wave__elements_8h_source_l00139}{oomph\+::\+Linear\+Wave\+Equations$<$ DIM $>$\+::output()}}, and \mbox{\hyperlink{linear__wave__elements_8h_source_l00430}{oomph\+::\+QLinear\+Wave\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::output()}}.
+
+\mbox{\Hypertarget{classoomph_1_1LinearWaveEquations_a1830b4405d4ab215e91e01914dd426f3}\label{classoomph_1_1LinearWaveEquations_a1830b4405d4ab215e91e01914dd426f3}} 
+\index{oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}!output@{output}}
+\index{output@{output}!oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{oomph\+::\+Linear\+Wave\+Equations}}$<$ DIM $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Output FE representation of soln\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+DIM plot points. 
+
+Output function\+:
+
+x,y,u or x,y,z,u
+
+nplot points in each coordinate direction 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b43e6679c9dd28c457}{oomph\+::\+Finite\+Element}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_a4e44576ef363b7b9680a60da96b7687b}{oomph\+::\+QLinear\+Wave\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{linear__wave__elements_8cc_source_l00235}{235}} of file \mbox{\hyperlink{linear__wave__elements_8cc_source}{linear\+\_\+wave\+\_\+elements.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+
+\mbox{\Hypertarget{classoomph_1_1LinearWaveEquations_aa0089c4e106d9bd525639d3215ed6825}\label{classoomph_1_1LinearWaveEquations_aa0089c4e106d9bd525639d3215ed6825}} 
+\index{oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}!output\_fct@{output\_fct}}
+\index{output\_fct@{output\_fct}!oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{output\_fct()}{output\_fct()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{oomph\+::\+Linear\+Wave\+Equations}}$<$ DIM $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot,  }\item[{const double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Output exact soln\+: x,y,u\+\_\+exact or x,y,z,u\+\_\+exact at nplot$^\wedge$\+DIM plot points (time-\/dependent version) 
+
+Output exact solution at time t.
+
+Solution is provided via function pointer. Plot at a given number of plot points.
+
+x,y,u\+\_\+exact or x,y,z,u\+\_\+exact 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2a8426dccd57b927be0ae0eec00d0479}{oomph\+::\+Finite\+Element}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_af991bd517d135fe1320074b28ed84b02}{oomph\+::\+QLinear\+Wave\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{linear__wave__elements_8cc_source_l00361}{361}} of file \mbox{\hyperlink{linear__wave__elements_8cc_source}{linear\+\_\+wave\+\_\+elements.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+
+\mbox{\Hypertarget{classoomph_1_1LinearWaveEquations_a3ae24c98f2d190e56fe24e754de682d8}\label{classoomph_1_1LinearWaveEquations_a3ae24c98f2d190e56fe24e754de682d8}} 
+\index{oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}!output\_fct@{output\_fct}}
+\index{output\_fct@{output\_fct}!oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{output\_fct()}{output\_fct()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{oomph\+::\+Linear\+Wave\+Equations}}$<$ DIM $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Output exact soln\+: x,y,u\+\_\+exact or x,y,z,u\+\_\+exact at nplot$^\wedge$\+DIM plot points. 
+
+Output exact solution.
+
+Solution is provided via function pointer. Plot at a given number of plot points.
+
+x,y,u\+\_\+exact or x,y,z,u\+\_\+exact 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a22b695c714f60ee6cd145be348042035}{oomph\+::\+Finite\+Element}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_af72b64dee3c8690aca4734d7f41515bc}{oomph\+::\+QLinear\+Wave\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{linear__wave__elements_8cc_source_l00309}{309}} of file \mbox{\hyperlink{linear__wave__elements_8cc_source}{linear\+\_\+wave\+\_\+elements.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+
+
+
+Referenced by \mbox{\hyperlink{linear__wave__elements_8h_source_l00459}{oomph\+::\+QLinear\+Wave\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::output\+\_\+fct()}}.
+
+\mbox{\Hypertarget{classoomph_1_1LinearWaveEquations_a2e4ced01331ace59c6d8fe95a756ca73}\label{classoomph_1_1LinearWaveEquations_a2e4ced01331ace59c6d8fe95a756ca73}} 
+\index{oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}!self\_test@{self\_test}}
+\index{self\_test@{self\_test}!oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{self\_test()}{self\_test()}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{oomph\+::\+Linear\+Wave\+Equations}}$<$ DIM $>$\+::self\+\_\+test\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Self-\/test\+: Return 0 for OK. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_af94c5a5e22175d5420b33b3b79e46ed3}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line \mbox{\hyperlink{linear__wave__elements_8cc_source_l00205}{205}} of file \mbox{\hyperlink{linear__wave__elements_8cc_source}{linear\+\_\+wave\+\_\+elements.\+cc}}.
+
+
+
+References \mbox{\hyperlink{elements_8cc_source_l04440}{oomph\+::\+Finite\+Element\+::self\+\_\+test()}}.
+
+\mbox{\Hypertarget{classoomph_1_1LinearWaveEquations_a6183c8a58b8aeebe505f158012b80934}\label{classoomph_1_1LinearWaveEquations_a6183c8a58b8aeebe505f158012b80934}} 
+\index{oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}!source\_fct\_pt@{source\_fct\_pt}}
+\index{source\_fct\_pt@{source\_fct\_pt}!oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{source\_fct\_pt()}{source\_fct\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a9648dd63c18bab6854d362d16f01e33d}{Linear\+Wave\+Source\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{oomph\+::\+Linear\+Wave\+Equations}}$<$ DIM $>$\+::source\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function\+: Pointer to source function. 
+
+
+
+Definition at line \mbox{\hyperlink{linear__wave__elements_8h_source_l00188}{188}} of file \mbox{\hyperlink{linear__wave__elements_8h_source}{linear\+\_\+wave\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{linear__wave__elements_8h_source_l00380}{oomph\+::\+Linear\+Wave\+Equations$<$ DIM $>$\+::\+Source\+\_\+fct\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__linear__wave__elements_8h_source_l00149}{oomph\+::\+Refineable\+Linear\+Wave\+Equations$<$ DIM $>$\+::further\+\_\+build()}}.
+
+\mbox{\Hypertarget{classoomph_1_1LinearWaveEquations_a61de270efb6fb0149da99d221580d13f}\label{classoomph_1_1LinearWaveEquations_a61de270efb6fb0149da99d221580d13f}} 
+\index{oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}!source\_fct\_pt@{source\_fct\_pt}}
+\index{source\_fct\_pt@{source\_fct\_pt}!oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{source\_fct\_pt()}{source\_fct\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a9648dd63c18bab6854d362d16f01e33d}{Linear\+Wave\+Source\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{oomph\+::\+Linear\+Wave\+Equations}}$<$ DIM $>$\+::source\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function\+: Pointer to source function. Const version. 
+
+
+
+Definition at line \mbox{\hyperlink{linear__wave__elements_8h_source_l00194}{194}} of file \mbox{\hyperlink{linear__wave__elements_8h_source}{linear\+\_\+wave\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{linear__wave__elements_8h_source_l00380}{oomph\+::\+Linear\+Wave\+Equations$<$ DIM $>$\+::\+Source\+\_\+fct\+\_\+pt}}.
+
+\mbox{\Hypertarget{classoomph_1_1LinearWaveEquations_aba49f677e10850fc49d76a982522ce69}\label{classoomph_1_1LinearWaveEquations_aba49f677e10850fc49d76a982522ce69}} 
+\index{oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}!u\_index\_lin\_wave@{u\_index\_lin\_wave}}
+\index{u\_index\_lin\_wave@{u\_index\_lin\_wave}!oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{u\_index\_lin\_wave()}{u\_index\_lin\_wave()}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+virtual unsigned \mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{oomph\+::\+Linear\+Wave\+Equations}}$<$ DIM $>$\+::u\+\_\+index\+\_\+lin\+\_\+wave (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return the index at which the unknown value is stored. The default value, 0, is appropriate for single-\/physics problems, when there is only one variable, the value that satisfies the linear wave equation. In derived multi-\/physics elements, this function should be overloaded to reflect the chosen storage scheme. Note that these equations require that the unknown is always stored at the same index at each node. 
+
+
+
+Definition at line \mbox{\hyperlink{linear__wave__elements_8h_source_l00077}{77}} of file \mbox{\hyperlink{linear__wave__elements_8h_source}{linear\+\_\+wave\+\_\+elements.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{linear__wave__elements_8h_source_l00112}{oomph\+::\+Linear\+Wave\+Equations$<$ DIM $>$\+::d2u\+\_\+dt2\+\_\+lin\+\_\+wave()}}, \mbox{\hyperlink{linear__wave__elements_8h_source_l00084}{oomph\+::\+Linear\+Wave\+Equations$<$ DIM $>$\+::du\+\_\+dt\+\_\+lin\+\_\+wave()}}, \mbox{\hyperlink{linear__wave__elements_8h_source_l00221}{oomph\+::\+Linear\+Wave\+Equations$<$ DIM $>$\+::get\+\_\+flux()}}, \mbox{\hyperlink{refineable__linear__wave__elements_8h_source_l00087}{oomph\+::\+Refineable\+Linear\+Wave\+Equations$<$ DIM $>$\+::get\+\_\+interpolated\+\_\+values()}}, \mbox{\hyperlink{linear__wave__elements_8h_source_l00274}{oomph\+::\+Linear\+Wave\+Equations$<$ DIM $>$\+::interpolated\+\_\+u\+\_\+lin\+\_\+wave()}}, and \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00220}{oomph\+::\+Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$\+::\+Linear\+Wave\+Flux\+Element()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1LinearWaveEquations_abdbae7c7594a53c7d5d5e73c13ea7cb2}\label{classoomph_1_1LinearWaveEquations_abdbae7c7594a53c7d5d5e73c13ea7cb2}} 
+\index{oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}!Source\_fct\_pt@{Source\_fct\_pt}}
+\index{Source\_fct\_pt@{Source\_fct\_pt}!oomph::LinearWaveEquations$<$ DIM $>$@{oomph::LinearWaveEquations$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Source\_fct\_pt}{Source\_fct\_pt}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a9648dd63c18bab6854d362d16f01e33d}{Linear\+Wave\+Source\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{oomph\+::\+Linear\+Wave\+Equations}}$<$ DIM $>$\+::Source\+\_\+fct\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pointer to source function\+: 
+
+
+
+Definition at line \mbox{\hyperlink{linear__wave__elements_8h_source_l00380}{380}} of file \mbox{\hyperlink{linear__wave__elements_8h_source}{linear\+\_\+wave\+\_\+elements.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__linear__wave__elements_8h_source_l00149}{oomph\+::\+Refineable\+Linear\+Wave\+Equations$<$ DIM $>$\+::further\+\_\+build()}}, \mbox{\hyperlink{linear__wave__elements_8h_source_l00202}{oomph\+::\+Linear\+Wave\+Equations$<$ DIM $>$\+::get\+\_\+source\+\_\+lin\+\_\+wave()}}, and \mbox{\hyperlink{linear__wave__elements_8h_source_l00188}{oomph\+::\+Linear\+Wave\+Equations$<$ DIM $>$\+::source\+\_\+fct\+\_\+pt()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{linear__wave__elements_8h}{linear\+\_\+wave\+\_\+elements.\+h}}\item 
+\mbox{\hyperlink{linear__wave__elements_8cc}{linear\+\_\+wave\+\_\+elements.\+cc}}\end{DoxyCompactItemize}

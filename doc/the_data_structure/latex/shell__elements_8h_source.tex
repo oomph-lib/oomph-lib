@@ -86,7 +86,7 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00082}00082 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00083}00083 \textcolor{comment}{    /// Default load function (zero traction)}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00084}00084 \textcolor{comment}{}    \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a13cfb1791eee82943ca56fef1a4f9dbe}{Zero\_traction\_fct}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& xi,}
-\DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00085}00085                                   \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00085}00085                                   \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00086}00086                                   \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7dabc60bec4cc294aa2adf92726c6d6823a}{N}},}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00087}00087                                   \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& load);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00088}00088 \textcolor{comment}{}}
@@ -96,7 +96,7 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00092}00092 \textcolor{comment}{    /// required for all specific load functions but the list should}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00093}00093 \textcolor{comment}{    /// cover all cases)}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00094}\mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a9f4a216ad08e35795d0a3a6080fb9ce0}{00094}} \textcolor{comment}{}    void (*\mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a9f4a216ad08e35795d0a3a6080fb9ce0}{Load\_vector\_fct\_pt}})(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& xi,}
-\DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00095}00095                                \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00095}00095                                \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00096}00096                                \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7dabc60bec4cc294aa2adf92726c6d6823a}{N}},}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00097}00097                                \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& load);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00098}00098 }
@@ -127,11 +127,11 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00123}\mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_ae565dc5fcdf60d733f6d19361e88d22d}{00123}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_ae565dc5fcdf60d733f6d19361e88d22d}{load\_vector\_for\_rate\_of\_work\_computation}}(}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00124}00124       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& intpt,}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00125}00125       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& xi,}
-\DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00126}00126       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00126}00126       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00127}00127       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7dabc60bec4cc294aa2adf92726c6d6823a}{N}},}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00128}00128       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& load)}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00129}00129     \{}
-\DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00130}00130       \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_ad404001c9a8c9587ece41bc4ff8c1ce1}{load\_vector}}(intpt, xi, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7dabc60bec4cc294aa2adf92726c6d6823a}{N}}, load);}
+\DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00130}00130       \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_ad404001c9a8c9587ece41bc4ff8c1ce1}{load\_vector}}(intpt, xi, x, \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7dabc60bec4cc294aa2adf92726c6d6823a}{N}}, load);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00131}00131     \}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00132}00132 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00133}00133 }
@@ -160,7 +160,7 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00156}00156 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00157}00157 \textcolor{comment}{    /// Access to the load vector function pointer}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00158}\mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a9d824cbf386963c57a4de407ef830e61}{00158}} \textcolor{comment}{}    void (*\&\mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a9d824cbf386963c57a4de407ef830e61}{load\_vector\_fct\_pt}}())(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& xi,}
-\DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00159}00159                                   \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00159}00159                                   \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00160}00160                                   \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7dabc60bec4cc294aa2adf92726c6d6823a}{N}},}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00161}00161                                   \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& load)}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00162}00162     \{}
@@ -175,11 +175,11 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00171}00171 \textcolor{comment}{    /// overloaded for FSI.}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00172}\mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_ad404001c9a8c9587ece41bc4ff8c1ce1}{00172}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_ad404001c9a8c9587ece41bc4ff8c1ce1}{load\_vector}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& intpt,}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00173}00173                              \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& xi,}
-\DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00174}00174                              \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00174}00174                              \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00175}00175                              \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7dabc60bec4cc294aa2adf92726c6d6823a}{N}},}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00176}00176                              \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& load)}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00177}00177     \{}
-\DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00178}00178       \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a9f4a216ad08e35795d0a3a6080fb9ce0}{Load\_vector\_fct\_pt}}(xi, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7dabc60bec4cc294aa2adf92726c6d6823a}{N}}, load);}
+\DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00178}00178       \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a9f4a216ad08e35795d0a3a6080fb9ce0}{Load\_vector\_fct\_pt}}(xi, x, \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7dabc60bec4cc294aa2adf92726c6d6823a}{N}}, load);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00179}00179     \}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00180}00180 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00181}00181 \textcolor{comment}{}}
@@ -268,7 +268,7 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00264}00264 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00265}00265 \textcolor{comment}{    /// Return the jacobian is calculated by finite differences by default,}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00266}00266 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a2c8049fa371d484a43e157ebef54b474}{fill\_in\_contribution\_to\_jacobian}}(\mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00267}00267                                           \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}});}
+\DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00267}00267                                           \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00268}00268 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00269}00269 \textcolor{comment}{    /// Get potential (strain) and kinetic energy of the element}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00270}00270 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a766bde0ab2904a6d73e2fa116dfa8738}{get\_energy}}(\textcolor{keywordtype}{double}\& pot\_en, \textcolor{keywordtype}{double}\& kin\_en);}
@@ -446,7 +446,7 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00442}\mbox{\hyperlink{classoomph_1_1FSIDiagHermiteShellElement_ad57fbbe43b255ff6429c43366fb5d64a}{00442}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1FSIDiagHermiteShellElement_ad57fbbe43b255ff6429c43366fb5d64a}{load\_vector\_for\_rate\_of\_work\_computation}}(}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00443}00443       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& intpt,}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00444}00444       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& xi,}
-\DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00445}00445       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00445}00445       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00446}00446       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7dabc60bec4cc294aa2adf92726c6d6823a}{N}},}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00447}00447       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& load)}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00448}00448     \{\textcolor{comment}{}}
@@ -458,7 +458,7 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00454}00454       \textcolor{comment}{// Get full load vector as per default}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00455}00455       \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00456}00456       \{}
-\DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00457}00457         \mbox{\hyperlink{classoomph_1_1FSIDiagHermiteShellElement_a1ef92a7c7157b252fdfc624ab5bc6165}{load\_vector}}(intpt, xi, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7dabc60bec4cc294aa2adf92726c6d6823a}{N}}, load);}
+\DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00457}00457         \mbox{\hyperlink{classoomph_1_1FSIDiagHermiteShellElement_a1ef92a7c7157b252fdfc624ab5bc6165}{load\_vector}}(intpt, xi, x, \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7dabc60bec4cc294aa2adf92726c6d6823a}{N}}, load);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00458}00458       \}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00459}00459     \}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00460}00460 \textcolor{comment}{}}
@@ -535,12 +535,12 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00531}00531 \textcolor{comment}{    /// the sign of the normal into account.}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00532}\mbox{\hyperlink{classoomph_1_1FSIDiagHermiteShellElement_a1ef92a7c7157b252fdfc624ab5bc6165}{00532}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1FSIDiagHermiteShellElement_a1ef92a7c7157b252fdfc624ab5bc6165}{load\_vector}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& intpt,}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00533}00533                      \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& xi,}
-\DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00534}00534                      \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00534}00534                      \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00535}00535                      \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7dabc60bec4cc294aa2adf92726c6d6823a}{N}},}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00536}00536                      \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& load)}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00537}00537     \{}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00538}00538       \textcolor{comment}{// Initially call the standard Load\_vector\_fct\_pt}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00539}00539       \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a9f4a216ad08e35795d0a3a6080fb9ce0}{Load\_vector\_fct\_pt}}(xi, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7dabc60bec4cc294aa2adf92726c6d6823a}{N}}, load);}
+\DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00539}00539       \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a9f4a216ad08e35795d0a3a6080fb9ce0}{Load\_vector\_fct\_pt}}(xi, x, \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7dabc60bec4cc294aa2adf92726c6d6823a}{N}}, load);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00540}00540 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00541}00541       \textcolor{comment}{// Memory for the FSI load}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00542}00542       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} fsi\_load(3);}
@@ -566,11 +566,11 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00562}00562 \textcolor{comment}{    /// that catches the case when we replace the Jacobian by the}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00563}00563 \textcolor{comment}{    /// mass matrix (for the consistent assignment of initial conditions).}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00564}\mbox{\hyperlink{classoomph_1_1FSIDiagHermiteShellElement_a5e48d1c0291cf16cacaa8b42112efe90}{00564}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1FSIDiagHermiteShellElement_a5e48d1c0291cf16cacaa8b42112efe90}{fill\_in\_contribution\_to\_jacobian}}(\mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00565}00565                                                   \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})}
+\DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00565}00565                                                   \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian)}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00566}00566     \{}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00567}00567       \textcolor{comment}{// Call the basic shell jacobian}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00568}00568       \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a2c8049fa371d484a43e157ebef54b474}{DiagHermiteShellElement::fill\_in\_contribution\_to\_jacobian}}(residuals,}
-\DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00569}00569                                                                 \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}});}
+\DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00569}00569                                                                 jacobian);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00570}00570       \textcolor{comment}{// Fill in the external interaction by finite differences}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00571}00571       this-\/>\mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_a80731cecc55aee156fb92aa72a77e882}{fill\_in\_jacobian\_from\_external\_interaction\_by\_fd}}(jacobian);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00572}00572     \}}
@@ -695,7 +695,7 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00691}00691 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00692}00692 \textcolor{comment}{    /// Calculate the geometric shape functions}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00693}00693 \textcolor{comment}{    /// at local coordinate s. Set any "{}superfluous"{} shape functions to zero.}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00694}\mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_aa7324ef347e70cfa0828fa7c82074398}{00694}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_aa7324ef347e70cfa0828fa7c82074398}{dshape\_local}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\& psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_ae3d0addae4ef07ae7295fe439483caf0}{dpsids}})\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00694}\mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_aa7324ef347e70cfa0828fa7c82074398}{00694}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_aa7324ef347e70cfa0828fa7c82074398}{dshape\_local}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\& psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& dpsids)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00695}00695 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00696}00696       \textcolor{comment}{// Initialise all of them to zero}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00697}00697       \textcolor{keywordtype}{unsigned} n = psi.\mbox{\hyperlink{classoomph_1_1Shape_a374bd15fa30336247543459231f82af0}{nindex1}}();}
@@ -707,20 +707,20 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00703}00703           psi(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j) = 0.0;}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00704}00704         \}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00705}00705       \}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00706}00706       \textcolor{keywordtype}{unsigned} n1 = \mbox{\hyperlink{classoomph_1_1FiniteElement_ae3d0addae4ef07ae7295fe439483caf0}{dpsids}}.nindex1();}
-\DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00707}00707       \textcolor{keywordtype}{unsigned} n2 = \mbox{\hyperlink{classoomph_1_1FiniteElement_ae3d0addae4ef07ae7295fe439483caf0}{dpsids}}.nindex2();}
-\DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00708}00708       \textcolor{keywordtype}{unsigned} n3 = \mbox{\hyperlink{classoomph_1_1FiniteElement_ae3d0addae4ef07ae7295fe439483caf0}{dpsids}}.nindex3();}
+\DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00706}00706       \textcolor{keywordtype}{unsigned} n1 = dpsids.\mbox{\hyperlink{classoomph_1_1DShape_a6c3a1de88d42417bbb35ad62655a5ed3}{nindex1}}();}
+\DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00707}00707       \textcolor{keywordtype}{unsigned} n2 = dpsids.\mbox{\hyperlink{classoomph_1_1DShape_a1ce1aa1abc964aaea4b21d7de2aa559e}{nindex2}}();}
+\DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00708}00708       \textcolor{keywordtype}{unsigned} n3 = dpsids.\mbox{\hyperlink{classoomph_1_1DShape_a1a5a3dc7227cdf09f16484e7125df913}{nindex3}}();}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00709}00709       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n1; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00710}00710       \{}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00711}00711         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < n2; j++)}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00712}00712         \{}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00713}00713           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < n3; k++)}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00714}00714           \{}
-\DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00715}00715             \mbox{\hyperlink{classoomph_1_1FiniteElement_ae3d0addae4ef07ae7295fe439483caf0}{dpsids}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j, k) = 0.0;}
+\DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00715}00715             dpsids(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j, k) = 0.0;}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00716}00716           \}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00717}00717         \}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00718}00718       \}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00719}00719       \mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry<HermiteShellElement>::dshape\_local}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, psi, \mbox{\hyperlink{classoomph_1_1FiniteElement_ae3d0addae4ef07ae7295fe439483caf0}{dpsids}});}
+\DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00719}00719       \mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry<HermiteShellElement>::dshape\_local}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, psi, dpsids);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00720}00720     \}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00721}00721 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8h_source_l00722}00722 \textcolor{comment}{    /// Output function -\/-\/ forward to broken version in FiniteElement}}

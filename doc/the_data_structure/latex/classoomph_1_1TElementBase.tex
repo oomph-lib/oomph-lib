@@ -20,13 +20,13 @@ Inheritance diagram for oomph\+::TElement\+Base\+:\begin{figure}[H]
 \item 
 \mbox{\hyperlink{classoomph_1_1TElementBase_a22cb91376d755b08c248acbc4f721422}{TElement\+Base}} ()
 \begin{DoxyCompactList}\small\item\em Empty default constructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1TElementBase_a955707fc5b9ca0435f34266a5ed97137}{TElement\+Base}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1TElementBase}{TElement\+Base}} \&)=delete
+\mbox{\hyperlink{classoomph_1_1TElementBase_a955707fc5b9ca0435f34266a5ed97137}{TElement\+Base}} (const \mbox{\hyperlink{classoomph_1_1TElementBase}{TElement\+Base}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{namespaceoomph_1_1ElementGeometry_a86ff99972b0205d7524e294c58c1182a}{Element\+Geometry\+::\+Element\+Geometry}} \mbox{\hyperlink{classoomph_1_1TElementBase_a2dc9fee159f9f682e195bd6ebfd5f1b6}{element\+\_\+geometry}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+\mbox{\hyperlink{namespaceoomph_1_1ElementGeometry_a86ff99972b0205d7524e294c58c1182a}{Element\+Geometry\+::\+Element\+Geometry}} \mbox{\hyperlink{classoomph_1_1TElementBase_a2dc9fee159f9f682e195bd6ebfd5f1b6}{element\+\_\+geometry}} () const
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{classoomph_1_1TElementBase_aa13f1d631a3373f8981b748dd469ff8f}{local\+\_\+coord\+\_\+is\+\_\+valid}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
+bool \mbox{\hyperlink{classoomph_1_1TElementBase_aa13f1d631a3373f8981b748dd469ff8f}{local\+\_\+coord\+\_\+is\+\_\+valid}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
 \begin{DoxyCompactList}\small\item\em Check whether the local coordinates are valid or not. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TElementBase_a0cce6b402f810f136ee04847727ca02a}{move\+\_\+local\+\_\+coord\+\_\+back\+\_\+into\+\_\+element}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1TElementBase_a0cce6b402f810f136ee04847727ca02a}{move\+\_\+local\+\_\+coord\+\_\+back\+\_\+into\+\_\+element}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) const
 \begin{DoxyCompactList}\small\item\em Adjust local coordinates so that they\textquotesingle{}re located inside the element. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -59,7 +59,7 @@ Definition at line \mbox{\hyperlink{Telements_8h_source_l01133}{1133}} of file \
 \index{oomph::TElementBase@{oomph::TElementBase}!TElementBase@{TElementBase}}
 \index{TElementBase@{TElementBase}!oomph::TElementBase@{oomph::TElementBase}}
 \doxysubsubsection{\texorpdfstring{TElementBase()}{TElementBase()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily oomph\+::\+TElement\+Base\+::\+TElement\+Base (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1TElementBase}{TElement\+Base}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+{\footnotesize\ttfamily oomph\+::\+TElement\+Base\+::\+TElement\+Base (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1TElementBase}{TElement\+Base}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
@@ -94,7 +94,7 @@ References \mbox{\hyperlink{elements_8h_source_l01242}{oomph\+::\+Element\+Geome
 \index{oomph::TElementBase@{oomph::TElementBase}!local\_coord\_is\_valid@{local\_coord\_is\_valid}}
 \index{local\_coord\_is\_valid@{local\_coord\_is\_valid}!oomph::TElementBase@{oomph::TElementBase}}
 \doxysubsubsection{\texorpdfstring{local\_coord\_is\_valid()}{local\_coord\_is\_valid()}}
-{\footnotesize\ttfamily bool oomph\+::\+TElement\+Base\+::local\+\_\+coord\+\_\+is\+\_\+valid (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily bool oomph\+::\+TElement\+Base\+::local\+\_\+coord\+\_\+is\+\_\+valid (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -110,7 +110,7 @@ Definition at line \mbox{\hyperlink{Telements_8h_source_l01148}{1148}} of file \
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02616}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1TElementBase_a0cce6b402f810f136ee04847727ca02a}\label{classoomph_1_1TElementBase_a0cce6b402f810f136ee04847727ca02a}} 
 \index{oomph::TElementBase@{oomph::TElementBase}!move\_local\_coord\_back\_into\_element@{move\_local\_coord\_back\_into\_element}}
@@ -132,7 +132,7 @@ Definition at line \mbox{\hyperlink{Telements_8h_source_l01175}{1175}} of file \
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02616}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 
 

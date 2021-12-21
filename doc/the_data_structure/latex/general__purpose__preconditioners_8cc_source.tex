@@ -658,15 +658,15 @@
 \DoxyCodeLine{\Hypertarget{general__purpose__preconditioners_8cc_source_l00654}00654     \}}
 \DoxyCodeLine{\Hypertarget{general__purpose__preconditioners_8cc_source_l00655}00655 }
 \DoxyCodeLine{\Hypertarget{general__purpose__preconditioners_8cc_source_l00656}00656     \textcolor{comment}{// solve Uz=y}}
-\DoxyCodeLine{\Hypertarget{general__purpose__preconditioners_8cc_source_l00657}00657     \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}};}
+\DoxyCodeLine{\Hypertarget{general__purpose__preconditioners_8cc_source_l00657}00657     \textcolor{keywordtype}{double} x;}
 \DoxyCodeLine{\Hypertarget{general__purpose__preconditioners_8cc_source_l00658}00658     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = n\_row -\/ 1; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} >= 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}-\/-\/)}
 \DoxyCodeLine{\Hypertarget{general__purpose__preconditioners_8cc_source_l00659}00659     \{}
-\DoxyCodeLine{\Hypertarget{general__purpose__preconditioners_8cc_source_l00660}00660       \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}} = z[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] / U\_row\_entry[U\_column\_start[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} + 1] -\/ 1].value();}
-\DoxyCodeLine{\Hypertarget{general__purpose__preconditioners_8cc_source_l00661}00661       z[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}};}
+\DoxyCodeLine{\Hypertarget{general__purpose__preconditioners_8cc_source_l00660}00660       x = z[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] / U\_row\_entry[U\_column\_start[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} + 1] -\/ 1].value();}
+\DoxyCodeLine{\Hypertarget{general__purpose__preconditioners_8cc_source_l00661}00661       z[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = x;}
 \DoxyCodeLine{\Hypertarget{general__purpose__preconditioners_8cc_source_l00662}00662       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = U\_column\_start[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]; j < U\_column\_start[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} + 1] -\/ 1; j++)}
 \DoxyCodeLine{\Hypertarget{general__purpose__preconditioners_8cc_source_l00663}00663       \{}
 \DoxyCodeLine{\Hypertarget{general__purpose__preconditioners_8cc_source_l00664}00664         z[U\_row\_entry[j].index()] =}
-\DoxyCodeLine{\Hypertarget{general__purpose__preconditioners_8cc_source_l00665}00665           z[U\_row\_entry[j].index()] -\/ \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}} * U\_row\_entry[j].value();}
+\DoxyCodeLine{\Hypertarget{general__purpose__preconditioners_8cc_source_l00665}00665           z[U\_row\_entry[j].index()] -\/ x * U\_row\_entry[j].value();}
 \DoxyCodeLine{\Hypertarget{general__purpose__preconditioners_8cc_source_l00666}00666       \}}
 \DoxyCodeLine{\Hypertarget{general__purpose__preconditioners_8cc_source_l00667}00667     \}}
 \DoxyCodeLine{\Hypertarget{general__purpose__preconditioners_8cc_source_l00668}00668 }

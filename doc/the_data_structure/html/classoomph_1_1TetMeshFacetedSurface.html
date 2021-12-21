@@ -209,7 +209,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa9c92e3c5ba628cdcc91086c9cb38c22"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetMeshFacetedSurface.html#aa9c92e3c5ba628cdcc91086c9cb38c22">boundary_zeta20</a> (const unsigned &amp;facet_id, const double &amp;zeta_boundary, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;zeta)</td></tr>
 <tr class="memdesc:aa9c92e3c5ba628cdcc91086c9cb38c22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual function that specifies the variation of the zeta coordinates in the <a class="el" href="classoomph_1_1GeomObject.html" title="/////////////////////////////////////////////////////////////////////">GeomObject</a> along the boundary connecting vertices 2 and 0 in facet facet_id. Default implementation: Linear interpolation between edges. zeta_boundary=0.0: we're on vertex 2; zeta_boundary=1.0: we're on vertex 0.  <a href="classoomph_1_1TetMeshFacetedSurface.html#aa9c92e3c5ba628cdcc91086c9cb38c22">More...</a><br /></td></tr>
 <tr class="separator:aa9c92e3c5ba628cdcc91086c9cb38c22"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ed1b3038fb88005c2c637543fd20433"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetMeshFacetedSurface.html#a6ed1b3038fb88005c2c637543fd20433">vertex_index_in_tetgen</a> (const unsigned &amp;<a class="el" href="namespaceoomph.html#ad835af913df4cbdc5648440f91b794ab">f</a>)</td></tr>
+<tr class="memitem:a6ed1b3038fb88005c2c637543fd20433"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetMeshFacetedSurface.html#a6ed1b3038fb88005c2c637543fd20433">vertex_index_in_tetgen</a> (const unsigned &amp;f)</td></tr>
 <tr class="memdesc:a6ed1b3038fb88005c2c637543fd20433"><td class="mdescLeft">&#160;</td><td class="mdescRight">Facet connectivity: vertex_index[j] is the index of the j-th vertex (in the Vertex_pt vector) in facet f. Bit of an obscure functionality that's only needed for setup tetgen_io.  <a href="classoomph_1_1TetMeshFacetedSurface.html#a6ed1b3038fb88005c2c637543fd20433">More...</a><br /></td></tr>
 <tr class="separator:a6ed1b3038fb88005c2c637543fd20433"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -873,7 +873,7 @@ Private Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00502">502</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="namespaceoomph.html#ad835af913df4cbdc5648440f91b794ab">oomph::f()</a>, <a class="el" href="tet__mesh_8h_source.html#l00486">Facet_pt</a>, <a class="el" href="tet__mesh_8h_source.html#l00494">Facet_vertex_index_in_tetgen</a>, <a class="el" href="tet__mesh_8h_source.html#l00325">nfacet()</a>, and <a class="el" href="tet__mesh_8h_source.html#l00483">Vertex_pt</a>.</p>
+<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00486">Facet_pt</a>, <a class="el" href="tet__mesh_8h_source.html#l00494">Facet_vertex_index_in_tetgen</a>, <a class="el" href="tet__mesh_8h_source.html#l00325">nfacet()</a>, and <a class="el" href="tet__mesh_8h_source.html#l00483">Vertex_pt</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="tet__mesh_8h_source.html#l00472">vertex_index_in_tetgen()</a>.</p>
 
@@ -951,7 +951,7 @@ Private Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00472">472</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="namespaceoomph.html#ad835af913df4cbdc5648440f91b794ab">oomph::f()</a>, <a class="el" href="tet__mesh_8h_source.html#l00494">Facet_vertex_index_in_tetgen</a>, <a class="el" href="tet__mesh_8h_source.html#l00325">nfacet()</a>, and <a class="el" href="tet__mesh_8h_source.html#l00502">setup_facet_connectivity_for_tetgen()</a>.</p>
+<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00494">Facet_vertex_index_in_tetgen</a>, <a class="el" href="tet__mesh_8h_source.html#l00325">nfacet()</a>, and <a class="el" href="tet__mesh_8h_source.html#l00502">setup_facet_connectivity_for_tetgen()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="tetgen__mesh_8template_8h_source.html#l00397">oomph::TetgenMesh&lt; ELEMENT &gt;::build_tetgenio()</a>.</p>
 
@@ -1163,7 +1163,7 @@ Private Member Functions</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Nov 2 2021 16:35:17
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Dec 21 2021 17:38:34
         </div>
       </div>
     </footer>

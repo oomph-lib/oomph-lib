@@ -54,7 +54,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00050}00050   \textcolor{keyword}{protected}:\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00051}00051 \textcolor{comment}{    /// Pointer to n\_p-\/th pressure node (Default: NULL,}}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00052}00052 \textcolor{comment}{    /// indicating that pressure is not based on nodal interpolation).}}
-\DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00053}\mbox{\hyperlink{classoomph_1_1RefineableSphericalNavierStokesEquations_a022b5fab872e9b138a04c2d481b56afc}{00053}} \textcolor{comment}{}    \textcolor{keyword}{virtual} Node* \mbox{\hyperlink{classoomph_1_1RefineableSphericalNavierStokesEquations_a022b5fab872e9b138a04c2d481b56afc}{pressure\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_p)}
+\DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00053}\mbox{\hyperlink{classoomph_1_1RefineableSphericalNavierStokesEquations_a022b5fab872e9b138a04c2d481b56afc}{00053}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1RefineableSphericalNavierStokesEquations_a022b5fab872e9b138a04c2d481b56afc}{pressure\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_p)}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00054}00054     \{}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00055}00055       \textcolor{keywordflow}{return} NULL;}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00056}00056     \}}
@@ -126,9 +126,9 @@
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00122}00122     \}}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00123}00123 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00124}00124 \textcolor{comment}{    /// Fill in the geometric Jacobian, which in this case is r*r*sin(theta)}}
-\DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00125}\mbox{\hyperlink{classoomph_1_1RefineableSphericalNavierStokesEquations_a2705f68643cc0fc85bc31f8b26189b6d}{00125}} \textcolor{comment}{}    \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1RefineableSphericalNavierStokesEquations_a2705f68643cc0fc85bc31f8b26189b6d}{geometric\_jacobian}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}})}
+\DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00125}\mbox{\hyperlink{classoomph_1_1RefineableSphericalNavierStokesEquations_a2705f68643cc0fc85bc31f8b26189b6d}{00125}} \textcolor{comment}{}    \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1RefineableSphericalNavierStokesEquations_a2705f68643cc0fc85bc31f8b26189b6d}{geometric\_jacobian}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x)}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00126}00126     \{}
-\DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00127}00127       \textcolor{keywordflow}{return} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[0] * \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[0] * sin(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[1]);}
+\DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00127}00127       \textcolor{keywordflow}{return} x[0] * x[0] * sin(x[1]);}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00128}00128     \}}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00129}00129 }
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00130}00130 \textcolor{comment}{}}
@@ -210,7 +210,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00206}00206 \textcolor{comment}{    /// flag=0: compute only residual vector}}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00207}00207 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1RefineableSphericalNavierStokesEquations_aaadda4a5dbffc1e23db2ac8b3dd86d4a}{fill\_in\_generic\_residual\_contribution\_spherical\_nst}}(}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00208}00208       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00209}00209       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}},}
+\DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00209}00209       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian,}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00210}00210       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& mass\_matrix,}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00211}00211       \textcolor{keywordtype}{unsigned} flag);}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00212}00212   \};}
@@ -227,7 +227,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00223}00223   \{}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00224}00224   \textcolor{keyword}{private}:\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00225}00225 \textcolor{comment}{    /// Pointer to n\_p-\/th pressure node}}
-\DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00226}\mbox{\hyperlink{classoomph_1_1RefineableQSphericalTaylorHoodElement_a740c9aab46644bad2020634ca27e8779}{00226}} \textcolor{comment}{}    Node* \mbox{\hyperlink{classoomph_1_1RefineableQSphericalTaylorHoodElement_a740c9aab46644bad2020634ca27e8779}{pressure\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_p)}
+\DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00226}\mbox{\hyperlink{classoomph_1_1RefineableQSphericalTaylorHoodElement_a740c9aab46644bad2020634ca27e8779}{00226}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1RefineableQSphericalTaylorHoodElement_a740c9aab46644bad2020634ca27e8779}{pressure\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_p)}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00227}00227     \{}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00228}00228       \textcolor{keywordflow}{return} this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(this-\/>\mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_af1726837de58e680ce2629e4281e4432}{Pconv}}[n\_p]);}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00229}00229     \}}
@@ -240,7 +240,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00236}00236       \textcolor{comment}{// loop over nodes}}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00237}00237       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < n\_node; n++)}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00238}00238       \{}
-\DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00239}00239         this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n)-\/>unpin(p\_index);}
+\DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00239}00239         this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n)-\/>\mbox{\hyperlink{classoomph_1_1Data_a4e5cb031bf8eceb8f97c2c4fbd74cb05}{unpin}}(p\_index);}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00240}00240       \}}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00241}00241     \}}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00242}00242 \textcolor{comment}{}}
@@ -253,17 +253,17 @@
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00249}00249       \textcolor{comment}{// loop over all nodes and pin all  the nodal pressures}}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00250}00250       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < n\_node; n++)}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00251}00251       \{}
-\DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00252}00252         this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n)-\/>pin(p\_index);}
+\DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00252}00252         this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n)-\/>\mbox{\hyperlink{classoomph_1_1Data_a422231c58e423f0b43822827aa334d79}{pin}}(p\_index);}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00253}00253       \}}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00254}00254 }
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00255}00255       \textcolor{comment}{// Loop over all actual pressure nodes and unpin if they're not hanging}}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00256}00256       \textcolor{keywordtype}{unsigned} n\_pres = this-\/>\mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_af923b447673c5a89772989e91d8f6603}{npres\_spherical\_nst}}();}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00257}00257       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} l = 0; l < n\_pres; l++)}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00258}00258       \{}
-\DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00259}00259         Node* nod\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(this-\/>\mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_af1726837de58e680ce2629e4281e4432}{Pconv}}[l]);}
-\DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00260}00260         \textcolor{keywordflow}{if} (!nod\_pt-\/>is\_hanging(p\_index))}
+\DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00259}00259         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(this-\/>\mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_af1726837de58e680ce2629e4281e4432}{Pconv}}[l]);}
+\DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00260}00260         \textcolor{keywordflow}{if} (!nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_af0e6237dfafad62cf427ff5013ddcfef}{is\_hanging}}(p\_index))}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00261}00261         \{}
-\DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00262}00262           nod\_pt-\/>unpin(p\_index);}
+\DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00262}00262           nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a4e5cb031bf8eceb8f97c2c4fbd74cb05}{unpin}}(p\_index);}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00263}00263         \}}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00264}00264       \}}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00265}00265     \}}
@@ -310,7 +310,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00306}00306     \}}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00307}00307 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00308}00308 \textcolor{comment}{    /// Pointer to the j-\/th vertex node in the element}}
-\DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00309}\mbox{\hyperlink{classoomph_1_1RefineableQSphericalTaylorHoodElement_aa1382be8024b592fffc3b9df6a5f9c6e}{00309}} \textcolor{comment}{}    Node* \mbox{\hyperlink{classoomph_1_1RefineableQSphericalTaylorHoodElement_aa1382be8024b592fffc3b9df6a5f9c6e}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00309}\mbox{\hyperlink{classoomph_1_1RefineableQSphericalTaylorHoodElement_aa1382be8024b592fffc3b9df6a5f9c6e}{00309}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1RefineableQSphericalTaylorHoodElement_aa1382be8024b592fffc3b9df6a5f9c6e}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00310}00310 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00311}00311       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1FiniteElement_ac8b551c9d6f1f8e30e8b18fe2f9ae072}{QSphericalTaylorHoodElement::vertex\_node\_pt}}(j);}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00312}00312     \}}
@@ -387,7 +387,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00383}00383 \textcolor{comment}{    /// the velocities are the geometric nodes. The pressure "{}nodes"{} are a}}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00384}00384 \textcolor{comment}{    /// subset of the nodes, so when n\_value==3, the n-\/th pressure}}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00385}00385 \textcolor{comment}{    /// node is returned.}}
-\DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00386}\mbox{\hyperlink{classoomph_1_1RefineableQSphericalTaylorHoodElement_a148ff243e3ff312c1153565a5d08932e}{00386}} \textcolor{comment}{}    Node* \mbox{\hyperlink{classoomph_1_1RefineableQSphericalTaylorHoodElement_a148ff243e3ff312c1153565a5d08932e}{interpolating\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n, \textcolor{keyword}{const} \textcolor{keywordtype}{int}\& n\_value)}
+\DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00386}\mbox{\hyperlink{classoomph_1_1RefineableQSphericalTaylorHoodElement_a148ff243e3ff312c1153565a5d08932e}{00386}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1RefineableQSphericalTaylorHoodElement_a148ff243e3ff312c1153565a5d08932e}{interpolating\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n, \textcolor{keyword}{const} \textcolor{keywordtype}{int}\& n\_value)}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00387}00387 }
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00388}00388     \{}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00389}00389       \textcolor{comment}{// The only different nodes are the pressure nodes}}
@@ -424,7 +424,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00420}00420 \textcolor{comment}{    /// pressure nodes must be calculated by using the same methods as}}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00421}00421 \textcolor{comment}{    /// the geometric nodes, but by recalling that there are only two pressure}}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00422}00422 \textcolor{comment}{    /// nodes per edge.}}
-\DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00423}\mbox{\hyperlink{classoomph_1_1RefineableQSphericalTaylorHoodElement_a79a5e3befa993ccbc4ffa83a7d264229}{00423}} \textcolor{comment}{}    Node* \mbox{\hyperlink{classoomph_1_1RefineableQSphericalTaylorHoodElement_a79a5e3befa993ccbc4ffa83a7d264229}{get\_interpolating\_node\_at\_local\_coordinate}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},}
+\DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00423}\mbox{\hyperlink{classoomph_1_1RefineableQSphericalTaylorHoodElement_a79a5e3befa993ccbc4ffa83a7d264229}{00423}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1RefineableQSphericalTaylorHoodElement_a79a5e3befa993ccbc4ffa83a7d264229}{get\_interpolating\_node\_at\_local\_coordinate}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00424}00424                                                      \textcolor{keyword}{const} \textcolor{keywordtype}{int}\& n\_value)}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00425}00425     \{}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00426}00426       \textcolor{comment}{// If we are calculating pressure nodes}}
@@ -479,7 +479,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00475}00475       \textcolor{comment}{// Otherwise velocity nodes are the same as pressure nodes}}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00476}00476       \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00477}00477       \{}
-\DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00478}00478         \textcolor{keywordflow}{return} this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_adf4424f1040fb5c4b6abfbd1c2bf65fc}{get\_node\_at\_local\_coordinate}}(s);}
+\DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00478}00478         \textcolor{keywordflow}{return} this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a2ddbb05c5f8bb35b64bec287d653105c}{get\_node\_at\_local\_coordinate}}(s);}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00479}00479       \}}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00480}00480     \}}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00481}00481 }
@@ -714,7 +714,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00710}00710     \}}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00711}00711 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00712}00712 \textcolor{comment}{    /// Pointer to the j-\/th vertex node in the element}}
-\DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00713}\mbox{\hyperlink{classoomph_1_1RefineableQSphericalCrouzeixRaviartElement_a20cd740c91195a250844abdd8d23fcfa}{00713}} \textcolor{comment}{}    Node* \mbox{\hyperlink{classoomph_1_1RefineableQSphericalCrouzeixRaviartElement_a20cd740c91195a250844abdd8d23fcfa}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00713}\mbox{\hyperlink{classoomph_1_1RefineableQSphericalCrouzeixRaviartElement_a20cd740c91195a250844abdd8d23fcfa}{00713}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1RefineableQSphericalCrouzeixRaviartElement_a20cd740c91195a250844abdd8d23fcfa}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00714}00714 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00715}00715       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1FiniteElement_ac8b551c9d6f1f8e30e8b18fe2f9ae072}{QSphericalCrouzeixRaviartElement::vertex\_node\_pt}}(j);}
 \DoxyCodeLine{\Hypertarget{refineable__spherical__navier__stokes__elements_8h_source_l00716}00716     \}}

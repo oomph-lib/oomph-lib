@@ -85,21 +85,21 @@
 \DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00081}00081     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < nnod; j++)}
 \DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00082}00082     \{}
 \DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00083}00083       \textcolor{comment}{// Pointer to node}}
-\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00084}00084       Node* nod\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(b, j);}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00084}00084       \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(b, j);}
 \DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00085}00085 }
 \DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00086}00086       \textcolor{comment}{// Get the Eulerian coordinates}}
-\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00087}00087       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}} = nod\_pt-\/>x(0);}
-\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00088}00088       \textcolor{keywordtype}{double} y = nod\_pt-\/>x(1);}
-\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00089}00089       \textcolor{keywordtype}{double} z = nod\_pt-\/>x(2);}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00087}00087       \textcolor{keywordtype}{double} x = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0);}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00088}00088       \textcolor{keywordtype}{double} y = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1);}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00089}00089       \textcolor{keywordtype}{double} z = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2);}
 \DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00090}00090 }
 \DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00091}00091       \textcolor{comment}{// Polar angle}}
-\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00092}00092       \textcolor{keywordtype}{double} phi = atan2(y, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00092}00092       \textcolor{keywordtype}{double} phi = atan2(y, x);}
 \DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00093}00093 }
 \DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00094}00094       \textcolor{comment}{// Set boundary coordinates}}
 \DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00095}00095       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} zeta(2);}
 \DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00096}00096       zeta[0] = z;}
 \DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00097}00097       zeta[1] = phi;}
-\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00098}00098       nod\_pt-\/>set\_coordinates\_on\_boundary(b, zeta);}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00098}00098       nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a94c19e165ab4e88aabbfa27443c530b7}{set\_coordinates\_on\_boundary}}(b, zeta);}
 \DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00099}00099     \}}
 \DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00100}00100     this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a412a5051be9e81f0ba61bf85e5abc4a6}{Boundary\_coordinate\_exists}}[b] = \textcolor{keyword}{true};}
 \DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00101}00101   \}}

@@ -20,30 +20,30 @@ Inheritance diagram for oomph\+::Axisymmetric\+PVDEquations\+:\begin{figure}[H]
 \item 
 \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquations_acb73b32e5b0b2a80b164a445c2c8ac9a}{Axisymmetric\+PVDEquations}} ()
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
-Constitutive\+Law $\ast$\& \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquations_a783cd25741fe5848429b63ca0ee2c1c9}{constitutive\+\_\+law\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1ConstitutiveLaw}{Constitutive\+Law}} $\ast$\& \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquations_a783cd25741fe5848429b63ca0ee2c1c9}{constitutive\+\_\+law\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return the constitutive law pointer. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquations_ad7984168072632f9d4f7218d81ca50eb}{get\+\_\+stress}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&g, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&G, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}})
+void \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquations_ad7984168072632f9d4f7218d81ca50eb}{get\+\_\+stress}} (const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&g, const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&G, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&sigma)
 \begin{DoxyCompactList}\small\item\em Return the stress tensor, as calculated from the constitutive law. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquations_a432b436b9e82c78cc06baefedc6029d4}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em Fill in the residuals by calling the generic function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquations_a12f081b16b2f2a9e8409d4ec12a6d071}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+axisym\+\_\+pvd}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em Return the residuals for the equations of solid mechanics. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquations_ac4d790ab3df428eb178c247f0ff13c29}{compute\+\_\+physical\+\_\+size}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquations_ac4d790ab3df428eb178c247f0ff13c29}{compute\+\_\+physical\+\_\+size}} () const
 \begin{DoxyCompactList}\small\item\em Overload/implement the function to calculate the volume of the element. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquations_a80e76c7d645e8863f2dd5b1bf456516a}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})
+void \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquations_a80e76c7d645e8863f2dd5b1bf456516a}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em Assign the contribution to the residual using only finite differences. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquations_a70c01efa665238ec7a574588209d3edb}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Overload the output function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquations_a35cf174ca1692f817e3182166e22ef4b}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquations_a35cf174ca1692f817e3182166e22ef4b}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em Output function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquations_a3b271e966cc554c21231503f7a965549}{output}} (FILE $\ast$file\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Overload the output function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquations_a780e6e426869eec81758bf7396a54bad}{output}} (FILE $\ast$file\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquations_a780e6e426869eec81758bf7396a54bad}{output}} (FILE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em Output function. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-Constitutive\+Law $\ast$ \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquations_a69bc689b112a9b24de68315296ab9c87}{Constitutive\+\_\+law\+\_\+pt}}
+\mbox{\hyperlink{classoomph_1_1ConstitutiveLaw}{Constitutive\+Law}} $\ast$ \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquations_a69bc689b112a9b24de68315296ab9c87}{Constitutive\+\_\+law\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to constitutive law. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -93,13 +93,13 @@ Definition at line \mbox{\hyperlink{axisym__solid__elements_8h_source_l00284}{28
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l06741}{oomph\+::\+Solid\+Finite\+Element\+::dshape\+\_\+lagrangian\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01968}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8cc_source_l07108}{oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi()}}, \mbox{\hyperlink{elements_8h_source_l03921}{oomph\+::\+Solid\+Finite\+Element\+::lagrangian\+\_\+position\+\_\+gen()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02354}{oomph\+::\+Finite\+Element\+::nodal\+\_\+position\+\_\+gen()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00157}{oomph\+::\+Mathematical\+Constants\+::\+Pi}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}.
+References \mbox{\hyperlink{elements_8cc_source_l06737}{oomph\+::\+Solid\+Finite\+Element\+::dshape\+\_\+lagrangian\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8cc_source_l07104}{oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi()}}, \mbox{\hyperlink{elements_8h_source_l03912}{oomph\+::\+Solid\+Finite\+Element\+::lagrangian\+\_\+position\+\_\+gen()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02349}{oomph\+::\+Finite\+Element\+::nodal\+\_\+position\+\_\+gen()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00157}{oomph\+::\+Mathematical\+Constants\+::\+Pi}}, \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}, and \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral\+::weight()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricPVDEquations_a783cd25741fe5848429b63ca0ee2c1c9}\label{classoomph_1_1AxisymmetricPVDEquations_a783cd25741fe5848429b63ca0ee2c1c9}} 
 \index{oomph::AxisymmetricPVDEquations@{oomph::AxisymmetricPVDEquations}!constitutive\_law\_pt@{constitutive\_law\_pt}}
 \index{constitutive\_law\_pt@{constitutive\_law\_pt}!oomph::AxisymmetricPVDEquations@{oomph::AxisymmetricPVDEquations}}
 \doxysubsubsection{\texorpdfstring{constitutive\_law\_pt()}{constitutive\_law\_pt()}}
-{\footnotesize\ttfamily Constitutive\+Law $\ast$\& oomph\+::\+Axisymmetric\+PVDEquations\+::constitutive\+\_\+law\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw}{Constitutive\+Law}} $\ast$\& oomph\+::\+Axisymmetric\+PVDEquations\+::constitutive\+\_\+law\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -133,7 +133,7 @@ Definition at line \mbox{\hyperlink{axisym__solid__elements_8h_source_l00388}{38
 
 
 
-References \mbox{\hyperlink{axisym__solid__elements_8h_source_l00094}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+axisym\+\_\+pvd()}}, \mbox{\hyperlink{elements_8cc_source_l06989}{oomph\+::\+Solid\+Finite\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+solid\+\_\+position\+\_\+by\+\_\+fd()}}, \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}, and \mbox{\hyperlink{elements_8h_source_l04330}{oomph\+::\+Solid\+Finite\+Element\+::\+Solve\+\_\+for\+\_\+consistent\+\_\+newmark\+\_\+accel\+\_\+flag}}.
+References \mbox{\hyperlink{axisym__solid__elements_8h_source_l00094}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+axisym\+\_\+pvd()}}, \mbox{\hyperlink{elements_8cc_source_l07227}{oomph\+::\+Solid\+Finite\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+for\+\_\+newmark\+\_\+accel()}}, \mbox{\hyperlink{elements_8cc_source_l06985}{oomph\+::\+Solid\+Finite\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+solid\+\_\+position\+\_\+by\+\_\+fd()}}, and \mbox{\hyperlink{elements_8h_source_l04302}{oomph\+::\+Solid\+Finite\+Element\+::\+Solve\+\_\+for\+\_\+consistent\+\_\+newmark\+\_\+accel\+\_\+flag}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricPVDEquations_a432b436b9e82c78cc06baefedc6029d4}\label{classoomph_1_1AxisymmetricPVDEquations_a432b436b9e82c78cc06baefedc6029d4}} 
 \index{oomph::AxisymmetricPVDEquations@{oomph::AxisymmetricPVDEquations}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
@@ -173,7 +173,7 @@ Definition at line \mbox{\hyperlink{axisym__solid__elements_8h_source_l00094}{94
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l06741}{oomph\+::\+Solid\+Finite\+Element\+::dshape\+\_\+lagrangian\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{axisym__solid__elements_8h_source_l00066}{get\+\_\+stress()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01968}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8cc_source_l07108}{oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi()}}, \mbox{\hyperlink{elements_8h_source_l03921}{oomph\+::\+Solid\+Finite\+Element\+::lagrangian\+\_\+position\+\_\+gen()}}, \mbox{\hyperlink{elements_8h_source_l02468}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02354}{oomph\+::\+Finite\+Element\+::nodal\+\_\+position\+\_\+gen()}}, \mbox{\hyperlink{elements_8h_source_l04165}{oomph\+::\+Solid\+Finite\+Element\+::position\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{constitutive__laws_8h_source_l00318}{oomph\+::sigma}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}.
+References \mbox{\hyperlink{elements_8cc_source_l06737}{oomph\+::\+Solid\+Finite\+Element\+::dshape\+\_\+lagrangian\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{axisym__solid__elements_8h_source_l00066}{get\+\_\+stress()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8cc_source_l07104}{oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi()}}, \mbox{\hyperlink{elements_8h_source_l03912}{oomph\+::\+Solid\+Finite\+Element\+::lagrangian\+\_\+position\+\_\+gen()}}, \mbox{\hyperlink{elements_8h_source_l02463}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02349}{oomph\+::\+Finite\+Element\+::nodal\+\_\+position\+\_\+gen()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{elements_8h_source_l04137}{oomph\+::\+Solid\+Finite\+Element\+::position\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}, and \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral\+::weight()}}.
 
 
 
@@ -183,7 +183,7 @@ Referenced by \mbox{\hyperlink{axisym__solid__elements_8h_source_l00388}{fill\+\
 \index{oomph::AxisymmetricPVDEquations@{oomph::AxisymmetricPVDEquations}!get\_stress@{get\_stress}}
 \index{get\_stress@{get\_stress}!oomph::AxisymmetricPVDEquations@{oomph::AxisymmetricPVDEquations}}
 \doxysubsubsection{\texorpdfstring{get\_stress()}{get\_stress()}}
-{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+PVDEquations\+::get\+\_\+stress (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{g,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{G,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{sigma }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+PVDEquations\+::get\+\_\+stress (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{g,  }\item[{const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{G,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{sigma }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -195,7 +195,7 @@ Definition at line \mbox{\hyperlink{axisym__solid__elements_8h_source_l00066}{66
 
 
 
-References \mbox{\hyperlink{axisym__solid__elements_8h_source_l00053}{Constitutive\+\_\+law\+\_\+pt}}, \mbox{\hyperlink{constitutive__laws_8h_source_l00318}{oomph\+::sigma}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
+References \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a93527d910de908035feb8f41b0401065}{oomph\+::\+Constitutive\+Law\+::calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress()}}, \mbox{\hyperlink{axisym__solid__elements_8h_source_l00053}{Constitutive\+\_\+law\+\_\+pt}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
 
 
 
@@ -225,13 +225,13 @@ Definition at line \mbox{\hyperlink{axisym__solid__elements_8h_source_l00448}{44
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
+References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricPVDEquations_a780e6e426869eec81758bf7396a54bad}\label{classoomph_1_1AxisymmetricPVDEquations_a780e6e426869eec81758bf7396a54bad}} 
 \index{oomph::AxisymmetricPVDEquations@{oomph::AxisymmetricPVDEquations}!output@{output}}
 \index{output@{output}!oomph::AxisymmetricPVDEquations@{oomph::AxisymmetricPVDEquations}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
-{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+PVDEquations\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+PVDEquations\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -251,7 +251,7 @@ Definition at line \mbox{\hyperlink{axisym__solid__elements_8h_source_l00455}{45
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8cc_source_l07108}{oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8cc_source_l07104}{oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricPVDEquations_a70c01efa665238ec7a574588209d3edb}\label{classoomph_1_1AxisymmetricPVDEquations_a70c01efa665238ec7a574588209d3edb}} 
 \index{oomph::AxisymmetricPVDEquations@{oomph::AxisymmetricPVDEquations}!output@{output}}
@@ -277,7 +277,7 @@ Definition at line \mbox{\hyperlink{axisym__solid__elements_8h_source_l00407}{40
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
+References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
 
 
 
@@ -287,7 +287,7 @@ Referenced by \mbox{\hyperlink{axisym__solid__elements_8h_source_l00513}{oomph\+
 \index{oomph::AxisymmetricPVDEquations@{oomph::AxisymmetricPVDEquations}!output@{output}}
 \index{output@{output}!oomph::AxisymmetricPVDEquations@{oomph::AxisymmetricPVDEquations}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
-{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+PVDEquations\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+PVDEquations\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -307,7 +307,7 @@ Definition at line \mbox{\hyperlink{axisym__solid__elements_8h_source_l00413}{41
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8cc_source_l07108}{oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8cc_source_l07104}{oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 
 
@@ -316,7 +316,7 @@ References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cla
 \index{oomph::AxisymmetricPVDEquations@{oomph::AxisymmetricPVDEquations}!Constitutive\_law\_pt@{Constitutive\_law\_pt}}
 \index{Constitutive\_law\_pt@{Constitutive\_law\_pt}!oomph::AxisymmetricPVDEquations@{oomph::AxisymmetricPVDEquations}}
 \doxysubsubsection{\texorpdfstring{Constitutive\_law\_pt}{Constitutive\_law\_pt}}
-{\footnotesize\ttfamily Constitutive\+Law$\ast$ oomph\+::\+Axisymmetric\+PVDEquations\+::\+Constitutive\+\_\+law\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw}{Constitutive\+Law}}$\ast$ oomph\+::\+Axisymmetric\+PVDEquations\+::\+Constitutive\+\_\+law\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 

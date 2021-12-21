@@ -56,13 +56,13 @@
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00052}00052   \textcolor{keyword}{public}:\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00053}00053 \textcolor{comment}{    /// Source function pointer typedef}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00054}\mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a7a2c87557c3d9d405bb07a9f53bb4abe}{00054}} \textcolor{comment}{}    \textcolor{keyword}{typedef} void (*\mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a7a2c87557c3d9d405bb07a9f53bb4abe}{SourceFctPt}})(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00055}00055                                 \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00056}00056                                 \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}});}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00055}00055                                 \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00056}00056                                 \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& f);}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00057}00057 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00058}00058 \textcolor{comment}{    /// Mass source function pointer typedef}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00059}\mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a4f2fe2e03df9328898e9932b09299655}{00059}} \textcolor{comment}{}    \textcolor{keyword}{typedef} void (*\mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a4f2fe2e03df9328898e9932b09299655}{MassSourceFctPt}})(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00060}00060                                     \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00061}00061                                     \textcolor{keywordtype}{double}\& \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}});}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00060}00060                                     \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00061}00061                                     \textcolor{keywordtype}{double}\& f);}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00062}00062 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00063}00063 \textcolor{comment}{    /// Constructor}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00064}\mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a4dc47e5296f523f13d704194bd3b893f}{00064}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a4dc47e5296f523f13d704194bd3b893f}{AxisymmetricPoroelasticityEquations}}()}
@@ -234,7 +234,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00230}00230 \textcolor{comment}{    /// Indirect access to the solid body force function -\/ returns 0 if}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00231}00231 \textcolor{comment}{    /// no forcing function has been set}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00232}\mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_ad60f7eabcd487ef2b2a6bb00561993bb}{00232}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_ad60f7eabcd487ef2b2a6bb00561993bb}{solid\_body\_force}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00233}00233                           \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00233}00233                           \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00234}00234                           \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& b)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00235}00235 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00236}00236       \textcolor{comment}{// If no function has been set, return zero vector}}
@@ -249,14 +249,14 @@
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00245}00245       \}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00246}00246       \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00247}00247       \{}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00248}00248         (*Solid\_body\_force\_fct\_pt)(time, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, b);}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00248}00248         (*Solid\_body\_force\_fct\_pt)(time, x, b);}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00249}00249       \}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00250}00250     \}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00251}00251 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00252}00252 \textcolor{comment}{    /// Indirect access to the fluid body force function -\/ returns 0 if}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00253}00253 \textcolor{comment}{    /// no forcing function has been set}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00254}\mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_ad1eeb8bb77f7b792cb26c66e3f824d73}{00254}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_ad1eeb8bb77f7b792cb26c66e3f824d73}{fluid\_body\_force}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00255}00255                           \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00255}00255                           \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00256}00256                           \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& b)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00257}00257 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00258}00258       \textcolor{comment}{// If no function has been set, return zero vector}}
@@ -271,14 +271,14 @@
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00267}00267       \}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00268}00268       \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00269}00269       \{}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00270}00270         (*Fluid\_body\_force\_fct\_pt)(time, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, b);}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00270}00270         (*Fluid\_body\_force\_fct\_pt)(time, x, b);}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00271}00271       \}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00272}00272     \}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00273}00273 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00274}00274 \textcolor{comment}{    /// Indirect access to the mass source function -\/ returns 0 if no}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00275}00275 \textcolor{comment}{    /// mass source function has been set}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00276}\mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a0a863fa42e1ee95ba85bec4bd1bda7a5}{00276}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a0a863fa42e1ee95ba85bec4bd1bda7a5}{mass\_source}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00277}00277                      \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00277}00277                      \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00278}00278                      \textcolor{keywordtype}{double}\& b)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00279}00279 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00280}00280       \textcolor{comment}{// If no function has been set, return zero vector}}
@@ -288,7 +288,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00284}00284       \}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00285}00285       \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00286}00286       \{}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00287}00287         (*Mass\_source\_fct\_pt)(time, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, b);}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00287}00287         (*Mass\_source\_fct\_pt)(time, x, b);}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00288}00288       \}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00289}00289     \}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00290}00290 \textcolor{comment}{}}
@@ -409,7 +409,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00405}00405 \textcolor{comment}{    /// Compute the global coordinates of the jth flux\_interpolation}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00406}00406 \textcolor{comment}{    /// point along an edge}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00407}\mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a94eb24ad4a608057dd8601bbac14f241}{00407}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a94eb24ad4a608057dd8601bbac14f241}{edge\_flux\_interpolation\_point\_global}}(}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00408}00408       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& edge, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j, \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}) \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00408}00408       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& edge, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j, \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x) \textcolor{keyword}{const} = 0;}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00409}00409 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00410}00410 \textcolor{comment}{    /// Pin the jth internal q value and set it to specified value}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00411}\mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a7d59c7c592e2c45e2cd7865295a36eed}{00411}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a7d59c7c592e2c45e2cd7865295a36eed}{pin\_q\_internal\_value}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j,}
@@ -471,9 +471,9 @@
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00467}00467 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00468}00468 \textcolor{comment}{    /// Fill in the Jacobian matrix for the Newton method}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00469}\mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_ae9ce19fe1b4cb1556408b4e2d3efaf76}{00469}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_ae9ce19fe1b4cb1556408b4e2d3efaf76}{fill\_in\_contribution\_to\_jacobian}}(\mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00470}00470                                           \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00470}00470                                           \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian)}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00471}00471     \{}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00472}00472       this-\/>\mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_ab71a0b881d269e7dd0550003c50f6c3f}{fill\_in\_generic\_residual\_contribution}}(residuals, \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, 1);}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00472}00472       this-\/>\mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_ab71a0b881d269e7dd0550003c50f6c3f}{fill\_in\_generic\_residual\_contribution}}(residuals, jacobian, 1);}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00473}00473     \}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00474}00474 }
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00475}00475 \textcolor{comment}{}}
@@ -494,7 +494,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00490}00490       \mbox{\hyperlink{classoomph_1_1FiniteElement_a9296c17b134688049256a4bbc886df69}{dshape\_eulerian}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, psi, dpsidx);}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00491}00491 }
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00492}00492       \textcolor{comment}{// Local coordinates}}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00493}00493       \textcolor{keywordtype}{double} r = \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0);}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00493}00493       \textcolor{keywordtype}{double} r = \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0);}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00494}00494 }
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00495}00495       \textcolor{comment}{// Assemble the "{}cartesian-\/like"{} contributions}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00496}00496       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
@@ -542,7 +542,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00538}00538       \mbox{\hyperlink{classoomph_1_1FiniteElement_a9296c17b134688049256a4bbc886df69}{dshape\_eulerian}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, psi, dpsidx);}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00539}00539 }
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00540}00540       \textcolor{comment}{// Local coordinates}}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00541}00541       \textcolor{keywordtype}{double} r = \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0);}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00541}00541       \textcolor{keywordtype}{double} r = \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0);}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00542}00542 }
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00543}00543       \textcolor{comment}{// Assemble the "{}cartesian-\/like"{} contributions}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00544}00544       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
@@ -805,10 +805,10 @@
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00801}00801 }
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00802}00802       \textcolor{comment}{// Storage for the inverse of the geometric jacobian (just so we can call}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00803}00803       \textcolor{comment}{// the local to eulerian mapping)}}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00804}00804       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} \mbox{\hyperlink{classoomph_1_1FiniteElement_a72ead1315f6f588e379963ad2a16b88a}{inverse\_jacobian}}(2);}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00804}00804       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} inverse\_jacobian(2);}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00805}00805 }
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00806}00806       \textcolor{comment}{// Get the determinant of the geometric mapping}}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00807}00807       \textcolor{keywordtype}{double} det = \mbox{\hyperlink{classoomph_1_1FiniteElement_a8a8d8f5529b13f3b9f07ee675c8d4d9c}{local\_to\_eulerian\_mapping}}(dpsi, \mbox{\hyperlink{classoomph_1_1FiniteElement_a72ead1315f6f588e379963ad2a16b88a}{inverse\_jacobian}});}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00807}00807       \textcolor{keywordtype}{double} det = \mbox{\hyperlink{classoomph_1_1FiniteElement_a8a8d8f5529b13f3b9f07ee675c8d4d9c}{local\_to\_eulerian\_mapping}}(dpsi, inverse\_jacobian);}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00808}00808 }
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00809}00809       \textcolor{comment}{// Get the divergence basis (wrt local coords) at local coords s}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00810}00810       \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_abe3e6e28eb58ae719a6180d0d57b1815}{get\_div\_q\_basis\_local}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, div\_q\_basis\_ds);}
@@ -827,9 +827,9 @@
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00823}00823       \}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00824}00824 }
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00825}00825       \textcolor{comment}{// Extra term due to cylindrical coords}}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00826}00826       \textcolor{keywordflow}{if} (std::abs(\mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0)) > 1\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}-\/10)}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00826}00826       \textcolor{keywordflow}{if} (std::abs(\mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0)) > 1\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}-\/10)}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00827}00827       \{}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00828}00828         div\_q += \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a412b654ecb7e8ba819877db02a382dfd}{interpolated\_q}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0) / \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0);}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00828}00828         div\_q += \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a412b654ecb7e8ba819877db02a382dfd}{interpolated\_q}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0) / \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0);}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00829}00829       \}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00830}00830     \}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00831}00831 }
@@ -886,7 +886,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00882}\mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a5544e6c2ff2d40788b45a114ed1ccfd2}{00882}} \textcolor{comment}{}    \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a5544e6c2ff2d40788b45a114ed1ccfd2}{du\_dt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00883}00883 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00884}00884       \textcolor{comment}{// Get the timestepper}}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00885}00885       \mbox{\hyperlink{classoomph_1_1TimeStepper}{TimeStepper}}* \mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\_stepper\_pt}} = \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n)-\/>time\_stepper\_pt();}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00885}00885       \mbox{\hyperlink{classoomph_1_1TimeStepper}{TimeStepper}}* \mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\_stepper\_pt}} = \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n)-\/>\mbox{\hyperlink{classoomph_1_1Data_a065d7bffcec82bf4d4bd7b41f9aa80b3}{time\_stepper\_pt}}();}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00886}00886 }
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00887}00887       \textcolor{comment}{// Storage for the derivative -\/ initialise to 0}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00888}00888       \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a5544e6c2ff2d40788b45a114ed1ccfd2}{du\_dt}} = 0.0;}
@@ -916,7 +916,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00912}\mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_ac5a86eb17bdc912476cce98eef4d0ffc}{00912}} \textcolor{comment}{}    \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_ac5a86eb17bdc912476cce98eef4d0ffc}{d2u\_dt2}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00913}00913 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00914}00914       \textcolor{comment}{// Get the timestepper}}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00915}00915       \mbox{\hyperlink{classoomph_1_1TimeStepper}{TimeStepper}}* \mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\_stepper\_pt}} = \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n)-\/>time\_stepper\_pt();}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00915}00915       \mbox{\hyperlink{classoomph_1_1TimeStepper}{TimeStepper}}* \mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\_stepper\_pt}} = \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n)-\/>\mbox{\hyperlink{classoomph_1_1Data_a065d7bffcec82bf4d4bd7b41f9aa80b3}{time\_stepper\_pt}}();}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00916}00916 }
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00917}00917       \textcolor{comment}{// Storage for the derivative -\/ initialise to 0}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00918}00918       \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_ac5a86eb17bdc912476cce98eef4d0ffc}{d2u\_dt2}} = 0.0;}
@@ -948,7 +948,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00944}00944       \textcolor{keywordtype}{unsigned} node\_num = \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_a3067ec7af1ffb4656b63f5921a9a6467}{q\_edge\_node\_number}}(n);}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00945}00945 }
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00946}00946       \textcolor{comment}{// get the timestepper}}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00947}00947       \mbox{\hyperlink{classoomph_1_1TimeStepper}{TimeStepper}}* \mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\_stepper\_pt}} = \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(node\_num)-\/>time\_stepper\_pt();}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00947}00947       \mbox{\hyperlink{classoomph_1_1TimeStepper}{TimeStepper}}* \mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\_stepper\_pt}} = \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(node\_num)-\/>\mbox{\hyperlink{classoomph_1_1Data_a065d7bffcec82bf4d4bd7b41f9aa80b3}{time\_stepper\_pt}}();}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00948}00948 }
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00949}00949       \textcolor{comment}{// storage for the derivative -\/ initialise to 0}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l00950}00950       \textcolor{keywordtype}{double} dq\_dt = 0.0;}
@@ -1180,7 +1180,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01176}01176       \textcolor{comment}{// Output the components of the position}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01177}01177       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01178}01178       \{}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01179}01179         data.push\_back(\mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01179}01179         data.push\_back(\mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01180}01180       \}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01181}01181 }
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01182}01182       \textcolor{comment}{// Output the components of the FE representation of u at s}}
@@ -1317,7 +1317,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01313}01313 }
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01314}01314     \textcolor{comment}{// fill in residuals and, if flag==true, jacobian}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01315}01315     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityEquations_ab71a0b881d269e7dd0550003c50f6c3f}{fill\_in\_generic\_residual\_contribution}}(}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01316}01316       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \textcolor{keywordtype}{bool} flag);}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01316}01316       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian, \textcolor{keywordtype}{bool} flag);}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01317}01317 }
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01318}01318   \textcolor{keyword}{private}:\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01319}01319 \textcolor{comment}{    /// Pointer to solid body force function}}
@@ -1505,7 +1505,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01501}01501 \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01502}01502 }
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01503}01503       \textcolor{comment}{// Displacements -\/-\/ infer from first (vertex) node}}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01504}01504       \textcolor{keywordtype}{unsigned} return\_value = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>ntstorage();}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01504}01504       \textcolor{keywordtype}{unsigned} return\_value = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Data_a9752205c5fb3bb886200b3fae9181e94}{ntstorage}}();}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01505}01505 }
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01506}01506       \textcolor{comment}{// Pressure: No history values (just present one!)}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01507}01507       \textcolor{keywordflow}{if} (fld == 2) return\_value = 1;}
@@ -1513,7 +1513,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01509}01509       \textcolor{comment}{// Flux: infer from first midside node}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01510}01510       \textcolor{keywordflow}{if} (fld == 3)}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01511}01511       \{}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01512}01512         return\_value = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(3)-\/>ntstorage();}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01512}01512         return\_value = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(3)-\/>\mbox{\hyperlink{classoomph_1_1Data_a9752205c5fb3bb886200b3fae9181e94}{ntstorage}}();}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01513}01513       \}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01514}01514       \textcolor{keywordflow}{return} return\_value;}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01515}01515     \}}
@@ -1522,7 +1522,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01518}01518 \textcolor{comment}{    /// (Note: count includes current value!)}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01519}\mbox{\hyperlink{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement_a077bea222dd174803e3af28e6995195e}{01519}} \textcolor{comment}{}    \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement_a077bea222dd174803e3af28e6995195e}{nhistory\_values\_for\_coordinate\_projection}}()}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01520}01520     \{}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01521}01521       \textcolor{keywordflow}{return} this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>position\_time\_stepper\_pt()-\/>ntstorage();}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01521}01521       \textcolor{keywordflow}{return} this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Node_a32b32940186f9d1e2abc5d4bedb6ff0d}{position\_time\_stepper\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1TimeStepper_a3939b77ec3578e4bd5b453c85649d631}{ntstorage}}();}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01522}01522     \}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01523}01523 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01524}01524 \textcolor{comment}{    /// Return Jacobian of mapping and shape functions of field fld}}
@@ -1754,7 +1754,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01750}01750 \textcolor{comment}{    /// want the Jacobian (1) or not (0). Virtual so it can be}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01751}01751 \textcolor{comment}{    /// overloaded if necessary}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01752}\mbox{\hyperlink{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement_a0ae5521eeba28eeef8eb28741597ea44}{01752}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement_a0ae5521eeba28eeef8eb28741597ea44}{residual\_for\_projection}}(\mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01753}01753                                  \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}},}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01753}01753                                  \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian,}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01754}01754                                  \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& flag)}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01755}01755     \{}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01756}01756       \textcolor{comment}{// Am I a solid element}}
@@ -1778,17 +1778,17 @@
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01774}01774       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_value = \mbox{\hyperlink{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement_a8082f4f9da812ae6965e20838ecce8d2}{nvalue\_of\_field}}(fld);}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01775}01775 }
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01776}01776       \textcolor{comment}{// Set the value of n\_intpt}}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01777}01777       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01777}01777       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01778}01778 }
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01779}01779       \textcolor{comment}{// Loop over the integration points}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01780}01780       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ipt = 0; ipt < n\_intpt; ipt++)}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01781}01781       \{}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01782}01782         \textcolor{comment}{// Get the local coordinates of Gauss point}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01783}01783         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_dim; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01784}01784           \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>knot(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01784}01784           \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{knot}}(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01785}01785 }
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01786}01786         \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01787}01787         \textcolor{keywordtype}{double} w = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01787}01787         \textcolor{keywordtype}{double} w = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01788}01788 }
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01789}01789         \textcolor{comment}{// Find same point in base mesh using external storage}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01790}01790         \mbox{\hyperlink{classoomph_1_1FiniteElement}{FiniteElement}}* other\_el\_pt = 0;}
@@ -1822,15 +1822,15 @@
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01818}01818             \textcolor{comment}{// Get the position shape functions}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01819}01819             this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{shape}}(s, psi);}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01820}01820             \textcolor{comment}{// Get the jacobian}}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01821}01821             \textcolor{keywordtype}{double} J = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a808557a124b98d5bbe3bb3b22c81b44b}{J\_eulerian}}(s);}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01821}01821             \textcolor{keywordtype}{double} J = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a089e58d5ad9b8efee637221b0e264563}{J\_eulerian}}(s);}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01822}01822 }
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01823}01823             \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01824}01824             \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01824}01824             \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01825}01825 }
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01826}01826             \textcolor{comment}{// Get the value of the current position of the 0th coordinate}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01827}01827             \textcolor{comment}{// in the current element}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01828}01828             \textcolor{comment}{// at the current time level (which is the unkown)}}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01829}01829             \textcolor{keywordtype}{double} interpolated\_xi\_proj = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(s, 0);}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01829}01829             \textcolor{keywordtype}{double} interpolated\_xi\_proj = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(s, 0);}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01830}01830 }
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01831}01831             \textcolor{comment}{// Get the Lagrangian position in the other element}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01832}01832             \textcolor{keywordtype}{double} interpolated\_xi\_bar =}
@@ -1853,7 +1853,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01849}01849                   \textcolor{comment}{// calculate residuals}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01850}01850                   residuals[local\_eqn] +=}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01851}01851                     (interpolated\_xi\_proj -\/ interpolated\_xi\_bar) * psi(l, k) *}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01852}01852                     \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01852}01852                     \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01853}01853 }
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01854}01854                   \textcolor{comment}{// Calculate the jacobian}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01855}01855                   \textcolor{keywordflow}{if} (flag == 1)}
@@ -1867,8 +1867,8 @@
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01863}01863                           solid\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a8632178393e76ffcd88888ab96616b1a}{position\_local\_eqn}}(l2, k2, 0);}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01864}01864                         \textcolor{keywordflow}{if} (local\_unknown >= 0)}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01865}01865                         \{}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01866}01866                           \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn, local\_unknown) +=}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01867}01867                             psi(l2, k2) * psi(l, k) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01866}01866                           jacobian(local\_eqn, local\_unknown) +=}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01867}01867                             psi(l2, k2) * psi(l, k) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01868}01868                         \}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01869}01869                       \}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01870}01870                     \}}
@@ -1888,10 +1888,10 @@
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01884}01884             \textcolor{comment}{// Get the position shape functions}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01885}01885             this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{shape}}(s, psi);}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01886}01886             \textcolor{comment}{// Get the jacobian}}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01887}01887             \textcolor{keywordtype}{double} J = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a808557a124b98d5bbe3bb3b22c81b44b}{J\_eulerian}}(s);}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01887}01887             \textcolor{keywordtype}{double} J = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a089e58d5ad9b8efee637221b0e264563}{J\_eulerian}}(s);}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01888}01888 }
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01889}01889             \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01890}01890             \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01890}01890             \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01891}01891 }
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01892}01892             \textcolor{comment}{// Get the value of the current position in the current element}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01893}01893             \textcolor{comment}{// at the current time level (which is the unkown)}}
@@ -1900,7 +1900,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01896}01896             \textcolor{keywordflow}{if} (solid\_el\_pt != 0)}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01897}01897             \{}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01898}01898               interpolated\_x\_proj =}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01899}01899                 this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(s, \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ab712be6423145fae3c23e444187db0e2}{Projected\_coordinate}});}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01899}01899                 this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(s, \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ab712be6423145fae3c23e444187db0e2}{Projected\_coordinate}});}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01900}01900             \}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01901}01901             \textcolor{comment}{// Otherwise it's the field value at the current time}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01902}01902             \textcolor{keywordflow}{else}}
@@ -1909,7 +1909,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01905}01905             \}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01906}01906 }
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01907}01907             \textcolor{comment}{// Get the position in the other element}}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01908}01908             \textcolor{keywordtype}{double} interpolated\_x\_bar = cast\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01908}01908             \textcolor{keywordtype}{double} interpolated\_x\_bar = cast\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01909}01909               \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a4698e178e500468c0af8c37bd47d0bd3}{Time\_level\_for\_projection}}, other\_s, \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ab712be6423145fae3c23e444187db0e2}{Projected\_coordinate}});}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01910}01910 }
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01911}01911             \textcolor{comment}{// Now loop over the nodes and position dofs}}
@@ -1948,7 +1948,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01944}01944                 \{}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01945}01945                   \textcolor{comment}{// calculate residuals}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01946}01946                   residuals[local\_eqn] +=}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01947}01947                     (interpolated\_x\_proj -\/ interpolated\_x\_bar) * psi(l, k) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01947}01947                     (interpolated\_x\_proj -\/ interpolated\_x\_bar) * psi(l, k) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01948}01948 }
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01949}01949                   \textcolor{comment}{// Calculate the jacobian}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01950}01950                   \textcolor{keywordflow}{if} (flag == 1)}
@@ -1971,8 +1971,8 @@
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01967}01967 }
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01968}01968                         \textcolor{keywordflow}{if} (local\_unknown >= 0)}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01969}01969                         \{}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01970}01970                           \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn, local\_unknown) +=}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01971}01971                             psi(l2, k2) * psi(l, k) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01970}01970                           jacobian(local\_eqn, local\_unknown) +=}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01971}01971                             psi(l2, k2) * psi(l, k) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01972}01972                         \}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01973}01973                       \}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01974}01974                     \}}
@@ -1996,7 +1996,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01992}01992               \textcolor{keywordtype}{double} J = \mbox{\hyperlink{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement_a53a88c81a5225e213ca869e670ad1605}{jacobian\_and\_shape\_of\_field}}(fld, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, psi);}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01993}01993 }
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01994}01994               \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01995}01995               \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01995}01995               \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01996}01996 }
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01997}01997               \textcolor{comment}{// Value of field in current element at current time level}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l01998}01998               \textcolor{comment}{//(the unknown)}}
@@ -2016,7 +2016,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02012}02012                   \textcolor{comment}{// calculate residuals}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02013}02013                   residuals[local\_eqn] +=}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02014}02014                     (interpolated\_value\_proj -\/ interpolated\_value\_bar) *}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02015}02015                     psi[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02015}02015                     psi[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02016}02016 }
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02017}02017                   \textcolor{comment}{// Calculate the jacobian}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02018}02018                   \textcolor{keywordflow}{if} (flag == 1)}
@@ -2026,8 +2026,8 @@
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02022}02022                       local\_unknown = \mbox{\hyperlink{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement_a083614b12898ca9057debe48aa81364a}{local\_equation}}(fld, l2);}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02023}02023                       \textcolor{keywordflow}{if} (local\_unknown >= 0)}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02024}02024                       \{}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02025}02025                         \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn, local\_unknown) +=}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02026}02026                           psi[l2] * psi[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02025}02025                         jacobian(local\_eqn, local\_unknown) +=}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02026}02026                           psi[l2] * psi[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02027}02027                       \}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02028}02028                     \}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02029}02029                   \} \textcolor{comment}{// end of jacobian}}
@@ -2044,7 +2044,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02040}02040               \textcolor{keywordtype}{double} J = \mbox{\hyperlink{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement_a53a88c81a5225e213ca869e670ad1605}{jacobian\_and\_shape\_of\_field}}(fld, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, psi);}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02041}02041 }
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02042}02042               \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02043}02043               \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02043}02043               \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02044}02044 }
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02045}02045               \textcolor{comment}{// Value of flux in current element at current time level}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02046}02046               \textcolor{comment}{//(the unknown)}}
@@ -2068,7 +2068,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02064}02064                   \{}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02065}02065                     \textcolor{comment}{// Add to residuals}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02066}02066                     residuals[local\_eqn] +=}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02067}02067                       (q\_proj[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ q\_bar[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]) * psi(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02067}02067                       (q\_proj[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ q\_bar[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]) * psi(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02068}02068 }
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02069}02069                     \textcolor{comment}{// Calculate the jacobian}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02070}02070                     \textcolor{keywordflow}{if} (flag == 1)}
@@ -2078,8 +2078,8 @@
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02074}02074                         local\_unknown = \mbox{\hyperlink{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement_a083614b12898ca9057debe48aa81364a}{local\_equation}}(fld, l2);}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02075}02075                         \textcolor{keywordflow}{if} (local\_unknown >= 0)}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02076}02076                         \{}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02077}02077                           \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn, local\_unknown) +=}
-\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02078}02078                             psi(l2, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * psi(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02077}02077                           jacobian(local\_eqn, local\_unknown) +=}
+\DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02078}02078                             psi(l2, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * psi(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02079}02079                         \}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02080}02080                       \}}
 \DoxyCodeLine{\Hypertarget{axisym__poroelasticity__elements_8h_source_l02081}02081                     \} \textcolor{comment}{// end of jacobian}}

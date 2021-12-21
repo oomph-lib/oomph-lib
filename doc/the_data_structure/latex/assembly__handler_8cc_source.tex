@@ -633,19 +633,19 @@
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00629}00629       \textcolor{keyword}{delete} \mbox{\hyperlink{classoomph_1_1AugmentedBlockFoldLinearSolver_a6793e6c00a07d6a037f12b78c7d32182}{E\_pt}};}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00630}00630     \}}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00631}00631     \mbox{\hyperlink{classoomph_1_1AugmentedBlockFoldLinearSolver_a6793e6c00a07d6a037f12b78c7d32182}{E\_pt}} = \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}(this-\/>\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}(), 0.0);}
-\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00632}00632     \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}(this-\/>\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}(), 0.0);}
-\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00633}00633     \mbox{\hyperlink{classoomph_1_1AugmentedBlockFoldLinearSolver_a1e8706ee6a97424bcbaf1992a09549ee}{Linear\_solver\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1LinearSolver_a3b310d08333033edc119b2a5bd7dcbfb}{resolve}}(b, \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}});}
+\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00632}00632     \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} f(this-\/>\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}(), 0.0);}
+\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00633}00633     \mbox{\hyperlink{classoomph_1_1AugmentedBlockFoldLinearSolver_a1e8706ee6a97424bcbaf1992a09549ee}{Linear\_solver\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1LinearSolver_a3b310d08333033edc119b2a5bd7dcbfb}{resolve}}(b, f);}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00634}00634     \mbox{\hyperlink{classoomph_1_1AugmentedBlockFoldLinearSolver_a1e8706ee6a97424bcbaf1992a09549ee}{Linear\_solver\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1LinearSolver_a3b310d08333033edc119b2a5bd7dcbfb}{resolve}}(Jprod\_alpha, *\mbox{\hyperlink{classoomph_1_1AugmentedBlockFoldLinearSolver_a6793e6c00a07d6a037f12b78c7d32182}{E\_pt}});}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00635}00635 }
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00636}00636     \textcolor{comment}{// Calculate the final entry in the vector e}}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00637}00637     \textcolor{keyword}{const} \textcolor{keywordtype}{double} e\_final = (*E\_pt)[n\_dof -\/ 1];}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00638}00638     \textcolor{comment}{// Calculate the final entry in the vector d}}
-\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00639}00639     \textcolor{keyword}{const} \textcolor{keywordtype}{double} d\_final = \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}[n\_dof -\/ 1] / e\_final;}
+\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00639}00639     \textcolor{keyword}{const} \textcolor{keywordtype}{double} d\_final = f[n\_dof -\/ 1] / e\_final;}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00640}00640     \textcolor{comment}{// Assemble the final corrections}}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00641}00641     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < n\_dof -\/ 1; n++)}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00642}00642     \{}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00643}00643       result[n] = a[n] -\/ (*Alpha\_pt)[n] * d\_final + d\_final * y[n];}
-\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00644}00644       result[n\_dof + n] = \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}[n] -\/ (*E\_pt)[n] * d\_final;}
+\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00644}00644       result[n\_dof + n] = f[n] -\/ (*E\_pt)[n] * d\_final;}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00645}00645     \}}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00646}00646     \textcolor{comment}{// The result corresponding to the parameter}}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00647}00647     result[n\_dof -\/ 1] = a[n\_dof -\/ 1] -\/ (*Alpha\_pt)[n\_dof -\/ 1] * d\_final;}
@@ -833,17 +833,17 @@
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00829}00829     \textcolor{comment}{// with the parameter}}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00830}00830     b[n\_dof -\/ 1] = rhs[n\_dof -\/ 1];}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00831}00831 }
-\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00832}00832     \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}(this-\/>\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}(), 0.0);}
+\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00832}00832     \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} f(this-\/>\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}(), 0.0);}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00833}00833 }
-\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00834}00834     \mbox{\hyperlink{classoomph_1_1AugmentedBlockFoldLinearSolver_a1e8706ee6a97424bcbaf1992a09549ee}{Linear\_solver\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1LinearSolver_a3b310d08333033edc119b2a5bd7dcbfb}{resolve}}(b, \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}});}
+\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00834}00834     \mbox{\hyperlink{classoomph_1_1AugmentedBlockFoldLinearSolver_a1e8706ee6a97424bcbaf1992a09549ee}{Linear\_solver\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1LinearSolver_a3b310d08333033edc119b2a5bd7dcbfb}{resolve}}(b, f);}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00835}00835 }
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00836}00836     \textcolor{comment}{// Calculate the final entry in the vector d}}
-\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00837}00837     \textcolor{keyword}{const} \textcolor{keywordtype}{double} d\_final = \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}[n\_dof -\/ 1] / (*E\_pt)[n\_dof -\/ 1];}
+\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00837}00837     \textcolor{keyword}{const} \textcolor{keywordtype}{double} d\_final = f[n\_dof -\/ 1] / (*E\_pt)[n\_dof -\/ 1];}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00838}00838     \textcolor{comment}{// Assemble the final corrections}}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00839}00839     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < n\_dof -\/ 1; n++)}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00840}00840     \{}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00841}00841       result[n] = a[n] -\/ (*Alpha\_pt)[n] * d\_final + d\_final * handler\_pt-\/>\mbox{\hyperlink{classoomph_1_1FoldHandler_ac8697e5d9484fc0488d4c16b822c792e}{Y}}[n];}
-\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00842}00842       result[n\_dof + n] = \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}[n] -\/ (*E\_pt)[n] * d\_final;}
+\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00842}00842       result[n\_dof + n] = f[n] -\/ (*E\_pt)[n] * d\_final;}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00843}00843     \}}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00844}00844     \textcolor{comment}{// The result corresponding to the paramater}}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00845}00845     result[n\_dof -\/ 1] = a[n\_dof -\/ 1] -\/ (*Alpha\_pt)[n\_dof -\/ 1] * d\_final;}
@@ -911,23 +911,23 @@
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00907}00907     linear\_solver\_pt-\/>\mbox{\hyperlink{classoomph_1_1LinearSolver_a3000ebd9becb3468d8a6a821a9cc0cd9}{enable\_resolve}}();}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00908}00908 }
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00909}00909     \textcolor{comment}{// Storage for the solution}}
-\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00910}00910     \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(dist\_pt, 0.0);}
+\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00910}00910     \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} x(dist\_pt, 0.0);}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00911}00911 }
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00912}00912     \textcolor{comment}{// Solve the standard problem, we only want to make sure that}}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00913}00913     \textcolor{comment}{// we factorise the matrix, if it has not been factorised. We shall}}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00914}00914     \textcolor{comment}{// ignore the return value of x.}}
-\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00915}00915     linear\_solver\_pt-\/>\mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485edacbeb6e}{solve}}(problem\_pt, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00915}00915     linear\_solver\_pt-\/>\mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485edacbeb6e}{solve}}(problem\_pt, x);}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00916}00916 }
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00917}00917     \textcolor{comment}{// Get the vector dresiduals/dparameter}}
-\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00918}00918     problem\_pt-\/>\mbox{\hyperlink{classoomph_1_1Problem_af4d959a47ef6a8d50b394a6761dfab5a}{get\_derivative\_wrt\_global\_parameter}}(parameter\_pt, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00918}00918     problem\_pt-\/>\mbox{\hyperlink{classoomph_1_1Problem_af4d959a47ef6a8d50b394a6761dfab5a}{get\_derivative\_wrt\_global\_parameter}}(parameter\_pt, x);}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00919}00919 }
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00920}00920     \textcolor{comment}{// Copy rhs vector into local storage so it doesn't get overwritten}}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00921}00921     \textcolor{comment}{// if the linear solver decides to initialise the solution vector, say,}}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00922}00922     \textcolor{comment}{// which it's quite entitled to do!}}
-\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00923}00923     \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} input\_x(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00923}00923     \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} input\_x(x);}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00924}00924 }
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00925}00925     \textcolor{comment}{// Now resolve the system with the new RHS and overwrite the solution}}
-\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00926}00926     linear\_solver\_pt-\/>\mbox{\hyperlink{classoomph_1_1LinearSolver_a3b310d08333033edc119b2a5bd7dcbfb}{resolve}}(input\_x, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00926}00926     linear\_solver\_pt-\/>\mbox{\hyperlink{classoomph_1_1LinearSolver_a3b310d08333033edc119b2a5bd7dcbfb}{resolve}}(input\_x, x);}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00927}00927 }
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00928}00928     \textcolor{comment}{// Restore the storage status of the linear solver}}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00929}00929     \textcolor{keywordflow}{if} (enable\_resolve)}
@@ -947,7 +947,7 @@
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00943}00943     \textcolor{keywordtype}{double} length = 0.0;}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00944}00944     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < \mbox{\hyperlink{classoomph_1_1FoldHandler_aa3f143846245ecea5967ba7c79bedf56}{Ndof}}; n++)}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00945}00945     \{}
-\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00946}00946       length += \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[n] * \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[n];}
+\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00946}00946       length += x[n] * x[n];}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00947}00947     \}}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00948}00948     length = sqrt(length);}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00949}00949 }
@@ -956,7 +956,7 @@
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00952}00952     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < \mbox{\hyperlink{classoomph_1_1FoldHandler_aa3f143846245ecea5967ba7c79bedf56}{Ndof}}; n++)}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00953}00953     \{}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00954}00954       problem\_pt-\/>\mbox{\hyperlink{classoomph_1_1Problem_aa9e4cfff7e1dc295036b0e58bc11ae75}{Dof\_pt}}.push\_back(\&\mbox{\hyperlink{classoomph_1_1FoldHandler_ac8697e5d9484fc0488d4c16b822c792e}{Y}}[n]);}
-\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00955}00955       \mbox{\hyperlink{classoomph_1_1FoldHandler_ac8697e5d9484fc0488d4c16b822c792e}{Y}}[n] = \mbox{\hyperlink{classoomph_1_1FoldHandler_a7b6ebf95bb87aab0c3df7daf841af3a8}{Phi}}[n] = -\/\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[n] / length;}
+\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00955}00955       \mbox{\hyperlink{classoomph_1_1FoldHandler_ac8697e5d9484fc0488d4c16b822c792e}{Y}}[n] = \mbox{\hyperlink{classoomph_1_1FoldHandler_a7b6ebf95bb87aab0c3df7daf841af3a8}{Phi}}[n] = -\/x[n] / length;}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00956}00956     \}}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00957}00957 }
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l00958}00958     \textcolor{comment}{// delete the dist\_pt}}
@@ -2463,20 +2463,20 @@
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02459}02459     \}}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02460}02460     \mbox{\hyperlink{classoomph_1_1AugmentedBlockPitchForkLinearSolver_a478bca515ee961576f523b1b5152651f}{E\_pt}} = \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}(this-\/>\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}(), 0.0);}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02461}02461 }
-\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02462}02462     \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}(this-\/>\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}(), 0.0);}
+\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02462}02462     \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} f(this-\/>\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}(), 0.0);}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02463}02463 }
-\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02464}02464     \mbox{\hyperlink{classoomph_1_1AugmentedBlockPitchForkLinearSolver_a1a3e1949c94c04c3b4ec19f0b895f97c}{Linear\_solver\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1LinearSolver_a3b310d08333033edc119b2a5bd7dcbfb}{resolve}}(b, \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}});}
+\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02464}02464     \mbox{\hyperlink{classoomph_1_1AugmentedBlockPitchForkLinearSolver_a1a3e1949c94c04c3b4ec19f0b895f97c}{Linear\_solver\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1LinearSolver_a3b310d08333033edc119b2a5bd7dcbfb}{resolve}}(b, f);}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02465}02465     \mbox{\hyperlink{classoomph_1_1AugmentedBlockPitchForkLinearSolver_a1a3e1949c94c04c3b4ec19f0b895f97c}{Linear\_solver\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1LinearSolver_a3b310d08333033edc119b2a5bd7dcbfb}{resolve}}(Jprod\_alpha, *\mbox{\hyperlink{classoomph_1_1AugmentedBlockPitchForkLinearSolver_a478bca515ee961576f523b1b5152651f}{E\_pt}});}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02466}02466 }
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02467}02467     \textcolor{comment}{// Calculate the final entry in the vector e}}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02468}02468     \textcolor{keyword}{const} \textcolor{keywordtype}{double} e\_final = (*E\_pt)[n\_dof -\/ 1];}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02469}02469     \textcolor{comment}{// Calculate the final entry in the vector d}}
-\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02470}02470     \textcolor{keyword}{const} \textcolor{keywordtype}{double} d\_final = -\/\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}[n\_dof -\/ 1] / e\_final;}
+\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02470}02470     \textcolor{keyword}{const} \textcolor{keywordtype}{double} d\_final = -\/f[n\_dof -\/ 1] / e\_final;}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02471}02471     \textcolor{comment}{// Assemble the final corrections}}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02472}02472     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < n\_dof -\/ 1; n++)}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02473}02473     \{}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02474}02474       result[n] = a[n] -\/ (*Alpha\_pt)[n] * d\_final;}
-\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02475}02475       result[n\_dof + n] = \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}[n] + (*E\_pt)[n] * d\_final;}
+\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02475}02475       result[n\_dof + n] = f[n] + (*E\_pt)[n] * d\_final;}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02476}02476     \}}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02477}02477 }
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02478}02478     result[n\_dof -\/ 1] = a[n\_dof -\/ 1] -\/ (*Alpha\_pt)[n\_dof -\/ 1] * d\_final;}
@@ -2648,17 +2648,17 @@
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02644}02644     \}}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02645}02645     b[n\_dof -\/ 1] = rhs[2 * n\_dof -\/ 1];}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02646}02646 }
-\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02647}02647     \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}(this-\/>\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}(), 0.0);}
+\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02647}02647     \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} f(this-\/>\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}(), 0.0);}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02648}02648 }
-\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02649}02649     \mbox{\hyperlink{classoomph_1_1AugmentedBlockPitchForkLinearSolver_a1a3e1949c94c04c3b4ec19f0b895f97c}{Linear\_solver\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1LinearSolver_a3b310d08333033edc119b2a5bd7dcbfb}{resolve}}(b, \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}});}
+\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02649}02649     \mbox{\hyperlink{classoomph_1_1AugmentedBlockPitchForkLinearSolver_a1a3e1949c94c04c3b4ec19f0b895f97c}{Linear\_solver\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1LinearSolver_a3b310d08333033edc119b2a5bd7dcbfb}{resolve}}(b, f);}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02650}02650 }
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02651}02651     \textcolor{comment}{// Calculate the final entry in the vector d}}
-\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02652}02652     \textcolor{keyword}{const} \textcolor{keywordtype}{double} d\_final = -\/\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}[n\_dof -\/ 1] / (*E\_pt)[n\_dof -\/ 1];}
+\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02652}02652     \textcolor{keyword}{const} \textcolor{keywordtype}{double} d\_final = -\/f[n\_dof -\/ 1] / (*E\_pt)[n\_dof -\/ 1];}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02653}02653     \textcolor{comment}{// Assemble the final corrections}}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02654}02654     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < n\_dof -\/ 1; n++)}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02655}02655     \{}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02656}02656       result[n] = a[n] -\/ (*Alpha\_pt)[n] * d\_final;}
-\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02657}02657       result[n\_dof + n] = \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}[n] + (*E\_pt)[n] * d\_final;}
+\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02657}02657       result[n\_dof + n] = f[n] + (*E\_pt)[n] * d\_final;}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02658}02658     \}}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02659}02659 }
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l02660}02660     result[n\_dof -\/ 1] = a[n\_dof -\/ 1] -\/ (*Alpha\_pt)[n\_dof -\/ 1] * d\_final;}
@@ -4483,23 +4483,23 @@
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04479}04479     linear\_solver\_pt-\/>\mbox{\hyperlink{classoomph_1_1LinearSolver_a3000ebd9becb3468d8a6a821a9cc0cd9}{enable\_resolve}}();}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04480}04480 }
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04481}04481     \textcolor{comment}{// Storage for the solution}}
-\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04482}04482     \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(dist\_pt, 0.0);}
+\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04482}04482     \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} x(dist\_pt, 0.0);}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04483}04483 }
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04484}04484     \textcolor{comment}{// Solve the standard problem, we only want to make sure that}}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04485}04485     \textcolor{comment}{// we factorise the matrix, if it has not been factorised. We shall}}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04486}04486     \textcolor{comment}{// ignore the return value of x.}}
-\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04487}04487     linear\_solver\_pt-\/>\mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485edacbeb6e}{solve}}(problem\_pt, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04487}04487     linear\_solver\_pt-\/>\mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485edacbeb6e}{solve}}(problem\_pt, x);}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04488}04488 }
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04489}04489     \textcolor{comment}{// Get the vector dresiduals/dparameter}}
-\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04490}04490     problem\_pt-\/>\mbox{\hyperlink{classoomph_1_1Problem_af4d959a47ef6a8d50b394a6761dfab5a}{get\_derivative\_wrt\_global\_parameter}}(parameter\_pt, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04490}04490     problem\_pt-\/>\mbox{\hyperlink{classoomph_1_1Problem_af4d959a47ef6a8d50b394a6761dfab5a}{get\_derivative\_wrt\_global\_parameter}}(parameter\_pt, x);}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04491}04491 }
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04492}04492     \textcolor{comment}{// Copy rhs vector into local storage so it doesn't get overwritten}}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04493}04493     \textcolor{comment}{// if the linear solver decides to initialise the solution vector, say,}}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04494}04494     \textcolor{comment}{// which it's quite entitled to do!}}
-\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04495}04495     \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} input\_x(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04495}04495     \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} input\_x(x);}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04496}04496 }
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04497}04497     \textcolor{comment}{// Now resolve the system with the new RHS and overwrite the solution}}
-\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04498}04498     linear\_solver\_pt-\/>\mbox{\hyperlink{classoomph_1_1LinearSolver_a3b310d08333033edc119b2a5bd7dcbfb}{resolve}}(input\_x, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04498}04498     linear\_solver\_pt-\/>\mbox{\hyperlink{classoomph_1_1LinearSolver_a3b310d08333033edc119b2a5bd7dcbfb}{resolve}}(input\_x, x);}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04499}04499 }
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04500}04500     \textcolor{comment}{// Restore the storage status of the linear solver}}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04501}04501     \textcolor{keywordflow}{if} (enable\_resolve)}
@@ -4515,7 +4515,7 @@
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04511}04511     \textcolor{keywordtype}{double} length = 0.0;}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04512}04512     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < \mbox{\hyperlink{classoomph_1_1HopfHandler_ac35b7c357ab453b686e80d8efe761945}{Ndof}}; n++)}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04513}04513     \{}
-\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04514}04514       length += \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[n] * \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[n];}
+\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04514}04514       length += x[n] * x[n];}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04515}04515     \}}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04516}04516     length = sqrt(length);}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04517}04517 }
@@ -4525,7 +4525,7 @@
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04521}04521     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < \mbox{\hyperlink{classoomph_1_1HopfHandler_ac35b7c357ab453b686e80d8efe761945}{Ndof}}; n++)}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04522}04522     \{}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04523}04523       problem\_pt-\/>\mbox{\hyperlink{classoomph_1_1Problem_aa9e4cfff7e1dc295036b0e58bc11ae75}{Dof\_pt}}.push\_back(\&\mbox{\hyperlink{classoomph_1_1HopfHandler_a117a5e192857e2f51c9c5d392fd6e5e7}{Phi}}[n]);}
-\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04524}04524       \mbox{\hyperlink{classoomph_1_1HopfHandler_a99aabcf5ac54311f1f7acb0dbd431b84}{C}}[n] = \mbox{\hyperlink{classoomph_1_1HopfHandler_a117a5e192857e2f51c9c5d392fd6e5e7}{Phi}}[n] = -\/\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[n] / length;}
+\DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04524}04524       \mbox{\hyperlink{classoomph_1_1HopfHandler_a99aabcf5ac54311f1f7acb0dbd431b84}{C}}[n] = \mbox{\hyperlink{classoomph_1_1HopfHandler_a117a5e192857e2f51c9c5d392fd6e5e7}{Phi}}[n] = -\/x[n] / length;}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04525}04525     \}}
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04526}04526 }
 \DoxyCodeLine{\Hypertarget{assembly__handler_8cc_source_l04527}04527     \textcolor{comment}{// Set the imaginary part so that the appropriate residual is}}

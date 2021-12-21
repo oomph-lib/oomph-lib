@@ -192,16 +192,16 @@
 \DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00188}00188       \}}
 \DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00189}00189 }
 \DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00190}00190 }
-\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00191}00191       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(3);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00191}00191       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(3);}
 \DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00192}00192       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} <= nx; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00193}00193       \{}
-\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00194}00194         \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[0] = min\_and\_max\_coordinates[0].first + double(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * dx;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00194}00194         x[0] = min\_and\_max\_coordinates[0].first + double(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * dx;}
 \DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00195}00195         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j <= ny; j++)}
 \DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00196}00196         \{}
-\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00197}00197           \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[1] = min\_and\_max\_coordinates[1].first + double(j) * dy;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00197}00197           x[1] = min\_and\_max\_coordinates[1].first + double(j) * dy;}
 \DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00198}00198           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k <= nz; k++)}
 \DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00199}00199           \{}
-\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00200}00200             \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[2] = min\_and\_max\_coordinates[2].first + double(k) * dz;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00200}00200             x[2] = min\_and\_max\_coordinates[2].first + double(k) * dz;}
 \DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00201}00201 }
 \DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00202}00202             \textcolor{comment}{// Try the specified number of nearest sample points for Newton}}
 \DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00203}00203             \textcolor{comment}{// search then just settle on the nearest one}}
@@ -215,7 +215,7 @@
 \DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00211}00211 }
 \DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00212}00212             \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classCGALSamplePointContainer}{CGALSamplePointContainer}}*\textcolor{keyword}{>}(}
 \DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00213}00213               mesh\_geom\_obj\_pt-\/>\mbox{\hyperlink{classoomph_1_1MeshAsGeomObject_a383d5ffb3cdde540a9db380d683f0673}{sample\_point\_container\_pt}}())}
-\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00214}00214               -\/>limited\_locate\_zeta(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, max\_sample\_points, geom\_obj\_pt, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00214}00214               -\/>limited\_locate\_zeta(x, max\_sample\_points, geom\_obj\_pt, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00215}00215 }
 \DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00216}00216 \textcolor{preprocessor}{\#else}}
 \DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00217}00217 }
@@ -236,7 +236,7 @@
 \DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00232}00232             \{}
 \DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00233}00233               std::stringstream error\_message;}
 \DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00234}00234               error\_message << \textcolor{stringliteral}{"{}Limited locate zeta failed for zeta = [ "{}}}
-\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00235}00235                             << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[0] << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[1] << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[2]}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00235}00235                             << x[0] << \textcolor{stringliteral}{"{} "{}} << x[1] << \textcolor{stringliteral}{"{} "{}} << x[2]}
 \DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00236}00236                             << \textcolor{stringliteral}{"{} ]. Makes no sense!\(\backslash\)n"{}};}
 \DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00237}00237               \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message.str(),}
 \DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00238}00238                                   OOMPH\_CURRENT\_FUNCTION,}
@@ -254,8 +254,8 @@
 \DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00250}00250                 std::stringstream error\_message;}
 \DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00251}00251                 error\_message}
 \DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00252}00252                   << \textcolor{stringliteral}{"{}Cast to FE for GeomObject returned by limited "{}}}
-\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00253}00253                   << \textcolor{stringliteral}{"{}locate zeta failed for zeta = [ "{}} << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[0] << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[1]}
-\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00254}00254                   << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[2] << \textcolor{stringliteral}{"{} ]. Makes no sense!\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00253}00253                   << \textcolor{stringliteral}{"{}locate zeta failed for zeta = [ "{}} << x[0] << \textcolor{stringliteral}{"{} "{}} << x[1]}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00254}00254                   << \textcolor{stringliteral}{"{} "{}} << x[2] << \textcolor{stringliteral}{"{} ]. Makes no sense!\(\backslash\)n"{}};}
 \DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00255}00255                 \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message.str(),}
 \DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00256}00256                                     OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00257}00257                                     OOMPH\_EXCEPTION\_LOCATION);}
@@ -273,7 +273,7 @@
 \DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00269}00269                 \textcolor{comment}{// Doc?}}
 \DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00270}00270                 \textcolor{keywordflow}{if} (doc\_target\_areas)}
 \DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00271}00271                 \{}
-\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00272}00272                   latest\_sizes\_file << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[0] << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[1] << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[2] << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00272}00272                   latest\_sizes\_file << x[0] << \textcolor{stringliteral}{"{} "{}} << x[1] << \textcolor{stringliteral}{"{} "{}} << x[2] << \textcolor{stringliteral}{"{} "{}}}
 \DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00273}00273                                     << tg\_size << std::endl;}
 \DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00274}00274                 \}}
 \DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00275}00275 }

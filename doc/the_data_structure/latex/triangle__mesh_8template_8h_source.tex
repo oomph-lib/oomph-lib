@@ -967,7 +967,7 @@
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l00963}00963     \}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l00964}00964 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l00965}00965 \textcolor{comment}{    /// Return pointer to node n on boundary b}}
-\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l00966}\mbox{\hyperlink{classoomph_1_1TriangleMesh_a9d6ef65352e1c179ba5bb914fdf3ece6}{00966}} \textcolor{comment}{}    Node*\& \mbox{\hyperlink{classoomph_1_1TriangleMesh_a9d6ef65352e1c179ba5bb914fdf3ece6}{boundary\_segment\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& b,}
+\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l00966}\mbox{\hyperlink{classoomph_1_1TriangleMesh_a9d6ef65352e1c179ba5bb914fdf3ece6}{00966}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}*\& \mbox{\hyperlink{classoomph_1_1TriangleMesh_a9d6ef65352e1c179ba5bb914fdf3ece6}{boundary\_segment\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& b,}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l00967}00967                                     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l00968}00968                                     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n)}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l00969}00969     \{}
@@ -1015,9 +1015,9 @@
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l01011}01011 }
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l01012}01012         \textcolor{comment}{// Update vertices using the vertex\_node\_id giving for the TriangulateIO}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l01013}01013         \textcolor{comment}{// vertex enumeration the corresponding oomphlib mesh enumeration}}
-\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l01014}01014         Node* mesh\_node\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}(inod);}
-\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l01015}01015         new\_x = mesh\_node\_pt-\/>x(0);}
-\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l01016}01016         new\_y = mesh\_node\_pt-\/>x(1);}
+\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l01014}01014         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* mesh\_node\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}(inod);}
+\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l01015}01015         new\_x = mesh\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0);}
+\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l01016}01016         new\_y = mesh\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1);}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l01017}01017         \mbox{\hyperlink{classoomph_1_1TriangleMeshBase_a488453de96eadbe320ea97c63a34d748}{Triangulateio}}.\mbox{\hyperlink{structoomph_1_1TriangulateIO_a479764c149b3afff010537ac129c8c3c}{pointlist}}[count * 2] = new\_x;}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l01018}01018         \mbox{\hyperlink{classoomph_1_1TriangleMeshBase_a488453de96eadbe320ea97c63a34d748}{Triangulateio}}.\mbox{\hyperlink{structoomph_1_1TriangulateIO_a479764c149b3afff010537ac129c8c3c}{pointlist}}[(count * 2) + 1] = new\_y;}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l01019}01019       \}}
@@ -1647,7 +1647,7 @@
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l01643}01643     \}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l01644}01644 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l01645}01645 \textcolor{comment}{    /// Add the node the shared boundary}}
-\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l01646}\mbox{\hyperlink{classoomph_1_1TriangleMesh_a56132de18ed5754ac30202036025347b}{01646}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1TriangleMesh_a56132de18ed5754ac30202036025347b}{add\_shared\_boundary\_node}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& b, Node* \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}})}
+\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l01646}\mbox{\hyperlink{classoomph_1_1TriangleMesh_a56132de18ed5754ac30202036025347b}{01646}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1TriangleMesh_a56132de18ed5754ac30202036025347b}{add\_shared\_boundary\_node}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& b, \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}})}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l01647}01647     \{}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l01648}01648       \textcolor{comment}{// Get the size of the Shared\_boundary\_node\_pt vector}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l01649}01649       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} nbound\_node = \mbox{\hyperlink{classoomph_1_1TriangleMesh_a73973f1a76bb9ff555e75b727c676d82}{Shared\_boundary\_node\_pt}}[b].size();}
@@ -1669,7 +1669,7 @@
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l01665}01665       \}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l01666}01666     \}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l01667}01667 }
-\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l01668}\mbox{\hyperlink{classoomph_1_1TriangleMesh_a81f9eb1f76c703b6f34f3c01137df949}{01668}}     Node* \mbox{\hyperlink{classoomph_1_1TriangleMesh_a81f9eb1f76c703b6f34f3c01137df949}{shared\_boundary\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& b, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n)}
+\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l01668}\mbox{\hyperlink{classoomph_1_1TriangleMesh_a81f9eb1f76c703b6f34f3c01137df949}{01668}}     \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1TriangleMesh_a81f9eb1f76c703b6f34f3c01137df949}{shared\_boundary\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& b, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n)}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l01669}01669     \{}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l01670}01670       \textcolor{comment}{// First check if the boundary exist}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l01671}01671       std::map<unsigned, Vector<Node*>>::iterator it =}
@@ -1689,7 +1689,7 @@
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l01685}01685     \}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l01686}01686 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l01687}01687 \textcolor{comment}{    /// Is the node on the shared boundary}}
-\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l01688}\mbox{\hyperlink{classoomph_1_1TriangleMesh_a14bf5a67e8ce6cc64a38922b08af991c}{01688}} \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{classoomph_1_1TriangleMesh_a14bf5a67e8ce6cc64a38922b08af991c}{is\_node\_on\_shared\_boundary}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& b, Node* \textcolor{keyword}{const}\& \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}})}
+\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l01688}\mbox{\hyperlink{classoomph_1_1TriangleMesh_a14bf5a67e8ce6cc64a38922b08af991c}{01688}} \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{classoomph_1_1TriangleMesh_a14bf5a67e8ce6cc64a38922b08af991c}{is\_node\_on\_shared\_boundary}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& b, \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \textcolor{keyword}{const}\& \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}})}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l01689}01689     \{}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l01690}01690       \textcolor{comment}{// First check if the boundary exist}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l01691}01691       std::map<unsigned, Vector<Node*>>::iterator it =}
@@ -2050,7 +2050,7 @@
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l02046}02046       std::map<\textcolor{keywordtype}{unsigned}, std::list<Node*>>\&}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l02047}02047         shared\_bnd\_id\_to\_sorted\_list\_node\_pt,}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l02048}02048       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& node\_degree,}
-\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l02049}02049       Node*\& new\_node\_pt,}
+\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l02049}02049       \mbox{\hyperlink{classoomph_1_1Node}{Node}}*\& new\_node\_pt,}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l02050}02050       \textcolor{keyword}{const} \textcolor{keywordtype}{bool} called\_from\_load\_balance = \textcolor{keyword}{false});}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l02051}02051 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l02052}02052 \textcolor{comment}{    /// Establish the connections of the polylines previously marked}}
@@ -2192,7 +2192,7 @@
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l02188}02188 }
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l02189}\mbox{\hyperlink{structoomph_1_1TriangleMesh_1_1Point_a51a65a16bcb72e3b18102f0ab8001d0c}{02189}}       \textcolor{keywordtype}{bool} \mbox{\hyperlink{structoomph_1_1TriangleMesh_1_1Point_a51a65a16bcb72e3b18102f0ab8001d0c}{operator<}}(\textcolor{keyword}{const} \mbox{\hyperlink{structoomph_1_1TriangleMesh_1_1Point}{Point}}\& p)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l02190}02190 \textcolor{keyword}{      }\{}
-\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l02191}02191         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}} < p.\mbox{\hyperlink{structoomph_1_1TriangleMesh_1_1Point_a3d99bdf85c838801260dda624a518133}{x}} || (\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}} == p.\mbox{\hyperlink{structoomph_1_1TriangleMesh_1_1Point_a3d99bdf85c838801260dda624a518133}{x}} \&\& y < p.\mbox{\hyperlink{structoomph_1_1TriangleMesh_1_1Point_a0ce04810567f9e1cd9acf211073a35da}{y}});}
+\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l02191}02191         \textcolor{keywordflow}{return} x < p.\mbox{\hyperlink{structoomph_1_1TriangleMesh_1_1Point_a3d99bdf85c838801260dda624a518133}{x}} || (x == p.\mbox{\hyperlink{structoomph_1_1TriangleMesh_1_1Point_a3d99bdf85c838801260dda624a518133}{x}} \&\& y < p.\mbox{\hyperlink{structoomph_1_1TriangleMesh_1_1Point_a0ce04810567f9e1cd9acf211073a35da}{y}});}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l02192}02192       \}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l02193}02193     \};}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l02194}02194 \textcolor{comment}{}}
@@ -2664,7 +2664,7 @@
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l02660}02660       Sorted\_shared\_boundary\_node\_pt.clear();}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l02661}02661     \}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l02662}02662 }
-\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l02663}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a99ab60eea8ed52348da71bbe379aa674}{02663}}     Node* \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a99ab60eea8ed52348da71bbe379aa674}{sorted\_shared\_boundary\_node\_pt}}(\textcolor{keywordtype}{unsigned}\& b, \textcolor{keywordtype}{unsigned}\& \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})}
+\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l02663}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a99ab60eea8ed52348da71bbe379aa674}{02663}}     \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a99ab60eea8ed52348da71bbe379aa674}{sorted\_shared\_boundary\_node\_pt}}(\textcolor{keywordtype}{unsigned}\& b, \textcolor{keywordtype}{unsigned}\& \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l02664}02664     \{}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l02665}02665       std::map<unsigned, Vector<Node*>>::iterator it =}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l02666}02666         Sorted\_shared\_boundary\_node\_pt.find(b);}
@@ -2861,7 +2861,7 @@
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l02857}02857 \textcolor{comment}{}    \textcolor{keywordtype}{void} create\_adjacency\_matrix\_new\_shared\_edges\_helper(}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l02858}02858       \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<\mbox{\hyperlink{classoomph_1_1Vector}{Vector<FiniteElement*>}}>\& unsorted\_face\_ele\_pt,}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l02859}02859       \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<\mbox{\hyperlink{classoomph_1_1Vector}{Vector<Node*>}}>\& tmp\_sorted\_shared\_node\_pt,}
-\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l02860}02860       std::map<Node*, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<\mbox{\hyperlink{classoomph_1_1Vector}{Vector<unsigned>}}>>\& node\_alias,}
+\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l02860}02860       std::map<\mbox{\hyperlink{classoomph_1_1Node}{Node}}*, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<\mbox{\hyperlink{classoomph_1_1Vector}{Vector<unsigned>}}>>\& node\_alias,}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l02861}02861       \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<\mbox{\hyperlink{classoomph_1_1Vector}{Vector<unsigned>}}>>\& adjacency\_matrix);}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l02862}02862 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l02863}02863 \textcolor{comment}{    /// Get the nodes on the shared boundary (b), these are stored}}
@@ -3236,7 +3236,7 @@
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03232}03232 \textcolor{comment}{    /// Check if necessary to add the node to the new domain or if it has}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03233}03233 \textcolor{comment}{    /// been already added}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03234}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a3a3b775171c860567f869aa5d00fa9b9}{03234}} \textcolor{comment}{}    \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a3a3b775171c860567f869aa5d00fa9b9}{try\_to\_add\_node\_pt\_load\_balance}}(\mbox{\hyperlink{classoomph_1_1Vector}{Vector<Node*>}}\& new\_nodes\_on\_domain,}
-\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03235}03235                                              Node*\& node\_pt)}
+\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03235}03235                                              \mbox{\hyperlink{classoomph_1_1Node}{Node}}*\& node\_pt)}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03236}03236     \{}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03237}03237       \textcolor{comment}{// Get the number of nodes currently added to the new domain}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03238}03238       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} nnew\_nodes\_on\_domain = new\_nodes\_on\_domain.size();}
@@ -3277,7 +3277,7 @@
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03273}03273       \textcolor{keywordtype}{unsigned}\& iproc,}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03274}03274       \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<\mbox{\hyperlink{classoomph_1_1Vector}{Vector<FiniteElement*>}}>\& f\_halo\_ele\_pt,}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03275}03275       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<Node*>}}\& new\_nodes\_on\_domain,}
-\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03276}03276       Node* nod\_pt);}
+\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03276}03276       \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt);}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03277}03277 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03278}03278 \textcolor{comment}{    /// Helper function to get the required nodal information}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03279}03279 \textcolor{comment}{    /// from an haloed node so that a fully-\/functional node (and}}
@@ -3290,7 +3290,7 @@
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03286}03286 \textcolor{comment}{}    \textcolor{keywordtype}{void} get\_required\_nodal\_information\_load\_balance\_helper(}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03287}03287       \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<\mbox{\hyperlink{classoomph_1_1Vector}{Vector<FiniteElement*>}}>\& f\_halo\_ele\_pt,}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03288}03288       \textcolor{keywordtype}{unsigned}\& iproc,}
-\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03289}03289       Node* nod\_pt);}
+\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03289}03289       \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt);}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03290}03290 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03291}03291 \textcolor{comment}{    /// Helper function to create elements on the loop}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03292}03292 \textcolor{comment}{    /// process based on the info received in}}
@@ -3321,7 +3321,7 @@
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03317}03317 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03318}03318 \textcolor{comment}{    /// Helper function to add a new node from load balance}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03319}03319 \textcolor{comment}{}    \textcolor{keywordtype}{void} add\_received\_node\_load\_balance\_helper(}
-\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03320}03320       Node*\& new\_nod\_pt,}
+\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03320}03320       \mbox{\hyperlink{classoomph_1_1Node}{Node}}*\& new\_nod\_pt,}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03321}03321       \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<\mbox{\hyperlink{classoomph_1_1Vector}{Vector<FiniteElement*>}}>\& f\_haloed\_ele\_pt,}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03322}03322       \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<std::map<unsigned, FiniteElement*>>>\&}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03323}03323         received\_old\_haloed\_element\_pt,}
@@ -3339,7 +3339,7 @@
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03335}03335 \textcolor{comment}{    /// element) with the information sent from the load balance}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03336}03336 \textcolor{comment}{    /// process}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03337}03337 \textcolor{comment}{}    \textcolor{keywordtype}{void} construct\_new\_node\_load\_balance\_helper(}
-\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03338}03338       Node*\& new\_nod\_pt,}
+\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03338}03338       \mbox{\hyperlink{classoomph_1_1Node}{Node}}*\& new\_nod\_pt,}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03339}03339       \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<\mbox{\hyperlink{classoomph_1_1Vector}{Vector<FiniteElement*>}}>\& f\_haloed\_ele\_pt,}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03340}03340       \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<std::map<unsigned, FiniteElement*>>>\&}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03341}03341         received\_old\_haloed\_element\_pt,}
@@ -3430,7 +3430,7 @@
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03426}03426 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03427}03427 \textcolor{comment}{    /// Check if necessary to add the node as haloed or if it has been}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03428}03428 \textcolor{comment}{    /// previously added to the haloed scheme}}
-\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03429}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a0bc1283a0cf4ea45abefea1930ef748a}{03429}} \textcolor{comment}{}    \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a0bc1283a0cf4ea45abefea1930ef748a}{try\_to\_add\_haloed\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& p, Node*\& nod\_pt)}
+\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03429}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a0bc1283a0cf4ea45abefea1930ef748a}{03429}} \textcolor{comment}{}    \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a0bc1283a0cf4ea45abefea1930ef748a}{try\_to\_add\_haloed\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& p, \mbox{\hyperlink{classoomph_1_1Node}{Node}}*\& nod\_pt)}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03430}03430     \{}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03431}03431       \textcolor{comment}{// Loop over current storage}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03432}03432       \textcolor{keywordtype}{unsigned} n\_haloed\_nod = this-\/>nhaloed\_node(p);}
@@ -3472,10 +3472,10 @@
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03468}03468 \textcolor{comment}{    /// Helper function to get the required nodal information}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03469}03469 \textcolor{comment}{    /// from a haloed node so that a fully-\/functional halo node (and}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03470}03470 \textcolor{comment}{    /// therefore element) can be created on the receiving process}}
-\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03471}03471 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_acc3c8930de1090a3dd7d4a3ddb55cacb}{get\_required\_nodal\_information\_helper}}(\textcolor{keywordtype}{unsigned}\& iproc, Node* nod\_pt);}
+\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03471}03471 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_acc3c8930de1090a3dd7d4a3ddb55cacb}{get\_required\_nodal\_information\_helper}}(\textcolor{keywordtype}{unsigned}\& iproc, \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt);}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03472}03472 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03473}03473 \textcolor{comment}{    /// Helper function to add haloed node}}
-\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03474}03474 \textcolor{comment}{}    \textcolor{keywordtype}{void} add\_haloed\_node\_helper(\textcolor{keywordtype}{unsigned}\& iproc, Node* nod\_pt);}
+\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03474}03474 \textcolor{comment}{}    \textcolor{keywordtype}{void} add\_haloed\_node\_helper(\textcolor{keywordtype}{unsigned}\& iproc, \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt);}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03475}03475 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03476}03476 \textcolor{comment}{    /// Helper function to send back halo and haloed information}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03477}03477 \textcolor{comment}{}    \textcolor{keywordtype}{void} send\_and\_receive\_elements\_nodes\_info(\textcolor{keywordtype}{int}\& send\_proc, \textcolor{keywordtype}{int}\& recv\_proc);}
@@ -3499,7 +3499,7 @@
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03495}03495 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03496}03496 \textcolor{comment}{    /// Helper function to add halo node}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03497}03497 \textcolor{comment}{}    \textcolor{keywordtype}{void} add\_halo\_node\_helper(}
-\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03498}03498       Node*\& new\_nod\_pt,}
+\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03498}03498       \mbox{\hyperlink{classoomph_1_1Node}{Node}}*\& new\_nod\_pt,}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03499}03499       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<Node*>}}\& new\_nodes\_on\_domain,}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03500}03500       \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<std::map<unsigned, Node*>>>>\&}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03501}03501         other\_proc\_shd\_bnd\_node\_pt,}
@@ -3513,7 +3513,7 @@
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03509}03509 \textcolor{comment}{    /// Helper function which constructs a new halo node}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03510}03510 \textcolor{comment}{    /// (on an element) with the information sent from the haloed process}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03511}03511 \textcolor{comment}{}    \textcolor{keywordtype}{void} construct\_new\_halo\_node\_helper(}
-\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03512}03512       Node*\& new\_nod\_pt,}
+\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03512}03512       \mbox{\hyperlink{classoomph_1_1Node}{Node}}*\& new\_nod\_pt,}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03513}03513       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<Node*>}}\& new\_nodes\_on\_domain,}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03514}03514       \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<std::map<unsigned, Node*>>>>\&}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03515}03515         other\_proc\_shd\_bnd\_node\_pt,}
@@ -3529,7 +3529,7 @@
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03525}03525 \textcolor{comment}{    /// value indicates whether or not a node was found on the same}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03526}03526 \textcolor{comment}{    /// reference}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03527}03527 \textcolor{comment}{}    \textcolor{keywordtype}{void} update\_other\_proc\_shd\_bnd\_node\_helper(}
-\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03528}03528       Node*\& new\_nod\_pt,}
+\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03528}03528       \mbox{\hyperlink{classoomph_1_1Node}{Node}}*\& new\_nod\_pt,}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03529}03529       \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<std::map<unsigned, Node*>>>>\&}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03530}03530         other\_proc\_shd\_bnd\_node\_pt,}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03531}03531       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<unsigned>}}\& other\_processor\_1,}
@@ -3734,14 +3734,14 @@
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03730}03730 }
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03731}03731         \textcolor{comment}{// Min angle based on vertex coordinates}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03732}03732         \textcolor{comment}{// (vertices are enumerated first)}}
-\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03733}03733         \textcolor{keywordtype}{double} ax = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>x(0);}
-\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03734}03734         \textcolor{keywordtype}{double} ay = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>x(1);}
+\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03733}03733         \textcolor{keywordtype}{double} ax = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0);}
+\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03734}03734         \textcolor{keywordtype}{double} ay = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1);}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03735}03735 }
-\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03736}03736         \textcolor{keywordtype}{double} bx = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(1)-\/>x(0);}
-\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03737}03737         \textcolor{keywordtype}{double} by = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(1)-\/>x(1);}
+\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03736}03736         \textcolor{keywordtype}{double} bx = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(1)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0);}
+\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03737}03737         \textcolor{keywordtype}{double} by = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(1)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1);}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03738}03738 }
-\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03739}03739         \textcolor{keywordtype}{double} cx = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(2)-\/>x(0);}
-\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03740}03740         \textcolor{keywordtype}{double} cy = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(2)-\/>x(1);}
+\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03739}03739         \textcolor{keywordtype}{double} cx = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(2)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0);}
+\DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03740}03740         \textcolor{keywordtype}{double} cy = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(2)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1);}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03741}03741 }
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03742}03742         \textcolor{comment}{// Min angle}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8template_8h_source_l03743}03743         \textcolor{keywordtype}{double} angle0 =}

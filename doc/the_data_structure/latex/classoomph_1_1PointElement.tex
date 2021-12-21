@@ -20,11 +20,11 @@ Inheritance diagram for oomph\+::Point\+Element\+:\begin{figure}[H]
 \item 
 \mbox{\hyperlink{classoomph_1_1PointElement_a08937a79fd45c5efd205a0e7535ef1cf}{Point\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1PointElement_a4edb7de8318197c56c67672f280ff35f}{Point\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1PointElement}{Point\+Element}} \&)=delete
+\mbox{\hyperlink{classoomph_1_1PointElement_a4edb7de8318197c56c67672f280ff35f}{Point\+Element}} (const \mbox{\hyperlink{classoomph_1_1PointElement}{Point\+Element}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PointElement_a27f0b22c4f5aae72b0223748b5cb1185}{shape}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1PointElement_a27f0b22c4f5aae72b0223748b5cb1185}{shape}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi) const
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PointElement_ac25e0eb9aa65e8b90ef4907942e2c87f}{local\+\_\+coordinate\+\_\+of\+\_\+node}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&j, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1PointElement_ac25e0eb9aa65e8b90ef4907942e2c87f}{local\+\_\+coordinate\+\_\+of\+\_\+node}} (const unsigned \&j, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) const
 \begin{DoxyCompactList}\small\item\em Get local coordinates of node j in the element; vector sets its own size. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
@@ -39,7 +39,7 @@ static \mbox{\hyperlink{classoomph_1_1PointIntegral}{Point\+Integral}} \mbox{\hy
 
 Point element has just a single node and a single shape function which is identically equal to one. 
 
-Definition at line \mbox{\hyperlink{elements_8h_source_l03445}{3445}} of file \mbox{\hyperlink{elements_8h_source}{elements.\+h}}.
+Definition at line \mbox{\hyperlink{elements_8h_source_l03438}{3438}} of file \mbox{\hyperlink{elements_8h_source}{elements.\+h}}.
 
 
 
@@ -56,17 +56,17 @@ Constructor.
 
 Allocate storage for the pointers to the nodes, There is only one nodes
 
-Definition at line \mbox{\hyperlink{elements_8h_source_l03449}{3449}} of file \mbox{\hyperlink{elements_8h_source}{elements.\+h}}.
+Definition at line \mbox{\hyperlink{elements_8h_source_l03442}{3442}} of file \mbox{\hyperlink{elements_8h_source}{elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03480}{Default\+\_\+integration\+\_\+scheme}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9b8ff92232a3d17ed7d403fbd3419569}{oomph\+::\+Finite\+Element\+::set\+\_\+integration\+\_\+scheme()}}, and \mbox{\hyperlink{elements_8h_source_l01404}{oomph\+::\+Finite\+Element\+::set\+\_\+n\+\_\+node()}}.
+References \mbox{\hyperlink{elements_8h_source_l03473}{Default\+\_\+integration\+\_\+scheme}}, \mbox{\hyperlink{elements_8cc_source_l03210}{oomph\+::\+Finite\+Element\+::set\+\_\+integration\+\_\+scheme()}}, and \mbox{\hyperlink{elements_8h_source_l01404}{oomph\+::\+Finite\+Element\+::set\+\_\+n\+\_\+node()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PointElement_a4edb7de8318197c56c67672f280ff35f}\label{classoomph_1_1PointElement_a4edb7de8318197c56c67672f280ff35f}} 
 \index{oomph::PointElement@{oomph::PointElement}!PointElement@{PointElement}}
 \index{PointElement@{PointElement}!oomph::PointElement@{oomph::PointElement}}
 \doxysubsubsection{\texorpdfstring{PointElement()}{PointElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily oomph\+::\+Point\+Element\+::\+Point\+Element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1PointElement}{Point\+Element}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+{\footnotesize\ttfamily oomph\+::\+Point\+Element\+::\+Point\+Element (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1PointElement}{Point\+Element}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
@@ -79,7 +79,7 @@ Broken copy constructor.
 \index{oomph::PointElement@{oomph::PointElement}!local\_coordinate\_of\_node@{local\_coordinate\_of\_node}}
 \index{local\_coordinate\_of\_node@{local\_coordinate\_of\_node}!oomph::PointElement@{oomph::PointElement}}
 \doxysubsubsection{\texorpdfstring{local\_coordinate\_of\_node()}{local\_coordinate\_of\_node()}}
-{\footnotesize\ttfamily void oomph\+::\+Point\+Element\+::local\+\_\+coordinate\+\_\+of\+\_\+node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{j,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Point\+Element\+::local\+\_\+coordinate\+\_\+of\+\_\+node (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -91,7 +91,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a22bc4ee35e4f948
 
 
 
-Definition at line \mbox{\hyperlink{elements_8h_source_l03469}{3469}} of file \mbox{\hyperlink{elements_8h_source}{elements.\+h}}.
+Definition at line \mbox{\hyperlink{elements_8h_source_l03462}{3462}} of file \mbox{\hyperlink{elements_8h_source}{elements.\+h}}.
 
 
 
@@ -101,15 +101,21 @@ References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 \index{oomph::PointElement@{oomph::PointElement}!shape@{shape}}
 \index{shape@{shape}!oomph::PointElement@{oomph::PointElement}}
 \doxysubsubsection{\texorpdfstring{shape()}{shape()}}
-{\footnotesize\ttfamily void oomph\+::\+Point\+Element\+::shape (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Point\+Element\+::shape (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
 Broken assignment operator. 
 
+Return the geometric shape function at the local coordinate s.
+
 Calculate the geometric shape functions at local coordinate s 
 
 Implements \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line \mbox{\hyperlink{elements_8cc_source_l07529}{7529}} of file \mbox{\hyperlink{elements_8cc_source}{elements.\+cc}}.
 
 
 
@@ -124,16 +130,19 @@ Implements \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a
 
 Return spatial dimension of element (=number of local coordinates needed to parametrise the element) 
 
+Assign the static Default\+\_\+integration\+\_\+scheme.
+
 Default integration scheme 
 
-Definition at line \mbox{\hyperlink{elements_8h_source_l03480}{3480}} of file \mbox{\hyperlink{elements_8h_source}{elements.\+h}}.
+Definition at line \mbox{\hyperlink{elements_8h_source_l03473}{3473}} of file \mbox{\hyperlink{elements_8h_source}{elements.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{elements_8h_source_l03449}{Point\+Element()}}.
+Referenced by \mbox{\hyperlink{elements_8h_source_l03442}{Point\+Element()}}.
 
 
 
-The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{elements_8h}{elements.\+h}}\end{DoxyCompactItemize}
+\mbox{\hyperlink{elements_8h}{elements.\+h}}\item 
+\mbox{\hyperlink{elements_8cc}{elements.\+cc}}\end{DoxyCompactItemize}

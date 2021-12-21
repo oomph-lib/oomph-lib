@@ -940,11 +940,11 @@
 \DoxyCodeLine{\Hypertarget{frontal__solver_8cc_source_l00936}00936     \}}
 \DoxyCodeLine{\Hypertarget{frontal__solver_8cc_source_l00937}00937 }
 \DoxyCodeLine{\Hypertarget{frontal__solver_8cc_source_l00938}00938     \textcolor{comment}{// Storage for the results}}
-\DoxyCodeLine{\Hypertarget{frontal__solver_8cc_source_l00939}00939     \textcolor{keywordtype}{double}** \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}} = \textcolor{keyword}{new} \textcolor{keywordtype}{double}*;}
-\DoxyCodeLine{\Hypertarget{frontal__solver_8cc_source_l00940}00940     *\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}} = \textcolor{keyword}{new} \textcolor{keywordtype}{double}[n\_dof];}
+\DoxyCodeLine{\Hypertarget{frontal__solver_8cc_source_l00939}00939     \textcolor{keywordtype}{double}** x = \textcolor{keyword}{new} \textcolor{keywordtype}{double}*;}
+\DoxyCodeLine{\Hypertarget{frontal__solver_8cc_source_l00940}00940     *x = \textcolor{keyword}{new} \textcolor{keywordtype}{double}[n\_dof];}
 \DoxyCodeLine{\Hypertarget{frontal__solver_8cc_source_l00941}00941 }
 \DoxyCodeLine{\Hypertarget{frontal__solver_8cc_source_l00942}00942     \textcolor{comment}{// Now call the resolver}}
-\DoxyCodeLine{\Hypertarget{frontal__solver_8cc_source_l00943}00943     MA42CD(trans, nrhs, lx, b, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1HSL__MA42_a0248d831f42eaf222c4283d17bdc2f5e}{Lw}}, \mbox{\hyperlink{classoomph_1_1HSL__MA42_ad12e72f377a117d7a106af587bcf4cac}{W}}, \mbox{\hyperlink{classoomph_1_1HSL__MA42_a6ae8fb349617e5b1dfe64bb7a822de3c}{Liw}}, \mbox{\hyperlink{classoomph_1_1HSL__MA42_aee49355d4011d4867ec6ed92823b4162}{IW}}, \mbox{\hyperlink{classoomph_1_1HSL__MA42_a607d4df18fa90208a18fbd7073412b53}{Icntl}}, \mbox{\hyperlink{classoomph_1_1HSL__MA42_a60b94dff66e7add9183e9c6e86786cfc}{Isave}}, \mbox{\hyperlink{classoomph_1_1HSL__MA42_abc3b3ea69eb833ee2c5d81509f26a6fe}{Info}});}
+\DoxyCodeLine{\Hypertarget{frontal__solver_8cc_source_l00943}00943     MA42CD(trans, nrhs, lx, b, x, \mbox{\hyperlink{classoomph_1_1HSL__MA42_a0248d831f42eaf222c4283d17bdc2f5e}{Lw}}, \mbox{\hyperlink{classoomph_1_1HSL__MA42_ad12e72f377a117d7a106af587bcf4cac}{W}}, \mbox{\hyperlink{classoomph_1_1HSL__MA42_a6ae8fb349617e5b1dfe64bb7a822de3c}{Liw}}, \mbox{\hyperlink{classoomph_1_1HSL__MA42_aee49355d4011d4867ec6ed92823b4162}{IW}}, \mbox{\hyperlink{classoomph_1_1HSL__MA42_a607d4df18fa90208a18fbd7073412b53}{Icntl}}, \mbox{\hyperlink{classoomph_1_1HSL__MA42_a60b94dff66e7add9183e9c6e86786cfc}{Isave}}, \mbox{\hyperlink{classoomph_1_1HSL__MA42_abc3b3ea69eb833ee2c5d81509f26a6fe}{Info}});}
 \DoxyCodeLine{\Hypertarget{frontal__solver_8cc_source_l00944}00944 }
 \DoxyCodeLine{\Hypertarget{frontal__solver_8cc_source_l00945}00945     \textcolor{comment}{// If there has been an error throw it}}
 \DoxyCodeLine{\Hypertarget{frontal__solver_8cc_source_l00946}00946     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1HSL__MA42_abc3b3ea69eb833ee2c5d81509f26a6fe}{Info}}[0] < 0)}
@@ -956,12 +956,12 @@
 \DoxyCodeLine{\Hypertarget{frontal__solver_8cc_source_l00952}00952     \textcolor{comment}{// Put the answer into the result array}}
 \DoxyCodeLine{\Hypertarget{frontal__solver_8cc_source_l00953}00953     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_dof; ++\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})}
 \DoxyCodeLine{\Hypertarget{frontal__solver_8cc_source_l00954}00954     \{}
-\DoxyCodeLine{\Hypertarget{frontal__solver_8cc_source_l00955}00955       result[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[0][\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{frontal__solver_8cc_source_l00955}00955       result[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = x[0][\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
 \DoxyCodeLine{\Hypertarget{frontal__solver_8cc_source_l00956}00956     \}}
 \DoxyCodeLine{\Hypertarget{frontal__solver_8cc_source_l00957}00957 }
 \DoxyCodeLine{\Hypertarget{frontal__solver_8cc_source_l00958}00958     \textcolor{comment}{// Delete the allocated storage}}
-\DoxyCodeLine{\Hypertarget{frontal__solver_8cc_source_l00959}00959     \textcolor{keyword}{delete}[] * \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}};}
-\DoxyCodeLine{\Hypertarget{frontal__solver_8cc_source_l00960}00960     \textcolor{keyword}{delete} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}};}
+\DoxyCodeLine{\Hypertarget{frontal__solver_8cc_source_l00959}00959     \textcolor{keyword}{delete}[] * x;}
+\DoxyCodeLine{\Hypertarget{frontal__solver_8cc_source_l00960}00960     \textcolor{keyword}{delete} x;}
 \DoxyCodeLine{\Hypertarget{frontal__solver_8cc_source_l00961}00961     \textcolor{keyword}{delete}[] * b;}
 \DoxyCodeLine{\Hypertarget{frontal__solver_8cc_source_l00962}00962     \textcolor{keyword}{delete} b;}
 \DoxyCodeLine{\Hypertarget{frontal__solver_8cc_source_l00963}00963   \}}

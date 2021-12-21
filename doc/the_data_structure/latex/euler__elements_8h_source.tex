@@ -69,7 +69,7 @@
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00065}00065     \}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00066}00066 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00067}00067 \textcolor{comment}{    /// Return the flux as a function of the unknown}}
-\DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00068}00068 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1EulerEquations_a2596b0523e6e40d3ece23f9fd0c6d97c}{flux}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}});}
+\DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00068}00068 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1EulerEquations_a2596b0523e6e40d3ece23f9fd0c6d97c}{flux}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& u, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& f);}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00069}00069 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00070}00070 \textcolor{comment}{    /// Return the flux derivatives as a function of the unknowns}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00071}00071 \textcolor{comment}{}    \textcolor{comment}{// void dflux\_du(const Vector<double> \&u, RankThreeTensor<double> \&df\_du);}}
@@ -101,7 +101,7 @@
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00097}00097     \}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00098}00098 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00099}00099 \textcolor{comment}{    /// Calculate the pressure from the unknowns}}
-\DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00100}00100 \textcolor{comment}{}    \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1EulerEquations_a227a4ad24989e3d1e50e41815436791f}{pressure}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00100}00100 \textcolor{comment}{}    \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1EulerEquations_a227a4ad24989e3d1e50e41815436791f}{pressure}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& u) \textcolor{keyword}{const};}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00101}00101 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00102}00102 \textcolor{comment}{    /// Return the value of gamma}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00103}\mbox{\hyperlink{classoomph_1_1EulerEquations_a51f474519ebab18d4b8504fa4b414d16}{00103}} \textcolor{comment}{}    \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1EulerEquations_a51f474519ebab18d4b8504fa4b414d16}{gamma}}()\textcolor{keyword}{ const}}
@@ -146,7 +146,7 @@
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00142}00142       \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} dpsidx(n\_node, DIM);}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00143}00143 }
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00144}00144       \textcolor{comment}{// Find the number of integration points}}
-\DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00145}00145       \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00145}00145       \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00146}00146 }
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00147}00147       error.resize(n\_flux);}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00148}00148       norm.resize(n\_flux);}
@@ -162,41 +162,41 @@
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00158}00158       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ipt = 0; ipt < n\_intpt; ipt++)}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00159}00159       \{}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00160}00160         \textcolor{comment}{// Get the shape functions at the knot}}
-\DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00161}00161         \textcolor{keywordtype}{double} J = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a837c4849f68842295ab5e77c8ecb8b93}{dshape\_eulerian\_at\_knot}}(ipt, psi, dpsidx);}
+\DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00161}00161         \textcolor{keywordtype}{double} J = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a368c44e295e35dd0b697be3222ce7b2f}{dshape\_eulerian\_at\_knot}}(ipt, psi, dpsidx);}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00162}00162 }
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00163}00163         \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00164}00164         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>weight(ipt) * J;}
+\DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00164}00164         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt) * J;}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00165}00165 }
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00166}00166         \textcolor{comment}{// Storage for the local functions}}
-\DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00167}00167         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(DIM, 0.0);}
+\DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00167}00167         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(DIM, 0.0);}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00168}00168         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} interpolated\_u(n\_flux, 0.0);}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00169}00169 }
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00170}00170         \textcolor{comment}{// Loop over the shape functions}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00171}00171         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} l = 0; l < n\_node; l++)}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00172}00172         \{}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00173}00173           \textcolor{comment}{// Locally cache the shape function}}
-\DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00174}00174           \textcolor{keyword}{const} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_aff0c55ce31f12df52b2fe5ae647ffebe}{psi\_}} = psi(l);}
+\DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00174}00174           \textcolor{keyword}{const} \textcolor{keywordtype}{double} psi\_ = psi(l);}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00175}00175           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00176}00176           \{}
-\DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00177}00177             \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9152c16ae9899168bcdaac7c2f977444}{nodal\_position}}(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * \mbox{\hyperlink{namespaceoomph_aff0c55ce31f12df52b2fe5ae647ffebe}{psi\_}};}
+\DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00177}00177             \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9152c16ae9899168bcdaac7c2f977444}{nodal\_position}}(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * psi\_;}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00178}00178           \}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00179}00179 }
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00180}00180           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_flux; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00181}00181           \{}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00182}00182             \textcolor{comment}{// Calculate the velocity and tangent vector}}
-\DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00183}00183             interpolated\_u[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a28fd5c2d4aeba5ef65bee0e0d72569f5}{nodal\_value}}(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * \mbox{\hyperlink{namespaceoomph_aff0c55ce31f12df52b2fe5ae647ffebe}{psi\_}};}
+\DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00183}00183             interpolated\_u[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a28fd5c2d4aeba5ef65bee0e0d72569f5}{nodal\_value}}(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * psi\_;}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00184}00184           \}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00185}00185         \}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00186}00186 }
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00187}00187         \textcolor{comment}{// Now get the exact solution at this value of x and t}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00188}00188         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} exact\_u(n\_flux, 0.0);}
-\DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00189}00189         (*exact\_solution\_pt)(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}, exact\_u);}
+\DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00189}00189         (*exact\_solution\_pt)(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}, exact\_u);}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00190}00190 }
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00191}00191         \textcolor{comment}{// Loop over the unknowns}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00192}00192         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_flux; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00193}00193         \{}
-\DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00194}00194           error[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += pow((interpolated\_u[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ exact\_u[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]), 2.0) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
-\DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00195}00195           norm[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += interpolated\_u[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * interpolated\_u[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00194}00194           error[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += pow((interpolated\_u[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ exact\_u[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]), 2.0) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
+\DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00195}00195           norm[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += interpolated\_u[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * interpolated\_u[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00196}00196         \}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00197}00197       \}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00198}00198     \}}
@@ -457,13 +457,13 @@
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00453}00453       \textcolor{comment}{// Attach geometric information to the element}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00454}00454       \textcolor{comment}{// N.B. This function also assigns nbulk\_value from required\_nvalue}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00455}00455       \textcolor{comment}{// of the bulk element.}}
-\DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00456}00456       element\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a025ab56ef9c6eea66fb34416fdf19152}{build\_face\_element}}(\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\_index}}, \textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00456}00456       element\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_aaf7bead5b462cfd5401d97b3dbdc7af7}{build\_face\_element}}(\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\_index}}, \textcolor{keyword}{this});}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00457}00457       \textcolor{comment}{// Set the value of the flux}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00458}00458       \mbox{\hyperlink{classoomph_1_1DGEulerFaceElement_ab2c9036ce56daafed333108febfa2f7b}{Nflux}} = 2 + element\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5f8fe59f06da1da9f6b7bbcbdb90ef93}{dim}}();}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00459}00459       \textcolor{comment}{// Use the Face integration scheme of the element for 2D elements}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00460}00460       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1DGEulerFaceElement_ab2c9036ce56daafed333108febfa2f7b}{Nflux}} > 3)}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00461}00461       \{}
-\DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00462}00462         this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9b8ff92232a3d17ed7d403fbd3419569}{set\_integration\_scheme}}(}
+\DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00462}00462         this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_ac80983f27f5bcbc08e2eeb6e4d03698b}{set\_integration\_scheme}}(}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00463}00463           \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(element\_pt)-\/>face\_integration\_pt());}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00464}00464       \}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00465}00465     \}}
@@ -711,7 +711,7 @@
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00707}00707       \textcolor{comment}{// Attach geometric information to the element}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00708}00708       \textcolor{comment}{// N.B. This function also assigns nbulk\_value from required\_nvalue}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00709}00709       \textcolor{comment}{// of the bulk element.}}
-\DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00710}00710       element\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a025ab56ef9c6eea66fb34416fdf19152}{build\_face\_element}}(\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\_index}}, \textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00710}00710       element\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_aaf7bead5b462cfd5401d97b3dbdc7af7}{build\_face\_element}}(\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\_index}}, \textcolor{keyword}{this});}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00711}00711       \textcolor{comment}{// Set the value of the flux}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00712}00712       \mbox{\hyperlink{classoomph_1_1DGEulerFaceReflectionElement_afdb06b622f23a5ccea9173283d68df2f}{Nflux}} = 2 + element\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5f8fe59f06da1da9f6b7bbcbdb90ef93}{dim}}();}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00713}00713     \}}
@@ -736,10 +736,10 @@
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00732}00732     \}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00733}00733 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00734}00734 \textcolor{comment}{    /// We overload interpolated\_u to reflect}}
-\DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00735}\mbox{\hyperlink{classoomph_1_1DGSpectralEulerElement_3_011_00_01NNODE__1D_01_4_aeaecacb84a16db526dbfc83a4f730326}{00735}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1DGEulerFaceReflectionElement_a288fa54f9022aac4bf060ca19a0c8a67}{interpolated\_u}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}})}
+\DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00735}\mbox{\hyperlink{classoomph_1_1DGSpectralEulerElement_3_011_00_01NNODE__1D_01_4_aeaecacb84a16db526dbfc83a4f730326}{00735}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1DGEulerFaceReflectionElement_a288fa54f9022aac4bf060ca19a0c8a67}{interpolated\_u}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& u)}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00736}00736     \{}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00737}00737       \textcolor{comment}{// Get the standard interpolated\_u}}
-\DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00738}00738       \mbox{\hyperlink{classoomph_1_1DGFaceElement_ab58cee592775f0ae54ac0b0087eb9d35}{DGFaceElement::interpolated\_u}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}});}
+\DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00738}00738       \mbox{\hyperlink{classoomph_1_1DGFaceElement_ab58cee592775f0ae54ac0b0087eb9d35}{DGFaceElement::interpolated\_u}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, u);}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00739}00739 }
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00740}00740       \textcolor{comment}{// Now do the reflection condition for the velocities}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00741}00741       \textcolor{comment}{// Find dot product of normal and velocities}}
@@ -750,13 +750,13 @@
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00746}00746       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_a3df72a05fe435265c5b42dc232ff351c}{dot}} = 0.0;}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00747}00747       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < nodal\_dim; j++)}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00748}00748       \{}
-\DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00749}00749         \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_a3df72a05fe435265c5b42dc232ff351c}{dot}} += n[j] * \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}[2 + j];}
+\DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00749}00749         \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_a3df72a05fe435265c5b42dc232ff351c}{dot}} += n[j] * u[2 + j];}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00750}00750       \}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00751}00751 }
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00752}00752       \textcolor{comment}{// Now subtract}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00753}00753       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < nodal\_dim; j++)}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00754}00754       \{}
-\DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00755}00755         \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}[2 + j] -\/= 2.0 * \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_a3df72a05fe435265c5b42dc232ff351c}{dot}} * n[j];}
+\DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00755}00755         u[2 + j] -\/= 2.0 * \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_a3df72a05fe435265c5b42dc232ff351c}{dot}} * n[j];}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00756}00756       \}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00757}00757     \}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00758}00758   \};}
@@ -805,7 +805,7 @@
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00801}00801     \}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00802}00802 }
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00803}00803     \textcolor{comment}{// Dummy}}
-\DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00804}\mbox{\hyperlink{classoomph_1_1DGSpectralEulerElement_3_011_00_01NNODE__1D_01_4_aa3ba0f414ff94627e3bd1aa174f41b86}{00804}}     Integral* \mbox{\hyperlink{classoomph_1_1DGSpectralEulerElement_3_011_00_01NNODE__1D_01_4_aa3ba0f414ff94627e3bd1aa174f41b86}{face\_integration\_pt}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00804}\mbox{\hyperlink{classoomph_1_1DGSpectralEulerElement_3_011_00_01NNODE__1D_01_4_aa3ba0f414ff94627e3bd1aa174f41b86}{00804}}     \mbox{\hyperlink{classoomph_1_1Integral}{Integral}}* \mbox{\hyperlink{classoomph_1_1DGSpectralEulerElement_3_011_00_01NNODE__1D_01_4_aa3ba0f414ff94627e3bd1aa174f41b86}{face\_integration\_pt}}()\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00805}00805 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00806}00806       \textcolor{keywordflow}{return} 0;}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00807}00807     \}}
@@ -934,7 +934,7 @@
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00930}00930 }
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00931}\mbox{\hyperlink{classoomph_1_1DGSpectralEulerElement_3_012_00_01NNODE__1D_01_4_a6d74232028a84f5cd43bc13fc280f325}{00931}}     \mbox{\hyperlink{classoomph_1_1DGSpectralEulerElement_3_012_00_01NNODE__1D_01_4_a6d74232028a84f5cd43bc13fc280f325}{\string~DGSpectralEulerElement}}() \{\}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00932}00932 }
-\DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00933}\mbox{\hyperlink{classoomph_1_1DGSpectralEulerElement_3_012_00_01NNODE__1D_01_4_a7a04553291c71b3d56dfeb2c48d9a854}{00933}}     Integral* \mbox{\hyperlink{classoomph_1_1DGSpectralEulerElement_3_012_00_01NNODE__1D_01_4_a7a04553291c71b3d56dfeb2c48d9a854}{face\_integration\_pt}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00933}\mbox{\hyperlink{classoomph_1_1DGSpectralEulerElement_3_012_00_01NNODE__1D_01_4_a7a04553291c71b3d56dfeb2c48d9a854}{00933}}     \mbox{\hyperlink{classoomph_1_1Integral}{Integral}}* \mbox{\hyperlink{classoomph_1_1DGSpectralEulerElement_3_012_00_01NNODE__1D_01_4_a7a04553291c71b3d56dfeb2c48d9a854}{face\_integration\_pt}}()\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00934}00934 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00935}00935       \textcolor{keywordflow}{return} \&Default\_face\_integration\_scheme;}
 \DoxyCodeLine{\Hypertarget{euler__elements_8h_source_l00936}00936     \}}

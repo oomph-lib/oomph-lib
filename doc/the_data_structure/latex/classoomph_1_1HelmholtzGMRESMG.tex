@@ -53,17 +53,21 @@ void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_a3147aa77b5e71a0822cc5c661d
 \begin{DoxyCompactList}\small\item\em General interface to solve function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_a81ddd10ccc03d6582dcadbd5cae1edda}{clean\+\_\+up\+\_\+memory}} ()
 \begin{DoxyCompactList}\small\item\em Cleanup data that\textquotesingle{}s stored for resolve (if any has been stored) \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_aa94abd65000a9fac33a29a1ae2f9ec73}{complex\+\_\+matrix\+\_\+multiplication}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$ $>$ const matrices\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&soln)
+void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_aa94abd65000a9fac33a29a1ae2f9ec73}{complex\+\_\+matrix\+\_\+multiplication}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$ $>$ const matrices\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&soln)
 \begin{DoxyCompactList}\small\item\em Helper function to calculate a complex matrix-\/vector product. Assumes the matrix has been provided as a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of length two; the first entry containing the real part of the system matrix and the second entry containing the imaginary part. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_ac08841fffc51bceb21122cd66988329b}{update}} (const unsigned \&k, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ $>$ \&hessenberg, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ $>$ \&v, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}})
-\begin{DoxyCompactList}\small\item\em Helper function to update the result vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_ac08841fffc51bceb21122cd66988329b}{update}} (const unsigned \&k, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ $>$ \&hessenberg, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ $>$ \&v, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&x)
+\begin{DoxyCompactList}\small\item\em Helper function to update the result vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_afc666c19cb09f252e63e43c3e126fb9a}{generate\+\_\+plane\+\_\+rotation}} (std\+::complex$<$ double $>$ \&dx, std\+::complex$<$ double $>$ \&dy, std\+::complex$<$ double $>$ \&cs, std\+::complex$<$ double $>$ \&sn)
+\begin{DoxyCompactList}\small\item\em Helper function\+: Generate a plane rotation. This is done by finding the value of $ \cos(\theta) $ (i.\+e. cs) and the value of $ \sin(\theta) $ (i.\+e. sn) such that\+: \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_a6b9f8cacb73c1bcad749289aac649505}{apply\+\_\+plane\+\_\+rotation}} (std\+::complex$<$ double $>$ \&dx, std\+::complex$<$ double $>$ \&dy, std\+::complex$<$ double $>$ \&cs, std\+::complex$<$ double $>$ \&sn)
+\begin{DoxyCompactList}\small\item\em Helper function\+: Apply plane rotation. This is done using the update\+: \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_ac7b6ce565f4882322f8f37a5dd0c46c0}{begin}}
-\begin{DoxyCompactList}\small\item\em Helper function\+: Generate a plane rotation. This is done by finding the value of $ \cos(\theta) $ (i.\+e. cs) and the value of $ \sin(\theta) $ (i.\+e. sn) such that\+: \end{DoxyCompactList}\item 
-\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}} cos theta \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}} sin theta \&\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_a44e50b68a7c2aab02342817c93ee6ad5}{Matrices\+\_\+storage\+\_\+pt}}
-\begin{DoxyCompactList}\small\item\em and \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_ae2a4718545bd42acb57aba5baa23d52f}{Iterations}}
+\begin{DoxyCompactList}\small\item\em Number of iterations taken. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_a5d8ae2181aecf890386ae48d81f90b42}{Matrices\+\_\+storage\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pointers to the real and imaginary part of the system matrix. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_acb64519b62c16bbec32d01c9969f746f}{Resolving}}
 \begin{DoxyCompactList}\small\item\em Boolean flag to indicate if the solve is done in re-\/solve mode, bypassing setup of matrix and preconditioner. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_a1550b5147f7fa822e8cbc9de93f1c06f}{Matrix\+\_\+can\+\_\+be\+\_\+deleted}}
@@ -80,7 +84,7 @@ class oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$}
 
 The \mbox{\hyperlink{classoomph_1_1GMRES}{GMRES}} method for the Helmholtz solver. 
 
-Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l01770}{1770}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
+Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l01734}{1734}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
 
 
 
@@ -98,11 +102,11 @@ Constructor.
 
 
 
-Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l01775}{1775}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
+Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l01739}{1739}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
 
 
 
-References \mbox{\hyperlink{complex__smoother_8h_source_l02505}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::\+Preconditioner\+\_\+\+LHS}}.
+References \mbox{\hyperlink{complex__smoother_8h_source_l02437}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::\+Preconditioner\+\_\+\+LHS}}.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_aa8bdb804033f8050742706589cd8a072}\label{classoomph_1_1HelmholtzGMRESMG_aa8bdb804033f8050742706589cd8a072}} 
 \index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!````~HelmholtzGMRESMG@{$\sim$HelmholtzGMRESMG}}
@@ -117,11 +121,11 @@ Destructor (cleanup storage)
 
 
 
-Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l01785}{1785}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
+Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l01749}{1749}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
 
 
 
-References \mbox{\hyperlink{complex__smoother_8h_source_l02089}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::clean\+\_\+up\+\_\+memory()}}.
+References \mbox{\hyperlink{complex__smoother_8h_source_l02053}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::clean\+\_\+up\+\_\+memory()}}.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_a7afe1fbc439c21054eaec7e152f36838}\label{classoomph_1_1HelmholtzGMRESMG_a7afe1fbc439c21054eaec7e152f36838}} 
 \index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!HelmholtzGMRESMG@{HelmholtzGMRESMG}}
@@ -137,6 +141,21 @@ Broken copy constructor.
 
 
 \doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_a6b9f8cacb73c1bcad749289aac649505}\label{classoomph_1_1HelmholtzGMRESMG_a6b9f8cacb73c1bcad749289aac649505}} 
+\index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!apply\_plane\_rotation@{apply\_plane\_rotation}}
+\index{apply\_plane\_rotation@{apply\_plane\_rotation}!oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{apply\_plane\_rotation()}{apply\_plane\_rotation()}}
+{\footnotesize\ttfamily template$<$typename MATRIX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG}{oomph\+::\+Helmholtz\+GMRESMG}}$<$ MATRIX $>$\+::apply\+\_\+plane\+\_\+rotation (\begin{DoxyParamCaption}\item[{std\+::complex$<$ double $>$ \&}]{dx,  }\item[{std\+::complex$<$ double $>$ \&}]{dy,  }\item[{std\+::complex$<$ double $>$ \&}]{cs,  }\item[{std\+::complex$<$ double $>$ \&}]{sn }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Helper function\+: Apply plane rotation. This is done using the update\+: 
+
+\[ \begin{bmatrix} dx \\ dy \end{bmatrix} \leftarrow \begin{bmatrix} \overline{\cos\theta} & \overline{\sin\theta} \\ -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} dx \\ dy \end{bmatrix}. \] Taken from\+: Saad Y.\char`\"{}\+Iterative methods for sparse linear systems\char`\"{}, p.\+193. 
+
+Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l02406}{2406}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
+
 \mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_a81ddd10ccc03d6582dcadbd5cae1edda}\label{classoomph_1_1HelmholtzGMRESMG_a81ddd10ccc03d6582dcadbd5cae1edda}} 
 \index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!clean\_up\_memory@{clean\_up\_memory}}
 \index{clean\_up\_memory@{clean\_up\_memory}!oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}}
@@ -154,15 +173,15 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a9d66f3262e80ca06
 
 
 
-Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l02089}{2089}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
+Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l02053}{2053}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
 
 
 
-References \mbox{\hyperlink{complex__smoother_8h_source_l02376}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::\+Matrices\+\_\+storage\+\_\+pt}}, and \mbox{\hyperlink{complex__smoother_8h_source_l02501}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::\+Matrix\+\_\+can\+\_\+be\+\_\+deleted}}.
+References \mbox{\hyperlink{complex__smoother_8h_source_l02425}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::\+Matrices\+\_\+storage\+\_\+pt}}, and \mbox{\hyperlink{complex__smoother_8h_source_l02433}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::\+Matrix\+\_\+can\+\_\+be\+\_\+deleted}}.
 
 
 
-Referenced by \mbox{\hyperlink{complex__smoother_8h_source_l01797}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::disable\+\_\+resolve()}}, \mbox{\hyperlink{complex__smoother_8h_source_l01842}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::solve()}}, \mbox{\hyperlink{complex__smoother_8h_source_l03352}{oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::solve()}}, \mbox{\hyperlink{complex__smoother_8h_source_l03319}{oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::$\sim$\+Helmholtz\+FGMRESMG()}}, and \mbox{\hyperlink{complex__smoother_8h_source_l01785}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::$\sim$\+Helmholtz\+GMRESMG()}}.
+Referenced by \mbox{\hyperlink{complex__smoother_8h_source_l01761}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::disable\+\_\+resolve()}}, \mbox{\hyperlink{complex__smoother_8h_source_l01806}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::solve()}}, \mbox{\hyperlink{complex__smoother_8h_source_l03284}{oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::solve()}}, \mbox{\hyperlink{complex__smoother_8h_source_l03251}{oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::$\sim$\+Helmholtz\+FGMRESMG()}}, and \mbox{\hyperlink{complex__smoother_8h_source_l01749}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::$\sim$\+Helmholtz\+GMRESMG()}}.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_aa94abd65000a9fac33a29a1ae2f9ec73}\label{classoomph_1_1HelmholtzGMRESMG_aa94abd65000a9fac33a29a1ae2f9ec73}} 
 \index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!complex\_matrix\_multiplication@{complex\_matrix\_multiplication}}
@@ -177,11 +196,11 @@ Helper function to calculate a complex matrix-\/vector product. Assumes the matr
 
 
 
-Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l02122}{2122}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
+Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l02086}{2086}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{complex__smoother_8h_source_l02376}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::\+Matrices\+\_\+storage\+\_\+pt}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, and \mbox{\hyperlink{complex__smoother_8h_source_l02425}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::\+Matrices\+\_\+storage\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_a842b638722cd45650da8771aea2f9e5c}\label{classoomph_1_1HelmholtzGMRESMG_a842b638722cd45650da8771aea2f9e5c}} 
 \index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!disable\_resolve@{disable\_resolve}}
@@ -200,11 +219,30 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_ad61c63af94c59618
 
 
 
-Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l01797}{1797}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
+Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l01761}{1761}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
 
 
 
-References \mbox{\hyperlink{complex__smoother_8h_source_l02089}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::clean\+\_\+up\+\_\+memory()}}, and \mbox{\hyperlink{linear__solver_8h_source_l00144}{oomph\+::\+Linear\+Solver\+::disable\+\_\+resolve()}}.
+References \mbox{\hyperlink{complex__smoother_8h_source_l02053}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::clean\+\_\+up\+\_\+memory()}}, and \mbox{\hyperlink{linear__solver_8h_source_l00144}{oomph\+::\+Linear\+Solver\+::disable\+\_\+resolve()}}.
+
+\mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_afc666c19cb09f252e63e43c3e126fb9a}\label{classoomph_1_1HelmholtzGMRESMG_afc666c19cb09f252e63e43c3e126fb9a}} 
+\index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!generate\_plane\_rotation@{generate\_plane\_rotation}}
+\index{generate\_plane\_rotation@{generate\_plane\_rotation}!oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{generate\_plane\_rotation()}{generate\_plane\_rotation()}}
+{\footnotesize\ttfamily template$<$typename MATRIX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG}{oomph\+::\+Helmholtz\+GMRESMG}}$<$ MATRIX $>$\+::generate\+\_\+plane\+\_\+rotation (\begin{DoxyParamCaption}\item[{std\+::complex$<$ double $>$ \&}]{dx,  }\item[{std\+::complex$<$ double $>$ \&}]{dy,  }\item[{std\+::complex$<$ double $>$ \&}]{cs,  }\item[{std\+::complex$<$ double $>$ \&}]{sn }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Helper function\+: Generate a plane rotation. This is done by finding the value of $ \cos(\theta) $ (i.\+e. cs) and the value of $ \sin(\theta) $ (i.\+e. sn) such that\+: 
+
+\[ \begin{bmatrix} \overline{\cos\theta} & \overline{\sin\theta} \\ -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} dx \\ dy \end{bmatrix} = \begin{bmatrix} r \\ 0 \end{bmatrix}, \] where $ r=\sqrt{pow(|dx|,2)+pow(|dy|,2)} $. The values of a and b are given by\+: The values of dx and dy are given by\+: \[ \cos\theta&=\dfrac{dx}{\sqrt{|dx|^2+|dy|^2}}, \] and \[ \sin\theta&=\dfrac{dy}{\sqrt{|dx|^2+|dy|^2}}. \] Taken from\+: Saad Y.\char`\"{}\+Iterative methods for sparse linear systems\char`\"{}, p.\+193. We also check to see that sn is always a real (nonnegative) number. See pp.\+193-\/194 for an explanation. 
+
+Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l02327}{2327}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
+
+
+
+References \mbox{\hyperlink{iterative__linear__solver_8h_source_l00107}{oomph\+::\+Iterative\+Linear\+Solver\+::tolerance()}}.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_ad2ae5c641eae7da8c7556b646fe38d36}\label{classoomph_1_1HelmholtzGMRESMG_ad2ae5c641eae7da8c7556b646fe38d36}} 
 \index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!iterations@{iterations}}
@@ -223,7 +261,11 @@ Implements \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a5fe7f7b5e4847fd
 
 
 
-Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l02065}{2065}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
+Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l02029}{2029}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
+
+
+
+References \mbox{\hyperlink{complex__smoother_8h_source_l02422}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::\+Iterations}}.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_aefa1cb22631d803db4bd131149a5c603}\label{classoomph_1_1HelmholtzGMRESMG_aefa1cb22631d803db4bd131149a5c603}} 
 \index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!operator=@{operator=}}
@@ -253,7 +295,7 @@ Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34
 
 
 
-Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l01806}{1806}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
+Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l01770}{1770}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_ad6937ea7f72719eb9e33c28c002fa380}\label{classoomph_1_1HelmholtzGMRESMG_ad6937ea7f72719eb9e33c28c002fa380}} 
 \index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!resolve@{resolve}}
@@ -272,11 +314,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a3b310d08333033ed
 
 
 
-Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l02032}{2032}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
+Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l01996}{1996}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
 
 
 
-References \mbox{\hyperlink{complex__smoother_8h_source_l02376}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::\+Matrices\+\_\+storage\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00520}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::matrix\+\_\+pt()}}, \mbox{\hyperlink{complex__smoother_8h_source_l02497}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::\+Resolving}}, and \mbox{\hyperlink{complex__smoother_8h_source_l02521}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::solve\+\_\+helper()}}.
+References \mbox{\hyperlink{complex__smoother_8h_source_l02425}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::\+Matrices\+\_\+storage\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00520}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::matrix\+\_\+pt()}}, \mbox{\hyperlink{complex__smoother_8h_source_l02429}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::\+Resolving}}, and \mbox{\hyperlink{complex__smoother_8h_source_l02453}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::solve\+\_\+helper()}}.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_a86f6bd77359a37117aeb17798b886a81}\label{classoomph_1_1HelmholtzGMRESMG_a86f6bd77359a37117aeb17798b886a81}} 
 \index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!set\_preconditioner\_LHS@{set\_preconditioner\_LHS}}
@@ -291,11 +333,11 @@ Set left preconditioning (the default)
 
 
 
-Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l02071}{2071}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
+Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l02035}{2035}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
 
 
 
-References \mbox{\hyperlink{complex__smoother_8h_source_l02505}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::\+Preconditioner\+\_\+\+LHS}}.
+References \mbox{\hyperlink{complex__smoother_8h_source_l02437}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::\+Preconditioner\+\_\+\+LHS}}.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_ab10551b0e67b40ad91555b1e612208a2}\label{classoomph_1_1HelmholtzGMRESMG_ab10551b0e67b40ad91555b1e612208a2}} 
 \index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!set\_preconditioner\_RHS@{set\_preconditioner\_RHS}}
@@ -310,11 +352,11 @@ Enable right preconditioning.
 
 
 
-Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l02077}{2077}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
+Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l02041}{2041}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
 
 
 
-References \mbox{\hyperlink{complex__smoother_8h_source_l02505}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::\+Preconditioner\+\_\+\+LHS}}.
+References \mbox{\hyperlink{complex__smoother_8h_source_l02437}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::\+Preconditioner\+\_\+\+LHS}}.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_ae566e34da6aa9ca70a034f7ef93a1aa5}\label{classoomph_1_1HelmholtzGMRESMG_ae566e34da6aa9ca70a034f7ef93a1aa5}} 
 \index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!setup@{setup}}
@@ -333,7 +375,7 @@ Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb1
 
 
 
-Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l01824}{1824}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
+Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l01788}{1788}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_a3e6405af2506c7b789ba3208d0a9cf6d}\label{classoomph_1_1HelmholtzGMRESMG_a3e6405af2506c7b789ba3208d0a9cf6d}} 
 \index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!solve@{solve}}
@@ -352,7 +394,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a546c09822d18191d
 
 
 
-Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l01999}{1999}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
+Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l01963}{1963}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_a14ba0370fbc782fa7ab9364a035a7513}\label{classoomph_1_1HelmholtzGMRESMG_a14ba0370fbc782fa7ab9364a035a7513}} 
 \index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!solve@{solve}}
@@ -371,7 +413,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a1f7a2ee2cd18d3da
 
 
 
-Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l02022}{2022}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
+Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l01986}{1986}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
 
 
 
@@ -398,11 +440,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1HelmholtzFGMRESMG_a36a1d601676df
 
 
 
-Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l01842}{1842}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
+Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l01806}{1806}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8cc_source_l02483}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::block\+\_\+setup()}}, \mbox{\hyperlink{double__vector_8cc_source_l00035}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{double__vector_8h_source_l00154}{oomph\+::\+Double\+Vector\+::built()}}, \mbox{\hyperlink{complex__smoother_8h_source_l02089}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01046}{oomph\+::\+MPI\+\_\+\+Helpers\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l01246}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{linear__solver_8h_source_l00077}{oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time}}, \mbox{\hyperlink{linear__solver_8h_source_l00073}{oomph\+::\+Linear\+Solver\+::\+Enable\+\_\+resolve}}, \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{oomph\+::f()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00673}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+block()}}, \mbox{\hyperlink{problem_8cc_source_l03890}{oomph\+::\+Problem\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00248}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Jacobian\+\_\+setup\+\_\+time}}, \mbox{\hyperlink{complex__smoother_8h_source_l02376}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::\+Matrices\+\_\+storage\+\_\+pt}}, \mbox{\hyperlink{complex__smoother_8h_source_l02501}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::\+Matrix\+\_\+can\+\_\+be\+\_\+deleted}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00520}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::matrix\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l01280}{oomph\+::\+Problem\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01670}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::nblock\+\_\+types()}}, \mbox{\hyperlink{problem_8h_source_l01674}{oomph\+::\+Problem\+::ndof()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{double__vector_8cc_source_l00164}{oomph\+::\+Double\+Vector\+::redistribute()}}, \mbox{\hyperlink{complex__smoother_8h_source_l02497}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::\+Resolving}}, \mbox{\hyperlink{preconditioner_8h_source_l00193}{oomph\+::\+Preconditioner\+::set\+\_\+comm\+\_\+pt()}}, \mbox{\hyperlink{preconditioner_8h_source_l00165}{oomph\+::\+Preconditioner\+::set\+\_\+matrix\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02866}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::set\+\_\+mesh()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02851}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::set\+\_\+nmesh()}}, \mbox{\hyperlink{complex__smoother_8h_source_l02521}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::solve\+\_\+helper()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}.
+References \mbox{\hyperlink{block__preconditioner_8cc_source_l02483}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::block\+\_\+setup()}}, \mbox{\hyperlink{double__vector_8cc_source_l00035}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{double__vector_8h_source_l00154}{oomph\+::\+Double\+Vector\+::built()}}, \mbox{\hyperlink{complex__smoother_8h_source_l02053}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01046}{oomph\+::\+MPI\+\_\+\+Helpers\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l01246}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{linear__solver_8h_source_l00077}{oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time}}, \mbox{\hyperlink{linear__solver_8h_source_l00073}{oomph\+::\+Linear\+Solver\+::\+Enable\+\_\+resolve}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00673}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+block()}}, \mbox{\hyperlink{problem_8cc_source_l03890}{oomph\+::\+Problem\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00248}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Jacobian\+\_\+setup\+\_\+time}}, \mbox{\hyperlink{complex__smoother_8h_source_l02425}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::\+Matrices\+\_\+storage\+\_\+pt}}, \mbox{\hyperlink{complex__smoother_8h_source_l02433}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::\+Matrix\+\_\+can\+\_\+be\+\_\+deleted}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00520}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::matrix\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l01280}{oomph\+::\+Problem\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01670}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::nblock\+\_\+types()}}, \mbox{\hyperlink{problem_8h_source_l01674}{oomph\+::\+Problem\+::ndof()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{double__vector_8cc_source_l00164}{oomph\+::\+Double\+Vector\+::redistribute()}}, \mbox{\hyperlink{complex__smoother_8h_source_l02429}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::\+Resolving}}, \mbox{\hyperlink{preconditioner_8h_source_l00193}{oomph\+::\+Preconditioner\+::set\+\_\+comm\+\_\+pt()}}, \mbox{\hyperlink{preconditioner_8h_source_l00165}{oomph\+::\+Preconditioner\+::set\+\_\+matrix\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02866}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::set\+\_\+mesh()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02851}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::set\+\_\+nmesh()}}, \mbox{\hyperlink{complex__smoother_8h_source_l02453}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::solve\+\_\+helper()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_a3147aa77b5e71a0822cc5c661dd07e0d}\label{classoomph_1_1HelmholtzGMRESMG_a3147aa77b5e71a0822cc5c661dd07e0d}} 
 \index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!solve\_helper@{solve\_helper}}
@@ -419,7 +461,7 @@ General interface to solve function.
 
 Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. based on the algorithm presented in Templates for the Solution of Linear Systems\+: Building Blocks for Iterative Methods, Barrett, Berry et al, SIAM, 2006 and the implementation in the IML++ library \+: \href{http://math.nist.gov/iml++/}{\texttt{ http\+://math.\+nist.\+gov/iml++/}} 
 
-Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l02521}{2521}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
+Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l02453}{2453}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
 
 
 
@@ -427,7 +469,7 @@ References \mbox{\hyperlink{double__vector_8cc_source_l00035}{oomph\+::\+Double\
 
 
 
-Referenced by \mbox{\hyperlink{complex__smoother_8h_source_l02032}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::resolve()}}, and \mbox{\hyperlink{complex__smoother_8h_source_l01842}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::solve()}}.
+Referenced by \mbox{\hyperlink{complex__smoother_8h_source_l01996}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::resolve()}}, and \mbox{\hyperlink{complex__smoother_8h_source_l01806}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::solve()}}.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_ac08841fffc51bceb21122cd66988329b}\label{classoomph_1_1HelmholtzGMRESMG_ac08841fffc51bceb21122cd66988329b}} 
 \index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!update@{update}}
@@ -442,65 +484,52 @@ Helper function to update the result vector.
 
 
 
-Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l02220}{2220}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
+Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l02184}{2184}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l02939}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+block\+\_\+vectors()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{complex__smoother_8h_source_l02505}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::\+Preconditioner\+\_\+\+LHS}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00095}{oomph\+::\+Iterative\+Linear\+Solver\+::preconditioner\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34884bb64ec8}{oomph\+::\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l03443}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::return\+\_\+block\+\_\+vectors()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l02939}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+block\+\_\+vectors()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{complex__smoother_8h_source_l02437}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::\+Preconditioner\+\_\+\+LHS}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00095}{oomph\+::\+Iterative\+Linear\+Solver\+::preconditioner\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34884bb64ec8}{oomph\+::\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l03443}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::return\+\_\+block\+\_\+vectors()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_ac7b6ce565f4882322f8f37a5dd0c46c0}\label{classoomph_1_1HelmholtzGMRESMG_ac7b6ce565f4882322f8f37a5dd0c46c0}} 
-\index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!begin@{begin}}
-\index{begin@{begin}!oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}}
-\doxysubsubsection{\texorpdfstring{begin}{begin}}
+\mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_ae2a4718545bd42acb57aba5baa23d52f}\label{classoomph_1_1HelmholtzGMRESMG_ae2a4718545bd42acb57aba5baa23d52f}} 
+\index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!Iterations@{Iterations}}
+\index{Iterations@{Iterations}!oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{Iterations}{Iterations}}
 {\footnotesize\ttfamily template$<$typename MATRIX $>$ \\
-\mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG}{oomph\+::\+Helmholtz\+GMRESMG}}$<$ MATRIX $>$\+::begin\hspace{0.3cm}{\ttfamily [protected]}}
-
-{\bfseries Initial value\+:}
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\{bmatrix\}}
-\DoxyCodeLine{        \(\backslash\)overline\{\(\backslash\)cos\(\backslash\)theta\} \& \(\backslash\)overline\{\(\backslash\)sin\(\backslash\)theta\}}
-\DoxyCodeLine{        \(\backslash\)\(\backslash\) -\/\(\backslash\)sin\(\backslash\)theta \& \(\backslash\)cos\(\backslash\)theta}
-\DoxyCodeLine{        \(\backslash\)end\{bmatrix\}}
-\DoxyCodeLine{        \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_ac7b6ce565f4882322f8f37a5dd0c46c0}{\(\backslash\)begin}}\{bmatrix\}}
-\DoxyCodeLine{        dx}
-\DoxyCodeLine{        \(\backslash\)\(\backslash\) dy}
-\DoxyCodeLine{        \(\backslash\)end\{bmatrix\}}
-\DoxyCodeLine{        =}
-\DoxyCodeLine{        \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_ac7b6ce565f4882322f8f37a5dd0c46c0}{\(\backslash\)begin}}\{bmatrix\}}
-\DoxyCodeLine{        r}
-\DoxyCodeLine{        \(\backslash\)\(\backslash\) 0}
-\DoxyCodeLine{        \(\backslash\)end\{bmatrix\}}
-
-\end{DoxyCode}
-
-
-Helper function\+: Generate a plane rotation. This is done by finding the value of $ \cos(\theta) $ (i.\+e. cs) and the value of $ \sin(\theta) $ (i.\+e. sn) such that\+: 
+unsigned \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG}{oomph\+::\+Helmholtz\+GMRESMG}}$<$ MATRIX $>$\+::Iterations\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
-Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l02354}{2354}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
+Number of iterations taken. 
 
-\mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_a44e50b68a7c2aab02342817c93ee6ad5}\label{classoomph_1_1HelmholtzGMRESMG_a44e50b68a7c2aab02342817c93ee6ad5}} 
+
+
+Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l02422}{2422}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{complex__smoother_8h_source_l02029}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::iterations()}}.
+
+\mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_a5d8ae2181aecf890386ae48d81f90b42}\label{classoomph_1_1HelmholtzGMRESMG_a5d8ae2181aecf890386ae48d81f90b42}} 
 \index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!Matrices\_storage\_pt@{Matrices\_storage\_pt}}
 \index{Matrices\_storage\_pt@{Matrices\_storage\_pt}!oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{Matrices\_storage\_pt}{Matrices\_storage\_pt}}
 {\footnotesize\ttfamily template$<$typename MATRIX $>$ \\
-\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}} cos theta \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}} sin theta\& \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}}$\ast$$>$ \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG}{oomph\+::\+Helmholtz\+GMRESMG}}$<$ MATRIX $>$\+::Matrices\+\_\+storage\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}}$\ast$$>$ \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG}{oomph\+::\+Helmholtz\+GMRESMG}}$<$ MATRIX $>$\+::Matrices\+\_\+storage\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
-and 
-
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pointers to the real and imaginary part of the system matrix 
-
-Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l02493}{2493}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pointers to the real and imaginary part of the system matrix. 
 
 
 
-Referenced by \mbox{\hyperlink{complex__smoother_8h_source_l02089}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{complex__smoother_8h_source_l02122}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::complex\+\_\+matrix\+\_\+multiplication()}}, \mbox{\hyperlink{complex__smoother_8h_source_l02032}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::resolve()}}, \mbox{\hyperlink{complex__smoother_8h_source_l01842}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::solve()}}, and \mbox{\hyperlink{complex__smoother_8h_source_l03352}{oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::solve()}}.
+Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l02425}{2425}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{complex__smoother_8h_source_l02053}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{complex__smoother_8h_source_l02086}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::complex\+\_\+matrix\+\_\+multiplication()}}, \mbox{\hyperlink{complex__smoother_8h_source_l01996}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::resolve()}}, \mbox{\hyperlink{complex__smoother_8h_source_l01806}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::solve()}}, and \mbox{\hyperlink{complex__smoother_8h_source_l03284}{oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::solve()}}.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_a1550b5147f7fa822e8cbc9de93f1c06f}\label{classoomph_1_1HelmholtzGMRESMG_a1550b5147f7fa822e8cbc9de93f1c06f}} 
 \index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!Matrix\_can\_be\_deleted@{Matrix\_can\_be\_deleted}}
@@ -515,11 +544,11 @@ Boolean flag to indicate if the matrix pointed to be Matrix\+\_\+pt can be delet
 
 
 
-Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l02501}{2501}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
+Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l02433}{2433}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{complex__smoother_8h_source_l02089}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{complex__smoother_8h_source_l01842}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::solve()}}, and \mbox{\hyperlink{complex__smoother_8h_source_l03352}{oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::solve()}}.
+Referenced by \mbox{\hyperlink{complex__smoother_8h_source_l02053}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{complex__smoother_8h_source_l01806}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::solve()}}, and \mbox{\hyperlink{complex__smoother_8h_source_l03284}{oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::solve()}}.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_a7f151e92397721fc2ae6acdd8253d685}\label{classoomph_1_1HelmholtzGMRESMG_a7f151e92397721fc2ae6acdd8253d685}} 
 \index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!Preconditioner\_LHS@{Preconditioner\_LHS}}
@@ -534,11 +563,11 @@ boolean indicating use of left hand preconditioning (if true) or right hand prec
 
 
 
-Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l02505}{2505}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
+Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l02437}{2437}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{complex__smoother_8h_source_l03312}{oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::\+Helmholtz\+FGMRESMG()}}, \mbox{\hyperlink{complex__smoother_8h_source_l01775}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::\+Helmholtz\+GMRESMG()}}, \mbox{\hyperlink{complex__smoother_8h_source_l02071}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::set\+\_\+preconditioner\+\_\+\+LHS()}}, \mbox{\hyperlink{complex__smoother_8h_source_l02077}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::set\+\_\+preconditioner\+\_\+\+RHS()}}, and \mbox{\hyperlink{complex__smoother_8h_source_l02220}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::update()}}.
+Referenced by \mbox{\hyperlink{complex__smoother_8h_source_l03244}{oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::\+Helmholtz\+FGMRESMG()}}, \mbox{\hyperlink{complex__smoother_8h_source_l01739}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::\+Helmholtz\+GMRESMG()}}, \mbox{\hyperlink{complex__smoother_8h_source_l02035}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::set\+\_\+preconditioner\+\_\+\+LHS()}}, \mbox{\hyperlink{complex__smoother_8h_source_l02041}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::set\+\_\+preconditioner\+\_\+\+RHS()}}, and \mbox{\hyperlink{complex__smoother_8h_source_l02184}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::update()}}.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_acb64519b62c16bbec32d01c9969f746f}\label{classoomph_1_1HelmholtzGMRESMG_acb64519b62c16bbec32d01c9969f746f}} 
 \index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!Resolving@{Resolving}}
@@ -553,11 +582,11 @@ Boolean flag to indicate if the solve is done in re-\/solve mode, bypassing setu
 
 
 
-Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l02497}{2497}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
+Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l02429}{2429}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{complex__smoother_8h_source_l02032}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::resolve()}}, \mbox{\hyperlink{complex__smoother_8h_source_l01842}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::solve()}}, and \mbox{\hyperlink{complex__smoother_8h_source_l03352}{oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::solve()}}.
+Referenced by \mbox{\hyperlink{complex__smoother_8h_source_l01996}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::resolve()}}, \mbox{\hyperlink{complex__smoother_8h_source_l01806}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::solve()}}, and \mbox{\hyperlink{complex__smoother_8h_source_l03284}{oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::solve()}}.
 
 
 

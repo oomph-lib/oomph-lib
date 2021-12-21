@@ -20,20 +20,20 @@ Inheritance diagram for oomph\+::Diag\+QHermite\+Element\texorpdfstring{$<$}{<} 
 \item 
 \mbox{\hyperlink{classoomph_1_1DiagQHermiteElement_a49b5a9df09fa243aa9cfe8df37bcfe92}{Diag\+QHermite\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1DiagQHermiteElement_a851096a6144291c807bb1a419e99fd7c}{Diag\+QHermite\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DiagQHermiteElement}{Diag\+QHermite\+Element}} \&dummy)=delete
+\mbox{\hyperlink{classoomph_1_1DiagQHermiteElement_a851096a6144291c807bb1a419e99fd7c}{Diag\+QHermite\+Element}} (const \mbox{\hyperlink{classoomph_1_1DiagQHermiteElement}{Diag\+QHermite\+Element}} \&dummy)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DiagQHermiteElement_a57e580d7b3d6e78f7636a66ef62acff7}{operator=}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DiagQHermiteElement}{Diag\+QHermite\+Element}} \&)=delete
+void \mbox{\hyperlink{classoomph_1_1DiagQHermiteElement_a57e580d7b3d6e78f7636a66ef62acff7}{operator=}} (const \mbox{\hyperlink{classoomph_1_1DiagQHermiteElement}{Diag\+QHermite\+Element}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-double \mbox{\hyperlink{classoomph_1_1DiagQHermiteElement_a07bdc47a91aba325c148acae357b9365}{invert\+\_\+jacobian\+\_\+mapping}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_a72ead1315f6f588e379963ad2a16b88a}{inverse\+\_\+jacobian}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1DiagQHermiteElement_a07bdc47a91aba325c148acae357b9365}{invert\+\_\+jacobian\+\_\+mapping}} (const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&inverse\+\_\+jacobian) const
 \begin{DoxyCompactList}\small\item\em Overload the template-\/free interface for the calculation of the inverse jacobian. Pass the dimension of the element to the invert\+\_\+jacobian function. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1DiagQHermiteElement_a0b4a87e67172efe1c68eaac2c7d235a7}{local\+\_\+to\+\_\+eulerian\+\_\+mapping}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&\mbox{\hyperlink{classoomph_1_1FiniteElement_ae3d0addae4ef07ae7295fe439483caf0}{dpsids}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_a72ead1315f6f588e379963ad2a16b88a}{inverse\+\_\+jacobian}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1DiagQHermiteElement_a0b4a87e67172efe1c68eaac2c7d235a7}{local\+\_\+to\+\_\+eulerian\+\_\+mapping}} (const \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsids, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&inverse\+\_\+jacobian) const
 \begin{DoxyCompactList}\small\item\em Overload the local to eulerian mapping so that it uses diagonal terms only. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DiagQHermiteElement_abae42df187036728d7d78467509f92af}{transform\+\_\+derivatives}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_a72ead1315f6f588e379963ad2a16b88a}{inverse\+\_\+jacobian}}, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dbasis) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1DiagQHermiteElement_abae42df187036728d7d78467509f92af}{transform\+\_\+derivatives}} (const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&inverse\+\_\+jacobian, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dbasis) const
 \begin{DoxyCompactList}\small\item\em Overload the template-\/free interface for the transformation of derivatives, so that the diagonal version is used. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DiagQHermiteElement_a6d6dbf192bc9284a87608e2699f8ebb1}{transform\+\_\+second\+\_\+derivatives}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_a72ead1315f6f588e379963ad2a16b88a}{inverse\+\_\+jacobian}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian2, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dbasis, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&d2basis) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1DiagQHermiteElement_a6d6dbf192bc9284a87608e2699f8ebb1}{transform\+\_\+second\+\_\+derivatives}} (const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&inverse\+\_\+jacobian, const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian2, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dbasis, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&d2basis) const
 \begin{DoxyCompactList}\small\item\em Overload the template-\/free interface for the calculation of transformation of second derivatives. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -68,7 +68,7 @@ Definition at line \mbox{\hyperlink{hermite__elements_8h_source_l00481}{481}} of
 \index{DiagQHermiteElement@{DiagQHermiteElement}!oomph::DiagQHermiteElement$<$ DIM $>$@{oomph::DiagQHermiteElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{DiagQHermiteElement()}{DiagQHermiteElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-\mbox{\hyperlink{classoomph_1_1DiagQHermiteElement}{oomph\+::\+Diag\+QHermite\+Element}}$<$ DIM $>$\+::\mbox{\hyperlink{classoomph_1_1DiagQHermiteElement}{Diag\+QHermite\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DiagQHermiteElement}{Diag\+QHermite\+Element}}$<$ DIM $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+\mbox{\hyperlink{classoomph_1_1DiagQHermiteElement}{oomph\+::\+Diag\+QHermite\+Element}}$<$ DIM $>$\+::\mbox{\hyperlink{classoomph_1_1DiagQHermiteElement}{Diag\+QHermite\+Element}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DiagQHermiteElement}{Diag\+QHermite\+Element}}$<$ DIM $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
@@ -82,7 +82,7 @@ Broken copy constructor.
 \index{invert\_jacobian\_mapping@{invert\_jacobian\_mapping}!oomph::DiagQHermiteElement$<$ DIM $>$@{oomph::DiagQHermiteElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{invert\_jacobian\_mapping()}{invert\_jacobian\_mapping()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1DiagQHermiteElement}{oomph\+::\+Diag\+QHermite\+Element}}$<$ DIM $>$\+::invert\+\_\+jacobian\+\_\+mapping (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{inverse\+\_\+jacobian }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+double \mbox{\hyperlink{classoomph_1_1DiagQHermiteElement}{oomph\+::\+Diag\+QHermite\+Element}}$<$ DIM $>$\+::invert\+\_\+jacobian\+\_\+mapping (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{inverse\+\_\+jacobian }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -96,16 +96,12 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1QHermiteElement_a1b5cb1c9b7800
 
 Definition at line \mbox{\hyperlink{hermite__elements_8h_source_l00440}{440}} of file \mbox{\hyperlink{hermite__elements_8h_source}{hermite\+\_\+elements.\+h}}.
 
-
-
-References \mbox{\hyperlink{elements_8h_source_l01613}{oomph\+::\+Finite\+Element\+::inverse\+\_\+jacobian}}, and \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}.
-
 \mbox{\Hypertarget{classoomph_1_1DiagQHermiteElement_a0b4a87e67172efe1c68eaac2c7d235a7}\label{classoomph_1_1DiagQHermiteElement_a0b4a87e67172efe1c68eaac2c7d235a7}} 
 \index{oomph::DiagQHermiteElement$<$ DIM $>$@{oomph::DiagQHermiteElement$<$ DIM $>$}!local\_to\_eulerian\_mapping@{local\_to\_eulerian\_mapping}}
 \index{local\_to\_eulerian\_mapping@{local\_to\_eulerian\_mapping}!oomph::DiagQHermiteElement$<$ DIM $>$@{oomph::DiagQHermiteElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{local\_to\_eulerian\_mapping()}{local\_to\_eulerian\_mapping()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1DiagQHermiteElement}{oomph\+::\+Diag\+QHermite\+Element}}$<$ DIM $>$\+::local\+\_\+to\+\_\+eulerian\+\_\+mapping (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsids,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{inverse\+\_\+jacobian }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+double \mbox{\hyperlink{classoomph_1_1DiagQHermiteElement}{oomph\+::\+Diag\+QHermite\+Element}}$<$ DIM $>$\+::local\+\_\+to\+\_\+eulerian\+\_\+mapping (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsids,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{inverse\+\_\+jacobian }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -121,14 +117,14 @@ Definition at line \mbox{\hyperlink{hermite__elements_8h_source_l00448}{448}} of
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01613}{oomph\+::\+Finite\+Element\+::inverse\+\_\+jacobian}}, \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}, and \mbox{\hyperlink{elements_8cc_source_l02588}{oomph\+::\+Finite\+Element\+::local\+\_\+to\+\_\+eulerian\+\_\+mapping\+\_\+diagonal()}}.
+References \mbox{\hyperlink{elements_8cc_source_l02588}{oomph\+::\+Finite\+Element\+::local\+\_\+to\+\_\+eulerian\+\_\+mapping\+\_\+diagonal()}}.
 
 \mbox{\Hypertarget{classoomph_1_1DiagQHermiteElement_a57e580d7b3d6e78f7636a66ef62acff7}\label{classoomph_1_1DiagQHermiteElement_a57e580d7b3d6e78f7636a66ef62acff7}} 
 \index{oomph::DiagQHermiteElement$<$ DIM $>$@{oomph::DiagQHermiteElement$<$ DIM $>$}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::DiagQHermiteElement$<$ DIM $>$@{oomph::DiagQHermiteElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1DiagQHermiteElement}{oomph\+::\+Diag\+QHermite\+Element}}$<$ DIM $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DiagQHermiteElement}{Diag\+QHermite\+Element}}$<$ DIM $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+void \mbox{\hyperlink{classoomph_1_1DiagQHermiteElement}{oomph\+::\+Diag\+QHermite\+Element}}$<$ DIM $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DiagQHermiteElement}{Diag\+QHermite\+Element}}$<$ DIM $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
@@ -139,7 +135,7 @@ Broken assignment operator.
 \index{transform\_derivatives@{transform\_derivatives}!oomph::DiagQHermiteElement$<$ DIM $>$@{oomph::DiagQHermiteElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{transform\_derivatives()}{transform\_derivatives()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1DiagQHermiteElement}{oomph\+::\+Diag\+QHermite\+Element}}$<$ DIM $>$\+::transform\+\_\+derivatives (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{inverse\+\_\+jacobian,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dbasis }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1DiagQHermiteElement}{oomph\+::\+Diag\+QHermite\+Element}}$<$ DIM $>$\+::transform\+\_\+derivatives (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{inverse\+\_\+jacobian,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dbasis }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -147,7 +143,7 @@ Overload the template-\/free interface for the transformation of derivatives, so
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a1620f469e609d1cc872a5aa8531f70cd}{oomph\+::\+Finite\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2c2f243c9f450c4023e5aa4246facd20}{oomph\+::\+Finite\+Element}}.
 
 
 
@@ -155,14 +151,14 @@ Definition at line \mbox{\hyperlink{hermite__elements_8h_source_l00459}{459}} of
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01613}{oomph\+::\+Finite\+Element\+::inverse\+\_\+jacobian}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_adaa4ae864dccc547973e22e9f0789b47}{oomph\+::\+Finite\+Element\+::transform\+\_\+derivatives\+\_\+diagonal()}}.
+References \mbox{\hyperlink{elements_8cc_source_l02877}{oomph\+::\+Finite\+Element\+::transform\+\_\+derivatives\+\_\+diagonal()}}.
 
 \mbox{\Hypertarget{classoomph_1_1DiagQHermiteElement_a6d6dbf192bc9284a87608e2699f8ebb1}\label{classoomph_1_1DiagQHermiteElement_a6d6dbf192bc9284a87608e2699f8ebb1}} 
 \index{oomph::DiagQHermiteElement$<$ DIM $>$@{oomph::DiagQHermiteElement$<$ DIM $>$}!transform\_second\_derivatives@{transform\_second\_derivatives}}
 \index{transform\_second\_derivatives@{transform\_second\_derivatives}!oomph::DiagQHermiteElement$<$ DIM $>$@{oomph::DiagQHermiteElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{transform\_second\_derivatives()}{transform\_second\_derivatives()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1DiagQHermiteElement}{oomph\+::\+Diag\+QHermite\+Element}}$<$ DIM $>$\+::transform\+\_\+second\+\_\+derivatives (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{inverse\+\_\+jacobian,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian2,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dbasis,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{d2basis }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1DiagQHermiteElement}{oomph\+::\+Diag\+QHermite\+Element}}$<$ DIM $>$\+::transform\+\_\+second\+\_\+derivatives (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{inverse\+\_\+jacobian,  }\item[{const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian2,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dbasis,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{d2basis }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -175,10 +171,6 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1QHermiteElement_a0f00088908528
 
 
 Definition at line \mbox{\hyperlink{hermite__elements_8h_source_l00467}{467}} of file \mbox{\hyperlink{hermite__elements_8h_source}{hermite\+\_\+elements.\+h}}.
-
-
-
-References \mbox{\hyperlink{elements_8h_source_l01613}{oomph\+::\+Finite\+Element\+::inverse\+\_\+jacobian}}, and \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}.
 
 
 

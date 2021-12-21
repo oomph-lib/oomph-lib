@@ -1065,11 +1065,11 @@ $(function() {
 <div class="line"><a id="l00936" name="l00936"></a><span class="lineno">  936</span>    }</div>
 <div class="line"><a id="l00937" name="l00937"></a><span class="lineno">  937</span> </div>
 <div class="line"><a id="l00938" name="l00938"></a><span class="lineno">  938</span>    <span class="comment">// Storage for the results</span></div>
-<div class="line"><a id="l00939" name="l00939"></a><span class="lineno">  939</span>    <span class="keywordtype">double</span>** <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a> = <span class="keyword">new</span> <span class="keywordtype">double</span>*;</div>
-<div class="line"><a id="l00940" name="l00940"></a><span class="lineno">  940</span>    *<a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a> = <span class="keyword">new</span> <span class="keywordtype">double</span>[n_dof];</div>
+<div class="line"><a id="l00939" name="l00939"></a><span class="lineno">  939</span>    <span class="keywordtype">double</span>** x = <span class="keyword">new</span> <span class="keywordtype">double</span>*;</div>
+<div class="line"><a id="l00940" name="l00940"></a><span class="lineno">  940</span>    *x = <span class="keyword">new</span> <span class="keywordtype">double</span>[n_dof];</div>
 <div class="line"><a id="l00941" name="l00941"></a><span class="lineno">  941</span> </div>
 <div class="line"><a id="l00942" name="l00942"></a><span class="lineno">  942</span>    <span class="comment">// Now call the resolver</span></div>
-<div class="line"><a id="l00943" name="l00943"></a><span class="lineno">  943</span>    MA42CD(trans, nrhs, lx, b, <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>, <a class="code hl_variable" href="classoomph_1_1HSL__MA42.html#a0248d831f42eaf222c4283d17bdc2f5e">Lw</a>, <a class="code hl_variable" href="classoomph_1_1HSL__MA42.html#ad12e72f377a117d7a106af587bcf4cac">W</a>, <a class="code hl_variable" href="classoomph_1_1HSL__MA42.html#a6ae8fb349617e5b1dfe64bb7a822de3c">Liw</a>, <a class="code hl_variable" href="classoomph_1_1HSL__MA42.html#aee49355d4011d4867ec6ed92823b4162">IW</a>, <a class="code hl_variable" href="classoomph_1_1HSL__MA42.html#a607d4df18fa90208a18fbd7073412b53">Icntl</a>, <a class="code hl_variable" href="classoomph_1_1HSL__MA42.html#a60b94dff66e7add9183e9c6e86786cfc">Isave</a>, <a class="code hl_variable" href="classoomph_1_1HSL__MA42.html#abc3b3ea69eb833ee2c5d81509f26a6fe">Info</a>);</div>
+<div class="line"><a id="l00943" name="l00943"></a><span class="lineno">  943</span>    MA42CD(trans, nrhs, lx, b, x, <a class="code hl_variable" href="classoomph_1_1HSL__MA42.html#a0248d831f42eaf222c4283d17bdc2f5e">Lw</a>, <a class="code hl_variable" href="classoomph_1_1HSL__MA42.html#ad12e72f377a117d7a106af587bcf4cac">W</a>, <a class="code hl_variable" href="classoomph_1_1HSL__MA42.html#a6ae8fb349617e5b1dfe64bb7a822de3c">Liw</a>, <a class="code hl_variable" href="classoomph_1_1HSL__MA42.html#aee49355d4011d4867ec6ed92823b4162">IW</a>, <a class="code hl_variable" href="classoomph_1_1HSL__MA42.html#a607d4df18fa90208a18fbd7073412b53">Icntl</a>, <a class="code hl_variable" href="classoomph_1_1HSL__MA42.html#a60b94dff66e7add9183e9c6e86786cfc">Isave</a>, <a class="code hl_variable" href="classoomph_1_1HSL__MA42.html#abc3b3ea69eb833ee2c5d81509f26a6fe">Info</a>);</div>
 <div class="line"><a id="l00944" name="l00944"></a><span class="lineno">  944</span> </div>
 <div class="line"><a id="l00945" name="l00945"></a><span class="lineno">  945</span>    <span class="comment">// If there has been an error throw it</span></div>
 <div class="line"><a id="l00946" name="l00946"></a><span class="lineno">  946</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="classoomph_1_1HSL__MA42.html#abc3b3ea69eb833ee2c5d81509f26a6fe">Info</a>[0] &lt; 0)</div>
@@ -1081,12 +1081,12 @@ $(function() {
 <div class="line"><a id="l00952" name="l00952"></a><span class="lineno">  952</span>    <span class="comment">// Put the answer into the result array</span></div>
 <div class="line"><a id="l00953" name="l00953"></a><span class="lineno">  953</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = 0; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &lt; n_dof; ++<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)</div>
 <div class="line"><a id="l00954" name="l00954"></a><span class="lineno">  954</span>    {</div>
-<div class="line"><a id="l00955" name="l00955"></a><span class="lineno">  955</span>      result[<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] = <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>[0][<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>];</div>
+<div class="line"><a id="l00955" name="l00955"></a><span class="lineno">  955</span>      result[<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] = x[0][<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>];</div>
 <div class="line"><a id="l00956" name="l00956"></a><span class="lineno">  956</span>    }</div>
 <div class="line"><a id="l00957" name="l00957"></a><span class="lineno">  957</span> </div>
 <div class="line"><a id="l00958" name="l00958"></a><span class="lineno">  958</span>    <span class="comment">// Delete the allocated storage</span></div>
-<div class="line"><a id="l00959" name="l00959"></a><span class="lineno">  959</span>    <span class="keyword">delete</span>[] * <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>;</div>
-<div class="line"><a id="l00960" name="l00960"></a><span class="lineno">  960</span>    <span class="keyword">delete</span> <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>;</div>
+<div class="line"><a id="l00959" name="l00959"></a><span class="lineno">  959</span>    <span class="keyword">delete</span>[] * x;</div>
+<div class="line"><a id="l00960" name="l00960"></a><span class="lineno">  960</span>    <span class="keyword">delete</span> x;</div>
 <div class="line"><a id="l00961" name="l00961"></a><span class="lineno">  961</span>    <span class="keyword">delete</span>[] * b;</div>
 <div class="line"><a id="l00962" name="l00962"></a><span class="lineno">  962</span>    <span class="keyword">delete</span> b;</div>
 <div class="line"><a id="l00963" name="l00963"></a><span class="lineno">  963</span>  }</div>
@@ -1324,7 +1324,6 @@ $(function() {
 <div class="ttc" id="amatrices_8h_html"><div class="ttname"><a href="matrices_8h.html">matrices.h</a></div></div>
 <div class="ttc" id="amesh_8h_html"><div class="ttname"><a href="mesh_8h.html">mesh.h</a></div></div>
 <div class="ttc" id="anamespaceoomph_html"><div class="ttname"><a href="namespaceoomph.html">oomph</a></div><div class="ttdoc">//////////////////////////////////////////////////////////////////// ////////////////////////////////...</div><div class="ttdef"><b>Definition:</b> <a href="advection__diffusion__elements_8cc_source.html#l00029">advection_diffusion_elements.cc:30</a></div></div>
-<div class="ttc" id="anamespaceoomph_html_a9d1d2da2b8bb8e73af72b5cadb8fe97c"><div class="ttname"><a href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">oomph::x</a></div><div class="ttdeci">x</div><div class="ttdoc">Pseudo buckling ring: Circular ring deformed by the N-th buckling mode of a thin-wall elastic ring.</div><div class="ttdef"><b>Definition:</b> <a href="pseudo__buckling__ring_8h_source.html#l00049">pseudo_buckling_ring.h:49</a></div></div>
 <div class="ttc" id="anamespaceoomph_html_aec474227917784dc0a255faf289cfc16"><div class="ttname"><a href="namespaceoomph.html#aec474227917784dc0a255faf289cfc16">oomph::oomph_info</a></div><div class="ttdeci">OomphInfo oomph_info</div><div class="ttdoc">Single (global) instantiation of the OomphInfo object – this is used throughout the library as a &quot;rep...</div><div class="ttdef"><b>Definition:</b> <a href="oomph__definitions_8cc_source.html#l00319">oomph_definitions.cc:319</a></div></div>
 <div class="ttc" id="aproblem_8h_html"><div class="ttname"><a href="problem_8h.html">problem.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
@@ -1355,7 +1354,7 @@ $(function() {
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Nov 2 2021 16:31:09
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Dec 21 2021 17:35:07
         </div>
       </div>
     </footer>

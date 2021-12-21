@@ -74,7 +74,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00070}00070 \textcolor{comment}{    /// compute the Jacobian as well.}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00071}\mbox{\hyperlink{classoomph_1_1RefineableFpPressureAdvDiffRobinBCSpaceTimeElement_a72e4c8aa0b1d35571f1096dc88061157}{00071}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1RefineableFpPressureAdvDiffRobinBCSpaceTimeElement_a72e4c8aa0b1d35571f1096dc88061157}{fill\_in\_generic\_residual\_contribution\_fp\_press\_adv\_diff\_robin\_bc}}(}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00072}00072       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00073}00073       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}},}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00073}00073       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian,}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00074}00074       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& construct\_jacobian\_flag);}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00075}00075   \};}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00076}00076 }
@@ -221,7 +221,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00217}00217       \textcolor{keywordtype}{double} J = this-\/>J\_eulerian(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00218}00218 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00219}00219       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00220}00220       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00220}00220       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00221}00221 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00222}00222 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00223}00223       \textcolor{comment}{// Number of master nodes and storage for the weight of the shape function}}
@@ -270,7 +270,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00266}00266           \textcolor{keywordflow}{if} (local\_eqn >= 0)}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00267}00267           \{}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00268}00268             residuals[local\_eqn] -\/=}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00269}00269               re * flux * interpolated\_press * testp[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight;}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00269}00269               re * flux * interpolated\_press * testp[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight;}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00270}00270 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00271}00271             \textcolor{comment}{// Jacobian too?}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00272}00272             \textcolor{keywordflow}{if} (flag)}
@@ -320,7 +320,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00316}00316                   \textcolor{keywordflow}{if} (local\_unknown >= 0)}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00317}00317                   \{}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00318}00318                     jacobian(local\_eqn, local\_unknown) -\/=}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00319}00319                       (re * flux * psip[l2] * testp[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight *}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00319}00319                       (re * flux * psip[l2] * testp[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight *}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00320}00320                        hang\_weight2);}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00321}00321                   \}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00322}00322                 \} \textcolor{comment}{// for (unsigned m2=0;m2<n\_master2;m2++)}}
@@ -341,7 +341,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00337}00337 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00338}00338   \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00339}00339   \textcolor{keyword}{class }RefineableSpaceTimeNavierStokesEquations}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00340}00340     : \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classSpaceTimeNavierStokesEquations}{SpaceTimeNavierStokesEquations}}<DIM>,}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00340}00340     : \textcolor{keyword}{public} \textcolor{keyword}{virtual} SpaceTimeNavierStokesEquations<DIM>,}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00341}00341       \textcolor{keyword}{public} \textcolor{keyword}{virtual} RefineableElement,}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00342}00342       \textcolor{keyword}{public} \textcolor{keyword}{virtual} ElementWithZ2ErrorEstimator}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00343}00343   \{}
@@ -356,7 +356,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00352}00352   \textcolor{keyword}{public}:\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00353}00353 \textcolor{comment}{    /// Constructor}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00354}\mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a63fbf1ce07606d29a027d2cab68e0857}{00354}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a63fbf1ce07606d29a027d2cab68e0857}{RefineableSpaceTimeNavierStokesEquations}}()}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00355}00355       : \mbox{\hyperlink{classSpaceTimeNavierStokesEquations}{SpaceTimeNavierStokesEquations}}<DIM>(),}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00355}00355       : \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations}{SpaceTimeNavierStokesEquations}}<DIM>(),}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00356}00356         \mbox{\hyperlink{classoomph_1_1RefineableElement}{RefineableElement}}(),}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00357}00357         \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator}{ElementWithZ2ErrorEstimator}}()}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00358}00358     \{}
@@ -410,7 +410,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00406}00406 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00407}00407 \textcolor{comment}{    /// Pointer to n\_p-\/th pressure node (Default: NULL,}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00408}00408 \textcolor{comment}{    /// indicating that pressure is not based on nodal interpolation).}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00409}\mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_ae6c4471129a487219f97ec3f28bddad5}{00409}} \textcolor{comment}{}    \textcolor{keyword}{virtual} Node* \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_ae6c4471129a487219f97ec3f28bddad5}{pressure\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_p)}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00409}\mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_ae6c4471129a487219f97ec3f28bddad5}{00409}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_ae6c4471129a487219f97ec3f28bddad5}{pressure\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_p)}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00410}00410     \{}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00411}00411       \textcolor{comment}{// Return a null pointer}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00412}00412       \textcolor{keywordflow}{return} NULL;}
@@ -461,7 +461,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00457}00457       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} strainrate(DIM, DIM, 0.0);}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00458}00458 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00459}00459       \textcolor{comment}{// Get strain rate matrix}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00460}00460       this-\/>\mbox{\hyperlink{classSpaceTimeNavierStokesEquations_a7407f0ffc65a323efd8d7f3046c41016}{strain\_rate}}(s, strainrate);}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00460}00460       this-\/>\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_ae393d5f751c42290cd0fe90c0337bdbb}{strain\_rate}}(s, strainrate);}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00461}00461 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00462}00462       \textcolor{comment}{// Pack into flux Vector}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00463}00463       \textcolor{keywordtype}{unsigned} icount = 0;}
@@ -506,7 +506,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00502}00502       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < DIM; j++)}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00503}00503       \{}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00504}00504         \textcolor{comment}{// Find the index at which the variable is stored}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00505}00505         \textcolor{keywordtype}{unsigned} u\_nodal\_index = this-\/>\mbox{\hyperlink{classSpaceTimeNavierStokesEquations_a7d8645f76ff2ef520a6c0e089272199d}{u\_index\_nst}}(j);}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00505}00505         \textcolor{keywordtype}{unsigned} u\_nodal\_index = this-\/>\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_abd193a0c754ddfc7b87ee7ec9f7e7694}{u\_index\_nst}}(j);}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00506}00506 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00507}00507         \textcolor{comment}{// Loop over nodes}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00508}00508         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} l = 0; l < n\_node; l++)}
@@ -530,47 +530,47 @@
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00526}00526           this-\/>\mbox{\hyperlink{classoomph_1_1RefineableElement_a637964a7a9892fe0f0b05692c2e8d153}{father\_element\_pt}}());}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00527}00527 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00528}00528       \textcolor{comment}{// Set the viscosity ratio pointer}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00529}00529       this-\/>\mbox{\hyperlink{classSpaceTimeNavierStokesEquations_a71fae89889367e6c0d088f481ea49c51}{Viscosity\_Ratio\_pt}} = cast\_father\_element\_pt-\/>viscosity\_ratio\_pt();}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00529}00529       this-\/>\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a78df6a6a28df4288cb1d6e8d32a62487}{Viscosity\_Ratio\_pt}} = cast\_father\_element\_pt-\/>viscosity\_ratio\_pt();}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00530}00530 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00531}00531       \textcolor{comment}{// Set the density ratio pointer}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00532}00532       this-\/>\mbox{\hyperlink{classSpaceTimeNavierStokesEquations_a3e41e5bd6c34f4e02293b7441c5151f3}{Density\_Ratio\_pt}} = cast\_father\_element\_pt-\/>density\_ratio\_pt();}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00532}00532       this-\/>\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a51b8eb313bce9abaee4178bb9ad639fa}{Density\_Ratio\_pt}} = cast\_father\_element\_pt-\/>density\_ratio\_pt();}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00533}00533 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00534}00534       \textcolor{comment}{// Set pointer to global Reynolds number}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00535}00535       this-\/>\mbox{\hyperlink{classSpaceTimeNavierStokesEquations_a744559a5859585a06ed3dd2edd61b6a9}{Re\_pt}} = cast\_father\_element\_pt-\/>re\_pt();}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00535}00535       this-\/>\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a9148f8b14cbadffb0eda4ccaa81865f4}{Re\_pt}} = cast\_father\_element\_pt-\/>re\_pt();}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00536}00536 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00537}00537       \textcolor{comment}{// Set pointer to global Reynolds number x Strouhal number (=Womersley)}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00538}00538       this-\/>\mbox{\hyperlink{classSpaceTimeNavierStokesEquations_a6a52854df46f84e9adde4d24bd1a5caf}{St\_pt}} = cast\_father\_element\_pt-\/>st\_pt();}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00538}00538       this-\/>\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a3fbd1a777f0d4b02a8ba1d62b3f754d3}{St\_pt}} = cast\_father\_element\_pt-\/>st\_pt();}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00539}00539 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00540}00540       \textcolor{comment}{// The Strouhal number (which is a proxy for the period here) is not}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00541}00541       \textcolor{comment}{// stored as external data}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00542}00542       this-\/>\mbox{\hyperlink{classSpaceTimeNavierStokesEquations_a8fb908954d05fbf680f454b6e6209de1}{Strouhal\_is\_stored\_as\_external\_data}} =}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00542}00542       this-\/>\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aefead13b37209acc40bacca1c7fe770f}{Strouhal\_is\_stored\_as\_external\_data}} =}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00543}00543         cast\_father\_element\_pt-\/>is\_strouhal\_stored\_as\_external\_data();}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00544}00544 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00545}00545       \textcolor{comment}{// If we're storing the Strouhal number as external data}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00546}00546       \textcolor{keywordflow}{if} (this-\/>\mbox{\hyperlink{classSpaceTimeNavierStokesEquations_a8fb908954d05fbf680f454b6e6209de1}{Strouhal\_is\_stored\_as\_external\_data}})}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00546}00546       \textcolor{keywordflow}{if} (this-\/>\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aefead13b37209acc40bacca1c7fe770f}{Strouhal\_is\_stored\_as\_external\_data}})}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00547}00547       \{}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00548}00548         \textcolor{comment}{// The index of the external data (which contains the st)}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00549}00549         \textcolor{keywordtype}{unsigned} data\_index = 0;}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00550}00550 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00551}00551         \textcolor{comment}{// Get the external data pointer from the father and store it}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00552}00552         this-\/>\mbox{\hyperlink{classSpaceTimeNavierStokesEquations_ae30cd452a4526a4ec0da5f9053b09280}{store\_strouhal\_as\_external\_data}}(}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00552}00552         this-\/>\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a66088d45fbb45c054632c4e2a677c945}{store\_strouhal\_as\_external\_data}}(}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00553}00553           cast\_father\_element\_pt-\/>external\_data\_pt(data\_index));}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00554}00554       \}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00555}00555 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00556}00556       \textcolor{comment}{// Set pointer to global Reynolds number x inverse Froude number}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00557}00557       this-\/>\mbox{\hyperlink{classSpaceTimeNavierStokesEquations_a3ec26dfd2edacdbcf2b84a2b809fb72e}{ReInvFr\_pt}} = cast\_father\_element\_pt-\/>re\_invfr\_pt();}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00557}00557       this-\/>\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a0f17dc6374634209fabff9751a8b4d63}{ReInvFr\_pt}} = cast\_father\_element\_pt-\/>re\_invfr\_pt();}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00558}00558 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00559}00559       \textcolor{comment}{// Set pointer to global gravity Vector}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00560}00560       this-\/>\mbox{\hyperlink{classSpaceTimeNavierStokesEquations_a18efb82edb6e42534491e7fc79d92bc5}{G\_pt}} = cast\_father\_element\_pt-\/>g\_pt();}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00560}00560       this-\/>\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a54106089fd7fa30326a0d6db8372af17}{G\_pt}} = cast\_father\_element\_pt-\/>g\_pt();}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00561}00561 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00562}00562       \textcolor{comment}{// Set pointer to body force function}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00563}00563       this-\/>\mbox{\hyperlink{classSpaceTimeNavierStokesEquations_a0f3460852bbda81d0932da20df1c15e8}{Body\_force\_fct\_pt}} = cast\_father\_element\_pt-\/>body\_force\_fct\_pt();}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00563}00563       this-\/>\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a186af0a617c8c79c1eec6503caf30467}{Body\_force\_fct\_pt}} = cast\_father\_element\_pt-\/>body\_force\_fct\_pt();}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00564}00564 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00565}00565       \textcolor{comment}{// Set pointer to volumetric source function}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00566}00566       this-\/>\mbox{\hyperlink{classSpaceTimeNavierStokesEquations_a4ab50b93570b9c051993fb1f70c8f8f7}{Source\_fct\_pt}} = cast\_father\_element\_pt-\/>source\_fct\_pt();}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00566}00566       this-\/>\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a9af8a69fe8cb0b1760063a8f7f9c3aa6}{Source\_fct\_pt}} = cast\_father\_element\_pt-\/>source\_fct\_pt();}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00567}00567 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00568}00568       \textcolor{comment}{// Set the ALE flag}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00569}00569       this-\/>\mbox{\hyperlink{classSpaceTimeNavierStokesEquations_ab4d9b73d8ca636c2692e6d8573eb5752}{ALE\_is\_disabled}} = cast\_father\_element\_pt-\/>ALE\_is\_disabled;}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00569}00569       this-\/>\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_af1918b4d6763e12f550596234c640f2a}{ALE\_is\_disabled}} = cast\_father\_element\_pt-\/>ALE\_is\_disabled;}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00570}00570     \} \textcolor{comment}{// End of further\_build}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00571}00571 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00572}00572 \textcolor{comment}{}}
@@ -593,7 +593,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00589}00589       this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{shape}}(s, psi);}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00590}00590 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00591}00591       \textcolor{comment}{// Find the index at which the velocity component is stored}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00592}00592       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} u\_nodal\_index = this-\/>\mbox{\hyperlink{classSpaceTimeNavierStokesEquations_a7d8645f76ff2ef520a6c0e089272199d}{u\_index\_nst}}(i);}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00592}00592       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} u\_nodal\_index = this-\/>\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_abd193a0c754ddfc7b87ee7ec9f7e7694}{u\_index\_nst}}(i);}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00593}00593 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00594}00594       \textcolor{comment}{// Storage for hang info pointer}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00595}00595       \mbox{\hyperlink{classoomph_1_1HangInfo}{HangInfo}}* hang\_info\_pt = 0;}
@@ -607,12 +607,12 @@
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00603}00603         \textcolor{keywordtype}{unsigned} n\_master = 1;}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00604}00604 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00605}00605         \textcolor{comment}{// Local bool (is the node hanging)}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00606}00606         \textcolor{keywordtype}{bool} is\_node\_hanging = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l)-\/>is\_hanging();}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00606}00606         \textcolor{keywordtype}{bool} is\_node\_hanging = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l)-\/>\mbox{\hyperlink{classoomph_1_1Node_af0e6237dfafad62cf427ff5013ddcfef}{is\_hanging}}();}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00607}00607 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00608}00608         \textcolor{comment}{// If the node is hanging, get the number of master nodes}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00609}00609         \textcolor{keywordflow}{if} (is\_node\_hanging)}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00610}00610         \{}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00611}00611           hang\_info\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l)-\/>hanging\_pt();}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00611}00611           hang\_info\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l)-\/>\mbox{\hyperlink{classoomph_1_1Node_afefa22db8b28e783b8647e3577ee01d9}{hanging\_pt}}();}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00612}00612           n\_master = hang\_info\_pt-\/>\mbox{\hyperlink{classoomph_1_1HangInfo_aa9c1130b58db2ff6d5eee4f923ba365c}{nmaster}}();}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00613}00613         \}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00614}00614         \textcolor{comment}{// Otherwise there is just one master node, the node itself}}
@@ -629,12 +629,12 @@
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00625}00625           \{}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00626}00626             \textcolor{comment}{// Get the equation number from the master node}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00627}00627             global\_eqn =}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00628}00628               hang\_info\_pt-\/>\mbox{\hyperlink{classoomph_1_1HangInfo_a7a935ae7eeca594a648ca1800444827c}{master\_node\_pt}}(m)-\/>eqn\_number(u\_nodal\_index);}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00628}00628               hang\_info\_pt-\/>\mbox{\hyperlink{classoomph_1_1HangInfo_a7a935ae7eeca594a648ca1800444827c}{master\_node\_pt}}(m)-\/>\mbox{\hyperlink{classoomph_1_1Data_ab6845db69833c541766d9a073b023fc4}{eqn\_number}}(u\_nodal\_index);}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00629}00629           \}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00630}00630           \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00631}00631           \{}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00632}00632             \textcolor{comment}{// Global equation number}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00633}00633             global\_eqn = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l)-\/>eqn\_number(u\_nodal\_index);}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00633}00633             global\_eqn = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l)-\/>\mbox{\hyperlink{classoomph_1_1Data_ab6845db69833c541766d9a073b023fc4}{eqn\_number}}(u\_nodal\_index);}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00634}00634           \}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00635}00635 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00636}00636           \textcolor{comment}{// If it's positive add to the count}}
@@ -662,13 +662,13 @@
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00658}00658         \textcolor{keywordtype}{double} hang\_weight = 1.0;}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00659}00659 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00660}00660         \textcolor{comment}{// Local bool (is the node hanging)}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00661}00661         \textcolor{keywordtype}{bool} is\_node\_hanging = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l)-\/>is\_hanging();}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00661}00661         \textcolor{keywordtype}{bool} is\_node\_hanging = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l)-\/>\mbox{\hyperlink{classoomph_1_1Node_af0e6237dfafad62cf427ff5013ddcfef}{is\_hanging}}();}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00662}00662 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00663}00663         \textcolor{comment}{// If the node is hanging, get the number of master nodes}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00664}00664         \textcolor{keywordflow}{if} (is\_node\_hanging)}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00665}00665         \{}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00666}00666           \textcolor{comment}{// Get the HangInfo pointer associated with the l-\/th node}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00667}00667           hang\_info\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l)-\/>hanging\_pt();}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00667}00667           hang\_info\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l)-\/>\mbox{\hyperlink{classoomph_1_1Node_afefa22db8b28e783b8647e3577ee01d9}{hanging\_pt}}();}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00668}00668 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00669}00669           \textcolor{comment}{// How many master nodes does this node have?}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00670}00670           n\_master = hang\_info\_pt-\/>\mbox{\hyperlink{classoomph_1_1HangInfo_aa9c1130b58db2ff6d5eee4f923ba365c}{nmaster}}();}
@@ -700,12 +700,12 @@
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00696}00696           \{}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00697}00697             \textcolor{comment}{// Get the equation number from the master node}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00698}00698             global\_eqn =}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00699}00699               hang\_info\_pt-\/>\mbox{\hyperlink{classoomph_1_1HangInfo_a7a935ae7eeca594a648ca1800444827c}{master\_node\_pt}}(m)-\/>eqn\_number(u\_nodal\_index);}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00699}00699               hang\_info\_pt-\/>\mbox{\hyperlink{classoomph_1_1HangInfo_a7a935ae7eeca594a648ca1800444827c}{master\_node\_pt}}(m)-\/>\mbox{\hyperlink{classoomph_1_1Data_ab6845db69833c541766d9a073b023fc4}{eqn\_number}}(u\_nodal\_index);}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00700}00700           \}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00701}00701           \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00702}00702           \{}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00703}00703             \textcolor{comment}{// Get the global equation number}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00704}00704             global\_eqn = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l)-\/>eqn\_number(u\_nodal\_index);}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00704}00704             global\_eqn = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l)-\/>\mbox{\hyperlink{classoomph_1_1Data_ab6845db69833c541766d9a073b023fc4}{eqn\_number}}(u\_nodal\_index);}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00705}00705           \}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00706}00706 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00707}00707           \textcolor{comment}{// If it's a proper degree of freedom}}
@@ -731,7 +731,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00727}00727 \textcolor{comment}{    ///           compute\_jacobian\_flag=1: compute both}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00728}\mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a830ec939fcac36ceabbb8367b89332c6}{00728}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a830ec939fcac36ceabbb8367b89332c6}{fill\_in\_generic\_residual\_contribution\_nst}}(}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00729}00729       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00730}00730       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}},}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00730}00730       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian,}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00731}00731       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& mass\_matrix,}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00732}00732       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& compute\_jacobian\_flag);}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00733}00733 }
@@ -741,7 +741,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00737}00737 \textcolor{comment}{    /// flag=1(or 0): do (or don't) compute the Jacobian as well.}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00738}\mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a6e32e07036ba99e2d712ab8756b3f74d}{00738}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a6e32e07036ba99e2d712ab8756b3f74d}{fill\_in\_generic\_pressure\_advection\_diffusion\_contribution\_nst}}(}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00739}00739       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00740}00740       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}},}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00740}00740       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian,}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00741}00741       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& compute\_jacobian\_flag);}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00742}00742 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00743}00743 \textcolor{comment}{}}
@@ -760,7 +760,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00756}00756 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00757}00757   \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00758}00758   \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement}{RefineableQTaylorHoodSpaceTimeElement}}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00759}00759     : \textcolor{keyword}{public} \mbox{\hyperlink{classQTaylorHoodSpaceTimeElement}{QTaylorHoodSpaceTimeElement}}<DIM>,}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00759}00759     : \textcolor{keyword}{public} \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement}{QTaylorHoodSpaceTimeElement}}<DIM>,}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00760}00760       \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations}{RefineableSpaceTimeNavierStokesEquations}}<DIM>,}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00761}00761       \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1RefineableQElement}{RefineableQElement}}<DIM + 1>}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00762}00762   \{}
@@ -770,7 +770,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00766}00766       : \mbox{\hyperlink{classoomph_1_1RefineableElement}{RefineableElement}}(),}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00767}00767         \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations}{RefineableSpaceTimeNavierStokesEquations}}<DIM>(),}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00768}00768         \mbox{\hyperlink{classoomph_1_1RefineableQElement}{RefineableQElement}}<DIM + 1>(),}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00769}00769         \mbox{\hyperlink{classQTaylorHoodSpaceTimeElement}{QTaylorHoodSpaceTimeElement}}<DIM>()}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00769}00769         \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement}{QTaylorHoodSpaceTimeElement}}<DIM>()}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00770}00770     \{}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00771}00771     \}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00772}00772 }
@@ -810,15 +810,15 @@
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00806}\mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_aa07f1304e2de93d2e2373980e0f09aca}{00806}} \textcolor{comment}{}    \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_aa07f1304e2de93d2e2373980e0f09aca}{nvertex\_node}}()\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00807}00807 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00808}00808       \textcolor{comment}{// Call the base class implementation of the function}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00809}00809       \textcolor{keywordflow}{return} \mbox{\hyperlink{classQTaylorHoodSpaceTimeElement}{QTaylorHoodSpaceTimeElement<DIM>::nvertex\_node}}();}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00809}00809       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1FiniteElement_a45631a7aa50efc3123a921d114f84cba}{QTaylorHoodSpaceTimeElement<DIM>::nvertex\_node}}();}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00810}00810     \} \textcolor{comment}{// End of nvertex\_node}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00811}00811 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00812}00812 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00813}00813 \textcolor{comment}{    /// Pointer to the j-\/th vertex node in the element}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00814}\mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a941c21bf998d5dfe8dfca56d21ad3959}{00814}} \textcolor{comment}{}    Node* \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a941c21bf998d5dfe8dfca56d21ad3959}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00814}\mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a941c21bf998d5dfe8dfca56d21ad3959}{00814}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a941c21bf998d5dfe8dfca56d21ad3959}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00815}00815 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00816}00816       \textcolor{comment}{// Call the base class implementation of the function}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00817}00817       \textcolor{keywordflow}{return} \mbox{\hyperlink{classQTaylorHoodSpaceTimeElement}{QTaylorHoodSpaceTimeElement<DIM>::vertex\_node\_pt}}(j);}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00817}00817       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1FiniteElement_ac8b551c9d6f1f8e30e8b18fe2f9ae072}{QTaylorHoodSpaceTimeElement<DIM>::vertex\_node\_pt}}(j);}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00818}00818     \} \textcolor{comment}{// End of vertex\_node\_pt}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00819}00819 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00820}00820 \textcolor{comment}{}}
@@ -836,11 +836,11 @@
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00832}00832       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00833}00833       \{}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00834}00834         \textcolor{comment}{// Calculate the i-\/th velocity component at local coordinates s}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00835}00835         values[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = this-\/>\mbox{\hyperlink{classSpaceTimeNavierStokesEquations_ab46e41e40a2b1bef2ba2b073af637565}{interpolated\_u\_nst}}(s, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00835}00835         values[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = this-\/>\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_ab05a01e85edefd811e44fe480a675ebb}{interpolated\_u\_nst}}(s, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00836}00836       \}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00837}00837 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00838}00838       \textcolor{comment}{// Calculate the pressure field at local coordinates s}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00839}00839       values[DIM] = this-\/>\mbox{\hyperlink{classSpaceTimeNavierStokesEquations_ae35b4e2526964a4278f9757438cf508d}{interpolated\_p\_nst}}(s);}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00839}00839       values[DIM] = this-\/>\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a5591b7cb6a6560aec9f7cc058798c63c}{interpolated\_p\_nst}}(s);}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00840}00840     \} \textcolor{comment}{// End of get\_interpolated\_values}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00841}00841 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00842}00842 \textcolor{comment}{}}
@@ -881,15 +881,15 @@
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00877}\mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a0f91288051d049c6541becc90c3f68aa}{00877}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a0f91288051d049c6541becc90c3f68aa}{further\_setup\_hanging\_nodes}}()}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00878}00878     \{}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00879}00879       \textcolor{comment}{// Set up the hang info for the pressure nodes}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00880}00880       this-\/>setup\_hang\_for\_value(this-\/>\mbox{\hyperlink{classQTaylorHoodSpaceTimeElement_a67bfa08cfea4a429c1c1516134e04526}{p\_nodal\_index\_nst}}());}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00880}00880       this-\/>setup\_hang\_for\_value(this-\/>\mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}{p\_nodal\_index\_nst}}());}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00881}00881     \} \textcolor{comment}{// End of further\_setup\_hanging\_nodes}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00882}00882 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00883}00883 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00884}00884 \textcolor{comment}{    /// Pointer to n\_p-\/th pressure node}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00885}\mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a9e45e0f4c084b175748225123f215440}{00885}} \textcolor{comment}{}    Node* \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a9e45e0f4c084b175748225123f215440}{pressure\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_p)}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00885}\mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a9e45e0f4c084b175748225123f215440}{00885}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a9e45e0f4c084b175748225123f215440}{pressure\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_p)}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00886}00886     \{}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00887}00887       \textcolor{comment}{// Return a pointer to the n\_p-\/th pressure node}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00888}00888       \textcolor{keywordflow}{return} this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(this-\/>\mbox{\hyperlink{classQTaylorHoodSpaceTimeElement_a91d588ab8f25f976533e2f19aa6d4537}{Pconv}}[n\_p]);}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00888}00888       \textcolor{keywordflow}{return} this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(this-\/>\mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a5eaf421b85f9ca1797bfc2532270cac9}{Pconv}}[n\_p]);}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00889}00889     \} \textcolor{comment}{// End of pressure node\_pt}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00890}00890 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00891}00891 \textcolor{comment}{}}
@@ -897,7 +897,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00893}00893 \textcolor{comment}{    /// the velocities are the geometric nodes. The pressure "{}nodes"{} are a}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00894}00894 \textcolor{comment}{    /// subset of the nodes, so when value\_id==DIM, the n-\/th pressure}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00895}00895 \textcolor{comment}{    /// node is returned.}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00896}\mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_ac5234e185771da6c17573addc55c675a}{00896}} \textcolor{comment}{}    Node* \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_ac5234e185771da6c17573addc55c675a}{interpolating\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n, \textcolor{keyword}{const} \textcolor{keywordtype}{int}\& value\_id)}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00896}\mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_ac5234e185771da6c17573addc55c675a}{00896}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_ac5234e185771da6c17573addc55c675a}{interpolating\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n, \textcolor{keyword}{const} \textcolor{keywordtype}{int}\& value\_id)}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00897}00897 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00898}00898     \{}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00899}00899       \textcolor{comment}{// The only different nodes are the pressure nodes}}
@@ -940,7 +940,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00936}00936 \textcolor{comment}{    /// pressure nodes must be calculated by using the same methods as}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00937}00937 \textcolor{comment}{    /// the geometric nodes, but by recalling that there are only two pressure}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00938}00938 \textcolor{comment}{    /// nodes per edge.}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00939}\mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a3d9d43184e5bfca7e24f35ba1786d403}{00939}} \textcolor{comment}{}    Node* \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a3d9d43184e5bfca7e24f35ba1786d403}{get\_interpolating\_node\_at\_local\_coordinate}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00939}\mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a3d9d43184e5bfca7e24f35ba1786d403}{00939}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a3d9d43184e5bfca7e24f35ba1786d403}{get\_interpolating\_node\_at\_local\_coordinate}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00940}00940                                                      \textcolor{keyword}{const} \textcolor{keywordtype}{int}\& value\_id)}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00941}00941     \{}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l00942}00942       \textcolor{comment}{// If we are calculating pressure nodes}}
@@ -1007,7 +1007,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01003}01003       \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01004}01004       \{}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01005}01005         \textcolor{comment}{// Call the regular helper function to find the right node}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01006}01006         \textcolor{keywordflow}{return} this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_adf4424f1040fb5c4b6abfbd1c2bf65fc}{get\_node\_at\_local\_coordinate}}(s);}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01006}01006         \textcolor{keywordflow}{return} this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a2ddbb05c5f8bb35b64bec287d653105c}{get\_node\_at\_local\_coordinate}}(s);}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01007}01007       \} \textcolor{comment}{// if (value\_id==DIM)}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01008}01008     \} \textcolor{comment}{// End of get\_interpolating\_node\_at\_local\_coordinate}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01009}01009 }
@@ -1060,7 +1060,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01056}01056       \textcolor{keywordflow}{if} (value\_id == DIM)}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01057}01057       \{}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01058}01058         \textcolor{comment}{// Call the pressure shape function}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01059}01059         \textcolor{keywordflow}{return} this-\/>\mbox{\hyperlink{classQTaylorHoodSpaceTimeElement_ad8a8ba12a4fa648ea6c00b2e23578d7b}{pshape\_nst}}(s, psi);}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01059}01059         \textcolor{keywordflow}{return} this-\/>\mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a48213eb3a18f3f0db23a45635e6d67d0}{pshape\_nst}}(s, psi);}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01060}01060       \}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01061}01061       \textcolor{comment}{// If we want the velocity basis functions}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01062}01062       \textcolor{keywordflow}{else}}
@@ -1076,7 +1076,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01072}01072 \textcolor{comment}{    /// Fp preconditioner}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01073}\mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a1d5467f767697f5f7aed8c6d2de2c247}{01073}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a1d5467f767697f5f7aed8c6d2de2c247}{build\_fp\_press\_adv\_diff\_robin\_bc\_element}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& face\_index)}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01074}01074     \{}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01075}01075       this-\/>\mbox{\hyperlink{classSpaceTimeNavierStokesEquations_a09f807838470a5965a597cf9d46d46f4}{Pressure\_advection\_diffusion\_robin\_element\_pt}}.push\_back(}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01075}01075       this-\/>\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a6d88396b9bb8a88f24f9df1d17e75d0e}{Pressure\_advection\_diffusion\_robin\_element\_pt}}.push\_back(}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01076}01076         \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1RefineableFpPressureAdvDiffRobinBCSpaceTimeElement}{RefineableFpPressureAdvDiffRobinBCSpaceTimeElement}}<}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01077}01077           \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement}{RefineableQTaylorHoodSpaceTimeElement<DIM>}}>(\textcolor{keyword}{this}, face\_index));}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01078}01078     \} \textcolor{comment}{// End of build\_fp\_press\_adv\_diff\_robin\_bc\_element}}
@@ -1101,7 +1101,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01097}01097       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01098}01098       \{}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01099}01099         \textcolor{comment}{// Get the nodal indices at which the velocities are stored}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01100}01100         u\_index[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = this-\/>\mbox{\hyperlink{classSpaceTimeNavierStokesEquations_a7d8645f76ff2ef520a6c0e089272199d}{u\_index\_nst}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01100}01100         u\_index[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = this-\/>\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_abd193a0c754ddfc7b87ee7ec9f7e7694}{u\_index\_nst}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01101}01101       \}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01102}01102 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01103}01103       \textcolor{comment}{// Get the number of nodes in the element}}
@@ -1111,19 +1111,19 @@
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01107}01107       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < n\_node; n++)}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01108}01108       \{}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01109}01109         \textcolor{comment}{// Pointer to current node}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01110}01110         Node* nod\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n);}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01110}01110         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n);}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01111}01111 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01112}01112         \textcolor{comment}{// Check if it's hanging:}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01113}01113         \textcolor{keywordflow}{if} (nod\_pt-\/>is\_hanging())}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01113}01113         \textcolor{keywordflow}{if} (nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_af0e6237dfafad62cf427ff5013ddcfef}{is\_hanging}}())}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01114}01114         \{}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01115}01115           \textcolor{comment}{// It's hanging -\/-\/ get number of master nodes}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01116}01116           \textcolor{keywordtype}{unsigned} nmaster = nod\_pt-\/>hanging\_pt()-\/>nmaster();}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01116}01116           \textcolor{keywordtype}{unsigned} nmaster = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_afefa22db8b28e783b8647e3577ee01d9}{hanging\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1HangInfo_aa9c1130b58db2ff6d5eee4f923ba365c}{nmaster}}();}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01117}01117 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01118}01118           \textcolor{comment}{// Loop over master nodes}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01119}01119           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < nmaster; j++)}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01120}01120           \{}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01121}01121             \textcolor{comment}{// Create a pointer to the j-\/th master node}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01122}01122             Node* master\_nod\_pt = nod\_pt-\/>hanging\_pt()-\/>master\_node\_pt(j);}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01122}01122             \mbox{\hyperlink{classoomph_1_1Node}{Node}}* master\_nod\_pt = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_afefa22db8b28e783b8647e3577ee01d9}{hanging\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1HangInfo_a7a935ae7eeca594a648ca1800444827c}{master\_node\_pt}}(j);}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01123}01123 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01124}01124             \textcolor{comment}{// Loop over the velocity components and add a pointer to their data}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01125}01125             \textcolor{comment}{// and indices to the vectors}}
@@ -1150,23 +1150,23 @@
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01146}01146       \} \textcolor{comment}{// for (unsigned n=0;n<n\_node;n++)}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01147}01147 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01148}01148       \textcolor{comment}{// Get the nodal index at which the pressure is stored}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01149}01149       \textcolor{keywordtype}{int} p\_index = this-\/>\mbox{\hyperlink{classQTaylorHoodSpaceTimeElement_a67bfa08cfea4a429c1c1516134e04526}{p\_nodal\_index\_nst}}();}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01149}01149       \textcolor{keywordtype}{int} p\_index = this-\/>\mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}{p\_nodal\_index\_nst}}();}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01150}01150 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01151}01151       \textcolor{comment}{// Get the number of pressure degrees of freedom}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01152}01152       \textcolor{keywordtype}{unsigned} n\_pres = this-\/>\mbox{\hyperlink{classQTaylorHoodSpaceTimeElement_aedce03011140864a19a0fd6c8fc7cae6}{npres\_nst}}();}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01152}01152       \textcolor{keywordtype}{unsigned} n\_pres = this-\/>\mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_af96b330b72d73e7143509ac05b4b358c}{npres\_nst}}();}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01153}01153 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01154}01154       \textcolor{comment}{// Loop over the pressure data}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01155}01155       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} l = 0; l < n\_pres; l++)}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01156}01156       \{}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01157}01157         \textcolor{comment}{// Get the pointer to the l-\/th pressure node}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01158}01158         Node* pres\_node\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a9e45e0f4c084b175748225123f215440}{pressure\_node\_pt}}(l);}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01158}01158         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* pres\_node\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a9e45e0f4c084b175748225123f215440}{pressure\_node\_pt}}(l);}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01159}01159 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01160}01160         \textcolor{comment}{// Check if the pressure dof is hanging}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01161}01161         \textcolor{keywordflow}{if} (pres\_node\_pt-\/>is\_hanging(p\_index))}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01161}01161         \textcolor{keywordflow}{if} (pres\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_af0e6237dfafad62cf427ff5013ddcfef}{is\_hanging}}(p\_index))}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01162}01162         \{}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01163}01163           \textcolor{comment}{// Get the pointer to the hang info object (pressure is stored}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01164}01164           \textcolor{comment}{// as p\_index-\/th nodal dof).}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01165}01165           \mbox{\hyperlink{classoomph_1_1HangInfo}{HangInfo}}* hang\_info\_pt = pres\_node\_pt-\/>hanging\_pt(p\_index);}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01165}01165           \mbox{\hyperlink{classoomph_1_1HangInfo}{HangInfo}}* hang\_info\_pt = pres\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_afefa22db8b28e783b8647e3577ee01d9}{hanging\_pt}}(p\_index);}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01166}01166 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01167}01167           \textcolor{comment}{// Get number of pressure master nodes (pressure is stored}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01168}01168           \textcolor{keywordtype}{unsigned} nmaster = hang\_info\_pt-\/>\mbox{\hyperlink{classoomph_1_1HangInfo_aa9c1130b58db2ff6d5eee4f923ba365c}{nmaster}}();}
@@ -1195,7 +1195,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01191}\mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_aeb7f3e77a51604e3ecf69c9a31a68ba7}{01191}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_aeb7f3e77a51604e3ecf69c9a31a68ba7}{unpin\_elemental\_pressure\_dofs}}()}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01192}01192     \{}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01193}01193       \textcolor{comment}{// Find the index at which the pressure is stored}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01194}01194       \textcolor{keywordtype}{int} p\_index = this-\/>\mbox{\hyperlink{classQTaylorHoodSpaceTimeElement_a67bfa08cfea4a429c1c1516134e04526}{p\_nodal\_index\_nst}}();}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01194}01194       \textcolor{keywordtype}{int} p\_index = this-\/>\mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}{p\_nodal\_index\_nst}}();}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01195}01195 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01196}01196       \textcolor{comment}{// Get the number of nodes in the element}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01197}01197       \textcolor{keywordtype}{unsigned} n\_node = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
@@ -1204,7 +1204,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01200}01200       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < n\_node; n++)}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01201}01201       \{}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01202}01202         \textcolor{comment}{// Unpin the p\_index-\/th dof at node n}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01203}01203         this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n)-\/>unpin(p\_index);}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01203}01203         this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n)-\/>\mbox{\hyperlink{classoomph_1_1Data_a4e5cb031bf8eceb8f97c2c4fbd74cb05}{unpin}}(p\_index);}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01204}01204       \}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01205}01205     \} \textcolor{comment}{// End of unpin\_elemental\_pressure\_dofs}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01206}01206 }
@@ -1213,7 +1213,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01209}\mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_afe9738f1e28843f6528ba0b6832fec76}{01209}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_afe9738f1e28843f6528ba0b6832fec76}{pin\_elemental\_redundant\_nodal\_pressure\_dofs}}()}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01210}01210     \{}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01211}01211       \textcolor{comment}{// Find the pressure index}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01212}01212       \textcolor{keywordtype}{int} p\_index = this-\/>\mbox{\hyperlink{classQTaylorHoodSpaceTimeElement_a67bfa08cfea4a429c1c1516134e04526}{p\_nodal\_index\_nst}}();}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01212}01212       \textcolor{keywordtype}{int} p\_index = this-\/>\mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}{p\_nodal\_index\_nst}}();}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01213}01213 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01214}01214       \textcolor{comment}{// Loop over all nodes}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01215}01215       \textcolor{keywordtype}{unsigned} n\_node = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
@@ -1222,23 +1222,23 @@
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01218}01218       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < n\_node; n++)}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01219}01219       \{}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01220}01220         \textcolor{comment}{// Pin the p\_index-\/th dof at node n}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01221}01221         this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n)-\/>pin(p\_index);}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01221}01221         this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n)-\/>\mbox{\hyperlink{classoomph_1_1Data_a422231c58e423f0b43822827aa334d79}{pin}}(p\_index);}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01222}01222       \}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01223}01223 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01224}01224       \textcolor{comment}{// Loop over all actual pressure nodes and unpin if they're not hanging}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01225}01225       \textcolor{keywordtype}{unsigned} n\_pres = this-\/>\mbox{\hyperlink{classQTaylorHoodSpaceTimeElement_aedce03011140864a19a0fd6c8fc7cae6}{npres\_nst}}();}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01225}01225       \textcolor{keywordtype}{unsigned} n\_pres = this-\/>\mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_af96b330b72d73e7143509ac05b4b358c}{npres\_nst}}();}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01226}01226 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01227}01227       \textcolor{comment}{// Loop over all pressure nodes}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01228}01228       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} l = 0; l < n\_pres; l++)}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01229}01229       \{}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01230}01230         \textcolor{comment}{// Get a pointer to the l-\/th pressure node}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01231}01231         Node* nod\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a9e45e0f4c084b175748225123f215440}{pressure\_node\_pt}}(l);}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01231}01231         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a9e45e0f4c084b175748225123f215440}{pressure\_node\_pt}}(l);}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01232}01232 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01233}01233         \textcolor{comment}{// If the node isn't hanging}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01234}01234         \textcolor{keywordflow}{if} (!nod\_pt-\/>is\_hanging(p\_index))}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01234}01234         \textcolor{keywordflow}{if} (!nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_af0e6237dfafad62cf427ff5013ddcfef}{is\_hanging}}(p\_index))}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01235}01235         \{}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01236}01236           \textcolor{comment}{// Unpin the p\_index-\/th dof at this node}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01237}01237           nod\_pt-\/>unpin(p\_index);}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01237}01237           nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a4e5cb031bf8eceb8f97c2c4fbd74cb05}{unpin}}(p\_index);}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01238}01238         \}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01239}01239       \} \textcolor{comment}{// for (unsigned l=0;l<n\_pres;l++)}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01240}01240     \} \textcolor{comment}{// End of pin\_elemental\_redundant\_nodal\_pressure\_dofs}}
@@ -1255,7 +1255,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01251}01251   \{}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01252}01252   \textcolor{keyword}{public}:\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01253}01253 \textcolor{comment}{    /// Constructor; empty}}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01254}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01RefineableQTaylorHoodSpaceTimeElement_3_01DIM_01_4_01_4_aa287b3cf851c96419c4206da2d5dc2e6}{01254}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01RefineableQTaylorHoodSpaceTimeElement_3_01DIM_01_4_01_4_aa287b3cf851c96419c4206da2d5dc2e6}{FaceGeometry}}() : \mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classQTaylorHoodSpaceTimeElement}{QTaylorHoodSpaceTimeElement}}<DIM>>() \{\}}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01254}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01RefineableQTaylorHoodSpaceTimeElement_3_01DIM_01_4_01_4_aa287b3cf851c96419c4206da2d5dc2e6}{01254}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01RefineableQTaylorHoodSpaceTimeElement_3_01DIM_01_4_01_4_aa287b3cf851c96419c4206da2d5dc2e6}{FaceGeometry}}() : \mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement}{QTaylorHoodSpaceTimeElement}}<DIM>>() \{\}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01255}01255   \};}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01256}01256 }
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01257}01257 }
@@ -1272,7 +1272,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01268}01268   \textcolor{keyword}{public}:\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01269}01269 \textcolor{comment}{    /// Constructor; empty}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01270}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01RefineableQTaylorHoodSpaceTimeElement_3_01DIM_01_4_01_4_01_4_ad2510754ef31d4cb0b586102169070cf}{01270}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01RefineableQTaylorHoodSpaceTimeElement_3_01DIM_01_4_01_4_01_4_ad2510754ef31d4cb0b586102169070cf}{FaceGeometry}}()}
-\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01271}01271       : \mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classQTaylorHoodSpaceTimeElement}{QTaylorHoodSpaceTimeElement}}<DIM>>>()}
+\DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01271}01271       : \mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement}{QTaylorHoodSpaceTimeElement}}<DIM>>>()}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01272}01272     \{}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01273}01273     \}}
 \DoxyCodeLine{\Hypertarget{refineable__spacetime__navier__stokes__elements_8h_source_l01274}01274   \};}

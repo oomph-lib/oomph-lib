@@ -22,11 +22,11 @@ Inheritance diagram for oomph\+::Fluid\+Interface\+Bounding\+Element\+:\begin{fi
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a09c0b1df7d653eaf55e94e3951d409dd}{Wall\+Unit\+Normal\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_ae79554c9cb0a24a01039b966b5a85f53}{wall\+\_\+unit\+\_\+normal\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to wall unit normal function. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a09c0b1df7d653eaf55e94e3951d409dd}{Wall\+Unit\+Normal\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a393601b322d0b8d6d2f86d07bd17550f}{wall\+\_\+unit\+\_\+normal\+\_\+fct\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a09c0b1df7d653eaf55e94e3951d409dd}{Wall\+Unit\+Normal\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a393601b322d0b8d6d2f86d07bd17550f}{wall\+\_\+unit\+\_\+normal\+\_\+fct\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to wall unit normal function. Const version. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \& \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a65571d43c8ff429b2da923915dd9c973}{u\+\_\+index\+\_\+interface\+\_\+boundary}} ()
 \begin{DoxyCompactList}\small\item\em Access for nodal index at which the velocity components are stored. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a8566c5bed5c87717fcb155d398ed8c8f}{set\+\_\+contact\+\_\+angle}} (double $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&angle\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} bool \&strong=true)
+void \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a8566c5bed5c87717fcb155d398ed8c8f}{set\+\_\+contact\+\_\+angle}} (double $\ast$const \&angle\+\_\+pt, const bool \&strong=true)
 \begin{DoxyCompactList}\small\item\em Set a pointer to the desired contact angle. Optional boolean (defaults to true) chooses strong imposition via hijacking (true) or weak imposition via addition to momentum equation (false). The default strong imposition is appropriate for static contact angle problems. \end{DoxyCompactList}\item 
 double $\ast$\& \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a24ce4642544ca7c7d1eac8ce155c7651}{contact\+\_\+angle\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function to the pointer specifying the prescribed contact angle. \end{DoxyCompactList}\item 
@@ -38,28 +38,28 @@ double \& \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_aea28c652
 \begin{DoxyCompactList}\small\item\em Return value of the contact angle. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_acaa709e7a402418fb03f2bf0f57f53ea}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em Calculate the residuals. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a69fa099e0cbfe8ae028a4edc77fedc60}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+interface\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, unsigned flag)=0
+virtual void \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a69fa099e0cbfe8ae028a4edc77fedc60}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+interface\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, unsigned flag)=0
 \begin{DoxyCompactList}\small\item\em Calculate the generic residuals contribution. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a4510bd81b572d758694715f673080041}{add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&flag, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psif, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsifds, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&interpolated\+\_\+n, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&\mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}})
+virtual void \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a4510bd81b572d758694715f673080041}{add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, const unsigned \&flag, const \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psif, const \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsifds, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&interpolated\+\_\+n, const double \&W)
 \begin{DoxyCompactList}\small\item\em Empty helper function to calculate the additional contributions arising from the node update strategy to the Jacobian within the integration loop. This will be overloaded by elements that require contributions to their underlying equations from boundary integrals. The shape functions, their derivatives w.\+r.\+t. to the local coordinates, the unit normal and integral weight are passed in so that they do not have to be recalculated. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a81adc5ae89ddfa120f587c61b972622f}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Overload the output function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_af2c821d51d506221976a0c17e1615ac3}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_af2c821d51d506221976a0c17e1615ac3}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em Output function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a85cc62405429744e3e3585894315cb9e}{output}} (FILE $\ast$file\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Overload the C-\/style output function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_ae85ea987a06275a03ad6d0e3710871da}{output}} (FILE $\ast$file\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_ae85ea987a06275a03ad6d0e3710871da}{output}} (FILE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em C-\/style Output function. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-virtual int \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a12a0a6d7c3c1c1a5a0f42a57e60eab34}{kinematic\+\_\+local\+\_\+eqn}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n)=0
+virtual int \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a12a0a6d7c3c1c1a5a0f42a57e60eab34}{kinematic\+\_\+local\+\_\+eqn}} (const unsigned \&n)=0
 \begin{DoxyCompactList}\small\item\em Function that is used to determine the local equation number of the kinematic equation associated with the nodes of the element This must be overloaded depending on the node update scheme. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a1a715427e2037278891c06afd5d096fb}{wall\+\_\+unit\+\_\+normal}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&normal)
+void \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a1a715427e2037278891c06afd5d096fb}{wall\+\_\+unit\+\_\+normal}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&normal)
 \begin{DoxyCompactList}\small\item\em Function that returns the unit normal of the bounding wall directed out of the fluid. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_ab2639a1585fe815bed2d2a3d69fa5164}{update\+\_\+in\+\_\+external\+\_\+fd}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+void \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_ab2639a1585fe815bed2d2a3d69fa5164}{update\+\_\+in\+\_\+external\+\_\+fd}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em The geometric data of the parent element is included as external data and so a (bulk) node update must take place after the variation of any of this external data. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a7347eb5984a18ffb1cfea1f9240badee}{reset\+\_\+in\+\_\+external\+\_\+fd}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+void \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a7347eb5984a18ffb1cfea1f9240badee}{reset\+\_\+in\+\_\+external\+\_\+fd}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em The only external data are these geometric data so We can omit the reset function (relying on the next update. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a6b0de0d11dfcfc912e2f56fbd6359ebe}{reset\+\_\+after\+\_\+external\+\_\+fd}} ()
 \begin{DoxyCompactList}\small\item\em We require a final node update in the bulk element after all finite differencing. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -73,7 +73,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_affa8d787e
 \doxysubsection*{Private Types}
 \begin{DoxyCompactItemize}
 \item 
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a09c0b1df7d653eaf55e94e3951d409dd}{Wall\+Unit\+Normal\+Fct\+Pt}}) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&unit\+\_\+normal)
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a09c0b1df7d653eaf55e94e3951d409dd}{Wall\+Unit\+Normal\+Fct\+Pt}}) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&unit\+\_\+normal)
 \begin{DoxyCompactList}\small\item\em Function pointer to a wall unit normal function. Returns the unit normal on the wall, at the specified Eulerian coordinate. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -99,7 +99,7 @@ Definition at line \mbox{\hyperlink{interface__elements_8h_source_l00053}{53}} o
 \index{oomph::FluidInterfaceBoundingElement@{oomph::FluidInterfaceBoundingElement}!WallUnitNormalFctPt@{WallUnitNormalFctPt}}
 \index{WallUnitNormalFctPt@{WallUnitNormalFctPt}!oomph::FluidInterfaceBoundingElement@{oomph::FluidInterfaceBoundingElement}}
 \doxysubsubsection{\texorpdfstring{WallUnitNormalFctPt}{WallUnitNormalFctPt}}
-{\footnotesize\ttfamily typedef void($\ast$ oomph\+::\+Fluid\+Interface\+Bounding\+Element\+::\+Wall\+Unit\+Normal\+Fct\+Pt) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&unit\+\_\+normal)\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily typedef void($\ast$ oomph\+::\+Fluid\+Interface\+Bounding\+Element\+::\+Wall\+Unit\+Normal\+Fct\+Pt) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&unit\+\_\+normal)\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -133,7 +133,7 @@ Definition at line \mbox{\hyperlink{interface__elements_8h_source_l00132}{132}} 
 \index{oomph::FluidInterfaceBoundingElement@{oomph::FluidInterfaceBoundingElement}!add\_additional\_residual\_contributions\_interface\_boundary@{add\_additional\_residual\_contributions\_interface\_boundary}}
 \index{add\_additional\_residual\_contributions\_interface\_boundary@{add\_additional\_residual\_contributions\_interface\_boundary}!oomph::FluidInterfaceBoundingElement@{oomph::FluidInterfaceBoundingElement}}
 \doxysubsubsection{\texorpdfstring{add\_additional\_residual\_contributions\_interface\_boundary()}{add\_additional\_residual\_contributions\_interface\_boundary()}}
-{\footnotesize\ttfamily virtual void oomph\+::\+Fluid\+Interface\+Bounding\+Element\+::add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface\+\_\+boundary (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{flag,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psif,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsifds,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{interpolated\+\_\+n,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{W }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Fluid\+Interface\+Bounding\+Element\+::add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface\+\_\+boundary (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{const unsigned \&}]{flag,  }\item[{const \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psif,  }\item[{const \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsifds,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{interpolated\+\_\+n,  }\item[{const double \&}]{W }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -271,7 +271,7 @@ Referenced by \mbox{\hyperlink{interface__elements_8h_source_l00214}{fill\+\_\+i
 \index{oomph::FluidInterfaceBoundingElement@{oomph::FluidInterfaceBoundingElement}!kinematic\_local\_eqn@{kinematic\_local\_eqn}}
 \index{kinematic\_local\_eqn@{kinematic\_local\_eqn}!oomph::FluidInterfaceBoundingElement@{oomph::FluidInterfaceBoundingElement}}
 \doxysubsubsection{\texorpdfstring{kinematic\_local\_eqn()}{kinematic\_local\_eqn()}}
-{\footnotesize\ttfamily virtual int oomph\+::\+Fluid\+Interface\+Bounding\+Element\+::kinematic\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual int oomph\+::\+Fluid\+Interface\+Bounding\+Element\+::kinematic\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
 
 
 
@@ -309,13 +309,13 @@ Definition at line \mbox{\hyperlink{interface__elements_8h_source_l00259}{259}} 
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
+References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FluidInterfaceBoundingElement_ae85ea987a06275a03ad6d0e3710871da}\label{classoomph_1_1FluidInterfaceBoundingElement_ae85ea987a06275a03ad6d0e3710871da}} 
 \index{oomph::FluidInterfaceBoundingElement@{oomph::FluidInterfaceBoundingElement}!output@{output}}
 \index{output@{output}!oomph::FluidInterfaceBoundingElement@{oomph::FluidInterfaceBoundingElement}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
-{\footnotesize\ttfamily void oomph\+::\+Fluid\+Interface\+Bounding\+Element\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Fluid\+Interface\+Bounding\+Element\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -335,7 +335,7 @@ Definition at line \mbox{\hyperlink{interface__elements_8h_source_l00265}{265}} 
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
+References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FluidInterfaceBoundingElement_a81adc5ae89ddfa120f587c61b972622f}\label{classoomph_1_1FluidInterfaceBoundingElement_a81adc5ae89ddfa120f587c61b972622f}} 
 \index{oomph::FluidInterfaceBoundingElement@{oomph::FluidInterfaceBoundingElement}!output@{output}}
@@ -361,7 +361,7 @@ Definition at line \mbox{\hyperlink{interface__elements_8h_source_l00247}{247}} 
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
+References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
 
 
 
@@ -371,7 +371,7 @@ Referenced by \mbox{\hyperlink{specific__node__update__interface__elements_8h_so
 \index{oomph::FluidInterfaceBoundingElement@{oomph::FluidInterfaceBoundingElement}!output@{output}}
 \index{output@{output}!oomph::FluidInterfaceBoundingElement@{oomph::FluidInterfaceBoundingElement}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
-{\footnotesize\ttfamily void oomph\+::\+Fluid\+Interface\+Bounding\+Element\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Fluid\+Interface\+Bounding\+Element\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -391,7 +391,7 @@ Definition at line \mbox{\hyperlink{interface__elements_8h_source_l00253}{253}} 
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
+References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FluidInterfaceBoundingElement_a6b0de0d11dfcfc912e2f56fbd6359ebe}\label{classoomph_1_1FluidInterfaceBoundingElement_a6b0de0d11dfcfc912e2f56fbd6359ebe}} 
 \index{oomph::FluidInterfaceBoundingElement@{oomph::FluidInterfaceBoundingElement}!reset\_after\_external\_fd@{reset\_after\_external\_fd}}
@@ -413,13 +413,13 @@ Definition at line \mbox{\hyperlink{interface__elements_8h_source_l00124}{124}} 
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l04763}{oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt()}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a7ae3f437c142fbdef17db914698ffb10}{oomph\+::\+Finite\+Element\+::node\+\_\+update()}}.
+References \mbox{\hyperlink{elements_8h_source_l04735}{oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt()}}, and \mbox{\hyperlink{elements_8cc_source_l05072}{oomph\+::\+Finite\+Element\+::node\+\_\+update()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FluidInterfaceBoundingElement_a7347eb5984a18ffb1cfea1f9240badee}\label{classoomph_1_1FluidInterfaceBoundingElement_a7347eb5984a18ffb1cfea1f9240badee}} 
 \index{oomph::FluidInterfaceBoundingElement@{oomph::FluidInterfaceBoundingElement}!reset\_in\_external\_fd@{reset\_in\_external\_fd}}
 \index{reset\_in\_external\_fd@{reset\_in\_external\_fd}!oomph::FluidInterfaceBoundingElement@{oomph::FluidInterfaceBoundingElement}}
 \doxysubsubsection{\texorpdfstring{reset\_in\_external\_fd()}{reset\_in\_external\_fd()}}
-{\footnotesize\ttfamily void oomph\+::\+Fluid\+Interface\+Bounding\+Element\+::reset\+\_\+in\+\_\+external\+\_\+fd (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Fluid\+Interface\+Bounding\+Element\+::reset\+\_\+in\+\_\+external\+\_\+fd (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -437,7 +437,7 @@ Definition at line \mbox{\hyperlink{interface__elements_8h_source_l00120}{120}} 
 \index{oomph::FluidInterfaceBoundingElement@{oomph::FluidInterfaceBoundingElement}!set\_contact\_angle@{set\_contact\_angle}}
 \index{set\_contact\_angle@{set\_contact\_angle}!oomph::FluidInterfaceBoundingElement@{oomph::FluidInterfaceBoundingElement}}
 \doxysubsubsection{\texorpdfstring{set\_contact\_angle()}{set\_contact\_angle()}}
-{\footnotesize\ttfamily void oomph\+::\+Fluid\+Interface\+Bounding\+Element\+::set\+\_\+contact\+\_\+angle (\begin{DoxyParamCaption}\item[{double $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{angle\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} bool \&}]{strong = {\ttfamily true} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void oomph\+::\+Fluid\+Interface\+Bounding\+Element\+::set\+\_\+contact\+\_\+angle (\begin{DoxyParamCaption}\item[{double $\ast$const \&}]{angle\+\_\+pt,  }\item[{const bool \&}]{strong = {\ttfamily true} }\end{DoxyParamCaption})}
 
 
 
@@ -451,7 +451,7 @@ Definition at line \mbox{\hyperlink{interface__elements_8cc_source_l00047}{47}} 
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l04763}{oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l04431}{oomph\+::\+Face\+Element\+::\+Bulk\+\_\+node\+\_\+number}}, \mbox{\hyperlink{interface__elements_8h_source_l00077}{Contact\+\_\+angle\+\_\+flag}}, and \mbox{\hyperlink{interface__elements_8h_source_l00067}{Contact\+\_\+angle\+\_\+pt}}.
+References \mbox{\hyperlink{elements_8h_source_l04735}{oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l04403}{oomph\+::\+Face\+Element\+::\+Bulk\+\_\+node\+\_\+number}}, \mbox{\hyperlink{interface__elements_8h_source_l00077}{Contact\+\_\+angle\+\_\+flag}}, and \mbox{\hyperlink{interface__elements_8h_source_l00067}{Contact\+\_\+angle\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1FluidInterfaceBoundingElement_a65571d43c8ff429b2da923915dd9c973}\label{classoomph_1_1FluidInterfaceBoundingElement_a65571d43c8ff429b2da923915dd9c973}} 
 \index{oomph::FluidInterfaceBoundingElement@{oomph::FluidInterfaceBoundingElement}!u\_index\_interface\_boundary@{u\_index\_interface\_boundary}}
@@ -475,7 +475,7 @@ References \mbox{\hyperlink{interface__elements_8h_source_l00081}{U\+\_\+index\+
 \index{oomph::FluidInterfaceBoundingElement@{oomph::FluidInterfaceBoundingElement}!update\_in\_external\_fd@{update\_in\_external\_fd}}
 \index{update\_in\_external\_fd@{update\_in\_external\_fd}!oomph::FluidInterfaceBoundingElement@{oomph::FluidInterfaceBoundingElement}}
 \doxysubsubsection{\texorpdfstring{update\_in\_external\_fd()}{update\_in\_external\_fd()}}
-{\footnotesize\ttfamily void oomph\+::\+Fluid\+Interface\+Bounding\+Element\+::update\+\_\+in\+\_\+external\+\_\+fd (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Fluid\+Interface\+Bounding\+Element\+::update\+\_\+in\+\_\+external\+\_\+fd (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -491,13 +491,13 @@ Definition at line \mbox{\hyperlink{interface__elements_8h_source_l00111}{111}} 
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l04763}{oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt()}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a7ae3f437c142fbdef17db914698ffb10}{oomph\+::\+Finite\+Element\+::node\+\_\+update()}}.
+References \mbox{\hyperlink{elements_8h_source_l04735}{oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt()}}, and \mbox{\hyperlink{elements_8cc_source_l05072}{oomph\+::\+Finite\+Element\+::node\+\_\+update()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FluidInterfaceBoundingElement_a1a715427e2037278891c06afd5d096fb}\label{classoomph_1_1FluidInterfaceBoundingElement_a1a715427e2037278891c06afd5d096fb}} 
 \index{oomph::FluidInterfaceBoundingElement@{oomph::FluidInterfaceBoundingElement}!wall\_unit\_normal@{wall\_unit\_normal}}
 \index{wall\_unit\_normal@{wall\_unit\_normal}!oomph::FluidInterfaceBoundingElement@{oomph::FluidInterfaceBoundingElement}}
 \doxysubsubsection{\texorpdfstring{wall\_unit\_normal()}{wall\_unit\_normal()}}
-{\footnotesize\ttfamily void oomph\+::\+Fluid\+Interface\+Bounding\+Element\+::wall\+\_\+unit\+\_\+normal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{normal }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily void oomph\+::\+Fluid\+Interface\+Bounding\+Element\+::wall\+\_\+unit\+\_\+normal (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{normal }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -509,7 +509,7 @@ Definition at line \mbox{\hyperlink{interface__elements_8h_source_l00090}{90}} o
 
 
 
-References \mbox{\hyperlink{interface__elements_8h_source_l00064}{Wall\+\_\+unit\+\_\+normal\+\_\+fct\+\_\+pt}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{interface__elements_8h_source_l00064}{Wall\+\_\+unit\+\_\+normal\+\_\+fct\+\_\+pt}}.
 
 
 

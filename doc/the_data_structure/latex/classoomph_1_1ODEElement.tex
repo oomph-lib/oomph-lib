@@ -36,7 +36,7 @@ virtual void \mbox{\hyperlink{classoomph_1_1ODEElement_aef001ba04ec222921cbdf887
 \begin{DoxyCompactList}\small\item\em Add the elemental contribution to the mass matrix matrix. and the residuals vector. Note that this function should NOT initialise the residuals vector or the mass matrix. It must be called after the residuals vector and jacobian matrix have been initialised to zero. The default is deliberately broken. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1ODEElement_a4a962db7537b5f3e801d68129ffc09ed}{exact\+\_\+solution}} (const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}) const
 \begin{DoxyCompactList}\small\item\em Exact solution. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1ODEElement_a2bcb0934042157ff4bd03a316b65c0ff}{derivative\+\_\+function}} (const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}})
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1ODEElement_a2bcb0934042157ff4bd03a316b65c0ff}{derivative\+\_\+function}} (const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&u)
 \begin{DoxyCompactList}\small\item\em Exact solution. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -143,7 +143,7 @@ Definition at line \mbox{\hyperlink{ode__elements_8h_source_l00166}{166}} of fil
 
 
 
-References \mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a794f59127c33dec7e177aade170b3584}{oomph\+::\+Solution\+Functor\+Base\+::derivative()}}, \mbox{\hyperlink{ode__elements_8h_source_l00180}{Exact\+\_\+solution\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{error__estimator_8h_source_l00165}{oomph\+::u}}.
+References \mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a794f59127c33dec7e177aade170b3584}{oomph\+::\+Solution\+Functor\+Base\+::derivative()}}, \mbox{\hyperlink{ode__elements_8h_source_l00180}{Exact\+\_\+solution\+\_\+pt}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
 
 
 
@@ -191,7 +191,7 @@ Definition at line \mbox{\hyperlink{ode__elements_8h_source_l00109}{109}} of fil
 
 
 
-References \mbox{\hyperlink{ode__elements_8h_source_l00180}{Exact\+\_\+solution\+\_\+pt}}, \mbox{\hyperlink{ode__elements_8h_source_l00082}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}, \mbox{\hyperlink{elements_8cc_source_l01102}{oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+internal\+\_\+by\+\_\+fd()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l01145}{oomph\+::\+Solution\+Functor\+Base\+::have\+\_\+jacobian()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l00622}{oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l01134}{oomph\+::\+Solution\+Functor\+Base\+::jacobian()}}, \mbox{\hyperlink{ode__elements_8h_source_l00076}{nvalue()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{timesteppers_8h_source_l00332}{oomph\+::\+Time\+Stepper\+::time()}}, \mbox{\hyperlink{nodes_8h_source_l00238}{oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{error__estimator_8h_source_l00165}{oomph\+::u}}, \mbox{\hyperlink{ode__elements_8h_source_l00182}{Use\+\_\+fd\+\_\+jacobian}}, \mbox{\hyperlink{nodes_8h_source_l00293}{oomph\+::\+Data\+::value()}}, and \mbox{\hyperlink{timesteppers_8h_source_l00594}{oomph\+::\+Time\+Stepper\+::weight()}}.
+References \mbox{\hyperlink{ode__elements_8h_source_l00180}{Exact\+\_\+solution\+\_\+pt}}, \mbox{\hyperlink{ode__elements_8h_source_l00082}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}, \mbox{\hyperlink{elements_8cc_source_l01102}{oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+internal\+\_\+by\+\_\+fd()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l01145}{oomph\+::\+Solution\+Functor\+Base\+::have\+\_\+jacobian()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l00622}{oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l01134}{oomph\+::\+Solution\+Functor\+Base\+::jacobian()}}, \mbox{\hyperlink{ode__elements_8h_source_l00076}{nvalue()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{timesteppers_8h_source_l00332}{oomph\+::\+Time\+Stepper\+::time()}}, \mbox{\hyperlink{nodes_8h_source_l00238}{oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{ode__elements_8h_source_l00182}{Use\+\_\+fd\+\_\+jacobian}}, \mbox{\hyperlink{nodes_8h_source_l00293}{oomph\+::\+Data\+::value()}}, and \mbox{\hyperlink{timesteppers_8h_source_l00594}{oomph\+::\+Time\+Stepper\+::weight()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ODEElement_aef001ba04ec222921cbdf887ddc6b041}\label{classoomph_1_1ODEElement_aef001ba04ec222921cbdf887ddc6b041}} 
 \index{oomph::ODEElement@{oomph::ODEElement}!fill\_in\_contribution\_to\_mass\_matrix@{fill\_in\_contribution\_to\_mass\_matrix}}
@@ -235,7 +235,7 @@ Definition at line \mbox{\hyperlink{ode__elements_8h_source_l00082}{82}} of file
 
 
 
-References \mbox{\hyperlink{ode__elements_8h_source_l00166}{derivative\+\_\+function()}}, \mbox{\hyperlink{elements_8h_source_l00622}{oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{ode__elements_8h_source_l00076}{nvalue()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{timesteppers_8h_source_l00332}{oomph\+::\+Time\+Stepper\+::time()}}, \mbox{\hyperlink{timesteppers_8h_source_l00502}{oomph\+::\+Time\+Stepper\+::time\+\_\+derivative()}}, \mbox{\hyperlink{nodes_8h_source_l00238}{oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{error__estimator_8h_source_l00165}{oomph\+::u}}, and \mbox{\hyperlink{nodes_8h_source_l00293}{oomph\+::\+Data\+::value()}}.
+References \mbox{\hyperlink{ode__elements_8h_source_l00166}{derivative\+\_\+function()}}, \mbox{\hyperlink{elements_8h_source_l00622}{oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{ode__elements_8h_source_l00076}{nvalue()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{timesteppers_8h_source_l00332}{oomph\+::\+Time\+Stepper\+::time()}}, \mbox{\hyperlink{timesteppers_8h_source_l00502}{oomph\+::\+Time\+Stepper\+::time\+\_\+derivative()}}, \mbox{\hyperlink{nodes_8h_source_l00238}{oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8h_source_l00293}{oomph\+::\+Data\+::value()}}.
 
 
 

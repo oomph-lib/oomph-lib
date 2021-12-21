@@ -110,7 +110,7 @@
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00106}00106       \textcolor{comment}{// Set the number of interpolated position types (always n\_node)}}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00107}00107       this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a28916ab3a512b5329e016d90450eb66a}{set\_nnodal\_position\_type}}(n\_node);}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00108}00108       \textcolor{comment}{// Assign pointer to default integration scheme}}
-\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00109}00109       this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9b8ff92232a3d17ed7d403fbd3419569}{set\_integration\_scheme}}(\&Default\_integration\_scheme);}
+\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00109}00109       this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_ac80983f27f5bcbc08e2eeb6e4d03698b}{set\_integration\_scheme}}(\&Default\_integration\_scheme);}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00110}00110     \}}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00111}00111 }
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00112}00112 \textcolor{comment}{}}
@@ -156,7 +156,7 @@
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00152}00152 \textcolor{comment}{    /// derivatives w.r.t. local coordinates at local coordinate s}}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00153}\mbox{\hyperlink{classoomph_1_1QHermiteElement_a8b44fee3bf2a9d1b7587b56e434b594e}{00153}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1QHermiteElement_a8b44fee3bf2a9d1b7587b56e434b594e}{dshape\_local}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00154}00154                       \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\& psi,}
-\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00155}00155                       \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_ae3d0addae4ef07ae7295fe439483caf0}{dpsids}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00155}00155                       \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& dpsids) \textcolor{keyword}{const};}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00156}00156 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00157}00157 \textcolor{comment}{    /// Function to compute the geometric shape functions and}}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00158}00158 \textcolor{comment}{    /// also first and second derivatives wrt local coordinates at}}
@@ -177,31 +177,31 @@
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00173}00173 \textcolor{comment}{    /// d2psids(i,5) = \(\backslash\)f\$ \(\backslash\)partial\string^2 \(\backslash\)psi\_j / \(\backslash\)partial s\_1 \(\backslash\)partial s\_2 \(\backslash\)f\$}}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00174}\mbox{\hyperlink{classoomph_1_1QHermiteElement_aef2bb1abc43f207edd57f6e38cbbe297}{00174}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1QHermiteElement_aef2bb1abc43f207edd57f6e38cbbe297}{d2shape\_local}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00175}00175                        \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\& psi,}
-\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00176}00176                        \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_ae3d0addae4ef07ae7295fe439483caf0}{dpsids}},}
+\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00176}00176                        \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& dpsids,}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00177}00177                        \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& d2psids) \textcolor{keyword}{const};}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00178}00178 }
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00179}00179 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00180}00180 \textcolor{comment}{    /// Overload the template-\/free interface for the calculation of}}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00181}00181 \textcolor{comment}{    /// the inverse jacobian. The element dimension must be passed to}}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00182}00182 \textcolor{comment}{    /// the function}}
-\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00183}\mbox{\hyperlink{classoomph_1_1QHermiteElement_a1b5cb1c9b780010ae16a5107d811ce03}{00183}} \textcolor{comment}{}    \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1QHermiteElement_a1b5cb1c9b780010ae16a5107d811ce03}{invert\_jacobian\_mapping}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}},}
-\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00184}00184                                    \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_a72ead1315f6f588e379963ad2a16b88a}{inverse\_jacobian}})\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00183}\mbox{\hyperlink{classoomph_1_1QHermiteElement_a1b5cb1c9b780010ae16a5107d811ce03}{00183}} \textcolor{comment}{}    \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1QHermiteElement_a1b5cb1c9b780010ae16a5107d811ce03}{invert\_jacobian\_mapping}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian,}
+\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00184}00184                                    \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& inverse\_jacobian)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00185}00185 \textcolor{keyword}{    }\{}
-\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00186}00186       \textcolor{keywordflow}{return} invert\_jacobian<DIM>(\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a72ead1315f6f588e379963ad2a16b88a}{inverse\_jacobian}});}
+\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00186}00186       \textcolor{keywordflow}{return} invert\_jacobian<DIM>(jacobian, inverse\_jacobian);}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00187}00187     \}}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00188}00188 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00189}00189 \textcolor{comment}{    /// Overload the template-\/free interface for the calculation of}}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00190}00190 \textcolor{comment}{    /// transformation of second derivatives. The element dimension should be}}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00191}00191 \textcolor{comment}{    /// passed as a template paremeter, for "{}optimum"{} efficiency.}}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00192}\mbox{\hyperlink{classoomph_1_1QHermiteElement_a0f000889085286deef3b273043522834}{00192}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1QHermiteElement_a0f000889085286deef3b273043522834}{transform\_second\_derivatives}}(}
-\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00193}00193       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}},}
-\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00194}00194       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_a72ead1315f6f588e379963ad2a16b88a}{inverse\_jacobian}},}
+\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00193}00193       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian,}
+\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00194}00194       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& inverse\_jacobian,}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00195}00195       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian2,}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00196}00196       \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& dbasis,}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00197}00197       \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& d2basis)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00198}00198 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00199}00199       transform\_second\_derivatives\_template<DIM>(}
-\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00200}00200         \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a72ead1315f6f588e379963ad2a16b88a}{inverse\_jacobian}}, jacobian2, dbasis, d2basis);}
+\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00200}00200         jacobian, inverse\_jacobian, jacobian2, dbasis, d2basis);}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00201}00201     \}}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00202}00202 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00203}00203 \textcolor{comment}{    /// Min. value of local coordinate}}
@@ -441,42 +441,42 @@
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00437}00437 \textcolor{comment}{    /// Overload the template-\/free interface for the calculation of}}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00438}00438 \textcolor{comment}{    /// the inverse jacobian. Pass the dimension of the element to the}}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00439}00439 \textcolor{comment}{    /// invert\_jacobian function.}}
-\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00440}\mbox{\hyperlink{classoomph_1_1DiagQHermiteElement_a07bdc47a91aba325c148acae357b9365}{00440}} \textcolor{comment}{}    \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1DiagQHermiteElement_a07bdc47a91aba325c148acae357b9365}{invert\_jacobian\_mapping}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}},}
-\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00441}00441                                    \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_a72ead1315f6f588e379963ad2a16b88a}{inverse\_jacobian}})\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00440}\mbox{\hyperlink{classoomph_1_1DiagQHermiteElement_a07bdc47a91aba325c148acae357b9365}{00440}} \textcolor{comment}{}    \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1DiagQHermiteElement_a07bdc47a91aba325c148acae357b9365}{invert\_jacobian\_mapping}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian,}
+\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00441}00441                                    \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& inverse\_jacobian)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00442}00442 \textcolor{keyword}{    }\{}
-\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00443}00443       \textcolor{keywordflow}{return} FiniteElement::invert\_jacobian<DIM>(\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a72ead1315f6f588e379963ad2a16b88a}{inverse\_jacobian}});}
+\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00443}00443       \textcolor{keywordflow}{return} FiniteElement::invert\_jacobian<DIM>(jacobian, inverse\_jacobian);}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00444}00444     \}}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00445}00445 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00446}00446 \textcolor{comment}{    /// Overload the local to eulerian mapping so that it uses diagonal}}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00447}00447 \textcolor{comment}{    /// terms only.}}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00448}\mbox{\hyperlink{classoomph_1_1DiagQHermiteElement_a0b4a87e67172efe1c68eaac2c7d235a7}{00448}} \textcolor{comment}{}    \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1DiagQHermiteElement_a0b4a87e67172efe1c68eaac2c7d235a7}{local\_to\_eulerian\_mapping}}(}
-\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00449}00449       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_ae3d0addae4ef07ae7295fe439483caf0}{dpsids}},}
-\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00450}00450       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}},}
-\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00451}00451       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_a72ead1315f6f588e379963ad2a16b88a}{inverse\_jacobian}})\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00449}00449       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& dpsids,}
+\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00450}00450       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian,}
+\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00451}00451       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& inverse\_jacobian)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00452}00452 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00453}00453       \textcolor{keywordflow}{return} this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a470aa4b64c3789ec17702cce6f883320}{local\_to\_eulerian\_mapping\_diagonal}}(}
-\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00454}00454         dpsids, \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a72ead1315f6f588e379963ad2a16b88a}{inverse\_jacobian}});}
+\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00454}00454         dpsids, jacobian, inverse\_jacobian);}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00455}00455     \}}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00456}00456 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00457}00457 \textcolor{comment}{    /// Overload the template-\/free interface for the transformation}}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00458}00458 \textcolor{comment}{    /// of derivatives, so that the diagonal version is used.}}
-\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00459}\mbox{\hyperlink{classoomph_1_1DiagQHermiteElement_abae42df187036728d7d78467509f92af}{00459}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1DiagQHermiteElement_abae42df187036728d7d78467509f92af}{transform\_derivatives}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_a72ead1315f6f588e379963ad2a16b88a}{inverse\_jacobian}},}
+\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00459}\mbox{\hyperlink{classoomph_1_1DiagQHermiteElement_abae42df187036728d7d78467509f92af}{00459}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1DiagQHermiteElement_abae42df187036728d7d78467509f92af}{transform\_derivatives}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& inverse\_jacobian,}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00460}00460                                \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& dbasis)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00461}00461 \textcolor{keyword}{    }\{}
-\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00462}00462       \mbox{\hyperlink{classoomph_1_1FiniteElement_adaa4ae864dccc547973e22e9f0789b47}{FiniteElement::transform\_derivatives\_diagonal}}(\mbox{\hyperlink{classoomph_1_1FiniteElement_a72ead1315f6f588e379963ad2a16b88a}{inverse\_jacobian}}, dbasis);}
+\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00462}00462       \mbox{\hyperlink{classoomph_1_1FiniteElement_adaa4ae864dccc547973e22e9f0789b47}{FiniteElement::transform\_derivatives\_diagonal}}(inverse\_jacobian, dbasis);}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00463}00463     \}}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00464}00464 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00465}00465 \textcolor{comment}{    /// Overload the template-\/free interface for the calculation of}}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00466}00466 \textcolor{comment}{    /// transformation of second derivatives.}}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00467}\mbox{\hyperlink{classoomph_1_1DiagQHermiteElement_a6d6dbf192bc9284a87608e2699f8ebb1}{00467}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1DiagQHermiteElement_a6d6dbf192bc9284a87608e2699f8ebb1}{transform\_second\_derivatives}}(}
-\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00468}00468       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}},}
-\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00469}00469       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_a72ead1315f6f588e379963ad2a16b88a}{inverse\_jacobian}},}
+\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00468}00468       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian,}
+\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00469}00469       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& inverse\_jacobian,}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00470}00470       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian2,}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00471}00471       \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& dbasis,}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00472}00472       \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& d2basis)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00473}00473 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00474}00474       FiniteElement::transform\_second\_derivatives\_diagonal<DIM>(}
-\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00475}00475         \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a72ead1315f6f588e379963ad2a16b88a}{inverse\_jacobian}}, jacobian2, dbasis, d2basis);}
+\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00475}00475         jacobian, inverse\_jacobian, jacobian2, dbasis, d2basis);}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00476}00476     \}}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00477}00477 }
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00478}00478 }
@@ -588,12 +588,12 @@
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00584}00584 \textcolor{comment}{    /// Overload the local to lagrangian mapping so that it uses diagonal}}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00585}00585 \textcolor{comment}{    /// terms only.}}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00586}\mbox{\hyperlink{classoomph_1_1SolidDiagQHermiteElement_a781e03c735c8c17533315781982882e1}{00586}} \textcolor{comment}{}    \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1SolidDiagQHermiteElement_a781e03c735c8c17533315781982882e1}{local\_to\_lagrangian\_mapping}}(}
-\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00587}00587       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_ae3d0addae4ef07ae7295fe439483caf0}{dpsids}},}
-\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00588}00588       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}},}
-\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00589}00589       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_a72ead1315f6f588e379963ad2a16b88a}{inverse\_jacobian}})\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00587}00587       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& dpsids,}
+\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00588}00588       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian,}
+\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00589}00589       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& inverse\_jacobian)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00590}00590 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00591}00591       \textcolor{keywordflow}{return} this-\/>\mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a811c926ab4ec81ecb374030302ef28ca}{local\_to\_lagrangian\_mapping\_diagonal}}(}
-\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00592}00592         dpsids, \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a72ead1315f6f588e379963ad2a16b88a}{inverse\_jacobian}});}
+\DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00592}00592         dpsids, jacobian, inverse\_jacobian);}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00593}00593     \}}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00594}00594   \};}
 \DoxyCodeLine{\Hypertarget{hermite__elements_8h_source_l00595}00595 }

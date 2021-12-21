@@ -182,7 +182,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8h_source_l00178}00178   \textcolor{keyword}{private}:\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8h_source_l00179}00179 \textcolor{comment}{    /// Overloaded helper function to take hanging nodes into account}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8h_source_l00180}00180 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1RefineableLinearElasticityEquations_ae2f77382b9fdb12eb7b4ba0dc6c239ef}{fill\_in\_generic\_contribution\_to\_residuals\_linear\_elasticity}}(}
-\DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8h_source_l00181}00181       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \textcolor{keywordtype}{unsigned} flag);}
+\DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8h_source_l00181}00181       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian, \textcolor{keywordtype}{unsigned} flag);}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8h_source_l00182}00182   \};}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8h_source_l00183}00183 }
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8h_source_l00184}00184 \textcolor{comment}{}}
@@ -219,7 +219,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8h_source_l00215}00215     \}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8h_source_l00216}00216 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8h_source_l00217}00217 \textcolor{comment}{    /// Pointer to the j-\/th vertex node in the element}}
-\DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8h_source_l00218}\mbox{\hyperlink{classoomph_1_1RefineableQLinearElasticityElement_a4a48ee3c0ae63c75c4f91c2faaa9bec4}{00218}} \textcolor{comment}{}    Node* \mbox{\hyperlink{classoomph_1_1RefineableQLinearElasticityElement_a4a48ee3c0ae63c75c4f91c2faaa9bec4}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8h_source_l00218}\mbox{\hyperlink{classoomph_1_1RefineableQLinearElasticityElement_a4a48ee3c0ae63c75c4f91c2faaa9bec4}{00218}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1RefineableQLinearElasticityElement_a4a48ee3c0ae63c75c4f91c2faaa9bec4}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8h_source_l00219}00219 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8h_source_l00220}00220       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1FiniteElement_ac8b551c9d6f1f8e30e8b18fe2f9ae072}{QLinearElasticityElement<DIM, NNODE\_1D>::vertex\_node\_pt}}(j);}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8h_source_l00221}00221     \}}
@@ -256,7 +256,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8h_source_l00252}00252       \textcolor{comment}{// Set integration scheme}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8h_source_l00253}00253       \textcolor{comment}{// (To avoid memory leaks in pre-\/build and p-\/refine where new}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8h_source_l00254}00254       \textcolor{comment}{// integration schemes are created)}}
-\DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8h_source_l00255}00255       this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9b8ff92232a3d17ed7d403fbd3419569}{set\_integration\_scheme}}(\textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1GaussLobattoLegendre}{GaussLobattoLegendre<DIM, 2>}});}
+\DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8h_source_l00255}00255       this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_ac80983f27f5bcbc08e2eeb6e4d03698b}{set\_integration\_scheme}}(\textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1GaussLobattoLegendre}{GaussLobattoLegendre<DIM, 2>}});}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8h_source_l00256}00256     \}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8h_source_l00257}00257 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8h_source_l00258}00258 \textcolor{comment}{    /// Destructor (to avoid memory leaks)}}
@@ -289,7 +289,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8h_source_l00285}00285     \}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8h_source_l00286}00286 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8h_source_l00287}00287 \textcolor{comment}{    /// Pointer to the j-\/th vertex node in the element}}
-\DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8h_source_l00288}\mbox{\hyperlink{classoomph_1_1PRefineableQLinearElasticityElement_a9ff7b9a9410ee45f4613d43987a8bc4e}{00288}} \textcolor{comment}{}    Node* \mbox{\hyperlink{classoomph_1_1PRefineableQLinearElasticityElement_a9ff7b9a9410ee45f4613d43987a8bc4e}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8h_source_l00288}\mbox{\hyperlink{classoomph_1_1PRefineableQLinearElasticityElement_a9ff7b9a9410ee45f4613d43987a8bc4e}{00288}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1PRefineableQLinearElasticityElement_a9ff7b9a9410ee45f4613d43987a8bc4e}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8h_source_l00289}00289 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8h_source_l00290}00290       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1FiniteElement_ac8b551c9d6f1f8e30e8b18fe2f9ae072}{QLinearElasticityElement<DIM, 2>::vertex\_node\_pt}}(j);}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8h_source_l00291}00291     \}}

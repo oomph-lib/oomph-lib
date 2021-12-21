@@ -73,7 +73,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00069}00069         ipt, psi, dpsidx, test, dtestdx);}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00070}00070 }
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00071}00071       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00072}00072       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00072}00072       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00073}00073 }
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00074}00074       \textcolor{comment}{// Position and gradient}}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00075}00075       std::complex<double> interpolated\_u(0.0, 0.0);}
@@ -172,13 +172,13 @@
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00168}00168             \textcolor{comment}{// Add body force/source term here and Helmholtz bit}}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00169}00169             residuals[local\_eqn\_real] +=}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00170}00170               (source.real() -\/ this-\/>k\_squared() * interpolated\_u.real()) *}
-\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00171}00171               test(l) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight;}
+\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00171}00171               test(l) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight;}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00172}00172 }
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00173}00173             \textcolor{comment}{// The Helmholtz bit itself}}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00174}00174             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < DIM; k++)}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00175}00175             \{}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00176}00176               residuals[local\_eqn\_real] +=}
-\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00177}00177                 interpolated\_dudx[k].real() * dtestdx(l, k) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight;}
+\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00177}00177                 interpolated\_dudx[k].real() * dtestdx(l, k) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight;}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00178}00178             \}}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00179}00179 }
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00180}00180             \textcolor{comment}{// Calculate the Jacobian}}
@@ -240,13 +240,13 @@
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00236}00236                     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00237}00237                     \{}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00238}00238                       jacobian(local\_eqn\_real, local\_unknown\_real) +=}
-\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00239}00239                         dpsidx(l2, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * dtestdx(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight *}
+\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00239}00239                         dpsidx(l2, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * dtestdx(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight *}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00240}00240                         hang\_weight2;}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00241}00241                     \}}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00242}00242 }
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00243}00243                     \textcolor{comment}{// Add the helmholtz contribution}}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00244}00244                     jacobian(local\_eqn\_real, local\_unknown\_real) -\/=}
-\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00245}00245                       this-\/>k\_squared() * psi(l2) * test(l) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight *}
+\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00245}00245                       this-\/>k\_squared() * psi(l2) * test(l) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight *}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00246}00246                       hang\_weight2;}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00247}00247                   \}}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00248}00248                 \} \textcolor{comment}{// End of loop over master nodes}}
@@ -260,13 +260,13 @@
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00256}00256             \textcolor{comment}{// Add body force/source term here and Helmholtz bit}}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00257}00257             residuals[local\_eqn\_imag] +=}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00258}00258               (source.imag() -\/ this-\/>k\_squared() * interpolated\_u.imag()) *}
-\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00259}00259               test(l) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight;}
+\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00259}00259               test(l) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight;}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00260}00260 }
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00261}00261             \textcolor{comment}{// The Helmholtz bit itself}}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00262}00262             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < DIM; k++)}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00263}00263             \{}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00264}00264               residuals[local\_eqn\_imag] +=}
-\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00265}00265                 interpolated\_dudx[k].imag() * dtestdx(l, k) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight;}
+\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00265}00265                 interpolated\_dudx[k].imag() * dtestdx(l, k) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight;}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00266}00266             \}}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00267}00267 }
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00268}00268             \textcolor{comment}{// Calculate the Jacobian}}
@@ -328,13 +328,13 @@
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00324}00324                     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00325}00325                     \{}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00326}00326                       jacobian(local\_eqn\_imag, local\_unknown\_imag) +=}
-\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00327}00327                         dpsidx(l2, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * dtestdx(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight *}
+\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00327}00327                         dpsidx(l2, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * dtestdx(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight *}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00328}00328                         hang\_weight2;}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00329}00329                     \}}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00330}00330 }
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00331}00331                     \textcolor{comment}{// Add the helmholtz contribution}}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00332}00332                     jacobian(local\_eqn\_imag, local\_unknown\_imag) -\/=}
-\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00333}00333                       this-\/>k\_squared() * psi(l2) * test(l) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight *}
+\DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00333}00333                       this-\/>k\_squared() * psi(l2) * test(l) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight *}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00334}00334                       hang\_weight2;}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00335}00335                   \}}
 \DoxyCodeLine{\Hypertarget{refineable__helmholtz__elements_8cc_source_l00336}00336                 \} \textcolor{comment}{// End of loop over master nodes}}

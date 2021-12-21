@@ -175,9 +175,9 @@ $(function() {
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <a class="code hl_variable" href="classoomph_1_1SpineNode.html#a8154a0fe0c361b730edc27e8e85c077a">Spine_mesh_pt</a>-&gt;<a class="code hl_function" href="classoomph_1_1SpineMesh.html#aa7843aadce3c540f34442671f59eb75b">spine_node_update</a>(<span class="keyword">this</span>);</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="comment">// Perform any auxiliary updates (i.e. reseting boundary conditions)</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordflow">if</span> (Aux_node_update_fct_pt != 0)</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="classoomph_1_1Node.html#a8bfd206ba303b6d446f59974719b24b6">Aux_node_update_fct_pt</a> != 0)</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    {</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>      Aux_node_update_fct_pt(<span class="keyword">this</span>);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>      <a class="code hl_variable" href="classoomph_1_1Node.html#a8bfd206ba303b6d446f59974719b24b6">Aux_node_update_fct_pt</a>(<span class="keyword">this</span>);</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    }</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  }</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
@@ -429,6 +429,7 @@ $(function() {
 <div class="ttc" id="aclassoomph_1_1Mesh_html_a0a42111e7eb200e5831f8b73c018b7dc"><div class="ttname"><a href="classoomph_1_1Mesh.html#a0a42111e7eb200e5831f8b73c018b7dc">oomph::Mesh::Node_pt</a></div><div class="ttdeci">Vector&lt; Node * &gt; Node_pt</div><div class="ttdoc">Vector of pointers to nodes.</div><div class="ttdef"><b>Definition:</b> <a href="mesh_8h_source.html#l00183">mesh.h:183</a></div></div>
 <div class="ttc" id="aclassoomph_1_1Mesh_html_ac192b41d1a24297ff38854548defd92b"><div class="ttname"><a href="classoomph_1_1Mesh.html#ac192b41d1a24297ff38854548defd92b">oomph::Mesh::read</a></div><div class="ttdeci">virtual void read(std::ifstream &amp;restart_file)</div><div class="ttdoc">Read solution from restart file.</div><div class="ttdef"><b>Definition:</b> <a href="mesh_8cc_source.html#l01130">mesh.cc:1130</a></div></div>
 <div class="ttc" id="aclassoomph_1_1Mesh_html_af821b936768868ea5dd91495e9ae3bc0"><div class="ttname"><a href="classoomph_1_1Mesh.html#af821b936768868ea5dd91495e9ae3bc0">oomph::Mesh::dump</a></div><div class="ttdeci">virtual void dump(std::ofstream &amp;dump_file, const bool &amp;use_old_ordering=true) const</div><div class="ttdoc">Dump the data in the mesh into a file for restart.</div><div class="ttdef"><b>Definition:</b> <a href="mesh_8cc_source.html#l01088">mesh.cc:1088</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Node_html_a8bfd206ba303b6d446f59974719b24b6"><div class="ttname"><a href="classoomph_1_1Node.html#a8bfd206ba303b6d446f59974719b24b6">oomph::Node::Aux_node_update_fct_pt</a></div><div class="ttdeci">AuxNodeUpdateFctPt Aux_node_update_fct_pt</div><div class="ttdoc">Pointer to auxiliary update function – this can be used to update any nodal values following the upda...</div><div class="ttdef"><b>Definition:</b> <a href="nodes_8h_source.html#l00967">nodes.h:967</a></div></div>
 <div class="ttc" id="aclassoomph_1_1OomphLibError_html"><div class="ttname"><a href="classoomph_1_1OomphLibError.html">oomph::OomphLibError</a></div><div class="ttdoc">An OomphLibError object which should be thrown when an run-time error is encountered....</div><div class="ttdef"><b>Definition:</b> <a href="oomph__definitions_8h_source.html#l00221">oomph_definitions.h:222</a></div></div>
 <div class="ttc" id="aclassoomph_1_1SpineMesh_html_a0ec20ffa3e78435f8daa087147900d9a"><div class="ttname"><a href="classoomph_1_1SpineMesh.html#a0ec20ffa3e78435f8daa087147900d9a">oomph::SpineMesh::set_consistent_pinned_spine_values_for_continuation</a></div><div class="ttdeci">void set_consistent_pinned_spine_values_for_continuation(ContinuationStorageScheme *const &amp;continuation_stepper_pt)</div><div class="ttdoc">Set any pinned spine &quot;history&quot; values to be consistent for continuation problems.</div><div class="ttdef"><b>Definition:</b> <a href="spines_8cc_source.html#l00189">spines.cc:189</a></div></div>
 <div class="ttc" id="aclassoomph_1_1SpineMesh_html_a281b1de21b0957de28fe78a93c80a215"><div class="ttname"><a href="classoomph_1_1SpineMesh.html#a281b1de21b0957de28fe78a93c80a215">oomph::SpineMesh::read</a></div><div class="ttdeci">void read(std::ifstream &amp;restart_file)</div><div class="ttdoc">Overload the read function so that the spine data is read from the restart file.</div><div class="ttdef"><b>Definition:</b> <a href="spines_8cc_source.html#l00253">spines.cc:253</a></div></div>
@@ -480,7 +481,7 @@ $(function() {
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Nov 2 2021 16:31:11
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Dec 21 2021 17:35:08
         </div>
       </div>
     </footer>

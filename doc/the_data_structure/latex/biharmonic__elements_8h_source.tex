@@ -60,7 +60,7 @@
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00056}00056   \{}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00057}00057   \textcolor{keyword}{public}:\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00058}00058 \textcolor{comment}{    /// source function type definition}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00059}\mbox{\hyperlink{classoomph_1_1BiharmonicEquations_aafa48cd7bbc8ce4383224d1d2d0bfda3}{00059}} \textcolor{comment}{}    \textcolor{keyword}{typedef} void (*\mbox{\hyperlink{classoomph_1_1BiharmonicEquations_aafa48cd7bbc8ce4383224d1d2d0bfda3}{SourceFctPt}})(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \textcolor{keywordtype}{double}\& \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_aebe4e72a90f24cde0f34cf14287e3721}{u}});}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00059}\mbox{\hyperlink{classoomph_1_1BiharmonicEquations_aafa48cd7bbc8ce4383224d1d2d0bfda3}{00059}} \textcolor{comment}{}    \textcolor{keyword}{typedef} void (*\mbox{\hyperlink{classoomph_1_1BiharmonicEquations_aafa48cd7bbc8ce4383224d1d2d0bfda3}{SourceFctPt}})(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x, \textcolor{keywordtype}{double}\& \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_aebe4e72a90f24cde0f34cf14287e3721}{u}});}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00060}00060 }
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00061}00061 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00062}00062 \textcolor{comment}{    /// Constructor (must initialise the Source\_fct\_pt to null)}}
@@ -76,7 +76,7 @@
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00072}00072 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00073}00073 \textcolor{comment}{    /// gets source strength}}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00074}\mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a38a2cd656bff448e982512af9b85276f}{00074}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a38a2cd656bff448e982512af9b85276f}{get\_source}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ipt,}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00075}00075                             \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00075}00075                             \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00076}00076                             \textcolor{keywordtype}{double}\& source)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00077}00077 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00078}00078       \textcolor{comment}{// if source function is not provided, i.e. zero, then return zero}}
@@ -88,7 +88,7 @@
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00084}00084       \textcolor{comment}{// else get source strength}}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00085}00085       \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00086}00086       \{}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00087}00087         (*Source\_fct\_pt)(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, source);}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00087}00087         (*Source\_fct\_pt)(x, source);}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00088}00088       \}}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00089}00089     \}}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00090}00090 }
@@ -106,10 +106,10 @@
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00102}00102 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00103}00103 \textcolor{comment}{    /// wrapper function, adds contribution to residual and generic}}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00104}\mbox{\hyperlink{classoomph_1_1BiharmonicEquations_ab96faece91161d22770aba9c3e6747f1}{00104}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_ab96faece91161d22770aba9c3e6747f1}{fill\_in\_contribution\_to\_jacobian}}(\mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residual,}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00105}00105                                           \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00105}00105                                           \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian)}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00106}00106     \{}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00107}00107       \textcolor{comment}{// call generic routine with flag set to 1}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00108}00108       \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a63bf0dbf59b9355563e71cf0b9eff2ee}{fill\_in\_generic\_residual\_contribution\_biharmonic}}(residual, \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, 1);}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00108}00108       \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a63bf0dbf59b9355563e71cf0b9eff2ee}{fill\_in\_generic\_residual\_contribution\_biharmonic}}(residual, jacobian, 1);}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00109}00109     \}}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00110}00110 }
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00111}00111 \textcolor{comment}{}}
@@ -131,7 +131,7 @@
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00127}00127 }
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00128}00128         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00129}00129         \{}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00130}00130           outfile << this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(s, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00130}00130           outfile << this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(s, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00131}00131         \}}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00132}00132 }
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00133}00133         outfile << \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_ac0fddc16dbe7c8bbfeea76beeba88e46}{interpolated\_u\_biharmonic}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) << std::endl;}
@@ -179,7 +179,7 @@
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00175}00175 }
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00176}00176         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00177}00177         \{}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00178}00178           outfile << this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(s, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00178}00178           outfile << this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(s, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00179}00179         \}}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00180}00180 }
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00181}00181         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} dudx(2, 0.0);}
@@ -200,7 +200,7 @@
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00196}00196       \textcolor{keywordtype}{unsigned} n\_node = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00197}00197 }
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00198}00198       \textcolor{comment}{// Find out how many values there}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00199}00199       \textcolor{keywordtype}{unsigned} n\_value = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>nvalue();}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00199}00199       \textcolor{keywordtype}{unsigned} n\_value = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}{nvalue}}();}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00200}00200 }
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00201}00201       \textcolor{comment}{// set up memory for shape functions}}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00202}00202       \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} psi(n\_node, n\_value);}
@@ -221,7 +221,7 @@
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00217}00217         \{}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00218}00218           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} d = 0; d < DIM; d++)}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00219}00219           \{}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00220}00220             dudx[d] += this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n)-\/>value(k) * dpsidx(n, k, d);}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00220}00220             dudx[d] += this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n)-\/>\mbox{\hyperlink{classoomph_1_1Node_afcc5cdba40bca251826ae5bee5ca15b4}{value}}(k) * dpsidx(n, k, d);}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00221}00221           \}}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00222}00222         \}}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00223}00223       \}}
@@ -237,7 +237,7 @@
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00233}00233       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00234}00234 }
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00235}00235       \textcolor{comment}{// Vector for coordintes}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00236}00236       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(DIM);}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00236}00236       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(DIM);}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00237}00237 }
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00238}00238       \textcolor{comment}{// Tecplot header info}}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00239}00239       outfile << this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a3193df31f9ce38e0609d17a8ffb386c6}{tecplot\_zone\_string}}(nplot);}
@@ -253,15 +253,15 @@
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00249}00249         this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a82da844fd3ebb2005842464cdc148a03}{get\_s\_plot}}(iplot, nplot, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00250}00250 }
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00251}00251         \textcolor{comment}{// Get x position as Vector}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00252}00252         this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(s, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00252}00252         this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(s, x);}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00253}00253 }
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00254}00254         \textcolor{comment}{// Get exact solution at this point}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00255}00255         (*exact\_soln\_pt)(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, exact\_soln);}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00255}00255         (*exact\_soln\_pt)(x, exact\_soln);}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00256}00256 }
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00257}00257         \textcolor{comment}{// Output x,y,...,u\_exact}}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00258}00258         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00259}00259         \{}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00260}00260           outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00260}00260           outfile << x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00261}00261         \}}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00262}00262         outfile << exact\_soln[0] << std::endl;}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00263}00263       \}}
@@ -297,7 +297,7 @@
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00293}00293       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00294}00294 }
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00295}00295       \textcolor{comment}{// Vector for coordintes}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00296}00296       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(DIM);}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00296}00296       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(DIM);}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00297}00297 }
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00298}00298       \textcolor{comment}{// Find out how many nodes there are in the element}}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00299}00299       \textcolor{keywordtype}{unsigned} n\_node = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
@@ -305,7 +305,7 @@
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00301}00301       \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} psi(n\_node);}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00302}00302 }
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00303}00303       \textcolor{comment}{// Set the value of n\_intpt}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00304}00304       \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00304}00304       \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00305}00305 }
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00306}00306       \textcolor{comment}{// Tecplot header info}}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00307}00307       outfile << this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a3193df31f9ce38e0609d17a8ffb386c6}{tecplot\_zone\_string}}(3);}
@@ -322,306 +322,305 @@
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00318}00318         \textcolor{comment}{// Assign values of s}}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00319}00319         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00320}00320         \{}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00321}00321           \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>knot(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00321}00321           \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{knot}}(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00322}00322         \}}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00323}00323 }
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00324}00324         \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00325}00325         \textcolor{keywordtype}{double} w = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00325}00325         \textcolor{keywordtype}{double} w = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00326}00326 }
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00327}00327         \textcolor{comment}{// Get jacobian of mapping}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00328}00328         \textcolor{keywordtype}{double} J = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a808557a124b98d5bbe3bb3b22c81b44b}{J\_eulerian}}(s);}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00328}00328         \textcolor{keywordtype}{double} J = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a089e58d5ad9b8efee637221b0e264563}{J\_eulerian}}(s);}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00329}00329 }
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00330}00330         \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00331}00331         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00331}00331         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00332}00332 }
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00333}00333         \textcolor{comment}{// Get x position as Vector}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00334}00334         this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(s, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00334}00334         this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(s, x);}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00335}00335 }
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00336}00336         \textcolor{comment}{// Get FE function value}}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00337}00337         \textcolor{keywordtype}{double} u\_fe = \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_ac0fddc16dbe7c8bbfeea76beeba88e46}{interpolated\_u\_biharmonic}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00338}00338 }
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00339}00339         \textcolor{comment}{// Get exact solution at this point}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00340}00340         (*exact\_soln\_pt)(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, exact\_soln);}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00340}00340         (*exact\_soln\_pt)(x, exact\_soln);}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00341}00341 }
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00342}00342         \textcolor{comment}{// Output x,y,...,error}}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00343}00343         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00344}00344         \{}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00345}00345           outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00345}00345           outfile << x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00346}00346         \}}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00347}00347         outfile << exact\_soln[0] << \textcolor{stringliteral}{"{} "{}} << fabs(exact\_soln[0] -\/ u\_fe)}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00348}00348                 << std::endl;}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00349}00349 }
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00350}00350         \textcolor{comment}{// Add to error and norm}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00351}00351         norm += exact\_soln[0] * exact\_soln[0] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00352}00352         error += (exact\_soln[0] -\/ u\_fe) * (exact\_soln[0] -\/ u\_fe) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00351}00351         norm += exact\_soln[0] * exact\_soln[0] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00352}00352         error += (exact\_soln[0] -\/ u\_fe) * (exact\_soln[0] -\/ u\_fe) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00353}00353       \}}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00354}00354 }
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00355}00355       this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_ac3987a5ead7dc20c63d86b333466e2b5}{write\_tecplot\_zone\_footer}}(outfile, 3);}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00356}00356     \}}
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00357}00357 }
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00358}00358 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00359}00359 \textcolor{comment}{    /// Plot the error when compared}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00360}00360 \textcolor{comment}{    /// against a given time-\/dependent exact solution \(\backslash\)f\$ \{\(\backslash\)bf f\}(t,\{\(\backslash\)bf x\})}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00361}00361 \textcolor{comment}{    /// \(\backslash\)f\$. Also calculates the norm of the error and that of the exact}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00362}00362 \textcolor{comment}{    /// solution. Call broken base-\/class version.}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00363}\mbox{\hyperlink{classoomph_1_1BiharmonicEquations_add6cd9c41b7e944cb6c030cc9d0bf0bf}{00363}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_add6cd9c41b7e944cb6c030cc9d0bf0bf}{compute\_error}}(std::ostream\& outfile,}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00364}00364                        \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{FiniteElement::UnsteadyExactSolutionFctPt}} exact\_soln\_pt,}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00365}00365                        \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00366}00366                        \textcolor{keywordtype}{double}\& error,}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00367}00367                        \textcolor{keywordtype}{double}\& norm)}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00368}00368     \{}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00369}00369       \mbox{\hyperlink{classoomph_1_1FiniteElement_a687fd8f8eb51faf69c7060f7210edda9}{FiniteElement::compute\_error}}(outfile, exact\_soln\_pt, time, error, norm);}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00370}00370     \}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00371}00371 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00372}00372 \textcolor{comment}{    /// calculates interpolated u at s}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00373}\mbox{\hyperlink{classoomph_1_1BiharmonicEquations_ac0fddc16dbe7c8bbfeea76beeba88e46}{00373}} \textcolor{comment}{}    \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_ac0fddc16dbe7c8bbfeea76beeba88e46}{interpolated\_u\_biharmonic}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00374}00374     \{}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00375}00375       \textcolor{comment}{// initialise storage for u\_interpolated}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00376}00376       \textcolor{keywordtype}{double} uu = 0;}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00377}00377 }
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00378}00378       \textcolor{comment}{// number of nodes}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00379}00379       \textcolor{keywordtype}{unsigned} n\_node = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00380}00380 }
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00381}00381       \textcolor{comment}{// number of degrees of freedom per node}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00382}00382       \textcolor{keywordtype}{unsigned} n\_value = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>nvalue();}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00383}00383 }
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00384}00384       \textcolor{comment}{// set up memory for shape functions}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00385}00385       \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} psi(n\_node, n\_value);}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00386}00386 }
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00387}00387       \textcolor{comment}{// find shape fn at position s}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00388}00388       this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{shape}}(s, psi);}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00389}00389 }
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00390}00390       \textcolor{comment}{// calculate interpolated u}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00391}00391       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < n\_node; n++)}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00392}00392       \{}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00393}00393         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < n\_value; k++)}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00394}00394         \{}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00395}00395           uu += \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_aebe4e72a90f24cde0f34cf14287e3721}{u}}(n, k) * psi(n, k);}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00396}00396         \}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00397}00397       \}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00398}00398 }
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00399}00399       \textcolor{comment}{// return interpolated\_u}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00400}00400       \textcolor{keywordflow}{return} uu;}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00401}00401     \}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00402}00402 }
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00403}00403 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00404}00404 \textcolor{comment}{    /// self test wrapper}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00405}\mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a45c5d9248207cb2f3fa584e2b8137d82}{00405}} \textcolor{comment}{}    \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a45c5d9248207cb2f3fa584e2b8137d82}{self\_test}}()}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00406}00406     \{}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00407}00407       \textcolor{keywordtype}{bool} passed = \textcolor{keyword}{true};}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00408}00408 }
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00409}00409       \textcolor{comment}{// Check lower-\/level stuff}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00410}00410       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1FiniteElement_af04bf6f6a9a60946e6afeee7afdd709c}{FiniteElement::self\_test}}() != 0)}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00411}00411       \{}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00412}00412         passed = \textcolor{keyword}{false};}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00413}00413       \}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00414}00414 }
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00415}00415       \textcolor{comment}{// Return verdict}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00416}00416       \textcolor{keywordflow}{if} (passed)}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00417}00417       \{}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00418}00418         \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00419}00419       \}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00420}00420       \textcolor{keywordflow}{else}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00421}00421       \{}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00422}00422         \textcolor{keywordflow}{return} 1;}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00423}00423       \}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00424}00424     \}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00425}00425 }
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00426}00426 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00427}00427 \textcolor{comment}{    /// return number of second derivate degrees of freedom}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00428}\mbox{\hyperlink{classoomph_1_1BiharmonicEquations_ade58315d59e79499aec5b08aac9c2d16}{00428}} \textcolor{comment}{}    \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_ade58315d59e79499aec5b08aac9c2d16}{get\_d2\_dof}}()}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00429}00429     \{}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00430}00430       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a43f2c15a2438a7710738a3f6faca6e61}{d2\_dof}}[DIM -\/ 1];}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00431}00431     \}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00432}00432 }
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00433}00433 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00434}00434 \textcolor{comment}{    /// The number of "{}DOF types"{} that degrees of freedom in this element}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00435}00435 \textcolor{comment}{    /// are sub-\/divided into (for block preconditioning)}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00436}\mbox{\hyperlink{classoomph_1_1BiharmonicEquations_abf1fbd964ed367a0bf24854ee76aa8f4}{00436}} \textcolor{comment}{}    \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_abf1fbd964ed367a0bf24854ee76aa8f4}{ndof\_types}}()\textcolor{keyword}{ const}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00437}00437 \textcolor{keyword}{    }\{}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00438}00438       \textcolor{keywordflow}{return} this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a56610c60d5bc2d7c27407a1455471b1a}{required\_nvalue}}(1);}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00439}00439     \}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00440}00440 }
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00441}00441 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00442}00442 \textcolor{comment}{    /// Create a list of pairs for all unknowns in this element,}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00443}00443 \textcolor{comment}{    /// so that the first entry in each pair contains the global equation}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00444}00444 \textcolor{comment}{    /// number of the unknown, while the second one contains the number}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00445}00445 \textcolor{comment}{    /// of the "{}DOF types"{} that this unknown is associated with.}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00446}00446 \textcolor{comment}{    /// (Function can obviously only be called if the equation numbering}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00447}00447 \textcolor{comment}{    /// scheme has been set up.) (for block preconditioning)}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00448}\mbox{\hyperlink{classoomph_1_1BiharmonicEquations_af36d72e588624eccb8956a3d0d4959b2}{00448}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_af36d72e588624eccb8956a3d0d4959b2}{get\_dof\_numbers\_for\_unknowns}}(}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00449}00449       std::list<std::pair<unsigned long, unsigned>>\& dof\_lookup\_list)\textcolor{keyword}{ const}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00450}00450 \textcolor{keyword}{    }\{}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00451}00451       \textcolor{comment}{// number of nodes}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00452}00452       \textcolor{keywordtype}{int} n\_node = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00453}00453 }
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00454}00454       \textcolor{comment}{// number of degrees of freedom at each node}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00455}00455       \textcolor{keywordtype}{int} n\_value = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>nvalue();}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00456}00456 }
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00457}00457       \textcolor{comment}{// temporary pair (used to store dof lookup prior to being added to list}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00458}00458       std::pair<unsigned long, unsigned> dof\_lookup;}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00459}00459 }
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00460}00460       \textcolor{comment}{// loop over the nodes}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00461}00461       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} n = 0; n < n\_node; n++)}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00462}00462       \{}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00463}00463         \textcolor{comment}{// loop over the degree of freedom}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00464}00464         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k = 0; k < n\_value; k++)}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00465}00465         \{}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00466}00466           \textcolor{comment}{// determine local eqn number}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00467}00467           \textcolor{keywordtype}{int} \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a3d46b71d27f94aeba21aff1ef84fd0a6}{local\_eqn\_number}} = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5da80bbed97543e586f698251d67941d}{nodal\_local\_eqn}}(n, k);}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00468}00468 }
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00469}00469           \textcolor{comment}{// if local equation number is less than zero then nodal dof pinned}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00470}00470           \textcolor{comment}{// then ignore}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00471}00471           \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement_a3d46b71d27f94aeba21aff1ef84fd0a6}{local\_eqn\_number}} >= 0)}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00472}00472           \{}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00473}00473             \textcolor{comment}{// store dof lookup in temporary pair}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00474}00474             dof\_lookup.first = this-\/>\mbox{\hyperlink{classoomph_1_1GeneralisedElement_a37ac5a1d5234fa931ab710c0c74d55d2}{eqn\_number}}(local\_eqn\_number);}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00475}00475             dof\_lookup.second = k;}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00476}00476             dof\_lookup\_list.push\_front(dof\_lookup);}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00477}00477             \textcolor{comment}{// add to list}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00478}00478           \}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00479}00479         \}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00480}00480       \}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00481}00481     \}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00482}00482 }
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00483}00483 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00484}00484 \textcolor{comment}{    /// Access functions for the source function pointer}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00485}\mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a9eec11a448366d542f8f4e36dc6189ca}{00485}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_aafa48cd7bbc8ce4383224d1d2d0bfda3}{SourceFctPt}}\& \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a9eec11a448366d542f8f4e36dc6189ca}{source\_fct\_pt}}()}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00486}00486     \{}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00487}00487       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a2711ff2523edd383374fd7ff5692ae48}{Source\_fct\_pt}};}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00488}00488     \}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00489}00489 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00490}00490 \textcolor{comment}{    /// Access functions for the source function pointers (const version)}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00491}\mbox{\hyperlink{classoomph_1_1BiharmonicEquations_afc6b6019723e9915af2013eb911235e4}{00491}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_aafa48cd7bbc8ce4383224d1d2d0bfda3}{SourceFctPt}} \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_afc6b6019723e9915af2013eb911235e4}{source\_fct\_pt}}()\textcolor{keyword}{ const}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00492}00492 \textcolor{keyword}{    }\{}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00493}00493       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a2711ff2523edd383374fd7ff5692ae48}{Source\_fct\_pt}};}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00494}00494     \}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00359}00359 \textcolor{comment}{    /// Plot the error when compared against a given time-\/dependent exact}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00360}00360 \textcolor{comment}{    /// solution \(\backslash\)f\$ \{\(\backslash\)bf f\}(t,\{\(\backslash\)bf x\}) \(\backslash\)f\$. Also calculates the norm of the}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00361}00361 \textcolor{comment}{    /// error and that of the exact solution. Call broken base-\/class version.}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00362}\mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a33e635f29e497c978a68bf5094391038}{00362}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a33e635f29e497c978a68bf5094391038}{compute\_error}}(std::ostream\& outfile,}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00363}00363                        \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{FiniteElement::UnsteadyExactSolutionFctPt}} exact\_soln\_pt,}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00364}00364                        \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00365}00365                        \textcolor{keywordtype}{double}\& error,}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00366}00366                        \textcolor{keywordtype}{double}\& norm)}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00367}00367     \{}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00368}00368       \mbox{\hyperlink{classoomph_1_1FiniteElement_a687fd8f8eb51faf69c7060f7210edda9}{FiniteElement::compute\_error}}(outfile, exact\_soln\_pt, time, error, norm);}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00369}00369     \}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00370}00370 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00371}00371 \textcolor{comment}{    /// calculates interpolated u at s}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00372}\mbox{\hyperlink{classoomph_1_1BiharmonicEquations_ac0fddc16dbe7c8bbfeea76beeba88e46}{00372}} \textcolor{comment}{}    \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_ac0fddc16dbe7c8bbfeea76beeba88e46}{interpolated\_u\_biharmonic}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00373}00373     \{}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00374}00374       \textcolor{comment}{// initialise storage for u\_interpolated}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00375}00375       \textcolor{keywordtype}{double} uu = 0;}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00376}00376 }
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00377}00377       \textcolor{comment}{// number of nodes}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00378}00378       \textcolor{keywordtype}{unsigned} n\_node = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00379}00379 }
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00380}00380       \textcolor{comment}{// number of degrees of freedom per node}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00381}00381       \textcolor{keywordtype}{unsigned} n\_value = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}{nvalue}}();}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00382}00382 }
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00383}00383       \textcolor{comment}{// set up memory for shape functions}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00384}00384       \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} psi(n\_node, n\_value);}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00385}00385 }
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00386}00386       \textcolor{comment}{// find shape fn at position s}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00387}00387       this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{shape}}(s, psi);}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00388}00388 }
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00389}00389       \textcolor{comment}{// calculate interpolated u}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00390}00390       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < n\_node; n++)}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00391}00391       \{}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00392}00392         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < n\_value; k++)}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00393}00393         \{}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00394}00394           uu += \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_aebe4e72a90f24cde0f34cf14287e3721}{u}}(n, k) * psi(n, k);}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00395}00395         \}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00396}00396       \}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00397}00397 }
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00398}00398       \textcolor{comment}{// return interpolated\_u}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00399}00399       \textcolor{keywordflow}{return} uu;}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00400}00400     \}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00401}00401 }
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00402}00402 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00403}00403 \textcolor{comment}{    /// self test wrapper}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00404}\mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a45c5d9248207cb2f3fa584e2b8137d82}{00404}} \textcolor{comment}{}    \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a45c5d9248207cb2f3fa584e2b8137d82}{self\_test}}()}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00405}00405     \{}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00406}00406       \textcolor{keywordtype}{bool} passed = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00407}00407 }
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00408}00408       \textcolor{comment}{// Check lower-\/level stuff}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00409}00409       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1FiniteElement_af94c5a5e22175d5420b33b3b79e46ed3}{FiniteElement::self\_test}}() != 0)}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00410}00410       \{}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00411}00411         passed = \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00412}00412       \}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00413}00413 }
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00414}00414       \textcolor{comment}{// Return verdict}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00415}00415       \textcolor{keywordflow}{if} (passed)}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00416}00416       \{}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00417}00417         \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00418}00418       \}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00419}00419       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00420}00420       \{}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00421}00421         \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00422}00422       \}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00423}00423     \}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00424}00424 }
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00425}00425 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00426}00426 \textcolor{comment}{    /// return number of second derivate degrees of freedom}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00427}\mbox{\hyperlink{classoomph_1_1BiharmonicEquations_ade58315d59e79499aec5b08aac9c2d16}{00427}} \textcolor{comment}{}    \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_ade58315d59e79499aec5b08aac9c2d16}{get\_d2\_dof}}()}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00428}00428     \{}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00429}00429       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a43f2c15a2438a7710738a3f6faca6e61}{d2\_dof}}[DIM -\/ 1];}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00430}00430     \}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00431}00431 }
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00432}00432 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00433}00433 \textcolor{comment}{    /// The number of "{}DOF types"{} that degrees of freedom in this element}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00434}00434 \textcolor{comment}{    /// are sub-\/divided into (for block preconditioning)}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00435}\mbox{\hyperlink{classoomph_1_1BiharmonicEquations_abf1fbd964ed367a0bf24854ee76aa8f4}{00435}} \textcolor{comment}{}    \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_abf1fbd964ed367a0bf24854ee76aa8f4}{ndof\_types}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00436}00436 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00437}00437       \textcolor{keywordflow}{return} this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a56610c60d5bc2d7c27407a1455471b1a}{required\_nvalue}}(1);}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00438}00438     \}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00439}00439 }
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00440}00440 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00441}00441 \textcolor{comment}{    /// Create a list of pairs for all unknowns in this element,}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00442}00442 \textcolor{comment}{    /// so that the first entry in each pair contains the global equation}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00443}00443 \textcolor{comment}{    /// number of the unknown, while the second one contains the number}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00444}00444 \textcolor{comment}{    /// of the "{}DOF types"{} that this unknown is associated with.}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00445}00445 \textcolor{comment}{    /// (Function can obviously only be called if the equation numbering}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00446}00446 \textcolor{comment}{    /// scheme has been set up.) (for block preconditioning)}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00447}\mbox{\hyperlink{classoomph_1_1BiharmonicEquations_af36d72e588624eccb8956a3d0d4959b2}{00447}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_af36d72e588624eccb8956a3d0d4959b2}{get\_dof\_numbers\_for\_unknowns}}(}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00448}00448       std::list<std::pair<unsigned long, unsigned>>\& dof\_lookup\_list)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00449}00449 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00450}00450       \textcolor{comment}{// number of nodes}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00451}00451       \textcolor{keywordtype}{int} n\_node = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00452}00452 }
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00453}00453       \textcolor{comment}{// number of degrees of freedom at each node}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00454}00454       \textcolor{keywordtype}{int} n\_value = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}{nvalue}}();}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00455}00455 }
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00456}00456       \textcolor{comment}{// temporary pair (used to store dof lookup prior to being added to list}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00457}00457       std::pair<unsigned long, unsigned> dof\_lookup;}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00458}00458 }
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00459}00459       \textcolor{comment}{// loop over the nodes}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00460}00460       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} n = 0; n < n\_node; n++)}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00461}00461       \{}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00462}00462         \textcolor{comment}{// loop over the degree of freedom}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00463}00463         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k = 0; k < n\_value; k++)}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00464}00464         \{}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00465}00465           \textcolor{comment}{// determine local eqn number}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00466}00466           \textcolor{keywordtype}{int} \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a3d46b71d27f94aeba21aff1ef84fd0a6}{local\_eqn\_number}} = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5da80bbed97543e586f698251d67941d}{nodal\_local\_eqn}}(n, k);}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00467}00467 }
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00468}00468           \textcolor{comment}{// if local equation number is less than zero then nodal dof pinned}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00469}00469           \textcolor{comment}{// then ignore}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00470}00470           \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement_a3d46b71d27f94aeba21aff1ef84fd0a6}{local\_eqn\_number}} >= 0)}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00471}00471           \{}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00472}00472             \textcolor{comment}{// store dof lookup in temporary pair}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00473}00473             dof\_lookup.first = this-\/>\mbox{\hyperlink{classoomph_1_1GeneralisedElement_a37ac5a1d5234fa931ab710c0c74d55d2}{eqn\_number}}(local\_eqn\_number);}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00474}00474             dof\_lookup.second = k;}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00475}00475             dof\_lookup\_list.push\_front(dof\_lookup);}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00476}00476             \textcolor{comment}{// add to list}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00477}00477           \}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00478}00478         \}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00479}00479       \}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00480}00480     \}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00481}00481 }
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00482}00482 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00483}00483 \textcolor{comment}{    /// Access functions for the source function pointer}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00484}\mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a9eec11a448366d542f8f4e36dc6189ca}{00484}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_aafa48cd7bbc8ce4383224d1d2d0bfda3}{SourceFctPt}}\& \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a9eec11a448366d542f8f4e36dc6189ca}{source\_fct\_pt}}()}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00485}00485     \{}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00486}00486       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a2711ff2523edd383374fd7ff5692ae48}{Source\_fct\_pt}};}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00487}00487     \}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00488}00488 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00489}00489 \textcolor{comment}{    /// Access functions for the source function pointers (const version)}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00490}\mbox{\hyperlink{classoomph_1_1BiharmonicEquations_afc6b6019723e9915af2013eb911235e4}{00490}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_aafa48cd7bbc8ce4383224d1d2d0bfda3}{SourceFctPt}} \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_afc6b6019723e9915af2013eb911235e4}{source\_fct\_pt}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00491}00491 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00492}00492       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a2711ff2523edd383374fd7ff5692ae48}{Source\_fct\_pt}};}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00493}00493     \}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00494}00494 }
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00495}00495 }
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00496}00496 }
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00497}00497   \textcolor{keyword}{protected}:\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00498}00498 \textcolor{comment}{    /// Compute element residual Vector only (if JFLAG=and/or element}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00499}00499 \textcolor{comment}{    /// Jacobian matrix}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00500}00500 \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a63bf0dbf59b9355563e71cf0b9eff2ee}{fill\_in\_generic\_residual\_contribution\_biharmonic}}(}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00501}00501       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \textcolor{keywordtype}{unsigned} JFLAG);}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00502}00502 }
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00503}00503 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00504}00504 \textcolor{comment}{    /// Pointer to source function:}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00505}\mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a2711ff2523edd383374fd7ff5692ae48}{00505}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_aafa48cd7bbc8ce4383224d1d2d0bfda3}{SourceFctPt}} \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a2711ff2523edd383374fd7ff5692ae48}{Source\_fct\_pt}};}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00506}00506 }
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00507}00507 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00508}00508 \textcolor{comment}{    /// Array to hold local eqn numbers: Local\_eqn[n] (=-\/1 for BC)}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00509}\mbox{\hyperlink{classoomph_1_1BiharmonicEquations_aee9ddb4f76f29a946c524d0280b13747}{00509}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Vector}{Vector<int>}} \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_aee9ddb4f76f29a946c524d0280b13747}{Local\_eqn}};}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00510}00510 }
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00511}00511   \textcolor{keyword}{private}:}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00512}00512     \textcolor{comment}{// number of degrees of freedom of second derivative}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00513}\mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a43f2c15a2438a7710738a3f6faca6e61}{00513}}     \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a43f2c15a2438a7710738a3f6faca6e61}{d2\_dof}}[];}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00514}00514   \};}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00496}00496   \textcolor{keyword}{protected}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00497}00497 \textcolor{comment}{    /// Compute element residual Vector only (if JFLAG=and/or element}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00498}00498 \textcolor{comment}{    /// Jacobian matrix}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00499}00499 \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a63bf0dbf59b9355563e71cf0b9eff2ee}{fill\_in\_generic\_residual\_contribution\_biharmonic}}(}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00500}00500       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian, \textcolor{keywordtype}{unsigned} JFLAG);}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00501}00501 }
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00502}00502 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00503}00503 \textcolor{comment}{    /// Pointer to source function:}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00504}\mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a2711ff2523edd383374fd7ff5692ae48}{00504}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_aafa48cd7bbc8ce4383224d1d2d0bfda3}{SourceFctPt}} \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a2711ff2523edd383374fd7ff5692ae48}{Source\_fct\_pt}};}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00505}00505 }
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00506}00506 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00507}00507 \textcolor{comment}{    /// Array to hold local eqn numbers: Local\_eqn[n] (=-\/1 for BC)}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00508}\mbox{\hyperlink{classoomph_1_1BiharmonicEquations_aee9ddb4f76f29a946c524d0280b13747}{00508}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Vector}{Vector<int>}} \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_aee9ddb4f76f29a946c524d0280b13747}{Local\_eqn}};}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00509}00509 }
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00510}00510   \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00511}00511     \textcolor{comment}{// number of degrees of freedom of second derivative}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00512}\mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a43f2c15a2438a7710738a3f6faca6e61}{00512}}     \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a43f2c15a2438a7710738a3f6faca6e61}{d2\_dof}}[];}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00513}00513   \};}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00514}00514 }
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00515}00515 }
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00516}00516 }
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00517}00517   \textcolor{comment}{// declares number of degrees of freedom of second derivative}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00518}00518   \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00519}00519   \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1BiharmonicEquations}{BiharmonicEquations<DIM>::d2\_dof}}[3] = \{1, 3, 6\};}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00516}00516   \textcolor{comment}{// declares number of degrees of freedom of second derivative}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00517}00517   \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00518}00518   \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1BiharmonicEquations}{BiharmonicEquations<DIM>::d2\_dof}}[3] = \{1, 3, 6\};}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00519}00519 }
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00520}00520 }
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00521}00521 }
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00522}00522   \textcolor{comment}{//=============================================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00523}00523 \textcolor{comment}{  ///  biharmonic element class}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00524}00524 \textcolor{comment}{}  \textcolor{comment}{//=============================================================================}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00525}00525   \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00526}\mbox{\hyperlink{classoomph_1_1BiharmonicElement}{00526}}   \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1BiharmonicElement}{BiharmonicElement}} : \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1QHermiteElement}{QHermiteElement}}<DIM>,}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00527}00527                             \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1BiharmonicEquations}{BiharmonicEquations}}<DIM>}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00528}00528   \{}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00529}00529   \textcolor{keyword}{public}:\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00530}00530 \textcolor{comment}{    /// access function for value, kth dof of node n}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00531}\mbox{\hyperlink{classoomph_1_1BiharmonicElement_ada3127693270368783121dfbef92d35d}{00531}} \textcolor{comment}{}    \textcolor{keyword}{inline} \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1BiharmonicElement_ada3127693270368783121dfbef92d35d}{u}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& k)\textcolor{keyword}{ const}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00532}00532 \textcolor{keyword}{    }\{}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00533}00533       \textcolor{keywordflow}{return} this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n)-\/>value(k);}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00534}00534     \}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00535}00535 }
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00536}00536 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00537}00537 \textcolor{comment}{    /// Constructor: Call constructors for QElement and}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00538}00538 \textcolor{comment}{    /// Poisson equations}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00539}\mbox{\hyperlink{classoomph_1_1BiharmonicElement_ae7ea696a05373fc4105a99bf4a8e49d7}{00539}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1BiharmonicElement_ae7ea696a05373fc4105a99bf4a8e49d7}{BiharmonicElement}}() : \mbox{\hyperlink{classoomph_1_1QHermiteElement}{QHermiteElement}}<DIM>(), \mbox{\hyperlink{classoomph_1_1BiharmonicEquations}{BiharmonicEquations}}<DIM>() \{\}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00521}00521   \textcolor{comment}{//=============================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00522}00522 \textcolor{comment}{  ///  biharmonic element class}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00523}00523 \textcolor{comment}{}  \textcolor{comment}{//=============================================================================}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00524}00524   \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00525}\mbox{\hyperlink{classoomph_1_1BiharmonicElement}{00525}}   \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1BiharmonicElement}{BiharmonicElement}} : \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1QHermiteElement}{QHermiteElement}}<DIM>,}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00526}00526                             \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1BiharmonicEquations}{BiharmonicEquations}}<DIM>}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00527}00527   \{}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00528}00528   \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00529}00529 \textcolor{comment}{    /// access function for value, kth dof of node n}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00530}\mbox{\hyperlink{classoomph_1_1BiharmonicElement_ada3127693270368783121dfbef92d35d}{00530}} \textcolor{comment}{}    \textcolor{keyword}{inline} \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1BiharmonicElement_ada3127693270368783121dfbef92d35d}{u}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& k)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00531}00531 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00532}00532       \textcolor{keywordflow}{return} this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n)-\/>\mbox{\hyperlink{classoomph_1_1Node_afcc5cdba40bca251826ae5bee5ca15b4}{value}}(k);}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00533}00533     \}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00534}00534 }
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00535}00535 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00536}00536 \textcolor{comment}{    /// Constructor: Call constructors for QElement and}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00537}00537 \textcolor{comment}{    /// Poisson equations}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00538}\mbox{\hyperlink{classoomph_1_1BiharmonicElement_ae7ea696a05373fc4105a99bf4a8e49d7}{00538}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1BiharmonicElement_ae7ea696a05373fc4105a99bf4a8e49d7}{BiharmonicElement}}() : \mbox{\hyperlink{classoomph_1_1QHermiteElement}{QHermiteElement}}<DIM>(), \mbox{\hyperlink{classoomph_1_1BiharmonicEquations}{BiharmonicEquations}}<DIM>() \{\}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00539}00539 }
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00540}00540 }
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00541}00541 }
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00542}\mbox{\hyperlink{classoomph_1_1BiharmonicElement_afa00029c6b72aec12a6dbc4d888c9144}{00542}}     \mbox{\hyperlink{classoomph_1_1BiharmonicElement_afa00029c6b72aec12a6dbc4d888c9144}{\string~BiharmonicElement}}()\{\};}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00543}00543 }
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00544}00544 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00545}00545 \textcolor{comment}{    ///  Required  \# of `values' (pinned or dofs)}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00546}00546 \textcolor{comment}{    /// at node n}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00547}\mbox{\hyperlink{classoomph_1_1BiharmonicElement_a11be94bc01db0e91409e5471693e8e0b}{00547}} \textcolor{comment}{}    \textcolor{keyword}{inline} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1BiharmonicElement_a11be94bc01db0e91409e5471693e8e0b}{required\_nvalue}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n)\textcolor{keyword}{ const}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00548}00548 \textcolor{keyword}{    }\{}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00549}00549       \textcolor{keywordflow}{return} DIM * 2;}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00550}00550     \}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00551}00551 }
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00552}00552 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00553}00553 \textcolor{comment}{    /// Output}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00554}\mbox{\hyperlink{classoomph_1_1BiharmonicElement_a03e56665ab48baab03924992830976c6}{00554}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1BiharmonicElement_a03e56665ab48baab03924992830976c6}{output}}(std::ostream\& outfile)}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00555}00555     \{}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00556}00556       \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a65124187a9935b51b6c635f457d0fa2c}{BiharmonicEquations<DIM>::output}}(outfile);}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00557}00557     \}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00558}00558 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00559}00559 \textcolor{comment}{    /// output wrapper}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00560}\mbox{\hyperlink{classoomph_1_1BiharmonicElement_ae21ebdb90932f2643157d2949093ea78}{00560}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1BiharmonicElement_ae21ebdb90932f2643157d2949093ea78}{output}}(std::ostream\& outfile, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_plot)}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00561}00561     \{}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00562}00562       \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a65124187a9935b51b6c635f457d0fa2c}{BiharmonicEquations<DIM>::output}}(outfile, n\_plot);}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00563}00563     \}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00564}00564 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00565}00565 \textcolor{comment}{    /// C-\/style output}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00566}\mbox{\hyperlink{classoomph_1_1BiharmonicElement_a405526be1bc18d1b758410767c1d1cae}{00566}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1BiharmonicElement_a405526be1bc18d1b758410767c1d1cae}{output}}(FILE* file\_pt)}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00567}00567     \{}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00568}00568       \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a65124187a9935b51b6c635f457d0fa2c}{BiharmonicEquations<DIM>::output}}(file\_pt);}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00569}00569     \}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00570}00570 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00571}00571 \textcolor{comment}{    /// C\_style output at n\_plot points}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00572}\mbox{\hyperlink{classoomph_1_1BiharmonicElement_a6466cb310679bf54811011f086ffb957}{00572}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1BiharmonicElement_a6466cb310679bf54811011f086ffb957}{output}}(FILE* file\_pt, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_plot)}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00573}00573     \{}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00574}00574       \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a65124187a9935b51b6c635f457d0fa2c}{BiharmonicEquations<DIM>::output}}(file\_pt, n\_plot);}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00575}00575     \}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00576}00576 }
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00577}00577 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00578}00578 \textcolor{comment}{    /// analytic solution wrapper}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00579}\mbox{\hyperlink{classoomph_1_1BiharmonicElement_a1c2dd136ac2a0f263c6a444a3db5a750}{00579}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1BiharmonicElement_a1c2dd136ac2a0f263c6a444a3db5a750}{output\_fct}}(std::ostream\& outfile,}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00580}00580                     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nplot,}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00581}00581                     \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{FiniteElement::SteadyExactSolutionFctPt}} exact\_soln\_pt)}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00582}00582     \{}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00583}00583       \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_aca4e6ea18f47696a4535dfc4e020ee64}{BiharmonicEquations<DIM>::output\_fct}}(outfile, nplot, exact\_soln\_pt);}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00584}00584     \}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00585}00585 }
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00586}00586 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00587}00587 \textcolor{comment}{    /// Final override}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00588}\mbox{\hyperlink{classoomph_1_1BiharmonicElement_ad8a8d7e9f534480b7acf45716dc62721}{00588}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1BiharmonicElement_ad8a8d7e9f534480b7acf45716dc62721}{output\_fct}}(std::ostream\& outfile,}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00589}00589                     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nplot,}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00590}00590                     \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00591}00591                     \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{FiniteElement::UnsteadyExactSolutionFctPt}} exact\_soln\_pt)}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00592}00592     \{}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00593}00593       \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_aca4e6ea18f47696a4535dfc4e020ee64}{BiharmonicEquations<DIM>::output\_fct}}(outfile, nplot, time, exact\_soln\_pt);}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00594}00594     \}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00595}00595 }
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00596}00596 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00597}00597 \textcolor{comment}{    /// computes error}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00598}\mbox{\hyperlink{classoomph_1_1BiharmonicElement_a456d89dce0ecf60aafab33c035838581}{00598}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1BiharmonicElement_a456d89dce0ecf60aafab33c035838581}{compute\_error}}(std::ostream\& outfile,}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00599}00599                        \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{FiniteElement::SteadyExactSolutionFctPt}} exact\_soln\_pt,}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00600}00600                        \textcolor{keywordtype}{double}\& error,}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00601}00601                        \textcolor{keywordtype}{double}\& norm)}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00602}00602     \{}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00603}00603       \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a914c46acc12aeea7d4b6288eceef1b5b}{BiharmonicEquations<DIM>::compute\_error}}(}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00604}00604         outfile, exact\_soln\_pt, error, norm);}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00605}00605     \}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00606}00606 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00607}00607 \textcolor{comment}{    /// Call the equations-\/class overloaded unsteady error calculation}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00608}\mbox{\hyperlink{classoomph_1_1BiharmonicElement_a0b1d07f8300afffeacaabb3aef2841fb}{00608}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1BiharmonicElement_a0b1d07f8300afffeacaabb3aef2841fb}{compute\_error}}(std::ostream\& outfile,}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00609}00609                        \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{FiniteElement::UnsteadyExactSolutionFctPt}} exact\_soln\_pt,}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00610}00610                        \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00611}00611                        \textcolor{keywordtype}{double}\& error,}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00612}00612                        \textcolor{keywordtype}{double}\& norm)}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00613}00613     \{}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00614}00614       \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a914c46acc12aeea7d4b6288eceef1b5b}{BiharmonicEquations<DIM>::compute\_error}}(}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00615}00615         outfile, exact\_soln\_pt, time, error, norm);}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00616}00616     \}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00617}00617   \};}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00541}\mbox{\hyperlink{classoomph_1_1BiharmonicElement_afa00029c6b72aec12a6dbc4d888c9144}{00541}}     \mbox{\hyperlink{classoomph_1_1BiharmonicElement_afa00029c6b72aec12a6dbc4d888c9144}{\string~BiharmonicElement}}()\{\};}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00542}00542 }
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00543}00543 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00544}00544 \textcolor{comment}{    ///  Required  \# of `values' (pinned or dofs)}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00545}00545 \textcolor{comment}{    /// at node n}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00546}\mbox{\hyperlink{classoomph_1_1BiharmonicElement_a11be94bc01db0e91409e5471693e8e0b}{00546}} \textcolor{comment}{}    \textcolor{keyword}{inline} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1BiharmonicElement_a11be94bc01db0e91409e5471693e8e0b}{required\_nvalue}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00547}00547 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00548}00548       \textcolor{keywordflow}{return} DIM * 2;}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00549}00549     \}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00550}00550 }
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00551}00551 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00552}00552 \textcolor{comment}{    /// Output}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00553}\mbox{\hyperlink{classoomph_1_1BiharmonicElement_a03e56665ab48baab03924992830976c6}{00553}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1BiharmonicElement_a03e56665ab48baab03924992830976c6}{output}}(std::ostream\& outfile)}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00554}00554     \{}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00555}00555       \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a65124187a9935b51b6c635f457d0fa2c}{BiharmonicEquations<DIM>::output}}(outfile);}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00556}00556     \}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00557}00557 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00558}00558 \textcolor{comment}{    /// output wrapper}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00559}\mbox{\hyperlink{classoomph_1_1BiharmonicElement_ae21ebdb90932f2643157d2949093ea78}{00559}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1BiharmonicElement_ae21ebdb90932f2643157d2949093ea78}{output}}(std::ostream\& outfile, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_plot)}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00560}00560     \{}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00561}00561       \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a65124187a9935b51b6c635f457d0fa2c}{BiharmonicEquations<DIM>::output}}(outfile, n\_plot);}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00562}00562     \}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00563}00563 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00564}00564 \textcolor{comment}{    /// C-\/style output}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00565}\mbox{\hyperlink{classoomph_1_1BiharmonicElement_a405526be1bc18d1b758410767c1d1cae}{00565}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1BiharmonicElement_a405526be1bc18d1b758410767c1d1cae}{output}}(FILE* file\_pt)}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00566}00566     \{}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00567}00567       \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a65124187a9935b51b6c635f457d0fa2c}{BiharmonicEquations<DIM>::output}}(file\_pt);}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00568}00568     \}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00569}00569 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00570}00570 \textcolor{comment}{    /// C\_style output at n\_plot points}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00571}\mbox{\hyperlink{classoomph_1_1BiharmonicElement_a6466cb310679bf54811011f086ffb957}{00571}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1BiharmonicElement_a6466cb310679bf54811011f086ffb957}{output}}(FILE* file\_pt, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_plot)}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00572}00572     \{}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00573}00573       \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a65124187a9935b51b6c635f457d0fa2c}{BiharmonicEquations<DIM>::output}}(file\_pt, n\_plot);}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00574}00574     \}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00575}00575 }
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00576}00576 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00577}00577 \textcolor{comment}{    /// analytic solution wrapper}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00578}\mbox{\hyperlink{classoomph_1_1BiharmonicElement_a1c2dd136ac2a0f263c6a444a3db5a750}{00578}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1BiharmonicElement_a1c2dd136ac2a0f263c6a444a3db5a750}{output\_fct}}(std::ostream\& outfile,}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00579}00579                     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nplot,}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00580}00580                     \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{FiniteElement::SteadyExactSolutionFctPt}} exact\_soln\_pt)}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00581}00581     \{}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00582}00582       \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_aca4e6ea18f47696a4535dfc4e020ee64}{BiharmonicEquations<DIM>::output\_fct}}(outfile, nplot, exact\_soln\_pt);}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00583}00583     \}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00584}00584 }
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00585}00585 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00586}00586 \textcolor{comment}{    /// Final override}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00587}\mbox{\hyperlink{classoomph_1_1BiharmonicElement_ad8a8d7e9f534480b7acf45716dc62721}{00587}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1BiharmonicElement_ad8a8d7e9f534480b7acf45716dc62721}{output\_fct}}(std::ostream\& outfile,}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00588}00588                     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nplot,}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00589}00589                     \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00590}00590                     \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{FiniteElement::UnsteadyExactSolutionFctPt}} exact\_soln\_pt)}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00591}00591     \{}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00592}00592       \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_aca4e6ea18f47696a4535dfc4e020ee64}{BiharmonicEquations<DIM>::output\_fct}}(outfile, nplot, time, exact\_soln\_pt);}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00593}00593     \}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00594}00594 }
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00595}00595 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00596}00596 \textcolor{comment}{    /// computes error}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00597}\mbox{\hyperlink{classoomph_1_1BiharmonicElement_a456d89dce0ecf60aafab33c035838581}{00597}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1BiharmonicElement_a456d89dce0ecf60aafab33c035838581}{compute\_error}}(std::ostream\& outfile,}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00598}00598                        \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{FiniteElement::SteadyExactSolutionFctPt}} exact\_soln\_pt,}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00599}00599                        \textcolor{keywordtype}{double}\& error,}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00600}00600                        \textcolor{keywordtype}{double}\& norm)}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00601}00601     \{}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00602}00602       \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a914c46acc12aeea7d4b6288eceef1b5b}{BiharmonicEquations<DIM>::compute\_error}}(}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00603}00603         outfile, exact\_soln\_pt, error, norm);}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00604}00604     \}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00605}00605 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00606}00606 \textcolor{comment}{    /// Call the equations-\/class overloaded unsteady error calculation}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00607}\mbox{\hyperlink{classoomph_1_1BiharmonicElement_a0b1d07f8300afffeacaabb3aef2841fb}{00607}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1BiharmonicElement_a0b1d07f8300afffeacaabb3aef2841fb}{compute\_error}}(std::ostream\& outfile,}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00608}00608                        \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{FiniteElement::UnsteadyExactSolutionFctPt}} exact\_soln\_pt,}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00609}00609                        \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00610}00610                        \textcolor{keywordtype}{double}\& error,}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00611}00611                        \textcolor{keywordtype}{double}\& norm)}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00612}00612     \{}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00613}00613       \mbox{\hyperlink{classoomph_1_1BiharmonicEquations_a914c46acc12aeea7d4b6288eceef1b5b}{BiharmonicEquations<DIM>::compute\_error}}(}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00614}00614         outfile, exact\_soln\_pt, time, error, norm);}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00615}00615     \}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00616}00616   \};}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00617}00617 }
 \DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00618}00618 }
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00619}00619 }
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00620}00620 \} \textcolor{comment}{// namespace oomph}}
-\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00621}00621 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00619}00619 \} \textcolor{comment}{// namespace oomph}}
+\DoxyCodeLine{\Hypertarget{biharmonic__elements_8h_source_l00620}00620 \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

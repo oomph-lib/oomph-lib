@@ -493,8 +493,6 @@ namespace oomph
 
     // Check if boundaries need to be updated (regardless of
     // requirements of bulk error estimator) but don't do anything!
-    bool check_only = true;
-    bool outer_boundary_update_necessary = false;
     bool inner_boundary_update_necessary = false; // true;
 
     // Should we bother to adapt?

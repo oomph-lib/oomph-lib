@@ -49,15 +49,15 @@
 \DoxyCodeLine{\Hypertarget{fsi_8cc_source_l00045}00045 \textcolor{comment}{    /// in nodal values 0,1,[2]. This is the default for all currently}}
 \DoxyCodeLine{\Hypertarget{fsi_8cc_source_l00046}00046 \textcolor{comment}{    /// existing Navier-\/Stokes elements. If you use any others,}}
 \DoxyCodeLine{\Hypertarget{fsi_8cc_source_l00047}00047 \textcolor{comment}{    /// use this function at your own risk.}}
-\DoxyCodeLine{\Hypertarget{fsi_8cc_source_l00048}\mbox{\hyperlink{namespaceoomph_1_1FSI__functions_ac1a95cf31d719f6aeceb72554ee75868}{00048}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1FSI__functions_ac1a95cf31d719f6aeceb72554ee75868}{apply\_no\_slip\_on\_moving\_wall}}(Node* node\_pt)}
+\DoxyCodeLine{\Hypertarget{fsi_8cc_source_l00048}\mbox{\hyperlink{namespaceoomph_1_1FSI__functions_ac1a95cf31d719f6aeceb72554ee75868}{00048}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1FSI__functions_ac1a95cf31d719f6aeceb72554ee75868}{apply\_no\_slip\_on\_moving\_wall}}(\mbox{\hyperlink{classoomph_1_1Node}{Node}}* node\_pt)}
 \DoxyCodeLine{\Hypertarget{fsi_8cc_source_l00049}00049     \{}
 \DoxyCodeLine{\Hypertarget{fsi_8cc_source_l00050}00050       \textcolor{comment}{// Find out spatial dimension of node}}
-\DoxyCodeLine{\Hypertarget{fsi_8cc_source_l00051}00051       \textcolor{keywordtype}{unsigned} ndim = node\_pt-\/>ndim();}
+\DoxyCodeLine{\Hypertarget{fsi_8cc_source_l00051}00051       \textcolor{keywordtype}{unsigned} ndim = node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
 \DoxyCodeLine{\Hypertarget{fsi_8cc_source_l00052}00052       \textcolor{comment}{// Assign velocity}}
 \DoxyCodeLine{\Hypertarget{fsi_8cc_source_l00053}00053       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < ndim; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{fsi_8cc_source_l00054}00054       \{}
-\DoxyCodeLine{\Hypertarget{fsi_8cc_source_l00055}00055         node\_pt-\/>set\_value(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}},}
-\DoxyCodeLine{\Hypertarget{fsi_8cc_source_l00056}00056                            \mbox{\hyperlink{namespaceoomph_1_1FSI__functions_aa213854665524b0720b63a115ef57fd8}{Strouhal\_for\_no\_slip}} * (node\_pt-\/>dposition\_dt(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})));}
+\DoxyCodeLine{\Hypertarget{fsi_8cc_source_l00055}00055         node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7289ca322725c6fd493970a19474b382}{set\_value}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}},}
+\DoxyCodeLine{\Hypertarget{fsi_8cc_source_l00056}00056                            \mbox{\hyperlink{namespaceoomph_1_1FSI__functions_aa213854665524b0720b63a115ef57fd8}{Strouhal\_for\_no\_slip}} * (node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ad3d37ea1c80500645fa32cc43f1f29ce}{dposition\_dt}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})));}
 \DoxyCodeLine{\Hypertarget{fsi_8cc_source_l00057}00057       \}}
 \DoxyCodeLine{\Hypertarget{fsi_8cc_source_l00058}00058     \}}
 \DoxyCodeLine{\Hypertarget{fsi_8cc_source_l00059}00059 }
@@ -237,7 +237,7 @@
 \DoxyCodeLine{\Hypertarget{fsi_8cc_source_l00233}00233     std::map<FSIFluidElement*, bool> done;}
 \DoxyCodeLine{\Hypertarget{fsi_8cc_source_l00234}00234 }
 \DoxyCodeLine{\Hypertarget{fsi_8cc_source_l00235}00235     \textcolor{comment}{// Number of integration points}}
-\DoxyCodeLine{\Hypertarget{fsi_8cc_source_l00236}00236     \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{fsi_8cc_source_l00236}00236     \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{fsi_8cc_source_l00237}00237 }
 \DoxyCodeLine{\Hypertarget{fsi_8cc_source_l00238}00238     \textcolor{comment}{// Loop over front and back if required: Get number of fluid-\/loaded faces}}
 \DoxyCodeLine{\Hypertarget{fsi_8cc_source_l00239}00239     \textcolor{keywordtype}{unsigned} n\_loaded\_face = 2;}
@@ -258,7 +258,7 @@
 \DoxyCodeLine{\Hypertarget{fsi_8cc_source_l00254}00254           \textcolor{keywordflow}{if} (!done[el\_f\_pt])}
 \DoxyCodeLine{\Hypertarget{fsi_8cc_source_l00255}00255           \{}
 \DoxyCodeLine{\Hypertarget{fsi_8cc_source_l00256}00256             \textcolor{comment}{// Update nodal positions}}
-\DoxyCodeLine{\Hypertarget{fsi_8cc_source_l00257}00257             el\_f\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a7ae3f437c142fbdef17db914698ffb10}{node\_update}}();}
+\DoxyCodeLine{\Hypertarget{fsi_8cc_source_l00257}00257             el\_f\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_ac27d707cb4f7c1429793c0fdb2fd093b}{node\_update}}();}
 \DoxyCodeLine{\Hypertarget{fsi_8cc_source_l00258}00258             done[el\_f\_pt] = \textcolor{keyword}{true};}
 \DoxyCodeLine{\Hypertarget{fsi_8cc_source_l00259}00259           \}}
 \DoxyCodeLine{\Hypertarget{fsi_8cc_source_l00260}00260         \}}

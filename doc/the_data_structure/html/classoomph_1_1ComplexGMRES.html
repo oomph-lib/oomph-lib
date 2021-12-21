@@ -191,7 +191,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac83116186f1a5beffab8faa299b8d4f1 inherit pub_methods_classoomph_1_1HelmholtzSmoother"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HelmholtzSmoother.html#ac83116186f1a5beffab8faa299b8d4f1">~HelmholtzSmoother</a> ()</td></tr>
 <tr class="memdesc:ac83116186f1a5beffab8faa299b8d4f1 inherit pub_methods_classoomph_1_1HelmholtzSmoother"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual empty destructor.  <a href="classoomph_1_1HelmholtzSmoother.html#ac83116186f1a5beffab8faa299b8d4f1">More...</a><br /></td></tr>
 <tr class="separator:ac83116186f1a5beffab8faa299b8d4f1 inherit pub_methods_classoomph_1_1HelmholtzSmoother"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeabcedb15b9f86681bcbcfbbbcc6b45c inherit pub_methods_classoomph_1_1HelmholtzSmoother"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HelmholtzSmoother.html#aeabcedb15b9f86681bcbcfbbbcc6b45c">complex_matrix_multiplication</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> * &gt; matrices_pt, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;<a class="el" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;soln)</td></tr>
+<tr class="memitem:aeabcedb15b9f86681bcbcfbbbcc6b45c inherit pub_methods_classoomph_1_1HelmholtzSmoother"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HelmholtzSmoother.html#aeabcedb15b9f86681bcbcfbbbcc6b45c">complex_matrix_multiplication</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> * &gt; matrices_pt, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;x, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;soln)</td></tr>
 <tr class="memdesc:aeabcedb15b9f86681bcbcfbbbcc6b45c inherit pub_methods_classoomph_1_1HelmholtzSmoother"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to calculate a complex matrix-vector product. Assumes the matrix has been provided as a <a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> of length two; the first entry containing the real part of the system matrix and the second entry containing the imaginary part.  <a href="classoomph_1_1HelmholtzSmoother.html#aeabcedb15b9f86681bcbcfbbbcc6b45c">More...</a><br /></td></tr>
 <tr class="separator:aeabcedb15b9f86681bcbcfbbbcc6b45c inherit pub_methods_classoomph_1_1HelmholtzSmoother"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a10dbef9689095e84e92f6864938850f7 inherit pub_methods_classoomph_1_1HelmholtzSmoother"><td class="memTemplParams" colspan="2">template&lt;typename MATRIX &gt; </td></tr>
@@ -372,18 +372,24 @@ Private Member Functions</h2></td></tr>
 <tr class="memitem:a848721022a08fde4b2182a143f287ded"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexGMRES.html#a848721022a08fde4b2182a143f287ded">complex_solve_helper</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;rhs, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;solution)</td></tr>
 <tr class="memdesc:a848721022a08fde4b2182a143f287ded"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is where the actual work is done.  <a href="classoomph_1_1ComplexGMRES.html#a848721022a08fde4b2182a143f287ded">More...</a><br /></td></tr>
 <tr class="separator:a848721022a08fde4b2182a143f287ded"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c6df8b6c50a0ccd344a62654b1411d0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexGMRES.html#a0c6df8b6c50a0ccd344a62654b1411d0">update</a> (const unsigned &amp;k, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &gt; &amp;hessenberg, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;<a class="el" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &gt; &amp;v, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;<a class="el" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>)</td></tr>
+<tr class="memitem:a0c6df8b6c50a0ccd344a62654b1411d0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexGMRES.html#a0c6df8b6c50a0ccd344a62654b1411d0">update</a> (const unsigned &amp;k, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &gt; &amp;hessenberg, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;<a class="el" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &gt; &amp;v, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;x)</td></tr>
 <tr class="memdesc:a0c6df8b6c50a0ccd344a62654b1411d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to update the result vector.  <a href="classoomph_1_1ComplexGMRES.html#a0c6df8b6c50a0ccd344a62654b1411d0">More...</a><br /></td></tr>
 <tr class="separator:a0c6df8b6c50a0ccd344a62654b1411d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07183636586d7d30fcde380ef88e5fe6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexGMRES.html#a07183636586d7d30fcde380ef88e5fe6">generate_plane_rotation</a> (std::complex&lt; double &gt; &amp;dx, std::complex&lt; double &gt; &amp;dy, std::complex&lt; double &gt; &amp;cs, std::complex&lt; double &gt; &amp;sn)</td></tr>
+<tr class="memdesc:a07183636586d7d30fcde380ef88e5fe6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function: Generate a plane rotation. This is done by finding the value of <img class="formulaInl" alt="$ \cos(\theta) $" src="form_306.png"/> (i.e. cs) and the value of <img class="formulaInl" alt="$ \sin(\theta) $" src="form_416.png"/> (i.e. sn) such that:  <a href="classoomph_1_1ComplexGMRES.html#a07183636586d7d30fcde380ef88e5fe6">More...</a><br /></td></tr>
+<tr class="separator:a07183636586d7d30fcde380ef88e5fe6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8aa80ff477c4b131f8c1a4c74f872df1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexGMRES.html#a8aa80ff477c4b131f8c1a4c74f872df1">apply_plane_rotation</a> (std::complex&lt; double &gt; &amp;dx, std::complex&lt; double &gt; &amp;dy, std::complex&lt; double &gt; &amp;cs, std::complex&lt; double &gt; &amp;sn)</td></tr>
+<tr class="memdesc:a8aa80ff477c4b131f8c1a4c74f872df1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function: Apply plane rotation. This is done using the update:  <a href="classoomph_1_1ComplexGMRES.html#a8aa80ff477c4b131f8c1a4c74f872df1">More...</a><br /></td></tr>
+<tr class="separator:a8aa80ff477c4b131f8c1a4c74f872df1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a3a3cb80fe9c0c98ae607520eef188ec5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexGMRES.html#a3a3cb80fe9c0c98ae607520eef188ec5">begin</a></td></tr>
-<tr class="memdesc:a3a3cb80fe9c0c98ae607520eef188ec5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function: Generate a plane rotation. This is done by finding the value of <img class="formulaInl" alt="$ \cos(\theta) $" src="form_181.png" width="33" height="14"/> (i.e. cs) and the value of <img class="formulaInl" alt="$ \sin(\theta) $" src="form_250.png" width="31" height="14"/> (i.e. sn) such that:  <a href="classoomph_1_1ComplexGMRES.html#a3a3cb80fe9c0c98ae607520eef188ec5">More...</a><br /></td></tr>
-<tr class="separator:a3a3cb80fe9c0c98ae607520eef188ec5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac734ff0f4a58d864ddbe5d90440d732e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceoomph.html#ad835af913df4cbdc5648440f91b794ab">f</a> cos theta <a class="el" href="namespaceoomph.html#ad835af913df4cbdc5648440f91b794ab">f</a> sin theta &amp;<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexGMRES.html#ac734ff0f4a58d864ddbe5d90440d732e">Matrices_storage_pt</a></td></tr>
-<tr class="memdesc:ac734ff0f4a58d864ddbe5d90440d732e"><td class="mdescLeft">&#160;</td><td class="mdescRight">and  <a href="classoomph_1_1ComplexGMRES.html#ac734ff0f4a58d864ddbe5d90440d732e">More...</a><br /></td></tr>
-<tr class="separator:ac734ff0f4a58d864ddbe5d90440d732e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a208aaa9528d6b08afa5324f77ac70581"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexGMRES.html#a208aaa9528d6b08afa5324f77ac70581">Iterations</a></td></tr>
+<tr class="memdesc:a208aaa9528d6b08afa5324f77ac70581"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of iterations taken.  <a href="classoomph_1_1ComplexGMRES.html#a208aaa9528d6b08afa5324f77ac70581">More...</a><br /></td></tr>
+<tr class="separator:a208aaa9528d6b08afa5324f77ac70581"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfd862b611a335b5d6872a9eb37aa193"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexGMRES.html#adfd862b611a335b5d6872a9eb37aa193">Matrices_storage_pt</a></td></tr>
+<tr class="memdesc:adfd862b611a335b5d6872a9eb37aa193"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> of pointers to the real and imaginary part of the system matrix.  <a href="classoomph_1_1ComplexGMRES.html#adfd862b611a335b5d6872a9eb37aa193">More...</a><br /></td></tr>
+<tr class="separator:adfd862b611a335b5d6872a9eb37aa193"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2694315efaf2aa353ad4d67f316b1597"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexGMRES.html#a2694315efaf2aa353ad4d67f316b1597">Resolving</a></td></tr>
 <tr class="memdesc:a2694315efaf2aa353ad4d67f316b1597"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean flag to indicate if the solve is done in re-solve mode, bypassing setup of matrix and preconditioner.  <a href="classoomph_1_1ComplexGMRES.html#a2694315efaf2aa353ad4d67f316b1597">More...</a><br /></td></tr>
 <tr class="separator:a2694315efaf2aa353ad4d67f316b1597"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -463,7 +469,7 @@ Additional Inherited Members</h2></td></tr>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename MATRIX&gt;<br />
 class oomph::ComplexGMRES&lt; MATRIX &gt;</div><p >The <a class="el" href="classoomph_1_1GMRES.html" title="//////////////////////////////////////////////////////////////////// ////////////////////////////////...">GMRES</a> method rewritten for complex matrices. </p>
 
-<p class="definition">Definition at line <a class="el" href="complex__smoother_8h_source.html#l00858">858</a> of file <a class="el" href="complex__smoother_8h_source.html">complex_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__smoother_8h_source.html#l00854">854</a> of file <a class="el" href="complex__smoother_8h_source.html">complex_smoother.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a8d0bfc83e16222c1eee97d8118505bae" name="a8d0bfc83e16222c1eee97d8118505bae"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8d0bfc83e16222c1eee97d8118505bae">&#9670;&nbsp;</a></span>ComplexGMRES() <span class="overload">[1/2]</span></h2>
@@ -492,7 +498,7 @@ template&lt;typename MATRIX &gt; </div>
 
 <p>Constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="complex__smoother_8h_source.html#l00862">862</a> of file <a class="el" href="complex__smoother_8h_source.html">complex_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__smoother_8h_source.html#l00858">858</a> of file <a class="el" href="complex__smoother_8h_source.html">complex_smoother.h</a>.</p>
 
 </div>
 </div>
@@ -523,9 +529,9 @@ template&lt;typename MATRIX &gt; </div>
 
 <p>Empty destructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="complex__smoother_8h_source.html#l00871">871</a> of file <a class="el" href="complex__smoother_8h_source.html">complex_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__smoother_8h_source.html#l00867">867</a> of file <a class="el" href="complex__smoother_8h_source.html">complex_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="complex__smoother_8h_source.html#l01003">oomph::ComplexGMRES&lt; MATRIX &gt;::clean_up_memory()</a>.</p>
+<p class="reference">References <a class="el" href="complex__smoother_8h_source.html#l00999">oomph::ComplexGMRES&lt; MATRIX &gt;::clean_up_memory()</a>.</p>
 
 </div>
 </div>
@@ -560,6 +566,64 @@ template&lt;typename MATRIX &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a8aa80ff477c4b131f8c1a4c74f872df1" name="a8aa80ff477c4b131f8c1a4c74f872df1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8aa80ff477c4b131f8c1a4c74f872df1">&#9670;&nbsp;</a></span>apply_plane_rotation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename MATRIX &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1ComplexGMRES.html">oomph::ComplexGMRES</a>&lt; MATRIX &gt;::apply_plane_rotation </td>
+          <td>(</td>
+          <td class="paramtype">std::complex&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::complex&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dy</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::complex&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>cs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::complex&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>sn</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function: Apply plane rotation. This is done using the update: </p>
+<p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \begin{bmatrix} dx \\ dy \end{bmatrix} \leftarrow \begin{bmatrix} \overline{\cos\theta} &amp; \overline{\sin\theta} \\ -\sin\theta &amp; \cos\theta \end{bmatrix} \begin{bmatrix} dx \\ dy \end{bmatrix}. \]" src="form_421.png"/>
+</p>
+<p> Taken from: Saad Y."Iterative methods for sparse linear systems", p.193. </p>
+
+<p class="definition">Definition at line <a class="el" href="complex__smoother_8h_source.html#l01185">1185</a> of file <a class="el" href="complex__smoother_8h_source.html">complex_smoother.h</a>.</p>
+
+</div>
+</div>
 <a id="a946b88bc1392180c56909b739bfa7b3c" name="a946b88bc1392180c56909b739bfa7b3c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a946b88bc1392180c56909b739bfa7b3c">&#9670;&nbsp;</a></span>clean_up_memory()</h2>
 
@@ -589,11 +653,11 @@ template&lt;typename MATRIX &gt; </div>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1LinearSolver.html#a9d66f3262e80ca06a365f98216afd85f">oomph::LinearSolver</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="complex__smoother_8h_source.html#l01003">1003</a> of file <a class="el" href="complex__smoother_8h_source.html">complex_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__smoother_8h_source.html#l00999">999</a> of file <a class="el" href="complex__smoother_8h_source.html">complex_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="complex__smoother_8h_source.html#l01123">oomph::ComplexGMRES&lt; MATRIX &gt;::Matrices_storage_pt</a>, and <a class="el" href="complex__smoother_8h_source.html#l01248">oomph::ComplexGMRES&lt; MATRIX &gt;::Matrix_can_be_deleted</a>.</p>
+<p class="reference">References <a class="el" href="complex__smoother_8h_source.html#l01204">oomph::ComplexGMRES&lt; MATRIX &gt;::Matrices_storage_pt</a>, and <a class="el" href="complex__smoother_8h_source.html#l01212">oomph::ComplexGMRES&lt; MATRIX &gt;::Matrix_can_be_deleted</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="complex__smoother_8h_source.html#l00884">oomph::ComplexGMRES&lt; MATRIX &gt;::disable_resolve()</a>, and <a class="el" href="complex__smoother_8h_source.html#l00871">oomph::ComplexGMRES&lt; MATRIX &gt;::~ComplexGMRES()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="complex__smoother_8h_source.html#l00880">oomph::ComplexGMRES&lt; MATRIX &gt;::disable_resolve()</a>, and <a class="el" href="complex__smoother_8h_source.html#l00867">oomph::ComplexGMRES&lt; MATRIX &gt;::~ComplexGMRES()</a>.</p>
 
 </div>
 </div>
@@ -627,9 +691,9 @@ template&lt;typename MATRIX &gt; </div>
 
 <p>Implements <a class="el" href="classoomph_1_1HelmholtzSmoother.html#a7c46336fdc3b386b0bab6111a3c55d44">oomph::HelmholtzSmoother</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="complex__smoother_8h_source.html#l00929">929</a> of file <a class="el" href="complex__smoother_8h_source.html">complex_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__smoother_8h_source.html#l00925">925</a> of file <a class="el" href="complex__smoother_8h_source.html">complex_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="complex__smoother_8h_source.html#l01123">oomph::ComplexGMRES&lt; MATRIX &gt;::Matrices_storage_pt</a>, <a class="el" href="complex__smoother_8h_source.html#l01248">oomph::ComplexGMRES&lt; MATRIX &gt;::Matrix_can_be_deleted</a>, and <a class="el" href="linear__algebra__distribution_8h_source.html#l00463">oomph::DistributableLinearAlgebraObject::nrow()</a>.</p>
+<p class="reference">References <a class="el" href="complex__smoother_8h_source.html#l01204">oomph::ComplexGMRES&lt; MATRIX &gt;::Matrices_storage_pt</a>, <a class="el" href="complex__smoother_8h_source.html#l01212">oomph::ComplexGMRES&lt; MATRIX &gt;::Matrix_can_be_deleted</a>, and <a class="el" href="linear__algebra__distribution_8h_source.html#l00463">oomph::DistributableLinearAlgebraObject::nrow()</a>.</p>
 
 </div>
 </div>
@@ -673,9 +737,9 @@ template&lt;typename MATRIX &gt; </div>
 
 <p>Implements <a class="el" href="classoomph_1_1HelmholtzSmoother.html#a8ec748270df3e1199f19ef267d5b8e85">oomph::HelmholtzSmoother</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="complex__smoother_8h_source.html#l00991">991</a> of file <a class="el" href="complex__smoother_8h_source.html">complex_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__smoother_8h_source.html#l00987">987</a> of file <a class="el" href="complex__smoother_8h_source.html">complex_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="complex__smoother_8h_source.html#l01255">oomph::ComplexGMRES&lt; MATRIX &gt;::complex_solve_helper()</a>, and <a class="el" href="complex__smoother_8h_source.html#l00176">oomph::HelmholtzSmoother::Use_as_smoother</a>.</p>
+<p class="reference">References <a class="el" href="complex__smoother_8h_source.html#l01219">oomph::ComplexGMRES&lt; MATRIX &gt;::complex_solve_helper()</a>, and <a class="el" href="complex__smoother_8h_source.html#l00176">oomph::HelmholtzSmoother::Use_as_smoother</a>.</p>
 
 </div>
 </div>
@@ -717,11 +781,11 @@ template&lt;typename MATRIX &gt; </div>
 
 <p>This is where the actual work is done. </p>
 
-<p class="definition">Definition at line <a class="el" href="complex__smoother_8h_source.html#l01255">1255</a> of file <a class="el" href="complex__smoother_8h_source.html">complex_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__smoother_8h_source.html#l01219">1219</a> of file <a class="el" href="complex__smoother_8h_source.html">complex_smoother.h</a>.</p>
 
 <p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="Vector_8h_source.html#l00167">oomph::Vector&lt; _Tp &gt;::initialise()</a>, <a class="el" href="black__box__newton__solver_8cc_source.html#l00044">oomph::BlackBoxFDNewtonSolver::Max_iter</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01295">oomph::TimingHelpers::timer()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="complex__smoother_8h_source.html#l00991">oomph::ComplexGMRES&lt; MATRIX &gt;::complex_smoother_solve()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="complex__smoother_8h_source.html#l00987">oomph::ComplexGMRES&lt; MATRIX &gt;::complex_smoother_solve()</a>.</p>
 
 </div>
 </div>
@@ -754,9 +818,75 @@ template&lt;typename MATRIX &gt; </div>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1LinearSolver.html#ad61c63af94c5961830bd9807225a48d6">oomph::LinearSolver</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="complex__smoother_8h_source.html#l00884">884</a> of file <a class="el" href="complex__smoother_8h_source.html">complex_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__smoother_8h_source.html#l00880">880</a> of file <a class="el" href="complex__smoother_8h_source.html">complex_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="complex__smoother_8h_source.html#l01003">oomph::ComplexGMRES&lt; MATRIX &gt;::clean_up_memory()</a>, and <a class="el" href="linear__solver_8h_source.html#l00144">oomph::LinearSolver::disable_resolve()</a>.</p>
+<p class="reference">References <a class="el" href="complex__smoother_8h_source.html#l00999">oomph::ComplexGMRES&lt; MATRIX &gt;::clean_up_memory()</a>, and <a class="el" href="linear__solver_8h_source.html#l00144">oomph::LinearSolver::disable_resolve()</a>.</p>
+
+</div>
+</div>
+<a id="a07183636586d7d30fcde380ef88e5fe6" name="a07183636586d7d30fcde380ef88e5fe6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07183636586d7d30fcde380ef88e5fe6">&#9670;&nbsp;</a></span>generate_plane_rotation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename MATRIX &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1ComplexGMRES.html">oomph::ComplexGMRES</a>&lt; MATRIX &gt;::generate_plane_rotation </td>
+          <td>(</td>
+          <td class="paramtype">std::complex&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::complex&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dy</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::complex&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>cs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::complex&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>sn</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function: Generate a plane rotation. This is done by finding the value of <img class="formulaInl" alt="$ \cos(\theta) $" src="form_306.png"/> (i.e. cs) and the value of <img class="formulaInl" alt="$ \sin(\theta) $" src="form_416.png"/> (i.e. sn) such that: </p>
+<p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \begin{bmatrix} \overline{\cos\theta} &amp; \overline{\sin\theta} \cr -\sin\theta &amp; \cos\theta \end{bmatrix} \begin{bmatrix} dx \\ dy \end{bmatrix} = \begin{bmatrix} r \\ 0 \end{bmatrix}, \]" src="form_417.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$ r=\sqrt{pow(|dx|,2)+pow(|dy|,2)} $" src="form_418.png"/>. The values of a and b are given by: The values of dx and dy are given by: </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \cos\theta&amp;=\dfrac{dx}{\sqrt{|dx|^2+|dy|^2}}, \]" src="form_419.png"/>
+</p>
+<p> and </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \sin\theta&amp;=\dfrac{dy}{\sqrt{|dx|^2+|dy|^2}}. \]" src="form_420.png"/>
+</p>
+<p> Taken from: Saad Y."Iterative methods for sparse linear systems", p.193. We also check to see that sn is always a real (nonnegative) number. See pp.193-194 for an explanation. </p>
+
+<p class="definition">Definition at line <a class="el" href="complex__smoother_8h_source.html#l01106">1106</a> of file <a class="el" href="complex__smoother_8h_source.html">complex_smoother.h</a>.</p>
+
+<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l00107">oomph::IterativeLinearSolver::tolerance()</a>.</p>
 
 </div>
 </div>
@@ -789,7 +919,9 @@ template&lt;typename MATRIX &gt; </div>
 
 <p>Implements <a class="el" href="classoomph_1_1IterativeLinearSolver.html#a5fe7f7b5e4847fdbd4f95d3875ec7a46">oomph::IterativeLinearSolver</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="complex__smoother_8h_source.html#l00922">922</a> of file <a class="el" href="complex__smoother_8h_source.html">complex_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__smoother_8h_source.html#l00918">918</a> of file <a class="el" href="complex__smoother_8h_source.html">complex_smoother.h</a>.</p>
+
+<p class="reference">References <a class="el" href="complex__smoother_8h_source.html#l01201">oomph::ComplexGMRES&lt; MATRIX &gt;::Iterations</a>.</p>
 
 </div>
 </div>
@@ -869,7 +1001,7 @@ template&lt;typename MATRIX &gt; </div>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1LinearSolver.html#a1f7a2ee2cd18d3dafc20a61ca2f52dbb">oomph::LinearSolver</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="complex__smoother_8h_source.html#l00914">914</a> of file <a class="el" href="complex__smoother_8h_source.html">complex_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__smoother_8h_source.html#l00910">910</a> of file <a class="el" href="complex__smoother_8h_source.html">complex_smoother.h</a>.</p>
 
 <p class="reference">References <a class="el" href="classoomph_1_1LinearSolver.html#a15ce22542b74ed1826ea485edacbeb6e">oomph::LinearSolver::solve()</a>.</p>
 
@@ -915,7 +1047,7 @@ template&lt;typename MATRIX &gt; </div>
 
 <p>Implements <a class="el" href="classoomph_1_1LinearSolver.html#a15ce22542b74ed1826ea485edacbeb6e">oomph::LinearSolver</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="complex__smoother_8h_source.html#l00896">896</a> of file <a class="el" href="complex__smoother_8h_source.html">complex_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__smoother_8h_source.html#l00892">892</a> of file <a class="el" href="complex__smoother_8h_source.html">complex_smoother.h</a>.</p>
 
 <p class="reference">References <a class="el" href="oomph__definitions_8cc_source.html#l00286">oomph::Global_string_for_annotation::string()</a>.</p>
 
@@ -977,15 +1109,15 @@ template&lt;typename MATRIX &gt; </div>
 
 <p>Helper function to update the result vector. </p>
 
-<p class="definition">Definition at line <a class="el" href="complex__smoother_8h_source.html#l01033">1033</a> of file <a class="el" href="complex__smoother_8h_source.html">complex_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__smoother_8h_source.html#l01029">1029</a> of file <a class="el" href="complex__smoother_8h_source.html">complex_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="pseudo__buckling__ring_8h_source.html#l00049">oomph::x</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="cfortran_8h_source.html#l00568">s</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a3a3cb80fe9c0c98ae607520eef188ec5" name="a3a3cb80fe9c0c98ae607520eef188ec5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3a3cb80fe9c0c98ae607520eef188ec5">&#9670;&nbsp;</a></span>begin</h2>
+<a id="a208aaa9528d6b08afa5324f77ac70581" name="a208aaa9528d6b08afa5324f77ac70581"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a208aaa9528d6b08afa5324f77ac70581">&#9670;&nbsp;</a></span>Iterations</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -996,7 +1128,7 @@ template&lt;typename MATRIX &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classoomph_1_1ComplexGMRES.html">oomph::ComplexGMRES</a>&lt; MATRIX &gt;::begin</td>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1ComplexGMRES.html">oomph::ComplexGMRES</a>&lt; MATRIX &gt;::Iterations</td>
         </tr>
       </table>
   </td>
@@ -1005,29 +1137,17 @@ template&lt;typename MATRIX &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">{bmatrix}</div>
-<div class="line">        \overline{\cos\theta} &amp; \overline{\sin\theta} \cr</div>
-<div class="line">        -\sin\theta &amp; \cos\theta</div>
-<div class="line">        \end{bmatrix}</div>
-<div class="line">        <a class="code hl_variable" href="classoomph_1_1ComplexGMRES.html#a3a3cb80fe9c0c98ae607520eef188ec5">\begin</a>{bmatrix}</div>
-<div class="line">        dx</div>
-<div class="line">        \\ dy</div>
-<div class="line">        \end{bmatrix}</div>
-<div class="line">        =</div>
-<div class="line">        <a class="code hl_variable" href="classoomph_1_1ComplexGMRES.html#a3a3cb80fe9c0c98ae607520eef188ec5">\begin</a>{bmatrix}</div>
-<div class="line">        r</div>
-<div class="line">        \\ 0</div>
-<div class="line">        \end{bmatrix}</div>
-<div class="ttc" id="aclassoomph_1_1ComplexGMRES_html_a3a3cb80fe9c0c98ae607520eef188ec5"><div class="ttname"><a href="classoomph_1_1ComplexGMRES.html#a3a3cb80fe9c0c98ae607520eef188ec5">oomph::ComplexGMRES::begin</a></div><div class="ttdeci">begin</div><div class="ttdoc">Helper function: Generate a plane rotation. This is done by finding the value of  (i....</div><div class="ttdef"><b>Definition:</b> <a href="complex__smoother_8h_source.html#l01101">complex_smoother.h:1101</a></div></div>
-</div><!-- fragment -->
-<p>Helper function: Generate a plane rotation. This is done by finding the value of <img class="formulaInl" alt="$ \cos(\theta) $" src="form_181.png" width="33" height="14"/> (i.e. cs) and the value of <img class="formulaInl" alt="$ \sin(\theta) $" src="form_250.png" width="31" height="14"/> (i.e. sn) such that: </p>
 
-<p class="definition">Definition at line <a class="el" href="complex__smoother_8h_source.html#l01101">1101</a> of file <a class="el" href="complex__smoother_8h_source.html">complex_smoother.h</a>.</p>
+<p>Number of iterations taken. </p>
+
+<p class="definition">Definition at line <a class="el" href="complex__smoother_8h_source.html#l01201">1201</a> of file <a class="el" href="complex__smoother_8h_source.html">complex_smoother.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="complex__smoother_8h_source.html#l00918">oomph::ComplexGMRES&lt; MATRIX &gt;::iterations()</a>.</p>
 
 </div>
 </div>
-<a id="ac734ff0f4a58d864ddbe5d90440d732e" name="ac734ff0f4a58d864ddbe5d90440d732e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac734ff0f4a58d864ddbe5d90440d732e">&#9670;&nbsp;</a></span>Matrices_storage_pt</h2>
+<a id="adfd862b611a335b5d6872a9eb37aa193" name="adfd862b611a335b5d6872a9eb37aa193"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adfd862b611a335b5d6872a9eb37aa193">&#9670;&nbsp;</a></span>Matrices_storage_pt</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1038,7 +1158,7 @@ template&lt;typename MATRIX &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceoomph.html#ad835af913df4cbdc5648440f91b794ab">f</a> cos theta <a class="el" href="namespaceoomph.html#ad835af913df4cbdc5648440f91b794ab">f</a> sin theta&amp; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt;<a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a>*&gt; <a class="el" href="classoomph_1_1ComplexGMRES.html">oomph::ComplexGMRES</a>&lt; MATRIX &gt;::Matrices_storage_pt</td>
+          <td class="memname"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt;<a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a>*&gt; <a class="el" href="classoomph_1_1ComplexGMRES.html">oomph::ComplexGMRES</a>&lt; MATRIX &gt;::Matrices_storage_pt</td>
         </tr>
       </table>
   </td>
@@ -1048,12 +1168,11 @@ template&lt;typename MATRIX &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>and </p>
-<p ><a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> of pointers to the real and imaginary part of the system matrix </p>
+<p><a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> of pointers to the real and imaginary part of the system matrix. </p>
 
-<p class="definition">Definition at line <a class="el" href="complex__smoother_8h_source.html#l01240">1240</a> of file <a class="el" href="complex__smoother_8h_source.html">complex_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__smoother_8h_source.html#l01204">1204</a> of file <a class="el" href="complex__smoother_8h_source.html">complex_smoother.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="complex__smoother_8h_source.html#l01003">oomph::ComplexGMRES&lt; MATRIX &gt;::clean_up_memory()</a>, and <a class="el" href="complex__smoother_8h_source.html#l00929">oomph::ComplexGMRES&lt; MATRIX &gt;::complex_smoother_setup()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="complex__smoother_8h_source.html#l00999">oomph::ComplexGMRES&lt; MATRIX &gt;::clean_up_memory()</a>, and <a class="el" href="complex__smoother_8h_source.html#l00925">oomph::ComplexGMRES&lt; MATRIX &gt;::complex_smoother_setup()</a>.</p>
 
 </div>
 </div>
@@ -1081,9 +1200,9 @@ template&lt;typename MATRIX &gt; </div>
 
 <p>Boolean flag to indicate if the real and imaginary system matrices can be deleted. </p>
 
-<p class="definition">Definition at line <a class="el" href="complex__smoother_8h_source.html#l01248">1248</a> of file <a class="el" href="complex__smoother_8h_source.html">complex_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__smoother_8h_source.html#l01212">1212</a> of file <a class="el" href="complex__smoother_8h_source.html">complex_smoother.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="complex__smoother_8h_source.html#l01003">oomph::ComplexGMRES&lt; MATRIX &gt;::clean_up_memory()</a>, and <a class="el" href="complex__smoother_8h_source.html#l00929">oomph::ComplexGMRES&lt; MATRIX &gt;::complex_smoother_setup()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="complex__smoother_8h_source.html#l00999">oomph::ComplexGMRES&lt; MATRIX &gt;::clean_up_memory()</a>, and <a class="el" href="complex__smoother_8h_source.html#l00925">oomph::ComplexGMRES&lt; MATRIX &gt;::complex_smoother_setup()</a>.</p>
 
 </div>
 </div>
@@ -1111,7 +1230,7 @@ template&lt;typename MATRIX &gt; </div>
 
 <p>Boolean flag to indicate if the solve is done in re-solve mode, bypassing setup of matrix and preconditioner. </p>
 
-<p class="definition">Definition at line <a class="el" href="complex__smoother_8h_source.html#l01244">1244</a> of file <a class="el" href="complex__smoother_8h_source.html">complex_smoother.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="complex__smoother_8h_source.html#l01208">1208</a> of file <a class="el" href="complex__smoother_8h_source.html">complex_smoother.h</a>.</p>
 
 </div>
 </div>
@@ -1146,7 +1265,7 @@ template&lt;typename MATRIX &gt; </div>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Nov 2 2021 16:31:49
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Dec 21 2021 17:35:33
         </div>
       </div>
     </footer>

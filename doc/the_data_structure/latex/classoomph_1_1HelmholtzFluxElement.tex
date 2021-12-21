@@ -18,45 +18,45 @@ Inheritance diagram for oomph\+::Helmholtz\+Flux\+Element\texorpdfstring{$<$}{<}
 \doxysubsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_ad53ce405c551a39ac9baeaaab7f254df}{Helmholtz\+Prescribed\+Flux\+Fct\+Pt}}) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, std\+::complex$<$ double $>$ \&flux)
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_ad53ce405c551a39ac9baeaaab7f254df}{Helmholtz\+Prescribed\+Flux\+Fct\+Pt}}) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, std\+::complex$<$ double $>$ \&flux)
 \begin{DoxyCompactList}\small\item\em Function pointer to the prescribed-\/flux function fct(x,f(x)) -- x is a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} and the flux is a complex. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a8c9a62afbb6ed06a0441d4fbf607624c}{Helmholtz\+Flux\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&bulk\+\_\+el\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}})
+\mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a8c9a62afbb6ed06a0441d4fbf607624c}{Helmholtz\+Flux\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&bulk\+\_\+el\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}})
 \begin{DoxyCompactList}\small\item\em Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the index of the face to which the element is attached. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a73182cbef5c3c2ccb7abdb6337b3651b}{Helmholtz\+Flux\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Broken empty constructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a747c3a80f505e318f915b763f5fbf878}{Helmholtz\+Flux\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement}{Helmholtz\+Flux\+Element}} \&dummy)=delete
+\mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a747c3a80f505e318f915b763f5fbf878}{Helmholtz\+Flux\+Element}} (const \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement}{Helmholtz\+Flux\+Element}} \&dummy)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_ad53ce405c551a39ac9baeaaab7f254df}{Helmholtz\+Prescribed\+Flux\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_ad7a1caf6679742499c14c1690d670372}{flux\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a861a3825432d2ddc1b0e2deff79ed0bc}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_ac388e1c565715ffc9953fc548def1bf5}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})
+void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_ac388e1c565715ffc9953fc548def1bf5}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector and its Jacobian matrix. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a02ce0bfabe6ce7ef3901bb4155806d86}{zeta\+\_\+nodal}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&k, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a02ce0bfabe6ce7ef3901bb4155806d86}{zeta\+\_\+nodal}} (const unsigned \&n, const unsigned \&k, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Specify the value of nodal zeta from the face geometry The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} representation, by default (needed to break indeterminacy if bulk element is Solid\+Element) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a08f6410ef176312d00f5a5c13caa1b06}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a8df42455a8d4584c1d67e8e0d7ab44a0}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a8df42455a8d4584c1d67e8e0d7ab44a0}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em Output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a8afbad47be6598b8a4a6776aa21bb38a}{output}} (FILE $\ast$file\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em C-\/style output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a125673c600acb76787db63810c51066d}{output}} (FILE $\ast$file\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a125673c600acb76787db63810c51066d}{output}} (FILE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em C-\/style output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... \end{DoxyCompactList}\item 
-virtual std\+::complex$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_aeb7d32f5e95b2ce8682b89c4f8e7d0c5}{u\+\_\+index\+\_\+helmholtz}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+virtual std\+::complex$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_aeb7d32f5e95b2ce8682b89c4f8e7d0c5}{u\+\_\+index\+\_\+helmholtz}} () const
 \begin{DoxyCompactList}\small\item\em Return the index at which the unknown value is stored. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-double \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a7d4c36738cba6e0620fa394d66ea28c5}{shape\+\_\+and\+\_\+test}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a7d4c36738cba6e0620fa394d66ea28c5}{shape\+\_\+and\+\_\+test}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) const
 \begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping between local and global (Eulerian) coordinates. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a463b7abfac1cc3aa698437b484b51683}{shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a463b7abfac1cc3aa698437b484b51683}{shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) const
 \begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping between local and global (Eulerian) coordinates. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a0e43870b7dc404d05c58c835a79e7121}{get\+\_\+flux}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, std\+::complex$<$ double $>$ \&flux)
+void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a0e43870b7dc404d05c58c835a79e7121}{get\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, std\+::complex$<$ double $>$ \&flux)
 \begin{DoxyCompactList}\small\item\em Function to calculate the prescribed flux at a given spatial position. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a4f6caf80f078c526144990ee77bfaf92}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+flux}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&flag)
+virtual void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a4f6caf80f078c526144990ee77bfaf92}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+flux}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, const unsigned \&flag)
 \begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the contribution to the Jacobian as well. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -85,7 +85,7 @@ Definition at line \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00051}{
 \index{HelmholtzPrescribedFluxFctPt@{HelmholtzPrescribedFluxFctPt}!oomph::HelmholtzFluxElement$<$ ELEMENT $>$@{oomph::HelmholtzFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{HelmholtzPrescribedFluxFctPt}{HelmholtzPrescribedFluxFctPt}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement}{oomph\+::\+Helmholtz\+Flux\+Element}}$<$ ELEMENT $>$\+::Helmholtz\+Prescribed\+Flux\+Fct\+Pt) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, std\+::complex$<$ double $>$ \&flux)}
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement}{oomph\+::\+Helmholtz\+Flux\+Element}}$<$ ELEMENT $>$\+::Helmholtz\+Prescribed\+Flux\+Fct\+Pt) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, std\+::complex$<$ double $>$ \&flux)}
 
 
 
@@ -103,7 +103,7 @@ Definition at line \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00058}{
 \index{HelmholtzFluxElement@{HelmholtzFluxElement}!oomph::HelmholtzFluxElement$<$ ELEMENT $>$@{oomph::HelmholtzFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{HelmholtzFluxElement()}{HelmholtzFluxElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement}{oomph\+::\+Helmholtz\+Flux\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement}{Helmholtz\+Flux\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{bulk\+\_\+el\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{face\+\_\+index }\end{DoxyParamCaption})}
+\mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement}{oomph\+::\+Helmholtz\+Flux\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement}{Helmholtz\+Flux\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{bulk\+\_\+el\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index }\end{DoxyParamCaption})}
 
 
 
@@ -117,7 +117,7 @@ Definition at line \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00268}{
 
 
 
-References \mbox{\hyperlink{classoomph_1_1FiniteElement_a025ab56ef9c6eea66fb34416fdf19152}{oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00252}{oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::\+Dim}}, \mbox{\hyperlink{elements_8h_source_l04654}{oomph\+::\+Face\+Element\+::face\+\_\+index()}}, \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00249}{oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l02475}{oomph\+::\+Finite\+Element\+::has\+\_\+hanging\+\_\+nodes()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, and \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00236}{oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::\+U\+\_\+index\+\_\+helmholtz}}.
+References \mbox{\hyperlink{elements_8cc_source_l05132}{oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00252}{oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::\+Dim}}, \mbox{\hyperlink{elements_8h_source_l04626}{oomph\+::\+Face\+Element\+::face\+\_\+index()}}, \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00249}{oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l02470}{oomph\+::\+Finite\+Element\+::has\+\_\+hanging\+\_\+nodes()}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, \mbox{\hyperlink{helmholtz__elements_8h_source_l00080}{oomph\+::\+Helmholtz\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+helmholtz()}}, and \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00236}{oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::\+U\+\_\+index\+\_\+helmholtz}}.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzFluxElement_a73182cbef5c3c2ccb7abdb6337b3651b}\label{classoomph_1_1HelmholtzFluxElement_a73182cbef5c3c2ccb7abdb6337b3651b}} 
 \index{oomph::HelmholtzFluxElement$<$ ELEMENT $>$@{oomph::HelmholtzFluxElement$<$ ELEMENT $>$}!HelmholtzFluxElement@{HelmholtzFluxElement}}
@@ -139,7 +139,7 @@ Definition at line \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00067}{
 \index{HelmholtzFluxElement@{HelmholtzFluxElement}!oomph::HelmholtzFluxElement$<$ ELEMENT $>$@{oomph::HelmholtzFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{HelmholtzFluxElement()}{HelmholtzFluxElement()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement}{oomph\+::\+Helmholtz\+Flux\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement}{Helmholtz\+Flux\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement}{Helmholtz\+Flux\+Element}}$<$ ELEMENT $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+\mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement}{oomph\+::\+Helmholtz\+Flux\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement}{Helmholtz\+Flux\+Element}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement}{Helmholtz\+Flux\+Element}}$<$ ELEMENT $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
@@ -169,7 +169,7 @@ Definition at line \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00106}{
 
 
 
-References \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00420}{oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+flux()}}, and \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}.
+References \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00420}{oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+flux()}}.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzFluxElement_a861a3825432d2ddc1b0e2deff79ed0bc}\label{classoomph_1_1HelmholtzFluxElement_a861a3825432d2ddc1b0e2deff79ed0bc}} 
 \index{oomph::HelmholtzFluxElement$<$ ELEMENT $>$@{oomph::HelmholtzFluxElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
@@ -199,7 +199,7 @@ References \mbox{\hyperlink{elements_8h_source_l00227}{oomph\+::\+Generalised\+E
 \index{fill\_in\_generic\_residual\_contribution\_helmholtz\_flux@{fill\_in\_generic\_residual\_contribution\_helmholtz\_flux}!oomph::HelmholtzFluxElement$<$ ELEMENT $>$@{oomph::HelmholtzFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_generic\_residual\_contribution\_helmholtz\_flux()}{fill\_in\_generic\_residual\_contribution\_helmholtz\_flux()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement}{oomph\+::\+Helmholtz\+Flux\+Element}}$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+flux (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement}{oomph\+::\+Helmholtz\+Flux\+Element}}$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+flux (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{const unsigned \&}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -211,7 +211,7 @@ Definition at line \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00419}{
 
 
 
-References \mbox{\hyperlink{multi__domain_8cc_source_l00060}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Dim}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}.
+References \mbox{\hyperlink{multi__domain_8cc_source_l00060}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Dim}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
 
 
 
@@ -241,7 +241,7 @@ References \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00249}{oomph\+:
 \index{get\_flux@{get\_flux}!oomph::HelmholtzFluxElement$<$ ELEMENT $>$@{oomph::HelmholtzFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{get\_flux()}{get\_flux()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement}{oomph\+::\+Helmholtz\+Flux\+Element}}$<$ ELEMENT $>$\+::get\+\_\+flux (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{std\+::complex$<$ double $>$ \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement}{oomph\+::\+Helmholtz\+Flux\+Element}}$<$ ELEMENT $>$\+::get\+\_\+flux (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{std\+::complex$<$ double $>$ \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -253,7 +253,7 @@ Definition at line \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00219}{
 
 
 
-References \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00249}{oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00249}{oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzFluxElement_a8afbad47be6598b8a4a6776aa21bb38a}\label{classoomph_1_1HelmholtzFluxElement_a8afbad47be6598b8a4a6776aa21bb38a}} 
 \index{oomph::HelmholtzFluxElement$<$ ELEMENT $>$@{oomph::HelmholtzFluxElement$<$ ELEMENT $>$}!output@{output}}
@@ -276,14 +276,14 @@ Definition at line \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00145}{
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
+References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzFluxElement_a125673c600acb76787db63810c51066d}\label{classoomph_1_1HelmholtzFluxElement_a125673c600acb76787db63810c51066d}} 
 \index{oomph::HelmholtzFluxElement$<$ ELEMENT $>$@{oomph::HelmholtzFluxElement$<$ ELEMENT $>$}!output@{output}}
 \index{output@{output}!oomph::HelmholtzFluxElement$<$ ELEMENT $>$@{oomph::HelmholtzFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement}{oomph\+::\+Helmholtz\+Flux\+Element}}$<$ ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement}{oomph\+::\+Helmholtz\+Flux\+Element}}$<$ ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -299,7 +299,7 @@ Definition at line \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00153}{
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
+References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzFluxElement_a08f6410ef176312d00f5a5c13caa1b06}\label{classoomph_1_1HelmholtzFluxElement_a08f6410ef176312d00f5a5c13caa1b06}} 
 \index{oomph::HelmholtzFluxElement$<$ ELEMENT $>$@{oomph::HelmholtzFluxElement$<$ ELEMENT $>$}!output@{output}}
@@ -322,14 +322,14 @@ Definition at line \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00130}{
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
+References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzFluxElement_a8df42455a8d4584c1d67e8e0d7ab44a0}\label{classoomph_1_1HelmholtzFluxElement_a8df42455a8d4584c1d67e8e0d7ab44a0}} 
 \index{oomph::HelmholtzFluxElement$<$ ELEMENT $>$@{oomph::HelmholtzFluxElement$<$ ELEMENT $>$}!output@{output}}
 \index{output@{output}!oomph::HelmholtzFluxElement$<$ ELEMENT $>$@{oomph::HelmholtzFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement}{oomph\+::\+Helmholtz\+Flux\+Element}}$<$ ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement}{oomph\+::\+Helmholtz\+Flux\+Element}}$<$ ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -345,14 +345,14 @@ Definition at line \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00137}{
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
+References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzFluxElement_a7d4c36738cba6e0620fa394d66ea28c5}\label{classoomph_1_1HelmholtzFluxElement_a7d4c36738cba6e0620fa394d66ea28c5}} 
 \index{oomph::HelmholtzFluxElement$<$ ELEMENT $>$@{oomph::HelmholtzFluxElement$<$ ELEMENT $>$}!shape\_and\_test@{shape\_and\_test}}
 \index{shape\_and\_test@{shape\_and\_test}!oomph::HelmholtzFluxElement$<$ ELEMENT $>$@{oomph::HelmholtzFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{shape\_and\_test()}{shape\_and\_test()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement}{oomph\+::\+Helmholtz\+Flux\+Element}}$<$ ELEMENT $>$\+::shape\+\_\+and\+\_\+test (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+double \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement}{oomph\+::\+Helmholtz\+Flux\+Element}}$<$ ELEMENT $>$\+::shape\+\_\+and\+\_\+test (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -364,14 +364,14 @@ Definition at line \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00172}{
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l05246}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l05242}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzFluxElement_a463b7abfac1cc3aa698437b484b51683}\label{classoomph_1_1HelmholtzFluxElement_a463b7abfac1cc3aa698437b484b51683}} 
 \index{oomph::HelmholtzFluxElement$<$ ELEMENT $>$@{oomph::HelmholtzFluxElement$<$ ELEMENT $>$}!shape\_and\_test\_at\_knot@{shape\_and\_test\_at\_knot}}
 \index{shape\_and\_test\_at\_knot@{shape\_and\_test\_at\_knot}!oomph::HelmholtzFluxElement$<$ ELEMENT $>$@{oomph::HelmholtzFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{shape\_and\_test\_at\_knot()}{shape\_and\_test\_at\_knot()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement}{oomph\+::\+Helmholtz\+Flux\+Element}}$<$ ELEMENT $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+double \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement}{oomph\+::\+Helmholtz\+Flux\+Element}}$<$ ELEMENT $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -383,7 +383,7 @@ Definition at line \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00196}{
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l05332}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a2de680722518136b5c6bf2aacc267a31}{oomph\+::\+Finite\+Element\+::shape\+\_\+at\+\_\+knot()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l05328}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8cc_source_l03220}{oomph\+::\+Finite\+Element\+::shape\+\_\+at\+\_\+knot()}}.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzFluxElement_aeb7d32f5e95b2ce8682b89c4f8e7d0c5}\label{classoomph_1_1HelmholtzFluxElement_aeb7d32f5e95b2ce8682b89c4f8e7d0c5}} 
 \index{oomph::HelmholtzFluxElement$<$ ELEMENT $>$@{oomph::HelmholtzFluxElement$<$ ELEMENT $>$}!u\_index\_helmholtz@{u\_index\_helmholtz}}
@@ -409,7 +409,7 @@ References \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00236}{oomph\+:
 \index{zeta\_nodal@{zeta\_nodal}!oomph::HelmholtzFluxElement$<$ ELEMENT $>$@{oomph::HelmholtzFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{zeta\_nodal()}{zeta\_nodal()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement}{oomph\+::\+Helmholtz\+Flux\+Element}}$<$ ELEMENT $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{k,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+double \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement}{oomph\+::\+Helmholtz\+Flux\+Element}}$<$ ELEMENT $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{k,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -425,7 +425,7 @@ Definition at line \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00120}{
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l04525}{oomph\+::\+Face\+Element\+::zeta\+\_\+nodal()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l04497}{oomph\+::\+Face\+Element\+::zeta\+\_\+nodal()}}.
 
 
 

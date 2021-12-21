@@ -1,0 +1,1100 @@
+\hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner}{}\doxysection{oomph\+::Navier\+Stokes\+Schur\+Complement\+Preconditioner Class Reference}
+\label{classoomph_1_1NavierStokesSchurComplementPreconditioner}\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+
+
+///////////////////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////////////////  
+
+
+
+
+{\ttfamily \#include $<$navier\+\_\+stokes\+\_\+preconditioners.\+h$>$}
+
+Inheritance diagram for oomph\+::Navier\+Stokes\+Schur\+Complement\+Preconditioner\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{classoomph_1_1NavierStokesSchurComplementPreconditioner}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_ac5ca2d9d665f4bd0a9f2e2cc103486b0}{Navier\+Stokes\+Schur\+Complement\+Preconditioner}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$\mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_aab92188d3bdcec3b07ac87f51934079b}{problem\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Constructor -\/ sets defaults for control flags. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_ad954b4f67329c643d5219ed573805b81}{$\sim$\+Navier\+Stokes\+Schur\+Complement\+Preconditioner}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_aba0ebcbc6963a62ad492fd9271e349a5}{Navier\+Stokes\+Schur\+Complement\+Preconditioner}} (const \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner}{Navier\+Stokes\+Schur\+Complement\+Preconditioner}} \&)=delete
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a41814f592afecb493310be513c595739}{set\+\_\+problem\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$\mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_aab92188d3bdcec3b07ac87f51934079b}{problem\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$ \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_aab92188d3bdcec3b07ac87f51934079b}{problem\+\_\+pt}} () const
+\item 
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_af406a2d6632c95f7d8b70baba1b912ee}{enable\+\_\+accept\+\_\+non\+\_\+\+Navier\+Stokes\+Element\+With\+Diagonal\+Mass\+Matrices\+\_\+elements}} ()
+\begin{DoxyCompactList}\small\item\em Accept presence of elements that are not of type \mbox{\hyperlink{classoomph_1_1NavierStokesElementWithDiagonalMassMatrices}{Navier\+Stokes\+Element\+With\+Diagonal\+Mass\+Matrices}} without issuing a warning. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a483c96d41a5032f90b8027d6ef2c0c5a}{disable\+\_\+accept\+\_\+non\+\_\+\+Navier\+Stokes\+Element\+With\+Diagonal\+Mass\+Matrices\+\_\+elements}} ()
+\begin{DoxyCompactList}\small\item\em Do not accept presence of elements that are not of type \mbox{\hyperlink{classoomph_1_1NavierStokesElementWithDiagonalMassMatrices}{Navier\+Stokes\+Element\+With\+Diagonal\+Mass\+Matrices}} without issuing a warning. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a03cbfa527081ea03c910aadc281615d7}{setup}} ()
+\begin{DoxyCompactList}\small\item\em Setup the preconditioner. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_adbc87003dd8e8c924ae802651b18f2ed}{preconditioner\+\_\+solve}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&r, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&z)
+\begin{DoxyCompactList}\small\item\em Apply preconditioner to \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} r. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_abe80b5bb32d24f49f427d04118de284a}{set\+\_\+navier\+\_\+stokes\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a295ad63173fcd9cfff7cbbdc6c518e9a}{mesh\+\_\+pt}}, const bool \&allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+navier\+\_\+stokes\+\_\+mesh=false)
+\begin{DoxyCompactList}\small\item\em Specify the mesh containing the block-\/preconditionable Navier-\/\+Stokes elements. The optional argument indicates if there are multiple types of elements in the same mesh. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a48f0d5e878eccab6e7f080c92d4bc6f5}{set\+\_\+p\+\_\+preconditioner}} (\mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} $\ast$new\+\_\+p\+\_\+preconditioner\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Function to set a new pressure matrix preconditioner (inexact solver) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a05bac2703d9570c15bf0676cbbe7ce03}{set\+\_\+p\+\_\+superlu\+\_\+preconditioner}} ()
+\begin{DoxyCompactList}\small\item\em Function to (re-\/)set pressure matrix preconditioner (inexact solver) to Super\+LU. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_ab2f387b87192dd2f7b6725cfe3aae44e}{set\+\_\+f\+\_\+preconditioner}} (\mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} $\ast$new\+\_\+f\+\_\+preconditioner\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Function to set a new momentum matrix preconditioner (inexact solver) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_ae687961a8422c3b61da2e225c5665110}{use\+\_\+lsc}} ()
+\begin{DoxyCompactList}\small\item\em Use LSC version of the preconditioner. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a1f77731b78f270044f09f761719a88b0}{use\+\_\+fp}} ()
+\begin{DoxyCompactList}\small\item\em Use Fp version of the preconditioner. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_af29abc6e2b9fd92ae3a31a4f9d56f6b8}{set\+\_\+f\+\_\+superlu\+\_\+preconditioner}} ()
+\begin{DoxyCompactList}\small\item\em Function to (re-\/)set momentum matrix preconditioner (inexact solver) to Super\+LU. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_af1a6030468c5795b3ace7a58bcb6b4f1}{enable\+\_\+doc\+\_\+time}} ()
+\begin{DoxyCompactList}\small\item\em Enable documentation of time. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_ae0015b71a33a147650606840d98f5a9e}{disable\+\_\+doc\+\_\+time}} ()
+\begin{DoxyCompactList}\small\item\em Disable documentation of time. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a5cac2493de85690e3954949eb2a27d2c}{clean\+\_\+up\+\_\+memory}} ()
+\begin{DoxyCompactList}\small\item\em Helper function to delete preconditioner data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_ac6554fd9418b705b70a0a54c0f864db8}{enable\+\_\+robin\+\_\+for\+\_\+fp}} ()
+\begin{DoxyCompactList}\small\item\em Use Robin BC elements for the Fp preconditioner. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_ae1db0cf426cd70ad4f1f30182d82c469}{disable\+\_\+robin\+\_\+for\+\_\+fp}} ()
+\begin{DoxyCompactList}\small\item\em Don\textquotesingle{}t use Robin BC elements for the Fp preconditioenr. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_af7d68718453adc8e7b9e19ad30cc9171}{pin\+\_\+first\+\_\+pressure\+\_\+dof\+\_\+in\+\_\+press\+\_\+adv\+\_\+diff}} ()
+\begin{DoxyCompactList}\small\item\em Set boolean indicating that we want to pin first pressure dof in Navier Stokes mesh when assembling the pressure advection diffusion system for Fp preconditoner -- needed at zero Reynolds number for non-\/enclosed flows but seems harmless in any case. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a58c02e402f5c6103268da36097b4ad0e}{unpin\+\_\+first\+\_\+pressure\+\_\+dof\+\_\+in\+\_\+press\+\_\+adv\+\_\+diff}} ()
+\begin{DoxyCompactList}\small\item\em Set boolean indicating that we do not want to pin first pressure dof in Navier Stokes mesh when assembling the pressure advection diffusion system for Fp preconditoner -- needed at zero Reynolds number for non-\/enclosed flows but seems harmless in any case. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class ELEMENT $>$ }\\void \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a1b42174c40c4fec1336c547aaa3d07f5}{validate}} (\mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} \&doc\+\_\+info, \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$orig\+\_\+problem\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Validate auxiliary pressure advection diffusion problem in 2D. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a03941c01d70ece07797301c8ac6a0a8a}{pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs}} ()
+\begin{DoxyCompactList}\small\item\em Pin all non-\/pressure dofs. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_ac3f40f62d33d33616cdb4bed48aaccde}{get\+\_\+pressure\+\_\+advection\+\_\+diffusion\+\_\+matrix}} (\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \&fp\+\_\+matrix)
+\begin{DoxyCompactList}\small\item\em Get the pressure advection diffusion matrix. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_af1c121b668b1961a68010f984166947c}{reset\+\_\+pin\+\_\+status}} ()
+\begin{DoxyCompactList}\small\item\em Reset pin status of all values. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a0b95e7159585b5151f9e5dc1d1713655}{setup}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_aec1a6eda2d78d1e3b41ced805534d72d}{matrix\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em for some reason we have to remind the compiler that there is a \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a03cbfa527081ea03c910aadc281615d7}{setup()}} function in \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} base class. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a783fae97e4b898f8de72b504a4f4bec6}{setup}} (const \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$\mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_aab92188d3bdcec3b07ac87f51934079b}{problem\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_aec1a6eda2d78d1e3b41ced805534d72d}{matrix\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em for some reason we have to remind the compiler that there is a \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a03cbfa527081ea03c910aadc281615d7}{setup()}} function in \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} base class. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_af4886f4efe510e5c9b0eb19422943588}{setup}} ()=0
+\begin{DoxyCompactList}\small\item\em for some reason we have to remind the compiler that there is a \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a03cbfa527081ea03c910aadc281615d7}{setup()}} function in \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} base class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_ab45d7496790cc29a056b83c194aa2a1c}{assemble\+\_\+inv\+\_\+press\+\_\+and\+\_\+veloc\+\_\+mass\+\_\+matrix\+\_\+diagonal}} (\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$\&inv\+\_\+p\+\_\+mass\+\_\+pt, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$\&inv\+\_\+v\+\_\+mass\+\_\+pt, const bool \&do\+\_\+both)
+\begin{DoxyCompactList}\small\item\em Helper function to assemble the inverse diagonals of the pressure and velocity mass matrices from the elemental contributions defined in Navier\+Stokes\+Equations$<$\+DIM$>$. If do\+\_\+both=true, both are computed, otherwise only the velocity mass matrix (the LSC version of the preconditioner only needs that one) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} $\ast$ \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a94c09c485f93eb273f4217460da02811}{P\+\_\+preconditioner\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the \textquotesingle{}preconditioner\textquotesingle{} for the pressure matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} $\ast$ \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a14a63179117e8cf5822c89ae2b5c9902}{F\+\_\+preconditioner\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the \textquotesingle{}preconditioner\textquotesingle{} for the F matrix. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a925aa01327e8a6af8c543d2983e92d2f}{Using\+\_\+default\+\_\+f\+\_\+preconditioner}}
+\begin{DoxyCompactList}\small\item\em flag indicating whether the default F preconditioner is used \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a6d9eb3bdee67fafd228e0923e61bd812}{Using\+\_\+default\+\_\+p\+\_\+preconditioner}}
+\begin{DoxyCompactList}\small\item\em flag indicating whether the default P preconditioner is used \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a3584d8bd088fad5ccce394899e167ca3}{Preconditioner\+\_\+has\+\_\+been\+\_\+setup}}
+\begin{DoxyCompactList}\small\item\em Control flag is true if the preconditioner has been setup (used so we can wipe the data when the preconditioner is called again) \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a31a0119eae85695e267b2b0e6d58cfe6}{Accept\+\_\+non\+\_\+\+Navier\+Stokes\+Element\+With\+Diagonal\+Mass\+Matrices\+\_\+elements}}
+\begin{DoxyCompactList}\small\item\em Boolean to indicate that presence of elements that are not of type \mbox{\hyperlink{classoomph_1_1NavierStokesElementWithDiagonalMassMatrices}{Navier\+Stokes\+Element\+With\+Diagonal\+Mass\+Matrices}} is acceptable (suppresses warning that issued otherwise). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_ad3e3b6635c1524d8413a75642e4bc4e1}{F\+\_\+preconditioner\+\_\+is\+\_\+block\+\_\+preconditioner}}
+\begin{DoxyCompactList}\small\item\em Boolean indicating whether the momentum system preconditioner is a block preconditioner. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a0b551f53464a6331d3b0f3da61d712ff}{Doc\+\_\+time}}
+\begin{DoxyCompactList}\small\item\em Set Doc\+\_\+time to true for outputting results of timings. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MatrixVectorProduct}{Matrix\+Vector\+Product}} $\ast$ \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a7d88aae7807a9a8d07491dda4c8c2465}{QBt\+\_\+mat\+\_\+vec\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct}{Matrix\+Vector\+Product}} operator for Qv$^\wedge$\{-\/1\} Bt. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MatrixVectorProduct}{Matrix\+Vector\+Product}} $\ast$ \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_ad7bc578498d001d81223b37badefb44b}{Bt\+\_\+mat\+\_\+vec\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct}{Matrix\+Vector\+Product}} operator for Bt. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MatrixVectorProduct}{Matrix\+Vector\+Product}} $\ast$ \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a66a5925f3bd0642de7bd3e61b8d740dc}{F\+\_\+mat\+\_\+vec\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct}{Matrix\+Vector\+Product}} operator for F. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MatrixVectorProduct}{Matrix\+Vector\+Product}} $\ast$ \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a6a02950e86b2b8a092dda57587850d1c}{E\+\_\+mat\+\_\+vec\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct}{Matrix\+Vector\+Product}} operator for E = Fp Qp$^\wedge$\{-\/1\} (only for Fp variant) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$ \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a6153711f9561d3d617b78d3035147326}{Navier\+\_\+stokes\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em the pointer to the mesh of block preconditionable Navier Stokes elements. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a932ce8737a185ca987a2c75d8af360d9}{Allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+navier\+\_\+stokes\+\_\+mesh}}
+\begin{DoxyCompactList}\small\item\em Flag to indicate if there are multiple element types in the Navier-\/\+Stokes mesh. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a6c6abbfacbceba68be65855cc32bccb1}{Use\+\_\+\+LSC}}
+\begin{DoxyCompactList}\small\item\em Boolean to indicate use of LSC (true) or Fp (false) variant. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a3aa99e654544365b78d4dca057ed53e0}{Use\+\_\+robin\+\_\+for\+\_\+fp}}
+\begin{DoxyCompactList}\small\item\em Use Robin BC elements for Fp preconditoner? \end{DoxyCompactList}\item 
+std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::vector$<$ int $>$ $>$ \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_af34c14327511f1e7deb5726b85b05417}{Eqn\+\_\+number\+\_\+backup}}
+\begin{DoxyCompactList}\small\item\em Map to store original eqn numbers of various \mbox{\hyperlink{classoomph_1_1Data}{Data}} values when assembling pressure advection diffusion matrix. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a40ffaa90de4f861037cbd364789eb889}{Pin\+\_\+first\+\_\+pressure\+\_\+dof\+\_\+in\+\_\+press\+\_\+adv\+\_\+diff}}
+\begin{DoxyCompactList}\small\item\em Boolean indicating if we want to pin first pressure dof in Navier Stokes mesh when assembling the pressure advection diffusion system for Fp preconditoner -- needed at zero Reynolds number for non-\/enclosed flows but seems harmless in any case. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$ \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a32957b16d3827ea7e6f308e1f3b6f246}{Problem\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Storage for the (non-\/const!) problem pointer for use in \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_ac3f40f62d33d33616cdb4bed48aaccde}{get\+\_\+pressure\+\_\+advection\+\_\+diffusion\+\_\+matrix()}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+///////////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////////// 
+
+The least-\/squares commutator (LSC; formerly BFBT) Navier Stokes preconditioner. It uses blocks corresponding to the velocity and pressure unknowns, i.\+e. there are a total of 2x2 blocks, and all velocity components are treated as a single block of unknowns.
+
+Here are the details\+: An \char`\"{}ideal\char`\"{} Navier-\/\+Stokes preconditioner would solve the system \[ \left( \begin{array}{cc} {\bf F} & {\bf G} \\ {\bf D} & {\bf 0} \end{array} \right) \left( \begin{array}{c} {\bf z}_u \\ {\bf z}_p \end{array} \right) = \left( \begin{array}{c} {\bf r}_u \\ {\bf r}_p \end{array} \right) \] where $ {\bf F}$ is the momentum block, $ {\bf G} $ the discrete gradient operator, and $ {\bf D}$ the discrete divergence operator. (For unstabilised elements, we have $ {\bf D} = {\bf G}^T $ and in much of the literature the divergence matrix is denoted by $ {\bf B} $ .) The use of this preconditioner would ensure the convergence of any iterative linear solver in a single iteration but its application is, of course, exactly as expensive as a direct solve. The LSC/\+BFBT preconditioner replaces the exact Jacobian by a block-\/triangular approximation \[ \left( \begin{array}{cc} {\bf F} & {\bf G} \\ {\bf 0} & -{\bf M}_s \end{array} \right) \left( \begin{array}{c} {\bf z}_u \\ {\bf z}_p \end{array} \right) = \left( \begin{array}{c} {\bf r}_u \\ {\bf r}_p \end{array} \right), \] where ${\bf M}_s$ is an approximation to the pressure Schur-\/complement $ {\bf S} = {\bf D} {\bf F}^{-1}{\bf G}. $ This system can be solved in two steps\+:
+\begin{DoxyEnumerate}
+\item Solve the second row for $ {\bf z}_p$ via
+
+\[ {\bf z}_p = - {\bf M}_s^{-1} {\bf r}_p \]
+\item Given $ {\bf z}_p $ , solve the first row for $ {\bf z}_u$ via
+
+\[ {\bf z}_u = {\bf F}^{-1} \big( {\bf r}_u - {\bf G} {\bf z}_p \big) \]
+\end{DoxyEnumerate}In the LSC/\+BFBT preconditioner, the action of the inverse pressure Schur complement \[ {\bf z}_p = - {\bf M}_s^{-1} {\bf r}_p \] is approximated by \[ {\bf z}_p = - \big({\bf D} \widehat{\bf Q}^{-1}{\bf G} \big)^{-1} \big({\bf D} \widehat{\bf Q}^{-1}{\bf F} \widehat{\bf Q}^{-1}{\bf G}\big) \big({\bf D} \widehat{\bf Q}^{-1}{\bf G} \big)^{-1} {\bf r}_p, \] where $ \widehat{\bf Q} $ is the diagonal of the velocity mass matrix. The evaluation of this expression involves two linear solves involving the matrix \[ {\bf P} = \big({\bf D} \widehat{\bf Q}^{-1}{\bf G} \big) \] which has the character of a matrix arising from the discretisation of a Poisson problem on the pressure space. We also have to evaluate matrix-\/vector products with the matrix \[ {\bf E}={\bf D}\widehat{\bf Q}^{-1}{\bf F}\widehat{\bf Q}^{-1}{\bf G} \] Details of the theory can be found in \char`\"{}\+Finite Elements and \+Fast Iterative Solvers with Applications in Incompressible Fluid \+Dynamics\char`\"{} by Howard C. Elman, David J. Silvester, and Andrew J. Wathen, published by Oxford University Press, 2006.
+
+In our implementation of the preconditioner, the linear systems can either be solved \char`\"{}exactly\char`\"{}, using Super\+LU (in its incarnation as an exact preconditioner; this is the default) or by any other \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} (inexact solver) specified via the access functions 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_ab2f387b87192dd2f7b6725cfe3aae44e}{NavierStokesSchurComplementPreconditioner::set\_f\_preconditioner}}(...)}
+
+\end{DoxyCode}
+ or 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a48f0d5e878eccab6e7f080c92d4bc6f5}{NavierStokesSchurComplementPreconditioner::set\_p\_preconditioner}}(...)}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00605}{605}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_ac5ca2d9d665f4bd0a9f2e2cc103486b0}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_ac5ca2d9d665f4bd0a9f2e2cc103486b0}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!NavierStokesSchurComplementPreconditioner@{NavierStokesSchurComplementPreconditioner}}
+\index{NavierStokesSchurComplementPreconditioner@{NavierStokesSchurComplementPreconditioner}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{NavierStokesSchurComplementPreconditioner()}{NavierStokesSchurComplementPreconditioner()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$}]{problem\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor -\/ sets defaults for control flags. 
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00610}{610}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01137}{Accept\+\_\+non\+\_\+\+Navier\+Stokes\+Element\+With\+Diagonal\+Mass\+Matrices\+\_\+elements}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01175}{Allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+navier\+\_\+stokes\+\_\+mesh}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01161}{Bt\+\_\+mat\+\_\+vec\+\_\+pt}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01155}{Doc\+\_\+time}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01167}{E\+\_\+mat\+\_\+vec\+\_\+pt}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01164}{F\+\_\+mat\+\_\+vec\+\_\+pt}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01121}{F\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01171}{Navier\+\_\+stokes\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01118}{P\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01192}{Pin\+\_\+first\+\_\+pressure\+\_\+dof\+\_\+in\+\_\+press\+\_\+adv\+\_\+diff}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01132}{Preconditioner\+\_\+has\+\_\+been\+\_\+setup}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01158}{QBt\+\_\+mat\+\_\+vec\+\_\+pt}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01178}{Use\+\_\+\+LSC}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01181}{Use\+\_\+robin\+\_\+for\+\_\+fp}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01124}{Using\+\_\+default\+\_\+f\+\_\+preconditioner}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01127}{Using\+\_\+default\+\_\+p\+\_\+preconditioner}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_ad954b4f67329c643d5219ed573805b81}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_ad954b4f67329c643d5219ed573805b81}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!````~NavierStokesSchurComplementPreconditioner@{$\sim$NavierStokesSchurComplementPreconditioner}}
+\index{````~NavierStokesSchurComplementPreconditioner@{$\sim$NavierStokesSchurComplementPreconditioner}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{$\sim$NavierStokesSchurComplementPreconditioner()}{~NavierStokesSchurComplementPreconditioner()}}
+{\footnotesize\ttfamily virtual oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::$\sim$\+Navier\+Stokes\+Schur\+Complement\+Preconditioner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00664}{664}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l01672}{clean\+\_\+up\+\_\+memory()}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_aba0ebcbc6963a62ad492fd9271e349a5}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_aba0ebcbc6963a62ad492fd9271e349a5}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!NavierStokesSchurComplementPreconditioner@{NavierStokesSchurComplementPreconditioner}}
+\index{NavierStokesSchurComplementPreconditioner@{NavierStokesSchurComplementPreconditioner}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{NavierStokesSchurComplementPreconditioner()}{NavierStokesSchurComplementPreconditioner()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner}{Navier\+Stokes\+Schur\+Complement\+Preconditioner}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_ab45d7496790cc29a056b83c194aa2a1c}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_ab45d7496790cc29a056b83c194aa2a1c}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!assemble\_inv\_press\_and\_veloc\_mass\_matrix\_diagonal@{assemble\_inv\_press\_and\_veloc\_mass\_matrix\_diagonal}}
+\index{assemble\_inv\_press\_and\_veloc\_mass\_matrix\_diagonal@{assemble\_inv\_press\_and\_veloc\_mass\_matrix\_diagonal}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{assemble\_inv\_press\_and\_veloc\_mass\_matrix\_diagonal()}{assemble\_inv\_press\_and\_veloc\_mass\_matrix\_diagonal()}}
+{\footnotesize\ttfamily void oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::assemble\+\_\+inv\+\_\+press\+\_\+and\+\_\+veloc\+\_\+mass\+\_\+matrix\+\_\+diagonal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$\&}]{inv\+\_\+p\+\_\+mass\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$\&}]{inv\+\_\+v\+\_\+mass\+\_\+pt,  }\item[{const bool \&}]{do\+\_\+both }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Helper function to assemble the inverse diagonals of the pressure and velocity mass matrices from the elemental contributions defined in Navier\+Stokes\+Equations$<$\+DIM$>$. If do\+\_\+both=true, both are computed, otherwise only the velocity mass matrix (the LSC version of the preconditioner only needs that one) 
+
+Helper function to assemble the inverse diagonals of the pressure and velocity mass matrix from the elemental contributions defined in \mbox{\hyperlink{classoomph_1_1NavierStokesElementWithDiagonalMassMatrices}{Navier\+Stokes\+Element\+With\+Diagonal\+Mass\+Matrices}}\+:\+: get\+\_\+pressure\+\_\+and\+\_\+velocity\+\_\+mass\+\_\+matrix\+\_\+diagonal(...) If do\+\_\+both=true, both are computed, otherwise only the velocity mass matrix (the LSC version of the preconditioner only needs that one) 
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00845}{845}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source}{navier\+\_\+stokes\+\_\+preconditioners.\+cc}}.
+
+
+
+References \mbox{\hyperlink{block__preconditioner_8h_source_l01903}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::block\+\_\+distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01822}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::block\+\_\+number()}}, \mbox{\hyperlink{matrices_8cc_source_l01710}{oomph\+::\+CRDouble\+Matrix\+::build\+\_\+without\+\_\+copy()}}, \mbox{\hyperlink{preconditioner_8h_source_l00171}{oomph\+::\+Preconditioner\+::comm\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00448}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l00704}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00261}{oomph\+::\+Linear\+Algebra\+Distribution\+::first\+\_\+row()}}, \mbox{\hyperlink{classoomph_1_1NavierStokesElementWithDiagonalMassMatrices_a4d491d10823eee10381a9b14bce6c244}{oomph\+::\+Navier\+Stokes\+Element\+With\+Diagonal\+Mass\+Matrices\+::get\+\_\+pressure\+\_\+and\+\_\+velocity\+\_\+mass\+\_\+matrix\+\_\+diagonal()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01850}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::index\+\_\+in\+\_\+block()}}, \mbox{\hyperlink{elements_8h_source_l01163}{oomph\+::\+Generalised\+Element\+::is\+\_\+halo()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02017}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::master\+\_\+distribution\+\_\+pt()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01171}{Navier\+\_\+stokes\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00186}{oomph\+::\+Linear\+Algebra\+Distribution\+::nrow()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00193}{oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00689}{problem\+\_\+pt()}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01178}{Use\+\_\+\+LSC}}.
+
+
+
+Referenced by \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00147}{setup()}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_a5cac2493de85690e3954949eb2a27d2c}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_a5cac2493de85690e3954949eb2a27d2c}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!clean\_up\_memory@{clean\_up\_memory}}
+\index{clean\_up\_memory@{clean\_up\_memory}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{clean\_up\_memory()}{clean\_up\_memory()}}
+{\footnotesize\ttfamily void oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::clean\+\_\+up\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Helper function to delete preconditioner data. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Preconditioner_a46c31c416829bedcd9db238431262027}{oomph\+::\+Preconditioner}}.
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l01672}{1672}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source}{navier\+\_\+stokes\+\_\+preconditioners.\+cc}}.
+
+
+
+References \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01161}{Bt\+\_\+mat\+\_\+vec\+\_\+pt}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01167}{E\+\_\+mat\+\_\+vec\+\_\+pt}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01164}{F\+\_\+mat\+\_\+vec\+\_\+pt}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01121}{F\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01118}{P\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01132}{Preconditioner\+\_\+has\+\_\+been\+\_\+setup}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01158}{QBt\+\_\+mat\+\_\+vec\+\_\+pt}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01124}{Using\+\_\+default\+\_\+f\+\_\+preconditioner}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01127}{Using\+\_\+default\+\_\+p\+\_\+preconditioner}}.
+
+
+
+Referenced by \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00034}{oomph\+::\+Pseudo\+Elastic\+FSIPreconditioner\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00147}{setup()}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00664}{$\sim$\+Navier\+Stokes\+Schur\+Complement\+Preconditioner()}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_a483c96d41a5032f90b8027d6ef2c0c5a}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_a483c96d41a5032f90b8027d6ef2c0c5a}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!disable\_accept\_non\_NavierStokesElementWithDiagonalMassMatrices\_elements@{disable\_accept\_non\_NavierStokesElementWithDiagonalMassMatrices\_elements}}
+\index{disable\_accept\_non\_NavierStokesElementWithDiagonalMassMatrices\_elements@{disable\_accept\_non\_NavierStokesElementWithDiagonalMassMatrices\_elements}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{disable\_accept\_non\_NavierStokesElementWithDiagonalMassMatrices\_elements()}{disable\_accept\_non\_NavierStokesElementWithDiagonalMassMatrices\_elements()}}
+{\footnotesize\ttfamily void oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::disable\+\_\+accept\+\_\+non\+\_\+\+Navier\+Stokes\+Element\+With\+Diagonal\+Mass\+Matrices\+\_\+elements (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Do not accept presence of elements that are not of type \mbox{\hyperlink{classoomph_1_1NavierStokesElementWithDiagonalMassMatrices}{Navier\+Stokes\+Element\+With\+Diagonal\+Mass\+Matrices}} without issuing a warning. 
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00713}{713}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01137}{Accept\+\_\+non\+\_\+\+Navier\+Stokes\+Element\+With\+Diagonal\+Mass\+Matrices\+\_\+elements}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_ae0015b71a33a147650606840d98f5a9e}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_ae0015b71a33a147650606840d98f5a9e}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!disable\_doc\_time@{disable\_doc\_time}}
+\index{disable\_doc\_time@{disable\_doc\_time}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{disable\_doc\_time()}{disable\_doc\_time()}}
+{\footnotesize\ttfamily void oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::disable\+\_\+doc\+\_\+time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Disable documentation of time. 
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00811}{811}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01155}{Doc\+\_\+time}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_ae1db0cf426cd70ad4f1f30182d82c469}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_ae1db0cf426cd70ad4f1f30182d82c469}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!disable\_robin\_for\_fp@{disable\_robin\_for\_fp}}
+\index{disable\_robin\_for\_fp@{disable\_robin\_for\_fp}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{disable\_robin\_for\_fp()}{disable\_robin\_for\_fp()}}
+{\footnotesize\ttfamily void oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::disable\+\_\+robin\+\_\+for\+\_\+fp (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Don\textquotesingle{}t use Robin BC elements for the Fp preconditioenr. 
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00826}{826}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01181}{Use\+\_\+robin\+\_\+for\+\_\+fp}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_af406a2d6632c95f7d8b70baba1b912ee}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_af406a2d6632c95f7d8b70baba1b912ee}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!enable\_accept\_non\_NavierStokesElementWithDiagonalMassMatrices\_elements@{enable\_accept\_non\_NavierStokesElementWithDiagonalMassMatrices\_elements}}
+\index{enable\_accept\_non\_NavierStokesElementWithDiagonalMassMatrices\_elements@{enable\_accept\_non\_NavierStokesElementWithDiagonalMassMatrices\_elements}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{enable\_accept\_non\_NavierStokesElementWithDiagonalMassMatrices\_elements()}{enable\_accept\_non\_NavierStokesElementWithDiagonalMassMatrices\_elements()}}
+{\footnotesize\ttfamily void oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::enable\+\_\+accept\+\_\+non\+\_\+\+Navier\+Stokes\+Element\+With\+Diagonal\+Mass\+Matrices\+\_\+elements (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Accept presence of elements that are not of type \mbox{\hyperlink{classoomph_1_1NavierStokesElementWithDiagonalMassMatrices}{Navier\+Stokes\+Element\+With\+Diagonal\+Mass\+Matrices}} without issuing a warning. 
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00705}{705}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01137}{Accept\+\_\+non\+\_\+\+Navier\+Stokes\+Element\+With\+Diagonal\+Mass\+Matrices\+\_\+elements}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_af1a6030468c5795b3ace7a58bcb6b4f1}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_af1a6030468c5795b3ace7a58bcb6b4f1}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!enable\_doc\_time@{enable\_doc\_time}}
+\index{enable\_doc\_time@{enable\_doc\_time}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{enable\_doc\_time()}{enable\_doc\_time()}}
+{\footnotesize\ttfamily void oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::enable\+\_\+doc\+\_\+time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Enable documentation of time. 
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00805}{805}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01155}{Doc\+\_\+time}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_ac6554fd9418b705b70a0a54c0f864db8}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_ac6554fd9418b705b70a0a54c0f864db8}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!enable\_robin\_for\_fp@{enable\_robin\_for\_fp}}
+\index{enable\_robin\_for\_fp@{enable\_robin\_for\_fp}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{enable\_robin\_for\_fp()}{enable\_robin\_for\_fp()}}
+{\footnotesize\ttfamily void oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::enable\+\_\+robin\+\_\+for\+\_\+fp (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Use Robin BC elements for the Fp preconditioner. 
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00820}{820}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01181}{Use\+\_\+robin\+\_\+for\+\_\+fp}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_ac3f40f62d33d33616cdb4bed48aaccde}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_ac3f40f62d33d33616cdb4bed48aaccde}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!get\_pressure\_advection\_diffusion\_matrix@{get\_pressure\_advection\_diffusion\_matrix}}
+\index{get\_pressure\_advection\_diffusion\_matrix@{get\_pressure\_advection\_diffusion\_matrix}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{get\_pressure\_advection\_diffusion\_matrix()}{get\_pressure\_advection\_diffusion\_matrix()}}
+{\footnotesize\ttfamily void oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::get\+\_\+pressure\+\_\+advection\+\_\+diffusion\+\_\+matrix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \&}]{fp\+\_\+matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the pressure advection diffusion matrix. 
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00880}{880}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{problem_8h_source_l01330}{oomph\+::\+Problem\+::add\+\_\+sub\+\_\+mesh()}}, \mbox{\hyperlink{problem_8h_source_l01570}{oomph\+::\+Problem\+::assembly\+\_\+handler\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l00840}{oomph\+::\+Mesh\+::boundary\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1TemplateFreeNavierStokesEquationsBase_a8e896ce593f2dad7d21fade4afabe2c4}{oomph\+::\+Template\+Free\+Navier\+Stokes\+Equations\+Base\+::build\+\_\+fp\+\_\+press\+\_\+adv\+\_\+diff\+\_\+robin\+\_\+bc\+\_\+element()}}, \mbox{\hyperlink{preconditioner_8h_source_l00171}{oomph\+::\+Preconditioner\+::comm\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1TemplateFreeNavierStokesEquationsBase_ac0505918d7458688c9cf55d348c92120}{oomph\+::\+Template\+Free\+Navier\+Stokes\+Equations\+Base\+::delete\+\_\+pressure\+\_\+advection\+\_\+diffusion\+\_\+robin\+\_\+elements()}}, \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{problem_8h_source_l00808}{oomph\+::\+Problem\+::distributed()}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00448}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l00704}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{mesh_8h_source_l00896}{oomph\+::\+Mesh\+::face\+\_\+index\+\_\+at\+\_\+boundary()}}, \mbox{\hyperlink{mesh_8h_source_l00473}{oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l01339}{oomph\+::\+Problem\+::flush\+\_\+sub\+\_\+meshes()}}, \mbox{\hyperlink{problem_8h_source_l01004}{oomph\+::\+Problem\+::get\+\_\+first\+\_\+and\+\_\+last\+\_\+element\+\_\+for\+\_\+assembly()}}, \mbox{\hyperlink{problem_8cc_source_l03890}{oomph\+::\+Problem\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{problem_8h_source_l01280}{oomph\+::\+Problem\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01171}{Navier\+\_\+stokes\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{mesh_8h_source_l00827}{oomph\+::\+Mesh\+::nboundary()}}, \mbox{\hyperlink{mesh_8h_source_l00878}{oomph\+::\+Mesh\+::nboundary\+\_\+element()}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{problem_8h_source_l01323}{oomph\+::\+Problem\+::nsub\+\_\+mesh()}}, \mbox{\hyperlink{classoomph_1_1TemplateFreeNavierStokesEquationsBase_a4e84f2f4260a0e65201cbb19fd63b398}{oomph\+::\+Template\+Free\+Navier\+Stokes\+Equations\+Base\+::p\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00862}{pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01192}{Pin\+\_\+first\+\_\+pressure\+\_\+dof\+\_\+in\+\_\+press\+\_\+adv\+\_\+diff}}, \mbox{\hyperlink{classoomph_1_1TemplateFreeNavierStokesEquationsBase_a4abf8942641e87df7611207e8cb7602d}{oomph\+::\+Template\+Free\+Navier\+Stokes\+Equations\+Base\+::pinned\+\_\+fp\+\_\+pressure\+\_\+eqn()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00689}{problem\+\_\+pt()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01060}{reset\+\_\+pin\+\_\+status()}}, \mbox{\hyperlink{problem_8cc_source_l01613}{oomph\+::\+Problem\+::set\+\_\+default\+\_\+first\+\_\+and\+\_\+last\+\_\+element\+\_\+for\+\_\+assembly()}}, \mbox{\hyperlink{problem_8h_source_l00988}{oomph\+::\+Problem\+::set\+\_\+first\+\_\+and\+\_\+last\+\_\+element\+\_\+for\+\_\+assembly()}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01181}{Use\+\_\+robin\+\_\+for\+\_\+fp}}.
+
+
+
+Referenced by \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00147}{setup()}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_a03941c01d70ece07797301c8ac6a0a8a}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_a03941c01d70ece07797301c8ac6a0a8a}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!pin\_all\_non\_pressure\_dofs@{pin\_all\_non\_pressure\_dofs}}
+\index{pin\_all\_non\_pressure\_dofs@{pin\_all\_non\_pressure\_dofs}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{pin\_all\_non\_pressure\_dofs()}{pin\_all\_non\_pressure\_dofs()}}
+{\footnotesize\ttfamily void oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pin all non-\/pressure dofs. 
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00862}{862}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00448}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01185}{Eqn\+\_\+number\+\_\+backup}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01171}{Navier\+\_\+stokes\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, and \mbox{\hyperlink{classoomph_1_1TemplateFreeNavierStokesEquationsBase_a4db23eff5a82f7b8478c7f9d21857d0a}{oomph\+::\+Template\+Free\+Navier\+Stokes\+Equations\+Base\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs()}}.
+
+
+
+Referenced by \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00880}{get\+\_\+pressure\+\_\+advection\+\_\+diffusion\+\_\+matrix()}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_af7d68718453adc8e7b9e19ad30cc9171}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_af7d68718453adc8e7b9e19ad30cc9171}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!pin\_first\_pressure\_dof\_in\_press\_adv\_diff@{pin\_first\_pressure\_dof\_in\_press\_adv\_diff}}
+\index{pin\_first\_pressure\_dof\_in\_press\_adv\_diff@{pin\_first\_pressure\_dof\_in\_press\_adv\_diff}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{pin\_first\_pressure\_dof\_in\_press\_adv\_diff()}{pin\_first\_pressure\_dof\_in\_press\_adv\_diff()}}
+{\footnotesize\ttfamily void oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::pin\+\_\+first\+\_\+pressure\+\_\+dof\+\_\+in\+\_\+press\+\_\+adv\+\_\+diff (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set boolean indicating that we want to pin first pressure dof in Navier Stokes mesh when assembling the pressure advection diffusion system for Fp preconditoner -- needed at zero Reynolds number for non-\/enclosed flows but seems harmless in any case. 
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00836}{836}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01192}{Pin\+\_\+first\+\_\+pressure\+\_\+dof\+\_\+in\+\_\+press\+\_\+adv\+\_\+diff}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_adbc87003dd8e8c924ae802651b18f2ed}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_adbc87003dd8e8c924ae802651b18f2ed}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!preconditioner\_solve@{preconditioner\_solve}}
+\index{preconditioner\_solve@{preconditioner\_solve}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{preconditioner\_solve()}{preconditioner\_solve()}}
+{\footnotesize\ttfamily void oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::preconditioner\+\_\+solve (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{z }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Apply preconditioner to \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} r. 
+
+Apply preconditioner to r. 
+
+Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34884bb64ec8}{oomph\+::\+Preconditioner}}.
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00658}{658}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source}{navier\+\_\+stokes\+\_\+preconditioners.\+cc}}.
+
+
+
+References \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01161}{Bt\+\_\+mat\+\_\+vec\+\_\+pt}}, \mbox{\hyperlink{double__vector_8cc_source_l00035}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{double__vector_8h_source_l00154}{oomph\+::\+Double\+Vector\+::built()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00342}{oomph\+::\+Linear\+Algebra\+Distribution\+::built()}}, \mbox{\hyperlink{double__vector_8h_source_l00142}{oomph\+::\+Double\+Vector\+::clear()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01167}{E\+\_\+mat\+\_\+vec\+\_\+pt}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01164}{F\+\_\+mat\+\_\+vec\+\_\+pt}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01152}{F\+\_\+preconditioner\+\_\+is\+\_\+block\+\_\+preconditioner}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01121}{F\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04186}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::get\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{matrix__vector__product_8cc_source_l00108}{oomph\+::\+Matrix\+Vector\+Product\+::multiply()}}, \mbox{\hyperlink{matrix__vector__product_8cc_source_l00177}{oomph\+::\+Matrix\+Vector\+Product\+::multiply\+\_\+transpose()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00463}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01118}{P\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01132}{Preconditioner\+\_\+has\+\_\+been\+\_\+setup}}, \mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34884bb64ec8}{oomph\+::\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01158}{QBt\+\_\+mat\+\_\+vec\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04489}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::return\+\_\+block\+\_\+vector()}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01178}{Use\+\_\+\+LSC}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__preconditioners_8h_source_l00373}{oomph\+::\+FSIPreconditioner\+::preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00280}{oomph\+::\+Pseudo\+Elastic\+FSIPreconditioner\+::preconditioner\+\_\+solve()}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_aab92188d3bdcec3b07ac87f51934079b}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_aab92188d3bdcec3b07ac87f51934079b}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!problem\_pt@{problem\_pt}}
+\index{problem\_pt@{problem\_pt}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{problem\_pt()}{problem\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$ oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::problem\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00689}{689}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01196}{Problem\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00846}{assemble\+\_\+inv\+\_\+press\+\_\+and\+\_\+veloc\+\_\+mass\+\_\+matrix\+\_\+diagonal()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00880}{get\+\_\+pressure\+\_\+advection\+\_\+diffusion\+\_\+matrix()}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00684}{set\+\_\+problem\+\_\+pt()}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_af1c121b668b1961a68010f984166947c}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_af1c121b668b1961a68010f984166947c}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!reset\_pin\_status@{reset\_pin\_status}}
+\index{reset\_pin\_status@{reset\_pin\_status}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{reset\_pin\_status()}{reset\_pin\_status()}}
+{\footnotesize\ttfamily void oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::reset\+\_\+pin\+\_\+status (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Reset pin status of all values. 
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01060}{1060}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00448}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00367}{oomph\+::\+Data\+::eqn\+\_\+number()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01185}{Eqn\+\_\+number\+\_\+backup}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l00622}{oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01171}{Navier\+\_\+stokes\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{elements_8h_source_l00823}{oomph\+::\+Generalised\+Element\+::ninternal\+\_\+data()}}, \mbox{\hyperlink{mesh_8h_source_l00596}{oomph\+::\+Mesh\+::nnode()}}, \mbox{\hyperlink{mesh_8h_source_l00436}{oomph\+::\+Mesh\+::node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}, and \mbox{\hyperlink{nodes_8h_source_l01765}{oomph\+::\+Solid\+Node\+::variable\+\_\+position\+\_\+pt()}}.
+
+
+
+Referenced by \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00880}{get\+\_\+pressure\+\_\+advection\+\_\+diffusion\+\_\+matrix()}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_ab2f387b87192dd2f7b6725cfe3aae44e}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_ab2f387b87192dd2f7b6725cfe3aae44e}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!set\_f\_preconditioner@{set\_f\_preconditioner}}
+\index{set\_f\_preconditioner@{set\_f\_preconditioner}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{set\_f\_preconditioner()}{set\_f\_preconditioner()}}
+{\footnotesize\ttfamily void oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::set\+\_\+f\+\_\+preconditioner (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} $\ast$}]{new\+\_\+f\+\_\+preconditioner\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function to set a new momentum matrix preconditioner (inexact solver) 
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00769}{769}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01121}{F\+\_\+preconditioner\+\_\+pt}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01124}{Using\+\_\+default\+\_\+f\+\_\+preconditioner}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_af29abc6e2b9fd92ae3a31a4f9d56f6b8}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_af29abc6e2b9fd92ae3a31a4f9d56f6b8}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!set\_f\_superlu\_preconditioner@{set\_f\_superlu\_preconditioner}}
+\index{set\_f\_superlu\_preconditioner@{set\_f\_superlu\_preconditioner}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{set\_f\_superlu\_preconditioner()}{set\_f\_superlu\_preconditioner()}}
+{\footnotesize\ttfamily void oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::set\+\_\+f\+\_\+superlu\+\_\+preconditioner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function to (re-\/)set momentum matrix preconditioner (inexact solver) to Super\+LU. 
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00795}{795}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01121}{F\+\_\+preconditioner\+\_\+pt}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01124}{Using\+\_\+default\+\_\+f\+\_\+preconditioner}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_abe80b5bb32d24f49f427d04118de284a}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_abe80b5bb32d24f49f427d04118de284a}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!set\_navier\_stokes\_mesh@{set\_navier\_stokes\_mesh}}
+\index{set\_navier\_stokes\_mesh@{set\_navier\_stokes\_mesh}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{set\_navier\_stokes\_mesh()}{set\_navier\_stokes\_mesh()}}
+{\footnotesize\ttfamily void oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::set\+\_\+navier\+\_\+stokes\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$}]{mesh\+\_\+pt,  }\item[{const bool \&}]{allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+navier\+\_\+stokes\+\_\+mesh = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Specify the mesh containing the block-\/preconditionable Navier-\/\+Stokes elements. The optional argument indicates if there are multiple types of elements in the same mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00732}{732}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01175}{Allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+navier\+\_\+stokes\+\_\+mesh}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01782}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::mesh\+\_\+pt()}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01171}{Navier\+\_\+stokes\+\_\+mesh\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__preconditioners_8h_source_l00269}{oomph\+::\+FSIPreconditioner\+::setup()}}, and \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00052}{oomph\+::\+Pseudo\+Elastic\+FSIPreconditioner\+::setup()}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_a48f0d5e878eccab6e7f080c92d4bc6f5}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_a48f0d5e878eccab6e7f080c92d4bc6f5}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!set\_p\_preconditioner@{set\_p\_preconditioner}}
+\index{set\_p\_preconditioner@{set\_p\_preconditioner}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{set\_p\_preconditioner()}{set\_p\_preconditioner()}}
+{\footnotesize\ttfamily void oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::set\+\_\+p\+\_\+preconditioner (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} $\ast$}]{new\+\_\+p\+\_\+preconditioner\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function to set a new pressure matrix preconditioner (inexact solver) 
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00745}{745}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01118}{P\+\_\+preconditioner\+\_\+pt}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01127}{Using\+\_\+default\+\_\+p\+\_\+preconditioner}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_a05bac2703d9570c15bf0676cbbe7ce03}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_a05bac2703d9570c15bf0676cbbe7ce03}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!set\_p\_superlu\_preconditioner@{set\_p\_superlu\_preconditioner}}
+\index{set\_p\_superlu\_preconditioner@{set\_p\_superlu\_preconditioner}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{set\_p\_superlu\_preconditioner()}{set\_p\_superlu\_preconditioner()}}
+{\footnotesize\ttfamily void oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::set\+\_\+p\+\_\+superlu\+\_\+preconditioner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function to (re-\/)set pressure matrix preconditioner (inexact solver) to Super\+LU. 
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00759}{759}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01118}{P\+\_\+preconditioner\+\_\+pt}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01127}{Using\+\_\+default\+\_\+p\+\_\+preconditioner}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_a41814f592afecb493310be513c595739}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_a41814f592afecb493310be513c595739}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!set\_problem\_pt@{set\_problem\_pt}}
+\index{set\_problem\_pt@{set\_problem\_pt}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{set\_problem\_pt()}{set\_problem\_pt()}}
+{\footnotesize\ttfamily void oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::set\+\_\+problem\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$}]{problem\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+Set the problem pointer (non-\/const pointer, the problem WILL be changed) for use in \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_ac3f40f62d33d33616cdb4bed48aaccde}{get\+\_\+pressure\+\_\+advection\+\_\+diffusion\+\_\+matrix()}}. 
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00684}{684}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00689}{problem\+\_\+pt()}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01196}{Problem\+\_\+pt}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_a03cbfa527081ea03c910aadc281615d7}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_a03cbfa527081ea03c910aadc281615d7}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!setup@{setup}}
+\index{setup@{setup}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily void oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Setup the preconditioner. 
+
+///////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////
+
+Setup the least-\/squares commutator Navier Stokes preconditioner. This extracts blocks corresponding to the velocity and pressure unknowns, creates the matrices actually needed in the application of the preconditioner and deletes what can be deleted... Note that this preconditioner needs a \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}}. 
+
+Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb19422943588}{oomph\+::\+Preconditioner}}.
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00147}{147}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source}{navier\+\_\+stokes\+\_\+preconditioners.\+cc}}.
+
+
+
+References \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01175}{Allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+navier\+\_\+stokes\+\_\+mesh}}, \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00846}{assemble\+\_\+inv\+\_\+press\+\_\+and\+\_\+veloc\+\_\+mass\+\_\+matrix\+\_\+diagonal()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l02483}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::block\+\_\+setup()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01161}{Bt\+\_\+mat\+\_\+vec\+\_\+pt}}, \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l01672}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{preconditioner_8h_source_l00171}{oomph\+::\+Preconditioner\+::comm\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01155}{Doc\+\_\+time}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01167}{E\+\_\+mat\+\_\+vec\+\_\+pt}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01164}{F\+\_\+mat\+\_\+vec\+\_\+pt}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01152}{F\+\_\+preconditioner\+\_\+is\+\_\+block\+\_\+preconditioner}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01121}{F\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{mesh_8h_source_l00473}{oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00673}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::get\+\_\+block()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01012}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::get\+\_\+block\+\_\+other\+\_\+matrix()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00880}{get\+\_\+pressure\+\_\+advection\+\_\+diffusion\+\_\+matrix()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02061}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::is\+\_\+subsidiary\+\_\+block\+\_\+preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00520}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::matrix\+\_\+pt()}}, \mbox{\hyperlink{matrices_8cc_source_l01782}{oomph\+::\+CRDouble\+Matrix\+::multiply()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01171}{Navier\+\_\+stokes\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01694}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::ndof\+\_\+types()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02037}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::ndof\+\_\+types\+\_\+in\+\_\+mesh()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01118}{P\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01132}{Preconditioner\+\_\+has\+\_\+been\+\_\+setup}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01158}{QBt\+\_\+mat\+\_\+vec\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02866}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::set\+\_\+mesh()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02851}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::set\+\_\+nmesh()}}, \mbox{\hyperlink{preconditioner_8h_source_l00094}{oomph\+::\+Preconditioner\+::setup()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02397}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::setup\+\_\+matrix\+\_\+vector\+\_\+product()}}, \mbox{\hyperlink{matrices_8h_source_l01031}{oomph\+::\+CRDouble\+Matrix\+::sparse\+\_\+indexed\+\_\+output\+\_\+with\+\_\+offset()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l02376}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::turn\+\_\+into\+\_\+subsidiary\+\_\+block\+\_\+preconditioner()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01178}{Use\+\_\+\+LSC}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01124}{Using\+\_\+default\+\_\+f\+\_\+preconditioner}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01127}{Using\+\_\+default\+\_\+p\+\_\+preconditioner}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__preconditioners_8h_source_l00269}{oomph\+::\+FSIPreconditioner\+::setup()}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_af4886f4efe510e5c9b0eb19422943588}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_af4886f4efe510e5c9b0eb19422943588}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!setup@{setup}}
+\index{setup@{setup}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Preconditioner\+::setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+for some reason we have to remind the compiler that there is a \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a03cbfa527081ea03c910aadc281615d7}{setup()}} function in \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} base class. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb19422943588}{oomph\+::\+Preconditioner}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_a783fae97e4b898f8de72b504a4f4bec6}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_a783fae97e4b898f8de72b504a4f4bec6}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!setup@{setup}}
+\index{setup@{setup}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily void oomph\+::\+Preconditioner\+::setup (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$}]{matrix\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+for some reason we have to remind the compiler that there is a \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a03cbfa527081ea03c910aadc281615d7}{setup()}} function in \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} base class. 
+
+
+
+Definition at line \mbox{\hyperlink{preconditioner_8h_source_l00120}{120}} of file \mbox{\hyperlink{preconditioner_8h_source}{preconditioner.\+h}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_a0b95e7159585b5151f9e5dc1d1713655}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_a0b95e7159585b5151f9e5dc1d1713655}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!setup@{setup}}
+\index{setup@{setup}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily void oomph\+::\+Preconditioner\+::setup (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$}]{matrix\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+for some reason we have to remind the compiler that there is a \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a03cbfa527081ea03c910aadc281615d7}{setup()}} function in \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} base class. 
+
+
+
+Definition at line \mbox{\hyperlink{preconditioner_8h_source_l00094}{94}} of file \mbox{\hyperlink{preconditioner_8h_source}{preconditioner.\+h}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_a58c02e402f5c6103268da36097b4ad0e}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_a58c02e402f5c6103268da36097b4ad0e}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!unpin\_first\_pressure\_dof\_in\_press\_adv\_diff@{unpin\_first\_pressure\_dof\_in\_press\_adv\_diff}}
+\index{unpin\_first\_pressure\_dof\_in\_press\_adv\_diff@{unpin\_first\_pressure\_dof\_in\_press\_adv\_diff}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{unpin\_first\_pressure\_dof\_in\_press\_adv\_diff()}{unpin\_first\_pressure\_dof\_in\_press\_adv\_diff()}}
+{\footnotesize\ttfamily void oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::unpin\+\_\+first\+\_\+pressure\+\_\+dof\+\_\+in\+\_\+press\+\_\+adv\+\_\+diff (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set boolean indicating that we do not want to pin first pressure dof in Navier Stokes mesh when assembling the pressure advection diffusion system for Fp preconditoner -- needed at zero Reynolds number for non-\/enclosed flows but seems harmless in any case. 
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00846}{846}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01192}{Pin\+\_\+first\+\_\+pressure\+\_\+dof\+\_\+in\+\_\+press\+\_\+adv\+\_\+diff}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_a1f77731b78f270044f09f761719a88b0}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_a1f77731b78f270044f09f761719a88b0}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!use\_fp@{use\_fp}}
+\index{use\_fp@{use\_fp}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{use\_fp()}{use\_fp()}}
+{\footnotesize\ttfamily void oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::use\+\_\+fp (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Use Fp version of the preconditioner. 
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00788}{788}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01178}{Use\+\_\+\+LSC}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_ae687961a8422c3b61da2e225c5665110}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_ae687961a8422c3b61da2e225c5665110}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!use\_lsc@{use\_lsc}}
+\index{use\_lsc@{use\_lsc}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{use\_lsc()}{use\_lsc()}}
+{\footnotesize\ttfamily void oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::use\+\_\+lsc (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Use LSC version of the preconditioner. 
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00782}{782}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01178}{Use\+\_\+\+LSC}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_a1b42174c40c4fec1336c547aaa3d07f5}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_a1b42174c40c4fec1336c547aaa3d07f5}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!validate@{validate}}
+\index{validate@{validate}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{validate()}{validate()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::validate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} \&}]{doc\+\_\+info,  }\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$}]{orig\+\_\+problem\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Validate auxiliary pressure advection diffusion problem in 2D. 
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00854}{854}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01171}{Navier\+\_\+stokes\+\_\+mesh\+\_\+pt}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00365}{oomph\+::\+Fp\+Pressure\+Advection\+Diffusion\+Problem$<$ ELEMENT $>$\+::validate()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_a31a0119eae85695e267b2b0e6d58cfe6}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_a31a0119eae85695e267b2b0e6d58cfe6}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!Accept\_non\_NavierStokesElementWithDiagonalMassMatrices\_elements@{Accept\_non\_NavierStokesElementWithDiagonalMassMatrices\_elements}}
+\index{Accept\_non\_NavierStokesElementWithDiagonalMassMatrices\_elements@{Accept\_non\_NavierStokesElementWithDiagonalMassMatrices\_elements}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{Accept\_non\_NavierStokesElementWithDiagonalMassMatrices\_elements}{Accept\_non\_NavierStokesElementWithDiagonalMassMatrices\_elements}}
+{\footnotesize\ttfamily bool oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::\+Accept\+\_\+non\+\_\+\+Navier\+Stokes\+Element\+With\+Diagonal\+Mass\+Matrices\+\_\+elements\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boolean to indicate that presence of elements that are not of type \mbox{\hyperlink{classoomph_1_1NavierStokesElementWithDiagonalMassMatrices}{Navier\+Stokes\+Element\+With\+Diagonal\+Mass\+Matrices}} is acceptable (suppresses warning that issued otherwise). 
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01137}{1137}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00713}{disable\+\_\+accept\+\_\+non\+\_\+\+Navier\+Stokes\+Element\+With\+Diagonal\+Mass\+Matrices\+\_\+elements()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00705}{enable\+\_\+accept\+\_\+non\+\_\+\+Navier\+Stokes\+Element\+With\+Diagonal\+Mass\+Matrices\+\_\+elements()}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00610}{Navier\+Stokes\+Schur\+Complement\+Preconditioner()}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_a932ce8737a185ca987a2c75d8af360d9}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_a932ce8737a185ca987a2c75d8af360d9}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!Allow\_multiple\_element\_type\_in\_navier\_stokes\_mesh@{Allow\_multiple\_element\_type\_in\_navier\_stokes\_mesh}}
+\index{Allow\_multiple\_element\_type\_in\_navier\_stokes\_mesh@{Allow\_multiple\_element\_type\_in\_navier\_stokes\_mesh}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{Allow\_multiple\_element\_type\_in\_navier\_stokes\_mesh}{Allow\_multiple\_element\_type\_in\_navier\_stokes\_mesh}}
+{\footnotesize\ttfamily bool oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::\+Allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+navier\+\_\+stokes\+\_\+mesh\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Flag to indicate if there are multiple element types in the Navier-\/\+Stokes mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01175}{1175}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00610}{Navier\+Stokes\+Schur\+Complement\+Preconditioner()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00732}{set\+\_\+navier\+\_\+stokes\+\_\+mesh()}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00147}{setup()}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_ad7bc578498d001d81223b37badefb44b}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_ad7bc578498d001d81223b37badefb44b}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!Bt\_mat\_vec\_pt@{Bt\_mat\_vec\_pt}}
+\index{Bt\_mat\_vec\_pt@{Bt\_mat\_vec\_pt}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{Bt\_mat\_vec\_pt}{Bt\_mat\_vec\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct}{Matrix\+Vector\+Product}}$\ast$ oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::\+Bt\+\_\+mat\+\_\+vec\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{classoomph_1_1MatrixVectorProduct}{Matrix\+Vector\+Product}} operator for Bt. 
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01161}{1161}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l01672}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00610}{Navier\+Stokes\+Schur\+Complement\+Preconditioner()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00658}{preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00147}{setup()}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_a0b551f53464a6331d3b0f3da61d712ff}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_a0b551f53464a6331d3b0f3da61d712ff}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!Doc\_time@{Doc\_time}}
+\index{Doc\_time@{Doc\_time}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{Doc\_time}{Doc\_time}}
+{\footnotesize\ttfamily bool oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::\+Doc\+\_\+time\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Set Doc\+\_\+time to true for outputting results of timings. 
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01155}{1155}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00811}{disable\+\_\+doc\+\_\+time()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00805}{enable\+\_\+doc\+\_\+time()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00610}{Navier\+Stokes\+Schur\+Complement\+Preconditioner()}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00147}{setup()}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_a6a02950e86b2b8a092dda57587850d1c}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_a6a02950e86b2b8a092dda57587850d1c}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!E\_mat\_vec\_pt@{E\_mat\_vec\_pt}}
+\index{E\_mat\_vec\_pt@{E\_mat\_vec\_pt}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{E\_mat\_vec\_pt}{E\_mat\_vec\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct}{Matrix\+Vector\+Product}}$\ast$ oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::\+E\+\_\+mat\+\_\+vec\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{classoomph_1_1MatrixVectorProduct}{Matrix\+Vector\+Product}} operator for E = Fp Qp$^\wedge$\{-\/1\} (only for Fp variant) 
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01167}{1167}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l01672}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00610}{Navier\+Stokes\+Schur\+Complement\+Preconditioner()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00658}{preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00147}{setup()}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_af34c14327511f1e7deb5726b85b05417}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_af34c14327511f1e7deb5726b85b05417}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!Eqn\_number\_backup@{Eqn\_number\_backup}}
+\index{Eqn\_number\_backup@{Eqn\_number\_backup}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{Eqn\_number\_backup}{Eqn\_number\_backup}}
+{\footnotesize\ttfamily std\+::map$<$\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$, std\+::vector$<$int$>$ $>$ oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::\+Eqn\+\_\+number\+\_\+backup\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Map to store original eqn numbers of various \mbox{\hyperlink{classoomph_1_1Data}{Data}} values when assembling pressure advection diffusion matrix. 
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01185}{1185}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00862}{pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs()}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01060}{reset\+\_\+pin\+\_\+status()}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_a66a5925f3bd0642de7bd3e61b8d740dc}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_a66a5925f3bd0642de7bd3e61b8d740dc}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!F\_mat\_vec\_pt@{F\_mat\_vec\_pt}}
+\index{F\_mat\_vec\_pt@{F\_mat\_vec\_pt}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{F\_mat\_vec\_pt}{F\_mat\_vec\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct}{Matrix\+Vector\+Product}}$\ast$ oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::\+F\+\_\+mat\+\_\+vec\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{classoomph_1_1MatrixVectorProduct}{Matrix\+Vector\+Product}} operator for F. 
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01164}{1164}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l01672}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00610}{Navier\+Stokes\+Schur\+Complement\+Preconditioner()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00658}{preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00147}{setup()}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_ad3e3b6635c1524d8413a75642e4bc4e1}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_ad3e3b6635c1524d8413a75642e4bc4e1}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!F\_preconditioner\_is\_block\_preconditioner@{F\_preconditioner\_is\_block\_preconditioner}}
+\index{F\_preconditioner\_is\_block\_preconditioner@{F\_preconditioner\_is\_block\_preconditioner}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{F\_preconditioner\_is\_block\_preconditioner}{F\_preconditioner\_is\_block\_preconditioner}}
+{\footnotesize\ttfamily bool oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::\+F\+\_\+preconditioner\+\_\+is\+\_\+block\+\_\+preconditioner\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boolean indicating whether the momentum system preconditioner is a block preconditioner. 
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01152}{1152}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00658}{preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00147}{setup()}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_a14a63179117e8cf5822c89ae2b5c9902}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_a14a63179117e8cf5822c89ae2b5c9902}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!F\_preconditioner\_pt@{F\_preconditioner\_pt}}
+\index{F\_preconditioner\_pt@{F\_preconditioner\_pt}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{F\_preconditioner\_pt}{F\_preconditioner\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}}$\ast$ oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::\+F\+\_\+preconditioner\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the \textquotesingle{}preconditioner\textquotesingle{} for the F matrix. 
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01121}{1121}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l01672}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00610}{Navier\+Stokes\+Schur\+Complement\+Preconditioner()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00658}{preconditioner\+\_\+solve()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00769}{set\+\_\+f\+\_\+preconditioner()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00795}{set\+\_\+f\+\_\+superlu\+\_\+preconditioner()}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00147}{setup()}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_a6153711f9561d3d617b78d3035147326}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_a6153711f9561d3d617b78d3035147326}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!Navier\_stokes\_mesh\_pt@{Navier\_stokes\_mesh\_pt}}
+\index{Navier\_stokes\_mesh\_pt@{Navier\_stokes\_mesh\_pt}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{Navier\_stokes\_mesh\_pt}{Navier\_stokes\_mesh\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}$\ast$ oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::\+Navier\+\_\+stokes\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+the pointer to the mesh of block preconditionable Navier Stokes elements. 
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01171}{1171}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00846}{assemble\+\_\+inv\+\_\+press\+\_\+and\+\_\+veloc\+\_\+mass\+\_\+matrix\+\_\+diagonal()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00880}{get\+\_\+pressure\+\_\+advection\+\_\+diffusion\+\_\+matrix()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00610}{Navier\+Stokes\+Schur\+Complement\+Preconditioner()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00862}{pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01060}{reset\+\_\+pin\+\_\+status()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00732}{set\+\_\+navier\+\_\+stokes\+\_\+mesh()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00147}{setup()}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00854}{validate()}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_a94c09c485f93eb273f4217460da02811}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_a94c09c485f93eb273f4217460da02811}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!P\_preconditioner\_pt@{P\_preconditioner\_pt}}
+\index{P\_preconditioner\_pt@{P\_preconditioner\_pt}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{P\_preconditioner\_pt}{P\_preconditioner\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}}$\ast$ oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::\+P\+\_\+preconditioner\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the \textquotesingle{}preconditioner\textquotesingle{} for the pressure matrix. 
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01118}{1118}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l01672}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00610}{Navier\+Stokes\+Schur\+Complement\+Preconditioner()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00658}{preconditioner\+\_\+solve()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00745}{set\+\_\+p\+\_\+preconditioner()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00759}{set\+\_\+p\+\_\+superlu\+\_\+preconditioner()}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00147}{setup()}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_a40ffaa90de4f861037cbd364789eb889}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_a40ffaa90de4f861037cbd364789eb889}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!Pin\_first\_pressure\_dof\_in\_press\_adv\_diff@{Pin\_first\_pressure\_dof\_in\_press\_adv\_diff}}
+\index{Pin\_first\_pressure\_dof\_in\_press\_adv\_diff@{Pin\_first\_pressure\_dof\_in\_press\_adv\_diff}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{Pin\_first\_pressure\_dof\_in\_press\_adv\_diff}{Pin\_first\_pressure\_dof\_in\_press\_adv\_diff}}
+{\footnotesize\ttfamily bool oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::\+Pin\+\_\+first\+\_\+pressure\+\_\+dof\+\_\+in\+\_\+press\+\_\+adv\+\_\+diff\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boolean indicating if we want to pin first pressure dof in Navier Stokes mesh when assembling the pressure advection diffusion system for Fp preconditoner -- needed at zero Reynolds number for non-\/enclosed flows but seems harmless in any case. 
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01192}{1192}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00880}{get\+\_\+pressure\+\_\+advection\+\_\+diffusion\+\_\+matrix()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00610}{Navier\+Stokes\+Schur\+Complement\+Preconditioner()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00836}{pin\+\_\+first\+\_\+pressure\+\_\+dof\+\_\+in\+\_\+press\+\_\+adv\+\_\+diff()}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00846}{unpin\+\_\+first\+\_\+pressure\+\_\+dof\+\_\+in\+\_\+press\+\_\+adv\+\_\+diff()}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_a3584d8bd088fad5ccce394899e167ca3}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_a3584d8bd088fad5ccce394899e167ca3}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!Preconditioner\_has\_been\_setup@{Preconditioner\_has\_been\_setup}}
+\index{Preconditioner\_has\_been\_setup@{Preconditioner\_has\_been\_setup}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{Preconditioner\_has\_been\_setup}{Preconditioner\_has\_been\_setup}}
+{\footnotesize\ttfamily bool oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::\+Preconditioner\+\_\+has\+\_\+been\+\_\+setup\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Control flag is true if the preconditioner has been setup (used so we can wipe the data when the preconditioner is called again) 
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01132}{1132}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l01672}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00610}{Navier\+Stokes\+Schur\+Complement\+Preconditioner()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00658}{preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00147}{setup()}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_a32957b16d3827ea7e6f308e1f3b6f246}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_a32957b16d3827ea7e6f308e1f3b6f246}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!Problem\_pt@{Problem\_pt}}
+\index{Problem\_pt@{Problem\_pt}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{Problem\_pt}{Problem\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}$\ast$ oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::\+Problem\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Storage for the (non-\/const!) problem pointer for use in \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_ac3f40f62d33d33616cdb4bed48aaccde}{get\+\_\+pressure\+\_\+advection\+\_\+diffusion\+\_\+matrix()}}. 
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01196}{1196}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00689}{problem\+\_\+pt()}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00684}{set\+\_\+problem\+\_\+pt()}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_a7d88aae7807a9a8d07491dda4c8c2465}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_a7d88aae7807a9a8d07491dda4c8c2465}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!QBt\_mat\_vec\_pt@{QBt\_mat\_vec\_pt}}
+\index{QBt\_mat\_vec\_pt@{QBt\_mat\_vec\_pt}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{QBt\_mat\_vec\_pt}{QBt\_mat\_vec\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct}{Matrix\+Vector\+Product}}$\ast$ oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::\+QBt\+\_\+mat\+\_\+vec\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{classoomph_1_1MatrixVectorProduct}{Matrix\+Vector\+Product}} operator for Qv$^\wedge$\{-\/1\} Bt. 
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01158}{1158}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l01672}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00610}{Navier\+Stokes\+Schur\+Complement\+Preconditioner()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00658}{preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00147}{setup()}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_a6c6abbfacbceba68be65855cc32bccb1}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_a6c6abbfacbceba68be65855cc32bccb1}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!Use\_LSC@{Use\_LSC}}
+\index{Use\_LSC@{Use\_LSC}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{Use\_LSC}{Use\_LSC}}
+{\footnotesize\ttfamily bool oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::\+Use\+\_\+\+LSC\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boolean to indicate use of LSC (true) or Fp (false) variant. 
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01178}{1178}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00846}{assemble\+\_\+inv\+\_\+press\+\_\+and\+\_\+veloc\+\_\+mass\+\_\+matrix\+\_\+diagonal()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00610}{Navier\+Stokes\+Schur\+Complement\+Preconditioner()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00658}{preconditioner\+\_\+solve()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00147}{setup()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00788}{use\+\_\+fp()}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00782}{use\+\_\+lsc()}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_a3aa99e654544365b78d4dca057ed53e0}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_a3aa99e654544365b78d4dca057ed53e0}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!Use\_robin\_for\_fp@{Use\_robin\_for\_fp}}
+\index{Use\_robin\_for\_fp@{Use\_robin\_for\_fp}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{Use\_robin\_for\_fp}{Use\_robin\_for\_fp}}
+{\footnotesize\ttfamily bool oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::\+Use\+\_\+robin\+\_\+for\+\_\+fp\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Use Robin BC elements for Fp preconditoner? 
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01181}{1181}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00826}{disable\+\_\+robin\+\_\+for\+\_\+fp()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00820}{enable\+\_\+robin\+\_\+for\+\_\+fp()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00880}{get\+\_\+pressure\+\_\+advection\+\_\+diffusion\+\_\+matrix()}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00610}{Navier\+Stokes\+Schur\+Complement\+Preconditioner()}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_a925aa01327e8a6af8c543d2983e92d2f}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_a925aa01327e8a6af8c543d2983e92d2f}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!Using\_default\_f\_preconditioner@{Using\_default\_f\_preconditioner}}
+\index{Using\_default\_f\_preconditioner@{Using\_default\_f\_preconditioner}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{Using\_default\_f\_preconditioner}{Using\_default\_f\_preconditioner}}
+{\footnotesize\ttfamily bool oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::\+Using\+\_\+default\+\_\+f\+\_\+preconditioner\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+flag indicating whether the default F preconditioner is used 
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01124}{1124}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l01672}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00610}{Navier\+Stokes\+Schur\+Complement\+Preconditioner()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00769}{set\+\_\+f\+\_\+preconditioner()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00795}{set\+\_\+f\+\_\+superlu\+\_\+preconditioner()}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00147}{setup()}}.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSchurComplementPreconditioner_a6d9eb3bdee67fafd228e0923e61bd812}\label{classoomph_1_1NavierStokesSchurComplementPreconditioner_a6d9eb3bdee67fafd228e0923e61bd812}} 
+\index{oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}!Using\_default\_p\_preconditioner@{Using\_default\_p\_preconditioner}}
+\index{Using\_default\_p\_preconditioner@{Using\_default\_p\_preconditioner}!oomph::NavierStokesSchurComplementPreconditioner@{oomph::NavierStokesSchurComplementPreconditioner}}
+\doxysubsubsection{\texorpdfstring{Using\_default\_p\_preconditioner}{Using\_default\_p\_preconditioner}}
+{\footnotesize\ttfamily bool oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::\+Using\+\_\+default\+\_\+p\+\_\+preconditioner\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+flag indicating whether the default P preconditioner is used 
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l01127}{1127}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8h_source}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l01672}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00610}{Navier\+Stokes\+Schur\+Complement\+Preconditioner()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00745}{set\+\_\+p\+\_\+preconditioner()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00759}{set\+\_\+p\+\_\+superlu\+\_\+preconditioner()}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00147}{setup()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{navier__stokes__preconditioners_8h}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}\item 
+\mbox{\hyperlink{navier__stokes__preconditioners_8cc}{navier\+\_\+stokes\+\_\+preconditioners.\+cc}}\end{DoxyCompactItemize}

@@ -141,6 +141,18 @@ Functions</h2></td></tr>
 <tr class="memitem:ab17222c9461096e3d5b8cf6250524644"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1CRDoubleMatrixHelpers.html#ab17222c9461096e3d5b8cf6250524644">inf_norm</a> (const <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> * &gt; &amp;matrix_pt)</td></tr>
 <tr class="memdesc:ab17222c9461096e3d5b8cf6250524644"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute infinity (maximum) norm of sub blocks as if it was one matrix.  <a href="namespaceoomph_1_1CRDoubleMatrixHelpers.html#ab17222c9461096e3d5b8cf6250524644">More...</a><br /></td></tr>
 <tr class="separator:ab17222c9461096e3d5b8cf6250524644"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02b5962dbe2bbfb93f54b668100afffc"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1CRDoubleMatrixHelpers.html#a02b5962dbe2bbfb93f54b668100afffc">gershgorin_eigenvalue_estimate</a> (const <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> * &gt; &amp;matrix_pt)</td></tr>
+<tr class="memdesc:a02b5962dbe2bbfb93f54b668100afffc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the largest Gershgorin disc whilst preserving the sign. Let A be an n by n matrix, with entries aij. For <img class="formulaInl" alt="$ i \in \{ 1,...,n \} $" src="form_319.png"/> let <img class="formulaInl" alt="$ R_i = \sum_{i\neq j} |a_{ij}| $" src="form_320.png"/> be the sum of the absolute values of the non-diagonal entries in the i-th row. Let <img class="formulaInl" alt="$ D(a_{ii},R_i) $" src="form_321.png"/> be the closed disc centered at <img class="formulaInl" alt="$ a_{ii} $" src="form_322.png"/> with radius <img class="formulaInl" alt="$ R_i $" src="form_323.png"/>, such a disc is called a Gershgorin disc.  <a href="namespaceoomph_1_1CRDoubleMatrixHelpers.html#a02b5962dbe2bbfb93f54b668100afffc">More...</a><br /></td></tr>
+<tr class="separator:a02b5962dbe2bbfb93f54b668100afffc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7e3ac344aa644292a143a3917a03e65"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1CRDoubleMatrixHelpers.html#ab7e3ac344aa644292a143a3917a03e65">concatenate</a> (const <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> * &gt; &amp;matrix_pt, <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> &amp;result_matrix)</td></tr>
+<tr class="memdesc:ab7e3ac344aa644292a143a3917a03e65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concatenate <a class="el" href="classoomph_1_1CRDoubleMatrix.html" title="A class for compressed row matrices. This is a distributable object.">CRDoubleMatrix</a> matrices. The in matrices are concatenated such that the block structure of the in matrices are preserved in the result matrix. Communication between processors is required. If the block structure of the sub matrices does not need to be preserved, consider using CRDoubleMatrixHelpers::concatenate_without_communication(...).  <a href="namespaceoomph_1_1CRDoubleMatrixHelpers.html#ab7e3ac344aa644292a143a3917a03e65">More...</a><br /></td></tr>
+<tr class="separator:ab7e3ac344aa644292a143a3917a03e65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a996568831ca0db90f080560dd400b3d6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1CRDoubleMatrixHelpers.html#a996568831ca0db90f080560dd400b3d6">concatenate_without_communication</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> * &gt; &amp;row_distribution_pt, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> * &gt; &amp;col_distribution_pt, const <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> * &gt; &amp;matrix_pt, <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> &amp;result_matrix)</td></tr>
+<tr class="memdesc:a996568831ca0db90f080560dd400b3d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concatenate <a class="el" href="classoomph_1_1CRDoubleMatrix.html" title="A class for compressed row matrices. This is a distributable object.">CRDoubleMatrix</a> matrices.  <a href="namespaceoomph_1_1CRDoubleMatrixHelpers.html#a996568831ca0db90f080560dd400b3d6">More...</a><br /></td></tr>
+<tr class="separator:a996568831ca0db90f080560dd400b3d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac04e094c973da752da4b76071ad09f44"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1CRDoubleMatrixHelpers.html#ac04e094c973da752da4b76071ad09f44">concatenate_without_communication</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> * &gt; &amp;block_distribution_pt, const <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> * &gt; &amp;matrix_pt, <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> &amp;result_matrix)</td></tr>
+<tr class="memdesc:ac04e094c973da752da4b76071ad09f44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concatenate <a class="el" href="classoomph_1_1CRDoubleMatrix.html" title="A class for compressed row matrices. This is a distributable object.">CRDoubleMatrix</a> matrices. This calls the other concatenate_without_communication(...) function, passing block_distribution_pt as both the row_distribution_pt and col_distribution_pt. This should only be called for block square matrices.  <a href="namespaceoomph_1_1CRDoubleMatrixHelpers.html#ac04e094c973da752da4b76071ad09f44">More...</a><br /></td></tr>
+<tr class="separator:ac04e094c973da752da4b76071ad09f44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a157511f700993ab8bc014f9d0d44f4c7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1CRDoubleMatrixHelpers.html#a157511f700993ab8bc014f9d0d44f4c7">deep_copy</a> (const <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> *const in_matrix_pt, <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> &amp;out_matrix)</td></tr>
 <tr class="memdesc:a157511f700993ab8bc014f9d0d44f4c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a deep copy of the matrix pointed to by in_matrix_pt.  <a href="namespaceoomph_1_1CRDoubleMatrixHelpers.html#a157511f700993ab8bc014f9d0d44f4c7">More...</a><br /></td></tr>
 <tr class="separator:a157511f700993ab8bc014f9d0d44f4c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -148,6 +160,139 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Namespace for helper functions for CRDoubleMatrices. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
+<a id="ab7e3ac344aa644292a143a3917a03e65" name="ab7e3ac344aa644292a143a3917a03e65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7e3ac344aa644292a143a3917a03e65">&#9670;&nbsp;</a></span>concatenate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::CRDoubleMatrixHelpers::concatenate </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>matrix_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> &amp;&#160;</td>
+          <td class="paramname"><em>result_matrix</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Concatenate <a class="el" href="classoomph_1_1CRDoubleMatrix.html" title="A class for compressed row matrices. This is a distributable object.">CRDoubleMatrix</a> matrices. The in matrices are concatenated such that the block structure of the in matrices are preserved in the result matrix. Communication between processors is required. If the block structure of the sub matrices does not need to be preserved, consider using CRDoubleMatrixHelpers::concatenate_without_communication(...). </p>
+<p >The matrix manipulation functions CRDoubleMatrixHelpers::concatenate(...) and CRDoubleMatrixHelpers::concatenate_without_communication(...) are analogous to the <a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> manipulation functions DoubleVectorHelpers::concatenate(...) and DoubleVectorHelpers::concatenate_without_communication(...). Please look at the <a class="el" href="classoomph_1_1DoubleVector.html" title="A vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleVector</a> functions for an illustration of the differences between concatenate(...) and concatenate_without_communication(...).</p>
+<p >Distribution of the result matrix: If the result matrix does not have a distribution built, then it will be given a uniform row distribution. Otherwise we use the existing distribution. This gives the user the ability to define their own distribution, or save computing power if a distribution has been pre-built.</p>
+<p >NOTE: ALL the matrices pointed to by matrix_pt has to be built. This is not the case with concatenate_without_communication(...) </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8cc_source.html#l04349">4349</a> of file <a class="el" href="matrices_8cc_source.html">matrices.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8cc_source.html#l01672">oomph::CRDoubleMatrix::build()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00342">oomph::LinearAlgebraDistribution::built()</a>, <a class="el" href="matrices_8h_source.html#l01072">oomph::CRDoubleMatrix::column_index()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00335">oomph::LinearAlgebraDistribution::communicator_pt()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00493">oomph::DistributableLinearAlgebraObject::distributed()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00457">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00261">oomph::LinearAlgebraDistribution::first_row()</a>, <a class="el" href="matrices_8h_source.html#l00491">oomph::DenseMatrix&lt; T &gt;::ncol()</a>, <a class="el" href="matrices_8h_source.html#l00485">oomph::DenseMatrix&lt; T &gt;::nrow()</a>, <a class="el" href="matrices_8h_source.html#l01002">oomph::CRDoubleMatrix::nrow()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00193">oomph::LinearAlgebraDistribution::nrow_local()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00387">oomph::LinearAlgebraDistribution::rank_of_global_row()</a>, <a class="el" href="matrices_8h_source.html#l01060">oomph::CRDoubleMatrix::row_start()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01295">oomph::TimingHelpers::timer()</a>, and <a class="el" href="matrices_8h_source.html#l01084">oomph::CRDoubleMatrix::value()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00061">oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner::setup()</a>.</p>
+
+</div>
+</div>
+<a id="ac04e094c973da752da4b76071ad09f44" name="ac04e094c973da752da4b76071ad09f44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac04e094c973da752da4b76071ad09f44">&#9670;&nbsp;</a></span>concatenate_without_communication() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::CRDoubleMatrixHelpers::concatenate_without_communication </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>block_distribution_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>matrix_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> &amp;&#160;</td>
+          <td class="paramname"><em>result_matrix</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Concatenate <a class="el" href="classoomph_1_1CRDoubleMatrix.html" title="A class for compressed row matrices. This is a distributable object.">CRDoubleMatrix</a> matrices. This calls the other concatenate_without_communication(...) function, passing block_distribution_pt as both the row_distribution_pt and col_distribution_pt. This should only be called for block square matrices. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8cc_source.html#l05885">5885</a> of file <a class="el" href="matrices_8cc_source.html">matrices.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8cc_source.html#l05223">concatenate_without_communication()</a>, <a class="el" href="matrices_8h_source.html#l00491">oomph::DenseMatrix&lt; T &gt;::ncol()</a>, and <a class="el" href="matrices_8h_source.html#l00485">oomph::DenseMatrix&lt; T &gt;::nrow()</a>.</p>
+
+</div>
+</div>
+<a id="a996568831ca0db90f080560dd400b3d6" name="a996568831ca0db90f080560dd400b3d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a996568831ca0db90f080560dd400b3d6">&#9670;&nbsp;</a></span>concatenate_without_communication() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::CRDoubleMatrixHelpers::concatenate_without_communication </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>row_distribution_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>col_distribution_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>matrix_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> &amp;&#160;</td>
+          <td class="paramname"><em>result_matrix</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Concatenate <a class="el" href="classoomph_1_1CRDoubleMatrix.html" title="A class for compressed row matrices. This is a distributable object.">CRDoubleMatrix</a> matrices. </p>
+<p >The <a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> row_distribution_pt contains the <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html" title="Describes the distribution of a distributable linear algebra type object. Typically this is a contain...">LinearAlgebraDistribution</a> of each block row. The <a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> col_distribution_pt contains the <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html" title="Describes the distribution of a distributable linear algebra type object. Typically this is a contain...">LinearAlgebraDistribution</a> of each block column. The <a class="el" href="classoomph_1_1DenseMatrix.html" title="//////////////////////////////////////////////////////////////////////////// ////////////////////////...">DenseMatrix</a> matrix_pt contains pointers to the CRDoubleMatrices to concatenate. The <a class="el" href="classoomph_1_1CRDoubleMatrix.html" title="A class for compressed row matrices. This is a distributable object.">CRDoubleMatrix</a> result_matrix is the result matrix.</p>
+<p >The result matrix is a permutation of the sub matrices such that the data stays on the same processor when the result matrix is built, there is no communication between processors. Thus the block structure of the sub matrices are NOT preserved in the result matrix. The rows are block-permuted, defined by the concatenation of the distributions in row_distribution_pt. Similarly, the columns are block-permuted, defined by the concatenation of the distributions in col_distribution_pt. For more details on the block-permutation, see LinearAlgebraDistributionHelpers::concatenate(...).</p>
+<p >If one wishes to preserve the block structure of the sub matrices in the result matrix, consider using CRDoubleMatrixHelpers::concatenate(...), which uses communication between processors to ensure that the block structure of the sub matrices are preserved.</p>
+<p >The matrix manipulation functions CRDoubleMatrixHelpers::concatenate(...) and CRDoubleMatrixHelpers::concatenate_without_communication(...) are analogous to the <a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> manipulation functions DoubleVectorHelpers::concatenate(...) and DoubleVectorHelpers::concatenate_without_communication(...). Please look at the <a class="el" href="classoomph_1_1DoubleVector.html" title="A vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleVector</a> functions for an illustration of the differences between concatenate(...) and concatenate_without_communication(...).</p>
+<p >Distribution of the result matrix: If the result matrix does not have a distribution built, then it will be given a distribution built from the concatenation of the distributions from row_distribution_pt, see LinearAlgebraDistributionHelpers::concatenate(...) for more detail. Otherwise we use the existing distribution. If there is an existing distribution then it must be the same as the distribution from the concatenation of row distributions as described above. Why don't we always compute the distribution "on the fly"? Because a non-uniform distribution requires communication. All block preconditioner distributions are concatenations of the distributions of the individual blocks. </p>
+<p >/////////////// END OF PARANOID TESTS</p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8cc_source.html#l05223">5223</a> of file <a class="el" href="matrices_8cc_source.html">matrices.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8cc_source.html#l01672">oomph::CRDoubleMatrix::build()</a>, <a class="el" href="matrices_8cc_source.html#l01710">oomph::CRDoubleMatrix::build_without_copy()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00342">oomph::LinearAlgebraDistribution::built()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00335">oomph::LinearAlgebraDistribution::communicator_pt()</a>, <a class="el" href="linear__algebra__distribution_8cc_source.html#l00367">oomph::LinearAlgebraDistributionHelpers::concatenate()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00493">oomph::DistributableLinearAlgebraObject::distributed()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00457">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l00491">oomph::DenseMatrix&lt; T &gt;::ncol()</a>, <a class="el" href="matrices_8h_source.html#l00485">oomph::DenseMatrix&lt; T &gt;::nrow()</a>, and <a class="el" href="linear__algebra__distribution_8h_source.html#l00193">oomph::LinearAlgebraDistribution::nrow_local()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="matrices_8cc_source.html#l05885">concatenate_without_communication()</a>, <a class="el" href="block__preconditioner_8h_source.html#l00673">oomph::BlockPreconditioner&lt; MATRIX &gt;::get_block()</a>, and <a class="el" href="block__preconditioner_8h_source.html#l01134">oomph::BlockPreconditioner&lt; MATRIX &gt;::get_concatenated_block()</a>.</p>
+
+</div>
+</div>
 <a id="ae3c10e59d5857457c7e34be8e9262035" name="ae3c10e59d5857457c7e34be8e9262035"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae3c10e59d5857457c7e34be8e9262035">&#9670;&nbsp;</a></span>create_uniformly_distributed_matrix()</h2>
 
@@ -257,6 +402,38 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a02b5962dbe2bbfb93f54b668100afffc" name="a02b5962dbe2bbfb93f54b668100afffc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02b5962dbe2bbfb93f54b668100afffc">&#9670;&nbsp;</a></span>gershgorin_eigenvalue_estimate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::CRDoubleMatrixHelpers::gershgorin_eigenvalue_estimate </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>matrix_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculates the largest Gershgorin disc whilst preserving the sign. Let A be an n by n matrix, with entries aij. For <img class="formulaInl" alt="$ i \in \{ 1,...,n \} $" src="form_319.png"/> let <img class="formulaInl" alt="$ R_i = \sum_{i\neq j} |a_{ij}| $" src="form_320.png"/> be the sum of the absolute values of the non-diagonal entries in the i-th row. Let <img class="formulaInl" alt="$ D(a_{ii},R_i) $" src="form_321.png"/> be the closed disc centered at <img class="formulaInl" alt="$ a_{ii} $" src="form_322.png"/> with radius <img class="formulaInl" alt="$ R_i $" src="form_323.png"/>, such a disc is called a Gershgorin disc. </p>
+<p ><br  />
+ We calculate <img class="formulaInl" alt="$ |D(a_{ii},R_i)|_{max} $" src="form_324.png"/> and multiply by the sign of the diagonal entry.</p>
+<p ><br  />
+ The <a class="el" href="classoomph_1_1DenseMatrix.html" title="//////////////////////////////////////////////////////////////////////////// ////////////////////////...">DenseMatrix</a> of CRDoubleMatrices are treated as if they are one large matrix. Therefore the dimensions of the sub matrices has to "make sense", there is a paranoid check for this.</p>
+<p ><br  />
+ We calculate <img class="formulaInl" alt="$ |D(a_{ii},R_i)|_{max} $" src="form_324.png"/>and multiply by the sign of the diagonal entry.</p>
+<p ><br  />
+ The <a class="el" href="classoomph_1_1DenseMatrix.html" title="//////////////////////////////////////////////////////////////////////////// ////////////////////////...">DenseMatrix</a> of CRDoubleMatrices are treated as if they are one large matrix. Therefore the dimensions of the sub matrices has to "make sense", there is a paranoid check for this. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8cc_source.html#l04003">4003</a> of file <a class="el" href="matrices_8cc_source.html">matrices.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l00491">oomph::DenseMatrix&lt; T &gt;::ncol()</a>, <a class="el" href="matrices_8h_source.html#l00485">oomph::DenseMatrix&lt; T &gt;::nrow()</a>, <a class="el" href="matrices_8h_source.html#l01060">oomph::CRDoubleMatrix::row_start()</a>, and <a class="el" href="matrices_8h_source.html#l01084">oomph::CRDoubleMatrix::value()</a>.</p>
+
+</div>
+</div>
 <a id="ab17222c9461096e3d5b8cf6250524644" name="ab17222c9461096e3d5b8cf6250524644"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab17222c9461096e3d5b8cf6250524644">&#9670;&nbsp;</a></span>inf_norm()</h2>
 
@@ -312,7 +489,7 @@ Functions</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Nov 2 2021 16:35:34
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Dec 21 2021 17:38:49
         </div>
       </div>
     </footer>

@@ -126,8 +126,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle"><div class="title">error_estimator.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -142,6 +141,9 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElementWithZ2ErrorEstimator.html">oomph::ElementWithZ2ErrorEstimator</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for finite elements that can compute the quantities that are required for the Z2 error estimator.  <a href="classoomph_1_1ElementWithZ2ErrorEstimator.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Z2ErrorEstimator.html">oomph::Z2ErrorEstimator</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Z2-error-estimator: Elements that can be used with Z2 error estimation should be derived from the base class <a class="el" href="classoomph_1_1ElementWithZ2ErrorEstimator.html" title="Base class for finite elements that can compute the quantities that are required for the Z2 error est...">ElementWithZ2ErrorEstimator</a> and implement its pure virtual member functions to provide the following functionality:  <a href="classoomph_1_1Z2ErrorEstimator.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DummyErrorEstimator.html">oomph::DummyErrorEstimator</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">///////////////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////////////  <a href="classoomph_1_1DummyErrorEstimator.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -151,15 +153,6 @@ Namespaces</h2></td></tr>
 <tr class="memitem:namespaceoomph"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html">oomph</a></td></tr>
 <tr class="memdesc:namespaceoomph"><td class="mdescLeft">&#160;</td><td class="mdescRight">//////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:ac0ed65f6db53d9ad737e1d2a69767d25"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#ac0ed65f6db53d9ad737e1d2a69767d25">oomph::u</a> {[FE]}(x_k) = \sum_{j=1}^{N} U_j \ \psi_j(x_k)</td></tr>
-<tr class="memdesc:ac0ed65f6db53d9ad737e1d2a69767d25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Z2-error-estimator: Elements that can be used with Z2 error estimation should be derived from the base class <a class="el" href="classoomph_1_1ElementWithZ2ErrorEstimator.html" title="Base class for finite elements that can compute the quantities that are required for the Z2 error est...">ElementWithZ2ErrorEstimator</a> and implement its pure virtual member functions to provide the following functionality:  <a href="namespaceoomph.html#ac0ed65f6db53d9ad737e1d2a69767d25">More...</a><br /></td></tr>
-<tr class="separator:ac0ed65f6db53d9ad737e1d2a69767d25"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae8b63f2a0003b8aab9d2dda967f43fa0"><td class="memItemLeft" align="right" valign="top">f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#ae8b63f2a0003b8aab9d2dda967f43fa0">oomph::f_i</a></td></tr>
-<tr class="memdesc:ae8b63f2a0003b8aab9d2dda967f43fa0"><td class="mdescLeft">&#160;</td><td class="mdescRight">where the <img class="formulaInl" alt="$ \psi_j(x_k) $" src="form_155.png" width="36" height="14"/> are the (global) <img class="formulaInl" alt="$ C^0 $" src="form_156.png" width="15" height="11"/> basis functions, the finite-element representation of the flux, <img class="formulaInl" alt="$ f_i = \partial u/\partial x_i $" src="form_157.png" width="65" height="14"/>,  <a href="namespaceoomph.html#ae8b63f2a0003b8aab9d2dda967f43fa0">More...</a><br /></td></tr>
-<tr class="separator:ae8b63f2a0003b8aab9d2dda967f43fa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 
@@ -189,7 +182,7 @@ Variables</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Nov 2 2021 16:31:16
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Dec 21 2021 17:35:12
         </div>
       </div>
     </footer>

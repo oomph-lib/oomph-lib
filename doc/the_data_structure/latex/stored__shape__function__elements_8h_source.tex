@@ -160,7 +160,7 @@
 \DoxyCodeLine{\Hypertarget{stored__shape__function__elements_8h_source_l00156}00156 \textcolor{comment}{    /// Set the spatial integration scheme -\/-\/ overloaded from the}}
 \DoxyCodeLine{\Hypertarget{stored__shape__function__elements_8h_source_l00157}00157 \textcolor{comment}{    /// finite element base class since a change in the integration scheme}}
 \DoxyCodeLine{\Hypertarget{stored__shape__function__elements_8h_source_l00158}00158 \textcolor{comment}{    /// forces a recomputation of the shape fcts at the integration points.}}
-\DoxyCodeLine{\Hypertarget{stored__shape__function__elements_8h_source_l00159}00159 \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a1c20f4028654ec94f57037a3e3dc6582}{set\_integration\_scheme}}(Integral* \textcolor{keyword}{const}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}});}
+\DoxyCodeLine{\Hypertarget{stored__shape__function__elements_8h_source_l00159}00159 \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a1c20f4028654ec94f57037a3e3dc6582}{set\_integration\_scheme}}(\mbox{\hyperlink{classoomph_1_1Integral}{Integral}}* \textcolor{keyword}{const}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}});}
 \DoxyCodeLine{\Hypertarget{stored__shape__function__elements_8h_source_l00160}00160 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{stored__shape__function__elements_8h_source_l00161}00161 \textcolor{comment}{    /// Return a pointer to the vector of pointers to the}}
 \DoxyCodeLine{\Hypertarget{stored__shape__function__elements_8h_source_l00162}00162 \textcolor{comment}{    /// stored shape functions}}
@@ -305,7 +305,7 @@
 \DoxyCodeLine{\Hypertarget{stored__shape__function__elements_8h_source_l00301}00301 \textcolor{comment}{    /// values have been stored, they will be used.}}
 \DoxyCodeLine{\Hypertarget{stored__shape__function__elements_8h_source_l00302}00302 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a94e5818f75717febe8af072351543811}{dshape\_local\_at\_knot}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ipt,}
 \DoxyCodeLine{\Hypertarget{stored__shape__function__elements_8h_source_l00303}00303                               \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\& psi,}
-\DoxyCodeLine{\Hypertarget{stored__shape__function__elements_8h_source_l00304}00304                               \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_ae3d0addae4ef07ae7295fe439483caf0}{dpsids}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{stored__shape__function__elements_8h_source_l00304}00304                               \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& dpsids) \textcolor{keyword}{const};}
 \DoxyCodeLine{\Hypertarget{stored__shape__function__elements_8h_source_l00305}00305 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{stored__shape__function__elements_8h_source_l00306}00306 \textcolor{comment}{    /// Calculate the second derivatives of the shape functions}}
 \DoxyCodeLine{\Hypertarget{stored__shape__function__elements_8h_source_l00307}00307 \textcolor{comment}{    /// w.r.t. local coordinates at the integration points and store the}}
@@ -318,7 +318,7 @@
 \DoxyCodeLine{\Hypertarget{stored__shape__function__elements_8h_source_l00314}00314 \textcolor{comment}{    /// values have been stored, they will be used.}}
 \DoxyCodeLine{\Hypertarget{stored__shape__function__elements_8h_source_l00315}00315 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_af1b0ce3644efb101953a6dc2ce120a3e}{d2shape\_local\_at\_knot}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ipt,}
 \DoxyCodeLine{\Hypertarget{stored__shape__function__elements_8h_source_l00316}00316                                \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\& psi,}
-\DoxyCodeLine{\Hypertarget{stored__shape__function__elements_8h_source_l00317}00317                                \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_ae3d0addae4ef07ae7295fe439483caf0}{dpsids}},}
+\DoxyCodeLine{\Hypertarget{stored__shape__function__elements_8h_source_l00317}00317                                \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& dpsids,}
 \DoxyCodeLine{\Hypertarget{stored__shape__function__elements_8h_source_l00318}00318                                \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& d2psids) \textcolor{keyword}{const};}
 \DoxyCodeLine{\Hypertarget{stored__shape__function__elements_8h_source_l00319}00319 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{stored__shape__function__elements_8h_source_l00320}00320 \textcolor{comment}{    /// Calculate the Jacobian of the mapping from local to global}}
@@ -441,7 +441,7 @@
 \DoxyCodeLine{\Hypertarget{stored__shape__function__elements_8h_source_l00437}00437 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{stored__shape__function__elements_8h_source_l00438}00438 \textcolor{comment}{    /// Overload the set\_integration\_scheme to recompute any stored}}
 \DoxyCodeLine{\Hypertarget{stored__shape__function__elements_8h_source_l00439}00439 \textcolor{comment}{    /// derivatives w.r.t. Lagrangian coordinates}}
-\DoxyCodeLine{\Hypertarget{stored__shape__function__elements_8h_source_l00440}\mbox{\hyperlink{classoomph_1_1StorableShapeSolidElementBase_acca94924abe9b0a0572ed0a73efb600a}{00440}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1StorableShapeSolidElementBase_acca94924abe9b0a0572ed0a73efb600a}{set\_integration\_scheme}}(Integral* \textcolor{keyword}{const}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}})}
+\DoxyCodeLine{\Hypertarget{stored__shape__function__elements_8h_source_l00440}\mbox{\hyperlink{classoomph_1_1StorableShapeSolidElementBase_acca94924abe9b0a0572ed0a73efb600a}{00440}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1StorableShapeSolidElementBase_acca94924abe9b0a0572ed0a73efb600a}{set\_integration\_scheme}}(\mbox{\hyperlink{classoomph_1_1Integral}{Integral}}* \textcolor{keyword}{const}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}})}
 \DoxyCodeLine{\Hypertarget{stored__shape__function__elements_8h_source_l00441}00441     \{}
 \DoxyCodeLine{\Hypertarget{stored__shape__function__elements_8h_source_l00442}00442       \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a1c20f4028654ec94f57037a3e3dc6582}{StorableShapeElementBase::set\_integration\_scheme}}(\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}});}
 \DoxyCodeLine{\Hypertarget{stored__shape__function__elements_8h_source_l00443}00443 }
@@ -533,7 +533,7 @@
 \DoxyCodeLine{\Hypertarget{stored__shape__function__elements_8h_source_l00529}00529 \textcolor{comment}{}    \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1StorableShapeSolidElementBase_a55f3ab1f51572cf77e374e4917f47f2b}{d2shape\_lagrangian\_at\_knot}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ipt,}
 \DoxyCodeLine{\Hypertarget{stored__shape__function__elements_8h_source_l00530}00530                                       \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\& psi,}
 \DoxyCodeLine{\Hypertarget{stored__shape__function__elements_8h_source_l00531}00531                                       \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& dpsidxi,}
-\DoxyCodeLine{\Hypertarget{stored__shape__function__elements_8h_source_l00532}00532                                       \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a1854ec49f297e92d050433e59045356c}{d2psidxi}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{stored__shape__function__elements_8h_source_l00532}00532                                       \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& d2psidxi) \textcolor{keyword}{const};}
 \DoxyCodeLine{\Hypertarget{stored__shape__function__elements_8h_source_l00533}00533 }
 \DoxyCodeLine{\Hypertarget{stored__shape__function__elements_8h_source_l00534}00534 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{stored__shape__function__elements_8h_source_l00535}00535 \textcolor{comment}{    /// Set the derivatives of stored shape functions with respect}}

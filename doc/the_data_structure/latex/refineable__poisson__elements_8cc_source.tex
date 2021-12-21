@@ -52,7 +52,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00048}00048     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00049}00049 }
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00050}00050     \textcolor{comment}{// Vector of global coordinates}}
-\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00051}00051     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(DIM);}
+\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00051}00051     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(DIM);}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00052}00052 }
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00053}00053     \textcolor{comment}{// Find out how many nodes there are in the element}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00054}00054     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_node = nnode();}
@@ -85,10 +85,10 @@
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00081}00081       \textcolor{keywordtype}{double} J = J\_eulerian(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00082}00082 }
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00083}00083       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00084}00084       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00084}00084       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00085}00085 }
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00086}00086       \textcolor{comment}{// Get x position as Vector}}
-\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00087}00087       interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00087}00087       interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00088}00088 }
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00089}00089       \textcolor{comment}{// Allocate storage for FE flux Vector}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00090}00090       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} fe\_flux(DIM);}
@@ -97,12 +97,12 @@
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00093}00093       get\_Z2\_flux(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, fe\_flux);}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00094}00094 }
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00095}00095       \textcolor{comment}{// Get exact flux at this point}}
-\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00096}00096       (*exact\_flux\_pt)(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, exact\_flux);}
+\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00096}00096       (*exact\_flux\_pt)(x, exact\_flux);}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00097}00097 }
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00098}00098       \textcolor{comment}{// Output x,y,...}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00099}00099       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00100}00100       \{}
-\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00101}00101         outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00101}00101         outfile << x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00102}00102       \}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00103}00103 }
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00104}00104       \textcolor{comment}{// Output exact flux}}
@@ -126,8 +126,8 @@
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00122}00122         sum += (fe\_flux[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ exact\_flux[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]) * (fe\_flux[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ exact\_flux[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]);}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00123}00123         sum2 += exact\_flux[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * exact\_flux[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00124}00124       \}}
-\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00125}00125       error += sum * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
-\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00126}00126       norm += sum2 * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00125}00125       error += sum * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
+\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00126}00126       norm += sum2 * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00127}00127 }
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00128}00128     \} \textcolor{comment}{// End of loop over the integration points}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00129}00129   \}}
@@ -175,7 +175,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00171}00171         ipt, psi, dpsidx, test, dtestdx);}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00172}00172 }
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00173}00173       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00174}00174       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00174}00174       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00175}00175 }
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00176}00176       \textcolor{comment}{// Position and gradient}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00177}00177       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} interpolated\_x(DIM, 0.0);}
@@ -257,13 +257,13 @@
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00253}00253           \textcolor{keywordflow}{if} (local\_eqn >= 0)}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00254}00254           \{}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00255}00255             \textcolor{comment}{// Add body force/source term here}}
-\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00256}00256             residuals[local\_eqn] += source * test(l) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight;}
+\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00256}00256             residuals[local\_eqn] += source * test(l) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight;}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00257}00257 }
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00258}00258             \textcolor{comment}{// The Poisson bit itself}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00259}00259             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < DIM; k++)}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00260}00260             \{}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00261}00261               residuals[local\_eqn] +=}
-\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00262}00262                 interpolated\_dudx[k] * dtestdx(l, k) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight;}
+\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00262}00262                 interpolated\_dudx[k] * dtestdx(l, k) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight;}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00263}00263             \}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00264}00264 }
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00265}00265             \textcolor{comment}{// Calculate the Jacobian}}
@@ -323,7 +323,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00319}00319                     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00320}00320                     \{}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00321}00321                       jacobian(local\_eqn, local\_unknown) +=}
-\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00322}00322                         dpsidx(l2, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * dtestdx(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight *}
+\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00322}00322                         dpsidx(l2, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * dtestdx(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight *}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00323}00323                         hang\_weight2;}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00324}00324                     \}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00325}00325                   \}}
@@ -544,7 +544,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00540}00540     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00541}00541 }
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00542}00542     \textcolor{comment}{// Vector for coordintes}}
-\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00543}00543     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(DIM);}
+\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00543}00543     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(DIM);}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00544}00544 }
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00545}00545     \textcolor{comment}{// Set the value of n\_intpt}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00546}00546     \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>integral\_pt()-\/>nweight();}
@@ -582,22 +582,22 @@
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00578}00578       \textcolor{keywordtype}{double} J = this-\/>J\_eulerian(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00579}00579 }
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00580}00580       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00581}00581       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00581}00581       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00582}00582 }
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00583}00583       \textcolor{comment}{// Get x position as Vector}}
-\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00584}00584       this-\/>interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00584}00584       this-\/>interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00585}00585 }
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00586}00586       \textcolor{comment}{// Get FE du/dx}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00587}00587       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} dudx\_fe(DIM);}
-\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00588}00588       PoissonEquations<DIM>::get\_flux(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, dudx\_fe);}
+\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00588}00588       \mbox{\hyperlink{classoomph_1_1PoissonEquations_aa11374daca090943d5abc70fa73cc763}{PoissonEquations<DIM>::get\_flux}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, dudx\_fe);}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00589}00589 }
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00590}00590       \textcolor{comment}{// Get exact gradient at this point}}
-\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00591}00591       (*exact\_grad\_pt)(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, exact\_grad);}
+\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00591}00591       (*exact\_grad\_pt)(x, exact\_grad);}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00592}00592 }
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00593}00593       \textcolor{comment}{// Output x,y,...,error}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00594}00594       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00595}00595       \{}
-\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00596}00596         outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00596}00596         outfile << x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00597}00597       \}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00598}00598       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00599}00599       \{}
@@ -608,9 +608,9 @@
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00604}00604       \textcolor{comment}{// Add to error and norm}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00605}00605       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00606}00606       \{}
-\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00607}00607         norm += exact\_grad[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * exact\_grad[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00607}00607         norm += exact\_grad[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * exact\_grad[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00608}00608         error +=}
-\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00609}00609           (exact\_grad[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ dudx\_fe[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]) * (exact\_grad[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ dudx\_fe[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00609}00609           (exact\_grad[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ dudx\_fe[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]) * (exact\_grad[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ dudx\_fe[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00610}00610       \}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00611}00611     \}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8cc_source_l00612}00612   \}}

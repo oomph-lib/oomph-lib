@@ -56,7 +56,7 @@
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00052}\mbox{\hyperlink{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_abfbf54a4e1228fd633c57ada920d28cc}{00052}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1IsotropicElasticityTensor}{IsotropicElasticityTensor}} \mbox{\hyperlink{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_abfbf54a4e1228fd633c57ada920d28cc}{Isotropic\_elasticity\_tensor}}(\mbox{\hyperlink{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_a27eabf4a5c7ca88b62dcb3e87462587e}{Nu}});}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00053}00053 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00054}00054 \textcolor{comment}{    /// Create constitutive law (for smoothing by nonlinear elasticity)}}
-\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00055}\mbox{\hyperlink{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_a16460050187c2bd5edb4e5ae24578f0f}{00055}} \textcolor{comment}{}    ConstitutiveLaw* \mbox{\hyperlink{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_a16460050187c2bd5edb4e5ae24578f0f}{Constitutive\_law\_pt}} = \textcolor{keyword}{new} GeneralisedHookean(\&\mbox{\hyperlink{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_a27eabf4a5c7ca88b62dcb3e87462587e}{Nu}}, \&\mbox{\hyperlink{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_a898d8e0f8dc2e672397917061d06fe03}{E}});}
+\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00055}\mbox{\hyperlink{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_a16460050187c2bd5edb4e5ae24578f0f}{00055}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw}{ConstitutiveLaw}}* \mbox{\hyperlink{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_a16460050187c2bd5edb4e5ae24578f0f}{Constitutive\_law\_pt}} = \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1GeneralisedHookean}{GeneralisedHookean}}(\&\mbox{\hyperlink{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_a27eabf4a5c7ca88b62dcb3e87462587e}{Nu}}, \&\mbox{\hyperlink{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_a898d8e0f8dc2e672397917061d06fe03}{E}});}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00056}00056 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00057}00057 \textcolor{comment}{    /// Scale for displacement of quadratic boundary (0.0: simplex; 1.0:}}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00058}00058 \textcolor{comment}{    /// quadratic)}}
@@ -154,7 +154,7 @@
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00150}00150 }
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00151}00151       \textcolor{keywordtype}{unsigned} nnode = orig\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a945e7823d1a2af243b5b7f7866aaff5e}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00152}00152       \textcolor{keywordtype}{unsigned} nbound = orig\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a84543564d6babe4faacbb9d87043fc19}{nboundary}}();}
-\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00153}00153       \textcolor{keywordtype}{unsigned} dim = orig\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1SolidMesh_a053f864c3df9b7436b2eda1554d30ee5}{node\_pt}}(0)-\/>ndim();}
+\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00153}00153       \textcolor{keywordtype}{unsigned} dim = orig\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1SolidMesh_a053f864c3df9b7436b2eda1554d30ee5}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00154}00154 }
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00155}00155       \textcolor{comment}{// Add to problem's collection of sub-\/meshes}}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00156}00156       \mbox{\hyperlink{classoomph_1_1Problem_a0cd05109bc2c003c5c0686e6aa55d847}{add\_sub\_mesh}}(\mbox{\hyperlink{classoomph_1_1NonLinearElasticitySmoothMesh_a3034da1f2e87fd7dcbabd6883ba7cdd9}{Dummy\_mesh\_pt}});}
@@ -171,7 +171,7 @@
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00167}00167         \mbox{\hyperlink{classoomph_1_1SolidNode}{SolidNode}}* nod\_pt = \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1SolidNode}{SolidNode}}*\textcolor{keyword}{>}(\mbox{\hyperlink{classoomph_1_1NonLinearElasticitySmoothMesh_a24fd838e1a0a8b8a7fe59249349e7da3}{Orig\_mesh\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1SolidMesh_a053f864c3df9b7436b2eda1554d30ee5}{node\_pt}}(j));}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00168}00168         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < dim; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00169}00169         \{}
-\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00170}00170           \mbox{\hyperlink{classoomph_1_1NonLinearElasticitySmoothMesh_a0d59ca9e732fafa9c1d70c85cdefbb74}{Orig\_node\_pos}}[j][\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = nod\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00170}00170           \mbox{\hyperlink{classoomph_1_1NonLinearElasticitySmoothMesh_a0d59ca9e732fafa9c1d70c85cdefbb74}{Orig\_node\_pos}}[j][\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00171}00171         \}}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00172}00172       \}}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00173}00173 }
@@ -362,13 +362,13 @@
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00358}00358       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < nnode; j++)}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00359}00359       \{}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00360}00360         \textcolor{comment}{// Get nodes}}
-\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00361}00361         Node* orig\_node\_pt = orig\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1SolidMesh_a053f864c3df9b7436b2eda1554d30ee5}{node\_pt}}(j);}
-\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00362}00362         Node* new\_node\_pt = \mbox{\hyperlink{classoomph_1_1NonLinearElasticitySmoothMesh_a3034da1f2e87fd7dcbabd6883ba7cdd9}{Dummy\_mesh\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1SolidMesh_a053f864c3df9b7436b2eda1554d30ee5}{node\_pt}}(j);}
+\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00361}00361         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* orig\_node\_pt = orig\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1SolidMesh_a053f864c3df9b7436b2eda1554d30ee5}{node\_pt}}(j);}
+\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00362}00362         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* new\_node\_pt = \mbox{\hyperlink{classoomph_1_1NonLinearElasticitySmoothMesh_a3034da1f2e87fd7dcbabd6883ba7cdd9}{Dummy\_mesh\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1SolidMesh_a053f864c3df9b7436b2eda1554d30ee5}{node\_pt}}(j);}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00363}00363 }
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00364}00364         \textcolor{comment}{// Assign new position}}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00365}00365         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < dim; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00366}00366         \{}
-\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00367}00367           orig\_node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = new\_node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00367}00367           orig\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = new\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00368}00368         \}}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00369}00369       \}}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00370}00370 }
@@ -404,10 +404,10 @@
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00400}00400       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < nnod; j++)}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00401}00401       \{}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00402}00402         \mbox{\hyperlink{classoomph_1_1SolidNode}{SolidNode}}* nod\_pt = \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1SolidNode}{SolidNode}}*\textcolor{keyword}{>}(\mbox{\hyperlink{classoomph_1_1NonLinearElasticitySmoothMesh_a24fd838e1a0a8b8a7fe59249349e7da3}{Orig\_mesh\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1SolidMesh_a053f864c3df9b7436b2eda1554d30ee5}{node\_pt}}(j));}
-\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00403}00403         \textcolor{keywordtype}{unsigned} dim = nod\_pt-\/>ndim();}
+\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00403}00403         \textcolor{keywordtype}{unsigned} dim = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00404}00404         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < dim; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00405}00405         \{}
-\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00406}00406           nod\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) =}
+\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00406}00406           nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) =}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00407}00407             nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1SolidNode_aa6780c66ed3f5db5cbb8fe2c0a476974}{xi}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) + \mbox{\hyperlink{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_a1becf6969521c3750d1267dd619a2d41}{Helper\_namespace\_for\_mesh\_smoothing::Scale}} *}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00408}00408                               (\mbox{\hyperlink{classoomph_1_1NonLinearElasticitySmoothMesh_a0d59ca9e732fafa9c1d70c85cdefbb74}{Orig\_node\_pos}}[j][\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1SolidNode_aa6780c66ed3f5db5cbb8fe2c0a476974}{xi}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00409}00409         \}}
@@ -424,11 +424,11 @@
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00420}00420       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < nnod; j++)}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00421}00421       \{}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00422}00422         \mbox{\hyperlink{classoomph_1_1SolidNode}{SolidNode}}* nod\_pt = \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1SolidNode}{SolidNode}}*\textcolor{keyword}{>}(\mbox{\hyperlink{classoomph_1_1NonLinearElasticitySmoothMesh_a3034da1f2e87fd7dcbabd6883ba7cdd9}{Dummy\_mesh\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1SolidMesh_a053f864c3df9b7436b2eda1554d30ee5}{node\_pt}}(j));}
-\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00423}00423         \textcolor{keywordtype}{unsigned} dim = nod\_pt-\/>ndim();}
+\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00423}00423         \textcolor{keywordtype}{unsigned} dim = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00424}00424         \mbox{\hyperlink{classoomph_1_1NonLinearElasticitySmoothMesh_a6ae3b3800d408d21fe1e6fa68575f58a}{Backup\_node\_pos}}[j].resize(dim);}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00425}00425         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < dim; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00426}00426         \{}
-\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00427}00427           \mbox{\hyperlink{classoomph_1_1NonLinearElasticitySmoothMesh_a6ae3b3800d408d21fe1e6fa68575f58a}{Backup\_node\_pos}}[j][\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = nod\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00427}00427           \mbox{\hyperlink{classoomph_1_1NonLinearElasticitySmoothMesh_a6ae3b3800d408d21fe1e6fa68575f58a}{Backup\_node\_pos}}[j][\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00428}00428         \}}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00429}00429       \}}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00430}00430     \}}
@@ -442,10 +442,10 @@
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00438}00438       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < nnod; j++)}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00439}00439       \{}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00440}00440         \mbox{\hyperlink{classoomph_1_1SolidNode}{SolidNode}}* nod\_pt = \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1SolidNode}{SolidNode}}*\textcolor{keyword}{>}(\mbox{\hyperlink{classoomph_1_1NonLinearElasticitySmoothMesh_a3034da1f2e87fd7dcbabd6883ba7cdd9}{Dummy\_mesh\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1SolidMesh_a053f864c3df9b7436b2eda1554d30ee5}{node\_pt}}(j));}
-\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00441}00441         \textcolor{keywordtype}{unsigned} dim = nod\_pt-\/>ndim();}
+\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00441}00441         \textcolor{keywordtype}{unsigned} dim = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00442}00442         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < dim; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00443}00443         \{}
-\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00444}00444           nod\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = \mbox{\hyperlink{classoomph_1_1NonLinearElasticitySmoothMesh_a6ae3b3800d408d21fe1e6fa68575f58a}{Backup\_node\_pos}}[j][\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00444}00444           nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = \mbox{\hyperlink{classoomph_1_1NonLinearElasticitySmoothMesh_a6ae3b3800d408d21fe1e6fa68575f58a}{Backup\_node\_pos}}[j][\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00445}00445         \}}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00446}00446       \}}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00447}00447     \}}
@@ -562,16 +562,16 @@
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00558}00558           \textcolor{comment}{// Does it not exist yet?}}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00559}00559           \textcolor{keywordflow}{if} (new\_node[orig\_elem\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j)] == 0)}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00560}00560           \{}
-\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00561}00561             Node* new\_nod\_pt =}
+\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00561}00561             \mbox{\hyperlink{classoomph_1_1Node}{Node}}* new\_nod\_pt =}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00562}00562               \mbox{\hyperlink{classoomph_1_1Problem_ae2e5559918832d0850b3631d004d0a37}{mesh\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a54676a4e37813f207d53ef9a7d16fd41}{construct\_node}}(j);}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00563}00563             new\_node[orig\_elem\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j)] = new\_nod\_pt;}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00564}00564             \mbox{\hyperlink{classoomph_1_1Problem_ae2e5559918832d0850b3631d004d0a37}{mesh\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Mesh_ac09a9bfeb6d70d8bbefe13c86948a6fc}{add\_node\_pt}}(new\_nod\_pt);}
-\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00565}00565             \textcolor{keywordtype}{unsigned} dim = new\_nod\_pt-\/>ndim();}
+\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00565}00565             \textcolor{keywordtype}{unsigned} dim = new\_nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00566}00566             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < dim; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00567}00567             \{}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00568}00568               \textcolor{comment}{// Set new nodal position to be the old one in the}}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00569}00569               \textcolor{comment}{// SolidMesh (assumed to contain no inverted elements)}}
-\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00570}00570               new\_nod\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) =}
+\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00570}00570               new\_nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) =}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00571}00571                 \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1SolidNode}{SolidNode}}*\textcolor{keyword}{>}(orig\_elem\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j))-\/>xi(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00572}00572             \}}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00573}00573           \}}
@@ -591,13 +591,13 @@
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00587}00587            it != pinned\_nodes.end();}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00588}00588            it++)}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00589}00589       \{}
-\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00590}00590         \textcolor{keywordtype}{unsigned} dim = (*it)-\/>ndim();}
+\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00590}00590         \textcolor{keywordtype}{unsigned} dim = (*it)-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00591}00591         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < dim; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00592}00592         \{}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00593}00593           new\_node[*it]-\/>pin(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00594}00594           new\_node[*it]-\/>set\_value(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}},}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00595}00595                                    scale *}
-\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00596}00596                                      (\textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1SolidNode}{SolidNode}}*\textcolor{keyword}{>}(*it)-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) -\/}
+\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00596}00596                                      (\textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1SolidNode}{SolidNode}}*\textcolor{keyword}{>}(*it)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) -\/}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00597}00597                                       \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1SolidNode}{SolidNode}}*\textcolor{keyword}{>}(*it)-\/>\mbox{\hyperlink{classoomph_1_1SolidNode_aa6780c66ed3f5db5cbb8fe2c0a476974}{xi}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})));}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00598}00598         \}}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00599}00599       \}}
@@ -614,13 +614,13 @@
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00610}00610       \{}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00611}00611         \textcolor{comment}{// Get nodes}}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00612}00612         \mbox{\hyperlink{classoomph_1_1SolidNode}{SolidNode}}* orig\_node\_pt = orig\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1SolidMesh_a053f864c3df9b7436b2eda1554d30ee5}{node\_pt}}(j);}
-\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00613}00613         Node* new\_node\_pt = new\_node[orig\_node\_pt];}
+\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00613}00613         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* new\_node\_pt = new\_node[orig\_node\_pt];}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00614}00614 }
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00615}00615         \textcolor{comment}{// Assign displacement difference}}
-\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00616}00616         \textcolor{keywordtype}{unsigned} dim = new\_node\_pt-\/>ndim();}
+\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00616}00616         \textcolor{keywordtype}{unsigned} dim = new\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00617}00617         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < dim; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00618}00618         \{}
-\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00619}00619           orig\_node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = orig\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1SolidNode_aa6780c66ed3f5db5cbb8fe2c0a476974}{xi}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) + new\_node\_pt-\/>value(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00619}00619           orig\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = orig\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1SolidNode_aa6780c66ed3f5db5cbb8fe2c0a476974}{xi}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) + new\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_afcc5cdba40bca251826ae5bee5ca15b4}{value}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00620}00620         \}}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00621}00621       \}}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00622}00622 }
@@ -691,16 +691,16 @@
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00687}00687           \textcolor{comment}{// Does it not exist yet?}}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00688}00688           \textcolor{keywordflow}{if} (new\_node[orig\_elem\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j)] == 0)}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00689}00689           \{}
-\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00690}00690             Node* new\_nod\_pt =}
+\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00690}00690             \mbox{\hyperlink{classoomph_1_1Node}{Node}}* new\_nod\_pt =}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00691}00691               \mbox{\hyperlink{classoomph_1_1Problem_ae2e5559918832d0850b3631d004d0a37}{mesh\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a54676a4e37813f207d53ef9a7d16fd41}{construct\_node}}(j);}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00692}00692             new\_node[orig\_elem\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j)] = new\_nod\_pt;}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00693}00693             \mbox{\hyperlink{classoomph_1_1Problem_ae2e5559918832d0850b3631d004d0a37}{mesh\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Mesh_ac09a9bfeb6d70d8bbefe13c86948a6fc}{add\_node\_pt}}(new\_nod\_pt);}
-\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00694}00694             \textcolor{keywordtype}{unsigned} dim = new\_nod\_pt-\/>ndim();}
+\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00694}00694             \textcolor{keywordtype}{unsigned} dim = new\_nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00695}00695             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < dim; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00696}00696             \{}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00697}00697               \textcolor{comment}{// Set new nodal position to be the old one in the}}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00698}00698               \textcolor{comment}{// SolidMesh (assumed to contain no inverted elements)}}
-\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00699}00699               new\_nod\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) =}
+\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00699}00699               new\_nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) =}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00700}00700                 \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1SolidNode}{SolidNode}}*\textcolor{keyword}{>}(orig\_elem\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j))-\/>xi(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00701}00701             \}}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00702}00702           \}}
@@ -719,14 +719,14 @@
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00715}00715            it != pinned\_nodes.end();}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00716}00716            it++)}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00717}00717       \{}
-\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00718}00718         new\_node[*it]-\/>pin(0);}
+\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00718}00718         new\_node[*it]-\/>\mbox{\hyperlink{classoomph_1_1Data_a422231c58e423f0b43822827aa334d79}{pin}}(0);}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00719}00719       \}}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00720}00720 }
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00721}00721       \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}} << \textcolor{stringliteral}{"{}Number of equations for Poisson displacement smoothing: "{}}}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00722}00722                  << \mbox{\hyperlink{classoomph_1_1Problem_a0df501c6aed60c4938861df776b10119}{assign\_eqn\_numbers}}() << std::endl;}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00723}00723 }
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00724}00724       \textcolor{comment}{// Solve separate displacement problems}}
-\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00725}00725       \textcolor{keywordtype}{unsigned} dim = orig\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1SolidMesh_a053f864c3df9b7436b2eda1554d30ee5}{node\_pt}}(0)-\/>ndim();}
+\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00725}00725       \textcolor{keywordtype}{unsigned} dim = orig\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1SolidMesh_a053f864c3df9b7436b2eda1554d30ee5}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00726}00726       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < dim; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00727}00727       \{}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00728}00728         \textcolor{comment}{// Loop over nodes and assign displacement difference}}
@@ -734,10 +734,10 @@
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00730}00730         \{}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00731}00731           \textcolor{comment}{// Get nodes}}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00732}00732           \mbox{\hyperlink{classoomph_1_1SolidNode}{SolidNode}}* orig\_node\_pt = orig\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1SolidMesh_a053f864c3df9b7436b2eda1554d30ee5}{node\_pt}}(j);}
-\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00733}00733           Node* new\_node\_pt = new\_node[orig\_node\_pt];}
+\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00733}00733           \mbox{\hyperlink{classoomph_1_1Node}{Node}}* new\_node\_pt = new\_node[orig\_node\_pt];}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00734}00734 }
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00735}00735           \textcolor{comment}{// Assign displacement difference}}
-\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00736}00736           new\_node\_pt-\/>set\_value(0, orig\_node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) -\/ orig\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1SolidNode_aa6780c66ed3f5db5cbb8fe2c0a476974}{xi}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
+\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00736}00736           new\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7289ca322725c6fd493970a19474b382}{set\_value}}(0, orig\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) -\/ orig\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1SolidNode_aa6780c66ed3f5db5cbb8fe2c0a476974}{xi}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00737}00737         \}}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00738}00738 }
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00739}00739         \textcolor{comment}{// Solve}}
@@ -748,10 +748,10 @@
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00744}00744         \{}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00745}00745           \textcolor{comment}{// Get nodes}}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00746}00746           \mbox{\hyperlink{classoomph_1_1SolidNode}{SolidNode}}* orig\_node\_pt = orig\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1SolidMesh_a053f864c3df9b7436b2eda1554d30ee5}{node\_pt}}(j);}
-\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00747}00747           Node* new\_node\_pt = new\_node[orig\_node\_pt];}
+\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00747}00747           \mbox{\hyperlink{classoomph_1_1Node}{Node}}* new\_node\_pt = new\_node[orig\_node\_pt];}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00748}00748 }
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00749}00749           \textcolor{comment}{// Assign displacement difference}}
-\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00750}00750           orig\_node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = orig\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1SolidNode_aa6780c66ed3f5db5cbb8fe2c0a476974}{xi}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) + new\_node\_pt-\/>value(0);}
+\DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00750}00750           orig\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = orig\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1SolidNode_aa6780c66ed3f5db5cbb8fe2c0a476974}{xi}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) + new\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_afcc5cdba40bca251826ae5bee5ca15b4}{value}}(0);}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00751}00751         \}}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00752}00752       \}}
 \DoxyCodeLine{\Hypertarget{mesh__smooth_8h_source_l00753}00753 }

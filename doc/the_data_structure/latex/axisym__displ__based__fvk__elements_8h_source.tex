@@ -57,7 +57,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__displ__based__fvk__elements_8h_source_l00053}00053 \textcolor{comment}{    /// Function pointer to pressure function fct(r,f(r)) -\/-\/}}
 \DoxyCodeLine{\Hypertarget{axisym__displ__based__fvk__elements_8h_source_l00054}00054 \textcolor{comment}{    /// r is a Vector!}}
 \DoxyCodeLine{\Hypertarget{axisym__displ__based__fvk__elements_8h_source_l00055}\mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a504878b18d793ef8a6540eb0f2b086c8}{00055}} \textcolor{comment}{}    \textcolor{keyword}{typedef} void (*\mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a504878b18d793ef8a6540eb0f2b086c8}{AxisymFoepplvonKarmanPressureFctPt}})(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& r,}
-\DoxyCodeLine{\Hypertarget{axisym__displ__based__fvk__elements_8h_source_l00056}00056                                                        \textcolor{keywordtype}{double}\& \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}});}
+\DoxyCodeLine{\Hypertarget{axisym__displ__based__fvk__elements_8h_source_l00056}00056                                                        \textcolor{keywordtype}{double}\& f);}
 \DoxyCodeLine{\Hypertarget{axisym__displ__based__fvk__elements_8h_source_l00057}00057 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{axisym__displ__based__fvk__elements_8h_source_l00058}00058 \textcolor{comment}{    /// Constructor (must initialise the Pressure\_fct\_pt). Also}}
 \DoxyCodeLine{\Hypertarget{axisym__displ__based__fvk__elements_8h_source_l00059}00059 \textcolor{comment}{    /// set physical parameters to their default values.}}
@@ -346,7 +346,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__displ__based__fvk__elements_8h_source_l00342}00342         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} inod = 0; inod < n\_node; inod++)}
 \DoxyCodeLine{\Hypertarget{axisym__displ__based__fvk__elements_8h_source_l00343}00343         \{}
 \DoxyCodeLine{\Hypertarget{axisym__displ__based__fvk__elements_8h_source_l00344}00344           \textcolor{comment}{// Pin the nodal value at the current index}}
-\DoxyCodeLine{\Hypertarget{axisym__displ__based__fvk__elements_8h_source_l00345}00345           \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(inod)-\/>pin(index);}
+\DoxyCodeLine{\Hypertarget{axisym__displ__based__fvk__elements_8h_source_l00345}00345           \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(inod)-\/>\mbox{\hyperlink{classoomph_1_1Data_a422231c58e423f0b43822827aa334d79}{pin}}(index);}
 \DoxyCodeLine{\Hypertarget{axisym__displ__based__fvk__elements_8h_source_l00346}00346         \}}
 \DoxyCodeLine{\Hypertarget{axisym__displ__based__fvk__elements_8h_source_l00347}00347       \}}
 \DoxyCodeLine{\Hypertarget{axisym__displ__based__fvk__elements_8h_source_l00348}00348     \}}

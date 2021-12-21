@@ -120,7 +120,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__quad__spectral__element_8h_source_l00116}00116           \{}
 \DoxyCodeLine{\Hypertarget{refineable__quad__spectral__element_8h_source_l00117}00117             \textcolor{comment}{// Has the node been created by one of its neighbours}}
 \DoxyCodeLine{\Hypertarget{refineable__quad__spectral__element_8h_source_l00118}00118             \textcolor{keywordtype}{bool} is\_periodic = \textcolor{keyword}{false};}
-\DoxyCodeLine{\Hypertarget{refineable__quad__spectral__element_8h_source_l00119}00119             Node* created\_node\_pt =}
+\DoxyCodeLine{\Hypertarget{refineable__quad__spectral__element_8h_source_l00119}00119             \mbox{\hyperlink{classoomph_1_1Node}{Node}}* created\_node\_pt =}
 \DoxyCodeLine{\Hypertarget{refineable__quad__spectral__element_8h_source_l00120}00120               this-\/>node\_created\_by\_neighbour(s\_fraction, is\_periodic);}
 \DoxyCodeLine{\Hypertarget{refineable__quad__spectral__element_8h_source_l00121}00121 }
 \DoxyCodeLine{\Hypertarget{refineable__quad__spectral__element_8h_source_l00122}00122             \textcolor{comment}{// If it has set the pointer}}
@@ -202,7 +202,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__quad__spectral__element_8h_source_l00198}00198               \textcolor{comment}{// If we are on the western boundary}}
 \DoxyCodeLine{\Hypertarget{refineable__quad__spectral__element_8h_source_l00199}00199               \textcolor{keywordflow}{if} (i0 == 0)}
 \DoxyCodeLine{\Hypertarget{refineable__quad__spectral__element_8h_source_l00200}00200               \{}
-\DoxyCodeLine{\Hypertarget{refineable__quad__spectral__element_8h_source_l00201}00201                 boundary = \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{refineable__quad__spectral__element_8h_source_l00201}00201                 boundary = \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{refineable__quad__spectral__element_8h_source_l00202}00202               \}}
 \DoxyCodeLine{\Hypertarget{refineable__quad__spectral__element_8h_source_l00203}00203               \textcolor{comment}{// If we are on the eastern boundary}}
 \DoxyCodeLine{\Hypertarget{refineable__quad__spectral__element_8h_source_l00204}00204               \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (i0 == n\_p -\/ 1)}
@@ -217,7 +217,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__quad__spectral__element_8h_source_l00213}00213                 \textcolor{comment}{// corner}}
 \DoxyCodeLine{\Hypertarget{refineable__quad__spectral__element_8h_source_l00214}00214                 \textcolor{keywordflow}{switch} (boundary)}
 \DoxyCodeLine{\Hypertarget{refineable__quad__spectral__element_8h_source_l00215}00215                 \{}
-\DoxyCodeLine{\Hypertarget{refineable__quad__spectral__element_8h_source_l00216}00216                   \textcolor{keywordflow}{case} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}}:}
+\DoxyCodeLine{\Hypertarget{refineable__quad__spectral__element_8h_source_l00216}00216                   \textcolor{keywordflow}{case} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}}:}
 \DoxyCodeLine{\Hypertarget{refineable__quad__spectral__element_8h_source_l00217}00217                     boundary = \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7dab02ffb52d34a25323447061474613d81}{SW}};}
 \DoxyCodeLine{\Hypertarget{refineable__quad__spectral__element_8h_source_l00218}00218                     \textcolor{keywordflow}{break};}
 \DoxyCodeLine{\Hypertarget{refineable__quad__spectral__element_8h_source_l00219}00219                   \textcolor{keywordflow}{case} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7da585070bd0e3801c3bbed287ef3c4a265}{E}}:}
@@ -235,7 +235,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__quad__spectral__element_8h_source_l00231}00231                 \textcolor{comment}{// If we already have a boundary}}
 \DoxyCodeLine{\Hypertarget{refineable__quad__spectral__element_8h_source_l00232}00232                 \textcolor{keywordflow}{switch} (boundary)}
 \DoxyCodeLine{\Hypertarget{refineable__quad__spectral__element_8h_source_l00233}00233                 \{}
-\DoxyCodeLine{\Hypertarget{refineable__quad__spectral__element_8h_source_l00234}00234                   \textcolor{keywordflow}{case} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}}:}
+\DoxyCodeLine{\Hypertarget{refineable__quad__spectral__element_8h_source_l00234}00234                   \textcolor{keywordflow}{case} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}}:}
 \DoxyCodeLine{\Hypertarget{refineable__quad__spectral__element_8h_source_l00235}00235                     boundary = \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daa01c8378aad2e474250e6ebefb9fa942}{NW}};}
 \DoxyCodeLine{\Hypertarget{refineable__quad__spectral__element_8h_source_l00236}00236                     \textcolor{keywordflow}{break};}
 \DoxyCodeLine{\Hypertarget{refineable__quad__spectral__element_8h_source_l00237}00237                   \textcolor{keywordflow}{case} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7da585070bd0e3801c3bbed287ef3c4a265}{E}}:}
@@ -289,7 +289,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__quad__spectral__element_8h_source_l00285}00285                 \textcolor{keywordflow}{if} (solid\_node\_pt != 0)}
 \DoxyCodeLine{\Hypertarget{refineable__quad__spectral__element_8h_source_l00286}00286                 \{}
 \DoxyCodeLine{\Hypertarget{refineable__quad__spectral__element_8h_source_l00287}00287                   \textcolor{comment}{// Get the positional boundary conditions from the father:}}
-\DoxyCodeLine{\Hypertarget{refineable__quad__spectral__element_8h_source_l00288}00288                   \textcolor{keywordtype}{unsigned} n\_dim = this-\/>node\_pt(jnod)-\/>ndim();}
+\DoxyCodeLine{\Hypertarget{refineable__quad__spectral__element_8h_source_l00288}00288                   \textcolor{keywordtype}{unsigned} n\_dim = this-\/>node\_pt(jnod)-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
 \DoxyCodeLine{\Hypertarget{refineable__quad__spectral__element_8h_source_l00289}00289                   \mbox{\hyperlink{classoomph_1_1Vector}{Vector<int>}} solid\_bound\_cons(n\_dim);}
 \DoxyCodeLine{\Hypertarget{refineable__quad__spectral__element_8h_source_l00290}00290                   \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_012_01_4}{RefineableSolidQElement<2>}}* son\_solid\_el\_pt =}
 \DoxyCodeLine{\Hypertarget{refineable__quad__spectral__element_8h_source_l00291}00291                     \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_012_01_4}{RefineableSolidQElement<2>}}*\textcolor{keyword}{>}(son\_el\_pt);}

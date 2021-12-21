@@ -20,21 +20,21 @@ Inheritance diagram for oomph\+::Projectable\+Time\+Harmonic\+Fourier\+Decompose
 \item 
 \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement_afd1c2909e2576ba90dddb2b86b22dd99}{Projectable\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards...\mbox{]}. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement_a796e903cd5f6f8d5f1a4e079f0b90258}{data\+\_\+values\+\_\+of\+\_\+field}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&fld)
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement_a796e903cd5f6f8d5f1a4e079f0b90258}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. In the underlying time-\/harmonic linear elasticity elemements the real and complex parts of the displacements are stored at the nodal values. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement_aee73e1027994f0c4908d048a930c3992}{nfields\+\_\+for\+\_\+projection}} ()
 \begin{DoxyCompactList}\small\item\em Number of fields to be projected\+: 3$\ast$dim, corresponding to real and imag parts of the displacement components. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement_a6ab68c3941f90a662a1b696bc7d4b3d7}{nhistory\+\_\+values\+\_\+for\+\_\+projection}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&fld)
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement_a6ab68c3941f90a662a1b696bc7d4b3d7}{nhistory\+\_\+values\+\_\+for\+\_\+projection}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Number of history values to be stored for fld-\/th field. (includes present value!) \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement_a907adc47e9267b2eca42631dc95c5af4}{nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection}} ()
 \begin{DoxyCompactList}\small\item\em Number of positional history values\+: Read out from positional timestepper (Note\+: count includes current value!) \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement_a74c726d77137a9693a37d3b01eb321b8}{jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&fld, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi)
+double \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement_a74c726d77137a9693a37d3b01eb321b8}{jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field}} (const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi)
 \begin{DoxyCompactList}\small\item\em Return Jacobian of mapping and shape functions of field fld at local coordinate s. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement_a789c16121f259adb1a04f9f283a1e277}{get\+\_\+field}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&fld, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
+double \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement_a789c16121f259adb1a04f9f283a1e277}{get\+\_\+field}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
 \begin{DoxyCompactList}\small\item\em Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: history values) \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement_a3fc2ba3dfb2547fcc704478280e9e096}{nvalue\+\_\+of\+\_\+field}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&fld)
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement_a3fc2ba3dfb2547fcc704478280e9e096}{nvalue\+\_\+of\+\_\+field}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Return number of values in field fld. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement_aba8a4c3e1fdaed3fa059c55d7c021ff5}{local\+\_\+equation}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&fld, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&j)
+int \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement_aba8a4c3e1fdaed3fa059c55d7c021ff5}{local\+\_\+equation}} (const unsigned \&fld, const unsigned \&j)
 \begin{DoxyCompactList}\small\item\em Return local equation number of value j in field fld. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -74,7 +74,7 @@ Definition at line \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear_
 \index{data\_values\_of\_field@{data\_values\_of\_field}!oomph::ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$@{oomph::ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{data\_values\_of\_field()}{data\_values\_of\_field()}}
 {\footnotesize\ttfamily template$<$class TIME\+\_\+\+HARMONIC\+\_\+\+LINEAR\+\_\+\+ELAST\+\_\+\+ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement}{oomph\+::\+Projectable\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element}}$<$ TIME\+\_\+\+HARMONIC\+\_\+\+LINEAR\+\_\+\+ELAST\+\_\+\+ELEMENT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement}{oomph\+::\+Projectable\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element}}$<$ TIME\+\_\+\+HARMONIC\+\_\+\+LINEAR\+\_\+\+ELAST\+\_\+\+ELEMENT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -90,14 +90,14 @@ Definition at line \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear_
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement_a789c16121f259adb1a04f9f283a1e277}\label{classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement_a789c16121f259adb1a04f9f283a1e277}} 
 \index{oomph::ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$@{oomph::ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$}!get\_field@{get\_field}}
 \index{get\_field@{get\_field}!oomph::ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$@{oomph::ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{get\_field()}{get\_field()}}
 {\footnotesize\ttfamily template$<$class TIME\+\_\+\+HARMONIC\+\_\+\+LINEAR\+\_\+\+ELAST\+\_\+\+ELEMENT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement}{oomph\+::\+Projectable\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element}}$<$ TIME\+\_\+\+HARMONIC\+\_\+\+LINEAR\+\_\+\+ELAST\+\_\+\+ELEMENT $>$\+::get\+\_\+field (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{fld,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+double \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement}{oomph\+::\+Projectable\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element}}$<$ TIME\+\_\+\+HARMONIC\+\_\+\+LINEAR\+\_\+\+ELAST\+\_\+\+ELEMENT $>$\+::get\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const unsigned \&}]{fld,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -113,14 +113,14 @@ Definition at line \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear_
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02598}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
+References \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement_a74c726d77137a9693a37d3b01eb321b8}\label{classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement_a74c726d77137a9693a37d3b01eb321b8}} 
 \index{oomph::ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$@{oomph::ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$}!jacobian\_and\_shape\_of\_field@{jacobian\_and\_shape\_of\_field}}
 \index{jacobian\_and\_shape\_of\_field@{jacobian\_and\_shape\_of\_field}!oomph::ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$@{oomph::ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{jacobian\_and\_shape\_of\_field()}{jacobian\_and\_shape\_of\_field()}}
 {\footnotesize\ttfamily template$<$class TIME\+\_\+\+HARMONIC\+\_\+\+LINEAR\+\_\+\+ELAST\+\_\+\+ELEMENT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement}{oomph\+::\+Projectable\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element}}$<$ TIME\+\_\+\+HARMONIC\+\_\+\+LINEAR\+\_\+\+ELAST\+\_\+\+ELEMENT $>$\+::jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{fld,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+double \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement}{oomph\+::\+Projectable\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element}}$<$ TIME\+\_\+\+HARMONIC\+\_\+\+LINEAR\+\_\+\+ELAST\+\_\+\+ELEMENT $>$\+::jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -136,14 +136,14 @@ Definition at line \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear_
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02616}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9296c17b134688049256a4bbc886df69}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian()}}, and \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}.
+References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8cc_source_l03298}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian()}}, and \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement_aba8a4c3e1fdaed3fa059c55d7c021ff5}\label{classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement_aba8a4c3e1fdaed3fa059c55d7c021ff5}} 
 \index{oomph::ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$@{oomph::ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$}!local\_equation@{local\_equation}}
 \index{local\_equation@{local\_equation}!oomph::ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$@{oomph::ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{local\_equation()}{local\_equation()}}
 {\footnotesize\ttfamily template$<$class TIME\+\_\+\+HARMONIC\+\_\+\+LINEAR\+\_\+\+ELAST\+\_\+\+ELEMENT $>$ \\
-int \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement}{oomph\+::\+Projectable\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element}}$<$ TIME\+\_\+\+HARMONIC\+\_\+\+LINEAR\+\_\+\+ELAST\+\_\+\+ELEMENT $>$\+::local\+\_\+equation (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{fld,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+int \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement}{oomph\+::\+Projectable\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element}}$<$ TIME\+\_\+\+HARMONIC\+\_\+\+LINEAR\+\_\+\+ELAST\+\_\+\+ELEMENT $>$\+::local\+\_\+equation (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -159,7 +159,7 @@ Definition at line \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear_
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}, and \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement_aee73e1027994f0c4908d048a930c3992}\label{classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement_aee73e1027994f0c4908d048a930c3992}} 
 \index{oomph::ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$@{oomph::ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$}!nfields\_for\_projection@{nfields\_for\_projection}}
@@ -182,7 +182,7 @@ Definition at line \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear_
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02616}{oomph\+::\+Finite\+Element\+::dim()}}.
+References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement_a907adc47e9267b2eca42631dc95c5af4}\label{classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement_a907adc47e9267b2eca42631dc95c5af4}} 
 \index{oomph::ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$@{oomph::ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$}!nhistory\_values\_for\_coordinate\_projection@{nhistory\_values\_for\_coordinate\_projection}}
@@ -205,14 +205,14 @@ Definition at line \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear_
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, and \mbox{\hyperlink{nodes_8h_source_l01022}{oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement_a6ab68c3941f90a662a1b696bc7d4b3d7}\label{classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement_a6ab68c3941f90a662a1b696bc7d4b3d7}} 
 \index{oomph::ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$@{oomph::ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$}!nhistory\_values\_for\_projection@{nhistory\_values\_for\_projection}}
 \index{nhistory\_values\_for\_projection@{nhistory\_values\_for\_projection}!oomph::ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$@{oomph::ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{nhistory\_values\_for\_projection()}{nhistory\_values\_for\_projection()}}
 {\footnotesize\ttfamily template$<$class TIME\+\_\+\+HARMONIC\+\_\+\+LINEAR\+\_\+\+ELAST\+\_\+\+ELEMENT $>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement}{oomph\+::\+Projectable\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element}}$<$ TIME\+\_\+\+HARMONIC\+\_\+\+LINEAR\+\_\+\+ELAST\+\_\+\+ELEMENT $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement}{oomph\+::\+Projectable\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element}}$<$ TIME\+\_\+\+HARMONIC\+\_\+\+LINEAR\+\_\+\+ELAST\+\_\+\+ELEMENT $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -228,14 +228,14 @@ Definition at line \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear_
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8cc_source_l00879}{oomph\+::\+Data\+::ntstorage()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement_a3fc2ba3dfb2547fcc704478280e9e096}\label{classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement_a3fc2ba3dfb2547fcc704478280e9e096}} 
 \index{oomph::ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$@{oomph::ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$}!nvalue\_of\_field@{nvalue\_of\_field}}
 \index{nvalue\_of\_field@{nvalue\_of\_field}!oomph::ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$@{oomph::ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{nvalue\_of\_field()}{nvalue\_of\_field()}}
 {\footnotesize\ttfamily template$<$class TIME\+\_\+\+HARMONIC\+\_\+\+LINEAR\+\_\+\+ELAST\+\_\+\+ELEMENT $>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement}{oomph\+::\+Projectable\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element}}$<$ TIME\+\_\+\+HARMONIC\+\_\+\+LINEAR\+\_\+\+ELAST\+\_\+\+ELEMENT $>$\+::nvalue\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement}{oomph\+::\+Projectable\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element}}$<$ TIME\+\_\+\+HARMONIC\+\_\+\+LINEAR\+\_\+\+ELAST\+\_\+\+ELEMENT $>$\+::nvalue\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -251,7 +251,7 @@ Definition at line \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear_
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}.
+References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}.
 
 
 

@@ -58,14 +58,14 @@
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00054}00054 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00055}00055   \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00056}\mbox{\hyperlink{classoomph_1_1RefineableUnsteadyHeatEquations}{00056}}   \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1RefineableUnsteadyHeatEquations}{RefineableUnsteadyHeatEquations}}}
-\DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00057}00057     : \textcolor{keyword}{public} \textcolor{keyword}{virtual} UnsteadyHeatEquations<DIM>,}
+\DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00057}00057     : \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations}{UnsteadyHeatEquations}}<DIM>,}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00058}00058       \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1RefineableElement}{RefineableElement}},}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00059}00059       \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator}{ElementWithZ2ErrorEstimator}}}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00060}00060   \{}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00061}00061   \textcolor{keyword}{public}:\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00062}00062 \textcolor{comment}{    /// Constructor}}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00063}\mbox{\hyperlink{classoomph_1_1RefineableUnsteadyHeatEquations_a288d73b971d6c891ef0061e4f0af1efd}{00063}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1RefineableUnsteadyHeatEquations_a288d73b971d6c891ef0061e4f0af1efd}{RefineableUnsteadyHeatEquations}}()}
-\DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00064}00064       : UnsteadyHeatEquations<DIM>(),}
+\DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00064}00064       : \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations}{UnsteadyHeatEquations}}<DIM>(),}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00065}00065         \mbox{\hyperlink{classoomph_1_1RefineableElement}{RefineableElement}}(),}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00066}00066         \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator}{ElementWithZ2ErrorEstimator}}()}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00067}00067     \{}
@@ -94,7 +94,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00090}00090 \textcolor{comment}{    /// Standard flux.from UnsteadyHeat equations}}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00091}\mbox{\hyperlink{classoomph_1_1RefineableUnsteadyHeatEquations_a971fdad8f46d54dcc140a57f5b46c05c}{00091}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1RefineableUnsteadyHeatEquations_a971fdad8f46d54dcc140a57f5b46c05c}{get\_Z2\_flux}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& flux)}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00092}00092     \{}
-\DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00093}00093       this-\/>get\_flux(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, flux);}
+\DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00093}00093       this-\/>\mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_a16a237c1055f7d8f577eab77ca00a03c}{get\_flux}}(s, flux);}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00094}00094     \}}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00095}00095 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00096}00096 \textcolor{comment}{    /// Get the function value u in Vector.}}
@@ -111,7 +111,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00107}00107       \textcolor{keywordtype}{unsigned} n\_node = \mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00108}00108 }
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00109}00109       \textcolor{comment}{// Find the nodal index at which the unknown is stored}}
-\DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00110}00110       \textcolor{keywordtype}{unsigned} u\_nodal\_index = this-\/>u\_index\_ust\_heat();}
+\DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00110}00110       \textcolor{keywordtype}{unsigned} u\_nodal\_index = this-\/>\mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_ae8d208c5b107bbdf5b5ef28e33f0b6c6}{u\_index\_ust\_heat}}();}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00111}00111 }
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00112}00112       \textcolor{comment}{// Local shape function}}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00113}00113       \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} psi(n\_node);}
@@ -148,7 +148,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00144}00144       \textcolor{keywordtype}{unsigned} n\_node = \mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00145}00145 }
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00146}00146       \textcolor{comment}{// Find the nodal index at which the unknown is stored}}
-\DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00147}00147       \textcolor{keywordtype}{unsigned} u\_nodal\_index = this-\/>u\_index\_ust\_heat();}
+\DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00147}00147       \textcolor{keywordtype}{unsigned} u\_nodal\_index = this-\/>\mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_ae8d208c5b107bbdf5b5ef28e33f0b6c6}{u\_index\_ust\_heat}}();}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00148}00148 }
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00149}00149       \textcolor{comment}{// Shape functions}}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00150}00150       \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} psi(n\_node);}
@@ -171,10 +171,10 @@
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00167}00167           this-\/>\mbox{\hyperlink{classoomph_1_1RefineableElement_a637964a7a9892fe0f0b05692c2e8d153}{father\_element\_pt}}());}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00168}00168 }
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00169}00169       \textcolor{comment}{// Set the source function from the parent}}
-\DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00170}00170       this-\/>Source\_fct\_pt = cast\_father\_element\_pt-\/>source\_fct\_pt();}
+\DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00170}00170       this-\/>\mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_a775c7525ac08c848d6c980c1913f1e12}{Source\_fct\_pt}} = cast\_father\_element\_pt-\/>\mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_a8c9229229db6018df12b5286daca2816}{source\_fct\_pt}}();}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00171}00171 }
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00172}00172       \textcolor{comment}{// Set the ALE status from the father}}
-\DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00173}00173       this-\/>ALE\_is\_disabled = cast\_father\_element\_pt-\/>ALE\_is\_disabled;}
+\DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00173}00173       this-\/>\mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_ad0573a152afa50ce714835b5551fc38c}{ALE\_is\_disabled}} = cast\_father\_element\_pt-\/>\mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_ad0573a152afa50ce714835b5551fc38c}{ALE\_is\_disabled}};}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00174}00174     \}}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00175}00175 }
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00176}00176 }
@@ -184,7 +184,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00180}00180 \textcolor{comment}{    /// flag=1: compute both}}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00181}00181 \textcolor{comment}{    /// flag=0: compute only residual vector}}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00182}00182 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1RefineableUnsteadyHeatEquations_a06043cae80b1b6091b5914f41ffba16e}{fill\_in\_generic\_residual\_contribution\_ust\_heat}}(}
-\DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00183}00183       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \textcolor{keywordtype}{unsigned} flag);}
+\DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00183}00183       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian, \textcolor{keywordtype}{unsigned} flag);}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00184}00184   \};}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00185}00185 }
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00186}00186 }
@@ -227,13 +227,13 @@
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00223}00223 \textcolor{comment}{    /// Number of vertex nodes in the element}}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00224}\mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatElement_a5492bc9cbf7a118fe4c707ba3c7e9685}{00224}} \textcolor{comment}{}    \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatElement_a5492bc9cbf7a118fe4c707ba3c7e9685}{nvertex\_node}}()\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00225}00225 \textcolor{keyword}{    }\{}
-\DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00226}00226       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatElement}{QUnsteadyHeatElement<DIM, NNODE\_1D>::nvertex\_node}}();}
+\DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00226}00226       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1FiniteElement_a45631a7aa50efc3123a921d114f84cba}{QUnsteadyHeatElement<DIM, NNODE\_1D>::nvertex\_node}}();}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00227}00227     \}}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00228}00228 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00229}00229 \textcolor{comment}{    /// Pointer to the j-\/th vertex node in the element}}
-\DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00230}\mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatElement_a06de953b6c4a43679f172327236212cf}{00230}} \textcolor{comment}{}    Node* \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatElement_a06de953b6c4a43679f172327236212cf}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00230}\mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatElement_a06de953b6c4a43679f172327236212cf}{00230}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatElement_a06de953b6c4a43679f172327236212cf}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00231}00231 \textcolor{keyword}{    }\{}
-\DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00232}00232       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatElement}{QUnsteadyHeatElement<DIM, NNODE\_1D>::vertex\_node\_pt}}(j);}
+\DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00232}00232       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1FiniteElement_ac8b551c9d6f1f8e30e8b18fe2f9ae072}{QUnsteadyHeatElement<DIM, NNODE\_1D>::vertex\_node\_pt}}(j);}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00233}00233     \}}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00234}00234 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__unsteady__heat__elements_8h_source_l00235}00235 \textcolor{comment}{    /// Rebuild from sons: empty}}

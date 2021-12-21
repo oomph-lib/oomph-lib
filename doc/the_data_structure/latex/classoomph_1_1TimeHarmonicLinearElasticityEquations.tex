@@ -20,30 +20,30 @@ Inheritance diagram for oomph\+::Time\+Harmonic\+Linear\+Elasticity\+Equations\t
 \item 
 \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquations_aded4f05223218f5b23728d85a15c743b}{Time\+Harmonic\+Linear\+Elasticity\+Equations}} ()
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquations_a5d00cc9bc6e465257ae9fcae3a48393a}{required\+\_\+nvalue}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquations_a5d00cc9bc6e465257ae9fcae3a48393a}{required\+\_\+nvalue}} (const unsigned \&n) const
 \begin{DoxyCompactList}\small\item\em Number of values required at node n. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquations_aed703e899b784e5bb2a0c7b9d8291d42}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em Return the residuals for the solid equations (the discretised principle of virtual displacements) \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquations_a546ed8d0a485289fa94c0835be57a771}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})
+void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquations_a546ed8d0a485289fa94c0835be57a771}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em The jacobian is calculated by finite differences by default, We need only to take finite differences w.\+r.\+t. positional variables For this element. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquations_a46807604989766db0dd54dd8ff457021}{get\+\_\+stress}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ std\+::complex$<$ double $>$ $>$ \&\mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquations_a46807604989766db0dd54dd8ff457021}{get\+\_\+stress}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ std\+::complex$<$ double $>$ $>$ \&sigma) const
 \begin{DoxyCompactList}\small\item\em Return the Cauchy stress tensor, as calculated from the elasticity tensor at specified local coordinate. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquations_a9b7deca877e8fbb4b20d0f3e9f732e69}{output\+\_\+fct}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&nplot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquations_a9b7deca877e8fbb4b20d0f3e9f732e69}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&nplot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Output exact solution x,y,\mbox{[}z\mbox{]},u\+\_\+r,v\+\_\+r,\mbox{[}w\+\_\+r\mbox{]},u\+\_\+i,v\+\_\+i,\mbox{[}w\+\_\+i\mbox{]}. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquations_acbc7549f33300563f0a3953782fb4a46}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Output\+: x,y,\mbox{[}z\mbox{]},u\+\_\+r,v\+\_\+r,\mbox{[}w\+\_\+r\mbox{]},u\+\_\+i,v\+\_\+i,\mbox{[}w\+\_\+i\mbox{]}. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquations_a5363121911a4418e2bfa707e02e2adc4}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquations_a5363121911a4418e2bfa707e02e2adc4}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em Output\+: x,y,\mbox{[}z\mbox{]},u\+\_\+r,v\+\_\+r,\mbox{[}w\+\_\+r\mbox{]},u\+\_\+i,v\+\_\+i,\mbox{[}w\+\_\+i\mbox{]}. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquations_ab92581333fed6fcfd5267e3136c445c3}{output}} (FILE $\ast$file\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em C-\/style output\+: x,y,\mbox{[}z\mbox{]},u\+\_\+r,v\+\_\+r,\mbox{[}w\+\_\+r\mbox{]},u\+\_\+i,v\+\_\+i,\mbox{[}w\+\_\+i\mbox{]}. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquations_a1913ef957b846a4bf04991718b83f9b5}{output}} (FILE $\ast$file\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquations_a1913ef957b846a4bf04991718b83f9b5}{output}} (FILE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em Output\+: x,y,\mbox{[}z\mbox{]},u\+\_\+r,v\+\_\+r,\mbox{[}w\+\_\+r\mbox{]},u\+\_\+i,v\+\_\+i,\mbox{[}w\+\_\+i\mbox{]}. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquations_a50a5236dcb29a7547a7e2fd75bf96b7f}{compute\+\_\+norm}} (double \&norm)
 \begin{DoxyCompactList}\small\item\em Compute norm of solution\+: square of the L2 norm. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-virtual void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquations_a1cbce23da8fa56642335a45651133a2a}{fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, unsigned flag)
+virtual void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquations_a1cbce23da8fa56642335a45651133a2a}{fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, unsigned flag)
 \begin{DoxyCompactList}\small\item\em Private helper function to compute residuals and (if requested via flag) also the Jacobian matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -99,7 +99,7 @@ Definition at line \mbox{\hyperlink{time__harmonic__linear__elasticity__elements
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
 
 \mbox{\Hypertarget{classoomph_1_1TimeHarmonicLinearElasticityEquations_a546ed8d0a485289fa94c0835be57a771}\label{classoomph_1_1TimeHarmonicLinearElasticityEquations_a546ed8d0a485289fa94c0835be57a771}} 
 \index{oomph::TimeHarmonicLinearElasticityEquations$<$ DIM $>$@{oomph::TimeHarmonicLinearElasticityEquations$<$ DIM $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
@@ -119,10 +119,6 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0
 
 
 Definition at line \mbox{\hyperlink{time__harmonic__linear__elasticity__elements_8h_source_l00339}{339}} of file \mbox{\hyperlink{time__harmonic__linear__elasticity__elements_8h_source}{time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
-
-
-
-References \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}.
 
 \mbox{\Hypertarget{classoomph_1_1TimeHarmonicLinearElasticityEquations_aed703e899b784e5bb2a0c7b9d8291d42}\label{classoomph_1_1TimeHarmonicLinearElasticityEquations_aed703e899b784e5bb2a0c7b9d8291d42}} 
 \index{oomph::TimeHarmonicLinearElasticityEquations$<$ DIM $>$@{oomph::TimeHarmonicLinearElasticityEquations$<$ DIM $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
@@ -168,7 +164,7 @@ Definition at line \mbox{\hyperlink{time__harmonic__linear__elasticity__elements
 
 
 
-References \mbox{\hyperlink{quadtree_8h_source_l00061}{oomph\+::\+Quad\+Tree\+Names\+::E}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}.
+References \mbox{\hyperlink{quadtree_8h_source_l00061}{oomph\+::\+Quad\+Tree\+Names\+::E}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
 
 
 
@@ -179,7 +175,7 @@ Referenced by \mbox{\hyperlink{time__harmonic__linear__elasticity__elements_8h_s
 \index{get\_stress@{get\_stress}!oomph::TimeHarmonicLinearElasticityEquations$<$ DIM $>$@{oomph::TimeHarmonicLinearElasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_stress()}{get\_stress()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquations}{oomph\+::\+Time\+Harmonic\+Linear\+Elasticity\+Equations}}$<$ DIM $>$\+::get\+\_\+stress (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{sigma }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquations}{oomph\+::\+Time\+Harmonic\+Linear\+Elasticity\+Equations}}$<$ DIM $>$\+::get\+\_\+stress (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{sigma }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -229,7 +225,7 @@ References \mbox{\hyperlink{time__harmonic__linear__elasticity__elements_8h_sour
 \index{output@{output}!oomph::TimeHarmonicLinearElasticityEquations$<$ DIM $>$@{oomph::TimeHarmonicLinearElasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquations}{oomph\+::\+Time\+Harmonic\+Linear\+Elasticity\+Equations}}$<$ DIM $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquations}{oomph\+::\+Time\+Harmonic\+Linear\+Elasticity\+Equations}}$<$ DIM $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -287,7 +283,7 @@ Referenced by \mbox{\hyperlink{time__harmonic__linear__elasticity__elements_8h_s
 \index{output@{output}!oomph::TimeHarmonicLinearElasticityEquations$<$ DIM $>$@{oomph::TimeHarmonicLinearElasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquations}{oomph\+::\+Time\+Harmonic\+Linear\+Elasticity\+Equations}}$<$ DIM $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquations}{oomph\+::\+Time\+Harmonic\+Linear\+Elasticity\+Equations}}$<$ DIM $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -307,14 +303,14 @@ Definition at line \mbox{\hyperlink{time__harmonic__linear__elasticity__elements
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{error__estimator_8h_source_l00165}{oomph\+::u}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1TimeHarmonicLinearElasticityEquations_a9b7deca877e8fbb4b20d0f3e9f732e69}\label{classoomph_1_1TimeHarmonicLinearElasticityEquations_a9b7deca877e8fbb4b20d0f3e9f732e69}} 
 \index{oomph::TimeHarmonicLinearElasticityEquations$<$ DIM $>$@{oomph::TimeHarmonicLinearElasticityEquations$<$ DIM $>$}!output\_fct@{output\_fct}}
 \index{output\_fct@{output\_fct}!oomph::TimeHarmonicLinearElasticityEquations$<$ DIM $>$@{oomph::TimeHarmonicLinearElasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{output\_fct()}{output\_fct()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquations}{oomph\+::\+Time\+Harmonic\+Linear\+Elasticity\+Equations}}$<$ DIM $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{nplot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquations}{oomph\+::\+Time\+Harmonic\+Linear\+Elasticity\+Equations}}$<$ DIM $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -330,14 +326,14 @@ Definition at line \mbox{\hyperlink{time__harmonic__linear__elasticity__elements
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1TimeHarmonicLinearElasticityEquations_a5d00cc9bc6e465257ae9fcae3a48393a}\label{classoomph_1_1TimeHarmonicLinearElasticityEquations_a5d00cc9bc6e465257ae9fcae3a48393a}} 
 \index{oomph::TimeHarmonicLinearElasticityEquations$<$ DIM $>$@{oomph::TimeHarmonicLinearElasticityEquations$<$ DIM $>$}!required\_nvalue@{required\_nvalue}}
 \index{required\_nvalue@{required\_nvalue}!oomph::TimeHarmonicLinearElasticityEquations$<$ DIM $>$@{oomph::TimeHarmonicLinearElasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{required\_nvalue()}{required\_nvalue()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquations}{oomph\+::\+Time\+Harmonic\+Linear\+Elasticity\+Equations}}$<$ DIM $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+unsigned \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquations}{oomph\+::\+Time\+Harmonic\+Linear\+Elasticity\+Equations}}$<$ DIM $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 

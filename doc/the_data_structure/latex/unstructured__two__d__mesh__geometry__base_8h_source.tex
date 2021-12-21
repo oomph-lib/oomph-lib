@@ -2049,7 +2049,7 @@
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l02045}02045 \textcolor{comment}{    /// the mesh}}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l02046}\mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a967d6bf715fca6ed9d8cd9a38382990b}{02046}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a967d6bf715fca6ed9d8cd9a38382990b}{add\_boundary\_segment\_node}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& b,}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l02047}02047                                    \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l02048}02048                                    Node* \textcolor{keyword}{const}\& \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}})}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l02048}02048                                    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \textcolor{keyword}{const}\& \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}})}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l02049}02049     \{}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l02050}02050       \textcolor{comment}{// Get the size of the Boundary\_node\_pt vector}}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l02051}02051       \textcolor{keywordtype}{unsigned} nbound\_seg\_node = \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a667c4dff46145685622836fc3b7af92d}{nboundary\_segment\_node}}(b, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
@@ -4356,8 +4356,8 @@
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04352}04352 }
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04353}04353         \textcolor{comment}{// Left and rightmost nodes (the left and right nodes of the}}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04354}04354         \textcolor{comment}{// current face element)}}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04355}04355         Node* left\_node\_pt = ele\_face\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0);}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04356}04356         Node* right\_node\_pt = ele\_face\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(nnod -\/ 1);}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04355}04355         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* left\_node\_pt = ele\_face\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0);}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04356}04356         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* right\_node\_pt = ele\_face\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(nnod -\/ 1);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04357}04357 }
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04358}04358         \textcolor{comment}{// Continue iterating if a new face element has been added to}}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04359}04359         \textcolor{comment}{// the list}}
@@ -4384,8 +4384,8 @@
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04380}04380             \textcolor{keywordflow}{if} (!(done\_el[ele\_face\_pt] || is\_halo\_face\_element[iiface]))}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04381}04381             \{}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04382}04382               \textcolor{comment}{// Get the left and right nodes of the current element}}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04383}04383               Node* local\_left\_node\_pt = ele\_face\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0);}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04384}04384               Node* local\_right\_node\_pt = ele\_face\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(nnod -\/ 1);}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04383}04383               \mbox{\hyperlink{classoomph_1_1Node}{Node}}* local\_left\_node\_pt = ele\_face\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0);}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04384}04384               \mbox{\hyperlink{classoomph_1_1Node}{Node}}* local\_right\_node\_pt = ele\_face\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(nnod -\/ 1);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04385}04385 }
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04386}04386               \textcolor{comment}{// New element fits at the left of segment and is not inverted}}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04387}04387               \textcolor{keywordflow}{if} (left\_node\_pt == local\_right\_node\_pt)}
@@ -4539,22 +4539,22 @@
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04535}04535         \textcolor{keywordtype}{unsigned} nnod = first\_ele\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04536}04536 }
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04537}04537         \textcolor{comment}{// Get the first node of the current segment}}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04538}04538         Node* first\_node\_pt = first\_ele\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0);}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04538}04538         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* first\_node\_pt = first\_ele\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04539}04539         \textcolor{keywordflow}{if} (is\_inverted[first\_ele\_pt])}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04540}04540         \{}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04541}04541           first\_node\_pt = first\_ele\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(nnod -\/ 1);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04542}04542         \}}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04543}04543 }
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04544}04544         \textcolor{comment}{// Coordinates of left node}}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04545}04545         \textcolor{keywordtype}{double} x\_left = first\_node\_pt-\/>x(0);}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04546}04546         \textcolor{keywordtype}{double} y\_left = first\_node\_pt-\/>x(1);}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04545}04545         \textcolor{keywordtype}{double} x\_left = first\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0);}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04546}04546         \textcolor{keywordtype}{double} y\_left = first\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04547}04547 }
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04548}04548         \textcolor{comment}{// Initialise boundary coordinate (local boundary coordinate}}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04549}04549         \textcolor{comment}{// for boundaries with more than one segment)}}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04550}04550         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} zeta(1, 0.0);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04551}04551 }
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04552}04552         \textcolor{comment}{// Set boundary coordinate}}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04553}04553         first\_node\_pt-\/>set\_coordinates\_on\_boundary(b, zeta);}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04553}04553         first\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a94c19e165ab4e88aabbfa27443c530b7}{set\_coordinates\_on\_boundary}}(b, zeta);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04554}04554 }
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04555}04555         \textcolor{comment}{// Lexicographically bottom left node}}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04556}04556         std::set<Node*> local\_nodes\_pt;}
@@ -4588,19 +4588,19 @@
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04584}04584           \textcolor{comment}{// Loop over nodes}}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04585}04585           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 1; j < nnod; j++)}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04586}04586           \{}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04587}04587             Node* nod\_pt = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(k\_nod);}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04587}04587             \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(k\_nod);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04588}04588             k\_nod += nod\_diff;}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04589}04589 }
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04590}04590             \textcolor{comment}{// Coordinates of right node}}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04591}04591             \textcolor{keywordtype}{double} x\_right = nod\_pt-\/>x(0);}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04592}04592             \textcolor{keywordtype}{double} y\_right = nod\_pt-\/>x(1);}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04591}04591             \textcolor{keywordtype}{double} x\_right = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0);}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04592}04592             \textcolor{keywordtype}{double} y\_right = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04593}04593 }
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04594}04594             \textcolor{comment}{// Increment boundary coordinate}}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04595}04595             zeta[0] += sqrt((x\_right -\/ x\_left) * (x\_right -\/ x\_left) +}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04596}04596                             (y\_right -\/ y\_left) * (y\_right -\/ y\_left));}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04597}04597 }
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04598}04598             \textcolor{comment}{// Set boundary coordinate}}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04599}04599             nod\_pt-\/>set\_coordinates\_on\_boundary(b, zeta);}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04599}04599             nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a94c19e165ab4e88aabbfa27443c530b7}{set\_coordinates\_on\_boundary}}(b, zeta);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04600}04600 }
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04601}04601             \textcolor{comment}{// Increment reference coordinate}}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04602}04602             x\_left = x\_right;}
@@ -4692,7 +4692,7 @@
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04688}04688             \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} nnod = first\_ele\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04689}04689 }
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04690}04690             \textcolor{comment}{// Get the first node of the current segment}}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04691}04691             Node* first\_node\_pt = first\_ele\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0);}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04691}04691             \mbox{\hyperlink{classoomph_1_1Node}{Node}}* first\_node\_pt = first\_ele\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04692}04692             \textcolor{keywordflow}{if} (is\_inverted[first\_ele\_pt])}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04693}04693             \{}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04694}04694               first\_node\_pt = first\_ele\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(nnod -\/ 1);}
@@ -4702,7 +4702,7 @@
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04698}04698             \mbox{\hyperlink{classoomph_1_1FiniteElement}{FiniteElement}}* last\_ele\_pt = segment\_sorted\_ele\_pt[is].back();}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04699}04699 }
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04700}04700             \textcolor{comment}{// Get the last node of the current segment}}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04701}04701             Node* last\_node\_pt = last\_ele\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(nnod -\/ 1);}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04701}04701             \mbox{\hyperlink{classoomph_1_1Node}{Node}}* last\_node\_pt = last\_ele\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(nnod -\/ 1);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04702}04702             \textcolor{keywordflow}{if} (is\_inverted[last\_ele\_pt])}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04703}04703             \{}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04704}04704               last\_node\_pt = last\_ele\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0);}
@@ -4712,9 +4712,9 @@
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04708}04708             \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} current\_segment\_initial\_zeta(1);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04709}04709             \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} current\_segment\_final\_zeta(1);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04710}04710 }
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04711}04711             first\_node\_pt-\/>get\_coordinates\_on\_boundary(}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04711}04711             first\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_abc8b7dc78cc1d0aab34eeaf856e21ea8}{get\_coordinates\_on\_boundary}}(}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04712}04712               b, current\_segment\_initial\_zeta);}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04713}04713             last\_node\_pt-\/>get\_coordinates\_on\_boundary(}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04713}04713             last\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_abc8b7dc78cc1d0aab34eeaf856e21ea8}{get\_coordinates\_on\_boundary}}(}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04714}04714               b, current\_segment\_final\_zeta);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04715}04715 }
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04716}04716 \textcolor{preprocessor}{\#ifdef PARANOID}}
@@ -4738,12 +4738,12 @@
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04734}04734                 << \textcolor{stringliteral}{"{}Segment: ("{}} << is << \textcolor{stringliteral}{"{})\(\backslash\)n"{}}}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04735}04735                 << \textcolor{stringliteral}{"{}Initial zeta value: ("{}} << current\_segment\_initial\_zeta[0]}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04736}04736                 << \textcolor{stringliteral}{"{})\(\backslash\)n"{}}}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04737}04737                 << \textcolor{stringliteral}{"{}Initial coordinate: ("{}} << first\_node\_pt-\/>x(0) << \textcolor{stringliteral}{"{}, "{}}}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04738}04738                 << first\_node\_pt-\/>x(1) << \textcolor{stringliteral}{"{})\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04737}04737                 << \textcolor{stringliteral}{"{}Initial coordinate: ("{}} << first\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0) << \textcolor{stringliteral}{"{}, "{}}}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04738}04738                 << first\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1) << \textcolor{stringliteral}{"{})\(\backslash\)n"{}}}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04739}04739                 << \textcolor{stringliteral}{"{}Final zeta value: ("{}} << current\_segment\_final\_zeta[0]}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04740}04740                 << \textcolor{stringliteral}{"{})\(\backslash\)n"{}}}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04741}04741                 << \textcolor{stringliteral}{"{}Initial coordinate: ("{}} << last\_node\_pt-\/>x(0) << \textcolor{stringliteral}{"{}, "{}}}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04742}04742                 << last\_node\_pt-\/>x(1) << \textcolor{stringliteral}{"{})\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04741}04741                 << \textcolor{stringliteral}{"{}Initial coordinate: ("{}} << last\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0) << \textcolor{stringliteral}{"{}, "{}}}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04742}04742                 << last\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1) << \textcolor{stringliteral}{"{})\(\backslash\)n"{}};}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04743}04743               \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04744}04744                 error\_message.str(), output\_string, OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04745}04745             \}}
@@ -4761,12 +4761,12 @@
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04757}04757                 << \textcolor{stringliteral}{"{}Arclength: ("{}} << segment\_arclength[is] << \textcolor{stringliteral}{"{}\(\backslash\)n"{}}}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04758}04758                 << \textcolor{stringliteral}{"{}Initial zeta value: ("{}} << current\_segment\_initial\_zeta[0]}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04759}04759                 << \textcolor{stringliteral}{"{})\(\backslash\)n"{}}}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04760}04760                 << \textcolor{stringliteral}{"{}Initial coordinate: ("{}} << first\_node\_pt-\/>x(0) << \textcolor{stringliteral}{"{}, "{}}}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04761}04761                 << first\_node\_pt-\/>x(1) << \textcolor{stringliteral}{"{})\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04760}04760                 << \textcolor{stringliteral}{"{}Initial coordinate: ("{}} << first\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0) << \textcolor{stringliteral}{"{}, "{}}}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04761}04761                 << first\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1) << \textcolor{stringliteral}{"{})\(\backslash\)n"{}}}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04762}04762                 << \textcolor{stringliteral}{"{}Final zeta value: ("{}} << current\_segment\_final\_zeta[0]}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04763}04763                 << \textcolor{stringliteral}{"{})\(\backslash\)n"{}}}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04764}04764                 << \textcolor{stringliteral}{"{}Initial coordinate: ("{}} << last\_node\_pt-\/>x(0) << \textcolor{stringliteral}{"{}, "{}}}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04765}04765                 << last\_node\_pt-\/>x(1) << \textcolor{stringliteral}{"{})\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04764}04764                 << \textcolor{stringliteral}{"{}Initial coordinate: ("{}} << last\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0) << \textcolor{stringliteral}{"{}, "{}}}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04765}04765                 << last\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1) << \textcolor{stringliteral}{"{})\(\backslash\)n"{}};}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04766}04766               \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04767}04767                 error\_message.str(), output\_string, OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04768}04768             \}}
@@ -4798,13 +4798,13 @@
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04794}04794                 \{}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04795}04795                   \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} zeta(1);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04796}04796                   \textcolor{comment}{// Get the node}}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04797}04797                   Node* nod\_pt = (*it);}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04797}04797                   \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = (*it);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04798}04798                   \textcolor{comment}{// Get the boundary coordinate associated to the node}}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04799}04799                   nod\_pt-\/>get\_coordinates\_on\_boundary(b, zeta);}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04799}04799                   nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_abc8b7dc78cc1d0aab34eeaf856e21ea8}{get\_coordinates\_on\_boundary}}(b, zeta);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04800}04800                   \textcolor{comment}{// Compute its new value}}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04801}04801                   zeta[0] = segment\_arclength[is] -\/ zeta[0];}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04802}04802                   \textcolor{comment}{// Set the new boundary coordinate value}}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04803}04803                   nod\_pt-\/>set\_coordinates\_on\_boundary(b, zeta);}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04803}04803                   nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a94c19e165ab4e88aabbfa27443c530b7}{set\_coordinates\_on\_boundary}}(b, zeta);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04804}04804                 \} \textcolor{comment}{// Loop over the nodes in the segment}}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04805}04805               \} \textcolor{comment}{// if (boundary\_segment\_inverted(b)[is])}}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04806}04806               \textcolor{keywordflow}{else}}
@@ -4835,13 +4835,13 @@
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04831}04831                 \{}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04832}04832                   \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} zeta(1);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04833}04833                   \textcolor{comment}{// Get the node}}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04834}04834                   Node* nod\_pt = (*it);}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04834}04834                   \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = (*it);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04835}04835                   \textcolor{comment}{// Get the boundary coordinate associated to the node}}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04836}04836                   nod\_pt-\/>get\_coordinates\_on\_boundary(b, zeta);}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04836}04836                   nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_abc8b7dc78cc1d0aab34eeaf856e21ea8}{get\_coordinates\_on\_boundary}}(b, zeta);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04837}04837                   \textcolor{comment}{// Compute its new value}}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04838}04838                   zeta[0] = segment\_arclength[is] -\/ zeta[0];}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04839}04839                   \textcolor{comment}{// Set the new boundary coordinate value}}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04840}04840                   nod\_pt-\/>set\_coordinates\_on\_boundary(b, zeta);}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04840}04840                   nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a94c19e165ab4e88aabbfa27443c530b7}{set\_coordinates\_on\_boundary}}(b, zeta);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04841}04841                 \} \textcolor{comment}{// Loop over the nodes in the segment}}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04842}04842               \} \textcolor{comment}{// else if (boundary\_segment\_inverted(b)[is])}}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l04843}04843             \} \textcolor{comment}{// original zeta values in decreasing order}}
@@ -5049,7 +5049,7 @@
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05045}05045           \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} nnod = first\_ele\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05046}05046 }
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05047}05047           \textcolor{comment}{// Get the first node of the current segment}}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05048}05048           Node* first\_node\_pt = first\_ele\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0);}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05048}05048           \mbox{\hyperlink{classoomph_1_1Node}{Node}}* first\_node\_pt = first\_ele\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05049}05049           \textcolor{keywordflow}{if} (is\_inverted[first\_ele\_pt])}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05050}05050           \{}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05051}05051             first\_node\_pt = first\_ele\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(nnod -\/ 1);}
@@ -5059,7 +5059,7 @@
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05055}05055           \mbox{\hyperlink{classoomph_1_1FiniteElement}{FiniteElement}}* last\_ele\_pt = segment\_sorted\_ele\_pt[is].back();}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05056}05056 }
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05057}05057           \textcolor{comment}{// Get the last node of the current segment}}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05058}05058           Node* last\_node\_pt = last\_ele\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(nnod -\/ 1);}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05058}05058           \mbox{\hyperlink{classoomph_1_1Node}{Node}}* last\_node\_pt = last\_ele\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(nnod -\/ 1);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05059}05059           \textcolor{keywordflow}{if} (is\_inverted[last\_ele\_pt])}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05060}05060           \{}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05061}05061             last\_node\_pt = last\_ele\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0);}
@@ -5068,14 +5068,14 @@
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05064}05064           \textcolor{comment}{// Get the coordinates for the first and last node}}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05065}05065           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05066}05066           \{}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05067}05067             first\_coordinate[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = first\_node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05068}05068             last\_coordinate[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = last\_node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05067}05067             first\_coordinate[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = first\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05068}05068             last\_coordinate[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = last\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05069}05069           \}}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05070}05070 }
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05071}05071           \textcolor{comment}{// Get the zeta coordinates for the first and last node}}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05072}05072           first\_node\_pt-\/>get\_coordinates\_on\_boundary(}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05072}05072           first\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_abc8b7dc78cc1d0aab34eeaf856e21ea8}{get\_coordinates\_on\_boundary}}(}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05073}05073             b, first\_node\_zeta\_coordinate);}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05074}05074           last\_node\_pt-\/>get\_coordinates\_on\_boundary(b,}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05074}05074           last\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_abc8b7dc78cc1d0aab34eeaf856e21ea8}{get\_coordinates\_on\_boundary}}(b,}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05075}05075                                                     last\_node\_zeta\_coordinate);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05076}05076 }
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05077}05077 \textcolor{preprocessor}{\#ifdef OOMPH\_HAS\_MPI}}
@@ -5268,10 +5268,10 @@
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05264}05264                it++)}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05265}05265           \{}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05266}05266             \textcolor{comment}{// Get the node}}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05267}05267             Node* nod\_pt = (*it);}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05267}05267             \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = (*it);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05268}05268 }
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05269}05269             \textcolor{comment}{// Get coordinate based on arclength along polygonal repesentation}}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05270}05270             nod\_pt-\/>get\_coordinates\_on\_boundary(b, zeta);}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05270}05270             nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_abc8b7dc78cc1d0aab34eeaf856e21ea8}{get\_coordinates\_on\_boundary}}(b, zeta);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05271}05271 }
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05272}05272             \textcolor{keywordflow}{if} (use\_old)}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05273}05273             \{}
@@ -5353,7 +5353,7 @@
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05349}05349             \}}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05350}05350 }
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05351}05351             \textcolor{comment}{// Assign updated coordinate}}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05352}05352             nod\_pt-\/>set\_coordinates\_on\_boundary(b, zeta);}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05352}05352             nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a94c19e165ab4e88aabbfa27443c530b7}{set\_coordinates\_on\_boundary}}(b, zeta);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05353}05353           \}}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05354}05354         \} \textcolor{comment}{// if (geom\_object\_pt != 0)}}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05355}05355         \textcolor{keywordflow}{else}}
@@ -5411,8 +5411,8 @@
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05407}05407                it != all\_nodes\_pt.end();}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05408}05408                it++)}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05409}05409           \{}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05410}05410             Node* nod\_pt = (*it);}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05411}05411             nod\_pt-\/>get\_coordinates\_on\_boundary(b, zeta);}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05410}05410             \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = (*it);}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05411}05411             nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_abc8b7dc78cc1d0aab34eeaf856e21ea8}{get\_coordinates\_on\_boundary}}(b, zeta);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05412}05412 }
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05413}05413 \textcolor{preprocessor}{\#ifdef OOMPH\_HAS\_MPI}}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05414}05414 }
@@ -5448,7 +5448,7 @@
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05444}05444             \{}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05445}05445               zeta\_max = zeta[0];}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05446}05446             \}}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05447}05447             nod\_pt-\/>set\_coordinates\_on\_boundary(b, zeta);}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05447}05447             nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a94c19e165ab4e88aabbfa27443c530b7}{set\_coordinates\_on\_boundary}}(b, zeta);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05448}05448           \} \textcolor{comment}{// Loop through the nodes in the segment (boundary)}}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05449}05449 }
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05450}05450 \textcolor{preprocessor}{\#ifdef OOMPH\_HAS\_MPI}}
@@ -5484,7 +5484,7 @@
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05480}05480             \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} nnod = first\_seg\_ele\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05481}05481 }
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05482}05482             \textcolor{comment}{// Get the first node of the current segment}}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05483}05483             Node* first\_seg\_node\_pt = first\_seg\_ele\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0);}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05483}05483             \mbox{\hyperlink{classoomph_1_1Node}{Node}}* first\_seg\_node\_pt = first\_seg\_ele\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05484}05484             \textcolor{keywordflow}{if} (is\_inverted[first\_seg\_ele\_pt])}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05485}05485             \{}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05486}05486               first\_seg\_node\_pt = first\_seg\_ele\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(nnod -\/ 1);}
@@ -5510,7 +5510,7 @@
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05506}05506 \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05507}05507 }
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05508}05508             \textcolor{comment}{// Get the last node of the current segment}}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05509}05509             Node* last\_seg\_node\_pt = last\_seg\_ele\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(nnod -\/ 1);}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05509}05509             \mbox{\hyperlink{classoomph_1_1Node}{Node}}* last\_seg\_node\_pt = last\_seg\_ele\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(nnod -\/ 1);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05510}05510             \textcolor{keywordflow}{if} (is\_inverted[last\_seg\_ele\_pt])}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05511}05511             \{}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05512}05512               last\_seg\_node\_pt = last\_seg\_ele\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0);}
@@ -5520,8 +5520,8 @@
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05516}05516             \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} first\_seg\_arclen(1);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05517}05517             \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} last\_seg\_arclen(1);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05518}05518 }
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05519}05519             first\_seg\_node\_pt-\/>get\_coordinates\_on\_boundary(b, first\_seg\_arclen);}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05520}05520             last\_seg\_node\_pt-\/>get\_coordinates\_on\_boundary(b, last\_seg\_arclen);}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05519}05519             first\_seg\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_abc8b7dc78cc1d0aab34eeaf856e21ea8}{get\_coordinates\_on\_boundary}}(b, first\_seg\_arclen);}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05520}05520             last\_seg\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_abc8b7dc78cc1d0aab34eeaf856e21ea8}{get\_coordinates\_on\_boundary}}(b, last\_seg\_arclen);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05521}05521 }
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05522}05522             \textcolor{comment}{// Update the initial and final segments arclength}}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05523}05523             \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_acb41801ed335402b81de2077b9ea59bc}{boundary\_segment\_initial\_arclength}}(b)[is] = first\_seg\_arclen[0];}
@@ -5532,8 +5532,8 @@
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05528}05528             \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} updated\_segment\_final\_coord(2);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05529}05529             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < 2; k++)}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05530}05530             \{}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05531}05531               updated\_segment\_initial\_coord[k] = first\_seg\_node\_pt-\/>x(k);}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05532}05532               updated\_segment\_final\_coord[k] = last\_seg\_node\_pt-\/>x(k);}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05531}05531               updated\_segment\_initial\_coord[k] = first\_seg\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(k);}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05532}05532               updated\_segment\_final\_coord[k] = last\_seg\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(k);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05533}05533             \}}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05534}05534 }
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05535}05535             \textcolor{comment}{// Set the updated initial coordinate}}
@@ -5564,16 +5564,16 @@
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05560}05560                it++)}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05561}05561           \{}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05562}05562             \textcolor{comment}{// Get the node}}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05563}05563             Node* nod\_pt = (*it);}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05563}05563             \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = (*it);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05564}05564 }
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05565}05565             \textcolor{comment}{// Get the boundary coordinate}}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05566}05566             nod\_pt-\/>get\_coordinates\_on\_boundary(b, zeta);}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05566}05566             nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_abc8b7dc78cc1d0aab34eeaf856e21ea8}{get\_coordinates\_on\_boundary}}(b, zeta);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05567}05567 }
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05568}05568             \textcolor{comment}{// Scale the value of the current node}}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05569}05569             zeta[0] /= zeta\_max;}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05570}05570 }
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05571}05571             \textcolor{comment}{// Set the new scaled value}}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05572}05572             nod\_pt-\/>set\_coordinates\_on\_boundary(b, zeta);}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05572}05572             nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a94c19e165ab4e88aabbfa27443c530b7}{set\_coordinates\_on\_boundary}}(b, zeta);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05573}05573           \} \textcolor{comment}{// Loop over the nodes}}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05574}05574 }
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8h_source_l05575}05575         \} \textcolor{comment}{// else if (geom\_object\_pt != 0)}}

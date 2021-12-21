@@ -43,71 +43,27 @@ namespace oomph
   //======================================================================
   /// A class for elements that solve the unsteady
   /// axisymmetric Navier--Stokes equations in
-  /// cylindrical polar coordinates, \f$ x_0^* = r^*\f$ and \f$ x_1^* = z^*  \f$
+  /// cylindrical polar coordinates, \f$ x_0^* = r^*\f$ and \f$ x_1^* = z^* \f$
   /// with \f$ \partial / \partial \theta = 0 \f$. We're solving for the
   /// radial, axial and azimuthal (swirl) velocities,
-  /// \f$ u_0^* = u_r^*(r^*,z^*,t^*) = u^*(r^*,z^*,t^*),
-  ///  \ u_1^* = u_z^*(r^*,z^*,t^*) = w^*(r^*,z^*,t^*)\f$ and
+  /// \f$ u_0^* = u_r^*(r^*,z^*,t^*) = u^*(r^*,z^*,t^*), \ u_1^* = u_z^*(r^*,z^*,t^*) = w^*(r^*,z^*,t^*)\f$ and
   /// \f$ u_2^* = u_\theta^*(r^*,z^*,t^*) = v^*(r^*,z^*,t^*) \f$,
   /// respectively, and the pressure \f$ p(r^*,z^*,t^*) \f$.
   /// This class contains the generic maths -- any concrete
   /// implementation must be derived from this.
   ///
   /// In dimensional form the axisymmetric Navier-Stokes equations are given
-  /// by the momentum equations (for the \f$ r^* \f$, \f$ z^* \f$ and \f$ \theta
-  /// \f$
+  /// by the momentum equations (for the \f$ r^* \f$, \f$ z^* \f$ and \f$ \theta \f$
   /// directions, respectively)
-  /// \f[
-  /// \rho\left(\frac{\partial u^*}{\partial t^*} + {u^*}\frac{\partial
-  ///   u^*}{\partial r^*} - \frac{{v^*}^2}{r^*}
-  ///   + {w^*}\frac{\partial u^*}{\partial z^*} \right) =
-  ///   B_r^*\left(r^*,z^*,t^*\right)+ \rho G_r^*+
-  ///   \frac{1}{r^*}
-  ///   \frac{\partial\left({r^*}\sigma_{rr}^*\right)}{\partial r^*}
-  ///   - \frac{\sigma_{\theta\theta}^*}{r^*} +
-  ///   \frac{\partial\sigma_{rz}^*}{\partial z^*},
-  /// \f]
-  /// \f[
-  /// \rho\left(\frac{\partial w^*}{\partial t^*} + {u^*}\frac{\partial
-  ///   w^*}{\partial r^*} + {w^*}\frac{\partial
-  ///   w^*}{\partial z^*} \right) =
-  ///   B_z^*\left(r^*,z^*,t^*\right)+\rho G_z^*+
-  ///   \frac{1}{r^*}\frac{\partial\left({r^*}\sigma_{zr}^*\right)}{\partial
-  ///   r^*} + \frac{\partial\sigma_{zz}^*}{\partial z^*},
-  /// \f]
-  /// \f[
-  /// \rho\left(\frac{\partial v^*}{\partial t^*} +
-  ///   {u^*}\frac{\partial v^*}{\partial r^*} +
-  ///   \frac{u^* v^*}{r^*}
-  ///   +{w^*}\frac{\partial v^*}{\partial z^*} \right)=
-  ///   B_\theta^*\left(r^*,z^*,t^*\right)+ \rho G_\theta^*+
-  ///   \frac{1}{r^*}\frac{\partial\left({r^*}\sigma_{\theta
-  ///   r}^*\right)}{\partial r^*} + \frac{\sigma_{r\theta}^*}{r^*} +
-  ///   \frac{\partial\sigma_{\theta z}^*}{\partial z^*},
-  /// \f]
+  /// \f[ \rho\left(\frac{\partial u^*}{\partial t^*} + {u^*}\frac{\partial u^*}{\partial r^*} - \frac{{v^*}^2}{r^*} + {w^*}\frac{\partial u^*}{\partial z^*} \right) = B_r^*\left(r^*,z^*,t^*\right)+ \rho G_r^*+ \frac{1}{r^*} \frac{\partial\left({r^*}\sigma_{rr}^*\right)}{\partial r^*} - \frac{\sigma_{\theta\theta}^*}{r^*} + \frac{\partial\sigma_{rz}^*}{\partial z^*}, \f]
+  /// \f[ \rho\left(\frac{\partial w^*}{\partial t^*} + {u^*}\frac{\partial w^*}{\partial r^*} + {w^*}\frac{\partial w^*}{\partial z^*} \right) = B_z^*\left(r^*,z^*,t^*\right)+\rho G_z^*+ \frac{1}{r^*}\frac{\partial\left({r^*}\sigma_{zr}^*\right)}{\partial r^*} + \frac{\partial\sigma_{zz}^*}{\partial z^*}, \f]
+  /// \f[ \rho\left(\frac{\partial v^*}{\partial t^*} + {u^*}\frac{\partial v^*}{\partial r^*} + \frac{u^* v^*}{r^*} +{w^*}\frac{\partial v^*}{\partial z^*} \right)= B_\theta^*\left(r^*,z^*,t^*\right)+ \rho G_\theta^*+ \frac{1}{r^*}\frac{\partial\left({r^*}\sigma_{\theta r}^*\right)}{\partial r^*} + \frac{\sigma_{r\theta}^*}{r^*} + \frac{\partial\sigma_{\theta z}^*}{\partial z^*}, \f]
   /// and
-  /// \f[
-  /// \frac{1}{r^*}\frac{\partial\left(r^*u^*\right)}{\partial r^*} +
-  /// \frac{\partial w^*}{\partial z^*} = Q^*.
-  /// \f]
+  /// \f[ \frac{1}{r^*}\frac{\partial\left(r^*u^*\right)}{\partial r^*} + \frac{\partial w^*}{\partial z^*} = Q^*. \f]
   /// The dimensional, symmetric stress tensor is defined as:
-  /// \f[
-  /// \sigma_{rr}^* = -p^* + 2\mu\frac{\partial u^*}{\partial r^*},
-  /// \qquad
-  /// \sigma_{\theta\theta}^* = -p^* +2\mu\frac{u^*}{r^*},
-  /// \f]
-  /// \f[
-  /// \sigma_{zz}^* = -p^* + 2\mu\frac{\partial w^*}{\partial z^*},
-  /// \qquad
-  /// \sigma_{rz}^* = \mu\left(\frac{\partial u^*}{\partial z^*} +
-  ///                 \frac{\partial w^*}{\partial r^*}\right),
-  /// \f]
-  /// \f[
-  /// \sigma_{\theta r}^* = \mu r^*\frac{\partial}{\partial r^*}
-  ///                       \left(\frac{v^*}{r^*}\right),
-  /// \qquad
-  /// \sigma_{\theta z}^* = \mu\frac{\partial v^*}{\partial z^*}.
-  /// \f]
+  /// \f[ \sigma_{rr}^* = -p^* + 2\mu\frac{\partial u^*}{\partial r^*}, \qquad \sigma_{\theta\theta}^* = -p^* +2\mu\frac{u^*}{r^*}, \f]
+  /// \f[ \sigma_{zz}^* = -p^* + 2\mu\frac{\partial w^*}{\partial z^*}, \qquad \sigma_{rz}^* = \mu\left(\frac{\partial u^*}{\partial z^*} + \frac{\partial w^*}{\partial r^*}\right), \f]
+  /// \f[ \sigma_{\theta r}^* = \mu r^*\frac{\partial}{\partial r^*} \left(\frac{v^*}{r^*}\right), \qquad \sigma_{\theta z}^* = \mu\frac{\partial v^*}{\partial z^*}. \f]
   /// Here, the (dimensional) velocity components are denoted
   /// by \f$ u^* \f$, \f$ w^* \f$
   /// and \f$ v^* \f$ for the radial, axial and azimuthal velocities,
@@ -115,29 +71,16 @@ namespace oomph
   /// have split the body force into two components: A constant
   /// vector \f$ \rho \ G_i^* \f$ which typically represents gravitational
   /// forces; and a variable body force, \f$ B_i^*(r^*,z^*,t^*) \f$.
-  /// \f$ Q^*(r^*,z^*,t^*)  \f$ is a volumetric source term for the
+  /// \f$ Q^*(r^*,z^*,t^*) \f$ is a volumetric source term for the
   /// continuity equation and is typically equal to zero.
   /// \n\n
   /// We non-dimensionalise the equations, using problem-specific reference
   /// quantities for the velocity, \f$ U \f$, length, \f$ L \f$, and time,
   /// \f$ T \f$, and scale the constant body force vector on the
   /// gravitational acceleration, \f$ g \f$, so that
-  /// \f[
-  /// u^* = U\, u, \qquad
-  /// w^* = U\, w, \qquad
-  /// v^* = U\, v,
-  /// \f]
-  /// \f[
-  /// r^* = L\, r, \qquad
-  /// z^* = L\, z, \qquad
-  /// t^* = T\, t,
-  /// \f]
-  /// \f[
-  /// G_i^* = g\, G_i, \qquad
-  /// B_i^* = \frac{U\mu_{ref}}{L^2}\, B_i, \qquad
-  /// p^* = \frac{\mu_{ref} U}{L}\, p, \qquad
-  /// Q^* = \frac{U}{L}\, Q.
-  /// \f]
+  /// \f[ u^* = U\, u, \qquad w^* = U\, w, \qquad v^* = U\, v, \f]
+  /// \f[ r^* = L\, r, \qquad z^* = L\, z, \qquad t^* = T\, t, \f]
+  /// \f[ G_i^* = g\, G_i, \qquad B_i^* = \frac{U\mu_{ref}}{L^2}\, B_i, \qquad p^* = \frac{\mu_{ref} U}{L}\, p, \qquad Q^* = \frac{U}{L}\, Q. \f]
   /// where we note that the pressure and the variable body force have
   /// been non-dimensionalised on the viscous scale. \f$ \mu_{ref} \f$
   /// and \f$ \rho_{ref} \f$ (used below) are reference values
@@ -147,69 +90,23 @@ namespace oomph
   /// \n\n
   /// The non-dimensional form of the axisymmetric Navier-Stokes equations
   /// is then given by
-  /// \f[
-  /// R_{\rho} Re\left(St\frac{\partial u}{\partial t} + {u}\frac{\partial
-  ///   u}{\partial r} - \frac{{v}^2}{r}
-  ///   + {w}\frac{\partial u}{\partial z} \right) =
-  ///   B_r\left(r,z,t\right)+  R_\rho \frac{Re}{Fr} G_r +
-  ///   \frac{1}{r}
-  ///   \frac{\partial\left({r}\sigma_{rr}\right)}{\partial r}
-  ///   - \frac{\sigma_{\theta\theta}}{r} +
-  ///   \frac{\partial\sigma_{rz}}{\partial z},
-  /// \f]
-  /// \f[
-  /// R_{\rho} Re\left(St\frac{\partial w}{\partial t} + {u}\frac{\partial
-  ///   w}{\partial r} + {w}\frac{\partial
-  ///   w}{\partial z} \right) =
-  ///    B_z\left(r,z,t\right)+ R_\rho \frac{Re}{Fr} G_z+
-  ///   \frac{1}{r}\frac{\partial\left({r}\sigma_{zr}\right)}{\partial
-  ///   r} + \frac{\partial\sigma_{zz}}{\partial z},
-  /// \f]
-  /// \f[
-  /// R_{\rho} Re\left(St\frac{\partial v}{\partial t} +
-  ///   {u}\frac{\partial v}{\partial r} +
-  ///   \frac{u v}{r}
-  ///   +{w}\frac{\partial v}{\partial z} \right)=
-  ///   B_\theta\left(r,z,t\right)+  R_\rho \frac{Re}{Fr} G_\theta+
-  ///   \frac{1}{r}\frac{\partial\left({r}\sigma_{\theta
-  ///   r}\right)}{\partial r} + \frac{\sigma_{r\theta}}{r} +
-  ///   \frac{\partial\sigma_{\theta z}}{\partial z},
-  /// \f]
+  /// \f[ R_{\rho} Re\left(St\frac{\partial u}{\partial t} + {u}\frac{\partial u}{\partial r} - \frac{{v}^2}{r} + {w}\frac{\partial u}{\partial z} \right) = B_r\left(r,z,t\right)+ R_\rho \frac{Re}{Fr} G_r + \frac{1}{r} \frac{\partial\left({r}\sigma_{rr}\right)}{\partial r} - \frac{\sigma_{\theta\theta}}{r} + \frac{\partial\sigma_{rz}}{\partial z}, \f]
+  /// \f[ R_{\rho} Re\left(St\frac{\partial w}{\partial t} + {u}\frac{\partial w}{\partial r} + {w}\frac{\partial w}{\partial z} \right) = B_z\left(r,z,t\right)+ R_\rho \frac{Re}{Fr} G_z+ \frac{1}{r}\frac{\partial\left({r}\sigma_{zr}\right)}{\partial r} + \frac{\partial\sigma_{zz}}{\partial z}, \f]
+  /// \f[ R_{\rho} Re\left(St\frac{\partial v}{\partial t} + {u}\frac{\partial v}{\partial r} + \frac{u v}{r} +{w}\frac{\partial v}{\partial z} \right)= B_\theta\left(r,z,t\right)+ R_\rho \frac{Re}{Fr} G_\theta+ \frac{1}{r}\frac{\partial\left({r}\sigma_{\theta r}\right)}{\partial r} + \frac{\sigma_{r\theta}}{r} + \frac{\partial\sigma_{\theta z}}{\partial z}, \f]
   /// and
-  /// \f[
-  /// \frac{1}{r}\frac{\partial\left(ru\right)}{\partial r} +
-  /// \frac{\partial w}{\partial z} = Q.
-  /// \f]
+  /// \f[ \frac{1}{r}\frac{\partial\left(ru\right)}{\partial r} + \frac{\partial w}{\partial z} = Q. \f]
   /// Here the non-dimensional, symmetric stress tensor is defined as:
-  /// \f[
-  /// \sigma_{rr} = -p + 2R_\mu \frac{\partial u}{\partial r},
-  /// \qquad
-  /// \sigma_{\theta\theta} = -p +2R_\mu \frac{u}{r},
-  /// \f]
-  /// \f[
-  /// \sigma_{zz} = -p + 2R_\mu \frac{\partial w}{\partial z},
-  /// \qquad
-  /// \sigma_{rz} = R_\mu \left(\frac{\partial u}{\partial z} +
-  ///                 \frac{\partial w}{\partial r}\right),
-  /// \f]
-  /// \f[
-  /// \sigma_{\theta r} = R_\mu r
-  ///       \frac{\partial}{\partial r}\left(\frac{v}{r}\right),
-  /// \qquad
-  /// \sigma_{\theta z} = R_\mu \frac{\partial v}{\partial z}.
-  /// \f]
+  /// \f[ \sigma_{rr} = -p + 2R_\mu \frac{\partial u}{\partial r}, \qquad \sigma_{\theta\theta} = -p +2R_\mu \frac{u}{r}, \f]
+  /// \f[ \sigma_{zz} = -p + 2R_\mu \frac{\partial w}{\partial z}, \qquad \sigma_{rz} = R_\mu \left(\frac{\partial u}{\partial z} + \frac{\partial w}{\partial r}\right), \f]
+  /// \f[ \sigma_{\theta r} = R_\mu r \frac{\partial}{\partial r}\left(\frac{v}{r}\right), \qquad \sigma_{\theta z} = R_\mu \frac{\partial v}{\partial z}. \f]
   /// and the dimensionless parameters
-  /// \f[
-  /// Re = \frac{UL\rho_{ref}}{\mu_{ref}}, \qquad
-  /// St = \frac{L}{UT}, \qquad
-  /// Fr = \frac{U^2}{gL},
-  /// \f]
+  /// \f[ Re = \frac{UL\rho_{ref}}{\mu_{ref}}, \qquad St = \frac{L}{UT}, \qquad Fr = \frac{U^2}{gL}, \f]
   /// are the Reynolds number, Strouhal number and Froude number
   /// respectively. \f$ R_\rho=\rho/\rho_{ref} \f$ and
   /// \f$ R_\mu(T) =\mu(T)/\mu_{ref}\f$ represent the ratios
   /// of the fluid's density and its dynamic viscosity, relative to the
   /// density and viscosity values used to form the non-dimensional
-  /// parameters (By default, \f$ R_\rho  = R_\mu = 1 \f$; other values
+  /// parameters (By default, \f$ R_\rho = R_\mu = 1 \f$; other values
   /// tend to be used in problems involving multiple fluids).
   //======================================================================
   class AxisymmetricNavierStokesEquations
@@ -696,8 +593,7 @@ namespace oomph
     /// Get integral of kinetic energy over element
     double kin_energy() const;
 
-    /// Strain-rate tensor: \f$ e_{ij} \f$  where \f$ i,j = r,z,\theta
-    /// \f$ (in that order)
+    /// Strain-rate tensor: \f$ e_{ij} \f$  where \f$ i,j = r,z,\theta \f$ (in that order)
     void strain_rate(const Vector<double>& s,
                      DenseMatrix<double>& strain_rate) const;
 
@@ -2305,6 +2201,114 @@ namespace oomph
         return this->nodal_local_eqn(j, u_nodal_index);
       }
     }
+  };
+
+  //=======================================================================
+  /// Axisymmetric FSI Element
+  //=======================================================================
+  class FSIAxisymmetricQTaylorHoodElement
+    : public virtual AxisymmetricQTaylorHoodElement,
+      public virtual FSIFluidElement
+  {
+  public:
+    /// Constructor
+    FSIAxisymmetricQTaylorHoodElement() : AxisymmetricQTaylorHoodElement() {}
+
+    /// Add to the set \c paired_load_data pairs containing
+    /// - the pointer to a Data object
+    /// and
+    /// - the index of the value in that Data object
+    /// .
+    /// for all values (pressures, velocities) that affect the
+    /// load computed in the \c get_load(...) function.
+    void identify_load_data(
+      std::set<std::pair<Data*, unsigned>>& paired_load_data)
+    {
+      // We're in 3D!
+      unsigned DIM = 3;
+
+      // Find the index at which the velocity is stored
+      unsigned u_index[DIM];
+      for (unsigned i = 0; i < DIM; i++)
+      {
+        u_index[i] = this->u_index_nst(i);
+      }
+
+      // Loop over the nodes
+      unsigned n_node = this->nnode();
+      for (unsigned n = 0; n < n_node; n++)
+      {
+        // Loop over the velocity components and add pointer to their data
+        // and indices to the vectors
+        for (unsigned i = 0; i < DIM; i++)
+        {
+          paired_load_data.insert(std::make_pair(this->node_pt(n), u_index[i]));
+        }
+      }
+
+      // Identify the pressure data
+      this->identify_pressure_data(paired_load_data);
+    };
+
+
+    /// Add to the set \c paired_load_data pairs containing
+    /// - the pointer to a Data object
+    /// and
+    /// - the index of the value in that Data object
+    /// .
+    /// for all values (pressures, velocities) that affect the
+    /// load computed in the \c get_load(...) function.
+    void identify_pressure_data(
+      std::set<std::pair<Data*, unsigned>>& paired_pressure_data)
+    {
+      // Find the index at which the pressure is stored
+      unsigned p_index = static_cast<unsigned>(this->p_nodal_index_axi_nst());
+
+      // Loop over the pressure data
+      unsigned n_pres = npres_axi_nst();
+      for (unsigned l = 0; l < n_pres; l++)
+      {
+        // The DIMth entry in each nodal data is the pressure, which
+        // affects the traction
+        paired_pressure_data.insert(
+          std::make_pair(this->node_pt(Pconv[l]), p_index));
+      }
+    }
+
+
+    /// Compute the load vector that is applied by current
+    /// element (at its local coordinate s) onto the adjacent
+    /// SolidElement. N is the outer unit normal on the FSIFluidElement.
+    void get_load(const Vector<double>& s,
+                  const Vector<double>& N,
+                  Vector<double>& load)
+    {
+      get_traction(s, N, load);
+    }
+  };
+
+
+  //=======================================================================
+  /// Face geometry of the Axisymmetric Taylor_Hood elements
+  //=======================================================================
+  template<>
+  class FaceGeometry<FSIAxisymmetricQTaylorHoodElement>
+    : public virtual QElement<1, 3>
+  {
+  public:
+    FaceGeometry() : QElement<1, 3>() {}
+  };
+
+  //=======================================================================
+  /// Face geometry of the face geometry of the Axisymmetric Taylor_Hood
+  /// elements
+  //=======================================================================
+  template<>
+  class FaceGeometry<FaceGeometry<FSIAxisymmetricQTaylorHoodElement>>
+    : public virtual PointElement
+  {
+  public:
+    FaceGeometry() : PointElement() {}
   };
 
 

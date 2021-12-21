@@ -39,7 +39,7 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00035}00035 \textcolor{comment}{  /// preconditioner and deletes what can be deleted... Note that}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00036}00036 \textcolor{comment}{  /// this preconditioner needs a CRDoubleMatrix.}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00037}00037 \textcolor{comment}{}  \textcolor{comment}{//============================================================================}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00038}00038   \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1TerminateHelper_a38ec1b047a4438b6eba8a21b669c229d}{PressureBasedSolidLSCPreconditioner::setup}}()}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00038}\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_aba594f38c2d36775115adbc90bcd0025}{00038}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_aba594f38c2d36775115adbc90bcd0025}{PressureBasedSolidLSCPreconditioner::setup}}()}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00039}00039   \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00040}00040     \textcolor{comment}{//\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00041}00041     \textcolor{comment}{// NOTE: In the interest of minimising memory usage, several containers}}
@@ -49,22 +49,22 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00045}00045     \textcolor{comment}{//\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00046}00046 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00047}00047     \textcolor{comment}{// make sure any old data is deleted}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00048}00048     \mbox{\hyperlink{namespaceoomph_1_1TerminateHelper_a20615123e22554c3c485484f4c23bfb5}{clean\_up\_memory}}();}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00048}00048     \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_ad83eb2ddd12350bcba2cb8db074de2bd}{clean\_up\_memory}}();}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00049}00049 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00050}00050 \textcolor{preprocessor}{\#ifdef PARANOID}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00051}00051     \textcolor{comment}{// paranoid check that the solid mesh pt has been set}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00052}00052     \textcolor{keywordflow}{if} (Solid\_mesh\_pt == 0)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00052}00052     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_aa14db4490d9ce73788e22bc3d465489b}{Solid\_mesh\_pt}} == 0)}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00053}00053     \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00054}00054       std::ostringstream error\_message;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00055}00055       error\_message << \textcolor{stringliteral}{"{}The solid mesh pointer must be set.\(\backslash\)n"{}}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00056}00056                     << \textcolor{stringliteral}{"{}Use method set\_solid\_mesh(...)"{}};}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00057}00057       \textcolor{keywordflow}{throw} OomphLibError(}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00057}00057       \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00058}00058         error\_message.str(), OOMPH\_CURRENT\_FUNCTION, OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00059}00059     \}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00060}00060 \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00061}00061 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00062}00062     \textcolor{comment}{// set the mesh}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00063}00063     this-\/>set\_mesh(0, Solid\_mesh\_pt);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00063}00063     this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_af97821621b570d409e6662939e5f818d}{set\_mesh}}(0, \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_aa14db4490d9ce73788e22bc3d465489b}{Solid\_mesh\_pt}});}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00064}00064 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00065}00065     \textcolor{comment}{// Get blocks}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00066}00066     \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
@@ -77,21 +77,21 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00073}00073     \textcolor{comment}{// type 0: displacement/positions -\/ corresponding to DOFs 0 to n-\/2}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00074}00074     \textcolor{comment}{// type 1: pressure -\/ corresponding to DOF n-\/1}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00075}00075     \textcolor{keywordtype}{double} t\_block\_start = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00076}00076     \textcolor{keywordtype}{unsigned} ndof\_types = 0;}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00077}00077     \textcolor{keywordflow}{if} (this-\/>is\_subsidiary\_block\_preconditioner())}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00076}00076     \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_ab6cca480686ea8e44244ac60a0db23ba}{ndof\_types}} = 0;}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00077}00077     \textcolor{keywordflow}{if} (this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a9ac4335ec07fc13f7bf1093fd0489c52}{is\_subsidiary\_block\_preconditioner}}())}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00078}00078     \{}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00079}00079       ndof\_types = this-\/>ndof\_types();}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00079}00079       ndof\_types = this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_ab6cca480686ea8e44244ac60a0db23ba}{ndof\_types}}();}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00080}00080     \}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00081}00081     \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00082}00082     \{}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00083}00083       ndof\_types = this-\/>ndof\_types\_in\_mesh(0);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00083}00083       ndof\_types = this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a45509677ccef78be13b5e4485312ddc1}{ndof\_types\_in\_mesh}}(0);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00084}00084     \}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00085}00085     Vector<unsigned> dof\_to\_block\_map(ndof\_types);}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00086}00086     dof\_to\_block\_map[ndof\_types -\/ 1] = 1;}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00087}00087     this-\/>block\_setup(dof\_to\_block\_map);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00085}00085     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<unsigned>}} dof\_to\_block\_map(\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_ab6cca480686ea8e44244ac60a0db23ba}{ndof\_types}});}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00086}00086     dof\_to\_block\_map[\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_ab6cca480686ea8e44244ac60a0db23ba}{ndof\_types}} -\/ 1] = 1;}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00087}00087     this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_af704c4816469cef4fed9d35a9ad651ec}{block\_setup}}(dof\_to\_block\_map);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00088}00088     \textcolor{keywordtype}{double} t\_block\_finish = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00089}00089     \textcolor{keywordtype}{double} block\_setup\_time = t\_block\_finish -\/ t\_block\_start;}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00090}00090     \textcolor{keywordflow}{if} (Doc\_time)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00090}00090     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a6bb97a362c82d3a363ffaaceb7a643a8}{Doc\_time}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00091}00091     \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00092}00092       \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}} << \textcolor{stringliteral}{"{}Time for block\_setup(...) [sec]: "{}} << block\_setup\_time}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00093}00093                  << \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
@@ -99,46 +99,46 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00095}00095 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00096}00096     \textcolor{comment}{// determine whether the F preconditioner is a block preconditioner (and}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00097}00097     \textcolor{comment}{// therefore a subsidiary preconditioner)}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00098}00098     BlockPreconditioner<CRDoubleMatrix>* F\_block\_preconditioner\_pt =}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00099}00099       \textcolor{keyword}{dynamic\_cast<}BlockPreconditioner<CRDoubleMatrix>*\textcolor{keyword}{>}(F\_preconditioner\_pt);}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00100}00100     F\_preconditioner\_is\_block\_preconditioner = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00098}00098     \mbox{\hyperlink{classoomph_1_1BlockPreconditioner}{BlockPreconditioner<CRDoubleMatrix>}}* F\_block\_preconditioner\_pt =}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00099}00099       \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1BlockPreconditioner}{BlockPreconditioner<CRDoubleMatrix>}}*\textcolor{keyword}{>}(\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a48598668a75faf5d983872f191288eb8}{F\_preconditioner\_pt}});}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00100}00100     \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_aa430d3786009f7ad9fd8009d5bc9430a}{F\_preconditioner\_is\_block\_preconditioner}} = \textcolor{keyword}{true};}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00101}00101     \textcolor{keywordflow}{if} (F\_block\_preconditioner\_pt == 0)}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00102}00102     \{}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00103}00103       F\_preconditioner\_is\_block\_preconditioner = \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00103}00103       \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_aa430d3786009f7ad9fd8009d5bc9430a}{F\_preconditioner\_is\_block\_preconditioner}} = \textcolor{keyword}{false};}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00104}00104     \}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00105}00105 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00106}00106     \textcolor{comment}{// Get B (the divergence block)}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00107}00107     \textcolor{keywordtype}{double} t\_get\_B\_start = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00108}00108     CRDoubleMatrix* b\_pt = \textcolor{keyword}{new} CRDoubleMatrix;}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00109}00109     this-\/>get\_block(1, 0, *b\_pt);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00108}00108     \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}}* b\_pt = \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}};}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00109}00109     this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a72b4dbe167da59d9ba12c7eff97d77e6}{get\_block}}(1, 0, *b\_pt);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00110}00110     \textcolor{keywordtype}{double} t\_get\_B\_finish = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00111}00111     \textcolor{keywordflow}{if} (Doc\_time)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00111}00111     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a6bb97a362c82d3a363ffaaceb7a643a8}{Doc\_time}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00112}00112     \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00113}00113       \textcolor{keywordtype}{double} get\_B\_time = t\_get\_B\_finish -\/ t\_get\_B\_start;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00114}00114       \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}} << \textcolor{stringliteral}{"{}Time to get B [sec]: "{}} << get\_B\_time << \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00115}00115     \}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00116}00116 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00117}00117     \textcolor{comment}{// the pointer for f}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00118}00118     CRDoubleMatrix* f\_pt = \textcolor{keyword}{new} CRDoubleMatrix;}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00118}00118     \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}}* f\_pt = \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}};}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00119}00119 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00120}00120     \textcolor{comment}{// the pointer for the p matrix}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00121}00121     CRDoubleMatrix* p\_matrix\_pt = \textcolor{keyword}{new} CRDoubleMatrix;}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00121}00121     \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}}* p\_matrix\_pt = \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}};}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00122}00122 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00123}00123     \textcolor{comment}{// the pointer for bt}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00124}00124     CRDoubleMatrix* bt\_pt = \textcolor{keyword}{new} CRDoubleMatrix;}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00124}00124     \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}}* bt\_pt = \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}};}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00125}00125 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00126}00126     \textcolor{comment}{// if BFBt is to be formed}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00127}00127     \textcolor{keywordflow}{if} (Form\_BFBt\_product)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00127}00127     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a216ed50190c2fa031c222b309e573f09}{Form\_BFBt\_product}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00128}00128     \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00129}00129       \textcolor{comment}{// If using scaling then replace B with Bt}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00130}00130       CRDoubleMatrix* ivmm\_pt = 0;}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00131}00131       \textcolor{keywordflow}{if} (P\_matrix\_using\_scaling)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00130}00130       \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}}* ivmm\_pt = 0;}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00131}00131       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_af92907711de209fa924eeef614d48c4e}{P\_matrix\_using\_scaling}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00132}00132       \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00133}00133         \textcolor{comment}{// Assemble the ivmm diagonal}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00134}00134         \textcolor{keywordtype}{double} ivmm\_assembly\_start\_t = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00135}00135         ivmm\_pt = assemble\_mass\_matrix\_diagonal();}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00135}00135         ivmm\_pt = \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a2b32d66080ccfb3a464245d16bea6168}{assemble\_mass\_matrix\_diagonal}}();}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00136}00136         \textcolor{keywordtype}{double} ivmm\_assembly\_finish\_t = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00137}00137         \textcolor{keywordflow}{if} (Doc\_time)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00137}00137         \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a6bb97a362c82d3a363ffaaceb7a643a8}{Doc\_time}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00138}00138         \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00139}00139           \textcolor{keywordtype}{double} ivmm\_assembly\_time =}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00140}00140             ivmm\_assembly\_finish\_t -\/ ivmm\_assembly\_start\_t;}
@@ -148,13 +148,13 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00144}00144 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00145}00145         \textcolor{comment}{// assemble BQ (stored in B)}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00146}00146         \textcolor{keywordtype}{double} t\_BQ\_start = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00147}00147         CRDoubleMatrix* temp\_matrix\_pt = \textcolor{keyword}{new} CRDoubleMatrix;}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00148}00148         b\_pt-\/>multiply(*ivmm\_pt, *temp\_matrix\_pt);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00147}00147         \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}}* temp\_matrix\_pt = \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}};}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00148}00148         b\_pt-\/>\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a54b75960df52e3aebd21aaab20e9869d}{multiply}}(*ivmm\_pt, *temp\_matrix\_pt);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00149}00149         \textcolor{keyword}{delete} b\_pt;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00150}00150         b\_pt = 0;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00151}00151         b\_pt = temp\_matrix\_pt;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00152}00152         \textcolor{keywordtype}{double} t\_BQ\_finish = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00153}00153         \textcolor{keywordflow}{if} (Doc\_time)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00153}00153         \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a6bb97a362c82d3a363ffaaceb7a643a8}{Doc\_time}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00154}00154         \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00155}00155           \textcolor{keywordtype}{double} t\_BQ\_time = t\_BQ\_finish -\/ t\_BQ\_start;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00156}00156           \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}} << \textcolor{stringliteral}{"{}Time to generate BQ [sec]: "{}} << t\_BQ\_time << std::endl;}
@@ -163,9 +163,9 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00159}00159 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00160}00160       \textcolor{comment}{// Get Bt}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00161}00161       \textcolor{keywordtype}{double} t\_get\_Bt\_start = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00162}00162       this-\/>get\_block(0, 1, *bt\_pt);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00162}00162       this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a72b4dbe167da59d9ba12c7eff97d77e6}{get\_block}}(0, 1, *bt\_pt);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00163}00163       \textcolor{keywordtype}{double} t\_get\_Bt\_finish = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00164}00164       \textcolor{keywordflow}{if} (Doc\_time)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00164}00164       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a6bb97a362c82d3a363ffaaceb7a643a8}{Doc\_time}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00165}00165       \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00166}00166         \textcolor{keywordtype}{double} t\_get\_Bt\_time = t\_get\_Bt\_finish -\/ t\_get\_Bt\_start;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00167}00167         \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}} << \textcolor{stringliteral}{"{}Time to get Bt [sec]: "{}} << t\_get\_Bt\_time << std::endl;}
@@ -174,9 +174,9 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00170}00170       \textcolor{comment}{// now form the P matrix by multiplying B (which if using scaling will be}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00171}00171       \textcolor{comment}{// BQ) with Bt}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00172}00172       \textcolor{keywordtype}{double} t\_P\_start = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00173}00173       b\_pt-\/>multiply(*bt\_pt, *p\_matrix\_pt);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00173}00173       b\_pt-\/>\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a54b75960df52e3aebd21aaab20e9869d}{multiply}}(*bt\_pt, *p\_matrix\_pt);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00174}00174       \textcolor{keywordtype}{double} t\_P\_finish = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00175}00175       \textcolor{keywordflow}{if} (Doc\_time)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00175}00175       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a6bb97a362c82d3a363ffaaceb7a643a8}{Doc\_time}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00176}00176       \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00177}00177         \textcolor{keywordtype}{double} t\_P\_time = t\_P\_finish -\/ t\_P\_start;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00178}00178         \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}} << \textcolor{stringliteral}{"{}Time to generate P matrix [sec]: "{}} << t\_P\_time}
@@ -185,18 +185,18 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00181}00181 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00182}00182       \textcolor{comment}{// Multiply auxiliary matrix by diagonal of mass matrix if}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00183}00183       \textcolor{comment}{// required}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00184}00184       \textcolor{keywordflow}{if} (P\_matrix\_using\_scaling)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00184}00184       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_af92907711de209fa924eeef614d48c4e}{P\_matrix\_using\_scaling}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00185}00185       \{}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00186}00186         CRDoubleMatrix* temp\_matrix\_pt = \textcolor{keyword}{new} CRDoubleMatrix;}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00186}00186         \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}}* temp\_matrix\_pt = \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}};}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00187}00187         \textcolor{keywordtype}{double} t\_QBt\_start = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00188}00188         ivmm\_pt-\/>multiply(*bt\_pt, *temp\_matrix\_pt);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00188}00188         ivmm\_pt-\/>\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a54b75960df52e3aebd21aaab20e9869d}{multiply}}(*bt\_pt, *temp\_matrix\_pt);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00189}00189         \textcolor{keyword}{delete} bt\_pt;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00190}00190         bt\_pt = 0;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00191}00191         bt\_pt = temp\_matrix\_pt;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00192}00192         \textcolor{keywordtype}{double} t\_QBt\_finish = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00193}00193 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00194}00194         \textcolor{comment}{// Output times}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00195}00195         \textcolor{keywordflow}{if} (Doc\_time)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00195}00195         \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a6bb97a362c82d3a363ffaaceb7a643a8}{Doc\_time}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00196}00196         \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00197}00197           \textcolor{keywordtype}{double} t\_QBt\_time = t\_QBt\_finish -\/ t\_QBt\_start;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00198}00198           \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}} << \textcolor{stringliteral}{"{}Time to generate QBt [sec]: "{}} << t\_QBt\_time}
@@ -209,9 +209,9 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00205}00205 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00206}00206       \textcolor{comment}{// get block 0 0}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00207}00207       \textcolor{keywordtype}{double} t\_get\_F\_start = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00208}00208       this-\/>get\_block(0, 0, *f\_pt);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00208}00208       this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a72b4dbe167da59d9ba12c7eff97d77e6}{get\_block}}(0, 0, *f\_pt);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00209}00209       \textcolor{keywordtype}{double} t\_get\_F\_finish = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00210}00210       \textcolor{keywordflow}{if} (Doc\_time)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00210}00210       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a6bb97a362c82d3a363ffaaceb7a643a8}{Doc\_time}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00211}00211       \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00212}00212         \textcolor{keywordtype}{double} t\_get\_F\_time = t\_get\_F\_finish -\/ t\_get\_F\_start;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00213}00213         \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}} << \textcolor{stringliteral}{"{}Time to get F [sec]: "{}} << t\_get\_F\_time << std::endl;}
@@ -219,10 +219,10 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00215}00215 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00216}00216       \textcolor{comment}{// Auxiliary matrix for intermediate results}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00217}00217       \textcolor{keywordtype}{double} t\_aux\_matrix\_start = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00218}00218       CRDoubleMatrix* aux\_matrix\_pt = \textcolor{keyword}{new} CRDoubleMatrix;}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00219}00219       f\_pt-\/>multiply(*bt\_pt, *aux\_matrix\_pt);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00218}00218       \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}}* aux\_matrix\_pt = \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}};}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00219}00219       f\_pt-\/>\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a54b75960df52e3aebd21aaab20e9869d}{multiply}}(*bt\_pt, *aux\_matrix\_pt);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00220}00220       \textcolor{keywordtype}{double} t\_aux\_matrix\_finish = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00221}00221       \textcolor{keywordflow}{if} (Doc\_time)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00221}00221       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a6bb97a362c82d3a363ffaaceb7a643a8}{Doc\_time}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00222}00222       \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00223}00223         \textcolor{keywordtype}{double} t\_aux\_time = t\_aux\_matrix\_finish -\/ t\_aux\_matrix\_start;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00224}00224         \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}} << \textcolor{stringliteral}{"{}Time to generate FQBt [sec]: "{}} << t\_aux\_time}
@@ -234,31 +234,31 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00230}00230       bt\_pt = 0;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00231}00231 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00232}00232       \textcolor{comment}{// and if F requires a block preconditioner then we can delete F}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00233}00233       \textcolor{keywordflow}{if} (F\_preconditioner\_is\_block\_preconditioner)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00233}00233       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_aa430d3786009f7ad9fd8009d5bc9430a}{F\_preconditioner\_is\_block\_preconditioner}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00234}00234       \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00235}00235         \textcolor{keyword}{delete} f\_pt;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00236}00236       \}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00237}00237 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00238}00238       \textcolor{comment}{// now form BFBt}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00239}00239       \textcolor{keywordtype}{double} t\_E\_matrix\_start = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00240}00240       CRDoubleMatrix* e\_matrix\_pt = \textcolor{keyword}{new} CRDoubleMatrix;}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00241}00241       b\_pt-\/>multiply(*aux\_matrix\_pt, *e\_matrix\_pt);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00240}00240       \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}}* e\_matrix\_pt = \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}};}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00241}00241       b\_pt-\/>\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a54b75960df52e3aebd21aaab20e9869d}{multiply}}(*aux\_matrix\_pt, *e\_matrix\_pt);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00242}00242       \textcolor{keyword}{delete} aux\_matrix\_pt;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00243}00243       \textcolor{keyword}{delete} b\_pt;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00244}00244       \textcolor{keywordtype}{double} t\_E\_matrix\_finish = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00245}00245       \textcolor{keywordflow}{if} (Doc\_time)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00245}00245       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a6bb97a362c82d3a363ffaaceb7a643a8}{Doc\_time}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00246}00246       \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00247}00247         \textcolor{keywordtype}{double} t\_E\_time = t\_E\_matrix\_finish -\/ t\_E\_matrix\_start;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00248}00248         \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}} << \textcolor{stringliteral}{"{}Time to generate E (B*(F*Bt)) [sec]: "{}} << t\_E\_time}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00249}00249                    << std::endl;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00250}00250       \}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00251}00251       \textcolor{keywordtype}{double} t\_E\_matvec\_start = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00252}00252       E\_mat\_vec\_pt = \textcolor{keyword}{new} MatrixVectorProduct;}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00252}00252       \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a5c6f62a80349652aeff75140ec9c54f1}{E\_mat\_vec\_pt}} = \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct}{MatrixVectorProduct}};}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00253}00253       \textcolor{comment}{// E\_mat\_vec\_pt-\/>setup(e\_matrix\_pt);}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00254}00254       this-\/>setup\_matrix\_vector\_product(E\_mat\_vec\_pt, e\_matrix\_pt, 1);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00254}00254       this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_adbe1ae854ee9831649249d50162bb6a9}{setup\_matrix\_vector\_product}}(\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a5c6f62a80349652aeff75140ec9c54f1}{E\_mat\_vec\_pt}}, e\_matrix\_pt, 1);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00255}00255       \textcolor{keywordtype}{double} t\_E\_matvec\_finish = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00256}00256       \textcolor{keyword}{delete} e\_matrix\_pt;}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00257}00257       \textcolor{keywordflow}{if} (Doc\_time)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00257}00257       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a6bb97a362c82d3a363ffaaceb7a643a8}{Doc\_time}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00258}00258       \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00259}00259         \textcolor{keywordtype}{double} t\_E\_time = t\_E\_matvec\_finish -\/ t\_E\_matvec\_start;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00260}00260         \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}} << \textcolor{stringliteral}{"{}Time to build E (BFBt) matrix vector operator E [sec]: "{}}}
@@ -267,10 +267,10 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00263}00263 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00264}00264       \textcolor{comment}{// and rebuild Bt}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00265}00265       t\_get\_Bt\_start = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00266}00266       bt\_pt = \textcolor{keyword}{new} CRDoubleMatrix;}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00267}00267       this-\/>get\_block(0, 1, *bt\_pt);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00266}00266       bt\_pt = \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}};}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00267}00267       this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a72b4dbe167da59d9ba12c7eff97d77e6}{get\_block}}(0, 1, *bt\_pt);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00268}00268       t\_get\_Bt\_finish = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00269}00269       \textcolor{keywordflow}{if} (Doc\_time)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00269}00269       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a6bb97a362c82d3a363ffaaceb7a643a8}{Doc\_time}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00270}00270       \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00271}00271         \textcolor{keywordtype}{double} t\_get\_Bt\_time = t\_get\_Bt\_finish -\/ t\_get\_Bt\_start;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00272}00272         \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}} << \textcolor{stringliteral}{"{}Time to get Bt [sec]: "{}} << t\_get\_Bt\_time << std::endl;}
@@ -285,13 +285,13 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00281}00281     \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00282}00282     \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00283}00283       \textcolor{comment}{// get the inverse mass matrix (Q)}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00284}00284       CRDoubleMatrix* ivmm\_pt = 0;}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00285}00285       \textcolor{keywordflow}{if} (P\_matrix\_using\_scaling)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00284}00284       \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}}* ivmm\_pt = 0;}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00285}00285       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_af92907711de209fa924eeef614d48c4e}{P\_matrix\_using\_scaling}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00286}00286       \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00287}00287         \textcolor{keywordtype}{double} ivmm\_assembly\_start\_t = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00288}00288         ivmm\_pt = assemble\_mass\_matrix\_diagonal();}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00288}00288         ivmm\_pt = \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a2b32d66080ccfb3a464245d16bea6168}{assemble\_mass\_matrix\_diagonal}}();}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00289}00289         \textcolor{keywordtype}{double} ivmm\_assembly\_finish\_t = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00290}00290         \textcolor{keywordflow}{if} (Doc\_time)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00290}00290         \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a6bb97a362c82d3a363ffaaceb7a643a8}{Doc\_time}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00291}00291         \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00292}00292           \textcolor{keywordtype}{double} ivmm\_assembly\_time =}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00293}00293             ivmm\_assembly\_finish\_t -\/ ivmm\_assembly\_start\_t;}
@@ -302,25 +302,25 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00298}00298 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00299}00299       \textcolor{comment}{// Get Bt}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00300}00300       \textcolor{keywordtype}{double} t\_get\_Bt\_start = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00301}00301       this-\/>get\_block(0, 1, *bt\_pt);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00301}00301       this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a72b4dbe167da59d9ba12c7eff97d77e6}{get\_block}}(0, 1, *bt\_pt);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00302}00302       \textcolor{keywordtype}{double} t\_get\_Bt\_finish = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00303}00303       \textcolor{keywordflow}{if} (Doc\_time)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00303}00303       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a6bb97a362c82d3a363ffaaceb7a643a8}{Doc\_time}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00304}00304       \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00305}00305         \textcolor{keywordtype}{double} t\_get\_Bt\_time = t\_get\_Bt\_finish -\/ t\_get\_Bt\_start;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00306}00306         \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}} << \textcolor{stringliteral}{"{}Time to get Bt [sec]: "{}} << t\_get\_Bt\_time << std::endl;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00307}00307       \}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00308}00308 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00309}00309       \textcolor{comment}{// next QBt}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00310}00310       \textcolor{keywordflow}{if} (P\_matrix\_using\_scaling)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00310}00310       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_af92907711de209fa924eeef614d48c4e}{P\_matrix\_using\_scaling}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00311}00311       \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00312}00312         \textcolor{keywordtype}{double} t\_QBt\_matrix\_start = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00313}00313         CRDoubleMatrix* qbt\_pt = \textcolor{keyword}{new} CRDoubleMatrix;}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00314}00314         ivmm\_pt-\/>multiply(*bt\_pt, *qbt\_pt);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00313}00313         \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}}* qbt\_pt = \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}};}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00314}00314         ivmm\_pt-\/>\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a54b75960df52e3aebd21aaab20e9869d}{multiply}}(*bt\_pt, *qbt\_pt);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00315}00315         \textcolor{keyword}{delete} bt\_pt;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00316}00316         bt\_pt = 0;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00317}00317         bt\_pt = qbt\_pt;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00318}00318         \textcolor{keywordtype}{double} t\_QBt\_matrix\_finish = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00319}00319         \textcolor{keywordflow}{if} (Doc\_time)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00319}00319         \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a6bb97a362c82d3a363ffaaceb7a643a8}{Doc\_time}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00320}00320         \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00321}00321           \textcolor{keywordtype}{double} t\_QBt\_time = t\_QBt\_matrix\_finish -\/ t\_QBt\_matrix\_start;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00322}00322           \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}} << \textcolor{stringliteral}{"{}Time to generate QBt [sec]: "{}} << t\_QBt\_time}
@@ -331,9 +331,9 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00327}00327 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00328}00328       \textcolor{comment}{// form P}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00329}00329       \textcolor{keywordtype}{double} t\_p\_matrix\_start = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00330}00330       b\_pt-\/>multiply(*bt\_pt, *p\_matrix\_pt);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00330}00330       b\_pt-\/>\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a54b75960df52e3aebd21aaab20e9869d}{multiply}}(*bt\_pt, *p\_matrix\_pt);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00331}00331       \textcolor{keywordtype}{double} t\_p\_matrix\_finish = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00332}00332       \textcolor{keywordflow}{if} (Doc\_time)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00332}00332       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a6bb97a362c82d3a363ffaaceb7a643a8}{Doc\_time}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00333}00333       \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00334}00334         \textcolor{keywordtype}{double} t\_p\_time = t\_p\_matrix\_finish -\/ t\_p\_matrix\_start;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00335}00335         \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}} << \textcolor{stringliteral}{"{}Time to generate P [sec]: "{}} << t\_p\_time << std::endl;}
@@ -343,11 +343,11 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00339}00339 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00340}00340       \textcolor{comment}{// build the matvec operator for QBt}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00341}00341       \textcolor{keywordtype}{double} t\_QBt\_MV\_start = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00342}00342       QBt\_mat\_vec\_pt = \textcolor{keyword}{new} MatrixVectorProduct;}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00342}00342       \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a03338487e35713fc408e83b12f9ba8ac}{QBt\_mat\_vec\_pt}} = \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct}{MatrixVectorProduct}};}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00343}00343       \textcolor{comment}{// QBt\_mat\_vec\_pt-\/>setup(bt\_pt);}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00344}00344       this-\/>setup\_matrix\_vector\_product(QBt\_mat\_vec\_pt, bt\_pt, 1);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00344}00344       this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_adbe1ae854ee9831649249d50162bb6a9}{setup\_matrix\_vector\_product}}(\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a03338487e35713fc408e83b12f9ba8ac}{QBt\_mat\_vec\_pt}}, bt\_pt, 1);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00345}00345       \textcolor{keywordtype}{double} t\_QBt\_MV\_finish = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00346}00346       \textcolor{keywordflow}{if} (Doc\_time)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00346}00346       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a6bb97a362c82d3a363ffaaceb7a643a8}{Doc\_time}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00347}00347       \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00348}00348         \textcolor{keywordtype}{double} t\_p\_time = t\_QBt\_MV\_finish -\/ t\_QBt\_MV\_start;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00349}00349         \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}} << \textcolor{stringliteral}{"{}Time to build QBt matrix vector operator [sec]: "{}}}
@@ -358,9 +358,9 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00354}00354 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00355}00355       \textcolor{comment}{// get F}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00356}00356       \textcolor{keywordtype}{double} t\_get\_F\_start = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00357}00357       this-\/>get\_block(0, 0, *f\_pt);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00357}00357       this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a72b4dbe167da59d9ba12c7eff97d77e6}{get\_block}}(0, 0, *f\_pt);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00358}00358       \textcolor{keywordtype}{double} t\_get\_F\_finish = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00359}00359       \textcolor{keywordflow}{if} (Doc\_time)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00359}00359       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a6bb97a362c82d3a363ffaaceb7a643a8}{Doc\_time}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00360}00360       \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00361}00361         \textcolor{keywordtype}{double} t\_get\_F\_time = t\_get\_F\_finish -\/ t\_get\_F\_start;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00362}00362         \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}} << \textcolor{stringliteral}{"{}Time to get F [sec]: "{}} << t\_get\_F\_time << std::endl;}
@@ -368,11 +368,11 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00364}00364 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00365}00365       \textcolor{comment}{// form the matrix vector product helper}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00366}00366       \textcolor{keywordtype}{double} t\_F\_MV\_start = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00367}00367       F\_mat\_vec\_pt = \textcolor{keyword}{new} MatrixVectorProduct;}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00367}00367       \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_ad1ce11b9dc16c14f5eaf72eb841c08ef}{F\_mat\_vec\_pt}} = \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct}{MatrixVectorProduct}};}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00368}00368       \textcolor{comment}{// F\_mat\_vec\_pt-\/>setup(f\_pt);}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00369}00369       this-\/>setup\_matrix\_vector\_product(F\_mat\_vec\_pt, f\_pt, 0);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00369}00369       this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_adbe1ae854ee9831649249d50162bb6a9}{setup\_matrix\_vector\_product}}(\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_ad1ce11b9dc16c14f5eaf72eb841c08ef}{F\_mat\_vec\_pt}}, f\_pt, 0);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00370}00370       \textcolor{keywordtype}{double} t\_F\_MV\_finish = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00371}00371       \textcolor{keywordflow}{if} (Doc\_time)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00371}00371       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a6bb97a362c82d3a363ffaaceb7a643a8}{Doc\_time}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00372}00372       \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00373}00373         \textcolor{keywordtype}{double} t\_F\_MV\_time = t\_F\_MV\_finish -\/ t\_F\_MV\_start;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00374}00374         \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}} << \textcolor{stringliteral}{"{}Time to build F Matrix Vector Operator [sec]: "{}}}
@@ -380,7 +380,7 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00376}00376       \}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00377}00377 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00378}00378       \textcolor{comment}{// if F is a block preconditioner then we can delete the F matrix}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00379}00379       \textcolor{keywordflow}{if} (F\_preconditioner\_is\_block\_preconditioner)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00379}00379       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_aa430d3786009f7ad9fd8009d5bc9430a}{F\_preconditioner\_is\_block\_preconditioner}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00380}00380       \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00381}00381         \textcolor{keyword}{delete} f\_pt;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00382}00382         f\_pt = 0;}
@@ -388,10 +388,10 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00384}00384 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00385}00385       \textcolor{comment}{// and rebuild Bt}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00386}00386       t\_get\_Bt\_start = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00387}00387       bt\_pt = \textcolor{keyword}{new} CRDoubleMatrix;}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00388}00388       this-\/>get\_block(0, 1, *bt\_pt);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00387}00387       bt\_pt = \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}};}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00388}00388       this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a72b4dbe167da59d9ba12c7eff97d77e6}{get\_block}}(0, 1, *bt\_pt);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00389}00389       t\_get\_Bt\_finish = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00390}00390       \textcolor{keywordflow}{if} (Doc\_time)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00390}00390       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a6bb97a362c82d3a363ffaaceb7a643a8}{Doc\_time}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00391}00391       \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00392}00392         \textcolor{keywordtype}{double} t\_get\_Bt\_time = t\_get\_Bt\_finish -\/ t\_get\_Bt\_start;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00393}00393         \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}} << \textcolor{stringliteral}{"{}Time to get Bt [sec]: "{}} << t\_get\_Bt\_time << std::endl;}
@@ -404,11 +404,11 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00400}00400 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00401}00401     \textcolor{comment}{// form the matrix vector operator for Bt}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00402}00402     \textcolor{keywordtype}{double} t\_Bt\_MV\_start = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00403}00403     Bt\_mat\_vec\_pt = \textcolor{keyword}{new} MatrixVectorProduct;}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00403}00403     \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_ac71c3f992d9790ca2e25e9c360eed635}{Bt\_mat\_vec\_pt}} = \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct}{MatrixVectorProduct}};}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00404}00404     \textcolor{comment}{// Bt\_mat\_vec\_pt-\/>setup(bt\_pt);}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00405}00405     this-\/>setup\_matrix\_vector\_product(Bt\_mat\_vec\_pt, bt\_pt, 1);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00405}00405     this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_adbe1ae854ee9831649249d50162bb6a9}{setup\_matrix\_vector\_product}}(\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_ac71c3f992d9790ca2e25e9c360eed635}{Bt\_mat\_vec\_pt}}, bt\_pt, 1);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00406}00406     \textcolor{keywordtype}{double} t\_Bt\_MV\_finish = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00407}00407     \textcolor{keywordflow}{if} (Doc\_time)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00407}00407     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a6bb97a362c82d3a363ffaaceb7a643a8}{Doc\_time}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00408}00408     \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00409}00409       \textcolor{keywordtype}{double} t\_Bt\_MV\_time = t\_Bt\_MV\_finish -\/ t\_Bt\_MV\_start;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00410}00410       \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}} << \textcolor{stringliteral}{"{}Time to build Bt Matrix Vector Operator [sec]: "{}}}
@@ -418,10 +418,10 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00414}00414     bt\_pt = 0;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00415}00415 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00416}00416     \textcolor{comment}{// if the P preconditioner has not been setup}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00417}00417     \textcolor{keywordflow}{if} (P\_preconditioner\_pt == 0)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00417}00417     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_af72af32deaca30259e86eba2e04f16ed}{P\_preconditioner\_pt}} == 0)}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00418}00418     \{}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00419}00419       P\_preconditioner\_pt = \textcolor{keyword}{new} SuperLUPreconditioner;}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00420}00420       Using\_default\_p\_preconditioner = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00419}00419       \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_af72af32deaca30259e86eba2e04f16ed}{P\_preconditioner\_pt}} = \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1SuperLUPreconditioner}{SuperLUPreconditioner}};}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00420}00420       \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_aca759bb66884df54c3ed5447357468e7}{Using\_default\_p\_preconditioner}} = \textcolor{keyword}{true};}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00421}00421     \}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00422}00422 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00423}00423     \textcolor{comment}{// std::stringstream junk;}}
@@ -432,12 +432,12 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00428}00428 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00429}00429     \textcolor{comment}{// Setup the preconditioner for the Pressure matrix}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00430}00430     \textcolor{keywordtype}{double} t\_p\_prec\_start = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00431}00431     P\_preconditioner\_pt-\/>setup(p\_matrix\_pt);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00431}00431     \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_af72af32deaca30259e86eba2e04f16ed}{P\_preconditioner\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Preconditioner_a0b95e7159585b5151f9e5dc1d1713655}{setup}}(p\_matrix\_pt);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00432}00432     \textcolor{keyword}{delete} p\_matrix\_pt;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00433}00433     p\_matrix\_pt = 0;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00434}00434     p\_matrix\_pt = 0;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00435}00435     \textcolor{keywordtype}{double} t\_p\_prec\_finish = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00436}00436     \textcolor{keywordflow}{if} (Doc\_time)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00436}00436     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a6bb97a362c82d3a363ffaaceb7a643a8}{Doc\_time}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00437}00437     \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00438}00438       \textcolor{keywordtype}{double} t\_p\_prec\_time = t\_p\_prec\_finish -\/ t\_p\_prec\_start;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00439}00439       \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}} << \textcolor{stringliteral}{"{}P sub-\/preconditioner setup time [sec]: "{}} << t\_p\_prec\_time}
@@ -448,36 +448,36 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00444}00444     \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00445}00445 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00446}00446     \textcolor{comment}{// if the F preconditioner has not been setup}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00447}00447     \textcolor{keywordflow}{if} (F\_preconditioner\_pt == 0)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00447}00447     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a48598668a75faf5d983872f191288eb8}{F\_preconditioner\_pt}} == 0)}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00448}00448     \{}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00449}00449       F\_preconditioner\_pt = \textcolor{keyword}{new} SuperLUPreconditioner;}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00450}00450       Using\_default\_f\_preconditioner = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00449}00449       \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a48598668a75faf5d983872f191288eb8}{F\_preconditioner\_pt}} = \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1SuperLUPreconditioner}{SuperLUPreconditioner}};}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00450}00450       \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_ad873e64fad712e74972d6dbc95b2eeb0}{Using\_default\_f\_preconditioner}} = \textcolor{keyword}{true};}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00451}00451     \}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00452}00452 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00453}00453     \textcolor{comment}{// if F is a block preconditioner}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00454}00454     \textcolor{keywordtype}{double} t\_f\_prec\_start = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00455}00455     \textcolor{keywordflow}{if} (F\_preconditioner\_is\_block\_preconditioner)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00455}00455     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_aa430d3786009f7ad9fd8009d5bc9430a}{F\_preconditioner\_is\_block\_preconditioner}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00456}00456     \{}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00457}00457       \textcolor{keywordtype}{unsigned} ndof\_types = this-\/>ndof\_types();}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00457}00457       \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_ab6cca480686ea8e44244ac60a0db23ba}{ndof\_types}} = this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_ab6cca480686ea8e44244ac60a0db23ba}{ndof\_types}}();}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00458}00458       ndof\_types-\/-\/;}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00459}00459       Vector<unsigned> dof\_map(ndof\_types);}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00460}00460       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < ndof\_types; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00459}00459       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<unsigned>}} dof\_map(\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_ab6cca480686ea8e44244ac60a0db23ba}{ndof\_types}});}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00460}00460       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_ab6cca480686ea8e44244ac60a0db23ba}{ndof\_types}}; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00461}00461       \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00462}00462         dof\_map[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}};}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00463}00463       \}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00464}00464       F\_block\_preconditioner\_pt-\/>turn\_into\_subsidiary\_block\_preconditioner(}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00464}00464       F\_block\_preconditioner\_pt-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_ab8e2478caa8370dd12462f17e1cc8082}{turn\_into\_subsidiary\_block\_preconditioner}}(}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00465}00465         \textcolor{keyword}{this}, dof\_map);}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00466}00466       F\_block\_preconditioner\_pt-\/>setup(matrix\_pt());}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00466}00466       F\_block\_preconditioner\_pt-\/>\mbox{\hyperlink{classoomph_1_1Preconditioner_a0b95e7159585b5151f9e5dc1d1713655}{setup}}(\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_aec1a6eda2d78d1e3b41ced805534d72d}{matrix\_pt}}());}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00467}00467     \}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00468}00468     \textcolor{comment}{// otherwise F is not a block preconditioner}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00469}00469     \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00470}00470     \{}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00471}00471       F\_preconditioner\_pt-\/>setup(f\_pt);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00471}00471       \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a48598668a75faf5d983872f191288eb8}{F\_preconditioner\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Preconditioner_a0b95e7159585b5151f9e5dc1d1713655}{setup}}(f\_pt);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00472}00472       \textcolor{keyword}{delete} f\_pt;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00473}00473       f\_pt = 0;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00474}00474     \}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00475}00475     \textcolor{keywordtype}{double} t\_f\_prec\_finish = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00476}00476     \textcolor{keywordflow}{if} (Doc\_time)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00476}00476     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a6bb97a362c82d3a363ffaaceb7a643a8}{Doc\_time}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00477}00477     \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00478}00478       \textcolor{keywordtype}{double} t\_f\_prec\_time = t\_f\_prec\_finish -\/ t\_f\_prec\_start;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00479}00479       \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}} << \textcolor{stringliteral}{"{}F sub-\/preconditioner setup time [sec]: "{}} << t\_f\_prec\_time}
@@ -487,32 +487,32 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00483}00483     \textcolor{comment}{// Remember that the preconditioner has been setup so}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00484}00484     \textcolor{comment}{// the stored information can be wiped when we}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00485}00485     \textcolor{comment}{// come here next...}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00486}00486     Preconditioner\_has\_been\_setup = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00486}00486     \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a36040d15eba392db2f29c503644a6ed2}{Preconditioner\_has\_been\_setup}} = \textcolor{keyword}{true};}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00487}00487   \}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00488}00488 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00489}00489 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00490}00490   \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00491}00491 \textcolor{comment}{  /// Apply preconditioner to r.}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00492}00492 \textcolor{comment}{}  \textcolor{comment}{//=======================================================================}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00493}00493   \textcolor{keywordtype}{void} PressureBasedSolidLSCPreconditioner::preconditioner\_solve(}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00494}00494     \textcolor{keyword}{const} DoubleVector\& r, DoubleVector\& z)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00493}\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_ab81479f6e6a91ecb048f8c8d7e050744}{00493}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_ab81479f6e6a91ecb048f8c8d7e050744}{PressureBasedSolidLSCPreconditioner::preconditioner\_solve}}(}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00494}00494     \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& r, \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& z)}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00495}00495   \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00496}00496 \textcolor{preprocessor}{\#ifdef PARANOID}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00497}00497     \textcolor{keywordflow}{if} (Preconditioner\_has\_been\_setup == \textcolor{keyword}{false})}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00497}00497     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a36040d15eba392db2f29c503644a6ed2}{Preconditioner\_has\_been\_setup}} == \textcolor{keyword}{false})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00498}00498     \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00499}00499       std::ostringstream error\_message;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00500}00500       error\_message << \textcolor{stringliteral}{"{}setup must be called before using preconditioner\_solve"{}};}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00501}00501       \textcolor{keywordflow}{throw} OomphLibError(}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00501}00501       \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00502}00502         error\_message.str(), OOMPH\_CURRENT\_FUNCTION, OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00503}00503     \}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00504}00504     \textcolor{keywordflow}{if} (z.built())}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00504}00504     \textcolor{keywordflow}{if} (z.\mbox{\hyperlink{classoomph_1_1DoubleVector_aae402d422ec4344a4a45cdb7659b7161}{built}}())}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00505}00505     \{}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00506}00506       \textcolor{keywordflow}{if} (z.nrow() != r.nrow())}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00506}00506       \textcolor{keywordflow}{if} (z.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow}}() != r.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow}}())}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00507}00507       \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00508}00508         std::ostringstream error\_message;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00509}00509         error\_message << \textcolor{stringliteral}{"{}The vectors z and r must have the same number of "{}}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00510}00510                       << \textcolor{stringliteral}{"{}of global rows"{}};}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00511}00511         \textcolor{keywordflow}{throw} OomphLibError(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00511}00511         \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message.str(),}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00512}00512                             OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00513}00513                             OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00514}00514       \}}
@@ -524,25 +524,25 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00520}00520     \textcolor{keywordtype}{double} t\_end = 0;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00521}00521 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00522}00522     \textcolor{comment}{// if z is not setup then give it the same distribution}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00523}00523     \textcolor{keywordflow}{if} (!z.built())}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00523}00523     \textcolor{keywordflow}{if} (!z.\mbox{\hyperlink{classoomph_1_1DoubleVector_aae402d422ec4344a4a45cdb7659b7161}{built}}())}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00524}00524     \{}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00525}00525       z.build(r.distribution\_pt(), 0.0);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00525}00525       z.\mbox{\hyperlink{classoomph_1_1DoubleVector_a7bcc94c157d6853a0f0502e8a76ed380}{build}}(r.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}(), 0.0);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00526}00526     \}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00527}00527 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00528}00528     \textcolor{comment}{// Step 1 -\/ apply approximate Schur inverse to pressure unknowns (block 1)}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00529}00529     \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00530}00530 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00531}00531     \textcolor{comment}{// Working vectors}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00532}00532     DoubleVector temp\_vec;}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00533}00533     DoubleVector another\_temp\_vec;}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00532}00532     \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} temp\_vec;}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00533}00533     \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} another\_temp\_vec;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00534}00534 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00535}00535     \textcolor{comment}{// Copy pressure values from residual vector to temp\_vec:}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00536}00536     \textcolor{comment}{// Loop over all entries in the global vector (this one}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00537}00537     \textcolor{comment}{// includes displacement/position and pressure dofs in some random fashion)}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00538}00538     this-\/>get\_block\_vector(1, r, temp\_vec);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00538}00538     this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a7efc9f2f0209764902e4e45fcb2556d1}{get\_block\_vector}}(1, r, temp\_vec);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00539}00539 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00540}00540 }
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00541}00541     \textcolor{keywordflow}{if} (Doc\_time)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00541}00541     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a6bb97a362c82d3a363ffaaceb7a643a8}{Doc\_time}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00542}00542     \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00543}00543       t\_end = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00544}00544       \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}} << \textcolor{stringliteral}{"{}LSC prec solve: Time for get block vector: "{}}}
@@ -555,24 +555,24 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00551}00551     \textcolor{comment}{// Solve first pressure Poisson system}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00552}00552 \textcolor{preprocessor}{\#ifdef PARANOID}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00553}00553     \textcolor{comment}{// check a solver has been set}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00554}00554     \textcolor{keywordflow}{if} (P\_preconditioner\_pt == 0)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00554}00554     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_af72af32deaca30259e86eba2e04f16ed}{P\_preconditioner\_pt}} == 0)}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00555}00555     \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00556}00556       std::ostringstream error\_message;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00557}00557       error\_message << \textcolor{stringliteral}{"{}P\_preconditioner\_pt has not been set."{}};}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00558}00558       \textcolor{keywordflow}{throw} OomphLibError(}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00558}00558       \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00559}00559         error\_message.str(), OOMPH\_CURRENT\_FUNCTION, OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00560}00560     \}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00561}00561 \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00562}00562 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00563}00563     \textcolor{comment}{// use some Preconditioner's preconditioner\_solve function}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00564}00564     P\_preconditioner\_pt-\/>preconditioner\_solve(temp\_vec, another\_temp\_vec);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00564}00564     \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_af72af32deaca30259e86eba2e04f16ed}{P\_preconditioner\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34884bb64ec8}{preconditioner\_solve}}(temp\_vec, another\_temp\_vec);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00565}00565 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00566}00566 }
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00567}00567     \textcolor{keywordflow}{if} (Doc\_time)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00567}00567     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a6bb97a362c82d3a363ffaaceb7a643a8}{Doc\_time}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00568}00568     \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00569}00569       t\_end = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00570}00570       \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}} << \textcolor{stringliteral}{"{}LSC prec solve: First P solve [nrow="{}}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00571}00571                  << P\_preconditioner\_pt-\/>nrow() << \textcolor{stringliteral}{"{}]: "{}} << t\_end -\/ t\_start}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00571}00571                  << \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_af72af32deaca30259e86eba2e04f16ed}{P\_preconditioner\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow}}() << \textcolor{stringliteral}{"{}]: "{}} << t\_end -\/ t\_start}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00572}00572                  << std::endl;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00573}00573       t\_start = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00574}00574     \}}
@@ -581,22 +581,22 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00577}00577     \textcolor{comment}{// NOTE: The vector another\_temp\_vec now contains the vector P\string^\{-\/1\} r\_p}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00578}00578 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00579}00579     \textcolor{comment}{// Multiply another\_temp\_vec by matrix E and stick the result into temp\_vec}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00580}00580     temp\_vec.clear();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00581}00581     \textcolor{keywordflow}{if} (Form\_BFBt\_product)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00580}00580     temp\_vec.\mbox{\hyperlink{classoomph_1_1DoubleVector_af1677445056759263b1b076966e7bfae}{clear}}();}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00581}00581     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a216ed50190c2fa031c222b309e573f09}{Form\_BFBt\_product}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00582}00582     \{}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00583}00583       E\_mat\_vec\_pt-\/>multiply(another\_temp\_vec, temp\_vec);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00583}00583       \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a5c6f62a80349652aeff75140ec9c54f1}{E\_mat\_vec\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_ac29ba50f1a77bf0e316c3417bcff71ee}{multiply}}(another\_temp\_vec, temp\_vec);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00584}00584     \}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00585}00585     \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00586}00586     \{}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00587}00587       QBt\_mat\_vec\_pt-\/>multiply(another\_temp\_vec, temp\_vec);}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00588}00588       another\_temp\_vec.clear();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00589}00589       F\_mat\_vec\_pt-\/>multiply(temp\_vec, another\_temp\_vec);}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00590}00590       temp\_vec.clear();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00591}00591       QBt\_mat\_vec\_pt-\/>multiply\_transpose(another\_temp\_vec, temp\_vec);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00587}00587       \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a03338487e35713fc408e83b12f9ba8ac}{QBt\_mat\_vec\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_ac29ba50f1a77bf0e316c3417bcff71ee}{multiply}}(another\_temp\_vec, temp\_vec);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00588}00588       another\_temp\_vec.\mbox{\hyperlink{classoomph_1_1DoubleVector_af1677445056759263b1b076966e7bfae}{clear}}();}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00589}00589       \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_ad1ce11b9dc16c14f5eaf72eb841c08ef}{F\_mat\_vec\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_ac29ba50f1a77bf0e316c3417bcff71ee}{multiply}}(temp\_vec, another\_temp\_vec);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00590}00590       temp\_vec.\mbox{\hyperlink{classoomph_1_1DoubleVector_af1677445056759263b1b076966e7bfae}{clear}}();}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00591}00591       \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a03338487e35713fc408e83b12f9ba8ac}{QBt\_mat\_vec\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_a2b7670797fe289ea814968f2f9469fd5}{multiply\_transpose}}(another\_temp\_vec, temp\_vec);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00592}00592     \}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00593}00593 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00594}00594 }
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00595}00595     \textcolor{keywordflow}{if} (Doc\_time)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00595}00595     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a6bb97a362c82d3a363ffaaceb7a643a8}{Doc\_time}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00596}00596     \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00597}00597       t\_end = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00598}00598       \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}} << \textcolor{stringliteral}{"{}LSC prec solve: E matrix vector product: "{}}}
@@ -607,15 +607,15 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00603}00603     \textcolor{comment}{// NOTE: The vector temp\_vec now contains E P\string^\{-\/1\} r\_p}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00604}00604 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00605}00605     \textcolor{comment}{// Solve second pressure Poisson system using preconditioner\_solve}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00606}00606     another\_temp\_vec.clear();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00607}00607     P\_preconditioner\_pt-\/>preconditioner\_solve(temp\_vec, another\_temp\_vec);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00606}00606     another\_temp\_vec.\mbox{\hyperlink{classoomph_1_1DoubleVector_af1677445056759263b1b076966e7bfae}{clear}}();}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00607}00607     \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_af72af32deaca30259e86eba2e04f16ed}{P\_preconditioner\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34884bb64ec8}{preconditioner\_solve}}(temp\_vec, another\_temp\_vec);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00608}00608 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00609}00609 }
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00610}00610     \textcolor{keywordflow}{if} (Doc\_time)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00610}00610     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a6bb97a362c82d3a363ffaaceb7a643a8}{Doc\_time}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00611}00611     \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00612}00612       t\_end = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00613}00613       \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}} << \textcolor{stringliteral}{"{}LSC prec solve: Second P solve [nrow="{}}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00614}00614                  << P\_preconditioner\_pt-\/>nrow() << \textcolor{stringliteral}{"{}]: "{}} << t\_end -\/ t\_start}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00614}00614                  << \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_af72af32deaca30259e86eba2e04f16ed}{P\_preconditioner\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow}}() << \textcolor{stringliteral}{"{}]: "{}} << t\_end -\/ t\_start}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00615}00615                  << std::endl;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00616}00616       t\_start = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00617}00617     \}}
@@ -627,9 +627,9 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00623}00623 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00624}00624     \textcolor{comment}{// Now copy another\_temp\_vec (i.e. z\_p) back into the global vector z.}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00625}00625     \textcolor{comment}{// Loop over all entries in the global results vector z:}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00626}00626     temp\_vec.build(another\_temp\_vec.distribution\_pt(), 0.0);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00626}00626     temp\_vec.\mbox{\hyperlink{classoomph_1_1DoubleVector_a7bcc94c157d6853a0f0502e8a76ed380}{build}}(another\_temp\_vec.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}(), 0.0);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00627}00627     temp\_vec -\/= another\_temp\_vec;}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00628}00628     return\_block\_vector(1, temp\_vec, z);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00628}00628     \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a1dd4d3cd6b64fa64e1ff6730b0deecc7}{return\_block\_vector}}(1, temp\_vec, z);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00629}00629 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00630}00630     \textcolor{comment}{// Step 2 -\/ apply preconditioner to displacement/positon unknowns (block 0)}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00631}00631     \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
@@ -638,11 +638,11 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00634}00634     \textcolor{comment}{// negative of the solution of the Schur complement systen, -\/z\_p.}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00635}00635     \textcolor{comment}{// Multiply by G (stored in Block\_matrix\_pt(0,1) and store}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00636}00636     \textcolor{comment}{// result in temp\_vec (vector resizes itself).}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00637}00637     temp\_vec.clear();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00638}00638     Bt\_mat\_vec\_pt-\/>multiply(another\_temp\_vec, temp\_vec);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00637}00637     temp\_vec.\mbox{\hyperlink{classoomph_1_1DoubleVector_af1677445056759263b1b076966e7bfae}{clear}}();}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00638}00638     \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_ac71c3f992d9790ca2e25e9c360eed635}{Bt\_mat\_vec\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_ac29ba50f1a77bf0e316c3417bcff71ee}{multiply}}(another\_temp\_vec, temp\_vec);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00639}00639 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00640}00640 }
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00641}00641     \textcolor{keywordflow}{if} (Doc\_time)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00641}00641     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a6bb97a362c82d3a363ffaaceb7a643a8}{Doc\_time}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00642}00642     \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00643}00643       t\_end = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00644}00644       \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}} << \textcolor{stringliteral}{"{}LSC prec solve: G matrix vector product: "{}}}
@@ -654,11 +654,11 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00650}00650 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00651}00651     \textcolor{comment}{// The vector another\_temp\_vec is no longer needed -\/-\/ re-\/use it to store}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00652}00652     \textcolor{comment}{// displacement/position quantities:}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00653}00653     another\_temp\_vec.clear();}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00653}00653     another\_temp\_vec.\mbox{\hyperlink{classoomph_1_1DoubleVector_af1677445056759263b1b076966e7bfae}{clear}}();}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00654}00654 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00655}00655     \textcolor{comment}{// Loop over all enries in the global vector and find the}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00656}00656     \textcolor{comment}{// entries associated with the displacement/position:}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00657}00657     get\_block\_vector(0, r, another\_temp\_vec);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00657}00657     \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a7efc9f2f0209764902e4e45fcb2556d1}{get\_block\_vector}}(0, r, another\_temp\_vec);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00658}00658     another\_temp\_vec += temp\_vec;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00659}00659 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00660}00660     \textcolor{comment}{// NOTE:  The vector another\_temp\_vec now contains r\_u -\/ G z\_p}}
@@ -666,33 +666,33 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00662}00662     \textcolor{comment}{// Solve momentum system}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00663}00663 \textcolor{preprocessor}{\#ifdef PARANOID}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00664}00664     \textcolor{comment}{// check a solver has been set}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00665}00665     \textcolor{keywordflow}{if} (F\_preconditioner\_pt == 0)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00665}00665     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a48598668a75faf5d983872f191288eb8}{F\_preconditioner\_pt}} == 0)}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00666}00666     \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00667}00667       std::ostringstream error\_message;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00668}00668       error\_message << \textcolor{stringliteral}{"{}F\_preconditioner\_pt has not been set."{}};}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00669}00669       \textcolor{keywordflow}{throw} OomphLibError(}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00669}00669       \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00670}00670         error\_message.str(), OOMPH\_CURRENT\_FUNCTION, OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00671}00671     \}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00672}00672 \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00673}00673 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00674}00674     \textcolor{comment}{// use some Preconditioner's preconditioner solve}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00675}00675     \textcolor{comment}{// and return}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00676}00676     \textcolor{keywordflow}{if} (F\_preconditioner\_is\_block\_preconditioner)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00676}00676     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_aa430d3786009f7ad9fd8009d5bc9430a}{F\_preconditioner\_is\_block\_preconditioner}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00677}00677     \{}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00678}00678       return\_block\_vector(0, another\_temp\_vec, z);}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00679}00679       F\_preconditioner\_pt-\/>preconditioner\_solve(z, z);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00678}00678       \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a1dd4d3cd6b64fa64e1ff6730b0deecc7}{return\_block\_vector}}(0, another\_temp\_vec, z);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00679}00679       \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a48598668a75faf5d983872f191288eb8}{F\_preconditioner\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34884bb64ec8}{preconditioner\_solve}}(z, z);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00680}00680     \}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00681}00681     \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00682}00682     \{}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00683}00683       F\_preconditioner\_pt-\/>preconditioner\_solve(another\_temp\_vec, temp\_vec);}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00684}00684       return\_block\_vector(0, temp\_vec, z);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00683}00683       \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a48598668a75faf5d983872f191288eb8}{F\_preconditioner\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34884bb64ec8}{preconditioner\_solve}}(another\_temp\_vec, temp\_vec);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00684}00684       \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a1dd4d3cd6b64fa64e1ff6730b0deecc7}{return\_block\_vector}}(0, temp\_vec, z);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00685}00685     \}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00686}00686 }
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00687}00687     \textcolor{keywordflow}{if} (Doc\_time)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00687}00687     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a6bb97a362c82d3a363ffaaceb7a643a8}{Doc\_time}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00688}00688     \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00689}00689       t\_end = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00690}00690       \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}} << \textcolor{stringliteral}{"{}LSC prec solve: F solve [nrow="{}}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00691}00691                  << P\_preconditioner\_pt-\/>nrow() << \textcolor{stringliteral}{"{}]: "{}} << t\_end -\/ t\_start}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00691}00691                  << \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_af72af32deaca30259e86eba2e04f16ed}{P\_preconditioner\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow}}() << \textcolor{stringliteral}{"{}]: "{}} << t\_end -\/ t\_start}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00692}00692                  << std::endl;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00693}00693       \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}} << \textcolor{stringliteral}{"{}LSC prec solve: Overall "{}} << t\_end -\/ t\_start\_overall}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00694}00694                  << std::endl;}
@@ -705,39 +705,39 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00701}00701 \textcolor{comment}{  /// mass matrix from the elemental contributions defined in}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00702}00702 \textcolor{comment}{  /// SolidElementWithDiagonalMassMatrix::get\_mass\_matrix\_diagonal(...).}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00703}00703 \textcolor{comment}{}  \textcolor{comment}{//========================================================================}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00704}00704   CRDoubleMatrix* PressureBasedSolidLSCPreconditioner::}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00705}00705     assemble\_mass\_matrix\_diagonal()}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00704}\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a2b32d66080ccfb3a464245d16bea6168}{00704}}   \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}}* \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a2b32d66080ccfb3a464245d16bea6168}{PressureBasedSolidLSCPreconditioner::}}}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00705}00705 \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a2b32d66080ccfb3a464245d16bea6168}{    assemble\_mass\_matrix\_diagonal}}()}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00706}00706   \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00707}00707     \textcolor{comment}{// determine the rows required by this processor}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00708}00708     \textcolor{keywordtype}{unsigned} first\_row = this-\/>block\_distribution\_pt(0)-\/>first\_row();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00709}00709     \textcolor{keywordtype}{unsigned} nrow\_local = this-\/>block\_distribution\_pt(0)-\/>nrow\_local();}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00710}00710     \textcolor{keywordtype}{unsigned} nrow = this-\/>block\_distribution\_pt(0)-\/>nrow();}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00708}00708     \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ab00a3919b8634c698749f14a4d92947d}{first\_row}} = this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_af497da125d1b8011af7ed00114f2d205}{block\_distribution\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a2634e540a78fe1ee3f5c907aff500b58}{first\_row}}();}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00709}00709     \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a9bd7e1d242c69a28da85a804a7717fce}{nrow\_local}} = this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_af497da125d1b8011af7ed00114f2d205}{block\_distribution\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_ac9310de740f9c3a61f8d5dab9bef88ca}{nrow\_local}}();}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00710}00710     \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow}} = this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_af497da125d1b8011af7ed00114f2d205}{block\_distribution\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_aafad0b69de2284808366b65bd63e493b}{nrow}}();}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00711}00711 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00712}00712     \textcolor{comment}{// create storage for the diagonals}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00713}00713     \textcolor{keywordtype}{double}* m\_values = \textcolor{keyword}{new} \textcolor{keywordtype}{double}[nrow\_local];}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00714}00714     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < nrow\_local; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00713}00713     \textcolor{keywordtype}{double}* m\_values = \textcolor{keyword}{new} \textcolor{keywordtype}{double}[\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a9bd7e1d242c69a28da85a804a7717fce}{nrow\_local}}];}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00714}00714     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a9bd7e1d242c69a28da85a804a7717fce}{nrow\_local}}; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00715}00715     \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00716}00716       m\_values[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = 0;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00717}00717     \}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00718}00718 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00719}00719     \textcolor{comment}{// if the problem is distributed}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00720}00720     \textcolor{keywordtype}{bool} distributed = \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00720}00720     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a5505731e7e73d7e4251c67c7adec6bf5}{distributed}} = \textcolor{keyword}{false};}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00721}00721 \textcolor{preprocessor}{\#ifdef OOMPH\_HAS\_MPI}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00722}00722     \textcolor{keywordflow}{if} (any\_mesh\_distributed() || this-\/>master\_distribution\_pt()-\/>distributed())}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00722}00722     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a6fb68db9e79048615984b005f8aa43b3}{any\_mesh\_distributed}}() || this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a6837129a0e4a2b7f5c279234c0307184}{master\_distribution\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a5505731e7e73d7e4251c67c7adec6bf5}{distributed}}())}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00723}00723     \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00724}00724       distributed = \textcolor{keyword}{true};}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00725}00725     \}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00726}00726 \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00727}00727 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00728}00728     \textcolor{comment}{// next we get the diagonal mass matrix data}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00729}00729     \textcolor{keywordflow}{if} (distributed)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00729}00729     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a5505731e7e73d7e4251c67c7adec6bf5}{distributed}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00730}00730     \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00731}00731 \textcolor{preprocessor}{\#ifdef OOMPH\_HAS\_MPI}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00732}00732       \textcolor{comment}{// the number of processors}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00733}00733       \textcolor{keywordtype}{unsigned} nproc = this-\/>comm\_pt()-\/>nproc();}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00733}00733       \textcolor{keywordtype}{unsigned} nproc = this-\/>\mbox{\hyperlink{classoomph_1_1Preconditioner_a88d799e18a605c3993c6fcac0a41d901}{comm\_pt}}()-\/>nproc();}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00734}00734 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00735}00735       \textcolor{comment}{// and my rank}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00736}00736       \textcolor{keywordtype}{unsigned} my\_rank = this-\/>comm\_pt()-\/>my\_rank();}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00736}00736       \textcolor{keywordtype}{unsigned} my\_rank = this-\/>\mbox{\hyperlink{classoomph_1_1Preconditioner_a88d799e18a605c3993c6fcac0a41d901}{comm\_pt}}()-\/>my\_rank();}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00737}00737 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00738}00738       \textcolor{comment}{// determine the rows for which we have lookup rows}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00739}00739       \textcolor{comment}{// if the problem is NOT distributed then we only classify global equation}}
@@ -745,54 +745,54 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00741}00741       \textcolor{comment}{// every element)}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00742}00742       \textcolor{keywordtype}{unsigned} first\_lookup\_row = 0;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00743}00743       \textcolor{keywordtype}{unsigned} last\_lookup\_row = 0;}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00744}00744       first\_lookup\_row = this-\/>master\_distribution\_pt()-\/>first\_row();}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00744}00744       first\_lookup\_row = this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a6837129a0e4a2b7f5c279234c0307184}{master\_distribution\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a2634e540a78fe1ee3f5c907aff500b58}{first\_row}}();}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00745}00745       last\_lookup\_row =}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00746}00746         first\_lookup\_row + this-\/>master\_distribution\_pt()-\/>nrow\_local() -\/ 1;}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00746}00746         first\_lookup\_row + this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a6837129a0e4a2b7f5c279234c0307184}{master\_distribution\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_ac9310de740f9c3a61f8d5dab9bef88ca}{nrow\_local}}() -\/ 1;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00747}00747 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00748}00748       \textcolor{comment}{// find number of local elements}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00749}00749       \textcolor{keywordtype}{unsigned} n\_el = Solid\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00749}00749       \textcolor{keywordtype}{unsigned} n\_el = \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_aa14db4490d9ce73788e22bc3d465489b}{Solid\_mesh\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Mesh_af01dfefb66c15579b540be62999d93ee}{nelement}}();}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00750}00750 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00751}00751       \textcolor{comment}{// the diagonal mass matrix contributions that have been}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00752}00752       \textcolor{comment}{// classified and should be sent to another processor}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00753}00753       Vector<double>* classified\_contributions\_send = \textcolor{keyword}{new} Vector<double>[nproc];}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00753}00753       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}* classified\_contributions\_send = \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}[nproc];}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00754}00754 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00755}00755       \textcolor{comment}{// the corresponding block indices}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00756}00756       Vector<unsigned>* classified\_indices\_send = \textcolor{keyword}{new} Vector<unsigned>[nproc];}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00756}00756       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<unsigned>}}* classified\_indices\_send = \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<unsigned>}}[nproc];}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00757}00757 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00758}00758       \textcolor{comment}{// the maitrix contributions that cannot be classified by this processor}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00759}00759       \textcolor{comment}{// and therefore must be sent to another for classification}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00760}00760       Vector<double>* unclassified\_contributions\_send =}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00761}00761         \textcolor{keyword}{new} Vector<double>[nproc];}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00760}00760       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}* unclassified\_contributions\_send =}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00761}00761         \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}[nproc];}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00762}00762 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00763}00763       \textcolor{comment}{// the corresponding global indices that require classification}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00764}00764       Vector<unsigned>* unclassified\_indices\_send = \textcolor{keyword}{new} Vector<unsigned>[nproc];}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00764}00764       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<unsigned>}}* unclassified\_indices\_send = \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<unsigned>}}[nproc];}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00765}00765 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00766}00766       \textcolor{comment}{// get the master distribution pt}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00767}00767       \textcolor{keyword}{const} LinearAlgebraDistribution* master\_distribution\_pt =}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00768}00768         this-\/>master\_distribution\_pt();}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00767}00767       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{LinearAlgebraDistribution}}* \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a6837129a0e4a2b7f5c279234c0307184}{master\_distribution\_pt}} =}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00768}00768         this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a6837129a0e4a2b7f5c279234c0307184}{master\_distribution\_pt}}();}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00769}00769 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00770}00770       \textcolor{comment}{// get the displacement/position distribution pt}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00771}00771       \textcolor{keyword}{const} LinearAlgebraDistribution* displ\_dist\_pt =}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00772}00772         this-\/>block\_distribution\_pt(0);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00771}00771       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{LinearAlgebraDistribution}}* displ\_dist\_pt =}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00772}00772         this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_af497da125d1b8011af7ed00114f2d205}{block\_distribution\_pt}}(0);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00773}00773 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00774}00774       \textcolor{comment}{// get the contribution for each element}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00775}00775       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}} = 0; \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}} < n\_el; \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}++)}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00776}00776       \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00777}00777         \textcolor{comment}{// check that the element is not halo d}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00778}00778         \textcolor{keywordflow}{if} (!Solid\_mesh\_pt-\/>element\_pt(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>is\_halo())}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00778}00778         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_aa14db4490d9ce73788e22bc3d465489b}{Solid\_mesh\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a9a5d03afb8730e9459ecbc67c6439143}{element\_pt}}(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>\mbox{\hyperlink{classoomph_1_1GeneralisedElement_a0d9869eaf7d6e104c1e465b0d3cd6a9b}{is\_halo}}())}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00779}00779         \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00780}00780           \textcolor{comment}{// find number of degrees of freedom in the element}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00781}00781           \textcolor{comment}{// (this is slightly too big because it includes the}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00782}00782           \textcolor{comment}{// pressure dofs but this doesn't matter)}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00783}00783           \textcolor{keywordtype}{unsigned} el\_dof = Solid\_mesh\_pt-\/>element\_pt(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>ndof();}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00783}00783           \textcolor{keywordtype}{unsigned} el\_dof = \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_aa14db4490d9ce73788e22bc3d465489b}{Solid\_mesh\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a9a5d03afb8730e9459ecbc67c6439143}{element\_pt}}(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>\mbox{\hyperlink{classoomph_1_1GeneralisedElement_a37204f67b37d212fd170c68d48f6da57}{ndof}}();}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00784}00784 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00785}00785           \textcolor{comment}{// allocate local storage for the element's contribution to the}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00786}00786           \textcolor{comment}{// mass matrix diagonal}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00787}00787           Vector<double> el\_vmm\_diagonal(el\_dof);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00787}00787           \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} el\_vmm\_diagonal(el\_dof);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00788}00788 }
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00789}00789           SolidElementWithDiagonalMassMatrix* cast\_el\_pt =}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00790}00790             \textcolor{keyword}{dynamic\_cast<}SolidElementWithDiagonalMassMatrix*\textcolor{keyword}{>}(}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00791}00791               Solid\_mesh\_pt-\/>element\_pt(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}));}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00789}00789           \mbox{\hyperlink{classoomph_1_1SolidElementWithDiagonalMassMatrix}{SolidElementWithDiagonalMassMatrix}}* cast\_el\_pt =}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00790}00790             \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1SolidElementWithDiagonalMassMatrix}{SolidElementWithDiagonalMassMatrix}}*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00791}00791               \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_aa14db4490d9ce73788e22bc3d465489b}{Solid\_mesh\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a9a5d03afb8730e9459ecbc67c6439143}{element\_pt}}(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}));}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00792}00792 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00793}00793 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00794}00794           \textcolor{keywordflow}{if} (cast\_el\_pt == 0)}
@@ -802,11 +802,11 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00798}00798             error\_message << \textcolor{stringliteral}{"{}Failed cast to "{}}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00799}00799                           << \textcolor{stringliteral}{"{}SolidElementWithDiagonalMassMatrix*\(\backslash\)n"{}}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00800}00800                           << \textcolor{stringliteral}{"{}Element is of type: "{}}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00801}00801                           << \textcolor{keyword}{typeid}(*(Solid\_mesh\_pt-\/>element\_pt(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}))).name()}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00801}00801                           << \textcolor{keyword}{typeid}(*(\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_aa14db4490d9ce73788e22bc3d465489b}{Solid\_mesh\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a9a5d03afb8730e9459ecbc67c6439143}{element\_pt}}(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}))).name()}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00802}00802                           << \textcolor{stringliteral}{"{}\(\backslash\)n"{}}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00803}00803                           << \textcolor{keyword}{typeid}(Solid\_mesh\_pt-\/>element\_pt(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})).name()}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00803}00803                           << \textcolor{keyword}{typeid}(\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_aa14db4490d9ce73788e22bc3d465489b}{Solid\_mesh\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a9a5d03afb8730e9459ecbc67c6439143}{element\_pt}}(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})).name()}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00804}00804                           << std::endl;}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00805}00805             OomphLibWarning(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00805}00805             \mbox{\hyperlink{classoomph_1_1OomphLibWarning}{OomphLibWarning}}(error\_message.str(),}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00806}00806                             \textcolor{stringliteral}{"{}PressureBasedSolidLSCPreconditioner::assemble\_"{}}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00807}00807                             \textcolor{stringliteral}{"{}mass\_matrix\_diagonal()"{}},}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00808}00808                             OOMPH\_EXCEPTION\_LOCATION);}
@@ -814,36 +814,36 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00810}00810           \}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00811}00811           \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00812}00812           \{}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00813}00813             cast\_el\_pt-\/>get\_mass\_matrix\_diagonal(el\_vmm\_diagonal);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00813}00813             cast\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1SolidElementWithDiagonalMassMatrix_ad2335852a20987f6a6c8e0d6ce5bc3af}{get\_mass\_matrix\_diagonal}}(el\_vmm\_diagonal);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00814}00814           \}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00815}00815 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00816}00816           \textcolor{comment}{// get the contribution for each dof}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00817}00817           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < el\_dof; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00818}00818           \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00819}00819             \textcolor{comment}{// Get the equation number}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00820}00820             \textcolor{keywordtype}{unsigned} eqn\_number = Solid\_mesh\_pt-\/>element\_pt(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>eqn\_number(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00820}00820             \textcolor{keywordtype}{unsigned} eqn\_number = \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_aa14db4490d9ce73788e22bc3d465489b}{Solid\_mesh\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a9a5d03afb8730e9459ecbc67c6439143}{element\_pt}}(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>\mbox{\hyperlink{classoomph_1_1GeneralisedElement_a37ac5a1d5234fa931ab710c0c74d55d2}{eqn\_number}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00821}00821 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00822}00822             \textcolor{comment}{// if I have lookup information on this processor}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00823}00823             \textcolor{keywordflow}{if} (eqn\_number >= first\_lookup\_row \&\& eqn\_number <= last\_lookup\_row)}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00824}00824             \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00825}00825               \textcolor{comment}{// bypass non displacement/position DOFs}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00826}00826               \textcolor{keywordflow}{if} (this-\/>block\_number(eqn\_number) == 0)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00826}00826               \textcolor{keywordflow}{if} (this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a8a64cfc57ffd16b92ac78499de515138}{block\_number}}(eqn\_number) == 0)}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00827}00827               \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00828}00828                 \textcolor{comment}{// get the index in the block}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00829}00829                 \textcolor{keywordtype}{unsigned} index = this-\/>index\_in\_block(eqn\_number);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00829}00829                 \textcolor{keywordtype}{unsigned} index = this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a75742d54177935fb22e59d045209b11e}{index\_in\_block}}(eqn\_number);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00830}00830 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00831}00831                 \textcolor{comment}{// determine which processor requires the block index}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00832}00832                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} p = 0; p < nproc; p++)}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00833}00833                 \{}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00834}00834                   \textcolor{keywordflow}{if} (index >= displ\_dist\_pt-\/>first\_row(p) \&\&}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00835}00835                       (index < (displ\_dist\_pt-\/>first\_row(p) +}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00836}00836                                 displ\_dist\_pt-\/>nrow\_local(p))))}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00834}00834                   \textcolor{keywordflow}{if} (index >= displ\_dist\_pt-\/>\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a2634e540a78fe1ee3f5c907aff500b58}{first\_row}}(p) \&\&}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00835}00835                       (index < (displ\_dist\_pt-\/>\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a2634e540a78fe1ee3f5c907aff500b58}{first\_row}}(p) +}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00836}00836                                 displ\_dist\_pt-\/>\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_ac9310de740f9c3a61f8d5dab9bef88ca}{nrow\_local}}(p))))}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00837}00837                   \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00838}00838                     \textcolor{comment}{// if it is required by this processor then add the}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00839}00839                     \textcolor{comment}{// contribution}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00840}00840                     \textcolor{keywordflow}{if} (p == my\_rank)}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00841}00841                     \{}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00842}00842                       m\_values[index -\/ first\_row] += el\_vmm\_diagonal[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00842}00842                       m\_values[index -\/ \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ab00a3919b8634c698749f14a4d92947d}{first\_row}}] += el\_vmm\_diagonal[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00843}00843                     \}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00844}00844                     \textcolor{comment}{// other wise store it for communication}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00845}00845                     \textcolor{keywordflow}{else}}
@@ -863,13 +863,13 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00859}00859             \textcolor{comment}{// the assumption: the processor for which the master block}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00860}00860             \textcolor{comment}{// preconditioner distribution will definitely hold the lookup}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00861}00861             \textcolor{comment}{// data for eqn\_number (although others may)}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00862}00862             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (any\_mesh\_distributed())}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00862}00862             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a6fb68db9e79048615984b005f8aa43b3}{any\_mesh\_distributed}}())}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00863}00863             \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00864}00864               \textcolor{comment}{// determine which processor requires the block index}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00865}00865               \textcolor{keywordtype}{unsigned} p = 0;}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00866}00866               \textcolor{keywordflow}{while} (!(eqn\_number >= master\_distribution\_pt-\/>first\_row(p) \&\&}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00867}00867                        (eqn\_number < (master\_distribution\_pt-\/>first\_row(p) +}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00868}00868                                       master\_distribution\_pt-\/>nrow\_local(p)))))}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00866}00866               \textcolor{keywordflow}{while} (!(eqn\_number >= \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a6837129a0e4a2b7f5c279234c0307184}{master\_distribution\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a2634e540a78fe1ee3f5c907aff500b58}{first\_row}}(p) \&\&}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00867}00867                        (eqn\_number < (\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a6837129a0e4a2b7f5c279234c0307184}{master\_distribution\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a2634e540a78fe1ee3f5c907aff500b58}{first\_row}}(p) +}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00868}00868                                       \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a6837129a0e4a2b7f5c279234c0307184}{master\_distribution\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_ac9310de740f9c3a61f8d5dab9bef88ca}{nrow\_local}}(p)))))}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00869}00869               \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00870}00870                 p++;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00871}00871               \}}
@@ -908,7 +908,7 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00904}00904                    n\_unclassified\_recv,}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00905}00905                    1,}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00906}00906                    MPI\_UNSIGNED,}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00907}00907                    this-\/>comm\_pt()-\/>mpi\_comm());}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00907}00907                    this-\/>\mbox{\hyperlink{classoomph_1_1Preconditioner_a88d799e18a605c3993c6fcac0a41d901}{comm\_pt}}()-\/>mpi\_comm());}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00908}00908 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00909}00909       \textcolor{comment}{// the base displacement for the sends}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00910}00910       MPI\_Aint base\_displacement;}
@@ -916,11 +916,11 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00912}00912 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00913}00913       \textcolor{comment}{// allocate storage for the data to be recieved}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00914}00914       \textcolor{comment}{// and post the sends and recvs}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00915}00915       Vector<double*> unclassified\_contributions\_recv(nproc);}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00916}00916       Vector<unsigned*> unclassified\_indices\_recv(nproc);}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00917}00917       Vector<MPI\_Request> unclassified\_recv\_requests;}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00918}00918       Vector<MPI\_Request> unclassified\_send\_requests;}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00919}00919       Vector<unsigned> unclassified\_recv\_proc;}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00915}00915       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double*>}} unclassified\_contributions\_recv(nproc);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00916}00916       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<unsigned*>}} unclassified\_indices\_recv(nproc);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00917}00917       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<MPI\_Request>}} unclassified\_recv\_requests;}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00918}00918       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<MPI\_Request>}} unclassified\_send\_requests;}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00919}00919       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<unsigned>}} unclassified\_recv\_proc;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00920}00920       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} p = 0; p < nproc; p++)}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00921}00921       \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00922}00922         \textcolor{keywordflow}{if} (p != my\_rank)}
@@ -964,7 +964,7 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00960}00960             \textcolor{comment}{// and recv}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00961}00961             MPI\_Request req;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00962}00962             MPI\_Irecv(}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00963}00963               m\_values, 1, final\_recv\_type, p, 0, comm\_pt()-\/>mpi\_comm(), \&req);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00963}00963               m\_values, 1, final\_recv\_type, p, 0, \mbox{\hyperlink{classoomph_1_1Preconditioner_a88d799e18a605c3993c6fcac0a41d901}{comm\_pt}}()-\/>mpi\_comm(), \&req);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00964}00964             unclassified\_recv\_requests.push\_back(req);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00965}00965             unclassified\_recv\_proc.push\_back(p);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l00966}00966             MPI\_Type\_free(\&recv\_types[0]);}
@@ -1007,7 +1007,7 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01003}01003             \textcolor{comment}{// and send}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01004}01004             MPI\_Request req;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01005}01005             MPI\_Isend(}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01006}01006               m\_values, 1, final\_send\_type, p, 0, comm\_pt()-\/>mpi\_comm(), \&req);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01006}01006               m\_values, 1, final\_send\_type, p, 0, \mbox{\hyperlink{classoomph_1_1Preconditioner_a88d799e18a605c3993c6fcac0a41d901}{comm\_pt}}()-\/>mpi\_comm(), \&req);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01007}01007             unclassified\_send\_requests.push\_back(req);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01008}01008             MPI\_Type\_free(\&send\_types[0]);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01009}01009             MPI\_Type\_free(\&send\_types[1]);}
@@ -1040,23 +1040,23 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01036}01036         \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01037}01037           \textcolor{keywordtype}{unsigned} eqn\_number = unclassified\_indices\_recv[p][\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01038}01038           \textcolor{comment}{// bypass non displacement/position DOFs}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01039}01039           \textcolor{keywordflow}{if} (this-\/>block\_number(eqn\_number) == 0)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01039}01039           \textcolor{keywordflow}{if} (this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a8a64cfc57ffd16b92ac78499de515138}{block\_number}}(eqn\_number) == 0)}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01040}01040           \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01041}01041             \textcolor{comment}{// get the index in the block}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01042}01042             \textcolor{keywordtype}{unsigned} index = this-\/>index\_in\_block(eqn\_number);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01042}01042             \textcolor{keywordtype}{unsigned} index = this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a75742d54177935fb22e59d045209b11e}{index\_in\_block}}(eqn\_number);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01043}01043 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01044}01044             \textcolor{comment}{// determine which processor requires the block index}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01045}01045             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} pp = 0; pp < nproc; pp++)}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01046}01046             \{}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01047}01047               \textcolor{keywordflow}{if} (index >= displ\_dist\_pt-\/>first\_row(pp) \&\&}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01048}01048                   (index < (displ\_dist\_pt-\/>first\_row(pp) +}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01049}01049                             displ\_dist\_pt-\/>nrow\_local(pp))))}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01047}01047               \textcolor{keywordflow}{if} (index >= displ\_dist\_pt-\/>\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a2634e540a78fe1ee3f5c907aff500b58}{first\_row}}(pp) \&\&}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01048}01048                   (index < (displ\_dist\_pt-\/>\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a2634e540a78fe1ee3f5c907aff500b58}{first\_row}}(pp) +}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01049}01049                             displ\_dist\_pt-\/>\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_ac9310de740f9c3a61f8d5dab9bef88ca}{nrow\_local}}(pp))))}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01050}01050               \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01051}01051                 \textcolor{comment}{// if it is required by this processor then add the}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01052}01052                 \textcolor{comment}{// contribution}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01053}01053                 \textcolor{keywordflow}{if} (pp == my\_rank)}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01054}01054                 \{}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01055}01055                   m\_values[index -\/ first\_row] +=}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01055}01055                   m\_values[index -\/ \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ab00a3919b8634c698749f14a4d92947d}{first\_row}}] +=}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01056}01056                     unclassified\_contributions\_recv[p][\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01057}01057                 \}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01058}01058                 \textcolor{comment}{// other wise store it for communication}}
@@ -1105,15 +1105,15 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01101}01101                    n\_classified\_recv,}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01102}01102                    1,}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01103}01103                    MPI\_UNSIGNED,}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01104}01104                    this-\/>comm\_pt()-\/>mpi\_comm());}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01104}01104                    this-\/>\mbox{\hyperlink{classoomph_1_1Preconditioner_a88d799e18a605c3993c6fcac0a41d901}{comm\_pt}}()-\/>mpi\_comm());}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01105}01105 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01106}01106       \textcolor{comment}{// allocate storage for the data to be recieved}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01107}01107       \textcolor{comment}{// and post the sends and recvs}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01108}01108       Vector<double*> classified\_contributions\_recv(nproc);}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01109}01109       Vector<unsigned*> classified\_indices\_recv(nproc);}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01110}01110       Vector<MPI\_Request> classified\_recv\_requests;}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01111}01111       Vector<MPI\_Request> classified\_send\_requests;}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01112}01112       Vector<unsigned> classified\_recv\_proc;}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01108}01108       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double*>}} classified\_contributions\_recv(nproc);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01109}01109       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<unsigned*>}} classified\_indices\_recv(nproc);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01110}01110       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<MPI\_Request>}} classified\_recv\_requests;}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01111}01111       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<MPI\_Request>}} classified\_send\_requests;}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01112}01112       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<unsigned>}} classified\_recv\_proc;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01113}01113       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} p = 0; p < nproc; p++)}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01114}01114       \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01115}01115         \textcolor{keywordflow}{if} (p != my\_rank)}
@@ -1155,7 +1155,7 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01151}01151             \textcolor{comment}{// and recv}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01152}01152             MPI\_Request req;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01153}01153             MPI\_Irecv(}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01154}01154               m\_values, 1, final\_recv\_type, p, 0, comm\_pt()-\/>mpi\_comm(), \&req);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01154}01154               m\_values, 1, final\_recv\_type, p, 0, \mbox{\hyperlink{classoomph_1_1Preconditioner_a88d799e18a605c3993c6fcac0a41d901}{comm\_pt}}()-\/>mpi\_comm(), \&req);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01155}01155             classified\_recv\_requests.push\_back(req);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01156}01156             classified\_recv\_proc.push\_back(p);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01157}01157             MPI\_Type\_free(\&recv\_types[0]);}
@@ -1198,7 +1198,7 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01194}01194             \textcolor{comment}{// and send}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01195}01195             MPI\_Request req;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01196}01196             MPI\_Isend(}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01197}01197               m\_values, 1, final\_send\_type, p, 0, comm\_pt()-\/>mpi\_comm(), \&req);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01197}01197               m\_values, 1, final\_send\_type, p, 0, \mbox{\hyperlink{classoomph_1_1Preconditioner_a88d799e18a605c3993c6fcac0a41d901}{comm\_pt}}()-\/>mpi\_comm(), \&req);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01198}01198             classified\_send\_requests.push\_back(req);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01199}01199             MPI\_Type\_free(\&send\_types[0]);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01200}01200             MPI\_Type\_free(\&send\_types[1]);}
@@ -1229,7 +1229,7 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01225}01225         \textcolor{keywordtype}{unsigned} n\_recv = n\_classified\_recv[p];}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01226}01226         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_recv; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01227}01227         \{}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01228}01228           m\_values[classified\_indices\_recv[p][\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ first\_row] +=}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01228}01228           m\_values[classified\_indices\_recv[p][\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ab00a3919b8634c698749f14a4d92947d}{first\_row}}] +=}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01229}01229             classified\_contributions\_recv[p][\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01230}01230         \}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01231}01231 }
@@ -1269,7 +1269,7 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01265}01265     \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01266}01266     \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01267}01267       \textcolor{comment}{// find number of elements}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01268}01268       \textcolor{keywordtype}{unsigned} n\_el = Solid\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01268}01268       \textcolor{keywordtype}{unsigned} n\_el = \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_aa14db4490d9ce73788e22bc3d465489b}{Solid\_mesh\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Mesh_af01dfefb66c15579b540be62999d93ee}{nelement}}();}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01269}01269 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01270}01270       \textcolor{comment}{// get the contribution for each element}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01271}01271       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}} = 0; \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}} < n\_el; \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}++)}
@@ -1277,15 +1277,15 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01273}01273         \textcolor{comment}{// find number of degrees of freedom in the element}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01274}01274         \textcolor{comment}{// (this is slightly too big because it includes the}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01275}01275         \textcolor{comment}{// pressure dofs but this doesn't matter)}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01276}01276         \textcolor{keywordtype}{unsigned} el\_dof = Solid\_mesh\_pt-\/>element\_pt(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>ndof();}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01276}01276         \textcolor{keywordtype}{unsigned} el\_dof = \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_aa14db4490d9ce73788e22bc3d465489b}{Solid\_mesh\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a9a5d03afb8730e9459ecbc67c6439143}{element\_pt}}(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>\mbox{\hyperlink{classoomph_1_1GeneralisedElement_a37204f67b37d212fd170c68d48f6da57}{ndof}}();}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01277}01277 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01278}01278         \textcolor{comment}{// allocate local storage for the element's contribution to the}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01279}01279         \textcolor{comment}{//  mass matrix diagonal}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01280}01280         Vector<double> el\_vmm\_diagonal(el\_dof);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01280}01280         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} el\_vmm\_diagonal(el\_dof);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01281}01281 }
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01282}01282         SolidElementWithDiagonalMassMatrix* cast\_el\_pt =}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01283}01283           \textcolor{keyword}{dynamic\_cast<}SolidElementWithDiagonalMassMatrix*\textcolor{keyword}{>}(}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01284}01284             Solid\_mesh\_pt-\/>element\_pt(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}));}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01282}01282         \mbox{\hyperlink{classoomph_1_1SolidElementWithDiagonalMassMatrix}{SolidElementWithDiagonalMassMatrix}}* cast\_el\_pt =}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01283}01283           \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1SolidElementWithDiagonalMassMatrix}{SolidElementWithDiagonalMassMatrix}}*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01284}01284             \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_aa14db4490d9ce73788e22bc3d465489b}{Solid\_mesh\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a9a5d03afb8730e9459ecbc67c6439143}{element\_pt}}(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}));}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01285}01285 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01286}01286         \textcolor{keywordflow}{if} (cast\_el\_pt == 0)}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01287}01287         \{}
@@ -1297,11 +1297,11 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01293}01293           error\_message << \textcolor{stringliteral}{"{}Failed cast to "{}}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01294}01294                         << \textcolor{stringliteral}{"{}SolidElementWithDiagonalMassMatrix*\(\backslash\)n"{}}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01295}01295                         << \textcolor{stringliteral}{"{}Element is of type: "{}}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01296}01296                         << \textcolor{keyword}{typeid}(*(Solid\_mesh\_pt-\/>element\_pt(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}))).name()}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01296}01296                         << \textcolor{keyword}{typeid}(*(\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_aa14db4490d9ce73788e22bc3d465489b}{Solid\_mesh\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a9a5d03afb8730e9459ecbc67c6439143}{element\_pt}}(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}))).name()}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01297}01297                         << \textcolor{stringliteral}{"{}\(\backslash\)n"{}}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01298}01298                         << \textcolor{keyword}{typeid}(Solid\_mesh\_pt-\/>element\_pt(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})).name()}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01298}01298                         << \textcolor{keyword}{typeid}(\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_aa14db4490d9ce73788e22bc3d465489b}{Solid\_mesh\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a9a5d03afb8730e9459ecbc67c6439143}{element\_pt}}(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})).name()}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01299}01299                         << std::endl;}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01300}01300           OomphLibWarning(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01300}01300           \mbox{\hyperlink{classoomph_1_1OomphLibWarning}{OomphLibWarning}}(error\_message.str(),}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01301}01301                           \textcolor{stringliteral}{"{}PressureBasedSolidLSCPreconditioner::assemble\_mass\_"{}}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01302}01302                           \textcolor{stringliteral}{"{}matrix\_diagonal()"{}},}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01303}01303                           OOMPH\_EXCEPTION\_LOCATION);}
@@ -1310,25 +1310,25 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01306}01306         \}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01307}01307         \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01308}01308         \{}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01309}01309           cast\_el\_pt-\/>get\_mass\_matrix\_diagonal(el\_vmm\_diagonal);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01309}01309           cast\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1SolidElementWithDiagonalMassMatrix_ad2335852a20987f6a6c8e0d6ce5bc3af}{get\_mass\_matrix\_diagonal}}(el\_vmm\_diagonal);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01310}01310         \}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01311}01311 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01312}01312         \textcolor{comment}{// get the contribution for each dof}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01313}01313         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < el\_dof; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01314}01314         \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01315}01315           \textcolor{comment}{// Get the equation number}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01316}01316           \textcolor{keywordtype}{unsigned} eqn\_number = Solid\_mesh\_pt-\/>element\_pt(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>eqn\_number(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01316}01316           \textcolor{keywordtype}{unsigned} eqn\_number = \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_aa14db4490d9ce73788e22bc3d465489b}{Solid\_mesh\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a9a5d03afb8730e9459ecbc67c6439143}{element\_pt}}(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>\mbox{\hyperlink{classoomph_1_1GeneralisedElement_a37ac5a1d5234fa931ab710c0c74d55d2}{eqn\_number}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01317}01317 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01318}01318           \textcolor{comment}{// bypass non displacement/position DOFs}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01319}01319           \textcolor{keywordflow}{if} (this-\/>block\_number(eqn\_number) == 0)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01319}01319           \textcolor{keywordflow}{if} (this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a8a64cfc57ffd16b92ac78499de515138}{block\_number}}(eqn\_number) == 0)}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01320}01320           \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01321}01321             \textcolor{comment}{// get the index in the block}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01322}01322             \textcolor{keywordtype}{unsigned} index = this-\/>index\_in\_block(eqn\_number);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01322}01322             \textcolor{keywordtype}{unsigned} index = this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a75742d54177935fb22e59d045209b11e}{index\_in\_block}}(eqn\_number);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01323}01323 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01324}01324             \textcolor{comment}{// if it is required on this processor}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01325}01325             \textcolor{keywordflow}{if} (index >= first\_row \&\& index < first\_row + nrow\_local)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01325}01325             \textcolor{keywordflow}{if} (index >= \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ab00a3919b8634c698749f14a4d92947d}{first\_row}} \&\& index < \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ab00a3919b8634c698749f14a4d92947d}{first\_row}} + \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a9bd7e1d242c69a28da85a804a7717fce}{nrow\_local}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01326}01326             \{}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01327}01327               m\_values[index -\/ first\_row] += el\_vmm\_diagonal[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01327}01327               m\_values[index -\/ \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ab00a3919b8634c698749f14a4d92947d}{first\_row}}] += el\_vmm\_diagonal[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01328}01328             \}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01329}01329           \}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01330}01330         \}}
@@ -1336,20 +1336,20 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01332}01332     \}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01333}01333 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01334}01334     \textcolor{comment}{// create column index and row start}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01335}01335     \textcolor{keywordtype}{int}* m\_column\_index = \textcolor{keyword}{new} \textcolor{keywordtype}{int}[nrow\_local];}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01336}01336     \textcolor{keywordtype}{int}* m\_row\_start = \textcolor{keyword}{new} \textcolor{keywordtype}{int}[nrow\_local + 1];}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01337}01337     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < nrow\_local; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01335}01335     \textcolor{keywordtype}{int}* m\_column\_index = \textcolor{keyword}{new} \textcolor{keywordtype}{int}[\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a9bd7e1d242c69a28da85a804a7717fce}{nrow\_local}}];}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01336}01336     \textcolor{keywordtype}{int}* m\_row\_start = \textcolor{keyword}{new} \textcolor{keywordtype}{int}[\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a9bd7e1d242c69a28da85a804a7717fce}{nrow\_local}} + 1];}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01337}01337     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a9bd7e1d242c69a28da85a804a7717fce}{nrow\_local}}; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01338}01338     \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01339}01339       m\_values[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = 1 / m\_values[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01340}01340       m\_column\_index[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = first\_row + \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}};}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01340}01340       m\_column\_index[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ab00a3919b8634c698749f14a4d92947d}{first\_row}} + \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}};}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01341}01341       m\_row\_start[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}};}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01342}01342     \}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01343}01343     m\_row\_start[nrow\_local] = nrow\_local;}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01343}01343     m\_row\_start[\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a9bd7e1d242c69a28da85a804a7717fce}{nrow\_local}}] = \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a9bd7e1d242c69a28da85a804a7717fce}{nrow\_local}};}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01344}01344 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01345}01345     \textcolor{comment}{// build the matrix}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01346}01346     CRDoubleMatrix* m\_pt = \textcolor{keyword}{new} CRDoubleMatrix(this-\/>block\_distribution\_pt(0));}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01347}01347     m\_pt-\/>build\_without\_copy(}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01348}01348       nrow, nrow\_local, m\_values, m\_column\_index, m\_row\_start);}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01346}01346     \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}}* m\_pt = \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}}(this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_af497da125d1b8011af7ed00114f2d205}{block\_distribution\_pt}}(0));}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01347}01347     m\_pt-\/>\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_aafb4d7de0a87b4bda560928e6a128060}{build\_without\_copy}}(}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01348}01348       \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow}}, \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a9bd7e1d242c69a28da85a804a7717fce}{nrow\_local}}, m\_values, m\_column\_index, m\_row\_start);}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01349}01349 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01350}01350     \textcolor{comment}{// return the matrix;}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01351}01351     \textcolor{keywordflow}{return} m\_pt;}
@@ -1358,39 +1358,39 @@
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01354}01354   \textcolor{comment}{//=========================================================================}\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01355}01355 \textcolor{comment}{  /// Helper function to delete preconditioner data.}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01356}01356 \textcolor{comment}{}  \textcolor{comment}{//=========================================================================}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01357}01357   \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1TerminateHelper_a20615123e22554c3c485484f4c23bfb5}{PressureBasedSolidLSCPreconditioner::clean\_up\_memory}}()}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01357}\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_ad83eb2ddd12350bcba2cb8db074de2bd}{01357}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_ad83eb2ddd12350bcba2cb8db074de2bd}{PressureBasedSolidLSCPreconditioner::clean\_up\_memory}}()}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01358}01358   \{}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01359}01359     \textcolor{keywordflow}{if} (Preconditioner\_has\_been\_setup)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01359}01359     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a36040d15eba392db2f29c503644a6ed2}{Preconditioner\_has\_been\_setup}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01360}01360     \{}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01361}01361       \textcolor{comment}{// delete matvecs}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01362}01362       \textcolor{keyword}{delete} Bt\_mat\_vec\_pt;}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01363}01363       Bt\_mat\_vec\_pt = 0;}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01362}01362       \textcolor{keyword}{delete} \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_ac71c3f992d9790ca2e25e9c360eed635}{Bt\_mat\_vec\_pt}};}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01363}01363       \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_ac71c3f992d9790ca2e25e9c360eed635}{Bt\_mat\_vec\_pt}} = 0;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01364}01364 }
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01365}01365       \textcolor{keywordflow}{if} (!Form\_BFBt\_product)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01365}01365       \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a216ed50190c2fa031c222b309e573f09}{Form\_BFBt\_product}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01366}01366       \{}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01367}01367         \textcolor{keyword}{delete} F\_mat\_vec\_pt;}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01368}01368         F\_mat\_vec\_pt = 0;}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01369}01369         \textcolor{keyword}{delete} QBt\_mat\_vec\_pt;}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01370}01370         QBt\_mat\_vec\_pt = 0;}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01367}01367         \textcolor{keyword}{delete} \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_ad1ce11b9dc16c14f5eaf72eb841c08ef}{F\_mat\_vec\_pt}};}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01368}01368         \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_ad1ce11b9dc16c14f5eaf72eb841c08ef}{F\_mat\_vec\_pt}} = 0;}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01369}01369         \textcolor{keyword}{delete} \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a03338487e35713fc408e83b12f9ba8ac}{QBt\_mat\_vec\_pt}};}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01370}01370         \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a03338487e35713fc408e83b12f9ba8ac}{QBt\_mat\_vec\_pt}} = 0;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01371}01371       \}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01372}01372       \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01373}01373       \{}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01374}01374         \textcolor{keyword}{delete} E\_mat\_vec\_pt;}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01375}01375         E\_mat\_vec\_pt = 0;}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01374}01374         \textcolor{keyword}{delete} \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a5c6f62a80349652aeff75140ec9c54f1}{E\_mat\_vec\_pt}};}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01375}01375         \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a5c6f62a80349652aeff75140ec9c54f1}{E\_mat\_vec\_pt}} = 0;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01376}01376       \}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01377}01377 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01378}01378       \textcolor{comment}{// delete stuff from displacement/position solve}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01379}01379       \textcolor{keywordflow}{if} (Using\_default\_f\_preconditioner)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01379}01379       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_ad873e64fad712e74972d6dbc95b2eeb0}{Using\_default\_f\_preconditioner}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01380}01380       \{}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01381}01381         \textcolor{keyword}{delete} F\_preconditioner\_pt;}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01382}01382         F\_preconditioner\_pt = 0;}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01381}01381         \textcolor{keyword}{delete} \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a48598668a75faf5d983872f191288eb8}{F\_preconditioner\_pt}};}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01382}01382         \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_a48598668a75faf5d983872f191288eb8}{F\_preconditioner\_pt}} = 0;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01383}01383       \}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01384}01384 }
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01385}01385       \textcolor{comment}{// delete stuff from Schur complement approx}}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01386}01386       \textcolor{keywordflow}{if} (Using\_default\_p\_preconditioner)}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01386}01386       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_aca759bb66884df54c3ed5447357468e7}{Using\_default\_p\_preconditioner}})}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01387}01387       \{}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01388}01388         \textcolor{keyword}{delete} P\_preconditioner\_pt;}
-\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01389}01389         P\_preconditioner\_pt = 0;}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01388}01388         \textcolor{keyword}{delete} \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_af72af32deaca30259e86eba2e04f16ed}{P\_preconditioner\_pt}};}
+\DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01389}01389         \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner_af72af32deaca30259e86eba2e04f16ed}{P\_preconditioner\_pt}} = 0;}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01390}01390       \}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01391}01391     \}}
 \DoxyCodeLine{\Hypertarget{solid__preconditioners_8cc_source_l01392}01392   \}}

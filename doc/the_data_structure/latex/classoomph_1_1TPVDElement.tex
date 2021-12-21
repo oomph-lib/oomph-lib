@@ -22,23 +22,23 @@ Inheritance diagram for oomph\+::TPVDElement\texorpdfstring{$<$}{<} DIM, NNODE\+
 \begin{DoxyCompactList}\small\item\em Constructor, there are no internal data points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TPVDElement_a048f0db11c13863fadc1606483c5a5e2}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Output function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TPVDElement_a16716e0b772f7a13b885faeb4def1cfa}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1TPVDElement_a16716e0b772f7a13b885faeb4def1cfa}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em Output function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TPVDElement_a272dff6c1e74e2634e2df71b33319e19}{output}} (FILE $\ast$file\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em C-\/style output function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TPVDElement_a439c64bf9eefec5c472dfe91099c2ffd}{output}} (FILE $\ast$file\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1TPVDElement_a439c64bf9eefec5c472dfe91099c2ffd}{output}} (FILE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em C-\/style output function. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1TPVDElement_a85176c5881f61e045e9783460ca0064f}{nrecovery\+\_\+order}} ()
 \begin{DoxyCompactList}\small\item\em Order of recovery shape functions for Z2 error estimation\+: Same order as shape functions. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1TPVDElement_aa23910847f4faa1d3701756c0f5a1e58}{nvertex\+\_\+node}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1TPVDElement_aa23910847f4faa1d3701756c0f5a1e58}{nvertex\+\_\+node}} () const
 \begin{DoxyCompactList}\small\item\em Number of vertex nodes in the element. \end{DoxyCompactList}\item 
-Node $\ast$ \mbox{\hyperlink{classoomph_1_1TPVDElement_ad9db81b93ae86bcdd6d1ff151e03ecaa}{vertex\+\_\+node\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&j) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1TPVDElement_ad9db81b93ae86bcdd6d1ff151e03ecaa}{vertex\+\_\+node\+\_\+pt}} (const unsigned \&j) const
 \begin{DoxyCompactList}\small\item\em Pointer to the j-\/th vertex node in the element. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1TPVDElement_a2cae6a6faf4fd3f7555f672fad077061}{num\+\_\+\+Z2\+\_\+flux\+\_\+terms}} ()
 \begin{DoxyCompactList}\small\item\em Number of \textquotesingle{}flux\textquotesingle{} terms for Z2 error estimation. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TPVDElement_a156300359d98bc69d81773b3b609329f}{get\+\_\+\+Z2\+\_\+flux}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux)
+void \mbox{\hyperlink{classoomph_1_1TPVDElement_a156300359d98bc69d81773b3b609329f}{get\+\_\+\+Z2\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux)
 \begin{DoxyCompactList}\small\item\em Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: Upper triangular entries in strain tensor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TPVDElement_ad0eb4d88aa6e0d32560f22706255569c}{describe\+\_\+local\+\_\+dofs}} (std\+::ostream \&out, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} std\+::string \&current\+\_\+string) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1TPVDElement_ad0eb4d88aa6e0d32560f22706255569c}{describe\+\_\+local\+\_\+dofs}} (std\+::ostream \&out, const std\+::string \&current\+\_\+string) const
 \begin{DoxyCompactList}\small\item\em Function to describe the local dofs of the element. The ostream specifies the output stream to which the description is written; the string stores the currently assembled output that is ultimately written to the output stream by Data\+::desribe\+\_\+dofs(...); it is typically built up incrementally as we descend through the call hierarchy of this function when called from Problem\+::describe\+\_\+dofs(...) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -78,7 +78,7 @@ Definition at line \mbox{\hyperlink{solid__elements_8h_source_l01759}{1759}} of 
 \index{describe\_local\_dofs@{describe\_local\_dofs}!oomph::TPVDElement$<$ DIM, NNODE\_1D $>$@{oomph::TPVDElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{describe\_local\_dofs()}{describe\_local\_dofs()}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-void oomph\+::\+Solid\+Finite\+Element\+::describe\+\_\+local\+\_\+dofs (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} std\+::string \&}]{current\+\_\+string }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+void oomph\+::\+Solid\+Finite\+Element\+::describe\+\_\+local\+\_\+dofs (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out,  }\item[{const std\+::string \&}]{current\+\_\+string }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -90,18 +90,18 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_aad9f9ebb2996fd9
 
 
 
-Definition at line \mbox{\hyperlink{elements_8cc_source_l03894}{3894}} of file \mbox{\hyperlink{elements_8cc_source}{elements.\+cc}}.
+Definition at line \mbox{\hyperlink{elements_8cc_source_l03885}{3885}} of file \mbox{\hyperlink{elements_8cc_source}{elements.\+cc}}.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01847}{oomph\+::\+Finite\+Element\+::local\+\_\+coordinate\+\_\+of\+\_\+node()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01842}{oomph\+::\+Finite\+Element\+::local\+\_\+coordinate\+\_\+of\+\_\+node()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1TPVDElement_a156300359d98bc69d81773b3b609329f}\label{classoomph_1_1TPVDElement_a156300359d98bc69d81773b3b609329f}} 
 \index{oomph::TPVDElement$<$ DIM, NNODE\_1D $>$@{oomph::TPVDElement$<$ DIM, NNODE\_1D $>$}!get\_Z2\_flux@{get\_Z2\_flux}}
 \index{get\_Z2\_flux@{get\_Z2\_flux}!oomph::TPVDElement$<$ DIM, NNODE\_1D $>$@{oomph::TPVDElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{get\_Z2\_flux()}{get\_Z2\_flux()}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1TPVDElement}{oomph\+::\+TPVDElement}}$<$ DIM, NNODE\+\_\+1D $>$\+::get\+\_\+\+Z2\+\_\+flux (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1TPVDElement}{oomph\+::\+TPVDElement}}$<$ DIM, NNODE\+\_\+1D $>$\+::get\+\_\+\+Z2\+\_\+flux (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -204,7 +204,7 @@ References \mbox{\hyperlink{solid__elements_8h_source_l00506}{oomph\+::\+PVDEqua
 \index{output@{output}!oomph::TPVDElement$<$ DIM, NNODE\_1D $>$@{oomph::TPVDElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1TPVDElement}{oomph\+::\+TPVDElement}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1TPVDElement}{oomph\+::\+TPVDElement}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -250,7 +250,7 @@ References \mbox{\hyperlink{solid__elements_8h_source_l00506}{oomph\+::\+PVDEqua
 \index{output@{output}!oomph::TPVDElement$<$ DIM, NNODE\_1D $>$@{oomph::TPVDElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1TPVDElement}{oomph\+::\+TPVDElement}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1TPVDElement}{oomph\+::\+TPVDElement}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -273,7 +273,7 @@ References \mbox{\hyperlink{solid__elements_8h_source_l00506}{oomph\+::\+PVDEqua
 \index{vertex\_node\_pt@{vertex\_node\_pt}!oomph::TPVDElement$<$ DIM, NNODE\_1D $>$@{oomph::TPVDElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{vertex\_node\_pt()}{vertex\_node\_pt()}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-Node $\ast$ \mbox{\hyperlink{classoomph_1_1TPVDElement}{oomph\+::\+TPVDElement}}$<$ DIM, NNODE\+\_\+1D $>$\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1TPVDElement}{oomph\+::\+TPVDElement}}$<$ DIM, NNODE\+\_\+1D $>$\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 

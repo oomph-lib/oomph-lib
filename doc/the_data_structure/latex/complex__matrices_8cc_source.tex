@@ -451,7 +451,7 @@
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00447}00447   \textcolor{comment}{//============================================================================}\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00448}00448 \textcolor{comment}{  ///  Find the residual of Ax=b, i.e. r=b-\/Ax}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00449}00449 \textcolor{comment}{}  \textcolor{comment}{//============================================================================}}
-\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00450}\mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_a76146afe81a055af475a107231468afb}{00450}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_a76146afe81a055af475a107231468afb}{DenseComplexMatrix::residual}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<std::complex<double>>\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00450}\mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_a76146afe81a055af475a107231468afb}{00450}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_a76146afe81a055af475a107231468afb}{DenseComplexMatrix::residual}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<std::complex<double>>\& x,}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00451}00451                                     \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<std::complex<double>>\& rhs,}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00452}00452                                     \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<std::complex<double>>\& residual)}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00453}00453   \{}
@@ -476,11 +476,11 @@
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00472}00472                           OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00473}00473     \}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00474}00474     \textcolor{comment}{// Check that the size of x is correct}}
-\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00475}00475     \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.size() != \mbox{\hyperlink{classoomph_1_1DenseMatrix_a23cb539be0b4ef0381b9f18e8e50f75e}{N}})}
+\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00475}00475     \textcolor{keywordflow}{if} (x.size() != \mbox{\hyperlink{classoomph_1_1DenseMatrix_a23cb539be0b4ef0381b9f18e8e50f75e}{N}})}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00476}00476     \{}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00477}00477       std::ostringstream error\_message\_stream;}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00478}00478       error\_message\_stream << \textcolor{stringliteral}{"{}The x vector is not the right size. It is "{}}}
-\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00479}00479                            << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.size() << \textcolor{stringliteral}{"{}, it should be "{}} << \mbox{\hyperlink{classoomph_1_1DenseMatrix_a23cb539be0b4ef0381b9f18e8e50f75e}{N}} << std::endl;}
+\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00479}00479                            << x.size() << \textcolor{stringliteral}{"{}, it should be "{}} << \mbox{\hyperlink{classoomph_1_1DenseMatrix_a23cb539be0b4ef0381b9f18e8e50f75e}{N}} << std::endl;}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00480}00480 }
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00481}00481       \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message\_stream.str(),}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00482}00482                           OOMPH\_CURRENT\_FUNCTION,}
@@ -499,7 +499,7 @@
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00495}00495       \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_a76146afe81a055af475a107231468afb}{residual}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = rhs[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00496}00496       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} j = 0; j < \mbox{\hyperlink{classoomph_1_1DenseMatrix_aa36631ee95fe55afe697377b03d05d6a}{M}}; j++)}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00497}00497       \{}
-\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00498}00498         \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_a76146afe81a055af475a107231468afb}{residual}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/= \mbox{\hyperlink{classoomph_1_1DenseMatrix_a92a2eea603a42e22fd4d3ea0a258e6f8}{Matrixdata}}[\mbox{\hyperlink{classoomph_1_1DenseMatrix_aa36631ee95fe55afe697377b03d05d6a}{M}} * \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} + j] * \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[j];}
+\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00498}00498         \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_a76146afe81a055af475a107231468afb}{residual}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/= \mbox{\hyperlink{classoomph_1_1DenseMatrix_a92a2eea603a42e22fd4d3ea0a258e6f8}{Matrixdata}}[\mbox{\hyperlink{classoomph_1_1DenseMatrix_aa36631ee95fe55afe697377b03d05d6a}{M}} * \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} + j] * x[j];}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00499}00499       \}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00500}00500     \}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00501}00501   \}}
@@ -508,16 +508,16 @@
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00504}00504   \textcolor{comment}{//============================================================================}\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00505}00505 \textcolor{comment}{  ///  Multiply the matrix by the vector x: soln=Ax}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00506}00506 \textcolor{comment}{}  \textcolor{comment}{//============================================================================}}
-\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00507}\mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_afcc47dd450a1ab37d2790b5d0279cadf}{00507}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_afcc47dd450a1ab37d2790b5d0279cadf}{DenseComplexMatrix::multiply}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<std::complex<double>>\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00507}\mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_afcc47dd450a1ab37d2790b5d0279cadf}{00507}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_afcc47dd450a1ab37d2790b5d0279cadf}{DenseComplexMatrix::multiply}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<std::complex<double>>\& x,}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00508}00508                                     \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<std::complex<double>>\& soln)}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00509}00509   \{}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00510}00510 \textcolor{preprocessor}{\#ifdef PARANOID}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00511}00511     \textcolor{comment}{// Check to see if x.size() = ncol().}}
-\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00512}00512     \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.size() != \mbox{\hyperlink{classoomph_1_1DenseMatrix_aa36631ee95fe55afe697377b03d05d6a}{M}})}
+\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00512}00512     \textcolor{keywordflow}{if} (x.size() != \mbox{\hyperlink{classoomph_1_1DenseMatrix_aa36631ee95fe55afe697377b03d05d6a}{M}})}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00513}00513     \{}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00514}00514       std::ostringstream error\_message\_stream;}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00515}00515       error\_message\_stream << \textcolor{stringliteral}{"{}The x vector is not the right size. It is "{}}}
-\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00516}00516                            << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.size() << \textcolor{stringliteral}{"{}, it should be "{}} << \mbox{\hyperlink{classoomph_1_1DenseMatrix_aa36631ee95fe55afe697377b03d05d6a}{M}} << std::endl;}
+\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00516}00516                            << x.size() << \textcolor{stringliteral}{"{}, it should be "{}} << \mbox{\hyperlink{classoomph_1_1DenseMatrix_aa36631ee95fe55afe697377b03d05d6a}{M}} << std::endl;}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00517}00517 }
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00518}00518       \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message\_stream.str(),}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00519}00519                           OOMPH\_CURRENT\_FUNCTION,}
@@ -537,7 +537,7 @@
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00533}00533       soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = 0.0;}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00534}00534       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} j = 0; j < \mbox{\hyperlink{classoomph_1_1DenseMatrix_aa36631ee95fe55afe697377b03d05d6a}{M}}; j++)}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00535}00535       \{}
-\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00536}00536         soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += \mbox{\hyperlink{classoomph_1_1DenseMatrix_a92a2eea603a42e22fd4d3ea0a258e6f8}{Matrixdata}}[\mbox{\hyperlink{classoomph_1_1DenseMatrix_aa36631ee95fe55afe697377b03d05d6a}{M}} * \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} + j] * \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[j];}
+\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00536}00536         soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += \mbox{\hyperlink{classoomph_1_1DenseMatrix_a92a2eea603a42e22fd4d3ea0a258e6f8}{Matrixdata}}[\mbox{\hyperlink{classoomph_1_1DenseMatrix_aa36631ee95fe55afe697377b03d05d6a}{M}} * \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} + j] * x[j];}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00537}00537       \}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00538}00538     \}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00539}00539   \}}
@@ -547,15 +547,15 @@
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00543}00543 \textcolor{comment}{  /// Multiply the  transposed matrix by the vector x: soln=A\string^T x}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00544}00544 \textcolor{comment}{}  \textcolor{comment}{//=================================================================}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00545}\mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_aaaf8f0589e011bf720791058711fa952}{00545}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_aaaf8f0589e011bf720791058711fa952}{DenseComplexMatrix::multiply\_transpose}}(}
-\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00546}00546     \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<std::complex<double>>\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<std::complex<double>>\& soln)}
+\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00546}00546     \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<std::complex<double>>\& x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<std::complex<double>>\& soln)}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00547}00547   \{}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00548}00548 \textcolor{preprocessor}{\#ifdef PARANOID}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00549}00549     \textcolor{comment}{// Check to see x.size() = nrow()}}
-\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00550}00550     \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.size() != \mbox{\hyperlink{classoomph_1_1DenseMatrix_a23cb539be0b4ef0381b9f18e8e50f75e}{N}})}
+\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00550}00550     \textcolor{keywordflow}{if} (x.size() != \mbox{\hyperlink{classoomph_1_1DenseMatrix_a23cb539be0b4ef0381b9f18e8e50f75e}{N}})}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00551}00551     \{}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00552}00552       std::ostringstream error\_message\_stream;}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00553}00553       error\_message\_stream << \textcolor{stringliteral}{"{}The x vector is not the right size. It is "{}}}
-\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00554}00554                            << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.size() << \textcolor{stringliteral}{"{}, it should be "{}} << \mbox{\hyperlink{classoomph_1_1DenseMatrix_a23cb539be0b4ef0381b9f18e8e50f75e}{N}} << std::endl;}
+\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00554}00554                            << x.size() << \textcolor{stringliteral}{"{}, it should be "{}} << \mbox{\hyperlink{classoomph_1_1DenseMatrix_a23cb539be0b4ef0381b9f18e8e50f75e}{N}} << std::endl;}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00555}00555 }
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00556}00556       \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message\_stream.str(),}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00557}00557                           OOMPH\_CURRENT\_FUNCTION,}
@@ -581,7 +581,7 @@
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00577}00577     \{}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00578}00578       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} j = 0; j < \mbox{\hyperlink{classoomph_1_1DenseMatrix_aa36631ee95fe55afe697377b03d05d6a}{M}}; j++)}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00579}00579       \{}
-\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00580}00580         soln[j] += \mbox{\hyperlink{classoomph_1_1DenseMatrix_a92a2eea603a42e22fd4d3ea0a258e6f8}{Matrixdata}}[\mbox{\hyperlink{classoomph_1_1DenseMatrix_a23cb539be0b4ef0381b9f18e8e50f75e}{N}} * \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} + j] * \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00580}00580         soln[j] += \mbox{\hyperlink{classoomph_1_1DenseMatrix_a92a2eea603a42e22fd4d3ea0a258e6f8}{Matrixdata}}[\mbox{\hyperlink{classoomph_1_1DenseMatrix_a23cb539be0b4ef0381b9f18e8e50f75e}{N}} * \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} + j] * x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00581}00581       \}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00582}00582     \}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00583}00583   \}}
@@ -792,7 +792,7 @@
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00788}00788   \textcolor{comment}{//===================================================================}\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00789}00789 \textcolor{comment}{  /// Work out residual vector r = b-\/Ax for candidate solution x}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00790}00790 \textcolor{comment}{}  \textcolor{comment}{//===================================================================}}
-\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00791}\mbox{\hyperlink{classoomph_1_1CCComplexMatrix_ade719948640907a8f338f83ee1587a90}{00791}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1CCComplexMatrix_ade719948640907a8f338f83ee1587a90}{CCComplexMatrix::residual}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<std::complex<double>>\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00791}\mbox{\hyperlink{classoomph_1_1CCComplexMatrix_ade719948640907a8f338f83ee1587a90}{00791}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1CCComplexMatrix_ade719948640907a8f338f83ee1587a90}{CCComplexMatrix::residual}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<std::complex<double>>\& x,}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00792}00792                                  \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<std::complex<double>>\& rhs,}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00793}00793                                  \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<std::complex<double>>\& residual)}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00794}00794   \{}
@@ -817,11 +817,11 @@
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00813}00813                           OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00814}00814     \}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00815}00815     \textcolor{comment}{// Check that the size of x is correct}}
-\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00816}00816     \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.size() != \mbox{\hyperlink{classoomph_1_1SparseMatrix_a8f15f962605f52fc75e8679efc6c8677}{N}})}
+\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00816}00816     \textcolor{keywordflow}{if} (x.size() != \mbox{\hyperlink{classoomph_1_1SparseMatrix_a8f15f962605f52fc75e8679efc6c8677}{N}})}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00817}00817     \{}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00818}00818       std::ostringstream error\_message\_stream;}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00819}00819       error\_message\_stream << \textcolor{stringliteral}{"{}The x vector is not the right size. It is "{}}}
-\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00820}00820                            << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.size() << \textcolor{stringliteral}{"{}, it should be "{}} << \mbox{\hyperlink{classoomph_1_1SparseMatrix_a8f15f962605f52fc75e8679efc6c8677}{N}} << std::endl;}
+\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00820}00820                            << x.size() << \textcolor{stringliteral}{"{}, it should be "{}} << \mbox{\hyperlink{classoomph_1_1SparseMatrix_a8f15f962605f52fc75e8679efc6c8677}{N}} << std::endl;}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00821}00821 }
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00822}00822       \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message\_stream.str(),}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00823}00823                           OOMPH\_CURRENT\_FUNCTION,}
@@ -847,7 +847,7 @@
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00843}00843       \{}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00844}00844         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = \mbox{\hyperlink{classoomph_1_1CCMatrix_a7dba85934f3059d0163dda06f94ddf9b}{Row\_index}}[k];}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00845}00845         std::complex<double> a\_ij = \mbox{\hyperlink{classoomph_1_1SparseMatrix_a55b53c70fe3906a65d0f84c429e963b1}{Value}}[k];}
-\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00846}00846         \mbox{\hyperlink{classoomph_1_1CCComplexMatrix_ade719948640907a8f338f83ee1587a90}{residual}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/= a\_ij * \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[j];}
+\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00846}00846         \mbox{\hyperlink{classoomph_1_1CCComplexMatrix_ade719948640907a8f338f83ee1587a90}{residual}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/= a\_ij * x[j];}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00847}00847       \}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00848}00848     \}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00849}00849   \}}
@@ -855,16 +855,16 @@
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00851}00851   \textcolor{comment}{//===================================================================}\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00852}00852 \textcolor{comment}{  ///  Multiply the matrix by the vector x}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00853}00853 \textcolor{comment}{}  \textcolor{comment}{//===================================================================}}
-\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00854}\mbox{\hyperlink{classoomph_1_1CCComplexMatrix_a6c7ba50bf29c2e9f40a68a073534f261}{00854}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1CCComplexMatrix_a6c7ba50bf29c2e9f40a68a073534f261}{CCComplexMatrix::multiply}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<std::complex<double>>\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00854}\mbox{\hyperlink{classoomph_1_1CCComplexMatrix_a6c7ba50bf29c2e9f40a68a073534f261}{00854}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1CCComplexMatrix_a6c7ba50bf29c2e9f40a68a073534f261}{CCComplexMatrix::multiply}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<std::complex<double>>\& x,}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00855}00855                                  \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<std::complex<double>>\& soln)}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00856}00856   \{}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00857}00857 \textcolor{preprocessor}{\#ifdef PARANOID}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00858}00858     \textcolor{comment}{// Check to see if x.size() = ncol()}}
-\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00859}00859     \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.size() != \mbox{\hyperlink{classoomph_1_1SparseMatrix_ae558ff039363bd2aa163525442090508}{M}})}
+\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00859}00859     \textcolor{keywordflow}{if} (x.size() != \mbox{\hyperlink{classoomph_1_1SparseMatrix_ae558ff039363bd2aa163525442090508}{M}})}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00860}00860     \{}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00861}00861       std::ostringstream error\_message\_stream;}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00862}00862       error\_message\_stream << \textcolor{stringliteral}{"{}The x vector is not the right size. It is "{}}}
-\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00863}00863                            << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.size() << \textcolor{stringliteral}{"{}, it should be "{}} << \mbox{\hyperlink{classoomph_1_1SparseMatrix_ae558ff039363bd2aa163525442090508}{M}} << std::endl;}
+\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00863}00863                            << x.size() << \textcolor{stringliteral}{"{}, it should be "{}} << \mbox{\hyperlink{classoomph_1_1SparseMatrix_ae558ff039363bd2aa163525442090508}{M}} << std::endl;}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00864}00864 }
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00865}00865       \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message\_stream.str(),}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00866}00866                           OOMPH\_CURRENT\_FUNCTION,}
@@ -888,7 +888,7 @@
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00884}00884       \{}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00885}00885         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = \mbox{\hyperlink{classoomph_1_1CCMatrix_a7dba85934f3059d0163dda06f94ddf9b}{Row\_index}}[k];}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00886}00886         std::complex<double> a\_ij = \mbox{\hyperlink{classoomph_1_1SparseMatrix_a55b53c70fe3906a65d0f84c429e963b1}{Value}}[k];}
-\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00887}00887         soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += a\_ij * \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[j];}
+\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00887}00887         soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += a\_ij * x[j];}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00888}00888       \}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00889}00889     \}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00890}00890   \}}
@@ -898,15 +898,15 @@
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00894}00894 \textcolor{comment}{  /// Multiply the  transposed matrix by the vector x: soln=A\string^T x}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00895}00895 \textcolor{comment}{}  \textcolor{comment}{//=================================================================}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00896}\mbox{\hyperlink{classoomph_1_1CCComplexMatrix_a85c89a6e460b6eb0a1ab704b6272c4d7}{00896}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1CCComplexMatrix_a85c89a6e460b6eb0a1ab704b6272c4d7}{CCComplexMatrix::multiply\_transpose}}(}
-\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00897}00897     \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<std::complex<double>>\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<std::complex<double>>\& soln)}
+\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00897}00897     \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<std::complex<double>>\& x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<std::complex<double>>\& soln)}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00898}00898   \{}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00899}00899 \textcolor{preprocessor}{\#ifdef PARANOID}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00900}00900     \textcolor{comment}{// Check to see x.size() = nrow()}}
-\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00901}00901     \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.size() != \mbox{\hyperlink{classoomph_1_1SparseMatrix_a8f15f962605f52fc75e8679efc6c8677}{N}})}
+\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00901}00901     \textcolor{keywordflow}{if} (x.size() != \mbox{\hyperlink{classoomph_1_1SparseMatrix_a8f15f962605f52fc75e8679efc6c8677}{N}})}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00902}00902     \{}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00903}00903       std::ostringstream error\_message\_stream;}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00904}00904       error\_message\_stream << \textcolor{stringliteral}{"{}The x vector is not the right size. It is "{}}}
-\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00905}00905                            << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.size() << \textcolor{stringliteral}{"{}, it should be "{}} << \mbox{\hyperlink{classoomph_1_1SparseMatrix_a8f15f962605f52fc75e8679efc6c8677}{N}} << std::endl;}
+\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00905}00905                            << x.size() << \textcolor{stringliteral}{"{}, it should be "{}} << \mbox{\hyperlink{classoomph_1_1SparseMatrix_a8f15f962605f52fc75e8679efc6c8677}{N}} << std::endl;}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00906}00906 }
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00907}00907       \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message\_stream.str(),}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00908}00908                           OOMPH\_CURRENT\_FUNCTION,}
@@ -933,7 +933,7 @@
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00929}00929       \{}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00930}00930         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} j = \mbox{\hyperlink{classoomph_1_1CCMatrix_a7dba85934f3059d0163dda06f94ddf9b}{Row\_index}}[k];}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00931}00931         std::complex<double> a\_ij = \mbox{\hyperlink{classoomph_1_1SparseMatrix_a55b53c70fe3906a65d0f84c429e963b1}{Value}}[k];}
-\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00932}00932         soln[j] += a\_ij * \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00932}00932         soln[j] += a\_ij * x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00933}00933       \}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00934}00934     \}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l00935}00935   \}}
@@ -1121,7 +1121,7 @@
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01117}01117   \textcolor{comment}{//=================================================================}\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01118}01118 \textcolor{comment}{  ///  Find the residulal to x of Ax=b, ie r=b-\/Ax}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01119}01119 \textcolor{comment}{}  \textcolor{comment}{//=================================================================}}
-\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01120}\mbox{\hyperlink{classoomph_1_1CRComplexMatrix_ae117c59a8e27c2e909338847044a2968}{01120}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1CRComplexMatrix_ae117c59a8e27c2e909338847044a2968}{CRComplexMatrix::residual}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<std::complex<double>>\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01120}\mbox{\hyperlink{classoomph_1_1CRComplexMatrix_ae117c59a8e27c2e909338847044a2968}{01120}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1CRComplexMatrix_ae117c59a8e27c2e909338847044a2968}{CRComplexMatrix::residual}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<std::complex<double>>\& x,}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01121}01121                                  \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<std::complex<double>>\& rhs,}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01122}01122                                  \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<std::complex<double>>\& residual)}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01123}01123   \{}
@@ -1138,11 +1138,11 @@
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01134}01134                           OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01135}01135     \}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01136}01136     \textcolor{comment}{// Check that the size of x is correct}}
-\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01137}01137     \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.size() != \mbox{\hyperlink{classoomph_1_1SparseMatrix_ae558ff039363bd2aa163525442090508}{M}})}
+\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01137}01137     \textcolor{keywordflow}{if} (x.size() != \mbox{\hyperlink{classoomph_1_1SparseMatrix_ae558ff039363bd2aa163525442090508}{M}})}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01138}01138     \{}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01139}01139       std::ostringstream error\_message\_stream;}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01140}01140       error\_message\_stream << \textcolor{stringliteral}{"{}The x vector is not the right size. It is "{}}}
-\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01141}01141                            << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.size() << \textcolor{stringliteral}{"{}, it should be "{}} << \mbox{\hyperlink{classoomph_1_1SparseMatrix_ae558ff039363bd2aa163525442090508}{M}} << std::endl;}
+\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01141}01141                            << x.size() << \textcolor{stringliteral}{"{}, it should be "{}} << \mbox{\hyperlink{classoomph_1_1SparseMatrix_ae558ff039363bd2aa163525442090508}{M}} << std::endl;}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01142}01142 }
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01143}01143       \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message\_stream.str(),}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01144}01144                           OOMPH\_CURRENT\_FUNCTION,}
@@ -1162,7 +1162,7 @@
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01158}01158       \{}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01159}01159         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} j = \mbox{\hyperlink{classoomph_1_1CRMatrix_a713740a548e1b022b4153145c465a2c3}{Column\_index}}[k];}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01160}01160         std::complex<double> a\_ij = \mbox{\hyperlink{classoomph_1_1SparseMatrix_a55b53c70fe3906a65d0f84c429e963b1}{Value}}[k];}
-\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01161}01161         \mbox{\hyperlink{classoomph_1_1CRComplexMatrix_ae117c59a8e27c2e909338847044a2968}{residual}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/= a\_ij * \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[j];}
+\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01161}01161         \mbox{\hyperlink{classoomph_1_1CRComplexMatrix_ae117c59a8e27c2e909338847044a2968}{residual}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/= a\_ij * x[j];}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01162}01162       \}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01163}01163     \}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01164}01164   \}}
@@ -1170,16 +1170,16 @@
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01166}01166   \textcolor{comment}{//=================================================================}\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01167}01167 \textcolor{comment}{  ///  Multiply the matrix by the vector x}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01168}01168 \textcolor{comment}{}  \textcolor{comment}{//=================================================================}}
-\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01169}\mbox{\hyperlink{classoomph_1_1CRComplexMatrix_a5ebf5f24c1bd1b4e4e3df6ebcceb189e}{01169}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1CRComplexMatrix_a5ebf5f24c1bd1b4e4e3df6ebcceb189e}{CRComplexMatrix::multiply}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<std::complex<double>>\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01169}\mbox{\hyperlink{classoomph_1_1CRComplexMatrix_a5ebf5f24c1bd1b4e4e3df6ebcceb189e}{01169}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1CRComplexMatrix_a5ebf5f24c1bd1b4e4e3df6ebcceb189e}{CRComplexMatrix::multiply}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<std::complex<double>>\& x,}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01170}01170                                  \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<std::complex<double>>\& soln)}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01171}01171   \{}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01172}01172 \textcolor{preprocessor}{\#ifdef PARANOID}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01173}01173     \textcolor{comment}{// Check to see x.size() = ncol()}}
-\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01174}01174     \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.size() != \mbox{\hyperlink{classoomph_1_1SparseMatrix_ae558ff039363bd2aa163525442090508}{M}})}
+\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01174}01174     \textcolor{keywordflow}{if} (x.size() != \mbox{\hyperlink{classoomph_1_1SparseMatrix_ae558ff039363bd2aa163525442090508}{M}})}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01175}01175     \{}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01176}01176       std::ostringstream error\_message\_stream;}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01177}01177       error\_message\_stream << \textcolor{stringliteral}{"{}The x vector is not the right size. It is "{}}}
-\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01178}01178                            << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.size() << \textcolor{stringliteral}{"{}, it should be "{}} << \mbox{\hyperlink{classoomph_1_1SparseMatrix_ae558ff039363bd2aa163525442090508}{M}} << std::endl;}
+\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01178}01178                            << x.size() << \textcolor{stringliteral}{"{}, it should be "{}} << \mbox{\hyperlink{classoomph_1_1SparseMatrix_ae558ff039363bd2aa163525442090508}{M}} << std::endl;}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01179}01179 }
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01180}01180       \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message\_stream.str(),}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01181}01181                           OOMPH\_CURRENT\_FUNCTION,}
@@ -1199,7 +1199,7 @@
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01195}01195       \{}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01196}01196         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} j = \mbox{\hyperlink{classoomph_1_1CRMatrix_a713740a548e1b022b4153145c465a2c3}{Column\_index}}[k];}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01197}01197         std::complex<double> a\_ij = \mbox{\hyperlink{classoomph_1_1SparseMatrix_a55b53c70fe3906a65d0f84c429e963b1}{Value}}[k];}
-\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01198}01198         soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += a\_ij * \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[j];}
+\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01198}01198         soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += a\_ij * x[j];}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01199}01199       \}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01200}01200     \}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01201}01201   \}}
@@ -1209,15 +1209,15 @@
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01205}01205 \textcolor{comment}{  /// Multiply the  transposed matrix by the vector x: soln=A\string^T x}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01206}01206 \textcolor{comment}{}  \textcolor{comment}{//=================================================================}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01207}\mbox{\hyperlink{classoomph_1_1CRComplexMatrix_a5df8a8b3bb15ce5627e7300448b13d28}{01207}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1CRComplexMatrix_a5df8a8b3bb15ce5627e7300448b13d28}{CRComplexMatrix::multiply\_transpose}}(}
-\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01208}01208     \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<std::complex<double>>\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<std::complex<double>>\& soln)}
+\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01208}01208     \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<std::complex<double>>\& x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<std::complex<double>>\& soln)}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01209}01209   \{}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01210}01210 \textcolor{preprocessor}{\#ifdef PARANOID}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01211}01211     \textcolor{comment}{// Check to see x.size() = nrow()}}
-\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01212}01212     \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.size() != \mbox{\hyperlink{classoomph_1_1SparseMatrix_a8f15f962605f52fc75e8679efc6c8677}{N}})}
+\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01212}01212     \textcolor{keywordflow}{if} (x.size() != \mbox{\hyperlink{classoomph_1_1SparseMatrix_a8f15f962605f52fc75e8679efc6c8677}{N}})}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01213}01213     \{}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01214}01214       std::ostringstream error\_message\_stream;}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01215}01215       error\_message\_stream << \textcolor{stringliteral}{"{}The x vector is not the right size. It is "{}}}
-\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01216}01216                            << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.size() << \textcolor{stringliteral}{"{}, it should be "{}} << \mbox{\hyperlink{classoomph_1_1SparseMatrix_a8f15f962605f52fc75e8679efc6c8677}{N}} << std::endl;}
+\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01216}01216                            << x.size() << \textcolor{stringliteral}{"{}, it should be "{}} << \mbox{\hyperlink{classoomph_1_1SparseMatrix_a8f15f962605f52fc75e8679efc6c8677}{N}} << std::endl;}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01217}01217 }
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01218}01218       \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message\_stream.str(),}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01219}01219                           OOMPH\_CURRENT\_FUNCTION,}
@@ -1244,7 +1244,7 @@
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01240}01240       \{}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01241}01241         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} j = \mbox{\hyperlink{classoomph_1_1CRMatrix_a713740a548e1b022b4153145c465a2c3}{Column\_index}}[k];}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01242}01242         std::complex<double> a\_ij = \mbox{\hyperlink{classoomph_1_1SparseMatrix_a55b53c70fe3906a65d0f84c429e963b1}{Value}}[k];}
-\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01243}01243         soln[j] += a\_ij * \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01243}01243         soln[j] += a\_ij * x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01244}01244       \}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01245}01245     \}}
 \DoxyCodeLine{\Hypertarget{complex__matrices_8cc_source_l01246}01246   \}}

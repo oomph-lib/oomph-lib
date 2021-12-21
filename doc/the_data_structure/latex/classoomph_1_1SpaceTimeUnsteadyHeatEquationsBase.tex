@@ -12,17 +12,17 @@ Base class so that we don\textquotesingle{}t need to know the dimension just to 
 Inheritance diagram for oomph\+::Space\+Time\+Unsteady\+Heat\+Equations\+Base\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=0.982456cm]{classoomph_1_1SpaceTimeUnsteadyHeatEquationsBase}
+\includegraphics[height=1.262327cm]{classoomph_1_1SpaceTimeUnsteadyHeatEquationsBase}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquationsBase_a47f2992a722a335505bc827ab095d7b5}{Space\+Time\+Unsteady\+Heat\+Source\+Fct\+Pt}}) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, double \&\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}})
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquationsBase_a47f2992a722a335505bc827ab095d7b5}{Space\+Time\+Unsteady\+Heat\+Source\+Fct\+Pt}}) (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&u)
 \begin{DoxyCompactList}\small\item\em Function pointer to source function fct(t,x,f(x,t)) -- x is a Vector! \end{DoxyCompactList}\item 
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquationsBase_a47f2992a722a335505bc827ab095d7b5}{Space\+Time\+Unsteady\+Heat\+Source\+Fct\+Pt}}) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, double \&\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}})
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquationsBase_a47f2992a722a335505bc827ab095d7b5}{Space\+Time\+Unsteady\+Heat\+Source\+Fct\+Pt}}) (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&u)
 \begin{DoxyCompactList}\small\item\em Function pointer to source function fct(t,x,f(x,t)) -- x is a Vector! \end{DoxyCompactList}\item 
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquationsBase_a47f2992a722a335505bc827ab095d7b5}{Space\+Time\+Unsteady\+Heat\+Source\+Fct\+Pt}}) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, double \&\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}})
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquationsBase_a47f2992a722a335505bc827ab095d7b5}{Space\+Time\+Unsteady\+Heat\+Source\+Fct\+Pt}}) (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&u)
 \begin{DoxyCompactList}\small\item\em Function pointer to source function fct(t,x,f(x,t)) -- x is a Vector! \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
@@ -48,7 +48,7 @@ Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_sou
 \index{oomph::SpaceTimeUnsteadyHeatEquationsBase@{oomph::SpaceTimeUnsteadyHeatEquationsBase}!SpaceTimeUnsteadyHeatSourceFctPt@{SpaceTimeUnsteadyHeatSourceFctPt}}
 \index{SpaceTimeUnsteadyHeatSourceFctPt@{SpaceTimeUnsteadyHeatSourceFctPt}!oomph::SpaceTimeUnsteadyHeatEquationsBase@{oomph::SpaceTimeUnsteadyHeatEquationsBase}}
 \doxysubsubsection{\texorpdfstring{SpaceTimeUnsteadyHeatSourceFctPt}{SpaceTimeUnsteadyHeatSourceFctPt}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
-{\footnotesize\ttfamily typedef void($\ast$ oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations\+Base\+::\+Space\+Time\+Unsteady\+Heat\+Source\+Fct\+Pt) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, double \&\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}})}
+{\footnotesize\ttfamily typedef void($\ast$ oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations\+Base\+::\+Space\+Time\+Unsteady\+Heat\+Source\+Fct\+Pt) (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&u)}
 
 
 
@@ -62,7 +62,7 @@ Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_sou
 \index{oomph::SpaceTimeUnsteadyHeatEquationsBase@{oomph::SpaceTimeUnsteadyHeatEquationsBase}!SpaceTimeUnsteadyHeatSourceFctPt@{SpaceTimeUnsteadyHeatSourceFctPt}}
 \index{SpaceTimeUnsteadyHeatSourceFctPt@{SpaceTimeUnsteadyHeatSourceFctPt}!oomph::SpaceTimeUnsteadyHeatEquationsBase@{oomph::SpaceTimeUnsteadyHeatEquationsBase}}
 \doxysubsubsection{\texorpdfstring{SpaceTimeUnsteadyHeatSourceFctPt}{SpaceTimeUnsteadyHeatSourceFctPt}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
-{\footnotesize\ttfamily typedef void($\ast$ oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations\+Base\+::\+Space\+Time\+Unsteady\+Heat\+Source\+Fct\+Pt) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, double \&\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}})}
+{\footnotesize\ttfamily typedef void($\ast$ oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations\+Base\+::\+Space\+Time\+Unsteady\+Heat\+Source\+Fct\+Pt) (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&u)}
 
 
 
@@ -76,7 +76,7 @@ Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unstea
 \index{oomph::SpaceTimeUnsteadyHeatEquationsBase@{oomph::SpaceTimeUnsteadyHeatEquationsBase}!SpaceTimeUnsteadyHeatSourceFctPt@{SpaceTimeUnsteadyHeatSourceFctPt}}
 \index{SpaceTimeUnsteadyHeatSourceFctPt@{SpaceTimeUnsteadyHeatSourceFctPt}!oomph::SpaceTimeUnsteadyHeatEquationsBase@{oomph::SpaceTimeUnsteadyHeatEquationsBase}}
 \doxysubsubsection{\texorpdfstring{SpaceTimeUnsteadyHeatSourceFctPt}{SpaceTimeUnsteadyHeatSourceFctPt}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
-{\footnotesize\ttfamily typedef void($\ast$ oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations\+Base\+::\+Space\+Time\+Unsteady\+Heat\+Source\+Fct\+Pt) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, double \&\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}})}
+{\footnotesize\ttfamily typedef void($\ast$ oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations\+Base\+::\+Space\+Time\+Unsteady\+Heat\+Source\+Fct\+Pt) (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&u)}
 
 
 
@@ -99,6 +99,10 @@ Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unstea
 
 Access function\+: Pointer to source function. 
 
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a731ffd54d96cc9ef4ccdba1484a4618e}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a731ffd54d96cc9ef4ccdba1484a4618e}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatMixedOrderEquations_a25be77e2aa28129ae878e80f9344c609}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Mixed\+Order\+Equations$<$ SPATIAL\+\_\+\+DIM $>$}}.
+
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquationsBase_aa4834b0df720e343e6f56856d8cb7688}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquationsBase_aa4834b0df720e343e6f56856d8cb7688}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquationsBase@{oomph::SpaceTimeUnsteadyHeatEquationsBase}!source\_fct\_pt@{source\_fct\_pt}}
 \index{source\_fct\_pt@{source\_fct\_pt}!oomph::SpaceTimeUnsteadyHeatEquationsBase@{oomph::SpaceTimeUnsteadyHeatEquationsBase}}
@@ -109,6 +113,10 @@ Access function\+: Pointer to source function.
 
 Access function\+: Pointer to source function. 
 
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a731ffd54d96cc9ef4ccdba1484a4618e}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a731ffd54d96cc9ef4ccdba1484a4618e}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatMixedOrderEquations_a25be77e2aa28129ae878e80f9344c609}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Mixed\+Order\+Equations$<$ SPATIAL\+\_\+\+DIM $>$}}.
+
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquationsBase_aa4834b0df720e343e6f56856d8cb7688}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquationsBase_aa4834b0df720e343e6f56856d8cb7688}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquationsBase@{oomph::SpaceTimeUnsteadyHeatEquationsBase}!source\_fct\_pt@{source\_fct\_pt}}
 \index{source\_fct\_pt@{source\_fct\_pt}!oomph::SpaceTimeUnsteadyHeatEquationsBase@{oomph::SpaceTimeUnsteadyHeatEquationsBase}}
@@ -118,6 +126,10 @@ Access function\+: Pointer to source function.
 
 
 Access function\+: Pointer to source function. 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a731ffd54d96cc9ef4ccdba1484a4618e}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a731ffd54d96cc9ef4ccdba1484a4618e}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatMixedOrderEquations_a25be77e2aa28129ae878e80f9344c609}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Mixed\+Order\+Equations$<$ SPATIAL\+\_\+\+DIM $>$}}.
 
 
 

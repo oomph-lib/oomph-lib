@@ -246,11 +246,11 @@
 \DoxyCodeLine{\Hypertarget{two__layer__spine__mesh_8template_8h_source_l00242}\mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_a7973ed642b9adff26bf531c76dade747}{00242}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_a7973ed642b9adff26bf531c76dade747}{spine\_node\_update\_lower}}(\mbox{\hyperlink{classoomph_1_1SpineNode}{SpineNode}}* spine\_node\_pt)}
 \DoxyCodeLine{\Hypertarget{two__layer__spine__mesh_8template_8h_source_l00243}00243     \{}
 \DoxyCodeLine{\Hypertarget{two__layer__spine__mesh_8template_8h_source_l00244}00244       \textcolor{comment}{// Get fraction along the spine}}
-\DoxyCodeLine{\Hypertarget{two__layer__spine__mesh_8template_8h_source_l00245}00245       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = spine\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1SpineNode_a3980c5355fa505586d4fb1e8456fbc45}{fraction}}();}
+\DoxyCodeLine{\Hypertarget{two__layer__spine__mesh_8template_8h_source_l00245}00245       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = spine\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1SpineNode_a3980c5355fa505586d4fb1e8456fbc45}{fraction}}();}
 \DoxyCodeLine{\Hypertarget{two__layer__spine__mesh_8template_8h_source_l00246}00246       \textcolor{comment}{// Get spine height}}
 \DoxyCodeLine{\Hypertarget{two__layer__spine__mesh_8template_8h_source_l00247}00247       \textcolor{keywordtype}{double} H = spine\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1SpineNode_a5af32b3551d15eb665485d0ed0233bde}{h}}();}
 \DoxyCodeLine{\Hypertarget{two__layer__spine__mesh_8template_8h_source_l00248}00248       \textcolor{comment}{// Set the value of y}}
-\DoxyCodeLine{\Hypertarget{two__layer__spine__mesh_8template_8h_source_l00249}00249       spine\_node\_pt-\/>x(1) = this-\/>\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ade53fec7446044418ccba9f55d692adb}{Ymin}} + W * H;}
+\DoxyCodeLine{\Hypertarget{two__layer__spine__mesh_8template_8h_source_l00249}00249       spine\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1) = this-\/>\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ade53fec7446044418ccba9f55d692adb}{Ymin}} + W * H;}
 \DoxyCodeLine{\Hypertarget{two__layer__spine__mesh_8template_8h_source_l00250}00250     \}}
 \DoxyCodeLine{\Hypertarget{two__layer__spine__mesh_8template_8h_source_l00251}00251 }
 \DoxyCodeLine{\Hypertarget{two__layer__spine__mesh_8template_8h_source_l00252}00252 \textcolor{comment}{}}
@@ -258,14 +258,14 @@
 \DoxyCodeLine{\Hypertarget{two__layer__spine__mesh_8template_8h_source_l00254}\mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_adc173b7505ec801a4aa688f97ffe55e0}{00254}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_adc173b7505ec801a4aa688f97ffe55e0}{spine\_node\_update\_upper}}(\mbox{\hyperlink{classoomph_1_1SpineNode}{SpineNode}}* spine\_node\_pt)}
 \DoxyCodeLine{\Hypertarget{two__layer__spine__mesh_8template_8h_source_l00255}00255     \{}
 \DoxyCodeLine{\Hypertarget{two__layer__spine__mesh_8template_8h_source_l00256}00256       \textcolor{comment}{// Get fraction alon the spine}}
-\DoxyCodeLine{\Hypertarget{two__layer__spine__mesh_8template_8h_source_l00257}00257       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = spine\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1SpineNode_a3980c5355fa505586d4fb1e8456fbc45}{fraction}}();}
+\DoxyCodeLine{\Hypertarget{two__layer__spine__mesh_8template_8h_source_l00257}00257       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = spine\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1SpineNode_a3980c5355fa505586d4fb1e8456fbc45}{fraction}}();}
 \DoxyCodeLine{\Hypertarget{two__layer__spine__mesh_8template_8h_source_l00258}00258 }
 \DoxyCodeLine{\Hypertarget{two__layer__spine__mesh_8template_8h_source_l00259}00259       \textcolor{comment}{// Get spine height}}
 \DoxyCodeLine{\Hypertarget{two__layer__spine__mesh_8template_8h_source_l00260}00260       \textcolor{keywordtype}{double} H = spine\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1SpineNode_a5af32b3551d15eb665485d0ed0233bde}{h}}();}
 \DoxyCodeLine{\Hypertarget{two__layer__spine__mesh_8template_8h_source_l00261}00261 }
 \DoxyCodeLine{\Hypertarget{two__layer__spine__mesh_8template_8h_source_l00262}00262       \textcolor{comment}{// Set the value of y}}
-\DoxyCodeLine{\Hypertarget{two__layer__spine__mesh_8template_8h_source_l00263}00263       spine\_node\_pt-\/>x(1) =}
-\DoxyCodeLine{\Hypertarget{two__layer__spine__mesh_8template_8h_source_l00264}00264         (this-\/>\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ade53fec7446044418ccba9f55d692adb}{Ymin}} + H) + \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * (this-\/>\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_aacbacc3a0e6ea8508abb3140ba343ffa}{Ymax}} -\/ (this-\/>\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ade53fec7446044418ccba9f55d692adb}{Ymin}} + H));}
+\DoxyCodeLine{\Hypertarget{two__layer__spine__mesh_8template_8h_source_l00263}00263       spine\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1) =}
+\DoxyCodeLine{\Hypertarget{two__layer__spine__mesh_8template_8h_source_l00264}00264         (this-\/>\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ade53fec7446044418ccba9f55d692adb}{Ymin}} + H) + \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * (this-\/>\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_aacbacc3a0e6ea8508abb3140ba343ffa}{Ymax}} -\/ (this-\/>\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ade53fec7446044418ccba9f55d692adb}{Ymin}} + H));}
 \DoxyCodeLine{\Hypertarget{two__layer__spine__mesh_8template_8h_source_l00265}00265     \}}
 \DoxyCodeLine{\Hypertarget{two__layer__spine__mesh_8template_8h_source_l00266}00266 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{two__layer__spine__mesh_8template_8h_source_l00267}00267 \textcolor{comment}{    /// Helper function to actually build the two-\/layer spine mesh}}

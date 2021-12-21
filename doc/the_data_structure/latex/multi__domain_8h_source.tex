@@ -395,7 +395,7 @@
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00391}00391 \textcolor{comment}{    /// Helper function to add external haloed nodes, inc. masters}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00392}00392 \textcolor{comment}{    /// of external haloed nodes}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00393}00393 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aea9c2b1984158b8f560c6fff7c0adea7}{add\_external\_haloed\_node\_to\_storage}}(\textcolor{keywordtype}{int}\& iproc,}
-\DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00394}00394                                              Node* nod\_pt,}
+\DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00394}00394                                              \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00395}00395                                              \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}* problem\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00396}00396                                              \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}* \textcolor{keyword}{const}\& external\_mesh\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00397}00397                                              \textcolor{keywordtype}{int}\& n\_cont\_inter\_values);}
@@ -405,7 +405,7 @@
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00401}00401 \textcolor{comment}{    /// of external haloed nodes}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00402}00402 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_abaafd14a3e78c1965c294797913b44bf}{recursively\_add\_masters\_of\_external\_haloed\_node}}(}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00403}00403       \textcolor{keywordtype}{int}\& iproc,}
-\DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00404}00404       Node* nod\_pt,}
+\DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00404}00404       \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00405}00405       \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}* problem\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00406}00406       \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}* \textcolor{keyword}{const}\& external\_mesh\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00407}00407       \textcolor{keywordtype}{int}\& n\_cont\_inter\_values);}
@@ -413,14 +413,14 @@
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00409}00409 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00410}00410 \textcolor{comment}{    /// Helper function to add external haloed node that is not a master}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00411}00411 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aac4036d305c98081e778e16d568ae560}{add\_external\_haloed\_node\_helper}}(\textcolor{keywordtype}{int}\& iproc,}
-\DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00412}00412                                          Node* nod\_pt,}
+\DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00412}00412                                          \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00413}00413                                          \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}* problem\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00414}00414                                          \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}* \textcolor{keyword}{const}\& external\_mesh\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00415}00415                                          \textcolor{keywordtype}{int}\& n\_cont\_inter\_values);}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00416}00416 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00417}00417 \textcolor{comment}{    /// Helper function to add external haloed node that is a master}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00418}00418 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a7116b75de2083297cc1ab4e4b1ca2e48}{add\_external\_haloed\_master\_node\_helper}}(\textcolor{keywordtype}{int}\& iproc,}
-\DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00419}00419                                                 Node* master\_nod\_pt,}
+\DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00419}00419                                                 \mbox{\hyperlink{classoomph_1_1Node}{Node}}* master\_nod\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00420}00420                                                 \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}* problem\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00421}00421                                                 \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}* \textcolor{keyword}{const}\& external\_mesh\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00422}00422                                                 \textcolor{keywordtype}{int}\& n\_cont\_inter\_values);}
@@ -429,7 +429,7 @@
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00425}00425 \textcolor{comment}{    /// external haloed node so that a fully-\/functional external halo}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00426}00426 \textcolor{comment}{    /// node (and therefore element) can be created on the receiving process}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00427}00427 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aaf7f6048aab50adfe33d24f8ff9f8390}{get\_required\_nodal\_information\_helper}}(\textcolor{keywordtype}{int}\& iproc,}
-\DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00428}00428                                                Node* nod\_pt,}
+\DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00428}00428                                                \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00429}00429                                                \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}* problem\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00430}00430                                                \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}* \textcolor{keyword}{const}\& external\_mesh\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00431}00431                                                \textcolor{keywordtype}{int}\& n\_cont\_inter\_values);}
@@ -439,7 +439,7 @@
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00435}00435 \textcolor{comment}{    /// master node (and possible element) can be created on the receiving proc}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00436}00436 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a3b08cda68388e72b4159bbc0fa0826ee}{get\_required\_master\_nodal\_information\_helper}}(}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00437}00437       \textcolor{keywordtype}{int}\& iproc,}
-\DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00438}00438       Node* master\_nod\_pt,}
+\DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00438}00438       \mbox{\hyperlink{classoomph_1_1Node}{Node}}* master\_nod\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00439}00439       \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}* problem\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00440}00440       \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}* \textcolor{keyword}{const}\& external\_mesh\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00441}00441       \textcolor{keywordtype}{int}\& n\_cont\_inter\_values);}
@@ -449,7 +449,7 @@
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00445}00445 \textcolor{comment}{    /// Helper function to add external halo nodes, including any}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00446}00446 \textcolor{comment}{    /// masters, based on information received from the haloed process}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00447}00447 \textcolor{comment}{}    \textcolor{keyword}{template}<\textcolor{keyword}{class} EXT\_ELEMENT>}
-\DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00448}00448     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a6415c5c0119c75e162418a0c9b59b4f7}{add\_external\_halo\_node\_to\_storage}}(Node*\& new\_nod\_pt,}
+\DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00448}00448     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a6415c5c0119c75e162418a0c9b59b4f7}{add\_external\_halo\_node\_to\_storage}}(\mbox{\hyperlink{classoomph_1_1Node}{Node}}*\& new\_nod\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00449}00449                                            \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}* \textcolor{keyword}{const}\& external\_mesh\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00450}00450                                            \textcolor{keywordtype}{unsigned}\& loc\_p,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00451}00451                                            \textcolor{keywordtype}{unsigned}\& node\_index,}
@@ -461,7 +461,7 @@
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00457}00457 \textcolor{comment}{    /// masters, etc) based on information received from the haloed process}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00458}00458 \textcolor{comment}{}    \textcolor{keyword}{template}<\textcolor{keyword}{class} EXT\_ELEMENT>}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00459}00459     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a8eeb905c3ef62453b87a512e4c3eafdd}{recursively\_add\_masters\_of\_external\_halo\_node\_to\_storage}}(}
-\DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00460}00460       Node*\& new\_nod\_pt,}
+\DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00460}00460       \mbox{\hyperlink{classoomph_1_1Node}{Node}}*\& new\_nod\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00461}00461       \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}* \textcolor{keyword}{const}\& external\_mesh\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00462}00462       \textcolor{keywordtype}{unsigned}\& loc\_p,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00463}00463       \textcolor{keywordtype}{unsigned}\& node\_index,}
@@ -471,7 +471,7 @@
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00467}00467 }
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00468}00468 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00469}00469 \textcolor{comment}{    /// Helper function to add external halo node that is not a master}}
-\DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00470}00470 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_abbec3c28e0cdbe77c6ce3c9021528247}{add\_external\_halo\_node\_helper}}(Node*\& new\_nod\_pt,}
+\DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00470}00470 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_abbec3c28e0cdbe77c6ce3c9021528247}{add\_external\_halo\_node\_helper}}(\mbox{\hyperlink{classoomph_1_1Node}{Node}}*\& new\_nod\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00471}00471                                        \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}* \textcolor{keyword}{const}\& external\_mesh\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00472}00472                                        \textcolor{keywordtype}{unsigned}\& loc\_p,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00473}00473                                        \textcolor{keywordtype}{unsigned}\& node\_index,}
@@ -481,8 +481,8 @@
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00477}00477 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00478}00478 \textcolor{comment}{    /// Helper function to add external halo node that is a master}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00479}00479 \textcolor{comment}{}    \textcolor{keyword}{template}<\textcolor{keyword}{class} EXT\_ELEMENT>}
-\DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00480}00480     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_ab0ce0182a95a673dfcef1abe31e76017}{add\_external\_halo\_master\_node\_helper}}(Node*\& new\_master\_nod\_pt,}
-\DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00481}00481                                               Node*\& new\_nod\_pt,}
+\DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00480}00480     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_ab0ce0182a95a673dfcef1abe31e76017}{add\_external\_halo\_master\_node\_helper}}(\mbox{\hyperlink{classoomph_1_1Node}{Node}}*\& new\_master\_nod\_pt,}
+\DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00481}00481                                               \mbox{\hyperlink{classoomph_1_1Node}{Node}}*\& new\_nod\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00482}00482                                               \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}* \textcolor{keyword}{const}\& external\_mesh\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00483}00483                                               \textcolor{keywordtype}{unsigned}\& loc\_p,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00484}00484                                               \textcolor{keywordtype}{int}\& n\_cont\_inter\_values,}
@@ -492,7 +492,7 @@
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00488}00488 \textcolor{comment}{    /// Helper function which constructs a new external halo node}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00489}00489 \textcolor{comment}{    /// (on an element) with the information sent from the haloed process}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00490}00490 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aa0a1707ca80a12f948616e016a1ed191}{construct\_new\_external\_halo\_node\_helper}}(}
-\DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00491}00491       Node*\& new\_nod\_pt,}
+\DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00491}00491       \mbox{\hyperlink{classoomph_1_1Node}{Node}}*\& new\_nod\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00492}00492       \textcolor{keywordtype}{unsigned}\& loc\_p,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00493}00493       \textcolor{keywordtype}{unsigned}\& node\_index,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00494}00494       \mbox{\hyperlink{classoomph_1_1FiniteElement}{FiniteElement}}* \textcolor{keyword}{const}\& new\_el\_pt,}
@@ -503,8 +503,8 @@
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00499}00499 \textcolor{comment}{    /// with the information sent from the haloed process}}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00500}00500 \textcolor{comment}{}    \textcolor{keyword}{template}<\textcolor{keyword}{class} EXT\_ELEMENT>}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00501}00501     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aa50dde1349bfc2809a8fb5c1bb971b0b}{construct\_new\_external\_halo\_master\_node\_helper}}(}
-\DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00502}00502       Node*\& new\_master\_nod\_pt,}
-\DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00503}00503       Node*\& nod\_pt,}
+\DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00502}00502       \mbox{\hyperlink{classoomph_1_1Node}{Node}}*\& new\_master\_nod\_pt,}
+\DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00503}00503       \mbox{\hyperlink{classoomph_1_1Node}{Node}}*\& nod\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00504}00504       \textcolor{keywordtype}{unsigned}\& loc\_p,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00505}00505       \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}* \textcolor{keyword}{const}\& external\_mesh\_pt,}
 \DoxyCodeLine{\Hypertarget{multi__domain_8h_source_l00506}00506       \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}* problem\_pt);}

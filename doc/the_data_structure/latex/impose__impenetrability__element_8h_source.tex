@@ -65,7 +65,7 @@
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00061}00061       \mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement_a6a8cf1048dbcc32288ea8eca1e6c380d}{Id}} = id;}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00062}00062 }
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00063}00063       \textcolor{comment}{// Build the face element}}
-\DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00064}00064       element\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a025ab56ef9c6eea66fb34416fdf19152}{build\_face\_element}}(\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\_index}}, \textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00064}00064       element\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_aaf7bead5b462cfd5401d97b3dbdc7af7}{build\_face\_element}}(\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\_index}}, \textcolor{keyword}{this});}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00065}00065 }
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00066}00066       \textcolor{comment}{// we need 1 additional values for each FaceElement node}}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00067}00067       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<unsigned>}} n\_additional\_values(\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}(), 1);}
@@ -87,11 +87,11 @@
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00083}00083 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00084}00084 \textcolor{comment}{    /// Fill in contribution from Jacobian}}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00085}\mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement_a9a53b713347bdb2b9c04692ea708eb01}{00085}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement_a9a53b713347bdb2b9c04692ea708eb01}{fill\_in\_contribution\_to\_jacobian}}(\mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00086}00086                                           \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})}
+\DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00086}00086                                           \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian)}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00087}00087     \{}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00088}00088       \textcolor{comment}{// Call the generic routine with the flag set to 1}}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00089}00089       \mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement_a943dc887f5a792524e418b23dea934c3}{fill\_in\_generic\_contribution\_to\_residuals\_parall\_lagr\_multiplier}}(}
-\DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00090}00090         residuals, \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, 1);}
+\DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00090}00090         residuals, jacobian, 1);}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00091}00091     \}}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00092}00092 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00093}00093 \textcolor{comment}{    /// Overload the output function}}
@@ -123,7 +123,7 @@
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00119}00119 \textcolor{comment}{    /// Jacobian}}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00120}\mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement_a943dc887f5a792524e418b23dea934c3}{00120}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement_a943dc887f5a792524e418b23dea934c3}{fill\_in\_generic\_contribution\_to\_residuals\_parall\_lagr\_multiplier}}(}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00121}00121       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00122}00122       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}},}
+\DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00122}00122       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian,}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00123}00123       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& flag)}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00124}00124     \{}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00125}00125       \textcolor{comment}{// Find out how many nodes there are}}
@@ -136,7 +136,7 @@
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00132}00132       \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} psi(n\_node);}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00133}00133 }
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00134}00134       \textcolor{comment}{// Set the value of n\_intpt}}
-\DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00135}00135       \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00135}00135       \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00136}00136 }
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00137}00137       \textcolor{comment}{// to store local equation number}}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00138}00138       \textcolor{keywordtype}{int} local\_eqn = 0;}
@@ -157,16 +157,16 @@
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00153}00153       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ipt = 0; ipt < n\_intpt; ipt++)}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00154}00154       \{}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00155}00155         \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00156}00156         \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00156}00156         \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00157}00157 }
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00158}00158         \textcolor{comment}{// Jacobian of mapping}}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00159}00159         \textcolor{keywordtype}{double} J = \mbox{\hyperlink{classoomph_1_1FaceElement_aa6380a08afc18bd4f35e337a1131a9d8}{J\_eulerian\_at\_knot}}(ipt);}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00160}00160 }
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00161}00161         \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00162}00162         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00162}00162         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00163}00163 }
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00164}00164         \textcolor{comment}{// Calculate the shape functions}}
-\DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00165}00165         \mbox{\hyperlink{classoomph_1_1FiniteElement_a2de680722518136b5c6bf2aacc267a31}{shape\_at\_knot}}(ipt, psi);}
+\DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00165}00165         \mbox{\hyperlink{classoomph_1_1FiniteElement_aeccc0f774e3fab8c536e2d41004a1665}{shape\_at\_knot}}(ipt, psi);}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00166}00166 }
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00167}00167         \textcolor{comment}{// compute  the velocity and the Lagrange multiplier}}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00168}00168         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} interpolated\_u(dim\_el + 1, 0.0);}
@@ -186,7 +186,7 @@
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00182}00182             \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1BoundaryNodeBase}{BoundaryNodeBase}}*\textcolor{keyword}{>}(\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j));}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00183}00183 }
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00184}00184           \textcolor{comment}{// get the node}}
-\DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00185}00185           Node* nod\_pt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j);}
+\DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00185}00185           \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j);}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00186}00186 }
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00187}00187           \textcolor{comment}{// Get the index of the first nodal value associated with}}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00188}00188           \textcolor{comment}{// this FaceElement}}
@@ -194,7 +194,7 @@
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00190}00190             bnod\_pt-\/>\mbox{\hyperlink{classoomph_1_1BoundaryNodeBase_a67c470bd15750e91775101b5bce65a58}{index\_of\_first\_value\_assigned\_by\_face\_element}}(\mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement_a6a8cf1048dbcc32288ea8eca1e6c380d}{Id}});}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00191}00191 }
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00192}00192           \textcolor{comment}{// Assemble the Lagrange multiplier}}
-\DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00193}00193           lambda += nod\_pt-\/>value(first\_index) * psi(j);}
+\DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00193}00193           lambda += nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_afcc5cdba40bca251826ae5bee5ca15b4}{value}}(first\_index) * psi(j);}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00194}00194         \}}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00195}00195 }
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00196}00196         \textcolor{comment}{// compute the normal vector}}
@@ -224,7 +224,7 @@
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00220}00220             \{}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00221}00221               \textcolor{comment}{// Assemble residual for lagrange multiplier}}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00222}00222               residuals[local\_eqn] +=}
-\DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00223}00223                 interpolated\_u[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * norm\_vec[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * psi(j) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00223}00223                 interpolated\_u[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * norm\_vec[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * psi(j) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00224}00224 }
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00225}00225               \textcolor{comment}{// Assemble Jacobian for Lagrange multiplier:}}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00226}00226               \textcolor{keywordflow}{if} (flag == 1)}
@@ -237,8 +237,8 @@
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00233}00233                   local\_unknown = \mbox{\hyperlink{classoomph_1_1FiniteElement_a5da80bbed97543e586f698251d67941d}{nodal\_local\_eqn}}(jj, u\_index[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]);}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00234}00234                   \textcolor{keywordflow}{if} (local\_unknown >= 0)}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00235}00235                   \{}
-\DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00236}00236                     \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn, local\_unknown) +=}
-\DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00237}00237                       norm\_vec[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * psi(jj) * psi(j) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00236}00236                     jacobian(local\_eqn, local\_unknown) +=}
+\DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00237}00237                       norm\_vec[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * psi(jj) * psi(j) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00238}00238                   \}}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00239}00239                 \}}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00240}00240               \}}
@@ -256,7 +256,7 @@
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00252}00252             \{}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00253}00253               \textcolor{comment}{// Add lagrange multiplier contribution to the bulk equation}}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00254}00254               \textcolor{comment}{// Add to residual}}
-\DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00255}00255               residuals[local\_eqn] += norm\_vec[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * psi(j) * lambda * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00255}00255               residuals[local\_eqn] += norm\_vec[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * psi(j) * lambda * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00256}00256 }
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00257}00257               \textcolor{comment}{// Do Jacobian too?}}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00258}00258               \textcolor{keywordflow}{if} (flag == 1)}
@@ -276,8 +276,8 @@
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00272}00272                       \mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement_a6a8cf1048dbcc32288ea8eca1e6c380d}{Id}}));}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00273}00273                   \textcolor{keywordflow}{if} (local\_unknown >= 0)}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00274}00274                   \{}
-\DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00275}00275                     \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn, local\_unknown) +=}
-\DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00276}00276                       norm\_vec[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * psi(jj) * psi(j) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00275}00275                     jacobian(local\_eqn, local\_unknown) +=}
+\DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00276}00276                       norm\_vec[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * psi(jj) * psi(j) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00277}00277                   \}}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00278}00278                 \}}
 \DoxyCodeLine{\Hypertarget{impose__impenetrability__element_8h_source_l00279}00279               \}}

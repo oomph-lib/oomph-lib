@@ -327,7 +327,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l00323}00323 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a4d445c4a1204da569f40ec1bdace9ef3}{solve}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& rhs, \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& soln);}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l00324}00324 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l00325}00325 \textcolor{comment}{    /// Find the residual, i.e. r=b-\/Ax the residual}}
-\DoxyCodeLine{\Hypertarget{matrices_8h_source_l00326}\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a971bdc2d9297fc582af8467178f4e00e}{00326}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a971bdc2d9297fc582af8467178f4e00e}{residual}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{matrices_8h_source_l00326}\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a971bdc2d9297fc582af8467178f4e00e}{00326}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a971bdc2d9297fc582af8467178f4e00e}{residual}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& x,}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l00327}00327                           \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& b,}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l00328}00328                           \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& residual\_)}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l00329}00329     \{}
@@ -349,18 +349,18 @@
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l00345}00345 \textcolor{comment}{    /// Find the maximum residual r=b-\/Ax -\/-\/ generic version, can be}}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l00346}00346 \textcolor{comment}{    /// overloaded for specific derived classes where the}}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l00347}00347 \textcolor{comment}{    /// max. can be determined "{}on the fly"{}}}
-\DoxyCodeLine{\Hypertarget{matrices_8h_source_l00348}\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a69a001b704e1d67277170ff7c0e4f6af}{00348}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a69a001b704e1d67277170ff7c0e4f6af}{max\_residual}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& rhs)}
+\DoxyCodeLine{\Hypertarget{matrices_8h_source_l00348}\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a69a001b704e1d67277170ff7c0e4f6af}{00348}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a69a001b704e1d67277170ff7c0e4f6af}{max\_residual}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& x, \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& rhs)}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l00349}00349     \{}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l00350}00350       \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} res;}
-\DoxyCodeLine{\Hypertarget{matrices_8h_source_l00351}00351       \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a971bdc2d9297fc582af8467178f4e00e}{residual}}(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, rhs, res);}
+\DoxyCodeLine{\Hypertarget{matrices_8h_source_l00351}00351       \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a971bdc2d9297fc582af8467178f4e00e}{residual}}(x, rhs, res);}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l00352}00352       \textcolor{keywordflow}{return} res.\mbox{\hyperlink{classoomph_1_1DoubleVector_a4c176b562f503701d65882a930d5b8f5}{max}}();}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l00353}00353     \}}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l00354}00354 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l00355}00355 \textcolor{comment}{    /// Multiply the matrix by the vector x: soln=Ax.}}
-\DoxyCodeLine{\Hypertarget{matrices_8h_source_l00356}\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a78204eab557e0dc99618e41a28a5c092}{00356}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a78204eab557e0dc99618e41a28a5c092}{multiply}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& soln) \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{\Hypertarget{matrices_8h_source_l00356}\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a78204eab557e0dc99618e41a28a5c092}{00356}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a78204eab557e0dc99618e41a28a5c092}{multiply}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& x, \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& soln) \textcolor{keyword}{const} = 0;}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l00357}00357 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l00358}00358 \textcolor{comment}{    /// Multiply the  transposed matrix by the vector x: soln=A\string^T x}}
-\DoxyCodeLine{\Hypertarget{matrices_8h_source_l00359}\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a843d44405b70da1d96b43218a21e6ffc}{00359}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a843d44405b70da1d96b43218a21e6ffc}{multiply\_transpose}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{matrices_8h_source_l00359}\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a843d44405b70da1d96b43218a21e6ffc}{00359}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a843d44405b70da1d96b43218a21e6ffc}{multiply\_transpose}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& x,}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l00360}00360                                     \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& soln) \textcolor{keyword}{const} = 0;}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l00361}00361 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l00362}00362 \textcolor{comment}{    /// For every row, find the maximum absolute value of the}}
@@ -1110,10 +1110,10 @@
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l01106}01106 \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_af2c0f286f77ca44453f0da684b8f9dc7}{lubksub}}(\mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& rhs);}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l01107}01107 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l01108}01108 \textcolor{comment}{    /// Multiply the matrix by the vector x: soln=Ax}}
-\DoxyCodeLine{\Hypertarget{matrices_8h_source_l01109}01109 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a54b75960df52e3aebd21aaab20e9869d}{multiply}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& soln) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{matrices_8h_source_l01109}01109 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a54b75960df52e3aebd21aaab20e9869d}{multiply}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& x, \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& soln) \textcolor{keyword}{const};}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l01110}01110 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l01111}01111 \textcolor{comment}{    /// Multiply the  transposed matrix by the vector x: soln=A\string^T x}}
-\DoxyCodeLine{\Hypertarget{matrices_8h_source_l01112}01112 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a42fb274c98ccf4c2a542ca15343fcc0e}{multiply\_transpose}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& soln) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{matrices_8h_source_l01112}01112 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a42fb274c98ccf4c2a542ca15343fcc0e}{multiply\_transpose}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& x, \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& soln) \textcolor{keyword}{const};}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l01113}01113 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l01114}01114 \textcolor{comment}{    /// Function to multiply this matrix by the CRDoubleMatrix matrix\_in.}}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l01115}01115 \textcolor{comment}{    /// In a serial matrix, there are 4 methods available:}}
@@ -1343,10 +1343,10 @@
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l01339}01339                                \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& eigen\_vect) \textcolor{keyword}{const};}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l01340}01340 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l01341}01341 \textcolor{comment}{    /// Multiply the matrix by the vector x: soln=Ax}}
-\DoxyCodeLine{\Hypertarget{matrices_8h_source_l01342}01342 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix_ab575dfefa0bdd8f495453baa5575a4a0}{multiply}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& soln) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{matrices_8h_source_l01342}01342 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix_ab575dfefa0bdd8f495453baa5575a4a0}{multiply}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& x, \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& soln) \textcolor{keyword}{const};}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l01343}01343 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l01344}01344 \textcolor{comment}{    /// Multiply the  transposed matrix by the vector x: soln=A\string^T x}}
-\DoxyCodeLine{\Hypertarget{matrices_8h_source_l01345}01345 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix_a7cc35997d87b4ee7b77fcaaf85eeeaec}{multiply\_transpose}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& soln) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{matrices_8h_source_l01345}01345 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix_a7cc35997d87b4ee7b77fcaaf85eeeaec}{multiply\_transpose}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& x, \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& soln) \textcolor{keyword}{const};}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l01346}01346 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l01347}01347 \textcolor{comment}{    /// For every row, find the maximum absolute value of the}}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l01348}01348 \textcolor{comment}{    /// entries in this row. Set all values that are less than alpha times}}
@@ -2844,10 +2844,10 @@
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l02840}02840 \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_a59fbc30e6a856794cd2678856c8aea6d}{lubksub}}(\mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& rhs);}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l02841}02841 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l02842}02842 \textcolor{comment}{    /// Multiply the matrix by the vector x: soln=Ax}}
-\DoxyCodeLine{\Hypertarget{matrices_8h_source_l02843}02843 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_add24c25e344b84fb5b732e294af5e8b2}{multiply}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& soln) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{matrices_8h_source_l02843}02843 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_add24c25e344b84fb5b732e294af5e8b2}{multiply}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& x, \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& soln) \textcolor{keyword}{const};}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l02844}02844 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l02845}02845 \textcolor{comment}{    /// Multiply the  transposed matrix by the vector x: soln=A\string^T x}}
-\DoxyCodeLine{\Hypertarget{matrices_8h_source_l02846}02846 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_a582352912b0a7e097f9ac31c5054beed}{multiply\_transpose}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& soln) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{matrices_8h_source_l02846}02846 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_a582352912b0a7e097f9ac31c5054beed}{multiply\_transpose}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& x, \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& soln) \textcolor{keyword}{const};}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l02847}02847 }
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l02848}02848 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l02849}02849 \textcolor{comment}{    /// Function to multiply this matrix by the CCDoubleMatrix matrix\_in}}
@@ -3592,12 +3592,12 @@
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l03588}03588 \textcolor{comment}{    /// the infinity norm.}}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l03589}03589 \textcolor{comment}{}    \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1CRDoubleMatrixHelpers_ab17222c9461096e3d5b8cf6250524644}{inf\_norm}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<CRDoubleMatrix*>}}\& matrix\_pt);}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l03590}03590 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{matrices_8h_source_l03591}03591 \textcolor{comment}{    /// Calculates the largest Gershgorin disc whilst preserving the}}
-\DoxyCodeLine{\Hypertarget{matrices_8h_source_l03592}03592 \textcolor{comment}{    /// sign. Let A be an n by n matrix, with entries aij. For \(\backslash\)f\$ i \(\backslash\)in \(\backslash\)\{}}
-\DoxyCodeLine{\Hypertarget{matrices_8h_source_l03593}\mbox{\hyperlink{namespaceoomph_a574d5c40e6181073e528848c30e15f63}{03593}} \textcolor{comment}{    /// 1,...,n \(\backslash\)\} \(\backslash\)f\$ let \(\backslash\)f\$ R\_i = \(\backslash\)sum\_\{i\(\backslash\)neq j\}|a\_\{ij\}| \(\backslash\)f\$ be the sum of}}
-\DoxyCodeLine{\Hypertarget{matrices_8h_source_l03594}03594 \textcolor{comment}{    /// the absolute values of the non-\/diagonal entries in the i-\/th row. Let \(\backslash\)f\$}}
-\DoxyCodeLine{\Hypertarget{matrices_8h_source_l03595}03595 \textcolor{comment}{    /// D(a\_\{ii\},R\_i) \(\backslash\)f\$ be the closed disc centered at \(\backslash\)f\$ a\_\{ii\} \(\backslash\)f\$ with}}
-\DoxyCodeLine{\Hypertarget{matrices_8h_source_l03596}03596 \textcolor{comment}{    /// radius \(\backslash\)f\$ R\_i \(\backslash\)f\$, such a disc is called a Gershgorin disc.}}
+\DoxyCodeLine{\Hypertarget{matrices_8h_source_l03591}03591 \textcolor{comment}{    /// Calculates the largest Gershgorin disc whilst preserving the sign. Let}}
+\DoxyCodeLine{\Hypertarget{matrices_8h_source_l03592}03592 \textcolor{comment}{    /// A be an n by n matrix, with entries aij. For \(\backslash\)f\$ i \(\backslash\)in \(\backslash\)\{ 1,...,n \(\backslash\)\} \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{matrices_8h_source_l03593}03593 \textcolor{comment}{    /// let \(\backslash\)f\$ R\_i = \(\backslash\)sum\_\{i\(\backslash\)neq j\} |a\_\{ij\}| \(\backslash\)f\$ be the sum of the absolute}}
+\DoxyCodeLine{\Hypertarget{matrices_8h_source_l03594}03594 \textcolor{comment}{    /// values of the non-\/diagonal entries in the i-\/th row. Let \(\backslash\)f\$ D(a\_\{ii\},R\_i) \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{matrices_8h_source_l03595}03595 \textcolor{comment}{    /// be the closed disc centered at \(\backslash\)f\$ a\_\{ii\} \(\backslash\)f\$ with radius \(\backslash\)f\$ R\_i \(\backslash\)f\$,}}
+\DoxyCodeLine{\Hypertarget{matrices_8h_source_l03596}03596 \textcolor{comment}{    /// such a disc is called a Gershgorin disc.}}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l03597}03597 \textcolor{comment}{    ///}}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l03598}03598 \textcolor{comment}{    /// \(\backslash\)n}}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l03599}03599 \textcolor{comment}{    ///}}
@@ -3609,7 +3609,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l03605}03605 \textcolor{comment}{    /// The DenseMatrix of CRDoubleMatrices are treated as if they are one}}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l03606}03606 \textcolor{comment}{    /// large matrix. Therefore the dimensions of the sub matrices has to}}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l03607}03607 \textcolor{comment}{    /// "{}make sense"{}, there is a paranoid check for this.}}
-\DoxyCodeLine{\Hypertarget{matrices_8h_source_l03608}03608 \textcolor{comment}{}    \textcolor{keywordtype}{double} gershgorin\_eigenvalue\_estimate(}
+\DoxyCodeLine{\Hypertarget{matrices_8h_source_l03608}03608 \textcolor{comment}{}    \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1CRDoubleMatrixHelpers_a02b5962dbe2bbfb93f54b668100afffc}{gershgorin\_eigenvalue\_estimate}}(}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l03609}03609       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<CRDoubleMatrix*>}}\& matrix\_pt);}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l03610}03610 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l03611}03611 \textcolor{comment}{    /// Concatenate CRDoubleMatrix matrices.}}
@@ -3638,7 +3638,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l03634}03634 \textcolor{comment}{    ///}}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l03635}03635 \textcolor{comment}{    /// NOTE: ALL the matrices pointed to by matrix\_pt has to be built. This is}}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l03636}03636 \textcolor{comment}{    /// not the case with concatenate\_without\_communication(...)}}
-\DoxyCodeLine{\Hypertarget{matrices_8h_source_l03637}\mbox{\hyperlink{namespaceoomph_a2d240459b98565dd04314903d707de48}{03637}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_a2d240459b98565dd04314903d707de48}{concatenate}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<CRDoubleMatrix*>}}\& matrix\_pt,}
+\DoxyCodeLine{\Hypertarget{matrices_8h_source_l03637}03637 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1CRDoubleMatrixHelpers_ab7e3ac344aa644292a143a3917a03e65}{concatenate}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<CRDoubleMatrix*>}}\& matrix\_pt,}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l03638}03638                      \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}}\& result\_matrix);}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l03639}03639 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l03640}03640 \textcolor{comment}{    /// Concatenate CRDoubleMatrix matrices.}}
@@ -3689,7 +3689,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l03685}03685 \textcolor{comment}{    /// Because a non-\/uniform distribution requires communication.}}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l03686}03686 \textcolor{comment}{    /// All block preconditioner distributions are concatenations of the}}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l03687}03687 \textcolor{comment}{    /// distributions of the individual blocks.}}
-\DoxyCodeLine{\Hypertarget{matrices_8h_source_l03688}\mbox{\hyperlink{namespaceoomph_a60abbd397064d971f529752aa9644fc7}{03688}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_a60abbd397064d971f529752aa9644fc7}{concatenate\_without\_communication}}(}
+\DoxyCodeLine{\Hypertarget{matrices_8h_source_l03688}03688 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1CRDoubleMatrixHelpers_a996568831ca0db90f080560dd400b3d6}{concatenate\_without\_communication}}(}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l03689}03689       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<LinearAlgebraDistribution*>}}\& row\_distribution\_pt,}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l03690}03690       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<LinearAlgebraDistribution*>}}\& col\_distribution\_pt,}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l03691}03691       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<CRDoubleMatrix*>}}\& matrix\_pt,}
@@ -3700,7 +3700,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l03696}03696 \textcolor{comment}{    /// passing block\_distribution\_pt as both the row\_distribution\_pt and}}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l03697}03697 \textcolor{comment}{    /// col\_distribution\_pt. This should only be called for block square}}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l03698}03698 \textcolor{comment}{    /// matrices.}}
-\DoxyCodeLine{\Hypertarget{matrices_8h_source_l03699}\mbox{\hyperlink{namespaceoomph_a92e8e6ce5ba691e0bd31542d41a385f8}{03699}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_a60abbd397064d971f529752aa9644fc7}{concatenate\_without\_communication}}(}
+\DoxyCodeLine{\Hypertarget{matrices_8h_source_l03699}03699 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1CRDoubleMatrixHelpers_a996568831ca0db90f080560dd400b3d6}{concatenate\_without\_communication}}(}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l03700}03700       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<LinearAlgebraDistribution*>}}\& block\_distribution\_pt,}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l03701}03701       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<CRDoubleMatrix*>}}\& matrix\_pt,}
 \DoxyCodeLine{\Hypertarget{matrices_8h_source_l03702}03702       \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}}\& result\_matrix);}

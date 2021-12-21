@@ -40,7 +40,7 @@
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00036}00036     \textcolor{comment}{// wipe the preconditioner}}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00037}00037     \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_afad4b204e6b7b2a63e4c4e0fe2f9f2c0}{Pseudo\_elastic\_preconditioner\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditioner_adcc9487ec16eea12912b2f3a023b4129}{clean\_up\_memory}}();}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00038}00038     \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_a5314b4734298c3de8f394a45792ba1c9}{Navier\_stokes\_preconditioner\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Preconditioner_a46c31c416829bedcd9db238431262027}{clean\_up\_memory}}();}
-\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00039}00039     \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_a438b2a5932c1fde633a73107043f0b09}{Navier\_stokes\_schur\_complement\_preconditioner\_pt}}-\/>clean\_up\_memory();}
+\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00039}00039     \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_a438b2a5932c1fde633a73107043f0b09}{Navier\_stokes\_schur\_complement\_preconditioner\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a5cac2493de85690e3954949eb2a27d2c}{clean\_up\_memory}}();}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00040}00040     \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_a2d96e724939038637ff4911372ee69b4}{Solid\_preconditioner\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Preconditioner_a46c31c416829bedcd9db238431262027}{clean\_up\_memory}}();}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00041}00041 }
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00042}00042     \textcolor{comment}{// clean the subsidiary matvec operators}}
@@ -148,7 +148,7 @@
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00144}00144     \textcolor{comment}{// setup the navier stokes preconditioner}}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00145}00145     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_aa9eab77e9d4dfbdecfac9cccceb68c7b}{Use\_navier\_stokes\_schur\_complement\_preconditioner}})}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00146}00146     \{}
-\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00147}00147       \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_a438b2a5932c1fde633a73107043f0b09}{Navier\_stokes\_schur\_complement\_preconditioner\_pt}}-\/>set\_navier\_stokes\_mesh(}
+\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00147}00147       \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_a438b2a5932c1fde633a73107043f0b09}{Navier\_stokes\_schur\_complement\_preconditioner\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_abe80b5bb32d24f49f427d04118de284a}{set\_navier\_stokes\_mesh}}(}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00148}00148         \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_a9d8025b022a2ca180210da2f7979dfe2}{Fluid\_and\_pseudo\_elastic\_mesh\_pt}});}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00149}00149 }
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00150}00150       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<unsigned>}} ns\_dof\_list(nfluid\_dof, 0);}
@@ -158,7 +158,7 @@
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00154}00154       \}}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00155}00155 }
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00156}00156       \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_a438b2a5932c1fde633a73107043f0b09}{Navier\_stokes\_schur\_complement\_preconditioner\_pt}}}
-\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00157}00157         -\/>turn\_into\_subsidiary\_block\_preconditioner(\textcolor{keyword}{this}, ns\_dof\_list);}
+\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00157}00157         -\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_ab8e2478caa8370dd12462f17e1cc8082}{turn\_into\_subsidiary\_block\_preconditioner}}(\textcolor{keyword}{this}, ns\_dof\_list);}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00158}00158 }
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00159}00159       \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_a438b2a5932c1fde633a73107043f0b09}{Navier\_stokes\_schur\_complement\_preconditioner\_pt}}-\/>Preconditioner::setup(}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00160}00160         \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_aec1a6eda2d78d1e3b41ced805534d72d}{matrix\_pt}}());}
@@ -288,15 +288,15 @@
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00284}00284     \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_afad4b204e6b7b2a63e4c4e0fe2f9f2c0}{Pseudo\_elastic\_preconditioner\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditioner_a9398dd60b00bc611a5b03e859256b410}{elastic\_preconditioner\_solve}}(r, z);}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00285}00285 }
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00286}00286     \textcolor{comment}{// apply the fluid on pseudo solid matrix vector product operator}}
-\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00287}00287     \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}};}
-\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00288}00288     this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a7efc9f2f0209764902e4e45fcb2556d1}{get\_block\_vector}}(2, z, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00287}00287     \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} x;}
+\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00288}00288     this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a7efc9f2f0209764902e4e45fcb2556d1}{get\_block\_vector}}(2, z, x);}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00289}00289     \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} y;}
-\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00290}00290     \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_a77c8b262ee8535947e52f36462544eec}{Fluid\_pseudo\_elastic\_matvec\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_ac29ba50f1a77bf0e316c3417bcff71ee}{multiply}}(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, y);}
+\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00290}00290     \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_a77c8b262ee8535947e52f36462544eec}{Fluid\_pseudo\_elastic\_matvec\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_ac29ba50f1a77bf0e316c3417bcff71ee}{multiply}}(x, y);}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00291}00291     \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} w;}
-\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00292}00292     \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_a05eb73f45602a85e5dfb0a9cd10a488e}{Solid\_pseudo\_elastic\_matvec\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_ac29ba50f1a77bf0e316c3417bcff71ee}{multiply}}(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, w);}
-\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00293}00293     \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.clear();}
-\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00294}00294     this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a7efc9f2f0209764902e4e45fcb2556d1}{get\_block\_vector}}(0, r, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
-\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00295}00295     \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}} -\/= y;}
+\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00292}00292     \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_a05eb73f45602a85e5dfb0a9cd10a488e}{Solid\_pseudo\_elastic\_matvec\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_ac29ba50f1a77bf0e316c3417bcff71ee}{multiply}}(x, w);}
+\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00293}00293     x.\mbox{\hyperlink{classoomph_1_1DoubleVector_af1677445056759263b1b076966e7bfae}{clear}}();}
+\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00294}00294     this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a7efc9f2f0209764902e4e45fcb2556d1}{get\_block\_vector}}(0, r, x);}
+\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00295}00295     x -\/= y;}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00296}00296     y.\mbox{\hyperlink{classoomph_1_1DoubleVector_af1677445056759263b1b076966e7bfae}{clear}}();}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00297}00297 }
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00298}00298     \textcolor{comment}{// storage for a copy of z}}
@@ -307,29 +307,29 @@
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00303}00303     \{}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00304}00304       z\_copy.\mbox{\hyperlink{classoomph_1_1DoubleVector_a7bcc94c157d6853a0f0502e8a76ed380}{build}}(z);}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00305}00305       this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a1dd4d3cd6b64fa64e1ff6730b0deecc7}{return\_block\_vector}}(0, x, z\_copy);}
-\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00306}00306       \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.clear();}
-\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00307}00307       \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_a438b2a5932c1fde633a73107043f0b09}{Navier\_stokes\_schur\_complement\_preconditioner\_pt}}-\/>preconditioner\_solve(}
+\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00306}00306       x.\mbox{\hyperlink{classoomph_1_1DoubleVector_af1677445056759263b1b076966e7bfae}{clear}}();}
+\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00307}00307       \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_a438b2a5932c1fde633a73107043f0b09}{Navier\_stokes\_schur\_complement\_preconditioner\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_adbc87003dd8e8c924ae802651b18f2ed}{preconditioner\_solve}}(}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00308}00308         z\_copy, z);}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00309}00309       z\_copy.\mbox{\hyperlink{classoomph_1_1DoubleVector_af1677445056759263b1b076966e7bfae}{clear}}();}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00310}00310     \}}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00311}00311     \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00312}00312     \{}
-\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00313}00313       \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_a5314b4734298c3de8f394a45792ba1c9}{Navier\_stokes\_preconditioner\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34884bb64ec8}{preconditioner\_solve}}(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, y);}
-\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00314}00314       \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.clear();}
+\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00313}00313       \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_a5314b4734298c3de8f394a45792ba1c9}{Navier\_stokes\_preconditioner\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34884bb64ec8}{preconditioner\_solve}}(x, y);}
+\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00314}00314       x.\mbox{\hyperlink{classoomph_1_1DoubleVector_af1677445056759263b1b076966e7bfae}{clear}}();}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00315}00315       this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a1dd4d3cd6b64fa64e1ff6730b0deecc7}{return\_block\_vector}}(0, y, z);}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00316}00316       y.\mbox{\hyperlink{classoomph_1_1DoubleVector_af1677445056759263b1b076966e7bfae}{clear}}();}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00317}00317     \}}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00318}00318 }
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00319}00319     \textcolor{comment}{// apply the solid onto fluid matrix vector product operator}}
-\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00320}00320     this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a7efc9f2f0209764902e4e45fcb2556d1}{get\_block\_vector}}(0, z, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
-\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00321}00321     \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_a8699afc5b64ec0c3db5c3cea5fd60c18}{Solid\_fluid\_matvec\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_ac29ba50f1a77bf0e316c3417bcff71ee}{multiply}}(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, y);}
-\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00322}00322     \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.clear();}
-\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00323}00323     this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a7efc9f2f0209764902e4e45fcb2556d1}{get\_block\_vector}}(1, r, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
-\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00324}00324     \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}} -\/= y;}
+\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00320}00320     this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a7efc9f2f0209764902e4e45fcb2556d1}{get\_block\_vector}}(0, z, x);}
+\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00321}00321     \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_a8699afc5b64ec0c3db5c3cea5fd60c18}{Solid\_fluid\_matvec\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_ac29ba50f1a77bf0e316c3417bcff71ee}{multiply}}(x, y);}
+\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00322}00322     x.\mbox{\hyperlink{classoomph_1_1DoubleVector_af1677445056759263b1b076966e7bfae}{clear}}();}
+\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00323}00323     this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a7efc9f2f0209764902e4e45fcb2556d1}{get\_block\_vector}}(1, r, x);}
+\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00324}00324     x -\/= y;}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00325}00325     y.\mbox{\hyperlink{classoomph_1_1DoubleVector_af1677445056759263b1b076966e7bfae}{clear}}();}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00326}00326 }
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00327}00327     \textcolor{comment}{// apply the result of the solid onto pseudo solid matrix vector product}}
-\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00328}00328     \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}} -\/= w;}
+\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00328}00328     x -\/= w;}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00329}00329     w.\mbox{\hyperlink{classoomph_1_1DoubleVector_af1677445056759263b1b076966e7bfae}{clear}}();}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00330}00330 }
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00331}00331     \textcolor{comment}{// apply the solid preconditioner}}
@@ -337,7 +337,7 @@
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00333}00333     \{}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00334}00334       \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} z\_copy(z);}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00335}00335       this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a1dd4d3cd6b64fa64e1ff6730b0deecc7}{return\_block\_vector}}(1, x, z\_copy);}
-\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00336}00336       \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.clear();}
+\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00336}00336       x.\mbox{\hyperlink{classoomph_1_1DoubleVector_af1677445056759263b1b076966e7bfae}{clear}}();}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00337}00337       (\textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1GeneralPurposeBlockPreconditioner}{GeneralPurposeBlockPreconditioner<CRDoubleMatrix>}}*\textcolor{keyword}{>}(}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00338}00338          \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_a2d96e724939038637ff4911372ee69b4}{Solid\_preconditioner\_pt}}))}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00339}00339         -\/>preconditioner\_solve(z\_copy, z);}
@@ -345,17 +345,17 @@
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00341}00341     \}}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00342}00342     \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00343}00343     \{}
-\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00344}00344       \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_a2d96e724939038637ff4911372ee69b4}{Solid\_preconditioner\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34884bb64ec8}{preconditioner\_solve}}(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, y);}
-\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00345}00345       \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.clear();}
+\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00344}00344       \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_a2d96e724939038637ff4911372ee69b4}{Solid\_preconditioner\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34884bb64ec8}{preconditioner\_solve}}(x, y);}
+\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00345}00345       x.\mbox{\hyperlink{classoomph_1_1DoubleVector_af1677445056759263b1b076966e7bfae}{clear}}();}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00346}00346       this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a1dd4d3cd6b64fa64e1ff6730b0deecc7}{return\_block\_vector}}(1, y, z);}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00347}00347     \}}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00348}00348 }
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00349}00349     \textcolor{comment}{// apply the lagrange multiplier solid matrix vector product operator}}
-\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00350}00350     \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_a1129dcb6e7e335aca44acdb4231adc38}{Lagrange\_solid\_matvec\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_ac29ba50f1a77bf0e316c3417bcff71ee}{multiply}}(y, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00350}00350     \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_a1129dcb6e7e335aca44acdb4231adc38}{Lagrange\_solid\_matvec\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_ac29ba50f1a77bf0e316c3417bcff71ee}{multiply}}(y, x);}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00351}00351     y.\mbox{\hyperlink{classoomph_1_1DoubleVector_af1677445056759263b1b076966e7bfae}{clear}}();}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00352}00352     this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a7efc9f2f0209764902e4e45fcb2556d1}{get\_block\_vector}}(3, r, y);}
-\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00353}00353     y -\/= \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}};}
-\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00354}00354     \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.clear();}
+\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00353}00353     y -\/= x;}
+\DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00354}00354     x.\mbox{\hyperlink{classoomph_1_1DoubleVector_af1677445056759263b1b076966e7bfae}{clear}}();}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00355}00355     z\_copy.\mbox{\hyperlink{classoomph_1_1DoubleVector_a7bcc94c157d6853a0f0502e8a76ed380}{build}}(z);}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00356}00356     this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a1dd4d3cd6b64fa64e1ff6730b0deecc7}{return\_block\_vector}}(3, y, z\_copy);}
 \DoxyCodeLine{\Hypertarget{pseudo__elastic__fsi__preconditioner_8cc_source_l00357}00357 }

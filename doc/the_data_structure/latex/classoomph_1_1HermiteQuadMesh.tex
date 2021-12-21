@@ -36,9 +36,9 @@ unsigned \& \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh_a433b92da06ab05477a82
 \item 
 void \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh_a745a06530e60580e95826bedcf2e3e01}{macro\+\_\+coordinate\+\_\+position}} (const unsigned \&node\+\_\+num\+\_\+x, const unsigned \&node\+\_\+num\+\_\+y, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&macro\+\_\+element\+\_\+position)
 \begin{DoxyCompactList}\small\item\em returns the macro element position of the node that is the x-\/th node along from the LHS and the y-\/th node up from the lower edge \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh_abaac1dedc4a2e578b73b0d849c9a68e8}{set\+\_\+position\+\_\+of\+\_\+node}} (const unsigned \&node\+\_\+num\+\_\+x, const unsigned \&node\+\_\+num\+\_\+y, Node $\ast$\mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\+\_\+pt}})
+void \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh_abaac1dedc4a2e578b73b0d849c9a68e8}{set\+\_\+position\+\_\+of\+\_\+node}} (const unsigned \&node\+\_\+num\+\_\+x, const unsigned \&node\+\_\+num\+\_\+y, \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$\mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em sets the generalised position of the node (i.\+e. -\/ x\+\_\+i, dx\+\_\+i/ds\+\_\+0, dx\+\_\+i/ds\+\_\+1 \& d2x\+\_\+i/ds\+\_\+0ds\+\_\+1 for i = 1,2). Takes the x,y coordinates of the node from which its position can be determined. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh_a735fd20f847ac98c5bd5db5196ff3ea4}{set\+\_\+position\+\_\+of\+\_\+boundary\+\_\+node}} (const unsigned \&node\+\_\+num\+\_\+x, const unsigned \&node\+\_\+num\+\_\+y, \mbox{\hyperlink{classoomph_1_1BoundaryNode}{Boundary\+Node}}$<$ Node $>$ $\ast$\mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\+\_\+pt}})
+void \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh_a735fd20f847ac98c5bd5db5196ff3ea4}{set\+\_\+position\+\_\+of\+\_\+boundary\+\_\+node}} (const unsigned \&node\+\_\+num\+\_\+x, const unsigned \&node\+\_\+num\+\_\+y, \mbox{\hyperlink{classoomph_1_1BoundaryNode}{Boundary\+Node}}$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $>$ $\ast$\mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em sets the generalised position of the node (i.\+e. -\/ x\+\_\+i, dx\+\_\+i/ds\+\_\+0, dx\+\_\+i/ds\+\_\+1 \& d2x\+\_\+i/ds\+\_\+0ds\+\_\+1 for i = 1,2). Takes the x,y coordinates of the node from which its position can be determined. Also sets coordinates on boundary vector for the node to be the generalised position of the node in macro element coordinates \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh_a17d8992ae7fa8b46b568d156306d3c89}{generalised\+\_\+macro\+\_\+element\+\_\+position\+\_\+of\+\_\+node}} (const unsigned \&node\+\_\+num\+\_\+x, const unsigned \&node\+\_\+num\+\_\+y, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&m\+\_\+gen)
 \begin{DoxyCompactList}\small\item\em computes the generalised position of the node at position (node\+\_\+num\+\_\+x, node\+\_\+num\+\_\+y) in the macro element coordinate scheme. index 0 of m\+\_\+gen \+: 0 -\/ m\+\_\+i 1 -\/ dm\+\_\+i/ds\+\_\+0 2 -\/ dm\+\_\+i/ds\+\_\+1 3 -\/ d2m\+\_\+i/ds\+\_\+0ds\+\_\+1 (where i is index 1 of m\+\_\+gen) \end{DoxyCompactList}\item 
@@ -227,7 +227,7 @@ References \mbox{\hyperlink{hermite__element__quad__mesh_8template_8h_source_l00
 \index{set\_position\_of\_boundary\_node@{set\_position\_of\_boundary\_node}!oomph::HermiteQuadMesh$<$ ELEMENT $>$@{oomph::HermiteQuadMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{set\_position\_of\_boundary\_node()}{set\_position\_of\_boundary\_node()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh}{oomph\+::\+Hermite\+Quad\+Mesh}}$<$ ELEMENT $>$\+::set\+\_\+position\+\_\+of\+\_\+boundary\+\_\+node (\begin{DoxyParamCaption}\item[{const unsigned \&}]{node\+\_\+num\+\_\+x,  }\item[{const unsigned \&}]{node\+\_\+num\+\_\+y,  }\item[{\mbox{\hyperlink{classoomph_1_1BoundaryNode}{Boundary\+Node}}$<$ Node $>$ $\ast$}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+void \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh}{oomph\+::\+Hermite\+Quad\+Mesh}}$<$ ELEMENT $>$\+::set\+\_\+position\+\_\+of\+\_\+boundary\+\_\+node (\begin{DoxyParamCaption}\item[{const unsigned \&}]{node\+\_\+num\+\_\+x,  }\item[{const unsigned \&}]{node\+\_\+num\+\_\+y,  }\item[{\mbox{\hyperlink{classoomph_1_1BoundaryNode}{Boundary\+Node}}$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $>$ $\ast$}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -239,14 +239,14 @@ Definition at line \mbox{\hyperlink{hermite__element__quad__mesh_8template_8cc_s
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l02533}{oomph\+::\+Boundary\+Node$<$ NODE\+\_\+\+TYPE $>$\+::is\+\_\+on\+\_\+boundary()}}, and \mbox{\hyperlink{nodes_8h_source_l02575}{oomph\+::\+Boundary\+Node$<$ NODE\+\_\+\+TYPE $>$\+::set\+\_\+coordinates\+\_\+on\+\_\+boundary()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l02532}{oomph\+::\+Boundary\+Node$<$ NODE\+\_\+\+TYPE $>$\+::is\+\_\+on\+\_\+boundary()}}, and \mbox{\hyperlink{nodes_8h_source_l02574}{oomph\+::\+Boundary\+Node$<$ NODE\+\_\+\+TYPE $>$\+::set\+\_\+coordinates\+\_\+on\+\_\+boundary()}}.
 
 \mbox{\Hypertarget{classoomph_1_1HermiteQuadMesh_abaac1dedc4a2e578b73b0d849c9a68e8}\label{classoomph_1_1HermiteQuadMesh_abaac1dedc4a2e578b73b0d849c9a68e8}} 
 \index{oomph::HermiteQuadMesh$<$ ELEMENT $>$@{oomph::HermiteQuadMesh$<$ ELEMENT $>$}!set\_position\_of\_node@{set\_position\_of\_node}}
 \index{set\_position\_of\_node@{set\_position\_of\_node}!oomph::HermiteQuadMesh$<$ ELEMENT $>$@{oomph::HermiteQuadMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{set\_position\_of\_node()}{set\_position\_of\_node()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh}{oomph\+::\+Hermite\+Quad\+Mesh}}$<$ ELEMENT $>$\+::set\+\_\+position\+\_\+of\+\_\+node (\begin{DoxyParamCaption}\item[{const unsigned \&}]{node\+\_\+num\+\_\+x,  }\item[{const unsigned \&}]{node\+\_\+num\+\_\+y,  }\item[{Node $\ast$}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+void \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh}{oomph\+::\+Hermite\+Quad\+Mesh}}$<$ ELEMENT $>$\+::set\+\_\+position\+\_\+of\+\_\+node (\begin{DoxyParamCaption}\item[{const unsigned \&}]{node\+\_\+num\+\_\+x,  }\item[{const unsigned \&}]{node\+\_\+num\+\_\+y,  }\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -258,7 +258,7 @@ Definition at line \mbox{\hyperlink{hermite__element__quad__mesh_8template_8cc_s
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{nodes_8h_source_l01126}{oomph\+::\+Node\+::x\+\_\+gen()}}.
 
 \mbox{\Hypertarget{classoomph_1_1HermiteQuadMesh_a6eefe872b5bf8a06174b536d9727ea44}\label{classoomph_1_1HermiteQuadMesh_a6eefe872b5bf8a06174b536d9727ea44}} 
 \index{oomph::HermiteQuadMesh$<$ ELEMENT $>$@{oomph::HermiteQuadMesh$<$ ELEMENT $>$}!setup\_boundary\_element\_info@{setup\_boundary\_element\_info}}
@@ -308,7 +308,7 @@ Definition at line \mbox{\hyperlink{hermite__element__quad__mesh_8template_8cc_s
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02616}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01212}{oomph\+::\+Leak\+Check\+Names\+::doc()}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02223}{oomph\+::\+Finite\+Element\+::nnode\+\_\+1d()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
+References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01212}{oomph\+::\+Leak\+Check\+Names\+::doc()}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{nodes_8h_source_l01365}{oomph\+::\+Node\+::get\+\_\+boundaries\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02218}{oomph\+::\+Finite\+Element\+::nnode\+\_\+1d()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
 
 
 

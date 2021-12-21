@@ -183,7 +183,7 @@
 \DoxyCodeLine{\Hypertarget{rectangle__with__hole__mesh_8template_8h_source_l00179}00179       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < np; n++)}
 \DoxyCodeLine{\Hypertarget{rectangle__with__hole__mesh_8template_8h_source_l00180}00180       \{}
 \DoxyCodeLine{\Hypertarget{rectangle__with__hole__mesh_8template_8h_source_l00181}00181         \textcolor{comment}{// Left hand side}}
-\DoxyCodeLine{\Hypertarget{rectangle__with__hole__mesh_8template_8h_source_l00182}00182         Node* nod\_pt = \mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n * np);}
+\DoxyCodeLine{\Hypertarget{rectangle__with__hole__mesh_8template_8h_source_l00182}00182         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = \mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n * np);}
 \DoxyCodeLine{\Hypertarget{rectangle__with__hole__mesh_8template_8h_source_l00183}00183         \mbox{\hyperlink{classoomph_1_1Mesh_aa864cbb7f3ff399eef871c63067894df}{convert\_to\_boundary\_node}}(nod\_pt);}
 \DoxyCodeLine{\Hypertarget{rectangle__with__hole__mesh_8template_8h_source_l00184}00184         \mbox{\hyperlink{classoomph_1_1Mesh_a007b102ac8e42328872ad658d7110bfc}{add\_boundary\_node}}(3, nod\_pt);}
 \DoxyCodeLine{\Hypertarget{rectangle__with__hole__mesh_8template_8h_source_l00185}00185 }
@@ -211,7 +211,7 @@
 \DoxyCodeLine{\Hypertarget{rectangle__with__hole__mesh_8template_8h_source_l00207}00207       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 1; n < np; n++)}
 \DoxyCodeLine{\Hypertarget{rectangle__with__hole__mesh_8template_8h_source_l00208}00208       \{}
 \DoxyCodeLine{\Hypertarget{rectangle__with__hole__mesh_8template_8h_source_l00209}00209         \textcolor{comment}{// Next part of hole}}
-\DoxyCodeLine{\Hypertarget{rectangle__with__hole__mesh_8template_8h_source_l00210}00210         Node* nod\_pt = \mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(2)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n * np);}
+\DoxyCodeLine{\Hypertarget{rectangle__with__hole__mesh_8template_8h_source_l00210}00210         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = \mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(2)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n * np);}
 \DoxyCodeLine{\Hypertarget{rectangle__with__hole__mesh_8template_8h_source_l00211}00211         \mbox{\hyperlink{classoomph_1_1Mesh_aa864cbb7f3ff399eef871c63067894df}{convert\_to\_boundary\_node}}(nod\_pt);}
 \DoxyCodeLine{\Hypertarget{rectangle__with__hole__mesh_8template_8h_source_l00212}00212         \mbox{\hyperlink{classoomph_1_1Mesh_a007b102ac8e42328872ad658d7110bfc}{add\_boundary\_node}}(4, nod\_pt);}
 \DoxyCodeLine{\Hypertarget{rectangle__with__hole__mesh_8template_8h_source_l00213}00213       \}}
@@ -219,7 +219,7 @@
 \DoxyCodeLine{\Hypertarget{rectangle__with__hole__mesh_8template_8h_source_l00215}00215       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 1; n < np; n++)}
 \DoxyCodeLine{\Hypertarget{rectangle__with__hole__mesh_8template_8h_source_l00216}00216       \{}
 \DoxyCodeLine{\Hypertarget{rectangle__with__hole__mesh_8template_8h_source_l00217}00217         \textcolor{comment}{// Next part of hole}}
-\DoxyCodeLine{\Hypertarget{rectangle__with__hole__mesh_8template_8h_source_l00218}00218         Node* nod\_pt = \mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(1)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(np -\/ n -\/ 1);}
+\DoxyCodeLine{\Hypertarget{rectangle__with__hole__mesh_8template_8h_source_l00218}00218         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = \mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(1)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(np -\/ n -\/ 1);}
 \DoxyCodeLine{\Hypertarget{rectangle__with__hole__mesh_8template_8h_source_l00219}00219         \mbox{\hyperlink{classoomph_1_1Mesh_aa864cbb7f3ff399eef871c63067894df}{convert\_to\_boundary\_node}}(nod\_pt);}
 \DoxyCodeLine{\Hypertarget{rectangle__with__hole__mesh_8template_8h_source_l00220}00220         \mbox{\hyperlink{classoomph_1_1Mesh_a007b102ac8e42328872ad658d7110bfc}{add\_boundary\_node}}(4, nod\_pt);}
 \DoxyCodeLine{\Hypertarget{rectangle__with__hole__mesh_8template_8h_source_l00221}00221       \}}
@@ -227,7 +227,7 @@
 \DoxyCodeLine{\Hypertarget{rectangle__with__hole__mesh_8template_8h_source_l00223}00223       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 1; n < np -\/ 1; n++)}
 \DoxyCodeLine{\Hypertarget{rectangle__with__hole__mesh_8template_8h_source_l00224}00224       \{}
 \DoxyCodeLine{\Hypertarget{rectangle__with__hole__mesh_8template_8h_source_l00225}00225         \textcolor{comment}{// Final part of hole}}
-\DoxyCodeLine{\Hypertarget{rectangle__with__hole__mesh_8template_8h_source_l00226}00226         Node* nod\_pt =}
+\DoxyCodeLine{\Hypertarget{rectangle__with__hole__mesh_8template_8h_source_l00226}00226         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt =}
 \DoxyCodeLine{\Hypertarget{rectangle__with__hole__mesh_8template_8h_source_l00227}00227           \mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(np * (np -\/ n -\/ 1) + np -\/ 1);}
 \DoxyCodeLine{\Hypertarget{rectangle__with__hole__mesh_8template_8h_source_l00228}00228         \mbox{\hyperlink{classoomph_1_1Mesh_aa864cbb7f3ff399eef871c63067894df}{convert\_to\_boundary\_node}}(nod\_pt);}
 \DoxyCodeLine{\Hypertarget{rectangle__with__hole__mesh_8template_8h_source_l00229}00229         \mbox{\hyperlink{classoomph_1_1Mesh_a007b102ac8e42328872ad658d7110bfc}{add\_boundary\_node}}(4, nod\_pt);}

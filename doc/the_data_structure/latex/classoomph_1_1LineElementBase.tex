@@ -20,9 +20,9 @@ Inheritance diagram for oomph\+::Line\+Element\+Base\+:\begin{figure}[H]
 \item 
 \mbox{\hyperlink{classoomph_1_1LineElementBase_a39c0e003c2b1569e7f33fdfbc47c79e4}{Line\+Element\+Base}} ()
 \begin{DoxyCompactList}\small\item\em Constructor. Empty. \end{DoxyCompactList}\item 
-virtual unsigned \mbox{\hyperlink{classoomph_1_1LineElementBase_ad80307523c850d58bca7b925df15e46d}{nvertex\+\_\+node}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual unsigned \mbox{\hyperlink{classoomph_1_1LineElementBase_ad80307523c850d58bca7b925df15e46d}{nvertex\+\_\+node}} () const =0
 \begin{DoxyCompactList}\small\item\em Number of vertex nodes in the element. \end{DoxyCompactList}\item 
-virtual Node $\ast$ \mbox{\hyperlink{classoomph_1_1LineElementBase_a7bcbd56f892a1bdb822ab44364dea7f8}{vertex\+\_\+node\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&j) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1LineElementBase_a7bcbd56f892a1bdb822ab44364dea7f8}{vertex\+\_\+node\+\_\+pt}} (const unsigned \&j) const =0
 \begin{DoxyCompactList}\small\item\em Pointer to the j-\/th vertex node in the element. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -74,7 +74,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1SpectralPeriodicOrbitElement_a3ec3
 \index{oomph::LineElementBase@{oomph::LineElementBase}!vertex\_node\_pt@{vertex\_node\_pt}}
 \index{vertex\_node\_pt@{vertex\_node\_pt}!oomph::LineElementBase@{oomph::LineElementBase}}
 \doxysubsubsection{\texorpdfstring{vertex\_node\_pt()}{vertex\_node\_pt()}}
-{\footnotesize\ttfamily virtual Node $\ast$ oomph\+::\+Line\+Element\+Base\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ oomph\+::\+Line\+Element\+Base\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 

@@ -2547,14 +2547,14 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02543}02543     \textcolor{comment}{// Now the nodes}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02544}02544     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0, ni = \mbox{\hyperlink{classoomph_1_1Problem_ae2e5559918832d0850b3631d004d0a37}{mesh\_pt}}()-\/>nnode(); \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < ni; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02545}02545     \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02546}02546       Node* node\_pt = \mbox{\hyperlink{classoomph_1_1Problem_ae2e5559918832d0850b3631d004d0a37}{mesh\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02547}02547       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0, nj = node\_pt-\/>nvalue(); j < nj; j++)}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02546}02546       \mbox{\hyperlink{classoomph_1_1Node}{Node}}* node\_pt = \mbox{\hyperlink{classoomph_1_1Problem_ae2e5559918832d0850b3631d004d0a37}{mesh\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02547}02547       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0, nj = node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}{nvalue}}(); j < nj; j++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02548}02548       \{}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02549}02549         \textcolor{comment}{// For each node get the equation number and copy out the value.}}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02550}02550         \textcolor{keywordtype}{int} eqn\_number = node\_pt-\/>eqn\_number(j);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02550}02550         \textcolor{keywordtype}{int} eqn\_number = node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_ab6845db69833c541766d9a073b023fc4}{eqn\_number}}(j);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02551}02551         \textcolor{keywordflow}{if} (eqn\_number >= 0)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02552}02552         \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02553}02553           dofs[eqn\_number] = node\_pt-\/>value(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, j);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02553}02553           dofs[eqn\_number] = node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_afcc5cdba40bca251826ae5bee5ca15b4}{value}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, j);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02554}02554         \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02555}02555       \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02556}02556     \}}
@@ -2618,7 +2618,7 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02614}02614         \textcolor{keywordtype}{unsigned} n\_node = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02615}02615         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < n\_node; j++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02616}02616         \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02617}02617           Node* nod\_pt = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02617}02617           \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02618}02618 }
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02619}02619           \textcolor{comment}{// Have we already done the node?}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02620}02620           \textcolor{keywordflow}{if} (!node\_done[nod\_pt])}
@@ -2628,10 +2628,10 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02624}02624             \textcolor{comment}{// Loop over values stored at node (if any) to find}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02625}02625             \textcolor{comment}{// the first non-\/negative eqn number}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02626}02626             \textcolor{keywordtype}{unsigned} first\_non\_negative\_eqn\_number\_plus\_one = 0;}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02627}02627             \textcolor{keywordtype}{unsigned} n\_val = nod\_pt-\/>nvalue();}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02627}02627             \textcolor{keywordtype}{unsigned} n\_val = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}{nvalue}}();}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02628}02628             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i\_val = 0; i\_val < n\_val; i\_val++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02629}02629             \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02630}02630               \textcolor{keywordtype}{int} eqn\_no = nod\_pt-\/>eqn\_number(i\_val);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02630}02630               \textcolor{keywordtype}{int} eqn\_no = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_ab6845db69833c541766d9a073b023fc4}{eqn\_number}}(i\_val);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02631}02631               \textcolor{keywordflow}{if} (eqn\_no >= 0)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02632}02632               \{}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02633}02633                 first\_non\_negative\_eqn\_number\_plus\_one = eqn\_no + 1;}
@@ -2678,13 +2678,13 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02674}02674                                         -\/>ncont\_interpolated\_values();}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02675}02675               \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i\_cont = -\/1; i\_cont < n\_cont\_int\_values; i\_cont++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02676}02676               \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02677}02677                 \textcolor{keywordflow}{if} (nod\_pt-\/>is\_hanging(i\_cont))}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02677}02677                 \textcolor{keywordflow}{if} (nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_af0e6237dfafad62cf427ff5013ddcfef}{is\_hanging}}(i\_cont))}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02678}02678                 \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02679}02679                   \mbox{\hyperlink{classoomph_1_1HangInfo}{HangInfo}}* hang\_pt = nod\_pt-\/>hanging\_pt(i\_cont);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02679}02679                   \mbox{\hyperlink{classoomph_1_1HangInfo}{HangInfo}}* hang\_pt = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_afefa22db8b28e783b8647e3577ee01d9}{hanging\_pt}}(i\_cont);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02680}02680                   \textcolor{keywordtype}{unsigned} n\_master = hang\_pt-\/>\mbox{\hyperlink{classoomph_1_1HangInfo_aa9c1130b58db2ff6d5eee4f923ba365c}{nmaster}}();}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02681}02681                   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} m = 0; m < n\_master; m++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02682}02682                   \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02683}02683                     Node* master\_nod\_pt = hang\_pt-\/>\mbox{\hyperlink{classoomph_1_1HangInfo_a7a935ae7eeca594a648ca1800444827c}{master\_node\_pt}}(m);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02683}02683                     \mbox{\hyperlink{classoomph_1_1Node}{Node}}* master\_nod\_pt = hang\_pt-\/>\mbox{\hyperlink{classoomph_1_1HangInfo_a7a935ae7eeca594a648ca1800444827c}{master\_node\_pt}}(m);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02684}02684                     \textcolor{keywordflow}{if} (!node\_done[master\_nod\_pt])}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02685}02685                     \{}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02686}02686                       node\_done[master\_nod\_pt] = \textcolor{keyword}{true};}
@@ -2692,10 +2692,10 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02688}02688                       \textcolor{comment}{// Loop over values stored at node (if any) to find}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02689}02689                       \textcolor{comment}{// the first non-\/negative eqn number}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02690}02690                       \textcolor{keywordtype}{unsigned} first\_non\_negative\_eqn\_number\_plus\_one = 0;}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02691}02691                       \textcolor{keywordtype}{unsigned} n\_val = master\_nod\_pt-\/>nvalue();}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02691}02691                       \textcolor{keywordtype}{unsigned} n\_val = master\_nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}{nvalue}}();}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02692}02692                       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i\_val = 0; i\_val < n\_val; i\_val++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02693}02693                       \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02694}02694                         \textcolor{keywordtype}{int} eqn\_no = master\_nod\_pt-\/>eqn\_number(i\_val);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02694}02694                         \textcolor{keywordtype}{int} eqn\_no = master\_nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_ab6845db69833c541766d9a073b023fc4}{eqn\_number}}(i\_val);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02695}02695                         \textcolor{keywordflow}{if} (eqn\_no >= 0)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02696}02696                         \{}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02697}02697                           first\_non\_negative\_eqn\_number\_plus\_one = eqn\_no + 1;}
@@ -2778,15 +2778,15 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02774}02774             \textcolor{keywordtype}{unsigned} n\_node = finite\_ext\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02775}02775             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < n\_node; j++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02776}02776             \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02777}02777               Node* nod\_pt = finite\_ext\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02777}02777               \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = finite\_ext\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02778}02778 }
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02779}02779               \textcolor{comment}{// Loop over values stored at node (if any) to find}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02780}02780               \textcolor{comment}{// the first non-\/negative eqn number}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02781}02781               \textcolor{keywordtype}{unsigned} first\_non\_negative\_eqn\_number\_plus\_one = 0;}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02782}02782               \textcolor{keywordtype}{unsigned} n\_val = nod\_pt-\/>nvalue();}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02782}02782               \textcolor{keywordtype}{unsigned} n\_val = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}{nvalue}}();}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02783}02783               \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i\_val = 0; i\_val < n\_val; i\_val++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02784}02784               \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02785}02785                 \textcolor{keywordtype}{int} eqn\_no = nod\_pt-\/>eqn\_number(i\_val);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02785}02785                 \textcolor{keywordtype}{int} eqn\_no = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_ab6845db69833c541766d9a073b023fc4}{eqn\_number}}(i\_val);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02786}02786                 \textcolor{keywordflow}{if} (eqn\_no >= 0)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02787}02787                 \{}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02788}02788                   first\_non\_negative\_eqn\_number\_plus\_one = eqn\_no + 1;}
@@ -2824,7 +2824,7 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02820}02820               \textcolor{comment}{// and we don't give a damn...)}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02821}02821               \textcolor{keywordflow}{if} (first\_non\_negative\_eqn\_number\_plus\_one > 0)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02822}02822               \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02823}02823                 Node* existing\_node\_pt =}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02823}02823                 \mbox{\hyperlink{classoomph_1_1Node}{Node}}* existing\_node\_pt =}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02824}02824                   global\_node\_pt[first\_non\_negative\_eqn\_number\_plus\_one -\/ 1];}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02825}02825 }
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02826}02826                 \textcolor{comment}{// Does this node already exist?}}
@@ -2835,12 +2835,12 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02831}02831 }
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02832}02832                   \textcolor{comment}{// It's a duplicate, so store the duplicated one for}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02833}02833                   \textcolor{comment}{// later killing...}}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02834}02834                   Node* duplicated\_node\_pt = nod\_pt;}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02834}02834                   \mbox{\hyperlink{classoomph_1_1Node}{Node}}* duplicated\_node\_pt = nod\_pt;}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02835}02835                   \textcolor{keywordflow}{if} (!node\_done[duplicated\_node\_pt])}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02836}02836                   \{}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02837}02837                     \textcolor{comment}{// Remove node from all boundaries}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02838}02838                     std::set<unsigned>* boundaries\_pt;}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02839}02839                     duplicated\_node\_pt-\/>get\_boundaries\_pt(boundaries\_pt);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02839}02839                     duplicated\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a33092a3d51285282ae8ec8e702d1cbf5}{get\_boundaries\_pt}}(boundaries\_pt);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02840}02840                     \textcolor{keywordflow}{if} (boundaries\_pt != 0)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02841}02841                     \{}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02842}02842                       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<unsigned>}} bound;}
@@ -2887,11 +2887,11 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02883}02883                          i\_cont++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02884}02884                     \{}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02885}02885                       \textcolor{keywordtype}{unsigned} n\_master\_orig = 0;}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02886}02886                       \textcolor{keywordflow}{if} (finite\_ext\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j)-\/>is\_hanging(i\_cont))}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02886}02886                       \textcolor{keywordflow}{if} (finite\_ext\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j)-\/>\mbox{\hyperlink{classoomph_1_1Node_af0e6237dfafad62cf427ff5013ddcfef}{is\_hanging}}(i\_cont))}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02887}02887                       \{}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02888}02888                         n\_master\_orig = finite\_ext\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j)}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02889}02889                                           -\/>hanging\_pt(i\_cont)}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02890}02890                                           -\/>nmaster();}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02889}02889                                           -\/>\mbox{\hyperlink{classoomph_1_1Node_afefa22db8b28e783b8647e3577ee01d9}{hanging\_pt}}(i\_cont)}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02890}02890                                           -\/>\mbox{\hyperlink{classoomph_1_1HangInfo_aa9c1130b58db2ff6d5eee4f923ba365c}{nmaster}}();}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02891}02891 }
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02892}02892                         \textcolor{comment}{// Temporary leak: Resolve like this:}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02893}02893                         \textcolor{comment}{// loop over all external halo nodes and identify the}}
@@ -2899,10 +2899,10 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02895}02895                         \textcolor{comment}{// external elements. Kill the dangling ones.}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02896}02896                       \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02897}02897                       \textcolor{keywordtype}{unsigned} n\_master\_replace = 0;}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02898}02898                       \textcolor{keywordflow}{if} (existing\_node\_pt-\/>is\_hanging(i\_cont))}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02898}02898                       \textcolor{keywordflow}{if} (existing\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_af0e6237dfafad62cf427ff5013ddcfef}{is\_hanging}}(i\_cont))}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02899}02899                       \{}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02900}02900                         n\_master\_replace =}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02901}02901                           existing\_node\_pt-\/>hanging\_pt(i\_cont)-\/>nmaster();}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02901}02901                           existing\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_afefa22db8b28e783b8647e3577ee01d9}{hanging\_pt}}(i\_cont)-\/>\mbox{\hyperlink{classoomph_1_1HangInfo_aa9c1130b58db2ff6d5eee4f923ba365c}{nmaster}}();}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02902}02902                       \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02903}02903 }
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02904}02904                       \textcolor{keywordflow}{if} (n\_master\_orig != n\_master\_replace)}
@@ -2916,10 +2916,10 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02912}02912                         \{}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02913}02913                           error\_stream}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02914}02914                             << \textcolor{stringliteral}{"{}Nodal coordinates of replacement node:"{}};}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02915}02915                           \textcolor{keywordtype}{unsigned} ndim = existing\_node\_pt-\/>ndim();}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02915}02915                           \textcolor{keywordtype}{unsigned} ndim = existing\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02916}02916                           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < ndim; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02917}02917                           \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02918}02918                             error\_stream << existing\_node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02918}02918                             error\_stream << existing\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02919}02919                           \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02920}02920                           error\_stream << \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02921}02921                           error\_stream << \textcolor{stringliteral}{"{}The coordinates of its "{}}}
@@ -2927,13 +2927,13 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02923}02923                                        << \textcolor{stringliteral}{"{} master nodes are: \(\backslash\)n"{}};}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02924}02924                           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < n\_master\_replace; k++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02925}02925                           \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02926}02926                             Node* master\_nod\_pt =}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02927}02927                               existing\_node\_pt-\/>hanging\_pt(i\_cont)}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02928}02928                                 -\/>master\_node\_pt(k);}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02929}02929                             \textcolor{keywordtype}{unsigned} ndim = master\_nod\_pt-\/>ndim();}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02926}02926                             \mbox{\hyperlink{classoomph_1_1Node}{Node}}* master\_nod\_pt =}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02927}02927                               existing\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_afefa22db8b28e783b8647e3577ee01d9}{hanging\_pt}}(i\_cont)}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02928}02928                                 -\/>\mbox{\hyperlink{classoomph_1_1HangInfo_a7a935ae7eeca594a648ca1800444827c}{master\_node\_pt}}(k);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02929}02929                             \textcolor{keywordtype}{unsigned} ndim = master\_nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02930}02930                             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < ndim; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02931}02931                             \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02932}02932                               error\_stream << master\_nod\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02932}02932                               error\_stream << master\_nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02933}02933                             \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02934}02934                             error\_stream << \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02935}02935                           \}}
@@ -2942,10 +2942,10 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02938}02938                         \{}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02939}02939                           error\_stream}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02940}02940                             << \textcolor{stringliteral}{"{}Nodal coordinates of node to be replaced:"{}};}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02941}02941                           \textcolor{keywordtype}{unsigned} ndim = finite\_ext\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j)-\/>ndim();}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02941}02941                           \textcolor{keywordtype}{unsigned} ndim = finite\_ext\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j)-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02942}02942                           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < ndim; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02943}02943                           \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02944}02944                             error\_stream << finite\_ext\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j)-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02944}02944                             error\_stream << finite\_ext\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02945}02945                                          << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02946}02946                           \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02947}02947                           error\_stream << \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
@@ -2954,13 +2954,13 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02950}02950                                        << \textcolor{stringliteral}{"{} master nodes are: \(\backslash\)n"{}};}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02951}02951                           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < n\_master\_orig; k++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02952}02952                           \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02953}02953                             Node* master\_nod\_pt = finite\_ext\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j)}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02954}02954                                                     -\/>hanging\_pt(i\_cont)}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02955}02955                                                     -\/>master\_node\_pt(k);}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02956}02956                             \textcolor{keywordtype}{unsigned} ndim = master\_nod\_pt-\/>ndim();}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02953}02953                             \mbox{\hyperlink{classoomph_1_1Node}{Node}}* master\_nod\_pt = finite\_ext\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j)}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02954}02954                                                     -\/>\mbox{\hyperlink{classoomph_1_1Node_afefa22db8b28e783b8647e3577ee01d9}{hanging\_pt}}(i\_cont)}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02955}02955                                                     -\/>\mbox{\hyperlink{classoomph_1_1HangInfo_a7a935ae7eeca594a648ca1800444827c}{master\_node\_pt}}(k);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02956}02956                             \textcolor{keywordtype}{unsigned} ndim = master\_nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02957}02957                             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < ndim; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02958}02958                             \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02959}02959                               error\_stream << master\_nod\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02959}02959                               error\_stream << master\_nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02960}02960                             \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02961}02961                             error\_stream << \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02962}02962                           \}}
@@ -2996,19 +2996,19 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02992}02992                     -\/>ncont\_interpolated\_values();}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02993}02993                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i\_cont = -\/1; i\_cont < n\_cont\_inter\_values; i\_cont++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02994}02994                 \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02995}02995                   \textcolor{keywordflow}{if} (finite\_ext\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j)-\/>is\_hanging(i\_cont))}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02995}02995                   \textcolor{keywordflow}{if} (finite\_ext\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j)-\/>\mbox{\hyperlink{classoomph_1_1Node_af0e6237dfafad62cf427ff5013ddcfef}{is\_hanging}}(i\_cont))}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02996}02996                   \{}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02997}02997                     \mbox{\hyperlink{classoomph_1_1HangInfo}{HangInfo}}* hang\_pt =}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02998}02998                       finite\_ext\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j)-\/>hanging\_pt(i\_cont);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l02998}02998                       finite\_ext\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j)-\/>\mbox{\hyperlink{classoomph_1_1Node_afefa22db8b28e783b8647e3577ee01d9}{hanging\_pt}}(i\_cont);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l02999}02999                     \textcolor{keywordtype}{unsigned} n\_master = hang\_pt-\/>\mbox{\hyperlink{classoomph_1_1HangInfo_aa9c1130b58db2ff6d5eee4f923ba365c}{nmaster}}();}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03000}03000                     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} m = 0; m < n\_master; m++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03001}03001                     \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03002}03002                       Node* master\_nod\_pt = hang\_pt-\/>\mbox{\hyperlink{classoomph_1_1HangInfo_a7a935ae7eeca594a648ca1800444827c}{master\_node\_pt}}(m);}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03003}03003                       \textcolor{keywordtype}{unsigned} n\_val = master\_nod\_pt-\/>nvalue();}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03002}03002                       \mbox{\hyperlink{classoomph_1_1Node}{Node}}* master\_nod\_pt = hang\_pt-\/>\mbox{\hyperlink{classoomph_1_1HangInfo_a7a935ae7eeca594a648ca1800444827c}{master\_node\_pt}}(m);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03003}03003                       \textcolor{keywordtype}{unsigned} n\_val = master\_nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}{nvalue}}();}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03004}03004                       \textcolor{keywordtype}{unsigned} first\_non\_negative\_eqn\_number\_plus\_one = 0;}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03005}03005                       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i\_val = 0; i\_val < n\_val; i\_val++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03006}03006                       \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03007}03007                         \textcolor{keywordtype}{int} eqn\_no = master\_nod\_pt-\/>eqn\_number(i\_val);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03007}03007                         \textcolor{keywordtype}{int} eqn\_no = master\_nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_ab6845db69833c541766d9a073b023fc4}{eqn\_number}}(i\_val);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03008}03008                         \textcolor{keywordflow}{if} (eqn\_no >= 0)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03009}03009                         \{}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03010}03010                           first\_non\_negative\_eqn\_number\_plus\_one = eqn\_no + 1;}
@@ -3050,7 +3050,7 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03046}03046                       \textcolor{comment}{// damn...)}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03047}03047                       \textcolor{keywordflow}{if} (first\_non\_negative\_eqn\_number\_plus\_one > 0)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03048}03048                       \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03049}03049                         Node* existing\_node\_pt = global\_node\_pt}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03049}03049                         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* existing\_node\_pt = global\_node\_pt}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03050}03050                           [first\_non\_negative\_eqn\_number\_plus\_one -\/ 1];}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03051}03051 }
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03052}03052                         \textcolor{comment}{// Does this node already exist?}}
@@ -3061,13 +3061,13 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03057}03057 }
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03058}03058                           \textcolor{comment}{// It's a duplicate, so store the duplicated one for}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03059}03059                           \textcolor{comment}{// later killing...}}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03060}03060                           Node* duplicated\_node\_pt = master\_nod\_pt;}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03060}03060                           \mbox{\hyperlink{classoomph_1_1Node}{Node}}* duplicated\_node\_pt = master\_nod\_pt;}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03061}03061 }
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03062}03062                           \textcolor{keywordflow}{if} (!node\_done[duplicated\_node\_pt])}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03063}03063                           \{}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03064}03064                             \textcolor{comment}{// Remove node from all boundaries}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03065}03065                             std::set<unsigned>* boundaries\_pt;}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03066}03066                             duplicated\_node\_pt-\/>get\_boundaries\_pt(}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03066}03066                             duplicated\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a33092a3d51285282ae8ec8e702d1cbf5}{get\_boundaries\_pt}}(}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03067}03067                               boundaries\_pt);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03068}03068                             \textcolor{keywordflow}{if} (boundaries\_pt != 0)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03069}03069                             \{}
@@ -3095,15 +3095,15 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03091}03091                           \textcolor{comment}{// Sanity check: setting replacement master}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03092}03092                           \textcolor{comment}{// node for non-\/hanging node? Sign of really}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03093}03093                           \textcolor{comment}{// f***ed up code.}}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03094}03094                           Node* tmp\_nod\_pt = finite\_ext\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j);}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03095}03095                           \textcolor{keywordflow}{if} (!tmp\_nod\_pt-\/>is\_hanging(i\_cont))}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03094}03094                           \mbox{\hyperlink{classoomph_1_1Node}{Node}}* tmp\_nod\_pt = finite\_ext\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03095}03095                           \textcolor{keywordflow}{if} (!tmp\_nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_af0e6237dfafad62cf427ff5013ddcfef}{is\_hanging}}(i\_cont))}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03096}03096                           \{}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03097}03097                             std::ostringstream error\_stream;}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03098}03098                             error\_stream}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03099}03099                               << \textcolor{stringliteral}{"{}About to re-\/set master for i\_cont= "{}} << i\_cont}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03100}03100                               << \textcolor{stringliteral}{"{} for external node (with proc "{}} << iproc}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03101}03101                               << \textcolor{stringliteral}{"{} )"{}} << tmp\_nod\_pt << \textcolor{stringliteral}{"{} at "{}};}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03102}03102                             \textcolor{keywordtype}{unsigned} n = tmp\_nod\_pt-\/>ndim();}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03102}03102                             \textcolor{keywordtype}{unsigned} n = tmp\_nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03103}03103                             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} jj = 0; jj < n; jj++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03104}03104                             \{}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03105}03105                               error\_stream << tmp\_nod\_pt-\/>x(jj) << \textcolor{stringliteral}{"{} "{}};}
@@ -3125,8 +3125,8 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03121}03121 }
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03122}03122                           \textcolor{comment}{// And re-\/set master}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03123}03123                           finite\_ext\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j)}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03124}03124                             -\/>hanging\_pt(i\_cont)}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03125}03125                             -\/>set\_master\_node\_pt(m, existing\_node\_pt, m\_weight);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03124}03124                             -\/>\mbox{\hyperlink{classoomph_1_1Node_afefa22db8b28e783b8647e3577ee01d9}{hanging\_pt}}(i\_cont)}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03125}03125                             -\/>\mbox{\hyperlink{classoomph_1_1HangInfo_afe4042d5805342d5e12b6a28e376885a}{set\_master\_node\_pt}}(m, existing\_node\_pt, m\_weight);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03126}03126                         \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03127}03127                         \textcolor{comment}{// If it doesn't, add it to the list of existing ones}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03128}03128                         \textcolor{keywordflow}{else}}
@@ -3250,7 +3250,7 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03246}03246           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < nnod; j++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03247}03247           \{}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03248}03248             \textcolor{comment}{// Get pointer to node}}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03249}03249             Node* nod\_pt = backup\_pt[j];}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03249}03249             \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = backup\_pt[j];}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03250}03250 }
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03251}03251             \textcolor{comment}{// Has it been nulled out?}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03252}03252             \textcolor{keywordflow}{if} (nod\_pt == 0)}
@@ -3387,7 +3387,7 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03383}03383           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < nnod; j++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03384}03384           \{}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03385}03385             \textcolor{comment}{// Get pointer to node}}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03386}03386             Node* nod\_pt = backup\_pt[j];}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03386}03386             \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = backup\_pt[j];}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03387}03387 }
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03388}03388             \textcolor{comment}{// Has it been nulled out?}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03389}03389             \textcolor{keywordflow}{if} (nod\_pt != 0)}
@@ -3482,14 +3482,14 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03478}03478     \textcolor{comment}{// Now the nodes}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03479}03479     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0, ni = \mbox{\hyperlink{classoomph_1_1Problem_ae2e5559918832d0850b3631d004d0a37}{mesh\_pt}}()-\/>nnode(); \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < ni; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03480}03480     \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03481}03481       Node* node\_pt = \mbox{\hyperlink{classoomph_1_1Problem_ae2e5559918832d0850b3631d004d0a37}{mesh\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03482}03482       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0, nj = node\_pt-\/>nvalue(); j < nj; j++)}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03481}03481       \mbox{\hyperlink{classoomph_1_1Node}{Node}}* node\_pt = \mbox{\hyperlink{classoomph_1_1Problem_ae2e5559918832d0850b3631d004d0a37}{mesh\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03482}03482       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0, nj = node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}{nvalue}}(); j < nj; j++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03483}03483       \{}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03484}03484         \textcolor{comment}{// For each node get the equation number and copy out the value.}}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03485}03485         \textcolor{keywordtype}{int} eqn\_number = node\_pt-\/>eqn\_number(j);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03485}03485         \textcolor{keywordtype}{int} eqn\_number = node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_ab6845db69833c541766d9a073b023fc4}{eqn\_number}}(j);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03486}03486         \textcolor{keywordflow}{if} (eqn\_number >= 0)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03487}03487         \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03488}03488           node\_pt-\/>set\_value(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, j, dofs[eqn\_number]);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03488}03488           node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7289ca322725c6fd493970a19474b382}{set\_value}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, j, dofs[eqn\_number]);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03489}03489         \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03490}03490       \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03491}03491     \}}
@@ -3532,14 +3532,14 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03528}03528     \textcolor{comment}{// nodes}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03529}03529     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0, ni = \mbox{\hyperlink{classoomph_1_1Problem_ae2e5559918832d0850b3631d004d0a37}{mesh\_pt}}()-\/>nnode(); \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < ni; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03530}03530     \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03531}03531       Node* node\_pt = \mbox{\hyperlink{classoomph_1_1Problem_ae2e5559918832d0850b3631d004d0a37}{mesh\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03532}03532       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0, nj = node\_pt-\/>nvalue(); j < nj; j++)}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03531}03531       \mbox{\hyperlink{classoomph_1_1Node}{Node}}* node\_pt = \mbox{\hyperlink{classoomph_1_1Problem_ae2e5559918832d0850b3631d004d0a37}{mesh\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03532}03532       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0, nj = node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}{nvalue}}(); j < nj; j++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03533}03533       \{}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03534}03534         \textcolor{comment}{// For each node get the equation number and copy in the value.}}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03535}03535         \textcolor{keywordtype}{int} eqn\_number = node\_pt-\/>eqn\_number(j);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03535}03535         \textcolor{keywordtype}{int} eqn\_number = node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_ab6845db69833c541766d9a073b023fc4}{eqn\_number}}(j);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03536}03536         \textcolor{keywordflow}{if} (eqn\_number >= 0)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03537}03537         \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03538}03538           node\_pt-\/>set\_value(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, j, *(\mbox{\hyperlink{classoomph_1_1Problem_a8f48134fe83371d3cc3605772e76d043}{dof\_pt}}[eqn\_number]));}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03538}03538           node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7289ca322725c6fd493970a19474b382}{set\_value}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, j, *(\mbox{\hyperlink{classoomph_1_1Problem_a8f48134fe83371d3cc3605772e76d043}{dof\_pt}}[eqn\_number]));}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03539}03539         \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03540}03540       \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03541}03541     \}}
@@ -3685,7 +3685,7 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03681}03681     \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03682}03682   \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03683}03683 }
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03684}\mbox{\hyperlink{classoomph_1_1Problem_a2d456362f4408556e879871ae34e57f1}{03684}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1Problem_a2d456362f4408556e879871ae34e57f1}{Problem::get\_dvaluesdt}}(\mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}})}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03684}\mbox{\hyperlink{classoomph_1_1Problem_a2d456362f4408556e879871ae34e57f1}{03684}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1Problem_a2d456362f4408556e879871ae34e57f1}{Problem::get\_dvaluesdt}}(\mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& f)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03685}03685   \{}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03686}03686     \textcolor{comment}{// Loop over timesteppers: make them (temporarily) steady and store their}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03687}03687     \textcolor{comment}{// is\_steady status.}}
@@ -3698,7 +3698,7 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03694}03694     \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03695}03695 }
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03696}03696     \textcolor{comment}{// Calculate f using the residual/jacobian machinary.}}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03697}03697     \mbox{\hyperlink{classoomph_1_1Problem_a8d7cc317f4900e076dec400ce2493c19}{get\_inverse\_mass\_matrix\_times\_residuals}}(\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}});}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l03697}03697     \mbox{\hyperlink{classoomph_1_1Problem_a8d7cc317f4900e076dec400ce2493c19}{get\_inverse\_mass\_matrix\_times\_residuals}}(f);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03698}03698 }
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03699}03699     \textcolor{comment}{// Reset the is\_steady status of all timesteppers that weren't already}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l03700}03700     \textcolor{comment}{// steady when we came in here and reset their weights}}
@@ -4334,14 +4334,14 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04330}04330       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_node = \mbox{\hyperlink{classoomph_1_1Problem_aa4a3bf9419e495aaaaea0dcb00ea53e5}{Mesh\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a945e7823d1a2af243b5b7f7866aaff5e}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04331}04331       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < n\_node; n++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04332}04332       \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l04333}04333         Node* \textcolor{keyword}{const} local\_node\_pt = \mbox{\hyperlink{classoomph_1_1Problem_aa4a3bf9419e495aaaaea0dcb00ea53e5}{Mesh\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}(n);}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l04334}04334         \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_value = local\_node\_pt-\/>nvalue();}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l04333}04333         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \textcolor{keyword}{const} local\_node\_pt = \mbox{\hyperlink{classoomph_1_1Problem_aa4a3bf9419e495aaaaea0dcb00ea53e5}{Mesh\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}(n);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l04334}04334         \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_value = local\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}{nvalue}}();}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04335}04335         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < n\_value; j++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04336}04336         \{}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04337}04337           \textcolor{comment}{// If the data value is pinned set the value to zero}}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l04338}04338           \textcolor{keywordflow}{if} (local\_node\_pt-\/>is\_pinned(j))}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l04338}04338           \textcolor{keywordflow}{if} (local\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_aedd0c445396ddcd650c814d17fef77dc}{is\_pinned}}(j))}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04339}04339           \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l04340}04340             local\_node\_pt-\/>set\_value(j, 0.0);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l04340}04340             local\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7289ca322725c6fd493970a19474b382}{set\_value}}(j, 0.0);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04341}04341           \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04342}04342         \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04343}04343 }
@@ -4352,10 +4352,10 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04348}04348         \textcolor{keywordflow}{if} (local\_solid\_node\_pt)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04349}04349         \{}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04350}04350           \textcolor{comment}{// Find the dimension of the node}}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l04351}04351           \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_dim = local\_solid\_node\_pt-\/>ndim();}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l04351}04351           \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_dim = local\_solid\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04352}04352           \textcolor{comment}{// Find number of positions}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04353}04353           \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_position\_type =}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l04354}04354             local\_solid\_node\_pt-\/>nposition\_type();}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l04354}04354             local\_solid\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_aee6f2b7a46fc9d875c6736895d7fc095}{nposition\_type}}();}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04355}04355 }
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04356}04356           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < n\_position\_type; k++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04357}04357           \{}
@@ -4365,7 +4365,7 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04361}04361               \textcolor{comment}{// set the value to zero}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04362}04362               \textcolor{keywordflow}{if} (local\_solid\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1SolidNode_afd8204156be2ff0fa40834ca35daf243}{position\_is\_pinned}}(k, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}))}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04363}04363               \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l04364}04364                 local\_solid\_node\_pt-\/>x\_gen(k, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = 0.0;}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l04364}04364                 local\_solid\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_af7fdc0dfda495d69bd31c790ee77da73}{x\_gen}}(k, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = 0.0;}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04365}04365               \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04366}04366             \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04367}04367           \}}
@@ -4402,14 +4402,14 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04398}04398         \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_node = \mbox{\hyperlink{classoomph_1_1Problem_ab65f6fc9c49860e6324457a7e6e76346}{Sub\_mesh\_pt}}[m]-\/>nnode();}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04399}04399         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < n\_node; n++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04400}04400         \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l04401}04401           Node* \textcolor{keyword}{const} local\_node\_pt = \mbox{\hyperlink{classoomph_1_1Problem_ab65f6fc9c49860e6324457a7e6e76346}{Sub\_mesh\_pt}}[m]-\/>node\_pt(n);}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l04402}04402           \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_value = local\_node\_pt-\/>nvalue();}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l04401}04401           \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \textcolor{keyword}{const} local\_node\_pt = \mbox{\hyperlink{classoomph_1_1Problem_ab65f6fc9c49860e6324457a7e6e76346}{Sub\_mesh\_pt}}[m]-\/>node\_pt(n);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l04402}04402           \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_value = local\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}{nvalue}}();}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04403}04403           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < n\_value; j++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04404}04404           \{}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04405}04405             \textcolor{comment}{// If the data value is pinned set the value to zero}}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l04406}04406             \textcolor{keywordflow}{if} (local\_node\_pt-\/>is\_pinned(j))}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l04406}04406             \textcolor{keywordflow}{if} (local\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_aedd0c445396ddcd650c814d17fef77dc}{is\_pinned}}(j))}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04407}04407             \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l04408}04408               local\_node\_pt-\/>set\_value(j, 0.0);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l04408}04408               local\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7289ca322725c6fd493970a19474b382}{set\_value}}(j, 0.0);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04409}04409             \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04410}04410           \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04411}04411 }
@@ -4420,10 +4420,10 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04416}04416           \textcolor{keywordflow}{if} (local\_solid\_node\_pt)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04417}04417           \{}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04418}04418             \textcolor{comment}{// Find the dimension of the node}}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l04419}04419             \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_dim = local\_solid\_node\_pt-\/>ndim();}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l04419}04419             \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_dim = local\_solid\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04420}04420             \textcolor{comment}{// Find number of positions}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04421}04421             \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_position\_type =}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l04422}04422               local\_solid\_node\_pt-\/>nposition\_type();}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l04422}04422               local\_solid\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_aee6f2b7a46fc9d875c6736895d7fc095}{nposition\_type}}();}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04423}04423 }
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04424}04424             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < n\_position\_type; k++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04425}04425             \{}
@@ -4433,7 +4433,7 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04429}04429                 \textcolor{comment}{// set the value to zero}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04430}04430                 \textcolor{keywordflow}{if} (local\_solid\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1SolidNode_afd8204156be2ff0fa40834ca35daf243}{position\_is\_pinned}}(k, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}))}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04431}04431                 \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l04432}04432                   local\_solid\_node\_pt-\/>x\_gen(k, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = 0.0;}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l04432}04432                   local\_solid\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_af7fdc0dfda495d69bd31c790ee77da73}{x\_gen}}(k, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = 0.0;}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04433}04433                 \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04434}04434               \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l04435}04435             \}}
@@ -6787,12 +6787,12 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l06783}06783 }
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l06784}06784             \textcolor{comment}{// determine the element number in my set of eqns using the}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l06785}06785             \textcolor{comment}{// bisection method}}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l06786}06786             \textcolor{keywordtype}{int} \mbox{\hyperlink{namespaceoomph_a550bca442f95a0c982eaa8861967b041}{left}} = 0;}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l06786}06786             \textcolor{keywordtype}{int} left = 0;}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l06787}06787             \textcolor{keywordtype}{int} right = my\_n\_eqn -\/ 1;}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l06788}06788             \textcolor{keywordtype}{int} eqn\_number = right / 2;}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l06789}06789             \textcolor{keywordflow}{while} (my\_eqns[eqn\_number] != global\_eqn\_number)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l06790}06790             \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l06791}06791               \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceoomph_a550bca442f95a0c982eaa8861967b041}{left}} == right)}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l06791}06791               \textcolor{keywordflow}{if} (left == right)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l06792}06792               \{}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l06793}06793                 \textcolor{comment}{// Check that the residuals associated with the}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l06794}06794                 \textcolor{comment}{// eqn number that can't be found are all zero}}
@@ -6850,13 +6850,13 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l06846}06846               \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l06847}06847               \textcolor{keywordflow}{if} (my\_eqns[eqn\_number] > global\_eqn\_number)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l06848}06848               \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l06849}06849                 right = std::max(eqn\_number -\/ 1, \mbox{\hyperlink{namespaceoomph_a550bca442f95a0c982eaa8861967b041}{left}});}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l06849}06849                 right = std::max(eqn\_number -\/ 1, left);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l06850}06850               \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l06851}06851               \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l06852}06852               \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l06853}06853                 \mbox{\hyperlink{namespaceoomph_a550bca442f95a0c982eaa8861967b041}{left}} = std::min(eqn\_number + 1, right);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l06853}06853                 left = std::min(eqn\_number + 1, right);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l06854}06854               \}}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l06855}06855               eqn\_number = (right + \mbox{\hyperlink{namespaceoomph_a550bca442f95a0c982eaa8861967b041}{left}}) / 2;}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l06855}06855               eqn\_number = (right + left) / 2;}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l06856}06856             \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l06857}06857 }
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l06858}06858             \textcolor{comment}{// Add the contribution to the residuals}}
@@ -7513,26 +7513,26 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l07509}07509           \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l07510}07510           \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l07511}07511           \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l07512}07512             \textcolor{keywordtype}{int} \mbox{\hyperlink{namespaceoomph_a550bca442f95a0c982eaa8861967b041}{left}} = 0;}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l07512}07512             \textcolor{keywordtype}{int} left = 0;}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l07513}07513             \textcolor{keywordtype}{int} right = n\_eqn\_from\_proc[p] -\/ 1;}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l07514}07514             \textcolor{keywordtype}{int} midpoint = right / 2;}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l07515}07515             \textcolor{keywordtype}{bool} complete = \textcolor{keyword}{false};}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l07516}07516             \textcolor{keywordflow}{while} (!complete)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l07517}07517             \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l07518}07518               midpoint = (right + \mbox{\hyperlink{namespaceoomph_a550bca442f95a0c982eaa8861967b041}{left}}) / 2;}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l07518}07518               midpoint = (right + left) / 2;}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l07519}07519               \textcolor{keywordflow}{if} (midpoint > right)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l07520}07520               \{}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l07521}07521                 midpoint = right;}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l07522}07522               \}}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l07523}07523               \textcolor{keywordflow}{if} (midpoint < \mbox{\hyperlink{namespaceoomph_a550bca442f95a0c982eaa8861967b041}{left}})}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l07523}07523               \textcolor{keywordflow}{if} (midpoint < left)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l07524}07524               \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l07525}07525                 midpoint = \mbox{\hyperlink{namespaceoomph_a550bca442f95a0c982eaa8861967b041}{left}};}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l07525}07525                 midpoint = left;}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l07526}07526               \}}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l07527}07527               \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceoomph_a550bca442f95a0c982eaa8861967b041}{left}} == right)}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l07527}07527               \textcolor{keywordflow}{if} (left == right)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l07528}07528               \{}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l07529}07529                 \textcolor{keywordflow}{if} (eqns\_from\_proc[p][midpoint] == \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l07530}07530                 \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l07531}07531                   midpoint = \mbox{\hyperlink{namespaceoomph_a550bca442f95a0c982eaa8861967b041}{left}};}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l07531}07531                   midpoint = left;}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l07532}07532                 \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l07533}07533                 \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l07534}07534                 \{}
@@ -7546,11 +7546,11 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l07542}07542               \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l07543}07543               \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (eqns\_from\_proc[p][midpoint] > \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l07544}07544               \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l07545}07545                 right = std::max(midpoint -\/ 1, \mbox{\hyperlink{namespaceoomph_a550bca442f95a0c982eaa8861967b041}{left}});}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l07545}07545                 right = std::max(midpoint -\/ 1, left);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l07546}07546               \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l07547}07547               \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l07548}07548               \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l07549}07549                 \mbox{\hyperlink{namespaceoomph_a550bca442f95a0c982eaa8861967b041}{left}} = std::min(midpoint + 1, right);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l07549}07549                 left = std::min(midpoint + 1, right);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l07550}07550               \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l07551}07551             \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l07552}07552             row\_on\_proc[p] = midpoint;}
@@ -11932,7 +11932,7 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l11928}11928         \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l11929}11929         \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l11930}11930         \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l11931}11931           \mbox{\hyperlink{classoomph_1_1Problem_ae2e5559918832d0850b3631d004d0a37}{mesh\_pt}}(m)-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})-\/>copy(orig\_problem\_pt-\/>\mbox{\hyperlink{classoomph_1_1Problem_ae2e5559918832d0850b3631d004d0a37}{mesh\_pt}}(m)-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l11931}11931           \mbox{\hyperlink{classoomph_1_1Problem_ae2e5559918832d0850b3631d004d0a37}{mesh\_pt}}(m)-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})-\/>\mbox{\hyperlink{classoomph_1_1Node_a103b12afe541e9bbe5c0790c1c0efe55}{copy}}(orig\_problem\_pt-\/>\mbox{\hyperlink{classoomph_1_1Problem_ae2e5559918832d0850b3631d004d0a37}{mesh\_pt}}(m)-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l11932}11932         \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l11933}11933       \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l11934}11934     \}}
@@ -13372,10 +13372,10 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l13368}13368     \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l13369}13369 }
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l13370}13370     \textcolor{comment}{// If we're tracking a Pitchfork get the slack parameter (Hack)}}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l13371}13371     \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}} = 0.0;}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l13371}13371     \textcolor{keywordtype}{double} sigma = 0.0;}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l13372}13372     \textcolor{keywordflow}{if} (bifurcation\_type == 2)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l13373}13373     \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l13374}13374       \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}} = this-\/>\mbox{\hyperlink{classoomph_1_1Problem_a2c025f1ba8a9f67bd7ee2dc70462b49a}{dof}}(this-\/>\mbox{\hyperlink{classoomph_1_1Problem_a218d4dfff74bc14f3f5dc8416236e01d}{ndof}}() -\/ 1);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l13374}13374       sigma = this-\/>\mbox{\hyperlink{classoomph_1_1Problem_a2c025f1ba8a9f67bd7ee2dc70462b49a}{dof}}(this-\/>\mbox{\hyperlink{classoomph_1_1Problem_a218d4dfff74bc14f3f5dc8416236e01d}{ndof}}() -\/ 1);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l13375}13375     \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l13376}13376 }
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l13377}13377     \textcolor{comment}{// We can now deactivate the bifurcation tracking in the problem}}
@@ -13616,7 +13616,7 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l13612}13612       \textcolor{keywordflow}{case} 2:}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l13613}13613         this-\/>\mbox{\hyperlink{classoomph_1_1Problem_a7f5eb1f88a957cb3d8a11b558002d484}{activate\_pitchfork\_tracking}}(parameter\_pt, eigenfunction[0]);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l13614}13614         \textcolor{comment}{// reset the slack parameter}}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l13615}13615         this-\/>\mbox{\hyperlink{classoomph_1_1Problem_a2c025f1ba8a9f67bd7ee2dc70462b49a}{dof}}(this-\/>\mbox{\hyperlink{classoomph_1_1Problem_a218d4dfff74bc14f3f5dc8416236e01d}{ndof}}() -\/ 1) = \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}};}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l13615}13615         this-\/>\mbox{\hyperlink{classoomph_1_1Problem_a2c025f1ba8a9f67bd7ee2dc70462b49a}{dof}}(this-\/>\mbox{\hyperlink{classoomph_1_1Problem_a218d4dfff74bc14f3f5dc8416236e01d}{ndof}}() -\/ 1) = sigma;}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l13616}13616         \textcolor{keywordflow}{break};}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l13617}13617 }
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l13618}13618         \textcolor{comment}{// Hopf}}
@@ -13782,12 +13782,12 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l13778}13778                 \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_node = original\_mesh\_pt-\/>nnode();}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l13779}13779                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < n\_node; ++n)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l13780}13780                 \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l13781}13781                   Node* \textcolor{keyword}{const} nod\_pt = original\_mesh\_pt-\/>node\_pt(n);}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l13782}13782                   Node* \textcolor{keyword}{const} new\_node\_pt = tmesh\_pt-\/>node\_pt(n);}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l13783}13783                   \textcolor{keywordtype}{unsigned} n\_dim = nod\_pt-\/>ndim();}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l13781}13781                   \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \textcolor{keyword}{const} nod\_pt = original\_mesh\_pt-\/>node\_pt(n);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l13782}13782                   \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \textcolor{keyword}{const} new\_node\_pt = tmesh\_pt-\/>node\_pt(n);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l13783}13783                   \textcolor{keywordtype}{unsigned} n\_dim = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l13784}13784                   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_dim; ++\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l13785}13785                   \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l13786}13786                     new\_node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = nod\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l13786}13786                     new\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l13787}13787                   \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l13788}13788                 \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l13789}13789               \}}
@@ -13876,12 +13876,12 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l13872}13872                   \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_node = original\_mesh\_pt-\/>nnode();}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l13873}13873                   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < n\_node; ++n)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l13874}13874                   \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l13875}13875                     Node* \textcolor{keyword}{const} nod\_pt = original\_mesh\_pt-\/>node\_pt(n);}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l13876}13876                     Node* \textcolor{keyword}{const} new\_node\_pt = tmesh\_pt-\/>node\_pt(n);}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l13877}13877                     \textcolor{keywordtype}{unsigned} n\_dim = nod\_pt-\/>ndim();}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l13875}13875                     \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \textcolor{keyword}{const} nod\_pt = original\_mesh\_pt-\/>node\_pt(n);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l13876}13876                     \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \textcolor{keyword}{const} new\_node\_pt = tmesh\_pt-\/>node\_pt(n);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l13877}13877                     \textcolor{keywordtype}{unsigned} n\_dim = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l13878}13878                     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_dim; ++\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l13879}13879                     \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l13880}13880                       new\_node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = nod\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l13880}13880                       new\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l13881}13881                     \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l13882}13882                   \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l13883}13883                 \}}
@@ -16522,7 +16522,7 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l16518}16518             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < n\_nod; n++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l16519}16519             \{}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l16520}16520               \textcolor{comment}{// Add the data for each haloed node to the vector}}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l16521}16521               my\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_ab29fbaa5e88f722de752b3fd642a75e4}{haloed\_node\_pt}}(rank, n)-\/>add\_values\_to\_vector(}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l16521}16521               my\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_ab29fbaa5e88f722de752b3fd642a75e4}{haloed\_node\_pt}}(rank, n)-\/>\mbox{\hyperlink{classoomph_1_1Node_a11400682e1fd2851777234a779e8bf8d}{add\_values\_to\_vector}}(}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l16522}16522                 send\_data);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l16523}16523             \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l16524}16524 }
@@ -16546,7 +16546,7 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l16542}16542             \{}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l16543}16543               \textcolor{comment}{// Add data from each external haloed node to the vector}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l16544}16544               my\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a9f6a99d3f3b01dc1b48247285f50e14d}{external\_haloed\_node\_pt}}(rank, n)}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l16545}16545                 -\/>add\_values\_to\_vector(send\_data);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l16545}16545                 -\/>\mbox{\hyperlink{classoomph_1_1Node_a11400682e1fd2851777234a779e8bf8d}{add\_values\_to\_vector}}(send\_data);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l16546}16546             \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l16547}16547 }
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l16548}16548             \textcolor{comment}{// Now loop over haloed elements and prepare to send internal data}}
@@ -16649,7 +16649,7 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l16645}16645             \{}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l16646}16646               \textcolor{comment}{// Read in values for each halo node}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l16647}16647               my\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_ad7ba73da180acb43523166ee71fb2e99}{halo\_node\_pt}}(send\_rank, n)}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l16648}16648                 -\/>read\_values\_from\_vector(receive\_data, count);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l16648}16648                 -\/>\mbox{\hyperlink{classoomph_1_1Node_accb033ab8ed4f96331014f7c4cd131f9}{read\_values\_from\_vector}}(receive\_data, count);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l16649}16649             \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l16650}16650 }
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l16651}16651             \textcolor{comment}{// Get number of halo elements whose non-\/halo is}}
@@ -16677,7 +16677,7 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l16673}16673             \{}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l16674}16674               \textcolor{comment}{// Read the data from the array into each halo node}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l16675}16675               my\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a1f88352a0bf5be7d15858915097c1e70}{external\_halo\_node\_pt}}(send\_rank, n)}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l16676}16676                 -\/>read\_values\_from\_vector(receive\_data, count);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l16676}16676                 -\/>\mbox{\hyperlink{classoomph_1_1Node_accb033ab8ed4f96331014f7c4cd131f9}{read\_values\_from\_vector}}(receive\_data, count);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l16677}16677             \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l16678}16678 }
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l16679}16679             \textcolor{comment}{// Get number of halo elements whose non-\/halo is}}
@@ -16809,20 +16809,20 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l16805}16805     \textcolor{keywordtype}{unsigned} nnod = \mbox{\hyperlink{classoomph_1_1Problem_ae2e5559918832d0850b3631d004d0a37}{mesh\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a945e7823d1a2af243b5b7f7866aaff5e}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l16806}16806     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < nnod; j++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l16807}16807     \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l16808}16808       Node* nod\_pt = \mbox{\hyperlink{classoomph_1_1Problem_ae2e5559918832d0850b3631d004d0a37}{mesh\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}(j);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l16808}16808       \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = \mbox{\hyperlink{classoomph_1_1Problem_ae2e5559918832d0850b3631d004d0a37}{mesh\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}(j);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l16809}16809 }
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l16810}16810       \textcolor{comment}{// loop over ALL eqn numbers -\/ variable number of values}}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l16811}16811       \textcolor{keywordtype}{unsigned} nval = nod\_pt-\/>nvalue();}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l16811}16811       \textcolor{keywordtype}{unsigned} nval = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}{nvalue}}();}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l16812}16812 }
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l16813}16813       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ival = 0; ival < nval; ival++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l16814}16814       \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l16815}16815         \textcolor{keywordtype}{int} old\_eqn\_number = nod\_pt-\/>eqn\_number(ival);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l16815}16815         \textcolor{keywordtype}{int} old\_eqn\_number = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_ab6845db69833c541766d9a073b023fc4}{eqn\_number}}(ival);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l16816}16816         \textcolor{comment}{// Include all eqn numbers}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l16817}16817         \textcolor{keywordflow}{if} (old\_eqn\_number >= 0)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l16818}16818         \{}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l16819}16819           \textcolor{comment}{// Bump up eqn number}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l16820}16820           \textcolor{keywordtype}{int} new\_eqn\_number = old\_eqn\_number + my\_eqn\_num\_base;}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l16821}16821           nod\_pt-\/>eqn\_number(ival) = new\_eqn\_number;}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l16821}16821           nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_ab6845db69833c541766d9a073b023fc4}{eqn\_number}}(ival) = new\_eqn\_number;}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l16822}16822         \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l16823}16823       \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l16824}16824 }
@@ -17008,7 +17008,7 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l17004}17004             \textcolor{keywordtype}{unsigned} n\_nod = my\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_ad3202cdf7b1b35f8b3db51430dbbb8c6}{nhaloed\_node}}(rank);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l17005}17005             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < n\_nod; n++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l17006}17006             \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l17007}17007               my\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_ab29fbaa5e88f722de752b3fd642a75e4}{haloed\_node\_pt}}(rank, n)-\/>add\_eqn\_numbers\_to\_vector(}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l17007}17007               my\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_ab29fbaa5e88f722de752b3fd642a75e4}{haloed\_node\_pt}}(rank, n)-\/>\mbox{\hyperlink{classoomph_1_1Data_a1d3f7c4200506d11fea3c647fe498f5d}{add\_eqn\_numbers\_to\_vector}}(}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l17008}17008                 send\_data);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l17009}17009             \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l17010}17010 }
@@ -17030,7 +17030,7 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l17026}17026             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < n\_ext\_nod; n++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l17027}17027             \{}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l17028}17028               my\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a9f6a99d3f3b01dc1b48247285f50e14d}{external\_haloed\_node\_pt}}(rank, n)}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l17029}17029                 -\/>add\_eqn\_numbers\_to\_vector(send\_data);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l17029}17029                 -\/>\mbox{\hyperlink{classoomph_1_1Data_a1d3f7c4200506d11fea3c647fe498f5d}{add\_eqn\_numbers\_to\_vector}}(send\_data);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l17030}17030             \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l17031}17031 }
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l17032}17032             \textcolor{comment}{// Add the equation numbers associated with internal data in}}
@@ -17137,7 +17137,7 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l17133}17133             \{}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l17134}17134               \textcolor{comment}{// Generalise to variable number of values per node}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l17135}17135               my\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_ad7ba73da180acb43523166ee71fb2e99}{halo\_node\_pt}}(send\_rank, n)}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l17136}17136                 -\/>read\_eqn\_numbers\_from\_vector(receive\_data, count);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l17136}17136                 -\/>\mbox{\hyperlink{classoomph_1_1Data_ae958e52df6ede2a08f957db4ee685ca7}{read\_eqn\_numbers\_from\_vector}}(receive\_data, count);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l17137}17137             \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l17138}17138 }
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l17139}17139             \textcolor{comment}{// Get number of halo elements whose non-\/halo is on}}
@@ -17160,7 +17160,7 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l17156}17156             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < n\_ext\_nod; n++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l17157}17157             \{}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l17158}17158               my\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a1f88352a0bf5be7d15858915097c1e70}{external\_halo\_node\_pt}}(send\_rank, n)}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l17159}17159                 -\/>read\_eqn\_numbers\_from\_vector(receive\_data, count);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l17159}17159                 -\/>\mbox{\hyperlink{classoomph_1_1Data_ae958e52df6ede2a08f957db4ee685ca7}{read\_eqn\_numbers\_from\_vector}}(receive\_data, count);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l17160}17160             \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l17161}17161 }
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l17162}17162             \textcolor{comment}{// Get number of external halo elements whose external haloed}}
@@ -19109,7 +19109,7 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19105}19105               \textcolor{keywordtype}{unsigned} nnod = fe\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19106}19106               \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < nnod; j++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19107}19107               \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l19108}19108                 Node* nod\_pt = fe\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l19108}19108                 \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = fe\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19109}19109                 \textcolor{keywordflow}{if} (!node\_done[send\_rank][nod\_pt])}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19110}19110                 \{}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19111}19111                   node\_done[send\_rank][nod\_pt] = \textcolor{keyword}{true};}
@@ -19127,7 +19127,7 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19123}19123                   \{}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19124}19124                     std::ostringstream error\_message;}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19125}19125                     error\_message}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l19126}19126                       << \textcolor{stringliteral}{"{}Node has more values, namely "{}} << nod\_pt-\/>nvalue()}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l19126}19126                       << \textcolor{stringliteral}{"{}Node has more values, namely "{}} << nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}{nvalue}}()}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19127}19127                       << \textcolor{stringliteral}{"{}, than we're about to receive, namely "{}} << nval}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19128}19128                       << \textcolor{stringliteral}{"{}. Something's wrong!\(\backslash\)n"{}};}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19129}19129                     \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message.str(),}
@@ -19222,13 +19222,13 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19218}19218                   \textcolor{comment}{// resized (due to a FaceElement that hasn't been attached}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19219}19219                   \textcolor{comment}{// yet here) when the send data was written. If so make space}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19220}19220                   \textcolor{comment}{// for the data here}}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l19221}19221                   \textcolor{keywordflow}{if} (nval > nod\_pt-\/>nvalue())}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l19221}19221                   \textcolor{keywordflow}{if} (nval > nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}{nvalue}}())}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19222}19222                   \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l19223}19223                     nod\_pt-\/>resize(nval);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l19223}19223                     nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ae6598da29d403889020ccd47a2c07cc4}{resize}}(nval);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19224}19224                   \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19225}19225 }
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19226}19226                   \textcolor{comment}{// Now read the actual values}}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l19227}19227                   nod\_pt-\/>read\_values\_from\_vector(receive\_data, count);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l19227}19227                   nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_accb033ab8ed4f96331014f7c4cd131f9}{read\_values\_from\_vector}}(receive\_data, count);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19228}19228                 \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19229}19229               \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19230}19230             \}}
@@ -19691,28 +19691,28 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19687}19687             \textcolor{keywordtype}{unsigned} nnod = fe\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19688}19688             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < nnod; j++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19689}19689             \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l19690}19690               Node* nod\_pt = fe\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l19690}19690               \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = fe\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19691}19691 }
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19692}19692               \textcolor{comment}{// Reconstruct the nodal values/position from the node's}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19693}19693               \textcolor{comment}{// possible hanging node representation to be on the safe side}}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l19694}19694               \textcolor{keywordtype}{unsigned} n\_value = nod\_pt-\/>nvalue();}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l19695}19695               \textcolor{keywordtype}{unsigned} nt = nod\_pt-\/>ntstorage();}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l19694}19694               \textcolor{keywordtype}{unsigned} n\_value = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}{nvalue}}();}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l19695}19695               \textcolor{keywordtype}{unsigned} nt = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a9752205c5fb3bb886200b3fae9181e94}{ntstorage}}();}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19696}19696               \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} values(n\_value);}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l19697}19697               \textcolor{keywordtype}{unsigned} n\_dim = nod\_pt-\/>ndim();}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l19697}19697               \textcolor{keywordtype}{unsigned} n\_dim = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19698}19698               \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} position(n\_dim);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19699}19699 }
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19700}19700               \textcolor{comment}{// Loop over all history values}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19701}19701               \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}} = 0; \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}} < nt; \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19702}19702               \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l19703}19703                 nod\_pt-\/>value(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, values);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l19703}19703                 nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_afcc5cdba40bca251826ae5bee5ca15b4}{value}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, values);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19704}19704                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_value; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19705}19705                 \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l19706}19706                   nod\_pt-\/>set\_value(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, values[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l19706}19706                   nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7289ca322725c6fd493970a19474b382}{set\_value}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, values[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19707}19707                 \}}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l19708}19708                 nod\_pt-\/>position(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, position);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l19708}19708                 nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a61c3ad6b319e4d2cce38dc8faae1bfae}{position}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, position);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19709}19709                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_dim; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19710}19710                 \{}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l19711}19711                   nod\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = position[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l19711}19711                   nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = position[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19712}19712                 \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19713}19713               \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19714}19714 }
@@ -19776,7 +19776,7 @@
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19772}19772                 \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19773}19773 }
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19774}19774                 \textcolor{comment}{// Add the actual values}}
-\DoxyCodeLine{\Hypertarget{problem_8cc_source_l19775}19775                 nod\_pt-\/>add\_values\_to\_vector(send\_data);}
+\DoxyCodeLine{\Hypertarget{problem_8cc_source_l19775}19775                 nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a11400682e1fd2851777234a779e8bf8d}{add\_values\_to\_vector}}(send\_data);}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19776}19776               \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19777}19777             \}}
 \DoxyCodeLine{\Hypertarget{problem_8cc_source_l19778}19778           \}}

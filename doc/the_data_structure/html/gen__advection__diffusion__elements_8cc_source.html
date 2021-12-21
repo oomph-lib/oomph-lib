@@ -162,7 +162,7 @@ $(function() {
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment"></span> </div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">  /// Default value for Peclet number</span></div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment"></span>  <span class="keyword">template</span>&lt;<span class="keywordtype">unsigned</span> DIM&gt;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  <span class="keywordtype">double</span> GeneralisedAdvectionDiffusionEquations&lt;DIM&gt;::Default_peclet_number =</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  <span class="keywordtype">double</span> <a class="code hl_variable" href="classoomph_1_1GeneralisedAdvectionDiffusionEquations.html#a2d278b9e194799a8b83602c37b61cc23">GeneralisedAdvectionDiffusionEquations&lt;DIM&gt;::Default_peclet_number</a> =</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    0.0;</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  <span class="comment">//======================================================================</span><span class="comment"></span></div>
@@ -174,11 +174,11 @@ $(function() {
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">  /// Pure version without hanging nodes</span></div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment"></span>  <span class="comment">//======================================================================</span></div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  <span class="keyword">template</span>&lt;<span class="keywordtype">unsigned</span> DIM&gt;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  <span class="keywordtype">void</span> GeneralisedAdvectionDiffusionEquations&lt;DIM&gt;::</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    fill_in_generic_residual_contribution_cons_adv_diff(</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>      Vector&lt;double&gt;&amp; residuals,</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>      DenseMatrix&lt;double&gt;&amp; jacobian,</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>      DenseMatrix&lt;double&gt;&amp; mass_matrix,</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="classoomph_1_1GeneralisedAdvectionDiffusionEquations.html#ae05de6e681f20f04f5ad9821f3a572c0">   48</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classoomph_1_1GeneralisedAdvectionDiffusionEquations.html#ae05de6e681f20f04f5ad9821f3a572c0">GeneralisedAdvectionDiffusionEquations&lt;DIM&gt;::</a></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><a class="code hl_function" href="classoomph_1_1GeneralisedAdvectionDiffusionEquations.html#ae05de6e681f20f04f5ad9821f3a572c0">    fill_in_generic_residual_contribution_cons_adv_diff</a>(</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>      <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a>&amp; residuals,</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>      <a class="code hl_class" href="classoomph_1_1DenseMatrix.html">DenseMatrix&lt;double&gt;</a>&amp; jacobian,</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>      <a class="code hl_class" href="classoomph_1_1DenseMatrix.html">DenseMatrix&lt;double&gt;</a>&amp; mass_matrix,</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>      <span class="keywordtype">unsigned</span> flag)</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  {</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="comment">// Find out how many nodes there are</span></div>
@@ -188,14 +188,14 @@ $(function() {
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> u_nodal_index = u_index_cons_adv_diff();</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="comment">// Set up memory for the shape and test functions</span></div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    Shape psi(n_node), test(n_node);</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    DShape dpsidx(n_node, DIM), dtestdx(n_node, DIM);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <a class="code hl_class" href="classoomph_1_1Shape.html">Shape</a> psi(n_node), test(n_node);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <a class="code hl_class" href="classoomph_1_1DShape.html">DShape</a> dpsidx(n_node, DIM), dtestdx(n_node, DIM);</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="comment">// Set the value of n_intpt</span></div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_intpt = integral_pt()-&gt;nweight();</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="comment">// Set the Vector to hold local coordinates</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    Vector&lt;double&gt; <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>(DIM);</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>(DIM);</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="comment">// Get Peclet number</span></div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="keyword">const</span> <span class="keywordtype">double</span> peclet = pe();</div>
@@ -221,15 +221,15 @@ $(function() {
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        ipt, psi, dpsidx, test, dtestdx);</div>
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>      <span class="comment">// Premultiply the weights and the Jacobian</span></div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>      <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a> = w * J;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>      <span class="keywordtype">double</span> <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a> = w * J;</div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>      <span class="comment">// Calculate local values of the solution and its derivatives</span></div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>      <span class="comment">// Allocate</span></div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>      <span class="keywordtype">double</span> interpolated_u = 0.0;</div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>      <span class="keywordtype">double</span> dudt = 0.0;</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>      Vector&lt;double&gt; interpolated_x(DIM, 0.0);</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>      Vector&lt;double&gt; interpolated_dudx(DIM, 0.0);</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>      Vector&lt;double&gt; mesh_velocity(DIM, 0.0);</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>      <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> interpolated_x(DIM, 0.0);</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>      <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> interpolated_dudx(DIM, 0.0);</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>      <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> mesh_velocity(DIM, 0.0);</div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>      <span class="comment">// Calculate function value and derivatives:</span></div>
@@ -270,16 +270,16 @@ $(function() {
 <div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span> </div>
 <div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>      <span class="comment">// Get wind</span></div>
 <div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>      <span class="comment">//--------</span></div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>      Vector&lt;double&gt; wind(DIM);</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>      <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> wind(DIM);</div>
 <div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>      get_wind_cons_adv_diff(ipt, <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, interpolated_x, wind);</div>
 <div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> </div>
 <div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>      <span class="comment">// Get the conserved wind (non-divergence free)</span></div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>      Vector&lt;double&gt; conserved_wind(DIM);</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>      <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> conserved_wind(DIM);</div>
 <div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>      get_conserved_wind_cons_adv_diff(ipt, <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, interpolated_x, conserved_wind);</div>
 <div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span> </div>
 <div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span> </div>
 <div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>      <span class="comment">// Get diffusivity tensor</span></div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>      DenseMatrix&lt;double&gt; <a class="code hl_enumvalue" href="namespaceoomph_1_1OcTreeNames.html#ae7e7e58298b85825061eeff362656c40a51292b8e4d96f2bb9f0d6bb0340d1620">D</a>(DIM, DIM);</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>      <a class="code hl_class" href="classoomph_1_1DenseMatrix.html">DenseMatrix&lt;double&gt;</a> <a class="code hl_enumvalue" href="namespaceoomph_1_1OcTreeNames.html#ae7e7e58298b85825061eeff362656c40a51292b8e4d96f2bb9f0d6bb0340d1620">D</a>(DIM, DIM);</div>
 <div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>      get_diff_cons_adv_diff(ipt, <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, interpolated_x, <a class="code hl_enumvalue" href="namespaceoomph_1_1OcTreeNames.html#ae7e7e58298b85825061eeff362656c40a51292b8e4d96f2bb9f0d6bb0340d1620">D</a>);</div>
 <div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
 <div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>      <span class="comment">// Assemble residuals and Jacobian</span></div>
@@ -295,7 +295,7 @@ $(function() {
 <div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>        <span class="keywordflow">if</span> (local_eqn &gt;= 0)</div>
 <div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>        {</div>
 <div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>          <span class="comment">// Add body force/source term and time derivative</span></div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>          residuals[local_eqn] -= (peclet_st * dudt + source) * test(l) * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a>;</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>          residuals[local_eqn] -= (peclet_st * dudt + source) * test(l) * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a>;</div>
 <div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span> </div>
 <div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>          <span class="comment">// The Generalised Advection Diffusion bit itself</span></div>
 <div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>          <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> k = 0; k &lt; DIM; k++)</div>
@@ -319,7 +319,7 @@ $(function() {
 <div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>              tmp2 += <a class="code hl_enumvalue" href="namespaceoomph_1_1OcTreeNames.html#ae7e7e58298b85825061eeff362656c40a51292b8e4d96f2bb9f0d6bb0340d1620">D</a>(k, j) * interpolated_dudx[j];</div>
 <div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>            }</div>
 <div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>            <span class="comment">// Now construct the contribution to the residuals</span></div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>            residuals[local_eqn] -= (tmp * test(l) + tmp2 * dtestdx(l, k)) * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a>;</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>            residuals[local_eqn] -= (tmp * test(l) + tmp2 * dtestdx(l, k)) * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a>;</div>
 <div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>          }</div>
 <div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span> </div>
 <div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>          <span class="comment">// Calculate the jacobian</span></div>
@@ -338,13 +338,13 @@ $(function() {
 <div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>                <span class="comment">// Mass matrix term</span></div>
 <div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>                jacobian(local_eqn, local_unknown) -=</div>
 <div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>                  peclet_st * test(l) * psi(l2) *</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>                  node_pt(l2)-&gt;time_stepper_pt()-&gt;weight(1, 0) * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a>;</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>                  node_pt(l2)-&gt;time_stepper_pt()-&gt;weight(1, 0) * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a>;</div>
 <div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span> </div>
 <div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>                <span class="comment">// Add the mass matrix term</span></div>
 <div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>                <span class="keywordflow">if</span> (flag == 2)</div>
 <div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>                {</div>
 <div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>                  mass_matrix(local_eqn, local_unknown) +=</div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>                    peclet_st * test(l) * psi(l2) * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a>;</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>                    peclet_st * test(l) * psi(l2) * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a>;</div>
 <div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>                }</div>
 <div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span> </div>
 <div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>                <span class="comment">// Add contribution to Elemental Matrix</span></div>
@@ -367,7 +367,7 @@ $(function() {
 <div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span> </div>
 <div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>                  <span class="comment">// Now assemble Jacobian term</span></div>
 <div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>                  jacobian(local_eqn, local_unknown) -=</div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>                    (tmp * test(l) + tmp2 * dtestdx(l, k)) * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a>;</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>                    (tmp * test(l) + tmp2 * dtestdx(l, k)) * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a>;</div>
 <div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>                }</div>
 <div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>              }</div>
 <div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>            }</div>
@@ -384,12 +384,12 @@ $(function() {
 <div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span><span class="comment">  /// Self-test:  Return 0 for OK</span></div>
 <div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span><span class="comment"></span>  <span class="comment">//======================================================================</span></div>
 <div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>  <span class="keyword">template</span>&lt;<span class="keywordtype">unsigned</span> DIM&gt;</div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>  <span class="keywordtype">unsigned</span> GeneralisedAdvectionDiffusionEquations&lt;DIM&gt;::self_test()</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno"><a class="line" href="classoomph_1_1GeneralisedAdvectionDiffusionEquations.html#a77d006ee2f3f4097ad74b180366ddc77">  258</a></span>  <span class="keywordtype">unsigned</span> <a class="code hl_function" href="classoomph_1_1GeneralisedAdvectionDiffusionEquations.html#a77d006ee2f3f4097ad74b180366ddc77">GeneralisedAdvectionDiffusionEquations&lt;DIM&gt;::self_test</a>()</div>
 <div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>  {</div>
 <div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>    <span class="keywordtype">bool</span> passed = <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span> </div>
 <div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>    <span class="comment">// Check lower-level stuff</span></div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="classoomph_1_1FiniteElement.html#af04bf6f6a9a60946e6afeee7afdd709c">FiniteElement::self_test</a>() != 0)</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="classoomph_1_1FiniteElement.html#af94c5a5e22175d5420b33b3b79e46ed3">FiniteElement::self_test</a>() != 0)</div>
 <div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>    {</div>
 <div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>      passed = <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>    }</div>
@@ -414,19 +414,19 @@ $(function() {
 <div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span><span class="comment">  /// nplot points in each coordinate direction</span></div>
 <div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span><span class="comment"></span>  <span class="comment">//======================================================================</span></div>
 <div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>  <span class="keyword">template</span>&lt;<span class="keywordtype">unsigned</span> DIM&gt;</div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceoomph_1_1CommandLineArgs.html#aca07d359a96b9c7b566142112604ea87">GeneralisedAdvectionDiffusionEquations&lt;DIM&gt;::output</a>(</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno"><a class="line" href="classoomph_1_1GeneralisedAdvectionDiffusionEquations.html#a44995055f98a97ce229609832a03867e">  288</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classoomph_1_1GeneralisedAdvectionDiffusionEquations.html#a6a225f0d19451429969ba92705bce96e">GeneralisedAdvectionDiffusionEquations&lt;DIM&gt;::output</a>(</div>
 <div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>    std::ostream&amp; outfile, <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; nplot)</div>
 <div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>  {</div>
 <div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>    <span class="comment">// Vector of local coordinates</span></div>
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>    Vector&lt;double&gt; <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>(DIM);</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>    <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>(DIM);</div>
 <div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span> </div>
 <div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span> </div>
 <div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>    <span class="comment">// Tecplot header info</span></div>
 <div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>    outfile &lt;&lt; tecplot_zone_string(nplot);</div>
 <div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span> </div>
 <div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_node = this-&gt;nnode();</div>
-<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>    Shape psi(n_node);</div>
-<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>    DShape dpsidx(n_node, DIM);</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>    <a class="code hl_class" href="classoomph_1_1Shape.html">Shape</a> psi(n_node);</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>    <a class="code hl_class" href="classoomph_1_1DShape.html">DShape</a> dpsidx(n_node, DIM);</div>
 <div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span> </div>
 <div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>    <span class="comment">// Loop over plot points</span></div>
 <div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>    <span class="keywordtype">unsigned</span> num_plot_points = nplot_points(nplot);</div>
@@ -436,18 +436,18 @@ $(function() {
 <div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>      get_s_plot(iplot, nplot, <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>);</div>
 <div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span> </div>
 <div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>      <span class="comment">// Get Eulerian coordinate of plot point</span></div>
-<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>      Vector&lt;double&gt; <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>(DIM);</div>
-<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>      interpolated_x(<a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>);</div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>      <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> x(DIM);</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>      interpolated_x(<a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, x);</div>
 <div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span> </div>
 <div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = 0; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &lt; DIM; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
 <div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>      {</div>
-<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>        outfile &lt;&lt; <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>[<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>        outfile &lt;&lt; x[<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
 <div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>      }</div>
 <div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>      outfile &lt;&lt; interpolated_u_cons_adv_diff(<a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>) &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
 <div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span> </div>
 <div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>      <span class="comment">// Get the gradients</span></div>
 <div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>      (void)this-&gt;dshape_eulerian(<a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, psi, dpsidx);</div>
-<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>      Vector&lt;double&gt; interpolated_dudx(DIM, 0.0);</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>      <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> interpolated_dudx(DIM, 0.0);</div>
 <div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> n = 0; n &lt; n_node; n++)</div>
 <div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>      {</div>
 <div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>        <span class="keyword">const</span> <span class="keywordtype">double</span> u_ = this-&gt;nodal_value(n, 0);</div>
@@ -463,10 +463,10 @@ $(function() {
 <div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>      }</div>
 <div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span> </div>
 <div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>      <span class="comment">// Get the wind</span></div>
-<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>      Vector&lt;double&gt; wind(DIM);</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>      <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> wind(DIM);</div>
 <div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>      <span class="comment">// Dummy integration point variable needed</span></div>
 <div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>      <span class="keywordtype">unsigned</span> ipt = 0;</div>
-<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>      get_wind_cons_adv_diff(ipt, <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>, wind);</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>      get_wind_cons_adv_diff(ipt, <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, x, wind);</div>
 <div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = 0; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &lt; DIM; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
 <div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>      {</div>
 <div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>        outfile &lt;&lt; wind[<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
@@ -487,11 +487,11 @@ $(function() {
 <div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span><span class="comment">  /// nplot points in each coordinate direction</span></div>
 <div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span><span class="comment"></span>  <span class="comment">//======================================================================</span></div>
 <div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>  <span class="keyword">template</span>&lt;<span class="keywordtype">unsigned</span> DIM&gt;</div>
-<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceoomph_1_1CommandLineArgs.html#aca07d359a96b9c7b566142112604ea87">GeneralisedAdvectionDiffusionEquations&lt;DIM&gt;::output</a>(</div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno"><a class="line" href="classoomph_1_1GeneralisedAdvectionDiffusionEquations.html#afcc8b4ee77728a11e26f8cd512874832">  361</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classoomph_1_1GeneralisedAdvectionDiffusionEquations.html#a6a225f0d19451429969ba92705bce96e">GeneralisedAdvectionDiffusionEquations&lt;DIM&gt;::output</a>(</div>
 <div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>    FILE* file_pt, <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; nplot)</div>
 <div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>  {</div>
 <div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>    <span class="comment">// Vector of local coordinates</span></div>
-<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>    Vector&lt;double&gt; <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>(DIM);</div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>    <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>(DIM);</div>
 <div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span> </div>
 <div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>    <span class="comment">// Tecplot header info</span></div>
 <div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>    fprintf(file_pt, <span class="stringliteral">&quot;%s&quot;</span>, tecplot_zone_string(nplot).c_str());</div>
@@ -524,22 +524,22 @@ $(function() {
 <div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span><span class="comment">  ///   x,y,u_exact    or    x,y,z,u_exact</span></div>
 <div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span><span class="comment"></span>  <span class="comment">//======================================================================</span></div>
 <div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>  <span class="keyword">template</span>&lt;<span class="keywordtype">unsigned</span> DIM&gt;</div>
-<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span>  <span class="keywordtype">void</span> GeneralisedAdvectionDiffusionEquations&lt;DIM&gt;::output_fct(</div>
+<div class="line"><a id="l00398" name="l00398"></a><span class="lineno"><a class="line" href="classoomph_1_1GeneralisedAdvectionDiffusionEquations.html#ac7bae95f78ecec53436902a7da1f6a92">  398</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classoomph_1_1GeneralisedAdvectionDiffusionEquations.html#ac7bae95f78ecec53436902a7da1f6a92">GeneralisedAdvectionDiffusionEquations&lt;DIM&gt;::output_fct</a>(</div>
 <div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>    std::ostream&amp; outfile,</div>
 <div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span>    <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; nplot,</div>
 <div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>    <a class="code hl_typedef" href="classoomph_1_1FiniteElement.html#a690fd33af26cc3e84f39bba6d5a85202">FiniteElement::SteadyExactSolutionFctPt</a> exact_soln_pt)</div>
 <div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span>  {</div>
 <div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>    <span class="comment">// Vector of local coordinates</span></div>
-<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>    Vector&lt;double&gt; <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>(DIM);</div>
+<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>    <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>(DIM);</div>
 <div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span> </div>
 <div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>    <span class="comment">// Vector for coordintes</span></div>
-<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>    Vector&lt;double&gt; <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>(DIM);</div>
+<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>    <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> x(DIM);</div>
 <div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span> </div>
 <div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span>    <span class="comment">// Tecplot header info</span></div>
 <div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span>    outfile &lt;&lt; tecplot_zone_string(nplot);</div>
 <div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span> </div>
 <div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span>    <span class="comment">// Exact solution Vector (here a scalar)</span></div>
-<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span>    Vector&lt;double&gt; exact_soln(1);</div>
+<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span>    <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> exact_soln(1);</div>
 <div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span> </div>
 <div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span>    <span class="comment">// Loop over plot points</span></div>
 <div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span>    <span class="keywordtype">unsigned</span> num_plot_points = nplot_points(nplot);</div>
@@ -549,15 +549,15 @@ $(function() {
 <div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span>      get_s_plot(iplot, nplot, <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>);</div>
 <div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span> </div>
 <div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span>      <span class="comment">// Get x position as Vector</span></div>
-<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span>      interpolated_x(<a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>);</div>
+<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span>      interpolated_x(<a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, x);</div>
 <div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span> </div>
 <div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span>      <span class="comment">// Get exact solution at this point</span></div>
-<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span>      (*exact_soln_pt)(<a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>, exact_soln);</div>
+<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span>      (*exact_soln_pt)(x, exact_soln);</div>
 <div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span> </div>
 <div class="line"><a id="l00428" name="l00428"></a><span class="lineno">  428</span>      <span class="comment">// Output x,y,...,u_exact</span></div>
 <div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span>      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = 0; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &lt; DIM; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
 <div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span>      {</div>
-<div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span>        outfile &lt;&lt; <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>[<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span>        outfile &lt;&lt; x[<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
 <div class="line"><a id="l00432" name="l00432"></a><span class="lineno">  432</span>      }</div>
 <div class="line"><a id="l00433" name="l00433"></a><span class="lineno">  433</span>      outfile &lt;&lt; exact_soln[0] &lt;&lt; std::endl;</div>
 <div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span>    }</div>
@@ -575,7 +575,7 @@ $(function() {
 <div class="line"><a id="l00446" name="l00446"></a><span class="lineno">  446</span><span class="comment">  ///</span></div>
 <div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span><span class="comment"></span>  <span class="comment">//======================================================================</span></div>
 <div class="line"><a id="l00448" name="l00448"></a><span class="lineno">  448</span>  <span class="keyword">template</span>&lt;<span class="keywordtype">unsigned</span> DIM&gt;</div>
-<div class="line"><a id="l00449" name="l00449"></a><span class="lineno">  449</span>  <span class="keywordtype">void</span> GeneralisedAdvectionDiffusionEquations&lt;DIM&gt;::compute_error(</div>
+<div class="line"><a id="l00449" name="l00449"></a><span class="lineno"><a class="line" href="classoomph_1_1GeneralisedAdvectionDiffusionEquations.html#a2cdd1b0c5ad536a0f2e20fb24474bd8c">  449</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classoomph_1_1GeneralisedAdvectionDiffusionEquations.html#a2cdd1b0c5ad536a0f2e20fb24474bd8c">GeneralisedAdvectionDiffusionEquations&lt;DIM&gt;::compute_error</a>(</div>
 <div class="line"><a id="l00450" name="l00450"></a><span class="lineno">  450</span>    std::ostream&amp; outfile,</div>
 <div class="line"><a id="l00451" name="l00451"></a><span class="lineno">  451</span>    <a class="code hl_typedef" href="classoomph_1_1FiniteElement.html#a690fd33af26cc3e84f39bba6d5a85202">FiniteElement::SteadyExactSolutionFctPt</a> exact_soln_pt,</div>
 <div class="line"><a id="l00452" name="l00452"></a><span class="lineno">  452</span>    <span class="keywordtype">double</span>&amp; error,</div>
@@ -586,15 +586,15 @@ $(function() {
 <div class="line"><a id="l00457" name="l00457"></a><span class="lineno">  457</span>    norm = 0.0;</div>
 <div class="line"><a id="l00458" name="l00458"></a><span class="lineno">  458</span> </div>
 <div class="line"><a id="l00459" name="l00459"></a><span class="lineno">  459</span>    <span class="comment">// Vector of local coordinates</span></div>
-<div class="line"><a id="l00460" name="l00460"></a><span class="lineno">  460</span>    Vector&lt;double&gt; <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>(DIM);</div>
+<div class="line"><a id="l00460" name="l00460"></a><span class="lineno">  460</span>    <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>(DIM);</div>
 <div class="line"><a id="l00461" name="l00461"></a><span class="lineno">  461</span> </div>
 <div class="line"><a id="l00462" name="l00462"></a><span class="lineno">  462</span>    <span class="comment">// Vector for coordintes</span></div>
-<div class="line"><a id="l00463" name="l00463"></a><span class="lineno">  463</span>    Vector&lt;double&gt; <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>(DIM);</div>
+<div class="line"><a id="l00463" name="l00463"></a><span class="lineno">  463</span>    <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> x(DIM);</div>
 <div class="line"><a id="l00464" name="l00464"></a><span class="lineno">  464</span> </div>
 <div class="line"><a id="l00465" name="l00465"></a><span class="lineno">  465</span>    <span class="comment">// Find out how many nodes there are in the element</span></div>
 <div class="line"><a id="l00466" name="l00466"></a><span class="lineno">  466</span>    <span class="keywordtype">unsigned</span> n_node = nnode();</div>
 <div class="line"><a id="l00467" name="l00467"></a><span class="lineno">  467</span> </div>
-<div class="line"><a id="l00468" name="l00468"></a><span class="lineno">  468</span>    Shape psi(n_node);</div>
+<div class="line"><a id="l00468" name="l00468"></a><span class="lineno">  468</span>    <a class="code hl_class" href="classoomph_1_1Shape.html">Shape</a> psi(n_node);</div>
 <div class="line"><a id="l00469" name="l00469"></a><span class="lineno">  469</span> </div>
 <div class="line"><a id="l00470" name="l00470"></a><span class="lineno">  470</span>    <span class="comment">// Set the value of n_intpt</span></div>
 <div class="line"><a id="l00471" name="l00471"></a><span class="lineno">  471</span>    <span class="keywordtype">unsigned</span> n_intpt = integral_pt()-&gt;nweight();</div>
@@ -603,7 +603,7 @@ $(function() {
 <div class="line"><a id="l00474" name="l00474"></a><span class="lineno">  474</span>    outfile &lt;&lt; <span class="stringliteral">&quot;ZONE&quot;</span> &lt;&lt; std::endl;</div>
 <div class="line"><a id="l00475" name="l00475"></a><span class="lineno">  475</span> </div>
 <div class="line"><a id="l00476" name="l00476"></a><span class="lineno">  476</span>    <span class="comment">// Exact solution Vector (here a scalar)</span></div>
-<div class="line"><a id="l00477" name="l00477"></a><span class="lineno">  477</span>    Vector&lt;double&gt; exact_soln(1);</div>
+<div class="line"><a id="l00477" name="l00477"></a><span class="lineno">  477</span>    <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> exact_soln(1);</div>
 <div class="line"><a id="l00478" name="l00478"></a><span class="lineno">  478</span> </div>
 <div class="line"><a id="l00479" name="l00479"></a><span class="lineno">  479</span>    <span class="comment">// Loop over the integration points</span></div>
 <div class="line"><a id="l00480" name="l00480"></a><span class="lineno">  480</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> ipt = 0; ipt &lt; n_intpt; ipt++)</div>
@@ -621,27 +621,27 @@ $(function() {
 <div class="line"><a id="l00492" name="l00492"></a><span class="lineno">  492</span>      <span class="keywordtype">double</span> J = J_eulerian(<a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>);</div>
 <div class="line"><a id="l00493" name="l00493"></a><span class="lineno">  493</span> </div>
 <div class="line"><a id="l00494" name="l00494"></a><span class="lineno">  494</span>      <span class="comment">// Premultiply the weights and the Jacobian</span></div>
-<div class="line"><a id="l00495" name="l00495"></a><span class="lineno">  495</span>      <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a> = w * J;</div>
+<div class="line"><a id="l00495" name="l00495"></a><span class="lineno">  495</span>      <span class="keywordtype">double</span> <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a> = w * J;</div>
 <div class="line"><a id="l00496" name="l00496"></a><span class="lineno">  496</span> </div>
 <div class="line"><a id="l00497" name="l00497"></a><span class="lineno">  497</span>      <span class="comment">// Get x position as Vector</span></div>
-<div class="line"><a id="l00498" name="l00498"></a><span class="lineno">  498</span>      interpolated_x(<a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>);</div>
+<div class="line"><a id="l00498" name="l00498"></a><span class="lineno">  498</span>      interpolated_x(<a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, x);</div>
 <div class="line"><a id="l00499" name="l00499"></a><span class="lineno">  499</span> </div>
 <div class="line"><a id="l00500" name="l00500"></a><span class="lineno">  500</span>      <span class="comment">// Get FE function value</span></div>
 <div class="line"><a id="l00501" name="l00501"></a><span class="lineno">  501</span>      <span class="keywordtype">double</span> u_fe = interpolated_u_cons_adv_diff(<a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>);</div>
 <div class="line"><a id="l00502" name="l00502"></a><span class="lineno">  502</span> </div>
 <div class="line"><a id="l00503" name="l00503"></a><span class="lineno">  503</span>      <span class="comment">// Get exact solution at this point</span></div>
-<div class="line"><a id="l00504" name="l00504"></a><span class="lineno">  504</span>      (*exact_soln_pt)(<a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>, exact_soln);</div>
+<div class="line"><a id="l00504" name="l00504"></a><span class="lineno">  504</span>      (*exact_soln_pt)(x, exact_soln);</div>
 <div class="line"><a id="l00505" name="l00505"></a><span class="lineno">  505</span> </div>
 <div class="line"><a id="l00506" name="l00506"></a><span class="lineno">  506</span>      <span class="comment">// Output x,y,...,error</span></div>
 <div class="line"><a id="l00507" name="l00507"></a><span class="lineno">  507</span>      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = 0; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &lt; DIM; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
 <div class="line"><a id="l00508" name="l00508"></a><span class="lineno">  508</span>      {</div>
-<div class="line"><a id="l00509" name="l00509"></a><span class="lineno">  509</span>        outfile &lt;&lt; <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>[<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a id="l00509" name="l00509"></a><span class="lineno">  509</span>        outfile &lt;&lt; x[<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
 <div class="line"><a id="l00510" name="l00510"></a><span class="lineno">  510</span>      }</div>
 <div class="line"><a id="l00511" name="l00511"></a><span class="lineno">  511</span>      outfile &lt;&lt; exact_soln[0] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; exact_soln[0] - u_fe &lt;&lt; std::endl;</div>
 <div class="line"><a id="l00512" name="l00512"></a><span class="lineno">  512</span> </div>
 <div class="line"><a id="l00513" name="l00513"></a><span class="lineno">  513</span>      <span class="comment">// Add to error and norm</span></div>
-<div class="line"><a id="l00514" name="l00514"></a><span class="lineno">  514</span>      norm += exact_soln[0] * exact_soln[0] * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a>;</div>
-<div class="line"><a id="l00515" name="l00515"></a><span class="lineno">  515</span>      error += (exact_soln[0] - u_fe) * (exact_soln[0] - u_fe) * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a>;</div>
+<div class="line"><a id="l00514" name="l00514"></a><span class="lineno">  514</span>      norm += exact_soln[0] * exact_soln[0] * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a>;</div>
+<div class="line"><a id="l00515" name="l00515"></a><span class="lineno">  515</span>      error += (exact_soln[0] - u_fe) * (exact_soln[0] - u_fe) * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a>;</div>
 <div class="line"><a id="l00516" name="l00516"></a><span class="lineno">  516</span>    }</div>
 <div class="line"><a id="l00517" name="l00517"></a><span class="lineno">  517</span>  }</div>
 <div class="line"><a id="l00518" name="l00518"></a><span class="lineno">  518</span> </div>
@@ -650,13 +650,13 @@ $(function() {
 <div class="line"><a id="l00521" name="l00521"></a><span class="lineno">  521</span><span class="comment">  ///</span></div>
 <div class="line"><a id="l00522" name="l00522"></a><span class="lineno">  522</span><span class="comment"></span>  <span class="comment">//======================================================================</span></div>
 <div class="line"><a id="l00523" name="l00523"></a><span class="lineno">  523</span>  <span class="keyword">template</span>&lt;<span class="keywordtype">unsigned</span> DIM&gt;</div>
-<div class="line"><a id="l00524" name="l00524"></a><span class="lineno">  524</span>  <span class="keywordtype">double</span> GeneralisedAdvectionDiffusionEquations&lt;DIM&gt;::integrate_u()</div>
+<div class="line"><a id="l00524" name="l00524"></a><span class="lineno"><a class="line" href="classoomph_1_1GeneralisedAdvectionDiffusionEquations.html#ad4651d1bd8d4da68f5d3d5acb45f659b">  524</a></span>  <span class="keywordtype">double</span> <a class="code hl_function" href="classoomph_1_1GeneralisedAdvectionDiffusionEquations.html#ad4651d1bd8d4da68f5d3d5acb45f659b">GeneralisedAdvectionDiffusionEquations&lt;DIM&gt;::integrate_u</a>()</div>
 <div class="line"><a id="l00525" name="l00525"></a><span class="lineno">  525</span>  {</div>
 <div class="line"><a id="l00526" name="l00526"></a><span class="lineno">  526</span>    <span class="comment">// Initialise</span></div>
 <div class="line"><a id="l00527" name="l00527"></a><span class="lineno">  527</span>    <span class="keywordtype">double</span> sum = 0.0;</div>
 <div class="line"><a id="l00528" name="l00528"></a><span class="lineno">  528</span> </div>
 <div class="line"><a id="l00529" name="l00529"></a><span class="lineno">  529</span>    <span class="comment">// Vector of local coordinates</span></div>
-<div class="line"><a id="l00530" name="l00530"></a><span class="lineno">  530</span>    Vector&lt;double&gt; <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>(DIM);</div>
+<div class="line"><a id="l00530" name="l00530"></a><span class="lineno">  530</span>    <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>(DIM);</div>
 <div class="line"><a id="l00531" name="l00531"></a><span class="lineno">  531</span> </div>
 <div class="line"><a id="l00532" name="l00532"></a><span class="lineno">  532</span>    <span class="comment">// Find out how many nodes there are in the element</span></div>
 <div class="line"><a id="l00533" name="l00533"></a><span class="lineno">  533</span>    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_node = nnode();</div>
@@ -665,7 +665,7 @@ $(function() {
 <div class="line"><a id="l00536" name="l00536"></a><span class="lineno">  536</span>    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> u_nodal_index = this-&gt;u_index_cons_adv_diff();</div>
 <div class="line"><a id="l00537" name="l00537"></a><span class="lineno">  537</span> </div>
 <div class="line"><a id="l00538" name="l00538"></a><span class="lineno">  538</span>    <span class="comment">// Allocate memory for the shape functions</span></div>
-<div class="line"><a id="l00539" name="l00539"></a><span class="lineno">  539</span>    Shape psi(n_node);</div>
+<div class="line"><a id="l00539" name="l00539"></a><span class="lineno">  539</span>    <a class="code hl_class" href="classoomph_1_1Shape.html">Shape</a> psi(n_node);</div>
 <div class="line"><a id="l00540" name="l00540"></a><span class="lineno">  540</span> </div>
 <div class="line"><a id="l00541" name="l00541"></a><span class="lineno">  541</span>    <span class="comment">// Set the value of n_intpt</span></div>
 <div class="line"><a id="l00542" name="l00542"></a><span class="lineno">  542</span>    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_intpt = integral_pt()-&gt;nweight();</div>
@@ -703,40 +703,50 @@ $(function() {
 <div class="line"><a id="l00574" name="l00574"></a><span class="lineno">  574</span>  <span class="comment">//======================================================================</span></div>
 <div class="line"><a id="l00575" name="l00575"></a><span class="lineno">  575</span>  <span class="keyword">template</span>&lt;<span class="keywordtype">unsigned</span> DIM, <span class="keywordtype">unsigned</span> NNODE_1D&gt;</div>
 <div class="line"><a id="l00576" name="l00576"></a><span class="lineno">  576</span>  <span class="keyword">const</span> <span class="keywordtype">unsigned</span></div>
-<div class="line"><a id="l00577" name="l00577"></a><span class="lineno">  577</span>    <a class="code hl_variable" href="classoomph_1_1QGeneralisedAdvectionDiffusionElement.html#a2ea29796b838cb53f0cfbc99a377274c">QGeneralisedAdvectionDiffusionElement&lt;DIM, NNODE_1D&gt;::Initial_Nvalue</a> = 1;</div>
+<div class="line"><a id="l00577" name="l00577"></a><span class="lineno">  577</span>    <a class="code hl_class" href="classoomph_1_1QGeneralisedAdvectionDiffusionElement.html">QGeneralisedAdvectionDiffusionElement&lt;DIM, NNODE_1D&gt;::Initial_Nvalue</a> = 1;</div>
 <div class="line"><a id="l00578" name="l00578"></a><span class="lineno">  578</span> </div>
 <div class="line"><a id="l00579" name="l00579"></a><span class="lineno">  579</span>  <span class="comment">//====================================================================</span></div>
 <div class="line"><a id="l00580" name="l00580"></a><span class="lineno">  580</span>  <span class="comment">// Force build of templates</span></div>
 <div class="line"><a id="l00581" name="l00581"></a><span class="lineno">  581</span>  <span class="comment">//====================================================================</span></div>
-<div class="line"><a id="l00582" name="l00582"></a><span class="lineno">  582</span>  <span class="keyword">template</span> <span class="keyword">class </span>GeneralisedAdvectionDiffusionEquations&lt;1&gt;;</div>
-<div class="line"><a id="l00583" name="l00583"></a><span class="lineno">  583</span>  <span class="keyword">template</span> <span class="keyword">class </span>GeneralisedAdvectionDiffusionEquations&lt;2&gt;;</div>
-<div class="line"><a id="l00584" name="l00584"></a><span class="lineno">  584</span>  <span class="keyword">template</span> <span class="keyword">class </span>GeneralisedAdvectionDiffusionEquations&lt;3&gt;;</div>
+<div class="line"><a id="l00582" name="l00582"></a><span class="lineno">  582</span>  <span class="keyword">template</span> <span class="keyword">class </span><a class="code hl_class" href="classoomph_1_1GeneralisedAdvectionDiffusionEquations.html">GeneralisedAdvectionDiffusionEquations&lt;1&gt;</a>;</div>
+<div class="line"><a id="l00583" name="l00583"></a><span class="lineno">  583</span>  <span class="keyword">template</span> <span class="keyword">class </span><a class="code hl_class" href="classoomph_1_1GeneralisedAdvectionDiffusionEquations.html">GeneralisedAdvectionDiffusionEquations&lt;2&gt;</a>;</div>
+<div class="line"><a id="l00584" name="l00584"></a><span class="lineno">  584</span>  <span class="keyword">template</span> <span class="keyword">class </span><a class="code hl_class" href="classoomph_1_1GeneralisedAdvectionDiffusionEquations.html">GeneralisedAdvectionDiffusionEquations&lt;3&gt;</a>;</div>
 <div class="line"><a id="l00585" name="l00585"></a><span class="lineno">  585</span> </div>
-<div class="line"><a id="l00586" name="l00586"></a><span class="lineno">  586</span>  <span class="keyword">template</span> <span class="keyword">class </span>QGeneralisedAdvectionDiffusionElement&lt;1, 2&gt;;</div>
-<div class="line"><a id="l00587" name="l00587"></a><span class="lineno">  587</span>  <span class="keyword">template</span> <span class="keyword">class </span>QGeneralisedAdvectionDiffusionElement&lt;1, 3&gt;;</div>
-<div class="line"><a id="l00588" name="l00588"></a><span class="lineno">  588</span>  <span class="keyword">template</span> <span class="keyword">class </span>QGeneralisedAdvectionDiffusionElement&lt;1, 4&gt;;</div>
+<div class="line"><a id="l00586" name="l00586"></a><span class="lineno">  586</span>  <span class="keyword">template</span> <span class="keyword">class </span><a class="code hl_class" href="classoomph_1_1QGeneralisedAdvectionDiffusionElement.html">QGeneralisedAdvectionDiffusionElement&lt;1, 2&gt;</a>;</div>
+<div class="line"><a id="l00587" name="l00587"></a><span class="lineno">  587</span>  <span class="keyword">template</span> <span class="keyword">class </span><a class="code hl_class" href="classoomph_1_1QGeneralisedAdvectionDiffusionElement.html">QGeneralisedAdvectionDiffusionElement&lt;1, 3&gt;</a>;</div>
+<div class="line"><a id="l00588" name="l00588"></a><span class="lineno">  588</span>  <span class="keyword">template</span> <span class="keyword">class </span><a class="code hl_class" href="classoomph_1_1QGeneralisedAdvectionDiffusionElement.html">QGeneralisedAdvectionDiffusionElement&lt;1, 4&gt;</a>;</div>
 <div class="line"><a id="l00589" name="l00589"></a><span class="lineno">  589</span> </div>
-<div class="line"><a id="l00590" name="l00590"></a><span class="lineno">  590</span>  <span class="keyword">template</span> <span class="keyword">class </span>QGeneralisedAdvectionDiffusionElement&lt;2, 2&gt;;</div>
-<div class="line"><a id="l00591" name="l00591"></a><span class="lineno">  591</span>  <span class="keyword">template</span> <span class="keyword">class </span>QGeneralisedAdvectionDiffusionElement&lt;2, 3&gt;;</div>
-<div class="line"><a id="l00592" name="l00592"></a><span class="lineno">  592</span>  <span class="keyword">template</span> <span class="keyword">class </span>QGeneralisedAdvectionDiffusionElement&lt;2, 4&gt;;</div>
+<div class="line"><a id="l00590" name="l00590"></a><span class="lineno">  590</span>  <span class="keyword">template</span> <span class="keyword">class </span><a class="code hl_class" href="classoomph_1_1QGeneralisedAdvectionDiffusionElement.html">QGeneralisedAdvectionDiffusionElement&lt;2, 2&gt;</a>;</div>
+<div class="line"><a id="l00591" name="l00591"></a><span class="lineno">  591</span>  <span class="keyword">template</span> <span class="keyword">class </span><a class="code hl_class" href="classoomph_1_1QGeneralisedAdvectionDiffusionElement.html">QGeneralisedAdvectionDiffusionElement&lt;2, 3&gt;</a>;</div>
+<div class="line"><a id="l00592" name="l00592"></a><span class="lineno">  592</span>  <span class="keyword">template</span> <span class="keyword">class </span><a class="code hl_class" href="classoomph_1_1QGeneralisedAdvectionDiffusionElement.html">QGeneralisedAdvectionDiffusionElement&lt;2, 4&gt;</a>;</div>
 <div class="line"><a id="l00593" name="l00593"></a><span class="lineno">  593</span> </div>
-<div class="line"><a id="l00594" name="l00594"></a><span class="lineno">  594</span>  <span class="keyword">template</span> <span class="keyword">class </span>QGeneralisedAdvectionDiffusionElement&lt;3, 2&gt;;</div>
-<div class="line"><a id="l00595" name="l00595"></a><span class="lineno">  595</span>  <span class="keyword">template</span> <span class="keyword">class </span>QGeneralisedAdvectionDiffusionElement&lt;3, 3&gt;;</div>
-<div class="line"><a id="l00596" name="l00596"></a><span class="lineno">  596</span>  <span class="keyword">template</span> <span class="keyword">class </span>QGeneralisedAdvectionDiffusionElement&lt;3, 4&gt;;</div>
+<div class="line"><a id="l00594" name="l00594"></a><span class="lineno">  594</span>  <span class="keyword">template</span> <span class="keyword">class </span><a class="code hl_class" href="classoomph_1_1QGeneralisedAdvectionDiffusionElement.html">QGeneralisedAdvectionDiffusionElement&lt;3, 2&gt;</a>;</div>
+<div class="line"><a id="l00595" name="l00595"></a><span class="lineno">  595</span>  <span class="keyword">template</span> <span class="keyword">class </span><a class="code hl_class" href="classoomph_1_1QGeneralisedAdvectionDiffusionElement.html">QGeneralisedAdvectionDiffusionElement&lt;3, 3&gt;</a>;</div>
+<div class="line"><a id="l00596" name="l00596"></a><span class="lineno">  596</span>  <span class="keyword">template</span> <span class="keyword">class </span><a class="code hl_class" href="classoomph_1_1QGeneralisedAdvectionDiffusionElement.html">QGeneralisedAdvectionDiffusionElement&lt;3, 4&gt;</a>;</div>
 <div class="line"><a id="l00597" name="l00597"></a><span class="lineno">  597</span> </div>
 <div class="line"><a id="l00598" name="l00598"></a><span class="lineno">  598</span> </div>
 <div class="line"><a id="l00599" name="l00599"></a><span class="lineno">  599</span>} <span class="comment">// namespace oomph</span></div>
 <div class="ttc" id="acfortran_8h_html_ab7123126e4885ef647dd9c6e3807a21c"><div class="ttname"><a href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a></div><div class="ttdeci">static char t char * s</div><div class="ttdef"><b>Definition:</b> <a href="cfortran_8h_source.html#l00568">cfortran.h:568</a></div></div>
 <div class="ttc" id="acfortran_8h_html_adb50e893b86b3e55e751a42eab3cba82"><div class="ttname"><a href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a></div><div class="ttdeci">cstr elem_len * i</div><div class="ttdef"><b>Definition:</b> <a href="cfortran_8h_source.html#l00603">cfortran.h:603</a></div></div>
-<div class="ttc" id="aclassoomph_1_1FiniteElement_html_a690fd33af26cc3e84f39bba6d5a85202"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#a690fd33af26cc3e84f39bba6d5a85202">oomph::FiniteElement::SteadyExactSolutionFctPt</a></div><div class="ttdeci">void(* SteadyExactSolutionFctPt)(const Vector&lt; double &gt; &amp;, Vector&lt; double &gt; &amp;)</div><div class="ttdoc">Function pointer for function that computes vector-valued steady &quot;exact solution&quot;  as .</div><div class="ttdef"><b>Definition:</b> <a href="elements_8h_source.html#l01764">elements.h:1764</a></div></div>
-<div class="ttc" id="aclassoomph_1_1FiniteElement_html_af04bf6f6a9a60946e6afeee7afdd709c"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#af04bf6f6a9a60946e6afeee7afdd709c">oomph::FiniteElement::self_test</a></div><div class="ttdeci">virtual unsigned self_test()</div><div class="ttdoc">Self-test: Check inversion of element &amp; do self-test for GeneralisedElement. Return 0 if OK.</div></div>
-<div class="ttc" id="aclassoomph_1_1QGeneralisedAdvectionDiffusionElement_html_a2ea29796b838cb53f0cfbc99a377274c"><div class="ttname"><a href="classoomph_1_1QGeneralisedAdvectionDiffusionElement.html#a2ea29796b838cb53f0cfbc99a377274c">oomph::QGeneralisedAdvectionDiffusionElement::Initial_Nvalue</a></div><div class="ttdeci">static const unsigned Initial_Nvalue</div><div class="ttdoc">Static array of ints to hold number of variables at nodes: Initial_Nvalue[n].</div><div class="ttdef"><b>Definition:</b> <a href="gen__advection__diffusion__elements_8h_source.html#l00649">gen_advection_diffusion_elements.h:649</a></div></div>
+<div class="ttc" id="aclassoomph_1_1DShape_html"><div class="ttname"><a href="classoomph_1_1DShape.html">oomph::DShape</a></div><div class="ttdoc">A Class for the derivatives of shape functions The class design is essentially the same as Shape,...</div><div class="ttdef"><b>Definition:</b> <a href="shape_8h_source.html#l00277">shape.h:278</a></div></div>
+<div class="ttc" id="aclassoomph_1_1DenseMatrix_html"><div class="ttname"><a href="classoomph_1_1DenseMatrix.html">oomph::DenseMatrix&lt; double &gt;</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FiniteElement_html_a690fd33af26cc3e84f39bba6d5a85202"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#a690fd33af26cc3e84f39bba6d5a85202">oomph::FiniteElement::SteadyExactSolutionFctPt</a></div><div class="ttdeci">void(* SteadyExactSolutionFctPt)(const Vector&lt; double &gt; &amp;, Vector&lt; double &gt; &amp;)</div><div class="ttdoc">Function pointer for function that computes vector-valued steady &quot;exact solution&quot;  as .</div><div class="ttdef"><b>Definition:</b> <a href="elements_8h_source.html#l01759">elements.h:1759</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FiniteElement_html_af94c5a5e22175d5420b33b3b79e46ed3"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#af94c5a5e22175d5420b33b3b79e46ed3">oomph::FiniteElement::self_test</a></div><div class="ttdeci">virtual unsigned self_test()</div><div class="ttdoc">Self-test: Check inversion of element &amp; do self-test for GeneralisedElement. Return 0 if OK.</div><div class="ttdef"><b>Definition:</b> <a href="elements_8cc_source.html#l04440">elements.cc:4440</a></div></div>
+<div class="ttc" id="aclassoomph_1_1GeneralisedAdvectionDiffusionEquations_html"><div class="ttname"><a href="classoomph_1_1GeneralisedAdvectionDiffusionEquations.html">oomph::GeneralisedAdvectionDiffusionEquations</a></div><div class="ttdoc">A class for all elements that solve the Advection Diffusion equations in conservative form using isop...</div><div class="ttdef"><b>Definition:</b> <a href="gen__advection__diffusion__elements_8h_source.html#l00051">gen_advection_diffusion_elements.h:52</a></div></div>
+<div class="ttc" id="aclassoomph_1_1GeneralisedAdvectionDiffusionEquations_html_a2cdd1b0c5ad536a0f2e20fb24474bd8c"><div class="ttname"><a href="classoomph_1_1GeneralisedAdvectionDiffusionEquations.html#a2cdd1b0c5ad536a0f2e20fb24474bd8c">oomph::GeneralisedAdvectionDiffusionEquations::compute_error</a></div><div class="ttdeci">void compute_error(std::ostream &amp;outfile, FiniteElement::SteadyExactSolutionFctPt exact_soln_pt, double &amp;error, double &amp;norm)</div><div class="ttdoc">Get error against and norm of exact solution.</div><div class="ttdef"><b>Definition:</b> <a href="gen__advection__diffusion__elements_8cc_source.html#l00449">gen_advection_diffusion_elements.cc:449</a></div></div>
+<div class="ttc" id="aclassoomph_1_1GeneralisedAdvectionDiffusionEquations_html_a2d278b9e194799a8b83602c37b61cc23"><div class="ttname"><a href="classoomph_1_1GeneralisedAdvectionDiffusionEquations.html#a2d278b9e194799a8b83602c37b61cc23">oomph::GeneralisedAdvectionDiffusionEquations::Default_peclet_number</a></div><div class="ttdeci">static double Default_peclet_number</div><div class="ttdoc">Static default value for the Peclet number.</div><div class="ttdef"><b>Definition:</b> <a href="gen__advection__diffusion__elements_8h_source.html#l00623">gen_advection_diffusion_elements.h:623</a></div></div>
+<div class="ttc" id="aclassoomph_1_1GeneralisedAdvectionDiffusionEquations_html_a6a225f0d19451429969ba92705bce96e"><div class="ttname"><a href="classoomph_1_1GeneralisedAdvectionDiffusionEquations.html#a6a225f0d19451429969ba92705bce96e">oomph::GeneralisedAdvectionDiffusionEquations::output</a></div><div class="ttdeci">void output(std::ostream &amp;outfile)</div><div class="ttdoc">Output with default number of plot points.</div><div class="ttdef"><b>Definition:</b> <a href="gen__advection__diffusion__elements_8h_source.html#l00149">gen_advection_diffusion_elements.h:149</a></div></div>
+<div class="ttc" id="aclassoomph_1_1GeneralisedAdvectionDiffusionEquations_html_a77d006ee2f3f4097ad74b180366ddc77"><div class="ttname"><a href="classoomph_1_1GeneralisedAdvectionDiffusionEquations.html#a77d006ee2f3f4097ad74b180366ddc77">oomph::GeneralisedAdvectionDiffusionEquations::self_test</a></div><div class="ttdeci">unsigned self_test()</div><div class="ttdoc">Self-test: Return 0 for OK.</div><div class="ttdef"><b>Definition:</b> <a href="gen__advection__diffusion__elements_8cc_source.html#l00258">gen_advection_diffusion_elements.cc:258</a></div></div>
+<div class="ttc" id="aclassoomph_1_1GeneralisedAdvectionDiffusionEquations_html_ac7bae95f78ecec53436902a7da1f6a92"><div class="ttname"><a href="classoomph_1_1GeneralisedAdvectionDiffusionEquations.html#ac7bae95f78ecec53436902a7da1f6a92">oomph::GeneralisedAdvectionDiffusionEquations::output_fct</a></div><div class="ttdeci">void output_fct(std::ostream &amp;outfile, const unsigned &amp;nplot, FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)</div><div class="ttdoc">Output exact soln: x,y,u_exact or x,y,z,u_exact at nplot^DIM plot points.</div><div class="ttdef"><b>Definition:</b> <a href="gen__advection__diffusion__elements_8cc_source.html#l00398">gen_advection_diffusion_elements.cc:398</a></div></div>
+<div class="ttc" id="aclassoomph_1_1GeneralisedAdvectionDiffusionEquations_html_ad4651d1bd8d4da68f5d3d5acb45f659b"><div class="ttname"><a href="classoomph_1_1GeneralisedAdvectionDiffusionEquations.html#ad4651d1bd8d4da68f5d3d5acb45f659b">oomph::GeneralisedAdvectionDiffusionEquations::integrate_u</a></div><div class="ttdeci">double integrate_u()</div><div class="ttdoc">Integrate the concentration over the element.</div><div class="ttdef"><b>Definition:</b> <a href="gen__advection__diffusion__elements_8cc_source.html#l00524">gen_advection_diffusion_elements.cc:524</a></div></div>
+<div class="ttc" id="aclassoomph_1_1GeneralisedAdvectionDiffusionEquations_html_ae05de6e681f20f04f5ad9821f3a572c0"><div class="ttname"><a href="classoomph_1_1GeneralisedAdvectionDiffusionEquations.html#ae05de6e681f20f04f5ad9821f3a572c0">oomph::GeneralisedAdvectionDiffusionEquations::fill_in_generic_residual_contribution_cons_adv_diff</a></div><div class="ttdeci">virtual void fill_in_generic_residual_contribution_cons_adv_diff(Vector&lt; double &gt; &amp;residuals, DenseMatrix&lt; double &gt; &amp;jacobian, DenseMatrix&lt; double &gt; &amp;mass_matrix, unsigned flag)</div><div class="ttdoc">Add the element's contribution to its residual vector only (if flag=and/or element Jacobian matrix.</div><div class="ttdef"><b>Definition:</b> <a href="gen__advection__diffusion__elements_8cc_source.html#l00048">gen_advection_diffusion_elements.cc:49</a></div></div>
+<div class="ttc" id="aclassoomph_1_1QGeneralisedAdvectionDiffusionElement_html"><div class="ttname"><a href="classoomph_1_1QGeneralisedAdvectionDiffusionElement.html">oomph::QGeneralisedAdvectionDiffusionElement</a></div><div class="ttdoc">//////////////////////////////////////////////////////////////////////// ////////////////////////////...</div><div class="ttdef"><b>Definition:</b> <a href="gen__advection__diffusion__elements_8h_source.html#l00638">gen_advection_diffusion_elements.h:641</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Shape_html"><div class="ttname"><a href="classoomph_1_1Shape.html">oomph::Shape</a></div><div class="ttdoc">A Class for shape functions. In simple cases, the shape functions have only one index that can be tho...</div><div class="ttdef"><b>Definition:</b> <a href="shape_8h_source.html#l00075">shape.h:76</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Vector_html"><div class="ttname"><a href="classoomph_1_1Vector.html">oomph::Vector&lt; double &gt;</a></div></div>
 <div class="ttc" id="agen__advection__diffusion__elements_8h_html"><div class="ttname"><a href="gen__advection__diffusion__elements_8h.html">gen_advection_diffusion_elements.h</a></div></div>
-<div class="ttc" id="anamespaceoomph_1_1CommandLineArgs_html_aca07d359a96b9c7b566142112604ea87"><div class="ttname"><a href="namespaceoomph_1_1CommandLineArgs.html#aca07d359a96b9c7b566142112604ea87">oomph::CommandLineArgs::output</a></div><div class="ttdeci">void output()</div><div class="ttdoc">Doc the command line arguments.</div><div class="ttdef"><b>Definition:</b> <a href="oomph__utilities_8cc_source.html#l00436">oomph_utilities.cc:436</a></div></div>
 <div class="ttc" id="anamespaceoomph_1_1OcTreeNames_html_ae7e7e58298b85825061eeff362656c40a51292b8e4d96f2bb9f0d6bb0340d1620"><div class="ttname"><a href="namespaceoomph_1_1OcTreeNames.html#ae7e7e58298b85825061eeff362656c40a51292b8e4d96f2bb9f0d6bb0340d1620">oomph::OcTreeNames::D</a></div><div class="ttdeci">@ D</div><div class="ttdef"><b>Definition:</b> <a href="octree_8h_source.html#l00071">octree.h:71</a></div></div>
+<div class="ttc" id="anamespaceoomph_1_1QuadTreeNames_html_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6"><div class="ttname"><a href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">oomph::QuadTreeNames::W</a></div><div class="ttdeci">@ W</div><div class="ttdef"><b>Definition:</b> <a href="quadtree_8h_source.html#l00063">quadtree.h:63</a></div></div>
 <div class="ttc" id="anamespaceoomph_html"><div class="ttname"><a href="namespaceoomph.html">oomph</a></div><div class="ttdoc">//////////////////////////////////////////////////////////////////// ////////////////////////////////...</div><div class="ttdef"><b>Definition:</b> <a href="advection__diffusion__elements_8cc_source.html#l00029">advection_diffusion_elements.cc:30</a></div></div>
-<div class="ttc" id="anamespaceoomph_html_a9d1d2da2b8bb8e73af72b5cadb8fe97c"><div class="ttname"><a href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">oomph::x</a></div><div class="ttdeci">x</div><div class="ttdoc">Pseudo buckling ring: Circular ring deformed by the N-th buckling mode of a thin-wall elastic ring.</div><div class="ttdef"><b>Definition:</b> <a href="pseudo__buckling__ring_8h_source.html#l00049">pseudo_buckling_ring.h:49</a></div></div>
-<div class="ttc" id="anamespaceoomph_html_ab40f6d5233caa62dd428818b4cba72d5"><div class="ttname"><a href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">oomph::W</a></div><div class="ttdeci">W</div><div class="ttdoc">///////////////////////////////////////////////////////////////// ///////////////////////////////////...</div><div class="ttdef"><b>Definition:</b> <a href="constitutive__laws_8h_source.html#l00142">constitutive_laws.h:142</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 
     <!-- jQuery for Bootstrap and Doxygen -->
@@ -765,7 +775,7 @@ $(function() {
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Nov 2 2021 16:31:07
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Dec 21 2021 17:35:05
         </div>
       </div>
     </footer>

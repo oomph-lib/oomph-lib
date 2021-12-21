@@ -56,7 +56,7 @@ virtual void \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a7dd49826326e9
 \begin{DoxyCompactList}\small\item\em Virtual function that specifies the variation of the zeta coordinates in the \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} along the boundary connecting vertices 1 and 2 in facet facet\+\_\+id. Default implementation\+: Linear interpolation between edges. zeta\+\_\+boundary=0.\+0\+: we\textquotesingle{}re on vertex 1; zeta\+\_\+boundary=1.\+0\+: we\textquotesingle{}re on vertex 2. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_aa9c92e3c5ba628cdcc91086c9cb38c22}{boundary\+\_\+zeta20}} (const unsigned \&facet\+\_\+id, const double \&zeta\+\_\+boundary, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta)
 \begin{DoxyCompactList}\small\item\em Virtual function that specifies the variation of the zeta coordinates in the \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} along the boundary connecting vertices 2 and 0 in facet facet\+\_\+id. Default implementation\+: Linear interpolation between edges. zeta\+\_\+boundary=0.\+0\+: we\textquotesingle{}re on vertex 2; zeta\+\_\+boundary=1.\+0\+: we\textquotesingle{}re on vertex 0. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a6ed1b3038fb88005c2c637543fd20433}{vertex\+\_\+index\+\_\+in\+\_\+tetgen}} (const unsigned \&\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}})
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a6ed1b3038fb88005c2c637543fd20433}{vertex\+\_\+index\+\_\+in\+\_\+tetgen}} (const unsigned \&f)
 \begin{DoxyCompactList}\small\item\em Facet connectivity\+: vertex\+\_\+index\mbox{[}j\mbox{]} is the index of the j-\/th vertex (in the Vertex\+\_\+pt vector) in facet f. Bit of an obscure functionality that\textquotesingle{}s only needed for setup tetgen\+\_\+io. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -449,7 +449,7 @@ Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00502}{502}} of file \m
 
 
 
-References \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{oomph\+::f()}}, \mbox{\hyperlink{tet__mesh_8h_source_l00486}{Facet\+\_\+pt}}, \mbox{\hyperlink{tet__mesh_8h_source_l00494}{Facet\+\_\+vertex\+\_\+index\+\_\+in\+\_\+tetgen}}, \mbox{\hyperlink{tet__mesh_8h_source_l00325}{nfacet()}}, and \mbox{\hyperlink{tet__mesh_8h_source_l00483}{Vertex\+\_\+pt}}.
+References \mbox{\hyperlink{tet__mesh_8h_source_l00486}{Facet\+\_\+pt}}, \mbox{\hyperlink{tet__mesh_8h_source_l00494}{Facet\+\_\+vertex\+\_\+index\+\_\+in\+\_\+tetgen}}, \mbox{\hyperlink{tet__mesh_8h_source_l00325}{nfacet()}}, and \mbox{\hyperlink{tet__mesh_8h_source_l00483}{Vertex\+\_\+pt}}.
 
 
 
@@ -493,7 +493,7 @@ Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00472}{472}} of file \m
 
 
 
-References \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{oomph\+::f()}}, \mbox{\hyperlink{tet__mesh_8h_source_l00494}{Facet\+\_\+vertex\+\_\+index\+\_\+in\+\_\+tetgen}}, \mbox{\hyperlink{tet__mesh_8h_source_l00325}{nfacet()}}, and \mbox{\hyperlink{tet__mesh_8h_source_l00502}{setup\+\_\+facet\+\_\+connectivity\+\_\+for\+\_\+tetgen()}}.
+References \mbox{\hyperlink{tet__mesh_8h_source_l00494}{Facet\+\_\+vertex\+\_\+index\+\_\+in\+\_\+tetgen}}, \mbox{\hyperlink{tet__mesh_8h_source_l00325}{nfacet()}}, and \mbox{\hyperlink{tet__mesh_8h_source_l00502}{setup\+\_\+facet\+\_\+connectivity\+\_\+for\+\_\+tetgen()}}.
 
 
 

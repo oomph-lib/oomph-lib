@@ -64,14 +64,14 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00060}00060 \textcolor{comment}{    /// then its derivative.}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00061}00061 \textcolor{comment}{}    \textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00062}\mbox{\hyperlink{namespaceoomph_1_1Hankel__functions__for__helmholtz__problem_a89d572e5352a2da98d19260165385f6f}{00062}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1Hankel__functions__for__helmholtz__problem_a89d572e5352a2da98d19260165385f6f}{Hankel\_first}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n,}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00063}00063                       \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00063}00063                       \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& x,}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00064}00064                       \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<std::complex<double>>\& h,}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00065}00065                       \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<std::complex<double>>\& hp)}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00066}00066     \{}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00067}00067       \textcolor{keywordtype}{int} n\_actual = 0;}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00068}00068       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} jn(n + 1), yn(n + 1), jnp(n + 1), ynp(n + 1);}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00069}00069       CRBond\_Bessel::bessjyna(}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00070}00070         \textcolor{keywordtype}{int}(n), \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, n\_actual, \&jn[0], \&yn[0], \&jnp[0], \&ynp[0]);}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00070}00070         \textcolor{keywordtype}{int}(n), x, n\_actual, \&jn[0], \&yn[0], \&jnp[0], \&ynp[0]);}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00071}00071 \textcolor{preprocessor}{\#ifdef PARANOID}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00072}00072       \textcolor{keywordflow}{if} (n\_actual != \textcolor{keywordtype}{int}(n))}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00073}00073       \{}
@@ -97,7 +97,7 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00093}00093 \textcolor{comment}{    /// shifted Laplacian preconditioner.}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00094}00094 \textcolor{comment}{}    \textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00095}\mbox{\hyperlink{namespaceoomph_1_1Hankel__functions__for__helmholtz__problem_a051f9376947b679c4c117f024fd7528a}{00095}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1Hankel__functions__for__helmholtz__problem_a051f9376947b679c4c117f024fd7528a}{CHankel\_first}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n,}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00096}00096                        \textcolor{keyword}{const} std::complex<double>\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00096}00096                        \textcolor{keyword}{const} std::complex<double>\& x,}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00097}00097                        \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<std::complex<double>>\& h,}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00098}00098                        \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<std::complex<double>>\& hp)}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00099}00099     \{}
@@ -118,7 +118,7 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00114}00114 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00115}00115       \textcolor{comment}{// Call the (complex) Bessel function to calculate the solution}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00116}00116       CRBond\_Bessel::cbessjyna(}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00117}00117         \textcolor{keywordtype}{int}(n), \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, n\_actual, \&jn[0], \&yn[0], \&jnp[0], \&ynp[0]);}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00117}00117         \textcolor{keywordtype}{int}(n), x, n\_actual, \&jn[0], \&yn[0], \&jnp[0], \&ynp[0]);}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00118}00118 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00119}00119 \textcolor{preprocessor}{\#ifdef PARANOID}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00120}00120       \textcolor{comment}{// Tell the user if they tried to calculate higher order terms}}
@@ -284,7 +284,7 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00280}00280       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} unit\_normal(bulk\_dim);}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00281}00281 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00282}00282       \textcolor{comment}{// Set the value of n\_intpt}}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00283}00283       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00283}00283       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00284}00284 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00285}00285       \textcolor{comment}{// Set the Vector to hold local coordinates}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00286}00286       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(local\_dim);}
@@ -303,19 +303,19 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00299}00299         \textcolor{comment}{// Assign values of s}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00300}00300         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < local\_dim; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00301}00301         \{}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00302}00302           \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>knot(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00302}00302           \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{knot}}(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00303}00303         \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00304}00304         \textcolor{comment}{// get the outer\_unit\_ext vector}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00305}00305         this-\/>\mbox{\hyperlink{classoomph_1_1FaceElement_a49cf44d89e80926635d2a26abfbbf3b0}{outer\_unit\_normal}}(s, unit\_normal);}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00306}00306 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00307}00307         \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00308}00308         \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00308}00308         \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00309}00309 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00310}00310         \textcolor{comment}{// Get jacobian of mapping}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00311}00311         \textcolor{keywordtype}{double} J = \mbox{\hyperlink{classoomph_1_1FaceElement_a919d0d76746eaa78a8a3c7f75f99a9e5}{J\_eulerian}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00312}00312 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00313}00313         \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00314}00314         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00314}00314         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00315}00315 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00316}00316         \textcolor{comment}{// Get local coordinates in bulk element by copy construction}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00317}00317         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} s\_bulk(\mbox{\hyperlink{classoomph_1_1FaceElement_a5dd56d5b438c316aca9efa815441b74d}{local\_coordinate\_in\_bulk}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}));}
@@ -330,7 +330,7 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00326}00326         std::complex<double> dphi\_dn(0.0, 0.0);}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00327}00327         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<std::complex<double>}}> interpolated\_dphidx(bulk\_dim);}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00328}00328         std::complex<double> interpolated\_phi(0.0, 0.0);}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00329}00329         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(bulk\_dim);}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00329}00329         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(bulk\_dim);}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00330}00330 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00331}00331         \textcolor{comment}{// Calculate function value and derivatives:}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00332}00332         \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
@@ -374,14 +374,14 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00370}00370         \textcolor{comment}{// Output?}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00371}00371         \textcolor{keywordflow}{if} (outfile.is\_open())}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00372}00372         \{}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00373}00373           \mbox{\hyperlink{classoomph_1_1FaceElement_a7aa612fec3604e08344503fbcdc357c8}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00374}00374           \textcolor{keywordtype}{double} phi = atan2(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[1], \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[0]);}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00375}00375           outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[0] << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[1] << \textcolor{stringliteral}{"{} "{}} << phi << \textcolor{stringliteral}{"{} "{}} << integrand}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00373}00373           \mbox{\hyperlink{classoomph_1_1FaceElement_a7aa612fec3604e08344503fbcdc357c8}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00374}00374           \textcolor{keywordtype}{double} phi = atan2(x[1], x[0]);}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00375}00375           outfile << x[0] << \textcolor{stringliteral}{"{} "{}} << x[1] << \textcolor{stringliteral}{"{} "{}} << phi << \textcolor{stringliteral}{"{} "{}} << integrand}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00376}00376                   << \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00377}00377         \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00378}00378 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00379}00379         \textcolor{comment}{// ...add to integral}}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00380}00380         power += integrand * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00380}00380         power += integrand * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00381}00381       \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00382}00382 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00383}00383       \textcolor{keywordflow}{return} power;}
@@ -416,7 +416,7 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00412}00412       \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} dpsi(n\_node, 1);}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00413}00413 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00414}00414       \textcolor{comment}{// Set the value of n\_intpt}}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00415}00415       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00415}00415       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00416}00416 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00417}00417       \textcolor{comment}{// Set the Vector to hold local coordinates}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00418}00418       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(this-\/>\mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_ad01f0d13e7319e28f28286abb6d0b7cc}{Dim}} -\/ 1);}
@@ -436,11 +436,11 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00432}00432         \textcolor{comment}{// Assign values of s}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00433}00433         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < (this-\/>\mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_ad01f0d13e7319e28f28286abb6d0b7cc}{Dim}} -\/ 1); \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00434}00434         \{}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00435}00435           s[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>knot(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00435}00435           s[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{knot}}(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00436}00436         \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00437}00437 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00438}00438         \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00439}00439         \textcolor{keywordtype}{double} w = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00439}00439         \textcolor{keywordtype}{double} w = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00440}00440 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00441}00441         \textcolor{comment}{// Get the shape functions}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00442}00442         this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9db1456b827131c21a991ac9fedf4b0c}{dshape\_local}}(s, psi, dpsi);}
@@ -674,11 +674,11 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00670}00670 \textcolor{comment}{    /// Add the element's contribution to its residual vector and its}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00671}00671 \textcolor{comment}{    /// Jacobian matrix}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00672}\mbox{\hyperlink{classoomph_1_1HelmholtzAbsorbingBCElement_a2ddc7be679d396847964aed6d545e168}{00672}} \textcolor{comment}{}    \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1HelmholtzAbsorbingBCElement_a2ddc7be679d396847964aed6d545e168}{fill\_in\_contribution\_to\_jacobian}}(\mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00673}00673                                                  \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00673}00673                                                  \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian)}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00674}00674     \{}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00675}00675       \textcolor{comment}{// Call the generic routine with the flag set to 1}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00676}00676       \mbox{\hyperlink{classoomph_1_1HelmholtzAbsorbingBCElement_a25fb70fd99fc41f78f9afe6a3d8a445e}{fill\_in\_generic\_residual\_contribution\_helmholtz\_abc}}(}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00677}00677         residuals, \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, 1);}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00677}00677         residuals, jacobian, 1);}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00678}00678     \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00679}00679 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00680}00680 \textcolor{comment}{}}
@@ -694,7 +694,7 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00690}00690 \textcolor{comment}{    /// Overloaded version, using the abc approximation}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00691}\mbox{\hyperlink{classoomph_1_1HelmholtzAbsorbingBCElement_a25fb70fd99fc41f78f9afe6a3d8a445e}{00691}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1HelmholtzAbsorbingBCElement_a25fb70fd99fc41f78f9afe6a3d8a445e}{fill\_in\_generic\_residual\_contribution\_helmholtz\_abc}}(}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00692}00692       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00693}00693       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}},}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00693}00693       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian,}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00694}00694       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& flag)}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00695}00695     \{}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00696}00696 \textcolor{preprocessor}{\#ifdef PARANOID}}
@@ -724,7 +724,7 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00720}00720         dtest\_dS(n\_node, this-\/>\mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_ad01f0d13e7319e28f28286abb6d0b7cc}{Dim}} -\/ 1), dpsi\_dS(n\_node, this-\/>\mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_ad01f0d13e7319e28f28286abb6d0b7cc}{Dim}} -\/ 1);}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00721}00721 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00722}00722       \textcolor{comment}{// Set the value of Nintpt}}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00723}00723       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00723}00723       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00724}00724 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00725}00725       \textcolor{comment}{// Set the Vector to hold local coordinates}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00726}00726       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(this-\/>\mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_ad01f0d13e7319e28f28286abb6d0b7cc}{Dim}} -\/ 1);}
@@ -745,11 +745,11 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00741}00741         \textcolor{comment}{// Assign values of s}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00742}00742         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < (this-\/>\mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_ad01f0d13e7319e28f28286abb6d0b7cc}{Dim}} -\/ 1); \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00743}00743         \{}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00744}00744           s[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>knot(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00744}00744           s[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{knot}}(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00745}00745         \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00746}00746 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00747}00747         \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00748}00748         \textcolor{keywordtype}{double} w = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00748}00748         \textcolor{keywordtype}{double} w = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00749}00749 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00750}00750         \textcolor{comment}{// Find the shape test functions and derivates; return the Jacobian}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00751}00751         \textcolor{comment}{// of the mapping between local and global (Eulerian)}}
@@ -758,7 +758,7 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00754}00754           this-\/>\mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_ab3183e6c6d742852fc890742a4e06d3f}{d\_shape\_and\_test\_local}}(s, psi, test, dpsi\_ds, dtest\_ds);}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00755}00755 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00756}00756         \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00757}00757         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00757}00757         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00758}00758         \textcolor{comment}{// get the inverse of jacibian}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00759}00759         \textcolor{keywordtype}{double} inv\_J = 1 / J;}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00760}00760 }
@@ -807,7 +807,7 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00803}00803 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00804}00804               residuals[local\_eqn\_real] += (k * interpolated\_u.imag() +}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00805}00805                                             (0.5 / \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}}) * interpolated\_u.real()) *}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00806}00806                                            test[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00806}00806                                            test[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00807}00807 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00808}00808               \textcolor{comment}{// Calculate the jacobian}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00809}00809               \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
@@ -823,15 +823,15 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00819}00819                   \textcolor{comment}{// If at a non-\/zero degree of freedom add in the entry}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00820}00820                   \textcolor{keywordflow}{if} (local\_unknown\_real >= 0)}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00821}00821                   \{}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00822}00822                     \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn\_real, local\_unknown\_real) +=}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00823}00823                       (0.5 / \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}}) * psi[l2] * test[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00822}00822                     jacobian(local\_eqn\_real, local\_unknown\_real) +=}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00823}00823                       (0.5 / \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}}) * psi[l2] * test[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00824}00824                   \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00825}00825 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00826}00826                   \textcolor{comment}{// If at a non-\/zero degree of freedom add in the entry}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00827}00827                   \textcolor{keywordflow}{if} (local\_unknown\_imag >= 0)}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00828}00828                   \{}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00829}00829                     \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn\_real, local\_unknown\_imag) +=}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00830}00830                       k * psi[l2] * test[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00829}00829                     jacobian(local\_eqn\_real, local\_unknown\_imag) +=}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00830}00830                       k * psi[l2] * test[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00831}00831                   \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00832}00832                 \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00833}00833               \}}
@@ -845,7 +845,7 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00841}00841               \textcolor{comment}{// Add the second order terms contibution to the residual}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00842}00842               residuals[local\_eqn\_imag] += (-\/k * interpolated\_u.real() +}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00843}00843                                             (0.5 / \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}}) * interpolated\_u.imag()) *}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00844}00844                                            test[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00844}00844                                            test[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00845}00845 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00846}00846 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00847}00847               \textcolor{comment}{// Calculate the jacobian}}
@@ -862,15 +862,15 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00858}00858                   \textcolor{comment}{// If at a non-\/zero degree of freedom add in the entry}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00859}00859                   \textcolor{keywordflow}{if} (local\_unknown\_real >= 0)}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00860}00860                   \{}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00861}00861                     \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn\_imag, local\_unknown\_real) +=}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00862}00862                       (-\/k) * psi[l2] * test[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00861}00861                     jacobian(local\_eqn\_imag, local\_unknown\_real) +=}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00862}00862                       (-\/k) * psi[l2] * test[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00863}00863                   \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00864}00864 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00865}00865                   \textcolor{comment}{// If at a non-\/zero degree of freedom add in the entry}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00866}00866                   \textcolor{keywordflow}{if} (local\_unknown\_imag >= 0)}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00867}00867                   \{}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00868}00868                     \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn\_imag, local\_unknown\_imag) +=}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00869}00869                       (0.5 / \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}}) * psi[l2] * test[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00868}00868                     jacobian(local\_eqn\_imag, local\_unknown\_imag) +=}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00869}00869                       (0.5 / \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}}) * psi[l2] * test[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00870}00870                   \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00871}00871                 \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00872}00872               \}}
@@ -900,11 +900,11 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00896}00896               residuals[local\_eqn\_real] +=}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00897}00897                 (k * interpolated\_u.imag() +}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00898}00898                  (0.5 / \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}}) * interpolated\_u.real()) *}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00899}00899                   test[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} +}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00900}00900                 ((0.125 / (k * \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}} * \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}})) * interpolated\_u.imag()) * test[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00899}00899                   test[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} +}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00900}00900                 ((0.125 / (k * \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}} * \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}})) * interpolated\_u.imag()) * test[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00901}00901 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00902}00902               residuals[local\_eqn\_real] +=}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00903}00903                 (-\/0.5 / k) * du\_dS.imag() * dtest\_dS(l, 0) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00903}00903                 (-\/0.5 / k) * du\_dS.imag() * dtest\_dS(l, 0) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00904}00904 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00905}00905               \textcolor{comment}{// Calculate the jacobian}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00906}00906               \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
@@ -920,19 +920,19 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00916}00916                   \textcolor{comment}{// If at a non-\/zero degree of freedom add in the entry}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00917}00917                   \textcolor{keywordflow}{if} (local\_unknown\_real >= 0)}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00918}00918                   \{}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00919}00919                     \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn\_real, local\_unknown\_real) +=}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00920}00920                       (0.5 / \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}}) * psi[l2] * test[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00919}00919                     jacobian(local\_eqn\_real, local\_unknown\_real) +=}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00920}00920                       (0.5 / \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}}) * psi[l2] * test[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00921}00921                   \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00922}00922 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00923}00923                   \textcolor{comment}{// If at a non-\/zero degree of freedom add in the entry}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00924}00924                   \textcolor{keywordflow}{if} (local\_unknown\_imag >= 0)}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00925}00925                   \{}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00926}00926                     \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn\_real, local\_unknown\_imag) +=}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00927}00927                       k * psi[l2] * test[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} +}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00928}00928                       (0.125 / (k * \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}} * \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}})) * psi[l2] * test[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00926}00926                     jacobian(local\_eqn\_real, local\_unknown\_imag) +=}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00927}00927                       k * psi[l2] * test[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} +}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00928}00928                       (0.125 / (k * \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}} * \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}})) * psi[l2] * test[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00929}00929 }
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00930}00930                     \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn\_real, local\_unknown\_imag) +=}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00931}00931                       (-\/0.5 / k) * dpsi\_dS(l2, 0) * dtest\_dS(l, 0) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00930}00930                     jacobian(local\_eqn\_real, local\_unknown\_imag) +=}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00931}00931                       (-\/0.5 / k) * dpsi\_dS(l2, 0) * dtest\_dS(l, 0) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00932}00932                   \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00933}00933                 \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00934}00934               \}}
@@ -947,11 +947,11 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00943}00943               residuals[local\_eqn\_imag] +=}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00944}00944                 (-\/k * interpolated\_u.real() +}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00945}00945                  (0.5 / \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}}) * interpolated\_u.imag()) *}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00946}00946                   test[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} +}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00947}00947                 ((-\/0.125 / (k * \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}} * \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}})) * interpolated\_u.real()) * test[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00946}00946                   test[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} +}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00947}00947                 ((-\/0.125 / (k * \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}} * \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}})) * interpolated\_u.real()) * test[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00948}00948 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00949}00949               residuals[local\_eqn\_imag] +=}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00950}00950                 (0.5 / k) * du\_dS.real() * dtest\_dS(l, 0) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00950}00950                 (0.5 / k) * du\_dS.real() * dtest\_dS(l, 0) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00951}00951 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00952}00952               \textcolor{comment}{// Calculate the jacobian}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00953}00953               \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
@@ -967,19 +967,19 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00963}00963                   \textcolor{comment}{// If at a non-\/zero degree of freedom add in the entry}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00964}00964                   \textcolor{keywordflow}{if} (local\_unknown\_real >= 0)}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00965}00965                   \{}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00966}00966                     \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn\_imag, local\_unknown\_real) +=}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00967}00967                       (-\/k) * psi[l2] * test[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} -\/}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00968}00968                       (0.125 / (k * \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}} * \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}})) * psi[l2] * test[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00966}00966                     jacobian(local\_eqn\_imag, local\_unknown\_real) +=}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00967}00967                       (-\/k) * psi[l2] * test[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} -\/}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00968}00968                       (0.125 / (k * \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}} * \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}})) * psi[l2] * test[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00969}00969 }
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00970}00970                     \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn\_imag, local\_unknown\_real) +=}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00971}00971                       (0.5 / k) * dpsi\_dS(l2, 0) * dtest\_dS(l, 0) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00970}00970                     jacobian(local\_eqn\_imag, local\_unknown\_real) +=}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00971}00971                       (0.5 / k) * dpsi\_dS(l2, 0) * dtest\_dS(l, 0) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00972}00972                   \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00973}00973 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00974}00974                   \textcolor{comment}{// If at a non-\/zero degree of freedom add in the entry}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00975}00975                   \textcolor{keywordflow}{if} (local\_unknown\_imag >= 0)}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00976}00976                   \{}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00977}00977                     \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn\_imag, local\_unknown\_imag) +=}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00978}00978                       (0.5 / \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}}) * psi[l2] * test[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00977}00977                     jacobian(local\_eqn\_imag, local\_unknown\_imag) +=}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00978}00978                       (0.5 / \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}}) * psi[l2] * test[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00979}00979                   \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00980}00980                 \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l00981}00981               \}}
@@ -1008,12 +1008,12 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01004}01004                 ((k * (1 + 0.125 / (k * k * \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}} * \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}}))) * interpolated\_u.imag() +}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01005}01005                  (0.5 / \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}} -\/ 0.125 / (k * k * \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}} * \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}} * \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}})) *}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01006}01006                    interpolated\_u.real()) *}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01007}01007                 test[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01007}01007                 test[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01008}01008 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01009}01009               residuals[local\_eqn\_real] +=}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01010}01010                 ((-\/0.5 / k) * du\_dS.imag() +}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01011}01011                  (0.5 / (k * k * \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}})) * du\_dS.real()) *}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01012}01012                 dtest\_dS(l, 0) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01012}01012                 dtest\_dS(l, 0) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01013}01013 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01014}01014               \textcolor{comment}{// Calculate the jacobian}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01015}01015               \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
@@ -1029,23 +1029,23 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01025}01025                   \textcolor{comment}{// If at a non-\/zero degree of freedom add in the entry}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01026}01026                   \textcolor{keywordflow}{if} (local\_unknown\_real >= 0)}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01027}01027                   \{}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01028}01028                     \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn\_real, local\_unknown\_real) +=}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01028}01028                     jacobian(local\_eqn\_real, local\_unknown\_real) +=}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01029}01029                       (0.5 / \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}} -\/ 0.125 / (k * k * \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}} * \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}} * \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}})) * psi[l2] *}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01030}01030                       test[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01030}01030                       test[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01031}01031 }
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01032}01032                     \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn\_real, local\_unknown\_real) +=}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01033}01033                       (0.5 / (k * k * \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}})) * dpsi\_dS(l2, 0) * dtest\_dS(l, 0) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01032}01032                     jacobian(local\_eqn\_real, local\_unknown\_real) +=}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01033}01033                       (0.5 / (k * k * \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}})) * dpsi\_dS(l2, 0) * dtest\_dS(l, 0) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01034}01034                   \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01035}01035 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01036}01036                   \textcolor{comment}{// If at a non-\/zero degree of freedom add in the entry}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01037}01037                   \textcolor{keywordflow}{if} (local\_unknown\_imag >= 0)}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01038}01038                   \{}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01039}01039                     \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn\_real, local\_unknown\_imag) +=}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01039}01039                     jacobian(local\_eqn\_real, local\_unknown\_imag) +=}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01040}01040                       (k * (1 + 0.125 / (k * k * \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}} * \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}}))) * psi[l2] * test[l] *}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01041}01041                       \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01041}01041                       \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01042}01042 }
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01043}01043                     \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn\_real, local\_unknown\_imag) +=}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01044}01044                       (-\/0.5 / k) * dpsi\_dS(l2, 0) * dtest\_dS(l, 0) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01043}01043                     jacobian(local\_eqn\_real, local\_unknown\_imag) +=}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01044}01044                       (-\/0.5 / k) * dpsi\_dS(l2, 0) * dtest\_dS(l, 0) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01045}01045                   \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01046}01046                 \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01047}01047               \}}
@@ -1061,12 +1061,12 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01057}01057                 ((-\/k * (1 + 0.125 / (k * k * \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}} * \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}}))) * interpolated\_u.real() +}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01058}01058                  (0.5 / \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}} -\/ 0.125 / (k * k * \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}} * \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}} * \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}})) *}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01059}01059                    interpolated\_u.imag()) *}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01060}01060                 test[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01060}01060                 test[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01061}01061 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01062}01062               residuals[local\_eqn\_imag] +=}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01063}01063                 ((0.5 / k) * du\_dS.real() +}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01064}01064                  (0.5 / (k * k * \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}})) * du\_dS.imag()) *}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01065}01065                 dtest\_dS(l, 0) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01065}01065                 dtest\_dS(l, 0) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01066}01066 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01067}01067               \textcolor{comment}{// Calculate the jacobian}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01068}01068               \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
@@ -1082,22 +1082,22 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01078}01078                   \textcolor{comment}{// If at a non-\/zero degree of freedom add in the entry}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01079}01079                   \textcolor{keywordflow}{if} (local\_unknown\_real >= 0)}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01080}01080                   \{}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01081}01081                     \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn\_imag, local\_unknown\_real) +=}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01081}01081                     jacobian(local\_eqn\_imag, local\_unknown\_real) +=}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01082}01082                       (-\/k * (1 + 0.125 / (k * k * \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}} * \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}}))) * psi[l2] * test[l] *}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01083}01083                       \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01083}01083                       \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01084}01084 }
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01085}01085                     \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn\_imag, local\_unknown\_real) +=}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01086}01086                       (0.5 / k) * dpsi\_dS(l2, 0) * dtest\_dS(l, 0) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01085}01085                     jacobian(local\_eqn\_imag, local\_unknown\_real) +=}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01086}01086                       (0.5 / k) * dpsi\_dS(l2, 0) * dtest\_dS(l, 0) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01087}01087                   \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01088}01088                   \textcolor{comment}{// If at a non-\/zero degree of freedom add in the entry}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01089}01089                   \textcolor{keywordflow}{if} (local\_unknown\_imag >= 0)}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01090}01090                   \{}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01091}01091                     \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn\_imag, local\_unknown\_imag) +=}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01091}01091                     jacobian(local\_eqn\_imag, local\_unknown\_imag) +=}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01092}01092                       (0.5 / \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}} -\/ 0.125 / (k * k * \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}} * \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}} * \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}})) * psi[l2] *}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01093}01093                       test[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01093}01093                       test[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01094}01094 }
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01095}01095                     \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn\_imag, local\_unknown\_imag) +=}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01096}01096                       (0.5 / (k * k * \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}})) * dpsi\_dS(l2, 0) * dtest\_dS(l, 0) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01095}01095                     jacobian(local\_eqn\_imag, local\_unknown\_imag) +=}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01096}01096                       (0.5 / (k * k * \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498}{R}})) * dpsi\_dS(l2, 0) * dtest\_dS(l, 0) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01097}01097                   \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01098}01098                 \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01099}01099               \}}
@@ -1144,11 +1144,11 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01140}01140 \textcolor{comment}{    /// Add the element's contribution to its residual vector and its}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01141}01141 \textcolor{comment}{    /// Jacobian matrix}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01142}\mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement_afb3ab9366490295ba422a9c3fa7d6279}{01142}} \textcolor{comment}{}    \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement_afb3ab9366490295ba422a9c3fa7d6279}{fill\_in\_contribution\_to\_jacobian}}(\mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01143}01143                                                  \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01143}01143                                                  \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian)}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01144}01144     \{}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01145}01145       \textcolor{comment}{// Call the generic routine with the flag set to 1}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01146}01146       \mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement_a1cc37a3e79fac04fbe2a778ebf770c2c}{fill\_in\_generic\_residual\_contribution\_helmholtz\_DtN\_bc}}(}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01147}01147         residuals, \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, 1);}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01147}01147         residuals, jacobian, 1);}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01148}01148     \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01149}01149 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01150}01150 \textcolor{comment}{    /// Compute the contribution of the element}}
@@ -1190,10 +1190,10 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01186}01186         \textcolor{keywordtype}{unsigned} nnod = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01187}01187         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < nnod; j++)}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01188}01188         \{}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01189}01189           Node* nod\_pt = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j);}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01189}01189           \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j);}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01190}01190 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01191}01191           \textcolor{comment}{// Don't add copied nodes}}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01192}01192           \textcolor{keywordflow}{if} (!(nod\_pt-\/>is\_a\_copy()))}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01192}01192           \textcolor{keywordflow}{if} (!(nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a736feee0f95ab3d542c70db6ca7ab233}{is\_a\_copy}}()))}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01193}01193           \{}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01194}01194             node\_set.insert(nod\_pt);}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01195}01195           \}}
@@ -1203,15 +1203,15 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01199}01199       \textcolor{keywordtype}{unsigned} nnod = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01200}01200       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < nnod; j++)}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01201}01201       \{}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01202}01202         Node* nod\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j);}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01202}01202         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j);}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01203}01203         node\_set.erase(nod\_pt);}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01204}01204 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01205}01205         \textcolor{comment}{// If the element's node is a copy then its "{}master"{} will}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01206}01206         \textcolor{comment}{// already have been added in the set above -\/-\/ remove the}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01207}01207         \textcolor{comment}{// master to avoid double counting eqn numbers}}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01208}01208         \textcolor{keywordflow}{if} (nod\_pt-\/>is\_a\_copy())}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01208}01208         \textcolor{keywordflow}{if} (nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a736feee0f95ab3d542c70db6ca7ab233}{is\_a\_copy}}())}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01209}01209         \{}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01210}01210           node\_set.erase(nod\_pt-\/>copied\_node\_pt());}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01210}01210           node\_set.erase(nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a5de5f4fa9259b44f527d90e474471563}{copied\_node\_pt}}());}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01211}01211         \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01212}01212       \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01213}01213 }
@@ -1231,7 +1231,7 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01227}01227 \textcolor{comment}{    /// Overloaded version, using the gamma computed in the mesh}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01228}\mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement_a1cc37a3e79fac04fbe2a778ebf770c2c}{01228}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement_a1cc37a3e79fac04fbe2a778ebf770c2c}{fill\_in\_generic\_residual\_contribution\_helmholtz\_DtN\_bc}}(}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01229}01229       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01230}01230       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}},}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01230}01230       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian,}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01231}01231       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& flag)}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01232}01232     \{}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01233}01233       \textcolor{comment}{// Find out how many nodes there are}}
@@ -1241,7 +1241,7 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01237}01237       \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} test(n\_node);}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01238}01238 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01239}01239       \textcolor{comment}{// Set the value of Nintpt}}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01240}01240       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01240}01240       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01241}01241 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01242}01242       \textcolor{comment}{// Set the Vector to hold local coordinates}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01243}01243       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(this-\/>\mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_ad01f0d13e7319e28f28286abb6d0b7cc}{Dim}} -\/ 1);}
@@ -1268,11 +1268,11 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01264}01264         \textcolor{comment}{// Assign values of s}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01265}01265         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < (this-\/>\mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_ad01f0d13e7319e28f28286abb6d0b7cc}{Dim}} -\/ 1); \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01266}01266         \{}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01267}01267           s[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>knot(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01267}01267           s[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{knot}}(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01268}01268         \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01269}01269 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01270}01270         \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01271}01271         \textcolor{keywordtype}{double} w = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01271}01271         \textcolor{keywordtype}{double} w = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01272}01272 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01273}01273         \textcolor{comment}{// Find the shape test functions and derivates; return the Jacobian}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01274}01274         \textcolor{comment}{// of the mapping between local and global (Eulerian)}}
@@ -1280,7 +1280,7 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01276}01276         \textcolor{keywordtype}{double} J = this-\/>\mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_a0ab124ee22e66e97013264cad6cc0c07}{test\_only}}(s, test);}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01277}01277 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01278}01278         \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01279}01279         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01279}01279         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01280}01280 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01281}01281         \textcolor{comment}{// Now add to the appropriate equations}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01282}01282         \textcolor{comment}{// Loop over the test functions:loop over the nodes}}
@@ -1295,7 +1295,7 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01291}01291           \textcolor{keywordflow}{if} (local\_eqn\_real >= 0)}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01292}01292           \{}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01293}01293             \textcolor{comment}{// Add the gamma contribution in this int\_point to the res}}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01294}01294             residuals[local\_eqn\_real] -\/= gamma[ipt].real() * test[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01294}01294             residuals[local\_eqn\_real] -\/= gamma[ipt].real() * test[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01295}01295 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01296}01296             \textcolor{comment}{// Calculate the jacobian}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01297}01297             \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
@@ -1317,16 +1317,16 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01313}01313                   global\_eqn\_real = this-\/>\mbox{\hyperlink{classoomph_1_1GeneralisedElement_a37ac5a1d5234fa931ab710c0c74d55d2}{eqn\_number}}(local\_unknown\_real);}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01314}01314 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01315}01315                   \textcolor{comment}{// Add the first order terms contribution}}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01316}01316                   \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn\_real, local\_unknown\_real) -\/=}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01317}01317                     d\_gamma[ipt][global\_eqn\_real].real() * test[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01316}01316                   jacobian(local\_eqn\_real, local\_unknown\_real) -\/=}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01317}01317                     d\_gamma[ipt][global\_eqn\_real].real() * test[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01318}01318                 \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01319}01319                 \textcolor{keywordflow}{if} (local\_unknown\_imag >= 0)}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01320}01320                 \{}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01321}01321                   global\_eqn\_imag = this-\/>\mbox{\hyperlink{classoomph_1_1GeneralisedElement_a37ac5a1d5234fa931ab710c0c74d55d2}{eqn\_number}}(local\_unknown\_imag);}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01322}01322 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01323}01323                   \textcolor{comment}{// Add the first order terms contribution}}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01324}01324                   \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn\_real, local\_unknown\_imag) -\/=}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01325}01325                     d\_gamma[ipt][global\_eqn\_imag].real() * test[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01324}01324                   jacobian(local\_eqn\_real, local\_unknown\_imag) -\/=}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01325}01325                     d\_gamma[ipt][global\_eqn\_imag].real() * test[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01326}01326                 \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01327}01327               \} \textcolor{comment}{// End of loop over nodes l2}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01328}01328 }
@@ -1349,8 +1349,8 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01345}01345                     this-\/>\mbox{\hyperlink{classoomph_1_1GeneralisedElement_a37ac5a1d5234fa931ab710c0c74d55d2}{eqn\_number}}(external\_unknown\_real);}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01346}01346 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01347}01347                   \textcolor{comment}{// Add the first order terms contribution}}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01348}01348                   \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn\_real, external\_unknown\_real) -\/=}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01349}01349                     d\_gamma[ipt][external\_global\_eqn\_real].real() * test[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01348}01348                   jacobian(local\_eqn\_real, external\_unknown\_real) -\/=}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01349}01349                     d\_gamma[ipt][external\_global\_eqn\_real].real() * test[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01350}01350                 \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01351}01351                 \textcolor{keywordflow}{if} (external\_unknown\_imag >= 0)}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01352}01352                 \{}
@@ -1358,8 +1358,8 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01354}01354                     this-\/>\mbox{\hyperlink{classoomph_1_1GeneralisedElement_a37ac5a1d5234fa931ab710c0c74d55d2}{eqn\_number}}(external\_unknown\_imag);}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01355}01355 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01356}01356                   \textcolor{comment}{// Add the first order terms contribution}}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01357}01357                   \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn\_real, external\_unknown\_imag) -\/=}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01358}01358                     d\_gamma[ipt][external\_global\_eqn\_imag].real() * test[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01357}01357                   jacobian(local\_eqn\_real, external\_unknown\_imag) -\/=}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01358}01358                     d\_gamma[ipt][external\_global\_eqn\_imag].real() * test[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01359}01359                 \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01360}01360               \} \textcolor{comment}{// End of loop over external data}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01361}01361             \} \textcolor{comment}{// End of flag}}
@@ -1368,7 +1368,7 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01364}01364           \textcolor{keywordflow}{if} (local\_eqn\_imag >= 0)}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01365}01365           \{}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01366}01366             \textcolor{comment}{// Add the gamma contribution in this int\_point to the res}}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01367}01367             residuals[local\_eqn\_imag] -\/= gamma[ipt].imag() * test[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01367}01367             residuals[local\_eqn\_imag] -\/= gamma[ipt].imag() * test[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01368}01368 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01369}01369             \textcolor{comment}{// Calculate the jacobian}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01370}01370             \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
@@ -1390,16 +1390,16 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01386}01386                   global\_eqn\_real = this-\/>\mbox{\hyperlink{classoomph_1_1GeneralisedElement_a37ac5a1d5234fa931ab710c0c74d55d2}{eqn\_number}}(local\_unknown\_real);}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01387}01387 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01388}01388                   \textcolor{comment}{// Add the first order terms contribution}}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01389}01389                   \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn\_imag, local\_unknown\_real) -\/=}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01390}01390                     d\_gamma[ipt][global\_eqn\_real].imag() * test[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01389}01389                   jacobian(local\_eqn\_imag, local\_unknown\_real) -\/=}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01390}01390                     d\_gamma[ipt][global\_eqn\_real].imag() * test[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01391}01391                 \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01392}01392                 \textcolor{keywordflow}{if} (local\_unknown\_imag >= 0)}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01393}01393                 \{}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01394}01394                   global\_eqn\_imag = this-\/>\mbox{\hyperlink{classoomph_1_1GeneralisedElement_a37ac5a1d5234fa931ab710c0c74d55d2}{eqn\_number}}(local\_unknown\_imag);}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01395}01395 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01396}01396                   \textcolor{comment}{// Add the first order terms contribution}}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01397}01397                   \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn\_imag, local\_unknown\_imag) -\/=}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01398}01398                     d\_gamma[ipt][global\_eqn\_imag].imag() * test[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01397}01397                   jacobian(local\_eqn\_imag, local\_unknown\_imag) -\/=}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01398}01398                     d\_gamma[ipt][global\_eqn\_imag].imag() * test[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01399}01399                 \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01400}01400               \} \textcolor{comment}{// End of loop over nodes l2}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01401}01401 }
@@ -1422,8 +1422,8 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01418}01418                     this-\/>\mbox{\hyperlink{classoomph_1_1GeneralisedElement_a37ac5a1d5234fa931ab710c0c74d55d2}{eqn\_number}}(external\_unknown\_real);}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01419}01419 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01420}01420                   \textcolor{comment}{// Add the first order terms contribution}}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01421}01421                   \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn\_imag, external\_unknown\_real) -\/=}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01422}01422                     d\_gamma[ipt][external\_global\_eqn\_real].imag() * test[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01421}01421                   jacobian(local\_eqn\_imag, external\_unknown\_real) -\/=}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01422}01422                     d\_gamma[ipt][external\_global\_eqn\_real].imag() * test[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01423}01423                 \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01424}01424                 \textcolor{keywordflow}{if} (external\_unknown\_imag >= 0)}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01425}01425                 \{}
@@ -1431,8 +1431,8 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01427}01427                     this-\/>\mbox{\hyperlink{classoomph_1_1GeneralisedElement_a37ac5a1d5234fa931ab710c0c74d55d2}{eqn\_number}}(external\_unknown\_imag);}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01428}01428 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01429}01429                   \textcolor{comment}{// Add the first order terms contribution}}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01430}01430                   \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn\_imag, external\_unknown\_imag) -\/=}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01431}01431                     d\_gamma[ipt][external\_global\_eqn\_imag].imag() * test[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01430}01430                   jacobian(local\_eqn\_imag, external\_unknown\_imag) -\/=}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01431}01431                     d\_gamma[ipt][external\_global\_eqn\_imag].imag() * test[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01432}01432                 \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01433}01433               \} \textcolor{comment}{// End of loop over external data}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01434}01434             \} \textcolor{comment}{// End of flag}}
@@ -1687,15 +1687,15 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01683}01683         \textcolor{keywordtype}{unsigned} nnod = fe\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01684}01684         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < nnod; j++)}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01685}01685         \{}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01686}01686           Node* nod\_pt = fe\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j);}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01686}01686           \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = fe\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j);}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01687}01687 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01688}01688           \textcolor{comment}{// Extract nodal coordinates from node:}}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01689}01689           \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(2);}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01690}01690           \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[0] = nod\_pt-\/>x(0);}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01691}01691           \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[1] = nod\_pt-\/>x(1);}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01689}01689           \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(2);}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01690}01690           x[0] = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0);}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01691}01691           x[1] = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1);}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01692}01692 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01693}01693           \textcolor{comment}{// Evaluate the radial distance}}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01694}01694           \textcolor{keywordtype}{double} r = sqrt(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[0] * \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[0] + \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[1] * \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[1]);}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01694}01694           \textcolor{keywordtype}{double} r = sqrt(x[0] * x[0] + x[1] * x[1]);}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01695}01695 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01696}01696           \textcolor{comment}{// Check}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01697}01697           \textcolor{keywordflow}{if} (Outer\_radius == 0.0)}
@@ -1709,7 +1709,7 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01705}01705               \mbox{\hyperlink{namespaceoomph_1_1ToleranceForHelmholtzOuterBoundary_a8b38c8071a0bd44ff94783e3ebb6c70b}{ToleranceForHelmholtzOuterBoundary::Tol}})}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01706}01706           \{}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01707}01707             std::ostringstream error\_stream;}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01708}01708             error\_stream << \textcolor{stringliteral}{"{}Node at "{}} << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[0] << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[1] << \textcolor{stringliteral}{"{} has radius "{}}}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01708}01708             error\_stream << \textcolor{stringliteral}{"{}Node at "{}} << x[0] << \textcolor{stringliteral}{"{} "{}} << x[1] << \textcolor{stringliteral}{"{} has radius "{}}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01709}01709                          << r << \textcolor{stringliteral}{"{} which does not "{}}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01710}01710                          << \textcolor{stringliteral}{"{} agree with \(\backslash\)nspecified outer radius "{}}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01711}01711                          << this-\/>Outer\_radius << \textcolor{stringliteral}{"{} within relative tolerance "{}}}
@@ -1753,7 +1753,7 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01749}01749           this-\/>element\_pt(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}));}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01750}01750 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01751}01751       \textcolor{comment}{// Set the value of n\_intpt}}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01752}01752       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01752}01752       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01753}01753 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01754}01754       \textcolor{comment}{// initialise gamma integral and its derivatives}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01755}01755       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<std::complex<double>}}> gamma\_vector(n\_intpt,}
@@ -1765,20 +1765,20 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01761}01761       \{}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01762}01762         \textcolor{comment}{// Allocate and initialise coordinate}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01763}01763         \textcolor{keywordtype}{unsigned} ndim\_local = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5f8fe59f06da1da9f6b7bbcbdb90ef93}{dim}}();}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01764}01764         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(ndim\_local + 1, 0.0);}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01764}01764         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(ndim\_local + 1, 0.0);}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01765}01765 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01766}01766         \textcolor{comment}{// Set the Vector to hold local coordinates}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01767}01767         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(ndim\_local, 0.0);}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01768}01768         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < ndim\_local; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01769}01769         \{}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01770}01770           \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>knot(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01770}01770           \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{knot}}(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01771}01771         \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01772}01772 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01773}01773         \textcolor{comment}{// Get the coordinates of the integration point}}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01774}01774         el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FaceElement_a7aa612fec3604e08344503fbcdc357c8}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01774}01774         el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FaceElement_a7aa612fec3604e08344503fbcdc357c8}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01775}01775 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01776}01776         \textcolor{comment}{// Polar angle}}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01777}01777         \textcolor{keywordtype}{double} phi = atan2(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[1], \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[0]);}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01777}01777         \textcolor{keywordtype}{double} phi = atan2(x[1], x[0]);}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01778}01778 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01779}01779         \textcolor{comment}{// Elemental contribution to gamma integral and its derivative}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01780}01780         std::complex<double> gamma\_con\_p(0.0, 0.0), gamma\_con\_n(0.0, 0.0);}
@@ -1905,11 +1905,11 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01901}01901     \textcolor{comment}{// Let the bulk element build the FaceElement, i.e. setup the pointers}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01902}01902     \textcolor{comment}{// to its nodes (by referring to the appropriate nodes in the bulk}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01903}01903     \textcolor{comment}{// element), etc.}}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01904}01904     bulk\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a025ab56ef9c6eea66fb34416fdf19152}{build\_face\_element}}(\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\_index}}, \textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01904}01904     bulk\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_aaf7bead5b462cfd5401d97b3dbdc7af7}{build\_face\_element}}(\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\_index}}, \textcolor{keyword}{this});}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01905}01905 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01906}01906     \textcolor{comment}{// Extract the dimension of the problem from the dimension of}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01907}01907     \textcolor{comment}{// the first node}}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01908}01908     \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_ad01f0d13e7319e28f28286abb6d0b7cc}{Dim}} = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>ndim();}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01908}01908     \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_ad01f0d13e7319e28f28286abb6d0b7cc}{Dim}} = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01909}01909 }
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01910}01910     \textcolor{comment}{// Set up U\_index\_helmholtz. Initialise to zero, which probably won't change}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01911}01911     \textcolor{comment}{// in most cases, oh well, the price we pay for generality}}
@@ -1925,8 +1925,8 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01921}01921         \textcolor{comment}{// One dimensional problem}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01922}01922       \textcolor{keywordflow}{case} 1:}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01923}01923       \{}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01924}01924         HelmholtzEquations<1>* eqn\_pt =}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01925}01925           \textcolor{keyword}{dynamic\_cast<}HelmholtzEquations<1>*\textcolor{keyword}{>}(bulk\_el\_pt);}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01924}01924         \mbox{\hyperlink{classoomph_1_1HelmholtzEquations}{HelmholtzEquations<1>}}* eqn\_pt =}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01925}01925           \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1HelmholtzEquations}{HelmholtzEquations<1>}}*\textcolor{keyword}{>}(bulk\_el\_pt);}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01926}01926         \textcolor{comment}{// If the cast has failed die}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01927}01927         \textcolor{keywordflow}{if} (eqn\_pt == 0)}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01928}01928         \{}
@@ -1945,7 +1945,7 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01941}01941         \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01942}01942         \{}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01943}01943           \textcolor{comment}{// Read the index from the (cast) bulk element}}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01944}01944           \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_ad3e6d12158c24f428c295bd5ad54365e}{U\_index\_helmholtz}} = eqn\_pt-\/>u\_index\_helmholtz();}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01944}01944           \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_ad3e6d12158c24f428c295bd5ad54365e}{U\_index\_helmholtz}} = eqn\_pt-\/>\mbox{\hyperlink{classoomph_1_1HelmholtzEquations_aa358171d391002d64aa2fcd69d5e1caa}{u\_index\_helmholtz}}();}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01945}01945         \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01946}01946       \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01947}01947       \textcolor{keywordflow}{break};}
@@ -1953,8 +1953,8 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01949}01949       \textcolor{comment}{// Two dimensional problem}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01950}01950       \textcolor{keywordflow}{case} 2:}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01951}01951       \{}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01952}01952         HelmholtzEquations<2>* eqn\_pt =}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01953}01953           \textcolor{keyword}{dynamic\_cast<}HelmholtzEquations<2>*\textcolor{keyword}{>}(bulk\_el\_pt);}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01952}01952         \mbox{\hyperlink{classoomph_1_1HelmholtzEquations}{HelmholtzEquations<2>}}* eqn\_pt =}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01953}01953           \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1HelmholtzEquations}{HelmholtzEquations<2>}}*\textcolor{keyword}{>}(bulk\_el\_pt);}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01954}01954         \textcolor{comment}{// If the cast has failed die}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01955}01955         \textcolor{keywordflow}{if} (eqn\_pt == 0)}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01956}01956         \{}
@@ -1972,7 +1972,7 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01968}01968         \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01969}01969         \{}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01970}01970           \textcolor{comment}{// Read the index from the (cast) bulk element}}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01971}01971           \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_ad3e6d12158c24f428c295bd5ad54365e}{U\_index\_helmholtz}} = eqn\_pt-\/>u\_index\_helmholtz();}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01971}01971           \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_ad3e6d12158c24f428c295bd5ad54365e}{U\_index\_helmholtz}} = eqn\_pt-\/>\mbox{\hyperlink{classoomph_1_1HelmholtzEquations_aa358171d391002d64aa2fcd69d5e1caa}{u\_index\_helmholtz}}();}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01972}01972         \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01973}01973       \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01974}01974 }
@@ -1981,8 +1981,8 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01977}01977       \textcolor{comment}{// Three dimensional problem}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01978}01978       \textcolor{keywordflow}{case} 3:}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01979}01979       \{}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01980}01980         HelmholtzEquations<3>* eqn\_pt =}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01981}01981           \textcolor{keyword}{dynamic\_cast<}HelmholtzEquations<3>*\textcolor{keyword}{>}(bulk\_el\_pt);}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01980}01980         \mbox{\hyperlink{classoomph_1_1HelmholtzEquations}{HelmholtzEquations<3>}}* eqn\_pt =}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01981}01981           \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1HelmholtzEquations}{HelmholtzEquations<3>}}*\textcolor{keyword}{>}(bulk\_el\_pt);}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01982}01982         \textcolor{comment}{// If the cast has failed die}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01983}01983         \textcolor{keywordflow}{if} (eqn\_pt == 0)}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01984}01984         \{}
@@ -2000,7 +2000,7 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01996}01996         \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01997}01997         \{}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01998}01998           \textcolor{comment}{// Read the index from the (cast) bulk element}}
-\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01999}01999           \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_ad3e6d12158c24f428c295bd5ad54365e}{U\_index\_helmholtz}} = eqn\_pt-\/>u\_index\_helmholtz();}
+\DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l01999}01999           \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_ad3e6d12158c24f428c295bd5ad54365e}{U\_index\_helmholtz}} = eqn\_pt-\/>\mbox{\hyperlink{classoomph_1_1HelmholtzEquations_aa358171d391002d64aa2fcd69d5e1caa}{u\_index\_helmholtz}}();}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l02000}02000         \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l02001}02001       \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__bc__elements_8h_source_l02002}02002       \textcolor{keywordflow}{break};}

@@ -18,18 +18,18 @@ Inheritance diagram for oomph\+::Biharmonic\+Flux\+Element\texorpdfstring{$<$}{<
 \doxysubsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_a0fafeac48951b37cf5cd86aa486945a8}{Flux\+Fct\+Pt}}) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, double \&flux)
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_a0fafeac48951b37cf5cd86aa486945a8}{Flux\+Fct\+Pt}}) (const double \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, double \&flux)
 \begin{DoxyCompactList}\small\item\em definition of flux function pointer, flux must be parametised in terms of the macro element coordinate position (s) along the problem edge \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_adbb8aa4037b31be337cd9aaa0d9b1fee}{Biharmonic\+Flux\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&bulk\+\_\+el\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&b)
+\mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_adbb8aa4037b31be337cd9aaa0d9b1fee}{Biharmonic\+Flux\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&bulk\+\_\+el\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}}, const unsigned \&b)
 \begin{DoxyCompactList}\small\item\em constructor \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_ab640d11e2bc26ac42a639fb2ed0627c2}{Biharmonic\+Flux\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Broken empty constructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_a3eaac73abbfb91e68f1bde6624aa188d}{Biharmonic\+Flux\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{Biharmonic\+Flux\+Element}} \&dummy)=delete
+\mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_a3eaac73abbfb91e68f1bde6624aa188d}{Biharmonic\+Flux\+Element}} (const \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{Biharmonic\+Flux\+Element}} \&dummy)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_a43d6022eafab8c69ebf22707c9de9d4a}{operator=}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{Biharmonic\+Flux\+Element}} \&)=delete
+void \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_a43d6022eafab8c69ebf22707c9de9d4a}{operator=}} (const \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{Biharmonic\+Flux\+Element}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_a0fafeac48951b37cf5cd86aa486945a8}{Flux\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_ae99d770a6dd977551cccdc9a832080e2}{flux0\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for the flux0 function pointer. \end{DoxyCompactList}\item 
@@ -37,36 +37,36 @@ void \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_a43d6022eafab8c69ebf22
 \begin{DoxyCompactList}\small\item\em Access function for the flux1 function pointer. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_ac957e958c25b7ecede49aac5393240f2}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_a2d9f3025aa3d9e941a95e2d2ca7f86ce}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})
+void \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_a2d9f3025aa3d9e941a95e2d2ca7f86ce}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector and its Jacobian matrix (note -\/ no contributions are made to the jacobian) \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_af4c405bca7989f8609926279fdf09f0f}{zeta\+\_\+nodal}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&k, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_af4c405bca7989f8609926279fdf09f0f}{zeta\+\_\+nodal}} (const unsigned \&n, const unsigned \&k, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Specify the value of nodal zeta from the face geometry The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} representation, by default (needed to break indeterminacy if bulk element is Solid\+Element) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_a04c4c197b9a2e0be02a9c84a5c6d6e2a}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Output function -- does nothing. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_a6fe872f8689f493bbcd2f251106284dd}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_a6fe872f8689f493bbcd2f251106284dd}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em Output function -- does nothing. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_a8cb3a9fb35eb58eff73bd8f0f96baf05}{output}} (FILE $\ast$file\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em C-\/style output function -- does nothing. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_ad5e4addb8deb7cf8df09e7f9ea23e155}{output}} (FILE $\ast$file\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_ad5e4addb8deb7cf8df09e7f9ea23e155}{output}} (FILE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em C-\/style output function -- does nothing. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_a91c948732fb3994a347faf3fd07e3875}{compute\+\_\+error}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt, double \&error, double \&norm)
 \begin{DoxyCompactList}\small\item\em compute\+\_\+error -- does nothing \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_af8520446e8c6194b43081bbb5e479bdd}{output\+\_\+fct}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&nplot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
+virtual void \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_af8520446e8c6194b43081bbb5e479bdd}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&nplot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Output an exact solution over the element. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_a854899967314722e4feff2b40308fcb3}{Biharmonic\+Flux\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&bulk\+\_\+el\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&b)
+\mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_a854899967314722e4feff2b40308fcb3}{Biharmonic\+Flux\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&bulk\+\_\+el\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}}, const unsigned \&b)
 \begin{DoxyCompactList}\small\item\em Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element, the index of the fixed local coordinate and its value represented by an integer (+/-\/ 1), indicating that the face is located at the max. or min. value of the \char`\"{}fixed\char`\"{} local coordinate in the bulk element. And the macro element position of the flux element along the edge of the problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_abe29aa7bcd5a053137fc0aed535502ee}{get\+\_\+flux0}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, double \&flux)
+void \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_abe29aa7bcd5a053137fc0aed535502ee}{get\+\_\+flux0}} (const double \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, double \&flux)
 \begin{DoxyCompactList}\small\item\em Function to return the prescribed flux at a given macro element coordinate position. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_ab963c3e9529215e2dc1b2b0850aab96c}{get\+\_\+flux1}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, double \&flux)
+void \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_ab963c3e9529215e2dc1b2b0850aab96c}{get\+\_\+flux1}} (const double \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, double \&flux)
 \begin{DoxyCompactList}\small\item\em Function to return the prescribed flux at a given macro element coordinate position. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_a17313d4bf33a00c472f90e2fe7b6efea}{J\+\_\+eulerian}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_a17313d4bf33a00c472f90e2fe7b6efea}{J\+\_\+eulerian}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) const
 \begin{DoxyCompactList}\small\item\em Calculate the Jacobian of the mapping between local and global coordinates at the position s for face elements. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_aa2de83c41435886f3bd1eb8f5bd3d9f6}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+biharmonic\+\_\+flux}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector. Flux elements only make contribution to the residual vector. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_acf685857a04bc982fa884025609904b2}{J\+\_\+eulerian}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_acf685857a04bc982fa884025609904b2}{J\+\_\+eulerian}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) const
 \begin{DoxyCompactList}\small\item\em Calculate the Jacobian of the mapping between local and global coordinates at the position s for face elements for two dimensional problems The jacobian of the 1D face element is computed which is dt/ds\+\_\+t. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_aefab5b3ebf50ee9b4c9fff1a0e51e2fd}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+biharmonic\+\_\+flux}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residual)
 \begin{DoxyCompactList}\small\item\em Compute the elemental contribution to the residual vector for 2D problem type 0 biharmonic flux elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -99,7 +99,7 @@ Definition at line \mbox{\hyperlink{biharmonic__flux__elements_8h_source_l00081}
 \index{FluxFctPt@{FluxFctPt}!oomph::BiharmonicFluxElement$<$ DIM $>$@{oomph::BiharmonicFluxElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{FluxFctPt}{FluxFctPt}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{oomph\+::\+Biharmonic\+Flux\+Element}}$<$ DIM $>$\+::Flux\+Fct\+Pt) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, double \&flux)}
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{oomph\+::\+Biharmonic\+Flux\+Element}}$<$ DIM $>$\+::Flux\+Fct\+Pt) (const double \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, double \&flux)}
 
 
 
@@ -117,7 +117,7 @@ Definition at line \mbox{\hyperlink{biharmonic__flux__elements_8h_source_l00088}
 \index{BiharmonicFluxElement@{BiharmonicFluxElement}!oomph::BiharmonicFluxElement$<$ DIM $>$@{oomph::BiharmonicFluxElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{BiharmonicFluxElement()}{BiharmonicFluxElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-\mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{oomph\+::\+Biharmonic\+Flux\+Element}}$<$ DIM $>$\+::\mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{Biharmonic\+Flux\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{bulk\+\_\+el\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{face\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{b }\end{DoxyParamCaption})}
+\mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{oomph\+::\+Biharmonic\+Flux\+Element}}$<$ DIM $>$\+::\mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{Biharmonic\+Flux\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{bulk\+\_\+el\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index,  }\item[{const unsigned \&}]{b }\end{DoxyParamCaption})}
 
 
 
@@ -143,7 +143,7 @@ Definition at line \mbox{\hyperlink{biharmonic__flux__elements_8h_source_l00097}
 \index{BiharmonicFluxElement@{BiharmonicFluxElement}!oomph::BiharmonicFluxElement$<$ DIM $>$@{oomph::BiharmonicFluxElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{BiharmonicFluxElement()}{BiharmonicFluxElement()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-\mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{oomph\+::\+Biharmonic\+Flux\+Element}}$<$ DIM $>$\+::\mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{Biharmonic\+Flux\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{Biharmonic\+Flux\+Element}}$<$ DIM $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+\mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{oomph\+::\+Biharmonic\+Flux\+Element}}$<$ DIM $>$\+::\mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{Biharmonic\+Flux\+Element}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{Biharmonic\+Flux\+Element}}$<$ DIM $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
@@ -153,7 +153,7 @@ Broken copy constructor.
 \index{oomph::BiharmonicFluxElement$<$ DIM $>$@{oomph::BiharmonicFluxElement$<$ DIM $>$}!BiharmonicFluxElement@{BiharmonicFluxElement}}
 \index{BiharmonicFluxElement@{BiharmonicFluxElement}!oomph::BiharmonicFluxElement$<$ DIM $>$@{oomph::BiharmonicFluxElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{BiharmonicFluxElement()}{BiharmonicFluxElement()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{oomph\+::\+Biharmonic\+Flux\+Element}}$<$ 2 $>$\+::\mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{Biharmonic\+Flux\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{bulk\+\_\+el\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{face\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{b }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{oomph\+::\+Biharmonic\+Flux\+Element}}$<$ 2 $>$\+::\mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{Biharmonic\+Flux\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{bulk\+\_\+el\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index,  }\item[{const unsigned \&}]{b }\end{DoxyParamCaption})}
 
 
 
@@ -165,7 +165,7 @@ Definition at line \mbox{\hyperlink{biharmonic__flux__elements_8cc_source_l00046
 
 
 
-References \mbox{\hyperlink{biharmonic__flux__elements_8h_source_l00240}{oomph\+::\+Biharmonic\+Flux\+Element$<$ DIM $>$\+::\+Boundary}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a025ab56ef9c6eea66fb34416fdf19152}{oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{elements_8h_source_l04654}{oomph\+::\+Face\+Element\+::face\+\_\+index()}}, \mbox{\hyperlink{biharmonic__flux__elements_8h_source_l00230}{oomph\+::\+Biharmonic\+Flux\+Element$<$ DIM $>$\+::\+Flux0\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{biharmonic__flux__elements_8h_source_l00233}{oomph\+::\+Biharmonic\+Flux\+Element$<$ DIM $>$\+::\+Flux1\+\_\+fct\+\_\+pt}}, and \mbox{\hyperlink{biharmonic__flux__elements_8h_source_l00237}{oomph\+::\+Biharmonic\+Flux\+Element$<$ DIM $>$\+::\+Nface\+\_\+nodal\+\_\+dof}}.
+References \mbox{\hyperlink{biharmonic__flux__elements_8h_source_l00240}{oomph\+::\+Biharmonic\+Flux\+Element$<$ DIM $>$\+::\+Boundary}}, \mbox{\hyperlink{elements_8cc_source_l05132}{oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{elements_8h_source_l04626}{oomph\+::\+Face\+Element\+::face\+\_\+index()}}, \mbox{\hyperlink{biharmonic__flux__elements_8h_source_l00230}{oomph\+::\+Biharmonic\+Flux\+Element$<$ DIM $>$\+::\+Flux0\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{biharmonic__flux__elements_8h_source_l00233}{oomph\+::\+Biharmonic\+Flux\+Element$<$ DIM $>$\+::\+Flux1\+\_\+fct\+\_\+pt}}, and \mbox{\hyperlink{biharmonic__flux__elements_8h_source_l00237}{oomph\+::\+Biharmonic\+Flux\+Element$<$ DIM $>$\+::\+Nface\+\_\+nodal\+\_\+dof}}.
 
 
 
@@ -251,7 +251,7 @@ Definition at line \mbox{\hyperlink{biharmonic__flux__elements_8cc_source_l00125
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicFluxElement_aa2de83c41435886f3bd1eb8f5bd3d9f6}\label{classoomph_1_1BiharmonicFluxElement_aa2de83c41435886f3bd1eb8f5bd3d9f6}} 
 \index{oomph::BiharmonicFluxElement$<$ DIM $>$@{oomph::BiharmonicFluxElement$<$ DIM $>$}!fill\_in\_generic\_residual\_contribution\_biharmonic\_flux@{fill\_in\_generic\_residual\_contribution\_biharmonic\_flux}}
@@ -319,7 +319,7 @@ Referenced by \mbox{\hyperlink{biharmonic__problem_8cc_source_l00294}{oomph\+::\
 \index{get\_flux0@{get\_flux0}!oomph::BiharmonicFluxElement$<$ DIM $>$@{oomph::BiharmonicFluxElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_flux0()}{get\_flux0()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{oomph\+::\+Biharmonic\+Flux\+Element}}$<$ DIM $>$\+::get\+\_\+flux0 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{s,  }\item[{double \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+void \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{oomph\+::\+Biharmonic\+Flux\+Element}}$<$ DIM $>$\+::get\+\_\+flux0 (\begin{DoxyParamCaption}\item[{const double \&}]{s,  }\item[{double \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
@@ -338,7 +338,7 @@ References \mbox{\hyperlink{biharmonic__flux__elements_8h_source_l00230}{oomph\+
 \index{get\_flux1@{get\_flux1}!oomph::BiharmonicFluxElement$<$ DIM $>$@{oomph::BiharmonicFluxElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_flux1()}{get\_flux1()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{oomph\+::\+Biharmonic\+Flux\+Element}}$<$ DIM $>$\+::get\+\_\+flux1 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{s,  }\item[{double \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+void \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{oomph\+::\+Biharmonic\+Flux\+Element}}$<$ DIM $>$\+::get\+\_\+flux1 (\begin{DoxyParamCaption}\item[{const double \&}]{s,  }\item[{double \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
@@ -356,7 +356,7 @@ References \mbox{\hyperlink{biharmonic__flux__elements_8h_source_l00233}{oomph\+
 \index{oomph::BiharmonicFluxElement$<$ DIM $>$@{oomph::BiharmonicFluxElement$<$ DIM $>$}!J\_eulerian@{J\_eulerian}}
 \index{J\_eulerian@{J\_eulerian}!oomph::BiharmonicFluxElement$<$ DIM $>$@{oomph::BiharmonicFluxElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{J\_eulerian()}{J\_eulerian()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily double \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{oomph\+::\+Biharmonic\+Flux\+Element}}$<$ 2 $>$\+::J\+\_\+eulerian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily double \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{oomph\+::\+Biharmonic\+Flux\+Element}}$<$ 2 $>$\+::J\+\_\+eulerian (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}
 
 
 
@@ -379,7 +379,7 @@ References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 \index{J\_eulerian@{J\_eulerian}!oomph::BiharmonicFluxElement$<$ DIM $>$@{oomph::BiharmonicFluxElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{J\_eulerian()}{J\_eulerian()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{oomph\+::\+Biharmonic\+Flux\+Element}}$<$ DIM $>$\+::J\+\_\+eulerian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}
+double \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{oomph\+::\+Biharmonic\+Flux\+Element}}$<$ DIM $>$\+::J\+\_\+eulerian (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}
 
 
 
@@ -387,14 +387,14 @@ Calculate the Jacobian of the mapping between local and global coordinates at th
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a808557a124b98d5bbe3bb3b22c81b44b}{oomph\+::\+Finite\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a089e58d5ad9b8efee637221b0e264563}{oomph\+::\+Finite\+Element}}.
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicFluxElement_a43d6022eafab8c69ebf22707c9de9d4a}\label{classoomph_1_1BiharmonicFluxElement_a43d6022eafab8c69ebf22707c9de9d4a}} 
 \index{oomph::BiharmonicFluxElement$<$ DIM $>$@{oomph::BiharmonicFluxElement$<$ DIM $>$}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::BiharmonicFluxElement$<$ DIM $>$@{oomph::BiharmonicFluxElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{oomph\+::\+Biharmonic\+Flux\+Element}}$<$ DIM $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{Biharmonic\+Flux\+Element}}$<$ DIM $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+void \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{oomph\+::\+Biharmonic\+Flux\+Element}}$<$ DIM $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{Biharmonic\+Flux\+Element}}$<$ DIM $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
@@ -424,7 +424,7 @@ Definition at line \mbox{\hyperlink{biharmonic__flux__elements_8h_source_l00164}
 \index{output@{output}!oomph::BiharmonicFluxElement$<$ DIM $>$@{oomph::BiharmonicFluxElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{oomph\+::\+Biharmonic\+Flux\+Element}}$<$ DIM $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{oomph\+::\+Biharmonic\+Flux\+Element}}$<$ DIM $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -462,7 +462,7 @@ Definition at line \mbox{\hyperlink{biharmonic__flux__elements_8h_source_l00156}
 \index{output@{output}!oomph::BiharmonicFluxElement$<$ DIM $>$@{oomph::BiharmonicFluxElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{oomph\+::\+Biharmonic\+Flux\+Element}}$<$ DIM $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{oomph\+::\+Biharmonic\+Flux\+Element}}$<$ DIM $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -481,7 +481,7 @@ Definition at line \mbox{\hyperlink{biharmonic__flux__elements_8h_source_l00160}
 \index{output\_fct@{output\_fct}!oomph::BiharmonicFluxElement$<$ DIM $>$@{oomph::BiharmonicFluxElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{output\_fct()}{output\_fct()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual void \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{oomph\+::\+Biharmonic\+Flux\+Element}}$<$ DIM $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+virtual void \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{oomph\+::\+Biharmonic\+Flux\+Element}}$<$ DIM $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -500,7 +500,7 @@ Definition at line \mbox{\hyperlink{biharmonic__flux__elements_8h_source_l00180}
 \index{zeta\_nodal@{zeta\_nodal}!oomph::BiharmonicFluxElement$<$ DIM $>$@{oomph::BiharmonicFluxElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{zeta\_nodal()}{zeta\_nodal()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{oomph\+::\+Biharmonic\+Flux\+Element}}$<$ DIM $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{k,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+double \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{oomph\+::\+Biharmonic\+Flux\+Element}}$<$ DIM $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{k,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -516,7 +516,7 @@ Definition at line \mbox{\hyperlink{biharmonic__flux__elements_8h_source_l00147}
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l04525}{oomph\+::\+Face\+Element\+::zeta\+\_\+nodal()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l04497}{oomph\+::\+Face\+Element\+::zeta\+\_\+nodal()}}.
 
 
 

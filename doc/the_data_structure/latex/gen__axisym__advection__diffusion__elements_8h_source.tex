@@ -64,17 +64,17 @@
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00060}\mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_a0c6a27f0de0f4385b2ddeb0fae8988bb}{00060}} \textcolor{comment}{    /// Function pointer to source function fct(x,f(x)) -\/-\/}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00061}00061 \textcolor{comment}{    /// x is a Vector!}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00062}00062 \textcolor{comment}{}    \textcolor{keyword}{typedef} void (*GeneralisedAxisymAdvectionDiffusionSourceFctPt)(}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00063}\mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_af1981ff9c2dd3b6e8723e2149efd2385}{00063}}       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \textcolor{keywordtype}{double}\& \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_af1981ff9c2dd3b6e8723e2149efd2385}{f}});}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00063}\mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_af1981ff9c2dd3b6e8723e2149efd2385}{00063}}       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x, \textcolor{keywordtype}{double}\& \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_af1981ff9c2dd3b6e8723e2149efd2385}{f}});}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00064}00064 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00065}\mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_aed54f338077e4afda0e67f46ef2cb309}{00065}} \textcolor{comment}{    /// Function pointer to wind function fct(x,w(x)) -\/-\/}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00066}00066 \textcolor{comment}{    /// x is a Vector!}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00067}00067 \textcolor{comment}{}    \textcolor{keyword}{typedef} void (*GeneralisedAxisymAdvectionDiffusionWindFctPt)(}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00068}\mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_aac288cd2423228b533d7fb865c9968f6}{00068}}       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_aac288cd2423228b533d7fb865c9968f6}{wind}});}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00068}\mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_aac288cd2423228b533d7fb865c9968f6}{00068}}       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_aac288cd2423228b533d7fb865c9968f6}{wind}});}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00069}00069 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00070}00070 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00071}00071 \textcolor{comment}{    /// Function pointer to a diffusivity function}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00072}\mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_af152ea280e55eb13efa2f9ddbc815be7}{00072}} \textcolor{comment}{}    \textcolor{keyword}{typedef} void (*\mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_af152ea280e55eb13efa2f9ddbc815be7}{GeneralisedAxisymAdvectionDiffusionDiffFctPt}})(}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00073}00073       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{namespaceoomph_1_1OcTreeNames_ae7e7e58298b85825061eeff362656c40a51292b8e4d96f2bb9f0d6bb0340d1620}{D}});}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00073}00073       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{namespaceoomph_1_1OcTreeNames_ae7e7e58298b85825061eeff362656c40a51292b8e4d96f2bb9f0d6bb0340d1620}{D}});}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00074}00074 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00075}\mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_ae828bc844ad459807cab591d10074990}{00075}} \textcolor{comment}{    /// Constructor: Initialise the Source\_fct\_pt and Wind\_fct\_pt}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00076}00076 \textcolor{comment}{    /// to null and set (pointer to) Peclet number to default}}
@@ -121,7 +121,7 @@
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00117}\mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_a2145d4d8fe818fafc528e0c20e53a44a}{00117}} \textcolor{comment}{}    \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_a2145d4d8fe818fafc528e0c20e53a44a}{du\_dt\_cons\_axisym\_adv\_diff}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00118}00118 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00119}00119       \textcolor{comment}{// Get the data's timestepper}}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00120}00120       \mbox{\hyperlink{classoomph_1_1TimeStepper}{TimeStepper}}* \mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\_stepper\_pt}} = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n)-\/>time\_stepper\_pt();}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00120}00120       \mbox{\hyperlink{classoomph_1_1TimeStepper}{TimeStepper}}* \mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\_stepper\_pt}} = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n)-\/>\mbox{\hyperlink{classoomph_1_1Data_a065d7bffcec82bf4d4bd7b41f9aa80b3}{time\_stepper\_pt}}();}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00121}00121 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00122}00122       \textcolor{comment}{// Initialise dudt}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00123}00123       \textcolor{keywordtype}{double} dudt = 0.0;}
@@ -313,7 +313,7 @@
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00309}00309 \textcolor{comment}{    /// the strength of the source function might be determined by}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00310}00310 \textcolor{comment}{    /// another system of equations}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00311}\mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_ad10c2469da2fc4a3fccbe2d798885490}{00311}} \textcolor{comment}{}    \textcolor{keyword}{inline} \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_ad10c2469da2fc4a3fccbe2d798885490}{get\_source\_cons\_axisym\_adv\_diff}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ipt,}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00312}00312                                                         \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00312}00312                                                         \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00313}00313                                                         \textcolor{keywordtype}{double}\& source)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00314}00314 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00315}00315       \textcolor{comment}{// If no source function has been set, return zero}}
@@ -324,7 +324,7 @@
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00320}00320       \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00321}00321       \{}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00322}00322         \textcolor{comment}{// Get source strength}}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00323}00323         (*Source\_fct\_pt)(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, source);}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00323}00323         (*Source\_fct\_pt)(x, source);}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00324}00324       \}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00325}00325     \}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00326}00326 \textcolor{comment}{}}
@@ -336,7 +336,7 @@
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00332}\mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_a6725fac49655c8c50f50977a0b8e9c15}{00332}} \textcolor{comment}{}    \textcolor{keyword}{inline} \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_a6725fac49655c8c50f50977a0b8e9c15}{get\_wind\_cons\_axisym\_adv\_diff}}(}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00333}00333       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ipt,}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00334}00334       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00335}00335       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00335}00335       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00336}00336       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_aac288cd2423228b533d7fb865c9968f6}{wind}})\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00337}00337 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00338}00338       \textcolor{comment}{// If no wind function has been set, return zero}}
@@ -351,7 +351,7 @@
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00347}00347       \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00348}00348       \{}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00349}00349         \textcolor{comment}{// Get wind}}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00350}00350         (*Wind\_fct\_pt)(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_aac288cd2423228b533d7fb865c9968f6}{wind}});}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00350}00350         (*Wind\_fct\_pt)(x, \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_aac288cd2423228b533d7fb865c9968f6}{wind}});}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00351}00351       \}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00352}00352     \}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00353}00353 }
@@ -365,7 +365,7 @@
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00361}\mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_a2167481afaeb64c9f8bd278e76f68851}{00361}} \textcolor{comment}{}    \textcolor{keyword}{inline} \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_a2167481afaeb64c9f8bd278e76f68851}{get\_conserved\_wind\_cons\_axisym\_adv\_diff}}(}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00362}00362       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ipt,}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00363}00363       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00364}00364       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00364}00364       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00365}00365       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_aac288cd2423228b533d7fb865c9968f6}{wind}})\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00366}00366 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00367}00367       \textcolor{comment}{// If no wind function has been set, return zero}}
@@ -379,7 +379,7 @@
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00375}00375       \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00376}00376       \{}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00377}00377         \textcolor{comment}{// Get wind}}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00378}00378         (*Conserved\_wind\_fct\_pt)(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_aac288cd2423228b533d7fb865c9968f6}{wind}});}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00378}00378         (*Conserved\_wind\_fct\_pt)(x, \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_aac288cd2423228b533d7fb865c9968f6}{wind}});}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00379}00379       \}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00380}00380     \}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00381}00381 }
@@ -393,7 +393,7 @@
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00389}\mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_a41ff0dbbece6cfb98d22719b8aa16685}{00389}} \textcolor{comment}{}    \textcolor{keyword}{inline} \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_a41ff0dbbece6cfb98d22719b8aa16685}{get\_diff\_cons\_axisym\_adv\_diff}}(}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00390}00390       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ipt,}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00391}00391       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00392}00392       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00392}00392       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00393}00393       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{namespaceoomph_1_1OcTreeNames_ae7e7e58298b85825061eeff362656c40a51292b8e4d96f2bb9f0d6bb0340d1620}{D}})\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00394}00394 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00395}00395       \textcolor{comment}{// If no wind function has been set, return identity}}
@@ -419,7 +419,7 @@
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00415}00415       \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00416}00416       \{}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00417}00417         \textcolor{comment}{// Get diffusivity tensor}}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00418}00418         (*Diff\_fct\_pt)(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{namespaceoomph_1_1OcTreeNames_ae7e7e58298b85825061eeff362656c40a51292b8e4d96f2bb9f0d6bb0340d1620}{D}});}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00418}00418         (*Diff\_fct\_pt)(x, \mbox{\hyperlink{namespaceoomph_1_1OcTreeNames_ae7e7e58298b85825061eeff362656c40a51292b8e4d96f2bb9f0d6bb0340d1620}{D}});}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00419}00419       \}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00420}00420     \}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00421}00421 }
@@ -474,7 +474,7 @@
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00470}00470       \mbox{\hyperlink{classoomph_1_1FiniteElement_a9296c17b134688049256a4bbc886df69}{dshape\_eulerian}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, psi, dpsidx);}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00471}00471 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00472}00472       \textcolor{comment}{// Storage for the Eulerian position}}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00473}00473       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(2, 0.0);}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00473}00473       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(2, 0.0);}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00474}00474       \textcolor{comment}{// Storage for the concentration}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00475}00475       \textcolor{keywordtype}{double} interpolated\_u = 0.0;}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00476}00476       \textcolor{comment}{// Storage for the derivatives of the concentration}}
@@ -489,7 +489,7 @@
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00485}00485         \textcolor{comment}{// Loop over directions}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00486}00486         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < 2; j++)}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00487}00487         \{}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00488}00488           \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}[j] += this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9152c16ae9899168bcdaac7c2f977444}{nodal\_position}}(l, j) * psi(l);}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00488}00488           \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}[j] += this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9152c16ae9899168bcdaac7c2f977444}{nodal\_position}}(l, j) * psi(l);}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00489}00489           interpolated\_dudx[j] += u\_value * dpsidx(l, j);}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00490}00490         \}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00491}00491       \}}
@@ -500,11 +500,11 @@
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00496}00496       \textcolor{comment}{// Get the conserved wind (non-\/divergence free)}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00497}00497       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} conserved\_wind(3);}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00498}00498       \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_a2167481afaeb64c9f8bd278e76f68851}{get\_conserved\_wind\_cons\_axisym\_adv\_diff}}(}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00499}00499         ipt, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}, conserved\_wind);}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00499}00499         ipt, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}, conserved\_wind);}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00500}00500 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00501}00501       \textcolor{comment}{// Get diffusivity tensor}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00502}00502       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} \mbox{\hyperlink{namespaceoomph_1_1OcTreeNames_ae7e7e58298b85825061eeff362656c40a51292b8e4d96f2bb9f0d6bb0340d1620}{D}}(3, 3);}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00503}00503       \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_a41ff0dbbece6cfb98d22719b8aa16685}{get\_diff\_cons\_axisym\_adv\_diff}}(ipt, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}, \mbox{\hyperlink{namespaceoomph_1_1OcTreeNames_ae7e7e58298b85825061eeff362656c40a51292b8e4d96f2bb9f0d6bb0340d1620}{D}});}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00503}00503       \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_a41ff0dbbece6cfb98d22719b8aa16685}{get\_diff\_cons\_axisym\_adv\_diff}}(ipt, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}, \mbox{\hyperlink{namespaceoomph_1_1OcTreeNames_ae7e7e58298b85825061eeff362656c40a51292b8e4d96f2bb9f0d6bb0340d1620}{D}});}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00504}00504 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00505}00505       \textcolor{comment}{// Calculate the total flux made up of the diffusive flux}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00506}00506       \textcolor{comment}{// and the conserved wind only bother with the}}
@@ -538,11 +538,11 @@
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00534}00534 \textcolor{comment}{    /// Add the element's contribution to its residual vector and}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00535}00535 \textcolor{comment}{    /// the element Jacobian matrix (wrapper)}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00536}\mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_ac12ea66ced5dbc1b70d17b39ca676cd5}{00536}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_ac12ea66ced5dbc1b70d17b39ca676cd5}{fill\_in\_contribution\_to\_jacobian}}(\mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00537}00537                                           \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00537}00537                                           \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian)}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00538}00538     \{}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00539}00539       \textcolor{comment}{// Call the generic routine with the flag set to 1}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00540}00540       \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_a9f329487daf70a6939dc69a24f86421a}{fill\_in\_generic\_residual\_contribution\_cons\_axisym\_adv\_diff}}(}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00541}00541         residuals, \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a4bff11b8ff97aefabb2df41e61e1779f}{GeneralisedElement::Dummy\_matrix}}, 1);}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00541}00541         residuals, jacobian, \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a4bff11b8ff97aefabb2df41e61e1779f}{GeneralisedElement::Dummy\_matrix}}, 1);}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00542}00542     \}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00543}00543 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00544}00544 \textcolor{comment}{}}
@@ -550,12 +550,12 @@
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00546}00546 \textcolor{comment}{    /// jacobian matrix and mass matrix}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00547}\mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_a7b4fb549aa5c7470ed12638952fbdaf3}{00547}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_a7b4fb549aa5c7470ed12638952fbdaf3}{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix}}(}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00548}00548       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00549}00549       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}},}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00549}00549       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian,}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00550}00550       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& mass\_matrix)}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00551}00551     \{}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00552}00552       \textcolor{comment}{// Call the generic routine with the flag set to 2}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00553}00553       \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_a9f329487daf70a6939dc69a24f86421a}{fill\_in\_generic\_residual\_contribution\_cons\_axisym\_adv\_diff}}(}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00554}00554         residuals, \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, mass\_matrix, 2);}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00554}00554         residuals, jacobian, mass\_matrix, 2);}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00555}00555     \}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00556}00556 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00557}00557 \textcolor{comment}{}}
@@ -614,7 +614,7 @@
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00610}00610 \textcolor{comment}{    /// (if flag=and/or element  Jacobian matrix}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00611}00611 \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_a9f329487daf70a6939dc69a24f86421a}{fill\_in\_generic\_residual\_contribution\_cons\_axisym\_adv\_diff}}(}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00612}00612       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00613}00613       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}},}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00613}00613       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian,}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00614}00614       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& mass\_matrix,}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00615}00615       \textcolor{keywordtype}{unsigned} flag);}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8h_source_l00616}00616 \textcolor{comment}{}}

@@ -346,7 +346,7 @@
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00342}00342       \textcolor{keywordtype}{unsigned} l;}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00343}00343 }
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00344}00344       \textcolor{comment}{// The index of the upper column bound}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00345}00345       \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}};}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00345}00345       \textcolor{keywordtype}{unsigned} u;}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00346}00346 }
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00347}00347       \textcolor{comment}{// If we're using the upper triangular form of the preconditioner}}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00348}00348       \textcolor{keywordflow}{if} (Upper\_triangular)}
@@ -358,20 +358,20 @@
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00354}00354         \textcolor{keywordflow}{if} (Block\_bandwidth >= 0)}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00355}00355         \{}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00356}00356           \textcolor{comment}{// The upper bound is the last nonzero block column}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00357}00357           \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}} = std::min(n\_block\_types, l + Block\_bandwidth);}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00357}00357           u = std::min(n\_block\_types, l + Block\_bandwidth);}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00358}00358         \}}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00359}00359         \textcolor{comment}{// Default case; loop over all the block columns}}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00360}00360         \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00361}00361         \{}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00362}00362           \textcolor{comment}{// The upper bound is the last column}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00363}00363           \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}} = n\_block\_types;}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00363}00363           u = n\_block\_types;}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00364}00364         \}}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00365}00365       \}}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00366}00366       \textcolor{comment}{// If we're using the lower triangular form of the preconditioner}}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00367}00367       \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00368}00368       \{}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00369}00369         \textcolor{comment}{// The upper bound column bound}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00370}00370         \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}} = \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}};}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00370}00370         u = \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}};}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00371}00371 }
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00372}00372         \textcolor{comment}{// If the block bandwidth has been provided}}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00373}00373         \textcolor{keywordflow}{if} (Block\_bandwidth >= 0)}
@@ -379,7 +379,7 @@
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00375}00375           \textcolor{comment}{// The lower bound is the last nonzero block column. The explicit}}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00376}00376           \textcolor{comment}{// casting is a bit over the top but it's better to be safe than}}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00377}00377           \textcolor{comment}{// sorry...}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00378}00378           l = std::max(0, \textcolor{keywordtype}{int}(\textcolor{keywordtype}{int}(\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}) -\/ Block\_bandwidth));}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00378}00378           l = std::max(0, \textcolor{keywordtype}{int}(\textcolor{keywordtype}{int}(u) -\/ Block\_bandwidth));}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00379}00379         \}}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00380}00380         \textcolor{comment}{// Default case; loop over all the block columns}}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00381}00381         \textcolor{keywordflow}{else}}
@@ -390,7 +390,7 @@
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00386}00386       \} \textcolor{comment}{// for (unsigned i=0;i<nblock\_types;i++)}}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00387}00387 }
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00388}00388       \textcolor{comment}{// Loop over the chosen block columns}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00389}00389       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = l; j < \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}; j++)}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00389}00389       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = l; j < u; j++)}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00390}00390       \{}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00391}00391         \textcolor{comment}{// Get the start time}}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__block__preconditioner_8cc_source_l00392}00392         \textcolor{keywordtype}{double} t\_extract\_start = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}

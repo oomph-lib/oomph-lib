@@ -46,7 +46,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00042}00042     \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} dpsidzeta(n\_node, 2);}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00043}00043 }
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00044}00044     \textcolor{comment}{// Set the value of n\_intpt}}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00045}00045     \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00045}00045     \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00046}00046 }
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00047}00047     \textcolor{comment}{// Integers to store the local equation numbers}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00048}00048     \textcolor{keywordtype}{int} local\_eqn = 0;}
@@ -55,17 +55,17 @@
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00051}00051     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ipt = 0; ipt < n\_intpt; ipt++)}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00052}00052     \{}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00053}00053       \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00054}00054       \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00054}00054       \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00055}00055 }
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00056}00056       \textcolor{comment}{// Call the derivatives of the shape (test) functions}}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00057}00057       \textcolor{keywordtype}{double} J = \mbox{\hyperlink{classoomph_1_1FiniteElement_a837c4849f68842295ab5e77c8ecb8b93}{dshape\_eulerian\_at\_knot}}(ipt, psi, dpsidzeta);}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00057}00057       \textcolor{keywordtype}{double} J = \mbox{\hyperlink{classoomph_1_1FiniteElement_a368c44e295e35dd0b697be3222ce7b2f}{dshape\_eulerian\_at\_knot}}(ipt, psi, dpsidzeta);}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00058}00058 }
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00059}00059       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00060}00060       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00060}00060       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00061}00061 }
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00062}00062       \textcolor{comment}{// Calculate local values of the pressure and velocity components}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00063}00063       \textcolor{comment}{// Allocate and initialise to zero}}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00064}00064       \textcolor{keywordtype}{double} interpolated\_u = 0.0;}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00064}00064       \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a4839156bf756602298093aa3c0a2f103}{interpolated\_u}} = 0.0;}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00065}00065       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{classoomph_1_1FiniteElement_a4407a4f0fb5bf5b883530742ee3153df}{interpolated\_zeta}}(2, 0.0);}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00066}00066       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} interpolated\_du\_dzeta(2, 0.0);}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00067}00067 }
@@ -74,12 +74,12 @@
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00070}00070       \textcolor{comment}{// Loop over nodes}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00071}00071       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} l = 0; l < n\_node; l++)}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00072}00072       \{}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00073}00073         interpolated\_u += \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}(l) * psi(l);}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00073}00073         \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a4839156bf756602298093aa3c0a2f103}{interpolated\_u}} += \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_aa3727069bb00e0b2f37d5bc3bb3b16ae}{u}}(l) * psi(l);}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00074}00074         \textcolor{comment}{// Loop over directions}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00075}00075         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < 2; j++)}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00076}00076         \{}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00077}00077           \mbox{\hyperlink{classoomph_1_1FiniteElement_a4407a4f0fb5bf5b883530742ee3153df}{interpolated\_zeta}}[j] += \mbox{\hyperlink{classoomph_1_1FiniteElement_a9152c16ae9899168bcdaac7c2f977444}{nodal\_position}}(l, j) * psi(l);}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00078}00078           interpolated\_du\_dzeta[j] += \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}(l) * dpsidzeta(l, j);}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00078}00078           interpolated\_du\_dzeta[j] += \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_aa3727069bb00e0b2f37d5bc3bb3b16ae}{u}}(l) * dpsidzeta(l, j);}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00079}00079         \}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00080}00080       \}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00081}00081 }
@@ -96,7 +96,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00092}00092 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00093}00093       \textcolor{comment}{// Derivs of position vector w.r.t. global intrinsic coords}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00094}00094       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<Vector<double>}}> dRdzeta;}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00095}00095       allocate\_vector\_of\_vectors(2, 3, dRdzeta);}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00095}00095       \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a3a618a00109c733bc38eee0623386d2b}{allocate\_vector\_of\_vectors}}(2, 3, dRdzeta);}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00096}00096 }
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00097}00097       \textcolor{comment}{// Unnormalised normal}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00098}00098       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} N\_unnormalised(3, 0.0);}
@@ -109,14 +109,14 @@
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00105}00105       \textcolor{comment}{// of the spine basis vector w.r.t. to the i-\/th global intrinsic}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00106}00106       \textcolor{comment}{// coordinate}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00107}00107       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<Vector<double>}}> dspine\_base;}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00108}00108       allocate\_vector\_of\_vectors(2, 3, dspine\_base);}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00108}00108       \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a3a618a00109c733bc38eee0623386d2b}{allocate\_vector\_of\_vectors}}(2, 3, dspine\_base);}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00109}00109 }
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00110}00110       \textcolor{comment}{// Derivative of spine vector w.r.t to the intrinsic}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00111}00111       \textcolor{comment}{// coordinates: dspine[i,j] = j-\/th component of the deriv.}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00112}00112       \textcolor{comment}{// of the spine vector w.r.t. to the i-\/th global intrinsic}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00113}00113       \textcolor{comment}{// coordinate}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00114}00114       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<Vector<double>}}> dspine;}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00115}00115       allocate\_vector\_of\_vectors(2, 3, dspine);}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00115}00115       \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a3a618a00109c733bc38eee0623386d2b}{allocate\_vector\_of\_vectors}}(2, 3, dspine);}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00116}00116 }
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00117}00117       \textcolor{comment}{// Vector v\_\(\backslash\)alpha contains the numerator of the variations of the}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00118}00118       \textcolor{comment}{// area element \{\(\backslash\)cal A\}\string^\{1/2\} w.r.t. the components of dR/d\(\backslash\)zeta\_\(\backslash\)alpha}}
@@ -128,7 +128,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00124}00124 }
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00125}00125       \textcolor{comment}{// No spines}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00126}00126       \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00127}00127       \textcolor{keywordflow}{if} (!use\_spines())}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00127}00127       \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_aaf07cfa70e0de1b388290d2e1f63a7b7}{use\_spines}}())}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00128}00128       \{}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00129}00129         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < 2; j++)}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00130}00130           sqnorm += interpolated\_du\_dzeta[j] * interpolated\_du\_dzeta[j];}
@@ -141,31 +141,31 @@
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00137}00137       \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00138}00138       \{}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00139}00139         \textcolor{comment}{// Get the spines}}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00140}00140         get\_spine\_base(\mbox{\hyperlink{classoomph_1_1FiniteElement_a4407a4f0fb5bf5b883530742ee3153df}{interpolated\_zeta}}, spine\_base, dspine\_base);}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00141}00141         get\_spine(\mbox{\hyperlink{classoomph_1_1FiniteElement_a4407a4f0fb5bf5b883530742ee3153df}{interpolated\_zeta}}, spine, dspine);}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00140}00140         \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a4f9bb4d4617839296397c07cb2f2349c}{get\_spine\_base}}(\mbox{\hyperlink{classoomph_1_1FiniteElement_a4407a4f0fb5bf5b883530742ee3153df}{interpolated\_zeta}}, spine\_base, dspine\_base);}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00141}00141         \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a08376fdfe31361bee2ba0d21f9b132ec}{get\_spine}}(\mbox{\hyperlink{classoomph_1_1FiniteElement_a4407a4f0fb5bf5b883530742ee3153df}{interpolated\_zeta}}, spine, dspine);}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00142}00142 }
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00143}00143         \textcolor{comment}{// calculation of dR/d\(\backslash\)zeta\_\(\backslash\)alpha}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00144}00144         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} alpha = 0; alpha < 2; alpha++)}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00145}00145         \{}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00146}00146           \textcolor{comment}{// Product rule for d(u \{\(\backslash\)bf S\} ) / d \(\backslash\)zeta\_\(\backslash\)alpha}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00147}00147           \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} dudzeta\_times\_spine(3, 0.0);}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00148}00148           scalar\_times\_vector(}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00148}00148           \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a1df29bef40248ef56647ce5af2695ca5}{scalar\_times\_vector}}(}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00149}00149             interpolated\_du\_dzeta[alpha], spine, dudzeta\_times\_spine);}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00150}00150 }
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00151}00151           \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} u\_times\_dspinedzeta(3, 0.0);}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00152}00152           scalar\_times\_vector(}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00153}00153             interpolated\_u, dspine[alpha], u\_times\_dspinedzeta);}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00152}00152           \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a1df29bef40248ef56647ce5af2695ca5}{scalar\_times\_vector}}(}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00153}00153             \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a4839156bf756602298093aa3c0a2f103}{interpolated\_u}}, dspine[alpha], u\_times\_dspinedzeta);}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00154}00154 }
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00155}00155           \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} d\_u\_times\_spine\_dzeta(3, 0.0);}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00156}00156           vector\_sum(}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00156}00156           \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_afb7ff7fc54e453324abdd29565ba8599}{vector\_sum}}(}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00157}00157             dudzeta\_times\_spine, u\_times\_dspinedzeta, d\_u\_times\_spine\_dzeta);}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00158}00158 }
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00159}00159           \textcolor{comment}{// Add derivative of spine base}}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00160}00160           vector\_sum(d\_u\_times\_spine\_dzeta, dspine\_base[alpha], dRdzeta[alpha]);}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00160}00160           \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_afb7ff7fc54e453324abdd29565ba8599}{vector\_sum}}(d\_u\_times\_spine\_dzeta, dspine\_base[alpha], dRdzeta[alpha]);}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00161}00161         \}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00162}00162 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00163}00163 \textcolor{comment}{        /// Get the unnormalized normal}}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00164}00164 \textcolor{comment}{}        cross\_product(dRdzeta[0], dRdzeta[1], N\_unnormalised);}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00164}00164 \textcolor{comment}{}        \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_abca184b7f327333dc4284096d94e4771}{cross\_product}}(dRdzeta[0], dRdzeta[1], N\_unnormalised);}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00165}00165 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00166}00166 \textcolor{comment}{        /// Tmp storage}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00167}00167 \textcolor{comment}{}        \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} v\_tmp\_1(3, 0.0);}
@@ -173,22 +173,22 @@
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00169}00169 }
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00170}00170         \textcolor{comment}{// Calculation of}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00171}00171         \textcolor{comment}{// |dR/d\(\backslash\)zeta\_1|\string^2 dR/d\(\backslash\)zeta\_0 -\/ <dR/d\(\backslash\)zeta\_0,dR/d\(\backslash\)zeta\_1>dR/d\(\backslash\)zeta\_1}}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00172}00172         scalar\_times\_vector(pow(two\_norm(dRdzeta[1]), 2), dRdzeta[0], v\_tmp\_1);}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00173}00173         scalar\_times\_vector(}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00174}00174           -\/1 * scalar\_product(dRdzeta[0], dRdzeta[1]), dRdzeta[1], v\_tmp\_2);}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00175}00175         vector\_sum(v\_tmp\_1, v\_tmp\_2, area\_variation\_numerator\_0);}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00172}00172         \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a1df29bef40248ef56647ce5af2695ca5}{scalar\_times\_vector}}(pow(\mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a16a1e5407993539ac48a690215ebd13e}{two\_norm}}(dRdzeta[1]), 2), dRdzeta[0], v\_tmp\_1);}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00173}00173         \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a1df29bef40248ef56647ce5af2695ca5}{scalar\_times\_vector}}(}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00174}00174           -\/1 * \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a377068e0e409cd58e4af567bdc4dc68b}{scalar\_product}}(dRdzeta[0], dRdzeta[1]), dRdzeta[1], v\_tmp\_2);}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00175}00175         \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_afb7ff7fc54e453324abdd29565ba8599}{vector\_sum}}(v\_tmp\_1, v\_tmp\_2, area\_variation\_numerator\_0);}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00176}00176 }
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00177}00177         \textcolor{comment}{// Calculation of}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00178}00178         \textcolor{comment}{// |dR/d\(\backslash\)zeta\_0|\string^2 dR/d\(\backslash\)zeta\_1 -\/ <dR/d\(\backslash\)zeta\_0,dR/d\(\backslash\)zeta\_1>dR/d\(\backslash\)zeta\_0}}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00179}00179         scalar\_times\_vector(pow(two\_norm(dRdzeta[0]), 2), dRdzeta[1], v\_tmp\_1);}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00180}00180         scalar\_times\_vector(}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00181}00181           -\/1 * scalar\_product(dRdzeta[0], dRdzeta[1]), dRdzeta[0], v\_tmp\_2);}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00182}00182         vector\_sum(v\_tmp\_1, v\_tmp\_2, area\_variation\_numerator\_1);}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00179}00179         \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a1df29bef40248ef56647ce5af2695ca5}{scalar\_times\_vector}}(pow(\mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a16a1e5407993539ac48a690215ebd13e}{two\_norm}}(dRdzeta[0]), 2), dRdzeta[1], v\_tmp\_1);}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00180}00180         \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a1df29bef40248ef56647ce5af2695ca5}{scalar\_times\_vector}}(}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00181}00181           -\/1 * \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a377068e0e409cd58e4af567bdc4dc68b}{scalar\_product}}(dRdzeta[0], dRdzeta[1]), dRdzeta[0], v\_tmp\_2);}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00182}00182         \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_afb7ff7fc54e453324abdd29565ba8599}{vector\_sum}}(v\_tmp\_1, v\_tmp\_2, area\_variation\_numerator\_1);}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00183}00183 }
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00184}00184         \textcolor{comment}{// Global Eulerian cooordinates}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00185}00185         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < 3; j++)}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00186}00186         \{}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00187}00187           r[j] = spine\_base[j] + interpolated\_u * spine[j];}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00187}00187           r[j] = spine\_base[j] + \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a4839156bf756602298093aa3c0a2f103}{interpolated\_u}} * spine[j];}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00188}00188         \}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00189}00189       \}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00190}00190 }
@@ -207,7 +207,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00203}00203         \textcolor{comment}{// If the node is hanging, get the number of master nodes}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00204}00204         \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l)-\/>is\_hanging())}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00205}00205         \{}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00206}00206           n\_master = \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l)-\/>hanging\_pt()-\/>nmaster();}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00206}00206           n\_master = \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l)-\/>\mbox{\hyperlink{classoomph_1_1Node_afefa22db8b28e783b8647e3577ee01d9}{hanging\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1HangInfo_aa9c1130b58db2ff6d5eee4f923ba365c}{nmaster}}();}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00207}00207         \}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00208}00208         \textcolor{comment}{// Otherwise there is just one master node, the node itself}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00209}00209         \textcolor{keywordflow}{else}}
@@ -226,13 +226,13 @@
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00222}00222             local\_eqn =}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00223}00223               \mbox{\hyperlink{classoomph_1_1RefineableElement_abc3d0cb0131ebf717ff0620242c9ca2b}{local\_hang\_eqn}}(\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l)-\/>hanging\_pt()-\/>master\_node\_pt(m), 0);}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00224}00224             \textcolor{comment}{// Read out the weight from the master node}}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00225}00225             hang\_weight = \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l)-\/>hanging\_pt()-\/>master\_weight(m);}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00225}00225             hang\_weight = \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l)-\/>\mbox{\hyperlink{classoomph_1_1Node_afefa22db8b28e783b8647e3577ee01d9}{hanging\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1HangInfo_ac49ebdd8957a658fe4a2420108d2dcee}{master\_weight}}(m);}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00226}00226           \}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00227}00227           \textcolor{comment}{// If the node is not hanging}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00228}00228           \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00229}00229           \{}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00230}00230             \textcolor{comment}{// The local equation number comes from the node itself}}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00231}00231             local\_eqn = this-\/>u\_local\_eqn(l);}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00231}00231             local\_eqn = this-\/>\mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a60c1e853d0f03470caec1b76c8fa9226}{u\_local\_eqn}}(l);}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00232}00232             \textcolor{comment}{// The hang weight is one}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00233}00233             hang\_weight = 1.0;}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00234}00234           \}}
@@ -241,17 +241,17 @@
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00237}00237           \textcolor{keywordflow}{if} (local\_eqn >= 0)}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00238}00238           \{}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00239}00239             \textcolor{comment}{// "{}simple"{} calculation case}}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00240}00240             \textcolor{keywordflow}{if} (!use\_spines())}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00240}00240             \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_aaf07cfa70e0de1b388290d2e1f63a7b7}{use\_spines}}())}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00241}00241             \{}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00242}00242               \textcolor{comment}{// Add source term: The curvature}}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00243}00243               residuals[local\_eqn] += get\_kappa() * psi(l) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight;}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00243}00243               residuals[local\_eqn] += \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_aa4144104f99e731a0e40ad4ced7f5e8e}{get\_kappa}}() * psi(l) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight;}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00244}00244 }
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00245}00245               \textcolor{comment}{// The YoungLaplace bit itself}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00246}00246               \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < 2; k++)}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00247}00247               \{}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00248}00248                 residuals[local\_eqn] += nonlinearterm *}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00249}00249                                         interpolated\_du\_dzeta[k] *}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00250}00250                                         dpsidzeta(l, k) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight;}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00250}00250                                         dpsidzeta(l, k) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight;}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00251}00251               \}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00252}00252             \}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00253}00253 }
@@ -261,35 +261,35 @@
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00257}00257               \textcolor{comment}{// Calculation of d(u S)/d\(\backslash\)zeta\_0}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00258}00258               \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00259}00259               \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} v\_tmp\_1(3, 0.0);}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00260}00260               scalar\_times\_vector(dpsidzeta(l, 0), spine, v\_tmp\_1);}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00260}00260               \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a1df29bef40248ef56647ce5af2695ca5}{scalar\_times\_vector}}(dpsidzeta(l, 0), spine, v\_tmp\_1);}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00261}00261 }
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00262}00262               \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} v\_tmp\_2(3, 0.0);}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00263}00263               scalar\_times\_vector(psi(l), dspine[0], v\_tmp\_2);}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00263}00263               \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a1df29bef40248ef56647ce5af2695ca5}{scalar\_times\_vector}}(psi(l), dspine[0], v\_tmp\_2);}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00264}00264 }
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00265}00265               \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} d\_uS\_dzeta0(3, 0.0);}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00266}00266               vector\_sum(v\_tmp\_1, v\_tmp\_2, d\_uS\_dzeta0);}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00266}00266               \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_afb7ff7fc54e453324abdd29565ba8599}{vector\_sum}}(v\_tmp\_1, v\_tmp\_2, d\_uS\_dzeta0);}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00267}00267 }
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00268}00268               \textcolor{comment}{// Add contribution to residual}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00269}00269               residuals[local\_eqn] +=}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00270}00270                 \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight *}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00271}00271                 scalar\_product(area\_variation\_numerator\_0, d\_uS\_dzeta0) /}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00272}00272                 two\_norm(N\_unnormalised);}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00270}00270                 \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight *}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00271}00271                 \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a377068e0e409cd58e4af567bdc4dc68b}{scalar\_product}}(area\_variation\_numerator\_0, d\_uS\_dzeta0) /}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00272}00272                 \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a16a1e5407993539ac48a690215ebd13e}{two\_norm}}(N\_unnormalised);}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00273}00273 }
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00274}00274               \textcolor{comment}{// Calculation of d(u S)/d\(\backslash\)zeta\_1}}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00275}00275               scalar\_times\_vector(dpsidzeta(l, 1), spine, v\_tmp\_1);}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00276}00276               scalar\_times\_vector(psi(l), dspine[1], v\_tmp\_2);}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00275}00275               \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a1df29bef40248ef56647ce5af2695ca5}{scalar\_times\_vector}}(dpsidzeta(l, 1), spine, v\_tmp\_1);}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00276}00276               \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a1df29bef40248ef56647ce5af2695ca5}{scalar\_times\_vector}}(psi(l), dspine[1], v\_tmp\_2);}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00277}00277               \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} d\_uS\_dzeta1(3, 0.0);}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00278}00278               vector\_sum(v\_tmp\_1, v\_tmp\_2, d\_uS\_dzeta1);}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00278}00278               \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_afb7ff7fc54e453324abdd29565ba8599}{vector\_sum}}(v\_tmp\_1, v\_tmp\_2, d\_uS\_dzeta1);}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00279}00279 }
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00280}00280               \textcolor{comment}{// Add contribution to residual}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00281}00281               residuals[local\_eqn] +=}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00282}00282                 \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight *}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00283}00283                 scalar\_product(area\_variation\_numerator\_1, d\_uS\_dzeta1) /}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00284}00284                 two\_norm(N\_unnormalised);}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00282}00282                 \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight *}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00283}00283                 \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a377068e0e409cd58e4af567bdc4dc68b}{scalar\_product}}(area\_variation\_numerator\_1, d\_uS\_dzeta1) /}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00284}00284                 \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a16a1e5407993539ac48a690215ebd13e}{two\_norm}}(N\_unnormalised);}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00285}00285 }
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00286}00286               \textcolor{comment}{// Curvature contribution to the residual  : kappa N S test}}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00287}00287               residuals[local\_eqn] += \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight * (get\_kappa()) *}
-\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00288}00288                                       scalar\_product(N\_unnormalised, spine) *}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00287}00287               residuals[local\_eqn] += \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight * (\mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_aa4144104f99e731a0e40ad4ced7f5e8e}{get\_kappa}}()) *}
+\DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00288}00288                                       \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a377068e0e409cd58e4af567bdc4dc68b}{scalar\_product}}(N\_unnormalised, spine) *}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00289}00289                                       psi(l);}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00290}00290             \}}
 \DoxyCodeLine{\Hypertarget{refineable__young__laplace__elements_8cc_source_l00291}00291           \}}

@@ -135,7 +135,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>A class that is used to assemble the augmented system that defines a pitchfork (symmetry-breaking) bifurcation. The "standard" problem must be a function of a global parameter <img class="formulaInl" alt="$ \lambda $" src="form_86.png" width="8" height="10"/> and a solution is <img class="formulaInl" alt="$R(u,\lambda) = 0$" src="form_87.png" width="61" height="14"/>, where <img class="formulaInl" alt="$u$" src="form_88.png" width="9" height="6"/> are the unknowns in the problem. A pitchfork bifurcation may be specified by the augmented system of size <img class="formulaInl" alt="$2N+2$" src="form_89.png" width="39" height="11"/>.  
+<p>A class that is used to assemble the augmented system that defines a pitchfork (symmetry-breaking) bifurcation. The "standard" problem must be a function of a global parameter <img class="formulaInl" alt="$ \lambda $" src="form_179.png"/> and a solution is <img class="formulaInl" alt="$R(u,\lambda) = 0$" src="form_180.png"/>, where <img class="formulaInl" alt="$u$" src="form_181.png"/> are the unknowns in the problem. A pitchfork bifurcation may be specified by the augmented system of size <img class="formulaInl" alt="$2N+2$" src="form_182.png"/>.  
  <a href="classoomph_1_1PitchForkHandler.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="assembly__handler_8h_source.html">assembly_handler.h</a>&gt;</code></p>
@@ -298,20 +298,20 @@ Friends</h2></td></tr>
 <tr class="separator:a223dd55e02e905ce0ce98e98f50b7e57"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >A class that is used to assemble the augmented system that defines a pitchfork (symmetry-breaking) bifurcation. The "standard" problem must be a function of a global parameter <img class="formulaInl" alt="$ \lambda $" src="form_86.png" width="8" height="10"/> and a solution is <img class="formulaInl" alt="$R(u,\lambda) = 0$" src="form_87.png" width="61" height="14"/>, where <img class="formulaInl" alt="$u$" src="form_88.png" width="9" height="6"/> are the unknowns in the problem. A pitchfork bifurcation may be specified by the augmented system of size <img class="formulaInl" alt="$2N+2$" src="form_89.png" width="39" height="11"/>. </p>
+<div class="textblock"><p >A class that is used to assemble the augmented system that defines a pitchfork (symmetry-breaking) bifurcation. The "standard" problem must be a function of a global parameter <img class="formulaInl" alt="$ \lambda $" src="form_179.png"/> and a solution is <img class="formulaInl" alt="$R(u,\lambda) = 0$" src="form_180.png"/>, where <img class="formulaInl" alt="$u$" src="form_181.png"/> are the unknowns in the problem. A pitchfork bifurcation may be specified by the augmented system of size <img class="formulaInl" alt="$2N+2$" src="form_182.png"/>. </p>
 <p class="formulaDsp">
-<img class="formulaDsp" alt="\[ R(u,\lambda) + \sigma \psi = 0,\]" src="form_90.png" width="96" height="14"/>
+<img class="formulaDsp" alt="\[ R(u,\lambda) + \sigma \psi = 0,\]" src="form_183.png"/>
 </p>
  <p class="formulaDsp">
-<img class="formulaDsp" alt="\[ Jy = 0,\]" src="form_91.png" width="41" height="13"/>
+<img class="formulaDsp" alt="\[ Jy = 0,\]" src="form_184.png"/>
 </p>
  <p class="formulaDsp">
-<img class="formulaDsp" alt="\[ \langle u, \phi \rangle = 0, \]" src="form_92.png" width="55" height="14"/>
+<img class="formulaDsp" alt="\[ \langle u, \phi \rangle = 0, \]" src="form_185.png"/>
 </p>
  <p class="formulaDsp">
-<img class="formulaDsp" alt="\[ \phi \cdot y = 1.\]" src="form_93.png" width="49" height="13"/>
+<img class="formulaDsp" alt="\[ \phi \cdot y = 1.\]" src="form_186.png"/>
 </p>
-<p> In the abovem <img class="formulaInl" alt="$J$" src="form_94.png" width="8" height="10"/> is the usual Jacobian matrix, <img class="formulaInl" alt="$dR/du$" src="form_95.png" width="36" height="14"/> and <img class="formulaInl" alt="$\phi$" src="form_96.png" width="8" height="13"/> is a constant vector that is chosen to ensure that the null vector, <img class="formulaInl" alt="$y$" src="form_97.png" width="8" height="9"/>, is not trivial. Here <img class="formulaInl" alt="$\sigma $" src="form_98.png" width="8" height="6"/> is a slack variable that is used to enforce the constraint <img class="formulaInl" alt="$ \langle u, \phi \rangle = 0 $" src="form_99.png" width="53" height="14"/> &mdash; the inner product of the solution with the chosen symmetry vector is zero. At the bifurcation <img class="formulaInl" alt="$ \sigma $" src="form_100.png" width="8" height="6"/> should be very close to zero. Note that this formulation means that any odd symmetry in the problem must be about zero. Moreover, we use the dot product of two vectors to calculate the inner product, rather than an integral over the domain and so the mesh must be symmetric in the appropriate directions. </p>
+<p> In the abovem <img class="formulaInl" alt="$J$" src="form_187.png"/> is the usual Jacobian matrix, <img class="formulaInl" alt="$dR/du$" src="form_188.png"/> and <img class="formulaInl" alt="$\phi$" src="form_189.png"/> is a constant vector that is chosen to ensure that the null vector, <img class="formulaInl" alt="$y$" src="form_190.png"/>, is not trivial. Here <img class="formulaInl" alt="$\sigma $" src="form_191.png"/> is a slack variable that is used to enforce the constraint <img class="formulaInl" alt="$ \langle u, \phi \rangle = 0 $" src="form_192.png"/> &mdash; the inner product of the solution with the chosen symmetry vector is zero. At the bifurcation <img class="formulaInl" alt="$ \sigma $" src="form_193.png"/> should be very close to zero. Note that this formulation means that any odd symmetry in the problem must be about zero. Moreover, we use the dot product of two vectors to calculate the inner product, rather than an integral over the domain and so the mesh must be symmetric in the appropriate directions. </p>
 
 <p class="definition">Definition at line <a class="el" href="assembly__handler_8h_source.html#l00772">772</a> of file <a class="el" href="assembly__handler_8h_source.html">assembly_handler.h</a>.</p>
 </div><h2 class="groupheader">Member Enumeration Documentation</h2>
@@ -1507,7 +1507,7 @@ Friends</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Nov 2 2021 16:33:48
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Dec 21 2021 17:37:17
         </div>
       </div>
     </footer>

@@ -327,7 +327,7 @@
 \DoxyCodeLine{\Hypertarget{extruded__macro__element_8cc_source_l00323}00323     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(2);}
 \DoxyCodeLine{\Hypertarget{extruded__macro__element_8cc_source_l00324}00324 }
 \DoxyCodeLine{\Hypertarget{extruded__macro__element_8cc_source_l00325}00325     \textcolor{comment}{// Storage for the global coordinates}}
-\DoxyCodeLine{\Hypertarget{extruded__macro__element_8cc_source_l00326}00326     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(3);}
+\DoxyCodeLine{\Hypertarget{extruded__macro__element_8cc_source_l00326}00326     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(3);}
 \DoxyCodeLine{\Hypertarget{extruded__macro__element_8cc_source_l00327}00327 }
 \DoxyCodeLine{\Hypertarget{extruded__macro__element_8cc_source_l00328}00328     \textcolor{comment}{// Loop over the faces}}
 \DoxyCodeLine{\Hypertarget{extruded__macro__element_8cc_source_l00329}00329     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} idirect = \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a8df863dabb4096fa066f7a6dbf7502d1}{L}}; idirect <= \mbox{\hyperlink{namespaceoomph_1_1OcTreeNames_ae7e7e58298b85825061eeff362656c40a755807a4724a0f4d96f0817559c0a927}{F}}; idirect++)}
@@ -356,10 +356,10 @@
 \DoxyCodeLine{\Hypertarget{extruded__macro__element_8cc_source_l00352}00352 }
 \DoxyCodeLine{\Hypertarget{extruded__macro__element_8cc_source_l00353}00353           \textcolor{comment}{// Get the global coordinates associated with these local coordinates}}
 \DoxyCodeLine{\Hypertarget{extruded__macro__element_8cc_source_l00354}00354           \mbox{\hyperlink{classoomph_1_1ExtrudedMacroElement_a953e0b43da1ee646e9be3a329ceaf390}{Extruded\_domain\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1ExtrudedDomain_a10a824075e2d2ee6efcf3485966dbadc}{macro\_element\_boundary}}(}
-\DoxyCodeLine{\Hypertarget{extruded__macro__element_8cc_source_l00355}00355             \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1MacroElement_a96e31a1ba7eac203a3bacb3403796ec1}{Macro\_element\_number}}, idirect, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{extruded__macro__element_8cc_source_l00355}00355             \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1MacroElement_a96e31a1ba7eac203a3bacb3403796ec1}{Macro\_element\_number}}, idirect, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{extruded__macro__element_8cc_source_l00356}00356 }
 \DoxyCodeLine{\Hypertarget{extruded__macro__element_8cc_source_l00357}00357           \textcolor{comment}{// Output the global (space-\/time) coordinates}}
-\DoxyCodeLine{\Hypertarget{extruded__macro__element_8cc_source_l00358}00358           outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[0] << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[1] << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[2] << std::endl;}
+\DoxyCodeLine{\Hypertarget{extruded__macro__element_8cc_source_l00358}00358           outfile << x[0] << \textcolor{stringliteral}{"{} "{}} << x[1] << \textcolor{stringliteral}{"{} "{}} << x[2] << std::endl;}
 \DoxyCodeLine{\Hypertarget{extruded__macro__element_8cc_source_l00359}00359         \}}
 \DoxyCodeLine{\Hypertarget{extruded__macro__element_8cc_source_l00360}00360       \} \textcolor{comment}{// for (unsigned i=0;i<nplot;i++)}}
 \DoxyCodeLine{\Hypertarget{extruded__macro__element_8cc_source_l00361}00361     \} \textcolor{comment}{// for (unsigned idirect=L;idirect<=F;idirect++)}}

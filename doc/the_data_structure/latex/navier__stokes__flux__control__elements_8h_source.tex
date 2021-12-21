@@ -390,7 +390,7 @@
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00386}00386 }
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00387}00387       \textcolor{comment}{// Set the dimension from the dimension of the first node (since Dim is}}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00388}00388       \textcolor{comment}{// private in the parent class)}}
-\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00389}00389       \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement_a6ae17dbe81d09caf9e65e729254474b6}{Dim}} = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>ndim();}
+\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00389}00389       \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement_a6ae17dbe81d09caf9e65e729254474b6}{Dim}} = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00390}00390     \}}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00391}00391 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00392}00392 \textcolor{comment}{    /// Destructor should not delete anything}}
@@ -409,11 +409,11 @@
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00405}00405 \textcolor{comment}{    /// master element with respect to dof in this}}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00406}00406 \textcolor{comment}{    /// element}}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00407}\mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement_a6a745b0b8b1417b7f61782e959c31f69}{00407}} \textcolor{comment}{}    \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement_a6a745b0b8b1417b7f61782e959c31f69}{fill\_in\_contribution\_to\_jacobian}}(\mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00408}00408                                                  \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})}
+\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00408}00408                                                  \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian)}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00409}00409     \{}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00410}00410       \textcolor{comment}{// Call the generic routine}}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00411}00411       \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement_a61f129d70845f43c8cb592a4f1258a9f}{fill\_in\_generic\_residual\_contribution\_fluid\_traction}}(}
-\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00412}00412         residuals, \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, 1);}
+\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00412}00412         residuals, jacobian, 1);}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00413}00413     \}}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00414}00414 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00415}00415 \textcolor{comment}{    /// Function to get the integral of the volume flux}}
@@ -442,7 +442,7 @@
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00438}00438       \textcolor{comment}{// Find number of nodes}}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00439}00439       \textcolor{keywordtype}{unsigned} n\_node = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00440}00440       \textcolor{comment}{// Calculate the shape functions}}
-\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00441}00441       this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a2de680722518136b5c6bf2aacc267a31}{shape\_at\_knot}}(ipt, psi);}
+\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00441}00441       this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_aeccc0f774e3fab8c536e2d41004a1665}{shape\_at\_knot}}(ipt, psi);}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00442}00442       \textcolor{comment}{// Set the test functions to be the same as the shape functions}}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00443}00443       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_node; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00444}00444       \{}
@@ -458,7 +458,7 @@
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00454}00454 \textcolor{comment}{    /// This function also calculates the Jacobian contribution for the}}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00455}00455 \textcolor{comment}{    /// NetFluxControlElement}}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00456}\mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement_a61f129d70845f43c8cb592a4f1258a9f}{00456}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement_a61f129d70845f43c8cb592a4f1258a9f}{fill\_in\_generic\_residual\_contribution\_fluid\_traction}}(}
-\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00457}00457       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \textcolor{keywordtype}{unsigned} flag)}
+\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00457}00457       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian, \textcolor{keywordtype}{unsigned} flag)}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00458}00458     \{}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00459}00459       \textcolor{comment}{// Find out how many nodes there are}}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00460}00460       \textcolor{keywordtype}{unsigned} n\_node = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
@@ -467,7 +467,7 @@
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00463}00463       \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} psif(n\_node), testf(n\_node);}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00464}00464 }
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00465}00465       \textcolor{comment}{// Set the value of n\_intpt}}
-\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00466}00466       \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00466}00466       \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00467}00467 }
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00468}00468       \textcolor{comment}{// Integers to store local equation numbers}}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00469}00469       \textcolor{keywordtype}{int} local\_eqn = 0;}
@@ -479,14 +479,14 @@
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00475}00475       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ipt = 0; ipt < n\_intpt; ipt++)}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00476}00476       \{}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00477}00477         \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00478}00478         \textcolor{keywordtype}{double} w = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00478}00478         \textcolor{keywordtype}{double} w = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00479}00479 }
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00480}00480         \textcolor{comment}{// Find the shape and test functions and return the Jacobian}}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00481}00481         \textcolor{comment}{// of the mapping}}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00482}00482         \textcolor{keywordtype}{double} J = \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement_a4c203742bc44ab562fcb98eaa2380e3a}{shape\_and\_test\_at\_knot}}(ipt, psif, testf);}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00483}00483 }
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00484}00484         \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00485}00485         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00485}00485         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00486}00486 }
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00487}00487         \textcolor{comment}{// Get the outer unit normal}}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00488}00488         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} unit\_normal(\mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement_a6ae17dbe81d09caf9e65e729254474b6}{Dim}});}
@@ -511,7 +511,7 @@
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00507}00507             \textcolor{keywordflow}{if} (local\_eqn >= 0)}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00508}00508             \{}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00509}00509               \textcolor{comment}{// Add the user-\/defined traction terms}}
-\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00510}00510               residuals[local\_eqn] += traction[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * testf[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00510}00510               residuals[local\_eqn] += traction[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * testf[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00511}00511 }
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00512}00512               \textcolor{comment}{// Calculate the Jacobian if required. It is assumed}}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00513}00513               \textcolor{comment}{// that traction DOES NOT depend upon velocities}}
@@ -528,11 +528,11 @@
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00524}00524                 \textcolor{keywordflow}{if} (local\_unknown >= 0)}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00525}00525                 \{}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00526}00526                   \textcolor{comment}{// Add to Jacobian for this element}}
-\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00527}00527                   \textcolor{keywordtype}{double} jac\_contribution = -\/unit\_normal[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * testf[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
-\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00528}00528                   \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn, local\_unknown) += jac\_contribution;}
+\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00527}00527                   \textcolor{keywordtype}{double} jac\_contribution = -\/unit\_normal[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * testf[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
+\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00528}00528                   jacobian(local\_eqn, local\_unknown) += jac\_contribution;}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00529}00529 }
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00530}00530                   \textcolor{comment}{// Add to Jacobian for master element}}
-\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00531}00531                   \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_unknown, local\_eqn) += jac\_contribution;}
+\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00531}00531                   jacobian(local\_unknown, local\_eqn) += jac\_contribution;}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00532}00532                 \}}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00533}00533               \}}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00534}00534             \}}
@@ -603,11 +603,11 @@
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00599}00599 \textcolor{comment}{    /// master element with respect to dof in this}}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00600}00600 \textcolor{comment}{    /// element}}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00601}\mbox{\hyperlink{classoomph_1_1RefineableNavierStokesFluxControlElement_a46659967091dc0f672d91f2ac339c304}{00601}} \textcolor{comment}{}    \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesFluxControlElement_a46659967091dc0f672d91f2ac339c304}{fill\_in\_contribution\_to\_jacobian}}(\mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00602}00602                                                  \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})}
+\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00602}00602                                                  \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian)}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00603}00603     \{}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00604}00604       \textcolor{comment}{// Call the generic routine}}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00605}00605       \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesFluxControlElement_a74cf9a3dc75276ce2eaefe6b8255811f}{refineable\_fill\_in\_generic\_residual\_contribution\_fluid\_traction}}(}
-\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00606}00606         residuals, \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, 1);}
+\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00606}00606         residuals, jacobian, 1);}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00607}00607     \}}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00608}00608 }
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00609}00609   \textcolor{keyword}{protected}:\textcolor{comment}{}}
@@ -616,7 +616,7 @@
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00612}00612 \textcolor{comment}{    /// This function also calculates the Jacobian contribution for the}}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00613}00613 \textcolor{comment}{    /// NetFluxControlElement}}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00614}\mbox{\hyperlink{classoomph_1_1RefineableNavierStokesFluxControlElement_a74cf9a3dc75276ce2eaefe6b8255811f}{00614}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesFluxControlElement_a74cf9a3dc75276ce2eaefe6b8255811f}{refineable\_fill\_in\_generic\_residual\_contribution\_fluid\_traction}}(}
-\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00615}00615       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \textcolor{keywordtype}{unsigned} flag)}
+\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00615}00615       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian, \textcolor{keywordtype}{unsigned} flag)}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00616}00616     \{}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00617}00617       \textcolor{comment}{// Get the indices at which the velocity components are stored}}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00618}00618       \textcolor{keywordtype}{unsigned} u\_nodal\_index[this-\/>\mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement_a6ae17dbe81d09caf9e65e729254474b6}{Dim}}];}
@@ -636,7 +636,7 @@
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00632}00632       \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} psif(n\_node), testf(n\_node);}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00633}00633 }
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00634}00634       \textcolor{comment}{// Set the value of n\_intpt}}
-\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00635}00635       \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00635}00635       \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00636}00636 }
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00637}00637       \textcolor{comment}{// Integers to store local equation numbers}}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00638}00638       \textcolor{keywordtype}{int} local\_eqn = 0;}
@@ -649,14 +649,14 @@
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00645}00645       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ipt = 0; ipt < n\_intpt; ipt++)}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00646}00646       \{}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00647}00647         \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00648}00648         \textcolor{keywordtype}{double} w = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00648}00648         \textcolor{keywordtype}{double} w = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00649}00649 }
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00650}00650         \textcolor{comment}{// Find the shape and test functions and return the Jacobian}}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00651}00651         \textcolor{comment}{// of the mapping}}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00652}00652         \textcolor{keywordtype}{double} J = this-\/>\mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement_a4c203742bc44ab562fcb98eaa2380e3a}{shape\_and\_test\_at\_knot}}(ipt, psif, testf);}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00653}00653 }
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00654}00654         \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00655}00655         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00655}00655         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00656}00656 }
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00657}00657         \textcolor{comment}{// Get the outer unit normal}}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00658}00658         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} unit\_normal(this-\/>Dim);}
@@ -680,12 +680,12 @@
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00676}00676         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} l = 0; l < n\_node; l++)}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00677}00677         \{}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00678}00678           \textcolor{comment}{// Local boolean to indicate whether the node is hanging}}
-\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00679}00679           \textcolor{keywordtype}{bool} is\_node\_hanging = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l)-\/>is\_hanging();}
+\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00679}00679           \textcolor{keywordtype}{bool} is\_node\_hanging = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l)-\/>\mbox{\hyperlink{classoomph_1_1Node_af0e6237dfafad62cf427ff5013ddcfef}{is\_hanging}}();}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00680}00680 }
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00681}00681           \textcolor{comment}{// If the node is hanging}}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00682}00682           \textcolor{keywordflow}{if} (is\_node\_hanging)}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00683}00683           \{}
-\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00684}00684             hang\_info\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l)-\/>hanging\_pt();}
+\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00684}00684             hang\_info\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l)-\/>\mbox{\hyperlink{classoomph_1_1Node_afefa22db8b28e783b8647e3577ee01d9}{hanging\_pt}}();}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00685}00685 }
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00686}00686             \textcolor{comment}{// Read out number of master nodes from hanging data}}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00687}00687             n\_master = hang\_info\_pt-\/>\mbox{\hyperlink{classoomph_1_1HangInfo_aa9c1130b58db2ff6d5eee4f923ba365c}{nmaster}}();}
@@ -727,7 +727,7 @@
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00723}00723               \{}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00724}00724                 \textcolor{comment}{// Add the user-\/defined traction terms}}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00725}00725                 residuals[local\_eqn] +=}
-\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00726}00726                   traction[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * testf[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight;}
+\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00726}00726                   traction[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * testf[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight;}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00727}00727 }
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00728}00728                 \textcolor{comment}{// Calculate the Jacobian if required. It is assumed}}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00729}00729                 \textcolor{comment}{// that traction DOES NOT depend upon velocities}}
@@ -745,11 +745,11 @@
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00741}00741                   \{}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00742}00742                     \textcolor{comment}{// Add to Jacobian for this element}}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00743}00743                     \textcolor{keywordtype}{double} jac\_contribution =}
-\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00744}00744                       -\/unit\_normal[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * testf[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight;}
-\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00745}00745                     \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn, local\_unknown) += jac\_contribution;}
+\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00744}00744                       -\/unit\_normal[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * testf[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight;}
+\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00745}00745                     jacobian(local\_eqn, local\_unknown) += jac\_contribution;}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00746}00746 }
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00747}00747                     \textcolor{comment}{// Add to Jacobian for master element}}
-\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00748}00748                     \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_unknown, local\_eqn) += jac\_contribution;}
+\DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00748}00748                     jacobian(local\_unknown, local\_eqn) += jac\_contribution;}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00749}00749                   \}}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00750}00750                 \}}
 \DoxyCodeLine{\Hypertarget{navier__stokes__flux__control__elements_8h_source_l00751}00751               \}}

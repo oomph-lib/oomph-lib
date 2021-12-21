@@ -108,7 +108,7 @@
 \DoxyCodeLine{\Hypertarget{geompack__mesh_8template_8cc_source_l00104}00104       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < nnod\_el; j++)}
 \DoxyCodeLine{\Hypertarget{geompack__mesh_8template_8cc_source_l00105}00105       \{}
 \DoxyCodeLine{\Hypertarget{geompack__mesh_8template_8cc_source_l00106}00106         \textcolor{comment}{// Pointer to node in the scaffold mesh}}
-\DoxyCodeLine{\Hypertarget{geompack__mesh_8template_8cc_source_l00107}00107         Node* scaffold\_node\_pt = Tmp\_mesh\_pt-\/>finite\_element\_pt(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>node\_pt(j);}
+\DoxyCodeLine{\Hypertarget{geompack__mesh_8template_8cc_source_l00107}00107         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* scaffold\_node\_pt = Tmp\_mesh\_pt-\/>finite\_element\_pt(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>node\_pt(j);}
 \DoxyCodeLine{\Hypertarget{geompack__mesh_8template_8cc_source_l00108}00108 }
 \DoxyCodeLine{\Hypertarget{geompack__mesh_8template_8cc_source_l00109}00109         \textcolor{comment}{// Get the (pseudo-\/)global node number in scaffold mesh}}
 \DoxyCodeLine{\Hypertarget{geompack__mesh_8template_8cc_source_l00110}00110         \textcolor{comment}{// (It's zero [=default] if not visited this one yet)}}
@@ -130,14 +130,14 @@
 \DoxyCodeLine{\Hypertarget{geompack__mesh_8template_8cc_source_l00126}00126           Node\_pt[global\_count -\/ 1] = finite\_element\_pt(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>node\_pt(j);}
 \DoxyCodeLine{\Hypertarget{geompack__mesh_8template_8cc_source_l00127}00127 }
 \DoxyCodeLine{\Hypertarget{geompack__mesh_8template_8cc_source_l00128}00128           \textcolor{comment}{// Assign coordinates}}
-\DoxyCodeLine{\Hypertarget{geompack__mesh_8template_8cc_source_l00129}00129           Node\_pt[global\_count -\/ 1]-\/>x(0) = scaffold\_node\_pt-\/>x(0);}
-\DoxyCodeLine{\Hypertarget{geompack__mesh_8template_8cc_source_l00130}00130           Node\_pt[global\_count -\/ 1]-\/>x(1) = scaffold\_node\_pt-\/>x(1);}
+\DoxyCodeLine{\Hypertarget{geompack__mesh_8template_8cc_source_l00129}00129           Node\_pt[global\_count -\/ 1]-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0) = scaffold\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0);}
+\DoxyCodeLine{\Hypertarget{geompack__mesh_8template_8cc_source_l00130}00130           Node\_pt[global\_count -\/ 1]-\/>x(1) = scaffold\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1);}
 \DoxyCodeLine{\Hypertarget{geompack__mesh_8template_8cc_source_l00131}00131 }
 \DoxyCodeLine{\Hypertarget{geompack__mesh_8template_8cc_source_l00132}00132 }
 \DoxyCodeLine{\Hypertarget{geompack__mesh_8template_8cc_source_l00133}00133           \textcolor{comment}{// Get pointer to set of mesh boundaries that this}}
 \DoxyCodeLine{\Hypertarget{geompack__mesh_8template_8cc_source_l00134}00134           \textcolor{comment}{// scaffold node occupies; NULL if the node is not on any boundary}}
 \DoxyCodeLine{\Hypertarget{geompack__mesh_8template_8cc_source_l00135}00135           std::set<unsigned>* boundaries\_pt;}
-\DoxyCodeLine{\Hypertarget{geompack__mesh_8template_8cc_source_l00136}00136           scaffold\_node\_pt-\/>get\_boundaries\_pt(boundaries\_pt);}
+\DoxyCodeLine{\Hypertarget{geompack__mesh_8template_8cc_source_l00136}00136           scaffold\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a33092a3d51285282ae8ec8e702d1cbf5}{get\_boundaries\_pt}}(boundaries\_pt);}
 \DoxyCodeLine{\Hypertarget{geompack__mesh_8template_8cc_source_l00137}00137 }
 \DoxyCodeLine{\Hypertarget{geompack__mesh_8template_8cc_source_l00138}00138           \textcolor{comment}{// Loop over the mesh boundaries that the node in the scaffold mesh}}
 \DoxyCodeLine{\Hypertarget{geompack__mesh_8template_8cc_source_l00139}00139           \textcolor{comment}{// occupies and assign new node to the same ones.}}

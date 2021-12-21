@@ -214,6 +214,40 @@ The constructor is given below and in addition to building the element based on 
 \end{DoxyCodeInclude}
  The additional contributions to the residuals and jacobian arise from the Lagrange multiplier contributions to the equations that determine the position of the nodes. The essential loop is the contribution below which adds the normal traction to the governing equations of solid mechanics\+: 
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{      \textcolor{comment}{// Loop over the shape functions to assemble contributions}}
+\DoxyCodeLine{      \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} l = 0; l < n\_node; l++)}
+\DoxyCodeLine{      \{}
+\DoxyCodeLine{        \textcolor{comment}{// Loop over the directions}}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < nodal\_dimension; i++)}
+\DoxyCodeLine{        \{}
+\DoxyCodeLine{          \textcolor{comment}{// Now using the same shape functions for the elastic equations,}}
+\DoxyCodeLine{          \textcolor{comment}{// so we can stay in the loop}}
+\DoxyCodeLine{          local\_eqn = this-\/>position\_local\_eqn(l, 0, i);}
+\DoxyCodeLine{          \textcolor{keywordflow}{if} (local\_eqn >= 0)}
+\DoxyCodeLine{          \{}
+\DoxyCodeLine{            \textcolor{comment}{// Add in the Lagrange multiplier contribution}}
+\DoxyCodeLine{            residuals[local\_eqn] -\/=}
+\DoxyCodeLine{              interpolated\_lagrange * interpolated\_n[i] * psif(l) * J * W;}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// Do the Jacobian calculation}}
+\DoxyCodeLine{            \textcolor{keywordflow}{if} (flag)}
+\DoxyCodeLine{            \{}
+\DoxyCodeLine{              \textcolor{comment}{// Loop over the nodes}}
+\DoxyCodeLine{              \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} l2 = 0; l2 < n\_node; l2++)}
+\DoxyCodeLine{              \{}
+\DoxyCodeLine{                \textcolor{comment}{// Dependence on solid positions will be handled by FDs}}
+\DoxyCodeLine{                \textcolor{comment}{// That leaves the Lagrange multiplier contribution}}
+\DoxyCodeLine{                local\_unknown = this-\/>kinematic\_local\_eqn(l2);}
+\DoxyCodeLine{                \textcolor{keywordflow}{if} (local\_unknown >= 0)}
+\DoxyCodeLine{                \{}
+\DoxyCodeLine{                  jacobian(local\_eqn, local\_unknown) -\/=}
+\DoxyCodeLine{                    psif(l2) * interpolated\_n[i] * psif(l) * J * W;}
+\DoxyCodeLine{                \}}
+\DoxyCodeLine{              \}}
+\DoxyCodeLine{            \} \textcolor{comment}{// End of Jacobian calculation}}
+\DoxyCodeLine{          \}}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{      \} \textcolor{comment}{// End of loop over shape functions}}
 
 \end{DoxyCodeInclude}
  \hypertarget{index_surface}{}\doxysection{The Surface\+Derivatives class}\label{index_surface}

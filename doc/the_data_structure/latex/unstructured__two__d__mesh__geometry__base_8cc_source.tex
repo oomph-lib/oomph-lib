@@ -4039,14 +4039,14 @@
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8cc_source_l04035}04035         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < n\_boundary\_node; ++n)}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8cc_source_l04036}04036         \{}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8cc_source_l04037}04037           \textcolor{comment}{// Get the boundary node and coordinates}}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8cc_source_l04038}04038           Node* \textcolor{keyword}{const} nod\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(b, n);}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8cc_source_l04039}04039           nod\_pt-\/>get\_coordinates\_on\_boundary(b, b\_coord);}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8cc_source_l04038}04038           \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \textcolor{keyword}{const} nod\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(b, n);}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8cc_source_l04039}04039           nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_abc8b7dc78cc1d0aab34eeaf856e21ea8}{get\_coordinates\_on\_boundary}}(b, b\_coord);}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8cc_source_l04040}04040 }
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8cc_source_l04041}04041           \textcolor{comment}{// Get the position and time history according to the underlying}}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8cc_source_l04042}04042           \textcolor{comment}{// geometric object, assuming that it has the same timestepper}}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8cc_source_l04043}04043           \textcolor{comment}{// as the nodes....}}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8cc_source_l04044}04044           \textcolor{keywordtype}{unsigned} n\_tvalues =}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8cc_source_l04045}04045             1 + nod\_pt-\/>position\_time\_stepper\_pt()-\/>nprev\_values();}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8cc_source_l04045}04045             1 + nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a32b32940186f9d1e2abc5d4bedb6ff0d}{position\_time\_stepper\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1TimeStepper_a0f38713ed304c18d9f7b5cf8131664c1}{nprev\_values}}();}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8cc_source_l04046}04046           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}} = 0; \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}} < n\_tvalues; ++\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}})}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8cc_source_l04047}04047           \{}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8cc_source_l04048}04048             \textcolor{comment}{// Get the position according to the underlying geometric object}}
@@ -4055,7 +4055,7 @@
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8cc_source_l04051}04051             \textcolor{comment}{// Move the node}}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8cc_source_l04052}04052             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8cc_source_l04053}04053             \{}
-\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8cc_source_l04054}04054               nod\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = new\_x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8cc_source_l04054}04054               nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = new\_x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8cc_source_l04055}04055             \}}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8cc_source_l04056}04056           \}}
 \DoxyCodeLine{\Hypertarget{unstructured__two__d__mesh__geometry__base_8cc_source_l04057}04057         \}}

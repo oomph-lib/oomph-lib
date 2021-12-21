@@ -65,8 +65,8 @@
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8cc_source_l00061}00061           dump\_file << nnod << \textcolor{stringliteral}{"{} \# Number of dumped boundary nodes\(\backslash\)n"{}};}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8cc_source_l00062}00062           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < nnod; j++)}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8cc_source_l00063}00063           \{}
-\DoxyCodeLine{\Hypertarget{triangle__mesh_8cc_source_l00064}00064             Node* nod\_pt = \mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(b, j);}
-\DoxyCodeLine{\Hypertarget{triangle__mesh_8cc_source_l00065}00065             nod\_pt-\/>get\_coordinates\_on\_boundary(b, zeta);}
+\DoxyCodeLine{\Hypertarget{triangle__mesh_8cc_source_l00064}00064             \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = \mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(b, j);}
+\DoxyCodeLine{\Hypertarget{triangle__mesh_8cc_source_l00065}00065             nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_abc8b7dc78cc1d0aab34eeaf856e21ea8}{get\_coordinates\_on\_boundary}}(b, zeta);}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8cc_source_l00066}00066             dump\_file << zeta[0] << std::endl;}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8cc_source_l00067}00067           \}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8cc_source_l00068}00068           dump\_file << \textcolor{stringliteral}{"{}-\/999 \# Done boundary coords for boundary "{}} << b << \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
@@ -181,8 +181,8 @@
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8cc_source_l00177}00177             zeta[0] = atof(input\_string.c\_str());}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8cc_source_l00178}00178 }
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8cc_source_l00179}00179             \textcolor{comment}{// Set it}}
-\DoxyCodeLine{\Hypertarget{triangle__mesh_8cc_source_l00180}00180             Node* nod\_pt = \mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(b, j);}
-\DoxyCodeLine{\Hypertarget{triangle__mesh_8cc_source_l00181}00181             nod\_pt-\/>set\_coordinates\_on\_boundary(b, zeta);}
+\DoxyCodeLine{\Hypertarget{triangle__mesh_8cc_source_l00180}00180             \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = \mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(b, j);}
+\DoxyCodeLine{\Hypertarget{triangle__mesh_8cc_source_l00181}00181             nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a94c19e165ab4e88aabbfa27443c530b7}{set\_coordinates\_on\_boundary}}(b, zeta);}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8cc_source_l00182}00182           \}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8cc_source_l00183}00183 }
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8cc_source_l00184}00184           \textcolor{comment}{// Read line up to termination sign}}
@@ -465,7 +465,7 @@
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8cc_source_l00461}00461         \textcolor{comment}{// We need only loop over the corner nodes}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8cc_source_l00462}00462         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 3; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8cc_source_l00463}00463         \{}
-\DoxyCodeLine{\Hypertarget{triangle__mesh_8cc_source_l00464}00464           fe\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})-\/>get\_boundaries\_pt(boundaries\_pt[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]);}
+\DoxyCodeLine{\Hypertarget{triangle__mesh_8cc_source_l00464}00464           fe\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})-\/>\mbox{\hyperlink{classoomph_1_1Node_a33092a3d51285282ae8ec8e702d1cbf5}{get\_boundaries\_pt}}(boundaries\_pt[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]);}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8cc_source_l00465}00465         \}}
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8cc_source_l00466}00466 }
 \DoxyCodeLine{\Hypertarget{triangle__mesh_8cc_source_l00467}00467         \textcolor{comment}{// Find the common boundaries of each edge}}

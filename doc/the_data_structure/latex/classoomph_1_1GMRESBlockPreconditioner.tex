@@ -93,17 +93,25 @@ virtual void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_af4886f4efe
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_acfd2e00c4bba75db1705378d8920c9f2}{update}} (const unsigned \&k, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&H, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&v, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&block\+\_\+x\+\_\+with\+\_\+size\+\_\+of\+\_\+full\+\_\+x, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}})
+void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_acfd2e00c4bba75db1705378d8920c9f2}{update}} (const unsigned \&k, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&H, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&v, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&block\+\_\+x\+\_\+with\+\_\+size\+\_\+of\+\_\+full\+\_\+x, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&x)
 \begin{DoxyCompactList}\small\item\em Helper function to update the result vector using the result, x=x\+\_\+0+\+V\+\_\+m$\ast$y. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_acfd2e00c4bba75db1705378d8920c9f2}{update}} (const unsigned \&k, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&H, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&v, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&block\+\_\+x\+\_\+with\+\_\+size\+\_\+of\+\_\+full\+\_\+x, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}})
-\begin{DoxyCompactList}\small\item\em Helper function to update the result vector using the result, x=x\+\_\+0+\+V\+\_\+m$\ast$y. \end{DoxyCompactList}\end{DoxyCompactItemize}
+void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_aeb5c45d896251c829edd2e214d441187}{generate\+\_\+plane\+\_\+rotation}} (double \&dx, double \&dy, double \&cs, double \&sn)
+\begin{DoxyCompactList}\small\item\em Helper function\+: Generate a plane rotation. This is done by finding the values of $ \cos(\theta) $ (i.\+e. cs) and \textbackslash{}sin(\textbackslash{}theta) (i.\+e. sn) such that\+: \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a08f44c37760a84bcae876aaca5a406f5}{apply\+\_\+plane\+\_\+rotation}} (double \&dx, double \&dy, double \&cs, double \&sn)
+\begin{DoxyCompactList}\small\item\em Helper function\+: Apply plane rotation. This is done using the update\+: \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_acfd2e00c4bba75db1705378d8920c9f2}{update}} (const unsigned \&k, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&H, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&v, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&block\+\_\+x\+\_\+with\+\_\+size\+\_\+of\+\_\+full\+\_\+x, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&x)
+\begin{DoxyCompactList}\small\item\em Helper function to update the result vector using the result, x=x\+\_\+0+\+V\+\_\+m$\ast$y. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_aeb5c45d896251c829edd2e214d441187}{generate\+\_\+plane\+\_\+rotation}} (double \&dx, double \&dy, double \&cs, double \&sn)
+\begin{DoxyCompactList}\small\item\em Helper function\+: Generate a plane rotation. This is done by finding the values of $ \cos(\theta) $ (i.\+e. cs) and \textbackslash{}sin(\textbackslash{}theta) (i.\+e. sn) such that\+: \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a08f44c37760a84bcae876aaca5a406f5}{apply\+\_\+plane\+\_\+rotation}} (double \&dx, double \&dy, double \&cs, double \&sn)
+\begin{DoxyCompactList}\small\item\em Helper function\+: Apply plane rotation. This is done using the update\+: \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_afa1a6124234cb3adf8766c88971d7f78}{begin}}
-\begin{DoxyCompactList}\small\item\em Helper function\+: Generate a plane rotation. This is done by finding the values of $ \cos(\theta) $ (i.\+e. cs) and \textbackslash{}sin(\textbackslash{}theta) (i.\+e. sn) such that\+: \end{DoxyCompactList}\item 
-\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}} cos theta \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}} sin theta \&\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner}{Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner}} $\ast$ \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a05385552adb400003801a8468a2186ae}{Navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt}}
-\begin{DoxyCompactList}\small\item\em and \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$ \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_ab4b84bc2dec36b26196f466a43ced299}{Matrix\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner}{Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner}} $\ast$ \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a66b8ac42169d3247d5e3d9678e905b88}{Navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the preconditioner for the block matrix. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a86f6eb1dbc5b96eab510bda26e3e579b}{Iterations}}
 \begin{DoxyCompactList}\small\item\em Number of iterations taken. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a727af6ccb23868b93a074e07f885b5e8}{Compute\+\_\+memory\+\_\+statistics}}
@@ -141,7 +149,7 @@ Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__b
 
 
 
-References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00618}{Compute\+\_\+memory\+\_\+statistics}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00622}{Memory\+\_\+usage\+\_\+in\+\_\+bytes}}.
+References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00586}{Compute\+\_\+memory\+\_\+statistics}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00590}{Memory\+\_\+usage\+\_\+in\+\_\+bytes}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_afa46854dcbd026d9457240e17e2c209a}\label{classoomph_1_1GMRESBlockPreconditioner_afa46854dcbd026d9457240e17e2c209a}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!````~GMRESBlockPreconditioner@{$\sim$GMRESBlockPreconditioner}}
@@ -187,7 +195,7 @@ Definition at line \mbox{\hyperlink{spacetime__navier__stokes__block__preconditi
 
 
 
-References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00618}{Compute\+\_\+memory\+\_\+statistics}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00622}{Memory\+\_\+usage\+\_\+in\+\_\+bytes}}.
+References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00586}{Compute\+\_\+memory\+\_\+statistics}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00590}{Memory\+\_\+usage\+\_\+in\+\_\+bytes}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_afa46854dcbd026d9457240e17e2c209a}\label{classoomph_1_1GMRESBlockPreconditioner_afa46854dcbd026d9457240e17e2c209a}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!````~GMRESBlockPreconditioner@{$\sim$GMRESBlockPreconditioner}}
@@ -220,6 +228,38 @@ Broken copy constructor.
 
 
 \doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a08f44c37760a84bcae876aaca5a406f5}\label{classoomph_1_1GMRESBlockPreconditioner_a08f44c37760a84bcae876aaca5a406f5}} 
+\index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!apply\_plane\_rotation@{apply\_plane\_rotation}}
+\index{apply\_plane\_rotation@{apply\_plane\_rotation}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
+\doxysubsubsection{\texorpdfstring{apply\_plane\_rotation()}{apply\_plane\_rotation()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void oomph\+::\+GMRESBlock\+Preconditioner\+::apply\+\_\+plane\+\_\+rotation (\begin{DoxyParamCaption}\item[{double \&}]{dx,  }\item[{double \&}]{dy,  }\item[{double \&}]{cs,  }\item[{double \&}]{sn }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Helper function\+: Apply plane rotation. This is done using the update\+: 
+
+\[ \begin{bmatrix} dx \newline dy \end{bmatrix} \leftarrow \begin{bmatrix} \cos\theta & \sin\theta \newline -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} dx \newline dy \end{bmatrix}. \] 
+
+Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00562}{562}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00729}{preconditioner\+\_\+solve()}}.
+
+\mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a08f44c37760a84bcae876aaca5a406f5}\label{classoomph_1_1GMRESBlockPreconditioner_a08f44c37760a84bcae876aaca5a406f5}} 
+\index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!apply\_plane\_rotation@{apply\_plane\_rotation}}
+\index{apply\_plane\_rotation@{apply\_plane\_rotation}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
+\doxysubsubsection{\texorpdfstring{apply\_plane\_rotation()}{apply\_plane\_rotation()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void oomph\+::\+GMRESBlock\+Preconditioner\+::apply\+\_\+plane\+\_\+rotation (\begin{DoxyParamCaption}\item[{double \&}]{dx,  }\item[{double \&}]{dy,  }\item[{double \&}]{cs,  }\item[{double \&}]{sn }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Helper function\+: Apply plane rotation. This is done using the update\+: 
+
+\[ \begin{bmatrix} dx \newline dy \end{bmatrix} \leftarrow \begin{bmatrix} \cos\theta & \sin\theta \newline -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} dx \newline dy \end{bmatrix}. \] 
+
+Definition at line \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source_l00569}{569}} of file \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+block\+\_\+preconditioner.\+h}}.
+
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a5c84148e23cb54f31de835df112deb4f}\label{classoomph_1_1GMRESBlockPreconditioner_a5c84148e23cb54f31de835df112deb4f}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!clean\_up\_memory@{clean\_up\_memory}}
 \index{clean\_up\_memory@{clean\_up\_memory}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
@@ -240,7 +280,7 @@ Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__b
 
 
 
-References \mbox{\hyperlink{preconditioner_8h_source_l00236}{oomph\+::\+Preconditioner\+::\+Matrix\+\_\+pt}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00532}{Navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00626}{Preconditioner\+\_\+has\+\_\+been\+\_\+setup}}.
+References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00575}{Matrix\+\_\+pt}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00579}{Navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00594}{Preconditioner\+\_\+has\+\_\+been\+\_\+setup}}.
 
 
 
@@ -266,7 +306,7 @@ Definition at line \mbox{\hyperlink{spacetime__navier__stokes__block__preconditi
 
 
 
-References \mbox{\hyperlink{preconditioner_8h_source_l00236}{oomph\+::\+Preconditioner\+::\+Matrix\+\_\+pt}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00532}{Navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00626}{Preconditioner\+\_\+has\+\_\+been\+\_\+setup}}.
+References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00575}{Matrix\+\_\+pt}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00579}{Navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00594}{Preconditioner\+\_\+has\+\_\+been\+\_\+setup}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a3a0ea82368302a802ad2ab891cd478c6}\label{classoomph_1_1GMRESBlockPreconditioner_a3a0ea82368302a802ad2ab891cd478c6}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!disable\_doc\_memory\_statistics@{disable\_doc\_memory\_statistics}}
@@ -284,7 +324,7 @@ Definition at line \mbox{\hyperlink{spacetime__navier__stokes__block__preconditi
 
 
 
-References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00618}{Compute\+\_\+memory\+\_\+statistics}}.
+References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00586}{Compute\+\_\+memory\+\_\+statistics}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a152b3c76e82d9f9d719163d8167b9a0b}\label{classoomph_1_1GMRESBlockPreconditioner_a152b3c76e82d9f9d719163d8167b9a0b}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!disable\_doc\_memory\_usage@{disable\_doc\_memory\_usage}}
@@ -302,7 +342,7 @@ Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__b
 
 
 
-References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00618}{Compute\+\_\+memory\+\_\+statistics}}.
+References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00586}{Compute\+\_\+memory\+\_\+statistics}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a63b84d8b40146a96ef4c49c8f23983c5}\label{classoomph_1_1GMRESBlockPreconditioner_a63b84d8b40146a96ef4c49c8f23983c5}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!enable\_doc\_memory\_statistics@{enable\_doc\_memory\_statistics}}
@@ -320,7 +360,7 @@ Definition at line \mbox{\hyperlink{spacetime__navier__stokes__block__preconditi
 
 
 
-References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00618}{Compute\+\_\+memory\+\_\+statistics}}.
+References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00586}{Compute\+\_\+memory\+\_\+statistics}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a506c5872b121bf6f316e1e04ba5fa814}\label{classoomph_1_1GMRESBlockPreconditioner_a506c5872b121bf6f316e1e04ba5fa814}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!enable\_doc\_memory\_usage@{enable\_doc\_memory\_usage}}
@@ -338,7 +378,39 @@ Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__b
 
 
 
-References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00618}{Compute\+\_\+memory\+\_\+statistics}}.
+References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00586}{Compute\+\_\+memory\+\_\+statistics}}.
+
+\mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_aeb5c45d896251c829edd2e214d441187}\label{classoomph_1_1GMRESBlockPreconditioner_aeb5c45d896251c829edd2e214d441187}} 
+\index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!generate\_plane\_rotation@{generate\_plane\_rotation}}
+\index{generate\_plane\_rotation@{generate\_plane\_rotation}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
+\doxysubsubsection{\texorpdfstring{generate\_plane\_rotation()}{generate\_plane\_rotation()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void oomph\+::\+GMRESBlock\+Preconditioner\+::generate\+\_\+plane\+\_\+rotation (\begin{DoxyParamCaption}\item[{double \&}]{dx,  }\item[{double \&}]{dy,  }\item[{double \&}]{cs,  }\item[{double \&}]{sn }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Helper function\+: Generate a plane rotation. This is done by finding the values of $ \cos(\theta) $ (i.\+e. cs) and \textbackslash{}sin(\textbackslash{}theta) (i.\+e. sn) such that\+: 
+
+\[ \begin{bmatrix} \cos\theta & \sin\theta \newline -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} dx \newline dy \end{bmatrix} = \begin{bmatrix} r \newline 0 \end{bmatrix}, \] where $ r=\sqrt{pow(dx,2)+pow(dy,2)} $. The values of a and b are given by\+: \[ \cos\theta&=\dfrac{dx}{\sqrt{pow(dx,2)+pow(dy,2)}}, \] and \[ \sin\theta&=\dfrac{dy}{\sqrt{pow(dx,2)+pow(dy,2)}}. \] Taken from\+: Saad Y.\char`\"{}\+Iterative methods for sparse linear systems\char`\"{}, p.\+192 
+
+Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00517}{517}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00729}{preconditioner\+\_\+solve()}}.
+
+\mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_aeb5c45d896251c829edd2e214d441187}\label{classoomph_1_1GMRESBlockPreconditioner_aeb5c45d896251c829edd2e214d441187}} 
+\index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!generate\_plane\_rotation@{generate\_plane\_rotation}}
+\index{generate\_plane\_rotation@{generate\_plane\_rotation}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
+\doxysubsubsection{\texorpdfstring{generate\_plane\_rotation()}{generate\_plane\_rotation()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void oomph\+::\+GMRESBlock\+Preconditioner\+::generate\+\_\+plane\+\_\+rotation (\begin{DoxyParamCaption}\item[{double \&}]{dx,  }\item[{double \&}]{dy,  }\item[{double \&}]{cs,  }\item[{double \&}]{sn }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Helper function\+: Generate a plane rotation. This is done by finding the values of $ \cos(\theta) $ (i.\+e. cs) and \textbackslash{}sin(\textbackslash{}theta) (i.\+e. sn) such that\+: 
+
+\[ \begin{bmatrix} \cos\theta & \sin\theta \newline -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} dx \newline dy \end{bmatrix} = \begin{bmatrix} r \newline 0 \end{bmatrix}, \] where $ r=\sqrt{pow(dx,2)+pow(dy,2)} $. The values of a and b are given by\+: \[ \cos\theta&=\dfrac{dx}{\sqrt{pow(dx,2)+pow(dy,2)}}, \] and \[ \sin\theta&=\dfrac{dy}{\sqrt{pow(dx,2)+pow(dy,2)}}. \] Taken from\+: Saad Y.\char`\"{}\+Iterative methods for sparse linear systems\char`\"{}, p.\+192 
+
+Definition at line \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source_l00524}{524}} of file \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+block\+\_\+preconditioner.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_ab1958769d26d3ca293fa908168e7ceea}\label{classoomph_1_1GMRESBlockPreconditioner_ab1958769d26d3ca293fa908168e7ceea}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!get\_memory\_usage\_in\_bytes@{get\_memory\_usage\_in\_bytes}}
@@ -356,7 +428,7 @@ Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__b
 
 
 
-References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00618}{Compute\+\_\+memory\+\_\+statistics}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00622}{Memory\+\_\+usage\+\_\+in\+\_\+bytes}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00626}{Preconditioner\+\_\+has\+\_\+been\+\_\+setup}}.
+References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00586}{Compute\+\_\+memory\+\_\+statistics}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00590}{Memory\+\_\+usage\+\_\+in\+\_\+bytes}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00594}{Preconditioner\+\_\+has\+\_\+been\+\_\+setup}}.
 
 
 
@@ -378,7 +450,7 @@ Definition at line \mbox{\hyperlink{spacetime__navier__stokes__block__preconditi
 
 
 
-References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00618}{Compute\+\_\+memory\+\_\+statistics}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00622}{Memory\+\_\+usage\+\_\+in\+\_\+bytes}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00626}{Preconditioner\+\_\+has\+\_\+been\+\_\+setup}}.
+References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00586}{Compute\+\_\+memory\+\_\+statistics}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00590}{Memory\+\_\+usage\+\_\+in\+\_\+bytes}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00594}{Preconditioner\+\_\+has\+\_\+been\+\_\+setup}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a164a5a09a67705a08017e8832dd78316}\label{classoomph_1_1GMRESBlockPreconditioner_a164a5a09a67705a08017e8832dd78316}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!iterations@{iterations}}
@@ -400,7 +472,7 @@ Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__b
 
 
 
-References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00614}{Iterations}}.
+References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00582}{Iterations}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a164a5a09a67705a08017e8832dd78316}\label{classoomph_1_1GMRESBlockPreconditioner_a164a5a09a67705a08017e8832dd78316}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!iterations@{iterations}}
@@ -422,7 +494,7 @@ Definition at line \mbox{\hyperlink{spacetime__navier__stokes__block__preconditi
 
 
 
-References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00614}{Iterations}}.
+References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00582}{Iterations}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a887660e1e255b8f70fa268ff98ac5cfe}\label{classoomph_1_1GMRESBlockPreconditioner_a887660e1e255b8f70fa268ff98ac5cfe}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!navier\_stokes\_subsidiary\_preconditioner\_pt@{navier\_stokes\_subsidiary\_preconditioner\_pt}}
@@ -440,7 +512,7 @@ Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__b
 
 
 
-References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00532}{Navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt}}.
+References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00579}{Navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt}}.
 
 
 
@@ -462,7 +534,7 @@ Definition at line \mbox{\hyperlink{spacetime__navier__stokes__block__preconditi
 
 
 
-References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00532}{Navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt}}.
+References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00579}{Navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a05c6d079c89252723c700fb62aa0cee5}\label{classoomph_1_1GMRESBlockPreconditioner_a05c6d079c89252723c700fb62aa0cee5}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!operator=@{operator=}}
@@ -504,7 +576,7 @@ Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__b
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00228}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Doc\+\_\+convergence\+\_\+history}}, \mbox{\hyperlink{linear__solver_8h_source_l00077}{oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time}}, \mbox{\hyperlink{double__vector_8cc_source_l00805}{oomph\+::\+Double\+Vector\+::dot()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04186}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::get\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l02939}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::get\+\_\+block\+\_\+vectors()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{Vector_8h_source_l00167}{oomph\+::\+Vector$<$ \+\_\+\+Tp $>$\+::initialise()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00614}{Iterations}}, \mbox{\hyperlink{preconditioner_8h_source_l00236}{oomph\+::\+Preconditioner\+::\+Matrix\+\_\+pt}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00242}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Max\+\_\+iter}}, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a78204eab557e0dc99618e41a28a5c092}{oomph\+::\+Double\+Matrix\+Base\+::multiply()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00532}{Navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01670}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::nblock\+\_\+types()}}, \mbox{\hyperlink{double__vector_8cc_source_l00867}{oomph\+::\+Double\+Vector\+::norm()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00231}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Output\+\_\+file\+\_\+stream}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00630}{Preconditioner\+\_\+\+LHS}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00482}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{matrices_8h_source_l00326}{oomph\+::\+Double\+Matrix\+Base\+::residual()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04489}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::return\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00251}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Solution\+\_\+time}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00262}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Throw\+\_\+error\+\_\+after\+\_\+max\+\_\+iter}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00239}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Tolerance}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00420}{update()}}, and \mbox{\hyperlink{double__vector_8h_source_l00254}{oomph\+::\+Double\+Vector\+::values\+\_\+pt()}}.
+References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00562}{apply\+\_\+plane\+\_\+rotation()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00228}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Doc\+\_\+convergence\+\_\+history}}, \mbox{\hyperlink{linear__solver_8h_source_l00077}{oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time}}, \mbox{\hyperlink{double__vector_8cc_source_l00805}{oomph\+::\+Double\+Vector\+::dot()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00517}{generate\+\_\+plane\+\_\+rotation()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04186}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::get\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l02939}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::get\+\_\+block\+\_\+vectors()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{Vector_8h_source_l00167}{oomph\+::\+Vector$<$ \+\_\+\+Tp $>$\+::initialise()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00582}{Iterations}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00575}{Matrix\+\_\+pt}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00242}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Max\+\_\+iter}}, \mbox{\hyperlink{matrices_8cc_source_l01782}{oomph\+::\+CRDouble\+Matrix\+::multiply()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00579}{Navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01670}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::nblock\+\_\+types()}}, \mbox{\hyperlink{double__vector_8cc_source_l00867}{oomph\+::\+Double\+Vector\+::norm()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00231}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Output\+\_\+file\+\_\+stream}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00598}{Preconditioner\+\_\+\+LHS}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00482}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{matrices_8h_source_l00326}{oomph\+::\+Double\+Matrix\+Base\+::residual()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04489}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::return\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00251}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Solution\+\_\+time}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00262}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Throw\+\_\+error\+\_\+after\+\_\+max\+\_\+iter}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00239}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Tolerance}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00420}{update()}}, and \mbox{\hyperlink{double__vector_8h_source_l00254}{oomph\+::\+Double\+Vector\+::values\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a73f8298ef0dee62de0eabd28ac78a53b}\label{classoomph_1_1GMRESBlockPreconditioner_a73f8298ef0dee62de0eabd28ac78a53b}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!preconditioner\_solve@{preconditioner\_solve}}
@@ -536,7 +608,7 @@ Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__b
 
 
 
-References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00630}{Preconditioner\+\_\+\+LHS}}.
+References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00598}{Preconditioner\+\_\+\+LHS}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_abb48a9b05565e396e648fe80511f6e39}\label{classoomph_1_1GMRESBlockPreconditioner_abb48a9b05565e396e648fe80511f6e39}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!set\_preconditioner\_LHS@{set\_preconditioner\_LHS}}
@@ -554,7 +626,7 @@ Definition at line \mbox{\hyperlink{spacetime__navier__stokes__block__preconditi
 
 
 
-References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00630}{Preconditioner\+\_\+\+LHS}}.
+References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00598}{Preconditioner\+\_\+\+LHS}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a8dd8043bbb27b1ca1e0d652fd723d681}\label{classoomph_1_1GMRESBlockPreconditioner_a8dd8043bbb27b1ca1e0d652fd723d681}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!set\_preconditioner\_RHS@{set\_preconditioner\_RHS}}
@@ -572,7 +644,7 @@ Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__b
 
 
 
-References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00630}{Preconditioner\+\_\+\+LHS}}.
+References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00598}{Preconditioner\+\_\+\+LHS}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a8dd8043bbb27b1ca1e0d652fd723d681}\label{classoomph_1_1GMRESBlockPreconditioner_a8dd8043bbb27b1ca1e0d652fd723d681}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!set\_preconditioner\_RHS@{set\_preconditioner\_RHS}}
@@ -590,7 +662,7 @@ Definition at line \mbox{\hyperlink{spacetime__navier__stokes__block__preconditi
 
 
 
-References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00630}{Preconditioner\+\_\+\+LHS}}.
+References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00598}{Preconditioner\+\_\+\+LHS}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_ae517d83cf8eddba9f9e2ed709f503da2}\label{classoomph_1_1GMRESBlockPreconditioner_ae517d83cf8eddba9f9e2ed709f503da2}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!setup@{setup}}
@@ -612,7 +684,7 @@ Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__b
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8cc_source_l02483}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::block\+\_\+setup()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00273}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00618}{Compute\+\_\+memory\+\_\+statistics}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00139}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::enable\+\_\+doc\+\_\+memory\+\_\+usage()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00673}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::get\+\_\+block()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02061}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::is\+\_\+subsidiary\+\_\+block\+\_\+preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00520}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::matrix\+\_\+pt()}}, \mbox{\hyperlink{preconditioner_8h_source_l00236}{oomph\+::\+Preconditioner\+::\+Matrix\+\_\+pt}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00622}{Memory\+\_\+usage\+\_\+in\+\_\+bytes}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00532}{Navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01670}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::nblock\+\_\+types()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01694}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::ndof\+\_\+types()}}, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_acdcd6e1ea2bf2380f1a2fa32c7829cb5}{oomph\+::\+Double\+Matrix\+Base\+::nrow()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00313}{oomph\+::oomph\+\_\+nullstream}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00626}{Preconditioner\+\_\+has\+\_\+been\+\_\+setup}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00061}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::setup()}}, \mbox{\hyperlink{preconditioner_8h_source_l00229}{oomph\+::\+Preconditioner\+::\+Silent\+\_\+preconditioner\+\_\+setup}}, \mbox{\hyperlink{oomph__definitions_8h_source_l00464}{oomph\+::\+Oomph\+Info\+::stream\+\_\+pt()}}, \mbox{\hyperlink{preconditioner_8h_source_l00232}{oomph\+::\+Preconditioner\+::\+Stream\+\_\+pt}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}, and \mbox{\hyperlink{block__preconditioner_8cc_source_l02376}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::turn\+\_\+into\+\_\+subsidiary\+\_\+block\+\_\+preconditioner()}}.
+References \mbox{\hyperlink{block__preconditioner_8cc_source_l02483}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::block\+\_\+setup()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00273}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00586}{Compute\+\_\+memory\+\_\+statistics}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00139}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::enable\+\_\+doc\+\_\+memory\+\_\+usage()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00673}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::get\+\_\+block()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02061}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::is\+\_\+subsidiary\+\_\+block\+\_\+preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00520}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::matrix\+\_\+pt()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00575}{Matrix\+\_\+pt}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00590}{Memory\+\_\+usage\+\_\+in\+\_\+bytes}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00579}{Navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01670}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::nblock\+\_\+types()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01694}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::ndof\+\_\+types()}}, \mbox{\hyperlink{matrices_8h_source_l01096}{oomph\+::\+CRDouble\+Matrix\+::nnz()}}, \mbox{\hyperlink{matrices_8h_source_l01002}{oomph\+::\+CRDouble\+Matrix\+::nrow()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00313}{oomph\+::oomph\+\_\+nullstream}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00594}{Preconditioner\+\_\+has\+\_\+been\+\_\+setup}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00061}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::setup()}}, \mbox{\hyperlink{preconditioner_8h_source_l00229}{oomph\+::\+Preconditioner\+::\+Silent\+\_\+preconditioner\+\_\+setup}}, \mbox{\hyperlink{oomph__definitions_8h_source_l00464}{oomph\+::\+Oomph\+Info\+::stream\+\_\+pt()}}, \mbox{\hyperlink{preconditioner_8h_source_l00232}{oomph\+::\+Preconditioner\+::\+Stream\+\_\+pt}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}, and \mbox{\hyperlink{block__preconditioner_8cc_source_l02376}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::turn\+\_\+into\+\_\+subsidiary\+\_\+block\+\_\+preconditioner()}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_ae517d83cf8eddba9f9e2ed709f503da2}\label{classoomph_1_1GMRESBlockPreconditioner_ae517d83cf8eddba9f9e2ed709f503da2}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!setup@{setup}}
@@ -764,7 +836,7 @@ Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__b
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04186}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::get\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00532}{Navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00630}{Preconditioner\+\_\+\+LHS}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00482}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04489}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::return\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{double__vector_8h_source_l00254}{oomph\+::\+Double\+Vector\+::values\+\_\+pt()}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04186}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::get\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00579}{Navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00463}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00598}{Preconditioner\+\_\+\+LHS}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00482}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04489}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::return\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{double__vector_8h_source_l00254}{oomph\+::\+Double\+Vector\+::values\+\_\+pt()}}.
 
 
 
@@ -786,42 +858,11 @@ Definition at line \mbox{\hyperlink{spacetime__navier__stokes__block__preconditi
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04186}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::get\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00532}{Navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00630}{Preconditioner\+\_\+\+LHS}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00482}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04489}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::return\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{double__vector_8h_source_l00254}{oomph\+::\+Double\+Vector\+::values\+\_\+pt()}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04186}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::get\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00579}{Navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00463}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00598}{Preconditioner\+\_\+\+LHS}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00482}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04489}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::return\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{double__vector_8h_source_l00254}{oomph\+::\+Double\+Vector\+::values\+\_\+pt()}}.
 
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_afa1a6124234cb3adf8766c88971d7f78}\label{classoomph_1_1GMRESBlockPreconditioner_afa1a6124234cb3adf8766c88971d7f78}} 
-\index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!begin@{begin}}
-\index{begin@{begin}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
-\doxysubsubsection{\texorpdfstring{begin}{begin}}
-{\footnotesize\ttfamily oomph\+::\+GMRESBlock\+Preconditioner\+::begin\hspace{0.3cm}{\ttfamily [private]}}
-
-{\bfseries Initial value\+:}
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\{bmatrix\}}
-\DoxyCodeLine{        \(\backslash\)cos\(\backslash\)theta \& \(\backslash\)sin\(\backslash\)theta \(\backslash\)newline}
-\DoxyCodeLine{        -\/\(\backslash\)sin\(\backslash\)theta \& \(\backslash\)cos\(\backslash\)theta}
-\DoxyCodeLine{        \(\backslash\)end\{bmatrix\}}
-\DoxyCodeLine{        \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_afa1a6124234cb3adf8766c88971d7f78}{\(\backslash\)begin}}\{bmatrix\}}
-\DoxyCodeLine{        dx \(\backslash\)newline}
-\DoxyCodeLine{        dy}
-\DoxyCodeLine{        \(\backslash\)end\{bmatrix\}}
-\DoxyCodeLine{        =}
-\DoxyCodeLine{        \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_afa1a6124234cb3adf8766c88971d7f78}{\(\backslash\)begin}}\{bmatrix\}}
-\DoxyCodeLine{        r \(\backslash\)newline}
-\DoxyCodeLine{        0}
-\DoxyCodeLine{        \(\backslash\)end\{bmatrix\}}
-
-\end{DoxyCode}
-
-
-Helper function\+: Generate a plane rotation. This is done by finding the values of $ \cos(\theta) $ (i.\+e. cs) and \textbackslash{}sin(\textbackslash{}theta) (i.\+e. sn) such that\+: 
-
-
-
-Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00511}{511}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
-
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a727af6ccb23868b93a074e07f885b5e8}\label{classoomph_1_1GMRESBlockPreconditioner_a727af6ccb23868b93a074e07f885b5e8}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!Compute\_memory\_statistics@{Compute\_memory\_statistics}}
 \index{Compute\_memory\_statistics@{Compute\_memory\_statistics}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
@@ -834,7 +875,7 @@ Flag to indicate whether or not to record the memory statistics this preconditio
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00618}{618}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00586}{586}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
 
 
 
@@ -852,11 +893,29 @@ Number of iterations taken.
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00614}{614}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00582}{582}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
 
 
 
 Referenced by \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00320}{iterations()}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00729}{preconditioner\+\_\+solve()}}.
+
+\mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_ab4b84bc2dec36b26196f466a43ced299}\label{classoomph_1_1GMRESBlockPreconditioner_ab4b84bc2dec36b26196f466a43ced299}} 
+\index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!Matrix\_pt@{Matrix\_pt}}
+\index{Matrix\_pt@{Matrix\_pt}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
+\doxysubsubsection{\texorpdfstring{Matrix\_pt}{Matrix\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$ oomph\+::\+GMRESBlock\+Preconditioner\+::\+Matrix\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to matrix. 
+
+
+
+Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00575}{575}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00273}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00729}{preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00575}{setup()}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a06aa85a7eb7a1787179386eb514ca77a}\label{classoomph_1_1GMRESBlockPreconditioner_a06aa85a7eb7a1787179386eb514ca77a}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!Memory\_usage\_in\_bytes@{Memory\_usage\_in\_bytes}}
@@ -870,25 +929,25 @@ Storage for the memory usage of the solver if the flag above is set to true (in 
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00622}{622}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00590}{590}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
 
 
 
 Referenced by \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00356}{get\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00250}{GMRESBlock\+Preconditioner()}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00575}{setup()}}.
 
-\mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a05385552adb400003801a8468a2186ae}\label{classoomph_1_1GMRESBlockPreconditioner_a05385552adb400003801a8468a2186ae}} 
+\mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a66b8ac42169d3247d5e3d9678e905b88}\label{classoomph_1_1GMRESBlockPreconditioner_a66b8ac42169d3247d5e3d9678e905b88}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!Navier\_stokes\_subsidiary\_preconditioner\_pt@{Navier\_stokes\_subsidiary\_preconditioner\_pt}}
 \index{Navier\_stokes\_subsidiary\_preconditioner\_pt@{Navier\_stokes\_subsidiary\_preconditioner\_pt}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{Navier\_stokes\_subsidiary\_preconditioner\_pt}{Navier\_stokes\_subsidiary\_preconditioner\_pt}}
-{\footnotesize\ttfamily \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}} cos theta \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}} sin theta \&\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner}{Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner}} $\ast$ oomph\+::\+GMRESBlock\+Preconditioner\+::\+Navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner}{Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner}} $\ast$ oomph\+::\+GMRESBlock\+Preconditioner\+::\+Navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-and 
+Pointer to the preconditioner for the block matrix. 
 
-Pointer to the preconditioner for the block matrix 
 
-Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00611}{611}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
+
+Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00579}{579}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
 
 
 
@@ -906,7 +965,7 @@ Control flag is true if the preconditioner has been setup (used so we can wipe t
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00626}{626}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00594}{594}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
 
 
 
@@ -924,7 +983,7 @@ boolean indicating use of left hand preconditioning (if true) or right hand prec
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00630}{630}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00598}{598}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
 
 
 

@@ -18,9 +18,9 @@ Inheritance diagram for oomph\+::Biharmonic\+Problem\texorpdfstring{$<$}{<} DIM 
 \doxysubsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1BiharmonicProblem_ac3e873c52bcd489bc545f3cd2c860e8f}{Dirichlet\+BCFct\+Pt}}) (const double \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, double \&\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}})
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1BiharmonicProblem_ac3e873c52bcd489bc545f3cd2c860e8f}{Dirichlet\+BCFct\+Pt}}) (const double \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, double \&u)
 \begin{DoxyCompactList}\small\item\em Definition of a dirichlet boundary condition function pointer. Takes the position along a boundary (s) in the macro element coordinate scheme and returns the value of the boundary condition at that point (u). \end{DoxyCompactList}\item 
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1BiharmonicProblem_a08d7386bbae19862d6fa656b8a2ae2a0}{Biharmonic\+Source\+Fct\+Pt}}) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, double \&\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}})
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1BiharmonicProblem_a08d7386bbae19862d6fa656b8a2ae2a0}{Biharmonic\+Source\+Fct\+Pt}}) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&f)
 \begin{DoxyCompactList}\small\item\em Definition of the Source Function. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
@@ -82,7 +82,7 @@ Definition at line \mbox{\hyperlink{biharmonic__problem_8h_source_l00066}{66}} o
 \index{BiharmonicSourceFctPt@{BiharmonicSourceFctPt}!oomph::BiharmonicProblem$<$ DIM $>$@{oomph::BiharmonicProblem$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{BiharmonicSourceFctPt}{BiharmonicSourceFctPt}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1BiharmonicProblem}{oomph\+::\+Biharmonic\+Problem}}$<$ DIM $>$\+::Biharmonic\+Source\+Fct\+Pt) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, double \&\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}})}
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1BiharmonicProblem}{oomph\+::\+Biharmonic\+Problem}}$<$ DIM $>$\+::Biharmonic\+Source\+Fct\+Pt) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&f)}
 
 
 
@@ -97,7 +97,7 @@ Definition at line \mbox{\hyperlink{biharmonic__problem_8h_source_l00077}{77}} o
 \index{DirichletBCFctPt@{DirichletBCFctPt}!oomph::BiharmonicProblem$<$ DIM $>$@{oomph::BiharmonicProblem$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{DirichletBCFctPt}{DirichletBCFctPt}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1BiharmonicProblem}{oomph\+::\+Biharmonic\+Problem}}$<$ DIM $>$\+::Dirichlet\+BCFct\+Pt) (const double \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, double \&\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}})}
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1BiharmonicProblem}{oomph\+::\+Biharmonic\+Problem}}$<$ DIM $>$\+::Dirichlet\+BCFct\+Pt) (const double \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, double \&u)}
 
 
 
@@ -286,7 +286,7 @@ Definition at line \mbox{\hyperlink{biharmonic__problem_8cc_source_l00042}{42}} 
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{error__estimator_8h_source_l00165}{oomph\+::u}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicProblem_a19509193167f4b969aa9f6cb6c2586b2}\label{classoomph_1_1BiharmonicProblem_a19509193167f4b969aa9f6cb6c2586b2}} 
 \index{oomph::BiharmonicProblem$<$ DIM $>$@{oomph::BiharmonicProblem$<$ DIM $>$}!set\_neumann\_boundary\_condition@{set\_neumann\_boundary\_condition}}
@@ -324,7 +324,7 @@ Definition at line \mbox{\hyperlink{biharmonic__problem_8h_source_l00164}{164}} 
 
 
 
-References \mbox{\hyperlink{biharmonic__problem_8h_source_l00201}{oomph\+::\+Biharmonic\+Problem$<$ DIM $>$\+::\+Bulk\+\_\+element\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{mesh_8h_source_l00448}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, and \mbox{\hyperlink{biharmonic__elements_8h_source_l00485}{oomph\+::\+Biharmonic\+Equations$<$ DIM $>$\+::source\+\_\+fct\+\_\+pt()}}.
+References \mbox{\hyperlink{biharmonic__problem_8h_source_l00201}{oomph\+::\+Biharmonic\+Problem$<$ DIM $>$\+::\+Bulk\+\_\+element\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{mesh_8h_source_l00448}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, and \mbox{\hyperlink{biharmonic__elements_8h_source_l00484}{oomph\+::\+Biharmonic\+Equations$<$ DIM $>$\+::source\+\_\+fct\+\_\+pt()}}.
 
 
 

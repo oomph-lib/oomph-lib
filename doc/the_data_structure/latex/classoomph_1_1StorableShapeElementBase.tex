@@ -22,9 +22,9 @@ Inheritance diagram for oomph\+::Storable\+Shape\+Element\+Base\+:\begin{figure}
 \begin{DoxyCompactList}\small\item\em Constructor, set most storage pointers to NULL. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a3de37b4bf61a78da326aade3c9169f76}{$\sim$\+Storable\+Shape\+Element\+Base}} ()
 \begin{DoxyCompactList}\small\item\em The destructor cleans up the static memory allocated for shape function storage. Internal and external data get wiped by the \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} destructor; nodes get killed in mesh destructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a657fd3c8a8110e90c7f8f88ca4954193}{Storable\+Shape\+Element\+Base}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase}{Storable\+Shape\+Element\+Base}} \&)=delete
+\mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a657fd3c8a8110e90c7f8f88ca4954193}{Storable\+Shape\+Element\+Base}} (const \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase}{Storable\+Shape\+Element\+Base}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_afdef4c0e9352b04c5b1aeb42850beef5}{operator=}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase}{Storable\+Shape\+Element\+Base}} \&)=delete
+void \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_afdef4c0e9352b04c5b1aeb42850beef5}{operator=}} (const \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase}{Storable\+Shape\+Element\+Base}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_ae4707f6f7c3ecdf1db110d882ddab8bb}{delete\+\_\+all\+\_\+shape\+\_\+local\+\_\+stored}} ()
 \begin{DoxyCompactList}\small\item\em Delete all the objects stored in the \mbox{[}...\mbox{]}\+\_\+local\+\_\+stored\+\_\+pt vectors and delete the vectors themselves. \end{DoxyCompactList}\item 
@@ -42,63 +42,63 @@ void \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a8c90dd66f8d564ecb8
 \begin{DoxyCompactList}\small\item\em Delete stored second derivatives of shape functions w.\+r.\+t. to global Eulerian coordinates. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_ab9e219f5624ced52f74ca4fefc2f711b}{delete\+\_\+\+J\+\_\+eulerian\+\_\+stored}} ()
 \begin{DoxyCompactList}\small\item\em Delete stored Jacobian of mapping between local and global (Eulerian) coordinates. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a1c20f4028654ec94f57037a3e3dc6582}{set\+\_\+integration\+\_\+scheme}} (Integral $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\+\_\+pt}})
+virtual void \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a1c20f4028654ec94f57037a3e3dc6582}{set\+\_\+integration\+\_\+scheme}} (\mbox{\hyperlink{classoomph_1_1Integral}{Integral}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Set the spatial integration scheme -- overloaded from the finite element base class since a change in the integration scheme forces a recomputation of the shape fcts at the integration points. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} $\ast$ $>$ $\ast$\& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a44e620fc062a1b21b09d1edd4b27c305}{shape\+\_\+stored\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return a pointer to the vector of pointers to the stored shape functions. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} $\ast$ $>$ $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a15a89e17b467fb95565e9d58bedb838e}{shape\+\_\+stored\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} $\ast$ $>$ $\ast$const \& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a15a89e17b467fb95565e9d58bedb838e}{shape\+\_\+stored\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Return a pointer to the vector of pointers to the stored shape functions (const version) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} $\ast$\& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a2721dc85bf42b89b7615516b37f6f262}{shape\+\_\+stored\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&ipt)
+\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} $\ast$\& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a2721dc85bf42b89b7615516b37f6f262}{shape\+\_\+stored\+\_\+pt}} (const unsigned \&ipt)
 \begin{DoxyCompactList}\small\item\em Return a pointer to the stored shape function at the ipt-\/th integration point. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_ae99aaf9629dba4465348f835bb974764}{shape\+\_\+stored\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&ipt) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} $\ast$const \& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_ae99aaf9629dba4465348f835bb974764}{shape\+\_\+stored\+\_\+pt}} (const unsigned \&ipt) const
 \begin{DoxyCompactList}\small\item\em Return a pointer to the stored shape function at the ipt-\/th integration point (const version) \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} $\ast$ $>$ $\ast$\& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_add2337424065763047c66dfc7f851146}{dshape\+\_\+local\+\_\+stored\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return a pointer to the vector of pointers to the stored first derivatives of the shape functions w.\+r.\+t the local coordinates. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} $\ast$ $>$ $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a955923b6564f80f76a77d2cb100b15bf}{dshape\+\_\+local\+\_\+stored\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} $\ast$ $>$ $\ast$const \& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a955923b6564f80f76a77d2cb100b15bf}{dshape\+\_\+local\+\_\+stored\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Return a pointer to the vector of pointers to the stored first derivatives of the shape functions w.\+r.\+t the local coordinates (const version) \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} $\ast$ $>$ $\ast$\& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_aad91e49554142952b0ce19f3c79a9b3e}{d2shape\+\_\+local\+\_\+stored\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return a pointer to the vector of pointers to the stored second derivatives of the shape functions w.\+r.\+t the local coordinates. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} $\ast$ $>$ $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a45781ad13ce0f4c16268b458c2df3f7d}{d2shape\+\_\+local\+\_\+stored\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} $\ast$ $>$ $\ast$const \& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a45781ad13ce0f4c16268b458c2df3f7d}{d2shape\+\_\+local\+\_\+stored\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Return a pointer to the vector of pointers to the stored second derivatives of the shape functions w.\+r.\+t the local coordinates (const version) \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} $\ast$ $>$ $\ast$\& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a07a04d1ddc353eca1b55f915606e04f5}{dshape\+\_\+eulerian\+\_\+stored\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return a pointer to the vector of pointers to the stored first derivatives of the shape functions w.\+r.\+t the global (eulerian) coordinates. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} $\ast$ $>$ $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a56113d33a75fde8ef4df556f45428fd1}{dshape\+\_\+eulerian\+\_\+stored\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} $\ast$ $>$ $\ast$const \& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a56113d33a75fde8ef4df556f45428fd1}{dshape\+\_\+eulerian\+\_\+stored\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Return a pointer to the vector of pointers to the stored first derivatives of the shape functions w.\+r.\+t the global (eulerian) coordinates (const version) \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} $\ast$ $>$ $\ast$\& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a28f344c79dc24b28a21a58542462a953}{d2shape\+\_\+eulerian\+\_\+stored\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return a pointer to the vector of pointers to the stored second derivatives of the shape functions w.\+r.\+t the global (eulerian) coordinates. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} $\ast$ $>$ $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_aa21035b6e5ebea8ca081a25f3172815f}{d2shape\+\_\+eulerian\+\_\+stored\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} $\ast$ $>$ $\ast$const \& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_aa21035b6e5ebea8ca081a25f3172815f}{d2shape\+\_\+eulerian\+\_\+stored\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Return a pointer to the vector of pointers to the stored second derivatives of the shape functions w.\+r.\+t the global (eulerian) coordinates (const version) \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $\ast$\& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a769198351d8aaf7c0592c4101046f6e6}{jacobian\+\_\+eulerian\+\_\+stored\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return a pointer to the vector of Jacobians of the mapping between the local and global (eulerian) coordinates. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_aac37ff5bdffb24f0ba2a5c5137577ff1}{jacobian\+\_\+eulerian\+\_\+stored\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $\ast$const \& \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_aac37ff5bdffb24f0ba2a5c5137577ff1}{jacobian\+\_\+eulerian\+\_\+stored\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Return a pointer to the vector of Jacobians of the mapping between the local and global (eulerian) coordinates (const version) \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_aa0f11d26e348ffbf3bef39ee76a43bfb}{set\+\_\+shape\+\_\+local\+\_\+stored\+\_\+from\+\_\+element}} (\mbox{\hyperlink{classoomph_1_1StorableShapeElementBase}{Storable\+Shape\+Element\+Base}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&element\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_aa0f11d26e348ffbf3bef39ee76a43bfb}{set\+\_\+shape\+\_\+local\+\_\+stored\+\_\+from\+\_\+element}} (\mbox{\hyperlink{classoomph_1_1StorableShapeElementBase}{Storable\+Shape\+Element\+Base}} $\ast$const \&element\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Set the shape functions pointed to internally to be those pointed to by the \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} element\+\_\+pt (In most cases all elements of the same type have the same number of integration points so the shape function values and their local derivatives are the same -\/-\/\texorpdfstring{$>$}{>} They only need to be stored by one element). Calling this function deletes the locally created storage and re-\/directs the pointers to the stored shape function of the specified element. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_aab18b96b6ef256e161033ec16e099fa4}{set\+\_\+dshape\+\_\+eulerian\+\_\+stored\+\_\+from\+\_\+element}} (\mbox{\hyperlink{classoomph_1_1StorableShapeElementBase}{Storable\+Shape\+Element\+Base}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&element\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_aab18b96b6ef256e161033ec16e099fa4}{set\+\_\+dshape\+\_\+eulerian\+\_\+stored\+\_\+from\+\_\+element}} (\mbox{\hyperlink{classoomph_1_1StorableShapeElementBase}{Storable\+Shape\+Element\+Base}} $\ast$const \&element\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Set the derivatives of stored shape functions with respect to the global coordinates to be the same as those pointed to by the \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} element\+\_\+pt. Note that this function also calls set\+\_\+shape\+\_\+local\+\_\+stored\+\_\+from\+\_\+element(element\+\_\+pt). so that the local derivatives are also stored. Calling this function only makes sense for uniformly-\/spaced meshes with elements of equal sizes. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_ad6900d26b449b3c58cba23bb58c631a7}{pre\+\_\+compute\+\_\+shape\+\_\+at\+\_\+knots}} ()
 \begin{DoxyCompactList}\small\item\em Calculate the shape functions at the integration points and store the results internally. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a162150b9480132ac350404291281eb3b}{shape\+\_\+at\+\_\+knot}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a162150b9480132ac350404291281eb3b}{shape\+\_\+at\+\_\+knot}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi) const
 \begin{DoxyCompactList}\small\item\em Return the geometric shape function at the ipt-\/th integration point. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_abbf221cfb9427bfc9af29233ef228b48}{pre\+\_\+compute\+\_\+dshape\+\_\+local\+\_\+at\+\_\+knots}} ()
 \begin{DoxyCompactList}\small\item\em Calculate the shape functions and first derivatives w.\+r.\+t. local coordinatess at the integration points and store the results internally. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a94e5818f75717febe8af072351543811}{dshape\+\_\+local\+\_\+at\+\_\+knot}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&\mbox{\hyperlink{classoomph_1_1FiniteElement_ae3d0addae4ef07ae7295fe439483caf0}{dpsids}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a94e5818f75717febe8af072351543811}{dshape\+\_\+local\+\_\+at\+\_\+knot}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsids) const
 \begin{DoxyCompactList}\small\item\em Return the geometric shape function and its derivative w.\+r.\+t. the local coordinates at the ipt-\/th integration point. If pre-\/computed values have been stored, they will be used. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_ae710e91d98baf5b83b0ee2557cbd2b3f}{pre\+\_\+compute\+\_\+d2shape\+\_\+local\+\_\+at\+\_\+knots}} ()
 \begin{DoxyCompactList}\small\item\em Calculate the second derivatives of the shape functions w.\+r.\+t. local coordinates at the integration points and store the results internally. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_af1b0ce3644efb101953a6dc2ce120a3e}{d2shape\+\_\+local\+\_\+at\+\_\+knot}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&\mbox{\hyperlink{classoomph_1_1FiniteElement_ae3d0addae4ef07ae7295fe439483caf0}{dpsids}}, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&d2psids) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_af1b0ce3644efb101953a6dc2ce120a3e}{d2shape\+\_\+local\+\_\+at\+\_\+knot}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsids, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&d2psids) const
 \begin{DoxyCompactList}\small\item\em Return the geometric shape function and its first and second derivatives w.\+r.\+t. the local coordinates at the ipt-\/th integration point. If pre-\/computed values have been stored, they will be used. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_aa807b2f4c54bd0f48ed3b76070ad21b9}{pre\+\_\+compute\+\_\+\+J\+\_\+eulerian\+\_\+at\+\_\+knots}} ()
 \begin{DoxyCompactList}\small\item\em Calculate the Jacobian of the mapping from local to global coordinates at the integration points and store the results internally. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_ad8fbccc3ef6b82a0f50fc1226fec777f}{J\+\_\+eulerian\+\_\+at\+\_\+knot}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&ipt) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_ad8fbccc3ef6b82a0f50fc1226fec777f}{J\+\_\+eulerian\+\_\+at\+\_\+knot}} (const unsigned \&ipt) const
 \begin{DoxyCompactList}\small\item\em Return the Jacobian of the mapping from local to global coordinates at the ipt-\/th integration point. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a9e936c1ce294614fab6db0ab864d9949}{pre\+\_\+compute\+\_\+dshape\+\_\+eulerian\+\_\+at\+\_\+knots}} ()
 \begin{DoxyCompactList}\small\item\em Calculate the first derivatives of the shape functions w.\+r.\+t the global coordinates at the integration points and store the results internally. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a6dba8c995caf1ce8075c8cd7d4220aaa}{dshape\+\_\+eulerian\+\_\+at\+\_\+knot}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a6dba8c995caf1ce8075c8cd7d4220aaa}{dshape\+\_\+eulerian\+\_\+at\+\_\+knot}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx) const
 \begin{DoxyCompactList}\small\item\em Return the geometric shape functions and also first derivatives w.\+r.\+t. global coordinates at the ipt-\/th integration point. If the values of the shape functions and derivatives have been pre-\/computed, these will be used. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a771a9c843fa71c2264ad0d653ec01d1a}{pre\+\_\+compute\+\_\+d2shape\+\_\+eulerian\+\_\+at\+\_\+knots}} ()
 \begin{DoxyCompactList}\small\item\em Calculate the first and second derivatives of the shape functions w.\+r.\+t global coordinates at the integration points and store the results internally. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_aa8d876cca1917be4181a914ef4595c21}{d2shape\+\_\+eulerian\+\_\+at\+\_\+knot}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&d2psidx) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_aa8d876cca1917be4181a914ef4595c21}{d2shape\+\_\+eulerian\+\_\+at\+\_\+knot}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&d2psidx) const
 \begin{DoxyCompactList}\small\item\em Return the geometric shape functions and also first and second derivatives w.\+r.\+t. global coordinates at ipt-\/th integration point. If the values of the shape functions and derivatives have been pre-\/computred, these will be used. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -166,7 +166,7 @@ References \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00129}
 \index{oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}!StorableShapeElementBase@{StorableShapeElementBase}}
 \index{StorableShapeElementBase@{StorableShapeElementBase}!oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}}
 \doxysubsubsection{\texorpdfstring{StorableShapeElementBase()}{StorableShapeElementBase()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily oomph\+::\+Storable\+Shape\+Element\+Base\+::\+Storable\+Shape\+Element\+Base (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase}{Storable\+Shape\+Element\+Base}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+{\footnotesize\ttfamily oomph\+::\+Storable\+Shape\+Element\+Base\+::\+Storable\+Shape\+Element\+Base (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase}{Storable\+Shape\+Element\+Base}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
@@ -179,7 +179,7 @@ Broken copy constructor.
 \index{oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}!d2shape\_eulerian\_at\_knot@{d2shape\_eulerian\_at\_knot}}
 \index{d2shape\_eulerian\_at\_knot@{d2shape\_eulerian\_at\_knot}!oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}}
 \doxysubsubsection{\texorpdfstring{d2shape\_eulerian\_at\_knot()}{d2shape\_eulerian\_at\_knot()}}
-{\footnotesize\ttfamily double oomph\+::\+Storable\+Shape\+Element\+Base\+::d2shape\+\_\+eulerian\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{d2psidx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily double oomph\+::\+Storable\+Shape\+Element\+Base\+::d2shape\+\_\+eulerian\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{d2psidx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -187,7 +187,7 @@ Return the geometric shape functions and also first and second derivatives w.\+r
 
 Return the geometric shape functions, first and second derivatives w.\+r.\+t eulerian coordinates at the ipt-\/th integration point. If the values have already been computed, return the stored values. 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0e1baefe25dc390b06ca070a50bc146f}{oomph\+::\+Finite\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_aee4c4dc82cab5662c3552f86422c8b3f}{oomph\+::\+Finite\+Element}}.
 
 
 
@@ -195,7 +195,7 @@ Definition at line \mbox{\hyperlink{stored__shape__function__elements_8cc_source
 
 
 
-References \mbox{\hyperlink{classoomph_1_1FiniteElement_a0e1baefe25dc390b06ca070a50bc146f}{oomph\+::\+Finite\+Element\+::d2shape\+\_\+eulerian\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00087}{D2\+Shape\+\_\+eulerian\+\_\+stored\+\_\+pt}}, and \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00091}{Jacobian\+\_\+eulerian\+\_\+stored\+\_\+pt}}.
+References \mbox{\hyperlink{elements_8cc_source_l03502}{oomph\+::\+Finite\+Element\+::d2shape\+\_\+eulerian\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00087}{D2\+Shape\+\_\+eulerian\+\_\+stored\+\_\+pt}}, and \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00091}{Jacobian\+\_\+eulerian\+\_\+stored\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1StorableShapeElementBase_a28f344c79dc24b28a21a58542462a953}\label{classoomph_1_1StorableShapeElementBase_a28f344c79dc24b28a21a58542462a953}} 
 \index{oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}!d2shape\_eulerian\_stored\_pt@{d2shape\_eulerian\_stored\_pt}}
@@ -223,7 +223,7 @@ Referenced by \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l008
 \index{oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}!d2shape\_eulerian\_stored\_pt@{d2shape\_eulerian\_stored\_pt}}
 \index{d2shape\_eulerian\_stored\_pt@{d2shape\_eulerian\_stored\_pt}!oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}}
 \doxysubsubsection{\texorpdfstring{d2shape\_eulerian\_stored\_pt()}{d2shape\_eulerian\_stored\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} $\ast$ $>$ $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}  \& oomph\+::\+Storable\+Shape\+Element\+Base\+::d2shape\+\_\+eulerian\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} $\ast$ $>$ $\ast$const  \& oomph\+::\+Storable\+Shape\+Element\+Base\+::d2shape\+\_\+eulerian\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -241,7 +241,7 @@ References \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00087}{
 \index{oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}!d2shape\_local\_at\_knot@{d2shape\_local\_at\_knot}}
 \index{d2shape\_local\_at\_knot@{d2shape\_local\_at\_knot}!oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}}
 \doxysubsubsection{\texorpdfstring{d2shape\_local\_at\_knot()}{d2shape\_local\_at\_knot()}}
-{\footnotesize\ttfamily void oomph\+::\+Storable\+Shape\+Element\+Base\+::d2shape\+\_\+local\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsids,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{d2psids }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Storable\+Shape\+Element\+Base\+::d2shape\+\_\+local\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsids,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{d2psids }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -249,7 +249,7 @@ Return the geometric shape function and its first and second derivatives w.\+r.\
 
 Return the shape function and its first and second derivatives w.\+r.\+t. the local coordinates at the ipt-\/th integration point. 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2160f6fe6d540022b2dad93df9886286}{oomph\+::\+Finite\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a5330790998d0b103d87da72b57fc633a}{oomph\+::\+Finite\+Element}}.
 
 
 
@@ -257,7 +257,7 @@ Definition at line \mbox{\hyperlink{stored__shape__function__elements_8cc_source
 
 
 
-References \mbox{\hyperlink{classoomph_1_1FiniteElement_a2160f6fe6d540022b2dad93df9886286}{oomph\+::\+Finite\+Element\+::d2shape\+\_\+local\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00075}{D2\+Shape\+\_\+local\+\_\+stored\+\_\+pt}}, and \mbox{\hyperlink{elements_8h_source_l01614}{oomph\+::\+Finite\+Element\+::dpsids}}.
+References \mbox{\hyperlink{elements_8cc_source_l03274}{oomph\+::\+Finite\+Element\+::d2shape\+\_\+local\+\_\+at\+\_\+knot()}}, and \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00075}{D2\+Shape\+\_\+local\+\_\+stored\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1StorableShapeElementBase_aad91e49554142952b0ce19f3c79a9b3e}\label{classoomph_1_1StorableShapeElementBase_aad91e49554142952b0ce19f3c79a9b3e}} 
 \index{oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}!d2shape\_local\_stored\_pt@{d2shape\_local\_stored\_pt}}
@@ -285,7 +285,7 @@ Referenced by \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l008
 \index{oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}!d2shape\_local\_stored\_pt@{d2shape\_local\_stored\_pt}}
 \index{d2shape\_local\_stored\_pt@{d2shape\_local\_stored\_pt}!oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}}
 \doxysubsubsection{\texorpdfstring{d2shape\_local\_stored\_pt()}{d2shape\_local\_stored\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} $\ast$ $>$ $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}  \& oomph\+::\+Storable\+Shape\+Element\+Base\+::d2shape\+\_\+local\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} $\ast$ $>$ $\ast$const  \& oomph\+::\+Storable\+Shape\+Element\+Base\+::d2shape\+\_\+local\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -481,7 +481,7 @@ Referenced by \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l000
 \index{oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}!dshape\_eulerian\_at\_knot@{dshape\_eulerian\_at\_knot}}
 \index{dshape\_eulerian\_at\_knot@{dshape\_eulerian\_at\_knot}!oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}}
 \doxysubsubsection{\texorpdfstring{dshape\_eulerian\_at\_knot()}{dshape\_eulerian\_at\_knot()}}
-{\footnotesize\ttfamily double oomph\+::\+Storable\+Shape\+Element\+Base\+::dshape\+\_\+eulerian\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily double oomph\+::\+Storable\+Shape\+Element\+Base\+::dshape\+\_\+eulerian\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -489,7 +489,7 @@ Return the geometric shape functions and also first derivatives w.\+r.\+t. globa
 
 Compute the geometric shape functions, and derivatives w.\+r.\+t eulerian coordinates at the ipt-\/th integration point. If the values have already been computed, return the stored values. 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a837c4849f68842295ab5e77c8ecb8b93}{oomph\+::\+Finite\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a368c44e295e35dd0b697be3222ce7b2f}{oomph\+::\+Finite\+Element}}.
 
 
 
@@ -497,7 +497,7 @@ Definition at line \mbox{\hyperlink{stored__shape__function__elements_8cc_source
 
 
 
-References \mbox{\hyperlink{classoomph_1_1FiniteElement_a837c4849f68842295ab5e77c8ecb8b93}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00083}{DShape\+\_\+eulerian\+\_\+stored\+\_\+pt}}, and \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00091}{Jacobian\+\_\+eulerian\+\_\+stored\+\_\+pt}}.
+References \mbox{\hyperlink{elements_8cc_source_l03325}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00083}{DShape\+\_\+eulerian\+\_\+stored\+\_\+pt}}, and \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00091}{Jacobian\+\_\+eulerian\+\_\+stored\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1StorableShapeElementBase_a07a04d1ddc353eca1b55f915606e04f5}\label{classoomph_1_1StorableShapeElementBase_a07a04d1ddc353eca1b55f915606e04f5}} 
 \index{oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}!dshape\_eulerian\_stored\_pt@{dshape\_eulerian\_stored\_pt}}
@@ -525,7 +525,7 @@ Referenced by \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l008
 \index{oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}!dshape\_eulerian\_stored\_pt@{dshape\_eulerian\_stored\_pt}}
 \index{dshape\_eulerian\_stored\_pt@{dshape\_eulerian\_stored\_pt}!oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}}
 \doxysubsubsection{\texorpdfstring{dshape\_eulerian\_stored\_pt()}{dshape\_eulerian\_stored\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} $\ast$ $>$ $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}  \& oomph\+::\+Storable\+Shape\+Element\+Base\+::dshape\+\_\+eulerian\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} $\ast$ $>$ $\ast$const  \& oomph\+::\+Storable\+Shape\+Element\+Base\+::dshape\+\_\+eulerian\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -543,7 +543,7 @@ References \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00083}{
 \index{oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}!dshape\_local\_at\_knot@{dshape\_local\_at\_knot}}
 \index{dshape\_local\_at\_knot@{dshape\_local\_at\_knot}!oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}}
 \doxysubsubsection{\texorpdfstring{dshape\_local\_at\_knot()}{dshape\_local\_at\_knot()}}
-{\footnotesize\ttfamily void oomph\+::\+Storable\+Shape\+Element\+Base\+::dshape\+\_\+local\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsids }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Storable\+Shape\+Element\+Base\+::dshape\+\_\+local\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsids }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -551,7 +551,7 @@ Return the geometric shape function and its derivative w.\+r.\+t. the local coor
 
 Return the shape function and its derivatives w.\+r.\+t. the local coordinates at the ipt-\/th integration point. 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a864e188f0030720e2e13ef7b56e8e271}{oomph\+::\+Finite\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2214ae814100dcbb553ac97cf243dcfe}{oomph\+::\+Finite\+Element}}.
 
 
 
@@ -559,7 +559,7 @@ Definition at line \mbox{\hyperlink{stored__shape__function__elements_8cc_source
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01614}{oomph\+::\+Finite\+Element\+::dpsids}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a864e188f0030720e2e13ef7b56e8e271}{oomph\+::\+Finite\+Element\+::dshape\+\_\+local\+\_\+at\+\_\+knot()}}, and \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00070}{DShape\+\_\+local\+\_\+stored\+\_\+pt}}.
+References \mbox{\hyperlink{elements_8cc_source_l03239}{oomph\+::\+Finite\+Element\+::dshape\+\_\+local\+\_\+at\+\_\+knot()}}, and \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00070}{DShape\+\_\+local\+\_\+stored\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1StorableShapeElementBase_add2337424065763047c66dfc7f851146}\label{classoomph_1_1StorableShapeElementBase_add2337424065763047c66dfc7f851146}} 
 \index{oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}!dshape\_local\_stored\_pt@{dshape\_local\_stored\_pt}}
@@ -587,7 +587,7 @@ Referenced by \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l008
 \index{oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}!dshape\_local\_stored\_pt@{dshape\_local\_stored\_pt}}
 \index{dshape\_local\_stored\_pt@{dshape\_local\_stored\_pt}!oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}}
 \doxysubsubsection{\texorpdfstring{dshape\_local\_stored\_pt()}{dshape\_local\_stored\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} $\ast$ $>$ $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}  \& oomph\+::\+Storable\+Shape\+Element\+Base\+::dshape\+\_\+local\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} $\ast$ $>$ $\ast$const  \& oomph\+::\+Storable\+Shape\+Element\+Base\+::dshape\+\_\+local\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -605,7 +605,7 @@ References \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00070}{
 \index{oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}!J\_eulerian\_at\_knot@{J\_eulerian\_at\_knot}}
 \index{J\_eulerian\_at\_knot@{J\_eulerian\_at\_knot}!oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}}
 \doxysubsubsection{\texorpdfstring{J\_eulerian\_at\_knot()}{J\_eulerian\_at\_knot()}}
-{\footnotesize\ttfamily double oomph\+::\+Storable\+Shape\+Element\+Base\+::\+J\+\_\+eulerian\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{ipt }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily double oomph\+::\+Storable\+Shape\+Element\+Base\+::\+J\+\_\+eulerian\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -613,7 +613,7 @@ Return the Jacobian of the mapping from local to global coordinates at the ipt-\
 
 Return the Jacobian of the mapping between the local and global coordinates. If the value has been precomputed return that. 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a5767755a268db4802392ab15b4cb35a8}{oomph\+::\+Finite\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_aa8a201e448a9200af7f87d612ef01227}{oomph\+::\+Finite\+Element}}.
 
 
 
@@ -621,7 +621,7 @@ Definition at line \mbox{\hyperlink{stored__shape__function__elements_8cc_source
 
 
 
-References \mbox{\hyperlink{classoomph_1_1FiniteElement_a5767755a268db4802392ab15b4cb35a8}{oomph\+::\+Finite\+Element\+::\+J\+\_\+eulerian\+\_\+at\+\_\+knot()}}, and \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00091}{Jacobian\+\_\+eulerian\+\_\+stored\+\_\+pt}}.
+References \mbox{\hyperlink{elements_8cc_source_l04168}{oomph\+::\+Finite\+Element\+::\+J\+\_\+eulerian\+\_\+at\+\_\+knot()}}, and \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00091}{Jacobian\+\_\+eulerian\+\_\+stored\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1StorableShapeElementBase_a769198351d8aaf7c0592c4101046f6e6}\label{classoomph_1_1StorableShapeElementBase_a769198351d8aaf7c0592c4101046f6e6}} 
 \index{oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}!jacobian\_eulerian\_stored\_pt@{jacobian\_eulerian\_stored\_pt}}
@@ -649,7 +649,7 @@ Referenced by \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l008
 \index{oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}!jacobian\_eulerian\_stored\_pt@{jacobian\_eulerian\_stored\_pt}}
 \index{jacobian\_eulerian\_stored\_pt@{jacobian\_eulerian\_stored\_pt}!oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}}
 \doxysubsubsection{\texorpdfstring{jacobian\_eulerian\_stored\_pt()}{jacobian\_eulerian\_stored\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}  \& oomph\+::\+Storable\+Shape\+Element\+Base\+::jacobian\+\_\+eulerian\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $\ast$const  \& oomph\+::\+Storable\+Shape\+Element\+Base\+::jacobian\+\_\+eulerian\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -667,7 +667,7 @@ References \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00091}{
 \index{oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
-{\footnotesize\ttfamily void oomph\+::\+Storable\+Shape\+Element\+Base\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase}{Storable\+Shape\+Element\+Base}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+{\footnotesize\ttfamily void oomph\+::\+Storable\+Shape\+Element\+Base\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase}{Storable\+Shape\+Element\+Base}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
@@ -689,7 +689,7 @@ Definition at line \mbox{\hyperlink{stored__shape__function__elements_8cc_source
 
 
 
-References \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00095}{Can\+\_\+delete\+\_\+dshape\+\_\+eulerian\+\_\+stored}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a0e1baefe25dc390b06ca070a50bc146f}{oomph\+::\+Finite\+Element\+::d2shape\+\_\+eulerian\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00087}{D2\+Shape\+\_\+eulerian\+\_\+stored\+\_\+pt}}, \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00163}{delete\+\_\+d2shape\+\_\+eulerian\+\_\+stored()}}, \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00139}{delete\+\_\+dshape\+\_\+eulerian\+\_\+stored()}}, \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00188}{delete\+\_\+\+J\+\_\+eulerian\+\_\+stored()}}, \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00083}{DShape\+\_\+eulerian\+\_\+stored\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01968}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00091}{Jacobian\+\_\+eulerian\+\_\+stored\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l02468}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02489}{oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, and \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00262}{pre\+\_\+compute\+\_\+shape\+\_\+at\+\_\+knots()}}.
+References \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00095}{Can\+\_\+delete\+\_\+dshape\+\_\+eulerian\+\_\+stored}}, \mbox{\hyperlink{elements_8cc_source_l03502}{oomph\+::\+Finite\+Element\+::d2shape\+\_\+eulerian\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00087}{D2\+Shape\+\_\+eulerian\+\_\+stored\+\_\+pt}}, \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00163}{delete\+\_\+d2shape\+\_\+eulerian\+\_\+stored()}}, \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00139}{delete\+\_\+dshape\+\_\+eulerian\+\_\+stored()}}, \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00188}{delete\+\_\+\+J\+\_\+eulerian\+\_\+stored()}}, \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00083}{DShape\+\_\+eulerian\+\_\+stored\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00091}{Jacobian\+\_\+eulerian\+\_\+stored\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l02463}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02484}{oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, and \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00262}{pre\+\_\+compute\+\_\+shape\+\_\+at\+\_\+knots()}}.
 
 
 
@@ -711,7 +711,7 @@ Definition at line \mbox{\hyperlink{stored__shape__function__elements_8cc_source
 
 
 
-References \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00079}{Can\+\_\+delete\+\_\+shape\+\_\+local\+\_\+stored}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a2160f6fe6d540022b2dad93df9886286}{oomph\+::\+Finite\+Element\+::d2shape\+\_\+local\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00075}{D2\+Shape\+\_\+local\+\_\+stored\+\_\+pt}}, \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00106}{delete\+\_\+d2shape\+\_\+local\+\_\+stored()}}, \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00083}{delete\+\_\+dshape\+\_\+local\+\_\+stored()}}, \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00057}{delete\+\_\+shape\+\_\+local\+\_\+stored()}}, \mbox{\hyperlink{elements_8h_source_l02616}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00060}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Dim}}, \mbox{\hyperlink{elements_8h_source_l01614}{oomph\+::\+Finite\+Element\+::dpsids}}, \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00070}{DShape\+\_\+local\+\_\+stored\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01968}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02468}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00066}{Shape\+\_\+stored\+\_\+pt}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
+References \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00079}{Can\+\_\+delete\+\_\+shape\+\_\+local\+\_\+stored}}, \mbox{\hyperlink{elements_8cc_source_l03274}{oomph\+::\+Finite\+Element\+::d2shape\+\_\+local\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00075}{D2\+Shape\+\_\+local\+\_\+stored\+\_\+pt}}, \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00106}{delete\+\_\+d2shape\+\_\+local\+\_\+stored()}}, \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00083}{delete\+\_\+dshape\+\_\+local\+\_\+stored()}}, \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00057}{delete\+\_\+shape\+\_\+local\+\_\+stored()}}, \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00060}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Dim}}, \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00070}{DShape\+\_\+local\+\_\+stored\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02463}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00066}{Shape\+\_\+stored\+\_\+pt}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
 
 
 
@@ -733,7 +733,7 @@ Definition at line \mbox{\hyperlink{stored__shape__function__elements_8cc_source
 
 
 
-References \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00095}{Can\+\_\+delete\+\_\+dshape\+\_\+eulerian\+\_\+stored}}, \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00139}{delete\+\_\+dshape\+\_\+eulerian\+\_\+stored()}}, \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00188}{delete\+\_\+\+J\+\_\+eulerian\+\_\+stored()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a837c4849f68842295ab5e77c8ecb8b93}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00083}{DShape\+\_\+eulerian\+\_\+stored\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01968}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00091}{Jacobian\+\_\+eulerian\+\_\+stored\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l02468}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02489}{oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension()}}, and \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00262}{pre\+\_\+compute\+\_\+shape\+\_\+at\+\_\+knots()}}.
+References \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00095}{Can\+\_\+delete\+\_\+dshape\+\_\+eulerian\+\_\+stored}}, \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00139}{delete\+\_\+dshape\+\_\+eulerian\+\_\+stored()}}, \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00188}{delete\+\_\+\+J\+\_\+eulerian\+\_\+stored()}}, \mbox{\hyperlink{elements_8cc_source_l03325}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00083}{DShape\+\_\+eulerian\+\_\+stored\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00091}{Jacobian\+\_\+eulerian\+\_\+stored\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l02463}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02484}{oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, and \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00262}{pre\+\_\+compute\+\_\+shape\+\_\+at\+\_\+knots()}}.
 
 
 
@@ -755,7 +755,7 @@ Definition at line \mbox{\hyperlink{stored__shape__function__elements_8cc_source
 
 
 
-References \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00079}{Can\+\_\+delete\+\_\+shape\+\_\+local\+\_\+stored}}, \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00083}{delete\+\_\+dshape\+\_\+local\+\_\+stored()}}, \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00057}{delete\+\_\+shape\+\_\+local\+\_\+stored()}}, \mbox{\hyperlink{elements_8h_source_l02616}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00060}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Dim}}, \mbox{\hyperlink{elements_8h_source_l01614}{oomph\+::\+Finite\+Element\+::dpsids}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a864e188f0030720e2e13ef7b56e8e271}{oomph\+::\+Finite\+Element\+::dshape\+\_\+local\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00070}{DShape\+\_\+local\+\_\+stored\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01968}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02468}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00066}{Shape\+\_\+stored\+\_\+pt}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
+References \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00079}{Can\+\_\+delete\+\_\+shape\+\_\+local\+\_\+stored}}, \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00083}{delete\+\_\+dshape\+\_\+local\+\_\+stored()}}, \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00057}{delete\+\_\+shape\+\_\+local\+\_\+stored()}}, \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00060}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Dim}}, \mbox{\hyperlink{elements_8cc_source_l03239}{oomph\+::\+Finite\+Element\+::dshape\+\_\+local\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00070}{DShape\+\_\+local\+\_\+stored\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02463}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00066}{Shape\+\_\+stored\+\_\+pt}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
 
 
 
@@ -777,7 +777,7 @@ Definition at line \mbox{\hyperlink{stored__shape__function__elements_8cc_source
 
 
 
-References \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00095}{Can\+\_\+delete\+\_\+dshape\+\_\+eulerian\+\_\+stored}}, \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00188}{delete\+\_\+\+J\+\_\+eulerian\+\_\+stored()}}, \mbox{\hyperlink{elements_8h_source_l01968}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a5767755a268db4802392ab15b4cb35a8}{oomph\+::\+Finite\+Element\+::\+J\+\_\+eulerian\+\_\+at\+\_\+knot()}}, and \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00091}{Jacobian\+\_\+eulerian\+\_\+stored\+\_\+pt}}.
+References \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00095}{Can\+\_\+delete\+\_\+dshape\+\_\+eulerian\+\_\+stored}}, \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00188}{delete\+\_\+\+J\+\_\+eulerian\+\_\+stored()}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8cc_source_l04168}{oomph\+::\+Finite\+Element\+::\+J\+\_\+eulerian\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00091}{Jacobian\+\_\+eulerian\+\_\+stored\+\_\+pt}}, and \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}.
 
 
 
@@ -799,7 +799,7 @@ Definition at line \mbox{\hyperlink{stored__shape__function__elements_8cc_source
 
 
 
-References \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00079}{Can\+\_\+delete\+\_\+shape\+\_\+local\+\_\+stored}}, \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00057}{delete\+\_\+shape\+\_\+local\+\_\+stored()}}, \mbox{\hyperlink{elements_8h_source_l01968}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02468}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a2de680722518136b5c6bf2aacc267a31}{oomph\+::\+Finite\+Element\+::shape\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00066}{Shape\+\_\+stored\+\_\+pt}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
+References \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00079}{Can\+\_\+delete\+\_\+shape\+\_\+local\+\_\+stored}}, \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00057}{delete\+\_\+shape\+\_\+local\+\_\+stored()}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02463}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{elements_8cc_source_l03220}{oomph\+::\+Finite\+Element\+::shape\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00066}{Shape\+\_\+stored\+\_\+pt}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
 
 
 
@@ -809,7 +809,7 @@ Referenced by \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l005
 \index{oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}!set\_dshape\_eulerian\_stored\_from\_element@{set\_dshape\_eulerian\_stored\_from\_element}}
 \index{set\_dshape\_eulerian\_stored\_from\_element@{set\_dshape\_eulerian\_stored\_from\_element}!oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}}
 \doxysubsubsection{\texorpdfstring{set\_dshape\_eulerian\_stored\_from\_element()}{set\_dshape\_eulerian\_stored\_from\_element()}}
-{\footnotesize\ttfamily void oomph\+::\+Storable\+Shape\+Element\+Base\+::set\+\_\+dshape\+\_\+eulerian\+\_\+stored\+\_\+from\+\_\+element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1StorableShapeElementBase}{Storable\+Shape\+Element\+Base}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{element\+\_\+pt }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void oomph\+::\+Storable\+Shape\+Element\+Base\+::set\+\_\+dshape\+\_\+eulerian\+\_\+stored\+\_\+from\+\_\+element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1StorableShapeElementBase}{Storable\+Shape\+Element\+Base}} $\ast$const \&}]{element\+\_\+pt }\end{DoxyParamCaption})}
 
 
 
@@ -827,7 +827,7 @@ References \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00095}{
 \index{oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}!set\_integration\_scheme@{set\_integration\_scheme}}
 \index{set\_integration\_scheme@{set\_integration\_scheme}!oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}}
 \doxysubsubsection{\texorpdfstring{set\_integration\_scheme()}{set\_integration\_scheme()}}
-{\footnotesize\ttfamily void oomph\+::\+Storable\+Shape\+Element\+Base\+::set\+\_\+integration\+\_\+scheme (\begin{DoxyParamCaption}\item[{Integral $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{integral\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Storable\+Shape\+Element\+Base\+::set\+\_\+integration\+\_\+scheme (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Integral}{Integral}} $\ast$const \&}]{integral\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -835,7 +835,7 @@ Set the spatial integration scheme -- overloaded from the finite element base cl
 
 Set the spatial integration scheme and also calculate the values of the shape functions and their derivatives w.\+r.\+t. the local coordinates, placing the values into storage so that they may be re-\/used, without recalculation. 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a9b8ff92232a3d17ed7d403fbd3419569}{oomph\+::\+Finite\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_ac80983f27f5bcbc08e2eeb6e4d03698b}{oomph\+::\+Finite\+Element}}.
 
 
 
@@ -847,7 +847,7 @@ Definition at line \mbox{\hyperlink{stored__shape__function__elements_8cc_source
 
 
 
-References \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00087}{D2\+Shape\+\_\+eulerian\+\_\+stored\+\_\+pt}}, \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00075}{D2\+Shape\+\_\+local\+\_\+stored\+\_\+pt}}, \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00083}{DShape\+\_\+eulerian\+\_\+stored\+\_\+pt}}, \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00070}{DShape\+\_\+local\+\_\+stored\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l01968}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00091}{Jacobian\+\_\+eulerian\+\_\+stored\+\_\+pt}}, \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00580}{pre\+\_\+compute\+\_\+d2shape\+\_\+eulerian\+\_\+at\+\_\+knots()}}, \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00394}{pre\+\_\+compute\+\_\+d2shape\+\_\+local\+\_\+at\+\_\+knots()}}, \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00519}{pre\+\_\+compute\+\_\+dshape\+\_\+eulerian\+\_\+at\+\_\+knots()}}, \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00321}{pre\+\_\+compute\+\_\+dshape\+\_\+local\+\_\+at\+\_\+knots()}}, \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00495}{pre\+\_\+compute\+\_\+\+J\+\_\+eulerian\+\_\+at\+\_\+knots()}}, \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00262}{pre\+\_\+compute\+\_\+shape\+\_\+at\+\_\+knots()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9b8ff92232a3d17ed7d403fbd3419569}{oomph\+::\+Finite\+Element\+::set\+\_\+integration\+\_\+scheme()}}, and \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00066}{Shape\+\_\+stored\+\_\+pt}}.
+References \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00087}{D2\+Shape\+\_\+eulerian\+\_\+stored\+\_\+pt}}, \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00075}{D2\+Shape\+\_\+local\+\_\+stored\+\_\+pt}}, \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00083}{DShape\+\_\+eulerian\+\_\+stored\+\_\+pt}}, \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00070}{DShape\+\_\+local\+\_\+stored\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00091}{Jacobian\+\_\+eulerian\+\_\+stored\+\_\+pt}}, \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00580}{pre\+\_\+compute\+\_\+d2shape\+\_\+eulerian\+\_\+at\+\_\+knots()}}, \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00394}{pre\+\_\+compute\+\_\+d2shape\+\_\+local\+\_\+at\+\_\+knots()}}, \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00519}{pre\+\_\+compute\+\_\+dshape\+\_\+eulerian\+\_\+at\+\_\+knots()}}, \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00321}{pre\+\_\+compute\+\_\+dshape\+\_\+local\+\_\+at\+\_\+knots()}}, \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00495}{pre\+\_\+compute\+\_\+\+J\+\_\+eulerian\+\_\+at\+\_\+knots()}}, \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00262}{pre\+\_\+compute\+\_\+shape\+\_\+at\+\_\+knots()}}, \mbox{\hyperlink{elements_8cc_source_l03210}{oomph\+::\+Finite\+Element\+::set\+\_\+integration\+\_\+scheme()}}, and \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00066}{Shape\+\_\+stored\+\_\+pt}}.
 
 
 
@@ -857,7 +857,7 @@ Referenced by \mbox{\hyperlink{stored__shape__function__elements_8h_source_l0044
 \index{oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}!set\_shape\_local\_stored\_from\_element@{set\_shape\_local\_stored\_from\_element}}
 \index{set\_shape\_local\_stored\_from\_element@{set\_shape\_local\_stored\_from\_element}!oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}}
 \doxysubsubsection{\texorpdfstring{set\_shape\_local\_stored\_from\_element()}{set\_shape\_local\_stored\_from\_element()}}
-{\footnotesize\ttfamily void oomph\+::\+Storable\+Shape\+Element\+Base\+::set\+\_\+shape\+\_\+local\+\_\+stored\+\_\+from\+\_\+element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1StorableShapeElementBase}{Storable\+Shape\+Element\+Base}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{element\+\_\+pt }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void oomph\+::\+Storable\+Shape\+Element\+Base\+::set\+\_\+shape\+\_\+local\+\_\+stored\+\_\+from\+\_\+element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1StorableShapeElementBase}{Storable\+Shape\+Element\+Base}} $\ast$const \&}]{element\+\_\+pt }\end{DoxyParamCaption})}
 
 
 
@@ -879,7 +879,7 @@ Referenced by \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l008
 \index{oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}!shape\_at\_knot@{shape\_at\_knot}}
 \index{shape\_at\_knot@{shape\_at\_knot}!oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}}
 \doxysubsubsection{\texorpdfstring{shape\_at\_knot()}{shape\_at\_knot()}}
-{\footnotesize\ttfamily void oomph\+::\+Storable\+Shape\+Element\+Base\+::shape\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Storable\+Shape\+Element\+Base\+::shape\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -887,7 +887,7 @@ Return the geometric shape function at the ipt-\/th integration point.
 
 Return the shape function stored at the ipt-\/th integration point. 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2de680722518136b5c6bf2aacc267a31}{oomph\+::\+Finite\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_aeccc0f774e3fab8c536e2d41004a1665}{oomph\+::\+Finite\+Element}}.
 
 
 
@@ -895,7 +895,7 @@ Definition at line \mbox{\hyperlink{stored__shape__function__elements_8cc_source
 
 
 
-References \mbox{\hyperlink{classoomph_1_1FiniteElement_a2de680722518136b5c6bf2aacc267a31}{oomph\+::\+Finite\+Element\+::shape\+\_\+at\+\_\+knot()}}, and \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00066}{Shape\+\_\+stored\+\_\+pt}}.
+References \mbox{\hyperlink{elements_8cc_source_l03220}{oomph\+::\+Finite\+Element\+::shape\+\_\+at\+\_\+knot()}}, and \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00066}{Shape\+\_\+stored\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1StorableShapeElementBase_a44e620fc062a1b21b09d1edd4b27c305}\label{classoomph_1_1StorableShapeElementBase_a44e620fc062a1b21b09d1edd4b27c305}} 
 \index{oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}!shape\_stored\_pt@{shape\_stored\_pt}}
@@ -923,7 +923,7 @@ Referenced by \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l011
 \index{oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}!shape\_stored\_pt@{shape\_stored\_pt}}
 \index{shape\_stored\_pt@{shape\_stored\_pt}!oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}}
 \doxysubsubsection{\texorpdfstring{shape\_stored\_pt()}{shape\_stored\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} $\ast$ $>$ $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}  \& oomph\+::\+Storable\+Shape\+Element\+Base\+::shape\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} $\ast$ $>$ $\ast$const  \& oomph\+::\+Storable\+Shape\+Element\+Base\+::shape\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -941,7 +941,7 @@ References \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00066}{
 \index{oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}!shape\_stored\_pt@{shape\_stored\_pt}}
 \index{shape\_stored\_pt@{shape\_stored\_pt}!oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}}
 \doxysubsubsection{\texorpdfstring{shape\_stored\_pt()}{shape\_stored\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} $\ast$\& oomph\+::\+Storable\+Shape\+Element\+Base\+::shape\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{ipt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} $\ast$\& oomph\+::\+Storable\+Shape\+Element\+Base\+::shape\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -959,7 +959,7 @@ References \mbox{\hyperlink{stored__shape__function__elements_8h_source_l00066}{
 \index{oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}!shape\_stored\_pt@{shape\_stored\_pt}}
 \index{shape\_stored\_pt@{shape\_stored\_pt}!oomph::StorableShapeElementBase@{oomph::StorableShapeElementBase}}
 \doxysubsubsection{\texorpdfstring{shape\_stored\_pt()}{shape\_stored\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}  \& oomph\+::\+Storable\+Shape\+Element\+Base\+::shape\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{ipt }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} $\ast$const  \& oomph\+::\+Storable\+Shape\+Element\+Base\+::shape\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 

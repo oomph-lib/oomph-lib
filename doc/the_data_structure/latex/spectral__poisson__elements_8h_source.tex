@@ -52,7 +52,7 @@
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00048}00048   \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM, \textcolor{keywordtype}{unsigned} NNODE\_1D>}
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00049}\mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement}{00049}}   \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement}{QSpectralPoissonElement}}}
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00050}00050     : \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1QSpectralElement}{QSpectralElement}}<DIM, NNODE\_1D>,}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00051}00051       \textcolor{keyword}{public} \textcolor{keyword}{virtual} PoissonEquations<DIM>}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00051}00051       \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1PoissonEquations}{PoissonEquations}}<DIM>}
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00052}00052   \{}
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00053}00053   \textcolor{keyword}{private}:\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00054}00054 \textcolor{comment}{    /// Static array of ints to hold number of variables at}}
@@ -63,7 +63,7 @@
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00059}00059 \textcolor{comment}{    /// Constructor: Call constructors for QSpectralElement and}}
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00060}00060 \textcolor{comment}{    /// Poisson equations}}
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00061}\mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement_a182407c61e120d9b2d62c44d2ba99139}{00061}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement_a182407c61e120d9b2d62c44d2ba99139}{QSpectralPoissonElement}}()}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00062}00062       : \mbox{\hyperlink{classoomph_1_1QSpectralElement}{QSpectralElement}}<DIM, NNODE\_1D>(), PoissonEquations<DIM>()}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00062}00062       : \mbox{\hyperlink{classoomph_1_1QSpectralElement}{QSpectralElement}}<DIM, NNODE\_1D>(), \mbox{\hyperlink{classoomph_1_1PoissonEquations}{PoissonEquations}}<DIM>()}
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00063}00063     \{}
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00064}00064     \}}
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00065}00065 \textcolor{comment}{}}
@@ -91,14 +91,14 @@
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00087}00087 \textcolor{comment}{    ///  x,y,u   or    x,y,z,u}}
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00088}\mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement_aa102e31f1f3c1f3040d69842aa0ad75a}{00088}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement_aa102e31f1f3c1f3040d69842aa0ad75a}{output}}(std::ostream\& outfile)}
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00089}00089     \{}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00090}00090       \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_aca07d359a96b9c7b566142112604ea87}{PoissonEquations<DIM>::output}}(outfile);}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00090}00090       \mbox{\hyperlink{classoomph_1_1PoissonEquations_a2417afb77d428846d7a1eada342ea8bb}{PoissonEquations<DIM>::output}}(outfile);}
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00091}00091     \}}
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00092}00092 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00093}00093 \textcolor{comment}{    ///  Output function:}}
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00094}00094 \textcolor{comment}{    ///   x,y,u   or    x,y,z,u at n\_plot\string^DIM plot points}}
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00095}\mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement_a09f0813f51286ed47f4e89536e8c4e2e}{00095}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement_a09f0813f51286ed47f4e89536e8c4e2e}{output}}(std::ostream\& outfile, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_plot)}
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00096}00096     \{}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00097}00097       \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_aca07d359a96b9c7b566142112604ea87}{PoissonEquations<DIM>::output}}(outfile, n\_plot);}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00097}00097       \mbox{\hyperlink{classoomph_1_1PoissonEquations_a2417afb77d428846d7a1eada342ea8bb}{PoissonEquations<DIM>::output}}(outfile, n\_plot);}
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00098}00098     \}}
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00099}00099 }
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00100}00100 \textcolor{comment}{}}
@@ -106,7 +106,7 @@
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00102}00102 \textcolor{comment}{    ///  x,y,u   or    x,y,z,u}}
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00103}\mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement_ac5588896f64d8c24a896dc0b30e7ec29}{00103}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement_ac5588896f64d8c24a896dc0b30e7ec29}{output}}(FILE* file\_pt)}
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00104}00104     \{}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00105}00105       \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_aca07d359a96b9c7b566142112604ea87}{PoissonEquations<DIM>::output}}(file\_pt);}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00105}00105       \mbox{\hyperlink{classoomph_1_1PoissonEquations_a2417afb77d428846d7a1eada342ea8bb}{PoissonEquations<DIM>::output}}(file\_pt);}
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00106}00106     \}}
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00107}00107 }
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00108}00108 \textcolor{comment}{}}
@@ -114,7 +114,7 @@
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00110}00110 \textcolor{comment}{    ///   x,y,u   or    x,y,z,u at n\_plot\string^DIM plot points}}
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00111}\mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement_aa3a03bc9793e976facde1a49396f5b43}{00111}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement_aa3a03bc9793e976facde1a49396f5b43}{output}}(FILE* file\_pt, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_plot)}
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00112}00112     \{}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00113}00113       \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_aca07d359a96b9c7b566142112604ea87}{PoissonEquations<DIM>::output}}(file\_pt, n\_plot);}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00113}00113       \mbox{\hyperlink{classoomph_1_1PoissonEquations_a2417afb77d428846d7a1eada342ea8bb}{PoissonEquations<DIM>::output}}(file\_pt, n\_plot);}
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00114}00114     \}}
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00115}00115 }
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00116}00116 \textcolor{comment}{}}
@@ -124,7 +124,7 @@
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00120}00120                     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_plot,}
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00121}00121                     \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{FiniteElement::SteadyExactSolutionFctPt}} exact\_soln\_pt)}
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00122}00122     \{}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00123}00123       PoissonEquations<DIM>::output\_fct(outfile, n\_plot, exact\_soln\_pt);}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00123}00123       \mbox{\hyperlink{classoomph_1_1PoissonEquations_ad6c637c8a5221313c2220e8e8c27ec42}{PoissonEquations<DIM>::output\_fct}}(outfile, n\_plot, exact\_soln\_pt);}
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00124}00124     \}}
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00125}00125 }
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00126}00126 \textcolor{comment}{}}
@@ -136,7 +136,7 @@
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00132}00132                     \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00133}00133                     \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{FiniteElement::UnsteadyExactSolutionFctPt}} exact\_soln\_pt)}
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00134}00134     \{}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00135}00135       PoissonEquations<DIM>::output\_fct(outfile, n\_plot, time, exact\_soln\_pt);}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00135}00135       \mbox{\hyperlink{classoomph_1_1PoissonEquations_ad6c637c8a5221313c2220e8e8c27ec42}{PoissonEquations<DIM>::output\_fct}}(outfile, n\_plot, time, exact\_soln\_pt);}
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00136}00136     \}}
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00137}00137 }
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00138}00138 }

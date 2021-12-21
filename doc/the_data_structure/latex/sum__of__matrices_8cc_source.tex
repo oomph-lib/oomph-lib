@@ -41,13 +41,13 @@
 \DoxyCodeLine{\Hypertarget{sum__of__matrices_8cc_source_l00037}00037 \textcolor{comment}{  /// delegate each multiplication to the appropriate class then add up the}}
 \DoxyCodeLine{\Hypertarget{sum__of__matrices_8cc_source_l00038}00038 \textcolor{comment}{  /// results.}}
 \DoxyCodeLine{\Hypertarget{sum__of__matrices_8cc_source_l00039}00039 \textcolor{comment}{}  \textcolor{comment}{// =================================================================}}
-\DoxyCodeLine{\Hypertarget{sum__of__matrices_8cc_source_l00040}\mbox{\hyperlink{classoomph_1_1SumOfMatrices_ae6c97ff92220835df3c3eeb1b0a85cc5}{00040}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1SumOfMatrices_ae6c97ff92220835df3c3eeb1b0a85cc5}{SumOfMatrices::multiply}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& soln)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{sum__of__matrices_8cc_source_l00040}\mbox{\hyperlink{classoomph_1_1SumOfMatrices_ae6c97ff92220835df3c3eeb1b0a85cc5}{00040}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1SumOfMatrices_ae6c97ff92220835df3c3eeb1b0a85cc5}{SumOfMatrices::multiply}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& x, \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& soln)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{sum__of__matrices_8cc_source_l00041}00041 \textcolor{keyword}{  }\{}
 \DoxyCodeLine{\Hypertarget{sum__of__matrices_8cc_source_l00042}00042     \textcolor{comment}{// We assume that appropriate checks and initialisation on x and soln are}}
 \DoxyCodeLine{\Hypertarget{sum__of__matrices_8cc_source_l00043}00043     \textcolor{comment}{// carried out within the individual matrix multiplys.}}
 \DoxyCodeLine{\Hypertarget{sum__of__matrices_8cc_source_l00044}00044 }
 \DoxyCodeLine{\Hypertarget{sum__of__matrices_8cc_source_l00045}00045     \textcolor{comment}{// Multiply for the main matrix}}
-\DoxyCodeLine{\Hypertarget{sum__of__matrices_8cc_source_l00046}00046     \mbox{\hyperlink{classoomph_1_1SumOfMatrices_afa2c914fc55c972b1389de3d9b7a7266}{Main\_matrix\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a78204eab557e0dc99618e41a28a5c092}{multiply}}(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, soln);}
+\DoxyCodeLine{\Hypertarget{sum__of__matrices_8cc_source_l00046}00046     \mbox{\hyperlink{classoomph_1_1SumOfMatrices_afa2c914fc55c972b1389de3d9b7a7266}{Main\_matrix\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a78204eab557e0dc99618e41a28a5c092}{multiply}}(x, soln);}
 \DoxyCodeLine{\Hypertarget{sum__of__matrices_8cc_source_l00047}00047 }
 \DoxyCodeLine{\Hypertarget{sum__of__matrices_8cc_source_l00048}00048     \textcolor{comment}{// Now add contribution for the added matrices}}
 \DoxyCodeLine{\Hypertarget{sum__of__matrices_8cc_source_l00049}00049     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i\_matrix = 0; i\_matrix < \mbox{\hyperlink{classoomph_1_1SumOfMatrices_a65dfe9fb848ae855f9949f1621df4df8}{Added\_matrix\_pt}}.size(); i\_matrix++)}
@@ -73,7 +73,7 @@
 \DoxyCodeLine{\Hypertarget{sum__of__matrices_8cc_source_l00069}00069            it != \mbox{\hyperlink{classoomph_1_1SumOfMatrices_a67b29b2c909a515cd328a45db2016a6c}{Col\_map\_pt}}[i\_matrix]-\/>main\_to\_added\_mapping\_pt()-\/>end();}
 \DoxyCodeLine{\Hypertarget{sum__of__matrices_8cc_source_l00070}00070            it++)}
 \DoxyCodeLine{\Hypertarget{sum__of__matrices_8cc_source_l00071}00071       \{}
-\DoxyCodeLine{\Hypertarget{sum__of__matrices_8cc_source_l00072}00072         temp\_x[it-\/>second] = \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[it-\/>first];}
+\DoxyCodeLine{\Hypertarget{sum__of__matrices_8cc_source_l00072}00072         temp\_x[it-\/>second] = x[it-\/>first];}
 \DoxyCodeLine{\Hypertarget{sum__of__matrices_8cc_source_l00073}00073       \}}
 \DoxyCodeLine{\Hypertarget{sum__of__matrices_8cc_source_l00074}00074 }
 \DoxyCodeLine{\Hypertarget{sum__of__matrices_8cc_source_l00075}00075       \textcolor{comment}{// Perform the multiplication}}

@@ -215,7 +215,7 @@ $(function() {
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        ipt, psi, dpsidx, test, dtestdx);</div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>      <span class="comment">// Premultiply the weights and the Jacobian</span></div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>      <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a> = w * J;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>      <span class="keywordtype">double</span> <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a> = w * J;</div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>      <span class="comment">// Calculate local values of the function</span></div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>      <span class="keywordtype">double</span> dudt = 0.0;</div>
@@ -316,7 +316,7 @@ $(function() {
 <div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>          {</div>
 <div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>            <span class="comment">// Add body force/source term and time derivative</span></div>
 <div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>            residuals[local_eqn] +=</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>              (alpha_local * dudt + source) * test(l) * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a> * hang_weight;</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>              (alpha_local * dudt + source) * test(l) * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a> * hang_weight;</div>
 <div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span> </div>
 <div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>            <span class="comment">// Mesh velocity and  Laplace operator itself</span></div>
 <div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>            <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> k = 0; k &lt; DIM; k++)</div>
@@ -325,7 +325,7 @@ $(function() {
 <div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>              <span class="keywordflow">if</span> (!ALE_is_disabled_flag)</div>
 <div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>                tmp -= alpha_local * mesh_velocity[k] * test(l);</div>
 <div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>              residuals[local_eqn] +=</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>                interpolated_dudx[k] * tmp * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a> * hang_weight;</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>                interpolated_dudx[k] * tmp * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a> * hang_weight;</div>
 <div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>            }</div>
 <div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span> </div>
 <div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>            <span class="comment">// Calculate the Jacobian</span></div>
@@ -381,7 +381,7 @@ $(function() {
 <div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>                    <span class="comment">// Mass matrix</span></div>
 <div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>                    jacobian(local_eqn, local_unknown) +=</div>
 <div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>                      alpha_local * test(l) * psi(l2) *</div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>                      this-&gt;node_pt(l2)-&gt;time_stepper_pt()-&gt;weight(1, 0) * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a> *</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>                      this-&gt;node_pt(l2)-&gt;time_stepper_pt()-&gt;weight(1, 0) * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a> *</div>
 <div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>                      hang_weight * hang_weight2;</div>
 <div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span> </div>
 <div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>                    <span class="comment">// Laplace operator and mesh veloc bit</span></div>
@@ -393,7 +393,7 @@ $(function() {
 <div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>                        tmp -= alpha_local * mesh_velocity[k] * test(l);</div>
 <div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>                      }</div>
 <div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>                      jacobian(local_eqn, local_unknown) +=</div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>                        dpsidx(l2, k) * tmp * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a> * hang_weight * hang_weight2;</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>                        dpsidx(l2, k) * tmp * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a> * hang_weight * hang_weight2;</div>
 <div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>                    }</div>
 <div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>                  }</div>
 <div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>                } <span class="comment">// End of loop over master nodes</span></div>
@@ -430,8 +430,8 @@ $(function() {
 <div class="ttc" id="aclassoomph_1_1RefineableUnsteadyHeatEquations_html_a06043cae80b1b6091b5914f41ffba16e"><div class="ttname"><a href="classoomph_1_1RefineableUnsteadyHeatEquations.html#a06043cae80b1b6091b5914f41ffba16e">oomph::RefineableUnsteadyHeatEquations::fill_in_generic_residual_contribution_ust_heat</a></div><div class="ttdeci">void fill_in_generic_residual_contribution_ust_heat(Vector&lt; double &gt; &amp;residuals, DenseMatrix&lt; double &gt; &amp;jacobian, unsigned flag)</div><div class="ttdoc">Add element's contribution to elemental residual vector and/or Jacobian matrix flag=1: compute both f...</div><div class="ttdef"><b>Definition:</b> <a href="refineable__unsteady__heat__elements_8cc_source.html#l00038">refineable_unsteady_heat_elements.cc:39</a></div></div>
 <div class="ttc" id="aclassoomph_1_1Shape_html"><div class="ttname"><a href="classoomph_1_1Shape.html">oomph::Shape</a></div><div class="ttdoc">A Class for shape functions. In simple cases, the shape functions have only one index that can be tho...</div><div class="ttdef"><b>Definition:</b> <a href="shape_8h_source.html#l00075">shape.h:76</a></div></div>
 <div class="ttc" id="aclassoomph_1_1Vector_html"><div class="ttname"><a href="classoomph_1_1Vector.html">oomph::Vector&lt; double &gt;</a></div></div>
+<div class="ttc" id="anamespaceoomph_1_1QuadTreeNames_html_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6"><div class="ttname"><a href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">oomph::QuadTreeNames::W</a></div><div class="ttdeci">@ W</div><div class="ttdef"><b>Definition:</b> <a href="quadtree_8h_source.html#l00063">quadtree.h:63</a></div></div>
 <div class="ttc" id="anamespaceoomph_html"><div class="ttname"><a href="namespaceoomph.html">oomph</a></div><div class="ttdoc">//////////////////////////////////////////////////////////////////// ////////////////////////////////...</div><div class="ttdef"><b>Definition:</b> <a href="advection__diffusion__elements_8cc_source.html#l00029">advection_diffusion_elements.cc:30</a></div></div>
-<div class="ttc" id="anamespaceoomph_html_ab40f6d5233caa62dd428818b4cba72d5"><div class="ttname"><a href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">oomph::W</a></div><div class="ttdeci">W</div><div class="ttdoc">///////////////////////////////////////////////////////////////// ///////////////////////////////////...</div><div class="ttdef"><b>Definition:</b> <a href="constitutive__laws_8h_source.html#l00142">constitutive_laws.h:142</a></div></div>
 <div class="ttc" id="arefineable__unsteady__heat__elements_8h_html"><div class="ttname"><a href="refineable__unsteady__heat__elements_8h.html">refineable_unsteady_heat_elements.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 
@@ -461,7 +461,7 @@ $(function() {
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Nov 2 2021 16:31:15
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Dec 21 2021 17:35:12
         </div>
       </div>
     </footer>

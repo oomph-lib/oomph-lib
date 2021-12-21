@@ -2,7 +2,7 @@
 \label{classoomph_1_1FluxTransportEquations}\index{oomph::FluxTransportEquations$<$ DIM $>$@{oomph::FluxTransportEquations$<$ DIM $>$}}
 
 
-where $ F_{ij} $ is a matrix of flux components.  
+Base class for the flux transport equations templated by the dimension DIM. The equations that are solved are.  
 
 
 
@@ -24,38 +24,38 @@ virtual \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_acb0c1a839416f66fd
 \begin{DoxyCompactList}\small\item\em Empty destructor. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_aba11971044cd76f543105d8d5bfcd163}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em Compute the element\textquotesingle{}s residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_a8557a64caa8d9e0b4a152664718d26ab}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})
+void \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_a8557a64caa8d9e0b4a152664718d26ab}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em Compute the element\textquotesingle{}s residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} and the jacobian matrix Virtual function can be overloaded by hanging-\/node version. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_ac3c3ab10011367a880104ec6d05ab9a9}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix)
+void \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_ac3c3ab10011367a880104ec6d05ab9a9}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix)
 \begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residuals vector, jacobian matrix and mass matrix. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_a12c2f66dbf817754f548cb51137529fa}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+mass\+\_\+matrix}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix)
 \begin{DoxyCompactList}\small\item\em Assemble the contributions to the mass matrix and residuals. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_a6994eab818eb7236e24e45b6fedec1f7}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+flux\+\_\+transport}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix, unsigned flag)
+virtual void \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_a6994eab818eb7236e24e45b6fedec1f7}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+flux\+\_\+transport}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix, unsigned flag)
 \begin{DoxyCompactList}\small\item\em Compute the residuals for the Navier--Stokes equations; flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_a919f56a48a7ab618c90ceb41da5afaeb}{interpolated\+\_\+u\+\_\+flux\+\_\+transport}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+double \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_a919f56a48a7ab618c90ceb41da5afaeb}{interpolated\+\_\+u\+\_\+flux\+\_\+transport}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Return the i-\/th unknown at the local coordinate s. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_ab637781b0f2fe83c5bc8f8127af4e1d4}{du\+\_\+dt\+\_\+flux\+\_\+transport}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_ab637781b0f2fe83c5bc8f8127af4e1d4}{du\+\_\+dt\+\_\+flux\+\_\+transport}} (const unsigned \&n, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em i-\/th component of du/dt at local node n. Uses suitably interpolated value for hanging nodes. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_a76f71716bef2734cadcd5f79a9d8e469}{calculate\+\_\+element\+\_\+averages}} (double $\ast$\&average\+\_\+values)
 \begin{DoxyCompactList}\small\item\em Compute the average values of the fluxes. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_afd690f82a24bc20b686fc7d25a59f775}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Output the element data --- typically the values at the nodes in a format suitable for post-\/processing. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_a6b9ea1eb9feb8c71c1d935c52e7d896f}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&nplot)
+void \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_a6b9ea1eb9feb8c71c1d935c52e7d896f}{output}} (std\+::ostream \&outfile, const unsigned \&nplot)
 \begin{DoxyCompactList}\small\item\em Output function, print the values of all unknowns. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-virtual unsigned \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_ae77531d3bdd9241f450fdb360e7a5cc9}{nflux}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+virtual unsigned \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_ae77531d3bdd9241f450fdb360e7a5cc9}{nflux}} () const
 \begin{DoxyCompactList}\small\item\em Return the number of fluxes (default zero) \end{DoxyCompactList}\item 
-virtual unsigned \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_a2de975b809b4c8a91dc5e0050dd5c9c1}{u\+\_\+index\+\_\+flux\+\_\+transport}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+virtual unsigned \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_a2de975b809b4c8a91dc5e0050dd5c9c1}{u\+\_\+index\+\_\+flux\+\_\+transport}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Return the index at which the i-\/th unknown value is stored. The default value, i, is appropriate for single-\/physics problems. In derived multi-\/physics elements, this function should be overloaded to reflect the chosen storage scheme. Note that these equations require that the unknowns are always stored at the same indices at each node. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_ab6ed40337620462e5c6e992081c1612a}{flux}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}})
+virtual void \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_ab6ed40337620462e5c6e992081c1612a}{flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&u, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Return the flux as a function of the unknown. This interface could (should) be generalised) \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_a85c3239c26cb1fb4ddd102759eb0fc0d}{dflux\+\_\+du}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}, \mbox{\hyperlink{classoomph_1_1RankThreeTensor}{Rank\+Three\+Tensor}}$<$ double $>$ \&df\+\_\+du)
+virtual void \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_a85c3239c26cb1fb4ddd102759eb0fc0d}{dflux\+\_\+du}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&u, \mbox{\hyperlink{classoomph_1_1RankThreeTensor}{Rank\+Three\+Tensor}}$<$ double $>$ \&df\+\_\+du)
 \begin{DoxyCompactList}\small\item\em Return the flux derivatives as a funciton of the unknowns Default finite-\/different implementation. \end{DoxyCompactList}\item 
-virtual double \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_a9bdf6ab17431bcac6eac11bce917cdde}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+flux\+\_\+transport}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual double \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_a9bdf6ab17431bcac6eac11bce917cdde}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+flux\+\_\+transport}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) const =0
 \begin{DoxyCompactList}\small\item\em Shape/test functions and derivs w.\+r.\+t. to global coords at local coord. s; return Jacobian of mapping. \end{DoxyCompactList}\item 
-virtual double \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_a21e7b05ac839ce2db818356ee6906e1c}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+flux\+\_\+transport}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual double \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_a21e7b05ac839ce2db818356ee6906e1c}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+flux\+\_\+transport}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) const =0
 \begin{DoxyCompactList}\small\item\em Shape/test functions and derivs w.\+r.\+t. to global coords at integration point ipt; return Jacobian of mapping. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -63,9 +63,11 @@ virtual double \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_a21e7b05ac8
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$unsigned DIM$>$\newline
 class oomph\+::\+Flux\+Transport\+Equations$<$ DIM $>$}
-where $ F_{ij} $ is a matrix of flux components. 
+Base class for the flux transport equations templated by the dimension DIM. The equations that are solved are. 
 
-Definition at line \mbox{\hyperlink{flux__transport__elements_8h_source_l00049}{49}} of file \mbox{\hyperlink{flux__transport__elements_8h_source}{flux\+\_\+transport\+\_\+elements.\+h}}.
+\[ \frac{\partial u_{i}}{\partial t} + \frac{\partial}{\partial x_{j}} \left(F_{ij}(u_{k})\right), \] where $ F_{ij} $ is a matrix of flux components. 
+
+Definition at line \mbox{\hyperlink{flux__transport__elements_8h_source_l00048}{48}} of file \mbox{\hyperlink{flux__transport__elements_8h_source}{flux\+\_\+transport\+\_\+elements.\+h}}.
 
 
 
@@ -83,7 +85,7 @@ Constructor.
 
 
 
-Definition at line \mbox{\hyperlink{flux__transport__elements_8h_source_l00108}{108}} of file \mbox{\hyperlink{flux__transport__elements_8h_source}{flux\+\_\+transport\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{flux__transport__elements_8h_source_l00107}{107}} of file \mbox{\hyperlink{flux__transport__elements_8h_source}{flux\+\_\+transport\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1FluxTransportEquations_acb0c1a839416f66fddf50b0fc55fc3f8}\label{classoomph_1_1FluxTransportEquations_acb0c1a839416f66fddf50b0fc55fc3f8}} 
 \index{oomph::FluxTransportEquations$<$ DIM $>$@{oomph::FluxTransportEquations$<$ DIM $>$}!````~FluxTransportEquations@{$\sim$FluxTransportEquations}}
@@ -98,7 +100,7 @@ Empty destructor.
 
 
 
-Definition at line \mbox{\hyperlink{flux__transport__elements_8h_source_l00111}{111}} of file \mbox{\hyperlink{flux__transport__elements_8h_source}{flux\+\_\+transport\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{flux__transport__elements_8h_source_l00110}{110}} of file \mbox{\hyperlink{flux__transport__elements_8h_source}{flux\+\_\+transport\+\_\+elements.\+h}}.
 
 
 
@@ -120,7 +122,7 @@ Definition at line \mbox{\hyperlink{flux__transport__elements_8cc_source_l00308}
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l00891}{oomph\+::psi\+\_\+}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
 
 
 
@@ -131,7 +133,7 @@ Referenced by \mbox{\hyperlink{euler__elements_8h_source_l00789}{oomph\+::\+DGSp
 \index{dflux\_du@{dflux\_du}!oomph::FluxTransportEquations$<$ DIM $>$@{oomph::FluxTransportEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{dflux\_du()}{dflux\_du()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1FluxTransportEquations}{oomph\+::\+Flux\+Transport\+Equations}}$<$ DIM $>$\+::dflux\+\_\+du (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{u,  }\item[{\mbox{\hyperlink{classoomph_1_1RankThreeTensor}{Rank\+Three\+Tensor}}$<$ double $>$ \&}]{df\+\_\+du }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1FluxTransportEquations}{oomph\+::\+Flux\+Transport\+Equations}}$<$ DIM $>$\+::dflux\+\_\+du (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{u,  }\item[{\mbox{\hyperlink{classoomph_1_1RankThreeTensor}{Rank\+Three\+Tensor}}$<$ double $>$ \&}]{df\+\_\+du }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -147,14 +149,14 @@ Definition at line \mbox{\hyperlink{flux__transport__elements_8cc_source_l00040}
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01198}{oomph\+::\+Generalised\+Element\+::\+Default\+\_\+fd\+\_\+jacobian\+\_\+step}}, \mbox{\hyperlink{octree_8h_source_l00074}{oomph\+::\+Oc\+Tree\+Names\+::F}}, and \mbox{\hyperlink{error__estimator_8h_source_l00165}{oomph\+::u}}.
+References \mbox{\hyperlink{elements_8h_source_l01198}{oomph\+::\+Generalised\+Element\+::\+Default\+\_\+fd\+\_\+jacobian\+\_\+step}}, and \mbox{\hyperlink{octree_8h_source_l00074}{oomph\+::\+Oc\+Tree\+Names\+::F}}.
 
 \mbox{\Hypertarget{classoomph_1_1FluxTransportEquations_a21e7b05ac839ce2db818356ee6906e1c}\label{classoomph_1_1FluxTransportEquations_a21e7b05ac839ce2db818356ee6906e1c}} 
 \index{oomph::FluxTransportEquations$<$ DIM $>$@{oomph::FluxTransportEquations$<$ DIM $>$}!dshape\_and\_dtest\_eulerian\_at\_knot\_flux\_transport@{dshape\_and\_dtest\_eulerian\_at\_knot\_flux\_transport}}
 \index{dshape\_and\_dtest\_eulerian\_at\_knot\_flux\_transport@{dshape\_and\_dtest\_eulerian\_at\_knot\_flux\_transport}!oomph::FluxTransportEquations$<$ DIM $>$@{oomph::FluxTransportEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_at\_knot\_flux\_transport()}{dshape\_and\_dtest\_eulerian\_at\_knot\_flux\_transport()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual double \mbox{\hyperlink{classoomph_1_1FluxTransportEquations}{oomph\+::\+Flux\+Transport\+Equations}}$<$ DIM $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+flux\+\_\+transport (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+virtual double \mbox{\hyperlink{classoomph_1_1FluxTransportEquations}{oomph\+::\+Flux\+Transport\+Equations}}$<$ DIM $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+flux\+\_\+transport (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
 
 
 
@@ -169,7 +171,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1QSpectralEulerElement_a1aea03c046d
 \index{dshape\_and\_dtest\_eulerian\_flux\_transport@{dshape\_and\_dtest\_eulerian\_flux\_transport}!oomph::FluxTransportEquations$<$ DIM $>$@{oomph::FluxTransportEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_flux\_transport()}{dshape\_and\_dtest\_eulerian\_flux\_transport()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual double \mbox{\hyperlink{classoomph_1_1FluxTransportEquations}{oomph\+::\+Flux\+Transport\+Equations}}$<$ DIM $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+flux\+\_\+transport (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+virtual double \mbox{\hyperlink{classoomph_1_1FluxTransportEquations}{oomph\+::\+Flux\+Transport\+Equations}}$<$ DIM $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+flux\+\_\+transport (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
 
 
 
@@ -184,7 +186,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1QSpectralEulerElement_a1dc148b0c45
 \index{du\_dt\_flux\_transport@{du\_dt\_flux\_transport}!oomph::FluxTransportEquations$<$ DIM $>$@{oomph::FluxTransportEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{du\_dt\_flux\_transport()}{du\_dt\_flux\_transport()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1FluxTransportEquations}{oomph\+::\+Flux\+Transport\+Equations}}$<$ DIM $>$\+::du\+\_\+dt\+\_\+flux\+\_\+transport (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption}) const}
+double \mbox{\hyperlink{classoomph_1_1FluxTransportEquations}{oomph\+::\+Flux\+Transport\+Equations}}$<$ DIM $>$\+::du\+\_\+dt\+\_\+flux\+\_\+transport (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const}
 
 
 
@@ -215,11 +217,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a6ae09fc0d6
 
 
 
-Definition at line \mbox{\hyperlink{flux__transport__elements_8h_source_l00127}{127}} of file \mbox{\hyperlink{flux__transport__elements_8h_source}{flux\+\_\+transport\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{flux__transport__elements_8h_source_l00126}{126}} of file \mbox{\hyperlink{flux__transport__elements_8h_source}{flux\+\_\+transport\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00227}{oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix}}, \mbox{\hyperlink{flux__transport__elements_8cc_source_l00090}{oomph\+::\+Flux\+Transport\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+flux\+\_\+transport()}}, and \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}.
+References \mbox{\hyperlink{elements_8h_source_l00227}{oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix}}, and \mbox{\hyperlink{flux__transport__elements_8cc_source_l00090}{oomph\+::\+Flux\+Transport\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+flux\+\_\+transport()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FluxTransportEquations_ac3c3ab10011367a880104ec6d05ab9a9}\label{classoomph_1_1FluxTransportEquations_ac3c3ab10011367a880104ec6d05ab9a9}} 
 \index{oomph::FluxTransportEquations$<$ DIM $>$@{oomph::FluxTransportEquations$<$ DIM $>$}!fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix@{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix}}
@@ -238,11 +240,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a2b6294a730
 
 
 
-Definition at line \mbox{\hyperlink{flux__transport__elements_8h_source_l00137}{137}} of file \mbox{\hyperlink{flux__transport__elements_8h_source}{flux\+\_\+transport\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{flux__transport__elements_8h_source_l00136}{136}} of file \mbox{\hyperlink{flux__transport__elements_8h_source}{flux\+\_\+transport\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{flux__transport__elements_8cc_source_l00090}{oomph\+::\+Flux\+Transport\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+flux\+\_\+transport()}}, and \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}.
+References \mbox{\hyperlink{flux__transport__elements_8cc_source_l00090}{oomph\+::\+Flux\+Transport\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+flux\+\_\+transport()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FluxTransportEquations_a12c2f66dbf817754f548cb51137529fa}\label{classoomph_1_1FluxTransportEquations_a12c2f66dbf817754f548cb51137529fa}} 
 \index{oomph::FluxTransportEquations$<$ DIM $>$@{oomph::FluxTransportEquations$<$ DIM $>$}!fill\_in\_contribution\_to\_mass\_matrix@{fill\_in\_contribution\_to\_mass\_matrix}}
@@ -261,7 +263,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a09e337880e
 
 
 
-Definition at line \mbox{\hyperlink{flux__transport__elements_8h_source_l00148}{148}} of file \mbox{\hyperlink{flux__transport__elements_8h_source}{flux\+\_\+transport\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{flux__transport__elements_8h_source_l00147}{147}} of file \mbox{\hyperlink{flux__transport__elements_8h_source}{flux\+\_\+transport\+\_\+elements.\+h}}.
 
 
 
@@ -284,7 +286,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line \mbox{\hyperlink{flux__transport__elements_8h_source_l00114}{114}} of file \mbox{\hyperlink{flux__transport__elements_8h_source}{flux\+\_\+transport\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{flux__transport__elements_8h_source_l00113}{113}} of file \mbox{\hyperlink{flux__transport__elements_8h_source}{flux\+\_\+transport\+\_\+elements.\+h}}.
 
 
 
@@ -311,18 +313,18 @@ Definition at line \mbox{\hyperlink{flux__transport__elements_8cc_source_l00089}
 
 
 
-References \mbox{\hyperlink{octree_8h_source_l00074}{oomph\+::\+Oc\+Tree\+Names\+::F}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l00891}{oomph\+::psi\+\_\+}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}.
+References \mbox{\hyperlink{octree_8h_source_l00074}{oomph\+::\+Oc\+Tree\+Names\+::F}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
 
 
 
-Referenced by \mbox{\hyperlink{flux__transport__elements_8h_source_l00127}{oomph\+::\+Flux\+Transport\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{flux__transport__elements_8h_source_l00137}{oomph\+::\+Flux\+Transport\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix()}}, \mbox{\hyperlink{flux__transport__elements_8h_source_l00148}{oomph\+::\+Flux\+Transport\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+mass\+\_\+matrix()}}, \mbox{\hyperlink{flux__transport__elements_8h_source_l00114}{oomph\+::\+Flux\+Transport\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}, \mbox{\hyperlink{euler__elements_8h_source_l00827}{oomph\+::\+DGSpectral\+Euler\+Element$<$ 1, NNODE\+\_\+1\+D $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+flux\+\_\+transport()}}, \mbox{\hyperlink{euler__elements_8h_source_l00954}{oomph\+::\+DGSpectral\+Euler\+Element$<$ 2, NNODE\+\_\+1\+D $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+flux\+\_\+transport()}}, \mbox{\hyperlink{scalar__advection__elements_8h_source_l00513}{oomph\+::\+DGSpectral\+Scalar\+Advection\+Element$<$ 1, NNODE\+\_\+1\+D $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+flux\+\_\+transport()}}, \mbox{\hyperlink{scalar__advection__elements_8h_source_l00652}{oomph\+::\+DGSpectral\+Scalar\+Advection\+Element$<$ 2, NNODE\+\_\+1\+D $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+flux\+\_\+transport()}}, \mbox{\hyperlink{scalar__advection__elements_8h_source_l00922}{oomph\+::\+DGScalar\+Advection\+Element$<$ 1, NNODE\+\_\+1\+D $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+flux\+\_\+transport()}}, and \mbox{\hyperlink{scalar__advection__elements_8h_source_l01000}{oomph\+::\+DGScalar\+Advection\+Element$<$ 2, NNODE\+\_\+1\+D $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+flux\+\_\+transport()}}.
+Referenced by \mbox{\hyperlink{flux__transport__elements_8h_source_l00126}{oomph\+::\+Flux\+Transport\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{flux__transport__elements_8h_source_l00136}{oomph\+::\+Flux\+Transport\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix()}}, \mbox{\hyperlink{flux__transport__elements_8h_source_l00147}{oomph\+::\+Flux\+Transport\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+mass\+\_\+matrix()}}, \mbox{\hyperlink{flux__transport__elements_8h_source_l00113}{oomph\+::\+Flux\+Transport\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}, \mbox{\hyperlink{euler__elements_8h_source_l00827}{oomph\+::\+DGSpectral\+Euler\+Element$<$ 1, NNODE\+\_\+1\+D $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+flux\+\_\+transport()}}, \mbox{\hyperlink{euler__elements_8h_source_l00954}{oomph\+::\+DGSpectral\+Euler\+Element$<$ 2, NNODE\+\_\+1\+D $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+flux\+\_\+transport()}}, \mbox{\hyperlink{scalar__advection__elements_8h_source_l00513}{oomph\+::\+DGSpectral\+Scalar\+Advection\+Element$<$ 1, NNODE\+\_\+1\+D $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+flux\+\_\+transport()}}, \mbox{\hyperlink{scalar__advection__elements_8h_source_l00652}{oomph\+::\+DGSpectral\+Scalar\+Advection\+Element$<$ 2, NNODE\+\_\+1\+D $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+flux\+\_\+transport()}}, \mbox{\hyperlink{scalar__advection__elements_8h_source_l00922}{oomph\+::\+DGScalar\+Advection\+Element$<$ 1, NNODE\+\_\+1\+D $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+flux\+\_\+transport()}}, and \mbox{\hyperlink{scalar__advection__elements_8h_source_l01000}{oomph\+::\+DGScalar\+Advection\+Element$<$ 2, NNODE\+\_\+1\+D $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+flux\+\_\+transport()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FluxTransportEquations_ab6ed40337620462e5c6e992081c1612a}\label{classoomph_1_1FluxTransportEquations_ab6ed40337620462e5c6e992081c1612a}} 
 \index{oomph::FluxTransportEquations$<$ DIM $>$@{oomph::FluxTransportEquations$<$ DIM $>$}!flux@{flux}}
 \index{flux@{flux}!oomph::FluxTransportEquations$<$ DIM $>$@{oomph::FluxTransportEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{flux()}{flux()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual void \mbox{\hyperlink{classoomph_1_1FluxTransportEquations}{oomph\+::\+Flux\+Transport\+Equations}}$<$ DIM $>$\+::flux (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{u,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+virtual void \mbox{\hyperlink{classoomph_1_1FluxTransportEquations}{oomph\+::\+Flux\+Transport\+Equations}}$<$ DIM $>$\+::flux (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{u,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -334,14 +336,14 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1EulerEquations_a2596b0523e6e40d3
 
 
 
-Definition at line \mbox{\hyperlink{flux__transport__elements_8h_source_l00071}{71}} of file \mbox{\hyperlink{flux__transport__elements_8h_source}{flux\+\_\+transport\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{flux__transport__elements_8h_source_l00070}{70}} of file \mbox{\hyperlink{flux__transport__elements_8h_source}{flux\+\_\+transport\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1FluxTransportEquations_a919f56a48a7ab618c90ceb41da5afaeb}\label{classoomph_1_1FluxTransportEquations_a919f56a48a7ab618c90ceb41da5afaeb}} 
 \index{oomph::FluxTransportEquations$<$ DIM $>$@{oomph::FluxTransportEquations$<$ DIM $>$}!interpolated\_u\_flux\_transport@{interpolated\_u\_flux\_transport}}
 \index{interpolated\_u\_flux\_transport@{interpolated\_u\_flux\_transport}!oomph::FluxTransportEquations$<$ DIM $>$@{oomph::FluxTransportEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{interpolated\_u\_flux\_transport()}{interpolated\_u\_flux\_transport()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1FluxTransportEquations}{oomph\+::\+Flux\+Transport\+Equations}}$<$ DIM $>$\+::interpolated\+\_\+u\+\_\+flux\+\_\+transport (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption})}
+double \mbox{\hyperlink{classoomph_1_1FluxTransportEquations}{oomph\+::\+Flux\+Transport\+Equations}}$<$ DIM $>$\+::interpolated\+\_\+u\+\_\+flux\+\_\+transport (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption})}
 
 
 
@@ -353,7 +355,7 @@ Definition at line \mbox{\hyperlink{flux__transport__elements_8cc_source_l00250}
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l00891}{oomph\+::psi\+\_\+}}, \mbox{\hyperlink{shape_8h_source_l00564}{oomph\+::\+One\+Dim\+Lagrange\+::shape()}}, and \mbox{\hyperlink{error__estimator_8h_source_l00165}{oomph\+::u}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{shape_8h_source_l00564}{oomph\+::\+One\+Dim\+Lagrange\+::shape()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FluxTransportEquations_ae77531d3bdd9241f450fdb360e7a5cc9}\label{classoomph_1_1FluxTransportEquations_ae77531d3bdd9241f450fdb360e7a5cc9}} 
 \index{oomph::FluxTransportEquations$<$ DIM $>$@{oomph::FluxTransportEquations$<$ DIM $>$}!nflux@{nflux}}
@@ -372,7 +374,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1EulerEquations_a6bf35d53c8c306df
 
 
 
-Definition at line \mbox{\hyperlink{flux__transport__elements_8h_source_l00053}{53}} of file \mbox{\hyperlink{flux__transport__elements_8h_source}{flux\+\_\+transport\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{flux__transport__elements_8h_source_l00052}{52}} of file \mbox{\hyperlink{flux__transport__elements_8h_source}{flux\+\_\+transport\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1FluxTransportEquations_afd690f82a24bc20b686fc7d25a59f775}\label{classoomph_1_1FluxTransportEquations_afd690f82a24bc20b686fc7d25a59f775}} 
 \index{oomph::FluxTransportEquations$<$ DIM $>$@{oomph::FluxTransportEquations$<$ DIM $>$}!output@{output}}
@@ -395,22 +397,22 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QSpectralEulerElement_ae3771a5f5
 
 
 
-Definition at line \mbox{\hyperlink{flux__transport__elements_8h_source_l00176}{176}} of file \mbox{\hyperlink{flux__transport__elements_8h_source}{flux\+\_\+transport\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{flux__transport__elements_8h_source_l00175}{175}} of file \mbox{\hyperlink{flux__transport__elements_8h_source}{flux\+\_\+transport\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{flux__transport__elements_8h_source_l00176}{oomph\+::\+Flux\+Transport\+Equations$<$ DIM $>$\+::output()}}.
+References \mbox{\hyperlink{flux__transport__elements_8h_source_l00175}{oomph\+::\+Flux\+Transport\+Equations$<$ DIM $>$\+::output()}}.
 
 
 
-Referenced by \mbox{\hyperlink{flux__transport__elements_8h_source_l00176}{oomph\+::\+Flux\+Transport\+Equations$<$ DIM $>$\+::output()}}, \mbox{\hyperlink{scalar__advection__elements_8h_source_l00234}{oomph\+::\+QSpectral\+Scalar\+Advection\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::output()}}, and \mbox{\hyperlink{scalar__advection__elements_8h_source_l00711}{oomph\+::\+QScalar\+Advection\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::output()}}.
+Referenced by \mbox{\hyperlink{flux__transport__elements_8h_source_l00175}{oomph\+::\+Flux\+Transport\+Equations$<$ DIM $>$\+::output()}}, \mbox{\hyperlink{scalar__advection__elements_8h_source_l00234}{oomph\+::\+QSpectral\+Scalar\+Advection\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::output()}}, and \mbox{\hyperlink{scalar__advection__elements_8h_source_l00711}{oomph\+::\+QScalar\+Advection\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FluxTransportEquations_a6b9ea1eb9feb8c71c1d935c52e7d896f}\label{classoomph_1_1FluxTransportEquations_a6b9ea1eb9feb8c71c1d935c52e7d896f}} 
 \index{oomph::FluxTransportEquations$<$ DIM $>$@{oomph::FluxTransportEquations$<$ DIM $>$}!output@{output}}
 \index{output@{output}!oomph::FluxTransportEquations$<$ DIM $>$@{oomph::FluxTransportEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1FluxTransportEquations}{oomph\+::\+Flux\+Transport\+Equations}}$<$ DIM $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1FluxTransportEquations}{oomph\+::\+Flux\+Transport\+Equations}}$<$ DIM $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -437,7 +439,7 @@ References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink
 \index{u\_index\_flux\_transport@{u\_index\_flux\_transport}!oomph::FluxTransportEquations$<$ DIM $>$@{oomph::FluxTransportEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{u\_index\_flux\_transport()}{u\_index\_flux\_transport()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual unsigned \mbox{\hyperlink{classoomph_1_1FluxTransportEquations}{oomph\+::\+Flux\+Transport\+Equations}}$<$ DIM $>$\+::u\+\_\+index\+\_\+flux\+\_\+transport (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+virtual unsigned \mbox{\hyperlink{classoomph_1_1FluxTransportEquations}{oomph\+::\+Flux\+Transport\+Equations}}$<$ DIM $>$\+::u\+\_\+index\+\_\+flux\+\_\+transport (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -445,7 +447,7 @@ Return the index at which the i-\/th unknown value is stored. The default value,
 
 
 
-Definition at line \mbox{\hyperlink{flux__transport__elements_8h_source_l00064}{64}} of file \mbox{\hyperlink{flux__transport__elements_8h_source}{flux\+\_\+transport\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{flux__transport__elements_8h_source_l00063}{63}} of file \mbox{\hyperlink{flux__transport__elements_8h_source}{flux\+\_\+transport\+\_\+elements.\+h}}.
 
 
 

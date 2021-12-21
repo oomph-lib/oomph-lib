@@ -20,23 +20,23 @@ Inheritance diagram for oomph\+::Projectable\+Fourier\+Decomposed\+Helmholtz\+El
 \item 
 \mbox{\hyperlink{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement_a2cd1deafcbc0f63b017a98cf8d067110}{Projectable\+Fourier\+Decomposed\+Helmholtz\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards...\mbox{]}. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement_ad67c81820417dac41039f651274b84ea}{data\+\_\+values\+\_\+of\+\_\+field}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&fld)
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement_ad67c81820417dac41039f651274b84ea}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement_a222ce07a334691bbff3f3ec7c8049ada}{nfields\+\_\+for\+\_\+projection}} ()
 \begin{DoxyCompactList}\small\item\em Number of fields to be projected\+: 2 (real and imag part) \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement_ade916dec0e853569db95b0538fcabb2a}{nhistory\+\_\+values\+\_\+for\+\_\+projection}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&fld)
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement_ade916dec0e853569db95b0538fcabb2a}{nhistory\+\_\+values\+\_\+for\+\_\+projection}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Number of history values to be stored for fld-\/th field. (Note\+: count includes current value!) \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement_ab1f9e43fe32a5c09fefe61f324a650cc}{nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection}} ()
 \begin{DoxyCompactList}\small\item\em Number of positional history values (Note\+: count includes current value!) \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement_a7ba6062f40bc46b7c3e09fb77857aa19}{jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&fld, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi)
+double \mbox{\hyperlink{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement_a7ba6062f40bc46b7c3e09fb77857aa19}{jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field}} (const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi)
 \begin{DoxyCompactList}\small\item\em Return Jacobian of mapping and shape functions of field fld at local coordinate s. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement_a163cc475f2675b5cc5e596ae9326df1b}{get\+\_\+field}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&fld, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
+double \mbox{\hyperlink{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement_a163cc475f2675b5cc5e596ae9326df1b}{get\+\_\+field}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
 \begin{DoxyCompactList}\small\item\em Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: history values) \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement_ad01ff7bf92e3c532b9aeb83a11428782}{nvalue\+\_\+of\+\_\+field}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&fld)
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement_ad01ff7bf92e3c532b9aeb83a11428782}{nvalue\+\_\+of\+\_\+field}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Return number of values in field fld\+: One per node. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement_aa978ab56d0673a25ac99e9477198d942}{local\+\_\+equation}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&fld, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&j)
+int \mbox{\hyperlink{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement_aa978ab56d0673a25ac99e9477198d942}{local\+\_\+equation}} (const unsigned \&fld, const unsigned \&j)
 \begin{DoxyCompactList}\small\item\em Return local equation number of value j in field fld. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement_ad174e0b31d3c16cbbbebdfaaee769231}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&nplot)
+void \mbox{\hyperlink{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement_ad174e0b31d3c16cbbbebdfaaee769231}{output}} (std\+::ostream \&outfile, const unsigned \&nplot)
 \begin{DoxyCompactList}\small\item\em Output FE representation of soln\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+DIM plot points. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -48,7 +48,7 @@ class oomph\+::\+Projectable\+Fourier\+Decomposed\+Helmholtz\+Element$<$ FOURIER
 
 Fourier decomposed Helmholtz upgraded to become projectable 
 
-Definition at line \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source_l00649}{649}} of file \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source}{fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source_l00645}{645}} of file \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source}{fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h}}.
 
 
 
@@ -66,7 +66,7 @@ Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards
 
 
 
-Definition at line \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source_l00655}{655}} of file \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source}{fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source_l00651}{651}} of file \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source}{fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h}}.
 
 
 
@@ -76,7 +76,7 @@ Definition at line \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_
 \index{data\_values\_of\_field@{data\_values\_of\_field}!oomph::ProjectableFourierDecomposedHelmholtzElement$<$ FOURIER\_DECOMPOSED\_HELMHOLTZ\_ELEMENT $>$@{oomph::ProjectableFourierDecomposedHelmholtzElement$<$ FOURIER\_DECOMPOSED\_HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{data\_values\_of\_field()}{data\_values\_of\_field()}}
 {\footnotesize\ttfamily template$<$class FOURIER\+\_\+\+DECOMPOSED\+\_\+\+HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement}{oomph\+::\+Projectable\+Fourier\+Decomposed\+Helmholtz\+Element}}$<$ FOURIER\+\_\+\+DECOMPOSED\+\_\+\+HELMHOLTZ\+\_\+\+ELEMENT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement}{oomph\+::\+Projectable\+Fourier\+Decomposed\+Helmholtz\+Element}}$<$ FOURIER\+\_\+\+DECOMPOSED\+\_\+\+HELMHOLTZ\+\_\+\+ELEMENT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -88,18 +88,18 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a2292bd9c58694f
 
 
 
-Definition at line \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source_l00660}{660}} of file \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source}{fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source_l00656}{656}} of file \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source}{fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement_a163cc475f2675b5cc5e596ae9326df1b}\label{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement_a163cc475f2675b5cc5e596ae9326df1b}} 
 \index{oomph::ProjectableFourierDecomposedHelmholtzElement$<$ FOURIER\_DECOMPOSED\_HELMHOLTZ\_ELEMENT $>$@{oomph::ProjectableFourierDecomposedHelmholtzElement$<$ FOURIER\_DECOMPOSED\_HELMHOLTZ\_ELEMENT $>$}!get\_field@{get\_field}}
 \index{get\_field@{get\_field}!oomph::ProjectableFourierDecomposedHelmholtzElement$<$ FOURIER\_DECOMPOSED\_HELMHOLTZ\_ELEMENT $>$@{oomph::ProjectableFourierDecomposedHelmholtzElement$<$ FOURIER\_DECOMPOSED\_HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{get\_field()}{get\_field()}}
 {\footnotesize\ttfamily template$<$class FOURIER\+\_\+\+DECOMPOSED\+\_\+\+HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement}{oomph\+::\+Projectable\+Fourier\+Decomposed\+Helmholtz\+Element}}$<$ FOURIER\+\_\+\+DECOMPOSED\+\_\+\+HELMHOLTZ\+\_\+\+ELEMENT $>$\+::get\+\_\+field (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{fld,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+double \mbox{\hyperlink{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement}{oomph\+::\+Projectable\+Fourier\+Decomposed\+Helmholtz\+Element}}$<$ FOURIER\+\_\+\+DECOMPOSED\+\_\+\+HELMHOLTZ\+\_\+\+ELEMENT $>$\+::get\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const unsigned \&}]{fld,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -111,18 +111,18 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ae4da5b565b6d33
 
 
 
-Definition at line \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source_l00747}{747}} of file \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source}{fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source_l00743}{743}} of file \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source}{fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02598}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
+References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement_a7ba6062f40bc46b7c3e09fb77857aa19}\label{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement_a7ba6062f40bc46b7c3e09fb77857aa19}} 
 \index{oomph::ProjectableFourierDecomposedHelmholtzElement$<$ FOURIER\_DECOMPOSED\_HELMHOLTZ\_ELEMENT $>$@{oomph::ProjectableFourierDecomposedHelmholtzElement$<$ FOURIER\_DECOMPOSED\_HELMHOLTZ\_ELEMENT $>$}!jacobian\_and\_shape\_of\_field@{jacobian\_and\_shape\_of\_field}}
 \index{jacobian\_and\_shape\_of\_field@{jacobian\_and\_shape\_of\_field}!oomph::ProjectableFourierDecomposedHelmholtzElement$<$ FOURIER\_DECOMPOSED\_HELMHOLTZ\_ELEMENT $>$@{oomph::ProjectableFourierDecomposedHelmholtzElement$<$ FOURIER\_DECOMPOSED\_HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{jacobian\_and\_shape\_of\_field()}{jacobian\_and\_shape\_of\_field()}}
 {\footnotesize\ttfamily template$<$class FOURIER\+\_\+\+DECOMPOSED\+\_\+\+HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement}{oomph\+::\+Projectable\+Fourier\+Decomposed\+Helmholtz\+Element}}$<$ FOURIER\+\_\+\+DECOMPOSED\+\_\+\+HELMHOLTZ\+\_\+\+ELEMENT $>$\+::jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{fld,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+double \mbox{\hyperlink{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement}{oomph\+::\+Projectable\+Fourier\+Decomposed\+Helmholtz\+Element}}$<$ FOURIER\+\_\+\+DECOMPOSED\+\_\+\+HELMHOLTZ\+\_\+\+ELEMENT $>$\+::jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -134,18 +134,18 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ad45c21b58c0985
 
 
 
-Definition at line \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source_l00721}{721}} of file \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source}{fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source_l00717}{717}} of file \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source}{fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02616}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement_aa978ab56d0673a25ac99e9477198d942}\label{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement_aa978ab56d0673a25ac99e9477198d942}} 
 \index{oomph::ProjectableFourierDecomposedHelmholtzElement$<$ FOURIER\_DECOMPOSED\_HELMHOLTZ\_ELEMENT $>$@{oomph::ProjectableFourierDecomposedHelmholtzElement$<$ FOURIER\_DECOMPOSED\_HELMHOLTZ\_ELEMENT $>$}!local\_equation@{local\_equation}}
 \index{local\_equation@{local\_equation}!oomph::ProjectableFourierDecomposedHelmholtzElement$<$ FOURIER\_DECOMPOSED\_HELMHOLTZ\_ELEMENT $>$@{oomph::ProjectableFourierDecomposedHelmholtzElement$<$ FOURIER\_DECOMPOSED\_HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{local\_equation()}{local\_equation()}}
 {\footnotesize\ttfamily template$<$class FOURIER\+\_\+\+DECOMPOSED\+\_\+\+HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-int \mbox{\hyperlink{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement}{oomph\+::\+Projectable\+Fourier\+Decomposed\+Helmholtz\+Element}}$<$ FOURIER\+\_\+\+DECOMPOSED\+\_\+\+HELMHOLTZ\+\_\+\+ELEMENT $>$\+::local\+\_\+equation (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{fld,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+int \mbox{\hyperlink{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement}{oomph\+::\+Projectable\+Fourier\+Decomposed\+Helmholtz\+Element}}$<$ FOURIER\+\_\+\+DECOMPOSED\+\_\+\+HELMHOLTZ\+\_\+\+ELEMENT $>$\+::local\+\_\+equation (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -157,7 +157,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac5c27ae929ff63
 
 
 
-Definition at line \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source_l00812}{812}} of file \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source}{fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source_l00808}{808}} of file \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source}{fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h}}.
 
 
 
@@ -180,7 +180,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a44634aa4049332
 
 
 
-Definition at line \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source_l00690}{690}} of file \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source}{fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source_l00686}{686}} of file \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source}{fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement_ab1f9e43fe32a5c09fefe61f324a650cc}\label{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement_ab1f9e43fe32a5c09fefe61f324a650cc}} 
 \index{oomph::ProjectableFourierDecomposedHelmholtzElement$<$ FOURIER\_DECOMPOSED\_HELMHOLTZ\_ELEMENT $>$@{oomph::ProjectableFourierDecomposedHelmholtzElement$<$ FOURIER\_DECOMPOSED\_HELMHOLTZ\_ELEMENT $>$}!nhistory\_values\_for\_coordinate\_projection@{nhistory\_values\_for\_coordinate\_projection}}
@@ -199,18 +199,18 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ab4ecd0cd24000a
 
 
 
-Definition at line \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source_l00714}{714}} of file \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source}{fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source_l00710}{710}} of file \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source}{fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, and \mbox{\hyperlink{nodes_8h_source_l01022}{oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement_ade916dec0e853569db95b0538fcabb2a}\label{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement_ade916dec0e853569db95b0538fcabb2a}} 
 \index{oomph::ProjectableFourierDecomposedHelmholtzElement$<$ FOURIER\_DECOMPOSED\_HELMHOLTZ\_ELEMENT $>$@{oomph::ProjectableFourierDecomposedHelmholtzElement$<$ FOURIER\_DECOMPOSED\_HELMHOLTZ\_ELEMENT $>$}!nhistory\_values\_for\_projection@{nhistory\_values\_for\_projection}}
 \index{nhistory\_values\_for\_projection@{nhistory\_values\_for\_projection}!oomph::ProjectableFourierDecomposedHelmholtzElement$<$ FOURIER\_DECOMPOSED\_HELMHOLTZ\_ELEMENT $>$@{oomph::ProjectableFourierDecomposedHelmholtzElement$<$ FOURIER\_DECOMPOSED\_HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{nhistory\_values\_for\_projection()}{nhistory\_values\_for\_projection()}}
 {\footnotesize\ttfamily template$<$class FOURIER\+\_\+\+DECOMPOSED\+\_\+\+HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement}{oomph\+::\+Projectable\+Fourier\+Decomposed\+Helmholtz\+Element}}$<$ FOURIER\+\_\+\+DECOMPOSED\+\_\+\+HELMHOLTZ\+\_\+\+ELEMENT $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement}{oomph\+::\+Projectable\+Fourier\+Decomposed\+Helmholtz\+Element}}$<$ FOURIER\+\_\+\+DECOMPOSED\+\_\+\+HELMHOLTZ\+\_\+\+ELEMENT $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -222,18 +222,18 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac6790f394630b9
 
 
 
-Definition at line \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source_l00697}{697}} of file \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source}{fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source_l00693}{693}} of file \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source}{fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8cc_source_l00879}{oomph\+::\+Data\+::ntstorage()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement_ad01ff7bf92e3c532b9aeb83a11428782}\label{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement_ad01ff7bf92e3c532b9aeb83a11428782}} 
 \index{oomph::ProjectableFourierDecomposedHelmholtzElement$<$ FOURIER\_DECOMPOSED\_HELMHOLTZ\_ELEMENT $>$@{oomph::ProjectableFourierDecomposedHelmholtzElement$<$ FOURIER\_DECOMPOSED\_HELMHOLTZ\_ELEMENT $>$}!nvalue\_of\_field@{nvalue\_of\_field}}
 \index{nvalue\_of\_field@{nvalue\_of\_field}!oomph::ProjectableFourierDecomposedHelmholtzElement$<$ FOURIER\_DECOMPOSED\_HELMHOLTZ\_ELEMENT $>$@{oomph::ProjectableFourierDecomposedHelmholtzElement$<$ FOURIER\_DECOMPOSED\_HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{nvalue\_of\_field()}{nvalue\_of\_field()}}
 {\footnotesize\ttfamily template$<$class FOURIER\+\_\+\+DECOMPOSED\+\_\+\+HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement}{oomph\+::\+Projectable\+Fourier\+Decomposed\+Helmholtz\+Element}}$<$ FOURIER\+\_\+\+DECOMPOSED\+\_\+\+HELMHOLTZ\+\_\+\+ELEMENT $>$\+::nvalue\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement}{oomph\+::\+Projectable\+Fourier\+Decomposed\+Helmholtz\+Element}}$<$ FOURIER\+\_\+\+DECOMPOSED\+\_\+\+HELMHOLTZ\+\_\+\+ELEMENT $>$\+::nvalue\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -245,18 +245,18 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a1a9a6de16f3511
 
 
 
-Definition at line \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source_l00795}{795}} of file \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source}{fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source_l00791}{791}} of file \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source}{fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}.
+References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement_ad174e0b31d3c16cbbbebdfaaee769231}\label{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement_ad174e0b31d3c16cbbbebdfaaee769231}} 
 \index{oomph::ProjectableFourierDecomposedHelmholtzElement$<$ FOURIER\_DECOMPOSED\_HELMHOLTZ\_ELEMENT $>$@{oomph::ProjectableFourierDecomposedHelmholtzElement$<$ FOURIER\_DECOMPOSED\_HELMHOLTZ\_ELEMENT $>$}!output@{output}}
 \index{output@{output}!oomph::ProjectableFourierDecomposedHelmholtzElement$<$ FOURIER\_DECOMPOSED\_HELMHOLTZ\_ELEMENT $>$@{oomph::ProjectableFourierDecomposedHelmholtzElement$<$ FOURIER\_DECOMPOSED\_HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}}
 {\footnotesize\ttfamily template$<$class FOURIER\+\_\+\+DECOMPOSED\+\_\+\+HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement}{oomph\+::\+Projectable\+Fourier\+Decomposed\+Helmholtz\+Element}}$<$ FOURIER\+\_\+\+DECOMPOSED\+\_\+\+HELMHOLTZ\+\_\+\+ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1ProjectableFourierDecomposedHelmholtzElement}{oomph\+::\+Projectable\+Fourier\+Decomposed\+Helmholtz\+Element}}$<$ FOURIER\+\_\+\+DECOMPOSED\+\_\+\+HELMHOLTZ\+\_\+\+ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -268,7 +268,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source_l00841}{841}} of file \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source}{fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source_l00837}{837}} of file \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source}{fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h}}.
 
 
 

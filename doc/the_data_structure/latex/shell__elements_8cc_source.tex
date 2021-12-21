@@ -52,7 +52,7 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00048}00048 \textcolor{comment}{  /// Default load function (zero traction)}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00049}00049 \textcolor{comment}{}  \textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00050}\mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a13cfb1791eee82943ca56fef1a4f9dbe}{00050}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a13cfb1791eee82943ca56fef1a4f9dbe}{KirchhoffLoveShellEquations::Zero\_traction\_fct}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& xi,}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00051}00051                                                       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00051}00051                                                       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00052}00052                                                       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7dabc60bec4cc294aa2adf92726c6d6823a}{N}},}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00053}00053                                                       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& load)}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00054}00054   \{}
@@ -93,7 +93,7 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00089}00089     \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} dpsidxi(n\_node, n\_position\_type, n\_lagrangian);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00090}00090 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00091}00091     \textcolor{comment}{// Could/Should we make this more general?}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00092}00092     \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a1854ec49f297e92d050433e59045356c}{d2psidxi}}(n\_node, n\_position\_type, 3);}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00092}00092     \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} d2psidxi(n\_node, n\_position\_type, 3);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00093}00093 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00094}00094 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00095}00095     \textcolor{comment}{// Call the derivatives of the shape functions:}}
@@ -175,18 +175,18 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00171}00171     \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} dpsidxi(n\_node, n\_position\_type, n\_lagrangian);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00172}00172 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00173}00173     \textcolor{comment}{// Could/Should we make this more general?}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00174}00174     \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a1854ec49f297e92d050433e59045356c}{d2psidxi}}(n\_node, n\_position\_type, 3);}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00174}00174     \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} d2psidxi(n\_node, n\_position\_type, 3);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00175}00175 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00176}00176 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00177}00177     \textcolor{comment}{// Call the derivatives of the shape functions:}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00178}00178     \textcolor{comment}{// d2psidxi(i,0) = \(\backslash\)f\$ \(\backslash\)partial\string^2 \(\backslash\)psi\_j / \(\backslash\)partial\string^2 \(\backslash\)xi\_0\string^2 \(\backslash\)f\$}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00179}00179     \textcolor{comment}{// d2psidxi(i,1) = \(\backslash\)f\$ \(\backslash\)partial\string^2 \(\backslash\)psi\_j / \(\backslash\)partial\string^2 \(\backslash\)xi\_1\string^2 \(\backslash\)f\$}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00180}00180     \textcolor{comment}{// d2psidxi(i,2) = \(\backslash\)f\$ \(\backslash\)partial\string^2 \(\backslash\)psi\_j/\(\backslash\)partial \(\backslash\)xi\_0 \(\backslash\)partial \(\backslash\)xi\_1 \(\backslash\)f\$}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00181}00181     (void)\mbox{\hyperlink{classoomph_1_1SolidFiniteElement_ac87b12010837978f9a419c8097721af4}{d2shape\_lagrangian}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, psi, dpsidxi, \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a1854ec49f297e92d050433e59045356c}{d2psidxi}});}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00181}00181     (void)\mbox{\hyperlink{classoomph_1_1SolidFiniteElement_ac87b12010837978f9a419c8097721af4}{d2shape\_lagrangian}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, psi, dpsidxi, d2psidxi);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00182}00182 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00183}00183     \textcolor{comment}{// Calculate local values of lagrangian position and}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00184}00184     \textcolor{comment}{// the derivative of global position wrt lagrangian coordinates}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00185}00185     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}(2, 0.0), \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(3, 0.0);}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00185}00185     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}(2, 0.0), \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(3, 0.0);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00186}00186     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} accel(3, 0.0);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00187}00187     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} interpolated\_A(2, 3);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00188}00188     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} interpolated\_dAdxi(3);}
@@ -223,7 +223,7 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00219}00219           \textcolor{keywordtype}{double} x\_value = \mbox{\hyperlink{classoomph_1_1FiniteElement_add91f6d02c8819cf778bc76afb4f03d1}{raw\_nodal\_position\_gen}}(l, k, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00220}00220 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00221}00221           \textcolor{comment}{// Calculate interpolated (deformed) position}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00222}00222           \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += x\_value * psi(l, k);}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00222}00222           \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += x\_value * psi(l, k);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00223}00223 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00224}00224           \textcolor{comment}{// Calculate the acceleration}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00225}00225           accel[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += \mbox{\hyperlink{classoomph_1_1FiniteElement_ab558009bb2957be292181d44b7e08df3}{raw\_dnodal\_position\_gen\_dt}}(2, l, k, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * psi(l, k);}
@@ -236,7 +236,7 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00232}00232           \textcolor{comment}{// Loop over the second derivative directions}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00233}00233           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < 3; j++)}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00234}00234           \{}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00235}00235             interpolated\_dAdxi(j, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) += x\_value * \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a1854ec49f297e92d050433e59045356c}{d2psidxi}}(l, k, j);}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00235}00235             interpolated\_dAdxi(j, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) += x\_value * d2psidxi(l, k, j);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00236}00236           \}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00237}00237         \}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00238}00238       \}}
@@ -378,10 +378,10 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00374}00374     \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} dpsidxi(n\_node, n\_position\_type, n\_lagrangian);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00375}00375 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00376}00376     \textcolor{comment}{// Could/Should we make this more general?}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00377}00377     \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a1854ec49f297e92d050433e59045356c}{d2psidxi}}(n\_node, n\_position\_type, 3);}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00377}00377     \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} d2psidxi(n\_node, n\_position\_type, 3);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00378}00378 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00379}00379     \textcolor{comment}{// Set the value of n\_intpt}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00380}00380     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00380}00380     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00381}00381 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00382}00382     \textcolor{comment}{// Get Physical Variables from Element}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00383}00383     \textcolor{comment}{// External pressure, Poisson ratio , and non-\/dim thickness h}}
@@ -398,20 +398,20 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00394}00394     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ipt = 0; ipt < n\_intpt; ipt++)}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00395}00395     \{}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00396}00396       \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00397}00397       \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00397}00397       \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00398}00398 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00399}00399       \textcolor{comment}{// Call the derivatives of the shape functions:}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00400}00400       \textcolor{comment}{// d2psidxi(i,0) = \(\backslash\)f\$ \(\backslash\)partial\string^2 \(\backslash\)psi\_j / \(\backslash\)partial\string^2 \(\backslash\)xi\_0\string^2 \(\backslash\)f\$}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00401}00401       \textcolor{comment}{// d2psidxi(i,1) = \(\backslash\)f\$ \(\backslash\)partial\string^2 \(\backslash\)psi\_j / \(\backslash\)partial\string^2 \(\backslash\)xi\_1\string^2 \(\backslash\)f\$}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00402}00402       \textcolor{comment}{// d2psidxi(i,2) = \(\backslash\)f\$ \(\backslash\)partial\string^2 \(\backslash\)psi\_j/\(\backslash\)partial \(\backslash\)xi\_0 \(\backslash\)partial \(\backslash\)xi\_1 \(\backslash\)f\$}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00403}00403       \textcolor{keywordtype}{double} J = d2shape\_lagrangian\_at\_knot(ipt, psi, dpsidxi, \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a1854ec49f297e92d050433e59045356c}{d2psidxi}});}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00403}00403       \textcolor{keywordtype}{double} J = \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a69d17ec5fa308adae42e2f3171649bfe}{d2shape\_lagrangian\_at\_knot}}(ipt, psi, dpsidxi, d2psidxi);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00404}00404 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00405}00405       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00406}00406       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00406}00406       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00407}00407 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00408}00408       \textcolor{comment}{// Calculate local values of lagrangian position and}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00409}00409       \textcolor{comment}{// the derivative of global position wrt lagrangian coordinates}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00410}00410       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}(2, 0.0), \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(3, 0.0);}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00410}00410       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}(2, 0.0), \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(3, 0.0);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00411}00411       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} accel(3, 0.0);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00412}00412       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} interpolated\_A(2, 3);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00413}00413       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} interpolated\_dAdxi(3);}
@@ -448,7 +448,7 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00444}00444             \textcolor{keywordtype}{double} x\_value = \mbox{\hyperlink{classoomph_1_1FiniteElement_add91f6d02c8819cf778bc76afb4f03d1}{raw\_nodal\_position\_gen}}(l, k, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00445}00445 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00446}00446             \textcolor{comment}{// Calculate interpolated (deformed) position}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00447}00447             \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += x\_value * psi(l, k);}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00447}00447             \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += x\_value * psi(l, k);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00448}00448 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00449}00449             \textcolor{comment}{// Calculate the acceleration}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00450}00450             accel[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += \mbox{\hyperlink{classoomph_1_1FiniteElement_ab558009bb2957be292181d44b7e08df3}{raw\_dnodal\_position\_gen\_dt}}(2, l, k, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * psi(l, k);}
@@ -461,7 +461,7 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00457}00457             \textcolor{comment}{// Loop over the second derivative directions}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00458}00458             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < 3; j++)}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00459}00459             \{}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00460}00460               interpolated\_dAdxi(j, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) += x\_value * \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a1854ec49f297e92d050433e59045356c}{d2psidxi}}(l, k, j);}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00460}00460               interpolated\_dAdxi(j, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) += x\_value * d2psidxi(l, k, j);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00461}00461             \}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00462}00462           \}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00463}00463         \}}
@@ -613,9 +613,9 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00609}00609       \}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00610}00610 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00611}00611       \textcolor{comment}{// Define the load Vector}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00612}00612       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}(3);}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00612}00612       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} f(3);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00613}00613       \textcolor{comment}{// Determine the load}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00614}00614       \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_ad404001c9a8c9587ece41bc4ff8c1ce1}{load\_vector}}(ipt, \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}, \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7dabc60bec4cc294aa2adf92726c6d6823a}{N}}, \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}});}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00614}00614       \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_ad404001c9a8c9587ece41bc4ff8c1ce1}{load\_vector}}(ipt, \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}, \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7dabc60bec4cc294aa2adf92726c6d6823a}{N}}, f);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00615}00615 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00616}00616       \textcolor{comment}{// Scale the load by the bending stiffness scale}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00617}00617       \textcolor{comment}{// for(unsigned i=0;i<3;i++)\{f[i] *=}}
@@ -688,7 +688,7 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00684}00684 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00685}00685               \textcolor{comment}{// Add in external forcing}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00686}00686               residuals[local\_eqn] -\/=}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00687}00687                 \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] / h\_cached * psi(l, k) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * sqrt\_Adet;}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00687}00687                 f[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] / h\_cached * psi(l, k) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * sqrt\_Adet;}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00688}00688 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00689}00689               \textcolor{comment}{// Storage for all residual terms that are multipled by the}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00690}00690               \textcolor{comment}{// Jacobian and area of the undeformed shell}}
@@ -722,7 +722,7 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00718}00718                       \textcolor{comment}{// Bending terms}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00719}00719                       other\_residual\_terms -\/=}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00720}00720                         bending\_scale * Et[al][be][ga][de] * kappa[al][be] *}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00721}00721                         (\mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7dabc60bec4cc294aa2adf92726c6d6823a}{N}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a1854ec49f297e92d050433e59045356c}{d2psidxi}}(l, k, mix[ga][de])}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00721}00721                         (\mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7dabc60bec4cc294aa2adf92726c6d6823a}{N}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * d2psidxi(l, k, mix[ga][de])}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00722}00722                          \textcolor{comment}{// Cross and dot product terms}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00723}00723                          +}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00724}00724                          normal\_var[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}][0] * interpolated\_dAdxi(mix[ga][de], 0) +}
@@ -733,7 +733,7 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00729}00729                 \}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00730}00730               \}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00731}00731 }
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00732}00732               residuals[local\_eqn] += other\_residual\_terms * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * sqrt\_adet;}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00732}00732               residuals[local\_eqn] += other\_residual\_terms * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * sqrt\_adet;}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00733}00733             \}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00734}00734           \}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00735}00735         \}}
@@ -754,7 +754,7 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00750}00750     \textcolor{comment}{// Solve for the consistent acceleration in Newmark scheme?}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00751}00751     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a52ba6cbb89b5edfe7592a49171aeb436}{Solve\_for\_consistent\_newmark\_accel\_flag}})}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00752}00752     \{}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00753}00753       fill\_in\_jacobian\_for\_newmark\_accel(\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}});}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00753}00753       \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_ae9b760377a56194d802510527b33c76f}{fill\_in\_jacobian\_for\_newmark\_accel}}(jacobian);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00754}00754       \textcolor{keywordflow}{return};}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00755}00755     \}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00756}00756 }
@@ -767,11 +767,11 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00763}00763 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00764}00764     \textcolor{comment}{// Get the solid entries in the jacobian using finite differences}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00765}00765     \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_aa4d7dab326ceb0167da34ad4c535fa0d}{SolidFiniteElement::fill\_in\_jacobian\_from\_solid\_position\_by\_fd}}(}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00766}00766       full\_residuals, \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}});}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00766}00766       full\_residuals, jacobian);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00767}00767 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00768}00768     \textcolor{comment}{// Get the entries from the external data, usually load terms}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00769}00769     \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a01ccf0a6a959cff46a36a4b7f1cf1554}{SolidFiniteElement::fill\_in\_jacobian\_from\_external\_by\_fd}}(full\_residuals,}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00770}00770                                                              \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}});}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00770}00770                                                              jacobian);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00771}00771   \}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00772}00772 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00773}00773   \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
@@ -799,10 +799,10 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00795}00795     \textcolor{comment}{// Set up memory for the shape functions}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00796}00796     \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} psi(n\_node, n\_position\_type);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00797}00797     \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} dpsidxi(n\_node, n\_position\_type, n\_lagrangian);}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00798}00798     \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a1854ec49f297e92d050433e59045356c}{d2psidxi}}(n\_node, n\_position\_type, 3);}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00798}00798     \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} d2psidxi(n\_node, n\_position\_type, 3);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00799}00799 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00800}00800     \textcolor{comment}{// Set the value of n\_intpt}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00801}00801     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00801}00801     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00802}00802 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00803}00803     \textcolor{comment}{// Get Physical Variables from Element}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00804}00804     \textcolor{comment}{// External pressure, Poisson ratio , and non-\/dim thickness h}}
@@ -839,13 +839,13 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00835}00835     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ipt = 0; ipt < n\_intpt; ipt++)}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00836}00836     \{}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00837}00837       \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00838}00838       \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00838}00838       \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00839}00839 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00840}00840       \textcolor{comment}{// Call the derivatives of the shape functions:}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00841}00841       \textcolor{keywordtype}{double} J = d2shape\_lagrangian\_at\_knot(ipt, psi, dpsidxi, \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a1854ec49f297e92d050433e59045356c}{d2psidxi}});}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00841}00841       \textcolor{keywordtype}{double} J = \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a69d17ec5fa308adae42e2f3171649bfe}{d2shape\_lagrangian\_at\_knot}}(ipt, psi, dpsidxi, d2psidxi);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00842}00842 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00843}00843       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00844}00844       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00844}00844       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00845}00845 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00846}00846       \textcolor{comment}{// Initialise values to zero}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00847}00847       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_dim; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
@@ -892,7 +892,7 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00888}00888             \textcolor{comment}{// Loop over the second derivative directions}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00889}00889             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < 3; j++)}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00890}00890             \{}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00891}00891               interpolated\_dAdxi(j, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) += x\_value * \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a1854ec49f297e92d050433e59045356c}{d2psidxi}}(l, k, j);}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00891}00891               interpolated\_dAdxi(j, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) += x\_value * d2psidxi(l, k, j);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00892}00892             \}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00893}00893           \}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l00894}00894         \}}
@@ -1061,10 +1061,10 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01057}01057           \}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01058}01058         \}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01059}01059       \}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01060}01060       pot\_en += pot\_en\_cont * 0.5 * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * sqrt\_adet;}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01060}01060       pot\_en += pot\_en\_cont * 0.5 * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * sqrt\_adet;}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01061}01061 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01062}01062       \textcolor{comment}{// Add contribution to kinetic energy}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01063}01063       kin\_en += 0.5 * lambda\_sq\_cached * veloc\_sq * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * sqrt\_adet;}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01063}01063       kin\_en += 0.5 * lambda\_sq\_cached * veloc\_sq * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * sqrt\_adet;}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01064}01064 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01065}01065     \} \textcolor{comment}{// End of loop over the integration points}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01066}01066   \}}
@@ -1096,7 +1096,7 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01092}01092     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_node = \mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01093}01093 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01094}01094     \textcolor{comment}{// Number of integration points}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01095}01095     \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01095}01095     \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01096}01096 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01097}01097     \textcolor{comment}{// Find out how many positional dofs there are}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01098}01098     \textcolor{keywordtype}{unsigned} n\_position\_type = \mbox{\hyperlink{classoomph_1_1FiniteElement_a36f4cb7569a545a9d93b66e6ee03cc91}{nnodal\_position\_type}}();}
@@ -1109,7 +1109,7 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01105}01105     \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} dpsidxi(n\_node, n\_position\_type, n\_lagrangian);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01106}01106 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01107}01107     \textcolor{comment}{// Storage for jacobian of mapping from local to Lagrangian coords}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01108}01108     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(n\_lagrangian);}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01108}01108     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} jacobian(n\_lagrangian);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01109}01109 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01110}01110     \textcolor{comment}{// Storage for velocity vector}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01111}01111     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} velocity(n\_dim);}
@@ -1122,7 +1122,7 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01118}01118 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01119}01119     \textcolor{comment}{// Storage for Lagrangian and Eulerian coordinates}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01120}01120     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} xi(n\_lagrangian);}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01121}01121     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(n\_dim);}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01121}01121     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(n\_dim);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01122}01122 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01123}01123     \textcolor{comment}{// Storage for covariant vectors}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01124}01124     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} interpolated\_A(n\_lagrangian, n\_dim);}
@@ -1131,25 +1131,25 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01127}01127     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ipt = 0; ipt < n\_intpt; ipt++)}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01128}01128     \{}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01129}01129       \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01130}01130       \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01130}01130       \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01131}01131 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01132}01132       \textcolor{comment}{// Get local coords at knot}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01133}01133       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_lagrangian; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01134}01134       \{}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01135}01135         \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>knot(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01135}01135         \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{knot}}(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01136}01136       \}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01137}01137 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01138}01138       \textcolor{comment}{// Get shape functions, derivatives, determinant of Jacobian of mapping}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01139}01139       \textcolor{keywordtype}{double} J = \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a4154c1d362b12905f2b5e6cbcfafa9f6}{dshape\_lagrangian}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, psi, dpsidxi);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01140}01140 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01141}01141       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01142}01142       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01142}01142       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01143}01143 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01144}01144       \textcolor{comment}{// Initialise velocity, x and interpolated\_A to zero}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01145}01145       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_dim; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01146}01146       \{}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01147}01147         velocity[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = 0.0;}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01148}01148         \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = 0.0;}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01148}01148         x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = 0.0;}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01149}01149         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < n\_lagrangian; j++)}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01150}01150         \{}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01151}01151           interpolated\_A(j, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = 0.0;}
@@ -1180,7 +1180,7 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01176}01176             velocity[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += \mbox{\hyperlink{classoomph_1_1FiniteElement_a45de68c68866ee5a15902ae185d9d511}{dnodal\_position\_gen\_dt}}(1, l, k, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * psi(l, k);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01177}01177 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01178}01178             \textcolor{keywordtype}{double} x\_value = \mbox{\hyperlink{classoomph_1_1FiniteElement_a61c5f4b9a62607313692d713bf95edc5}{nodal\_position\_gen}}(l, k, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01179}01179             \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += x\_value * psi(l, k);}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01179}01179             x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += x\_value * psi(l, k);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01180}01180 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01181}01181             \textcolor{comment}{// Loop over derivative directions}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01182}01182             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < n\_lagrangian; j++)}
@@ -1214,7 +1214,7 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01210}01210       \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a797e455634ac8b8e8669c4adff84e644}{get\_normal}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, normal);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01211}01211 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01212}01212       \textcolor{comment}{// Get load vector}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01213}01213       \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_ae565dc5fcdf60d733f6d19361e88d22d}{load\_vector\_for\_rate\_of\_work\_computation}}(ipt, xi, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, normal, load);}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01213}01213       \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_ae565dc5fcdf60d733f6d19361e88d22d}{load\_vector\_for\_rate\_of\_work\_computation}}(ipt, xi, x, normal, load);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01214}01214 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01215}01215       \textcolor{comment}{// Local rate of work:}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01216}01216       \textcolor{keywordtype}{double} rate\_of\_work = 0.0;}
@@ -1224,7 +1224,7 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01220}01220       \}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01221}01221 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01222}01222       \textcolor{comment}{// Add rate of work}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01223}01223       rate\_of\_work\_integral += rate\_of\_work / \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a5228ebb72cceae574ba2a824ddab6725}{h}}() * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * A\_det;}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01223}01223       rate\_of\_work\_integral += rate\_of\_work / \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a5228ebb72cceae574ba2a824ddab6725}{h}}() * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * A\_det;}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01224}01224     \}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01225}01225 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01226}01226     \textcolor{keywordflow}{return} rate\_of\_work\_integral;}
@@ -1252,13 +1252,13 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01248}01248         \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0] = -\/1.0 + l1 * 2.0 / (n\_plot -\/ 1);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01249}01249 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01250}01250         \textcolor{comment}{// Output}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01251}01251         outfile << \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0) << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 1) << \textcolor{stringliteral}{"{} "{}}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01252}01252                 << \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 2) << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{classoomph_1_1FiniteElement_a408b7a4b9116c531fb9defa79783b226}{interpolated\_dxdt}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0, 1)}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01253}01253                 << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{classoomph_1_1FiniteElement_a408b7a4b9116c531fb9defa79783b226}{interpolated\_dxdt}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 1, 1) << \textcolor{stringliteral}{"{} "{}}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01254}01254                 << \mbox{\hyperlink{classoomph_1_1FiniteElement_a408b7a4b9116c531fb9defa79783b226}{interpolated\_dxdt}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 2, 1) << \textcolor{stringliteral}{"{} "{}}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01255}01255                 << \mbox{\hyperlink{classoomph_1_1FiniteElement_a408b7a4b9116c531fb9defa79783b226}{interpolated\_dxdt}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0, 2) << \textcolor{stringliteral}{"{} "{}}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01256}01256                 << \mbox{\hyperlink{classoomph_1_1FiniteElement_a408b7a4b9116c531fb9defa79783b226}{interpolated\_dxdt}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 1, 2) << \textcolor{stringliteral}{"{} "{}}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01257}01257                 << \mbox{\hyperlink{classoomph_1_1FiniteElement_a408b7a4b9116c531fb9defa79783b226}{interpolated\_dxdt}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 2, 2) << \textcolor{stringliteral}{"{} "{}} << std::endl;}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01251}01251         outfile << \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0) << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 1) << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01252}01252                 << \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 2) << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{classoomph_1_1FiniteElement_a7e5ddde616cfd7fdd86a71d4120c9784}{interpolated\_dxdt}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0, 1)}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01253}01253                 << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{classoomph_1_1FiniteElement_a7e5ddde616cfd7fdd86a71d4120c9784}{interpolated\_dxdt}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 1, 1) << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01254}01254                 << \mbox{\hyperlink{classoomph_1_1FiniteElement_a7e5ddde616cfd7fdd86a71d4120c9784}{interpolated\_dxdt}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 2, 1) << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01255}01255                 << \mbox{\hyperlink{classoomph_1_1FiniteElement_a7e5ddde616cfd7fdd86a71d4120c9784}{interpolated\_dxdt}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0, 2) << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01256}01256                 << \mbox{\hyperlink{classoomph_1_1FiniteElement_a7e5ddde616cfd7fdd86a71d4120c9784}{interpolated\_dxdt}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 1, 2) << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01257}01257                 << \mbox{\hyperlink{classoomph_1_1FiniteElement_a7e5ddde616cfd7fdd86a71d4120c9784}{interpolated\_dxdt}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 2, 2) << \textcolor{stringliteral}{"{} "{}} << std::endl;}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01258}01258       \}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01259}01259     \}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01260}01260     outfile << std::endl;}
@@ -1286,8 +1286,8 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01282}01282         \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0] = -\/1.0 + l1 * 2.0 / (n\_plot -\/ 1);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01283}01283 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01284}01284         \textcolor{comment}{// Output the x and y positions}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01285}01285         outfile << \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0) << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 1) << \textcolor{stringliteral}{"{} "{}}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01286}01286                 << \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 2) << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01285}01285         outfile << \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0) << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 1) << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01286}01286                 << \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 2) << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01287}01287         outfile << \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0) << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 1)}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01288}01288                 << std::endl;}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01289}01289       \}}
@@ -1318,9 +1318,9 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01314}01314         \textcolor{comment}{// Output the x and y positions}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01315}01315         fprintf(file\_pt,}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01316}01316                 \textcolor{stringliteral}{"{}\%g \%g \%g "{}},}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01317}01317                 \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0),}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01318}01318                 \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 1),}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01319}01319                 \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 2));}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01317}01317                 \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0),}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01318}01318                 \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 1),}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01319}01319                 \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 2));}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01320}01320         fprintf(}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01321}01321           file\_pt, \textcolor{stringliteral}{"{}\%g \%g \(\backslash\)n "{}}, \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0), \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 1));}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01322}01322       \}}
@@ -1464,7 +1464,7 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01460}01460     \textcolor{comment}{// Let the bulk element build the FaceElement, i.e. setup the pointers}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01461}01461     \textcolor{comment}{// to its nodes (by referring to the appropriate nodes in the bulk}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01462}01462     \textcolor{comment}{// element), etc.}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01463}01463     bulk\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a025ab56ef9c6eea66fb34416fdf19152}{build\_face\_element}}(\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\_index}}, \textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01463}01463     bulk\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_aaf7bead5b462cfd5401d97b3dbdc7af7}{build\_face\_element}}(\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\_index}}, \textcolor{keyword}{this});}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01464}01464 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01465}01465     \textcolor{comment}{// Overwrite default assignments:}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01466}01466 }
@@ -1553,16 +1553,16 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01549}01549     \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} psi(n\_node, n\_type);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01550}01550 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01551}01551     \textcolor{comment}{// Set \# of integration points}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01552}01552     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01552}01552     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01553}01553 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01554}01554     \textcolor{comment}{// Loop over the integration points}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01555}01555     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ipt = 0; ipt < n\_intpt; ipt++)}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01556}01556     \{}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01557}01557       \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01558}01558       \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01558}01558       \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01559}01559 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01560}01560       \textcolor{comment}{// Get integration point in local coordinates}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01561}01561       \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0] = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>knot(ipt, 0);}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01561}01561       \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0] = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{knot}}(ipt, 0);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01562}01562 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01563}01563       \textcolor{comment}{// Get shape functions}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01564}01564       \mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_ae9a3033b7bcba34dafcb7154be331b7f}{shape}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, psi);}
@@ -1578,7 +1578,7 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01574}01574         \{}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01575}01575           \textcolor{comment}{// The (additional) Lagrange multiplier values are stored}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01576}01576           \textcolor{comment}{// after those that were created by the bulk elements:}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01577}01577           lambda += \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j)-\/>value(\mbox{\hyperlink{classoomph_1_1FaceElement_abd04b85066da626341294b5f0b97516e}{Nbulk\_value}}[j] + k) * psi(j, k);}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01577}01577           lambda += \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j)-\/>\mbox{\hyperlink{classoomph_1_1Node_afcc5cdba40bca251826ae5bee5ca15b4}{value}}(\mbox{\hyperlink{classoomph_1_1FaceElement_abd04b85066da626341294b5f0b97516e}{Nbulk\_value}}[j] + k) * psi(j, k);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01578}01578         \}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01579}01579       \}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01580}01580 }
@@ -1589,7 +1589,7 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01585}01585       bulk\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a797e455634ac8b8e8669c4adff84e644}{get\_normal}}(s\_bulk, shell\_normal);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01586}01586 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01587}01587       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01588}01588       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01588}01588       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01589}01589 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01590}01590       \textcolor{comment}{// Here's the actual constraint}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01591}01591       \textcolor{keywordtype}{double} constraint\_residual =}
@@ -1613,7 +1613,7 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01609}01609           local\_eqn = \mbox{\hyperlink{classoomph_1_1FiniteElement_a5da80bbed97543e586f698251d67941d}{nodal\_local\_eqn}}(j, \mbox{\hyperlink{classoomph_1_1FaceElement_abd04b85066da626341294b5f0b97516e}{Nbulk\_value}}[j] + k);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01610}01610           \textcolor{keywordflow}{if} (local\_eqn >= 0)}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01611}01611           \{}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01612}01612             residuals[local\_eqn] += constraint\_residual * psi(j, k) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01612}01612             residuals[local\_eqn] += constraint\_residual * psi(j, k) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01613}01613           \}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01614}01614         \}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01615}01615       \}}
@@ -1629,7 +1629,7 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01625}01625       \textcolor{comment}{// Loop over the number of nodes}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01626}01626       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < n\_node; j++)}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01627}01627       \{}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01628}01628         Node* nod\_pt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j);}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01628}01628         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01629}01629 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01630}01630         \textcolor{comment}{// Loop over directions}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01631}01631         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 3; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
@@ -1642,10 +1642,10 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01638}01638             \textcolor{keywordflow}{if} (local\_eqn >= 0)}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01639}01639             \{}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01640}01640               \textcolor{comment}{// Backup}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01641}01641               \textcolor{keywordtype}{double} backup = nod\_pt-\/>x\_gen(k, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01641}01641               \textcolor{keywordtype}{double} backup = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_af7fdc0dfda495d69bd31c790ee77da73}{x\_gen}}(k, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01642}01642 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01643}01643               \textcolor{comment}{// Increment}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01644}01644               nod\_pt-\/>x\_gen(k, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) += fd\_step;}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01644}01644               nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_af7fdc0dfda495d69bd31c790ee77da73}{x\_gen}}(k, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) += fd\_step;}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01645}01645 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01646}01646               \textcolor{comment}{// Re-\/evaluate unit normal on bulk shell element}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01647}01647               bulk\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a797e455634ac8b8e8669c4adff84e644}{get\_normal}}(s\_bulk, shell\_normal\_plus);}
@@ -1662,10 +1662,10 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01658}01658                 (constraint\_residual\_plus -\/ constraint\_residual) / fd\_step;}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01659}01659 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01660}01660               \textcolor{comment}{// Add to residual}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01661}01661               residuals[local\_eqn] += lambda * dres\_dx * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01661}01661               residuals[local\_eqn] += lambda * dres\_dx * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01662}01662 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01663}01663               \textcolor{comment}{// Reset}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01664}01664               nod\_pt-\/>x\_gen(k, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = backup;}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01664}01664               nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_af7fdc0dfda495d69bd31c790ee77da73}{x\_gen}}(k, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = backup;}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01665}01665             \}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01666}01666           \}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01667}01667         \}}
@@ -1723,7 +1723,7 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01719}01719         \{}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01720}01720           \textcolor{comment}{// The (additional) Lagrange multiplier values are stored}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01721}01721           \textcolor{comment}{// after those that were created by the bulk elements:}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01722}01722           lambda += \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j)-\/>value(\mbox{\hyperlink{classoomph_1_1FaceElement_abd04b85066da626341294b5f0b97516e}{Nbulk\_value}}[j] + k) * psi(j, k);}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01722}01722           lambda += \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j)-\/>\mbox{\hyperlink{classoomph_1_1Node_afcc5cdba40bca251826ae5bee5ca15b4}{value}}(\mbox{\hyperlink{classoomph_1_1FaceElement_abd04b85066da626341294b5f0b97516e}{Nbulk\_value}}[j] + k) * psi(j, k);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01723}01723         \}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01724}01724       \}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01725}01725 }
@@ -1737,9 +1737,9 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01733}01733               << \mbox{\hyperlink{classoomph_1_1FaceElement_a7aa612fec3604e08344503fbcdc357c8}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 1) << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{classoomph_1_1FaceElement_a7aa612fec3604e08344503fbcdc357c8}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 2) << \textcolor{stringliteral}{"{} "{}}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01734}01734               << \mbox{\hyperlink{classoomph_1_1FaceElement_a919d0d76746eaa78a8a3c7f75f99a9e5}{J\_eulerian}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) << \textcolor{stringliteral}{"{} "{}} << bulk\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}(s\_bulk, 0)}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01735}01735               << \textcolor{stringliteral}{"{} "{}} << bulk\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}(s\_bulk, 1) << \textcolor{stringliteral}{"{} "{}}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01736}01736               << bulk\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(s\_bulk, 0) << \textcolor{stringliteral}{"{} "{}}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01737}01737               << bulk\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(s\_bulk, 1) << \textcolor{stringliteral}{"{} "{}}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01738}01738               << bulk\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(s\_bulk, 2) << \textcolor{stringliteral}{"{} "{}} << lambda << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01736}01736               << bulk\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(s\_bulk, 0) << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01737}01737               << bulk\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(s\_bulk, 1) << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01738}01738               << bulk\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(s\_bulk, 2) << \textcolor{stringliteral}{"{} "{}} << lambda << \textcolor{stringliteral}{"{} "{}}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01739}01739               << shell\_normal[0] << \textcolor{stringliteral}{"{} "{}} << shell\_normal[1] << \textcolor{stringliteral}{"{} "{}}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01740}01740               << shell\_normal[2] << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_ae374c52cd948ff9871ea64442ef8a53d}{Normal\_to\_clamping\_plane}}[0] << \textcolor{stringliteral}{"{} "{}}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01741}01741               << \mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_ae374c52cd948ff9871ea64442ef8a53d}{Normal\_to\_clamping\_plane}}[1] << \textcolor{stringliteral}{"{} "{}}}
@@ -1755,13 +1755,13 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01751}01751       \textcolor{keywordtype}{double} max\_error = 0.0;}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01752}01752 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01753}01753       \textcolor{comment}{// Set \# of integration points}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01754}01754       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01754}01754       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01755}01755 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01756}01756       \textcolor{comment}{// Loop over the integration points}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01757}01757       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ipt = 0; ipt < n\_intpt; ipt++)}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01758}01758       \{}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01759}01759         \textcolor{comment}{// Get integration point in local coordinates}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01760}01760         \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0] = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>knot(ipt, 0);}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01760}01760         \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0] = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{knot}}(ipt, 0);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01761}01761 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01762}01762         \textcolor{comment}{// Get eulerian jacobian via s}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01763}01763         \textcolor{keywordtype}{double} J\_via\_s = \mbox{\hyperlink{classoomph_1_1FaceElement_a919d0d76746eaa78a8a3c7f75f99a9e5}{J\_eulerian}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
@@ -1809,7 +1809,7 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01805}01805     \textcolor{comment}{// Loop over the nodes}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01806}01806     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < n\_node; n++)}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01807}01807     \{}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01808}01808       Node* nod\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n);}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01808}01808       \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n);}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01809}01809 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01810}01810       \textcolor{comment}{// Loop over position dofs}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01811}01811       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < n\_position\_type; k++)}
@@ -1835,7 +1835,7 @@
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01831}01831       \}}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01832}01832 }
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01833}01833       \textcolor{comment}{// Loop over values}}
-\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01834}01834       \textcolor{keywordtype}{unsigned} n\_val = nod\_pt-\/>nvalue();}
+\DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01834}01834       \textcolor{keywordtype}{unsigned} n\_val = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}{nvalue}}();}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01835}01835       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < n\_val; j++)}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01836}01836       \{}
 \DoxyCodeLine{\Hypertarget{shell__elements_8cc_source_l01837}01837         \textcolor{comment}{// If the variable is free}}

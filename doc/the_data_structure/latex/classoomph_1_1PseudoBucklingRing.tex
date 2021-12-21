@@ -1,0 +1,607 @@
+\hypertarget{classoomph_1_1PseudoBucklingRing}{}\doxysection{oomph\+::Pseudo\+Buckling\+Ring Class Reference}
+\label{classoomph_1_1PseudoBucklingRing}\index{oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}}
+
+
+Pseudo buckling ring\+: Circular ring deformed by the N-\/th buckling mode of a thin-\/wall elastic ring.  
+
+
+
+
+{\ttfamily \#include $<$pseudo\+\_\+buckling\+\_\+ring.\+h$>$}
+
+Inheritance diagram for oomph\+::Pseudo\+Buckling\+Ring\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1PseudoBucklingRing}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_a7028441632808d2bc24d7f398aff3c6c}{Pseudo\+Buckling\+Ring}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor (empty and broken) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_aab85d68a2bcb4158e74cb3eeb3c24dd4}{Pseudo\+Buckling\+Ring}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ $>$ \&\mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_aed7e4e24a81d91f21bc972da131d1407}{geom\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$\mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\+\_\+stepper\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: 1 Lagrangian coordinate, 2 Eulerian coords. Pass buckling amplitude, ratio of of buckling amplitudes, buckling wavenumber (as a double), undeformed ring radius (all as \mbox{\hyperlink{classoomph_1_1Data}{Data}}) and pointer to global timestepper. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_a5569f859a21fc3ce498096397822fe47}{Pseudo\+Buckling\+Ring}} (const double \&\mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_ad28891383abe71a473a079721c6dd53e}{eps\+\_\+buckl}}, const double \&\mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_ade2881e77f7cf0be26970c78c70d3a4d}{ampl\+\_\+ratio}}, const unsigned n\+\_\+buckl, const double \&\mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_ad202df097c0a68d93a5b2f99abf4c39b}{r\+\_\+0}}, const double \&\mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_af53f509aa119f74c77ae45046023f28f}{T}}, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$\mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\+\_\+stepper\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: 1 Lagrangian coordinate, 2 Eulerian coords. Pass buckling amplitude, ratio of of buckling amplitudes, buckling wavenumber, undeformed ring radius, period of osc and pointer to global timestepper. All geometric data is pinned by default. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_a68bb9ee9e3e2a37d78758b6f594e2369}{Pseudo\+Buckling\+Ring}} (const double \&\mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_ad28891383abe71a473a079721c6dd53e}{eps\+\_\+buckl}}, const double \&HoR, const unsigned \&n\+\_\+buckl, const unsigned \&imode, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$\mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\+\_\+stepper\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: 1 Lagrangian coordinate, 2 Eulerian coords. Pass buckling amplitude, h/R, buckling wavenumbe and pointer to global timestepper. Other parameters get set up to represent oscillating ring with mode imode (1 or 2). All geometric data is pinned by default. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_aaf080e9a7f32a9836647f74e28e09ece}{Pseudo\+Buckling\+Ring}} (const \mbox{\hyperlink{classoomph_1_1PseudoBucklingRing}{Pseudo\+Buckling\+Ring}} \&node)=delete
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_ad4b5a765475478b3d3466b71d718b59f}{operator=}} (const \mbox{\hyperlink{classoomph_1_1PseudoBucklingRing}{Pseudo\+Buckling\+Ring}} \&)=delete
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_a1b1c4cc24f5bd87654ae62f44e4fa547}{$\sim$\+Pseudo\+Buckling\+Ring}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: Clean up if necessary. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_ad28891383abe71a473a079721c6dd53e}{eps\+\_\+buckl}} ()
+\begin{DoxyCompactList}\small\item\em Access function for buckling amplitude. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_ade2881e77f7cf0be26970c78c70d3a4d}{ampl\+\_\+ratio}} ()
+\begin{DoxyCompactList}\small\item\em Access function for amplitude ratio. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_ad202df097c0a68d93a5b2f99abf4c39b}{r\+\_\+0}} ()
+\begin{DoxyCompactList}\small\item\em Access function for undeformed radius. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_af53f509aa119f74c77ae45046023f28f}{T}} ()
+\begin{DoxyCompactList}\small\item\em Access function for period of oscillation. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_a61e55df2895b2a1cd877517a31e928e4}{n\+\_\+buckl\+\_\+float}} ()
+\begin{DoxyCompactList}\small\item\em Access function for buckling wavenumber (as float) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_ad93efaf7bde42f34272ba668a5b71304}{set\+\_\+eps\+\_\+buckl}} (const double \&\mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_ad28891383abe71a473a079721c6dd53e}{eps\+\_\+buckl}})
+\begin{DoxyCompactList}\small\item\em Set buckling amplitude. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_a54c88bd59587d51f5d0083ec783a6797}{set\+\_\+ampl\+\_\+ratio}} (const double \&\mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_ade2881e77f7cf0be26970c78c70d3a4d}{ampl\+\_\+ratio}})
+\begin{DoxyCompactList}\small\item\em Set amplitude ratio between radial and azimuthal buckling displacements. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_ac52faed0469827fc629abd7de267262f}{set\+\_\+n\+\_\+buckl}} (const unsigned \&n\+\_\+buckl)
+\begin{DoxyCompactList}\small\item\em Set buckling wavenumber. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_a348dbc5d192cb5a162448420bd7a185e}{set\+\_\+\+R\+\_\+0}} (const double \&\mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_ad202df097c0a68d93a5b2f99abf4c39b}{r\+\_\+0}})
+\begin{DoxyCompactList}\small\item\em Set undeformed radius of ring. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_a37ea2b2f4e889e187eda1d46ba0b27ce}{set\+\_\+T}} (const double \&\mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_af53f509aa119f74c77ae45046023f28f}{T}})
+\begin{DoxyCompactList}\small\item\em Set period of oscillation. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_a1cd6c36f2f84385b6485933b18cbbe43}{position}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&r) const
+\begin{DoxyCompactList}\small\item\em Position \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} at Lagrangian coordinate zeta at present time. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_a7c45a80564ceaeb146d9eb813611572d}{veloc}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&veloc)
+\begin{DoxyCompactList}\small\item\em Parametrised velocity on object at current time\+: veloc = d r(zeta)/dt. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_ae983ed12da7311457a4a2d4f1c3f8b6c}{accel}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&accel)
+\begin{DoxyCompactList}\small\item\em Parametrised acceleration on object at current time\+: accel = d$^\wedge$2 r(zeta)/dt$^\wedge$2. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_a027211cc7067efa849e605b456cb5462}{position}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&r) const
+\begin{DoxyCompactList}\small\item\em Position \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} at Lagrangian coordinate zeta at discrete previous time (t=0\+: present time; t\texorpdfstring{$>$}{>}0\+: previous time) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_aa11d7bbd2d01a646200e8719e61ad09a}{dposition\+\_\+dt}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, const unsigned \&j, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&drdt)
+\begin{DoxyCompactList}\small\item\em j-\/th time-\/derivative on object at current time\+: $ \frac{d^{j} r(\zeta)}{dt^j} $. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_a9e03780134886a9a2a19358519eca3be}{ngeom\+\_\+data}} () const
+\begin{DoxyCompactList}\small\item\em How many items of \mbox{\hyperlink{classoomph_1_1Data}{Data}} does the shape of the object depend on? \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_aed7e4e24a81d91f21bc972da131d1407}{geom\+\_\+data\+\_\+pt}} (const unsigned \&j)
+\begin{DoxyCompactList}\small\item\em Return pointer to the j-\/th \mbox{\hyperlink{classoomph_1_1Data}{Data}} item that the object\textquotesingle{}s shape depends on. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_a6d7d859995d19d6dbcd13f444fb73d6a}{Geom\+\_\+data\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pointers to \mbox{\hyperlink{classoomph_1_1Data}{Data}} items that affects the object\textquotesingle{}s shape. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_a37b25eb9891d9811158a11b8e8802542}{Must\+\_\+clean\+\_\+up}}
+\begin{DoxyCompactList}\small\item\em Do I need to clean up? \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Pseudo buckling ring\+: Circular ring deformed by the N-\/th buckling mode of a thin-\/wall elastic ring. 
+
+\[ x = R_0 \cos(\zeta) + \epsilon \left( \cos(N \zeta) \cos(\zeta) - A \sin(N \zeta) \sin(\zeta) \right) sin(2 \pi t/T) \] \[ y = R_0 \sin(\zeta) + \epsilon \left( \cos(N \zeta) \sin(\zeta) + A \sin(N \zeta) \cos(\zeta) \right) sin(2 \pi t/T) \] where A is the ratio of the aziumuthal to the radial buckling amplitude (A=-\/1/N for statically buckling rings) and epsilon is the buckling amplitude. 
+
+Definition at line \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00055}{55}} of file \mbox{\hyperlink{pseudo__buckling__ring_8h_source}{pseudo\+\_\+buckling\+\_\+ring.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1PseudoBucklingRing_a7028441632808d2bc24d7f398aff3c6c}\label{classoomph_1_1PseudoBucklingRing_a7028441632808d2bc24d7f398aff3c6c}} 
+\index{oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}!PseudoBucklingRing@{PseudoBucklingRing}}
+\index{PseudoBucklingRing@{PseudoBucklingRing}!oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}}
+\doxysubsubsection{\texorpdfstring{PseudoBucklingRing()}{PseudoBucklingRing()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily oomph\+::\+Pseudo\+Buckling\+Ring\+::\+Pseudo\+Buckling\+Ring (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default constructor (empty and broken) 
+
+
+
+Definition at line \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00059}{59}} of file \mbox{\hyperlink{pseudo__buckling__ring_8h_source}{pseudo\+\_\+buckling\+\_\+ring.\+h}}.
+
+\mbox{\Hypertarget{classoomph_1_1PseudoBucklingRing_aab85d68a2bcb4158e74cb3eeb3c24dd4}\label{classoomph_1_1PseudoBucklingRing_aab85d68a2bcb4158e74cb3eeb3c24dd4}} 
+\index{oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}!PseudoBucklingRing@{PseudoBucklingRing}}
+\index{PseudoBucklingRing@{PseudoBucklingRing}!oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}}
+\doxysubsubsection{\texorpdfstring{PseudoBucklingRing()}{PseudoBucklingRing()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily oomph\+::\+Pseudo\+Buckling\+Ring\+::\+Pseudo\+Buckling\+Ring (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ $>$ \&}]{geom\+\_\+data\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: 1 Lagrangian coordinate, 2 Eulerian coords. Pass buckling amplitude, ratio of of buckling amplitudes, buckling wavenumber (as a double), undeformed ring radius (all as \mbox{\hyperlink{classoomph_1_1Data}{Data}}) and pointer to global timestepper. 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_a6d7d859995d19d6dbcd13f444fb73d6a}{Geom\_data\_pt}}[0]-\/>value(0) = Eps\_buckl;}
+\DoxyCodeLine{\mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_a6d7d859995d19d6dbcd13f444fb73d6a}{Geom\_data\_pt}}[0]-\/>value(1) = Ampl\_ratio;}
+\DoxyCodeLine{\mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_a6d7d859995d19d6dbcd13f444fb73d6a}{Geom\_data\_pt}}[0]-\/>value(2) = Double\_N\_buckl;}
+\DoxyCodeLine{\mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_a6d7d859995d19d6dbcd13f444fb73d6a}{Geom\_data\_pt}}[0]-\/>value(3) = R\_0;}
+\DoxyCodeLine{\mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_a6d7d859995d19d6dbcd13f444fb73d6a}{Geom\_data\_pt}}[0]-\/>value(4) = \mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_af53f509aa119f74c77ae45046023f28f}{T}};}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00078}{78}} of file \mbox{\hyperlink{pseudo__buckling__ring_8h_source}{pseudo\+\_\+buckling\+\_\+ring.\+h}}.
+
+
+
+References \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00545}{geom\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00553}{Geom\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00556}{Must\+\_\+clean\+\_\+up}}, and \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}.
+
+\mbox{\Hypertarget{classoomph_1_1PseudoBucklingRing_a5569f859a21fc3ce498096397822fe47}\label{classoomph_1_1PseudoBucklingRing_a5569f859a21fc3ce498096397822fe47}} 
+\index{oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}!PseudoBucklingRing@{PseudoBucklingRing}}
+\index{PseudoBucklingRing@{PseudoBucklingRing}!oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}}
+\doxysubsubsection{\texorpdfstring{PseudoBucklingRing()}{PseudoBucklingRing()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily oomph\+::\+Pseudo\+Buckling\+Ring\+::\+Pseudo\+Buckling\+Ring (\begin{DoxyParamCaption}\item[{const double \&}]{eps\+\_\+buckl,  }\item[{const double \&}]{ampl\+\_\+ratio,  }\item[{const unsigned}]{n\+\_\+buckl,  }\item[{const double \&}]{r\+\_\+0,  }\item[{const double \&}]{T,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: 1 Lagrangian coordinate, 2 Eulerian coords. Pass buckling amplitude, ratio of of buckling amplitudes, buckling wavenumber, undeformed ring radius, period of osc and pointer to global timestepper. All geometric data is pinned by default. 
+
+
+
+Definition at line \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00116}{116}} of file \mbox{\hyperlink{pseudo__buckling__ring_8h_source}{pseudo\+\_\+buckling\+\_\+ring.\+h}}.
+
+
+
+References \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00287}{ampl\+\_\+ratio()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00281}{eps\+\_\+buckl()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00553}{Geom\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00556}{Must\+\_\+clean\+\_\+up}}, \mbox{\hyperlink{classoomph_1_1TimeStepper_a0f38713ed304c18d9f7b5cf8131664c1}{oomph\+::\+Time\+Stepper\+::nprev\+\_\+values()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00293}{r\+\_\+0()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00299}{T()}}, and \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}.
+
+\mbox{\Hypertarget{classoomph_1_1PseudoBucklingRing_a68bb9ee9e3e2a37d78758b6f594e2369}\label{classoomph_1_1PseudoBucklingRing_a68bb9ee9e3e2a37d78758b6f594e2369}} 
+\index{oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}!PseudoBucklingRing@{PseudoBucklingRing}}
+\index{PseudoBucklingRing@{PseudoBucklingRing}!oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}}
+\doxysubsubsection{\texorpdfstring{PseudoBucklingRing()}{PseudoBucklingRing()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily oomph\+::\+Pseudo\+Buckling\+Ring\+::\+Pseudo\+Buckling\+Ring (\begin{DoxyParamCaption}\item[{const double \&}]{eps\+\_\+buckl,  }\item[{const double \&}]{HoR,  }\item[{const unsigned \&}]{n\+\_\+buckl,  }\item[{const unsigned \&}]{imode,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: 1 Lagrangian coordinate, 2 Eulerian coords. Pass buckling amplitude, h/R, buckling wavenumbe and pointer to global timestepper. Other parameters get set up to represent oscillating ring with mode imode (1 or 2). All geometric data is pinned by default. 
+
+
+
+Definition at line \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00165}{165}} of file \mbox{\hyperlink{pseudo__buckling__ring_8h_source}{pseudo\+\_\+buckling\+\_\+ring.\+h}}.
+
+
+
+References \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00287}{ampl\+\_\+ratio()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00281}{eps\+\_\+buckl()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00553}{Geom\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00556}{Must\+\_\+clean\+\_\+up}}, \mbox{\hyperlink{classoomph_1_1TimeStepper_a0f38713ed304c18d9f7b5cf8131664c1}{oomph\+::\+Time\+Stepper\+::nprev\+\_\+values()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00157}{oomph\+::\+Mathematical\+Constants\+::\+Pi}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00299}{T()}}, and \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}.
+
+\mbox{\Hypertarget{classoomph_1_1PseudoBucklingRing_aaf080e9a7f32a9836647f74e28e09ece}\label{classoomph_1_1PseudoBucklingRing_aaf080e9a7f32a9836647f74e28e09ece}} 
+\index{oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}!PseudoBucklingRing@{PseudoBucklingRing}}
+\index{PseudoBucklingRing@{PseudoBucklingRing}!oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}}
+\doxysubsubsection{\texorpdfstring{PseudoBucklingRing()}{PseudoBucklingRing()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily oomph\+::\+Pseudo\+Buckling\+Ring\+::\+Pseudo\+Buckling\+Ring (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1PseudoBucklingRing}{Pseudo\+Buckling\+Ring}} \&}]{node }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+\mbox{\Hypertarget{classoomph_1_1PseudoBucklingRing_a1b1c4cc24f5bd87654ae62f44e4fa547}\label{classoomph_1_1PseudoBucklingRing_a1b1c4cc24f5bd87654ae62f44e4fa547}} 
+\index{oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}!````~PseudoBucklingRing@{$\sim$PseudoBucklingRing}}
+\index{````~PseudoBucklingRing@{$\sim$PseudoBucklingRing}!oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}}
+\doxysubsubsection{\texorpdfstring{$\sim$PseudoBucklingRing()}{~PseudoBucklingRing()}}
+{\footnotesize\ttfamily oomph\+::\+Pseudo\+Buckling\+Ring\+::$\sim$\+Pseudo\+Buckling\+Ring (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor\+: Clean up if necessary. 
+
+
+
+Definition at line \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00269}{269}} of file \mbox{\hyperlink{pseudo__buckling__ring_8h_source}{pseudo\+\_\+buckling\+\_\+ring.\+h}}.
+
+
+
+References \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00553}{Geom\+\_\+data\+\_\+pt}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00556}{Must\+\_\+clean\+\_\+up}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1PseudoBucklingRing_ae983ed12da7311457a4a2d4f1c3f8b6c}\label{classoomph_1_1PseudoBucklingRing_ae983ed12da7311457a4a2d4f1c3f8b6c}} 
+\index{oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}!accel@{accel}}
+\index{accel@{accel}!oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}}
+\doxysubsubsection{\texorpdfstring{accel()}{accel()}}
+{\footnotesize\ttfamily void oomph\+::\+Pseudo\+Buckling\+Ring\+::accel (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{accel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Parametrised acceleration on object at current time\+: accel = d$^\wedge$2 r(zeta)/dt$^\wedge$2. 
+
+
+
+Definition at line \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00416}{416}} of file \mbox{\hyperlink{pseudo__buckling__ring_8h_source}{pseudo\+\_\+buckling\+\_\+ring.\+h}}.
+
+
+
+References \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00416}{accel()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00553}{Geom\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{geom__objects_8h_source_l00435}{oomph\+::\+Geom\+Object\+::\+Geom\+\_\+object\+\_\+time\+\_\+stepper\+\_\+pt}}, \mbox{\hyperlink{geom__objects_8h_source_l00431}{oomph\+::\+Geom\+Object\+::\+Ndim}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00157}{oomph\+::\+Mathematical\+Constants\+::\+Pi}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00299}{T()}}, \mbox{\hyperlink{timesteppers_8h_source_l00123}{oomph\+::\+Time\+::time()}}, and \mbox{\hyperlink{timesteppers_8h_source_l00572}{oomph\+::\+Time\+Stepper\+::time\+\_\+pt()}}.
+
+
+
+Referenced by \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00416}{accel()}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00505}{dposition\+\_\+dt()}}.
+
+\mbox{\Hypertarget{classoomph_1_1PseudoBucklingRing_ade2881e77f7cf0be26970c78c70d3a4d}\label{classoomph_1_1PseudoBucklingRing_ade2881e77f7cf0be26970c78c70d3a4d}} 
+\index{oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}!ampl\_ratio@{ampl\_ratio}}
+\index{ampl\_ratio@{ampl\_ratio}!oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}}
+\doxysubsubsection{\texorpdfstring{ampl\_ratio()}{ampl\_ratio()}}
+{\footnotesize\ttfamily double oomph\+::\+Pseudo\+Buckling\+Ring\+::ampl\+\_\+ratio (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for amplitude ratio. 
+
+
+
+Definition at line \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00287}{287}} of file \mbox{\hyperlink{pseudo__buckling__ring_8h_source}{pseudo\+\_\+buckling\+\_\+ring.\+h}}.
+
+
+
+References \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00553}{Geom\+\_\+data\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00116}{Pseudo\+Buckling\+Ring()}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00318}{set\+\_\+ampl\+\_\+ratio()}}.
+
+\mbox{\Hypertarget{classoomph_1_1PseudoBucklingRing_aa11d7bbd2d01a646200e8719e61ad09a}\label{classoomph_1_1PseudoBucklingRing_aa11d7bbd2d01a646200e8719e61ad09a}} 
+\index{oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}!dposition\_dt@{dposition\_dt}}
+\index{dposition\_dt@{dposition\_dt}!oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}}
+\doxysubsubsection{\texorpdfstring{dposition\_dt()}{dposition\_dt()}}
+{\footnotesize\ttfamily void oomph\+::\+Pseudo\+Buckling\+Ring\+::dposition\+\_\+dt (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{zeta,  }\item[{const unsigned \&}]{j,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{drdt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+j-\/th time-\/derivative on object at current time\+: $ \frac{d^{j} r(\zeta)}{dt^j} $. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_aa46469e491d25eda8dbe213f07152974}{oomph\+::\+Geom\+Object}}.
+
+
+
+Definition at line \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00505}{505}} of file \mbox{\hyperlink{pseudo__buckling__ring_8h_source}{pseudo\+\_\+buckling\+\_\+ring.\+h}}.
+
+
+
+References \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00416}{accel()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00344}{position()}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00381}{veloc()}}.
+
+\mbox{\Hypertarget{classoomph_1_1PseudoBucklingRing_ad28891383abe71a473a079721c6dd53e}\label{classoomph_1_1PseudoBucklingRing_ad28891383abe71a473a079721c6dd53e}} 
+\index{oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}!eps\_buckl@{eps\_buckl}}
+\index{eps\_buckl@{eps\_buckl}!oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}}
+\doxysubsubsection{\texorpdfstring{eps\_buckl()}{eps\_buckl()}}
+{\footnotesize\ttfamily double oomph\+::\+Pseudo\+Buckling\+Ring\+::eps\+\_\+buckl (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for buckling amplitude. 
+
+
+
+Definition at line \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00281}{281}} of file \mbox{\hyperlink{pseudo__buckling__ring_8h_source}{pseudo\+\_\+buckling\+\_\+ring.\+h}}.
+
+
+
+References \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00553}{Geom\+\_\+data\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00116}{Pseudo\+Buckling\+Ring()}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00311}{set\+\_\+eps\+\_\+buckl()}}.
+
+\mbox{\Hypertarget{classoomph_1_1PseudoBucklingRing_aed7e4e24a81d91f21bc972da131d1407}\label{classoomph_1_1PseudoBucklingRing_aed7e4e24a81d91f21bc972da131d1407}} 
+\index{oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}!geom\_data\_pt@{geom\_data\_pt}}
+\index{geom\_data\_pt@{geom\_data\_pt}!oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}}
+\doxysubsubsection{\texorpdfstring{geom\_data\_pt()}{geom\_data\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ oomph\+::\+Pseudo\+Buckling\+Ring\+::geom\+\_\+data\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return pointer to the j-\/th \mbox{\hyperlink{classoomph_1_1Data}{Data}} item that the object\textquotesingle{}s shape depends on. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_a512b6e559414821452836a387cb34132}{oomph\+::\+Geom\+Object}}.
+
+
+
+Definition at line \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00545}{545}} of file \mbox{\hyperlink{pseudo__buckling__ring_8h_source}{pseudo\+\_\+buckling\+\_\+ring.\+h}}.
+
+
+
+References \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00553}{Geom\+\_\+data\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00078}{Pseudo\+Buckling\+Ring()}}.
+
+\mbox{\Hypertarget{classoomph_1_1PseudoBucklingRing_a61e55df2895b2a1cd877517a31e928e4}\label{classoomph_1_1PseudoBucklingRing_a61e55df2895b2a1cd877517a31e928e4}} 
+\index{oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}!n\_buckl\_float@{n\_buckl\_float}}
+\index{n\_buckl\_float@{n\_buckl\_float}!oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}}
+\doxysubsubsection{\texorpdfstring{n\_buckl\_float()}{n\_buckl\_float()}}
+{\footnotesize\ttfamily double oomph\+::\+Pseudo\+Buckling\+Ring\+::n\+\_\+buckl\+\_\+float (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for buckling wavenumber (as float) 
+
+
+
+Definition at line \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00305}{305}} of file \mbox{\hyperlink{pseudo__buckling__ring_8h_source}{pseudo\+\_\+buckling\+\_\+ring.\+h}}.
+
+
+
+References \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00553}{Geom\+\_\+data\+\_\+pt}}.
+
+\mbox{\Hypertarget{classoomph_1_1PseudoBucklingRing_a9e03780134886a9a2a19358519eca3be}\label{classoomph_1_1PseudoBucklingRing_a9e03780134886a9a2a19358519eca3be}} 
+\index{oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}!ngeom\_data@{ngeom\_data}}
+\index{ngeom\_data@{ngeom\_data}!oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}}
+\doxysubsubsection{\texorpdfstring{ngeom\_data()}{ngeom\_data()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Pseudo\+Buckling\+Ring\+::ngeom\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+How many items of \mbox{\hyperlink{classoomph_1_1Data}{Data}} does the shape of the object depend on? 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_a19d325347e19964e127fe124df56f251}{oomph\+::\+Geom\+Object}}.
+
+
+
+Definition at line \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00538}{538}} of file \mbox{\hyperlink{pseudo__buckling__ring_8h_source}{pseudo\+\_\+buckling\+\_\+ring.\+h}}.
+
+
+
+References \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00553}{Geom\+\_\+data\+\_\+pt}}.
+
+\mbox{\Hypertarget{classoomph_1_1PseudoBucklingRing_ad4b5a765475478b3d3466b71d718b59f}\label{classoomph_1_1PseudoBucklingRing_ad4b5a765475478b3d3466b71d718b59f}} 
+\index{oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void oomph\+::\+Pseudo\+Buckling\+Ring\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1PseudoBucklingRing}{Pseudo\+Buckling\+Ring}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken assignment operator. 
+
+\mbox{\Hypertarget{classoomph_1_1PseudoBucklingRing_a027211cc7067efa849e605b456cb5462}\label{classoomph_1_1PseudoBucklingRing_a027211cc7067efa849e605b456cb5462}} 
+\index{oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}!position@{position}}
+\index{position@{position}!oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}}
+\doxysubsubsection{\texorpdfstring{position()}{position()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Pseudo\+Buckling\+Ring\+::position (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Position \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} at Lagrangian coordinate zeta at discrete previous time (t=0\+: present time; t\texorpdfstring{$>$}{>}0\+: previous time) 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_ad44a736d23dcd63af163a7d80b5c4dfa}{oomph\+::\+Geom\+Object}}.
+
+
+
+Definition at line \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00452}{452}} of file \mbox{\hyperlink{pseudo__buckling__ring_8h_source}{pseudo\+\_\+buckling\+\_\+ring.\+h}}.
+
+
+
+References \mbox{\hyperlink{timesteppers_8h_source_l00136}{oomph\+::\+Time\+::dt()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00553}{Geom\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{geom__objects_8h_source_l00435}{oomph\+::\+Geom\+Object\+::\+Geom\+\_\+object\+\_\+time\+\_\+stepper\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{geom__objects_8h_source_l00431}{oomph\+::\+Geom\+Object\+::\+Ndim}}, \mbox{\hyperlink{classoomph_1_1TimeStepper_a0f38713ed304c18d9f7b5cf8131664c1}{oomph\+::\+Time\+Stepper\+::nprev\+\_\+values()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00157}{oomph\+::\+Mathematical\+Constants\+::\+Pi}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00299}{T()}}, \mbox{\hyperlink{timesteppers_8h_source_l00123}{oomph\+::\+Time\+::time()}}, and \mbox{\hyperlink{timesteppers_8h_source_l00572}{oomph\+::\+Time\+Stepper\+::time\+\_\+pt()}}.
+
+\mbox{\Hypertarget{classoomph_1_1PseudoBucklingRing_a1cd6c36f2f84385b6485933b18cbbe43}\label{classoomph_1_1PseudoBucklingRing_a1cd6c36f2f84385b6485933b18cbbe43}} 
+\index{oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}!position@{position}}
+\index{position@{position}!oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}}
+\doxysubsubsection{\texorpdfstring{position()}{position()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Pseudo\+Buckling\+Ring\+::position (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Position \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} at Lagrangian coordinate zeta at present time. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object}}.
+
+
+
+Definition at line \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00344}{344}} of file \mbox{\hyperlink{pseudo__buckling__ring_8h_source}{pseudo\+\_\+buckling\+\_\+ring.\+h}}.
+
+
+
+References \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00553}{Geom\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{geom__objects_8h_source_l00435}{oomph\+::\+Geom\+Object\+::\+Geom\+\_\+object\+\_\+time\+\_\+stepper\+\_\+pt}}, \mbox{\hyperlink{geom__objects_8h_source_l00431}{oomph\+::\+Geom\+Object\+::\+Ndim}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00157}{oomph\+::\+Mathematical\+Constants\+::\+Pi}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00299}{T()}}, \mbox{\hyperlink{timesteppers_8h_source_l00123}{oomph\+::\+Time\+::time()}}, and \mbox{\hyperlink{timesteppers_8h_source_l00572}{oomph\+::\+Time\+Stepper\+::time\+\_\+pt()}}.
+
+
+
+Referenced by \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00505}{dposition\+\_\+dt()}}.
+
+\mbox{\Hypertarget{classoomph_1_1PseudoBucklingRing_ad202df097c0a68d93a5b2f99abf4c39b}\label{classoomph_1_1PseudoBucklingRing_ad202df097c0a68d93a5b2f99abf4c39b}} 
+\index{oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}!r\_0@{r\_0}}
+\index{r\_0@{r\_0}!oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}}
+\doxysubsubsection{\texorpdfstring{r\_0()}{r\_0()}}
+{\footnotesize\ttfamily double oomph\+::\+Pseudo\+Buckling\+Ring\+::r\+\_\+0 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for undeformed radius. 
+
+
+
+Definition at line \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00293}{293}} of file \mbox{\hyperlink{pseudo__buckling__ring_8h_source}{pseudo\+\_\+buckling\+\_\+ring.\+h}}.
+
+
+
+References \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00553}{Geom\+\_\+data\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00745}{oomph\+::\+Pseudo\+Buckling\+Ring\+Element\+::get\+\_\+residuals\+\_\+generic()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00116}{Pseudo\+Buckling\+Ring()}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00330}{set\+\_\+\+R\+\_\+0()}}.
+
+\mbox{\Hypertarget{classoomph_1_1PseudoBucklingRing_a54c88bd59587d51f5d0083ec783a6797}\label{classoomph_1_1PseudoBucklingRing_a54c88bd59587d51f5d0083ec783a6797}} 
+\index{oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}!set\_ampl\_ratio@{set\_ampl\_ratio}}
+\index{set\_ampl\_ratio@{set\_ampl\_ratio}!oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}}
+\doxysubsubsection{\texorpdfstring{set\_ampl\_ratio()}{set\_ampl\_ratio()}}
+{\footnotesize\ttfamily void oomph\+::\+Pseudo\+Buckling\+Ring\+::set\+\_\+ampl\+\_\+ratio (\begin{DoxyParamCaption}\item[{const double \&}]{ampl\+\_\+ratio }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set amplitude ratio between radial and azimuthal buckling displacements. 
+
+
+
+Definition at line \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00318}{318}} of file \mbox{\hyperlink{pseudo__buckling__ring_8h_source}{pseudo\+\_\+buckling\+\_\+ring.\+h}}.
+
+
+
+References \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00287}{ampl\+\_\+ratio()}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00553}{Geom\+\_\+data\+\_\+pt}}.
+
+\mbox{\Hypertarget{classoomph_1_1PseudoBucklingRing_ad93efaf7bde42f34272ba668a5b71304}\label{classoomph_1_1PseudoBucklingRing_ad93efaf7bde42f34272ba668a5b71304}} 
+\index{oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}!set\_eps\_buckl@{set\_eps\_buckl}}
+\index{set\_eps\_buckl@{set\_eps\_buckl}!oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}}
+\doxysubsubsection{\texorpdfstring{set\_eps\_buckl()}{set\_eps\_buckl()}}
+{\footnotesize\ttfamily void oomph\+::\+Pseudo\+Buckling\+Ring\+::set\+\_\+eps\+\_\+buckl (\begin{DoxyParamCaption}\item[{const double \&}]{eps\+\_\+buckl }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set buckling amplitude. 
+
+
+
+Definition at line \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00311}{311}} of file \mbox{\hyperlink{pseudo__buckling__ring_8h_source}{pseudo\+\_\+buckling\+\_\+ring.\+h}}.
+
+
+
+References \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00281}{eps\+\_\+buckl()}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00553}{Geom\+\_\+data\+\_\+pt}}.
+
+\mbox{\Hypertarget{classoomph_1_1PseudoBucklingRing_ac52faed0469827fc629abd7de267262f}\label{classoomph_1_1PseudoBucklingRing_ac52faed0469827fc629abd7de267262f}} 
+\index{oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}!set\_n\_buckl@{set\_n\_buckl}}
+\index{set\_n\_buckl@{set\_n\_buckl}!oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}}
+\doxysubsubsection{\texorpdfstring{set\_n\_buckl()}{set\_n\_buckl()}}
+{\footnotesize\ttfamily void oomph\+::\+Pseudo\+Buckling\+Ring\+::set\+\_\+n\+\_\+buckl (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+buckl }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set buckling wavenumber. 
+
+
+
+Definition at line \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00324}{324}} of file \mbox{\hyperlink{pseudo__buckling__ring_8h_source}{pseudo\+\_\+buckling\+\_\+ring.\+h}}.
+
+
+
+References \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00553}{Geom\+\_\+data\+\_\+pt}}.
+
+\mbox{\Hypertarget{classoomph_1_1PseudoBucklingRing_a348dbc5d192cb5a162448420bd7a185e}\label{classoomph_1_1PseudoBucklingRing_a348dbc5d192cb5a162448420bd7a185e}} 
+\index{oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}!set\_R\_0@{set\_R\_0}}
+\index{set\_R\_0@{set\_R\_0}!oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}}
+\doxysubsubsection{\texorpdfstring{set\_R\_0()}{set\_R\_0()}}
+{\footnotesize\ttfamily void oomph\+::\+Pseudo\+Buckling\+Ring\+::set\+\_\+\+R\+\_\+0 (\begin{DoxyParamCaption}\item[{const double \&}]{r\+\_\+0 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set undeformed radius of ring. 
+
+
+
+Definition at line \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00330}{330}} of file \mbox{\hyperlink{pseudo__buckling__ring_8h_source}{pseudo\+\_\+buckling\+\_\+ring.\+h}}.
+
+
+
+References \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00553}{Geom\+\_\+data\+\_\+pt}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00293}{r\+\_\+0()}}.
+
+\mbox{\Hypertarget{classoomph_1_1PseudoBucklingRing_a37ea2b2f4e889e187eda1d46ba0b27ce}\label{classoomph_1_1PseudoBucklingRing_a37ea2b2f4e889e187eda1d46ba0b27ce}} 
+\index{oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}!set\_T@{set\_T}}
+\index{set\_T@{set\_T}!oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}}
+\doxysubsubsection{\texorpdfstring{set\_T()}{set\_T()}}
+{\footnotesize\ttfamily void oomph\+::\+Pseudo\+Buckling\+Ring\+::set\+\_\+T (\begin{DoxyParamCaption}\item[{const double \&}]{T }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set period of oscillation. 
+
+
+
+Definition at line \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00336}{336}} of file \mbox{\hyperlink{pseudo__buckling__ring_8h_source}{pseudo\+\_\+buckling\+\_\+ring.\+h}}.
+
+
+
+References \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00553}{Geom\+\_\+data\+\_\+pt}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00299}{T()}}.
+
+\mbox{\Hypertarget{classoomph_1_1PseudoBucklingRing_af53f509aa119f74c77ae45046023f28f}\label{classoomph_1_1PseudoBucklingRing_af53f509aa119f74c77ae45046023f28f}} 
+\index{oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}!T@{T}}
+\index{T@{T}!oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}}
+\doxysubsubsection{\texorpdfstring{T()}{T()}}
+{\footnotesize\ttfamily double oomph\+::\+Pseudo\+Buckling\+Ring\+::T (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for period of oscillation. 
+
+
+
+Definition at line \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00299}{299}} of file \mbox{\hyperlink{pseudo__buckling__ring_8h_source}{pseudo\+\_\+buckling\+\_\+ring.\+h}}.
+
+
+
+References \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00553}{Geom\+\_\+data\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00416}{accel()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00344}{position()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00116}{Pseudo\+Buckling\+Ring()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00336}{set\+\_\+\+T()}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00381}{veloc()}}.
+
+\mbox{\Hypertarget{classoomph_1_1PseudoBucklingRing_a7c45a80564ceaeb146d9eb813611572d}\label{classoomph_1_1PseudoBucklingRing_a7c45a80564ceaeb146d9eb813611572d}} 
+\index{oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}!veloc@{veloc}}
+\index{veloc@{veloc}!oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}}
+\doxysubsubsection{\texorpdfstring{veloc()}{veloc()}}
+{\footnotesize\ttfamily void oomph\+::\+Pseudo\+Buckling\+Ring\+::veloc (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{veloc }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Parametrised velocity on object at current time\+: veloc = d r(zeta)/dt. 
+
+
+
+Definition at line \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00381}{381}} of file \mbox{\hyperlink{pseudo__buckling__ring_8h_source}{pseudo\+\_\+buckling\+\_\+ring.\+h}}.
+
+
+
+References \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00553}{Geom\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{geom__objects_8h_source_l00435}{oomph\+::\+Geom\+Object\+::\+Geom\+\_\+object\+\_\+time\+\_\+stepper\+\_\+pt}}, \mbox{\hyperlink{geom__objects_8h_source_l00431}{oomph\+::\+Geom\+Object\+::\+Ndim}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00157}{oomph\+::\+Mathematical\+Constants\+::\+Pi}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00299}{T()}}, \mbox{\hyperlink{timesteppers_8h_source_l00123}{oomph\+::\+Time\+::time()}}, \mbox{\hyperlink{timesteppers_8h_source_l00572}{oomph\+::\+Time\+Stepper\+::time\+\_\+pt()}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00381}{veloc()}}.
+
+
+
+Referenced by \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00505}{dposition\+\_\+dt()}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00381}{veloc()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1PseudoBucklingRing_a6d7d859995d19d6dbcd13f444fb73d6a}\label{classoomph_1_1PseudoBucklingRing_a6d7d859995d19d6dbcd13f444fb73d6a}} 
+\index{oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}!Geom\_data\_pt@{Geom\_data\_pt}}
+\index{Geom\_data\_pt@{Geom\_data\_pt}!oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}}
+\doxysubsubsection{\texorpdfstring{Geom\_data\_pt}{Geom\_data\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$$>$ oomph\+::\+Pseudo\+Buckling\+Ring\+::\+Geom\+\_\+data\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pointers to \mbox{\hyperlink{classoomph_1_1Data}{Data}} items that affects the object\textquotesingle{}s shape. 
+
+
+
+Definition at line \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00553}{553}} of file \mbox{\hyperlink{pseudo__buckling__ring_8h_source}{pseudo\+\_\+buckling\+\_\+ring.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00416}{accel()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00287}{ampl\+\_\+ratio()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00281}{eps\+\_\+buckl()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00545}{geom\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00305}{n\+\_\+buckl\+\_\+float()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00538}{ngeom\+\_\+data()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00344}{position()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00078}{Pseudo\+Buckling\+Ring()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00614}{oomph\+::\+Pseudo\+Buckling\+Ring\+Element\+::\+Pseudo\+Buckling\+Ring\+Element()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00293}{r\+\_\+0()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00318}{set\+\_\+ampl\+\_\+ratio()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00311}{set\+\_\+eps\+\_\+buckl()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00324}{set\+\_\+n\+\_\+buckl()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00330}{set\+\_\+\+R\+\_\+0()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00336}{set\+\_\+\+T()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00299}{T()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00381}{veloc()}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00269}{$\sim$\+Pseudo\+Buckling\+Ring()}}.
+
+\mbox{\Hypertarget{classoomph_1_1PseudoBucklingRing_a37b25eb9891d9811158a11b8e8802542}\label{classoomph_1_1PseudoBucklingRing_a37b25eb9891d9811158a11b8e8802542}} 
+\index{oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}!Must\_clean\_up@{Must\_clean\_up}}
+\index{Must\_clean\_up@{Must\_clean\_up}!oomph::PseudoBucklingRing@{oomph::PseudoBucklingRing}}
+\doxysubsubsection{\texorpdfstring{Must\_clean\_up}{Must\_clean\_up}}
+{\footnotesize\ttfamily bool oomph\+::\+Pseudo\+Buckling\+Ring\+::\+Must\+\_\+clean\+\_\+up\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Do I need to clean up? 
+
+
+
+Definition at line \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00556}{556}} of file \mbox{\hyperlink{pseudo__buckling__ring_8h_source}{pseudo\+\_\+buckling\+\_\+ring.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00078}{Pseudo\+Buckling\+Ring()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00269}{$\sim$\+Pseudo\+Buckling\+Ring()}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00682}{oomph\+::\+Pseudo\+Buckling\+Ring\+Element\+::$\sim$\+Pseudo\+Buckling\+Ring\+Element()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{pseudo__buckling__ring_8h}{pseudo\+\_\+buckling\+\_\+ring.\+h}}\end{DoxyCompactItemize}

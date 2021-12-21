@@ -471,7 +471,7 @@ $(function() {
 <div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>      <span class="keywordtype">unsigned</span> l;</div>
 <div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span> </div>
 <div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>      <span class="comment">// The index of the upper column bound</span></div>
-<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>      <span class="keywordtype">unsigned</span> <a class="code hl_variable" href="namespaceoomph.html#ac0ed65f6db53d9ad737e1d2a69767d25">u</a>;</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>      <span class="keywordtype">unsigned</span> u;</div>
 <div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span> </div>
 <div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>      <span class="comment">// If we&#39;re using the upper triangular form of the preconditioner</span></div>
 <div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>      <span class="keywordflow">if</span> (Upper_triangular)</div>
@@ -483,20 +483,20 @@ $(function() {
 <div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>        <span class="keywordflow">if</span> (Block_bandwidth &gt;= 0)</div>
 <div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>        {</div>
 <div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>          <span class="comment">// The upper bound is the last nonzero block column</span></div>
-<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>          <a class="code hl_variable" href="namespaceoomph.html#ac0ed65f6db53d9ad737e1d2a69767d25">u</a> = std::min(n_block_types, l + Block_bandwidth);</div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>          u = std::min(n_block_types, l + Block_bandwidth);</div>
 <div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>        }</div>
 <div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>        <span class="comment">// Default case; loop over all the block columns</span></div>
 <div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>        <span class="keywordflow">else</span></div>
 <div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>        {</div>
 <div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>          <span class="comment">// The upper bound is the last column</span></div>
-<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>          <a class="code hl_variable" href="namespaceoomph.html#ac0ed65f6db53d9ad737e1d2a69767d25">u</a> = n_block_types;</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>          u = n_block_types;</div>
 <div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>        }</div>
 <div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>      }</div>
 <div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>      <span class="comment">// If we&#39;re using the lower triangular form of the preconditioner</span></div>
 <div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>      <span class="keywordflow">else</span></div>
 <div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>      {</div>
 <div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>        <span class="comment">// The upper bound column bound</span></div>
-<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>        <a class="code hl_variable" href="namespaceoomph.html#ac0ed65f6db53d9ad737e1d2a69767d25">u</a> = <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>;</div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>        u = <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>;</div>
 <div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span> </div>
 <div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>        <span class="comment">// If the block bandwidth has been provided</span></div>
 <div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>        <span class="keywordflow">if</span> (Block_bandwidth &gt;= 0)</div>
@@ -504,7 +504,7 @@ $(function() {
 <div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>          <span class="comment">// The lower bound is the last nonzero block column. The explicit</span></div>
 <div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>          <span class="comment">// casting is a bit over the top but it&#39;s better to be safe than</span></div>
 <div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>          <span class="comment">// sorry...</span></div>
-<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>          l = std::max(0, <span class="keywordtype">int</span>(<span class="keywordtype">int</span>(<a class="code hl_variable" href="namespaceoomph.html#ac0ed65f6db53d9ad737e1d2a69767d25">u</a>) - Block_bandwidth));</div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>          l = std::max(0, <span class="keywordtype">int</span>(<span class="keywordtype">int</span>(u) - Block_bandwidth));</div>
 <div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>        }</div>
 <div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>        <span class="comment">// Default case; loop over all the block columns</span></div>
 <div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>        <span class="keywordflow">else</span></div>
@@ -515,7 +515,7 @@ $(function() {
 <div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>      } <span class="comment">// for (unsigned i=0;i&lt;nblock_types;i++)</span></div>
 <div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span> </div>
 <div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>      <span class="comment">// Loop over the chosen block columns</span></div>
-<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> j = l; j &lt; <a class="code hl_variable" href="namespaceoomph.html#ac0ed65f6db53d9ad737e1d2a69767d25">u</a>; j++)</div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> j = l; j &lt; u; j++)</div>
 <div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>      {</div>
 <div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>        <span class="comment">// Get the start time</span></div>
 <div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>        <span class="keywordtype">double</span> t_extract_start = <a class="code hl_function" href="namespaceoomph_1_1TimingHelpers.html#a9fb6ad7e2e01b0914e9f7072ef9ebfa6">TimingHelpers::timer</a>();</div>
@@ -971,7 +971,6 @@ $(function() {
 <div class="ttc" id="anamespaceoomph_1_1TimingHelpers_html_a9fb6ad7e2e01b0914e9f7072ef9ebfa6"><div class="ttname"><a href="namespaceoomph_1_1TimingHelpers.html#a9fb6ad7e2e01b0914e9f7072ef9ebfa6">oomph::TimingHelpers::timer</a></div><div class="ttdeci">double timer()</div><div class="ttdoc">returns the time in seconds after some point in past</div><div class="ttdef"><b>Definition:</b> <a href="oomph__utilities_8cc_source.html#l01295">oomph_utilities.cc:1295</a></div></div>
 <div class="ttc" id="anamespaceoomph_html"><div class="ttname"><a href="namespaceoomph.html">oomph</a></div><div class="ttdoc">//////////////////////////////////////////////////////////////////// ////////////////////////////////...</div><div class="ttdef"><b>Definition:</b> <a href="advection__diffusion__elements_8cc_source.html#l00029">advection_diffusion_elements.cc:30</a></div></div>
 <div class="ttc" id="anamespaceoomph_html_a71421688cd14bcbb18a23c64b7245941"><div class="ttname"><a href="namespaceoomph.html#a71421688cd14bcbb18a23c64b7245941">oomph::oomph_nullstream</a></div><div class="ttdeci">Nullstream oomph_nullstream</div><div class="ttdoc">///////////////////////////////////////////////////////////////////////// ///////////////////////////...</div><div class="ttdef"><b>Definition:</b> <a href="oomph__definitions_8cc_source.html#l00313">oomph_definitions.cc:313</a></div></div>
-<div class="ttc" id="anamespaceoomph_html_ac0ed65f6db53d9ad737e1d2a69767d25"><div class="ttname"><a href="namespaceoomph.html#ac0ed65f6db53d9ad737e1d2a69767d25">oomph::u</a></div><div class="ttdeci">u</div><div class="ttdoc">Z2-error-estimator: Elements that can be used with Z2 error estimation should be derived from the bas...</div><div class="ttdef"><b>Definition:</b> <a href="error__estimator_8h_source.html#l00165">error_estimator.h:165</a></div></div>
 <div class="ttc" id="anamespaceoomph_html_aec474227917784dc0a255faf289cfc16"><div class="ttname"><a href="namespaceoomph.html#aec474227917784dc0a255faf289cfc16">oomph::oomph_info</a></div><div class="ttdeci">OomphInfo oomph_info</div><div class="ttdoc">Single (global) instantiation of the OomphInfo object – this is used throughout the library as a &quot;rep...</div><div class="ttdef"><b>Definition:</b> <a href="oomph__definitions_8cc_source.html#l00319">oomph_definitions.cc:319</a></div></div>
 <div class="ttc" id="asuperlu_8c_html_a69adc9284c505fa959966039ac941988"><div class="ttname"><a href="superlu_8c.html#a69adc9284c505fa959966039ac941988">get_memory_usage_in_bytes</a></div><div class="ttdeci">void get_memory_usage_in_bytes(double *lu_factor_memory, double *total_memory)</div><div class="ttdef"><b>Definition:</b> <a href="superlu_8c_source.html#l00085">superlu.c:85</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
@@ -1002,7 +1001,7 @@ $(function() {
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Nov 2 2021 16:31:14
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Dec 21 2021 17:35:11
         </div>
       </div>
     </footer>

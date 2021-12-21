@@ -56,7 +56,7 @@
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00052}00052   \textcolor{keyword}{public}:\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00053}00053 \textcolor{comment}{    /// Function pointer to the prescribed-\/flux function fct(x,f(x)) -\/-\/}}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00054}00054 \textcolor{comment}{    /// x is a Vector!}}
-\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00055}\mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a667254e1d7fea39ba393e0d9853f216d}{00055}} \textcolor{comment}{}    \textcolor{keyword}{typedef} void (*\mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a667254e1d7fea39ba393e0d9853f216d}{PoissonPrescribedFluxFctPt}})(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00055}\mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a667254e1d7fea39ba393e0d9853f216d}{00055}} \textcolor{comment}{}    \textcolor{keyword}{typedef} void (*\mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a667254e1d7fea39ba393e0d9853f216d}{PoissonPrescribedFluxFctPt}})(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00056}00056                                                \textcolor{keywordtype}{double}\& flux);}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00057}00057 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00058}00058 \textcolor{comment}{    /// Constructor, takes the pointer to the "{}bulk"{} element and the}}
@@ -109,11 +109,11 @@
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00105}00105 \textcolor{comment}{    /// Add the element's contribution to its residual vector and its}}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00106}00106 \textcolor{comment}{    /// Jacobian matrix}}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00107}\mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a7be7daf3b3b3ba50a216d40d1d8016f5}{00107}} \textcolor{comment}{}    \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a7be7daf3b3b3ba50a216d40d1d8016f5}{fill\_in\_contribution\_to\_jacobian}}(\mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00108}00108                                                  \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})}
+\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00108}00108                                                  \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian)}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00109}00109     \{}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00110}00110       \textcolor{comment}{// Call the generic routine with the flag set to 1}}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00111}00111       \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a78a7d6879d80f26ea06a905b721a3d25}{fill\_in\_generic\_residual\_contribution\_poisson\_flux}}(}
-\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00112}00112         residuals, \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, 1);}
+\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00112}00112         residuals, jacobian, 1);}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00113}00113     \}}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00114}00114 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00115}00115 \textcolor{comment}{    /// Output function}}
@@ -142,14 +142,14 @@
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00138}00138         \textcolor{comment}{// Get local coordinates of plot point}}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00139}00139         \mbox{\hyperlink{classoomph_1_1FiniteElement_a82da844fd3ebb2005842464cdc148a03}{get\_s\_plot}}(iplot, nplot, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00140}00140 }
-\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00141}00141         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(el\_dim + 1);}
+\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00141}00141         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(el\_dim + 1);}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00142}00142         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < el\_dim + 1; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00143}00143         \{}
-\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00144}00144           \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{classoomph_1_1FaceElement_a7aa612fec3604e08344503fbcdc357c8}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
-\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00145}00145           outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00144}00144           x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{classoomph_1_1FaceElement_a7aa612fec3604e08344503fbcdc357c8}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00145}00145           outfile << x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00146}00146         \}}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00147}00147         \textcolor{keywordtype}{double} flux = 0.0;}
-\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00148}00148         \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a51a332a35b271f1d61512ae66397aecb}{get\_flux}}(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, flux);}
+\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00148}00148         \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a51a332a35b271f1d61512ae66397aecb}{get\_flux}}(x, flux);}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00149}00149         outfile << flux << std::endl;}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00150}00150       \}}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00151}00151 }
@@ -210,7 +210,7 @@
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00206}00206       \textcolor{keywordtype}{unsigned} n\_node = \mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00207}00207 }
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00208}00208       \textcolor{comment}{// Get the shape functions}}
-\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00209}00209       \mbox{\hyperlink{classoomph_1_1FiniteElement_a2de680722518136b5c6bf2aacc267a31}{shape\_at\_knot}}(ipt, psi);}
+\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00209}00209       \mbox{\hyperlink{classoomph_1_1FiniteElement_aeccc0f774e3fab8c536e2d41004a1665}{shape\_at\_knot}}(ipt, psi);}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00210}00210 }
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00211}00211       \textcolor{comment}{// Set the test functions to be the same as the shape functions}}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00212}00212       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_node; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
@@ -225,7 +225,7 @@
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00221}00221 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00222}00222 \textcolor{comment}{    /// Function to calculate the prescribed flux at a given spatial}}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00223}00223 \textcolor{comment}{    /// position}}
-\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00224}\mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a51a332a35b271f1d61512ae66397aecb}{00224}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a51a332a35b271f1d61512ae66397aecb}{get\_flux}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \textcolor{keywordtype}{double}\& flux)}
+\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00224}\mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a51a332a35b271f1d61512ae66397aecb}{00224}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a51a332a35b271f1d61512ae66397aecb}{get\_flux}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x, \textcolor{keywordtype}{double}\& flux)}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00225}00225     \{}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00226}00226       \textcolor{comment}{// If the function pointer is zero return zero}}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00227}00227       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PoissonFluxElement_ad737032d93200748f1c48e22c2cc0e9b}{Flux\_fct\_pt}} == 0)}
@@ -235,7 +235,7 @@
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00231}00231       \textcolor{comment}{// Otherwise call the function}}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00232}00232       \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00233}00233       \{}
-\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00234}00234         (*Flux\_fct\_pt)(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, flux);}
+\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00234}00234         (*Flux\_fct\_pt)(x, flux);}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00235}00235       \}}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00236}00236     \}}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00237}00237 }
@@ -245,7 +245,7 @@
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00241}00241 \textcolor{comment}{    /// Jacobian as well.}}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00242}00242 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a78a7d6879d80f26ea06a905b721a3d25}{fill\_in\_generic\_residual\_contribution\_poisson\_flux}}(}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00243}00243       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00244}00244       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}},}
+\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00244}00244       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian,}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00245}00245       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& flag);}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00246}00246 }
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00247}00247 \textcolor{comment}{}}
@@ -279,7 +279,7 @@
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00275}00275     \textcolor{comment}{// Let the bulk element build the FaceElement, i.e. setup the pointers}}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00276}00276     \textcolor{comment}{// to its nodes (by referring to the appropriate nodes in the bulk}}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00277}00277     \textcolor{comment}{// element), etc.}}
-\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00278}00278     bulk\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a025ab56ef9c6eea66fb34416fdf19152}{build\_face\_element}}(\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\_index}}, \textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00278}00278     bulk\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_aaf7bead5b462cfd5401d97b3dbdc7af7}{build\_face\_element}}(\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\_index}}, \textcolor{keyword}{this});}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00279}00279 }
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00280}00280 \textcolor{preprocessor}{\#ifdef PARANOID}}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00281}00281     \{}
@@ -310,7 +310,7 @@
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00306}00306 }
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00307}00307     \textcolor{comment}{// Extract the dimension of the problem from the dimension of}}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00308}00308     \textcolor{comment}{// the first node}}
-\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00309}00309     \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a2ba672aba6d197451151700733254f4c}{Dim}} = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>ndim();}
+\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00309}00309     \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a2ba672aba6d197451151700733254f4c}{Dim}} = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00310}00310 }
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00311}00311     \textcolor{comment}{// Set up U\_index\_poisson. Initialise to zero, which probably won't change}}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00312}00312     \textcolor{comment}{// in most cases, oh well, the price we pay for generality}}
@@ -326,8 +326,8 @@
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00322}00322         \textcolor{comment}{// One dimensional problem}}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00323}00323       \textcolor{keywordflow}{case} 1:}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00324}00324       \{}
-\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00325}00325         PoissonEquations<1>* eqn\_pt =}
-\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00326}00326           \textcolor{keyword}{dynamic\_cast<}PoissonEquations<1>*\textcolor{keyword}{>}(bulk\_el\_pt);}
+\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00325}00325         \mbox{\hyperlink{classoomph_1_1PoissonEquations}{PoissonEquations<1>}}* eqn\_pt =}
+\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00326}00326           \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1PoissonEquations}{PoissonEquations<1>}}*\textcolor{keyword}{>}(bulk\_el\_pt);}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00327}00327         \textcolor{comment}{// If the cast has failed die}}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00328}00328         \textcolor{keywordflow}{if} (eqn\_pt == 0)}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00329}00329         \{}
@@ -346,7 +346,7 @@
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00342}00342         \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00343}00343         \{}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00344}00344           \textcolor{comment}{// Read the index from the (cast) bulk element}}
-\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00345}00345           \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_ab504c339a71a90ae4975071368b1f84c}{U\_index\_poisson}} = eqn\_pt-\/>u\_index\_poisson();}
+\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00345}00345           \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_ab504c339a71a90ae4975071368b1f84c}{U\_index\_poisson}} = eqn\_pt-\/>\mbox{\hyperlink{classoomph_1_1PoissonEquations_ae2e4e133bde4c4cbddf00de6c4feb72c}{u\_index\_poisson}}();}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00346}00346         \}}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00347}00347       \}}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00348}00348       \textcolor{keywordflow}{break};}
@@ -354,8 +354,8 @@
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00350}00350       \textcolor{comment}{// Two dimensional problem}}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00351}00351       \textcolor{keywordflow}{case} 2:}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00352}00352       \{}
-\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00353}00353         PoissonEquations<2>* eqn\_pt =}
-\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00354}00354           \textcolor{keyword}{dynamic\_cast<}PoissonEquations<2>*\textcolor{keyword}{>}(bulk\_el\_pt);}
+\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00353}00353         \mbox{\hyperlink{classoomph_1_1PoissonEquations}{PoissonEquations<2>}}* eqn\_pt =}
+\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00354}00354           \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1PoissonEquations}{PoissonEquations<2>}}*\textcolor{keyword}{>}(bulk\_el\_pt);}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00355}00355         \textcolor{comment}{// If the cast has failed die}}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00356}00356         \textcolor{keywordflow}{if} (eqn\_pt == 0)}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00357}00357         \{}
@@ -373,7 +373,7 @@
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00369}00369         \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00370}00370         \{}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00371}00371           \textcolor{comment}{// Read the index from the (cast) bulk element.}}
-\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00372}00372           \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_ab504c339a71a90ae4975071368b1f84c}{U\_index\_poisson}} = eqn\_pt-\/>u\_index\_poisson();}
+\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00372}00372           \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_ab504c339a71a90ae4975071368b1f84c}{U\_index\_poisson}} = eqn\_pt-\/>\mbox{\hyperlink{classoomph_1_1PoissonEquations_ae2e4e133bde4c4cbddf00de6c4feb72c}{u\_index\_poisson}}();}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00373}00373         \}}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00374}00374       \}}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00375}00375       \textcolor{keywordflow}{break};}
@@ -381,8 +381,8 @@
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00377}00377       \textcolor{comment}{// Three dimensional problem}}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00378}00378       \textcolor{keywordflow}{case} 3:}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00379}00379       \{}
-\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00380}00380         PoissonEquations<3>* eqn\_pt =}
-\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00381}00381           \textcolor{keyword}{dynamic\_cast<}PoissonEquations<3>*\textcolor{keyword}{>}(bulk\_el\_pt);}
+\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00380}00380         \mbox{\hyperlink{classoomph_1_1PoissonEquations}{PoissonEquations<3>}}* eqn\_pt =}
+\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00381}00381           \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1PoissonEquations}{PoissonEquations<3>}}*\textcolor{keyword}{>}(bulk\_el\_pt);}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00382}00382         \textcolor{comment}{// If the cast has failed die}}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00383}00383         \textcolor{keywordflow}{if} (eqn\_pt == 0)}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00384}00384         \{}
@@ -400,7 +400,7 @@
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00396}00396         \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00397}00397         \{}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00398}00398           \textcolor{comment}{// Read the index from the (cast) bulk element.}}
-\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00399}00399           \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_ab504c339a71a90ae4975071368b1f84c}{U\_index\_poisson}} = eqn\_pt-\/>u\_index\_poisson();}
+\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00399}00399           \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_ab504c339a71a90ae4975071368b1f84c}{U\_index\_poisson}} = eqn\_pt-\/>\mbox{\hyperlink{classoomph_1_1PoissonEquations_ae2e4e133bde4c4cbddf00de6c4feb72c}{u\_index\_poisson}}();}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00400}00400         \}}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00401}00401       \}}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00402}00402       \textcolor{keywordflow}{break};}
@@ -464,7 +464,7 @@
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00460}00460       \textcolor{keywordtype}{double} J = shape\_and\_test(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, psif, testf);}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00461}00461 }
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00462}00462       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00463}00463       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00463}00463       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00464}00464 }
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00465}00465       \textcolor{comment}{// Need to find position to feed into flux function, initialise to zero}}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00466}00466       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} interpolated\_x(\mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a27cbb5ec7f6fea2f237c11659ffeef58}{Dim}}, 0.0);}
@@ -493,7 +493,7 @@
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00489}00489         \textcolor{keywordflow}{if} (local\_eqn >= 0)}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00490}00490         \{}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00491}00491           \textcolor{comment}{// Add the prescribed flux terms}}
-\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00492}00492           residuals[local\_eqn] -\/= flux * testf[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00492}00492           residuals[local\_eqn] -\/= flux * testf[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00493}00493 }
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00494}00494           \textcolor{comment}{// Imposed traction doesn't depend upon the solution,}}
 \DoxyCodeLine{\Hypertarget{poisson__flux__elements_8h_source_l00495}00495           \textcolor{comment}{// -\/-\/> the Jacobian is always zero, so no Jacobian}}

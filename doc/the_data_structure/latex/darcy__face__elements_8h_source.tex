@@ -54,7 +54,7 @@
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00050}00050 \textcolor{comment}{    /// Default load function (zero pressure)}}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00051}00051 \textcolor{comment}{}    \textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00052}\mbox{\hyperlink{namespaceoomph_1_1DarcyFaceElementHelper_a088969b1cd5f0c561db82bb4f1697546}{00052}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1DarcyFaceElementHelper_a088969b1cd5f0c561db82bb4f1697546}{Zero\_pressure\_fct}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
-\DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00053}00053                            \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00053}00053                            \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00054}00054                            \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7dabc60bec4cc294aa2adf92726c6d6823a}{N}},}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00055}00055                            \textcolor{keywordtype}{double}\& load)}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00056}00056     \{}
@@ -81,7 +81,7 @@
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00077}00077 \textcolor{comment}{    /// (Not all of the input arguments will be required for all specific load}}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00078}00078 \textcolor{comment}{    /// functions but the list should cover all cases)}}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00079}\mbox{\hyperlink{classoomph_1_1DarcyFaceElement_a39c6156b3067d3ff047eb7cf62d36b4c}{00079}} \textcolor{comment}{}    void (*\mbox{\hyperlink{classoomph_1_1DarcyFaceElement_a39c6156b3067d3ff047eb7cf62d36b4c}{Pressure\_fct\_pt}})(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
-\DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00080}00080                             \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00080}00080                             \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00081}00081                             \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& n,}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00082}00082                             \textcolor{keywordtype}{double}\& result);}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00083}00083 }
@@ -93,11 +93,11 @@
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00089}00089 \textcolor{comment}{    /// so it can be overloaded for FSI.}}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00090}\mbox{\hyperlink{classoomph_1_1DarcyFaceElement_afedbc8695e027c9d1bb80843f2548bc1}{00090}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1DarcyFaceElement_afedbc8695e027c9d1bb80843f2548bc1}{get\_pressure}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00091}00091                               \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& intpt,}
-\DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00092}00092                               \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00092}00092                               \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00093}00093                               \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& n,}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00094}00094                               \textcolor{keywordtype}{double}\& \mbox{\hyperlink{classoomph_1_1DarcyFaceElement_acb4492022eed505e3b41ee47a6b3bcaa}{pressure}})}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00095}00095     \{}
-\DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00096}00096       \mbox{\hyperlink{classoomph_1_1DarcyFaceElement_a39c6156b3067d3ff047eb7cf62d36b4c}{Pressure\_fct\_pt}}(time, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, n, \mbox{\hyperlink{classoomph_1_1DarcyFaceElement_acb4492022eed505e3b41ee47a6b3bcaa}{pressure}});}
+\DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00096}00096       \mbox{\hyperlink{classoomph_1_1DarcyFaceElement_a39c6156b3067d3ff047eb7cf62d36b4c}{Pressure\_fct\_pt}}(time, x, n, \mbox{\hyperlink{classoomph_1_1DarcyFaceElement_acb4492022eed505e3b41ee47a6b3bcaa}{pressure}});}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00097}00097     \}}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00098}00098 }
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00099}00099 \textcolor{comment}{}}
@@ -141,7 +141,7 @@
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00137}00137 }
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00138}00138       \textcolor{comment}{// Attach the geometrical information to the element. N.B. This function}}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00139}00139       \textcolor{comment}{// also assigns nbulk\_value from the required\_nvalue of the bulk element}}
-\DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00140}00140       element\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a025ab56ef9c6eea66fb34416fdf19152}{build\_face\_element}}(\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\_index}}, \textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00140}00140       element\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_aaf7bead5b462cfd5401d97b3dbdc7af7}{build\_face\_element}}(\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\_index}}, \textcolor{keyword}{this});}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00141}00141 }
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00142}00142       \textcolor{comment}{// Zero pressure}}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00143}00143       \mbox{\hyperlink{classoomph_1_1DarcyFaceElement_a39c6156b3067d3ff047eb7cf62d36b4c}{Pressure\_fct\_pt}} = \&\mbox{\hyperlink{namespaceoomph_1_1DarcyFaceElementHelper_a088969b1cd5f0c561db82bb4f1697546}{DarcyFaceElementHelper::Zero\_pressure\_fct}};}
@@ -150,7 +150,7 @@
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00146}00146 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00147}00147 \textcolor{comment}{    /// Reference to the pressure function pointer}}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00148}\mbox{\hyperlink{classoomph_1_1DarcyFaceElement_a879c92237eb386a886d78009078b711a}{00148}} \textcolor{comment}{}    void (*\&\mbox{\hyperlink{classoomph_1_1DarcyFaceElement_a879c92237eb386a886d78009078b711a}{pressure\_fct\_pt}}())(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
-\DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00149}00149                                \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00149}00149                                \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00150}00150                                \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& n,}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00151}00151                                \textcolor{keywordtype}{double}\& \mbox{\hyperlink{classoomph_1_1DarcyFaceElement_acb4492022eed505e3b41ee47a6b3bcaa}{pressure}})}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00152}00152     \{}
@@ -167,7 +167,7 @@
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00163}00163 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00164}00164 \textcolor{comment}{    /// Fill in contribution from Jacobian}}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00165}\mbox{\hyperlink{classoomph_1_1DarcyFaceElement_a7b114cbc2c42545d84be0342801ae7c0}{00165}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1DarcyFaceElement_a7b114cbc2c42545d84be0342801ae7c0}{fill\_in\_contribution\_to\_jacobian}}(\mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00166}00166                                           \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})}
+\DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00166}00166                                           \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian)}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00167}00167     \{}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00168}00168       \textcolor{comment}{// Call the residuals}}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00169}00169       \mbox{\hyperlink{classoomph_1_1DarcyFaceElement_a456b5876a2966eafb5bfe68e7210534d}{fill\_in\_contribution\_to\_residuals\_darcy\_face}}(residuals);}
@@ -235,8 +235,8 @@
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00231}00231     \textcolor{keywordtype}{unsigned} n\_dim = this-\/>nodal\_dimension();}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00232}00232 }
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00233}00233     \textcolor{comment}{// Position vector}}
-\DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00234}00234     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(n\_dim);}
-\DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00235}00235     interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00234}00234     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(n\_dim);}
+\DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00235}00235     interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00236}00236 }
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00237}00237     \textcolor{comment}{// Outer unit normal}}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00238}00238     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} unit\_normal(n\_dim);}
@@ -246,7 +246,7 @@
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00242}00242     \textcolor{keywordtype}{unsigned} ipt = 0;}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00243}00243 }
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00244}00244     \textcolor{comment}{// Pressure value}}
-\DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00245}00245     get\_pressure(time, ipt, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, unit\_normal, pressure);}
+\DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00245}00245     get\_pressure(time, ipt, x, unit\_normal, pressure);}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00246}00246   \}}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00247}00247 }
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00248}00248 }
@@ -385,7 +385,7 @@
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00381}00381 }
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00382}00382       \textcolor{comment}{// Premultiply the weights and the square-\/root of the determinant of}}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00383}00383       \textcolor{comment}{// the metric tensor}}
-\DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00384}00384       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * sqrt(Adet);}
+\DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00384}00384       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * sqrt(Adet);}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00385}00385 }
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00386}00386       \textcolor{comment}{// Now calculate the load}}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00387}00387       \textcolor{keywordtype}{double} pressure;}
@@ -405,7 +405,7 @@
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00401}00401           \{}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00402}00402             \textcolor{comment}{// Add the loading terms to the residuals}}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00403}00403             residuals[local\_eqn] +=}
-\DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00404}00404               pressure * q\_basis(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * interpolated\_normal[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00404}00404               pressure * q\_basis(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * interpolated\_normal[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00405}00405           \}}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00406}00406         \} \textcolor{comment}{// End of if not boundary condition}}
 \DoxyCodeLine{\Hypertarget{darcy__face__elements_8h_source_l00407}00407       \} \textcolor{comment}{// End of loop over shape functions}}

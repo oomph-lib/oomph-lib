@@ -204,7 +204,9 @@ Finally, it is possible to suppress the installation of CGAL (and the related li
 
 \end{DoxyCode}
  In this case {\ttfamily oomph-\/lib} will employ a sub-\/optimal \char`\"{}locate\+\_\+zeta\char`\"{} algorithm in its multi-\/domain algorithms.\hypertarget{index_external_dist}{}\doxysubsection{External (third-\/party) libraries that are not distributed with oomph-\/lib}\label{index_external_dist}
-\hypertarget{index_hypre}{}\doxysubsubsection{Hypre}\label{index_hypre}
+Note\+: The third-\/party libraries discussed here are not installed by default but are built on demand if suitable tar files are placed in the relevant directories in the oomph-\/lib directory tree. You can download the tar files using the script \begin{center} \href{../../../bin/get_external_distribution_tar_files.bash}{\texttt{ bin/get\+\_\+external\+\_\+distribution\+\_\+tar\+\_\+files.\+bash}} \end{center} 
+
+or download them one-\/by-\/one using the links provided below.\hypertarget{index_hypre}{}\doxysubsubsection{Hypre}\label{index_hypre}
 {\ttfamily oomph-\/lib} provides wrappers to the powerful solvers and preconditioners from the \href{https://computation.llnl.gov/casc/linear_solvers/sls_hypre.html}{\texttt{ Scalable Linear Solvers Project}}. The wrappers are only built if {\ttfamily Hypre} is available on your machine. If your local ~\newline
  copy of the {\ttfamily Hypre} library installed in 
 \begin{DoxyCode}{0}
@@ -228,7 +230,7 @@ Finally, it is possible to suppress the installation of CGAL (and the related li
 
 {\bfseries{Note\+:}} {\ttfamily oomph-\/lib} works with version 2.\+0.\+0 of the library. If this version of {\ttfamily Hypre} is not available on your machine download the tar file from the our own website\+:
 
-\begin{center} \href{../../../../oomph-lib_external_distfiles/hypre-2.0.0.tar.gz}{\texttt{ hypre-\/2.\+0.\+0.\+tar.\+gz}} \end{center} 
+\begin{center} \href{https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/hypre-2.0.0.tar.gz}{\texttt{ hypre-\/2.\+0.\+0.\+tar.\+gz}} \end{center} 
 
 You can either build the library yourself or get {\ttfamily oomph-\/lib} to build it for you. To do this simply place a copy of the tar file into the directory 
 \begin{DoxyCode}{0}
@@ -265,7 +267,7 @@ You can either build the library yourself or get {\ttfamily oomph-\/lib} to buil
 
 {\bfseries{Note\+:}} {\ttfamily oomph-\/lib} should work with major version numbers 9, 10 and 11 of the Trilinos library, and for revision numbers from 11 onwards you will need to have {\ttfamily cmake} installed on your machine. If these versions of {\ttfamily Trilinos} are not available on your machine you can get the latest version from the \href{http://trilinos.sandia.gov/}{\texttt{ Trilinos web site }} or download a copy of the relevant tar file from our own website\+:
 
-\begin{center} \href{../../../../oomph-lib_external_distfiles/trilinos-11.8.1-Source.tar.gz}{\texttt{ trilinos-\/11.\+8.\+1-\/\+Source.\+tar.\+gz}} \end{center} 
+\begin{center} \href{https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/trilinos-11.8.1-Source.tar.gz}{\texttt{ trilinos-\/11.\+8.\+1-\/\+Source.\+tar.\+gz}} \end{center} 
 
 You can either build the library yourself or get {\ttfamily oomph-\/lib} to build it for you. To do this simply place a copy of the tar file into the directory 
 \begin{DoxyCode}{0}
@@ -307,7 +309,7 @@ If you do not have {\ttfamily MUMPS} available you can download the latest versi
 \end{DoxyCode}
 
 
-You can also download both files from our own website\+: \begin{center} \href{../../../../oomph-lib_external_distfiles/MUMPS_4.10.0.tar.gz}{\texttt{ MUMPS\+\_\+4.\+10.\+0.\+tar.\+gz}} \end{center}  \begin{center} \href{../../../../oomph-lib_external_distfiles/scalapack_installer.tgz}{\texttt{ scalapack\+\_\+installer.\+tgz}} \end{center} 
+You can also download both files from our own website\+: \begin{center} \href{https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/MUMPS_4.10.0.tar.gz}{\texttt{ MUMPS\+\_\+4.\+10.\+0.\+tar.\+gz}} \end{center}  \begin{center} \href{https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/scalapack_installer.tgz}{\texttt{ scalapack\+\_\+installer.\+tgz}} \end{center} 
 
 Note that the configure option 
 \begin{DoxyCode}{0}

@@ -484,441 +484,451 @@
 \DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00481}00481 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00482}00482 \textcolor{comment}{\(\backslash\)subsection external\_dist External (third-\/party) libraries that are not distributed with oomph-\/lib}}
 \DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00483}00483 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00484}00484 \textcolor{comment}{\(\backslash\)subsubsection hypre Hypre}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00485}00485 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00486}00486 \textcolor{comment}{\(\backslash\)c oomph-\/lib provides wrappers to the powerful solvers and}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00487}00487 \textcolor{comment}{preconditioners from the}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00488}00488 \textcolor{comment}{<a href="{}https://computation.llnl.gov/casc/linear\_solvers/sls\_hypre.html"{}>}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00489}00489 \textcolor{comment}{Scalable Linear Solvers Project</a>. The wrappers are only built}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00490}00490 \textcolor{comment}{if \(\backslash\)c Hypre is available on your machine. If your local  }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00491}00491 \textcolor{comment}{copy of the \(\backslash\)c Hypre library installed in }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00492}00492 \textcolor{comment}{\(\backslash\)code}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00493}00493 \textcolor{comment}{/home/mheil/local/hypre}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00494}00494 \textcolor{comment}{\(\backslash\)endcode}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00495}00495 \textcolor{comment}{i.e. if this directory contains \(\backslash\)c Hypre's lib and include}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00496}00496 \textcolor{comment}{directories:}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00497}00497 \textcolor{comment}{\(\backslash\)code}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00498}00498 \textcolor{comment}{biowulf:\string~ 10:44:22\$ ll /home/mheil/local/hypre}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00499}00499 \textcolor{comment}{total 8}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00500}00500 \textcolor{comment}{drwxr-\/xr-\/x    2 mheil    users        4096 Nov  3  2007 include}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00501}00501 \textcolor{comment}{drwxr-\/xr-\/x    2 mheil    users        4096 Nov  3  2007 lib}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00502}00502 \textcolor{comment}{\(\backslash\)endcode}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00503}00503 \textcolor{comment}{you can get \(\backslash\)c oomph-\/lib to link against it (and to compile}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00504}00504 \textcolor{comment}{\(\backslash\)c oomph-\/lib's wrappers to \(\backslash\)c Hypre's solvers and preconditioners)}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00505}00505 \textcolor{comment}{by specifying the configure option}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00506}00506 \textcolor{comment}{\(\backslash\)code}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00507}00507 \textcolor{comment}{-\/-\/with-\/hypre=/home/mheil/local/hypre}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00508}00508 \textcolor{comment}{\(\backslash\)endcode}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00509}00509 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00510}00510 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00511}00511 \textcolor{comment}{\(\backslash\)b Note: \(\backslash\)c oomph-\/lib works with version 2.0.0 of the library. }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00512}00512 \textcolor{comment}{If this version of \(\backslash\)c Hypre is not available on your machine}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00513}00513 \textcolor{comment}{download the tar file from the our own website: }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00514}00514 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00515}00515 \textcolor{comment}{<CENTER>}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00516}00516 \textcolor{comment}{<a href="{}../../../../oomph-\/lib\_external\_distfiles/hypre-\/2.0.0.tar.gz"{}>hypre-\/2.0.0.tar.gz</a>}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00517}00517 \textcolor{comment}{</CENTER>}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00518}00518 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00519}00519 \textcolor{comment}{You can either build the library yourself}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00520}00520 \textcolor{comment}{or get \(\backslash\)c oomph-\/lib to build it for you. To do this simply place a copy of the}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00521}00521 \textcolor{comment}{tar file into the directory}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00522}00522 \textcolor{comment}{\(\backslash\)code}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00523}00523 \textcolor{comment}{external\_distributions/hypre}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00524}00524 \textcolor{comment}{\(\backslash\)endcode}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00525}00525 \textcolor{comment}{and (re-\/)run \(\backslash\)c autogen.sh. The installation procedure will detect}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00526}00526 \textcolor{comment}{the tar file, unpack it, and install the library in }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00527}00527 \textcolor{comment}{\(\backslash\)code}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00528}00528 \textcolor{comment}{external\_distributions/hypre/hypre\_default\_installation}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00529}00529 \textcolor{comment}{\(\backslash\)endcode}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00530}00530 \textcolor{comment}{Unless you explicitly specified a library location using}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00531}00531 \textcolor{comment}{the \(\backslash\)c -\/-\/with-\/hypre flag, \(\backslash\)c oomph-\/lib will then link against}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00532}00532 \textcolor{comment}{this newly created version of the library. However, we strongly}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00533}00533 \textcolor{comment}{recommend moving the newly created library }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00534}00534 \textcolor{comment}{to another place (outside the \(\backslash\)c oomph-\/lib distribution) to }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00535}00535 \textcolor{comment}{preserve it for future use. Once this is done you simply specify the }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00536}00536 \textcolor{comment}{(new) location of the library with the \(\backslash\)c -\/-\/with-\/hypre flag, as }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00537}00537 \textcolor{comment}{discussed above. (Also make sure to delete the tar file}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00538}00538 \textcolor{comment}{from \(\backslash\)c external\_distributions/hypre, otherwise the library}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00539}00539 \textcolor{comment}{will be re-\/built.) Note that \(\backslash\)c make \(\backslash\)c clean will delete the}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00540}00540 \textcolor{comment}{unpacked \(\backslash\)c Hypre sources but not the tar file and the library itself.}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00541}00541 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00542}00542 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00543}00543 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00544}00544 \textcolor{comment}{\(\backslash\)subsubsection trilinos Trilinos}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00545}00545 \textcolor{comment}{\(\backslash\)c oomph-\/lib provides wrappers to the powerful solvers and}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00546}00546 \textcolor{comment}{preconditioners from the}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00547}00547 \textcolor{comment}{<a href="{}http://trilinos.sandia.gov/"{}>}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00548}00548 \textcolor{comment}{Trilinos Project</a>. The wrappers are only built}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00549}00549 \textcolor{comment}{if \(\backslash\)c Trilinos is available on your machine. If your local  }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00550}00550 \textcolor{comment}{copy of the \(\backslash\)c Trilinos library installed in }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00551}00551 \textcolor{comment}{\(\backslash\)code}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00552}00552 \textcolor{comment}{/home/mheil/local/trilinos}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00553}00553 \textcolor{comment}{\(\backslash\)endcode}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00554}00554 \textcolor{comment}{i.e. if this directory contains \(\backslash\)c Trilinos's lib and include}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00555}00555 \textcolor{comment}{directories:}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00556}00556 \textcolor{comment}{\(\backslash\)code}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00557}00557 \textcolor{comment}{biowulf:\string~ 10:44:31\$ ll /home/mheil/local/trilinos}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00558}00558 \textcolor{comment}{total 24}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00559}00559 \textcolor{comment}{drwxr-\/xr-\/x    2 mheil    users        4096 Dec 20 15:34 bin}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00560}00560 \textcolor{comment}{drwxr-\/xr-\/x    2 mheil    users       16384 Dec 20 15:35 include}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00561}00561 \textcolor{comment}{drwxr-\/xr-\/x    2 mheil    users        4096 Dec 20 15:35 lib}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00562}00562 \textcolor{comment}{\(\backslash\)endcode}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00563}00563 \textcolor{comment}{you can get \(\backslash\)c oomph-\/lib to link against it (and to compile}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00564}00564 \textcolor{comment}{\(\backslash\)c oomph-\/lib's wrappers to \(\backslash\)c Trilinos's solvers and preconditioners)}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00565}00565 \textcolor{comment}{by specifying the configure option}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00484}00484 \textcolor{comment}{Note: The third-\/party libraries discussed here are not installed}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00485}00485 \textcolor{comment}{by default but are built on demand if suitable tar files are placed}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00486}00486 \textcolor{comment}{in the relevant directories in the oomph-\/lib directory tree. You can}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00487}00487 \textcolor{comment}{download the tar files using the script}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00488}00488 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00489}00489 \textcolor{comment}{<a href="{}../../../bin/get\_external\_distribution\_tar\_files.bash"{}>bin/get\_external\_distribution\_tar\_files.bash</a>}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00490}00490 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00491}00491 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00492}00492 \textcolor{comment}{or download them one-\/by-\/one using the links provided below.}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00493}00493 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00494}00494 \textcolor{comment}{\(\backslash\)subsubsection hypre Hypre}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00495}00495 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00496}00496 \textcolor{comment}{\(\backslash\)c oomph-\/lib provides wrappers to the powerful solvers and}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00497}00497 \textcolor{comment}{preconditioners from the}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00498}00498 \textcolor{comment}{<a href="{}https://computation.llnl.gov/casc/linear\_solvers/sls\_hypre.html"{}>}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00499}00499 \textcolor{comment}{Scalable Linear Solvers Project</a>. The wrappers are only built}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00500}00500 \textcolor{comment}{if \(\backslash\)c Hypre is available on your machine. If your local  }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00501}00501 \textcolor{comment}{copy of the \(\backslash\)c Hypre library installed in }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00502}00502 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00503}00503 \textcolor{comment}{/home/mheil/local/hypre}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00504}00504 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00505}00505 \textcolor{comment}{i.e. if this directory contains \(\backslash\)c Hypre's lib and include}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00506}00506 \textcolor{comment}{directories:}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00507}00507 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00508}00508 \textcolor{comment}{biowulf:\string~ 10:44:22\$ ll /home/mheil/local/hypre}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00509}00509 \textcolor{comment}{total 8}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00510}00510 \textcolor{comment}{drwxr-\/xr-\/x    2 mheil    users        4096 Nov  3  2007 include}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00511}00511 \textcolor{comment}{drwxr-\/xr-\/x    2 mheil    users        4096 Nov  3  2007 lib}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00512}00512 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00513}00513 \textcolor{comment}{you can get \(\backslash\)c oomph-\/lib to link against it (and to compile}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00514}00514 \textcolor{comment}{\(\backslash\)c oomph-\/lib's wrappers to \(\backslash\)c Hypre's solvers and preconditioners)}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00515}00515 \textcolor{comment}{by specifying the configure option}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00516}00516 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00517}00517 \textcolor{comment}{-\/-\/with-\/hypre=/home/mheil/local/hypre}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00518}00518 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00519}00519 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00520}00520 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00521}00521 \textcolor{comment}{\(\backslash\)b Note: \(\backslash\)c oomph-\/lib works with version 2.0.0 of the library. }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00522}00522 \textcolor{comment}{If this version of \(\backslash\)c Hypre is not available on your machine}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00523}00523 \textcolor{comment}{download the tar file from the our own website: }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00524}00524 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00525}00525 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00526}00526 \textcolor{comment}{<a href="{}https://personal.maths.manchester.ac.uk/oomphlib/oomph-\/lib\_external\_distfiles/hypre-\/2.0.0.tar.gz"{}>hypre-\/2.0.0.tar.gz</a>}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00527}00527 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00528}00528 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00529}00529 \textcolor{comment}{You can either build the library yourself}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00530}00530 \textcolor{comment}{or get \(\backslash\)c oomph-\/lib to build it for you. To do this simply place a copy of the}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00531}00531 \textcolor{comment}{tar file into the directory}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00532}00532 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00533}00533 \textcolor{comment}{external\_distributions/hypre}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00534}00534 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00535}00535 \textcolor{comment}{and (re-\/)run \(\backslash\)c autogen.sh. The installation procedure will detect}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00536}00536 \textcolor{comment}{the tar file, unpack it, and install the library in }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00537}00537 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00538}00538 \textcolor{comment}{external\_distributions/hypre/hypre\_default\_installation}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00539}00539 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00540}00540 \textcolor{comment}{Unless you explicitly specified a library location using}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00541}00541 \textcolor{comment}{the \(\backslash\)c -\/-\/with-\/hypre flag, \(\backslash\)c oomph-\/lib will then link against}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00542}00542 \textcolor{comment}{this newly created version of the library. However, we strongly}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00543}00543 \textcolor{comment}{recommend moving the newly created library }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00544}00544 \textcolor{comment}{to another place (outside the \(\backslash\)c oomph-\/lib distribution) to }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00545}00545 \textcolor{comment}{preserve it for future use. Once this is done you simply specify the }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00546}00546 \textcolor{comment}{(new) location of the library with the \(\backslash\)c -\/-\/with-\/hypre flag, as }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00547}00547 \textcolor{comment}{discussed above. (Also make sure to delete the tar file}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00548}00548 \textcolor{comment}{from \(\backslash\)c external\_distributions/hypre, otherwise the library}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00549}00549 \textcolor{comment}{will be re-\/built.) Note that \(\backslash\)c make \(\backslash\)c clean will delete the}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00550}00550 \textcolor{comment}{unpacked \(\backslash\)c Hypre sources but not the tar file and the library itself.}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00551}00551 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00552}00552 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00553}00553 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00554}00554 \textcolor{comment}{\(\backslash\)subsubsection trilinos Trilinos}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00555}00555 \textcolor{comment}{\(\backslash\)c oomph-\/lib provides wrappers to the powerful solvers and}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00556}00556 \textcolor{comment}{preconditioners from the}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00557}00557 \textcolor{comment}{<a href="{}http://trilinos.sandia.gov/"{}>}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00558}00558 \textcolor{comment}{Trilinos Project</a>. The wrappers are only built}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00559}00559 \textcolor{comment}{if \(\backslash\)c Trilinos is available on your machine. If your local  }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00560}00560 \textcolor{comment}{copy of the \(\backslash\)c Trilinos library installed in }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00561}00561 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00562}00562 \textcolor{comment}{/home/mheil/local/trilinos}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00563}00563 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00564}00564 \textcolor{comment}{i.e. if this directory contains \(\backslash\)c Trilinos's lib and include}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00565}00565 \textcolor{comment}{directories:}}
 \DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00566}00566 \textcolor{comment}{\(\backslash\)code}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00567}00567 \textcolor{comment}{-\/-\/with-\/trilinos=/home/mheil/local/trilinos}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00568}00568 \textcolor{comment}{\(\backslash\)endcode}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00569}00569 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00570}00570 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00571}00571 \textcolor{comment}{\(\backslash\)b Note: \(\backslash\)c oomph-\/lib should work with major version numbers 9, 10 and 11}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00572}00572 \textcolor{comment}{of the Trilinos library, and for revision numbers from 11 onwards you will}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00573}00573 \textcolor{comment}{need to have \(\backslash\)c cmake installed on your machine.}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00574}00574 \textcolor{comment}{If these versions of \(\backslash\)c Trilinos are not available on your machine you}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00575}00575 \textcolor{comment}{can get the latest version from the <a href="{}http://trilinos.sandia.gov/"{}>}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00576}00576 \textcolor{comment}{Trilinos web site </a> or download a copy of the relevant tar file}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00577}00577 \textcolor{comment}{from our own website:}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00578}00578 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00567}00567 \textcolor{comment}{biowulf:\string~ 10:44:31\$ ll /home/mheil/local/trilinos}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00568}00568 \textcolor{comment}{total 24}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00569}00569 \textcolor{comment}{drwxr-\/xr-\/x    2 mheil    users        4096 Dec 20 15:34 bin}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00570}00570 \textcolor{comment}{drwxr-\/xr-\/x    2 mheil    users       16384 Dec 20 15:35 include}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00571}00571 \textcolor{comment}{drwxr-\/xr-\/x    2 mheil    users        4096 Dec 20 15:35 lib}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00572}00572 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00573}00573 \textcolor{comment}{you can get \(\backslash\)c oomph-\/lib to link against it (and to compile}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00574}00574 \textcolor{comment}{\(\backslash\)c oomph-\/lib's wrappers to \(\backslash\)c Trilinos's solvers and preconditioners)}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00575}00575 \textcolor{comment}{by specifying the configure option}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00576}00576 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00577}00577 \textcolor{comment}{-\/-\/with-\/trilinos=/home/mheil/local/trilinos}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00578}00578 \textcolor{comment}{\(\backslash\)endcode}}
 \DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00579}00579 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00580}00580 \textcolor{comment}{<CENTER>}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00581}00581 \textcolor{comment}{<a href="{}../../../../oomph-\/lib\_external\_distfiles/trilinos-\/11.8.1-\/Source.tar.gz"{}>trilinos-\/11.8.1-\/Source.tar.gz</a>}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00582}00582 \textcolor{comment}{</CENTER>}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00583}00583 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00584}00584 \textcolor{comment}{You can either build the library yourself}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00585}00585 \textcolor{comment}{or get \(\backslash\)c oomph-\/lib to build it for you. To do this simply place a copy of the}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00586}00586 \textcolor{comment}{tar file into the directory}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00587}00587 \textcolor{comment}{\(\backslash\)code}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00588}00588 \textcolor{comment}{external\_distributions/trilinos}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00589}00589 \textcolor{comment}{\(\backslash\)endcode}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00590}00590 \textcolor{comment}{and (re-\/)run \(\backslash\)c autogen.sh. The build process is somewhat different}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00591}00591 \textcolor{comment}{for major version numbers 9 and 10, but oomph-\/lib will detect this}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00592}00592 \textcolor{comment}{automatically, provided that the source file is called}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00593}00593 \textcolor{comment}{trilinos-\/N.*.tar.gz, where N is the major version number. }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00594}00594 \textcolor{comment}{The installation procedure will then detect}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00595}00595 \textcolor{comment}{the tar file, unpack it, and install the library in }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00596}00596 \textcolor{comment}{\(\backslash\)code}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00597}00597 \textcolor{comment}{external\_distributions/trilinos/trilinos\_default\_installation}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00598}00598 \textcolor{comment}{\(\backslash\)endcode}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00599}00599 \textcolor{comment}{Unless you explicitly specified a library location using}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00600}00600 \textcolor{comment}{the \(\backslash\)c -\/-\/with-\/trilinos flag, \(\backslash\)c oomph-\/lib will then link against}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00601}00601 \textcolor{comment}{this newly created version of the library. However, we strongly}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00602}00602 \textcolor{comment}{recommend moving the newly created library }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00603}00603 \textcolor{comment}{to another place (outside the \(\backslash\)c oomph-\/lib distribution) to }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00604}00604 \textcolor{comment}{preserve it for future use. Once this is done you simply specify the }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00605}00605 \textcolor{comment}{(new) location of the library with the \(\backslash\)c -\/-\/with-\/trilinos flag, as }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00606}00606 \textcolor{comment}{discussed above. (Also make sure to delete the tar file from}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00607}00607 \textcolor{comment}{\(\backslash\)c external\_distributions/trilinos, otherwise the library}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00608}00608 \textcolor{comment}{will be re-\/built.) Note that \(\backslash\)c make \(\backslash\)c clean will delete the}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00609}00609 \textcolor{comment}{unpacked \(\backslash\)c Trilinos sources but not the tar file and the library itself.}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00610}00610 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00611}00611 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00612}00612 \textcolor{comment}{<HR>}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00613}00613 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00614}00614 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00615}00615 \textcolor{comment}{\(\backslash\)subsubsection mumps MUMPS and ScaLAPACK}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00616}00616 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00617}00617 \textcolor{comment}{\(\backslash\)c oomph-\/lib also provides wrappers to the }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00618}00618 \textcolor{comment}{<a href="{}http://graal.ens-\/lyon.fr/MUMPS/"{}> MUMPS}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00619}00619 \textcolor{comment}{</a> multifrontal solver, if it is available on your system. }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00620}00620 \textcolor{comment}{\(\backslash\)c MUMPS needs the linear algebra library}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00621}00621 \textcolor{comment}{<a href="{}http://www.netlib.org/scalapack/"{}> }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00622}00622 \textcolor{comment}{ ScaLAPACK </a> which must also be installed on your system.}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00623}00623 \textcolor{comment}{The}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00624}00624 \textcolor{comment}{configure options}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00625}00625 \textcolor{comment}{\(\backslash\)code}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00626}00626 \textcolor{comment}{-\/-\/with-\/mumps=/opt/mumps}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00627}00627 \textcolor{comment}{-\/-\/with-\/scalapack=/opt/scalapack}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00628}00628 \textcolor{comment}{\(\backslash\)endcode}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00629}00629 \textcolor{comment}{will compile \(\backslash\)c oomph-\/lib's wrappers and link against the \(\backslash\)c MUMPS}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00630}00630 \textcolor{comment}{solver provided that \(\backslash\)c MUMPS and ScaLAPACK </a> are installed in the }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00631}00631 \textcolor{comment}{directories }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00632}00632 \textcolor{comment}{\(\backslash\)code}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00633}00633 \textcolor{comment}{/opt/mumps}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00634}00634 \textcolor{comment}{/opt/scalapack}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00635}00635 \textcolor{comment}{\(\backslash\)endcode}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00636}00636 \textcolor{comment}{i.e. these directories contain the \(\backslash\)c lib and \(\backslash\)c include directories that}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00637}00637 \textcolor{comment}{result from successful installations of \(\backslash\)c MUMPS and \(\backslash\)c ScaLAPACK,}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00638}00638 \textcolor{comment}{respectively.}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00639}00639 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00640}00640 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00641}00641 \textcolor{comment}{If you do not have \(\backslash\)c MUMPS available you can download the latest}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00642}00642 \textcolor{comment}{version }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00643}00643 \textcolor{comment}{<a href="{}http://graal.ens-\/lyon.fr/MUMPS/index.php?page=dwnld"{}> here. </a>}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00644}00644 \textcolor{comment}{You can build and install the library yourself, or get \(\backslash\)c oomph-\/lib to build it}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00645}00645 \textcolor{comment}{during part of its own build process. Simply place a copy of the tar file}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00646}00646 \textcolor{comment}{\(\backslash\)c MUMPS\_4.10.0.tar.gz in the directory}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00647}00647 \textcolor{comment}{\(\backslash\)code}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00648}00648 \textcolor{comment}{external\_distributions/mumps\_and\_scalapack}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00649}00649 \textcolor{comment}{\(\backslash\)endcode}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00650}00650 \textcolor{comment}{You will also need to download the \(\backslash\)c scalapack\_installer.tgz from }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00651}00651 \textcolor{comment}{<a href="{}http://www.netlib.org/scalapack/\#\_scalapack\_installer\_for\_linux"{}>}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00652}00652 \textcolor{comment}{here, </a> and place a copy in the same directory}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00653}00653 \textcolor{comment}{\(\backslash\)code}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00654}00654 \textcolor{comment}{external\_distributions/mumps\_and\_scalapack}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00655}00655 \textcolor{comment}{\(\backslash\)endcode}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00656}00656 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00657}00657 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00658}00658 \textcolor{comment}{You can also download both files from our own website:}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00659}00659 \textcolor{comment}{<CENTER>}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00660}00660 \textcolor{comment}{<a href="{}../../../../oomph-\/lib\_external\_distfiles/MUMPS\_4.10.0.tar.gz"{}>MUMPS\_4.10.0.tar.gz</a>}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00661}00661 \textcolor{comment}{</CENTER>}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00662}00662 \textcolor{comment}{<CENTER>}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00663}00663 \textcolor{comment}{<a href="{}../../../../oomph-\/lib\_external\_distfiles/scalapack\_installer.tgz"{}>scalapack\_installer.tgz</a>}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00664}00664 \textcolor{comment}{</CENTER>}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00665}00665 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00666}00666 \textcolor{comment}{Note that the configure option}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00667}00667 \textcolor{comment}{\(\backslash\)code}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00668}00668 \textcolor{comment}{-\/-\/with-\/mpi-\/include-\/directory=/usr/lib/openmpi/include}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00669}00669 \textcolor{comment}{\(\backslash\)endcode}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00670}00670 \textcolor{comment}{<b> must </b> be specified in order to build \(\backslash\)c MUMPS, where \(\backslash\)c}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00671}00671 \textcolor{comment}{/usr/lib/openmpi/include is the directory that contains the file \(\backslash\)c mpi.h.}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00672}00672 \textcolor{comment}{[You can use `locate mpi.h`, to, well, locate that directory.]}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00673}00673 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00674}00674 \textcolor{comment}{Once the files have been placed in the \(\backslash\)c}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00675}00675 \textcolor{comment}{external\_distributions/mumps\_and\_scalapack directory, simply (re-\/)run}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00676}00676 \textcolor{comment}{\(\backslash\)c autogen.sh, which will detect and build the libraries and install}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00677}00677 \textcolor{comment}{then in directory}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00678}00678 \textcolor{comment}{\(\backslash\)code}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00679}00679 \textcolor{comment}{external\_distributions/mumps\_and\_scalapack/mumps\_and\_scalapack\_default\_installation}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00680}00680 \textcolor{comment}{\(\backslash\)endcode}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00681}00681 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00682}00682 \textcolor{comment}{Note that the installation of `ScaLAPACK` requires an}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00683}00683 \textcolor{comment}{active Internet connection because it automatically downloads}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00684}00684 \textcolor{comment}{additional files.}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00685}00685 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00686}00686 \textcolor{comment}{Unless you explicitly specified a library location using}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00687}00687 \textcolor{comment}{the \(\backslash\)c -\/-\/with-\/mumps and \(\backslash\)c -\/-\/with-\/scalapack flags, }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00688}00688 \textcolor{comment}{\(\backslash\)c oomph-\/lib will then link against}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00689}00689 \textcolor{comment}{the newly created versions of the libraries. However, we strongly}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00690}00690 \textcolor{comment}{recommend moving the libraries outside the \(\backslash\)c oomph-\/lib distribution to }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00691}00691 \textcolor{comment}{preserve them for future use. Once this is done you simply specify the }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00692}00692 \textcolor{comment}{(new) location of the library with the \(\backslash\)c -\/-\/with-\/mumps and \(\backslash\)c}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00693}00693 \textcolor{comment}{-\/-\/with-\/scalapack flags, as }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00694}00694 \textcolor{comment}{discussed above. (Also make sure to delete the tar files from}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00695}00695 \textcolor{comment}{\(\backslash\)c external\_distributions/mumps\_and\_scalapack, otherwise the libraries}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00696}00696 \textcolor{comment}{will be built again.) Note that \(\backslash\)c make \(\backslash\)c clean will delete the}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00697}00697 \textcolor{comment}{unpacked sources but not the tar files nor the installed libraries.}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00698}00698 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00699}00699 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00700}00700 \textcolor{comment}{<HR>}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00701}00701 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00702}00702 \textcolor{comment}{\(\backslash\)section own How to write your own code and link it against oomph-\/lib's library/libraries}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00703}00703 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00704}00704 \textcolor{comment}{If you followed the instructions so far, you will be able to install}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00705}00705 \textcolor{comment}{\(\backslash\)c oomph-\/lib and run the demo codes that are provided in the}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00706}00706 \textcolor{comment}{\(\backslash\)c demo\_drivers directory. Great! Now on to the next step: How do }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00707}00707 \textcolor{comment}{you write your own codes and link them against \(\backslash\)c oomph-\/lib? }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00708}00708 \textcolor{comment}{There are two options, depending on}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00709}00709 \textcolor{comment}{whether you have (or are willing to install) the gnu autotools}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00710}00710 \textcolor{comment}{<A HREF="{}http://www.gnu.org/software/autoconf/"{}>autoconf</A>,}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00711}00711 \textcolor{comment}{<A HREF="{}http://www.gnu.org/software/automake/"{}>automake</A>}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00712}00712 \textcolor{comment}{and <A HREF="{}http://www.gnu.org/software/libtool/"{}>libtool</A>}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00713}00713 \textcolor{comment}{on your machine. }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00714}00714 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00715}00715 \textcolor{comment}{\(\backslash\)subsection have\_auto\_tools Writing/linking your own driver codes under autotools control}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00716}00716 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00717}00717 \textcolor{comment}{\(\backslash\)subsubsection add\_driver Adding your own driver codes}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00718}00718 \textcolor{comment}{Let's start with the straightforward case: You want to use \(\backslash\)c}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00719}00719 \textcolor{comment}{oomph-\/lib to solve one of your own problems. To do this within }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00720}00720 \textcolor{comment}{\(\backslash\)c oomph-\/lib's autotools framework, simply create a new}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00721}00721 \textcolor{comment}{directory in \(\backslash\)c user\_drivers and write your driver code. To facilitate}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00722}00722 \textcolor{comment}{these steps, the \(\backslash\)c user\_drivers directory already contains a }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00723}00723 \textcolor{comment}{sample directory \(\backslash\)c joe\_cool for which all these steps have been}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00724}00724 \textcolor{comment}{performed. If you don't object to the directory name (or if your}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00725}00725 \textcolor{comment}{name is Joe Cool) you can simply work in that directory. }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00726}00726 \textcolor{comment}{If not, we suggest the following sequence of steps:}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00727}00727 \textcolor{comment}{-\/\# Go to the \(\backslash\)c user\_drivers directory and create a new }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00728}00728 \textcolor{comment}{   directory, e.g.}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00729}00729 \textcolor{comment}{\(\backslash\)code}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00730}00730 \textcolor{comment}{cd user\_drivers}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00731}00731 \textcolor{comment}{mkdir josephine\_cool}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00732}00732 \textcolor{comment}{\(\backslash\)endcode}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00733}00733 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00734}00734 \textcolor{comment}{-\/\# Copy the \(\backslash\)c Makefile.am and the driver code \(\backslash\)c joes\_poisson\_code.cc}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00735}00735 \textcolor{comment}{   from \(\backslash\)c user\_drivers/joe\_cool to \(\backslash\)c user\_drivers/josephine\_cool.}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00736}00736 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00737}00737 \textcolor{comment}{-\/\# Return to \(\backslash\)c oomph-\/lib's top-\/level directory and re-\/run `./autogen.sh`}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00738}00738 \textcolor{comment}{   to generate the required Makefile etc. in your own directory.}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00739}00739 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00740}00740 \textcolor{comment}{-\/\# You may now return to your own directory in \(\backslash\)c user\_drivers and}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00741}00741 \textcolor{comment}{   make your own driver code:}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00742}00742 \textcolor{comment}{\(\backslash\)code}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00743}00743 \textcolor{comment}{cd user\_drivers/josephine\_cool}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00744}00744 \textcolor{comment}{make}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00745}00745 \textcolor{comment}{\(\backslash\)endcode}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00746}00746 \textcolor{comment}{   This will create the required executable. }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00747}00747 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00748}00748 \textcolor{comment}{-\/\# Unfortunately, the driver code (copied from Joe Cool's directory!) is }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00749}00749 \textcolor{comment}{   unlikely to be the one you want but you can now rename it, edit it, }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00750}00750 \textcolor{comment}{   or add further driver codes to your directory. In general we}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00751}00751 \textcolor{comment}{   suggest that you have a look at the }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00752}00752 \textcolor{comment}{   <A HREF="{}../../example\_code\_list/html/index.html"{}>list of}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00753}00753 \textcolor{comment}{   example codes</A> and try to identify a problem that is similar to the}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00754}00754 \textcolor{comment}{   one you want to solve. The associated driver code will be a good starting}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00755}00755 \textcolor{comment}{   point for your own. Note that whenever you add new driver codes or}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00756}00756 \textcolor{comment}{   rename existing ones you will have to update the local }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00757}00757 \textcolor{comment}{   \(\backslash\)c Makefile.\(\backslash\)c am, though it is not necessary to re-\/run}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00758}00758 \textcolor{comment}{   \(\backslash\)c autogen.\(\backslash\)c sh. The sample \(\backslash\)c Makefile.\(\backslash\)c am}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00759}00759 \textcolor{comment}{   copied from Joe Cool's directory is well annotated and gives}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00760}00760 \textcolor{comment}{   clear instructions how to adapt its contents:}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00761}00761 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00762}00762 \textcolor{comment}{\(\backslash\)include "{}joe\_cool\_makefile.am"{}}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00763}00763 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00764}00764 \textcolor{comment}{   Note the following points: \(\backslash\)n\(\backslash\)n}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00765}00765 \textcolor{comment}{   -\/ Lines that start with a "{}\#"{} are comments.}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00766}00766 \textcolor{comment}{     \(\backslash\)n\(\backslash\)n}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00767}00767 \textcolor{comment}{   -\/ The first (non-\/comment) line in the above file specifies the name(s) of }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00768}00768 \textcolor{comment}{     the executable(s) that will be created by make. These names must be}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00769}00769 \textcolor{comment}{     the same as those in the \(\backslash\)c  *\_SOURCES and \(\backslash\)c *\_LDADD variables. }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00770}00770 \textcolor{comment}{     \(\backslash\)n\(\backslash\)n}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00771}00771 \textcolor{comment}{   -\/ The \(\backslash\)c joes\_poisson\_code\_SOURCES variable declares which (local)}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00772}00772 \textcolor{comment}{     sources your executable depends on. In the current example there}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00773}00773 \textcolor{comment}{     is only a single file, the driver code,}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00774}00774 \textcolor{comment}{     \(\backslash\)c joes\_poisson\_code. \(\backslash\)c cc, itself. }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00775}00775 \textcolor{comment}{     \(\backslash\)n\(\backslash\)n}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00776}00776 \textcolor{comment}{   -\/ The \(\backslash\)c joes\_poisson\_code\_LDADD variable declares:}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00777}00777 \textcolor{comment}{     -\/ the location of the library directory (automake}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00778}00778 \textcolor{comment}{       will convert the macro \(\backslash\)c -\/L\(\backslash\)@libdir\(\backslash\)@ into the actual }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00779}00779 \textcolor{comment}{       directory -\/-\/ you don't have to change this!).}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00780}00780 \textcolor{comment}{     -\/ the libraries (\(\backslash\)c oomph-\/lib or otherwise) that you wish to link}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00781}00781 \textcolor{comment}{       against. This is done with the usual \(\backslash\)c -\/l flag that you}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00782}00782 \textcolor{comment}{       will be familiar with from your compiler. Have a look at the}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00783}00783 \textcolor{comment}{       comments regarding the order of the libraries!}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00784}00784 \textcolor{comment}{     \(\backslash\)n\(\backslash\)n}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00785}00785 \textcolor{comment}{   -\/ The \(\backslash\)c INCLUDES variable specifies where to find the include}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00786}00786 \textcolor{comment}{     header files. This line is again completely generic -\/-\/ automake}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00787}00787 \textcolor{comment}{     will convert the macro \(\backslash\)c -\/I\(\backslash\)@includedir\(\backslash\)@ into the actual }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00788}00788 \textcolor{comment}{     location. }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00789}00789 \textcolor{comment}{     \(\backslash\)n\(\backslash\)n}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00790}00790 \textcolor{comment}{   -\/ If you have multiple driver codes, add the name of all}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00791}00791 \textcolor{comment}{     executables to the \(\backslash\)c noinst\_PROGRAMS variable, and specify}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00792}00792 \textcolor{comment}{     the \(\backslash\)c *\_SOURCES and \(\backslash\)c *\_LDADD variables}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00793}00793 \textcolor{comment}{     for each one. }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00580}00580 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00581}00581 \textcolor{comment}{\(\backslash\)b Note: \(\backslash\)c oomph-\/lib should work with major version numbers 9, 10 and 11}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00582}00582 \textcolor{comment}{of the Trilinos library, and for revision numbers from 11 onwards you will}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00583}00583 \textcolor{comment}{need to have \(\backslash\)c cmake installed on your machine.}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00584}00584 \textcolor{comment}{If these versions of \(\backslash\)c Trilinos are not available on your machine you}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00585}00585 \textcolor{comment}{can get the latest version from the <a href="{}http://trilinos.sandia.gov/"{}>}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00586}00586 \textcolor{comment}{Trilinos web site </a> or download a copy of the relevant tar file}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00587}00587 \textcolor{comment}{from our own website:}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00588}00588 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00589}00589 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00590}00590 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00591}00591 \textcolor{comment}{<a href="{}https://personal.maths.manchester.ac.uk/oomphlib/oomph-\/lib\_external\_distfiles/trilinos-\/11.8.1-\/Source.tar.gz"{}>trilinos-\/11.8.1-\/Source.tar.gz</a>}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00592}00592 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00593}00593 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00594}00594 \textcolor{comment}{You can either build the library yourself}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00595}00595 \textcolor{comment}{or get \(\backslash\)c oomph-\/lib to build it for you. To do this simply place a copy of the}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00596}00596 \textcolor{comment}{tar file into the directory}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00597}00597 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00598}00598 \textcolor{comment}{external\_distributions/trilinos}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00599}00599 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00600}00600 \textcolor{comment}{and (re-\/)run \(\backslash\)c autogen.sh. The build process is somewhat different}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00601}00601 \textcolor{comment}{for major version numbers 9 and 10, but oomph-\/lib will detect this}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00602}00602 \textcolor{comment}{automatically, provided that the source file is called}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00603}00603 \textcolor{comment}{trilinos-\/N.*.tar.gz, where N is the major version number. }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00604}00604 \textcolor{comment}{The installation procedure will then detect}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00605}00605 \textcolor{comment}{the tar file, unpack it, and install the library in }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00606}00606 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00607}00607 \textcolor{comment}{external\_distributions/trilinos/trilinos\_default\_installation}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00608}00608 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00609}00609 \textcolor{comment}{Unless you explicitly specified a library location using}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00610}00610 \textcolor{comment}{the \(\backslash\)c -\/-\/with-\/trilinos flag, \(\backslash\)c oomph-\/lib will then link against}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00611}00611 \textcolor{comment}{this newly created version of the library. However, we strongly}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00612}00612 \textcolor{comment}{recommend moving the newly created library }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00613}00613 \textcolor{comment}{to another place (outside the \(\backslash\)c oomph-\/lib distribution) to }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00614}00614 \textcolor{comment}{preserve it for future use. Once this is done you simply specify the }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00615}00615 \textcolor{comment}{(new) location of the library with the \(\backslash\)c -\/-\/with-\/trilinos flag, as }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00616}00616 \textcolor{comment}{discussed above. (Also make sure to delete the tar file from}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00617}00617 \textcolor{comment}{\(\backslash\)c external\_distributions/trilinos, otherwise the library}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00618}00618 \textcolor{comment}{will be re-\/built.) Note that \(\backslash\)c make \(\backslash\)c clean will delete the}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00619}00619 \textcolor{comment}{unpacked \(\backslash\)c Trilinos sources but not the tar file and the library itself.}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00620}00620 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00621}00621 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00622}00622 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00623}00623 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00624}00624 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00625}00625 \textcolor{comment}{\(\backslash\)subsubsection mumps MUMPS and ScaLAPACK}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00626}00626 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00627}00627 \textcolor{comment}{\(\backslash\)c oomph-\/lib also provides wrappers to the }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00628}00628 \textcolor{comment}{<a href="{}http://graal.ens-\/lyon.fr/MUMPS/"{}> MUMPS}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00629}00629 \textcolor{comment}{</a> multifrontal solver, if it is available on your system. }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00630}00630 \textcolor{comment}{\(\backslash\)c MUMPS needs the linear algebra library}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00631}00631 \textcolor{comment}{<a href="{}http://www.netlib.org/scalapack/"{}> }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00632}00632 \textcolor{comment}{ ScaLAPACK </a> which must also be installed on your system.}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00633}00633 \textcolor{comment}{The}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00634}00634 \textcolor{comment}{configure options}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00635}00635 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00636}00636 \textcolor{comment}{-\/-\/with-\/mumps=/opt/mumps}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00637}00637 \textcolor{comment}{-\/-\/with-\/scalapack=/opt/scalapack}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00638}00638 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00639}00639 \textcolor{comment}{will compile \(\backslash\)c oomph-\/lib's wrappers and link against the \(\backslash\)c MUMPS}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00640}00640 \textcolor{comment}{solver provided that \(\backslash\)c MUMPS and ScaLAPACK </a> are installed in the }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00641}00641 \textcolor{comment}{directories }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00642}00642 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00643}00643 \textcolor{comment}{/opt/mumps}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00644}00644 \textcolor{comment}{/opt/scalapack}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00645}00645 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00646}00646 \textcolor{comment}{i.e. these directories contain the \(\backslash\)c lib and \(\backslash\)c include directories that}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00647}00647 \textcolor{comment}{result from successful installations of \(\backslash\)c MUMPS and \(\backslash\)c ScaLAPACK,}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00648}00648 \textcolor{comment}{respectively.}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00649}00649 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00650}00650 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00651}00651 \textcolor{comment}{If you do not have \(\backslash\)c MUMPS available you can download the latest}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00652}00652 \textcolor{comment}{version }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00653}00653 \textcolor{comment}{<a href="{}http://graal.ens-\/lyon.fr/MUMPS/index.php?page=dwnld"{}> here. </a>}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00654}00654 \textcolor{comment}{You can build and install the library yourself, or get \(\backslash\)c oomph-\/lib to build it}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00655}00655 \textcolor{comment}{during part of its own build process. Simply place a copy of the tar file}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00656}00656 \textcolor{comment}{\(\backslash\)c MUMPS\_4.10.0.tar.gz in the directory}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00657}00657 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00658}00658 \textcolor{comment}{external\_distributions/mumps\_and\_scalapack}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00659}00659 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00660}00660 \textcolor{comment}{You will also need to download the \(\backslash\)c scalapack\_installer.tgz from }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00661}00661 \textcolor{comment}{<a href="{}http://www.netlib.org/scalapack/\#\_scalapack\_installer\_for\_linux"{}>}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00662}00662 \textcolor{comment}{here, </a> and place a copy in the same directory}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00663}00663 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00664}00664 \textcolor{comment}{external\_distributions/mumps\_and\_scalapack}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00665}00665 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00666}00666 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00667}00667 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00668}00668 \textcolor{comment}{You can also download both files from our own website:}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00669}00669 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00670}00670 \textcolor{comment}{<a href="{}https://personal.maths.manchester.ac.uk/oomphlib/oomph-\/lib\_external\_distfiles/MUMPS\_4.10.0.tar.gz"{}>MUMPS\_4.10.0.tar.gz</a>}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00671}00671 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00672}00672 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00673}00673 \textcolor{comment}{<a href="{}https://personal.maths.manchester.ac.uk/oomphlib/oomph-\/lib\_external\_distfiles/scalapack\_installer.tgz"{}>scalapack\_installer.tgz</a>}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00674}00674 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00675}00675 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00676}00676 \textcolor{comment}{Note that the configure option}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00677}00677 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00678}00678 \textcolor{comment}{-\/-\/with-\/mpi-\/include-\/directory=/usr/lib/openmpi/include}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00679}00679 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00680}00680 \textcolor{comment}{<b> must </b> be specified in order to build \(\backslash\)c MUMPS, where \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00681}00681 \textcolor{comment}{/usr/lib/openmpi/include is the directory that contains the file \(\backslash\)c mpi.h.}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00682}00682 \textcolor{comment}{[You can use `locate mpi.h`, to, well, locate that directory.]}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00683}00683 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00684}00684 \textcolor{comment}{Once the files have been placed in the \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00685}00685 \textcolor{comment}{external\_distributions/mumps\_and\_scalapack directory, simply (re-\/)run}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00686}00686 \textcolor{comment}{\(\backslash\)c autogen.sh, which will detect and build the libraries and install}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00687}00687 \textcolor{comment}{then in directory}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00688}00688 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00689}00689 \textcolor{comment}{external\_distributions/mumps\_and\_scalapack/mumps\_and\_scalapack\_default\_installation}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00690}00690 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00691}00691 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00692}00692 \textcolor{comment}{Note that the installation of `ScaLAPACK` requires an}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00693}00693 \textcolor{comment}{active Internet connection because it automatically downloads}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00694}00694 \textcolor{comment}{additional files.}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00695}00695 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00696}00696 \textcolor{comment}{Unless you explicitly specified a library location using}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00697}00697 \textcolor{comment}{the \(\backslash\)c -\/-\/with-\/mumps and \(\backslash\)c -\/-\/with-\/scalapack flags, }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00698}00698 \textcolor{comment}{\(\backslash\)c oomph-\/lib will then link against}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00699}00699 \textcolor{comment}{the newly created versions of the libraries. However, we strongly}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00700}00700 \textcolor{comment}{recommend moving the libraries outside the \(\backslash\)c oomph-\/lib distribution to }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00701}00701 \textcolor{comment}{preserve them for future use. Once this is done you simply specify the }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00702}00702 \textcolor{comment}{(new) location of the library with the \(\backslash\)c -\/-\/with-\/mumps and \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00703}00703 \textcolor{comment}{-\/-\/with-\/scalapack flags, as }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00704}00704 \textcolor{comment}{discussed above. (Also make sure to delete the tar files from}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00705}00705 \textcolor{comment}{\(\backslash\)c external\_distributions/mumps\_and\_scalapack, otherwise the libraries}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00706}00706 \textcolor{comment}{will be built again.) Note that \(\backslash\)c make \(\backslash\)c clean will delete the}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00707}00707 \textcolor{comment}{unpacked sources but not the tar files nor the installed libraries.}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00708}00708 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00709}00709 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00710}00710 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00711}00711 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00712}00712 \textcolor{comment}{\(\backslash\)section own How to write your own code and link it against oomph-\/lib's library/libraries}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00713}00713 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00714}00714 \textcolor{comment}{If you followed the instructions so far, you will be able to install}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00715}00715 \textcolor{comment}{\(\backslash\)c oomph-\/lib and run the demo codes that are provided in the}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00716}00716 \textcolor{comment}{\(\backslash\)c demo\_drivers directory. Great! Now on to the next step: How do }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00717}00717 \textcolor{comment}{you write your own codes and link them against \(\backslash\)c oomph-\/lib? }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00718}00718 \textcolor{comment}{There are two options, depending on}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00719}00719 \textcolor{comment}{whether you have (or are willing to install) the gnu autotools}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00720}00720 \textcolor{comment}{<A HREF="{}http://www.gnu.org/software/autoconf/"{}>autoconf</A>,}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00721}00721 \textcolor{comment}{<A HREF="{}http://www.gnu.org/software/automake/"{}>automake</A>}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00722}00722 \textcolor{comment}{and <A HREF="{}http://www.gnu.org/software/libtool/"{}>libtool</A>}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00723}00723 \textcolor{comment}{on your machine. }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00724}00724 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00725}00725 \textcolor{comment}{\(\backslash\)subsection have\_auto\_tools Writing/linking your own driver codes under autotools control}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00726}00726 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00727}00727 \textcolor{comment}{\(\backslash\)subsubsection add\_driver Adding your own driver codes}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00728}00728 \textcolor{comment}{Let's start with the straightforward case: You want to use \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00729}00729 \textcolor{comment}{oomph-\/lib to solve one of your own problems. To do this within }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00730}00730 \textcolor{comment}{\(\backslash\)c oomph-\/lib's autotools framework, simply create a new}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00731}00731 \textcolor{comment}{directory in \(\backslash\)c user\_drivers and write your driver code. To facilitate}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00732}00732 \textcolor{comment}{these steps, the \(\backslash\)c user\_drivers directory already contains a }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00733}00733 \textcolor{comment}{sample directory \(\backslash\)c joe\_cool for which all these steps have been}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00734}00734 \textcolor{comment}{performed. If you don't object to the directory name (or if your}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00735}00735 \textcolor{comment}{name is Joe Cool) you can simply work in that directory. }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00736}00736 \textcolor{comment}{If not, we suggest the following sequence of steps:}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00737}00737 \textcolor{comment}{-\/\# Go to the \(\backslash\)c user\_drivers directory and create a new }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00738}00738 \textcolor{comment}{   directory, e.g.}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00739}00739 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00740}00740 \textcolor{comment}{cd user\_drivers}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00741}00741 \textcolor{comment}{mkdir josephine\_cool}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00742}00742 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00743}00743 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00744}00744 \textcolor{comment}{-\/\# Copy the \(\backslash\)c Makefile.am and the driver code \(\backslash\)c joes\_poisson\_code.cc}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00745}00745 \textcolor{comment}{   from \(\backslash\)c user\_drivers/joe\_cool to \(\backslash\)c user\_drivers/josephine\_cool.}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00746}00746 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00747}00747 \textcolor{comment}{-\/\# Return to \(\backslash\)c oomph-\/lib's top-\/level directory and re-\/run `./autogen.sh`}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00748}00748 \textcolor{comment}{   to generate the required Makefile etc. in your own directory.}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00749}00749 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00750}00750 \textcolor{comment}{-\/\# You may now return to your own directory in \(\backslash\)c user\_drivers and}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00751}00751 \textcolor{comment}{   make your own driver code:}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00752}00752 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00753}00753 \textcolor{comment}{cd user\_drivers/josephine\_cool}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00754}00754 \textcolor{comment}{make}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00755}00755 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00756}00756 \textcolor{comment}{   This will create the required executable. }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00757}00757 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00758}00758 \textcolor{comment}{-\/\# Unfortunately, the driver code (copied from Joe Cool's directory!) is }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00759}00759 \textcolor{comment}{   unlikely to be the one you want but you can now rename it, edit it, }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00760}00760 \textcolor{comment}{   or add further driver codes to your directory. In general we}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00761}00761 \textcolor{comment}{   suggest that you have a look at the }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00762}00762 \textcolor{comment}{   <A HREF="{}../../example\_code\_list/html/index.html"{}>list of}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00763}00763 \textcolor{comment}{   example codes</A> and try to identify a problem that is similar to the}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00764}00764 \textcolor{comment}{   one you want to solve. The associated driver code will be a good starting}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00765}00765 \textcolor{comment}{   point for your own. Note that whenever you add new driver codes or}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00766}00766 \textcolor{comment}{   rename existing ones you will have to update the local }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00767}00767 \textcolor{comment}{   \(\backslash\)c Makefile.\(\backslash\)c am, though it is not necessary to re-\/run}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00768}00768 \textcolor{comment}{   \(\backslash\)c autogen.\(\backslash\)c sh. The sample \(\backslash\)c Makefile.\(\backslash\)c am}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00769}00769 \textcolor{comment}{   copied from Joe Cool's directory is well annotated and gives}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00770}00770 \textcolor{comment}{   clear instructions how to adapt its contents:}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00771}00771 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00772}00772 \textcolor{comment}{\(\backslash\)include "{}joe\_cool\_makefile.am"{}}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00773}00773 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00774}00774 \textcolor{comment}{   Note the following points: \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00775}00775 \textcolor{comment}{   -\/ Lines that start with a "{}\#"{} are comments.}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00776}00776 \textcolor{comment}{     \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00777}00777 \textcolor{comment}{   -\/ The first (non-\/comment) line in the above file specifies the name(s) of }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00778}00778 \textcolor{comment}{     the executable(s) that will be created by make. These names must be}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00779}00779 \textcolor{comment}{     the same as those in the \(\backslash\)c  *\_SOURCES and \(\backslash\)c *\_LDADD variables. }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00780}00780 \textcolor{comment}{     \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00781}00781 \textcolor{comment}{   -\/ The \(\backslash\)c joes\_poisson\_code\_SOURCES variable declares which (local)}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00782}00782 \textcolor{comment}{     sources your executable depends on. In the current example there}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00783}00783 \textcolor{comment}{     is only a single file, the driver code,}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00784}00784 \textcolor{comment}{     \(\backslash\)c joes\_poisson\_code. \(\backslash\)c cc, itself. }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00785}00785 \textcolor{comment}{     \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00786}00786 \textcolor{comment}{   -\/ The \(\backslash\)c joes\_poisson\_code\_LDADD variable declares:}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00787}00787 \textcolor{comment}{     -\/ the location of the library directory (automake}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00788}00788 \textcolor{comment}{       will convert the macro \(\backslash\)c -\/L\(\backslash\)@libdir\(\backslash\)@ into the actual }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00789}00789 \textcolor{comment}{       directory -\/-\/ you don't have to change this!).}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00790}00790 \textcolor{comment}{     -\/ the libraries (\(\backslash\)c oomph-\/lib or otherwise) that you wish to link}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00791}00791 \textcolor{comment}{       against. This is done with the usual \(\backslash\)c -\/l flag that you}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00792}00792 \textcolor{comment}{       will be familiar with from your compiler. Have a look at the}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00793}00793 \textcolor{comment}{       comments regarding the order of the libraries!}}
 \DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00794}00794 \textcolor{comment}{     \(\backslash\)n\(\backslash\)n}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00795}00795 \textcolor{comment}{   -\/ The \(\backslash\)c INCLUDES variable should only be specified once.}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00796}00796 \textcolor{comment}{   .}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00797}00797 \textcolor{comment}{  }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00798}00798 \textcolor{comment}{It makes sense to create a separate GitHub repository for your user}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00799}00799 \textcolor{comment}{driver directory. This won't interfere with the forked/cloned}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00800}00800 \textcolor{comment}{oomph-\/lib repository that you're working within. As far as the \(\backslash\)c}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00801}00801 \textcolor{comment}{oomph-\/lib repository is concerned your user driver directory is simply}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00802}00802 \textcolor{comment}{one of possibly many directories that it's not tracking. Similarly, from}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00803}00803 \textcolor{comment}{within your user driver directory, the files outside it are not}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00804}00804 \textcolor{comment}{tracked by your repository, so the two can happily co-\/exist.}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00805}00805 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00806}00806 \textcolor{comment}{\(\backslash\)subsubsection add\_src Adding new libraries and linking against them from driver codes}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00807}00807 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00808}00808 \textcolor{comment}{The above instructions should be sufficient to get you started.}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00809}00809 \textcolor{comment}{You can create multiple sub-\/directories for different projects }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00810}00810 \textcolor{comment}{and each sub-\/directory may, of course, contain multiple files, }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00811}00811 \textcolor{comment}{separated into header and source files. \(\backslash\)c automake will ensure that }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00812}00812 \textcolor{comment}{only those files that have been}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00813}00813 \textcolor{comment}{changed will be recompiled when you issue the \(\backslash\)c make}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00814}00814 \textcolor{comment}{command. However, at some point you may wish to package some of your sources }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00815}00815 \textcolor{comment}{into your own library and maybe even offer it for permanent inclusion into}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00816}00816 \textcolor{comment}{\(\backslash\)c oomph-\/lib. For this purpose the \(\backslash\)c oomph-\/lib distribution provides the}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00817}00817 \textcolor{comment}{sub-\/directory \(\backslash\)c user\_src which closely mirrors that of the }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00818}00818 \textcolor{comment}{\(\backslash\)c src and \(\backslash\)c external\_src directories discussed earlier. During the}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00819}00819 \textcolor{comment}{build process, each  sub-\/directory in  \(\backslash\)c user\_src is compiled}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00820}00820 \textcolor{comment}{into its own library and installed in the standard location. }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00821}00821 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00822}00822 \textcolor{comment}{ The steps required to include your own library into the \(\backslash\)c oomph-\/lib}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00823}00823 \textcolor{comment}{build process are very similar to those required to}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00824}00824 \textcolor{comment}{add additional user drivers. As before, the \(\backslash\)c user\_src directory }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00825}00825 \textcolor{comment}{already contains a sample directory \(\backslash\)c jack\_cool, to facilitate}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00826}00826 \textcolor{comment}{the procedure. We therefore suggest the following sequence of steps:}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00827}00827 \textcolor{comment}{-\/\# Go to the \(\backslash\)c user\_src directory and create a new }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00828}00828 \textcolor{comment}{   directory, e.g.}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00829}00829 \textcolor{comment}{\(\backslash\)code}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00830}00830 \textcolor{comment}{cd user\_src}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00831}00831 \textcolor{comment}{mkdir jacqueline\_cool}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00832}00832 \textcolor{comment}{\(\backslash\)endcode}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00833}00833 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00834}00834 \textcolor{comment}{-\/\# Copy the \(\backslash\)c Makefile.am and the codes \(\backslash\)c hello\_world.cc and }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00835}00835 \textcolor{comment}{   \(\backslash\)c hello\_world.h }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00836}00836 \textcolor{comment}{   from \(\backslash\)c user\_src/jack\_cool to \(\backslash\)c user\_src/jacqueline\_cool.}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00837}00837 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00838}00838 \textcolor{comment}{-\/\# Return to the top-\/level \(\backslash\)c oomph-\/lib directory and re-\/run}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00839}00839 \textcolor{comment}{   `autogen.sh`.}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00840}00840 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00841}00841 \textcolor{comment}{-\/\# You may now return to your own directory in \(\backslash\)c user\_src and}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00842}00842 \textcolor{comment}{   make and install our own library}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00843}00843 \textcolor{comment}{\(\backslash\)code}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00844}00844 \textcolor{comment}{cd user\_src/jacqueline\_cool}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00845}00845 \textcolor{comment}{make}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00846}00846 \textcolor{comment}{make install}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00847}00847 \textcolor{comment}{\(\backslash\)endcode}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00848}00848 \textcolor{comment}{   This will create the library and install it in \(\backslash\)c build/lib}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00849}00849 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00850}00850 \textcolor{comment}{   The \(\backslash\)c Makefile.\(\backslash\)c am for libraries is slightly more complicated}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00851}00851 \textcolor{comment}{   (though reasonably well documented) so -\/-\/ for now -\/-\/ we'll}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00852}00852 \textcolor{comment}{   just list it here and hope that the changes required }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00853}00853 \textcolor{comment}{   to include additional sources are obvious. If you really can't}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00854}00854 \textcolor{comment}{   figure it out, send us an email and prompt us to complete}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00855}00855 \textcolor{comment}{   this bit of the documentation....}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00856}00856 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00857}00857 \textcolor{comment}{\(\backslash\)include "{}linked\_make\_file.am"{} }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00858}00858 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00859}00859 \textcolor{comment}{Note that the directory  \(\backslash\)c user\_drivers/jack\_cool contains}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00860}00860 \textcolor{comment}{an example of a user driver code (\(\backslash\)c jacks\_own\_code \(\backslash\)c .cc) }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00861}00861 \textcolor{comment}{that uses a user library.}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00862}00862 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00863}00863 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00864}00864 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00865}00865 \textcolor{comment}{\(\backslash\)subsection dont\_have\_auto\_tools Writing/linking user code without autotools: How do I treat \(\backslash\)c oomph-\/lib simply as a library?}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00866}00866 \textcolor{comment}{Linking directly against \(\backslash\)c oomph-\/lib's (sub-\/)libraries }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00867}00867 \textcolor{comment}{is slightly complicated by cross-\/compilation issues arising from}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00868}00868 \textcolor{comment}{the fact that the \(\backslash\)c oomph-\/lib distribution includes a few C and Fortran }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00869}00869 \textcolor{comment}{sources. When linking is done (by the C++ compiler) one usually has to }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00870}00870 \textcolor{comment}{explicitly specify a few compiler-\/specific Fortran libraries.}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00871}00871 \textcolor{comment}{The beauty of the \(\backslash\)c autotools approach described above is that these libraries}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00872}00872 \textcolor{comment}{(and any other flags that need to be passed to the compiler/linker)}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00873}00873 \textcolor{comment}{are determined and specified automatically. Doing this manually }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00874}00874 \textcolor{comment}{is no fun! Have a look at}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00875}00875 \textcolor{comment}{Mike Gerdts's excellent document }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00876}00876 \textcolor{comment}{<A HREF="{}https://sites.google.com/site/mgerdts/whatgccreallydoes"{}>}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00877}00877 \textcolor{comment}{"{}How gcc really works"{}</A> for details.}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00878}00878 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00879}00879 \textcolor{comment}{ The good news is that \(\backslash\)c oomph-\/lib's installation procedure automatically }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00880}00880 \textcolor{comment}{generates a sample \(\backslash\)c Makefile that contains all the relevant}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00881}00881 \textcolor{comment}{information. Once the installation is complete, the sample makefile is}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00882}00882 \textcolor{comment}{located at}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00883}00883 \textcolor{comment}{\(\backslash\)code}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00884}00884 \textcolor{comment}{demo\_drivers/linking/makefile.sample}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00885}00885 \textcolor{comment}{\(\backslash\)endcode}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00886}00886 \textcolor{comment}{Here is the version that was generated one of our machines:}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00887}00887 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00888}00888 \textcolor{comment}{\(\backslash\)include makefile.sample.biowulf}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00889}00889 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00890}00890 \textcolor{comment}{The version that is generated during the build process}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00891}00891 \textcolor{comment}{on your machine provides template for your own customised}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00892}00892 \textcolor{comment}{Makefiles. When modifying the sample to different driver codes, }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00893}00893 \textcolor{comment}{you should not (have to) edit any of the "{}installation specific"{}}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00894}00894 \textcolor{comment}{variables. Simply specify the \(\backslash\)c oomph-\/lib (sub-\/)libraries that you wish to }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00895}00895 \textcolor{comment}{link against in the \(\backslash\)c OOMPH\_LIB-\/LIBS variable (in the example shown}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00896}00896 \textcolor{comment}{above, we are linking against the \(\backslash\)c generic and \(\backslash\)c poisson libraries),}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00897}00897 \textcolor{comment}{and specify the dependencies for your own driver code, following the}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00898}00898 \textcolor{comment}{usual \(\backslash\)c Makefile syntax. The executable may then be created by the usual}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00899}00899 \textcolor{comment}{\(\backslash\)code}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00900}00900 \textcolor{comment}{make -\/f makefile.sample my\_demo\_code}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00901}00901 \textcolor{comment}{\(\backslash\)endcode}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00902}00902 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00903}00903 \textcolor{comment}{<a name="{}apple\_linking"{}>}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00904}00904 \textcolor{comment}{<b>Note/Disclaimer:</b></a> The sample \(\backslash\)c Makefile generated during \(\backslash\)c oomph-\/lib's }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00905}00905 \textcolor{comment}{installation should work for most (if not all) linux machines, though it may}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00906}00906 \textcolor{comment}{require slight tweaks for Darwin (the BSD-\/derived UNIX core of Apple's}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00907}00907 \textcolor{comment}{OSX operating system). Problems are most }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00908}00908 \textcolor{comment}{likely to arise from the \(\backslash\)c SHARED\_LIBRARY\_FLAGS variable. }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00909}00909 \textcolor{comment}{As mentioned in the comment in the sample \(\backslash\)c Makefile, on such }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00910}00910 \textcolor{comment}{machines the fragment <code>-\/Wl,-\/-\/rpath -\/Wl,</code> should be deleted from the }}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00911}00911 \textcolor{comment}{\(\backslash\)c SHARED\_LIBRARY\_FLAGS variable. }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00795}00795 \textcolor{comment}{   -\/ The \(\backslash\)c INCLUDES variable specifies where to find the include}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00796}00796 \textcolor{comment}{     header files. This line is again completely generic -\/-\/ automake}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00797}00797 \textcolor{comment}{     will convert the macro \(\backslash\)c -\/I\(\backslash\)@includedir\(\backslash\)@ into the actual }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00798}00798 \textcolor{comment}{     location. }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00799}00799 \textcolor{comment}{     \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00800}00800 \textcolor{comment}{   -\/ If you have multiple driver codes, add the name of all}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00801}00801 \textcolor{comment}{     executables to the \(\backslash\)c noinst\_PROGRAMS variable, and specify}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00802}00802 \textcolor{comment}{     the \(\backslash\)c *\_SOURCES and \(\backslash\)c *\_LDADD variables}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00803}00803 \textcolor{comment}{     for each one. }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00804}00804 \textcolor{comment}{     \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00805}00805 \textcolor{comment}{   -\/ The \(\backslash\)c INCLUDES variable should only be specified once.}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00806}00806 \textcolor{comment}{   .}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00807}00807 \textcolor{comment}{  }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00808}00808 \textcolor{comment}{It makes sense to create a separate GitHub repository for your user}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00809}00809 \textcolor{comment}{driver directory. This won't interfere with the forked/cloned}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00810}00810 \textcolor{comment}{oomph-\/lib repository that you're working within. As far as the \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00811}00811 \textcolor{comment}{oomph-\/lib repository is concerned your user driver directory is simply}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00812}00812 \textcolor{comment}{one of possibly many directories that it's not tracking. Similarly, from}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00813}00813 \textcolor{comment}{within your user driver directory, the files outside it are not}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00814}00814 \textcolor{comment}{tracked by your repository, so the two can happily co-\/exist.}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00815}00815 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00816}00816 \textcolor{comment}{\(\backslash\)subsubsection add\_src Adding new libraries and linking against them from driver codes}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00817}00817 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00818}00818 \textcolor{comment}{The above instructions should be sufficient to get you started.}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00819}00819 \textcolor{comment}{You can create multiple sub-\/directories for different projects }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00820}00820 \textcolor{comment}{and each sub-\/directory may, of course, contain multiple files, }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00821}00821 \textcolor{comment}{separated into header and source files. \(\backslash\)c automake will ensure that }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00822}00822 \textcolor{comment}{only those files that have been}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00823}00823 \textcolor{comment}{changed will be recompiled when you issue the \(\backslash\)c make}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00824}00824 \textcolor{comment}{command. However, at some point you may wish to package some of your sources }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00825}00825 \textcolor{comment}{into your own library and maybe even offer it for permanent inclusion into}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00826}00826 \textcolor{comment}{\(\backslash\)c oomph-\/lib. For this purpose the \(\backslash\)c oomph-\/lib distribution provides the}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00827}00827 \textcolor{comment}{sub-\/directory \(\backslash\)c user\_src which closely mirrors that of the }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00828}00828 \textcolor{comment}{\(\backslash\)c src and \(\backslash\)c external\_src directories discussed earlier. During the}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00829}00829 \textcolor{comment}{build process, each  sub-\/directory in  \(\backslash\)c user\_src is compiled}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00830}00830 \textcolor{comment}{into its own library and installed in the standard location. }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00831}00831 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00832}00832 \textcolor{comment}{ The steps required to include your own library into the \(\backslash\)c oomph-\/lib}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00833}00833 \textcolor{comment}{build process are very similar to those required to}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00834}00834 \textcolor{comment}{add additional user drivers. As before, the \(\backslash\)c user\_src directory }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00835}00835 \textcolor{comment}{already contains a sample directory \(\backslash\)c jack\_cool, to facilitate}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00836}00836 \textcolor{comment}{the procedure. We therefore suggest the following sequence of steps:}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00837}00837 \textcolor{comment}{-\/\# Go to the \(\backslash\)c user\_src directory and create a new }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00838}00838 \textcolor{comment}{   directory, e.g.}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00839}00839 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00840}00840 \textcolor{comment}{cd user\_src}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00841}00841 \textcolor{comment}{mkdir jacqueline\_cool}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00842}00842 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00843}00843 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00844}00844 \textcolor{comment}{-\/\# Copy the \(\backslash\)c Makefile.am and the codes \(\backslash\)c hello\_world.cc and }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00845}00845 \textcolor{comment}{   \(\backslash\)c hello\_world.h }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00846}00846 \textcolor{comment}{   from \(\backslash\)c user\_src/jack\_cool to \(\backslash\)c user\_src/jacqueline\_cool.}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00847}00847 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00848}00848 \textcolor{comment}{-\/\# Return to the top-\/level \(\backslash\)c oomph-\/lib directory and re-\/run}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00849}00849 \textcolor{comment}{   `autogen.sh`.}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00850}00850 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00851}00851 \textcolor{comment}{-\/\# You may now return to your own directory in \(\backslash\)c user\_src and}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00852}00852 \textcolor{comment}{   make and install our own library}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00853}00853 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00854}00854 \textcolor{comment}{cd user\_src/jacqueline\_cool}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00855}00855 \textcolor{comment}{make}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00856}00856 \textcolor{comment}{make install}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00857}00857 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00858}00858 \textcolor{comment}{   This will create the library and install it in \(\backslash\)c build/lib}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00859}00859 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00860}00860 \textcolor{comment}{   The \(\backslash\)c Makefile.\(\backslash\)c am for libraries is slightly more complicated}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00861}00861 \textcolor{comment}{   (though reasonably well documented) so -\/-\/ for now -\/-\/ we'll}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00862}00862 \textcolor{comment}{   just list it here and hope that the changes required }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00863}00863 \textcolor{comment}{   to include additional sources are obvious. If you really can't}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00864}00864 \textcolor{comment}{   figure it out, send us an email and prompt us to complete}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00865}00865 \textcolor{comment}{   this bit of the documentation....}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00866}00866 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00867}00867 \textcolor{comment}{\(\backslash\)include "{}linked\_make\_file.am"{} }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00868}00868 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00869}00869 \textcolor{comment}{Note that the directory  \(\backslash\)c user\_drivers/jack\_cool contains}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00870}00870 \textcolor{comment}{an example of a user driver code (\(\backslash\)c jacks\_own\_code \(\backslash\)c .cc) }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00871}00871 \textcolor{comment}{that uses a user library.}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00872}00872 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00873}00873 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00874}00874 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00875}00875 \textcolor{comment}{\(\backslash\)subsection dont\_have\_auto\_tools Writing/linking user code without autotools: How do I treat \(\backslash\)c oomph-\/lib simply as a library?}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00876}00876 \textcolor{comment}{Linking directly against \(\backslash\)c oomph-\/lib's (sub-\/)libraries }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00877}00877 \textcolor{comment}{is slightly complicated by cross-\/compilation issues arising from}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00878}00878 \textcolor{comment}{the fact that the \(\backslash\)c oomph-\/lib distribution includes a few C and Fortran }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00879}00879 \textcolor{comment}{sources. When linking is done (by the C++ compiler) one usually has to }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00880}00880 \textcolor{comment}{explicitly specify a few compiler-\/specific Fortran libraries.}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00881}00881 \textcolor{comment}{The beauty of the \(\backslash\)c autotools approach described above is that these libraries}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00882}00882 \textcolor{comment}{(and any other flags that need to be passed to the compiler/linker)}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00883}00883 \textcolor{comment}{are determined and specified automatically. Doing this manually }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00884}00884 \textcolor{comment}{is no fun! Have a look at}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00885}00885 \textcolor{comment}{Mike Gerdts's excellent document }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00886}00886 \textcolor{comment}{<A HREF="{}https://sites.google.com/site/mgerdts/whatgccreallydoes"{}>}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00887}00887 \textcolor{comment}{"{}How gcc really works"{}</A> for details.}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00888}00888 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00889}00889 \textcolor{comment}{ The good news is that \(\backslash\)c oomph-\/lib's installation procedure automatically }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00890}00890 \textcolor{comment}{generates a sample \(\backslash\)c Makefile that contains all the relevant}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00891}00891 \textcolor{comment}{information. Once the installation is complete, the sample makefile is}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00892}00892 \textcolor{comment}{located at}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00893}00893 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00894}00894 \textcolor{comment}{demo\_drivers/linking/makefile.sample}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00895}00895 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00896}00896 \textcolor{comment}{Here is the version that was generated one of our machines:}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00897}00897 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00898}00898 \textcolor{comment}{\(\backslash\)include makefile.sample.biowulf}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00899}00899 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00900}00900 \textcolor{comment}{The version that is generated during the build process}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00901}00901 \textcolor{comment}{on your machine provides template for your own customised}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00902}00902 \textcolor{comment}{Makefiles. When modifying the sample to different driver codes, }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00903}00903 \textcolor{comment}{you should not (have to) edit any of the "{}installation specific"{}}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00904}00904 \textcolor{comment}{variables. Simply specify the \(\backslash\)c oomph-\/lib (sub-\/)libraries that you wish to }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00905}00905 \textcolor{comment}{link against in the \(\backslash\)c OOMPH\_LIB-\/LIBS variable (in the example shown}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00906}00906 \textcolor{comment}{above, we are linking against the \(\backslash\)c generic and \(\backslash\)c poisson libraries),}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00907}00907 \textcolor{comment}{and specify the dependencies for your own driver code, following the}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00908}00908 \textcolor{comment}{usual \(\backslash\)c Makefile syntax. The executable may then be created by the usual}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00909}00909 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00910}00910 \textcolor{comment}{make -\/f makefile.sample my\_demo\_code}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00911}00911 \textcolor{comment}{\(\backslash\)endcode}}
 \DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00912}00912 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00913}00913 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00914}00914 \textcolor{comment}{<hr>}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00915}00915 \textcolor{comment}{<hr>}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00916}00916 \textcolor{comment}{\(\backslash\)section pdf PDF file}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00917}00917 \textcolor{comment}{A <a href="{}../latex/refman.pdf"{}>pdf version</a> of this document is available.}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00918}00918 \textcolor{comment}{**/}}
-\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00919}00919 }
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00913}00913 \textcolor{comment}{<a name="{}apple\_linking"{}>}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00914}00914 \textcolor{comment}{<b>Note/Disclaimer:</b></a> The sample \(\backslash\)c Makefile generated during \(\backslash\)c oomph-\/lib's }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00915}00915 \textcolor{comment}{installation should work for most (if not all) linux machines, though it may}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00916}00916 \textcolor{comment}{require slight tweaks for Darwin (the BSD-\/derived UNIX core of Apple's}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00917}00917 \textcolor{comment}{OSX operating system). Problems are most }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00918}00918 \textcolor{comment}{likely to arise from the \(\backslash\)c SHARED\_LIBRARY\_FLAGS variable. }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00919}00919 \textcolor{comment}{As mentioned in the comment in the sample \(\backslash\)c Makefile, on such }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00920}00920 \textcolor{comment}{machines the fragment <code>-\/Wl,-\/-\/rpath -\/Wl,</code> should be deleted from the }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00921}00921 \textcolor{comment}{\(\backslash\)c SHARED\_LIBRARY\_FLAGS variable. }}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00922}00922 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00923}00923 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00924}00924 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00925}00925 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00926}00926 \textcolor{comment}{\(\backslash\)section pdf PDF file}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00927}00927 \textcolor{comment}{A <a href="{}../latex/refman.pdf"{}>pdf version</a> of this document is available.}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00928}00928 \textcolor{comment}{**/}}
+\DoxyCodeLine{\Hypertarget{the__distribution_8txt__doxygenified_8h_source_l00929}00929 }
 
 \end{DoxyCode}

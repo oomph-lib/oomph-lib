@@ -50,7 +50,7 @@
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00046}00046 \textcolor{comment}{  /// father element.}}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00047}00047 \textcolor{comment}{}  \textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00048}\mbox{\hyperlink{classoomph_1_1AlgebraicElementBase_ab9ada27015d5cb28ae00b086ace3600f}{00048}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AlgebraicElementBase_ab9ada27015d5cb28ae00b086ace3600f}{AlgebraicElementBase::setup\_algebraic\_node\_update}}(}
-\DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00049}00049     Node*\& node\_pt,}
+\DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00049}00049     \mbox{\hyperlink{classoomph_1_1Node}{Node}}*\& node\_pt,}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00050}00050     \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& s\_father,}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00051}00051     \mbox{\hyperlink{classoomph_1_1FiniteElement}{FiniteElement}}* father\_el\_pt)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00052}00052 \textcolor{keyword}{  }\{}
@@ -240,7 +240,7 @@
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00236}00236     \textcolor{keywordflow}{if} (update\_all\_time\_levels\_for\_new\_node)}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00237}00237     \{}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00238}00238       \textcolor{comment}{// Present value plus previous values}}
-\DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00239}00239       ntime = 1 + Position\_time\_stepper\_pt-\/>nprev\_values();}
+\DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00239}00239       ntime = 1 + \mbox{\hyperlink{classoomph_1_1Node_a8cf734873ab29a412289f8ac2d3be348}{Position\_time\_stepper\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1TimeStepper_a0f38713ed304c18d9f7b5cf8131664c1}{nprev\_values}}();}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00240}00240     \}}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00241}00241     \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00242}00242     \{}
@@ -249,7 +249,7 @@
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00245}00245     \}}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00246}00246 }
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00247}00247     \textcolor{comment}{// Is it a hanging node?}}
-\DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00248}00248     \textcolor{keywordflow}{if} (is\_hanging())}
+\DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00248}00248     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1Node_af0e6237dfafad62cf427ff5013ddcfef}{is\_hanging}}())}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00249}00249     \{}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00250}00250       \textcolor{comment}{// Loop over all master nodes and update their position}}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00251}00251       \textcolor{comment}{// That's all we need to update the position of hanging nodes!}}
@@ -259,10 +259,10 @@
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00255}00255       \textcolor{comment}{// Node::position() which determines the position}}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00256}00256       \textcolor{comment}{// via the hanging node constraints from the position of}}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00257}00257       \textcolor{comment}{// the master nodes)}}
-\DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00258}00258       \textcolor{keywordtype}{unsigned} nmaster = hanging\_pt()-\/>nmaster();}
+\DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00258}00258       \textcolor{keywordtype}{unsigned} nmaster = \mbox{\hyperlink{classoomph_1_1Node_afefa22db8b28e783b8647e3577ee01d9}{hanging\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1HangInfo_aa9c1130b58db2ff6d5eee4f923ba365c}{nmaster}}();}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00259}00259       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} imaster = 0; imaster < nmaster; imaster++)}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00260}00260       \{}
-\DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00261}00261         \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1AlgebraicNode}{AlgebraicNode}}*\textcolor{keyword}{>}(hanging\_pt()-\/>master\_node\_pt(imaster))}
+\DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00261}00261         \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1AlgebraicNode}{AlgebraicNode}}*\textcolor{keyword}{>}(\mbox{\hyperlink{classoomph_1_1Node_afefa22db8b28e783b8647e3577ee01d9}{hanging\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1HangInfo_a7a935ae7eeca594a648ca1800444827c}{master\_node\_pt}}(imaster))}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00262}00262           -\/>\mbox{\hyperlink{classoomph_1_1AlgebraicNode_a754dc8fcac3382a07f60262c9792c84c}{node\_update}}();}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00263}00263       \}}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00264}00264     \}}
@@ -286,9 +286,9 @@
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00282}00282     \}}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00283}00283 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00284}00284 \textcolor{comment}{    /// Perform auxiliary update of function values?}}
-\DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00285}00285 \textcolor{comment}{}    \textcolor{keywordflow}{if} (Aux\_node\_update\_fct\_pt != 0)}
+\DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00285}00285 \textcolor{comment}{}    \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1Node_a8bfd206ba303b6d446f59974719b24b6}{Aux\_node\_update\_fct\_pt}} != 0)}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00286}00286     \{}
-\DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00287}00287       Aux\_node\_update\_fct\_pt(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00287}00287       \mbox{\hyperlink{classoomph_1_1Node_a8bfd206ba303b6d446f59974719b24b6}{Aux\_node\_update\_fct\_pt}}(\textcolor{keyword}{this});}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00288}00288     \}}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00289}00289   \}}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00290}00290 }
@@ -303,7 +303,7 @@
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00299}00299     \textcolor{comment}{// Initialise}}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00300}00300     \textcolor{keywordtype}{bool} passed = \textcolor{keyword}{true};}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00301}00301 }
-\DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00302}00302     \textcolor{keywordtype}{unsigned} test = Node::self\_test();}
+\DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00302}00302     \textcolor{keywordtype}{unsigned} test = \mbox{\hyperlink{classoomph_1_1Data_ae43b63b56afb8574db6da68f85802f80}{Node::self\_test}}();}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00303}00303     \textcolor{keywordflow}{if} (test != 0)}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00304}00304     \{}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00305}00305       passed = \textcolor{keyword}{false};}
@@ -325,7 +325,7 @@
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00321}00321       \textcolor{keywordtype}{double} err\_max = 0.0;}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00322}00322 }
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00323}00323       \textcolor{comment}{// Spatial (Eulerian) position of the node}}
-\DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00324}00324       \textcolor{keywordtype}{unsigned} ndim\_node = ndim();}
+\DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00324}00324       \textcolor{keywordtype}{unsigned} ndim\_node = \mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00325}00325       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x\_0(ndim\_node);}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00326}00326       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x\_new(ndim\_node);}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00327}00327 }
@@ -358,7 +358,7 @@
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00354}00354       \textcolor{comment}{// Store coordinates}}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00355}00355       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < ndim\_node; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00356}00356       \{}
-\DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00357}00357         x\_0[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00357}00357         x\_0[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00358}00358       \}}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00359}00359 }
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00360}00360 }
@@ -374,7 +374,7 @@
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00370}00370         \textcolor{comment}{// Store coordinates}}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00371}00371         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < ndim\_node; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00372}00372         \{}
-\DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00373}00373           x\_new[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00373}00373           x\_new[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00374}00374         \}}
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00375}00375 }
 \DoxyCodeLine{\Hypertarget{algebraic__elements_8cc_source_l00376}00376         \textcolor{comment}{// Check error}}

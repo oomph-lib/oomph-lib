@@ -385,19 +385,19 @@
 \DoxyCodeLine{\Hypertarget{general__purpose__block__preconditioners_8cc_source_l00381}00381       \}}
 \DoxyCodeLine{\Hypertarget{general__purpose__block__preconditioners_8cc_source_l00382}00382 }
 \DoxyCodeLine{\Hypertarget{general__purpose__block__preconditioners_8cc_source_l00383}00383       \textcolor{comment}{// next setup the off diagonal mat vec operators}}
-\DoxyCodeLine{\Hypertarget{general__purpose__block__preconditioners_8cc_source_l00384}00384       \textcolor{keywordtype}{unsigned} l, \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}};}
+\DoxyCodeLine{\Hypertarget{general__purpose__block__preconditioners_8cc_source_l00384}00384       \textcolor{keywordtype}{unsigned} l, u;}
 \DoxyCodeLine{\Hypertarget{general__purpose__block__preconditioners_8cc_source_l00385}00385       \textcolor{keywordflow}{if} (Upper\_triangular)}
 \DoxyCodeLine{\Hypertarget{general__purpose__block__preconditioners_8cc_source_l00386}00386       \{}
 \DoxyCodeLine{\Hypertarget{general__purpose__block__preconditioners_8cc_source_l00387}00387         l = \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} + 1;}
-\DoxyCodeLine{\Hypertarget{general__purpose__block__preconditioners_8cc_source_l00388}00388         \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}} = nblock\_types;}
+\DoxyCodeLine{\Hypertarget{general__purpose__block__preconditioners_8cc_source_l00388}00388         u = nblock\_types;}
 \DoxyCodeLine{\Hypertarget{general__purpose__block__preconditioners_8cc_source_l00389}00389       \}}
 \DoxyCodeLine{\Hypertarget{general__purpose__block__preconditioners_8cc_source_l00390}00390       \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{general__purpose__block__preconditioners_8cc_source_l00391}00391       \{}
 \DoxyCodeLine{\Hypertarget{general__purpose__block__preconditioners_8cc_source_l00392}00392         l = 0;}
-\DoxyCodeLine{\Hypertarget{general__purpose__block__preconditioners_8cc_source_l00393}00393         \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}} = \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}};}
+\DoxyCodeLine{\Hypertarget{general__purpose__block__preconditioners_8cc_source_l00393}00393         u = \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}};}
 \DoxyCodeLine{\Hypertarget{general__purpose__block__preconditioners_8cc_source_l00394}00394       \}}
 \DoxyCodeLine{\Hypertarget{general__purpose__block__preconditioners_8cc_source_l00395}00395 }
-\DoxyCodeLine{\Hypertarget{general__purpose__block__preconditioners_8cc_source_l00396}00396       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = l; j < \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}; j++)}
+\DoxyCodeLine{\Hypertarget{general__purpose__block__preconditioners_8cc_source_l00396}00396       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = l; j < u; j++)}
 \DoxyCodeLine{\Hypertarget{general__purpose__block__preconditioners_8cc_source_l00397}00397       \{}
 \DoxyCodeLine{\Hypertarget{general__purpose__block__preconditioners_8cc_source_l00398}00398         \textcolor{comment}{// Get the start time}}
 \DoxyCodeLine{\Hypertarget{general__purpose__block__preconditioners_8cc_source_l00399}00399         \textcolor{keywordtype}{double} t\_extract\_start = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}

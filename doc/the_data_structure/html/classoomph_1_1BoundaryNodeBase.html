@@ -134,7 +134,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>A class that contains the information required by Nodes that are located on <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a> boundaries. A <a class="el" href="classoomph_1_1BoundaryNode.html" title="A template Class for BoundaryNodes; that is Nodes that MAY live on the boundary of a Mesh....">BoundaryNode</a> of a particular type is obtained by combining a given Node with this class. By differentiating between Nodes and BoundaryNodes we avoid a lot of un-necessary storage in the bulk Nodes.  
+<p>A class that contains the information required by Nodes that are located on <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a> boundaries. A <a class="el" href="classoomph_1_1BoundaryNode.html" title="A template Class for BoundaryNodes; that is Nodes that MAY live on the boundary of a Mesh....">BoundaryNode</a> of a particular type is obtained by combining a given <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a> with this class. By differentiating between Nodes and BoundaryNodes we avoid a lot of un-necessary storage in the bulk Nodes.  
  <a href="classoomph_1_1BoundaryNodeBase.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="nodes_8h_source.html">nodes.h</a>&gt;</code></p>
@@ -153,7 +153,7 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a2af96b956e59182fe8bfe8e2a87e02ce"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BoundaryNodeBase.html#a2af96b956e59182fe8bfe8e2a87e02ce">assign_additional_values_with_face_id</a> (const unsigned &amp;n_additional_value, const unsigned &amp;face_id=0)=0</td></tr>
-<tr class="memdesc:a2af96b956e59182fe8bfe8e2a87e02ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Member function that allocates storage for a given number of additional degrees of freedom, n_additional_value, associated with a particular face_id to the Node node_pt.  <a href="classoomph_1_1BoundaryNodeBase.html#a2af96b956e59182fe8bfe8e2a87e02ce">More...</a><br /></td></tr>
+<tr class="memdesc:a2af96b956e59182fe8bfe8e2a87e02ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Member function that allocates storage for a given number of additional degrees of freedom, n_additional_value, associated with a particular face_id to the <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a> node_pt.  <a href="classoomph_1_1BoundaryNodeBase.html#a2af96b956e59182fe8bfe8e2a87e02ce">More...</a><br /></td></tr>
 <tr class="separator:a2af96b956e59182fe8bfe8e2a87e02ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f73c54dbb9bdfe3538b61117a0cc674"><td class="memItemLeft" align="right" valign="top">std::map&lt; unsigned, unsigned &gt; *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BoundaryNodeBase.html#a5f73c54dbb9bdfe3538b61117a0cc674">index_of_first_value_assigned_by_face_element_pt</a> ()</td></tr>
 <tr class="memdesc:a5f73c54dbb9bdfe3538b61117a0cc674"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return pointer to the map giving the index of the first face element value.  <a href="classoomph_1_1BoundaryNodeBase.html#a5f73c54dbb9bdfe3538b61117a0cc674">More...</a><br /></td></tr>
@@ -215,35 +215,35 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a335936260b9a5d6ed4e191e4c44ab3a2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BoundaryNodeBase.html#a335936260b9a5d6ed4e191e4c44ab3a2">make_node_periodic</a> (Node *const &amp;node_pt, Node *const &amp;original_node_pt)</td></tr>
+<tr class="memitem:a335936260b9a5d6ed4e191e4c44ab3a2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BoundaryNodeBase.html#a335936260b9a5d6ed4e191e4c44ab3a2">make_node_periodic</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;node_pt, <a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;original_node_pt)</td></tr>
 <tr class="memdesc:a335936260b9a5d6ed4e191e4c44ab3a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function that is used to turn BoundaryNodes into peridic boundary nodes by setting the data values of copied_node_pt to those of original_node_pt.  <a href="classoomph_1_1BoundaryNodeBase.html#a335936260b9a5d6ed4e191e4c44ab3a2">More...</a><br /></td></tr>
 <tr class="separator:a335936260b9a5d6ed4e191e4c44ab3a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a37f55f9018ae7dcd5cb194f030fccfd6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BoundaryNodeBase.html#a37f55f9018ae7dcd5cb194f030fccfd6">make_nodes_periodic</a> (Node *const &amp;node_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; Node * &gt; const &amp;periodic_copies_pt)</td></tr>
+<tr class="memitem:a37f55f9018ae7dcd5cb194f030fccfd6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BoundaryNodeBase.html#a37f55f9018ae7dcd5cb194f030fccfd6">make_nodes_periodic</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;node_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Node.html">Node</a> * &gt; const &amp;periodic_copies_pt)</td></tr>
 <tr class="memdesc:a37f55f9018ae7dcd5cb194f030fccfd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function that is used to turn BoundaryNodes into periodic boundary nodes by setting the data values of the nodes in the vector periodic_copies_pt to be the same as those in node_pt.  <a href="classoomph_1_1BoundaryNodeBase.html#a37f55f9018ae7dcd5cb194f030fccfd6">More...</a><br /></td></tr>
 <tr class="separator:a37f55f9018ae7dcd5cb194f030fccfd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a950c7d3ab5b9ee0473b45b2a134728a7"><td class="memItemLeft" align="right" valign="top">std::map&lt; unsigned, unsigned &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BoundaryNodeBase.html#a950c7d3ab5b9ee0473b45b2a134728a7">Index_of_first_value_assigned_by_face_element_pt</a></td></tr>
-<tr class="memdesc:a950c7d3ab5b9ee0473b45b2a134728a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to a map, indexed by the face element identifier it returns the position of the first face element value. If the Node does not lie on a face element this map should never be queried.  <a href="classoomph_1_1BoundaryNodeBase.html#a950c7d3ab5b9ee0473b45b2a134728a7">More...</a><br /></td></tr>
+<tr class="memdesc:a950c7d3ab5b9ee0473b45b2a134728a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to a map, indexed by the face element identifier it returns the position of the first face element value. If the <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a> does not lie on a face element this map should never be queried.  <a href="classoomph_1_1BoundaryNodeBase.html#a950c7d3ab5b9ee0473b45b2a134728a7">More...</a><br /></td></tr>
 <tr class="separator:a950c7d3ab5b9ee0473b45b2a134728a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4afcc250ee4d601a60f06d0d39ebaca0"><td class="memItemLeft" align="right" valign="top">Node *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BoundaryNodeBase.html#a4afcc250ee4d601a60f06d0d39ebaca0">Copied_node_pt</a></td></tr>
+<tr class="memitem:a4afcc250ee4d601a60f06d0d39ebaca0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Node.html">Node</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BoundaryNodeBase.html#a4afcc250ee4d601a60f06d0d39ebaca0">Copied_node_pt</a></td></tr>
 <tr class="memdesc:a4afcc250ee4d601a60f06d0d39ebaca0"><td class="mdescLeft">&#160;</td><td class="mdescRight">If the <a class="el" href="classoomph_1_1BoundaryNode.html" title="A template Class for BoundaryNodes; that is Nodes that MAY live on the boundary of a Mesh....">BoundaryNode</a> is periodic, this pointer is set to the <a class="el" href="classoomph_1_1BoundaryNode.html" title="A template Class for BoundaryNodes; that is Nodes that MAY live on the boundary of a Mesh....">BoundaryNode</a> whose data it shares.  <a href="classoomph_1_1BoundaryNodeBase.html#a4afcc250ee4d601a60f06d0d39ebaca0">More...</a><br /></td></tr>
 <tr class="separator:a4afcc250ee4d601a60f06d0d39ebaca0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr class="memitem:a732b1ffccbcd7b79097a1779a94e9497"><td class="memItemLeft" align="right" valign="top">std::map&lt; unsigned, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; * &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BoundaryNodeBase.html#a732b1ffccbcd7b79097a1779a94e9497">Boundary_coordinates_pt</a></td></tr>
-<tr class="memdesc:a732b1ffccbcd7b79097a1779a94e9497"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to a map of pointers to intrinsic boundary coordinates of the Node, indexed by the boundary number. If the Node does not lie on a boundary this map should never be queried because unnecessary storage will then be allocated. Hence, it can only be accessed via the appropriate set and get functions.  <a href="classoomph_1_1BoundaryNodeBase.html#a732b1ffccbcd7b79097a1779a94e9497">More...</a><br /></td></tr>
+<tr class="memdesc:a732b1ffccbcd7b79097a1779a94e9497"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to a map of pointers to intrinsic boundary coordinates of the <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a>, indexed by the boundary number. If the <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a> does not lie on a boundary this map should never be queried because unnecessary storage will then be allocated. Hence, it can only be accessed via the appropriate set and get functions.  <a href="classoomph_1_1BoundaryNodeBase.html#a732b1ffccbcd7b79097a1779a94e9497">More...</a><br /></td></tr>
 <tr class="separator:a732b1ffccbcd7b79097a1779a94e9497"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a18163a5bc2e0b6dfc487e249f3c24dd6"><td class="memItemLeft" align="right" valign="top">std::set&lt; unsigned &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BoundaryNodeBase.html#a18163a5bc2e0b6dfc487e249f3c24dd6">Boundaries_pt</a></td></tr>
-<tr class="memdesc:a18163a5bc2e0b6dfc487e249f3c24dd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to set of mesh boundaries occupied by the Node; NULL if the Node is not on any boundaries.  <a href="classoomph_1_1BoundaryNodeBase.html#a18163a5bc2e0b6dfc487e249f3c24dd6">More...</a><br /></td></tr>
+<tr class="memdesc:a18163a5bc2e0b6dfc487e249f3c24dd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to set of mesh boundaries occupied by the <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a>; NULL if the <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a> is not on any boundaries.  <a href="classoomph_1_1BoundaryNodeBase.html#a18163a5bc2e0b6dfc487e249f3c24dd6">More...</a><br /></td></tr>
 <tr class="separator:a18163a5bc2e0b6dfc487e249f3c24dd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >A class that contains the information required by Nodes that are located on <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a> boundaries. A <a class="el" href="classoomph_1_1BoundaryNode.html" title="A template Class for BoundaryNodes; that is Nodes that MAY live on the boundary of a Mesh....">BoundaryNode</a> of a particular type is obtained by combining a given Node with this class. By differentiating between Nodes and BoundaryNodes we avoid a lot of un-necessary storage in the bulk Nodes. </p>
+<div class="textblock"><p >A class that contains the information required by Nodes that are located on <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a> boundaries. A <a class="el" href="classoomph_1_1BoundaryNode.html" title="A template Class for BoundaryNodes; that is Nodes that MAY live on the boundary of a Mesh....">BoundaryNode</a> of a particular type is obtained by combining a given <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a> with this class. By differentiating between Nodes and BoundaryNodes we avoid a lot of un-necessary storage in the bulk Nodes. </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l01996">1996</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l01995">1995</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a00957868c82b2ec9f676ebdd80f2edf4" name="a00957868c82b2ec9f676ebdd80f2edf4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a00957868c82b2ec9f676ebdd80f2edf4">&#9670;&nbsp;</a></span>BoundaryNodeBase() <span class="overload">[1/2]</span></h2>
@@ -270,7 +270,7 @@ Private Attributes</h2></td></tr>
 
 <p>Default constructor, set the pointers to the storage to NULL. </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02153">2153</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02152">2152</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
 </div>
 </div>
@@ -302,7 +302,7 @@ Private Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="nodes_8cc_source.html#l02993">2993</a> of file <a class="el" href="nodes_8cc_source.html">nodes.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8h_source.html#l02009">Boundaries_pt</a>, <a class="el" href="nodes_8h_source.html#l02005">Boundary_coordinates_pt</a>, and <a class="el" href="nodes_8h_source.html#l02018">Index_of_first_value_assigned_by_face_element_pt</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l02008">Boundaries_pt</a>, <a class="el" href="nodes_8h_source.html#l02004">Boundary_coordinates_pt</a>, and <a class="el" href="nodes_8h_source.html#l02017">Index_of_first_value_assigned_by_face_element_pt</a>.</p>
 
 </div>
 </div>
@@ -355,9 +355,9 @@ Private Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="nodes_8cc_source.html#l03028">3028</a> of file <a class="el" href="nodes_8cc_source.html">nodes.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8h_source.html#l02009">Boundaries_pt</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l02008">Boundaries_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="nodes_8h_source.html#l02546">oomph::BoundaryNode&lt; NODE_TYPE &gt;::add_to_boundary()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="nodes_8h_source.html#l02545">oomph::BoundaryNode&lt; NODE_TYPE &gt;::add_to_boundary()</a>.</p>
 
 </div>
 </div>
@@ -395,7 +395,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Member function that allocates storage for a given number of additional degrees of freedom, n_additional_value, associated with a particular face_id to the Node node_pt. </p>
+<p>Member function that allocates storage for a given number of additional degrees of freedom, n_additional_value, associated with a particular face_id to the <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a> node_pt. </p>
 
 <p>Implemented in <a class="el" href="classoomph_1_1BoundaryNode.html#a04ba9bf0b13ec5a8da2e2a27d41a1ef5">oomph::BoundaryNode&lt; NODE_TYPE &gt;</a>.</p>
 
@@ -426,11 +426,11 @@ Private Attributes</h2></td></tr>
 
 <p>Have boundary coordinates been set up? </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02171">2171</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02170">2170</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8h_source.html#l02005">Boundary_coordinates_pt</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l02004">Boundary_coordinates_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="nodes_8h_source.html#l02518">oomph::BoundaryNode&lt; NODE_TYPE &gt;::boundary_coordinates_have_been_set_up()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="nodes_8h_source.html#l02517">oomph::BoundaryNode&lt; NODE_TYPE &gt;::boundary_coordinates_have_been_set_up()</a>.</p>
 
 </div>
 </div>
@@ -460,11 +460,11 @@ Private Attributes</h2></td></tr>
 
 <p>Access to pointer to set of mesh boundaries that this node occupies; NULL if the node is not on any boundary. </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02178">2178</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02177">2177</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8h_source.html#l02009">Boundaries_pt</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l02008">Boundaries_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="nodes_8h_source.html#l02526">oomph::BoundaryNode&lt; NODE_TYPE &gt;::get_boundaries_pt()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="nodes_8h_source.html#l02525">oomph::BoundaryNode&lt; NODE_TYPE &gt;::get_boundaries_pt()</a>.</p>
 
 </div>
 </div>
@@ -505,7 +505,7 @@ Private Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="nodes_8cc_source.html#l03165">3165</a> of file <a class="el" href="nodes_8cc_source.html">nodes.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8h_source.html#l02009">Boundaries_pt</a>, <a class="el" href="nodes_8h_source.html#l02005">Boundary_coordinates_pt</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="nodes_8h_source.html#l02190">is_on_boundary()</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l02008">Boundaries_pt</a>, <a class="el" href="nodes_8h_source.html#l02004">Boundary_coordinates_pt</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="nodes_8h_source.html#l02189">is_on_boundary()</a>.</p>
 
 </div>
 </div>
@@ -545,11 +545,11 @@ Private Attributes</h2></td></tr>
 
 <p>Return the vector of boundary coordinates on mesh boundary b. </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02202">2202</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02201">2201</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8h_source.html#l02202">get_coordinates_on_boundary()</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l02201">get_coordinates_on_boundary()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="nodes_8h_source.html#l02202">get_coordinates_on_boundary()</a>, and <a class="el" href="nodes_8h_source.html#l02567">oomph::BoundaryNode&lt; NODE_TYPE &gt;::get_coordinates_on_boundary()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="nodes_8h_source.html#l02201">get_coordinates_on_boundary()</a>, and <a class="el" href="nodes_8h_source.html#l02566">oomph::BoundaryNode&lt; NODE_TYPE &gt;::get_coordinates_on_boundary()</a>.</p>
 
 </div>
 </div>
@@ -595,9 +595,9 @@ Private Attributes</h2></td></tr>
 
 <p>Return the index of the first value associated with the i-th face element value. If no argument id is specified we return the index associated with the first (and assumed to be only) face element attached to this node. If no values have been set by any FaceElements and throw_if_no_value_assigned_by_face_element is set to true, this is caught gracefully in all circumstances (there are examples with complex unstructured 3D meshes where it's not clear a priori if a node has been resized by FaceElements) by throwing an <a class="el" href="classoomph_1_1OomphLibError.html" title="An OomphLibError object which should be thrown when an run-time error is encountered....">OomphLibError</a> that can be caught gracefully. If throw_quietly is set to true we throw an <a class="el" href="classoomph_1_1OomphLibQuietException.html" title="//////////////////////////////////////////////////////////////////// ////////////////////////////////...">OomphLibQuietException</a> instead. You can catch either by catching the underlying std::runtime_error. In PARANOID mode we check regardless of the setting of throw_if_no_value_assigned_by_face_element (but respect the request for quietness). Returns UINT_MAX if error. </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02099">2099</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02098">2098</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8h_source.html#l02018">Index_of_first_value_assigned_by_face_element_pt</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l02017">Index_of_first_value_assigned_by_face_element_pt</a>.</p>
 
 </div>
 </div>
@@ -627,9 +627,9 @@ Private Attributes</h2></td></tr>
 
 <p>Return the index of the first value associated with the i-th face element value. If no argument is specified we return the index associated with the first (and assumed to be only) face element attached to this node. Throws error only in paranoid mode if no values have been set by any FaceElements. If you want to catch such cases gracefully in all circumstances (there are examples with complex unstructured 3D meshes where it's not clear a priori if a node has been resized by FaceElements) use alternative version (with leading bool arguments) that always checks and throws so exceptions can be caught gracefully. Returns UINT_MAX if error. </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02062">2062</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02061">2061</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8h_source.html#l02018">Index_of_first_value_assigned_by_face_element_pt</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l02017">Index_of_first_value_assigned_by_face_element_pt</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="solid__traction__elements_8h_source.html#l01676">oomph::ImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;::fill_in_generic_contribution_to_residuals_displ_lagr_multiplier()</a>, <a class="el" href="solid__traction__elements_8h_source.html#l02780">oomph::FSIImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;::fill_in_generic_contribution_to_residuals_fsi_displ_lagr_multiplier()</a>, <a class="el" href="impose__impenetrability__element_8h_source.html#l00120">oomph::ImposeImpenetrabilityElement&lt; ELEMENT &gt;::fill_in_generic_contribution_to_residuals_parall_lagr_multiplier()</a>, <a class="el" href="impose__parallel__outflow__element_8h_source.html#l00137">oomph::ImposeParallelOutflowElement&lt; ELEMENT &gt;::fill_in_generic_contribution_to_residuals_parall_lagr_multiplier()</a>, <a class="el" href="axisym__poroelastic__fsi__face__elements_8h_source.html#l00812">oomph::LinearisedAxisymPoroelasticBJS_FSIElement&lt; FLUID_BULK_ELEMENT, POROELASTICITY_BULK_ELEMENT &gt;::fill_in_generic_residual_contribution_axisym_poroelastic_fsi()</a>, <a class="el" href="axisym__fluid__traction__elements_8h_source.html#l00883">oomph::LinearisedFSIAxisymmetricNStNoSlipBCElementElement&lt; FLUID_BULK_ELEMENT, SOLID_BULK_ELEMENT &gt;::fill_in_generic_residual_contribution_fsi_no_slip_axisym()</a>, <a class="el" href="impose__impenetrability__element_8h_source.html#l00312">oomph::ImposeImpenetrabilityElement&lt; ELEMENT &gt;::get_dof_numbers_for_unknowns()</a>, <a class="el" href="impose__parallel__outflow__element_8h_source.html#l00353">oomph::ImposeParallelOutflowElement&lt; ELEMENT &gt;::get_dof_numbers_for_unknowns()</a>, <a class="el" href="solid__traction__elements_8h_source.html#l01913">oomph::ImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;::get_dof_numbers_for_unknowns()</a>, <a class="el" href="solid__traction__elements_8h_source.html#l03002">oomph::FSIImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;::get_dof_numbers_for_unknowns()</a>, <a class="el" href="solid__traction__elements_8h_source.html#l01404">oomph::ImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;::output()</a>, <a class="el" href="solid__traction__elements_8h_source.html#l02678">oomph::FSIImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;::output()</a>, <a class="el" href="solid__traction__elements_8h_source.html#l02063">oomph::RefineableImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;::refineable_fill_in_generic_contribution_to_residuals_displ_lagr_multiplier()</a>, <a class="el" href="solid__traction__elements_8h_source.html#l03133">oomph::RefineableFSIImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;::refineable_fill_in_generic_contribution_to_residuals_fsi_displ_lagr_multiplier()</a>, and <a class="el" href="solid__traction__elements_8h_source.html#l01517">oomph::ImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;::square_of_l2_norm_of_error()</a>.</p>
 
@@ -660,11 +660,11 @@ Private Attributes</h2></td></tr>
 
 <p>Return pointer to the map giving the index of the first face element value. </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02047">2047</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02046">2046</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8h_source.html#l02018">Index_of_first_value_assigned_by_face_element_pt</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l02017">Index_of_first_value_assigned_by_face_element_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="nodes_8h_source.html#l02289">oomph::BoundaryNode&lt; NODE_TYPE &gt;::clear_additional_copied_pointers()</a>, <a class="el" href="multi__domain_8template_8cc_source.html#l02068">oomph::Multi_domain_functions::construct_new_external_halo_master_node_helper()</a>, <a class="el" href="missing__masters_8template_8cc_source.html#l00251">oomph::Missing_masters_functions::construct_new_external_halo_master_node_helper()</a>, <a class="el" href="multi__domain_8cc_source.html#l01452">oomph::Multi_domain_functions::construct_new_external_halo_node_helper()</a>, <a class="el" href="missing__masters_8cc_source.html#l01298">oomph::Missing_masters_functions::construct_new_external_halo_node_helper()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l19416">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::construct_new_halo_node_helper()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l27905">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::construct_new_node_load_balance_helper()</a>, <a class="el" href="problem_8cc_source.html#l19274">oomph::Problem::get_data_to_be_sent_during_load_balancing()</a>, <a class="el" href="missing__masters_8cc_source.html#l00658">oomph::Missing_masters_functions::get_required_master_nodal_information_helper()</a>, <a class="el" href="multi__domain_8cc_source.html#l01010">oomph::Multi_domain_functions::get_required_master_nodal_information_helper()</a>, <a class="el" href="missing__masters_8cc_source.html#l00436">oomph::Missing_masters_functions::get_required_nodal_information_helper()</a>, <a class="el" href="multi__domain_8cc_source.html#l00754">oomph::Multi_domain_functions::get_required_nodal_information_helper()</a>, <a class="el" href="nodes_8h_source.html#l02246">oomph::BoundaryNode&lt; NODE_TYPE &gt;::reset_copied_pointers()</a>, <a class="el" href="mesh_8cc_source.html#l04426">oomph::Mesh::resize_halo_nodes()</a>, and <a class="el" href="problem_8cc_source.html#l18944">oomph::Problem::send_data_to_be_sent_during_load_balancing()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="nodes_8h_source.html#l02288">oomph::BoundaryNode&lt; NODE_TYPE &gt;::clear_additional_copied_pointers()</a>, <a class="el" href="multi__domain_8template_8cc_source.html#l02068">oomph::Multi_domain_functions::construct_new_external_halo_master_node_helper()</a>, <a class="el" href="missing__masters_8template_8cc_source.html#l00251">oomph::Missing_masters_functions::construct_new_external_halo_master_node_helper()</a>, <a class="el" href="multi__domain_8cc_source.html#l01452">oomph::Multi_domain_functions::construct_new_external_halo_node_helper()</a>, <a class="el" href="missing__masters_8cc_source.html#l01298">oomph::Missing_masters_functions::construct_new_external_halo_node_helper()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l19416">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::construct_new_halo_node_helper()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l27905">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::construct_new_node_load_balance_helper()</a>, <a class="el" href="problem_8cc_source.html#l19274">oomph::Problem::get_data_to_be_sent_during_load_balancing()</a>, <a class="el" href="missing__masters_8cc_source.html#l00658">oomph::Missing_masters_functions::get_required_master_nodal_information_helper()</a>, <a class="el" href="multi__domain_8cc_source.html#l01010">oomph::Multi_domain_functions::get_required_master_nodal_information_helper()</a>, <a class="el" href="missing__masters_8cc_source.html#l00436">oomph::Missing_masters_functions::get_required_nodal_information_helper()</a>, <a class="el" href="multi__domain_8cc_source.html#l00754">oomph::Multi_domain_functions::get_required_nodal_information_helper()</a>, <a class="el" href="nodes_8h_source.html#l02245">oomph::BoundaryNode&lt; NODE_TYPE &gt;::reset_copied_pointers()</a>, <a class="el" href="mesh_8cc_source.html#l04426">oomph::Mesh::resize_halo_nodes()</a>, and <a class="el" href="problem_8cc_source.html#l18944">oomph::Problem::send_data_to_be_sent_during_load_balancing()</a>.</p>
 
 </div>
 </div>
@@ -693,11 +693,11 @@ Private Attributes</h2></td></tr>
 
 <p>Test whether the node lies on a boundary. </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02190">2190</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02189">2189</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8h_source.html#l02009">Boundaries_pt</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l02008">Boundaries_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="nodes_8cc_source.html#l03165">get_coordinates_on_boundary()</a>, <a class="el" href="nodes_8h_source.html#l02533">oomph::BoundaryNode&lt; NODE_TYPE &gt;::is_on_boundary()</a>, <a class="el" href="nodes_8cc_source.html#l03119">ncoordinates_on_boundary()</a>, <a class="el" href="nodes_8cc_source.html#l03062">remove_from_boundary()</a>, and <a class="el" href="nodes_8cc_source.html#l03236">set_coordinates_on_boundary()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="nodes_8cc_source.html#l03165">get_coordinates_on_boundary()</a>, <a class="el" href="nodes_8h_source.html#l02532">oomph::BoundaryNode&lt; NODE_TYPE &gt;::is_on_boundary()</a>, <a class="el" href="nodes_8cc_source.html#l03119">ncoordinates_on_boundary()</a>, <a class="el" href="nodes_8cc_source.html#l03062">remove_from_boundary()</a>, and <a class="el" href="nodes_8cc_source.html#l03236">set_coordinates_on_boundary()</a>.</p>
 
 </div>
 </div>
@@ -722,7 +722,7 @@ Private Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="nodes_8cc_source.html#l03099">3099</a> of file <a class="el" href="nodes_8cc_source.html">nodes.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8h_source.html#l02009">Boundaries_pt</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l02008">Boundaries_pt</a>.</p>
 
 </div>
 </div>
@@ -738,13 +738,13 @@ Private Attributes</h2></td></tr>
         <tr>
           <td class="memname">void oomph::BoundaryNodeBase::make_node_periodic </td>
           <td>(</td>
-          <td class="paramtype">Node *const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;&#160;</td>
           <td class="paramname"><em>node_pt</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Node *const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;&#160;</td>
           <td class="paramname"><em>original_node_pt</em>&#160;</td>
         </tr>
         <tr>
@@ -765,9 +765,9 @@ Private Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="nodes_8cc_source.html#l02951">2951</a> of file <a class="el" href="nodes_8cc_source.html">nodes.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8h_source.html#l02022">Copied_node_pt</a>, and <a class="el" href="nodes_8cc_source.html#l02951">make_node_periodic()</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8cc_source.html#l00076">oomph::Data::add_copy()</a>, <a class="el" href="nodes_8h_source.html#l01107">oomph::Node::copied_node_pt()</a>, <a class="el" href="nodes_8h_source.html#l02021">Copied_node_pt</a>, <a class="el" href="nodes_8cc_source.html#l00187">oomph::Data::delete_value_storage()</a>, <a class="el" href="nodes_8h_source.html#l00116">oomph::Data::Eqn_number</a>, <a class="el" href="nodes_8h_source.html#l00253">oomph::Data::is_a_copy()</a>, <a class="el" href="nodes_8cc_source.html#l02951">make_node_periodic()</a>, and <a class="el" href="nodes_8h_source.html#l00112">oomph::Data::Value</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="nodes_8cc_source.html#l02951">make_node_periodic()</a>, and <a class="el" href="nodes_8h_source.html#l02779">oomph::BoundaryNode&lt; NODE_TYPE &gt;::make_periodic()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="nodes_8cc_source.html#l02951">make_node_periodic()</a>, and <a class="el" href="nodes_8h_source.html#l02778">oomph::BoundaryNode&lt; NODE_TYPE &gt;::make_periodic()</a>.</p>
 
 </div>
 </div>
@@ -783,13 +783,13 @@ Private Attributes</h2></td></tr>
         <tr>
           <td class="memname">void oomph::BoundaryNodeBase::make_nodes_periodic </td>
           <td>(</td>
-          <td class="paramtype">Node *const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;&#160;</td>
           <td class="paramname"><em>copied_node_pt</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; Node * &gt; const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Node.html">Node</a> * &gt; const &amp;&#160;</td>
           <td class="paramname"><em>periodic_copies_pt</em>&#160;</td>
         </tr>
         <tr>
@@ -811,9 +811,9 @@ Private Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="nodes_8cc_source.html#l02896">2896</a> of file <a class="el" href="nodes_8cc_source.html">nodes.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8h_source.html#l02022">Copied_node_pt</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8cc_source.html#l00076">oomph::Data::add_copy()</a>, <a class="el" href="nodes_8h_source.html#l02021">Copied_node_pt</a>, <a class="el" href="nodes_8cc_source.html#l00187">oomph::Data::delete_value_storage()</a>, <a class="el" href="nodes_8h_source.html#l00116">oomph::Data::Eqn_number</a>, <a class="el" href="nodes_8h_source.html#l00253">oomph::Data::is_a_copy()</a>, and <a class="el" href="nodes_8h_source.html#l00112">oomph::Data::Value</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="nodes_8h_source.html#l02786">oomph::BoundaryNode&lt; NODE_TYPE &gt;::make_periodic_nodes()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="nodes_8h_source.html#l02785">oomph::BoundaryNode&lt; NODE_TYPE &gt;::make_periodic_nodes()</a>.</p>
 
 </div>
 </div>
@@ -837,9 +837,9 @@ Private Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="nodes_8cc_source.html#l03119">3119</a> of file <a class="el" href="nodes_8cc_source.html">nodes.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8h_source.html#l02009">Boundaries_pt</a>, <a class="el" href="nodes_8h_source.html#l02005">Boundary_coordinates_pt</a>, and <a class="el" href="nodes_8h_source.html#l02190">is_on_boundary()</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l02008">Boundaries_pt</a>, <a class="el" href="nodes_8h_source.html#l02004">Boundary_coordinates_pt</a>, and <a class="el" href="nodes_8h_source.html#l02189">is_on_boundary()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="nodes_8h_source.html#l02559">oomph::BoundaryNode&lt; NODE_TYPE &gt;::ncoordinates_on_boundary()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="nodes_8h_source.html#l02558">oomph::BoundaryNode&lt; NODE_TYPE &gt;::ncoordinates_on_boundary()</a>.</p>
 
 </div>
 </div>
@@ -921,9 +921,9 @@ Private Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="nodes_8cc_source.html#l03062">3062</a> of file <a class="el" href="nodes_8cc_source.html">nodes.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8h_source.html#l02009">Boundaries_pt</a>, <a class="el" href="nodes_8h_source.html#l02005">Boundary_coordinates_pt</a>, and <a class="el" href="nodes_8h_source.html#l02190">is_on_boundary()</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l02008">Boundaries_pt</a>, <a class="el" href="nodes_8h_source.html#l02004">Boundary_coordinates_pt</a>, and <a class="el" href="nodes_8h_source.html#l02189">is_on_boundary()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="nodes_8h_source.html#l02552">oomph::BoundaryNode&lt; NODE_TYPE &gt;::remove_from_boundary()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="nodes_8h_source.html#l02551">oomph::BoundaryNode&lt; NODE_TYPE &gt;::remove_from_boundary()</a>.</p>
 
 </div>
 </div>
@@ -964,7 +964,7 @@ Private Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="nodes_8cc_source.html#l03236">3236</a> of file <a class="el" href="nodes_8cc_source.html">nodes.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8h_source.html#l02009">Boundaries_pt</a>, <a class="el" href="nodes_8h_source.html#l02005">Boundary_coordinates_pt</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="nodes_8h_source.html#l02190">is_on_boundary()</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l02008">Boundaries_pt</a>, <a class="el" href="nodes_8h_source.html#l02004">Boundary_coordinates_pt</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="nodes_8h_source.html#l02189">is_on_boundary()</a>.</p>
 
 </div>
 </div>
@@ -1004,11 +1004,11 @@ Private Attributes</h2></td></tr>
 
 <p>Set the vector of boundary coordinates on mesh boundary b. </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02211">2211</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02210">2210</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8h_source.html#l02211">set_coordinates_on_boundary()</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l02210">set_coordinates_on_boundary()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="nodes_8h_source.html#l02211">set_coordinates_on_boundary()</a>, and <a class="el" href="nodes_8h_source.html#l02575">oomph::BoundaryNode&lt; NODE_TYPE &gt;::set_coordinates_on_boundary()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="nodes_8h_source.html#l02210">set_coordinates_on_boundary()</a>, and <a class="el" href="nodes_8h_source.html#l02574">oomph::BoundaryNode&lt; NODE_TYPE &gt;::set_coordinates_on_boundary()</a>.</p>
 
 </div>
 </div>
@@ -1033,11 +1033,11 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Pointer to set of mesh boundaries occupied by the Node; NULL if the Node is not on any boundaries. </p>
+<p>Pointer to set of mesh boundaries occupied by the <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a>; NULL if the <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a> is not on any boundaries. </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02009">2009</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02008">2008</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="nodes_8cc_source.html#l03028">add_to_boundary()</a>, <a class="el" href="nodes_8h_source.html#l02178">get_boundaries_pt()</a>, <a class="el" href="nodes_8cc_source.html#l03165">get_coordinates_on_boundary()</a>, <a class="el" href="nodes_8cc_source.html#l03099">is_on_boundary()</a>, <a class="el" href="nodes_8cc_source.html#l03119">ncoordinates_on_boundary()</a>, <a class="el" href="nodes_8cc_source.html#l03062">remove_from_boundary()</a>, <a class="el" href="nodes_8cc_source.html#l03236">set_coordinates_on_boundary()</a>, and <a class="el" href="nodes_8cc_source.html#l02993">~BoundaryNodeBase()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="nodes_8cc_source.html#l03028">add_to_boundary()</a>, <a class="el" href="nodes_8h_source.html#l02177">get_boundaries_pt()</a>, <a class="el" href="nodes_8cc_source.html#l03165">get_coordinates_on_boundary()</a>, <a class="el" href="nodes_8cc_source.html#l03099">is_on_boundary()</a>, <a class="el" href="nodes_8cc_source.html#l03119">ncoordinates_on_boundary()</a>, <a class="el" href="nodes_8cc_source.html#l03062">remove_from_boundary()</a>, <a class="el" href="nodes_8cc_source.html#l03236">set_coordinates_on_boundary()</a>, and <a class="el" href="nodes_8cc_source.html#l02993">~BoundaryNodeBase()</a>.</p>
 
 </div>
 </div>
@@ -1061,11 +1061,11 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Pointer to a map of pointers to intrinsic boundary coordinates of the Node, indexed by the boundary number. If the Node does not lie on a boundary this map should never be queried because unnecessary storage will then be allocated. Hence, it can only be accessed via the appropriate set and get functions. </p>
+<p>Pointer to a map of pointers to intrinsic boundary coordinates of the <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a>, indexed by the boundary number. If the <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a> does not lie on a boundary this map should never be queried because unnecessary storage will then be allocated. Hence, it can only be accessed via the appropriate set and get functions. </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02005">2005</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02004">2004</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="nodes_8h_source.html#l02171">boundary_coordinates_have_been_set_up()</a>, <a class="el" href="nodes_8cc_source.html#l03165">get_coordinates_on_boundary()</a>, <a class="el" href="nodes_8cc_source.html#l03119">ncoordinates_on_boundary()</a>, <a class="el" href="nodes_8cc_source.html#l03062">remove_from_boundary()</a>, <a class="el" href="nodes_8cc_source.html#l03236">set_coordinates_on_boundary()</a>, and <a class="el" href="nodes_8cc_source.html#l02993">~BoundaryNodeBase()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="nodes_8h_source.html#l02170">boundary_coordinates_have_been_set_up()</a>, <a class="el" href="nodes_8cc_source.html#l03165">get_coordinates_on_boundary()</a>, <a class="el" href="nodes_8cc_source.html#l03119">ncoordinates_on_boundary()</a>, <a class="el" href="nodes_8cc_source.html#l03062">remove_from_boundary()</a>, <a class="el" href="nodes_8cc_source.html#l03236">set_coordinates_on_boundary()</a>, and <a class="el" href="nodes_8cc_source.html#l02993">~BoundaryNodeBase()</a>.</p>
 
 </div>
 </div>
@@ -1079,7 +1079,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">Node* oomph::BoundaryNodeBase::Copied_node_pt</td>
+          <td class="memname"><a class="el" href="classoomph_1_1Node.html">Node</a>* oomph::BoundaryNodeBase::Copied_node_pt</td>
         </tr>
       </table>
   </td>
@@ -1091,9 +1091,9 @@ Private Attributes</h2></td></tr>
 
 <p>If the <a class="el" href="classoomph_1_1BoundaryNode.html" title="A template Class for BoundaryNodes; that is Nodes that MAY live on the boundary of a Mesh....">BoundaryNode</a> is periodic, this pointer is set to the <a class="el" href="classoomph_1_1BoundaryNode.html" title="A template Class for BoundaryNodes; that is Nodes that MAY live on the boundary of a Mesh....">BoundaryNode</a> whose data it shares. </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02022">2022</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02021">2021</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="nodes_8h_source.html#l02829">oomph::BoundaryNode&lt; NODE_TYPE &gt;::assign_eqn_numbers()</a>, <a class="el" href="nodes_8h_source.html#l02289">oomph::BoundaryNode&lt; NODE_TYPE &gt;::clear_additional_copied_pointers()</a>, <a class="el" href="nodes_8h_source.html#l02333">oomph::BoundaryNode&lt; NODE_TYPE &gt;::clear_copied_pointers()</a>, <a class="el" href="nodes_8h_source.html#l02823">oomph::BoundaryNode&lt; NODE_TYPE &gt;::copied_node_pt()</a>, <a class="el" href="nodes_8h_source.html#l02793">oomph::BoundaryNode&lt; NODE_TYPE &gt;::is_a_copy()</a>, <a class="el" href="nodes_8cc_source.html#l02951">make_node_periodic()</a>, <a class="el" href="nodes_8cc_source.html#l02896">make_nodes_periodic()</a>, <a class="el" href="nodes_8h_source.html#l02246">oomph::BoundaryNode&lt; NODE_TYPE &gt;::reset_copied_pointers()</a>, <a class="el" href="nodes_8h_source.html#l02855">oomph::BoundaryNode&lt; NODE_TYPE &gt;::resize()</a>, and <a class="el" href="nodes_8h_source.html#l02463">oomph::BoundaryNode&lt; NODE_TYPE &gt;::~BoundaryNode()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="nodes_8h_source.html#l02828">oomph::BoundaryNode&lt; NODE_TYPE &gt;::assign_eqn_numbers()</a>, <a class="el" href="nodes_8h_source.html#l02288">oomph::BoundaryNode&lt; NODE_TYPE &gt;::clear_additional_copied_pointers()</a>, <a class="el" href="nodes_8h_source.html#l02332">oomph::BoundaryNode&lt; NODE_TYPE &gt;::clear_copied_pointers()</a>, <a class="el" href="nodes_8h_source.html#l02822">oomph::BoundaryNode&lt; NODE_TYPE &gt;::copied_node_pt()</a>, <a class="el" href="nodes_8h_source.html#l02792">oomph::BoundaryNode&lt; NODE_TYPE &gt;::is_a_copy()</a>, <a class="el" href="nodes_8cc_source.html#l02951">make_node_periodic()</a>, <a class="el" href="nodes_8cc_source.html#l02896">make_nodes_periodic()</a>, <a class="el" href="nodes_8h_source.html#l02245">oomph::BoundaryNode&lt; NODE_TYPE &gt;::reset_copied_pointers()</a>, <a class="el" href="nodes_8h_source.html#l02854">oomph::BoundaryNode&lt; NODE_TYPE &gt;::resize()</a>, and <a class="el" href="nodes_8h_source.html#l02462">oomph::BoundaryNode&lt; NODE_TYPE &gt;::~BoundaryNode()</a>.</p>
 
 </div>
 </div>
@@ -1117,11 +1117,11 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Pointer to a map, indexed by the face element identifier it returns the position of the first face element value. If the Node does not lie on a face element this map should never be queried. </p>
+<p>Pointer to a map, indexed by the face element identifier it returns the position of the first face element value. If the <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a> does not lie on a face element this map should never be queried. </p>
 
-<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02018">2018</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l02017">2017</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="nodes_8h_source.html#l02678">oomph::BoundaryNode&lt; NODE_TYPE &gt;::assign_additional_values_with_face_id()</a>, <a class="el" href="nodes_8h_source.html#l02062">index_of_first_value_assigned_by_face_element()</a>, <a class="el" href="nodes_8h_source.html#l02047">index_of_first_value_assigned_by_face_element_pt()</a>, <a class="el" href="nodes_8h_source.html#l02611">oomph::BoundaryNode&lt; NODE_TYPE &gt;::nvalue_assigned_by_face_element()</a>, <a class="el" href="nodes_8h_source.html#l02463">oomph::BoundaryNode&lt; NODE_TYPE &gt;::~BoundaryNode()</a>, and <a class="el" href="nodes_8cc_source.html#l02993">~BoundaryNodeBase()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="nodes_8h_source.html#l02677">oomph::BoundaryNode&lt; NODE_TYPE &gt;::assign_additional_values_with_face_id()</a>, <a class="el" href="nodes_8h_source.html#l02061">index_of_first_value_assigned_by_face_element()</a>, <a class="el" href="nodes_8h_source.html#l02046">index_of_first_value_assigned_by_face_element_pt()</a>, <a class="el" href="nodes_8h_source.html#l02610">oomph::BoundaryNode&lt; NODE_TYPE &gt;::nvalue_assigned_by_face_element()</a>, <a class="el" href="nodes_8h_source.html#l02462">oomph::BoundaryNode&lt; NODE_TYPE &gt;::~BoundaryNode()</a>, and <a class="el" href="nodes_8cc_source.html#l02993">~BoundaryNodeBase()</a>.</p>
 
 </div>
 </div>
@@ -1157,7 +1157,7 @@ Private Attributes</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Nov 2 2021 16:31:43
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Dec 21 2021 17:35:27
         </div>
       </div>
     </footer>

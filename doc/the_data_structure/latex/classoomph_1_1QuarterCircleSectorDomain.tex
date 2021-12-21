@@ -35,34 +35,34 @@ void \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_a76c032d372019ad51
 \begin{DoxyCompactList}\small\item\em Function pointer for function that squashes the outer two macro elements towards the wall by mapping the input value of the \char`\"{}radial\char`\"{} macro element coordinate to the return value. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_a5b66f846233b3cf976ed63d9bf54f0c7}{s\+\_\+squashed}} (const double \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
 \begin{DoxyCompactList}\small\item\em Function that squashes the outer two macro elements towards the wall by mapping the input value of the \char`\"{}radial\char`\"{} macro element coordinate to the return value. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_a9faddf9d13e0a7633f732bac1ddda80b}{macro\+\_\+element\+\_\+boundary}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&i\+\_\+macro, const unsigned \&i\+\_\+direct, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}})
+void \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_a9faddf9d13e0a7633f732bac1ddda80b}{macro\+\_\+element\+\_\+boundary}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&i\+\_\+macro, const unsigned \&i\+\_\+direct, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} representation of the i\+\_\+macro-\/th macro element boundary i\+\_\+direct (N/\+S/\+W/E) at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous)\+: f(s). Note that the local coordinate {\bfseries{s}} is a 1D \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} rather than a scalar -- this is unavoidable because this function implements the pure virtual function in the \mbox{\hyperlink{classoomph_1_1Domain}{Domain}} base class. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_af1520e712b46c8e1b0f098596fa63101}{r\+\_\+top\+\_\+left\+\_\+N}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}})
+void \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_af1520e712b46c8e1b0f098596fa63101}{r\+\_\+top\+\_\+left\+\_\+N}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Boundary of top left macro element zeta $ \in [-1,1] $. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_a84f4970adc3a93392ef1a57f19df96a1}{r\+\_\+top\+\_\+left\+\_\+W}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}})
+void \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_a84f4970adc3a93392ef1a57f19df96a1}{r\+\_\+top\+\_\+left\+\_\+W}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Boundary of top left macro element zeta $ \in [-1,1] $. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_a0bb74af9c782bd0a0a8d3ccfd708af55}{r\+\_\+top\+\_\+left\+\_\+S}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}})
+void \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_a0bb74af9c782bd0a0a8d3ccfd708af55}{r\+\_\+top\+\_\+left\+\_\+S}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Boundary of top left macro element zeta $ \in [-1,1] $. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_a951bc38c7e96a40f33c60b3ccee820bf}{r\+\_\+top\+\_\+left\+\_\+E}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}})
+void \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_a951bc38c7e96a40f33c60b3ccee820bf}{r\+\_\+top\+\_\+left\+\_\+E}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Boundary of top left macro element zeta $ \in [-1,1] $. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_ad937b0da664b5c01063e7f8de6427fce}{r\+\_\+bot\+\_\+right\+\_\+N}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}})
+void \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_ad937b0da664b5c01063e7f8de6427fce}{r\+\_\+bot\+\_\+right\+\_\+N}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Boundary of bottom right macro element zeta $ \in [-1,1] $. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_a85ba295aaeff2833644691978deac247}{r\+\_\+bot\+\_\+right\+\_\+W}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}})
+void \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_a85ba295aaeff2833644691978deac247}{r\+\_\+bot\+\_\+right\+\_\+W}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Boundary of bottom right macro element zeta $ \in [-1,1] $. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_a552f9bfc6fd451669f44ee02c8bb0d38}{r\+\_\+bot\+\_\+right\+\_\+S}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}})
+void \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_a552f9bfc6fd451669f44ee02c8bb0d38}{r\+\_\+bot\+\_\+right\+\_\+S}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Boundary of bottom right macro element zeta $ \in [-1,1] $. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_abb05f2e719d81f167fc0f608e80c5696}{r\+\_\+bot\+\_\+right\+\_\+E}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}})
+void \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_abb05f2e719d81f167fc0f608e80c5696}{r\+\_\+bot\+\_\+right\+\_\+E}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Boundary of bottom right macro element zeta $ \in [-1,1] $. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_a1cb12e9b1d2e17f8bd5c3d6691be3b1d}{r\+\_\+centr\+\_\+N}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}})
+void \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_a1cb12e9b1d2e17f8bd5c3d6691be3b1d}{r\+\_\+centr\+\_\+N}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Boundary of central box macro element zeta $ \in [-1,1] $. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_ae4558d37a4f9bb3f9d78b6878cb77a49}{r\+\_\+centr\+\_\+E}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}})
+void \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_ae4558d37a4f9bb3f9d78b6878cb77a49}{r\+\_\+centr\+\_\+E}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Boundary of central box macro element zeta $ \in [-1,1] $. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_aaa17ff1d6529000f8309005396966830}{r\+\_\+centr\+\_\+S}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}})
+void \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_aaa17ff1d6529000f8309005396966830}{r\+\_\+centr\+\_\+S}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Boundary of central box macro element zeta $ \in [-1,1] $. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_a453fc6f043f57031c1347065d521a1c3}{r\+\_\+centr\+\_\+W}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}})
+void \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_a453fc6f043f57031c1347065d521a1c3}{r\+\_\+centr\+\_\+W}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Boundary of central box macro element zeta $ \in [-1,1] $. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Private Member Functions}
 \begin{DoxyCompactItemize}
@@ -217,7 +217,7 @@ Definition at line \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l0
 
 
 
-References \mbox{\hyperlink{quadtree_8h_source_l00061}{oomph\+::\+Quad\+Tree\+Names\+::E}}, \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{oomph\+::f()}}, \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00505}{r\+\_\+bot\+\_\+right\+\_\+\+E()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00451}{r\+\_\+bot\+\_\+right\+\_\+\+N()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00486}{r\+\_\+bot\+\_\+right\+\_\+\+S()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00461}{r\+\_\+bot\+\_\+right\+\_\+\+W()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00532}{r\+\_\+centr\+\_\+\+E()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00521}{r\+\_\+centr\+\_\+\+N()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00543}{r\+\_\+centr\+\_\+\+S()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00562}{r\+\_\+centr\+\_\+\+W()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00417}{r\+\_\+top\+\_\+left\+\_\+\+E()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00354}{r\+\_\+top\+\_\+left\+\_\+\+N()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00390}{r\+\_\+top\+\_\+left\+\_\+\+S()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00370}{r\+\_\+top\+\_\+left\+\_\+\+W()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{quadtree_8h_source_l00062}{oomph\+::\+Quad\+Tree\+Names\+::S}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}.
+References \mbox{\hyperlink{quadtree_8h_source_l00061}{oomph\+::\+Quad\+Tree\+Names\+::E}}, \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00505}{r\+\_\+bot\+\_\+right\+\_\+\+E()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00451}{r\+\_\+bot\+\_\+right\+\_\+\+N()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00486}{r\+\_\+bot\+\_\+right\+\_\+\+S()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00461}{r\+\_\+bot\+\_\+right\+\_\+\+W()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00532}{r\+\_\+centr\+\_\+\+E()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00521}{r\+\_\+centr\+\_\+\+N()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00543}{r\+\_\+centr\+\_\+\+S()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00562}{r\+\_\+centr\+\_\+\+W()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00417}{r\+\_\+top\+\_\+left\+\_\+\+E()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00354}{r\+\_\+top\+\_\+left\+\_\+\+N()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00390}{r\+\_\+top\+\_\+left\+\_\+\+S()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00370}{r\+\_\+top\+\_\+left\+\_\+\+W()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{quadtree_8h_source_l00062}{oomph\+::\+Quad\+Tree\+Names\+::S}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
 
 \mbox{\Hypertarget{classoomph_1_1QuarterCircleSectorDomain_a76c032d372019ad5104a0a36fba12512}\label{classoomph_1_1QuarterCircleSectorDomain_a76c032d372019ad5104a0a36fba12512}} 
 \index{oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}!operator=@{operator=}}
@@ -245,7 +245,7 @@ Definition at line \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l0
 
 
 
-References \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{oomph\+::f()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00124}{Fract\+\_\+mid}}, \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00130}{Wall\+\_\+pt}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00127}{Xi\+\_\+hi}}, and \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00121}{Xi\+\_\+lo}}.
+References \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00124}{Fract\+\_\+mid}}, \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00130}{Wall\+\_\+pt}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00127}{Xi\+\_\+hi}}, and \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00121}{Xi\+\_\+lo}}.
 
 
 
@@ -267,7 +267,7 @@ Definition at line \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l0
 
 
 
-References \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{oomph\+::f()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00417}{r\+\_\+top\+\_\+left\+\_\+\+E()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+References \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00417}{r\+\_\+top\+\_\+left\+\_\+\+E()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
 
 
 
@@ -289,7 +289,7 @@ Definition at line \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l0
 
 
 
-References \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{oomph\+::f()}}, \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00100}{s\+\_\+squashed()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00130}{Wall\+\_\+pt}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}, and \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00121}{Xi\+\_\+lo}}.
+References \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00100}{s\+\_\+squashed()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00130}{Wall\+\_\+pt}}, and \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00121}{Xi\+\_\+lo}}.
 
 
 
@@ -311,7 +311,7 @@ Definition at line \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l0
 
 
 
-References \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{oomph\+::f()}}, \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00130}{Wall\+\_\+pt}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00127}{Xi\+\_\+hi}}, and \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00121}{Xi\+\_\+lo}}.
+References \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00130}{Wall\+\_\+pt}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00127}{Xi\+\_\+hi}}, and \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00121}{Xi\+\_\+lo}}.
 
 
 
@@ -333,7 +333,7 @@ Definition at line \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l0
 
 
 
-References \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{oomph\+::f()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00461}{r\+\_\+bot\+\_\+right\+\_\+\+W()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+References \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00461}{r\+\_\+bot\+\_\+right\+\_\+\+W()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
 
 
 
@@ -355,7 +355,7 @@ Definition at line \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l0
 
 
 
-References \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{oomph\+::f()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00390}{r\+\_\+top\+\_\+left\+\_\+\+S()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+References \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00390}{r\+\_\+top\+\_\+left\+\_\+\+S()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
 
 
 
@@ -377,7 +377,7 @@ Definition at line \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l0
 
 
 
-References \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{oomph\+::f()}}, \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00130}{Wall\+\_\+pt}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}, and \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00121}{Xi\+\_\+lo}}.
+References \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00130}{Wall\+\_\+pt}}, and \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00121}{Xi\+\_\+lo}}.
 
 
 
@@ -399,7 +399,7 @@ Definition at line \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l0
 
 
 
-References \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{oomph\+::f()}}, \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00130}{Wall\+\_\+pt}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}, and \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00127}{Xi\+\_\+hi}}.
+References \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00130}{Wall\+\_\+pt}}, and \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00127}{Xi\+\_\+hi}}.
 
 
 
@@ -421,7 +421,7 @@ Definition at line \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l0
 
 
 
-References \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{oomph\+::f()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00124}{Fract\+\_\+mid}}, \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00100}{s\+\_\+squashed()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00130}{Wall\+\_\+pt}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00127}{Xi\+\_\+hi}}, and \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00121}{Xi\+\_\+lo}}.
+References \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00124}{Fract\+\_\+mid}}, \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00100}{s\+\_\+squashed()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00130}{Wall\+\_\+pt}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00127}{Xi\+\_\+hi}}, and \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00121}{Xi\+\_\+lo}}.
 
 
 
@@ -443,7 +443,7 @@ Definition at line \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l0
 
 
 
-References \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{oomph\+::f()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00124}{Fract\+\_\+mid}}, \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00130}{Wall\+\_\+pt}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00127}{Xi\+\_\+hi}}, and \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00121}{Xi\+\_\+lo}}.
+References \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00124}{Fract\+\_\+mid}}, \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00130}{Wall\+\_\+pt}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00127}{Xi\+\_\+hi}}, and \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00121}{Xi\+\_\+lo}}.
 
 
 
@@ -465,7 +465,7 @@ Definition at line \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l0
 
 
 
-References \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{oomph\+::f()}}, \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00130}{Wall\+\_\+pt}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}, and \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00127}{Xi\+\_\+hi}}.
+References \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00130}{Wall\+\_\+pt}}, and \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00127}{Xi\+\_\+hi}}.
 
 
 
@@ -487,7 +487,7 @@ Definition at line \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l0
 
 
 
-References \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{oomph\+::f()}}, \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00100}{s\+\_\+squashed()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00130}{Wall\+\_\+pt}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}, and \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00127}{Xi\+\_\+hi}}.
+References \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00100}{s\+\_\+squashed()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00130}{Wall\+\_\+pt}}, and \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00127}{Xi\+\_\+hi}}.
 
 
 

@@ -35,46 +35,27 @@
 \DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00031}00031 \textcolor{comment}{  /// Translation scheme that takes account of the symmetries of the}}
 \DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00032}00032 \textcolor{comment}{  /// tensor. The independent coefficients are related to the coefficients of}}
 \DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00033}00033 \textcolor{comment}{  /// the elasticity tensor as follows:}}
-\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00034}00034 \textcolor{comment}{}\textcolor{comment}{  /**\(\backslash\)f[\(\backslash\)begin\{array\}\{cc\}    0 \& E\_\{1111\} \(\backslash\)\(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00035}00035 \textcolor{comment}{                             1 \& E\_\{1112\} \(\backslash\)\(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00036}00036 \textcolor{comment}{                             2 \& E\_\{1122\} \(\backslash\)\(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00037}00037 \textcolor{comment}{                             3 \& E\_\{1212\} \(\backslash\)\(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00038}00038 \textcolor{comment}{                             4 \& E\_\{1222\} \(\backslash\)\(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00039}00039 \textcolor{comment}{                             5 \& E\_\{2222\} \(\backslash\)\(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00040}00040 \textcolor{comment}{                             6 \& E\_\{1113\} \(\backslash\)\(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00041}00041 \textcolor{comment}{                             7 \& E\_\{1123\} \(\backslash\)\(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00042}00042 \textcolor{comment}{                             8 \& E\_\{1133\} \(\backslash\)\(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00043}00043 \textcolor{comment}{                             9 \& E\_\{1213\} \(\backslash\)\(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00044}00044 \textcolor{comment}{                             10 \& E\_\{1223\} \(\backslash\)\(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00045}00045 \textcolor{comment}{                             11 \& E\_\{1233\} \(\backslash\)\(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00046}00046 \textcolor{comment}{                             12 \& E\_\{1313\} \(\backslash\)\(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00047}00047 \textcolor{comment}{                             13 \& E\_\{1322\} \(\backslash\)\(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00048}00048 \textcolor{comment}{                             14 \& E\_\{1323\} \(\backslash\)\(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00049}00049 \textcolor{comment}{                             15 \& E\_\{1333\} \(\backslash\)\(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00050}00050 \textcolor{comment}{                             16 \& E\_\{2223\} \(\backslash\)\(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00051}00051 \textcolor{comment}{                             17 \& E\_\{2233\} \(\backslash\)\(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00052}00052 \textcolor{comment}{                             18 \& E\_\{2323\} \(\backslash\)\(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00053}00053 \textcolor{comment}{                             19 \& E\_\{2333\} \(\backslash\)\(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00054}00054 \textcolor{comment}{                             20 \& E\_\{3333\}}}
-\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00055}00055 \textcolor{comment}{                             \(\backslash\)end\{array\}\(\backslash\)f] **/}}
-\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00056}00056   \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicElasticityTensor_a26ab48ec65967f3ff8687d2208b337f6}{PMLTimeHarmonicElasticityTensor::Index}}[3][3][3][3] = \{}
-\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00057}00057     \{\{\{0, 1, 6\}, \{1, 2, 7\}, \{6, 7, 8\}\},}
-\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00058}00058      \{\{1, 3, 9\}, \{3, 4, 10\}, \{9, 10, 11\}\},}
-\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00059}00059      \{\{6, 9, 12\}, \{9, 13, 14\}, \{12, 14, 15\}\}\},}
-\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00060}00060 }
-\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00061}00061     \{\{\{1, 3, 9\}, \{3, 4, 10\}, \{9, 10, 11\}\},}
-\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00062}00062      \{\{2, 4, 13\}, \{4, 5, 16\}, \{13, 16, 17\}\},}
-\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00063}00063      \{\{7, 10, 14\}, \{10, 16, 18\}, \{14, 18, 19\}\}\},}
-\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00064}00064 }
-\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00065}00065     \{\{\{6, 9, 12\}, \{9, 13, 14\}, \{12, 14, 15\}\},}
-\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00066}00066      \{\{7, 10, 14\}, \{10, 16, 18\}, \{14, 18, 19\}\},}
-\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00067}00067      \{\{8, 11, 15\}, \{11, 17, 19\}, \{15, 19, 20\}\}\}\};}
-\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00068}00068 }
-\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00069}00069 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00070}00070 \textcolor{comment}{  /// Translation scheme for the isotropic elasticity tensor}}
-\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00071}00071 \textcolor{comment}{}  \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_ac1c39fcce5b79af772e89e86def6f623}{PMLTimeHarmonicIsotropicElasticityTensor::StaticIndex}}[21] = \{}
-\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00072}00072     1, 0, 2, 3, 0, 1, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0, 0, 2, 3, 0, 1\};}
-\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00073}00073 }
-\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00074}00074 \} \textcolor{comment}{// namespace oomph}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00034}00034 \textcolor{comment}{}\textcolor{comment}{  /**}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00035}00035 \textcolor{comment}{  /// \(\backslash\)f[\(\backslash\)begin\{array\}\{cc\} 0 \& E\_\{1111\} \(\backslash\)\(\backslash\) 1 \& E\_\{1112\} \(\backslash\)\(\backslash\) 2 \& E\_\{1122\} \(\backslash\)\(\backslash\) 3 \& E\_\{1212\} \(\backslash\)\(\backslash\) 4 \& E\_\{1222\} \(\backslash\)\(\backslash\) 5 \& E\_\{2222\} \(\backslash\)\(\backslash\) 6 \& E\_\{1113\} \(\backslash\)\(\backslash\) 7 \& E\_\{1123\} \(\backslash\)\(\backslash\) 8 \& E\_\{1133\} \(\backslash\)\(\backslash\) 9 \& E\_\{1213\} \(\backslash\)\(\backslash\) 10 \& E\_\{1223\} \(\backslash\)\(\backslash\) 11 \& E\_\{1233\} \(\backslash\)\(\backslash\) 12 \& E\_\{1313\} \(\backslash\)\(\backslash\) 13 \& E\_\{1322\} \(\backslash\)\(\backslash\) 14 \& E\_\{1323\} \(\backslash\)\(\backslash\) 15 \& E\_\{1333\} \(\backslash\)\(\backslash\) 16 \& E\_\{2223\} \(\backslash\)\(\backslash\) 17 \& E\_\{2233\} \(\backslash\)\(\backslash\) 18 \& E\_\{2323\} \(\backslash\)\(\backslash\) 19 \& E\_\{2333\} \(\backslash\)\(\backslash\) 20 \& E\_\{3333\} \(\backslash\)end\{array\}\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00036}00036 \textcolor{comment}{  /// **/}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00037}00037 \textcolor{comment}{}  const unsigned PMLTimeHarmonicElasticityTensor::Index[3][3][3][3] = \{}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00038}00038     \{\{\{0, 1, 6\}, \{1, 2, 7\}, \{6, 7, 8\}\},}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00039}00039      \{\{1, 3, 9\}, \{3, 4, 10\}, \{9, 10, 11\}\},}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00040}00040      \{\{6, 9, 12\}, \{9, 13, 14\}, \{12, 14, 15\}\}\},}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00041}00041 }
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00042}00042     \{\{\{1, 3, 9\}, \{3, 4, 10\}, \{9, 10, 11\}\},}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00043}00043      \{\{2, 4, 13\}, \{4, 5, 16\}, \{13, 16, 17\}\},}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00044}00044      \{\{7, 10, 14\}, \{10, 16, 18\}, \{14, 18, 19\}\}\},}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00045}00045 }
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00046}00046     \{\{\{6, 9, 12\}, \{9, 13, 14\}, \{12, 14, 15\}\},}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00047}00047      \{\{7, 10, 14\}, \{10, 16, 18\}, \{14, 18, 19\}\},}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00048}00048      \{\{8, 11, 15\}, \{11, 17, 19\}, \{15, 19, 20\}\}\}\};}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00049}00049 }
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00050}00050 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00051}00051 \textcolor{comment}{  /// Translation scheme for the isotropic elasticity tensor}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00052}00052 \textcolor{comment}{}  const unsigned PMLTimeHarmonicIsotropicElasticityTensor::StaticIndex[21] = \{}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00053}00053     1, 0, 2, 3, 0, 1, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0, 0, 2, 3, 0, 1\};}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00054}00054 }
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__elasticity__tensor_8cc_source_l00055}00055 \} // namespace oomph}
 
 \end{DoxyCode}

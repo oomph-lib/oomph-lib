@@ -22,9 +22,9 @@ Inheritance diagram for oomph\+::Rectangle\+With\+Hole\+Domain\+:\begin{figure}[
 \begin{DoxyCompactList}\small\item\em Constructor. Pass pointer to geometric object that represents the cylinder, the length of the (square) domain. The \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} must be parametrised such that $\zeta \in [0,2\pi]$ sweeps around the circumference in anticlockwise direction. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1RectangleWithHoleDomain_adae7fabe3167ec35c1c0d4af813a4dca}{$\sim$\+Rectangle\+With\+Hole\+Domain}} ()
 \begin{DoxyCompactList}\small\item\em Destructor\+: Empty; cleanup done in base class. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RectangleWithHoleDomain_a9548ab705821b22c43850b658a893fd8}{linear\+\_\+interpolate}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{namespaceoomph_a550bca442f95a0c982eaa8861967b041}{left}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ right, const double \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}})
+void \mbox{\hyperlink{classoomph_1_1RectangleWithHoleDomain_a9548ab705821b22c43850b658a893fd8}{linear\+\_\+interpolate}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ left, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ right, const double \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Helper function to interpolate linearly between the \char`\"{}right\char`\"{} and \char`\"{}left\char`\"{} points; $ s \in [-1,1] $. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RectangleWithHoleDomain_a514085f80059aa9f0cc3334a3cb408c1}{macro\+\_\+element\+\_\+boundary}} (const unsigned \&time, const unsigned \&m, const unsigned \&direction, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}})
+void \mbox{\hyperlink{classoomph_1_1RectangleWithHoleDomain_a514085f80059aa9f0cc3334a3cb408c1}{macro\+\_\+element\+\_\+boundary}} (const unsigned \&time, const unsigned \&m, const unsigned \&direction, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Parametrisation of macro element boundaries\+: f(s) is the position vector to macro-\/element m\textquotesingle{}s boundary in the specified direction \mbox{[}N/\+S/\+E/W\mbox{]} at the specfied discrete time level (time=0\+: present; time\texorpdfstring{$>$}{>}0\+: previous) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -109,7 +109,7 @@ Definition at line \mbox{\hyperlink{rectangle__with__hole__domain_8h_source_l001
 
 
 
-References \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{oomph\+::f()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{namespaceoomph_a550bca442f95a0c982eaa8861967b041}{oomph\+::left()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 
 
@@ -135,7 +135,7 @@ Definition at line \mbox{\hyperlink{rectangle__with__hole__domain_8h_source_l001
 
 
 
-References \mbox{\hyperlink{rectangle__with__hole__domain_8h_source_l00336}{Cylinder\+\_\+pt}}, \mbox{\hyperlink{quadtree_8h_source_l00061}{oomph\+::\+Quad\+Tree\+Names\+::E}}, \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{oomph\+::f()}}, \mbox{\hyperlink{rectangle__with__hole__domain_8h_source_l00106}{linear\+\_\+interpolate()}}, \mbox{\hyperlink{rectangle__with__hole__domain_8h_source_l00318}{Lower\+\_\+mid\+\_\+left}}, \mbox{\hyperlink{rectangle__with__hole__domain_8h_source_l00321}{Lower\+\_\+mid\+\_\+right}}, \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}, \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{quadtree_8h_source_l00062}{oomph\+::\+Quad\+Tree\+Names\+::S}}, \mbox{\hyperlink{rectangle__with__hole__domain_8h_source_l00330}{Upper\+\_\+mid\+\_\+left}}, \mbox{\hyperlink{rectangle__with__hole__domain_8h_source_l00333}{Upper\+\_\+mid\+\_\+right}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}.
+References \mbox{\hyperlink{rectangle__with__hole__domain_8h_source_l00336}{Cylinder\+\_\+pt}}, \mbox{\hyperlink{quadtree_8h_source_l00061}{oomph\+::\+Quad\+Tree\+Names\+::E}}, \mbox{\hyperlink{rectangle__with__hole__domain_8h_source_l00106}{linear\+\_\+interpolate()}}, \mbox{\hyperlink{rectangle__with__hole__domain_8h_source_l00318}{Lower\+\_\+mid\+\_\+left}}, \mbox{\hyperlink{rectangle__with__hole__domain_8h_source_l00321}{Lower\+\_\+mid\+\_\+right}}, \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}, \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{quadtree_8h_source_l00062}{oomph\+::\+Quad\+Tree\+Names\+::S}}, \mbox{\hyperlink{rectangle__with__hole__domain_8h_source_l00330}{Upper\+\_\+mid\+\_\+left}}, \mbox{\hyperlink{rectangle__with__hole__domain_8h_source_l00333}{Upper\+\_\+mid\+\_\+right}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
 
 
 

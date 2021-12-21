@@ -295,23 +295,23 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00291}00291   \textcolor{comment}{//============================================================================}\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00292}00292 \textcolor{comment}{  ///  Multiply the matrix by the vector x: soln=Ax}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00293}00293 \textcolor{comment}{}  \textcolor{comment}{//============================================================================}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00294}\mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix_ab575dfefa0bdd8f495453baa5575a4a0}{00294}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix_ab575dfefa0bdd8f495453baa5575a4a0}{DenseDoubleMatrix::multiply}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00294}\mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix_ab575dfefa0bdd8f495453baa5575a4a0}{00294}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix_ab575dfefa0bdd8f495453baa5575a4a0}{DenseDoubleMatrix::multiply}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& x,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00295}00295                                    \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& soln)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00296}00296 \textcolor{keyword}{  }\{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00297}00297 \textcolor{preprocessor}{\#ifdef PARANOID}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00298}00298     \textcolor{comment}{// Check to see if x.size() = ncol().}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00299}00299     \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.nrow() != this-\/>ncol())}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00299}00299     \textcolor{keywordflow}{if} (x.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow}}() != this-\/>ncol())}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00300}00300     \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00301}00301       std::ostringstream error\_message\_stream;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00302}00302       error\_message\_stream << \textcolor{stringliteral}{"{}The x vector is not the right size. It is "{}}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00303}00303                            << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.nrow() << \textcolor{stringliteral}{"{}, it should be "{}} << this-\/>\mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix_aec36d12984999f29f5fc21feea55df1d}{ncol}}()}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00303}00303                            << x.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow}}() << \textcolor{stringliteral}{"{}, it should be "{}} << this-\/>\mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix_aec36d12984999f29f5fc21feea55df1d}{ncol}}()}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00304}00304                            << std::endl;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00305}00305       \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message\_stream.str(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00306}00306                           OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00307}00307                           OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00308}00308     \}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00309}00309     \textcolor{comment}{// check that x is not distributed}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00310}00310     \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.distributed())}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00310}00310     \textcolor{keywordflow}{if} (x.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a5505731e7e73d7e4251c67c7adec6bf5}{distributed}}())}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00311}00311     \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00312}00312       std::ostringstream error\_message\_stream;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00313}00313       error\_message\_stream}
@@ -345,7 +345,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00341}00341                             OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00342}00342                             OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00343}00343       \}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00344}00344       \textcolor{keywordflow}{if} (*\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.distribution\_pt()-\/>communicator\_pt() !=}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00344}00344       \textcolor{keywordflow}{if} (*x.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a2760847d45ab334f6d902efc2620b615}{communicator\_pt}}() !=}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00345}00345           *soln.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a2760847d45ab334f6d902efc2620b615}{communicator\_pt}}())}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00346}00346       \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00347}00347         std::ostringstream error\_message\_stream;}
@@ -363,7 +363,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00359}00359     \textcolor{keywordflow}{if} (!soln.\mbox{\hyperlink{classoomph_1_1DoubleVector_aae402d422ec4344a4a45cdb7659b7161}{built}}())}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00360}00360     \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00361}00361       \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{LinearAlgebraDistribution}} dist(}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00362}00362         \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.distribution\_pt()-\/>communicator\_pt(), this-\/>nrow(), \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00362}00362         x.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a2760847d45ab334f6d902efc2620b615}{communicator\_pt}}(), this-\/>nrow(), \textcolor{keyword}{false});}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00363}00363       soln.\mbox{\hyperlink{classoomph_1_1DoubleVector_a7bcc94c157d6853a0f0502e8a76ed380}{build}}(\&dist, 0.0);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00364}00364     \}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00365}00365 }
@@ -371,7 +371,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00367}00367     soln.\mbox{\hyperlink{classoomph_1_1DoubleVector_a180c1057a29f4ed721da46040a619ecd}{initialise}}(0.0);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00368}00368 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00369}00369     \textcolor{comment}{// Multiply the matrix A, by the vector x}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00370}00370     \textcolor{keyword}{const} \textcolor{keywordtype}{double}* x\_pt = \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.values\_pt();}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00370}00370     \textcolor{keyword}{const} \textcolor{keywordtype}{double}* x\_pt = x.\mbox{\hyperlink{classoomph_1_1DoubleVector_ae3484a5eb4cb663e09640806ef1bf05a}{values\_pt}}();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00371}00371     \textcolor{keywordtype}{double}* soln\_pt = soln.\mbox{\hyperlink{classoomph_1_1DoubleVector_ae3484a5eb4cb663e09640806ef1bf05a}{values\_pt}}();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00372}00372     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < \mbox{\hyperlink{classoomph_1_1DenseMatrix_a23cb539be0b4ef0381b9f18e8e50f75e}{N}}; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00373}00373     \{}
@@ -386,23 +386,23 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00382}00382   \textcolor{comment}{//=================================================================}\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00383}00383 \textcolor{comment}{  /// Multiply the transposed matrix by the vector x: soln=A\string^T x}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00384}00384 \textcolor{comment}{}  \textcolor{comment}{//=================================================================}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00385}\mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix_a7cc35997d87b4ee7b77fcaaf85eeeaec}{00385}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix_a7cc35997d87b4ee7b77fcaaf85eeeaec}{DenseDoubleMatrix::multiply\_transpose}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00385}\mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix_a7cc35997d87b4ee7b77fcaaf85eeeaec}{00385}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix_a7cc35997d87b4ee7b77fcaaf85eeeaec}{DenseDoubleMatrix::multiply\_transpose}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& x,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00386}00386                                              \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& soln)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00387}00387 \textcolor{keyword}{  }\{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00388}00388 \textcolor{preprocessor}{\#ifdef PARANOID}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00389}00389     \textcolor{comment}{// Check to see if x.size() = ncol().}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00390}00390     \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.nrow() != this-\/>nrow())}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00390}00390     \textcolor{keywordflow}{if} (x.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow}}() != this-\/>nrow())}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00391}00391     \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00392}00392       std::ostringstream error\_message\_stream;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00393}00393       error\_message\_stream << \textcolor{stringliteral}{"{}The x vector is not the right size. It is "{}}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00394}00394                            << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.nrow() << \textcolor{stringliteral}{"{}, it should be "{}} << this-\/>\mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix_ab67993d1a41ca5ddf05c8210673723f0}{nrow}}()}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00394}00394                            << x.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow}}() << \textcolor{stringliteral}{"{}, it should be "{}} << this-\/>\mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix_ab67993d1a41ca5ddf05c8210673723f0}{nrow}}()}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00395}00395                            << std::endl;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00396}00396       \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message\_stream.str(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00397}00397                           OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00398}00398                           OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00399}00399     \}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00400}00400     \textcolor{comment}{// check that x is not distributed}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00401}00401     \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.distributed())}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00401}00401     \textcolor{keywordflow}{if} (x.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a5505731e7e73d7e4251c67c7adec6bf5}{distributed}}())}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00402}00402     \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00403}00403       std::ostringstream error\_message\_stream;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00404}00404       error\_message\_stream}
@@ -437,7 +437,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00433}00433                             OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00434}00434       \}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00435}00435       \textcolor{keywordflow}{if} (*soln.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a2760847d45ab334f6d902efc2620b615}{communicator\_pt}}() !=}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00436}00436           *\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.distribution\_pt()-\/>communicator\_pt())}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00436}00436           *x.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a2760847d45ab334f6d902efc2620b615}{communicator\_pt}}())}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00437}00437       \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00438}00438         std::ostringstream error\_message\_stream;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00439}00439         error\_message\_stream}
@@ -454,7 +454,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00450}00450     \textcolor{keywordflow}{if} (!soln.\mbox{\hyperlink{classoomph_1_1DoubleVector_aae402d422ec4344a4a45cdb7659b7161}{built}}())}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00451}00451     \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00452}00452       \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{LinearAlgebraDistribution}}* dist\_pt = \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{LinearAlgebraDistribution}}(}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00453}00453         \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.distribution\_pt()-\/>communicator\_pt(), this-\/>ncol(), \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00453}00453         x.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a2760847d45ab334f6d902efc2620b615}{communicator\_pt}}(), this-\/>ncol(), \textcolor{keyword}{false});}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00454}00454       soln.\mbox{\hyperlink{classoomph_1_1DoubleVector_a7bcc94c157d6853a0f0502e8a76ed380}{build}}(dist\_pt, 0.0);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00455}00455       \textcolor{keyword}{delete} dist\_pt;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00456}00456     \}}
@@ -464,7 +464,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00460}00460 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00461}00461     \textcolor{comment}{// Matrix vector product}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00462}00462     \textcolor{keywordtype}{double}* soln\_pt = soln.\mbox{\hyperlink{classoomph_1_1DoubleVector_ae3484a5eb4cb663e09640806ef1bf05a}{values\_pt}}();}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00463}00463     \textcolor{keyword}{const} \textcolor{keywordtype}{double}* x\_pt = \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.values\_pt();}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00463}00463     \textcolor{keyword}{const} \textcolor{keywordtype}{double}* x\_pt = x.\mbox{\hyperlink{classoomph_1_1DoubleVector_ae3484a5eb4cb663e09640806ef1bf05a}{values\_pt}}();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00464}00464     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < \mbox{\hyperlink{classoomph_1_1DenseMatrix_a23cb539be0b4ef0381b9f18e8e50f75e}{N}}; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00465}00465     \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00466}00466       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} j = 0; j < \mbox{\hyperlink{classoomph_1_1DenseMatrix_aa36631ee95fe55afe697377b03d05d6a}{M}}; j++)}
@@ -623,22 +623,22 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00619}00619   \textcolor{comment}{//===================================================================}\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00620}00620 \textcolor{comment}{  ///  Multiply the matrix by the vector x}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00621}00621 \textcolor{comment}{}  \textcolor{comment}{//===================================================================}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00622}\mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_add24c25e344b84fb5b732e294af5e8b2}{00622}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_add24c25e344b84fb5b732e294af5e8b2}{CCDoubleMatrix::multiply}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& soln)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00622}\mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_add24c25e344b84fb5b732e294af5e8b2}{00622}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_add24c25e344b84fb5b732e294af5e8b2}{CCDoubleMatrix::multiply}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& x, \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& soln)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00623}00623 \textcolor{keyword}{  }\{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00624}00624 \textcolor{preprocessor}{\#ifdef PARANOID}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00625}00625     \textcolor{comment}{// Check to see if x.size() = ncol().}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00626}00626     \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.nrow() != this-\/>ncol())}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00626}00626     \textcolor{keywordflow}{if} (x.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow}}() != this-\/>ncol())}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00627}00627     \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00628}00628       std::ostringstream error\_message\_stream;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00629}00629       error\_message\_stream << \textcolor{stringliteral}{"{}The x vector is not the right size. It is "{}}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00630}00630                            << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.nrow() << \textcolor{stringliteral}{"{}, it should be "{}} << this-\/>\mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_aa38cc544ab30f9318161763e13c20957}{ncol}}()}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00630}00630                            << x.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow}}() << \textcolor{stringliteral}{"{}, it should be "{}} << this-\/>\mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_aa38cc544ab30f9318161763e13c20957}{ncol}}()}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00631}00631                            << std::endl;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00632}00632       \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message\_stream.str(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00633}00633                           OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00634}00634                           OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00635}00635     \}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00636}00636     \textcolor{comment}{// check that x is not distributed}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00637}00637     \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.distributed())}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00637}00637     \textcolor{keywordflow}{if} (x.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a5505731e7e73d7e4251c67c7adec6bf5}{distributed}}())}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00638}00638     \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00639}00639       std::ostringstream error\_message\_stream;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00640}00640       error\_message\_stream}
@@ -673,7 +673,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00669}00669                             OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00670}00670       \}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00671}00671       \textcolor{keywordflow}{if} (*soln.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a2760847d45ab334f6d902efc2620b615}{communicator\_pt}}() !=}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00672}00672           *\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.distribution\_pt()-\/>communicator\_pt())}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00672}00672           *x.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a2760847d45ab334f6d902efc2620b615}{communicator\_pt}}())}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00673}00673       \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00674}00674         std::ostringstream error\_message\_stream;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00675}00675         error\_message\_stream}
@@ -690,7 +690,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00686}00686     \textcolor{keywordflow}{if} (!soln.\mbox{\hyperlink{classoomph_1_1DoubleVector_aae402d422ec4344a4a45cdb7659b7161}{built}}())}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00687}00687     \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00688}00688       \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{LinearAlgebraDistribution}}* dist\_pt = \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{LinearAlgebraDistribution}}(}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00689}00689         \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.distribution\_pt()-\/>communicator\_pt(), this-\/>nrow(), \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00689}00689         x.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a2760847d45ab334f6d902efc2620b615}{communicator\_pt}}(), this-\/>nrow(), \textcolor{keyword}{false});}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00690}00690       soln.\mbox{\hyperlink{classoomph_1_1DoubleVector_a7bcc94c157d6853a0f0502e8a76ed380}{build}}(dist\_pt, 0.0);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00691}00691       \textcolor{keyword}{delete} dist\_pt;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00692}00692     \}}
@@ -700,7 +700,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00696}00696 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00697}00697     \textcolor{comment}{// multiply}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00698}00698     \textcolor{keywordtype}{double}* soln\_pt = soln.\mbox{\hyperlink{classoomph_1_1DoubleVector_ae3484a5eb4cb663e09640806ef1bf05a}{values\_pt}}();}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00699}00699     \textcolor{keyword}{const} \textcolor{keywordtype}{double}* x\_pt = \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.values\_pt();}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00699}00699     \textcolor{keyword}{const} \textcolor{keywordtype}{double}* x\_pt = x.\mbox{\hyperlink{classoomph_1_1DoubleVector_ae3484a5eb4cb663e09640806ef1bf05a}{values\_pt}}();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00700}00700     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} j = 0; j < \mbox{\hyperlink{classoomph_1_1SparseMatrix_a8f15f962605f52fc75e8679efc6c8677}{N}}; j++)}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00701}00701     \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00702}00702       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{long} k = \mbox{\hyperlink{classoomph_1_1CCMatrix_a6a38ae2bd1a69905375585d5b24c6136}{Column\_start}}[j]; k < \mbox{\hyperlink{classoomph_1_1CCMatrix_a6a38ae2bd1a69905375585d5b24c6136}{Column\_start}}[j + 1]; k++)}
@@ -716,23 +716,23 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00712}00712   \textcolor{comment}{//=================================================================}\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00713}00713 \textcolor{comment}{  /// Multiply the  transposed matrix by the vector x: soln=A\string^T x}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00714}00714 \textcolor{comment}{}  \textcolor{comment}{//=================================================================}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00715}\mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_a582352912b0a7e097f9ac31c5054beed}{00715}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_a582352912b0a7e097f9ac31c5054beed}{CCDoubleMatrix::multiply\_transpose}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00715}\mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_a582352912b0a7e097f9ac31c5054beed}{00715}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_a582352912b0a7e097f9ac31c5054beed}{CCDoubleMatrix::multiply\_transpose}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& x,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00716}00716                                           \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& soln)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00717}00717 \textcolor{keyword}{  }\{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00718}00718 \textcolor{preprocessor}{\#ifdef PARANOID}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00719}00719     \textcolor{comment}{// Check to see if x.size() = ncol().}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00720}00720     \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.nrow() != this-\/>nrow())}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00720}00720     \textcolor{keywordflow}{if} (x.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow}}() != this-\/>nrow())}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00721}00721     \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00722}00722       std::ostringstream error\_message\_stream;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00723}00723       error\_message\_stream << \textcolor{stringliteral}{"{}The x vector is not the right size. It is "{}}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00724}00724                            << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.nrow() << \textcolor{stringliteral}{"{}, it should be "{}} << this-\/>\mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_ab541153fa5ab2c1bc18e5339bacadfb9}{nrow}}()}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00724}00724                            << x.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow}}() << \textcolor{stringliteral}{"{}, it should be "{}} << this-\/>\mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_ab541153fa5ab2c1bc18e5339bacadfb9}{nrow}}()}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00725}00725                            << std::endl;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00726}00726       \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message\_stream.str(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00727}00727                           OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00728}00728                           OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00729}00729     \}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00730}00730     \textcolor{comment}{// check that x is not distributed}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00731}00731     \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.distributed())}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00731}00731     \textcolor{keywordflow}{if} (x.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a5505731e7e73d7e4251c67c7adec6bf5}{distributed}}())}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00732}00732     \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00733}00733       std::ostringstream error\_message\_stream;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00734}00734       error\_message\_stream}
@@ -767,7 +767,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00763}00763                             OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00764}00764       \}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00765}00765       \textcolor{keywordflow}{if} (*soln.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a2760847d45ab334f6d902efc2620b615}{communicator\_pt}}() !=}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00766}00766           *\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.distribution\_pt()-\/>communicator\_pt())}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00766}00766           *x.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a2760847d45ab334f6d902efc2620b615}{communicator\_pt}}())}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00767}00767       \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00768}00768         std::ostringstream error\_message\_stream;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00769}00769         error\_message\_stream}
@@ -784,7 +784,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00780}00780     \textcolor{keywordflow}{if} (!soln.\mbox{\hyperlink{classoomph_1_1DoubleVector_aae402d422ec4344a4a45cdb7659b7161}{built}}())}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00781}00781     \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00782}00782       \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{LinearAlgebraDistribution}}* dist\_pt = \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{LinearAlgebraDistribution}}(}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00783}00783         \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.distribution\_pt()-\/>communicator\_pt(), this-\/>ncol(), \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00783}00783         x.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a2760847d45ab334f6d902efc2620b615}{communicator\_pt}}(), this-\/>ncol(), \textcolor{keyword}{false});}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00784}00784       soln.\mbox{\hyperlink{classoomph_1_1DoubleVector_a7bcc94c157d6853a0f0502e8a76ed380}{build}}(dist\_pt, 0.0);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00785}00785       \textcolor{keyword}{delete} dist\_pt;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00786}00786     \}}
@@ -794,7 +794,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00790}00790 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00791}00791     \textcolor{comment}{// Matrix vector product}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00792}00792     \textcolor{keywordtype}{double}* soln\_pt = soln.\mbox{\hyperlink{classoomph_1_1DoubleVector_ae3484a5eb4cb663e09640806ef1bf05a}{values\_pt}}();}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00793}00793     \textcolor{keyword}{const} \textcolor{keywordtype}{double}* x\_pt = \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.values\_pt();}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00793}00793     \textcolor{keyword}{const} \textcolor{keywordtype}{double}* x\_pt = x.\mbox{\hyperlink{classoomph_1_1DoubleVector_ae3484a5eb4cb663e09640806ef1bf05a}{values\_pt}}();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00794}00794     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < \mbox{\hyperlink{classoomph_1_1SparseMatrix_a8f15f962605f52fc75e8679efc6c8677}{N}}; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00795}00795     \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l00796}00796       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{long} k = \mbox{\hyperlink{classoomph_1_1CCMatrix_a6a38ae2bd1a69905375585d5b24c6136}{Column\_start}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]; k < \mbox{\hyperlink{classoomph_1_1CCMatrix_a6a38ae2bd1a69905375585d5b24c6136}{Column\_start}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} + 1]; k++)}
@@ -1783,7 +1783,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01779}01779   \textcolor{comment}{//=============================================================================}\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01780}01780 \textcolor{comment}{  ///  Multiply the matrix by the vector x}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01781}01781 \textcolor{comment}{}  \textcolor{comment}{//=============================================================================}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01782}\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a54b75960df52e3aebd21aaab20e9869d}{01782}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a54b75960df52e3aebd21aaab20e9869d}{CRDoubleMatrix::multiply}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& soln)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01782}\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a54b75960df52e3aebd21aaab20e9869d}{01782}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a54b75960df52e3aebd21aaab20e9869d}{CRDoubleMatrix::multiply}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& x, \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& soln)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01783}01783 \textcolor{keyword}{  }\{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01784}01784 \textcolor{preprocessor}{\#ifdef PARANOID}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01785}01785     \textcolor{comment}{// check that this matrix is built}}
@@ -1796,7 +1796,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01792}01792                           OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01793}01793     \}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01794}01794     \textcolor{comment}{// check that the distribution of x is setup}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01795}01795     \textcolor{keywordflow}{if} (!\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.built())}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01795}01795     \textcolor{keywordflow}{if} (!x.\mbox{\hyperlink{classoomph_1_1DoubleVector_aae402d422ec4344a4a45cdb7659b7161}{built}}())}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01796}01796     \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01797}01797       std::ostringstream error\_message\_stream;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01798}01798       error\_message\_stream << \textcolor{stringliteral}{"{}The distribution of the vector x must be setup"{}};}
@@ -1848,7 +1848,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01844}01844     \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01845}01845 \textcolor{preprocessor}{\#ifdef OOMPH\_HAS\_TRILINOS}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01846}01846       \textcolor{comment}{// This will only work if we have trilinos on board}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01847}01847       \mbox{\hyperlink{namespaceoomph_1_1TrilinosEpetraHelpers_a595c337ff02ad53b3dcac04ed142f8db}{TrilinosEpetraHelpers::multiply}}(\textcolor{keyword}{this}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, soln);}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01847}01847       \mbox{\hyperlink{namespaceoomph_1_1TrilinosEpetraHelpers_a595c337ff02ad53b3dcac04ed142f8db}{TrilinosEpetraHelpers::multiply}}(\textcolor{keyword}{this}, x, soln);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01848}01848 \textcolor{preprocessor}{\#else}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01849}01849       std::ostringstream error\_message\_stream;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01850}01850       error\_message\_stream}
@@ -1866,7 +1866,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01862}01862       \textcolor{keyword}{const} \textcolor{keywordtype}{int}* \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a925b465e7e86cf1ec45c1fb70a37c105}{column\_index}} = \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_aefc9a269911694cdd5bde98dc536148f}{CR\_matrix}}.column\_index();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01863}01863       \textcolor{keyword}{const} \textcolor{keywordtype}{double}* \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_aafc5f1896dc3a317cdeddb067290c796}{value}} = \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_aefc9a269911694cdd5bde98dc536148f}{CR\_matrix}}.value();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01864}01864       \textcolor{keywordtype}{double}* soln\_pt = soln.\mbox{\hyperlink{classoomph_1_1DoubleVector_ae3484a5eb4cb663e09640806ef1bf05a}{values\_pt}}();}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01865}01865       \textcolor{keyword}{const} \textcolor{keywordtype}{double}* x\_pt = \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.values\_pt();}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01865}01865       \textcolor{keyword}{const} \textcolor{keywordtype}{double}* x\_pt = x.\mbox{\hyperlink{classoomph_1_1DoubleVector_ae3484a5eb4cb663e09640806ef1bf05a}{values\_pt}}();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01866}01866       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01867}01867       \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01868}01868         soln\_pt[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = 0.0;}
@@ -1883,7 +1883,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01879}01879   \textcolor{comment}{//=================================================================}\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01880}01880 \textcolor{comment}{  /// Multiply the transposed matrix by the vector x: soln=A\string^T x}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01881}01881 \textcolor{comment}{}  \textcolor{comment}{//=================================================================}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01882}\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a42fb274c98ccf4c2a542ca15343fcc0e}{01882}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a42fb274c98ccf4c2a542ca15343fcc0e}{CRDoubleMatrix::multiply\_transpose}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01882}\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a42fb274c98ccf4c2a542ca15343fcc0e}{01882}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a42fb274c98ccf4c2a542ca15343fcc0e}{CRDoubleMatrix::multiply\_transpose}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& x,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01883}01883                                           \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& soln)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01884}01884 \textcolor{keyword}{  }\{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01885}01885 \textcolor{preprocessor}{\#ifdef PARANOID}}
@@ -1926,7 +1926,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01922}01922     \textcolor{keywordflow}{if} (!soln.\mbox{\hyperlink{classoomph_1_1DoubleVector_aae402d422ec4344a4a45cdb7659b7161}{built}}())}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01923}01923     \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01924}01924       \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{LinearAlgebraDistribution}}* dist\_pt =}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01925}01925         \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{LinearAlgebraDistribution}}(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.distribution\_pt()-\/>communicator\_pt(),}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01925}01925         \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{LinearAlgebraDistribution}}(x.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a2760847d45ab334f6d902efc2620b615}{communicator\_pt}}(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01926}01926                                       this-\/>ncol(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01927}01927                                       this-\/>distributed());}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01928}01928       soln.\mbox{\hyperlink{classoomph_1_1DoubleVector_a7bcc94c157d6853a0f0502e8a76ed380}{build}}(dist\_pt, 0.0);}
@@ -1941,7 +1941,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01937}01937     \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01938}01938 \textcolor{preprocessor}{\#ifdef OOMPH\_HAS\_TRILINOS}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01939}01939       \textcolor{comment}{// This will only work if we have trilinos on board}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01940}01940       \mbox{\hyperlink{namespaceoomph_1_1TrilinosEpetraHelpers_a595c337ff02ad53b3dcac04ed142f8db}{TrilinosEpetraHelpers::multiply}}(\textcolor{keyword}{this}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, soln);}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01940}01940       \mbox{\hyperlink{namespaceoomph_1_1TrilinosEpetraHelpers_a595c337ff02ad53b3dcac04ed142f8db}{TrilinosEpetraHelpers::multiply}}(\textcolor{keyword}{this}, x, soln);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01941}01941 \textcolor{preprocessor}{\#else}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01942}01942       std::ostringstream error\_message\_stream;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01943}01943       error\_message\_stream}
@@ -1959,7 +1959,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01955}01955       \textcolor{keyword}{const} \textcolor{keywordtype}{int}* \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a925b465e7e86cf1ec45c1fb70a37c105}{column\_index}} = \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_aefc9a269911694cdd5bde98dc536148f}{CR\_matrix}}.column\_index();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01956}01956       \textcolor{keyword}{const} \textcolor{keywordtype}{double}* \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_aafc5f1896dc3a317cdeddb067290c796}{value}} = \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_aefc9a269911694cdd5bde98dc536148f}{CR\_matrix}}.value();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01957}01957       \textcolor{keywordtype}{double}* soln\_pt = soln.\mbox{\hyperlink{classoomph_1_1DoubleVector_ae3484a5eb4cb663e09640806ef1bf05a}{values\_pt}}();}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01958}01958       \textcolor{keyword}{const} \textcolor{keywordtype}{double}* x\_pt = \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.values\_pt();}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01958}01958       \textcolor{keyword}{const} \textcolor{keywordtype}{double}* x\_pt = x.\mbox{\hyperlink{classoomph_1_1DoubleVector_ae3484a5eb4cb663e09640806ef1bf05a}{values\_pt}}();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01959}01959       \textcolor{comment}{// Matrix vector product}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01960}01960       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l01961}01961       \{}
@@ -3986,12 +3986,12 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l03982}03982     \}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l03983}03983 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l03984}03984     \textcolor{comment}{//============================================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l03985}03985 \textcolor{comment}{    /// Calculates the largest Gershgorin disc whilst preserving the}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l03986}03986 \textcolor{comment}{    /// sign. Let A be an n by n matrix, with entries aij. For \(\backslash\)f\$ i \(\backslash\)in \(\backslash\)\{}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l03987}03987 \textcolor{comment}{    /// 1,...,n \(\backslash\)\} \(\backslash\)f\$ let \(\backslash\)f\$ R\_i = \(\backslash\)sum\_\{i\(\backslash\)neq j\} |a\_\{ij\}| \(\backslash\)f\$ be the sum of}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l03988}03988 \textcolor{comment}{    /// the absolute values of the non-\/diagonal entries in the i-\/th row. Let \(\backslash\)f\$}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l03989}03989 \textcolor{comment}{    /// D(a\_\{ii\},R\_i) \(\backslash\)f\$ be the closed disc centered at \(\backslash\)f\$ a\_\{ii\} \(\backslash\)f\$ with}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l03990}03990 \textcolor{comment}{    /// radius \(\backslash\)f\$ R\_i \(\backslash\)f\$, such a disc is called a Gershgorin disc.}}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l03985}03985 \textcolor{comment}{    /// Calculates the largest Gershgorin disc whilst preserving the sign. Let}}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l03986}03986 \textcolor{comment}{    /// A be an n by n matrix, with entries aij. For \(\backslash\)f\$ i \(\backslash\)in \(\backslash\)\{ 1,...,n \(\backslash\)\} \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l03987}03987 \textcolor{comment}{    /// let \(\backslash\)f\$ R\_i = \(\backslash\)sum\_\{i\(\backslash\)neq j\} |a\_\{ij\}| \(\backslash\)f\$ be the sum of the absolute}}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l03988}03988 \textcolor{comment}{    /// values of the non-\/diagonal entries in the i-\/th row. Let \(\backslash\)f\$ D(a\_\{ii\},R\_i) \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l03989}03989 \textcolor{comment}{    /// be the closed disc centered at \(\backslash\)f\$ a\_\{ii\} \(\backslash\)f\$ with radius \(\backslash\)f\$ R\_i \(\backslash\)f\$,}}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l03990}03990 \textcolor{comment}{    /// such a disc is called a Gershgorin disc.}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l03991}03991 \textcolor{comment}{    ///}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l03992}03992 \textcolor{comment}{    /// \(\backslash\)n}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l03993}03993 \textcolor{comment}{    ///}}
@@ -4004,7 +4004,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04000}04000 \textcolor{comment}{    /// large matrix. Therefore the dimensions of the sub matrices has to}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04001}04001 \textcolor{comment}{    /// "{}make sense"{}, there is a paranoid check for this.}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04002}04002 \textcolor{comment}{}    \textcolor{comment}{//============================================================================}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04003}04003     \textcolor{keywordtype}{double} gershgorin\_eigenvalue\_estimate(}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04003}\mbox{\hyperlink{namespaceoomph_1_1CRDoubleMatrixHelpers_a02b5962dbe2bbfb93f54b668100afffc}{04003}}     \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1CRDoubleMatrixHelpers_a02b5962dbe2bbfb93f54b668100afffc}{gershgorin\_eigenvalue\_estimate}}(}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04004}04004       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<CRDoubleMatrix*>}}\& matrix\_pt)}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04005}04005     \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04006}04006       \textcolor{comment}{// The number of block rows and columns}}
@@ -4034,7 +4034,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04030}04030             std::ostringstream error\_message;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04031}04031             error\_message << \textcolor{stringliteral}{"{}The pointer martrix\_pt("{}} << block\_row\_i << \textcolor{stringliteral}{"{},"{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04032}04032                           << block\_col\_i << \textcolor{stringliteral}{"{}) is null.\(\backslash\)n"{}};}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04033}04033             \textcolor{keywordflow}{throw} OomphLibError(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04033}04033             \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message.str(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04034}04034                                 OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04035}04035                                 OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04036}04036           \}}
@@ -4044,7 +4044,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04040}04040             std::ostringstream error\_message;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04041}04041             error\_message << \textcolor{stringliteral}{"{}The matrix at martrix\_pt("{}} << block\_row\_i << \textcolor{stringliteral}{"{},"{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04042}04042                           << block\_col\_i << \textcolor{stringliteral}{"{}) is not built.\(\backslash\)n"{}};}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04043}04043             \textcolor{keywordflow}{throw} OomphLibError(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04043}04043             \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message.str(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04044}04044                                 OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04045}04045                                 OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04046}04046           \}}
@@ -4057,7 +4057,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04053}04053 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04054}04054       \textcolor{comment}{// The communicator pointer from block (0,0)}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04055}04055       \textcolor{comment}{// All communicators should be the same, we check this next.}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04056}04056       \textcolor{keyword}{const} OomphCommunicator* \textcolor{keyword}{const} comm\_pt =}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04056}04056       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{OomphCommunicator}}* \textcolor{keyword}{const} comm\_pt =}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04057}04057         matrix\_pt(0, 0)-\/>distribution\_pt()-\/>communicator\_pt();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04058}04058 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04059}04059 \textcolor{preprocessor}{\#ifdef PARANOID}}
@@ -4068,7 +4068,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04064}04064         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} block\_col\_i = 0; block\_col\_i < nblockcol; block\_col\_i++)}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04065}04065         \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04066}04066           \textcolor{comment}{// Communicator for this block matrix.}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04067}04067           \textcolor{keyword}{const} OomphCommunicator current\_block\_comm =}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04067}04067           \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{OomphCommunicator}} current\_block\_comm =}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04068}04068             *(matrix\_pt(block\_row\_i, block\_col\_i)}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04069}04069                 -\/>distribution\_pt()}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04070}04070                 -\/>communicator\_pt());}
@@ -4079,7 +4079,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04075}04075                           << block\_row\_i << \textcolor{stringliteral}{"{},"{}} << block\_col\_i}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04076}04076                           << \textcolor{stringliteral}{"{}) is not the same as block "{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04077}04077                           << \textcolor{stringliteral}{"{}matrix\_pt(0,0).\(\backslash\)n"{}};}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04078}04078             \textcolor{keywordflow}{throw} OomphLibError(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04078}04078             \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message.str(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04079}04079                                 OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04080}04080                                 OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04081}04081           \}}
@@ -4107,7 +4107,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04103}04103               error\_message << \textcolor{stringliteral}{"{}Block matrix\_pt("{}} << block\_row\_i << \textcolor{stringliteral}{"{},"{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04104}04104                             << block\_col\_i << \textcolor{stringliteral}{"{}) and block matrix\_pt(0,0) "{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04105}04105                             << \textcolor{stringliteral}{"{}have a different distributed boolean.\(\backslash\)n"{}};}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04106}04106               \textcolor{keywordflow}{throw} OomphLibError(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04106}04106               \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message.str(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04107}04107                                   OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04108}04108                                   OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04109}04109             \}}
@@ -4140,7 +4140,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04136}04136                           << \textcolor{stringliteral}{"{}. But martrix\_pt("{}} << block\_row\_i << \textcolor{stringliteral}{"{},"{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04137}04137                           << block\_col\_i}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04138}04138                           << \textcolor{stringliteral}{"{}) has nrow = "{}} << current\_block\_nrow << \textcolor{stringliteral}{"{}.\(\backslash\)n"{}};}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04139}04139             \textcolor{keywordflow}{throw} OomphLibError(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04139}04139             \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message.str(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04140}04140                                 OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04141}04141                                 OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04142}04142           \}}
@@ -4166,7 +4166,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04162}04162                           << \textcolor{stringliteral}{"{}. But martrix\_pt("{}} << block\_row\_i << \textcolor{stringliteral}{"{},"{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04163}04163                           << block\_col\_i}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04164}04164                           << \textcolor{stringliteral}{"{}) has ncol = "{}} << current\_block\_ncol << \textcolor{stringliteral}{"{}.\(\backslash\)n"{}};}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04165}04165             \textcolor{keywordflow}{throw} OomphLibError(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04165}04165             \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message.str(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04166}04166                                 OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04167}04167                                 OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04168}04168           \}}
@@ -4177,14 +4177,14 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04173}04173       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} block\_row\_i = 0; block\_row\_i < nblockrow; block\_row\_i++)}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04174}04174       \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04175}04175         \textcolor{comment}{// The first distribution of this block row.}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04176}04176         \textcolor{keyword}{const} LinearAlgebraDistribution first\_dist =}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04176}04176         \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{LinearAlgebraDistribution}} first\_dist =}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04177}04177           *(matrix\_pt(block\_row\_i, 0)-\/>distribution\_pt());}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04178}04178 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04179}04179         \textcolor{comment}{// Loop through the rest of the block columns.}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04180}04180         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} block\_col\_i = 1; block\_col\_i < nblockcol; block\_col\_i++)}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04181}04181         \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04182}04182           \textcolor{comment}{// Get the distribution from the current block.}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04183}04183           \textcolor{keyword}{const} LinearAlgebraDistribution current\_dist =}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04183}04183           \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{LinearAlgebraDistribution}} current\_dist =}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04184}04184             matrix\_pt(block\_row\_i, block\_col\_i)-\/>distribution\_pt();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04185}04185 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04186}04186           \textcolor{comment}{// Compare the first distribution against the current.}}
@@ -4195,7 +4195,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04191}04191                           << \textcolor{stringliteral}{"{} is different from the distribution from "{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04192}04192                           << \textcolor{stringliteral}{"{}martrix\_pt("{}} << block\_row\_i << \textcolor{stringliteral}{"{},"{}} << block\_col\_i}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04193}04193                           << \textcolor{stringliteral}{"{}).\(\backslash\)n"{}};}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04194}04194             \textcolor{keywordflow}{throw} OomphLibError(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04194}04194             \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message.str(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04195}04195                                 OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04196}04196                                 OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04197}04197           \}}
@@ -4222,10 +4222,10 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04218}04218           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} block\_col\_i = 0; block\_col\_i < nblockcol; block\_col\_i++)}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04219}04219           \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04220}04220             \textcolor{comment}{// Locally cache the pointer to the current block.}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04221}04221             CRDoubleMatrix* block\_pt = matrix\_pt(block\_row\_i, block\_col\_i);}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04221}04221             \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}}* block\_pt = matrix\_pt(block\_row\_i, block\_col\_i);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04222}04222 }
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04223}04223             \textcolor{keyword}{const} \textcolor{keywordtype}{int}* row\_start = block\_pt-\/>row\_start();}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04224}04224             \textcolor{keyword}{const} \textcolor{keywordtype}{double}* value = block\_pt-\/>value();}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04223}04223             \textcolor{keyword}{const} \textcolor{keywordtype}{int}* row\_start = block\_pt-\/>\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a31a5d05c00d653a02e7b07714472d372}{row\_start}}();}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04224}04224             \textcolor{keyword}{const} \textcolor{keywordtype}{double}* value = block\_pt-\/>\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_aafc5f1896dc3a317cdeddb067290c796}{value}}();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04225}04225 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04226}04226             \textcolor{comment}{// Loop through the values}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04227}04227             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} val\_i = row\_start[local\_row\_i];}
@@ -4268,7 +4268,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04264}04264                           << \textcolor{stringliteral}{"{},"{}} << block\_row\_i << \textcolor{stringliteral}{"{})\(\backslash\)n"{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04265}04265                           << \textcolor{stringliteral}{"{}on local row "{}} << local\_row\_i}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04266}04266                           << \textcolor{stringliteral}{"{} does not exist."{}} << std::endl;}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04267}04267             \textcolor{keywordflow}{throw} OomphLibError(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04267}04267             \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message.str(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04268}04268                                 OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04269}04269                                 OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04270}04270           \}}
@@ -4350,12 +4350,12 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04346}04346 \textcolor{comment}{    /// NOTE: ALL the matrices pointed to by matrix\_pt has to be built. This is}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04347}04347 \textcolor{comment}{    /// not the case with concatenate\_without\_communication(...)}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04348}04348 \textcolor{comment}{}    \textcolor{comment}{//============================================================================}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04349}04349     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_a2d240459b98565dd04314903d707de48}{concatenate}}(\textcolor{keyword}{const} DenseMatrix<CRDoubleMatrix*>\& matrix\_pt,}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04350}04350                      CRDoubleMatrix\& result\_matrix)}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04349}\mbox{\hyperlink{namespaceoomph_1_1CRDoubleMatrixHelpers_ab7e3ac344aa644292a143a3917a03e65}{04349}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1CRDoubleMatrixHelpers_ab7e3ac344aa644292a143a3917a03e65}{concatenate}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<CRDoubleMatrix*>}}\& matrix\_pt,}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04350}04350                      \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}}\& result\_matrix)}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04351}04351     \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04352}04352       \textcolor{comment}{// The number of block rows and block columns.}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04353}04353       \textcolor{keywordtype}{unsigned} matrix\_nrow = matrix\_pt.nrow();}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04354}04354       \textcolor{keywordtype}{unsigned} matrix\_ncol = matrix\_pt.ncol();}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04353}04353       \textcolor{keywordtype}{unsigned} matrix\_nrow = matrix\_pt.\mbox{\hyperlink{classoomph_1_1DenseMatrix_a1b425094510d833ffe91920747a0a962}{nrow}}();}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04354}04354       \textcolor{keywordtype}{unsigned} matrix\_ncol = matrix\_pt.\mbox{\hyperlink{classoomph_1_1DenseMatrix_a9937181f1cb4cfaed7aaf3b483c42456}{ncol}}();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04355}04355 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04356}04356       \textcolor{comment}{// PARANOID checks involving only the in matrices.}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04357}04357 \textcolor{preprocessor}{\#ifdef PARANOID}}
@@ -4364,7 +4364,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04360}04360       \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04361}04361         std::ostringstream error\_message;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04362}04362         error\_message << \textcolor{stringliteral}{"{}There are no matrices to concatenate.\(\backslash\)n"{}};}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04363}04363         \textcolor{keywordflow}{throw} OomphLibError(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04363}04363         \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message.str(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04364}04364                             OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04365}04365                             OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04366}04366       \}}
@@ -4375,7 +4375,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04371}04371         std::ostringstream warning\_message;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04372}04372         warning\_message << \textcolor{stringliteral}{"{}There is only one matrix to concatenate...\(\backslash\)n"{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04373}04373                         << \textcolor{stringliteral}{"{}This does not require concatenating...\(\backslash\)n"{}};}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04374}04374         OomphLibWarning(warning\_message.str(),}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04374}04374         \mbox{\hyperlink{classoomph_1_1OomphLibWarning}{OomphLibWarning}}(warning\_message.str(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04375}04375                         OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04376}04376                         OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04377}04377       \}}
@@ -4391,7 +4391,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04387}04387             error\_message << \textcolor{stringliteral}{"{}The sub matrix ("{}} << block\_row\_i << \textcolor{stringliteral}{"{},"{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04388}04388                           << block\_col\_i << \textcolor{stringliteral}{"{})\(\backslash\)n"{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04389}04389                           << \textcolor{stringliteral}{"{}is not built. \(\backslash\)n"{}};}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04390}04390             \textcolor{keywordflow}{throw} OomphLibError(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04390}04390             \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message.str(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04391}04391                                 OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04392}04392                                 OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04393}04393           \}}
@@ -4403,14 +4403,14 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04399}04399       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} block\_row\_i = 0; block\_row\_i < matrix\_nrow; block\_row\_i++)}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04400}04400       \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04401}04401         \textcolor{comment}{// Use the first column to compare against the rest.}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04402}04402         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} current\_block\_nrow = matrix\_pt(block\_row\_i, 0)-\/>nrow();}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04402}04402         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} current\_block\_nrow = matrix\_pt(block\_row\_i, 0)-\/>\mbox{\hyperlink{classoomph_1_1DenseMatrix_a1b425094510d833ffe91920747a0a962}{nrow}}();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04403}04403 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04404}04404         \textcolor{comment}{// Compare against columns 1 to matrix\_ncol -\/ 1}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04405}04405         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} block\_col\_i = 1; block\_col\_i < matrix\_ncol; block\_col\_i++)}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04406}04406         \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04407}04407           \textcolor{comment}{// Get the nrow for this sub block.}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04408}04408           \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} subblock\_nrow =}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04409}04409             matrix\_pt(block\_row\_i, block\_col\_i)-\/>nrow();}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04409}04409             matrix\_pt(block\_row\_i, block\_col\_i)-\/>\mbox{\hyperlink{classoomph_1_1DenseMatrix_a1b425094510d833ffe91920747a0a962}{nrow}}();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04410}04410 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04411}04411           \textcolor{keywordflow}{if} (current\_block\_nrow != subblock\_nrow)}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04412}04412           \{}
@@ -4419,7 +4419,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04415}04415                           << block\_col\_i << \textcolor{stringliteral}{"{})\(\backslash\)n"{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04416}04416                           << \textcolor{stringliteral}{"{}requires nrow = "{}} << current\_block\_nrow}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04417}04417                           << \textcolor{stringliteral}{"{}, but has nrow = "{}} << subblock\_nrow << \textcolor{stringliteral}{"{}.\(\backslash\)n"{}};}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04418}04418             \textcolor{keywordflow}{throw} OomphLibError(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04418}04418             \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message.str(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04419}04419                                 OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04420}04420                                 OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04421}04421           \}}
@@ -4430,14 +4430,14 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04426}04426       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} block\_col\_i = 0; block\_col\_i < matrix\_ncol; block\_col\_i++)}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04427}04427       \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04428}04428         \textcolor{comment}{// Use the first row to compare against the rest.}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04429}04429         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} current\_block\_ncol = matrix\_pt(0, block\_col\_i)-\/>ncol();}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04429}04429         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} current\_block\_ncol = matrix\_pt(0, block\_col\_i)-\/>\mbox{\hyperlink{classoomph_1_1DenseMatrix_a9937181f1cb4cfaed7aaf3b483c42456}{ncol}}();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04430}04430 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04431}04431         \textcolor{comment}{// Compare against rows 1 to matrix\_nrow -\/ 1}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04432}04432         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} block\_row\_i = 1; block\_row\_i < matrix\_nrow; block\_row\_i++)}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04433}04433         \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04434}04434           \textcolor{comment}{// Get the ncol for this sub block.}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04435}04435           \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} subblock\_ncol =}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04436}04436             matrix\_pt(block\_row\_i, block\_col\_i)-\/>ncol();}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04436}04436             matrix\_pt(block\_row\_i, block\_col\_i)-\/>\mbox{\hyperlink{classoomph_1_1DenseMatrix_a9937181f1cb4cfaed7aaf3b483c42456}{ncol}}();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04437}04437 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04438}04438           \textcolor{keywordflow}{if} (current\_block\_ncol != subblock\_ncol)}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04439}04439           \{}
@@ -4446,7 +4446,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04442}04442                           << block\_col\_i << \textcolor{stringliteral}{"{})\(\backslash\)n"{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04443}04443                           << \textcolor{stringliteral}{"{}requires ncol = "{}} << current\_block\_ncol}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04444}04444                           << \textcolor{stringliteral}{"{}, but has ncol = "{}} << subblock\_ncol << \textcolor{stringliteral}{"{}.\(\backslash\)n"{}};}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04445}04445             \textcolor{keywordflow}{throw} OomphLibError(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04445}04445             \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message.str(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04446}04446                                 OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04447}04447                                 OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04448}04448           \}}
@@ -4455,7 +4455,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04451}04451 \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04452}04452 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04453}04453       \textcolor{comment}{// The communicator pointer from block (0,0)}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04454}04454       \textcolor{keyword}{const} OomphCommunicator* \textcolor{keyword}{const} comm\_pt =}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04454}04454       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{OomphCommunicator}}* \textcolor{keyword}{const} comm\_pt =}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04455}04455         matrix\_pt(0, 0)-\/>distribution\_pt()-\/>communicator\_pt();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04456}04456 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04457}04457       \textcolor{comment}{// Check if the block (0,0) is distributed or not.}}
@@ -4463,19 +4463,19 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04459}04459 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04460}04460       \textcolor{comment}{// If the result matrix does not have a distribution, we create a uniform}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04461}04461       \textcolor{comment}{// distribution.}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04462}04462       \textcolor{keywordflow}{if} (!result\_matrix.distribution\_pt()-\/>built())}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04462}04462       \textcolor{keywordflow}{if} (!result\_matrix.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a92bfff97fd228b9c528922c39ab563b2}{built}}())}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04463}04463       \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04464}04464         \textcolor{comment}{// Sum of sub matrix nrow. We use the first column.}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04465}04465         \textcolor{keywordtype}{unsigned} tmp\_nrow = 0;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04466}04466         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} block\_row\_i = 0; block\_row\_i < matrix\_nrow; block\_row\_i++)}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04467}04467         \{}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04468}04468           tmp\_nrow += matrix\_pt(block\_row\_i, 0)-\/>nrow();}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04468}04468           tmp\_nrow += matrix\_pt(block\_row\_i, 0)-\/>\mbox{\hyperlink{classoomph_1_1DenseMatrix_a1b425094510d833ffe91920747a0a962}{nrow}}();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04469}04469         \}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04470}04470 }
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04471}04471         LinearAlgebraDistribution tmp\_distribution(}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04471}04471         \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{LinearAlgebraDistribution}} tmp\_distribution(}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04472}04472           comm\_pt, tmp\_nrow, distributed);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04473}04473 }
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04474}04474         result\_matrix.build(\&tmp\_distribution);}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04474}04474         result\_matrix.\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_af44bac2acd071317f96dae49cbb0d977}{build}}(\&tmp\_distribution);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04475}04475       \}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04476}04476       \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04477}04477       \textcolor{comment}{// A distribution is supplied for the result matrix.}}
@@ -4488,16 +4488,16 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04484}04484         \textcolor{keywordtype}{unsigned} tmp\_nrow = 0;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04485}04485         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} block\_row\_i = 0; block\_row\_i < matrix\_nrow; block\_row\_i++)}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04486}04486         \{}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04487}04487           tmp\_nrow += matrix\_pt(block\_row\_i, 0)-\/>nrow();}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04487}04487           tmp\_nrow += matrix\_pt(block\_row\_i, 0)-\/>\mbox{\hyperlink{classoomph_1_1DenseMatrix_a1b425094510d833ffe91920747a0a962}{nrow}}();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04488}04488         \}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04489}04489 }
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04490}04490         \textcolor{keywordflow}{if} (tmp\_nrow != result\_matrix.nrow())}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04490}04490         \textcolor{keywordflow}{if} (tmp\_nrow != result\_matrix.\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_abd8d231b0549540144b4739a667b1e75}{nrow}}())}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04491}04491         \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04492}04492           std::ostringstream error\_message;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04493}04493           error\_message << \textcolor{stringliteral}{"{}The total number of rows from the matrices to\(\backslash\)n"{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04494}04494                         << \textcolor{stringliteral}{"{}concatenate does not match the nrow from the\(\backslash\)n"{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04495}04495                         << \textcolor{stringliteral}{"{}result matrix\(\backslash\)n"{}};}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04496}04496           \textcolor{keywordflow}{throw} OomphLibError(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04496}04496           \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message.str(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04497}04497                               OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04498}04498                               OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04499}04499         \}}
@@ -4509,8 +4509,8 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04505}04505       \textcolor{comment}{// Are all the communicators the same?}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04506}04506       \textcolor{comment}{// Compare the communicator for sub matrices (against the result matrix).}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04507}04507       \{}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04508}04508         \textcolor{keyword}{const} OomphCommunicator communicator =}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04509}04509           *(result\_matrix.distribution\_pt()-\/>communicator\_pt());}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04508}04508         \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{OomphCommunicator}} communicator =}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04509}04509           *(result\_matrix.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a2760847d45ab334f6d902efc2620b615}{communicator\_pt}}());}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04510}04510 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04511}04511         \textcolor{comment}{// Are all communicator pointers the same?}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04512}04512         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} block\_row\_i = 0; block\_row\_i < matrix\_nrow; block\_row\_i++)}
@@ -4518,7 +4518,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04514}04514           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} block\_col\_i = 0; block\_col\_i < matrix\_ncol;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04515}04515                block\_col\_i++)}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04516}04516           \{}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04517}04517             \textcolor{keyword}{const} OomphCommunicator another\_communicator =}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04517}04517             \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{OomphCommunicator}} another\_communicator =}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04518}04518               *(matrix\_pt(block\_row\_i, block\_col\_i)}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04519}04519                   -\/>distribution\_pt()}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04520}04520                   -\/>communicator\_pt());}
@@ -4530,7 +4530,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04526}04526                             << block\_row\_i << \textcolor{stringliteral}{"{},"{}} << block\_col\_i << \textcolor{stringliteral}{"{})\(\backslash\)n"{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04527}04527                             << \textcolor{stringliteral}{"{}does not have the same communicator as the "{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04528}04528                                \textcolor{stringliteral}{"{}result matrix. \(\backslash\)n"{}};}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04529}04529               \textcolor{keywordflow}{throw} OomphLibError(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04529}04529               \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message.str(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04530}04530                                   OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04531}04531                                   OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04532}04532             \}}
@@ -4545,7 +4545,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04541}04541       \textcolor{keywordflow}{if} (comm\_pt-\/>nproc() != 1)}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04542}04542       \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04543}04543         \textcolor{comment}{// Compare distributed for sub matrices (against the result matrix).}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04544}04544         \textcolor{keyword}{const} \textcolor{keywordtype}{bool} res\_distributed = result\_matrix.distributed();}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04544}04544         \textcolor{keyword}{const} \textcolor{keywordtype}{bool} res\_distributed = result\_matrix.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a5505731e7e73d7e4251c67c7adec6bf5}{distributed}}();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04545}04545 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04546}04546         \textcolor{comment}{// Loop over all sub blocks.}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04547}04547         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} block\_row\_i = 0; block\_row\_i < matrix\_nrow; block\_row\_i++)}
@@ -4562,7 +4562,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04558}04558               error\_message << \textcolor{stringliteral}{"{}The distributed boolean of the sub matrix ("{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04559}04559                             << block\_row\_i << \textcolor{stringliteral}{"{},"{}} << block\_col\_i << \textcolor{stringliteral}{"{})\(\backslash\)n"{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04560}04560                             << \textcolor{stringliteral}{"{}is not the same as the result matrix. \(\backslash\)n"{}};}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04561}04561               \textcolor{keywordflow}{throw} OomphLibError(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04561}04561               \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message.str(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04562}04562                                   OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04563}04563                                   OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04564}04564             \}}
@@ -4576,7 +4576,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04572}04572       \textcolor{comment}{// in calculating the result column indices.}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04573}04573       \textcolor{comment}{// Since the number of columns in each block column is the same,}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04574}04574       \textcolor{comment}{// we only loop through the first block row (row zero).}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04575}04575       Vector<unsigned long> sum\_of\_ncol\_up\_to\_block(matrix\_ncol);}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04575}04575       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<unsigned long>}} sum\_of\_ncol\_up\_to\_block(matrix\_ncol);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04576}04576 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04577}04577       \textcolor{comment}{// Also compute the total number of columns to build the resulting matrix.}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04578}04578       \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} res\_ncol = 0;}
@@ -4584,7 +4584,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04580}04580       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} block\_col\_i = 0; block\_col\_i < matrix\_ncol; block\_col\_i++)}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04581}04581       \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04582}04582         sum\_of\_ncol\_up\_to\_block[block\_col\_i] = res\_ncol;}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04583}04583         res\_ncol += matrix\_pt(0, block\_col\_i)-\/>ncol();}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04583}04583         res\_ncol += matrix\_pt(0, block\_col\_i)-\/>\mbox{\hyperlink{classoomph_1_1DenseMatrix_a9937181f1cb4cfaed7aaf3b483c42456}{ncol}}();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04584}04584       \}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04585}04585 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04586}04586       \textcolor{comment}{// We begin the process of extracting and ordering the values,}}
@@ -4605,14 +4605,14 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04601}04601         \}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04602}04602 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04603}04603         \textcolor{comment}{// Declare the vectors required to build a CRDoubleMatrix}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04604}04604         Vector<double> res\_values;}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04605}04605         Vector<int> res\_column\_indices;}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04606}04606         Vector<int> res\_row\_start;}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04604}04604         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} res\_values;}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04605}04605         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<int>}} res\_column\_indices;}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04606}04606         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<int>}} res\_row\_start;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04607}04607 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04608}04608         \textcolor{comment}{// Reserve space for the vectors.}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04609}04609         res\_values.reserve(res\_nnz);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04610}04610         res\_column\_indices.reserve(res\_nnz);}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04611}04611         res\_row\_start.reserve(result\_matrix.nrow() + 1);}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04611}04611         res\_row\_start.reserve(result\_matrix.\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_abd8d231b0549540144b4739a667b1e75}{nrow}}() + 1);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04612}04612 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04613}04613         \textcolor{comment}{// Now we fill in the data.}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04614}04614 }
@@ -4623,7 +4623,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04619}04619         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} block\_row\_i = 0; block\_row\_i < matrix\_nrow; block\_row\_i++)}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04620}04620         \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04621}04621           \textcolor{comment}{// Get the number of rows in this block row, from the first block.}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04622}04622           \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} block\_row\_nrow = matrix\_pt(block\_row\_i, 0)-\/>nrow();}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04622}04622           \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} block\_row\_nrow = matrix\_pt(block\_row\_i, 0)-\/>\mbox{\hyperlink{classoomph_1_1DenseMatrix_a1b425094510d833ffe91920747a0a962}{nrow}}();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04623}04623 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04624}04624           \textcolor{comment}{// Loop through the number of rows in this block row}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04625}04625           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} row\_i = 0; row\_i < block\_row\_nrow; row\_i++)}
@@ -4636,14 +4636,14 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04632}04632                  block\_col\_i++)}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04633}04633             \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04634}04634               \textcolor{comment}{// Get the current block.}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04635}04635               CRDoubleMatrix* current\_block\_pt =}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04635}04635               \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}}* current\_block\_pt =}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04636}04636                 matrix\_pt(block\_row\_i, block\_col\_i);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04637}04637 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04638}04638               \textcolor{comment}{// Get the values, column\_indices and row\_start for this block.}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04639}04639               \textcolor{keywordtype}{double}* current\_block\_values = current\_block\_pt-\/>value();}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04639}04639               \textcolor{keywordtype}{double}* current\_block\_values = current\_block\_pt-\/>\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_aafc5f1896dc3a317cdeddb067290c796}{value}}();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04640}04640               \textcolor{keywordtype}{int}* current\_block\_column\_indices =}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04641}04641                 current\_block\_pt-\/>column\_index();}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04642}04642               \textcolor{keywordtype}{int}* current\_block\_row\_start = current\_block\_pt-\/>row\_start();}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04641}04641                 current\_block\_pt-\/>\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a925b465e7e86cf1ec45c1fb70a37c105}{column\_index}}();}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04642}04642               \textcolor{keywordtype}{int}* current\_block\_row\_start = current\_block\_pt-\/>\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a31a5d05c00d653a02e7b07714472d372}{row\_start}}();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04643}04643 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04644}04644               \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} val\_i = current\_block\_row\_start[row\_i];}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04645}04645                    val\_i < current\_block\_row\_start[row\_i + 1];}
@@ -4666,7 +4666,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04662}04662         res\_row\_start.push\_back(res\_nnz);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04663}04663 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04664}04664         \textcolor{comment}{// Build the matrix}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04665}04665         result\_matrix.build(}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04665}04665         result\_matrix.\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_af44bac2acd071317f96dae49cbb0d977}{build}}(}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04666}04666           res\_ncol, res\_values, res\_column\_indices, res\_row\_start);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04667}04667       \}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04668}04668       \textcolor{comment}{// Otherwise we are dealing with a distributed matrix.}}
@@ -4685,8 +4685,8 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04681}04681         \textcolor{keywordtype}{unsigned} my\_rank = comm\_pt-\/>my\_rank();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04682}04682 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04683}04683         \textcolor{comment}{// Storage for the data (per processor) to send.}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04684}04684         Vector<Vector<unsigned>> column\_indices\_to\_send(nproc);}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04685}04685         Vector<Vector<double>> values\_to\_send(nproc);}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04684}04684         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<Vector<unsigned>}}> column\_indices\_to\_send(nproc);}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04685}04685         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<Vector<double>}}> values\_to\_send(nproc);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04686}04686 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04687}04687         \textcolor{comment}{// The sum of the nrow for the sub blocks (so far). This is used as an}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04688}04688         \textcolor{comment}{// offset to calculate the global equation number in the result matrix.}}
@@ -4699,8 +4699,8 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04695}04695         \}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04696}04696 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04697}04697         \textcolor{comment}{// Get the pointer to the result distribution, for convenience...}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04698}04698         LinearAlgebraDistribution* res\_distribution\_pt =}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04699}04699           result\_matrix.distribution\_pt();}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04698}04698         \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{LinearAlgebraDistribution}}* res\_distribution\_pt =}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04699}04699           result\_matrix.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04700}04700 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04701}04701         \textcolor{comment}{// loop over the sub blocks to calculate the global\_eqn, get the values}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04702}04702         \textcolor{comment}{// and column indices.}}
@@ -4731,11 +4731,11 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04727}04727             \textcolor{comment}{// this for every row, it may be better to store a list mapping for}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04728}04728             \textcolor{comment}{// very large number of processors.}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04729}04729             \textcolor{keywordtype}{unsigned} res\_p =}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04730}04730               res\_distribution\_pt-\/>rank\_of\_global\_row(res\_global\_eqn);}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04730}04730               res\_distribution\_pt-\/>\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_acd5ffc5ff4b91a8e63677f9677cd0039}{rank\_of\_global\_row}}(res\_global\_eqn);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04731}04731 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04732}04732             \textcolor{comment}{// With the res\_p, we get the res\_first\_row to}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04733}04733             \textcolor{comment}{// work out the res\_local\_eqn}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04734}04734             \textcolor{keywordtype}{unsigned} res\_first\_row = res\_distribution\_pt-\/>first\_row(res\_p);}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04734}04734             \textcolor{keywordtype}{unsigned} res\_first\_row = res\_distribution\_pt-\/>\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a2634e540a78fe1ee3f5c907aff500b58}{first\_row}}(res\_p);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04735}04735             \textcolor{keywordtype}{unsigned} res\_local\_eqn = res\_global\_eqn -\/ res\_first\_row;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04736}04736 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04737}04737             \textcolor{comment}{// Loop through the block columns, calculate the nnz. This is used}}
@@ -4780,14 +4780,14 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04776}04776                  block\_col\_i++)}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04777}04777             \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04778}04778               \textcolor{comment}{// Cache the pointer to the current block for convenience.}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04779}04779               CRDoubleMatrix* current\_block\_pt =}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04779}04779               \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}}* current\_block\_pt =}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04780}04780                 matrix\_pt(block\_row\_i, block\_col\_i);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04781}04781 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04782}04782               \textcolor{comment}{// Values, column indices and row\_start for the current block.}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04783}04783               \textcolor{keywordtype}{double}* current\_block\_values = current\_block\_pt-\/>value();}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04783}04783               \textcolor{keywordtype}{double}* current\_block\_values = current\_block\_pt-\/>\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_aafc5f1896dc3a317cdeddb067290c796}{value}}();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04784}04784               \textcolor{keywordtype}{int}* current\_block\_column\_indices =}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04785}04785                 current\_block\_pt-\/>column\_index();}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04786}04786               \textcolor{keywordtype}{int}* current\_block\_row\_start = current\_block\_pt-\/>row\_start();}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04785}04785                 current\_block\_pt-\/>\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a925b465e7e86cf1ec45c1fb70a37c105}{column\_index}}();}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04786}04786               \textcolor{keywordtype}{int}* current\_block\_row\_start = current\_block\_pt-\/>\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a31a5d05c00d653a02e7b07714472d372}{row\_start}}();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04787}04787 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04788}04788               \textcolor{comment}{// Loop though the values and column\_indices}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04789}04789               \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} val\_i = current\_block\_row\_start[sub\_local\_eqn];}
@@ -4806,7 +4806,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04802}04802           \} \textcolor{comment}{// for sub\_local\_eqn}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04803}04803 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04804}04804           \textcolor{comment}{// update the sum\_of\_block\_nrow}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04805}04805           sum\_of\_block\_nrow += matrix\_pt(block\_row\_i, 0)-\/>nrow();}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04805}04805           sum\_of\_block\_nrow += matrix\_pt(block\_row\_i, 0)-\/>\mbox{\hyperlink{classoomph_1_1DenseMatrix_a1b425094510d833ffe91920747a0a962}{nrow}}();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04806}04806 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04807}04807         \} \textcolor{comment}{// for block\_row}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04808}04808 }
@@ -4820,16 +4820,16 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04816}04816         \textcolor{comment}{// Prepare to send data!}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04817}04817 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04818}04818         \textcolor{comment}{// Storage for the number of data to be sent to each processor.}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04819}04819         Vector<int> send\_n(nproc, 0);}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04819}04819         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<int>}} send\_n(nproc, 0);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04820}04820 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04821}04821         \textcolor{comment}{// Storage for all the values/column indices to be sent}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04822}04822         \textcolor{comment}{// to each processor.}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04823}04823         Vector<double> send\_values\_data;}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04824}04824         Vector<unsigned> send\_column\_indices\_data;}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04823}04823         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} send\_values\_data;}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04824}04824         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<unsigned>}} send\_column\_indices\_data;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04825}04825 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04826}04826         \textcolor{comment}{// Storage location within send\_values\_data}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04827}04827         \textcolor{comment}{// (and send\_column\_indices\_data) for data to be sent to each processor.}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04828}04828         Vector<int> send\_displacement(nproc, 0);}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04828}04828         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<int>}} send\_displacement(nproc, 0);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04829}04829 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04830}04830         \textcolor{keywordtype}{double} t\_total\_ndata\_start;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04831}04831         \textcolor{keywordflow}{if} (enable\_timing) t\_total\_ndata\_start = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
@@ -4901,7 +4901,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04897}04897         \textcolor{keywordflow}{if} (enable\_timing) t\_sendn\_start = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04898}04898 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04899}04899         \textcolor{comment}{// Strorage for the number of data to be received from each processor}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04900}04900         Vector<int> receive\_n(nproc, 0);}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04900}04900         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<int>}} receive\_n(nproc, 0);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04901}04901 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04902}04902         MPI\_Alltoall(\&send\_n[0],}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04903}04903                      1,}
@@ -4922,7 +4922,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04918}04918         \textcolor{comment}{// Prepare the data to be received}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04919}04919         \textcolor{comment}{// by working out the displacement from the received data}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04920}04920         \textcolor{comment}{// receive\_displacement is the same for both values and column indices.}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04921}04921         Vector<int> receive\_displacement(nproc, 0);}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04921}04921         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<int>}} receive\_displacement(nproc, 0);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04922}04922         \textcolor{keywordtype}{int} receive\_data\_count = 0;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04923}04923         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} rank = 0; rank < nproc; rank++)}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04924}04924         \{}
@@ -4936,8 +4936,8 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04932}04932         \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04933}04933           receive\_data\_count++;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04934}04934         \}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04935}04935         Vector<double> receive\_values\_data(receive\_data\_count);}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04936}04936         Vector<unsigned> receive\_column\_indices\_data(receive\_data\_count);}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04935}04935         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} receive\_values\_data(receive\_data\_count);}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04936}04936         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<unsigned>}} receive\_column\_indices\_data(receive\_data\_count);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04937}04937 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04938}04938         \textcolor{comment}{// Make sure that the send buffer has size at least one}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04939}04939         \textcolor{comment}{// so that we don't get a segmentation fault.}}
@@ -4988,7 +4988,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04984}04984         \textcolor{comment}{// We need to re-\/arrange them. To do this, we do some pre-\/processing.}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04985}04985 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04986}04986         \textcolor{comment}{// nrow\_local for this processor.}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04987}04987         \textcolor{keywordtype}{unsigned} res\_nrow\_local = res\_distribution\_pt-\/>nrow\_local();}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04987}04987         \textcolor{keywordtype}{unsigned} res\_nrow\_local = res\_distribution\_pt-\/>\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_ac9310de740f9c3a61f8d5dab9bef88ca}{nrow\_local}}();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04988}04988 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04989}04989         \textcolor{comment}{// Per row, store:}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04990}04990         \textcolor{comment}{// 1) where this row came from, 0 -\/ this proc, 1 -\/ other procs.}}
@@ -4996,8 +4996,8 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04992}04992         \textcolor{comment}{// 3) the offset -\/ where the values/columns in the receive data vectors}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04993}04993         \textcolor{comment}{//                 begins. This is different from the offset of where}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04994}04994         \textcolor{comment}{//                 the data from a certain processor starts.}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04995}04995         Vector<Vector<unsigned>> value\_column\_locations(res\_nrow\_local,}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04996}04996                                                         Vector<unsigned>(3, 0));}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04995}04995         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<Vector<unsigned>}}> value\_column\_locations(res\_nrow\_local,}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04996}04996                                                         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<unsigned>}}(3, 0));}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04997}04997 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04998}04998         \textcolor{comment}{// Store the local nnz so we can reserve space for}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l04999}04999         \textcolor{comment}{// the values and column indices.}}
@@ -5087,9 +5087,9 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05083}05083 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05084}05084         \textcolor{comment}{// Now loop through the locations and store the values}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05085}05085         \textcolor{comment}{// the column indices in the correct order.}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05086}05086         Vector<int> res\_column\_indices;}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05087}05087         Vector<double> res\_values;}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05088}05088         Vector<int> res\_row\_start;}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05086}05086         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<int>}} res\_column\_indices;}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05087}05087         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} res\_values;}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05088}05088         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<int>}} res\_row\_start;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05089}05089 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05090}05090         res\_column\_indices.reserve(res\_nnz\_local);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05091}05091         res\_values.reserve(res\_nnz\_local);}
@@ -5160,7 +5160,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05156}05156         \textcolor{keywordflow}{if} (enable\_timing) t\_buildres\_start = \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{TimingHelpers::timer}}();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05157}05157 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05158}05158         \textcolor{comment}{// build the matrix.}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05159}05159         result\_matrix.build(}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05159}05159         result\_matrix.\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_af44bac2acd071317f96dae49cbb0d977}{build}}(}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05160}05160           res\_ncol, res\_values, res\_column\_indices, res\_row\_start);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05161}05161 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05162}05162         \textcolor{keywordflow}{if} (enable\_timing)}
@@ -5224,15 +5224,15 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05220}05220 \textcolor{comment}{    /// All block preconditioner distributions are concatenations of the}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05221}05221 \textcolor{comment}{    /// distributions of the individual blocks.}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05222}05222 \textcolor{comment}{}    \textcolor{comment}{//============================================================================}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05223}05223     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_a60abbd397064d971f529752aa9644fc7}{concatenate\_without\_communication}}(}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05224}05224       \textcolor{keyword}{const} Vector<LinearAlgebraDistribution*>\& row\_distribution\_pt,}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05225}05225       \textcolor{keyword}{const} Vector<LinearAlgebraDistribution*>\& col\_distribution\_pt,}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05226}05226       \textcolor{keyword}{const} DenseMatrix<CRDoubleMatrix*>\& matrix\_pt,}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05227}05227       CRDoubleMatrix\& result\_matrix)}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05223}\mbox{\hyperlink{namespaceoomph_1_1CRDoubleMatrixHelpers_a996568831ca0db90f080560dd400b3d6}{05223}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1CRDoubleMatrixHelpers_a996568831ca0db90f080560dd400b3d6}{concatenate\_without\_communication}}(}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05224}05224       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<LinearAlgebraDistribution*>}}\& row\_distribution\_pt,}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05225}05225       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<LinearAlgebraDistribution*>}}\& col\_distribution\_pt,}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05226}05226       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<CRDoubleMatrix*>}}\& matrix\_pt,}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05227}05227       \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}}\& result\_matrix)}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05228}05228     \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05229}05229       \textcolor{comment}{// The number of block rows and block columns.}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05230}05230       \textcolor{keywordtype}{unsigned} matrix\_nrow = matrix\_pt.nrow();}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05231}05231       \textcolor{keywordtype}{unsigned} matrix\_ncol = matrix\_pt.ncol();}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05230}05230       \textcolor{keywordtype}{unsigned} matrix\_nrow = matrix\_pt.\mbox{\hyperlink{classoomph_1_1DenseMatrix_a1b425094510d833ffe91920747a0a962}{nrow}}();}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05231}05231       \textcolor{keywordtype}{unsigned} matrix\_ncol = matrix\_pt.\mbox{\hyperlink{classoomph_1_1DenseMatrix_a9937181f1cb4cfaed7aaf3b483c42456}{ncol}}();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05232}05232 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05233}05233       \textcolor{comment}{// PARANOID checks involving in matrices and block\_distribution only.}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05234}05234       \textcolor{comment}{// PARANOID checks involving the result matrix will come later since}}
@@ -5245,7 +5245,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05241}05241       \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05242}05242         std::ostringstream error\_message;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05243}05243         error\_message << \textcolor{stringliteral}{"{}There are no matrices to concatenate.\(\backslash\)n"{}};}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05244}05244         \textcolor{keywordflow}{throw} OomphLibError(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05244}05244         \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message.str(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05245}05245                             OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05246}05246                             OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05247}05247       \}}
@@ -5256,7 +5256,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05252}05252         std::ostringstream warning\_message;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05253}05253         warning\_message << \textcolor{stringliteral}{"{}There is only one matrix to concatenate...\(\backslash\)n"{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05254}05254                         << \textcolor{stringliteral}{"{}This does not require concatenating...\(\backslash\)n"{}};}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05255}05255         OomphLibWarning(warning\_message.str(),}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05255}05255         \mbox{\hyperlink{classoomph_1_1OomphLibWarning}{OomphLibWarning}}(warning\_message.str(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05256}05256                         OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05257}05257                         OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05258}05258       \}}
@@ -5270,7 +5270,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05266}05266         std::ostringstream error\_message;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05267}05267         error\_message << \textcolor{stringliteral}{"{}The number of row distributions must be the same as\(\backslash\)n"{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05268}05268                       << \textcolor{stringliteral}{"{}the number of block rows."{}};}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05269}05269         \textcolor{keywordflow}{throw} OomphLibError(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05269}05269         \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message.str(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05270}05270                             OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05271}05271                             OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05272}05272       \}}
@@ -5283,7 +5283,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05279}05279         error\_message}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05280}05280           << \textcolor{stringliteral}{"{}The number of column distributions must be the same as\(\backslash\)n"{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05281}05281           << \textcolor{stringliteral}{"{}the number of block columns."{}};}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05282}05282         \textcolor{keywordflow}{throw} OomphLibError(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05282}05282         \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message.str(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05283}05283                             OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05284}05284                             OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05285}05285       \}}
@@ -5296,7 +5296,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05292}05292           std::ostringstream error\_message;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05293}05293           error\_message << \textcolor{stringliteral}{"{}The row distribution pointer in position "{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05294}05294                         << block\_row\_i << \textcolor{stringliteral}{"{} is null.\(\backslash\)n"{}};}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05295}05295           \textcolor{keywordflow}{throw} OomphLibError(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05295}05295           \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message.str(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05296}05296                               OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05297}05297                               OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05298}05298         \}}
@@ -5310,7 +5310,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05306}05306           std::ostringstream error\_message;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05307}05307           error\_message << \textcolor{stringliteral}{"{}The column distribution pointer in position "{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05308}05308                         << block\_col\_i << \textcolor{stringliteral}{"{} is null.\(\backslash\)n"{}};}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05309}05309           \textcolor{keywordflow}{throw} OomphLibError(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05309}05309           \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message.str(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05310}05310                               OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05311}05311                               OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05312}05312         \}}
@@ -5325,7 +5325,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05321}05321           std::ostringstream error\_message;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05322}05322           error\_message << \textcolor{stringliteral}{"{}The distribution pointer in position "{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05323}05323                         << block\_row\_i << \textcolor{stringliteral}{"{} is not built.\(\backslash\)n"{}};}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05324}05324           \textcolor{keywordflow}{throw} OomphLibError(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05324}05324           \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message.str(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05325}05325                               OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05326}05326                               OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05327}05327         \}}
@@ -5338,19 +5338,19 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05334}05334           std::ostringstream error\_message;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05335}05335           error\_message << \textcolor{stringliteral}{"{}The distribution pointer in position "{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05336}05336                         << block\_col\_i << \textcolor{stringliteral}{"{} is not built.\(\backslash\)n"{}};}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05337}05337           \textcolor{keywordflow}{throw} OomphLibError(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05337}05337           \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message.str(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05338}05338                               OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05339}05339                               OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05340}05340         \}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05341}05341       \}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05342}05342 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05343}05343       \textcolor{comment}{// Check that all communicators in row\_distribution\_pt are the same.}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05344}05344       \textcolor{keyword}{const} OomphCommunicator first\_row\_comm =}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05344}05344       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{OomphCommunicator}} first\_row\_comm =}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05345}05345         *(row\_distribution\_pt[0]-\/>communicator\_pt());}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05346}05346 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05347}05347       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} block\_row\_i = 1; block\_row\_i < matrix\_nrow; block\_row\_i++)}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05348}05348       \{}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05349}05349         \textcolor{keyword}{const} OomphCommunicator current\_comm =}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05349}05349         \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{OomphCommunicator}} current\_comm =}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05350}05350           *(row\_distribution\_pt[block\_row\_i]-\/>communicator\_pt());}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05351}05351 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05352}05352         \textcolor{keywordflow}{if} (first\_row\_comm != current\_comm)}
@@ -5360,7 +5360,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05356}05356             << \textcolor{stringliteral}{"{}The communicator from the row distribution in position "{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05357}05357             << block\_row\_i << \textcolor{stringliteral}{"{} is not the same as the first "{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05358}05358             << \textcolor{stringliteral}{"{}communicator from row\_distribution\_pt"{}};}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05359}05359           \textcolor{keywordflow}{throw} OomphLibError(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05359}05359           \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message.str(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05360}05360                               OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05361}05361                               OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05362}05362         \}}
@@ -5370,7 +5370,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05366}05366       \textcolor{comment}{// first row communicator from above.}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05367}05367       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} block\_col\_i = 0; block\_col\_i < matrix\_ncol; block\_col\_i++)}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05368}05368       \{}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05369}05369         \textcolor{keyword}{const} OomphCommunicator current\_comm =}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05369}05369         \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{OomphCommunicator}} current\_comm =}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05370}05370           *(col\_distribution\_pt[block\_col\_i]-\/>communicator\_pt());}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05371}05371 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05372}05372         \textcolor{keywordflow}{if} (first\_row\_comm != current\_comm)}
@@ -5380,7 +5380,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05376}05376             << \textcolor{stringliteral}{"{}The communicator from the col distribution in position "{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05377}05377             << block\_col\_i << \textcolor{stringliteral}{"{} is not the same as the first "{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05378}05378             << \textcolor{stringliteral}{"{}communicator from row\_distribution\_pt"{}};}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05379}05379           \textcolor{keywordflow}{throw} OomphLibError(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05379}05379           \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message.str(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05380}05380                               OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05381}05381                               OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05382}05382         \}}
@@ -5399,7 +5399,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05395}05395             error\_message << \textcolor{stringliteral}{"{}The sub matrix\_pt("{}} << block\_row\_i << \textcolor{stringliteral}{"{},"{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05396}05396                           << block\_col\_i << \textcolor{stringliteral}{"{})\(\backslash\)n"{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05397}05397                           << \textcolor{stringliteral}{"{}is not built.\(\backslash\)n"{}};}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05398}05398             \textcolor{keywordflow}{throw} OomphLibError(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05398}05398             \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message.str(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05399}05399                                 OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05400}05400                                 OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05401}05401           \}}
@@ -5414,7 +5414,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05410}05410         \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05411}05411           \textcolor{keywordflow}{if} (matrix\_pt(block\_row\_i, block\_col\_i) != 0)}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05412}05412           \{}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05413}05413             \textcolor{keyword}{const} OomphCommunicator current\_comm =}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05413}05413             \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{OomphCommunicator}} current\_comm =}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05414}05414               *(matrix\_pt(block\_row\_i, block\_col\_i)}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05415}05415                   -\/>distribution\_pt()}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05416}05416                   -\/>communicator\_pt());}
@@ -5426,7 +5426,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05422}05422                 << \textcolor{stringliteral}{"{})\(\backslash\)n"{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05423}05423                 << \textcolor{stringliteral}{"{}does not have the same communicator pointer as those in\(\backslash\)n"{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05424}05424                 << \textcolor{stringliteral}{"{}(row|col)\_distribution\_pt.\(\backslash\)n"{}};}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05425}05425               \textcolor{keywordflow}{throw} OomphLibError(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05425}05425               \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message.str(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05426}05426                                   OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05427}05427                                   OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05428}05428             \}}
@@ -5450,7 +5450,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05446}05446           \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05447}05447             \textcolor{comment}{// Get the nrow for this sub block.}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05448}05448             \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} subblock\_nrow =}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05449}05449               matrix\_pt(block\_row\_i, block\_col\_i)-\/>nrow();}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05449}05449               matrix\_pt(block\_row\_i, block\_col\_i)-\/>\mbox{\hyperlink{classoomph_1_1DenseMatrix_a1b425094510d833ffe91920747a0a962}{nrow}}();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05450}05450 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05451}05451             \textcolor{keywordflow}{if} (current\_block\_nrow != subblock\_nrow)}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05452}05452             \{}
@@ -5461,7 +5461,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05457}05457                             << \textcolor{stringliteral}{"{}, but has nrow = "{}} << subblock\_nrow << \textcolor{stringliteral}{"{}.\(\backslash\)n"{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05458}05458                             << \textcolor{stringliteral}{"{}Either the row\_distribution\_pt is incorrect or "{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05459}05459                             << \textcolor{stringliteral}{"{}the sub matrices are incorrect.\(\backslash\)n"{}};}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05460}05460               \textcolor{keywordflow}{throw} OomphLibError(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05460}05460               \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message.str(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05461}05461                                   OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05462}05462                                   OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05463}05463             \}}
@@ -5482,7 +5482,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05478}05478           \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05479}05479             \textcolor{comment}{// Get the ncol for this sub block.}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05480}05480             \textcolor{keywordtype}{unsigned} subblock\_ncol =}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05481}05481               matrix\_pt(block\_row\_i, block\_col\_i)-\/>ncol();}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05481}05481               matrix\_pt(block\_row\_i, block\_col\_i)-\/>\mbox{\hyperlink{classoomph_1_1DenseMatrix_a9937181f1cb4cfaed7aaf3b483c42456}{ncol}}();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05482}05482 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05483}05483             \textcolor{keywordflow}{if} (current\_block\_ncol != subblock\_ncol)}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05484}05484             \{}
@@ -5493,7 +5493,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05489}05489                             << \textcolor{stringliteral}{"{}, but has ncol = "{}} << subblock\_ncol << \textcolor{stringliteral}{"{}.\(\backslash\)n"{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05490}05490                             << \textcolor{stringliteral}{"{}Either the col\_distribution\_pt is incorrect or "{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05491}05491                             << \textcolor{stringliteral}{"{}the sub matrices are incorrect.\(\backslash\)n"{}};}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05492}05492               \textcolor{keywordflow}{throw} OomphLibError(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05492}05492               \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message.str(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05493}05493                                   OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05494}05494                                   OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05495}05495             \}}
@@ -5509,7 +5509,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05505}05505       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} block\_row\_i = 0; block\_row\_i < matrix\_nrow; block\_row\_i++)}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05506}05506       \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05507}05507         \textcolor{comment}{// Get the distribution from the first block in this row.}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05508}05508         LinearAlgebraDistribution* block\_row\_distribution\_pt =}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05508}05508         \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{LinearAlgebraDistribution}}* block\_row\_distribution\_pt =}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05509}05509           row\_distribution\_pt[block\_row\_i];}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05510}05510 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05511}05511         \textcolor{comment}{// Loop through the block columns}}
@@ -5518,7 +5518,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05514}05514           \textcolor{keywordflow}{if} (matrix\_pt(block\_row\_i, block\_col\_i) != 0)}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05515}05515           \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05516}05516             \textcolor{comment}{// Get the distribution for this block.}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05517}05517             LinearAlgebraDistribution* current\_block\_distribution\_pt =}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05517}05517             \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{LinearAlgebraDistribution}}* current\_block\_distribution\_pt =}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05518}05518               matrix\_pt(block\_row\_i, block\_col\_i)-\/>distribution\_pt();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05519}05519 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05520}05520             \textcolor{comment}{// Ensure that the in matrices is a square block matrix.}}
@@ -5532,7 +5532,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05528}05528                 << \textcolor{stringliteral}{"{}block in this block row.\(\backslash\)n"{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05529}05529                 << \textcolor{stringliteral}{"{}All distributions on a block row must be the same"{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05530}05530                 << \textcolor{stringliteral}{"{}for this function to concatenate matrices.\(\backslash\)n"{}};}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05531}05531               \textcolor{keywordflow}{throw} OomphLibError(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05531}05531               \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message.str(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05532}05532                                   OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05533}05533                                   OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05534}05534             \}}
@@ -5542,7 +5542,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05538}05538 \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05539}05539 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05540}05540       \textcolor{comment}{// The communicator pointer from the first row\_distribution\_pt}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05541}05541       \textcolor{keyword}{const} OomphCommunicator* \textcolor{keyword}{const} comm\_pt =}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05541}05541       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{OomphCommunicator}}* \textcolor{keyword}{const} comm\_pt =}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05542}05542         row\_distribution\_pt[0]-\/>communicator\_pt();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05543}05543 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05544}05544       \textcolor{comment}{// Renamed for so it makes more sense.}}
@@ -5550,14 +5550,14 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05546}05546 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05547}05547       \textcolor{comment}{// If the result matrix does not have a distribution, then we concatenate}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05548}05548       \textcolor{comment}{// the sub matrix distributions.}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05549}05549       \textcolor{keywordflow}{if} (!result\_matrix.distribution\_pt()-\/>built())}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05549}05549       \textcolor{keywordflow}{if} (!result\_matrix.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a92bfff97fd228b9c528922c39ab563b2}{built}}())}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05550}05550       \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05551}05551         \textcolor{comment}{// The result distribution}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05552}05552         LinearAlgebraDistribution tmp\_distribution;}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05552}05552         \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{LinearAlgebraDistribution}} tmp\_distribution;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05553}05553         \mbox{\hyperlink{namespaceoomph_1_1LinearAlgebraDistributionHelpers_af11187289196182ce650da88cfe37fc2}{LinearAlgebraDistributionHelpers::concatenate}}(row\_distribution\_pt,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05554}05554                                                       tmp\_distribution);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05555}05555 }
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05556}05556         result\_matrix.build(\&tmp\_distribution);}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05556}05556         result\_matrix.\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_af44bac2acd071317f96dae49cbb0d977}{build}}(\&tmp\_distribution);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05557}05557       \}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05558}05558       \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05559}05559       \textcolor{comment}{// A distribution is supplied for the result matrix.}}
@@ -5566,12 +5566,12 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05562}05562         \textcolor{comment}{// Check that the result distribution is a concatenation of the}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05563}05563         \textcolor{comment}{// distributions of the sub matrices.}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05564}05564 }
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05565}05565         LinearAlgebraDistribution wanted\_distribution;}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05565}05565         \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{LinearAlgebraDistribution}} wanted\_distribution;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05566}05566 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05567}05567         \mbox{\hyperlink{namespaceoomph_1_1LinearAlgebraDistributionHelpers_af11187289196182ce650da88cfe37fc2}{LinearAlgebraDistributionHelpers::concatenate}}(row\_distribution\_pt,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05568}05568                                                       wanted\_distribution);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05569}05569 }
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05570}05570         \textcolor{keywordflow}{if} (*(result\_matrix.distribution\_pt()) != wanted\_distribution)}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05570}05570         \textcolor{keywordflow}{if} (*(result\_matrix.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}()) != wanted\_distribution)}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05571}05571         \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05572}05572           std::ostringstream error\_message;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05573}05573           error\_message}
@@ -5582,7 +5582,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05578}05578             << \textcolor{stringliteral}{"{}The result distribution must be the same as the one \(\backslash\)n"{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05579}05579             << \textcolor{stringliteral}{"{}created by\(\backslash\)n"{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05580}05580             << \textcolor{stringliteral}{"{}LinearAlgebraDistributionHelpers::concatenate(...)"{}};}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05581}05581           \textcolor{keywordflow}{throw} OomphLibError(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05581}05581           \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message.str(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05582}05582                               OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05583}05583                               OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05584}05584         \}}
@@ -5598,14 +5598,14 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05594}05594       \textcolor{comment}{// communicators are the same.}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05595}05595       \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05596}05596         \textcolor{comment}{// Communicator from the result matrix.}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05597}05597         \textcolor{keyword}{const} OomphCommunicator res\_comm =}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05598}05598           *(result\_matrix.distribution\_pt()-\/>communicator\_pt());}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05597}05597         \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{OomphCommunicator}} res\_comm =}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05598}05598           *(result\_matrix.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a2760847d45ab334f6d902efc2620b615}{communicator\_pt}}());}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05599}05599 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05600}05600         \textcolor{comment}{// Is the result communicator pointer the same as the others?}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05601}05601         \textcolor{comment}{// Since we have already tested the others, we only need to compare}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05602}05602         \textcolor{comment}{// against one of them. Say the first communicator from}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05603}05603         \textcolor{comment}{// row\_distribution\_pt.}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05604}05604         \textcolor{keyword}{const} OomphCommunicator first\_comm =}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05604}05604         \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{OomphCommunicator}} first\_comm =}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05605}05605           *(row\_distribution\_pt[0]-\/>communicator\_pt());}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05606}05606 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05607}05607         \textcolor{keywordflow}{if} (res\_comm != first\_comm)}
@@ -5614,7 +5614,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05610}05610           error\_message << \textcolor{stringliteral}{"{}The OomphCommunicator of the result matrix is not "{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05611}05611                            \textcolor{stringliteral}{"{}the same as the "{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05612}05612                         << \textcolor{stringliteral}{"{}others!"{}};}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05613}05613           \textcolor{keywordflow}{throw} OomphLibError(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05613}05613           \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message.str(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05614}05614                               OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05615}05615                               OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05616}05616         \}}
@@ -5627,7 +5627,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05623}05623       \textcolor{keywordflow}{if} (comm\_pt-\/>nproc() != 1)}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05624}05624       \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05625}05625         \textcolor{comment}{// Compare distributed for sub matrices (against the result matrix).}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05626}05626         \textcolor{keyword}{const} \textcolor{keywordtype}{bool} res\_distributed = result\_matrix.distributed();}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05626}05626         \textcolor{keyword}{const} \textcolor{keywordtype}{bool} res\_distributed = result\_matrix.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a5505731e7e73d7e4251c67c7adec6bf5}{distributed}}();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05627}05627 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05628}05628         \textcolor{comment}{// Loop over all sub blocks.}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05629}05629         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} block\_row\_i = 0; block\_row\_i < matrix\_nrow; block\_row\_i++)}
@@ -5646,7 +5646,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05642}05642                 error\_message << \textcolor{stringliteral}{"{}The distributed boolean of the sub matrix ("{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05643}05643                               << block\_row\_i << \textcolor{stringliteral}{"{},"{}} << block\_col\_i << \textcolor{stringliteral}{"{})\(\backslash\)n"{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05644}05644                               << \textcolor{stringliteral}{"{}is not the same as the result matrix. \(\backslash\)n"{}};}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05645}05645                 \textcolor{keywordflow}{throw} OomphLibError(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05645}05645                 \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message.str(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05646}05646                                     OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05647}05647                                     OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05648}05648               \}}
@@ -5670,7 +5670,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05666}05666               << \textcolor{stringliteral}{"{}The distributed boolean of row\_distribution\_pt["{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05667}05667               << block\_row\_i << \textcolor{stringliteral}{"{}]\(\backslash\)n"{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05668}05668               << \textcolor{stringliteral}{"{}is not the same as the one from row\_distribution\_pt[0]. \(\backslash\)n"{}};}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05669}05669             \textcolor{keywordflow}{throw} OomphLibError(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05669}05669             \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message.str(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05670}05670                                 OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05671}05671                                 OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05672}05672           \}}
@@ -5689,7 +5689,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05685}05685               << \textcolor{stringliteral}{"{}The distributed boolean of col\_distribution\_pt["{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05686}05686               << block\_col\_i << \textcolor{stringliteral}{"{}]\(\backslash\)n"{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05687}05687               << \textcolor{stringliteral}{"{}is not the same as the one from row\_distribution\_pt[0]. \(\backslash\)n"{}};}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05688}05688             \textcolor{keywordflow}{throw} OomphLibError(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05688}05688             \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message.str(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05689}05689                                 OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05690}05690                                 OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05691}05691           \}}
@@ -5704,11 +5704,11 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05700}05700       \textcolor{keywordtype}{unsigned} nproc = comm\_pt-\/>nproc();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05701}05701 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05702}05702       \textcolor{comment}{// Cache the result distribution pointer for convenience.}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05703}05703       LinearAlgebraDistribution* res\_distribution\_pt =}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05704}05704         result\_matrix.distribution\_pt();}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05703}05703       \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{LinearAlgebraDistribution}}* res\_distribution\_pt =}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05704}05704         result\_matrix.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05705}05705 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05706}05706       \textcolor{comment}{// nrow\_local for the result matrix}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05707}05707       \textcolor{keywordtype}{unsigned} res\_nrow\_local = res\_distribution\_pt-\/>nrow\_local();}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05707}05707       \textcolor{keywordtype}{unsigned} res\_nrow\_local = res\_distribution\_pt-\/>\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_ac9310de740f9c3a61f8d5dab9bef88ca}{nrow\_local}}();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05708}05708 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05709}05709       \textcolor{comment}{// renamed for readability.}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05710}05710       \textcolor{keywordtype}{unsigned} nblock\_col = matrix\_ncol;}
@@ -5874,7 +5874,7 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05870}05870       \}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05871}05871 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05872}05872       \textcolor{comment}{// Build the result matrix.}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05873}05873       result\_matrix.build\_without\_copy(}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05873}05873       result\_matrix.\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_aafb4d7de0a87b4bda560928e6a128060}{build\_without\_copy}}(}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05874}05874         res\_ncol, res\_nnz, res\_value, res\_column\_index, res\_row\_start);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05875}05875     \}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05876}05876 }
@@ -5886,22 +5886,22 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05882}05882 \textcolor{comment}{    /// col\_distribution\_pt. This should only be called for block square}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05883}05883 \textcolor{comment}{    /// matrices.}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05884}05884 \textcolor{comment}{}    \textcolor{comment}{//============================================================================}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05885}05885     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_a60abbd397064d971f529752aa9644fc7}{concatenate\_without\_communication}}(}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05886}05886       \textcolor{keyword}{const} Vector<LinearAlgebraDistribution*>\& block\_distribution\_pt,}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05887}05887       \textcolor{keyword}{const} DenseMatrix<CRDoubleMatrix*>\& matrix\_pt,}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05888}05888       CRDoubleMatrix\& result\_matrix)}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05885}\mbox{\hyperlink{namespaceoomph_1_1CRDoubleMatrixHelpers_ac04e094c973da752da4b76071ad09f44}{05885}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1CRDoubleMatrixHelpers_a996568831ca0db90f080560dd400b3d6}{concatenate\_without\_communication}}(}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05886}05886       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<LinearAlgebraDistribution*>}}\& block\_distribution\_pt,}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05887}05887       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<CRDoubleMatrix*>}}\& matrix\_pt,}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05888}05888       \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}}\& result\_matrix)}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05889}05889     \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05890}05890 \textcolor{preprocessor}{\#ifdef PARANOID}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05891}05891       \textcolor{comment}{// The number of block rows and block columns.}}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05892}05892       \textcolor{keywordtype}{unsigned} matrix\_nrow = matrix\_pt.nrow();}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05893}05893       \textcolor{keywordtype}{unsigned} matrix\_ncol = matrix\_pt.ncol();}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05892}05892       \textcolor{keywordtype}{unsigned} matrix\_nrow = matrix\_pt.\mbox{\hyperlink{classoomph_1_1DenseMatrix_a1b425094510d833ffe91920747a0a962}{nrow}}();}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05893}05893       \textcolor{keywordtype}{unsigned} matrix\_ncol = matrix\_pt.\mbox{\hyperlink{classoomph_1_1DenseMatrix_a9937181f1cb4cfaed7aaf3b483c42456}{ncol}}();}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05894}05894 }
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05895}05895       \textcolor{comment}{// Are there matrices to concatenate?}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05896}05896       \textcolor{keywordflow}{if} (matrix\_nrow == 0)}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05897}05897       \{}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05898}05898         std::ostringstream error\_message;}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05899}05899         error\_message << \textcolor{stringliteral}{"{}There are no matrices to concatenate.\(\backslash\)n"{}};}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05900}05900         \textcolor{keywordflow}{throw} OomphLibError(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05900}05900         \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message.str(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05901}05901                             OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05902}05902                             OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05903}05903       \}}
@@ -5916,13 +5916,13 @@
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05912}05912           << \textcolor{stringliteral}{"{}concatenate\_without\_communication function, passing in\(\backslash\)n"{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05913}05913           << \textcolor{stringliteral}{"{}a Vector of distributions describing how to permute the\(\backslash\)n"{}}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05914}05914           << \textcolor{stringliteral}{"{}columns."{}};}
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05915}05915         \textcolor{keywordflow}{throw} OomphLibError(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05915}05915         \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message.str(),}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05916}05916                             OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05917}05917                             OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05918}05918       \}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05919}05919 \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05920}05920 }
-\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05921}05921       \mbox{\hyperlink{namespaceoomph_a60abbd397064d971f529752aa9644fc7}{concatenate\_without\_communication}}(}
+\DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05921}05921       \mbox{\hyperlink{namespaceoomph_1_1CRDoubleMatrixHelpers_a996568831ca0db90f080560dd400b3d6}{concatenate\_without\_communication}}(}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05922}05922         block\_distribution\_pt, block\_distribution\_pt, matrix\_pt, result\_matrix);}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05923}05923     \}}
 \DoxyCodeLine{\Hypertarget{matrices_8cc_source_l05924}05924 }

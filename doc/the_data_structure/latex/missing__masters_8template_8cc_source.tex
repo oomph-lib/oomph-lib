@@ -64,7 +64,7 @@
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00060}00060 \textcolor{comment}{}  \textcolor{comment}{//=========================================================================}}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00061}00061   \textcolor{keyword}{template}<\textcolor{keyword}{class} EXT\_ELEMENT>}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00062}\mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_a9510959d4583c82a516d520c9da35a93}{00062}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_a9510959d4583c82a516d520c9da35a93}{Missing\_masters\_functions::add\_external\_halo\_node\_to\_storage}}(}
-\DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00063}00063     Node*\& new\_nod\_pt,}
+\DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00063}00063     \mbox{\hyperlink{classoomph_1_1Node}{Node}}*\& new\_nod\_pt,}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00064}00064     \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}* \textcolor{keyword}{const}\& mesh\_pt,}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00065}00065     \textcolor{keywordtype}{unsigned}\& loc\_p,}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00066}00066     \textcolor{keywordtype}{unsigned}\& node\_index,}
@@ -108,7 +108,7 @@
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00104}00104   \textcolor{keyword}{template}<\textcolor{keyword}{class} EXT\_ELEMENT>}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00105}\mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_a5aeedca2c5268a414d83fa7cfd023f14}{00105}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_a5aeedca2c5268a414d83fa7cfd023f14}{Missing\_masters\_functions::}}}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00106}00106 \mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_a5aeedca2c5268a414d83fa7cfd023f14}{    recursively\_add\_masters\_of\_external\_halo\_node\_to\_storage}}(}
-\DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00107}00107       Node*\& new\_nod\_pt,}
+\DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00107}00107       \mbox{\hyperlink{classoomph_1_1Node}{Node}}*\& new\_nod\_pt,}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00108}00108       \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}* \textcolor{keyword}{const}\& mesh\_pt,}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00109}00109       \textcolor{keywordtype}{unsigned}\& loc\_p,}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00110}00110       \textcolor{keywordtype}{unsigned}\& node\_index,}
@@ -140,7 +140,7 @@
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00136}00136         \mbox{\hyperlink{classoomph_1_1HangInfo}{HangInfo}}* hang\_pt = \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1HangInfo}{HangInfo}}(n\_master);}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00137}00137         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} m = 0; m < n\_master; m++)}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00138}00138         \{}
-\DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00139}00139           Node* master\_nod\_pt = 0;}
+\DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00139}00139           \mbox{\hyperlink{classoomph_1_1Node}{Node}}* master\_nod\_pt = 0;}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00140}00140           \textcolor{comment}{// Get the master node (creating and adding it if required)}}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00141}00141           add\_external\_halo\_master\_node\_helper<EXT\_ELEMENT>(}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00142}00142             master\_nod\_pt,}
@@ -169,7 +169,7 @@
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00165}00165             counter\_for\_recv\_doubles,}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00166}00166             recv\_doubles);}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00167}00167         \}}
-\DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00168}00168         new\_nod\_pt-\/>set\_hanging\_pt(hang\_pt, i\_cont);}
+\DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00168}00168         new\_nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a98b3e63390c43196db9429f32319b0ca}{set\_hanging\_pt}}(hang\_pt, i\_cont);}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00169}00169       \}}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00170}00170     \} \textcolor{comment}{// end loop over continous interpolated values}}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00171}00171   \}}
@@ -179,8 +179,8 @@
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00175}00175 \textcolor{comment}{}  \textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00176}00176   \textcolor{keyword}{template}<\textcolor{keyword}{class} EXT\_ELEMENT>}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00177}\mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_a9e3bf04e14473cd6671c5b1f17bc4823}{00177}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_a9e3bf04e14473cd6671c5b1f17bc4823}{Missing\_masters\_functions::add\_external\_halo\_master\_node\_helper}}(}
-\DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00178}00178     Node*\& new\_master\_nod\_pt,}
-\DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00179}00179     Node*\& new\_nod\_pt,}
+\DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00178}00178     \mbox{\hyperlink{classoomph_1_1Node}{Node}}*\& new\_master\_nod\_pt,}
+\DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00179}00179     \mbox{\hyperlink{classoomph_1_1Node}{Node}}*\& new\_nod\_pt,}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00180}00180     \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}* \textcolor{keyword}{const}\& mesh\_pt,}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00181}00181     \textcolor{keywordtype}{unsigned}\& loc\_p,}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00182}00182     \textcolor{keywordtype}{int}\& ncont\_inter\_values,}
@@ -253,8 +253,8 @@
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00249}00249   \textcolor{keyword}{template}<\textcolor{keyword}{class} EXT\_ELEMENT>}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00250}\mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_a97561cb6cf8e5ad1c876173ee5973e41}{00250}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_a97561cb6cf8e5ad1c876173ee5973e41}{Missing\_masters\_functions::}}}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00251}00251 \mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_a97561cb6cf8e5ad1c876173ee5973e41}{    construct\_new\_external\_halo\_master\_node\_helper}}(}
-\DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00252}00252       Node*\& new\_master\_nod\_pt,}
-\DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00253}00253       Node*\& nod\_pt,}
+\DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00252}00252       \mbox{\hyperlink{classoomph_1_1Node}{Node}}*\& new\_master\_nod\_pt,}
+\DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00253}00253       \mbox{\hyperlink{classoomph_1_1Node}{Node}}*\& nod\_pt,}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00254}00254       \textcolor{keywordtype}{unsigned}\& loc\_p,}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00255}00255       \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}* \textcolor{keyword}{const}\& mesh\_pt,}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00256}00256       \textcolor{keywordtype}{unsigned}\& counter\_for\_recv\_unsigneds,}
@@ -317,7 +317,7 @@
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00313}00313     \textcolor{comment}{// Just take timestepper from a node}}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00314}00314     \textcolor{comment}{// Let's use first node of first element since this must exist}}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00315}00315     time\_stepper\_pt =}
-\DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00316}00316       mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>time\_stepper\_pt();}
+\DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00316}00316       mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Data_a065d7bffcec82bf4d4bd7b41f9aa80b3}{time\_stepper\_pt}}();}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00317}00317 }
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00318}00318     \textcolor{comment}{// Is the node for which the master is required Algebraic, Macro or Solid?}}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00319}00319     \mbox{\hyperlink{classoomph_1_1AlgebraicNode}{AlgebraicNode}}* alg\_nod\_pt = \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1AlgebraicNode}{AlgebraicNode}}*\textcolor{keyword}{>}(nod\_pt);}
@@ -646,8 +646,8 @@
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00642}00642       \textcolor{comment}{// Add this as an external halo node}}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00643}00643       mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_ac0b818d3cf5f2eae2816574b6d0a4f07}{add\_external\_halo\_node\_pt}}(loc\_p, new\_master\_nod\_pt);}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00644}00644       \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}} << \textcolor{stringliteral}{"{}Added external halo master node:"{}} << new\_master\_nod\_pt}
-\DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00645}00645                  << \textcolor{stringliteral}{"{} at [ "{}} << new\_master\_nod\_pt-\/>x(0) << \textcolor{stringliteral}{"{}, "{}}}
-\DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00646}00646                  << new\_master\_nod\_pt-\/>x(1) << \textcolor{stringliteral}{"{} ]"{}} << std::endl;}
+\DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00645}00645                  << \textcolor{stringliteral}{"{} at [ "{}} << new\_master\_nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0) << \textcolor{stringliteral}{"{}, "{}}}
+\DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00646}00646                  << new\_master\_nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1) << \textcolor{stringliteral}{"{} ]"{}} << std::endl;}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00647}00647 }
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00648}00648       \textcolor{comment}{// Create a new node update element for this master node if required}}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00649}00649       \mbox{\hyperlink{classoomph_1_1FiniteElement}{FiniteElement}}* new\_node\_update\_f\_el\_pt = 0;}
@@ -785,7 +785,7 @@
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00781}00781         \textcolor{keywordtype}{unsigned} n\_node = new\_node\_update\_f\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00782}00782         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < n\_node; j++)}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00783}00783         \{}
-\DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00784}00784           Node* new\_nod\_pt = 0;}
+\DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00784}00784           \mbox{\hyperlink{classoomph_1_1Node}{Node}}* new\_nod\_pt = 0;}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00785}00785           add\_external\_halo\_node\_to\_storage<EXT\_ELEMENT>(}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00786}00786             new\_nod\_pt,}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00787}00787             mesh\_pt,}
@@ -799,7 +799,7 @@
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00795}00795             recv\_doubles);}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00796}00796           \textcolor{comment}{// BENFLAG:}}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00797}00797           \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}} << \textcolor{stringliteral}{"{}Added node "{}} << new\_nod\_pt << \textcolor{stringliteral}{"{} at [ "{}}}
-\DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00798}00798                      << new\_nod\_pt-\/>x(0) << \textcolor{stringliteral}{"{}, "{}} << new\_nod\_pt-\/>x(1) << \textcolor{stringliteral}{"{} ]"{}}}
+\DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00798}00798                      << new\_nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0) << \textcolor{stringliteral}{"{}, "{}} << new\_nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1) << \textcolor{stringliteral}{"{} ]"{}}}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00799}00799                      << std::endl;}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00800}00800         \}}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l00801}00801 }
@@ -1240,11 +1240,11 @@
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l01236}01236         \textcolor{keywordflow}{if} (time\_stepper\_pt != 0)}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l01237}01237         \{}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l01238}01238           new\_master\_nod\_pt =}
-\DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l01239}01239             \textcolor{keyword}{new} Node(time\_stepper\_pt, n\_dim, n\_position\_type, n\_value);}
+\DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l01239}01239             \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1Node}{Node}}(time\_stepper\_pt, n\_dim, n\_position\_type, n\_value);}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l01240}01240         \}}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l01241}01241         \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l01242}01242         \{}
-\DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l01243}01243           new\_master\_nod\_pt = \textcolor{keyword}{new} Node(n\_dim, n\_position\_type, n\_value);}
+\DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l01243}01243           new\_master\_nod\_pt = \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1Node}{Node}}(n\_dim, n\_position\_type, n\_value);}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l01244}01244         \}}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l01245}01245       \}}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l01246}01246 }
@@ -1259,25 +1259,25 @@
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l01255}01255     \{}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l01256}01256       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}} = 0; \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}} < n\_prev; \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}++)}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l01257}01257       \{}
-\DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l01258}01258         new\_master\_nod\_pt-\/>set\_value(}
+\DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l01258}01258         new\_master\_nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7289ca322725c6fd493970a19474b382}{set\_value}}(}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l01259}01259           \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, i\_val, recv\_doubles[counter\_for\_recv\_doubles++]);}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l01260}01260       \}}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l01261}01261     \}}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l01262}01262 }
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l01263}01263     \textcolor{comment}{// Get copied history values for positions}}
-\DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l01264}01264     \textcolor{keywordtype}{unsigned} n\_nod\_dim = new\_master\_nod\_pt-\/>ndim();}
+\DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l01264}01264     \textcolor{keywordtype}{unsigned} n\_nod\_dim = new\_master\_nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l01265}01265     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} idim = 0; idim < n\_nod\_dim; idim++)}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l01266}01266     \{}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l01267}01267       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}} = 0; \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}} < n\_prev; \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}++)}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l01268}01268       \{}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l01269}01269         \textcolor{comment}{// Copy to coordinate}}
-\DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l01270}01270         new\_master\_nod\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, idim) =}
+\DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l01270}01270         new\_master\_nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, idim) =}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l01271}01271           recv\_doubles[counter\_for\_recv\_doubles++];}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l01272}01272       \}}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l01273}01273     \}}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l01274}01274 }
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l01275}01275     \textcolor{comment}{// Assign correct non-\/halo processor ID}}
-\DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l01276}01276     new\_master\_nod\_pt-\/>set\_halo(non\_halo\_proc\_ID);}
+\DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l01276}01276     new\_master\_nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_ac96b285ae3f1ce549807072b652573bf}{set\_halo}}(non\_halo\_proc\_ID);}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l01277}01277   \}}
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l01278}01278 }
 \DoxyCodeLine{\Hypertarget{missing__masters_8template_8cc_source_l01279}01279 }

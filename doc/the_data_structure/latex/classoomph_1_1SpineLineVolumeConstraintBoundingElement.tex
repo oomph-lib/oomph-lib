@@ -18,11 +18,11 @@ Inheritance diagram for oomph\+::Spine\+Line\+Volume\+Constraint\+Bounding\+Elem
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1SpineLineVolumeConstraintBoundingElement_a5b8bb4a60ee78615103eb6b9fa3eb397}{Spine\+Line\+Volume\+Constraint\+Bounding\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&element\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}})
+\mbox{\hyperlink{classoomph_1_1SpineLineVolumeConstraintBoundingElement_a5b8bb4a60ee78615103eb6b9fa3eb397}{Spine\+Line\+Volume\+Constraint\+Bounding\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&element\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}})
 \begin{DoxyCompactList}\small\item\em Contructor\+: Specify bulk element and index of face to which this face element is to be attached. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1SpineLineVolumeConstraintBoundingElement_a9b23d5b98dc459a918045d2a8e221728}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})
+void \mbox{\hyperlink{classoomph_1_1SpineLineVolumeConstraintBoundingElement_a9b23d5b98dc459a918045d2a8e221728}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em Fill in contribution to residuals and Jacobian. This is specific to spine based elements in which the shape derivatives are evaluated using geometric data. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1SpineLineVolumeConstraintBoundingElement_ab299a1b0cec3d35f5bd6ef683a244db6}{zeta\+\_\+nodal}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&k, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1SpineLineVolumeConstraintBoundingElement_ab299a1b0cec3d35f5bd6ef683a244db6}{zeta\+\_\+nodal}} (const unsigned \&n, const unsigned \&k, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} representation, by default. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -42,7 +42,7 @@ Definition at line \mbox{\hyperlink{constrained__volume__elements_8h_source_l004
 \index{SpineLineVolumeConstraintBoundingElement@{SpineLineVolumeConstraintBoundingElement}!oomph::SpineLineVolumeConstraintBoundingElement$<$ ELEMENT $>$@{oomph::SpineLineVolumeConstraintBoundingElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{SpineLineVolumeConstraintBoundingElement()}{SpineLineVolumeConstraintBoundingElement()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1SpineLineVolumeConstraintBoundingElement}{oomph\+::\+Spine\+Line\+Volume\+Constraint\+Bounding\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1SpineLineVolumeConstraintBoundingElement}{Spine\+Line\+Volume\+Constraint\+Bounding\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{element\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1SpineLineVolumeConstraintBoundingElement}{oomph\+::\+Spine\+Line\+Volume\+Constraint\+Bounding\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1SpineLineVolumeConstraintBoundingElement}{Spine\+Line\+Volume\+Constraint\+Bounding\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{element\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -54,7 +54,7 @@ Definition at line \mbox{\hyperlink{constrained__volume__elements_8h_source_l004
 
 
 
-References \mbox{\hyperlink{classoomph_1_1FiniteElement_a025ab56ef9c6eea66fb34416fdf19152}{oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element()}}, and \mbox{\hyperlink{elements_8h_source_l04654}{oomph\+::\+Face\+Element\+::face\+\_\+index()}}.
+References \mbox{\hyperlink{elements_8cc_source_l05132}{oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element()}}, and \mbox{\hyperlink{elements_8h_source_l04626}{oomph\+::\+Face\+Element\+::face\+\_\+index()}}.
 
 
 
@@ -87,7 +87,7 @@ References \mbox{\hyperlink{constrained__volume__elements_8cc_source_l00115}{oom
 \index{zeta\_nodal@{zeta\_nodal}!oomph::SpineLineVolumeConstraintBoundingElement$<$ ELEMENT $>$@{oomph::SpineLineVolumeConstraintBoundingElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{zeta\_nodal()}{zeta\_nodal()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1SpineLineVolumeConstraintBoundingElement}{oomph\+::\+Spine\+Line\+Volume\+Constraint\+Bounding\+Element}}$<$ ELEMENT $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{k,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+double \mbox{\hyperlink{classoomph_1_1SpineLineVolumeConstraintBoundingElement}{oomph\+::\+Spine\+Line\+Volume\+Constraint\+Bounding\+Element}}$<$ ELEMENT $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{k,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -103,7 +103,7 @@ Definition at line \mbox{\hyperlink{constrained__volume__elements_8h_source_l004
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l04525}{oomph\+::\+Face\+Element\+::zeta\+\_\+nodal()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l04497}{oomph\+::\+Face\+Element\+::zeta\+\_\+nodal()}}.
 
 
 

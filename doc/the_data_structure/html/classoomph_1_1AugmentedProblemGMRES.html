@@ -363,7 +363,7 @@ Private Member Functions</h2></td></tr>
 <tr class="memitem:aa4fbf2fd3d7ce466e7ea74620c4bdcea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AugmentedProblemGMRES.html#aa4fbf2fd3d7ce466e7ea74620c4bdcea">clean_up_memory</a> ()</td></tr>
 <tr class="memdesc:aa4fbf2fd3d7ce466e7ea74620c4bdcea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cleanup data that's stored for resolve (if any has been stored)  <a href="classoomph_1_1AugmentedProblemGMRES.html#aa4fbf2fd3d7ce466e7ea74620c4bdcea">More...</a><br /></td></tr>
 <tr class="separator:aa4fbf2fd3d7ce466e7ea74620c4bdcea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a98bde93ede0909eb0170ef490c6d184d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AugmentedProblemGMRES.html#a98bde93ede0909eb0170ef490c6d184d">augmented_matrix_multiply</a> (<a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> *matrix_pt, const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;<a class="el" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;soln)</td></tr>
+<tr class="memitem:a98bde93ede0909eb0170ef490c6d184d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AugmentedProblemGMRES.html#a98bde93ede0909eb0170ef490c6d184d">augmented_matrix_multiply</a> (<a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> *matrix_pt, const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;x, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;soln)</td></tr>
 <tr class="memdesc:a98bde93ede0909eb0170ef490c6d184d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiply the vector x by the augmented system matrix.  <a href="classoomph_1_1AugmentedProblemGMRES.html#a98bde93ede0909eb0170ef490c6d184d">More...</a><br /></td></tr>
 <tr class="separator:a98bde93ede0909eb0170ef490c6d184d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a71199dc59da3f5077803829e36ad4aec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AugmentedProblemGMRES.html#a71199dc59da3f5077803829e36ad4aec">apply_schur_complement_preconditioner</a> (const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;rhs, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;soln)</td></tr>
@@ -372,18 +372,24 @@ Private Member Functions</h2></td></tr>
 <tr class="memitem:a1ff5a4b43235b43d2254af0db6195dc7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AugmentedProblemGMRES.html#a1ff5a4b43235b43d2254af0db6195dc7">solve_helper</a> (<a class="el" href="classoomph_1_1DoubleMatrixBase.html">DoubleMatrixBase</a> *const &amp;matrix_pt, const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;rhs, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;solution)</td></tr>
 <tr class="memdesc:a1ff5a4b43235b43d2254af0db6195dc7"><td class="mdescLeft">&#160;</td><td class="mdescRight">General interface to solve function.  <a href="classoomph_1_1AugmentedProblemGMRES.html#a1ff5a4b43235b43d2254af0db6195dc7">More...</a><br /></td></tr>
 <tr class="separator:a1ff5a4b43235b43d2254af0db6195dc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab7513cfa22054fa1bff319c72aac8313"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AugmentedProblemGMRES.html#ab7513cfa22054fa1bff319c72aac8313">update</a> (const unsigned &amp;k, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &gt; &amp;H, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;v, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;<a class="el" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>)</td></tr>
+<tr class="memitem:ab7513cfa22054fa1bff319c72aac8313"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AugmentedProblemGMRES.html#ab7513cfa22054fa1bff319c72aac8313">update</a> (const unsigned &amp;k, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &gt; &amp;H, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;v, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;x)</td></tr>
 <tr class="memdesc:ab7513cfa22054fa1bff319c72aac8313"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to update the result vector using the result, x=x_0+V_m*y.  <a href="classoomph_1_1AugmentedProblemGMRES.html#ab7513cfa22054fa1bff319c72aac8313">More...</a><br /></td></tr>
 <tr class="separator:ab7513cfa22054fa1bff319c72aac8313"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74bb2d9ceab6473c1922b166ebf48681"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AugmentedProblemGMRES.html#a74bb2d9ceab6473c1922b166ebf48681">generate_plane_rotation</a> (double &amp;dx, double &amp;dy, double &amp;cs, double &amp;sn)</td></tr>
+<tr class="memdesc:a74bb2d9ceab6473c1922b166ebf48681"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function: Generate a plane rotation. This is done by finding the values of <img class="formulaInl" alt="$ \cos(\theta) $" src="form_306.png"/> (i.e. cs) and \sin(\theta) (i.e. sn) such that:  <a href="classoomph_1_1AugmentedProblemGMRES.html#a74bb2d9ceab6473c1922b166ebf48681">More...</a><br /></td></tr>
+<tr class="separator:a74bb2d9ceab6473c1922b166ebf48681"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a175361cb4600f20511213636f2e645ce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AugmentedProblemGMRES.html#a175361cb4600f20511213636f2e645ce">apply_plane_rotation</a> (double &amp;dx, double &amp;dy, double &amp;cs, double &amp;sn)</td></tr>
+<tr class="memdesc:a175361cb4600f20511213636f2e645ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function: Apply plane rotation. This is done using the update:  <a href="classoomph_1_1AugmentedProblemGMRES.html#a175361cb4600f20511213636f2e645ce">More...</a><br /></td></tr>
+<tr class="separator:a175361cb4600f20511213636f2e645ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a291e94349dab093547e89d755c81c171"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AugmentedProblemGMRES.html#a291e94349dab093547e89d755c81c171">begin</a></td></tr>
-<tr class="memdesc:a291e94349dab093547e89d755c81c171"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function: Generate a plane rotation. This is done by finding the values of <img class="formulaInl" alt="$ \cos(\theta) $" src="form_181.png" width="33" height="14"/> (i.e. cs) and \sin(\theta) (i.e. sn) such that:  <a href="classoomph_1_1AugmentedProblemGMRES.html#a291e94349dab093547e89d755c81c171">More...</a><br /></td></tr>
-<tr class="separator:a291e94349dab093547e89d755c81c171"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade82d55b66084e9eaefa867315e85ab9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceoomph.html#ad835af913df4cbdc5648440f91b794ab">f</a> cos theta <a class="el" href="namespaceoomph.html#ad835af913df4cbdc5648440f91b794ab">f</a> sin theta &amp;unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AugmentedProblemGMRES.html#ade82d55b66084e9eaefa867315e85ab9">Restart</a></td></tr>
-<tr class="memdesc:ade82d55b66084e9eaefa867315e85ab9"><td class="mdescLeft">&#160;</td><td class="mdescRight">and  <a href="classoomph_1_1AugmentedProblemGMRES.html#ade82d55b66084e9eaefa867315e85ab9">More...</a><br /></td></tr>
-<tr class="separator:ade82d55b66084e9eaefa867315e85ab9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9be7f8a66aefc1352e95741c5f265443"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AugmentedProblemGMRES.html#a9be7f8a66aefc1352e95741c5f265443">Iterations</a></td></tr>
+<tr class="memdesc:a9be7f8a66aefc1352e95741c5f265443"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of iterations taken.  <a href="classoomph_1_1AugmentedProblemGMRES.html#a9be7f8a66aefc1352e95741c5f265443">More...</a><br /></td></tr>
+<tr class="separator:a9be7f8a66aefc1352e95741c5f265443"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a472af506241c412c2a6fe4c53529118e"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AugmentedProblemGMRES.html#a472af506241c412c2a6fe4c53529118e">Restart</a></td></tr>
+<tr class="memdesc:a472af506241c412c2a6fe4c53529118e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of iterations before the iteration proceedure is restarted if iteration restart is used.  <a href="classoomph_1_1AugmentedProblemGMRES.html#a472af506241c412c2a6fe4c53529118e">More...</a><br /></td></tr>
+<tr class="separator:a472af506241c412c2a6fe4c53529118e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a447c3077e0763deb70e7e9ac34748d74"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AugmentedProblemGMRES.html#a447c3077e0763deb70e7e9ac34748d74">Iteration_restart</a></td></tr>
 <tr class="memdesc:a447c3077e0763deb70e7e9ac34748d74"><td class="mdescLeft">&#160;</td><td class="mdescRight">boolean indicating if iteration restarting is used  <a href="classoomph_1_1AugmentedProblemGMRES.html#a447c3077e0763deb70e7e9ac34748d74">More...</a><br /></td></tr>
 <tr class="separator:a447c3077e0763deb70e7e9ac34748d74"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -483,7 +489,7 @@ Additional Inherited Members</h2></td></tr>
 <div class="textblock"><p >//////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// </p>
 <p >The <a class="el" href="classoomph_1_1GMRES.html" title="//////////////////////////////////////////////////////////////////// ////////////////////////////////...">GMRES</a> method. </p>
 
-<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01580">1580</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01548">1548</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a04987cc3a1440855435d2c26cfbfc0bf" name="a04987cc3a1440855435d2c26cfbfc0bf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a04987cc3a1440855435d2c26cfbfc0bf">&#9670;&nbsp;</a></span>AugmentedProblemGMRES() <span class="overload">[1/2]</span></h2>
@@ -533,9 +539,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01584">1584</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01552">1552</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l01997">Iteration_restart</a>, and <a class="el" href="iterative__linear__solver_8h_source.html#l02027">Preconditioner_LHS</a>.</p>
+<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l01933">Iteration_restart</a>, and <a class="el" href="iterative__linear__solver_8h_source.html#l01963">Preconditioner_LHS</a>.</p>
 
 </div>
 </div>
@@ -564,9 +570,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Destructor: Clean up storage. </p>
 
-<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01603">1603</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01571">1571</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l01719">clean_up_memory()</a>.</p>
+<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l01687">clean_up_memory()</a>.</p>
 
 </div>
 </div>
@@ -599,6 +605,63 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a175361cb4600f20511213636f2e645ce" name="a175361cb4600f20511213636f2e645ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a175361cb4600f20511213636f2e645ce">&#9670;&nbsp;</a></span>apply_plane_rotation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::AugmentedProblemGMRES::apply_plane_rotation </td>
+          <td>(</td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>dx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>dy</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>cs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>sn</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function: Apply plane rotation. This is done using the update: </p>
+<p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \begin{bmatrix} dx \newline dy \end{bmatrix} \leftarrow \begin{bmatrix} \cos\theta &amp; \sin\theta \newline -\sin\theta &amp; \cos\theta \end{bmatrix} \begin{bmatrix} dx \newline dy \end{bmatrix}. \]" src="form_311.png"/>
+</p>
+ 
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01913">1913</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="iterative__linear__solver_8cc_source.html#l02862">solve_helper()</a>.</p>
+
+</div>
+</div>
 <a id="a71199dc59da3f5077803829e36ad4aec" name="a71199dc59da3f5077803829e36ad4aec"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a71199dc59da3f5077803829e36ad4aec">&#9670;&nbsp;</a></span>apply_schur_complement_preconditioner()</h2>
 
@@ -635,11 +698,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Apply the block-diagonal Schur complement preconditioner to compute the LHS which has size N+1 (the augmented system size) </p>
 
-<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01768">1768</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01736">1736</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00457">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00186">oomph::LinearAlgebraDistribution::nrow()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00095">oomph::IterativeLinearSolver::preconditioner_pt()</a>, <a class="el" href="classoomph_1_1Preconditioner.html#ace1199369e4465cd2b9a34884bb64ec8">oomph::Preconditioner::preconditioner_solve()</a>, and <a class="el" href="iterative__linear__solver_8h_source.html#l02015">Schur_complement_scalar</a>.</p>
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00457">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00186">oomph::LinearAlgebraDistribution::nrow()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00095">oomph::IterativeLinearSolver::preconditioner_pt()</a>, <a class="el" href="classoomph_1_1Preconditioner.html#ace1199369e4465cd2b9a34884bb64ec8">oomph::Preconditioner::preconditioner_solve()</a>, and <a class="el" href="iterative__linear__solver_8h_source.html#l01951">Schur_complement_scalar</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="iterative__linear__solver_8cc_source.html#l02862">solve_helper()</a>, and <a class="el" href="iterative__linear__solver_8h_source.html#l01822">update()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="iterative__linear__solver_8cc_source.html#l02862">solve_helper()</a>, and <a class="el" href="iterative__linear__solver_8h_source.html#l01790">update()</a>.</p>
 
 </div>
 </div>
@@ -685,9 +748,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Multiply the vector x by the augmented system matrix. </p>
 
-<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01729">1729</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01697">1697</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l02006">C_pt</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00457">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="double__vector_8cc_source.html#l00805">oomph::DoubleVector::dot()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8cc_source.html#l01782">oomph::CRDoubleMatrix::multiply()</a>, <a class="el" href="matrices_8h_source.html#l01002">oomph::CRDoubleMatrix::nrow()</a>, and <a class="el" href="pseudo__buckling__ring_8h_source.html#l00049">oomph::x</a>.</p>
+<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l01942">C_pt</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00457">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="double__vector_8cc_source.html#l00805">oomph::DoubleVector::dot()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8cc_source.html#l01782">oomph::CRDoubleMatrix::multiply()</a>, and <a class="el" href="matrices_8h_source.html#l01002">oomph::CRDoubleMatrix::nrow()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="iterative__linear__solver_8cc_source.html#l02862">solve_helper()</a>.</p>
 
@@ -720,11 +783,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1LinearSolver.html#a9d66f3262e80ca06a365f98216afd85f">oomph::LinearSolver</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01719">1719</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01687">1687</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l02023">Matrix_can_be_deleted</a>, and <a class="el" href="iterative__linear__solver_8h_source.html#l02000">Matrix_pt</a>.</p>
+<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l01959">Matrix_can_be_deleted</a>, and <a class="el" href="iterative__linear__solver_8h_source.html#l01936">Matrix_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="iterative__linear__solver_8h_source.html#l01615">disable_resolve()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l02746">solve()</a>, and <a class="el" href="iterative__linear__solver_8h_source.html#l01603">~AugmentedProblemGMRES()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="iterative__linear__solver_8h_source.html#l01583">disable_resolve()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l02746">solve()</a>, and <a class="el" href="iterative__linear__solver_8h_source.html#l01571">~AugmentedProblemGMRES()</a>.</p>
 
 </div>
 </div>
@@ -753,9 +816,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Switches off iteration restart. </p>
 
-<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01700">1700</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01668">1668</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l01997">Iteration_restart</a>.</p>
+<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l01933">Iteration_restart</a>.</p>
 
 </div>
 </div>
@@ -786,9 +849,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1LinearSolver.html#ad61c63af94c5961830bd9807225a48d6">oomph::LinearSolver</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01615">1615</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01583">1583</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l01719">clean_up_memory()</a>, and <a class="el" href="linear__solver_8h_source.html#l00144">oomph::LinearSolver::disable_resolve()</a>.</p>
+<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l01687">clean_up_memory()</a>, and <a class="el" href="linear__solver_8h_source.html#l00144">oomph::LinearSolver::disable_resolve()</a>.</p>
 
 </div>
 </div>
@@ -818,9 +881,73 @@ Additional Inherited Members</h2></td></tr>
 
 <p>switches on iteration restarting and takes as an argument the number of iterations after which the construction of the orthogonalisation basis vectors should be restarted </p>
 
-<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01693">1693</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01661">1661</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l01997">Iteration_restart</a>, and <a class="el" href="iterative__linear__solver_8h_source.html#l01915">Restart</a>.</p>
+<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l01933">Iteration_restart</a>, and <a class="el" href="iterative__linear__solver_8h_source.html#l01930">Restart</a>.</p>
+
+</div>
+</div>
+<a id="a74bb2d9ceab6473c1922b166ebf48681" name="a74bb2d9ceab6473c1922b166ebf48681"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74bb2d9ceab6473c1922b166ebf48681">&#9670;&nbsp;</a></span>generate_plane_rotation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::AugmentedProblemGMRES::generate_plane_rotation </td>
+          <td>(</td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>dx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>dy</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>cs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>sn</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function: Generate a plane rotation. This is done by finding the values of <img class="formulaInl" alt="$ \cos(\theta) $" src="form_306.png"/> (i.e. cs) and \sin(\theta) (i.e. sn) such that: </p>
+<p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \begin{bmatrix} \cos\theta &amp; \sin\theta \newline -\sin\theta &amp; \cos\theta \end{bmatrix} \begin{bmatrix} dx \newline dy \end{bmatrix} = \begin{bmatrix} r \newline 0 \end{bmatrix}, \]" src="form_307.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$ r=\sqrt{pow(dx,2)+pow(dy,2)} $" src="form_308.png"/>. The values of a and b are given by: </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \cos\theta&amp;=\dfrac{dx}{\sqrt{pow(dx,2)+pow(dy,2)}}, \]" src="form_309.png"/>
+</p>
+<p> and </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \sin\theta&amp;=\dfrac{dy}{\sqrt{pow(dx,2)+pow(dy,2)}}. \]" src="form_310.png"/>
+</p>
+<p> Taken from: Saad Y."Iterative methods for sparse linear systems", p.192 </p>
+
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01868">1868</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="iterative__linear__solver_8cc_source.html#l02862">solve_helper()</a>.</p>
 
 </div>
 </div>
@@ -849,9 +976,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>access function indicating whether restarted <a class="el" href="classoomph_1_1GMRES.html" title="//////////////////////////////////////////////////////////////////// ////////////////////////////////...">GMRES</a> is used </p>
 
-<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01685">1685</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01653">1653</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l01997">Iteration_restart</a>.</p>
+<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l01933">Iteration_restart</a>.</p>
 
 </div>
 </div>
@@ -882,7 +1009,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classoomph_1_1IterativeLinearSolver.html#a5fe7f7b5e4847fdbd4f95d3875ec7a46">oomph::IterativeLinearSolver</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01679">1679</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01647">1647</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l01926">Iterations</a>.</p>
 
 </div>
 </div>
@@ -955,7 +1084,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8cc_source.html#l02831">2831</a> of file <a class="el" href="iterative__linear__solver_8cc_source.html">iterative_linear_solver.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l02000">Matrix_pt</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l02019">Resolving</a>, and <a class="el" href="iterative__linear__solver_8cc_source.html#l02746">solve()</a>.</p>
+<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l01936">Matrix_pt</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01955">Resolving</a>, and <a class="el" href="iterative__linear__solver_8cc_source.html#l02746">solve()</a>.</p>
 
 </div>
 </div>
@@ -984,9 +1113,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Set left preconditioning (the default) </p>
 
-<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01706">1706</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01674">1674</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l02027">Preconditioner_LHS</a>.</p>
+<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l01963">Preconditioner_LHS</a>.</p>
 
 </div>
 </div>
@@ -1015,9 +1144,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Enable right preconditioning. </p>
 
-<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01712">1712</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01680">1680</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l02027">Preconditioner_LHS</a>.</p>
+<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l01963">Preconditioner_LHS</a>.</p>
 
 </div>
 </div>
@@ -1065,9 +1194,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1LinearSolver.html#a546c09822d18191df14caed864c04c09">oomph::LinearSolver</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01628">1628</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01596">1596</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00507">oomph::DistributableLinearAlgebraObject::build_distribution()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00457">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="linear__solver_8h_source.html#l00073">oomph::LinearSolver::Enable_resolve</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l02023">Matrix_can_be_deleted</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l02000">Matrix_pt</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l02019">Resolving</a>, and <a class="el" href="iterative__linear__solver_8cc_source.html#l02862">solve_helper()</a>.</p>
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00507">oomph::DistributableLinearAlgebraObject::build_distribution()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00457">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="linear__solver_8h_source.html#l00073">oomph::LinearSolver::Enable_resolve</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01959">Matrix_can_be_deleted</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01936">Matrix_pt</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01955">Resolving</a>, and <a class="el" href="iterative__linear__solver_8cc_source.html#l02862">solve_helper()</a>.</p>
 
 </div>
 </div>
@@ -1115,7 +1244,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1LinearSolver.html#a1f7a2ee2cd18d3dafc20a61ca2f52dbb">oomph::LinearSolver</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01666">1666</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01634">1634</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
 
 <p class="reference">References <a class="el" href="classoomph_1_1LinearSolver.html#a15ce22542b74ed1826ea485edacbeb6e">oomph::LinearSolver::solve()</a>.</p>
 
@@ -1163,7 +1292,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8cc_source.html#l02746">2746</a> of file <a class="el" href="iterative__linear__solver_8cc_source.html">iterative_linear_solver.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="double__vector_8cc_source.html#l00035">oomph::DoubleVector::build()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00507">oomph::DistributableLinearAlgebraObject::build_distribution()</a>, <a class="el" href="double__vector_8h_source.html#l00154">oomph::DoubleVector::built()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01719">clean_up_memory()</a>, <a class="el" href="problem_8h_source.html#l01246">oomph::Problem::communicator_pt()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00457">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="linear__solver_8h_source.html#l00077">oomph::LinearSolver::Doc_time</a>, <a class="el" href="linear__solver_8h_source.html#l00073">oomph::LinearSolver::Enable_resolve</a>, <a class="el" href="namespaceoomph.html#ad835af913df4cbdc5648440f91b794ab">oomph::f()</a>, <a class="el" href="problem_8cc_source.html#l03890">oomph::Problem::get_jacobian()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00248">oomph::IterativeLinearSolver::Jacobian_setup_time</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l02023">Matrix_can_be_deleted</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l02000">Matrix_pt</a>, <a class="el" href="problem_8h_source.html#l01674">oomph::Problem::ndof()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="double__vector_8cc_source.html#l00164">oomph::DoubleVector::redistribute()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l02019">Resolving</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l02015">Schur_complement_scalar</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l02862">solve_helper()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01295">oomph::TimingHelpers::timer()</a>.</p>
+<p class="reference">References <a class="el" href="double__vector_8cc_source.html#l00035">oomph::DoubleVector::build()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00507">oomph::DistributableLinearAlgebraObject::build_distribution()</a>, <a class="el" href="double__vector_8h_source.html#l00154">oomph::DoubleVector::built()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01687">clean_up_memory()</a>, <a class="el" href="problem_8h_source.html#l01246">oomph::Problem::communicator_pt()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00457">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="linear__solver_8h_source.html#l00077">oomph::LinearSolver::Doc_time</a>, <a class="el" href="linear__solver_8h_source.html#l00073">oomph::LinearSolver::Enable_resolve</a>, <a class="el" href="problem_8cc_source.html#l03890">oomph::Problem::get_jacobian()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00248">oomph::IterativeLinearSolver::Jacobian_setup_time</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01959">Matrix_can_be_deleted</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01936">Matrix_pt</a>, <a class="el" href="problem_8h_source.html#l01674">oomph::Problem::ndof()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="double__vector_8cc_source.html#l00164">oomph::DoubleVector::redistribute()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01955">Resolving</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01951">Schur_complement_scalar</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l02862">solve_helper()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01295">oomph::TimingHelpers::timer()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="iterative__linear__solver_8cc_source.html#l02831">resolve()</a>.</p>
 
@@ -1214,7 +1343,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8cc_source.html#l02862">2862</a> of file <a class="el" href="iterative__linear__solver_8cc_source.html">iterative_linear_solver.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l01768">apply_schur_complement_preconditioner()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01729">augmented_matrix_multiply()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l02003">B_pt</a>, <a class="el" href="double__vector_8cc_source.html#l00035">oomph::DoubleVector::build()</a>, <a class="el" href="double__vector_8h_source.html#l00154">oomph::DoubleVector::built()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l02006">C_pt</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00335">oomph::LinearAlgebraDistribution::communicator_pt()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00329">oomph::LinearAlgebraDistribution::distributed()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00493">oomph::DistributableLinearAlgebraObject::distributed()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00457">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00228">oomph::IterativeLinearSolver::Doc_convergence_history</a>, <a class="el" href="linear__solver_8h_source.html#l00077">oomph::LinearSolver::Doc_time</a>, <a class="el" href="double__vector_8cc_source.html#l00805">oomph::DoubleVector::dot()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="double__vector_8cc_source.html#l00123">oomph::DoubleVector::initialise()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01997">Iteration_restart</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00242">oomph::IterativeLinearSolver::Max_iter</a>, <a class="el" href="double__vector_8cc_source.html#l00867">oomph::DoubleVector::norm()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00463">oomph::DistributableLinearAlgebraObject::nrow()</a>, <a class="el" href="classoomph_1_1DoubleMatrixBase.html#acdcd6e1ea2bf2380f1a2fa32c7829cb5">oomph::DoubleMatrixBase::nrow()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00231">oomph::IterativeLinearSolver::Output_file_stream</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l02027">Preconditioner_LHS</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00095">oomph::IterativeLinearSolver::preconditioner_pt()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00254">oomph::IterativeLinearSolver::Preconditioner_setup_time</a>, <a class="el" href="classoomph_1_1Preconditioner.html#ace1199369e4465cd2b9a34884bb64ec8">oomph::Preconditioner::preconditioner_solve()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l02019">Resolving</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01915">Restart</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l02015">Schur_complement_scalar</a>, <a class="el" href="preconditioner_8h_source.html#l00094">oomph::Preconditioner::setup()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00258">oomph::IterativeLinearSolver::Setup_preconditioner_before_solve</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00251">oomph::IterativeLinearSolver::Solution_time</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00286">oomph::Global_string_for_annotation::string()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00262">oomph::IterativeLinearSolver::Throw_error_after_max_iter</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01295">oomph::TimingHelpers::timer()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00239">oomph::IterativeLinearSolver::Tolerance</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01822">update()</a>, and <a class="el" href="double__vector_8h_source.html#l00254">oomph::DoubleVector::values_pt()</a>.</p>
+<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l01913">apply_plane_rotation()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01736">apply_schur_complement_preconditioner()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01697">augmented_matrix_multiply()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01939">B_pt</a>, <a class="el" href="double__vector_8cc_source.html#l00035">oomph::DoubleVector::build()</a>, <a class="el" href="double__vector_8h_source.html#l00154">oomph::DoubleVector::built()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01942">C_pt</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00335">oomph::LinearAlgebraDistribution::communicator_pt()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00329">oomph::LinearAlgebraDistribution::distributed()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00493">oomph::DistributableLinearAlgebraObject::distributed()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00457">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00228">oomph::IterativeLinearSolver::Doc_convergence_history</a>, <a class="el" href="linear__solver_8h_source.html#l00077">oomph::LinearSolver::Doc_time</a>, <a class="el" href="double__vector_8cc_source.html#l00805">oomph::DoubleVector::dot()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01868">generate_plane_rotation()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="double__vector_8cc_source.html#l00123">oomph::DoubleVector::initialise()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01933">Iteration_restart</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01926">Iterations</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00242">oomph::IterativeLinearSolver::Max_iter</a>, <a class="el" href="double__vector_8cc_source.html#l00867">oomph::DoubleVector::norm()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00463">oomph::DistributableLinearAlgebraObject::nrow()</a>, <a class="el" href="classoomph_1_1DoubleMatrixBase.html#acdcd6e1ea2bf2380f1a2fa32c7829cb5">oomph::DoubleMatrixBase::nrow()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00231">oomph::IterativeLinearSolver::Output_file_stream</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01963">Preconditioner_LHS</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00095">oomph::IterativeLinearSolver::preconditioner_pt()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00254">oomph::IterativeLinearSolver::Preconditioner_setup_time</a>, <a class="el" href="classoomph_1_1Preconditioner.html#ace1199369e4465cd2b9a34884bb64ec8">oomph::Preconditioner::preconditioner_solve()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01955">Resolving</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01930">Restart</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01951">Schur_complement_scalar</a>, <a class="el" href="preconditioner_8h_source.html#l00094">oomph::Preconditioner::setup()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00258">oomph::IterativeLinearSolver::Setup_preconditioner_before_solve</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00251">oomph::IterativeLinearSolver::Solution_time</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00286">oomph::Global_string_for_annotation::string()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00262">oomph::IterativeLinearSolver::Throw_error_after_max_iter</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01295">oomph::TimingHelpers::timer()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00239">oomph::IterativeLinearSolver::Tolerance</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01790">update()</a>, and <a class="el" href="double__vector_8h_source.html#l00254">oomph::DoubleVector::values_pt()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="iterative__linear__solver_8cc_source.html#l02746">solve()</a>.</p>
 
@@ -1274,9 +1403,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Helper function to update the result vector using the result, x=x_0+V_m*y. </p>
 
-<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01822">1822</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01790">1790</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l01768">apply_schur_complement_preconditioner()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l02027">Preconditioner_LHS</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="double__vector_8h_source.html#l00254">oomph::DoubleVector::values_pt()</a>, and <a class="el" href="pseudo__buckling__ring_8h_source.html#l00049">oomph::x</a>.</p>
+<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l01736">apply_schur_complement_preconditioner()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00457">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00463">oomph::DistributableLinearAlgebraObject::nrow()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01963">Preconditioner_LHS</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="double__vector_8h_source.html#l00254">oomph::DoubleVector::values_pt()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="iterative__linear__solver_8cc_source.html#l02862">solve_helper()</a>.</p>
 
@@ -1305,49 +1434,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Pointer to the column vector in the bordered system. </p>
 
-<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l02003">2003</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01939">1939</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="iterative__linear__solver_8cc_source.html#l02862">solve_helper()</a>.</p>
-
-</div>
-</div>
-<a id="a291e94349dab093547e89d755c81c171" name="a291e94349dab093547e89d755c81c171"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a291e94349dab093547e89d755c81c171">&#9670;&nbsp;</a></span>begin</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">oomph::AugmentedProblemGMRES::begin</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">{bmatrix}</div>
-<div class="line">        \cos\theta &amp; \sin\theta \newline</div>
-<div class="line">        -\sin\theta &amp; \cos\theta</div>
-<div class="line">        \end{bmatrix}</div>
-<div class="line">        <a class="code hl_variable" href="classoomph_1_1AugmentedProblemGMRES.html#a291e94349dab093547e89d755c81c171">\begin</a>{bmatrix}</div>
-<div class="line">        dx \newline</div>
-<div class="line">        dy</div>
-<div class="line">        \end{bmatrix}</div>
-<div class="line">        =</div>
-<div class="line">        <a class="code hl_variable" href="classoomph_1_1AugmentedProblemGMRES.html#a291e94349dab093547e89d755c81c171">\begin</a>{bmatrix}</div>
-<div class="line">        r \newline</div>
-<div class="line">        0</div>
-<div class="line">        \end{bmatrix}</div>
-<div class="ttc" id="aclassoomph_1_1AugmentedProblemGMRES_html_a291e94349dab093547e89d755c81c171"><div class="ttname"><a href="classoomph_1_1AugmentedProblemGMRES.html#a291e94349dab093547e89d755c81c171">oomph::AugmentedProblemGMRES::begin</a></div><div class="ttdeci">begin</div><div class="ttdoc">Helper function: Generate a plane rotation. This is done by finding the values of  (i....</div><div class="ttdef"><b>Definition:</b> <a href="iterative__linear__solver_8h_source.html#l01894">iterative_linear_solver.h:1894</a></div></div>
-</div><!-- fragment -->
-<p>Helper function: Generate a plane rotation. This is done by finding the values of <img class="formulaInl" alt="$ \cos(\theta) $" src="form_181.png" width="33" height="14"/> (i.e. cs) and \sin(\theta) (i.e. sn) such that: </p>
-
-<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01894">1894</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
 
 </div>
 </div>
@@ -1373,9 +1462,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Pointer to the row vector in the bordered system. </p>
 
-<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l02006">2006</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01942">1942</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="iterative__linear__solver_8h_source.html#l01729">augmented_matrix_multiply()</a>, and <a class="el" href="iterative__linear__solver_8cc_source.html#l02862">solve_helper()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="iterative__linear__solver_8h_source.html#l01697">augmented_matrix_multiply()</a>, and <a class="el" href="iterative__linear__solver_8cc_source.html#l02862">solve_helper()</a>.</p>
 
 </div>
 </div>
@@ -1401,9 +1490,37 @@ Additional Inherited Members</h2></td></tr>
 
 <p>boolean indicating if iteration restarting is used </p>
 
-<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01997">1997</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01933">1933</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="iterative__linear__solver_8h_source.html#l01584">AugmentedProblemGMRES()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01700">disable_iteration_restart()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01693">enable_iteration_restart()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01685">iteration_restart()</a>, and <a class="el" href="iterative__linear__solver_8cc_source.html#l02862">solve_helper()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="iterative__linear__solver_8h_source.html#l01552">AugmentedProblemGMRES()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01668">disable_iteration_restart()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01661">enable_iteration_restart()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01653">iteration_restart()</a>, and <a class="el" href="iterative__linear__solver_8cc_source.html#l02862">solve_helper()</a>.</p>
+
+</div>
+</div>
+<a id="a9be7f8a66aefc1352e95741c5f265443" name="a9be7f8a66aefc1352e95741c5f265443"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9be7f8a66aefc1352e95741c5f265443">&#9670;&nbsp;</a></span>Iterations</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::AugmentedProblemGMRES::Iterations</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of iterations taken. </p>
+
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01926">1926</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="iterative__linear__solver_8h_source.html#l01647">iterations()</a>, and <a class="el" href="iterative__linear__solver_8cc_source.html#l02862">solve_helper()</a>.</p>
 
 </div>
 </div>
@@ -1429,9 +1546,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Boolean flag to indicate if the matrix pointed to be Matrix_pt can be deleted. </p>
 
-<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l02023">2023</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01959">1959</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="iterative__linear__solver_8h_source.html#l01719">clean_up_memory()</a>, and <a class="el" href="iterative__linear__solver_8cc_source.html#l02746">solve()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="iterative__linear__solver_8h_source.html#l01687">clean_up_memory()</a>, and <a class="el" href="iterative__linear__solver_8cc_source.html#l02746">solve()</a>.</p>
 
 </div>
 </div>
@@ -1457,9 +1574,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Pointer to matrix. </p>
 
-<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l02000">2000</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01936">1936</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="iterative__linear__solver_8h_source.html#l01719">clean_up_memory()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l02831">resolve()</a>, and <a class="el" href="iterative__linear__solver_8cc_source.html#l02746">solve()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="iterative__linear__solver_8h_source.html#l01687">clean_up_memory()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l02831">resolve()</a>, and <a class="el" href="iterative__linear__solver_8cc_source.html#l02746">solve()</a>.</p>
 
 </div>
 </div>
@@ -1485,9 +1602,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>boolean indicating use of left hand preconditioning (if true) or right hand preconditioning (if false) </p>
 
-<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l02027">2027</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01963">1963</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="iterative__linear__solver_8h_source.html#l01584">AugmentedProblemGMRES()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01706">set_preconditioner_LHS()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01712">set_preconditioner_RHS()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l02862">solve_helper()</a>, and <a class="el" href="iterative__linear__solver_8h_source.html#l01822">update()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="iterative__linear__solver_8h_source.html#l01552">AugmentedProblemGMRES()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01674">set_preconditioner_LHS()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01680">set_preconditioner_RHS()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l02862">solve_helper()</a>, and <a class="el" href="iterative__linear__solver_8h_source.html#l01790">update()</a>.</p>
 
 </div>
 </div>
@@ -1513,14 +1630,14 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Boolean flag to indicate if the solve is done in re-solve mode, bypassing setup of matrix and preconditioner. </p>
 
-<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l02019">2019</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01955">1955</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="iterative__linear__solver_8cc_source.html#l02831">resolve()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l02746">solve()</a>, and <a class="el" href="iterative__linear__solver_8cc_source.html#l02862">solve_helper()</a>.</p>
 
 </div>
 </div>
-<a id="ade82d55b66084e9eaefa867315e85ab9" name="ade82d55b66084e9eaefa867315e85ab9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ade82d55b66084e9eaefa867315e85ab9">&#9670;&nbsp;</a></span>Restart</h2>
+<a id="a472af506241c412c2a6fe4c53529118e" name="a472af506241c412c2a6fe4c53529118e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a472af506241c412c2a6fe4c53529118e">&#9670;&nbsp;</a></span>Restart</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1529,7 +1646,7 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceoomph.html#ad835af913df4cbdc5648440f91b794ab">f</a> cos theta <a class="el" href="namespaceoomph.html#ad835af913df4cbdc5648440f91b794ab">f</a> sin theta&amp; unsigned oomph::AugmentedProblemGMRES::Restart</td>
+          <td class="memname">unsigned oomph::AugmentedProblemGMRES::Restart</td>
         </tr>
       </table>
   </td>
@@ -1539,12 +1656,11 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>and </p>
-<p >The number of iterations before the iteration proceedure is restarted if iteration restart is used </p>
+<p>The number of iterations before the iteration proceedure is restarted if iteration restart is used. </p>
 
-<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01994">1994</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01930">1930</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="iterative__linear__solver_8h_source.html#l01693">enable_iteration_restart()</a>, and <a class="el" href="iterative__linear__solver_8cc_source.html#l02862">solve_helper()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="iterative__linear__solver_8h_source.html#l01661">enable_iteration_restart()</a>, and <a class="el" href="iterative__linear__solver_8cc_source.html#l02862">solve_helper()</a>.</p>
 
 </div>
 </div>
@@ -1570,7 +1686,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Pointer to the last entry of the RHS vector in the bordered system. </p>
 
-<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l02012">2012</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01948">1948</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
 
 </div>
 </div>
@@ -1596,9 +1712,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>The scalar component of the Schur complement preconditioner. </p>
 
-<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l02015">2015</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01951">1951</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="iterative__linear__solver_8h_source.html#l01768">apply_schur_complement_preconditioner()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l02746">solve()</a>, and <a class="el" href="iterative__linear__solver_8cc_source.html#l02862">solve_helper()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="iterative__linear__solver_8h_source.html#l01736">apply_schur_complement_preconditioner()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l02746">solve()</a>, and <a class="el" href="iterative__linear__solver_8cc_source.html#l02862">solve_helper()</a>.</p>
 
 </div>
 </div>
@@ -1624,7 +1740,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Pointer to the last entry of the LHS vector in the bordered system. </p>
 
-<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l02009">2009</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l01945">1945</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
 
 </div>
 </div>
@@ -1660,7 +1776,7 @@ Additional Inherited Members</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Nov 2 2021 16:31:32
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Dec 21 2021 17:35:18
         </div>
       </div>
     </footer>

@@ -526,10 +526,10 @@
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l00522}00522       \}}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l00523}00523       \textcolor{comment}{// PARANOID check -\/ If a node in the input problem has more than}}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l00524}00524       \textcolor{comment}{// one value we cannot deal with it so arbitarily check the first one}}
-\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l00525}00525       \textcolor{keywordflow}{if} (problem\_pt-\/>\mbox{\hyperlink{classoomph_1_1Problem_ae2e5559918832d0850b3631d004d0a37}{mesh\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}(0)-\/>nvalue() != 1)}
+\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l00525}00525       \textcolor{keywordflow}{if} (problem\_pt-\/>\mbox{\hyperlink{classoomph_1_1Problem_ae2e5559918832d0850b3631d004d0a37}{mesh\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}{nvalue}}() != 1)}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l00526}00526       \{}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l00527}00527         \textcolor{comment}{// How many dofs are there in the first node}}
-\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l00528}00528         \textcolor{keywordtype}{unsigned} n\_value = problem\_pt-\/>\mbox{\hyperlink{classoomph_1_1Problem_ae2e5559918832d0850b3631d004d0a37}{mesh\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}(0)-\/>nvalue();}
+\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l00528}00528         \textcolor{keywordtype}{unsigned} n\_value = problem\_pt-\/>\mbox{\hyperlink{classoomph_1_1Problem_ae2e5559918832d0850b3631d004d0a37}{mesh\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}{nvalue}}();}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l00529}00529 }
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l00530}00530         \textcolor{comment}{// Make the error message}}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l00531}00531         std::ostringstream error\_message\_stream;}
@@ -1758,13 +1758,13 @@
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01754}01754                     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i\_master = 0; i\_master < nmaster; i\_master++)}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01755}01755                     \{}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01756}01756                       \textcolor{comment}{// Set up a pointer to the master node}}
-\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01757}01757                       Node* master\_node\_pt =}
+\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01757}01757                       \mbox{\hyperlink{classoomph_1_1Node}{Node}}* master\_node\_pt =}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01758}01758                         hang\_info\_pt-\/>\mbox{\hyperlink{classoomph_1_1HangInfo_a7a935ae7eeca594a648ca1800444827c}{master\_node\_pt}}(i\_master);}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01759}01759 }
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01760}01760                       \textcolor{comment}{// The column number in the interpolation matrix: the}}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01761}01761                       \textcolor{comment}{// global equation number of the d.o.f. stored at this}}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01762}01762                       \textcolor{comment}{// master node for the coarse element}}
-\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01763}01763                       \textcolor{keywordtype}{int} master\_jj = master\_node\_pt-\/>eqn\_number(0);}
+\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01763}01763                       \textcolor{keywordtype}{int} master\_jj = master\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_ab6845db69833c541766d9a073b023fc4}{eqn\_number}}(0);}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01764}01764 }
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01765}01765                       \textcolor{comment}{// Is the master node a proper d.o.f.?}}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01766}01766                       \textcolor{keywordflow}{if} (master\_jj >= 0)}
@@ -1886,10 +1886,10 @@
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01882}01882            i\_fine\_node++)}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01883}01883       \{}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01884}01884         \textcolor{comment}{// Set a pointer to the i\_fine\_unknown-\/th node in the fine mesh}}
-\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01885}01885         Node* fine\_node\_pt = ref\_fine\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}(i\_fine\_node);}
+\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01885}01885         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* fine\_node\_pt = ref\_fine\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}(i\_fine\_node);}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01886}01886 }
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01887}01887         \textcolor{comment}{// Get the global equation number}}
-\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01888}01888         \textcolor{keywordtype}{int} i\_fine = fine\_node\_pt-\/>eqn\_number(0);}
+\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01888}01888         \textcolor{keywordtype}{int} i\_fine = fine\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_ab6845db69833c541766d9a073b023fc4}{eqn\_number}}(0);}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01889}01889 }
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01890}01890         \textcolor{comment}{// If the node is a proper d.o.f.}}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01891}01891         \textcolor{keywordflow}{if} (i\_fine >= 0)}
@@ -1899,7 +1899,7 @@
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01895}01895           row\_start[i\_fine] = value.size();}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01896}01896 }
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01897}01897           \textcolor{comment}{// Get the (Eulerian) spatial location of the fine node}}
-\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01898}01898           fine\_node\_pt-\/>position(fine\_node\_position);}
+\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01898}01898           fine\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a61c3ad6b319e4d2cce38dc8faae1bfae}{position}}(fine\_node\_position);}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01899}01899 }
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01900}01900           \textcolor{comment}{// Create a null pointer to the GeomObject class}}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01901}01901           \mbox{\hyperlink{classoomph_1_1GeomObject}{GeomObject}}* el\_pt = 0;}
@@ -1929,34 +1929,34 @@
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01925}01925           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j\_node = 0; j\_node < n\_node; j\_node++)}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01926}01926           \{}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01927}01927             \textcolor{comment}{// Get the j\_coarse\_unknown-\/th node in the coarse element}}
-\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01928}01928             Node* coarse\_node\_pt = el\_coarse\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j\_node);}
+\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01928}01928             \mbox{\hyperlink{classoomph_1_1Node}{Node}}* coarse\_node\_pt = el\_coarse\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j\_node);}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01929}01929 }
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01930}01930             \textcolor{comment}{// Column number in interpolation matrix: Global equation number of}}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01931}01931             \textcolor{comment}{// the d.o.f. stored at this node in the coarse element}}
-\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01932}01932             \textcolor{keywordtype}{int} j\_coarse = coarse\_node\_pt-\/>eqn\_number(0);}
+\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01932}01932             \textcolor{keywordtype}{int} j\_coarse = coarse\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_ab6845db69833c541766d9a073b023fc4}{eqn\_number}}(0);}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01933}01933 }
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01934}01934             \textcolor{comment}{// If the value stored at this node is pinned or hanging}}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01935}01935             \textcolor{keywordflow}{if} (j\_coarse < 0)}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01936}01936             \{}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01937}01937               \textcolor{comment}{// Hanging node: In this case we need to accumulate the}}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01938}01938               \textcolor{comment}{// contributions from the master nodes}}
-\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01939}01939               \textcolor{keywordflow}{if} (el\_coarse\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j\_node)-\/>is\_hanging())}
+\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01939}01939               \textcolor{keywordflow}{if} (el\_coarse\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j\_node)-\/>\mbox{\hyperlink{classoomph_1_1Node_af0e6237dfafad62cf427ff5013ddcfef}{is\_hanging}}())}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01940}01940               \{}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01941}01941                 \textcolor{comment}{// Find the number of master nodes of the hanging}}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01942}01942                 \textcolor{comment}{// the node in the reference element}}
-\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01943}01943                 \mbox{\hyperlink{classoomph_1_1HangInfo}{HangInfo}}* hang\_info\_pt = coarse\_node\_pt-\/>hanging\_pt();}
+\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01943}01943                 \mbox{\hyperlink{classoomph_1_1HangInfo}{HangInfo}}* hang\_info\_pt = coarse\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_afefa22db8b28e783b8647e3577ee01d9}{hanging\_pt}}();}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01944}01944                 \textcolor{keywordtype}{unsigned} nmaster = hang\_info\_pt-\/>\mbox{\hyperlink{classoomph_1_1HangInfo_aa9c1130b58db2ff6d5eee4f923ba365c}{nmaster}}();}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01945}01945 }
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01946}01946                 \textcolor{comment}{// Loop over the master nodes}}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01947}01947                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i\_master = 0; i\_master < nmaster; i\_master++)}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01948}01948                 \{}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01949}01949                   \textcolor{comment}{// Set up a pointer to the master node}}
-\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01950}01950                   Node* master\_node\_pt = hang\_info\_pt-\/>\mbox{\hyperlink{classoomph_1_1HangInfo_a7a935ae7eeca594a648ca1800444827c}{master\_node\_pt}}(i\_master);}
+\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01950}01950                   \mbox{\hyperlink{classoomph_1_1Node}{Node}}* master\_node\_pt = hang\_info\_pt-\/>\mbox{\hyperlink{classoomph_1_1HangInfo_a7a935ae7eeca594a648ca1800444827c}{master\_node\_pt}}(i\_master);}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01951}01951 }
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01952}01952                   \textcolor{comment}{// The column number in the interpolation matrix: the}}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01953}01953                   \textcolor{comment}{// global equation number of the d.o.f. stored at this master}}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01954}01954                   \textcolor{comment}{// node for the coarse element}}
-\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01955}01955                   \textcolor{keywordtype}{int} master\_jj = master\_node\_pt-\/>eqn\_number(0);}
+\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01955}01955                   \textcolor{keywordtype}{int} master\_jj = master\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_ab6845db69833c541766d9a073b023fc4}{eqn\_number}}(0);}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01956}01956 }
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01957}01957                   \textcolor{comment}{// Is the master node a proper d.o.f.?}}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l01958}01958                   \textcolor{keywordflow}{if} (master\_jj >= 0)}
@@ -2231,7 +2231,7 @@
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02227}02227 }
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02228}02228     \textcolor{comment}{// Get the dimension of the problem (assumed to be the dimension of any}}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02229}02229     \textcolor{comment}{// node in the mesh)}}
-\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02230}02230     \textcolor{keywordtype}{unsigned} n\_dim = bulk\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}(0)-\/>ndim();}
+\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02230}02230     \textcolor{keywordtype}{unsigned} n\_dim = bulk\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02231}02231 }
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02232}02232     \textcolor{comment}{// Find the number of nodes in an element}}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02233}02233     \textcolor{keywordtype}{unsigned} nnod = bulk\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
@@ -2246,17 +2246,17 @@
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02242}02242       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < nnod; j++)}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02243}02243       \{}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02244}02244         \textcolor{comment}{// Pointer to node}}
-\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02245}02245         Node* nod\_pt = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j);}
+\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02245}02245         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j);}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02246}02246 }
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02247}02247         \textcolor{comment}{// Sanity check}}
-\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02248}02248         \textcolor{keywordflow}{if} (nod\_pt-\/>nvalue() != 1)}
+\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02248}02248         \textcolor{keywordflow}{if} (nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}{nvalue}}() != 1)}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02249}02249         \{}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02250}02250           \textcolor{comment}{// Set up an output stream}}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02251}02251           std::ostringstream error\_stream;}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02252}02252 }
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02253}02253           \textcolor{comment}{// Output the error message}}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02254}02254           error\_stream << \textcolor{stringliteral}{"{}Sorry, not sure what to do here! I can't deal with "{}}}
-\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02255}02255                        << nod\_pt-\/>nvalue() << \textcolor{stringliteral}{"{} values!"{}} << std::endl;}
+\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02255}02255                        << nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}{nvalue}}() << \textcolor{stringliteral}{"{} values!"{}} << std::endl;}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02256}02256 }
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02257}02257           \textcolor{comment}{// Throw an error to indicate that it was not possible to plot the}}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02258}02258           \textcolor{comment}{// data}}
@@ -2266,7 +2266,7 @@
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02262}02262         \}}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02263}02263 }
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02264}02264         \textcolor{comment}{// Free or pinned?}}
-\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02265}02265         \textcolor{keywordtype}{int} eqn\_num = nod\_pt-\/>eqn\_number(0);}
+\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02265}02265         \textcolor{keywordtype}{int} eqn\_num = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_ab6845db69833c541766d9a073b023fc4}{eqn\_number}}(0);}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02266}02266 }
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02267}02267         \textcolor{comment}{// If it's a free node}}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02268}02268         \textcolor{keywordflow}{if} (eqn\_num >= 0)}
@@ -2278,7 +2278,7 @@
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02274}02274           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_dim; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02275}02275           \{}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02276}02276             \textcolor{comment}{// Increment coordinate\_sum by the value of x(i)}}
-\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02277}02277             coordinate\_sum += nod\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02277}02277             coordinate\_sum += nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02278}02278           \}}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02279}02279 }
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02280}02280           \textcolor{comment}{// Store the value of pi in cache}}
@@ -2286,7 +2286,7 @@
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02282}02282 }
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02283}02283           \textcolor{comment}{// Make the vector represent a constant function}}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02284}02284           Restriction\_self\_test\_vectors\_storage[0][eqn\_num] =}
-\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02285}02285             sin(pi * (nod\_pt-\/>x(0))) * sin(pi * (nod\_pt-\/>x(1)));}
+\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02285}02285             sin(pi * (nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0))) * sin(pi * (nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1)));}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02286}02286         \}}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02287}02287       \} \textcolor{comment}{// for (unsigned j=0;j<nnod;j++)}}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02288}02288     \} \textcolor{comment}{// for (unsigned e=0;e<n\_el;e++)}}
@@ -2397,7 +2397,7 @@
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02393}02393 }
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02394}02394     \textcolor{comment}{// Get the dimension of the problem (assumed to be the dimension of any}}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02395}02395     \textcolor{comment}{// node in the mesh)}}
-\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02396}02396     \textcolor{keywordtype}{unsigned} n\_dim = bulk\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}(0)-\/>ndim();}
+\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02396}02396     \textcolor{keywordtype}{unsigned} n\_dim = bulk\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02397}02397 }
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02398}02398     \textcolor{comment}{// Find the number of nodes in an element}}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02399}02399     \textcolor{keywordtype}{unsigned} nnod = bulk\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
@@ -2419,14 +2419,14 @@
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02415}02415       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < nnod; j++)}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02416}02416       \{}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02417}02417         \textcolor{comment}{// Pointer to node}}
-\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02418}02418         Node* nod\_pt = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j);}
+\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02418}02418         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j);}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02419}02419 }
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02420}02420         \textcolor{comment}{// Sanity check}}
-\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02421}02421         \textcolor{keywordflow}{if} (nod\_pt-\/>nvalue() != 1)}
+\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02421}02421         \textcolor{keywordflow}{if} (nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}{nvalue}}() != 1)}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02422}02422         \{}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02423}02423           std::ostringstream error\_stream;}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02424}02424 }
-\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02425}02425           error\_stream << \textcolor{stringliteral}{"{}Sorry, not sure what to do here!"{}} << nod\_pt-\/>nvalue()}
+\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02425}02425           error\_stream << \textcolor{stringliteral}{"{}Sorry, not sure what to do here!"{}} << nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}{nvalue}}()}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02426}02426                        << std::endl;}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02427}02427 }
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02428}02428           \textcolor{comment}{// Output the value of dimension to screen}}
@@ -2435,7 +2435,7 @@
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02431}02431           \textcolor{comment}{// Output the values of x\_i for all i}}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02432}02432           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_dim; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02433}02433           \{}
-\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02434}02434             error\_stream << nod\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02434}02434             error\_stream << nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02435}02435           \}}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02436}02436 }
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02437}02437           \textcolor{comment}{// End line}}
@@ -2451,11 +2451,11 @@
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02447}02447         \textcolor{comment}{// Output the coordinates of the node}}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02448}02448         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_dim; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02449}02449         \{}
-\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02450}02450           some\_file << nod\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02450}02450           some\_file << nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02451}02451         \}}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02452}02452 }
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02453}02453         \textcolor{comment}{// Free or pinned?}}
-\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02454}02454         \textcolor{keywordtype}{int} \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}} = nod\_pt-\/>eqn\_number(0);}
+\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02454}02454         \textcolor{keywordtype}{int} \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}} = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_ab6845db69833c541766d9a073b023fc4}{eqn\_number}}(0);}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02455}02455         \textcolor{keywordflow}{if} (\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}} >= 0)}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02456}02456         \{}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02457}02457           \textcolor{comment}{// Output the e-\/th entry if the node is free}}
@@ -2464,7 +2464,7 @@
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02460}02460         \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02461}02461         \{}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02462}02462           \textcolor{comment}{// Boundary node}}
-\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02463}02463           \textcolor{keywordflow}{if} (nod\_pt-\/>is\_on\_boundary())}
+\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02463}02463           \textcolor{keywordflow}{if} (nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a2ca215e42116ee8a2acc7d6a35e37788}{is\_on\_boundary}}())}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02464}02464           \{}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02465}02465             \textcolor{comment}{// On the finest level the boundary data is pinned so set to 0}}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02466}02466             \textcolor{keywordflow}{if} (hierarchy\_level == 0)}
@@ -2479,7 +2479,7 @@
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02475}02475             \}}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02476}02476           \}}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02477}02477           \textcolor{comment}{// Hanging node}}
-\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02478}02478           \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (nod\_pt-\/>is\_hanging())}
+\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02478}02478           \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_af0e6237dfafad62cf427ff5013ddcfef}{is\_hanging}}())}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02479}02479           \{}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02480}02480             \textcolor{comment}{// Allocate space for a double to store the weighted sum}}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02481}02481             \textcolor{comment}{// of the surrounding master nodes of the hanging node}}
@@ -2487,17 +2487,17 @@
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02483}02483 }
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02484}02484             \textcolor{comment}{// Find the number of master nodes of the hanging}}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02485}02485             \textcolor{comment}{// the node in the reference element}}
-\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02486}02486             \mbox{\hyperlink{classoomph_1_1HangInfo}{HangInfo}}* hang\_info\_pt = nod\_pt-\/>hanging\_pt();}
+\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02486}02486             \mbox{\hyperlink{classoomph_1_1HangInfo}{HangInfo}}* hang\_info\_pt = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_afefa22db8b28e783b8647e3577ee01d9}{hanging\_pt}}();}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02487}02487             \textcolor{keywordtype}{unsigned} nmaster = hang\_info\_pt-\/>\mbox{\hyperlink{classoomph_1_1HangInfo_aa9c1130b58db2ff6d5eee4f923ba365c}{nmaster}}();}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02488}02488 }
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02489}02489             \textcolor{comment}{// Loop over the master nodes}}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02490}02490             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i\_master = 0; i\_master < nmaster; i\_master++)}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02491}02491             \{}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02492}02492               \textcolor{comment}{// Set up a pointer to the master node}}
-\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02493}02493               Node* master\_node\_pt = hang\_info\_pt-\/>\mbox{\hyperlink{classoomph_1_1HangInfo_a7a935ae7eeca594a648ca1800444827c}{master\_node\_pt}}(i\_master);}
+\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02493}02493               \mbox{\hyperlink{classoomph_1_1Node}{Node}}* master\_node\_pt = hang\_info\_pt-\/>\mbox{\hyperlink{classoomph_1_1HangInfo_a7a935ae7eeca594a648ca1800444827c}{master\_node\_pt}}(i\_master);}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02494}02494 }
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02495}02495               \textcolor{comment}{// Get the global equation number of this node}}
-\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02496}02496               \textcolor{keywordtype}{int} master\_jj = master\_node\_pt-\/>eqn\_number(0);}
+\DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02496}02496               \textcolor{keywordtype}{int} master\_jj = master\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_ab6845db69833c541766d9a073b023fc4}{eqn\_number}}(0);}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02497}02497 }
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02498}02498               \textcolor{comment}{// Is the master node a proper d.o.f.?}}
 \DoxyCodeLine{\Hypertarget{geometric__multigrid_8h_source_l02499}02499               \textcolor{keywordflow}{if} (master\_jj >= 0)}

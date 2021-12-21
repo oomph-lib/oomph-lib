@@ -18,11 +18,11 @@ Inheritance diagram for oomph\+::Solid\+Face\+Element\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-double \mbox{\hyperlink{classoomph_1_1SolidFaceElement_a28526b0f7a7daa2ab90348e16cf6a529}{zeta\+\_\+nodal}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&k, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1SolidFaceElement_a28526b0f7a7daa2ab90348e16cf6a529}{zeta\+\_\+nodal}} (const unsigned \&n, const unsigned \&k, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} representation, by default This final over-\/ride is required because both Solid\+Finite\+Elements and Face\+Elements overload zeta\+\_\+nodal. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1SolidFaceElement_ace3eb64ce511c869bd140922b6597667}{interpolated\+\_\+xi}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1SolidFaceElement_ace3eb64ce511c869bd140922b6597667}{interpolated\+\_\+xi}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Return i-\/th FE-\/interpolated Lagrangian coordinate xi\mbox{[}i\mbox{]} at local coordinate s. Overloaded from \mbox{\hyperlink{classoomph_1_1SolidFiniteElement}{Solid\+Finite\+Element}}. Note that the Lagrangian coordinates are those defined in the bulk! For instance, in a 1D \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} that is aligned with the Lagrangian coordinate line xi\+\_\+0=const, only xi\+\_\+1 will vary in the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}}. This may confuse you if you (wrongly!) believe that in a 1D Solid\+Element there should only a single Lagrangian coordinate, namely xi\+\_\+0! \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1SolidFaceElement_ae1c414e42a48c736a9b634e922dbb314}{interpolated\+\_\+xi}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1SolidFaceElement_ae1c414e42a48c736a9b634e922dbb314}{interpolated\+\_\+xi}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi) const
 \begin{DoxyCompactList}\small\item\em Compute FE interpolated Lagrangian coordinate vector xi\mbox{[}\mbox{]} at local coordinate s as \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Overloaded from \mbox{\hyperlink{classoomph_1_1SolidFiniteElement}{Solid\+Finite\+Element}}. Note that the Lagrangian coordinates are those defined in the bulk! For instance, in a 1D \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} that is aligned with the Lagrangian coordinate line xi\+\_\+0=const, only xi\+\_\+1 will vary in the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}}. This may confuse you if you (wrongly!) believe that in a 1D Solid\+Element there should only a single Lagrangian coordinate, namely xi\+\_\+0! \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -30,7 +30,7 @@ void \mbox{\hyperlink{classoomph_1_1SolidFaceElement_ae1c414e42a48c736a9b634e922
 \doxysubsection{Detailed Description}
 Solid\+Face\+Elements combine Face\+Elements and Solid\+Finite\+Elements and overload various functions so they work properly in the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} context. 
 
-Definition at line \mbox{\hyperlink{elements_8h_source_l04940}{4940}} of file \mbox{\hyperlink{elements_8h_source}{elements.\+h}}.
+Definition at line \mbox{\hyperlink{elements_8h_source_l04912}{4912}} of file \mbox{\hyperlink{elements_8h_source}{elements.\+h}}.
 
 
 
@@ -39,7 +39,7 @@ Definition at line \mbox{\hyperlink{elements_8h_source_l04940}{4940}} of file \m
 \index{oomph::SolidFaceElement@{oomph::SolidFaceElement}!interpolated\_xi@{interpolated\_xi}}
 \index{interpolated\_xi@{interpolated\_xi}!oomph::SolidFaceElement@{oomph::SolidFaceElement}}
 \doxysubsubsection{\texorpdfstring{interpolated\_xi()}{interpolated\_xi()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily double oomph\+::\+Solid\+Face\+Element\+::interpolated\+\_\+xi (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily double oomph\+::\+Solid\+Face\+Element\+::interpolated\+\_\+xi (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -51,21 +51,21 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b4
 
 
 
-Definition at line \mbox{\hyperlink{elements_8h_source_l04965}{4965}} of file \mbox{\hyperlink{elements_8h_source}{elements.\+h}}.
+Definition at line \mbox{\hyperlink{elements_8h_source_l04937}{4937}} of file \mbox{\hyperlink{elements_8h_source}{elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l04763}{oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02616}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l04965}{interpolated\+\_\+xi()}}, \mbox{\hyperlink{elements_8cc_source_l06357}{oomph\+::\+Face\+Element\+::local\+\_\+coordinate\+\_\+in\+\_\+bulk()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References \mbox{\hyperlink{elements_8h_source_l04735}{oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l04937}{interpolated\+\_\+xi()}}, \mbox{\hyperlink{elements_8cc_source_l06353}{oomph\+::\+Face\+Element\+::local\+\_\+coordinate\+\_\+in\+\_\+bulk()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 
 
-Referenced by \mbox{\hyperlink{elements_8h_source_l04965}{interpolated\+\_\+xi()}}, \mbox{\hyperlink{shell__elements_8cc_source_l01678}{oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::output()}}, and \mbox{\hyperlink{solid__traction__elements_8h_source_l00199}{oomph\+::\+Solid\+Traction\+Element$<$ ELEMENT $>$\+::output()}}.
+Referenced by \mbox{\hyperlink{elements_8h_source_l04937}{interpolated\+\_\+xi()}}, \mbox{\hyperlink{shell__elements_8cc_source_l01678}{oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::output()}}, and \mbox{\hyperlink{solid__traction__elements_8h_source_l00199}{oomph\+::\+Solid\+Traction\+Element$<$ ELEMENT $>$\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SolidFaceElement_ae1c414e42a48c736a9b634e922dbb314}\label{classoomph_1_1SolidFaceElement_ae1c414e42a48c736a9b634e922dbb314}} 
 \index{oomph::SolidFaceElement@{oomph::SolidFaceElement}!interpolated\_xi@{interpolated\_xi}}
 \index{interpolated\_xi@{interpolated\_xi}!oomph::SolidFaceElement@{oomph::SolidFaceElement}}
 \doxysubsubsection{\texorpdfstring{interpolated\_xi()}{interpolated\_xi()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void oomph\+::\+Solid\+Face\+Element\+::interpolated\+\_\+xi (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{xi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Solid\+Face\+Element\+::interpolated\+\_\+xi (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{xi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -77,17 +77,17 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_ae7a83078da
 
 
 
-Definition at line \mbox{\hyperlink{elements_8h_source_l04985}{4985}} of file \mbox{\hyperlink{elements_8h_source}{elements.\+h}}.
+Definition at line \mbox{\hyperlink{elements_8h_source_l04957}{4957}} of file \mbox{\hyperlink{elements_8h_source}{elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l04763}{oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02616}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8h_source_l04965}{interpolated\+\_\+xi()}}, \mbox{\hyperlink{elements_8cc_source_l06357}{oomph\+::\+Face\+Element\+::local\+\_\+coordinate\+\_\+in\+\_\+bulk()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References \mbox{\hyperlink{elements_8h_source_l04735}{oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8h_source_l04937}{interpolated\+\_\+xi()}}, \mbox{\hyperlink{elements_8cc_source_l06353}{oomph\+::\+Face\+Element\+::local\+\_\+coordinate\+\_\+in\+\_\+bulk()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1SolidFaceElement_a28526b0f7a7daa2ab90348e16cf6a529}\label{classoomph_1_1SolidFaceElement_a28526b0f7a7daa2ab90348e16cf6a529}} 
 \index{oomph::SolidFaceElement@{oomph::SolidFaceElement}!zeta\_nodal@{zeta\_nodal}}
 \index{zeta\_nodal@{zeta\_nodal}!oomph::SolidFaceElement@{oomph::SolidFaceElement}}
 \doxysubsubsection{\texorpdfstring{zeta\_nodal()}{zeta\_nodal()}}
-{\footnotesize\ttfamily double oomph\+::\+Solid\+Face\+Element\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{k,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily double oomph\+::\+Solid\+Face\+Element\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{k,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -99,11 +99,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a4a377d7aca
 
 
 
-Definition at line \mbox{\hyperlink{elements_8h_source_l04949}{4949}} of file \mbox{\hyperlink{elements_8h_source}{elements.\+h}}.
+Definition at line \mbox{\hyperlink{elements_8h_source_l04921}{4921}} of file \mbox{\hyperlink{elements_8h_source}{elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l04525}{oomph\+::\+Face\+Element\+::zeta\+\_\+nodal()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l04497}{oomph\+::\+Face\+Element\+::zeta\+\_\+nodal()}}.
 
 
 

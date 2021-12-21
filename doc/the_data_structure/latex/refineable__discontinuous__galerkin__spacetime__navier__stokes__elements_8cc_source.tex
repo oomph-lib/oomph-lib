@@ -152,7 +152,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00148}00148       \}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00149}00149 }
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00150}00150       \textcolor{comment}{// Premultiply weights and Jacobian}}
-\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00151}00151       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00151}00151       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00152}00152 }
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00153}00153       \textcolor{comment}{// Do we want the velocity one?}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00154}00154       \textcolor{keywordflow}{if} ((which\_one == 0) || (which\_one == 2))}
@@ -212,7 +212,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00208}00208               \textcolor{keywordflow}{if} (local\_eqn >= 0)}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00209}00209               \{}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00210}00210                 \textcolor{comment}{// Add the contribution}}
-\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00211}00211                 veloc\_mass\_diag[local\_eqn] += pow(psi[l] * hang\_weight, 2) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00211}00211                 veloc\_mass\_diag[local\_eqn] += pow(psi[l] * hang\_weight, 2) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00212}00212               \}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00213}00213             \} \textcolor{comment}{// for (unsigned i=0;i<DIM;i++)}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00214}00214           \} \textcolor{comment}{// for (unsigned m=0;m<n\_master;m++)}}
@@ -271,7 +271,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00267}00267             \textcolor{keywordflow}{if} (local\_eqn >= 0)}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00268}00268             \{}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00269}00269               \textcolor{comment}{// Add the contribution}}
-\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00270}00270               press\_mass\_diag[local\_eqn] += pow(psi\_p[l] * hang\_weight, 2) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00270}00270               press\_mass\_diag[local\_eqn] += pow(psi\_p[l] * hang\_weight, 2) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00271}00271             \}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00272}00272           \} \textcolor{comment}{// for (unsigned m=0;m<n\_master;m++)}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00273}00273         \} \textcolor{comment}{// for (unsigned l=0;l<n\_pres;l++)}}
@@ -386,7 +386,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00382}00382       this-\/>dpshape\_and\_dptest\_eulerian\_nst(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, psip, dpsip, testp, dtestp);}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00383}00383 }
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00384}00384       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00385}00385       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00385}00385       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00386}00386 }
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00387}00387       \textcolor{comment}{// Calculate local values of the pressure and velocity components}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00388}00388       \textcolor{comment}{// Allocate}}
@@ -472,12 +472,12 @@
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00468}00468           \textcolor{comment}{// If the equation is not pinned}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00469}00469           \textcolor{keywordflow}{if} (local\_eqn >= 0)}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00470}00470           \{}
-\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00471}00471             residuals[local\_eqn] -\/= source * testp[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight;}
+\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00471}00471             residuals[local\_eqn] -\/= source * testp[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight;}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00472}00472             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < DIM; k++)}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00473}00473             \{}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00474}00474               residuals[local\_eqn] +=}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00475}00475                 interpolated\_dpdx[k] *}
-\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00476}00476                 (scaled\_re * interpolated\_u[k] * testp[l] + dtestp(l, k)) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} *}
+\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00476}00476                 (scaled\_re * interpolated\_u[k] * testp[l] + dtestp(l, k)) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} *}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00477}00477                 hang\_weight;}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00478}00478             \}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00479}00479 }
@@ -539,7 +539,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00535}00535                           dtestp(l2, k) *}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00536}00536                           (scaled\_re * interpolated\_u[k] * testp[l] +}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00537}00537                            dtestp(l, k)) *}
-\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00538}00538                           \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight * hang\_weight2;}
+\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00538}00538                           \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight * hang\_weight2;}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00539}00539                       \}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00540}00540                     \}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00541}00541                     \textcolor{keywordflow}{else}}
@@ -712,7 +712,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00708}00708       this-\/>pshape\_nst(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, psip, testp);}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00709}00709 }
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00710}00710       \textcolor{comment}{// Pre-\/multiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00711}00711       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00711}00711       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00712}00712 }
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00713}00713       \textcolor{comment}{// Storage for the interpolated time value}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00714}00714       \textcolor{keywordtype}{double} interpolated\_t = 0.0;}
@@ -865,19 +865,19 @@
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00861}00861             \{}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00862}00862               \textcolor{comment}{// Add the user-\/defined body force terms}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00863}00863               residuals[local\_eqn] +=}
-\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00864}00864                 body\_force[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * testf[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight;}
+\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00864}00864                 body\_force[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * testf[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight;}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00865}00865 }
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00866}00866               \textcolor{comment}{// Add the gravitational body force term}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00867}00867               residuals[local\_eqn] +=}
-\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00868}00868                 scaled\_re\_inv\_fr * testf[l] * G[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight;}
+\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00868}00868                 scaled\_re\_inv\_fr * testf[l] * G[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight;}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00869}00869 }
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00870}00870               \textcolor{comment}{// Add the pressure gradient term}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00871}00871               residuals[local\_eqn] +=}
-\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00872}00872                 interpolated\_p * dtestfdx(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight;}
+\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00872}00872                 interpolated\_p * dtestfdx(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight;}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00873}00873 }
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00874}00874               \textcolor{comment}{// Add in the contribution from the time derivative}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00875}00875               residuals[local\_eqn] -\/= (scaled\_re\_st * interpolated\_dudt[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] *}
-\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00876}00876                                        testf[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight);}
+\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00876}00876                                        testf[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight);}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00877}00877 }
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00878}00878               \textcolor{comment}{// If ALE is enabled}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00879}00879               \textcolor{keywordflow}{if} (!(this-\/>ALE\_is\_disabled))}
@@ -888,7 +888,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00884}00884                   \textcolor{comment}{// Add in the mesh velocity contribution}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00885}00885                   residuals[local\_eqn] +=}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00886}00886                     (scaled\_re\_st * mesh\_velocity[k] * interpolated\_dudx(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, k) *}
-\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00887}00887                      testf[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight);}
+\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00887}00887                      testf[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight);}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00888}00888                 \}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00889}00889               \} \textcolor{comment}{// if (!(this-\/>ALE\_is\_disabled))}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00890}00890 }
@@ -898,7 +898,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00894}00894                 \textcolor{comment}{// Add in the convective term contribution}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00895}00895                 residuals[local\_eqn] -\/=}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00896}00896                   (scaled\_re * interpolated\_u[k] * interpolated\_dudx(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, k) *}
-\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00897}00897                    testf[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight);}
+\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00897}00897                    testf[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight);}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00898}00898               \}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00899}00899 }
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00900}00900               \textcolor{comment}{// Loop over the coordinate directions}}
@@ -911,7 +911,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00907}00907                 residuals[local\_eqn] -\/=}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00908}00908                   ((interpolated\_dudx(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, k) +}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00909}00909                     this-\/>Gamma[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * interpolated\_dudx(k, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})) *}
-\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00910}00910                    visc\_ratio * dtestfdx(l, k) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight);}
+\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00910}00910                    visc\_ratio * dtestfdx(l, k) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight);}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00911}00911               \}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00912}00912 }
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00913}00913               \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
@@ -981,12 +981,12 @@
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00977}00977                         \textcolor{comment}{// Add contribution to elemental matrix}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00978}00978                         jacobian(local\_eqn, local\_unknown) -\/=}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00979}00979                           (visc\_ratio * this-\/>Gamma[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * dpsifdx(l2, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) *}
-\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00980}00980                            dtestfdx(l, i2) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight * hang\_weight2);}
+\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00980}00980                            dtestfdx(l, i2) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight * hang\_weight2);}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00981}00981 }
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00982}00982                         \textcolor{comment}{// Now add in the inertial terms}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00983}00983                         jacobian(local\_eqn, local\_unknown) -\/=}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00984}00984                           (scaled\_re * psif[l2] * interpolated\_dudx(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, i2) *}
-\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00985}00985                            testf[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight * hang\_weight2);}
+\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00985}00985                            testf[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight * hang\_weight2);}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00986}00986 }
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00987}00987                         \textcolor{comment}{// Extra component if i2=i}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00988}00988                         \textcolor{keywordflow}{if} (i2 == \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})}
@@ -999,13 +999,13 @@
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00995}00995                             \textcolor{comment}{// taken to the other side of the equation when}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00996}00996                             \textcolor{comment}{// formulating the generalised eigenproblem.}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00997}00997                             mass\_matrix(local\_eqn, local\_unknown) +=}
-\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00998}00998                               (scaled\_re\_st * psif[l2] * testf[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} *}
+\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00998}00998                               (scaled\_re\_st * psif[l2] * testf[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} *}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l00999}00999                                hang\_weight * hang\_weight2);}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01000}01000                           \}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01001}01001 }
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01002}01002                           \textcolor{comment}{// Add in the time-\/derivative contribution}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01003}01003                           jacobian(local\_eqn, local\_unknown) -\/=}
-\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01004}01004                             (scaled\_re\_st * dpsifdx(l2, DIM) * testf[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} *}
+\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01004}01004                             (scaled\_re\_st * dpsifdx(l2, DIM) * testf[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} *}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01005}01005                              hang\_weight * hang\_weight2);}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01006}01006 }
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01007}01007                           \textcolor{comment}{// Loop over the velocity components}}
@@ -1014,7 +1014,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01010}01010                             \textcolor{comment}{// Add in the convective term contribution}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01011}01011                             jacobian(local\_eqn, local\_unknown) -\/=}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01012}01012                               (scaled\_re * interpolated\_u[k] * dpsifdx(l2, k) *}
-\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01013}01013                                testf[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight * hang\_weight2);}
+\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01013}01013                                testf[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight * hang\_weight2);}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01014}01014                           \}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01015}01015 }
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01016}01016                           \textcolor{comment}{// If ALE is enabled}}
@@ -1026,7 +1026,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01022}01022                               \textcolor{comment}{// Add in the mesh velocity contribution}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01023}01023                               jacobian(local\_eqn, local\_unknown) +=}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01024}01024                                 (scaled\_re\_st * mesh\_velocity[k] *}
-\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01025}01025                                  dpsifdx(l2, k) * testf[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight *}
+\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01025}01025                                  dpsifdx(l2, k) * testf[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight *}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01026}01026                                  hang\_weight2);}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01027}01027                             \}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01028}01028                           \} \textcolor{comment}{// if (!(this-\/>ALE\_is\_disabled))}}
@@ -1037,7 +1037,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01033}01033                             \textcolor{comment}{// Add in the velocity gradient terms}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01034}01034                             jacobian(local\_eqn, local\_unknown) -\/=}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01035}01035                               (visc\_ratio * dpsifdx(l2, k) * dtestfdx(l, k) *}
-\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01036}01036                                \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight * hang\_weight2);}
+\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01036}01036                                \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight * hang\_weight2);}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01037}01037                           \}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01038}01038                         \} \textcolor{comment}{// if (i2==i)}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01039}01039                       \} \textcolor{comment}{// if (local\_unknown>=0)}}
@@ -1093,7 +1093,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01089}01089                     \textcolor{keywordflow}{if} (local\_unknown >= 0)}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01090}01090                     \{}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01091}01091                       jacobian(local\_eqn, local\_unknown) +=}
-\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01092}01092                         (psip[l2] * dtestfdx(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight *}
+\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01092}01092                         (psip[l2] * dtestfdx(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight *}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01093}01093                          hang\_weight2);}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01094}01094                     \}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01095}01095                   \} \textcolor{comment}{// for (unsigned m2=0;m2<n\_master2;m2++)}}
@@ -1122,7 +1122,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01118}01118                   \{}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01119}01119                     \textcolor{comment}{// Add in the contribution from the time derivative}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01120}01120                     jacobian(local\_eqn, local\_unknown) -\/=}
-\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01121}01121                       (scaled\_dre\_st\_dst * interpolated\_dudt[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * testf[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} *}
+\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01121}01121                       (scaled\_dre\_st\_dst * interpolated\_dudt[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * testf[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} *}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01122}01122                        hang\_weight);}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01123}01123 }
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01124}01124                     \textcolor{comment}{// If ALE is enabled}}
@@ -1134,7 +1134,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01130}01130                         \textcolor{comment}{// Add in the mesh velocity contribution}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01131}01131                         jacobian(local\_eqn, local\_unknown) +=}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01132}01132                           (scaled\_dre\_st\_dst * mesh\_velocity[k] *}
-\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01133}01133                            interpolated\_dudx(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, k) * testf[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} *}
+\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01133}01133                            interpolated\_dudx(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, k) * testf[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} *}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01134}01134                            hang\_weight);}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01135}01135                       \}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01136}01136                     \} \textcolor{comment}{// if (!ALE\_is\_disabled)}}
@@ -1195,14 +1195,14 @@
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01191}01191           \textcolor{keywordflow}{if} (local\_eqn >= 0)}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01192}01192           \{}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01193}01193             \textcolor{comment}{// Add in the source term contribution}}
-\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01194}01194             residuals[local\_eqn] -\/= source * testp[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight;}
+\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01194}01194             residuals[local\_eqn] -\/= source * testp[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight;}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01195}01195 }
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01196}01196             \textcolor{comment}{// Loop over velocity components}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01197}01197             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < DIM; k++)}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01198}01198             \{}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01199}01199               \textcolor{comment}{// Add in the velocity gradient terms}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01200}01200               residuals[local\_eqn] +=}
-\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01201}01201                 interpolated\_dudx(k, k) * testp[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight;}
+\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01201}01201                 interpolated\_dudx(k, k) * testp[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight;}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01202}01202             \}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01203}01203 }
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01204}01204             \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
@@ -1271,7 +1271,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01267}01267                     \{}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01268}01268                       \textcolor{comment}{// Add in the velocity gradient contribution}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01269}01269                       jacobian(local\_eqn, local\_unknown) +=}
-\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01270}01270                         (dpsifdx(l2, i2) * testp[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight *}
+\DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01270}01270                         (dpsifdx(l2, i2) * testp[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight *}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01271}01271                          hang\_weight2);}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01272}01272                     \}}
 \DoxyCodeLine{\Hypertarget{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l01273}01273                   \} \textcolor{comment}{// for (unsigned i2=0;i2<DIM;i2++)s}}

@@ -22,27 +22,27 @@ Inheritance diagram for oomph\+::Scalar\+Advection\+Equations\texorpdfstring{$<$
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1ScalarAdvectionEquations_af80d315e76fe7392744d5442f1d2386d}{Scalar\+Advection\+Wind\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1ScalarAdvectionEquations_aa5434696fc4bcd120bde668b1ba034a5}{wind\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to wind function. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1ScalarAdvectionEquations_af80d315e76fe7392744d5442f1d2386d}{Scalar\+Advection\+Wind\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1ScalarAdvectionEquations_a8630d7c8b9771f291701547b3dd10f3c}{wind\+\_\+fct\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+\mbox{\hyperlink{classoomph_1_1ScalarAdvectionEquations_af80d315e76fe7392744d5442f1d2386d}{Scalar\+Advection\+Wind\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1ScalarAdvectionEquations_a8630d7c8b9771f291701547b3dd10f3c}{wind\+\_\+fct\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to wind function. Const version. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1ScalarAdvectionEquations_a71a3c28feb1156376cbf55e7043e27e8}{required\+\_\+nvalue}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1ScalarAdvectionEquations_a71a3c28feb1156376cbf55e7043e27e8}{required\+\_\+nvalue}} (const unsigned \&n) const
 \begin{DoxyCompactList}\small\item\em The number of unknowns at each node is the number of values. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1ScalarAdvectionEquations_ae94eb3569c9fd7f9e07defb77006cd63}{compute\+\_\+error}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} initial\+\_\+condition\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&error, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&norm)
+void \mbox{\hyperlink{classoomph_1_1ScalarAdvectionEquations_ae94eb3569c9fd7f9e07defb77006cd63}{compute\+\_\+error}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} initial\+\_\+condition\+\_\+pt, const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&error, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&norm)
 \begin{DoxyCompactList}\small\item\em Compute the error and norm of solution integrated over the element Does not plot the error in the outfile. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-unsigned \mbox{\hyperlink{classoomph_1_1ScalarAdvectionEquations_adb45110daf7b47f7a2091448765b6f06}{nflux}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1ScalarAdvectionEquations_adb45110daf7b47f7a2091448765b6f06}{nflux}} () const
 \begin{DoxyCompactList}\small\item\em A single flux is interpolated. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1ScalarAdvectionEquations_af5a06cfaa7bff5d831b739545a57580f}{flux}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}})
+void \mbox{\hyperlink{classoomph_1_1ScalarAdvectionEquations_af5a06cfaa7bff5d831b739545a57580f}{flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&u, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Return the flux as a function of the unknown. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1ScalarAdvectionEquations_af0073678c951417d6497ea0c772b30dc}{dflux\+\_\+du}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}, \mbox{\hyperlink{classoomph_1_1RankThreeTensor}{Rank\+Three\+Tensor}}$<$ double $>$ \&df\+\_\+du)
+void \mbox{\hyperlink{classoomph_1_1ScalarAdvectionEquations_af0073678c951417d6497ea0c772b30dc}{dflux\+\_\+du}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&u, \mbox{\hyperlink{classoomph_1_1RankThreeTensor}{Rank\+Three\+Tensor}}$<$ double $>$ \&df\+\_\+du)
 \begin{DoxyCompactList}\small\item\em Return the flux derivatives as a function of the unknowns. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1ScalarAdvectionEquations_ae3a022b75a6f2c343c18a938ee3fb457}{get\+\_\+wind\+\_\+scalar\+\_\+adv}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&wind) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+virtual void \mbox{\hyperlink{classoomph_1_1ScalarAdvectionEquations_ae3a022b75a6f2c343c18a938ee3fb457}{get\+\_\+wind\+\_\+scalar\+\_\+adv}} (const unsigned \&ipt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&wind) const
 \begin{DoxyCompactList}\small\item\em Return the wind at a given position. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Types}
 \begin{DoxyCompactItemize}
 \item 
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1ScalarAdvectionEquations_af80d315e76fe7392744d5442f1d2386d}{Scalar\+Advection\+Wind\+Fct\+Pt}}) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&wind)
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1ScalarAdvectionEquations_af80d315e76fe7392744d5442f1d2386d}{Scalar\+Advection\+Wind\+Fct\+Pt}}) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&wind)
 \begin{DoxyCompactList}\small\item\em Typedef for a wind function as a possible function of position. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -67,7 +67,7 @@ Definition at line \mbox{\hyperlink{scalar__advection__elements_8h_source_l00047
 \index{ScalarAdvectionWindFctPt@{ScalarAdvectionWindFctPt}!oomph::ScalarAdvectionEquations$<$ DIM $>$@{oomph::ScalarAdvectionEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{ScalarAdvectionWindFctPt}{ScalarAdvectionWindFctPt}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1ScalarAdvectionEquations}{oomph\+::\+Scalar\+Advection\+Equations}}$<$ DIM $>$\+::Scalar\+Advection\+Wind\+Fct\+Pt) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&wind)\hspace{0.3cm}{\ttfamily [private]}}
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1ScalarAdvectionEquations}{oomph\+::\+Scalar\+Advection\+Equations}}$<$ DIM $>$\+::Scalar\+Advection\+Wind\+Fct\+Pt) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&wind)\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -103,7 +103,7 @@ Definition at line \mbox{\hyperlink{scalar__advection__elements_8h_source_l00092
 \index{compute\_error@{compute\_error}!oomph::ScalarAdvectionEquations$<$ DIM $>$@{oomph::ScalarAdvectionEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{compute\_error()}{compute\_error()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1ScalarAdvectionEquations}{oomph\+::\+Scalar\+Advection\+Equations}}$<$ DIM $>$\+::compute\+\_\+error (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}}}]{initial\+\_\+condition\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{error,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{norm }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1ScalarAdvectionEquations}{oomph\+::\+Scalar\+Advection\+Equations}}$<$ DIM $>$\+::compute\+\_\+error (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}}}]{initial\+\_\+condition\+\_\+pt,  }\item[{const double \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{error,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{norm }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -111,7 +111,7 @@ Compute the error and norm of solution integrated over the element Does not plot
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_ac24e1a51acd6a8629d6067277e7f0d2c}{oomph\+::\+Finite\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a6c1220af04b60c1a1c34b44495188daf}{oomph\+::\+Finite\+Element}}.
 
 
 
@@ -119,14 +119,14 @@ Definition at line \mbox{\hyperlink{scalar__advection__elements_8h_source_l00116
 
 
 
-References \mbox{\hyperlink{classoomph_1_1FiniteElement_a837c4849f68842295ab5e77c8ecb8b93}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{scalar__advection__elements_8h_source_l00070}{oomph\+::\+Scalar\+Advection\+Equations$<$ DIM $>$\+::get\+\_\+wind\+\_\+scalar\+\_\+adv()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01968}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{scalar__advection__elements_8h_source_l00058}{oomph\+::\+Scalar\+Advection\+Equations$<$ DIM $>$\+::nflux()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02322}{oomph\+::\+Finite\+Element\+::nodal\+\_\+position()}}, \mbox{\hyperlink{elements_8h_source_l02598}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{nodes_8h_source_l00891}{oomph\+::psi\+\_\+}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}.
+References \mbox{\hyperlink{elements_8cc_source_l03325}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{scalar__advection__elements_8h_source_l00070}{oomph\+::\+Scalar\+Advection\+Equations$<$ DIM $>$\+::get\+\_\+wind\+\_\+scalar\+\_\+adv()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{scalar__advection__elements_8h_source_l00058}{oomph\+::\+Scalar\+Advection\+Equations$<$ DIM $>$\+::nflux()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02317}{oomph\+::\+Finite\+Element\+::nodal\+\_\+position()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}, and \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral\+::weight()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ScalarAdvectionEquations_af0073678c951417d6497ea0c772b30dc}\label{classoomph_1_1ScalarAdvectionEquations_af0073678c951417d6497ea0c772b30dc}} 
 \index{oomph::ScalarAdvectionEquations$<$ DIM $>$@{oomph::ScalarAdvectionEquations$<$ DIM $>$}!dflux\_du@{dflux\_du}}
 \index{dflux\_du@{dflux\_du}!oomph::ScalarAdvectionEquations$<$ DIM $>$@{oomph::ScalarAdvectionEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{dflux\_du()}{dflux\_du()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1ScalarAdvectionEquations}{oomph\+::\+Scalar\+Advection\+Equations}}$<$ DIM $>$\+::dflux\+\_\+du (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{u,  }\item[{\mbox{\hyperlink{classoomph_1_1RankThreeTensor}{Rank\+Three\+Tensor}}$<$ double $>$ \&}]{df\+\_\+du }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1ScalarAdvectionEquations}{oomph\+::\+Scalar\+Advection\+Equations}}$<$ DIM $>$\+::dflux\+\_\+du (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{u,  }\item[{\mbox{\hyperlink{classoomph_1_1RankThreeTensor}{Rank\+Three\+Tensor}}$<$ double $>$ \&}]{df\+\_\+du }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -142,14 +142,14 @@ Definition at line \mbox{\hyperlink{scalar__advection__elements_8cc_source_l0005
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l01642}{oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::initialise()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l01642}{oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::initialise()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
 
 \mbox{\Hypertarget{classoomph_1_1ScalarAdvectionEquations_af5a06cfaa7bff5d831b739545a57580f}\label{classoomph_1_1ScalarAdvectionEquations_af5a06cfaa7bff5d831b739545a57580f}} 
 \index{oomph::ScalarAdvectionEquations$<$ DIM $>$@{oomph::ScalarAdvectionEquations$<$ DIM $>$}!flux@{flux}}
 \index{flux@{flux}!oomph::ScalarAdvectionEquations$<$ DIM $>$@{oomph::ScalarAdvectionEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{flux()}{flux()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1ScalarAdvectionEquations}{oomph\+::\+Scalar\+Advection\+Equations}}$<$ DIM $>$\+::flux (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{u,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1ScalarAdvectionEquations}{oomph\+::\+Scalar\+Advection\+Equations}}$<$ DIM $>$\+::flux (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{u,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -165,14 +165,14 @@ Definition at line \mbox{\hyperlink{scalar__advection__elements_8cc_source_l0003
 
 
 
-References \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{oomph\+::f()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{error__estimator_8h_source_l00165}{oomph\+::u}}, \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
 
 \mbox{\Hypertarget{classoomph_1_1ScalarAdvectionEquations_ae3a022b75a6f2c343c18a938ee3fb457}\label{classoomph_1_1ScalarAdvectionEquations_ae3a022b75a6f2c343c18a938ee3fb457}} 
 \index{oomph::ScalarAdvectionEquations$<$ DIM $>$@{oomph::ScalarAdvectionEquations$<$ DIM $>$}!get\_wind\_scalar\_adv@{get\_wind\_scalar\_adv}}
 \index{get\_wind\_scalar\_adv@{get\_wind\_scalar\_adv}!oomph::ScalarAdvectionEquations$<$ DIM $>$@{oomph::ScalarAdvectionEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_wind\_scalar\_adv()}{get\_wind\_scalar\_adv()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual void \mbox{\hyperlink{classoomph_1_1ScalarAdvectionEquations}{oomph\+::\+Scalar\+Advection\+Equations}}$<$ DIM $>$\+::get\+\_\+wind\+\_\+scalar\+\_\+adv (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{wind }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+virtual void \mbox{\hyperlink{classoomph_1_1ScalarAdvectionEquations}{oomph\+::\+Scalar\+Advection\+Equations}}$<$ DIM $>$\+::get\+\_\+wind\+\_\+scalar\+\_\+adv (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{wind }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -184,7 +184,7 @@ Definition at line \mbox{\hyperlink{scalar__advection__elements_8h_source_l00070
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{scalar__advection__elements_8h_source_l00054}{oomph\+::\+Scalar\+Advection\+Equations$<$ DIM $>$\+::\+Wind\+\_\+fct\+\_\+pt}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{scalar__advection__elements_8h_source_l00054}{oomph\+::\+Scalar\+Advection\+Equations$<$ DIM $>$\+::\+Wind\+\_\+fct\+\_\+pt}}.
 
 
 
@@ -218,7 +218,7 @@ Referenced by \mbox{\hyperlink{scalar__advection__elements_8h_source_l00116}{oom
 \index{required\_nvalue@{required\_nvalue}!oomph::ScalarAdvectionEquations$<$ DIM $>$@{oomph::ScalarAdvectionEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{required\_nvalue()}{required\_nvalue()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1ScalarAdvectionEquations}{oomph\+::\+Scalar\+Advection\+Equations}}$<$ DIM $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+unsigned \mbox{\hyperlink{classoomph_1_1ScalarAdvectionEquations}{oomph\+::\+Scalar\+Advection\+Equations}}$<$ DIM $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 

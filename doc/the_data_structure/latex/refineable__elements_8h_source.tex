@@ -133,7 +133,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00129}00129 \textcolor{comment}{    /// Overload the standard version to use the hanging information for}}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00130}00130 \textcolor{comment}{    /// the Eulerian coordinates.}}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00131}00131 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1RefineableElement_a9936fe72471f1bd977b800c9e5696949}{assemble\_local\_to\_eulerian\_jacobian}}(}
-\DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00132}00132       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_ae3d0addae4ef07ae7295fe439483caf0}{dpsids}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00132}00132       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& dpsids, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian) \textcolor{keyword}{const};}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00133}00133 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00134}00134 \textcolor{comment}{    /// Assemble the the "{}jacobian"{} matrix of second derivatives of the}}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00135}00135 \textcolor{comment}{    /// mapping from local to Eulerian coordinates, given}}
@@ -148,7 +148,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00144}00144 \textcolor{comment}{    /// coordinates have already been constructed.}}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00145}00145 \textcolor{comment}{    /// Overload the standard version to account for hanging nodes.}}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00146}00146 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1RefineableElement_abd80668ecabd71ea8d992cfaabb6633c}{assemble\_eulerian\_base\_vectors}}(}
-\DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00147}00147       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_ae3d0addae4ef07ae7295fe439483caf0}{dpsids}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& interpolated\_G) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00147}00147       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& dpsids, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& interpolated\_G) \textcolor{keyword}{const};}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00148}00148 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00149}00149 \textcolor{comment}{    /// Calculate the mapping from local to Eulerian coordinates given}}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00150}00150 \textcolor{comment}{    /// the derivatives of the shape functions w.r.t the local coordinates.}}
@@ -158,9 +158,9 @@
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00154}00154 \textcolor{comment}{    /// and the inverse jacobian. Overload the standard version to take}}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00155}00155 \textcolor{comment}{    /// hanging info into account.}}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00156}00156 \textcolor{comment}{}    \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1RefineableElement_a4edbc4a35b1b37b346c802b0a04f2f82}{local\_to\_eulerian\_mapping\_diagonal}}(}
-\DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00157}00157       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_ae3d0addae4ef07ae7295fe439483caf0}{dpsids}},}
-\DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00158}00158       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}},}
-\DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00159}00159       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_a72ead1315f6f588e379963ad2a16b88a}{inverse\_jacobian}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00157}00157       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& dpsids,}
+\DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00158}00158       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian,}
+\DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00159}00159       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& inverse\_jacobian) \textcolor{keyword}{const};}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00160}00160 }
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00161}00161   \textcolor{keyword}{private}:\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00162}00162 \textcolor{comment}{    /// Storage for local equation numbers of hanging node variables}}
@@ -184,7 +184,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00180}00180 \textcolor{comment}{    /// This version is overloaded to take hanging node information into}}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00181}00181 \textcolor{comment}{    /// account}}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00182}00182 \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1RefineableElement_a83ff8606d2ccf11f7c70a95991cd50d5}{fill\_in\_jacobian\_from\_nodal\_by\_fd}}(}
-\DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00183}00183       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}});}
+\DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00183}00183       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian);}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00184}00184 }
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00185}00185   \textcolor{keyword}{public}:\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00186}00186 \textcolor{comment}{    /// Constructor, calls the FiniteElement constructor and initialises}}
@@ -279,7 +279,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00275}00275 \textcolor{comment}{    /// hanging node variables (values stored at master nodes). The local}}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00276}00276 \textcolor{comment}{    /// equation number corresponds to the i-\/th unknown stored at the node}}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00277}00277 \textcolor{comment}{    /// addressed by node\_pt}}
-\DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00278}\mbox{\hyperlink{classoomph_1_1RefineableElement_abc3d0cb0131ebf717ff0620242c9ca2b}{00278}} \textcolor{comment}{}    \textcolor{keyword}{inline} \textcolor{keywordtype}{int} \mbox{\hyperlink{classoomph_1_1RefineableElement_abc3d0cb0131ebf717ff0620242c9ca2b}{local\_hang\_eqn}}(Node* \textcolor{keyword}{const}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})}
+\DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00278}\mbox{\hyperlink{classoomph_1_1RefineableElement_abc3d0cb0131ebf717ff0620242c9ca2b}{00278}} \textcolor{comment}{}    \textcolor{keyword}{inline} \textcolor{keywordtype}{int} \mbox{\hyperlink{classoomph_1_1RefineableElement_abc3d0cb0131ebf717ff0620242c9ca2b}{local\_hang\_eqn}}(\mbox{\hyperlink{classoomph_1_1Node}{Node}}* \textcolor{keyword}{const}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00279}00279     \{}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00280}00280 \textcolor{preprocessor}{\#ifdef RANGE\_CHECKING}}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00281}00281       \textcolor{keywordflow}{if} (\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} > \mbox{\hyperlink{classoomph_1_1RefineableElement_a53e171a18c9f43f1db90a6876516a073}{ncont\_interpolated\_values}}())}
@@ -380,7 +380,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00376}00376         \textcolor{comment}{// If any node in this element is in the father, it can't be deleted}}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00377}00377         \textcolor{keywordflow}{if} (father\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_aeb40d7a104d99e6f7d8123e801e53b5b}{get\_node\_number}}(this-\/>node\_pt(n)) >= 0)}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00378}00378         \{}
-\DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00379}00379           \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n)-\/>set\_non\_obsolete();}
+\DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00379}00379           \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n)-\/>\mbox{\hyperlink{classoomph_1_1Node_a6dfc895be93214f4a880c1e9e7a3b4a6}{set\_non\_obsolete}}();}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00380}00380         \}}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00381}00381       \}}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00382}00382     \}}
@@ -438,7 +438,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00434}00434 \textcolor{comment}{    /// variables use the positional nodes, i.e. isoparametric elements. Note}}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00435}00435 \textcolor{comment}{    /// that any overloaded versions of this function MUST provide a set}}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00436}00436 \textcolor{comment}{    /// of nodes for the position, which always has the value\_id -\/1.}}
-\DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00437}\mbox{\hyperlink{classoomph_1_1RefineableElement_a7ce034d6dff9963f1620f878ca714052}{00437}} \textcolor{comment}{}    \textcolor{keyword}{virtual} Node* \mbox{\hyperlink{classoomph_1_1RefineableElement_a7ce034d6dff9963f1620f878ca714052}{interpolating\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n, \textcolor{keyword}{const} \textcolor{keywordtype}{int}\& value\_id)}
+\DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00437}\mbox{\hyperlink{classoomph_1_1RefineableElement_a7ce034d6dff9963f1620f878ca714052}{00437}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1RefineableElement_a7ce034d6dff9963f1620f878ca714052}{interpolating\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n, \textcolor{keyword}{const} \textcolor{keywordtype}{int}\& value\_id)}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00438}00438 }
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00439}00439     \{}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00440}00440       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n);}
@@ -457,11 +457,11 @@
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00453}00453 \textcolor{comment}{    /// Return a pointer to the node that interpolates the value-\/id-\/th}}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00454}00454 \textcolor{comment}{    /// unknown at local coordinate s. If there is not a node at that position,}}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00455}00455 \textcolor{comment}{    /// then return 0.}}
-\DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00456}\mbox{\hyperlink{classoomph_1_1RefineableElement_a98332b71c658a2a6d4293380e58473b3}{00456}} \textcolor{comment}{}    \textcolor{keyword}{virtual} Node* \mbox{\hyperlink{classoomph_1_1RefineableElement_a98332b71c658a2a6d4293380e58473b3}{get\_interpolating\_node\_at\_local\_coordinate}}(}
+\DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00456}\mbox{\hyperlink{classoomph_1_1RefineableElement_a98332b71c658a2a6d4293380e58473b3}{00456}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1RefineableElement_a98332b71c658a2a6d4293380e58473b3}{get\_interpolating\_node\_at\_local\_coordinate}}(}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00457}00457       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \textcolor{keyword}{const} \textcolor{keywordtype}{int}\& value\_id)}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00458}00458 }
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00459}00459     \{}
-\DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00460}00460       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1FiniteElement_adf4424f1040fb5c4b6abfbd1c2bf65fc}{get\_node\_at\_local\_coordinate}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
+\DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00460}00460       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ddbb05c5f8bb35b64bec287d653105c}{get\_node\_at\_local\_coordinate}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00461}00461     \}}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00462}00462 }
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00463}00463 \textcolor{comment}{}}
@@ -514,7 +514,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00510}00510 \textcolor{comment}{    /// into account}}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00511}\mbox{\hyperlink{classoomph_1_1RefineableElement_ab2ac14f6019818fc4efb411e9486ae3c}{00511}} \textcolor{comment}{}    \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1RefineableElement_ab2ac14f6019818fc4efb411e9486ae3c}{assign\_nodal\_local\_eqn\_numbers}}(\textcolor{keyword}{const} \textcolor{keywordtype}{bool}\& store\_local\_dof\_pt)}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00512}00512     \{}
-\DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00513}00513       \mbox{\hyperlink{classoomph_1_1FiniteElement_aabd4c886bdbd09b1fdb1fd2d656aea19}{FiniteElement::assign\_nodal\_local\_eqn\_numbers}}(store\_local\_dof\_pt);}
+\DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00513}00513       \mbox{\hyperlink{classoomph_1_1FiniteElement_a4136e6f2a0d782f4c23540d71050db30}{FiniteElement::assign\_nodal\_local\_eqn\_numbers}}(store\_local\_dof\_pt);}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00514}00514       \mbox{\hyperlink{classoomph_1_1RefineableElement_a381592dd61261f9d5e0b2f88f799c3fc}{assign\_hanging\_local\_eqn\_numbers}}(store\_local\_dof\_pt);}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00515}00515     \}}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00516}00516 \textcolor{comment}{}}
@@ -907,7 +907,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00903}00903 \textcolor{comment}{    /// Overload the standard version to use the hanging information for}}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00904}00904 \textcolor{comment}{    /// the lagrangian coordinates.}}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00905}00905 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1RefineableSolidElement_ae0d5a2fc617a11036a80d0d016292d7a}{assemble\_local\_to\_lagrangian\_jacobian}}(}
-\DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00906}00906       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_ae3d0addae4ef07ae7295fe439483caf0}{dpsids}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00906}00906       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& dpsids, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian) \textcolor{keyword}{const};}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00907}00907 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00908}00908 \textcolor{comment}{    /// Assemble the the "{}jacobian"{} matrix of second derivatives, given}}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00909}00909 \textcolor{comment}{    /// the second derivatives of the shape functions w.r.t. local coordinates}}
@@ -923,9 +923,9 @@
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00919}00919 \textcolor{comment}{    /// This function returns the determinant of the jacobian, the jacobian}}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00920}00920 \textcolor{comment}{    /// and the inverse jacobian.}}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00921}00921 \textcolor{comment}{}    \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1RefineableSolidElement_a492846d9f2c5d5235f9f3ff1001d4ec8}{local\_to\_lagrangian\_mapping\_diagonal}}(}
-\DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00922}00922       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_ae3d0addae4ef07ae7295fe439483caf0}{dpsids}},}
-\DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00923}00923       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}},}
-\DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00924}00924       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_a72ead1315f6f588e379963ad2a16b88a}{inverse\_jacobian}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00922}00922       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& dpsids,}
+\DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00923}00923       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian,}
+\DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00924}00924       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& inverse\_jacobian) \textcolor{keyword}{const};}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00925}00925 }
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00926}00926   \textcolor{keyword}{public}:\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00927}00927 \textcolor{comment}{    /// Constructor}}
@@ -968,7 +968,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00964}00964 \textcolor{comment}{    /// corresponding to the solid positions. Overloaded version to take}}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00965}00965 \textcolor{comment}{    /// the hanging nodes into account}}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00966}00966 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1RefineableSolidElement_a97f911c422af3e4fbd078b58cfe3e207}{fill\_in\_jacobian\_from\_solid\_position\_by\_fd}}(}
-\DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00967}00967       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}});}
+\DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00967}00967       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian);}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00968}00968 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00969}00969 \textcolor{comment}{    /// Return the flag deciding if the Lagrangian coordinates of}}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l00970}00970 \textcolor{comment}{    /// newly-\/created interior SolidNodes are to be determined by the father}}
@@ -1006,7 +1006,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l01002}01002 \textcolor{comment}{    /// associated with nodal positions. The function returns a dense}}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l01003}01003 \textcolor{comment}{    /// matrix that contains all the local equation numbers corresponding to}}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l01004}01004 \textcolor{comment}{    /// the positional degrees of freedom.}}
-\DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l01005}\mbox{\hyperlink{classoomph_1_1RefineableSolidElement_a547e50bc2c13c6e4852c543cd7d38f74}{01005}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<int>}}\& \mbox{\hyperlink{classoomph_1_1RefineableSolidElement_a547e50bc2c13c6e4852c543cd7d38f74}{local\_position\_hang\_eqn}}(Node* \textcolor{keyword}{const}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}})}
+\DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l01005}\mbox{\hyperlink{classoomph_1_1RefineableSolidElement_a547e50bc2c13c6e4852c543cd7d38f74}{01005}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<int>}}\& \mbox{\hyperlink{classoomph_1_1RefineableSolidElement_a547e50bc2c13c6e4852c543cd7d38f74}{local\_position\_hang\_eqn}}(\mbox{\hyperlink{classoomph_1_1Node}{Node}}* \textcolor{keyword}{const}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}})}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l01006}01006     \{}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l01007}01007       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1RefineableSolidElement_aa361b9441808d7d194494125abd1f6fd}{Local\_position\_hang\_eqn}}[\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}];}
 \DoxyCodeLine{\Hypertarget{refineable__elements_8h_source_l01008}01008     \}}

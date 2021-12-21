@@ -12,6 +12,14 @@ void \mbox{\hyperlink{namespaceoomph_1_1CRDoubleMatrixHelpers_ae3c10e59d5857457c
 \begin{DoxyCompactList}\small\item\em Builds a uniformly distributed matrix. A locally replicated matrix is constructed then redistributed using OOMPH-\/\+LIB\textquotesingle{}s default uniform row distribution. This is memory intensive thus should be used for testing or small problems only. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceoomph_1_1CRDoubleMatrixHelpers_ab17222c9461096e3d5b8cf6250524644}{inf\+\_\+norm}} (const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$ $>$ \&matrix\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Compute infinity (maximum) norm of sub blocks as if it was one matrix. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceoomph_1_1CRDoubleMatrixHelpers_a02b5962dbe2bbfb93f54b668100afffc}{gershgorin\+\_\+eigenvalue\+\_\+estimate}} (const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$ $>$ \&matrix\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Calculates the largest Gershgorin disc whilst preserving the sign. Let A be an n by n matrix, with entries aij. For $ i \in \{ 1,...,n \} $ let $ R_i = \sum_{i\neq j} |a_{ij}| $ be the sum of the absolute values of the non-\/diagonal entries in the i-\/th row. Let $ D(a_{ii},R_i) $ be the closed disc centered at $ a_{ii} $ with radius $ R_i $, such a disc is called a Gershgorin disc. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceoomph_1_1CRDoubleMatrixHelpers_ab7e3ac344aa644292a143a3917a03e65}{concatenate}} (const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$ $>$ \&matrix\+\_\+pt, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \&result\+\_\+matrix)
+\begin{DoxyCompactList}\small\item\em Concatenate \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} matrices. The in matrices are concatenated such that the block structure of the in matrices are preserved in the result matrix. Communication between processors is required. If the block structure of the sub matrices does not need to be preserved, consider using CRDouble\+Matrix\+Helpers\+::concatenate\+\_\+without\+\_\+communication(...). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceoomph_1_1CRDoubleMatrixHelpers_a996568831ca0db90f080560dd400b3d6}{concatenate\+\_\+without\+\_\+communication}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} $\ast$ $>$ \&row\+\_\+distribution\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} $\ast$ $>$ \&col\+\_\+distribution\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$ $>$ \&matrix\+\_\+pt, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \&result\+\_\+matrix)
+\begin{DoxyCompactList}\small\item\em Concatenate \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} matrices. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceoomph_1_1CRDoubleMatrixHelpers_ac04e094c973da752da4b76071ad09f44}{concatenate\+\_\+without\+\_\+communication}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} $\ast$ $>$ \&block\+\_\+distribution\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$ $>$ \&matrix\+\_\+pt, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \&result\+\_\+matrix)
+\begin{DoxyCompactList}\small\item\em Concatenate \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} matrices. This calls the other concatenate\+\_\+without\+\_\+communication(...) function, passing block\+\_\+distribution\+\_\+pt as both the row\+\_\+distribution\+\_\+pt and col\+\_\+distribution\+\_\+pt. This should only be called for block square matrices. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceoomph_1_1CRDoubleMatrixHelpers_a157511f700993ab8bc014f9d0d44f4c7}{deep\+\_\+copy}} (const \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$const in\+\_\+matrix\+\_\+pt, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \&out\+\_\+matrix)
 \begin{DoxyCompactList}\small\item\em Create a deep copy of the matrix pointed to by in\+\_\+matrix\+\_\+pt. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
@@ -20,6 +28,80 @@ void \mbox{\hyperlink{namespaceoomph_1_1CRDoubleMatrixHelpers_a157511f700993ab8b
 Namespace for helper functions for CRDouble\+Matrices. 
 
 \doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespaceoomph_1_1CRDoubleMatrixHelpers_ab7e3ac344aa644292a143a3917a03e65}\label{namespaceoomph_1_1CRDoubleMatrixHelpers_ab7e3ac344aa644292a143a3917a03e65}} 
+\index{oomph::CRDoubleMatrixHelpers@{oomph::CRDoubleMatrixHelpers}!concatenate@{concatenate}}
+\index{concatenate@{concatenate}!oomph::CRDoubleMatrixHelpers@{oomph::CRDoubleMatrixHelpers}}
+\doxysubsubsection{\texorpdfstring{concatenate()}{concatenate()}}
+{\footnotesize\ttfamily void oomph\+::\+CRDouble\+Matrix\+Helpers\+::concatenate (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$ $>$ \&}]{matrix\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \&}]{result\+\_\+matrix }\end{DoxyParamCaption})}
+
+
+
+Concatenate \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} matrices. The in matrices are concatenated such that the block structure of the in matrices are preserved in the result matrix. Communication between processors is required. If the block structure of the sub matrices does not need to be preserved, consider using CRDouble\+Matrix\+Helpers\+::concatenate\+\_\+without\+\_\+communication(...). 
+
+The matrix manipulation functions CRDouble\+Matrix\+Helpers\+::concatenate(...) and CRDouble\+Matrix\+Helpers\+::concatenate\+\_\+without\+\_\+communication(...) are analogous to the \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} manipulation functions Double\+Vector\+Helpers\+::concatenate(...) and Double\+Vector\+Helpers\+::concatenate\+\_\+without\+\_\+communication(...). Please look at the \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} functions for an illustration of the differences between concatenate(...) and concatenate\+\_\+without\+\_\+communication(...).
+
+Distribution of the result matrix\+: If the result matrix does not have a distribution built, then it will be given a uniform row distribution. Otherwise we use the existing distribution. This gives the user the ability to define their own distribution, or save computing power if a distribution has been pre-\/built.
+
+NOTE\+: ALL the matrices pointed to by matrix\+\_\+pt has to be built. This is not the case with concatenate\+\_\+without\+\_\+communication(...) 
+
+Definition at line \mbox{\hyperlink{matrices_8cc_source_l04349}{4349}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+
+
+
+References \mbox{\hyperlink{matrices_8cc_source_l01672}{oomph\+::\+CRDouble\+Matrix\+::build()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00342}{oomph\+::\+Linear\+Algebra\+Distribution\+::built()}}, \mbox{\hyperlink{matrices_8h_source_l01072}{oomph\+::\+CRDouble\+Matrix\+::column\+\_\+index()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00335}{oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00261}{oomph\+::\+Linear\+Algebra\+Distribution\+::first\+\_\+row()}}, \mbox{\hyperlink{matrices_8h_source_l00491}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::ncol()}}, \mbox{\hyperlink{matrices_8h_source_l00485}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::nrow()}}, \mbox{\hyperlink{matrices_8h_source_l01002}{oomph\+::\+CRDouble\+Matrix\+::nrow()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00193}{oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00387}{oomph\+::\+Linear\+Algebra\+Distribution\+::rank\+\_\+of\+\_\+global\+\_\+row()}}, \mbox{\hyperlink{matrices_8h_source_l01060}{oomph\+::\+CRDouble\+Matrix\+::row\+\_\+start()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}, and \mbox{\hyperlink{matrices_8h_source_l01084}{oomph\+::\+CRDouble\+Matrix\+::value()}}.
+
+
+
+Referenced by \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00061}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::setup()}}.
+
+\mbox{\Hypertarget{namespaceoomph_1_1CRDoubleMatrixHelpers_ac04e094c973da752da4b76071ad09f44}\label{namespaceoomph_1_1CRDoubleMatrixHelpers_ac04e094c973da752da4b76071ad09f44}} 
+\index{oomph::CRDoubleMatrixHelpers@{oomph::CRDoubleMatrixHelpers}!concatenate\_without\_communication@{concatenate\_without\_communication}}
+\index{concatenate\_without\_communication@{concatenate\_without\_communication}!oomph::CRDoubleMatrixHelpers@{oomph::CRDoubleMatrixHelpers}}
+\doxysubsubsection{\texorpdfstring{concatenate\_without\_communication()}{concatenate\_without\_communication()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void oomph\+::\+CRDouble\+Matrix\+Helpers\+::concatenate\+\_\+without\+\_\+communication (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} $\ast$ $>$ \&}]{block\+\_\+distribution\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$ $>$ \&}]{matrix\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \&}]{result\+\_\+matrix }\end{DoxyParamCaption})}
+
+
+
+Concatenate \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} matrices. This calls the other concatenate\+\_\+without\+\_\+communication(...) function, passing block\+\_\+distribution\+\_\+pt as both the row\+\_\+distribution\+\_\+pt and col\+\_\+distribution\+\_\+pt. This should only be called for block square matrices. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8cc_source_l05885}{5885}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+
+
+
+References \mbox{\hyperlink{matrices_8cc_source_l05223}{concatenate\+\_\+without\+\_\+communication()}}, \mbox{\hyperlink{matrices_8h_source_l00491}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::ncol()}}, and \mbox{\hyperlink{matrices_8h_source_l00485}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::nrow()}}.
+
+\mbox{\Hypertarget{namespaceoomph_1_1CRDoubleMatrixHelpers_a996568831ca0db90f080560dd400b3d6}\label{namespaceoomph_1_1CRDoubleMatrixHelpers_a996568831ca0db90f080560dd400b3d6}} 
+\index{oomph::CRDoubleMatrixHelpers@{oomph::CRDoubleMatrixHelpers}!concatenate\_without\_communication@{concatenate\_without\_communication}}
+\index{concatenate\_without\_communication@{concatenate\_without\_communication}!oomph::CRDoubleMatrixHelpers@{oomph::CRDoubleMatrixHelpers}}
+\doxysubsubsection{\texorpdfstring{concatenate\_without\_communication()}{concatenate\_without\_communication()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void oomph\+::\+CRDouble\+Matrix\+Helpers\+::concatenate\+\_\+without\+\_\+communication (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} $\ast$ $>$ \&}]{row\+\_\+distribution\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} $\ast$ $>$ \&}]{col\+\_\+distribution\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$ $>$ \&}]{matrix\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \&}]{result\+\_\+matrix }\end{DoxyParamCaption})}
+
+
+
+Concatenate \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} matrices. 
+
+The \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} row\+\_\+distribution\+\_\+pt contains the \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} of each block row. The \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} col\+\_\+distribution\+\_\+pt contains the \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} of each block column. The \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}} matrix\+\_\+pt contains pointers to the CRDouble\+Matrices to concatenate. The \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} result\+\_\+matrix is the result matrix.
+
+The result matrix is a permutation of the sub matrices such that the data stays on the same processor when the result matrix is built, there is no communication between processors. Thus the block structure of the sub matrices are NOT preserved in the result matrix. The rows are block-\/permuted, defined by the concatenation of the distributions in row\+\_\+distribution\+\_\+pt. Similarly, the columns are block-\/permuted, defined by the concatenation of the distributions in col\+\_\+distribution\+\_\+pt. For more details on the block-\/permutation, see Linear\+Algebra\+Distribution\+Helpers\+::concatenate(...).
+
+If one wishes to preserve the block structure of the sub matrices in the result matrix, consider using CRDouble\+Matrix\+Helpers\+::concatenate(...), which uses communication between processors to ensure that the block structure of the sub matrices are preserved.
+
+The matrix manipulation functions CRDouble\+Matrix\+Helpers\+::concatenate(...) and CRDouble\+Matrix\+Helpers\+::concatenate\+\_\+without\+\_\+communication(...) are analogous to the \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} manipulation functions Double\+Vector\+Helpers\+::concatenate(...) and Double\+Vector\+Helpers\+::concatenate\+\_\+without\+\_\+communication(...). Please look at the \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} functions for an illustration of the differences between concatenate(...) and concatenate\+\_\+without\+\_\+communication(...).
+
+Distribution of the result matrix\+: If the result matrix does not have a distribution built, then it will be given a distribution built from the concatenation of the distributions from row\+\_\+distribution\+\_\+pt, see Linear\+Algebra\+Distribution\+Helpers\+::concatenate(...) for more detail. Otherwise we use the existing distribution. If there is an existing distribution then it must be the same as the distribution from the concatenation of row distributions as described above. Why don\textquotesingle{}t we always compute the distribution \char`\"{}on the fly\char`\"{}? Because a non-\/uniform distribution requires communication. All block preconditioner distributions are concatenations of the distributions of the individual blocks. /////////////// END OF PARANOID TESTS
+
+Definition at line \mbox{\hyperlink{matrices_8cc_source_l05223}{5223}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+
+
+
+References \mbox{\hyperlink{matrices_8cc_source_l01672}{oomph\+::\+CRDouble\+Matrix\+::build()}}, \mbox{\hyperlink{matrices_8cc_source_l01710}{oomph\+::\+CRDouble\+Matrix\+::build\+\_\+without\+\_\+copy()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00342}{oomph\+::\+Linear\+Algebra\+Distribution\+::built()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00335}{oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8cc_source_l00367}{oomph\+::\+Linear\+Algebra\+Distribution\+Helpers\+::concatenate()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l00491}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::ncol()}}, \mbox{\hyperlink{matrices_8h_source_l00485}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::nrow()}}, and \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00193}{oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local()}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrices_8cc_source_l05885}{concatenate\+\_\+without\+\_\+communication()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00673}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+block()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l01134}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+concatenated\+\_\+block()}}.
+
 \mbox{\Hypertarget{namespaceoomph_1_1CRDoubleMatrixHelpers_ae3c10e59d5857457c7e34be8e9262035}\label{namespaceoomph_1_1CRDoubleMatrixHelpers_ae3c10e59d5857457c7e34be8e9262035}} 
 \index{oomph::CRDoubleMatrixHelpers@{oomph::CRDoubleMatrixHelpers}!create\_uniformly\_distributed\_matrix@{create\_uniformly\_distributed\_matrix}}
 \index{create\_uniformly\_distributed\_matrix@{create\_uniformly\_distributed\_matrix}!oomph::CRDoubleMatrixHelpers@{oomph::CRDoubleMatrixHelpers}}
@@ -59,6 +141,34 @@ References \mbox{\hyperlink{matrices_8cc_source_l01672}{oomph\+::\+CRDouble\+Mat
 
 
 Referenced by \mbox{\hyperlink{double__multi__vector_8h_source_l00105}{oomph\+::\+Double\+Multi\+Vector\+::\+Double\+Multi\+Vector()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00673}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+block()}}, and \mbox{\hyperlink{block__preconditioner_8cc_source_l05671}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+dof\+\_\+level\+\_\+block()}}.
+
+\mbox{\Hypertarget{namespaceoomph_1_1CRDoubleMatrixHelpers_a02b5962dbe2bbfb93f54b668100afffc}\label{namespaceoomph_1_1CRDoubleMatrixHelpers_a02b5962dbe2bbfb93f54b668100afffc}} 
+\index{oomph::CRDoubleMatrixHelpers@{oomph::CRDoubleMatrixHelpers}!gershgorin\_eigenvalue\_estimate@{gershgorin\_eigenvalue\_estimate}}
+\index{gershgorin\_eigenvalue\_estimate@{gershgorin\_eigenvalue\_estimate}!oomph::CRDoubleMatrixHelpers@{oomph::CRDoubleMatrixHelpers}}
+\doxysubsubsection{\texorpdfstring{gershgorin\_eigenvalue\_estimate()}{gershgorin\_eigenvalue\_estimate()}}
+{\footnotesize\ttfamily double oomph\+::\+CRDouble\+Matrix\+Helpers\+::gershgorin\+\_\+eigenvalue\+\_\+estimate (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$ $>$ \&}]{matrix\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Calculates the largest Gershgorin disc whilst preserving the sign. Let A be an n by n matrix, with entries aij. For $ i \in \{ 1,...,n \} $ let $ R_i = \sum_{i\neq j} |a_{ij}| $ be the sum of the absolute values of the non-\/diagonal entries in the i-\/th row. Let $ D(a_{ii},R_i) $ be the closed disc centered at $ a_{ii} $ with radius $ R_i $, such a disc is called a Gershgorin disc. 
+
+~\newline
+ We calculate $ |D(a_{ii},R_i)|_{max} $ and multiply by the sign of the diagonal entry.
+
+~\newline
+ The \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}} of CRDouble\+Matrices are treated as if they are one large matrix. Therefore the dimensions of the sub matrices has to \char`\"{}make sense\char`\"{}, there is a paranoid check for this.
+
+~\newline
+ We calculate $ |D(a_{ii},R_i)|_{max} $and multiply by the sign of the diagonal entry.
+
+~\newline
+ The \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}} of CRDouble\+Matrices are treated as if they are one large matrix. Therefore the dimensions of the sub matrices has to \char`\"{}make sense\char`\"{}, there is a paranoid check for this. 
+
+Definition at line \mbox{\hyperlink{matrices_8cc_source_l04003}{4003}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l00491}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::ncol()}}, \mbox{\hyperlink{matrices_8h_source_l00485}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::nrow()}}, \mbox{\hyperlink{matrices_8h_source_l01060}{oomph\+::\+CRDouble\+Matrix\+::row\+\_\+start()}}, and \mbox{\hyperlink{matrices_8h_source_l01084}{oomph\+::\+CRDouble\+Matrix\+::value()}}.
 
 \mbox{\Hypertarget{namespaceoomph_1_1CRDoubleMatrixHelpers_ab17222c9461096e3d5b8cf6250524644}\label{namespaceoomph_1_1CRDoubleMatrixHelpers_ab17222c9461096e3d5b8cf6250524644}} 
 \index{oomph::CRDoubleMatrixHelpers@{oomph::CRDoubleMatrixHelpers}!inf\_norm@{inf\_norm}}

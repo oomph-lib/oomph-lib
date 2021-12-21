@@ -251,7 +251,7 @@
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00247}00247 \textcolor{comment}{    /// Global coordinates as function of local coordinates.}}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00248}00248 \textcolor{comment}{    /// using the macro element representation}}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00249}\mbox{\hyperlink{classoomph_1_1QElementBase_a9382eae5e06bceba2d107592ad111075}{00249}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1QElementBase_a9382eae5e06bceba2d107592ad111075}{get\_x\_from\_macro\_element}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},}
-\DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00250}00250                                   \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}})\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00250}00250                                   \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00251}00251 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00252}00252       \textcolor{comment}{// Check that there is a macro element}}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00253}00253       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a5facfd17bf738c5632d4692f0433ca52}{Macro\_elem\_pt}} == 0)}
@@ -269,7 +269,7 @@
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00265}00265         s\_macro[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] =}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00266}00266           \mbox{\hyperlink{classoomph_1_1QElementBase_a6c5743d593aa67f9dbfcde9556a9bdd7}{s\_macro\_ll}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) + 0.5 * (\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] + 1.0) * (\mbox{\hyperlink{classoomph_1_1QElementBase_a0e02d2c0be2b93967700723d77891cb2}{s\_macro\_ur}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) -\/ \mbox{\hyperlink{classoomph_1_1QElementBase_a6c5743d593aa67f9dbfcde9556a9bdd7}{s\_macro\_ll}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00267}00267       \}}
-\DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00268}00268       \mbox{\hyperlink{classoomph_1_1FiniteElement_a5facfd17bf738c5632d4692f0433ca52}{Macro\_elem\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1MacroElement_a85e7842ad949bb4062a9ff302fa452e5}{macro\_map}}(s\_macro, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00268}00268       \mbox{\hyperlink{classoomph_1_1FiniteElement_a5facfd17bf738c5632d4692f0433ca52}{Macro\_elem\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1MacroElement_a85e7842ad949bb4062a9ff302fa452e5}{macro\_map}}(s\_macro, x);}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00269}00269     \}}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00270}00270 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00271}00271 \textcolor{comment}{    /// Global coordinates as function of local coordinates}}
@@ -277,7 +277,7 @@
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00273}00273 \textcolor{comment}{    /// using the macro element representation}}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00274}\mbox{\hyperlink{classoomph_1_1QElementBase_a61b722ea5221157266b894bdbb255011}{00274}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1QElementBase_a61b722ea5221157266b894bdbb255011}{get\_x\_from\_macro\_element}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}},}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00275}00275                                   \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},}
-\DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00276}00276                                   \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}})}
+\DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00276}00276                                   \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x)}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00277}00277     \{}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00278}00278       \textcolor{comment}{// Check that there is a macro element}}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00279}00279       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a5facfd17bf738c5632d4692f0433ca52}{Macro\_elem\_pt}} == 0)}
@@ -295,7 +295,7 @@
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00291}00291         s\_macro[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] =}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00292}00292           \mbox{\hyperlink{classoomph_1_1QElementBase_a6c5743d593aa67f9dbfcde9556a9bdd7}{s\_macro\_ll}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) + 0.5 * (\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] + 1.0) * (\mbox{\hyperlink{classoomph_1_1QElementBase_a0e02d2c0be2b93967700723d77891cb2}{s\_macro\_ur}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) -\/ \mbox{\hyperlink{classoomph_1_1QElementBase_a6c5743d593aa67f9dbfcde9556a9bdd7}{s\_macro\_ll}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00293}00293       \}}
-\DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00294}00294       \mbox{\hyperlink{classoomph_1_1FiniteElement_a5facfd17bf738c5632d4692f0433ca52}{Macro\_elem\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1MacroElement_a85e7842ad949bb4062a9ff302fa452e5}{macro\_map}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, s\_macro, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00294}00294       \mbox{\hyperlink{classoomph_1_1FiniteElement_a5facfd17bf738c5632d4692f0433ca52}{Macro\_elem\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1MacroElement_a85e7842ad949bb4062a9ff302fa452e5}{macro\_map}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, s\_macro, x);}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00295}00295     \}}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00296}00296 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00297}00297 \textcolor{comment}{    /// Return number of nodes on one face of the element. Always}}
@@ -382,7 +382,7 @@
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00378}00378 \textcolor{comment}{    /// in xi\_fe and xi.}}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00379}\mbox{\hyperlink{classoomph_1_1QSolidElementBase_a2afc3bfd3aa6ed253f42d55ac4e20839}{00379}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1QSolidElementBase_a2afc3bfd3aa6ed253f42d55ac4e20839}{get\_x\_and\_xi}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00380}00380                       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x\_fe,}
-\DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00381}00381                       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00381}00381                       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00382}00382                       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& xi\_fe,}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00383}00383                       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& xi)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00384}00384 \textcolor{keyword}{    }\{}
@@ -421,7 +421,7 @@
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00417}00417       \textcolor{keywordtype}{unsigned} n\_x = x\_fe.size();}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00418}00418       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_x; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00419}00419       \{}
-\DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00420}00420         x\_fe[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00420}00420         x\_fe[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00421}00421       \}}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00422}00422 }
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00423}00423       \textcolor{comment}{// Eulerian coordinate from FE representation again:}}
@@ -429,7 +429,7 @@
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00425}00425       \{}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00426}00426         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_x; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00427}00427         \{}
-\DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00428}00428           \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = x\_fe[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00428}00428           x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = x\_fe[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00429}00429         \}}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00430}00430       \}}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00431}00431       \textcolor{comment}{// or refer to the "{}current"{} MacroElement if it exists.}}
@@ -442,7 +442,7 @@
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00438}00438           s\_macro[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{classoomph_1_1QElementBase_a6c5743d593aa67f9dbfcde9556a9bdd7}{s\_macro\_ll}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) +}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00439}00439                        0.5 * (\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] + 1.0) * (\mbox{\hyperlink{classoomph_1_1QElementBase_a0e02d2c0be2b93967700723d77891cb2}{s\_macro\_ur}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) -\/ \mbox{\hyperlink{classoomph_1_1QElementBase_a6c5743d593aa67f9dbfcde9556a9bdd7}{s\_macro\_ll}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00440}00440         \}}
-\DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00441}00441         \mbox{\hyperlink{classoomph_1_1FiniteElement_a5facfd17bf738c5632d4692f0433ca52}{Macro\_elem\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1MacroElement_a85e7842ad949bb4062a9ff302fa452e5}{macro\_map}}(s\_macro, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00441}00441         \mbox{\hyperlink{classoomph_1_1FiniteElement_a5facfd17bf738c5632d4692f0433ca52}{Macro\_elem\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1MacroElement_a85e7842ad949bb4062a9ff302fa452e5}{macro\_map}}(s\_macro, x);}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00442}00442       \}}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00443}00443     \}}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00444}00444   \};}
@@ -476,7 +476,7 @@
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00472}\mbox{\hyperlink{classoomph_1_1LineElementBase_ad80307523c850d58bca7b925df15e46d}{00472}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1LineElementBase_ad80307523c850d58bca7b925df15e46d}{nvertex\_node}}() \textcolor{keyword}{const} = 0;}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00473}00473 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00474}00474 \textcolor{comment}{    /// Pointer to the j-\/th vertex node in the element}}
-\DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00475}\mbox{\hyperlink{classoomph_1_1LineElementBase_a7bcbd56f892a1bdb822ab44364dea7f8}{00475}} \textcolor{comment}{}    \textcolor{keyword}{virtual} Node* \mbox{\hyperlink{classoomph_1_1LineElementBase_a7bcbd56f892a1bdb822ab44364dea7f8}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j) \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00475}\mbox{\hyperlink{classoomph_1_1LineElementBase_a7bcbd56f892a1bdb822ab44364dea7f8}{00475}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1LineElementBase_a7bcbd56f892a1bdb822ab44364dea7f8}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j) \textcolor{keyword}{const} = 0;}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00476}00476   \};}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00477}00477 }
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00478}00478   \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
@@ -556,10 +556,10 @@
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00552}00552     \}}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00553}00553 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00554}00554 \textcolor{comment}{    /// Pointer to the j-\/th vertex node in the element}}
-\DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00555}\mbox{\hyperlink{classoomph_1_1QElement_3_011_00_01NNODE__1D_01_4_af5bcc18f8f5e3ad57412594b074b27d2}{00555}} \textcolor{comment}{}    Node* \mbox{\hyperlink{classoomph_1_1QElement_3_011_00_01NNODE__1D_01_4_af5bcc18f8f5e3ad57412594b074b27d2}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00555}\mbox{\hyperlink{classoomph_1_1QElement_3_011_00_01NNODE__1D_01_4_af5bcc18f8f5e3ad57412594b074b27d2}{00555}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1QElement_3_011_00_01NNODE__1D_01_4_af5bcc18f8f5e3ad57412594b074b27d2}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00556}00556 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00557}00557       \textcolor{keywordtype}{unsigned} n\_node\_1d = nnode\_1d();}
-\DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00558}00558       Node* nod\_pt;}
+\DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00558}00558       \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt;}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00559}00559       \textcolor{keywordflow}{switch} (j)}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00560}00560       \{}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00561}00561         \textcolor{keywordflow}{case} 0:}
@@ -607,7 +607,7 @@
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00603}00603     \}}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00604}00604 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00605}00605 \textcolor{comment}{    /// Get the node at the specified local coordinate}}
-\DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00606}00606 \textcolor{comment}{}    Node* get\_node\_at\_local\_coordinate(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00606}00606 \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* get\_node\_at\_local\_coordinate(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) \textcolor{keyword}{const};}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00607}00607 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00608}00608 \textcolor{comment}{    /// Number of nodes along each element edge}}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00609}\mbox{\hyperlink{classoomph_1_1QElement_3_011_00_01NNODE__1D_01_4_aa37c4b1c77e3799a64667676ca445eb2}{00609}} \textcolor{comment}{}    \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1QElement_3_011_00_01NNODE__1D_01_4_aa37c4b1c77e3799a64667676ca445eb2}{nnode\_1d}}()\textcolor{keyword}{ const}}
@@ -831,7 +831,7 @@
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00827}\mbox{\hyperlink{classoomph_1_1QuadElementBase_a84d28d4fad80333d994d9455596b1ae9}{00827}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1QuadElementBase_a84d28d4fad80333d994d9455596b1ae9}{nvertex\_node}}() \textcolor{keyword}{const} = 0;}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00828}00828 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00829}00829 \textcolor{comment}{    /// Pointer to the j-\/th vertex node in the element}}
-\DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00830}\mbox{\hyperlink{classoomph_1_1QuadElementBase_a745b2653a31ecc0af592fdcd3668007b}{00830}} \textcolor{comment}{}    \textcolor{keyword}{virtual} Node* \mbox{\hyperlink{classoomph_1_1QuadElementBase_a745b2653a31ecc0af592fdcd3668007b}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j) \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00830}\mbox{\hyperlink{classoomph_1_1QuadElementBase_a745b2653a31ecc0af592fdcd3668007b}{00830}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1QuadElementBase_a745b2653a31ecc0af592fdcd3668007b}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j) \textcolor{keyword}{const} = 0;}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00831}00831   \};}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00832}00832 }
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00833}00833   \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
@@ -914,10 +914,10 @@
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00910}00910     \}}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00911}00911 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00912}00912 \textcolor{comment}{    /// Pointer to the j-\/th vertex node in the element}}
-\DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00913}\mbox{\hyperlink{classoomph_1_1QElement_3_012_00_01NNODE__1D_01_4_a59252441e251735751a9ebf2b0696c27}{00913}} \textcolor{comment}{}    Node* \mbox{\hyperlink{classoomph_1_1QElement_3_012_00_01NNODE__1D_01_4_a59252441e251735751a9ebf2b0696c27}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00913}\mbox{\hyperlink{classoomph_1_1QElement_3_012_00_01NNODE__1D_01_4_a59252441e251735751a9ebf2b0696c27}{00913}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1QElement_3_012_00_01NNODE__1D_01_4_a59252441e251735751a9ebf2b0696c27}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00914}00914 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00915}00915       \textcolor{keywordtype}{unsigned} n\_node\_1d = nnode\_1d();}
-\DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00916}00916       Node* nod\_pt;}
+\DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00916}00916       \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt;}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00917}00917       \textcolor{keywordflow}{switch} (j)}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00918}00918       \{}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00919}00919         \textcolor{keywordflow}{case} 0:}
@@ -977,7 +977,7 @@
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00973}00973     \}}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00974}00974 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00975}00975 \textcolor{comment}{    /// Get the node at the specified local coordinate}}
-\DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00976}00976 \textcolor{comment}{}    Node* get\_node\_at\_local\_coordinate(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00976}00976 \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* get\_node\_at\_local\_coordinate(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) \textcolor{keyword}{const};}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00977}00977 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00978}00978 \textcolor{comment}{    /// Number of nodes along each element edge}}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l00979}\mbox{\hyperlink{classoomph_1_1QElement_3_012_00_01NNODE__1D_01_4_a8654dd65f19c1b47a3361e55b92df34d}{00979}} \textcolor{comment}{}    \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1QElement_3_012_00_01NNODE__1D_01_4_a8654dd65f19c1b47a3361e55b92df34d}{nnode\_1d}}()\textcolor{keyword}{ const}}
@@ -1243,7 +1243,7 @@
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l01239}\mbox{\hyperlink{classoomph_1_1BrickElementBase_a8a2f954fea0650a9641c69614929cfa7}{01239}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1BrickElementBase_a8a2f954fea0650a9641c69614929cfa7}{nvertex\_node}}() \textcolor{keyword}{const} = 0;}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l01240}01240 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l01241}01241 \textcolor{comment}{    /// Pointer to the j-\/th vertex node in the element}}
-\DoxyCodeLine{\Hypertarget{Qelements_8h_source_l01242}\mbox{\hyperlink{classoomph_1_1BrickElementBase_a77b8108a58d9ee150e5bcee2c0b8f347}{01242}} \textcolor{comment}{}    \textcolor{keyword}{virtual} Node* \mbox{\hyperlink{classoomph_1_1BrickElementBase_a77b8108a58d9ee150e5bcee2c0b8f347}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j) \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{\Hypertarget{Qelements_8h_source_l01242}\mbox{\hyperlink{classoomph_1_1BrickElementBase_a77b8108a58d9ee150e5bcee2c0b8f347}{01242}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1BrickElementBase_a77b8108a58d9ee150e5bcee2c0b8f347}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j) \textcolor{keyword}{const} = 0;}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l01243}01243   \};}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l01244}01244 }
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l01245}01245   \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
@@ -1330,10 +1330,10 @@
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l01326}01326     \}}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l01327}01327 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l01328}01328 \textcolor{comment}{    /// Pointer to the j-\/th vertex node in the element}}
-\DoxyCodeLine{\Hypertarget{Qelements_8h_source_l01329}\mbox{\hyperlink{classoomph_1_1QElement_3_013_00_01NNODE__1D_01_4_a9c7205c792ece55f76116f102f453f5f}{01329}} \textcolor{comment}{}    Node* \mbox{\hyperlink{classoomph_1_1QElement_3_013_00_01NNODE__1D_01_4_a9c7205c792ece55f76116f102f453f5f}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{Qelements_8h_source_l01329}\mbox{\hyperlink{classoomph_1_1QElement_3_013_00_01NNODE__1D_01_4_a9c7205c792ece55f76116f102f453f5f}{01329}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1QElement_3_013_00_01NNODE__1D_01_4_a9c7205c792ece55f76116f102f453f5f}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l01330}01330 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l01331}01331       \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7dabc60bec4cc294aa2adf92726c6d6823a}{N}} = nnode\_1d();}
-\DoxyCodeLine{\Hypertarget{Qelements_8h_source_l01332}01332       Node* nod\_pt;}
+\DoxyCodeLine{\Hypertarget{Qelements_8h_source_l01332}01332       \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt;}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l01333}01333       \textcolor{keywordflow}{switch} (j)}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l01334}01334       \{}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l01335}01335         \textcolor{keywordflow}{case} 0:}
@@ -1409,7 +1409,7 @@
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l01405}01405     \}}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l01406}01406 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l01407}01407 \textcolor{comment}{    /// Get the node at the specified local coordinate}}
-\DoxyCodeLine{\Hypertarget{Qelements_8h_source_l01408}01408 \textcolor{comment}{}    Node* get\_node\_at\_local\_coordinate(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{Qelements_8h_source_l01408}01408 \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* get\_node\_at\_local\_coordinate(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) \textcolor{keyword}{const};}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l01409}01409 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l01410}01410 \textcolor{comment}{    /// Number of nodes along each element edge}}
 \DoxyCodeLine{\Hypertarget{Qelements_8h_source_l01411}\mbox{\hyperlink{classoomph_1_1QElement_3_013_00_01NNODE__1D_01_4_a3de3fa35517dc2b5bd7b2e90069dc761}{01411}} \textcolor{comment}{}    \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1QElement_3_013_00_01NNODE__1D_01_4_a3de3fa35517dc2b5bd7b2e90069dc761}{nnode\_1d}}()\textcolor{keyword}{ const}}

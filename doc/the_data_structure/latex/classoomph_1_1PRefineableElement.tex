@@ -22,9 +22,9 @@ Inheritance diagram for oomph\+::PRefineable\+Element\+:\begin{figure}[H]
 \begin{DoxyCompactList}\small\item\em Constructor, calls the \mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} constructor. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{classoomph_1_1PRefineableElement_a5b96194fe6780017d5b2b768658bea48}{$\sim$\+PRefineable\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Destructor, empty. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1PRefineableElement_a55a27c5a3d6f0b82aa3fd714960ef6e0}{PRefineable\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1PRefineableElement}{PRefineable\+Element}} \&)=delete
+\mbox{\hyperlink{classoomph_1_1PRefineableElement_a55a27c5a3d6f0b82aa3fd714960ef6e0}{PRefineable\+Element}} (const \mbox{\hyperlink{classoomph_1_1PRefineableElement}{PRefineable\+Element}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PRefineableElement_a4b315647b925147201031ea34c724de3}{operator=}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1PRefineableElement}{PRefineable\+Element}} \&)=delete
+void \mbox{\hyperlink{classoomph_1_1PRefineableElement_a4b315647b925147201031ea34c724de3}{operator=}} (const \mbox{\hyperlink{classoomph_1_1PRefineableElement}{PRefineable\+Element}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1PRefineableElement_a086636c6717bb5bbe7e31123bc0cd511}{p\+\_\+refinement\+\_\+is\+\_\+enabled}} ()
 \begin{DoxyCompactList}\small\item\em Flag to indicate suppression of any refinement. \end{DoxyCompactList}\item 
@@ -34,9 +34,9 @@ void \mbox{\hyperlink{classoomph_1_1PRefineableElement_a0c3aaa6e93d92bc06700016c
 \begin{DoxyCompactList}\small\item\em Emnable refinement for this element. \end{DoxyCompactList}\item 
 unsigned \& \mbox{\hyperlink{classoomph_1_1PRefineableElement_a83b9554e28ce574cc7759e88388575b0}{p\+\_\+order}} ()
 \begin{DoxyCompactList}\small\item\em Access function to P\+\_\+order. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1PRefineableElement_ad1c4ca3d701eaca833fc9404b068c8f7}{p\+\_\+order}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1PRefineableElement_ad1c4ca3d701eaca833fc9404b068c8f7}{p\+\_\+order}} () const
 \begin{DoxyCompactList}\small\item\em Access function to P\+\_\+order (const version) \end{DoxyCompactList}\item 
-virtual unsigned \mbox{\hyperlink{classoomph_1_1PRefineableElement_a6babd48e981414ad54cbfc1d89977f43}{initial\+\_\+p\+\_\+order}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual unsigned \mbox{\hyperlink{classoomph_1_1PRefineableElement_a6babd48e981414ad54cbfc1d89977f43}{initial\+\_\+p\+\_\+order}} () const =0
 \begin{DoxyCompactList}\small\item\em Get the initial P\+\_\+order This is required so that elements which are constructed with a higher p-\/order initially are not un-\/refined past this level (e.\+g. in fluid problems where elements initially use quadratic velocity and linear pressure) Virtual because this needs to be set in templated derived classes. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PRefineableElement_a89ecf3e300ea9c7dd37ce981053377f4}{select\+\_\+for\+\_\+p\+\_\+refinement}} ()
 \begin{DoxyCompactList}\small\item\em Select the element for p-\/refinement. \end{DoxyCompactList}\item 
@@ -50,7 +50,7 @@ bool \mbox{\hyperlink{classoomph_1_1PRefineableElement_a988945bf2c1eef6c406033e5
 \begin{DoxyCompactList}\small\item\em Has the element been selected for refinement? \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1PRefineableElement_a0060b4224c7db8c950448f736a1ce597}{to\+\_\+be\+\_\+p\+\_\+unrefined}} ()
 \begin{DoxyCompactList}\small\item\em Has the element been selected for p-\/unrefinement? \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1PRefineableElement_a706db9352965197a215405f620b3cedc}{p\+\_\+refine}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&inc, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&clone\+\_\+pt)=0
+virtual void \mbox{\hyperlink{classoomph_1_1PRefineableElement_a706db9352965197a215405f620b3cedc}{p\+\_\+refine}} (const int \&inc, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&clone\+\_\+pt)=0
 \begin{DoxyCompactList}\small\item\em p-\/refine the element \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1PRefineableElement_a18a6ec4187845d2dbad763ba284ffcc2}{nodes\+\_\+built}} ()
 \begin{DoxyCompactList}\small\item\em Return true if all the nodes have been built, false if not. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -110,7 +110,7 @@ Definition at line \mbox{\hyperlink{refineable__elements_8h_source_l00678}{678}}
 \index{oomph::PRefineableElement@{oomph::PRefineableElement}!PRefineableElement@{PRefineableElement}}
 \index{PRefineableElement@{PRefineableElement}!oomph::PRefineableElement@{oomph::PRefineableElement}}
 \doxysubsubsection{\texorpdfstring{PRefineableElement()}{PRefineableElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily oomph\+::\+PRefineable\+Element\+::\+PRefineable\+Element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1PRefineableElement}{PRefineable\+Element}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+{\footnotesize\ttfamily oomph\+::\+PRefineable\+Element\+::\+PRefineable\+Element (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1PRefineableElement}{PRefineable\+Element}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
@@ -237,13 +237,13 @@ Definition at line \mbox{\hyperlink{refineable__elements_8h_source_l00766}{766}}
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableElement_a4b315647b925147201031ea34c724de3}\label{classoomph_1_1PRefineableElement_a4b315647b925147201031ea34c724de3}} 
 \index{oomph::PRefineableElement@{oomph::PRefineableElement}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::PRefineableElement@{oomph::PRefineableElement}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
-{\footnotesize\ttfamily void oomph\+::\+PRefineable\+Element\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1PRefineableElement}{PRefineable\+Element}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+{\footnotesize\ttfamily void oomph\+::\+PRefineable\+Element\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1PRefineableElement}{PRefineable\+Element}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
@@ -293,7 +293,7 @@ References \mbox{\hyperlink{refineable__elements_8h_source_l00655}{P\+\_\+order}
 \index{oomph::PRefineableElement@{oomph::PRefineableElement}!p\_refine@{p\_refine}}
 \index{p\_refine@{p\_refine}!oomph::PRefineableElement@{oomph::PRefineableElement}}
 \doxysubsubsection{\texorpdfstring{p\_refine()}{p\_refine()}}
-{\footnotesize\ttfamily virtual void oomph\+::\+PRefineable\+Element\+::p\+\_\+refine (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{inc,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{clone\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+PRefineable\+Element\+::p\+\_\+refine (\begin{DoxyParamCaption}\item[{const int \&}]{inc,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&}]{clone\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 

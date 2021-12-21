@@ -67,7 +67,7 @@
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00063}00063     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(2);}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00064}00064 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00065}00065     \textcolor{comment}{// Vector for coordintes}}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00066}00066     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(2);}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00066}00066     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(2);}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00067}00067 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00068}00068     \textcolor{comment}{// Displacement vector}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00069}00069     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<std::complex<double>}}> disp(3);}
@@ -78,7 +78,7 @@
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00074}00074     \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} psi(n\_node);}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00075}00075 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00076}00076     \textcolor{comment}{// Set the value of n\_intpt}}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00077}00077     \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00077}00077     \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00078}00078 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00079}00079     \textcolor{comment}{// Loop over the integration points}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00080}00080     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ipt = 0; ipt < n\_intpt; ipt++)}
@@ -86,17 +86,17 @@
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00082}00082       \textcolor{comment}{// Assign values of s}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00083}00083       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00084}00084       \{}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00085}00085         \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>knot(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00085}00085         \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{knot}}(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00086}00086       \}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00087}00087 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00088}00088       \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00089}00089       \textcolor{keywordtype}{double} w = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00089}00089       \textcolor{keywordtype}{double} w = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00090}00090 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00091}00091       \textcolor{comment}{// Get jacobian of mapping}}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00092}00092       \textcolor{keywordtype}{double} J = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a808557a124b98d5bbe3bb3b22c81b44b}{J\_eulerian}}(s);}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00092}00092       \textcolor{keywordtype}{double} J = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a089e58d5ad9b8efee637221b0e264563}{J\_eulerian}}(s);}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00093}00093 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00094}00094       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00095}00095       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00095}00095       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00096}00096 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00097}00097       \textcolor{comment}{// Get FE function value}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00098}00098       this-\/>\mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a01357567fa0212ff94370a78ebca67b1}{interpolated\_u\_time\_harmonic\_fourier\_decomposed\_linear\_elasticity}}(}
@@ -107,7 +107,7 @@
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00103}00103       \{}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00104}00104         norm += (disp[ii].real() * disp[ii].real() +}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00105}00105                  disp[ii].imag() * disp[ii].imag()) *}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00106}00106                 \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00106}00106                 \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00107}00107       \}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00108}00108     \}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00109}00109   \}}
@@ -155,7 +155,7 @@
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00151}00151     this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9296c17b134688049256a4bbc886df69}{dshape\_eulerian}}(s, psi, dpsidx);}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00152}00152 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00153}00153     \textcolor{comment}{// Storage for Eulerian coordinates (r,z; initialised to zero)}}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00154}00154     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(2, 0.0);}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00154}00154     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(2, 0.0);}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00155}00155 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00156}00156     \textcolor{comment}{// Displacements u\_r,u\_z,u\_theta}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00157}00157     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<std::complex<double>}}> interpolated\_u(3,}
@@ -172,7 +172,7 @@
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00168}00168       \textcolor{comment}{// Calculate the coordinates}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00169}00169       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00170}00170       \{}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00171}00171         \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9152c16ae9899168bcdaac7c2f977444}{nodal\_position}}(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * psi(l);}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00171}00171         \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9152c16ae9899168bcdaac7c2f977444}{nodal\_position}}(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * psi(l);}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00172}00172       \}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00173}00173       \textcolor{comment}{// Get the nodal displacements}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00174}00174       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 3; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
@@ -192,7 +192,7 @@
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00188}00188     \}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00189}00189 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00190}00190     \textcolor{comment}{// define shorthand notation for regularly-\/occurring terms}}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00191}00191     \textcolor{keywordtype}{double} r = \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}[0];}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00191}00191     \textcolor{keywordtype}{double} r = \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}[0];}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00192}00192     \textcolor{keyword}{const} std::complex<double> \mbox{\hyperlink{namespaceoomph_1_1MathematicalConstants_a609ab3b897b174e49ddf7a19fd95f2ef}{I}}(0.0, 1.0);}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00193}00193 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00194}00194     \textcolor{comment}{// r component of displacement}}
@@ -283,7 +283,7 @@
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00279}00279     \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} dpsidx(n\_node, 2);}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00280}00280 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00281}00281     \textcolor{comment}{// Set the value of Nintpt -\/-\/ the number of integration points}}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00282}00282     \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00282}00282     \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00283}00283 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00284}00284     \textcolor{comment}{// Set the vector to hold the local coordinates in the element}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00285}00285     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(2);}
@@ -298,17 +298,17 @@
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00294}00294       \textcolor{comment}{// Assign the values of s}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00295}00295       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; ++\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00296}00296       \{}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00297}00297         \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>knot(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00297}00297         \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{knot}}(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00298}00298       \}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00299}00299 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00300}00300       \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00301}00301       \textcolor{keywordtype}{double} w = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00301}00301       \textcolor{keywordtype}{double} w = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00302}00302 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00303}00303       \textcolor{comment}{// Call the derivatives of the shape functions (and get Jacobian)}}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00304}00304       \textcolor{keywordtype}{double} J = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a837c4849f68842295ab5e77c8ecb8b93}{dshape\_eulerian\_at\_knot}}(ipt, psi, dpsidx);}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00304}00304       \textcolor{keywordtype}{double} J = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a368c44e295e35dd0b697be3222ce7b2f}{dshape\_eulerian\_at\_knot}}(ipt, psi, dpsidx);}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00305}00305 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00306}00306       \textcolor{comment}{// Storage for Eulerian coordinates (r,z; initialised to zero)}}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00307}00307       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(2, 0.0);}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00307}00307       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(2, 0.0);}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00308}00308 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00309}00309       \textcolor{comment}{// Displacements u\_r,u\_z,u\_theta}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00310}00310       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<std::complex<double>}}> interpolated\_u(}
@@ -325,7 +325,7 @@
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00321}00321         \textcolor{comment}{// Calculate the coordinates}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00322}00322         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00323}00323         \{}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00324}00324           \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_abe831900a6d6a08ee4a43fd9c07af32e}{raw\_nodal\_position}}(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * psi(l);}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00324}00324           \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_abe831900a6d6a08ee4a43fd9c07af32e}{raw\_nodal\_position}}(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * psi(l);}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00325}00325         \}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00326}00326         \textcolor{comment}{// Get the nodal displacements}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00327}00327         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 3; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
@@ -349,13 +349,13 @@
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00345}00345       this-\/>\mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a7e28782573e1210b9a5f98f17360f6e9}{body\_force}}(interpolated\_x, b);}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00346}00346 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00347}00347       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00348}00348       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00348}00348       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00349}00349 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00350}00350       \textcolor{comment}{//=====EQUATIONS OF FOURIER DECOMPOSED TIME HARMONIC LINEAR ELASTICITY}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00351}00351       \textcolor{comment}{//========}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00352}00352 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00353}00353       \textcolor{comment}{// define shorthand notation for regularly-\/occurring terms}}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00354}00354       \textcolor{keywordtype}{double} r = \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}[0];}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00354}00354       \textcolor{keywordtype}{double} r = \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}[0];}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00355}00355       \textcolor{keywordtype}{double} rsq = pow(r, 2);}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00356}00356       \textcolor{keywordtype}{double} nsq = pow(n, 2);}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00357}00357       \textcolor{keyword}{const} std::complex<double> \mbox{\hyperlink{namespaceoomph_1_1MathematicalConstants_a609ab3b897b174e49ddf7a19fd95f2ef}{I}}(0.0, 1.0);}
@@ -396,7 +396,7 @@
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00392}00392             residuals[local\_eqn\_real] +=}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00393}00393               (-\/\mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a06d6b766640617b92206d2936f2d93fc}{omega\_sq}}.real() * interpolated\_u[a].real() +}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00394}00394                \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a06d6b766640617b92206d2936f2d93fc}{omega\_sq}}.imag() * interpolated\_u[a].imag() -\/ b[a].real()) *}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00395}00395               psi(l) * r * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00395}00395               psi(l) * r * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00396}00396 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00397}00397             \textcolor{comment}{// Three components of the stress divergence term:}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00398}00398             \textcolor{comment}{// a=0: r; a=1: z; a=2: theta}}
@@ -425,7 +425,7 @@
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00421}00421                    (durdr.imag() + ur.imag() / r + n / r * uth.real() +}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00422}00422                     duzdz.imag()) *}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00423}00423                    (dpsidx(l, 0) + psi(l) / r)) *}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00424}00424                 r * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00424}00424                 r * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00425}00425             \}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00426}00426             \textcolor{comment}{// Real part of z-\/equation}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00427}00427             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (a == 1)}
@@ -447,7 +447,7 @@
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00443}00443                    (durdr.imag() + ur.imag() / r + n / r * uth.real() +}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00444}00444                     duzdz.imag()) *}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00445}00445                    dpsidx(l, 1)) *}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00446}00446                 r * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00446}00446                 r * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00447}00447             \}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00448}00448             \textcolor{comment}{// Real part of theta-\/equation}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00449}00449             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (a == 2)}
@@ -473,7 +473,7 @@
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00469}00469                    (durdr.real() + ur.real() / r -\/ n / r * uth.imag() +}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00470}00470                     duzdz.real()) *}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00471}00471                    n * psi(l) / r) *}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00472}00472                 r * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00472}00472                 r * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00473}00473             \}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00474}00474             \textcolor{comment}{// error: a should be 0, 1 or 2}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00475}00475             \textcolor{keywordflow}{else}}
@@ -501,17 +501,17 @@
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00497}00497                          lambda * (dpsidx(l2, 0) + psi(l2) / r) *}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00498}00498                            (dpsidx(l, 0) + psi(l) / r) -\/}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00499}00499                          \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a06d6b766640617b92206d2936f2d93fc}{omega\_sq}} * psi(l2) * psi(l)) *}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00500}00500                         r * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00500}00500                         r * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00501}00501 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00502}00502                   G\_z = (mu * dpsidx(l2, 0) * dpsidx(l, 1) +}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00503}00503                          lambda * dpsidx(l2, 1) * (dpsidx(l, 0) + psi(l) / r)) *}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00504}00504                         r * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00504}00504                         r * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00505}00505 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00506}00506                   G\_theta = (-\/\mbox{\hyperlink{namespaceoomph_1_1MathematicalConstants_a609ab3b897b174e49ddf7a19fd95f2ef}{I}} * (mu * (n / r * dpsidx(l2, 0) * psi(l) -\/}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00507}00507                                          3.0 * n / rsq * psi(l2) * psi(l)) -\/}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00508}00508                                    lambda * n / r * psi(l2) *}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00509}00509                                      (dpsidx(l, 0) + psi(l) / r))) *}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00510}00510                             r * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00510}00510                             r * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00511}00511                 \}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00512}00512                 \textcolor{comment}{// terms for rows of Jacobian matrix corresponding to z-\/equation}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00513}00513                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (a == 1)}
@@ -519,18 +519,18 @@
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00515}00515                   G\_r =}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00516}00516                     (mu * dpsidx(l2, 1) * dpsidx(l, 0) +}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00517}00517                      lambda * (dpsidx(l2, 0) + psi(l2) / r) * dpsidx(l, 1)) *}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00518}00518                     r * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00518}00518                     r * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00519}00519 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00520}00520                   G\_z = (mu * (dpsidx(l2, 0) * dpsidx(l, 0) +}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00521}00521                                nsq / rsq * psi(l2) * psi(l) +}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00522}00522                                2.0 * dpsidx(l2, 1) * dpsidx(l, 1)) +}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00523}00523                          lambda * dpsidx(l2, 1) * dpsidx(l, 1) -\/}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00524}00524                          \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a06d6b766640617b92206d2936f2d93fc}{omega\_sq}} * psi(l2) * psi(l)) *}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00525}00525                         r * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00525}00525                         r * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00526}00526 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00527}00527                   G\_theta = (-\/\mbox{\hyperlink{namespaceoomph_1_1MathematicalConstants_a609ab3b897b174e49ddf7a19fd95f2ef}{I}} * (mu * n / r * dpsidx(l2, 1) * psi(l) -\/}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00528}00528                                    lambda * n / r * dpsidx(l, 1) * psi(l2))) *}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00529}00529                             r * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00529}00529                             r * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00530}00530                 \}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00531}00531                 \textcolor{comment}{// terms for rows of Jacobian matrix corresponding to}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00532}00532                 \textcolor{comment}{// theta-\/equation}}
@@ -540,11 +540,11 @@
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00536}00536                                      3.0 * n / rsq * psi(l2) * psi(l)) +}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00537}00537                                lambda * n / r * (dpsidx(l2, 0) + psi(l2) / r) *}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00538}00538                                  psi(l))) *}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00539}00539                         r * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00539}00539                         r * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00540}00540 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00541}00541                   G\_z = (-\/\mbox{\hyperlink{namespaceoomph_1_1MathematicalConstants_a609ab3b897b174e49ddf7a19fd95f2ef}{I}} * (-\/mu * n / r * psi(l2) * dpsidx(l, 1) +}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00542}00542                                lambda * n / r * dpsidx(l2, 1) * psi(l))) *}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00543}00543                         r * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00543}00543                         r * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00544}00544 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00545}00545                   G\_theta = (mu * ((dpsidx(l2, 0) -\/ psi(l2) / r) *}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00546}00546                                      (dpsidx(l, 0) -\/ psi(l) / r) +}
@@ -552,7 +552,7 @@
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00548}00548                                    dpsidx(l2, 1) * dpsidx(l, 1)) +}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00549}00549                              lambda * nsq / rsq * psi(l2) * psi(l) -\/}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00550}00550                              \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a06d6b766640617b92206d2936f2d93fc}{omega\_sq}} * psi(l2) * psi(l)) *}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00551}00551                             r * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00551}00551                             r * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00552}00552                 \}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00553}00553 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00554}00554                 \textcolor{comment}{// Loop over the displacement components}}
@@ -569,17 +569,17 @@
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00565}00565                   \{}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00566}00566                     \textcolor{keywordflow}{if} (c == 0)}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00567}00567                     \{}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00568}00568                       \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn\_real, local\_unknown\_real) +=}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00568}00568                       jacobian(local\_eqn\_real, local\_unknown\_real) +=}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00569}00569                         G\_r.real();}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00570}00570                     \}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00571}00571                     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (c == 1)}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00572}00572                     \{}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00573}00573                       \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn\_real, local\_unknown\_real) +=}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00573}00573                       jacobian(local\_eqn\_real, local\_unknown\_real) +=}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00574}00574                         G\_z.real();}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00575}00575                     \}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00576}00576                     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (c == 2)}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00577}00577                     \{}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00578}00578                       \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn\_real, local\_unknown\_real) +=}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00578}00578                       jacobian(local\_eqn\_real, local\_unknown\_real) +=}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00579}00579                         G\_theta.real();}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00580}00580                     \}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00581}00581                   \}}
@@ -589,17 +589,17 @@
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00585}00585                   \{}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00586}00586                     \textcolor{keywordflow}{if} (c == 0)}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00587}00587                     \{}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00588}00588                       \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn\_real, local\_unknown\_imag) +=}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00588}00588                       jacobian(local\_eqn\_real, local\_unknown\_imag) +=}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00589}00589                         -\/G\_r.imag();}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00590}00590                     \}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00591}00591                     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (c == 1)}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00592}00592                     \{}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00593}00593                       \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn\_real, local\_unknown\_imag) +=}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00593}00593                       jacobian(local\_eqn\_real, local\_unknown\_imag) +=}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00594}00594                         -\/G\_z.imag();}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00595}00595                     \}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00596}00596                     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (c == 2)}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00597}00597                     \{}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00598}00598                       \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn\_real, local\_unknown\_imag) +=}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00598}00598                       jacobian(local\_eqn\_real, local\_unknown\_imag) +=}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00599}00599                         -\/G\_theta.imag();}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00600}00600                     \}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00601}00601                   \}}
@@ -620,7 +620,7 @@
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00616}00616             residuals[local\_eqn\_imag] +=}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00617}00617               (-\/\mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a06d6b766640617b92206d2936f2d93fc}{omega\_sq}}.real() * interpolated\_u[a].imag() -\/}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00618}00618                \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a06d6b766640617b92206d2936f2d93fc}{omega\_sq}}.imag() * interpolated\_u[a].real() -\/ b[a].imag()) *}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00619}00619               psi(l) * r * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00619}00619               psi(l) * r * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00620}00620 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00621}00621             \textcolor{comment}{// Three components of the stress divergence term:}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00622}00622             \textcolor{comment}{// a=0: r; a=1: z; a=2: theta}}
@@ -649,7 +649,7 @@
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00645}00645                    (durdr.real() + ur.real() / r -\/ n / r * uth.imag() +}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00646}00646                     duzdz.real()) *}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00647}00647                    (dpsidx(l, 0) + psi(l) / r)) *}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00648}00648                 r * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00648}00648                 r * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00649}00649             \}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00650}00650             \textcolor{comment}{// Imag part of z-\/equation}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00651}00651             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (a == 1)}
@@ -671,7 +671,7 @@
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00667}00667                    (durdr.real() + ur.real() / r -\/ n / r * uth.imag() +}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00668}00668                     duzdz.real()) *}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00669}00669                    dpsidx(l, 1)) *}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00670}00670                 r * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00670}00670                 r * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00671}00671             \}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00672}00672             \textcolor{comment}{// Imag part of theta-\/equation}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00673}00673             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (a == 2)}
@@ -697,7 +697,7 @@
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00693}00693                    (durdr.imag() + ur.imag() / r + n / r * uth.real() +}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00694}00694                     duzdz.imag()) *}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00695}00695                    n * psi(l) / r) *}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00696}00696                 r * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00696}00696                 r * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00697}00697             \}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00698}00698             \textcolor{comment}{// error: a should be 0, 1 or 2}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00699}00699             \textcolor{keywordflow}{else}}
@@ -725,17 +725,17 @@
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00721}00721                          lambda * (dpsidx(l2, 0) + psi(l2) / r) *}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00722}00722                            (dpsidx(l, 0) + psi(l) / r) -\/}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00723}00723                          \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a06d6b766640617b92206d2936f2d93fc}{omega\_sq}} * psi(l2) * psi(l)) *}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00724}00724                         r * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00724}00724                         r * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00725}00725 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00726}00726                   G\_z = (mu * dpsidx(l2, 0) * dpsidx(l, 1) +}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00727}00727                          lambda * dpsidx(l2, 1) * (dpsidx(l, 0) + psi(l) / r)) *}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00728}00728                         r * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00728}00728                         r * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00729}00729 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00730}00730                   G\_theta = (-\/\mbox{\hyperlink{namespaceoomph_1_1MathematicalConstants_a609ab3b897b174e49ddf7a19fd95f2ef}{I}} * (mu * (n / r * dpsidx(l2, 0) * psi(l) -\/}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00731}00731                                          3.0 * n / rsq * psi(l2) * psi(l)) -\/}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00732}00732                                    lambda * n / r * psi(l2) *}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00733}00733                                      (dpsidx(l, 0) + psi(l) / r))) *}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00734}00734                             r * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00734}00734                             r * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00735}00735                 \}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00736}00736                 \textcolor{comment}{// terms for rows of Jacobian matrix corresponding to z-\/equation}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00737}00737                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (a == 1)}
@@ -743,18 +743,18 @@
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00739}00739                   G\_r =}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00740}00740                     (mu * dpsidx(l2, 1) * dpsidx(l, 0) +}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00741}00741                      lambda * (dpsidx(l2, 0) + psi(l2) / r) * dpsidx(l, 1)) *}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00742}00742                     r * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00742}00742                     r * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00743}00743 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00744}00744                   G\_z = (mu * (dpsidx(l2, 0) * dpsidx(l, 0) +}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00745}00745                                nsq / rsq * psi(l2) * psi(l) +}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00746}00746                                2.0 * dpsidx(l2, 1) * dpsidx(l, 1)) +}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00747}00747                          lambda * dpsidx(l2, 1) * dpsidx(l, 1) -\/}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00748}00748                          \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a06d6b766640617b92206d2936f2d93fc}{omega\_sq}} * psi(l2) * psi(l)) *}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00749}00749                         r * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00749}00749                         r * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00750}00750 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00751}00751                   G\_theta = (-\/\mbox{\hyperlink{namespaceoomph_1_1MathematicalConstants_a609ab3b897b174e49ddf7a19fd95f2ef}{I}} * (mu * n / r * dpsidx(l2, 1) * psi(l) -\/}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00752}00752                                    lambda * n / r * dpsidx(l, 1) * psi(l2))) *}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00753}00753                             r * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00753}00753                             r * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00754}00754                 \}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00755}00755                 \textcolor{comment}{// terms for rows of Jacobian matrix corresponding to}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00756}00756                 \textcolor{comment}{// theta-\/equation}}
@@ -764,11 +764,11 @@
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00760}00760                                      3.0 * n / rsq * psi(l2) * psi(l)) +}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00761}00761                                lambda * n / r * (dpsidx(l2, 0) + psi(l2) / r) *}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00762}00762                                  psi(l))) *}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00763}00763                         r * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00763}00763                         r * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00764}00764 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00765}00765                   G\_z = (-\/\mbox{\hyperlink{namespaceoomph_1_1MathematicalConstants_a609ab3b897b174e49ddf7a19fd95f2ef}{I}} * (-\/mu * n / r * psi(l2) * dpsidx(l, 1) +}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00766}00766                                lambda * n / r * dpsidx(l2, 1) * psi(l))) *}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00767}00767                         r * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00767}00767                         r * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00768}00768 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00769}00769                   G\_theta = (mu * ((dpsidx(l2, 0) -\/ psi(l2) / r) *}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00770}00770                                      (dpsidx(l, 0) -\/ psi(l) / r) +}
@@ -776,7 +776,7 @@
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00772}00772                                    dpsidx(l2, 1) * dpsidx(l, 1)) +}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00773}00773                              lambda * nsq / rsq * psi(l2) * psi(l) -\/}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00774}00774                              \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a06d6b766640617b92206d2936f2d93fc}{omega\_sq}} * psi(l2) * psi(l)) *}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00775}00775                             r * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00775}00775                             r * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00776}00776                 \}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00777}00777 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00778}00778                 \textcolor{comment}{// Loop over the displacement components}}
@@ -793,17 +793,17 @@
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00789}00789                   \{}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00790}00790                     \textcolor{keywordflow}{if} (c == 0)}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00791}00791                     \{}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00792}00792                       \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn\_imag, local\_unknown\_real) +=}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00792}00792                       jacobian(local\_eqn\_imag, local\_unknown\_real) +=}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00793}00793                         G\_r.imag();}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00794}00794                     \}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00795}00795                     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (c == 1)}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00796}00796                     \{}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00797}00797                       \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn\_imag, local\_unknown\_real) +=}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00797}00797                       jacobian(local\_eqn\_imag, local\_unknown\_real) +=}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00798}00798                         G\_z.imag();}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00799}00799                     \}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00800}00800                     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (c == 2)}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00801}00801                     \{}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00802}00802                       \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn\_imag, local\_unknown\_real) +=}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00802}00802                       jacobian(local\_eqn\_imag, local\_unknown\_real) +=}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00803}00803                         G\_theta.imag();}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00804}00804                     \}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00805}00805                   \}}
@@ -813,17 +813,17 @@
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00809}00809                   \{}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00810}00810                     \textcolor{keywordflow}{if} (c == 0)}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00811}00811                     \{}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00812}00812                       \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn\_imag, local\_unknown\_imag) +=}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00812}00812                       jacobian(local\_eqn\_imag, local\_unknown\_imag) +=}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00813}00813                         G\_r.real();}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00814}00814                     \}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00815}00815                     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (c == 1)}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00816}00816                     \{}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00817}00817                       \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn\_imag, local\_unknown\_imag) +=}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00817}00817                       jacobian(local\_eqn\_imag, local\_unknown\_imag) +=}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00818}00818                         G\_z.real();}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00819}00819                     \}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00820}00820                     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (c == 2)}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00821}00821                     \{}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00822}00822                       \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn\_imag, local\_unknown\_imag) +=}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00822}00822                       jacobian(local\_eqn\_imag, local\_unknown\_imag) +=}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00823}00823                         G\_theta.real();}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00824}00824                     \}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00825}00825                   \}}
@@ -850,7 +850,7 @@
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00846}00846     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(2);}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00847}00847 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00848}00848     \textcolor{comment}{// Vector for coordintes}}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00849}00849     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(2);}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00849}00849     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(2);}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00850}00850 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00851}00851     \textcolor{comment}{// Tecplot header info}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00852}00852     outfile << this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a3193df31f9ce38e0609d17a8ffb386c6}{tecplot\_zone\_string}}(nplot);}
@@ -866,15 +866,15 @@
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00862}00862       this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a82da844fd3ebb2005842464cdc148a03}{get\_s\_plot}}(iplot, nplot, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00863}00863 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00864}00864       \textcolor{comment}{// Get x position as Vector}}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00865}00865       this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(s, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00865}00865       this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(s, x);}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00866}00866 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00867}00867       \textcolor{comment}{// Get exact solution at this point}}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00868}00868       (*exact\_soln\_pt)(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, exact\_soln);}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00868}00868       (*exact\_soln\_pt)(x, exact\_soln);}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00869}00869 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00870}00870       \textcolor{comment}{// Output r,z,...,u\_exact,...}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00871}00871       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00872}00872       \{}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00873}00873         outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00873}00873         outfile << x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00874}00874       \}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00875}00875       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 6; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00876}00876       \{}
@@ -895,8 +895,8 @@
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00891}00891   \{}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00892}00892     \textcolor{comment}{// Set output Vector}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00893}00893     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(2);}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00894}00894     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(2);}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00895}00895     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<std::complex<double>}}> \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}(3);}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00894}00894     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(2);}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00895}00895     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<std::complex<double>}}> u(3);}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00896}00896 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00897}00897     \textcolor{comment}{// Tecplot header info}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00898}00898     outfile << this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a3193df31f9ce38e0609d17a8ffb386c6}{tecplot\_zone\_string}}(nplot);}
@@ -909,26 +909,26 @@
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00905}00905       this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a82da844fd3ebb2005842464cdc148a03}{get\_s\_plot}}(iplot, nplot, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00906}00906 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00907}00907       \textcolor{comment}{// Get Eulerian coordinates and displacements}}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00908}00908       this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(s, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00908}00908       this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(s, x);}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00909}00909       this-\/>\mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a01357567fa0212ff94370a78ebca67b1}{interpolated\_u\_time\_harmonic\_fourier\_decomposed\_linear\_elasticity}}(}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00910}00910         s, \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}});}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00910}00910         s, u);}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00911}00911 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00912}00912       \textcolor{comment}{// Output the r,z,..}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00913}00913       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00914}00914       \{}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00915}00915         outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00915}00915         outfile << x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00916}00916       \}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00917}00917 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00918}00918       \textcolor{comment}{// Output real part of displacement}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00919}00919       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 3; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00920}00920       \{}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00921}00921         outfile << \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}].real() << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00921}00921         outfile << u[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}].real() << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00922}00922       \}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00923}00923 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00924}00924       \textcolor{comment}{// Output imag part of displacement}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00925}00925       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 3; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00926}00926       \{}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00927}00927         outfile << \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}].imag() << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00927}00927         outfile << u[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}].imag() << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00928}00928       \}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00929}00929 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00930}00930       outfile << std::endl;}
@@ -961,7 +961,7 @@
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00957}00957       \textcolor{comment}{// Coordinates}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00958}00958       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00959}00959       \{}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00960}00960         fprintf(file\_pt, \textcolor{stringliteral}{"{}\%g "{}}, this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(s, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00960}00960         fprintf(file\_pt, \textcolor{stringliteral}{"{}\%g "{}}, this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(s, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00961}00961       \}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00962}00962 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00963}00963       \textcolor{comment}{// Displacement}}
@@ -1011,10 +1011,10 @@
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01007}01007     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(2);}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01008}01008 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01009}01009     \textcolor{comment}{// Vector for coordinates}}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01010}01010     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(2);}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01010}01010     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(2);}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01011}01011 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01012}01012     \textcolor{comment}{// Set the value of n\_intpt}}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01013}01013     \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01013}01013     \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01014}01014 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01015}01015     outfile << \textcolor{stringliteral}{"{}ZONE"{}} << std::endl;}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01016}01016 }
@@ -1027,30 +1027,30 @@
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01023}01023       \textcolor{comment}{// Assign values of s}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01024}01024       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01025}01025       \{}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01026}01026         \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>knot(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01026}01026         \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{knot}}(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01027}01027       \}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01028}01028 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01029}01029       \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01030}01030       \textcolor{keywordtype}{double} w = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01030}01030       \textcolor{keywordtype}{double} w = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01031}01031 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01032}01032       \textcolor{comment}{// Get jacobian of mapping}}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01033}01033       \textcolor{keywordtype}{double} J = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a808557a124b98d5bbe3bb3b22c81b44b}{J\_eulerian}}(s);}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01033}01033       \textcolor{keywordtype}{double} J = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a089e58d5ad9b8efee637221b0e264563}{J\_eulerian}}(s);}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01034}01034 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01035}01035       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01036}01036       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01036}01036       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01037}01037 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01038}01038       \textcolor{comment}{// Get x position as Vector}}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01039}01039       this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(s, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01039}01039       this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(s, x);}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01040}01040 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01041}01041       \textcolor{comment}{// Get exact solution at this point}}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01042}01042       (*exact\_soln\_pt)(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, exact\_soln);}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01042}01042       (*exact\_soln\_pt)(x, exact\_soln);}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01043}01043 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01044}01044       \textcolor{comment}{// Displacement error}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01045}01045       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 3; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01046}01046       \{}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01047}01047         norm += (exact\_soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * exact\_soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] +}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01048}01048                  exact\_soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} + 3] * exact\_soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} + 3]) *}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01049}01049                 \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01049}01049                 \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01050}01050         error +=}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01051}01051           ((exact\_soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01052}01052             \textcolor{keyword}{this}}
@@ -1072,14 +1072,14 @@
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01068}01068                 -\/>\mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a01357567fa0212ff94370a78ebca67b1}{interpolated\_u\_time\_harmonic\_fourier\_decomposed\_linear\_elasticity}}(}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01069}01069                   \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01070}01070                 .imag())) *}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01071}01071           \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01071}01071           \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01072}01072       \}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01073}01073 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01074}01074 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01075}01075       \textcolor{comment}{// Output r,z coordinates}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01076}01076       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01077}01077       \{}
-\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01078}01078         outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01078}01078         outfile << x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01079}01079       \}}
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01080}01080 }
 \DoxyCodeLine{\Hypertarget{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l01081}01081       \textcolor{comment}{// Output ur\_error, uz\_error, uth\_error}}

@@ -28,7 +28,7 @@ void \mbox{\hyperlink{classoomph_1_1DGElement_a62c5daa21324a839419ec4feec8e0685}
 \begin{DoxyCompactList}\small\item\em Function that allows the reuse of the mass matrix. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1DGElement_a1fb4172f65716e0b5277efc65b182d44}{disable\+\_\+mass\+\_\+matrix\+\_\+reuse}} ()
 \begin{DoxyCompactList}\small\item\em Function that disables the reuse of the mass matrix. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1DGElement_a794df81f734bdab309fe76a713588524}{set\+\_\+mass\+\_\+matrix\+\_\+from\+\_\+element}} (\mbox{\hyperlink{classoomph_1_1DGElement}{DGElement}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&element\+\_\+pt)
+virtual void \mbox{\hyperlink{classoomph_1_1DGElement_a794df81f734bdab309fe76a713588524}{set\+\_\+mass\+\_\+matrix\+\_\+from\+\_\+element}} (\mbox{\hyperlink{classoomph_1_1DGElement}{DGElement}} $\ast$const \&element\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Set the mass matrix to point to one in another element. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1DGElement_a56efa47ff13adce4b7d740290a208ddc}{pre\+\_\+compute\+\_\+mass\+\_\+matrix}} ()
 \begin{DoxyCompactList}\small\item\em Function that computes and stores the (inverse) mass matrix. \end{DoxyCompactList}\item 
@@ -36,33 +36,33 @@ virtual void \mbox{\hyperlink{classoomph_1_1DGElement_a4387d0837a07a2d5423896331
 \item 
 virtual void \mbox{\hyperlink{classoomph_1_1DGElement_ad2247a9d65eb229dbf30d709c7b28d6d}{get\+\_\+inverse\+\_\+mass\+\_\+matrix\+\_\+times\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&minv\+\_\+res)
 \begin{DoxyCompactList}\small\item\em Function that returns the current value of the residuals multiplied by the inverse mass matrix (virtual so that it can be overloaded specific elements in which time saving tricks can be applied) \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DGElement_aa04768b9b6e6b929c070c6c1c9fc4372}{construct\+\_\+boundary\+\_\+nodes\+\_\+and\+\_\+faces}} (\mbox{\hyperlink{classoomph_1_1DGMesh}{DGMesh}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&mesh\+\_\+pt, std\+::vector$<$ bool $>$ \&boundary\+\_\+flag, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&\mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\+\_\+stepper\+\_\+pt}})
+void \mbox{\hyperlink{classoomph_1_1DGElement_aa04768b9b6e6b929c070c6c1c9fc4372}{construct\+\_\+boundary\+\_\+nodes\+\_\+and\+\_\+faces}} (\mbox{\hyperlink{classoomph_1_1DGMesh}{DGMesh}} $\ast$const \&mesh\+\_\+pt, std\+::vector$<$ bool $>$ \&boundary\+\_\+flag, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\+\_\+stepper\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Construct all nodes and faces of the element. The vector of booleans boundary should be the same size as the number of nodes and if any entries are true that node will be constructed as a boundary node. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DGElement_a6f7fc1def2a798ee364ae33c8925245f}{construct\+\_\+nodes\+\_\+and\+\_\+faces}} (\mbox{\hyperlink{classoomph_1_1DGMesh}{DGMesh}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&\mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\+\_\+stepper\+\_\+pt}})
+void \mbox{\hyperlink{classoomph_1_1DGElement_a6f7fc1def2a798ee364ae33c8925245f}{construct\+\_\+nodes\+\_\+and\+\_\+faces}} (\mbox{\hyperlink{classoomph_1_1DGMesh}{DGMesh}} $\ast$const \&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\+\_\+stepper\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Construct the nodes and faces of the element. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1DGElement_a8908504165b2d6bd3e2429a08160fd2b}{set\+\_\+mesh\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1DGMesh}{DGMesh}} $\ast$\&mesh\+\_\+pt)
 \item 
-unsigned \mbox{\hyperlink{classoomph_1_1DGElement_a76598661987374a484d75d626f9bc13b}{nface}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1DGElement_a76598661987374a484d75d626f9bc13b}{nface}} () const
 \begin{DoxyCompactList}\small\item\em Return the number of faces. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1DGFaceElement}{DGFace\+Element}} $\ast$ \mbox{\hyperlink{classoomph_1_1DGElement_a93fae49d0109a60b0fbbbdf04c1e4367}{face\+\_\+element\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\mbox{\hyperlink{classoomph_1_1DGFaceElement}{DGFace\+Element}} $\ast$ \mbox{\hyperlink{classoomph_1_1DGElement_a93fae49d0109a60b0fbbbdf04c1e4367}{face\+\_\+element\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Access function for the faces. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1DGElement_ab4d6f236fcfaca280473ad9177b296e9}{output\+\_\+faces}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Output the faces of the element. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DGElement_aca2f5466e8f969d671ba71b976153629}{get\+\_\+neighbouring\+\_\+face\+\_\+and\+\_\+local\+\_\+coordinate}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&face\+\_\+index, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} $\ast$\&\mbox{\hyperlink{classoomph_1_1DGElement_a93fae49d0109a60b0fbbbdf04c1e4367}{face\+\_\+element\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&s\+\_\+face)
+void \mbox{\hyperlink{classoomph_1_1DGElement_aca2f5466e8f969d671ba71b976153629}{get\+\_\+neighbouring\+\_\+face\+\_\+and\+\_\+local\+\_\+coordinate}} (const int \&face\+\_\+index, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} $\ast$\&\mbox{\hyperlink{classoomph_1_1DGElement_a93fae49d0109a60b0fbbbdf04c1e4367}{face\+\_\+element\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&s\+\_\+face)
 \begin{DoxyCompactList}\small\item\em Return the neighbour info. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DGElement_a318f2799a91b674c9420e4fc1da5c055}{setup\+\_\+face\+\_\+neighbour\+\_\+info}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} bool \&add\+\_\+face\+\_\+data\+\_\+as\+\_\+external)
+void \mbox{\hyperlink{classoomph_1_1DGElement_a318f2799a91b674c9420e4fc1da5c055}{setup\+\_\+face\+\_\+neighbour\+\_\+info}} (const bool \&add\+\_\+face\+\_\+data\+\_\+as\+\_\+external)
 \begin{DoxyCompactList}\small\item\em The boolean flag determines whether the data from the neighbouring elements is added as external data to the element (required for correct computation of the jacobian) \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DGElement_a5eaf138a13233e7a3eeb86ccda8d6edb}{add\+\_\+flux\+\_\+contributions\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, unsigned flag)
+void \mbox{\hyperlink{classoomph_1_1DGElement_a5eaf138a13233e7a3eeb86ccda8d6edb}{add\+\_\+flux\+\_\+contributions\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, unsigned flag)
 \begin{DoxyCompactList}\small\item\em Loop over all faces and add their integrated numerical fluxes to the residuals. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DGElement_a69834c27193675dfa9e9d03413ac9d7e}{slope\+\_\+limit}} (\mbox{\hyperlink{classoomph_1_1SlopeLimiter}{Slope\+Limiter}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&slope\+\_\+limiter\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1DGElement_a69834c27193675dfa9e9d03413ac9d7e}{slope\+\_\+limit}} (\mbox{\hyperlink{classoomph_1_1SlopeLimiter}{Slope\+Limiter}} $\ast$const \&slope\+\_\+limiter\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Limit the slope within the element. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1DGElement_a336c61ef405a4710060f177e707c3ec9}{calculate\+\_\+element\+\_\+averages}} (double $\ast$\&average\+\_\+values)
 \begin{DoxyCompactList}\small\item\em Calculate the averages in the element. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1DGElement_a23227ce4e1bd1c24b0d1ae203c36703a}{calculate\+\_\+averages}} ()
 \begin{DoxyCompactList}\small\item\em Calculate the elemental averages. \end{DoxyCompactList}\item 
-double \& \mbox{\hyperlink{classoomph_1_1DGElement_ac6e34ef10309c4714881404a788d0722}{average\+\_\+value}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+double \& \mbox{\hyperlink{classoomph_1_1DGElement_ac6e34ef10309c4714881404a788d0722}{average\+\_\+value}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Return the average values. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \& \mbox{\hyperlink{classoomph_1_1DGElement_a60a1a333981b18cd97923ab740f42290}{average\+\_\+value}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+const double \& \mbox{\hyperlink{classoomph_1_1DGElement_a60a1a333981b18cd97923ab740f42290}{average\+\_\+value}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Return the average values. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -153,13 +153,13 @@ Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00406}{406}} of file
 
 
 
-References \mbox{\hyperlink{dg__elements_8cc_source_l00416}{oomph\+::\+DGFace\+Element\+::add\+\_\+flux\+\_\+contributions()}}, \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{oomph\+::f()}}, \mbox{\hyperlink{dg__elements_8h_source_l00366}{face\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}, and \mbox{\hyperlink{dg__elements_8h_source_l00360}{nface()}}.
+References \mbox{\hyperlink{dg__elements_8cc_source_l00416}{oomph\+::\+DGFace\+Element\+::add\+\_\+flux\+\_\+contributions()}}, \mbox{\hyperlink{dg__elements_8h_source_l00366}{face\+\_\+element\+\_\+pt()}}, and \mbox{\hyperlink{dg__elements_8h_source_l00360}{nface()}}.
 
 \mbox{\Hypertarget{classoomph_1_1DGElement_ac6e34ef10309c4714881404a788d0722}\label{classoomph_1_1DGElement_ac6e34ef10309c4714881404a788d0722}} 
 \index{oomph::DGElement@{oomph::DGElement}!average\_value@{average\_value}}
 \index{average\_value@{average\_value}!oomph::DGElement@{oomph::DGElement}}
 \doxysubsubsection{\texorpdfstring{average\_value()}{average\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily double \& oomph\+::\+DGElement\+::average\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double \& oomph\+::\+DGElement\+::average\+\_\+value (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -177,7 +177,7 @@ References \mbox{\hyperlink{dg__elements_8h_source_l00179}{Average\+\_\+value}},
 \index{oomph::DGElement@{oomph::DGElement}!average\_value@{average\_value}}
 \index{average\_value@{average\_value}!oomph::DGElement@{oomph::DGElement}}
 \doxysubsubsection{\texorpdfstring{average\_value()}{average\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \& oomph\+::\+DGElement\+::average\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const double \& oomph\+::\+DGElement\+::average\+\_\+value (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -249,7 +249,7 @@ Referenced by \mbox{\hyperlink{dg__elements_8h_source_l00430}{calculate\+\_\+ave
 \index{oomph::DGElement@{oomph::DGElement}!construct\_boundary\_nodes\_and\_faces@{construct\_boundary\_nodes\_and\_faces}}
 \index{construct\_boundary\_nodes\_and\_faces@{construct\_boundary\_nodes\_and\_faces}!oomph::DGElement@{oomph::DGElement}}
 \doxysubsubsection{\texorpdfstring{construct\_boundary\_nodes\_and\_faces()}{construct\_boundary\_nodes\_and\_faces()}}
-{\footnotesize\ttfamily void oomph\+::\+DGElement\+::construct\+\_\+boundary\+\_\+nodes\+\_\+and\+\_\+faces (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DGMesh}{DGMesh}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{mesh\+\_\+pt,  }\item[{std\+::vector$<$ bool $>$ \&}]{boundary\+\_\+flag,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{time\+\_\+stepper\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+DGElement\+::construct\+\_\+boundary\+\_\+nodes\+\_\+and\+\_\+faces (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DGMesh}{DGMesh}} $\ast$const \&}]{mesh\+\_\+pt,  }\item[{std\+::vector$<$ bool $>$ \&}]{boundary\+\_\+flag,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \&}]{time\+\_\+stepper\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -261,13 +261,13 @@ Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00291}{291}} of file
 
 
 
-References \mbox{\hyperlink{classoomph_1_1DGElement_a4387d0837a07a2d5423896331c6c012a}{build\+\_\+all\+\_\+faces()}}, \mbox{\hyperlink{elements_8h_source_l02543}{oomph\+::\+Finite\+Element\+::construct\+\_\+boundary\+\_\+node()}}, \mbox{\hyperlink{elements_8h_source_l02514}{oomph\+::\+Finite\+Element\+::construct\+\_\+node()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}.
+References \mbox{\hyperlink{classoomph_1_1DGElement_a4387d0837a07a2d5423896331c6c012a}{build\+\_\+all\+\_\+faces()}}, \mbox{\hyperlink{elements_8h_source_l02538}{oomph\+::\+Finite\+Element\+::construct\+\_\+boundary\+\_\+node()}}, \mbox{\hyperlink{elements_8h_source_l02509}{oomph\+::\+Finite\+Element\+::construct\+\_\+node()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classoomph_1_1DGElement_a6f7fc1def2a798ee364ae33c8925245f}\label{classoomph_1_1DGElement_a6f7fc1def2a798ee364ae33c8925245f}} 
 \index{oomph::DGElement@{oomph::DGElement}!construct\_nodes\_and\_faces@{construct\_nodes\_and\_faces}}
 \index{construct\_nodes\_and\_faces@{construct\_nodes\_and\_faces}!oomph::DGElement@{oomph::DGElement}}
 \doxysubsubsection{\texorpdfstring{construct\_nodes\_and\_faces()}{construct\_nodes\_and\_faces()}}
-{\footnotesize\ttfamily void oomph\+::\+DGElement\+::construct\+\_\+nodes\+\_\+and\+\_\+faces (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DGMesh}{DGMesh}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{time\+\_\+stepper\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+DGElement\+::construct\+\_\+nodes\+\_\+and\+\_\+faces (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DGMesh}{DGMesh}} $\ast$const \&}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \&}]{time\+\_\+stepper\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -279,7 +279,7 @@ Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00335}{335}} of file
 
 
 
-References \mbox{\hyperlink{classoomph_1_1DGElement_a4387d0837a07a2d5423896331c6c012a}{build\+\_\+all\+\_\+faces()}}, \mbox{\hyperlink{elements_8h_source_l02514}{oomph\+::\+Finite\+Element\+::construct\+\_\+node()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}.
+References \mbox{\hyperlink{classoomph_1_1DGElement_a4387d0837a07a2d5423896331c6c012a}{build\+\_\+all\+\_\+faces()}}, \mbox{\hyperlink{elements_8h_source_l02509}{oomph\+::\+Finite\+Element\+::construct\+\_\+node()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classoomph_1_1DGElement_a1fb4172f65716e0b5277efc65b182d44}\label{classoomph_1_1DGElement_a1fb4172f65716e0b5277efc65b182d44}} 
 \index{oomph::DGElement@{oomph::DGElement}!disable\_mass\_matrix\_reuse@{disable\_mass\_matrix\_reuse}}
@@ -329,7 +329,7 @@ Referenced by \mbox{\hyperlink{problem_8cc_source_l11802}{oomph\+::\+Problem\+::
 \index{oomph::DGElement@{oomph::DGElement}!face\_element\_pt@{face\_element\_pt}}
 \index{face\_element\_pt@{face\_element\_pt}!oomph::DGElement@{oomph::DGElement}}
 \doxysubsubsection{\texorpdfstring{face\_element\_pt()}{face\_element\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1DGFaceElement}{DGFace\+Element}} $\ast$ oomph\+::\+DGElement\+::face\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1DGFaceElement}{DGFace\+Element}} $\ast$ oomph\+::\+DGElement\+::face\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -377,7 +377,7 @@ Referenced by \mbox{\hyperlink{problem_8cc_source_l03579}{oomph\+::\+Problem\+::
 \index{oomph::DGElement@{oomph::DGElement}!get\_neighbouring\_face\_and\_local\_coordinate@{get\_neighbouring\_face\_and\_local\_coordinate}}
 \index{get\_neighbouring\_face\_and\_local\_coordinate@{get\_neighbouring\_face\_and\_local\_coordinate}!oomph::DGElement@{oomph::DGElement}}
 \doxysubsubsection{\texorpdfstring{get\_neighbouring\_face\_and\_local\_coordinate()}{get\_neighbouring\_face\_and\_local\_coordinate()}}
-{\footnotesize\ttfamily void oomph\+::\+DGElement\+::get\+\_\+neighbouring\+\_\+face\+\_\+and\+\_\+local\+\_\+coordinate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{face\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} $\ast$\&}]{face\+\_\+element\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s\+\_\+face }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void oomph\+::\+DGElement\+::get\+\_\+neighbouring\+\_\+face\+\_\+and\+\_\+local\+\_\+coordinate (\begin{DoxyParamCaption}\item[{const int \&}]{face\+\_\+index,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} $\ast$\&}]{face\+\_\+element\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s\+\_\+face }\end{DoxyParamCaption})}
 
 
 
@@ -451,7 +451,7 @@ Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00372}{372}} of file
 
 
 
-References \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{oomph\+::f()}}, \mbox{\hyperlink{dg__elements_8h_source_l00366}{face\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{dg__elements_8h_source_l00360}{nface()}}, and \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
+References \mbox{\hyperlink{dg__elements_8h_source_l00366}{face\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{dg__elements_8h_source_l00360}{nface()}}, and \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1DGElement_a56efa47ff13adce4b7d740290a208ddc}\label{classoomph_1_1DGElement_a56efa47ff13adce4b7d740290a208ddc}} 
 \index{oomph::DGElement@{oomph::DGElement}!pre\_compute\_mass\_matrix@{pre\_compute\_mass\_matrix}}
@@ -501,7 +501,7 @@ Referenced by \mbox{\hyperlink{dg__elements_8cc_source_l00686}{slope\+\_\+limit(
 \index{oomph::DGElement@{oomph::DGElement}!set\_mass\_matrix\_from\_element@{set\_mass\_matrix\_from\_element}}
 \index{set\_mass\_matrix\_from\_element@{set\_mass\_matrix\_from\_element}!oomph::DGElement@{oomph::DGElement}}
 \doxysubsubsection{\texorpdfstring{set\_mass\_matrix\_from\_element()}{set\_mass\_matrix\_from\_element()}}
-{\footnotesize\ttfamily virtual void oomph\+::\+DGElement\+::set\+\_\+mass\+\_\+matrix\+\_\+from\+\_\+element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DGElement}{DGElement}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{element\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+DGElement\+::set\+\_\+mass\+\_\+matrix\+\_\+from\+\_\+element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DGElement}{DGElement}} $\ast$const \&}]{element\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -533,7 +533,7 @@ References \mbox{\hyperlink{dg__elements_8h_source_l00171}{DG\+\_\+mesh\+\_\+pt}
 \index{oomph::DGElement@{oomph::DGElement}!setup\_face\_neighbour\_info@{setup\_face\_neighbour\_info}}
 \index{setup\_face\_neighbour\_info@{setup\_face\_neighbour\_info}!oomph::DGElement@{oomph::DGElement}}
 \doxysubsubsection{\texorpdfstring{setup\_face\_neighbour\_info()}{setup\_face\_neighbour\_info()}}
-{\footnotesize\ttfamily void oomph\+::\+DGElement\+::setup\+\_\+face\+\_\+neighbour\+\_\+info (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} bool \&}]{add\+\_\+face\+\_\+data\+\_\+as\+\_\+external }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+DGElement\+::setup\+\_\+face\+\_\+neighbour\+\_\+info (\begin{DoxyParamCaption}\item[{const bool \&}]{add\+\_\+face\+\_\+data\+\_\+as\+\_\+external }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -545,13 +545,13 @@ Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00393}{393}} of file
 
 
 
-References \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{oomph\+::f()}}, \mbox{\hyperlink{dg__elements_8h_source_l00366}{face\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{dg__elements_8h_source_l00360}{nface()}}, \mbox{\hyperlink{dg__elements_8cc_source_l00123}{oomph\+::\+DGFace\+Element\+::report\+\_\+info()}}, and \mbox{\hyperlink{dg__elements_8cc_source_l00042}{oomph\+::\+DGFace\+Element\+::setup\+\_\+neighbour\+\_\+info()}}.
+References \mbox{\hyperlink{dg__elements_8h_source_l00366}{face\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{dg__elements_8h_source_l00360}{nface()}}, \mbox{\hyperlink{dg__elements_8cc_source_l00123}{oomph\+::\+DGFace\+Element\+::report\+\_\+info()}}, and \mbox{\hyperlink{dg__elements_8cc_source_l00042}{oomph\+::\+DGFace\+Element\+::setup\+\_\+neighbour\+\_\+info()}}.
 
 \mbox{\Hypertarget{classoomph_1_1DGElement_a69834c27193675dfa9e9d03413ac9d7e}\label{classoomph_1_1DGElement_a69834c27193675dfa9e9d03413ac9d7e}} 
 \index{oomph::DGElement@{oomph::DGElement}!slope\_limit@{slope\_limit}}
 \index{slope\_limit@{slope\_limit}!oomph::DGElement@{oomph::DGElement}}
 \doxysubsubsection{\texorpdfstring{slope\_limit()}{slope\_limit()}}
-{\footnotesize\ttfamily void oomph\+::\+DGElement\+::slope\+\_\+limit (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SlopeLimiter}{Slope\+Limiter}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{slope\+\_\+limiter\+\_\+pt }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void oomph\+::\+DGElement\+::slope\+\_\+limit (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SlopeLimiter}{Slope\+Limiter}} $\ast$const \&}]{slope\+\_\+limiter\+\_\+pt }\end{DoxyParamCaption})}
 
 
 
@@ -563,7 +563,7 @@ Definition at line \mbox{\hyperlink{dg__elements_8cc_source_l00686}{686}} of fil
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l04763}{oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02616}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{dg__elements_8h_source_l00366}{face\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{dg__elements_8h_source_l00534}{oomph\+::\+Slope\+Limiter\+::limit()}}, and \mbox{\hyperlink{dg__elements_8h_source_l00193}{required\+\_\+nflux()}}.
+References \mbox{\hyperlink{elements_8h_source_l04735}{oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{dg__elements_8h_source_l00366}{face\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{dg__elements_8h_source_l00534}{oomph\+::\+Slope\+Limiter\+::limit()}}, and \mbox{\hyperlink{dg__elements_8h_source_l00193}{required\+\_\+nflux()}}.
 
 
 

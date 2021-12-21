@@ -20,15 +20,15 @@ Inheritance diagram for oomph\+::QSpherical\+Taylor\+Hood\+Element\+:\begin{figu
 \item 
 \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_a03608ea537e37018e0894260ebc83b65}{QSpherical\+Taylor\+Hood\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Constructor, no internal data points. \end{DoxyCompactList}\item 
-virtual unsigned \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_a900be4fc6f5710905e8f562ca5a76c3d}{required\+\_\+nvalue}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+virtual unsigned \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_a900be4fc6f5710905e8f562ca5a76c3d}{required\+\_\+nvalue}} (const unsigned \&n) const
 \begin{DoxyCompactList}\small\item\em Number of values (pinned or dofs) required at node n. Can be overwritten for hanging node version. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_a8d7e127d0989233ad2bcd417536b54c0}{p\+\_\+nodal\+\_\+index\+\_\+spherical\+\_\+nst}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+int \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_a8d7e127d0989233ad2bcd417536b54c0}{p\+\_\+nodal\+\_\+index\+\_\+spherical\+\_\+nst}} () const
 \begin{DoxyCompactList}\small\item\em Set the value at which the pressure is stored in the nodes In this case the third index because there are three velocity components. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_a0baaa4667b08a35ccb6f655fc55e63ac}{p\+\_\+spherical\+\_\+nst}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+p) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_a0baaa4667b08a35ccb6f655fc55e63ac}{p\+\_\+spherical\+\_\+nst}} (const unsigned \&n\+\_\+p) const
 \begin{DoxyCompactList}\small\item\em Access function for the pressure values at local pressure node n\+\_\+p (const version) \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_af923b447673c5a89772989e91d8f6603}{npres\+\_\+spherical\+\_\+nst}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_af923b447673c5a89772989e91d8f6603}{npres\+\_\+spherical\+\_\+nst}} () const
 \begin{DoxyCompactList}\small\item\em Return number of pressure values. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_acc320cd97d3adae63e1775f24f63efe7}{fix\+\_\+pressure}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&p\+\_\+dof, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&p\+\_\+value)
+void \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_acc320cd97d3adae63e1775f24f63efe7}{fix\+\_\+pressure}} (const unsigned \&p\+\_\+dof, const double \&p\+\_\+value)
 \begin{DoxyCompactList}\small\item\em Pin p\+\_\+dof-\/th pressure dof and set it to value specified by p\+\_\+value. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_a3f964db0b1ca6e1edd0c2b450b79af6d}{identify\+\_\+load\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&paired\+\_\+load\+\_\+data)
 \begin{DoxyCompactList}\small\item\em Add to the set {\ttfamily paired\+\_\+load\+\_\+data} pairs containing. \end{DoxyCompactList}\item 
@@ -36,38 +36,38 @@ void \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_a53b2b394a10a6a4
 \begin{DoxyCompactList}\small\item\em Add to the set {\ttfamily paired\+\_\+pressure\+\_\+data} pairs containing. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_af3864809dfd77246f0ec052480ac397f}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations}{Spherical\+Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_ac4e26ba768ccacbcd5144d34219690b0}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&nplot)
+void \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_ac4e26ba768ccacbcd5144d34219690b0}{output}} (std\+::ostream \&outfile, const unsigned \&nplot)
 \begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations}{Spherical\+Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_aa45522c214c7cb5ff01724ebafe988c6}{output}} (FILE $\ast$file\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations}{Spherical\+Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_ad8e462b97fd0aa1d0000e3440259ef61}{output}} (FILE $\ast$file\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&nplot)
+void \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_ad8e462b97fd0aa1d0000e3440259ef61}{output}} (FILE $\ast$file\+\_\+pt, const unsigned \&nplot)
 \begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations}{Spherical\+Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_a3417f97997b87a5cddc499697e227717}{ndof\+\_\+types}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_a3417f97997b87a5cddc499697e227717}{ndof\+\_\+types}} () const
 \begin{DoxyCompactList}\small\item\em The number of \char`\"{}\+DOF types\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: Velocity (3 components) and pressure. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_a62c62fd109c074654a239bcfb99522c6}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_a62c62fd109c074654a239bcfb99522c6}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const
 \begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+Dof type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-double \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_ad6ac4efe30e2d18801f17f000db47a25}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+spherical\+\_\+nst}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_ad6ac4efe30e2d18801f17f000db47a25}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+spherical\+\_\+nst}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) const
 \begin{DoxyCompactList}\small\item\em Velocity shape and test functions and their derivs w.\+r.\+t. to global coords at local coordinate s (taken from geometry) Return Jacobian of mapping between local and global coordinates. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_accf74eeba4a63dff1ca12048b751fed2}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+spherical\+\_\+nst}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_accf74eeba4a63dff1ca12048b751fed2}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+spherical\+\_\+nst}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) const
 \begin{DoxyCompactList}\small\item\em Velocity shape and test functions and their derivs w.\+r.\+t. to global coords at local coordinate s (taken from geometry) Return Jacobian of mapping between local and global coordinates. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_acc55b6f8430df47195e31d8e8e6b68c0}{pshape\+\_\+spherical\+\_\+nst}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_acc55b6f8430df47195e31d8e8e6b68c0}{pshape\+\_\+spherical\+\_\+nst}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi) const
 \begin{DoxyCompactList}\small\item\em Pressure shape functions at local coordinate s. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_afa1ec3d14dbdee7581260678f6790fe7}{pshape\+\_\+spherical\+\_\+nst}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_afa1ec3d14dbdee7581260678f6790fe7}{pshape\+\_\+spherical\+\_\+nst}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) const
 \begin{DoxyCompactList}\small\item\em Pressure shape and test functions at local coordinte s. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_a758be6fc4cc9d5e1191134412a43b83d}{p\+\_\+local\+\_\+eqn}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+int \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_a758be6fc4cc9d5e1191134412a43b83d}{p\+\_\+local\+\_\+eqn}} (const unsigned \&n) const
 \begin{DoxyCompactList}\small\item\em Return the local equation numbers for the pressure values. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_af1726837de58e680ce2629e4281e4432}{Pconv}} \mbox{[}$\,$\mbox{]} = \{0, 2, 6, 8\}
+static const unsigned \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_af1726837de58e680ce2629e4281e4432}{Pconv}} \mbox{[}$\,$\mbox{]} = \{0, 2, 6, 8\}
 \begin{DoxyCompactList}\small\item\em Static array of ints to hold conversion from pressure node numbers to actual node numbers. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_abdb8b06dabe4d4982ba86b83fc8cd4db}{Initial\+\_\+\+Nvalue}} \mbox{[}$\,$\mbox{]}
+static const unsigned \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_abdb8b06dabe4d4982ba86b83fc8cd4db}{Initial\+\_\+\+Nvalue}} \mbox{[}$\,$\mbox{]}
 \begin{DoxyCompactList}\small\item\em Static array of ints to hold number of variables at node. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -103,7 +103,7 @@ Definition at line \mbox{\hyperlink{spherical__navier__stokes__elements_8h_sourc
 \index{oomph::QSphericalTaylorHoodElement@{oomph::QSphericalTaylorHoodElement}!dshape\_and\_dtest\_eulerian\_at\_knot\_spherical\_nst@{dshape\_and\_dtest\_eulerian\_at\_knot\_spherical\_nst}}
 \index{dshape\_and\_dtest\_eulerian\_at\_knot\_spherical\_nst@{dshape\_and\_dtest\_eulerian\_at\_knot\_spherical\_nst}!oomph::QSphericalTaylorHoodElement@{oomph::QSphericalTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_at\_knot\_spherical\_nst()}{dshape\_and\_dtest\_eulerian\_at\_knot\_spherical\_nst()}}
-{\footnotesize\ttfamily double oomph\+::\+QSpherical\+Taylor\+Hood\+Element\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+spherical\+\_\+nst (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily double oomph\+::\+QSpherical\+Taylor\+Hood\+Element\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+spherical\+\_\+nst (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -119,13 +119,13 @@ Definition at line \mbox{\hyperlink{spherical__navier__stokes__elements_8h_sourc
 
 
 
-References \mbox{\hyperlink{classoomph_1_1FiniteElement_a837c4849f68842295ab5e77c8ecb8b93}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian\+\_\+at\+\_\+knot()}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References \mbox{\hyperlink{elements_8cc_source_l03325}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian\+\_\+at\+\_\+knot()}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
 
 \mbox{\Hypertarget{classoomph_1_1QSphericalTaylorHoodElement_ad6ac4efe30e2d18801f17f000db47a25}\label{classoomph_1_1QSphericalTaylorHoodElement_ad6ac4efe30e2d18801f17f000db47a25}} 
 \index{oomph::QSphericalTaylorHoodElement@{oomph::QSphericalTaylorHoodElement}!dshape\_and\_dtest\_eulerian\_spherical\_nst@{dshape\_and\_dtest\_eulerian\_spherical\_nst}}
 \index{dshape\_and\_dtest\_eulerian\_spherical\_nst@{dshape\_and\_dtest\_eulerian\_spherical\_nst}!oomph::QSphericalTaylorHoodElement@{oomph::QSphericalTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_spherical\_nst()}{dshape\_and\_dtest\_eulerian\_spherical\_nst()}}
-{\footnotesize\ttfamily double oomph\+::\+QSpherical\+Taylor\+Hood\+Element\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+spherical\+\_\+nst (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily double oomph\+::\+QSpherical\+Taylor\+Hood\+Element\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+spherical\+\_\+nst (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -141,13 +141,13 @@ Definition at line \mbox{\hyperlink{spherical__navier__stokes__elements_8h_sourc
 
 
 
-References \mbox{\hyperlink{classoomph_1_1FiniteElement_a9296c17b134688049256a4bbc886df69}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian()}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References \mbox{\hyperlink{elements_8cc_source_l03298}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian()}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
 
 \mbox{\Hypertarget{classoomph_1_1QSphericalTaylorHoodElement_acc320cd97d3adae63e1775f24f63efe7}\label{classoomph_1_1QSphericalTaylorHoodElement_acc320cd97d3adae63e1775f24f63efe7}} 
 \index{oomph::QSphericalTaylorHoodElement@{oomph::QSphericalTaylorHoodElement}!fix\_pressure@{fix\_pressure}}
 \index{fix\_pressure@{fix\_pressure}!oomph::QSphericalTaylorHoodElement@{oomph::QSphericalTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{fix\_pressure()}{fix\_pressure()}}
-{\footnotesize\ttfamily void oomph\+::\+QSpherical\+Taylor\+Hood\+Element\+::fix\+\_\+pressure (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{p\+\_\+dof,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{p\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+QSpherical\+Taylor\+Hood\+Element\+::fix\+\_\+pressure (\begin{DoxyParamCaption}\item[{const unsigned \&}]{p\+\_\+dof,  }\item[{const double \&}]{p\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -163,7 +163,7 @@ Definition at line \mbox{\hyperlink{spherical__navier__stokes__elements_8h_sourc
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{spherical__navier__stokes__elements_8h_source_l01152}{p\+\_\+nodal\+\_\+index\+\_\+spherical\+\_\+nst()}}.
+References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{spherical__navier__stokes__elements_8h_source_l01152}{p\+\_\+nodal\+\_\+index\+\_\+spherical\+\_\+nst()}}, \mbox{\hyperlink{nodes_8h_source_l00385}{oomph\+::\+Data\+::pin()}}, and \mbox{\hyperlink{nodes_8h_source_l00271}{oomph\+::\+Data\+::set\+\_\+value()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QSphericalTaylorHoodElement_a62c62fd109c074654a239bcfb99522c6}\label{classoomph_1_1QSphericalTaylorHoodElement_a62c62fd109c074654a239bcfb99522c6}} 
 \index{oomph::QSphericalTaylorHoodElement@{oomph::QSphericalTaylorHoodElement}!get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}}
@@ -185,7 +185,7 @@ Definition at line \mbox{\hyperlink{spherical__navier__stokes__elements_8cc_sour
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00704}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{elements_8h_source_l00726}{oomph\+::\+Generalised\+Element\+::local\+\_\+eqn\+\_\+number()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}, and \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References \mbox{\hyperlink{elements_8h_source_l00704}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{elements_8h_source_l00726}{oomph\+::\+Generalised\+Element\+::local\+\_\+eqn\+\_\+number()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QSphericalTaylorHoodElement_a3f964db0b1ca6e1edd0c2b450b79af6d}\label{classoomph_1_1QSphericalTaylorHoodElement_a3f964db0b1ca6e1edd0c2b450b79af6d}} 
 \index{oomph::QSphericalTaylorHoodElement@{oomph::QSphericalTaylorHoodElement}!identify\_load\_data@{identify\_load\_data}}
@@ -211,7 +211,7 @@ Definition at line \mbox{\hyperlink{spherical__navier__stokes__elements_8cc_sour
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{spherical__navier__stokes__elements_8cc_source_l02549}{identify\+\_\+pressure\+\_\+data()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{spherical__navier__stokes__elements_8h_source_l00387}{oomph\+::\+Spherical\+Navier\+Stokes\+Equations\+::u\+\_\+index\+\_\+spherical\+\_\+nst()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{spherical__navier__stokes__elements_8cc_source_l02549}{identify\+\_\+pressure\+\_\+data()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{spherical__navier__stokes__elements_8h_source_l00387}{oomph\+::\+Spherical\+Navier\+Stokes\+Equations\+::u\+\_\+index\+\_\+spherical\+\_\+nst()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QSphericalTaylorHoodElement_a53b2b394a10a6a415a79c3d53aaf2a51}\label{classoomph_1_1QSphericalTaylorHoodElement_a53b2b394a10a6a415a79c3d53aaf2a51}} 
 \index{oomph::QSphericalTaylorHoodElement@{oomph::QSphericalTaylorHoodElement}!identify\_pressure\_data@{identify\_pressure\_data}}
@@ -239,7 +239,7 @@ Definition at line \mbox{\hyperlink{spherical__navier__stokes__elements_8cc_sour
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{spherical__navier__stokes__elements_8h_source_l01165}{npres\+\_\+spherical\+\_\+nst()}}, \mbox{\hyperlink{spherical__navier__stokes__elements_8h_source_l01152}{p\+\_\+nodal\+\_\+index\+\_\+spherical\+\_\+nst()}}, and \mbox{\hyperlink{spherical__navier__stokes__elements_8h_source_l01100}{Pconv}}.
+References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{spherical__navier__stokes__elements_8h_source_l01165}{npres\+\_\+spherical\+\_\+nst()}}, \mbox{\hyperlink{spherical__navier__stokes__elements_8h_source_l01152}{p\+\_\+nodal\+\_\+index\+\_\+spherical\+\_\+nst()}}, and \mbox{\hyperlink{spherical__navier__stokes__elements_8h_source_l01100}{Pconv}}.
 
 
 
@@ -311,7 +311,7 @@ References \mbox{\hyperlink{spherical__navier__stokes__elements_8h_source_l00517
 \index{oomph::QSphericalTaylorHoodElement@{oomph::QSphericalTaylorHoodElement}!output@{output}}
 \index{output@{output}!oomph::QSphericalTaylorHoodElement@{oomph::QSphericalTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
-{\footnotesize\ttfamily void oomph\+::\+QSpherical\+Taylor\+Hood\+Element\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+QSpherical\+Taylor\+Hood\+Element\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -355,7 +355,7 @@ References \mbox{\hyperlink{spherical__navier__stokes__elements_8h_source_l00517
 \index{oomph::QSphericalTaylorHoodElement@{oomph::QSphericalTaylorHoodElement}!output@{output}}
 \index{output@{output}!oomph::QSphericalTaylorHoodElement@{oomph::QSphericalTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
-{\footnotesize\ttfamily void oomph\+::\+QSpherical\+Taylor\+Hood\+Element\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+QSpherical\+Taylor\+Hood\+Element\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -377,7 +377,7 @@ References \mbox{\hyperlink{spherical__navier__stokes__elements_8h_source_l00517
 \index{oomph::QSphericalTaylorHoodElement@{oomph::QSphericalTaylorHoodElement}!p\_local\_eqn@{p\_local\_eqn}}
 \index{p\_local\_eqn@{p\_local\_eqn}!oomph::QSphericalTaylorHoodElement@{oomph::QSphericalTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{p\_local\_eqn()}{p\_local\_eqn()}}
-{\footnotesize\ttfamily int oomph\+::\+QSpherical\+Taylor\+Hood\+Element\+::p\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily int oomph\+::\+QSpherical\+Taylor\+Hood\+Element\+::p\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -421,7 +421,7 @@ Referenced by \mbox{\hyperlink{spherical__navier__stokes__elements_8h_source_l01
 \index{oomph::QSphericalTaylorHoodElement@{oomph::QSphericalTaylorHoodElement}!p\_spherical\_nst@{p\_spherical\_nst}}
 \index{p\_spherical\_nst@{p\_spherical\_nst}!oomph::QSphericalTaylorHoodElement@{oomph::QSphericalTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{p\_spherical\_nst()}{p\_spherical\_nst()}}
-{\footnotesize\ttfamily double oomph\+::\+QSpherical\+Taylor\+Hood\+Element\+::p\+\_\+spherical\+\_\+nst (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+p }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily double oomph\+::\+QSpherical\+Taylor\+Hood\+Element\+::p\+\_\+spherical\+\_\+nst (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+p }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -437,13 +437,13 @@ Definition at line \mbox{\hyperlink{spherical__navier__stokes__elements_8h_sourc
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02598}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, and \mbox{\hyperlink{spherical__navier__stokes__elements_8h_source_l01152}{p\+\_\+nodal\+\_\+index\+\_\+spherical\+\_\+nst()}}.
+References \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, and \mbox{\hyperlink{spherical__navier__stokes__elements_8h_source_l01152}{p\+\_\+nodal\+\_\+index\+\_\+spherical\+\_\+nst()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QSphericalTaylorHoodElement_acc55b6f8430df47195e31d8e8e6b68c0}\label{classoomph_1_1QSphericalTaylorHoodElement_acc55b6f8430df47195e31d8e8e6b68c0}} 
 \index{oomph::QSphericalTaylorHoodElement@{oomph::QSphericalTaylorHoodElement}!pshape\_spherical\_nst@{pshape\_spherical\_nst}}
 \index{pshape\_spherical\_nst@{pshape\_spherical\_nst}!oomph::QSphericalTaylorHoodElement@{oomph::QSphericalTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{pshape\_spherical\_nst()}{pshape\_spherical\_nst()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void oomph\+::\+QSpherical\+Taylor\+Hood\+Element\+::pshape\+\_\+spherical\+\_\+nst (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+QSpherical\+Taylor\+Hood\+Element\+::pshape\+\_\+spherical\+\_\+nst (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -469,7 +469,7 @@ Referenced by \mbox{\hyperlink{refineable__spherical__navier__stokes__elements_8
 \index{oomph::QSphericalTaylorHoodElement@{oomph::QSphericalTaylorHoodElement}!pshape\_spherical\_nst@{pshape\_spherical\_nst}}
 \index{pshape\_spherical\_nst@{pshape\_spherical\_nst}!oomph::QSphericalTaylorHoodElement@{oomph::QSphericalTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{pshape\_spherical\_nst()}{pshape\_spherical\_nst()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void oomph\+::\+QSpherical\+Taylor\+Hood\+Element\+::pshape\+\_\+spherical\+\_\+nst (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+QSpherical\+Taylor\+Hood\+Element\+::pshape\+\_\+spherical\+\_\+nst (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -491,7 +491,7 @@ References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{sph
 \index{oomph::QSphericalTaylorHoodElement@{oomph::QSphericalTaylorHoodElement}!required\_nvalue@{required\_nvalue}}
 \index{required\_nvalue@{required\_nvalue}!oomph::QSphericalTaylorHoodElement@{oomph::QSphericalTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{required\_nvalue()}{required\_nvalue()}}
-{\footnotesize\ttfamily virtual unsigned oomph\+::\+QSpherical\+Taylor\+Hood\+Element\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual unsigned oomph\+::\+QSpherical\+Taylor\+Hood\+Element\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -520,7 +520,7 @@ References \mbox{\hyperlink{spherical__navier__stokes__elements_8h_source_l01095
 \index{oomph::QSphericalTaylorHoodElement@{oomph::QSphericalTaylorHoodElement}!Initial\_Nvalue@{Initial\_Nvalue}}
 \index{Initial\_Nvalue@{Initial\_Nvalue}!oomph::QSphericalTaylorHoodElement@{oomph::QSphericalTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{Initial\_Nvalue}{Initial\_Nvalue}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned oomph\+::\+QSpherical\+Taylor\+Hood\+Element\+::\+Initial\+\_\+\+Nvalue\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily const unsigned oomph\+::\+QSpherical\+Taylor\+Hood\+Element\+::\+Initial\+\_\+\+Nvalue\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 {\bfseries Initial value\+:}
 \begin{DoxyCode}{0}
@@ -544,7 +544,7 @@ Referenced by \mbox{\hyperlink{spherical__navier__stokes__elements_8h_source_l01
 \index{oomph::QSphericalTaylorHoodElement@{oomph::QSphericalTaylorHoodElement}!Pconv@{Pconv}}
 \index{Pconv@{Pconv}!oomph::QSphericalTaylorHoodElement@{oomph::QSphericalTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{Pconv}{Pconv}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned oomph\+::\+QSpherical\+Taylor\+Hood\+Element\+::\+Pconv = \{0, 2, 6, 8\}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily const unsigned oomph\+::\+QSpherical\+Taylor\+Hood\+Element\+::\+Pconv = \{0, 2, 6, 8\}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
 
 
 

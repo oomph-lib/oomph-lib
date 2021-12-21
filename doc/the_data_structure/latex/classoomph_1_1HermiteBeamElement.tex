@@ -22,15 +22,15 @@ Inheritance diagram for oomph\+::Hermite\+Beam\+Element\+:\begin{figure}[H]
 \begin{DoxyCompactList}\small\item\em Constructor (empty) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HermiteBeamElement_a4e17bcc85c99e50a676998555151168a}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Output function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HermiteBeamElement_a57da5131fb8e21c6b4774f634492cbbf}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1HermiteBeamElement_a57da5131fb8e21c6b4774f634492cbbf}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em Output function with specified number of plot points. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HermiteBeamElement_aa86c489ad41bc0fb5d9ac3268883c826}{output}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1HermiteBeamElement_aa86c489ad41bc0fb5d9ac3268883c826}{output}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, std\+::ostream \&outfile, const unsigned \&n\+\_\+plot) const
 \begin{DoxyCompactList}\small\item\em Output at previous time (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous) with specified number of plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HermiteBeamElement_ae47002ab30c8283faa9aebb4af9dc7f3}{output}} (FILE $\ast$file\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em C-\/style output function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HermiteBeamElement_a1507819b449418c5e27bb94a7fa08930}{output}} (FILE $\ast$file\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1HermiteBeamElement_a1507819b449418c5e27bb94a7fa08930}{output}} (FILE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em C-\/style output function with specified number of plot points. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HermiteBeamElement_afc92c0d3a0b5ca4bbd4c6232e6858a8a}{output}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, FILE $\ast$file\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1HermiteBeamElement_afc92c0d3a0b5ca4bbd4c6232e6858a8a}{output}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, FILE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot) const
 \begin{DoxyCompactList}\small\item\em C-\/style output at previous time (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous) with specified number of plot points. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -38,7 +38,7 @@ void \mbox{\hyperlink{classoomph_1_1HermiteBeamElement_afc92c0d3a0b5ca4bbd4c6232
 \doxysubsection{Detailed Description}
 Hermite Kirchhoff Love beam. Implements \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations}{Kirchhoff\+Love\+Beam\+Equations}} using 2-\/node Hermite elements as the underlying geometrical elements. 
 
-Definition at line \mbox{\hyperlink{beam__elements_8h_source_l00327}{327}} of file \mbox{\hyperlink{beam__elements_8h_source}{beam\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{beam__elements_8h_source_l00311}{311}} of file \mbox{\hyperlink{beam__elements_8h_source}{beam\+\_\+elements.\+h}}.
 
 
 
@@ -55,7 +55,7 @@ Constructor (empty)
 
 
 
-Definition at line \mbox{\hyperlink{beam__elements_8h_source_l00332}{332}} of file \mbox{\hyperlink{beam__elements_8h_source}{beam\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{beam__elements_8h_source_l00316}{316}} of file \mbox{\hyperlink{beam__elements_8h_source}{beam\+\_\+elements.\+h}}.
 
 
 
@@ -68,7 +68,7 @@ References \mbox{\hyperlink{elements_8h_source_l01390}{oomph\+::\+Finite\+Elemen
 \index{oomph::HermiteBeamElement@{oomph::HermiteBeamElement}!output@{output}}
 \index{output@{output}!oomph::HermiteBeamElement@{oomph::HermiteBeamElement}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/6]}}
-{\footnotesize\ttfamily void oomph\+::\+Hermite\+Beam\+Element\+::output (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{t,  }\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily void oomph\+::\+Hermite\+Beam\+Element\+::output (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption}) const}
 
 
 
@@ -80,13 +80,13 @@ Definition at line \mbox{\hyperlink{beam__elements_8cc_source_l00940}{940}} of f
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
 
 \mbox{\Hypertarget{classoomph_1_1HermiteBeamElement_aa86c489ad41bc0fb5d9ac3268883c826}\label{classoomph_1_1HermiteBeamElement_aa86c489ad41bc0fb5d9ac3268883c826}} 
 \index{oomph::HermiteBeamElement@{oomph::HermiteBeamElement}!output@{output}}
 \index{output@{output}!oomph::HermiteBeamElement@{oomph::HermiteBeamElement}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/6]}}
-{\footnotesize\ttfamily void oomph\+::\+Hermite\+Beam\+Element\+::output (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{t,  }\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Hermite\+Beam\+Element\+::output (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -102,7 +102,7 @@ Definition at line \mbox{\hyperlink{beam__elements_8cc_source_l00786}{786}} of f
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
 
 \mbox{\Hypertarget{classoomph_1_1HermiteBeamElement_ae47002ab30c8283faa9aebb4af9dc7f3}\label{classoomph_1_1HermiteBeamElement_ae47002ab30c8283faa9aebb4af9dc7f3}} 
 \index{oomph::HermiteBeamElement@{oomph::HermiteBeamElement}!output@{output}}
@@ -130,7 +130,7 @@ References \mbox{\hyperlink{beam__elements_8cc_source_l00929}{output()}}.
 \index{oomph::HermiteBeamElement@{oomph::HermiteBeamElement}!output@{output}}
 \index{output@{output}!oomph::HermiteBeamElement@{oomph::HermiteBeamElement}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/6]}}
-{\footnotesize\ttfamily void oomph\+::\+Hermite\+Beam\+Element\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Hermite\+Beam\+Element\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -146,7 +146,7 @@ Definition at line \mbox{\hyperlink{beam__elements_8cc_source_l00982}{982}} of f
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l07108}{oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi()}}, \mbox{\hyperlink{geom__objects_8h_source_l00177}{oomph\+::\+Geom\+Object\+::ndim()}}, \mbox{\hyperlink{geom__objects_8h_source_l00171}{oomph\+::\+Geom\+Object\+::nlagrangian()}}, \mbox{\hyperlink{elements_8h_source_l02468}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02299}{oomph\+::\+Finite\+Element\+::raw\+\_\+dnodal\+\_\+position\+\_\+gen\+\_\+dt()}}, \mbox{\hyperlink{elements_8h_source_l03906}{oomph\+::\+Solid\+Finite\+Element\+::raw\+\_\+lagrangian\+\_\+position\+\_\+gen()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1QHermiteElement_a0e5d50fb86a7eb4c8a30ca8392d5a216}{oomph\+::\+QHermite\+Element$<$ DIM $>$\+::shape()}}, and \mbox{\hyperlink{beam__elements_8h_source_l00165}{oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::\+Undeformed\+\_\+beam\+\_\+pt}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l07104}{oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi()}}, \mbox{\hyperlink{geom__objects_8h_source_l00177}{oomph\+::\+Geom\+Object\+::ndim()}}, \mbox{\hyperlink{geom__objects_8h_source_l00171}{oomph\+::\+Geom\+Object\+::nlagrangian()}}, \mbox{\hyperlink{elements_8h_source_l02463}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02294}{oomph\+::\+Finite\+Element\+::raw\+\_\+dnodal\+\_\+position\+\_\+gen\+\_\+dt()}}, \mbox{\hyperlink{elements_8h_source_l03897}{oomph\+::\+Solid\+Finite\+Element\+::raw\+\_\+lagrangian\+\_\+position\+\_\+gen()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1QHermiteElement_a0e5d50fb86a7eb4c8a30ca8392d5a216}{oomph\+::\+QHermite\+Element$<$ DIM $>$\+::shape()}}, and \mbox{\hyperlink{beam__elements_8h_source_l00149}{oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::\+Undeformed\+\_\+beam\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1HermiteBeamElement_a4e17bcc85c99e50a676998555151168a}\label{classoomph_1_1HermiteBeamElement_a4e17bcc85c99e50a676998555151168a}} 
 \index{oomph::HermiteBeamElement@{oomph::HermiteBeamElement}!output@{output}}
@@ -178,7 +178,7 @@ Referenced by \mbox{\hyperlink{beam__elements_8cc_source_l00929}{output()}}.
 \index{oomph::HermiteBeamElement@{oomph::HermiteBeamElement}!output@{output}}
 \index{output@{output}!oomph::HermiteBeamElement@{oomph::HermiteBeamElement}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [6/6]}}
-{\footnotesize\ttfamily void oomph\+::\+Hermite\+Beam\+Element\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Hermite\+Beam\+Element\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -194,7 +194,7 @@ Definition at line \mbox{\hyperlink{beam__elements_8cc_source_l00825}{825}} of f
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l07108}{oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi()}}, \mbox{\hyperlink{geom__objects_8h_source_l00177}{oomph\+::\+Geom\+Object\+::ndim()}}, \mbox{\hyperlink{geom__objects_8h_source_l00171}{oomph\+::\+Geom\+Object\+::nlagrangian()}}, \mbox{\hyperlink{elements_8h_source_l02468}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02299}{oomph\+::\+Finite\+Element\+::raw\+\_\+dnodal\+\_\+position\+\_\+gen\+\_\+dt()}}, \mbox{\hyperlink{elements_8h_source_l03906}{oomph\+::\+Solid\+Finite\+Element\+::raw\+\_\+lagrangian\+\_\+position\+\_\+gen()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1QHermiteElement_a0e5d50fb86a7eb4c8a30ca8392d5a216}{oomph\+::\+QHermite\+Element$<$ DIM $>$\+::shape()}}, and \mbox{\hyperlink{beam__elements_8h_source_l00165}{oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::\+Undeformed\+\_\+beam\+\_\+pt}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l07104}{oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi()}}, \mbox{\hyperlink{geom__objects_8h_source_l00177}{oomph\+::\+Geom\+Object\+::ndim()}}, \mbox{\hyperlink{geom__objects_8h_source_l00171}{oomph\+::\+Geom\+Object\+::nlagrangian()}}, \mbox{\hyperlink{elements_8h_source_l02463}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02294}{oomph\+::\+Finite\+Element\+::raw\+\_\+dnodal\+\_\+position\+\_\+gen\+\_\+dt()}}, \mbox{\hyperlink{elements_8h_source_l03897}{oomph\+::\+Solid\+Finite\+Element\+::raw\+\_\+lagrangian\+\_\+position\+\_\+gen()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1QHermiteElement_a0e5d50fb86a7eb4c8a30ca8392d5a216}{oomph\+::\+QHermite\+Element$<$ DIM $>$\+::shape()}}, and \mbox{\hyperlink{beam__elements_8h_source_l00149}{oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::\+Undeformed\+\_\+beam\+\_\+pt}}.
 
 
 

@@ -870,27 +870,27 @@
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l00866}00866     \textcolor{keywordtype}{unsigned} nnode = this-\/>nboundary\_node(5);}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l00867}00867     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < nnode; k++)}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l00868}00868     \{}
-\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l00869}00869       Node* nod\_pt = this-\/>boundary\_node\_pt(5, k);}
+\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l00869}00869       \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = this-\/>boundary\_node\_pt(5, k);}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l00870}00870       zeta[0] = double(k) * flag\_length / double(nnode -\/ 1);}
-\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l00871}00871       nod\_pt-\/>set\_coordinates\_on\_boundary(5, zeta);}
+\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l00871}00871       nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a94c19e165ab4e88aabbfa27443c530b7}{set\_coordinates\_on\_boundary}}(5, zeta);}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l00872}00872     \}}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l00873}00873 }
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l00874}00874     \textcolor{comment}{// loop on nodes of boundary 6}}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l00875}00875     nnode = this-\/>nboundary\_node(6);}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l00876}00876     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < nnode; k++)}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l00877}00877     \{}
-\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l00878}00878       Node* nod\_pt = this-\/>boundary\_node\_pt(6, k);}
+\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l00878}00878       \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = this-\/>boundary\_node\_pt(6, k);}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l00879}00879       zeta[0] = double(k) * flag\_length / double(nnode -\/ 1);}
-\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l00880}00880       nod\_pt-\/>set\_coordinates\_on\_boundary(6, zeta);}
+\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l00880}00880       nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a94c19e165ab4e88aabbfa27443c530b7}{set\_coordinates\_on\_boundary}}(6, zeta);}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l00881}00881     \}}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l00882}00882 }
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l00883}00883     \textcolor{comment}{// loop on nodes of boundary 7}}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l00884}00884     nnode = this-\/>nboundary\_node(7);}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l00885}00885     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < nnode; k++)}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l00886}00886     \{}
-\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l00887}00887       Node* nod\_pt = this-\/>boundary\_node\_pt(7, k);}
+\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l00887}00887       \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = this-\/>boundary\_node\_pt(7, k);}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l00888}00888       zeta[0] = -\/flag\_height / 2. + double(k) / double(nnode -\/ 1) * flag\_height;}
-\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l00889}00889       nod\_pt-\/>set\_coordinates\_on\_boundary(7, zeta);}
+\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l00889}00889       nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a94c19e165ab4e88aabbfa27443c530b7}{set\_coordinates\_on\_boundary}}(7, zeta);}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l00890}00890     \}}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l00891}00891 }
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l00892}00892     \textcolor{comment}{// We have parametrised boundary 5,6 and 7}}
@@ -961,7 +961,7 @@
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l00957}00957         ref\_value[3] = \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0];}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l00958}00958 }
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l00959}00959         \textcolor{comment}{// Fifth reference value : x coordinate}}
-\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l00960}00960         ref\_value[4] = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})-\/>x(0);}
+\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l00960}00960         ref\_value[4] = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0);}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l00961}00961 }
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l00962}00962         \textcolor{comment}{// Setup algebraic update for node: Pass update information}}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l00963}00963         \textcolor{comment}{// to AlgebraicNode:}}
@@ -1009,7 +1009,7 @@
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01005}01005         ref\_value[3] = \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0];}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01006}01006 }
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01007}01007         \textcolor{comment}{// Fifth reference value : x coordinate}}
-\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01008}01008         ref\_value[4] = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})-\/>x(0);}
+\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01008}01008         ref\_value[4] = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0);}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01009}01009 }
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01010}01010         \textcolor{comment}{// Setup algebraic update for node: Pass update information}}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01011}01011         \textcolor{comment}{// to AlgebraicNode:}}
@@ -1431,9 +1431,9 @@
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01427}01427     \textcolor{keywordtype}{double} r = ref\_value[1];}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01428}01428 }
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01429}01429     \textcolor{comment}{// Assign new nodal coordinates}}
-\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01430}01430     node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 0) =}
+\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01430}01430     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 0) =}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01431}01431       ref\_point[0] + (1.0 -\/ r) * (flag\_point[0] -\/ ref\_point[0]);}
-\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01432}01432     node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 1) =}
+\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01432}01432     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 1) =}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01433}01433       ref\_point[1] + (1.0 -\/ r) * (flag\_point[1] -\/ ref\_point[1]);}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01434}01434   \}}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01435}01435 }
@@ -1470,8 +1470,8 @@
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01466}01466     \textcolor{keywordtype}{double} r = ref\_value[1];}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01467}01467 }
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01468}01468     \textcolor{comment}{// Assign new nodal coordinates}}
-\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01469}01469     node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 0) = ref\_point[0] + r * (flag\_point[0] -\/ ref\_point[0]);}
-\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01470}01470     node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 1) = ref\_point[1] + r * (flag\_point[1] -\/ ref\_point[1]);}
+\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01469}01469     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 0) = ref\_point[0] + r * (flag\_point[0] -\/ ref\_point[0]);}
+\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01470}01470     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 1) = ref\_point[1] + r * (flag\_point[1] -\/ ref\_point[1]);}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01471}01471   \}}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01472}01472 }
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01473}01473   \textcolor{comment}{//=================================================================}\textcolor{comment}{}}
@@ -1516,8 +1516,8 @@
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01512}01512     \textcolor{keywordtype}{double} r = ref\_value[0];}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01513}01513 }
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01514}01514     \textcolor{comment}{// Assign new nodal coordinates}}
-\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01515}01515     node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 0) = flag\_point[0] + r * (ref\_point[0] -\/ flag\_point[0]);}
-\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01516}01516     node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 1) = flag\_point[1] + r * (ref\_point[1] -\/ flag\_point[1]);}
+\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01515}01515     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 0) = flag\_point[0] + r * (ref\_point[0] -\/ flag\_point[0]);}
+\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01516}01516     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 1) = flag\_point[1] + r * (ref\_point[1] -\/ flag\_point[1]);}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01517}01517   \}}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01518}01518 }
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01519}01519   \textcolor{comment}{//=================================================================}\textcolor{comment}{}}
@@ -1564,8 +1564,8 @@
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01560}01560     p2[1] = Height;}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01561}01561 }
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01562}01562     \textcolor{comment}{// Connect those points with the vertical fraction ref\_value[1]}}
-\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01563}01563     node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 0) = p1[0] + ref\_value[1] * (p2[0] -\/ p1[0]);}
-\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01564}01564     node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 1) = p1[1] + ref\_value[1] * (p2[1] -\/ p1[1]);}
+\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01563}01563     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 0) = p1[0] + ref\_value[1] * (p2[0] -\/ p1[0]);}
+\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01564}01564     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 1) = p1[1] + ref\_value[1] * (p2[1] -\/ p1[1]);}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01565}01565   \}}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01566}01566 }
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01567}01567   \textcolor{comment}{//=================================================================}\textcolor{comment}{}}
@@ -1613,8 +1613,8 @@
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01609}01609     p2[1] = 0.;}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01610}01610 }
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01611}01611     \textcolor{comment}{// Connect those points with the vertical fraction ref\_value[1]}}
-\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01612}01612     node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 0) = p2[0] + ref\_value[1] * (p1[0] -\/ p2[0]);}
-\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01613}01613     node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 1) = p2[1] + ref\_value[1] * (p1[1] -\/ p2[1]);}
+\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01612}01612     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 0) = p2[0] + ref\_value[1] * (p1[0] -\/ p2[0]);}
+\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01613}01613     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 1) = p2[1] + ref\_value[1] * (p1[1] -\/ p2[1]);}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01614}01614   \}}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01615}01615 }
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01616}01616   \textcolor{comment}{//=================================================================}\textcolor{comment}{}}
@@ -1655,8 +1655,8 @@
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01651}01651 }
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01652}01652 }
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01653}01653     \textcolor{comment}{// Connect those points with the vertical fraction ref\_value[1]}}
-\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01654}01654     node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 0) = point\_flag[0] + ref\_value[1] * (p1[0] -\/ point\_flag[0]);}
-\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01655}01655     node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 1) = point\_flag[1] + ref\_value[1] * (p1[1] -\/ point\_flag[1]);}
+\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01654}01654     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 0) = point\_flag[0] + ref\_value[1] * (p1[0] -\/ point\_flag[0]);}
+\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01655}01655     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 1) = point\_flag[1] + ref\_value[1] * (p1[1] -\/ point\_flag[1]);}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01656}01656   \}}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01657}01657 }
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01658}01658   \textcolor{comment}{//=================================================================}\textcolor{comment}{}}
@@ -1697,9 +1697,9 @@
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01693}01693 }
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01694}01694 }
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01695}01695     \textcolor{comment}{// Connect those points with the vertical fraction ref\_value[1]}}
-\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01696}01696     node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 0) =}
+\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01696}01696     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 0) =}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01697}01697       point\_flag[0] + (1 -\/ ref\_value[1]) * (p1[0] -\/ point\_flag[0]);}
-\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01698}01698     node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 1) =}
+\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01698}01698     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 1) =}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01699}01699       point\_flag[1] + (1 -\/ ref\_value[1]) * (p1[1] -\/ point\_flag[1]);}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01700}01700   \}}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01701}01701 }
@@ -1775,18 +1775,18 @@
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01771}01771     \textcolor{comment}{// Place point on horizontal fraction of straight line}}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01772}01772     \textcolor{comment}{// connecting reference points -\/-\/ this won't match the}}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01773}01773     \textcolor{comment}{// curved top boundary adjacent to the flag}}
-\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01774}01774     node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 0) =}
+\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01774}01774     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 0) =}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01775}01775       ref\_point\_on\_circle[0] +}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01776}01776       (ref\_point\_on\_right\_line[0] -\/ ref\_point\_on\_circle[0]) * omega\_horizontal;}
-\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01777}01777     node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 1) =}
+\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01777}01777     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 1) =}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01778}01778       ref\_point\_on\_circle[1] +}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01779}01779       (ref\_point\_on\_right\_line[1] -\/ ref\_point\_on\_circle[1]) * omega\_horizontal;}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01780}01780 }
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01781}01781     \textcolor{comment}{// Correct by scaled difference between bottom straight line}}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01782}01782     \textcolor{comment}{// and bent flag}}
-\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01783}01783     node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 0) +=}
+\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01783}01783     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 0) +=}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01784}01784       (ref\_point\_on\_flag[0] -\/ r\_bot[0]) * (1.0 -\/ omega\_vertical);}
-\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01785}01785     node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 1) +=}
+\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01785}01785     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 1) +=}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01786}01786       (ref\_point\_on\_flag[1] -\/ r\_bot[1]) * (1.0 -\/ omega\_vertical);}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01787}01787   \}}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01788}01788 }
@@ -1861,17 +1861,17 @@
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01857}01857     \textcolor{comment}{// Place point on horizontal fraction of straight line}}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01858}01858     \textcolor{comment}{// connecting reference points -\/-\/ this won't match the}}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01859}01859     \textcolor{comment}{// curved top boundary adjacent to the flag}}
-\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01860}01860     node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 0) =}
+\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01860}01860     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 0) =}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01861}01861       ref\_point\_on\_circle[0] +}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01862}01862       (ref\_point\_on\_right\_line[0] -\/ ref\_point\_on\_circle[0]) * omega\_horizontal;}
-\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01863}01863     node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 1) =}
+\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01863}01863     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 1) =}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01864}01864       ref\_point\_on\_circle[1] +}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01865}01865       (ref\_point\_on\_right\_line[1] -\/ ref\_point\_on\_circle[1]) * omega\_horizontal;}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01866}01866 }
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01867}01867     \textcolor{comment}{// Correct by scaled difference between top straight line}}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01868}01868     \textcolor{comment}{// and bent flag}}
-\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01869}01869     node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 0) += (ref\_point\_on\_flag[0] -\/ r\_top[0]) * omega\_vertical;}
-\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01870}01870     node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 1) += (ref\_point\_on\_flag[1] -\/ r\_top[1]) * omega\_vertical;}
+\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01869}01869     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 0) += (ref\_point\_on\_flag[0] -\/ r\_top[0]) * omega\_vertical;}
+\DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01870}01870     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 1) += (ref\_point\_on\_flag[1] -\/ r\_top[1]) * omega\_vertical;}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01871}01871   \}}
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01872}01872 }
 \DoxyCodeLine{\Hypertarget{cylinder__with__flag__mesh_8template_8cc_source_l01873}01873 \textcolor{comment}{}}

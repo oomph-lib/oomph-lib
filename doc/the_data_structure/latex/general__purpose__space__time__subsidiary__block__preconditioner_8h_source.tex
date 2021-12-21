@@ -253,8 +253,8 @@
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00249}00249 \textcolor{comment}{    /// Constructor (empty)}}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00250}\mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a8f02edf93c0501aeba98723d803472b4}{00250}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a8f02edf93c0501aeba98723d803472b4}{GMRESBlockPreconditioner}}()}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00251}00251       : \mbox{\hyperlink{classoomph_1_1BlockPreconditioner}{BlockPreconditioner}}<\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}}>(),}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00252}00252         \mbox{\hyperlink{classoomph_1_1Preconditioner_a04caf49de41802ef112e4b8b644b1d4d}{Matrix\_pt}}(0),}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00253}00253         \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a05385552adb400003801a8468a2186ae}{Navier\_stokes\_subsidiary\_preconditioner\_pt}}(0),}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00252}00252         \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_ab4b84bc2dec36b26196f466a43ced299}{Matrix\_pt}}(0),}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00253}00253         \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a66b8ac42169d3247d5e3d9678e905b88}{Navier\_stokes\_subsidiary\_preconditioner\_pt}}(0),}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00254}00254         \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a86f6eb1dbc5b96eab510bda26e3e579b}{Iterations}}(0),}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00255}00255         \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a7662244571d832c4dece39100bc0a118}{Preconditioner\_has\_been\_setup}}(false),}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00256}00256         \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a9cd47798800f479265b762b8ce48dfdb}{Preconditioner\_LHS}}(false)}
@@ -280,16 +280,16 @@
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00276}00276       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a7662244571d832c4dece39100bc0a118}{Preconditioner\_has\_been\_setup}})}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00277}00277       \{}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00278}00278         \textcolor{comment}{// Delete the subsidiary preconditioner}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00279}00279         \textcolor{keyword}{delete} \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a05385552adb400003801a8468a2186ae}{Navier\_stokes\_subsidiary\_preconditioner\_pt}};}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00279}00279         \textcolor{keyword}{delete} \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a66b8ac42169d3247d5e3d9678e905b88}{Navier\_stokes\_subsidiary\_preconditioner\_pt}};}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00280}00280 }
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00281}00281         \textcolor{comment}{// Make it a null pointer}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00282}00282         \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a05385552adb400003801a8468a2186ae}{Navier\_stokes\_subsidiary\_preconditioner\_pt}} = 0;}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00282}00282         \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a66b8ac42169d3247d5e3d9678e905b88}{Navier\_stokes\_subsidiary\_preconditioner\_pt}} = 0;}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00283}00283 }
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00284}00284         \textcolor{comment}{// Delete the matrix!}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00285}00285         \textcolor{keyword}{delete} \mbox{\hyperlink{classoomph_1_1Preconditioner_a04caf49de41802ef112e4b8b644b1d4d}{Matrix\_pt}};}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00285}00285         \textcolor{keyword}{delete} \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_ab4b84bc2dec36b26196f466a43ced299}{Matrix\_pt}};}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00286}00286 }
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00287}00287         \textcolor{comment}{// Make it a null pointer}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00288}00288         \mbox{\hyperlink{classoomph_1_1Preconditioner_a04caf49de41802ef112e4b8b644b1d4d}{Matrix\_pt}} = 0;}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00288}00288         \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_ab4b84bc2dec36b26196f466a43ced299}{Matrix\_pt}} = 0;}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00289}00289       \}}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00290}00290     \} \textcolor{comment}{// End of clean\_up\_memory}}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00291}00291 \textcolor{comment}{}}
@@ -415,7 +415,7 @@
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00411}00411 \textcolor{keyword}{      const}}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00412}00412 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00413}00413       \textcolor{comment}{// Return a pointer to the appropriate member data}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00414}00414       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a05385552adb400003801a8468a2186ae}{Navier\_stokes\_subsidiary\_preconditioner\_pt}};}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00414}00414       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a66b8ac42169d3247d5e3d9678e905b88}{Navier\_stokes\_subsidiary\_preconditioner\_pt}};}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00415}00415     \} \textcolor{comment}{// End of navier\_stokes\_subsidiary\_preconditioner\_pt}}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00416}00416 }
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00417}00417   \textcolor{keyword}{private}:\textcolor{comment}{}}
@@ -426,7 +426,7 @@
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00422}00422                 \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00423}00423                 \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<DoubleVector>}}\& v,}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00424}00424                 \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& block\_x\_with\_size\_of\_full\_x,}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00425}00425                 \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}})}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00425}00425                 \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& x)}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00426}00426     \{}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00427}00427       \textcolor{comment}{// Make a local copy of s}}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00428}00428       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} y(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
@@ -446,13 +446,13 @@
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00442}00442       \} \textcolor{comment}{// for (int i=int(k);i>=0;i-\/-\/)}}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00443}00443 }
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00444}00444       \textcolor{comment}{// Store the number of rows in the result vector}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00445}00445       \textcolor{keywordtype}{unsigned} n\_x = \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.nrow();}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00445}00445       \textcolor{keywordtype}{unsigned} n\_x = x.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow}}();}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00446}00446 }
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00447}00447       \textcolor{comment}{// Build a temporary vector with entries initialised to 0.0}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00448}00448       \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} temp(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.distribution\_pt(), 0.0);}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00448}00448       \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} temp(x.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}(), 0.0);}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00449}00449 }
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00450}00450       \textcolor{comment}{// Build a temporary vector with entries initialised to 0.0}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00451}00451       \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} z(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.distribution\_pt(), 0.0);}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00451}00451       \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} z(x.\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\_pt}}(), 0.0);}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00452}00452 }
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00453}00453       \textcolor{comment}{// Get access to the underlying values}}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00454}00454       \textcolor{keywordtype}{double}* temp\_pt = temp.\mbox{\hyperlink{classoomph_1_1DoubleVector_ae3484a5eb4cb663e09640806ef1bf05a}{values\_pt}}();}
@@ -475,7 +475,7 @@
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00471}00471       \{}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00472}00472         \textcolor{comment}{// Since we're using LHS preconditioning the preconditioner is applied}}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00473}00473         \textcolor{comment}{// to the matrix and RHS vector so we simply update the value of x}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00474}00474         \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}} += temp;}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00474}00474         x += temp;}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00475}00475       \}}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00476}00476       \textcolor{comment}{// If we're using RHS preconditioning}}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00477}00477       \textcolor{keywordflow}{else}}
@@ -492,7 +492,7 @@
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00488}00488         this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a1dd4d3cd6b64fa64e1ff6730b0deecc7}{return\_block\_vector}}(0, temp, temp\_with\_size\_of\_full\_rhs);}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00489}00489 }
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00490}00490         \textcolor{comment}{// Solve on the global-\/sized vectors}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00491}00491         \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a05385552adb400003801a8468a2186ae}{Navier\_stokes\_subsidiary\_preconditioner\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a95fa1d146686ea3b0dbf42104117f4d0}{preconditioner\_solve}}(}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00491}00491         \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a66b8ac42169d3247d5e3d9678e905b88}{Navier\_stokes\_subsidiary\_preconditioner\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a95fa1d146686ea3b0dbf42104117f4d0}{preconditioner\_solve}}(}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00492}00492           temp\_with\_size\_of\_full\_rhs, block\_z\_with\_size\_of\_full\_z);}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00493}00493 }
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00494}00494         \textcolor{comment}{// Now reorder the entries and put them into z}}
@@ -504,136 +504,104 @@
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00500}00500 }
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00501}00501         \textcolor{comment}{// Use the update: x\_m=x\_0+inv(M)Vy [see Saad Y,"{}Iterative methods for}}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00502}00502         \textcolor{comment}{// sparse linear systems"{}, p.284]}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00503}00503         \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}} += z;}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00503}00503         x += z;}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00504}00504       \}}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00505}00505     \} \textcolor{comment}{// End of update}}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00506}00506 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00507}00507 \textcolor{comment}{    /// Helper function: Generate a plane rotation. This is done by}}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00508}00508 \textcolor{comment}{    /// finding the values of \(\backslash\)f\$ \(\backslash\)cos(\(\backslash\)theta) \(\backslash\)f\$ (i.e. cs) and \(\backslash\)sin(\(\backslash\)theta)}}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00509}00509 \textcolor{comment}{    /// (i.e. sn) such that:}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00510}00510 \textcolor{comment}{    /// \(\backslash\)f[}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00511}\mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_afa1a6124234cb3adf8766c88971d7f78}{00511}} \textcolor{comment}{    /// \(\backslash\)begin\{bmatrix\}}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00512}00512 \textcolor{comment}{    /// \(\backslash\)cos\(\backslash\)theta \& \(\backslash\)sin\(\backslash\)theta \(\backslash\)newline}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00513}00513 \textcolor{comment}{    /// -\/\(\backslash\)sin\(\backslash\)theta \& \(\backslash\)cos\(\backslash\)theta}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00514}00514 \textcolor{comment}{    /// \(\backslash\)end\{bmatrix\}}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00515}00515 \textcolor{comment}{    /// \(\backslash\)begin\{bmatrix\}}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00516}00516 \textcolor{comment}{    /// dx \(\backslash\)newline}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00517}00517 \textcolor{comment}{    /// dy}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00518}00518 \textcolor{comment}{    /// \(\backslash\)end\{bmatrix\}}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00519}00519 \textcolor{comment}{    /// =}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00520}00520 \textcolor{comment}{    /// \(\backslash\)begin\{bmatrix\}}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00521}00521 \textcolor{comment}{    /// r \(\backslash\)newline}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00522}00522 \textcolor{comment}{    /// 0}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00523}00523 \textcolor{comment}{    /// \(\backslash\)end\{bmatrix\},}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00524}00524 \textcolor{comment}{    /// \(\backslash\)f]}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00525}00525 \textcolor{comment}{    /// where \(\backslash\)f\$ r=\(\backslash\)sqrt\{pow(dx,2)+pow(dy,2)\} \(\backslash\)f\$. The values of a and b are}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00526}00526 \textcolor{comment}{    /// given by:}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00527}00527 \textcolor{comment}{    /// \(\backslash\)f[}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00528}00528 \textcolor{comment}{    /// \(\backslash\)cos\(\backslash\)theta\&=\(\backslash\)dfrac\{dx\}\{\(\backslash\)sqrt\{pow(dx,2)+pow(dy,2)\}\},}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00529}00529 \textcolor{comment}{    /// \(\backslash\)f]}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00530}00530 \textcolor{comment}{    /// and}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00531}00531 \textcolor{comment}{    /// \(\backslash\)f[}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00532}00532 \textcolor{comment}{    /// \(\backslash\)sin\(\backslash\)theta\&=\(\backslash\)dfrac\{dy\}\{\(\backslash\)sqrt\{pow(dx,2)+pow(dy,2)\}\}.}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00533}00533 \textcolor{comment}{    /// \(\backslash\)f]}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00534}00534 \textcolor{comment}{    /// Taken from: Saad Y."{}Iterative methods for sparse linear systems"{}, p.192}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00535}00535 \textcolor{comment}{}    \textcolor{keywordtype}{void} generate\_plane\_rotation(\textcolor{keywordtype}{double}\& dx, \textcolor{keywordtype}{double}\& dy, \textcolor{keywordtype}{double}\& cs, \textcolor{keywordtype}{double}\& sn)}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00536}00536     \{}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00537}00537       \textcolor{comment}{// If dy=0 then we do not need to apply a rotation}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00538}00538       \textcolor{keywordflow}{if} (dy == 0.0)}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00539}00539       \{}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00540}00540         \textcolor{comment}{// Using theta=0 gives cos(theta)=1}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00541}00541         cs = 1.0;}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00542}00542 }
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00543}00543         \textcolor{comment}{// Using theta=0 gives sin(theta)=0}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00544}00544         sn = 0.0;}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00545}00545       \}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00546}00546       \textcolor{comment}{// If dx or dy is large using the normal form of calculting cs and sn}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00547}00547       \textcolor{comment}{// is naive since this may overflow or underflow so instead we calculate}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00548}00548       \textcolor{comment}{// r=sqrt(pow(dx,2)+pow(dy,2)) by using r=|dy|sqrt(1+pow(dx/dy,2)) if}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00549}00549       \textcolor{comment}{// |dy|>|dx| [see <A}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00550}00550       \textcolor{comment}{// HREF=https://en.wikipedia.org/wiki/Hypot"{}>Hypot</A>.].}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00551}00551       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (fabs(dy) > fabs(dx))}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00552}00552       \{}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00553}00553         \textcolor{comment}{// Since |dy|>|dx| calculate the ratio dx/dy}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00554}00554         \textcolor{keywordtype}{double} temp = dx / dy;}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00555}00555 }
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00556}00556         \textcolor{comment}{// Calculate sin(theta)=dy/sqrt(pow(dx,2)+pow(dy,2))}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00557}00557         sn = 1.0 / sqrt(1.0 + temp * temp);}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00558}00558 }
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00559}00559         \textcolor{comment}{// Calculate cos(theta)=dx/sqrt(pow(dx,2)+pow(dy,2))=(dx/dy)*sin(theta)}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00560}00560         cs = temp * sn;}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00561}00561       \}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00562}00562       \textcolor{comment}{// Otherwise, we have |dx|>=|dy| so to, again, avoid overflow or underflow}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00563}00563       \textcolor{comment}{// calculate the values of cs and sn using the method above}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00564}00564       \textcolor{keywordflow}{else}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00565}00565       \{}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00566}00566         \textcolor{comment}{// Since |dx|>=|dy| calculate the ratio dy/dx}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00567}00567         \textcolor{keywordtype}{double} temp = dy / dx;}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00568}00568 }
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00569}00569         \textcolor{comment}{// Calculate cos(theta)=dx/sqrt(pow(dx,2)+pow(dy,2))}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00570}00570         cs = 1.0 / sqrt(1.0 + temp * temp);}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00571}00571 }
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00572}00572         \textcolor{comment}{// Calculate sin(theta)=dy/sqrt(pow(dx,2)+pow(dy,2))=(dy/dx)*cos(theta)}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00573}00573         sn = temp * cs;}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00574}00574       \}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00575}00575     \} \textcolor{comment}{// End of generate\_plane\_rotation}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00510}00510 \textcolor{comment}{    /// \(\backslash\)f[ \(\backslash\)begin\{bmatrix\} \(\backslash\)cos\(\backslash\)theta \& \(\backslash\)sin\(\backslash\)theta \(\backslash\)newline -\/\(\backslash\)sin\(\backslash\)theta \& \(\backslash\)cos\(\backslash\)theta \(\backslash\)end\{bmatrix\} \(\backslash\)begin\{bmatrix\} dx \(\backslash\)newline dy \(\backslash\)end\{bmatrix\} = \(\backslash\)begin\{bmatrix\} r \(\backslash\)newline 0 \(\backslash\)end\{bmatrix\}, \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00511}00511 \textcolor{comment}{    /// where \(\backslash\)f\$ r=\(\backslash\)sqrt\{pow(dx,2)+pow(dy,2)\} \(\backslash\)f\$. The values of a and b are}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00512}00512 \textcolor{comment}{    /// given by:}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00513}00513 \textcolor{comment}{    /// \(\backslash\)f[ \(\backslash\)cos\(\backslash\)theta\&=\(\backslash\)dfrac\{dx\}\{\(\backslash\)sqrt\{pow(dx,2)+pow(dy,2)\}\}, \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00514}00514 \textcolor{comment}{    /// and}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00515}00515 \textcolor{comment}{    /// \(\backslash\)f[ \(\backslash\)sin\(\backslash\)theta\&=\(\backslash\)dfrac\{dy\}\{\(\backslash\)sqrt\{pow(dx,2)+pow(dy,2)\}\}. \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00516}00516 \textcolor{comment}{    /// Taken from: Saad Y."{}Iterative methods for sparse linear systems"{}, p.192}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00517}\mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_aeb5c45d896251c829edd2e214d441187}{00517}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_aeb5c45d896251c829edd2e214d441187}{generate\_plane\_rotation}}(\textcolor{keywordtype}{double}\& dx, \textcolor{keywordtype}{double}\& dy, \textcolor{keywordtype}{double}\& cs, \textcolor{keywordtype}{double}\& sn)}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00518}00518     \{}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00519}00519       \textcolor{comment}{// If dy=0 then we do not need to apply a rotation}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00520}00520       \textcolor{keywordflow}{if} (dy == 0.0)}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00521}00521       \{}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00522}00522         \textcolor{comment}{// Using theta=0 gives cos(theta)=1}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00523}00523         cs = 1.0;}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00524}00524 }
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00525}00525         \textcolor{comment}{// Using theta=0 gives sin(theta)=0}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00526}00526         sn = 0.0;}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00527}00527       \}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00528}00528       \textcolor{comment}{// If dx or dy is large using the normal form of calculting cs and sn}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00529}00529       \textcolor{comment}{// is naive since this may overflow or underflow so instead we calculate}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00530}00530       \textcolor{comment}{// r=sqrt(pow(dx,2)+pow(dy,2)) by using r=|dy|sqrt(1+pow(dx/dy,2)) if}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00531}00531       \textcolor{comment}{// |dy|>|dx| [see <A}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00532}00532       \textcolor{comment}{// HREF=https://en.wikipedia.org/wiki/Hypot"{}>Hypot</A>.].}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00533}00533       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (fabs(dy) > fabs(dx))}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00534}00534       \{}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00535}00535         \textcolor{comment}{// Since |dy|>|dx| calculate the ratio dx/dy}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00536}00536         \textcolor{keywordtype}{double} temp = dx / dy;}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00537}00537 }
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00538}00538         \textcolor{comment}{// Calculate sin(theta)=dy/sqrt(pow(dx,2)+pow(dy,2))}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00539}00539         sn = 1.0 / sqrt(1.0 + temp * temp);}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00540}00540 }
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00541}00541         \textcolor{comment}{// Calculate cos(theta)=dx/sqrt(pow(dx,2)+pow(dy,2))=(dx/dy)*sin(theta)}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00542}00542         cs = temp * sn;}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00543}00543       \}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00544}00544       \textcolor{comment}{// Otherwise, we have |dx|>=|dy| so to, again, avoid overflow or underflow}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00545}00545       \textcolor{comment}{// calculate the values of cs and sn using the method above}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00546}00546       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00547}00547       \{}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00548}00548         \textcolor{comment}{// Since |dx|>=|dy| calculate the ratio dy/dx}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00549}00549         \textcolor{keywordtype}{double} temp = dy / dx;}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00550}00550 }
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00551}00551         \textcolor{comment}{// Calculate cos(theta)=dx/sqrt(pow(dx,2)+pow(dy,2))}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00552}00552         cs = 1.0 / sqrt(1.0 + temp * temp);}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00553}00553 }
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00554}00554         \textcolor{comment}{// Calculate sin(theta)=dy/sqrt(pow(dx,2)+pow(dy,2))=(dy/dx)*cos(theta)}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00555}00555         sn = temp * cs;}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00556}00556       \}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00557}00557     \} \textcolor{comment}{// End of generate\_plane\_rotation}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00558}00558 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00559}00559 \textcolor{comment}{    /// Helper function: Apply plane rotation. This is done using the}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00560}00560 \textcolor{comment}{    /// update:}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00561}00561 \textcolor{comment}{    /// \(\backslash\)f[ \(\backslash\)begin\{bmatrix\} dx \(\backslash\)newline dy \(\backslash\)end\{bmatrix\} \(\backslash\)leftarrow \(\backslash\)begin\{bmatrix\} \(\backslash\)cos\(\backslash\)theta \& \(\backslash\)sin\(\backslash\)theta \(\backslash\)newline -\/\(\backslash\)sin\(\backslash\)theta \& \(\backslash\)cos\(\backslash\)theta \(\backslash\)end\{bmatrix\} \(\backslash\)begin\{bmatrix\} dx \(\backslash\)newline dy \(\backslash\)end\{bmatrix\}. \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00562}\mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a08f44c37760a84bcae876aaca5a406f5}{00562}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a08f44c37760a84bcae876aaca5a406f5}{apply\_plane\_rotation}}(\textcolor{keywordtype}{double}\& dx, \textcolor{keywordtype}{double}\& dy, \textcolor{keywordtype}{double}\& cs, \textcolor{keywordtype}{double}\& sn)}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00563}00563     \{}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00564}00564       \textcolor{comment}{// Calculate the value of dx but don't update it yet}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00565}00565       \textcolor{keywordtype}{double} temp = cs * dx + sn * dy;}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00566}00566 }
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00567}00567       \textcolor{comment}{// Set the value of dy}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00568}00568       dy = -\/sn * dx + cs * dy;}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00569}00569 }
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00570}00570       \textcolor{comment}{// Set the value of dx using the correct values of dx and dy}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00571}00571       dx = temp;}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00572}00572     \} \textcolor{comment}{// End of apply\_plane\_rotation}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00573}00573 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00574}00574 \textcolor{comment}{    /// Pointer to matrix}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00575}\mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_ab4b84bc2dec36b26196f466a43ced299}{00575}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDoubleMatrix}}* \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_ab4b84bc2dec36b26196f466a43ced299}{Matrix\_pt}};}
 \DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00576}00576 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00577}00577 \textcolor{comment}{    /// Helper function: Apply plane rotation. This is done using the}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00578}00578 \textcolor{comment}{    /// update:}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00579}00579 \textcolor{comment}{    /// \(\backslash\)f[}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00580}00580 \textcolor{comment}{    /// \(\backslash\)begin\{bmatrix\}}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00581}00581 \textcolor{comment}{    /// dx \(\backslash\)newline}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00582}00582 \textcolor{comment}{    /// dy}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00583}00583 \textcolor{comment}{    /// \(\backslash\)end\{bmatrix\}}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00584}00584 \textcolor{comment}{    /// \(\backslash\)leftarrow}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00585}00585 \textcolor{comment}{    /// \(\backslash\)begin\{bmatrix\}}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00586}00586 \textcolor{comment}{    /// \(\backslash\)cos\(\backslash\)theta \& \(\backslash\)sin\(\backslash\)theta \(\backslash\)newline}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00587}00587 \textcolor{comment}{    /// -\/\(\backslash\)sin\(\backslash\)theta \& \(\backslash\)cos\(\backslash\)theta}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00588}00588 \textcolor{comment}{    /// \(\backslash\)end\{bmatrix\}}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00589}00589 \textcolor{comment}{    /// \(\backslash\)begin\{bmatrix\}}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00590}00590 \textcolor{comment}{    /// dx \(\backslash\)newline}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00591}00591 \textcolor{comment}{    /// dy}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00592}00592 \textcolor{comment}{    /// \(\backslash\)end\{bmatrix\}.}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00593}00593 \textcolor{comment}{    /// \(\backslash\)f]}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00594}00594 \textcolor{comment}{}    \textcolor{keywordtype}{void} apply\_plane\_rotation(\textcolor{keywordtype}{double}\& dx, \textcolor{keywordtype}{double}\& dy, \textcolor{keywordtype}{double}\& cs, \textcolor{keywordtype}{double}\& sn)}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00595}00595     \{}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00596}00596       \textcolor{comment}{// Calculate the value of dx but don't update it yet}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00597}00597       \textcolor{keywordtype}{double} temp = cs * dx + sn * dy;}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00598}00598 }
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00599}00599       \textcolor{comment}{// Set the value of dy}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00600}00600       dy = -\/sn * dx + cs * dy;}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00601}00601 }
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00602}00602       \textcolor{comment}{// Set the value of dx using the correct values of dx and dy}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00603}00603       dx = temp;}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00604}00604     \} \textcolor{comment}{// End of apply\_plane\_rotation}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00605}00605 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00606}00606 \textcolor{comment}{    /// Pointer to matrix}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00607}00607 \textcolor{comment}{}    CRDoubleMatrix* \mbox{\hyperlink{classoomph_1_1Preconditioner_a04caf49de41802ef112e4b8b644b1d4d}{Matrix\_pt}};}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00608}00608 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00609}00609 \textcolor{comment}{    /// Pointer to the preconditioner for the block matrix}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00610}00610 \textcolor{comment}{}    SpaceTimeNavierStokesSubsidiaryPreconditioner*}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00611}\mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a05385552adb400003801a8468a2186ae}{00611}}       \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a05385552adb400003801a8468a2186ae}{Navier\_stokes\_subsidiary\_preconditioner\_pt}};}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00612}00612 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00613}00613 \textcolor{comment}{    /// Number of iterations taken}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00614}\mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a86f6eb1dbc5b96eab510bda26e3e579b}{00614}} \textcolor{comment}{}    \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a86f6eb1dbc5b96eab510bda26e3e579b}{Iterations}};}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00615}00615 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00616}00616 \textcolor{comment}{    /// Flag to indicate whether or not to record the memory statistics}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00617}00617 \textcolor{comment}{    /// this preconditioner}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00618}\mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a727af6ccb23868b93a074e07f885b5e8}{00618}} \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a727af6ccb23868b93a074e07f885b5e8}{Compute\_memory\_statistics}};}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00619}00619 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00620}00620 \textcolor{comment}{    /// Storage for the memory usage of the solver if the flag above}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00621}00621 \textcolor{comment}{    /// is set to true (in bytes)}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00622}\mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a06aa85a7eb7a1787179386eb514ca77a}{00622}} \textcolor{comment}{}    \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a06aa85a7eb7a1787179386eb514ca77a}{Memory\_usage\_in\_bytes}};}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00623}00623 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00624}00624 \textcolor{comment}{    /// Control flag is true if the preconditioner has been setup (used}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00625}00625 \textcolor{comment}{    /// so we can wipe the data when the preconditioner is called again)}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00626}\mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a7662244571d832c4dece39100bc0a118}{00626}} \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a7662244571d832c4dece39100bc0a118}{Preconditioner\_has\_been\_setup}};}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00627}00627 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00628}00628 \textcolor{comment}{    /// boolean indicating use of left hand preconditioning (if true)}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00629}00629 \textcolor{comment}{    /// or right hand preconditioning (if false)}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00630}\mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a9cd47798800f479265b762b8ce48dfdb}{00630}} \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a9cd47798800f479265b762b8ce48dfdb}{Preconditioner\_LHS}};}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00631}00631   \};}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00632}00632 \} \textcolor{comment}{// End of namespace oomph}}
-\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00633}00633 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00577}00577 \textcolor{comment}{    /// Pointer to the preconditioner for the block matrix}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00578}00578 \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner}{SpaceTimeNavierStokesSubsidiaryPreconditioner}}*}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00579}\mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a66b8ac42169d3247d5e3d9678e905b88}{00579}}       \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a66b8ac42169d3247d5e3d9678e905b88}{Navier\_stokes\_subsidiary\_preconditioner\_pt}};}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00580}00580 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00581}00581 \textcolor{comment}{    /// Number of iterations taken}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00582}\mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a86f6eb1dbc5b96eab510bda26e3e579b}{00582}} \textcolor{comment}{}    \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a86f6eb1dbc5b96eab510bda26e3e579b}{Iterations}};}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00583}00583 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00584}00584 \textcolor{comment}{    /// Flag to indicate whether or not to record the memory statistics}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00585}00585 \textcolor{comment}{    /// this preconditioner}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00586}\mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a727af6ccb23868b93a074e07f885b5e8}{00586}} \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a727af6ccb23868b93a074e07f885b5e8}{Compute\_memory\_statistics}};}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00587}00587 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00588}00588 \textcolor{comment}{    /// Storage for the memory usage of the solver if the flag above}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00589}00589 \textcolor{comment}{    /// is set to true (in bytes)}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00590}\mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a06aa85a7eb7a1787179386eb514ca77a}{00590}} \textcolor{comment}{}    \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a06aa85a7eb7a1787179386eb514ca77a}{Memory\_usage\_in\_bytes}};}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00591}00591 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00592}00592 \textcolor{comment}{    /// Control flag is true if the preconditioner has been setup (used}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00593}00593 \textcolor{comment}{    /// so we can wipe the data when the preconditioner is called again)}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00594}\mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a7662244571d832c4dece39100bc0a118}{00594}} \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a7662244571d832c4dece39100bc0a118}{Preconditioner\_has\_been\_setup}};}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00595}00595 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00596}00596 \textcolor{comment}{    /// boolean indicating use of left hand preconditioning (if true)}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00597}00597 \textcolor{comment}{    /// or right hand preconditioning (if false)}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00598}\mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a9cd47798800f479265b762b8ce48dfdb}{00598}} \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a9cd47798800f479265b762b8ce48dfdb}{Preconditioner\_LHS}};}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00599}00599   \};}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00600}00600 \} \textcolor{comment}{// End of namespace oomph}}
+\DoxyCodeLine{\Hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00601}00601 \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

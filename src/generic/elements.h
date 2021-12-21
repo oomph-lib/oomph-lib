@@ -1571,17 +1571,13 @@ namespace oomph
     /// the nodal coordinates \f$ X_{pq} \f$ of the derivative of the shape
     /// functions \f$ \psi_j \f$ w.r.t. the global eulerian coordinates
     /// \f$ x_i \f$. I.e. this function calculates
-    /// \f[
-    /// \frac{\partial}{\partial X_{pq}}
-    /// \left( \frac{\partial \psi_j}{\partial x_i} \right).
-    /// \f]
+    /// \f[ \frac{\partial}{\partial X_{pq}} \left( \frac{\partial \psi_j}{\partial x_i} \right). \f]
     /// To do this it requires the determinant of the jacobian mapping, its
     /// derivative w.r.t. the nodal coordinates \f$ X_{pq} \f$, the inverse
     /// jacobian and the derivatives of the shape functions w.r.t. the local
     /// coordinates. The result is returned as a tensor of rank four.
     ///  Numbering:
-    /// d_dpsidx_dX(p,q,j,i) = \f$ \frac{\partial}{\partial X_{pq}}
-    /// \left( \frac{\partial \psi_j}{\partial x_i} \right) \f$
+    /// d_dpsidx_dX(p,q,j,i) = \f$ \frac{\partial}{\partial X_{pq}} \left( \frac{\partial \psi_j}{\partial x_i} \right) \f$
     /// By default the function will use the dimension of the element to call
     /// the correct d_dshape_eulerian_dnodal_coordinates_templated_helper(..)
     /// function. This should be overloaded for efficiency (removal of a
@@ -1602,8 +1598,7 @@ namespace oomph
     /// shape functions w.r.t. the local coordinates. The result is returned
     /// as a tensor of rank four.
     ///  Numbering:
-    /// d_dpsidx_dX(p,q,j,i) = \f$ \frac{\partial}{\partial X_{pq}}
-    /// \left( \frac{\partial \psi_j}{\partial x_i} \right) \f$
+    /// d_dpsidx_dX(p,q,j,i) = \f$ \frac{\partial}{\partial X_{pq}} \left( \frac{\partial \psi_j}{\partial x_i} \right) \f$
     /// This function is templated by the dimension of the element.
     template<unsigned DIM>
     void d_dshape_eulerian_dnodal_coordinates_templated_helper(
@@ -3271,10 +3266,9 @@ namespace oomph
         error_message, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// Plot the error when compared
-    /// against a given time-dependent exact solution \f$ {\bf f}(t,{\bf x})
-    /// \f$. Also calculates the norm of the error and that of the exact
-    /// solution.
+    /// Plot the error when compared against a given time-dependent exact
+    /// solution \f$ {\bf f}(t,{\bf x}) \f$. Also calculates the norm of the
+    /// error and that of the exact solution.
     virtual void compute_error(
       std::ostream& outfile,
       FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
@@ -3290,12 +3284,11 @@ namespace oomph
         error_message, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// Plot the error when compared
-    /// against a given exact solution \f$ {\bf f}({\bf x}) \f$.
-    /// Also calculates the norm of the
-    /// error and that of the exact solution.
-    /// Version with vectors of norms and errors so that different variables'
-    /// norms and errors can be returned individually
+    /// Plot the error when compared against a given exact solution
+    /// \f$ {\bf f}({\bf x}) \f$. Also calculates the norm of the error and
+    /// that of the exact solution.
+    /// The version with vectors of norms and errors so that different
+    /// variables' norms and errors can be returned individually
     virtual void compute_error(
       std::ostream& outfile,
       FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
@@ -3310,10 +3303,10 @@ namespace oomph
                           OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// Plot the error when compared
-    /// against a given time-dependent exact solution \f$ {\bf f}(t,{\bf x})
-    /// \f$. Also calculates the norm of the error and that of the exact
-    /// solution. Version with vectors of norms and errors so that different
+    /// Plot the error when compared against a given time-dependent exact
+    /// solution \f$ {\bf f}(t,{\bf x}) \f$. Also calculates the norm of the
+    /// error and that of the exact solution.
+    /// The version with vectors of norms and errors so that different
     /// variables' norms and errors can be returned individually
     virtual void compute_error(
       std::ostream& outfile,
@@ -3738,8 +3731,7 @@ namespace oomph
     ///  \b 2D:
     /// d2psidxi(i,0) = \f$ \partial^2 \psi_j / \partial \xi_0^2 \f$
     /// d2psidxi(i,1) = \f$ \partial^2 \psi_j / \partial \xi_1^2 \f$
-    /// d2psidxi(i,2) = \f$ \partial^2 \psi_j / \partial \xi_0 \partial \xi_1
-    /// \f$
+    /// d2psidxi(i,2) = \f$ \partial^2 \psi_j / \partial \xi_0 \partial \xi_1 \f$
     ///  \b 3D:
     /// d2psidxi(i,0) = \f$ \partial^2 \psi_j / \partial \xi_0^2 \f$
     /// d2psidxi(i,1) = \f$ \partial^2 \psi_j / \partial \xi_1^2 \f$
@@ -3767,10 +3759,9 @@ namespace oomph
     /// d2psidxi(i,0) = \f$ \partial^2 \psi_j / \partial^2 \xi_0^2 \f$
     /// d2psidxi(i,1) = \f$ \partial^2 \psi_j / \partial^2 \xi_1^2 \f$
     /// d2psidxi(i,2) = \f$ \partial^2 \psi_j / \partial^2 \xi_2^2 \f$
-    /// d2psidxi(i,3) = \f$ \partial^2 \psi_j / \partial \xi_0 \partial \xi_1
-    /// \f$ d2psidxi(i,4) = \f$ \partial^2 \psi_j/\partial \xi_0 \partial \xi_2
-    /// \f$ d2psidxi(i,5) = \f$ \partial^2 \psi_j/\partial \xi_1 \partial \xi_2
-    /// \f$
+    /// d2psidxi(i,3) = \f$ \partial^2 \psi_j / \partial \xi_0 \partial \xi_1 \f$
+    /// d2psidxi(i,4) = \f$ \partial^2 \psi_j / \partial \xi_0 \partial \xi_2 \f$
+    /// d2psidxi(i,5) = \f$ \partial^2 \psi_j / \partial \xi_1 \partial \xi_2 \f$
     virtual double d2shape_lagrangian_at_knot(const unsigned& ipt,
                                               Shape& psi,
                                               DShape& dpsidxi,
@@ -4002,12 +3993,7 @@ namespace oomph
 
     /// Compute the residuals for the setup of an initial condition.
     /// The global equations are:
-    /// \f[
-    /// 0 = \int \left( \sum_{j=1}^N \sum_{k=1}^K X_{ijk} \psi_{jk}(\xi_n)
-    /// - \frac{\partial^D R^{(IC)}_i(\xi_n)}{\partial t^D}
-    /// \right) \psi_{lm}(\xi_n) \ dv
-    /// \mbox{ \ \ \ \ for \ \ \ $l=1,...,N, \ \ m=1,...,K$}
-    /// \f]
+    /// \f[ 0 = \int \left( \sum_{j=1}^N \sum_{k=1}^K X_{ijk} \psi_{jk}(\xi_n) - \frac{\partial^D R^{(IC)}_i(\xi_n)}{\partial t^D} \right) \psi_{lm}(\xi_n) \ dv \mbox{ \ \ \ \ for \ \ \ $l=1,...,N, \ \ m=1,...,K$} \f]
     /// where \f$ N \f$ is the number of nodes in the mesh and \f$ K \f$
     /// the number of generalised nodal coordinates. The initial shape
     /// of the solid body, \f$ {\bf R}^{(IC)},\f$ and its time-derivatives
@@ -4022,12 +4008,7 @@ namespace oomph
 
     /// Fill in the residuals for the setup of an initial condition.
     /// The global equations are:
-    /// \f[
-    /// 0 = \int \left( \sum_{j=1}^N \sum_{k=1}^K X_{ijk} \psi_{jk}(\xi_n)
-    /// - \frac{\partial^D R^{(IC)}_i(\xi_n)}{\partial t^D}
-    /// \right) \psi_{lm}(\xi_n) \ dv
-    /// \mbox{ \ \ \ \ for \ \ \ $l=1,...,N, \ \ m=1,...,K$}
-    /// \f]
+    /// \f[ 0 = \int \left( \sum_{j=1}^N \sum_{k=1}^K X_{ijk} \psi_{jk}(\xi_n) - \frac{\partial^D R^{(IC)}_i(\xi_n)}{\partial t^D} \right) \psi_{lm}(\xi_n) \ dv \mbox{ \ \ \ \ for \ \ \ $l=1,...,N, \ \ m=1,...,K$} \f]
     /// where \f$ N \f$ is the number of nodes in the mesh and \f$ K \f$
     /// the number of generalised nodal coordinates. The initial shape
     /// of the solid body, \f$ {\bf R}^{(IC)},\f$ and its time-derivatives
@@ -4044,12 +4025,7 @@ namespace oomph
 
     /// Fill in the residuals and Jacobian for the setup of an
     /// initial condition. The global equations are:
-    /// \f[
-    /// 0 = \int \left( \sum_{j=1}^N \sum_{k=1}^K X_{ijk} \psi_{jk}(\xi_n)
-    /// - \frac{\partial^D R^{(IC)}_i(\xi_n)}{\partial t^D}
-    /// \right) \psi_{lm}(\xi_n) \ dv
-    /// \mbox{ \ \ \ \ for \ \ \ $l=1,...,N, \ \ m=1,...,K$}
-    /// \f]
+    /// \f[ 0 = \int \left( \sum_{j=1}^N \sum_{k=1}^K X_{ijk} \psi_{jk}(\xi_n) - \frac{\partial^D R^{(IC)}_i(\xi_n)}{\partial t^D} \right) \psi_{lm}(\xi_n) \ dv \mbox{ \ \ \ \ for \ \ \ $l=1,...,N, \ \ m=1,...,K$} \f]
     /// where \f$ N \f$ is the number of nodes in the mesh and \f$ K \f$
     /// the number of generalised nodal coordinates. The initial shape
     /// of the solid body, \f$ {\bf R}^{(IC)},\f$ and its time-derivatives
@@ -4077,12 +4053,8 @@ namespace oomph
   protected:
     /// Helper function to fill in the residuals and (if flag==1) the
     /// Jacobian for the setup of an initial condition. The global equations
-    /// are: \f[ 0 = \int \left( \sum_{j=1}^N \sum_{k=1}^K X_{ijk}
-    /// \psi_{jk}(\xi_n)
-    /// - \frac{\partial^D R^{(IC)}_i(\xi_n)}{\partial t^D}
-    /// \right) \psi_{lm}(\xi_n) \ dv
-    /// \mbox{ \ \ \ \ for \ \ \ $l=1,...,N, \ \ m=1,...,K$}
-    /// \f]
+    /// are:
+    /// \f[ 0 = \int \left( \sum_{j=1}^N \sum_{k=1}^K X_{ijk} \psi_{jk}(\xi_n) - \frac{\partial^D R^{(IC)}_i(\xi_n)}{\partial t^D} \right) \psi_{lm}(\xi_n) \ dv \mbox{ \ \ \ \ for \ \ \ $l=1,...,N, \ \ m=1,...,K$} \f]
     /// where \f$ N \f$ is the number of nodes in the mesh and \f$ K \f$
     /// the number of generalised nodal coordinates. The initial shape
     /// of the solid body, \f$ {\bf R}^{(IC)},\f$ and its time-derivatives

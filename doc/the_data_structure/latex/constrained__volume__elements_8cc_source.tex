@@ -131,7 +131,7 @@
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00127}00127       \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} dpsifds(n\_node, 1);}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00128}00128 }
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00129}00129       \textcolor{comment}{// Set the value of n\_intpt}}
-\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00130}00130       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00130}00130       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00131}00131 }
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00132}00132       \textcolor{comment}{// Storage for the local coordinate}}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00133}00133       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(1);}
@@ -140,13 +140,13 @@
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00136}00136       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ipt = 0; ipt < n\_intpt; ipt++)}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00137}00137       \{}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00138}00138         \textcolor{comment}{// Get the local coordinate at the integration point}}
-\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00139}00139         \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0] = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>knot(ipt, 0);}
+\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00139}00139         \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0] = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{knot}}(ipt, 0);}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00140}00140 }
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00141}00141         \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00142}00142         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00142}00142         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00143}00143 }
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00144}00144         \textcolor{comment}{// Call the derivatives of the shape function at the knot point}}
-\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00145}00145         this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a864e188f0030720e2e13ef7b56e8e271}{dshape\_local\_at\_knot}}(ipt, psif, dpsifds);}
+\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00145}00145         this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a2214ae814100dcbb553ac97cf243dcfe}{dshape\_local\_at\_knot}}(ipt, psif, dpsifds);}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00146}00146 }
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00147}00147         \textcolor{comment}{// Get position and tangent vector}}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00148}00148         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} interpolated\_t1(2, 0.0);}
@@ -181,7 +181,7 @@
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00177}00177 }
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00178}00178         \textcolor{comment}{// Add to residual with sign chosen so that the volume is}}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00179}00179         \textcolor{comment}{// positive when the elements bound the fluid}}
-\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00180}00180         residuals[local\_eqn] += 0.5 * \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_a3df72a05fe435265c5b42dc232ff351c}{dot}} * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * J;}
+\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00180}00180         residuals[local\_eqn] += 0.5 * \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_a3df72a05fe435265c5b42dc232ff351c}{dot}} * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * J;}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00181}00181       \}}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00182}00182     \}}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00183}00183   \}}
@@ -203,7 +203,7 @@
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00199}00199     \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} dpsifds(n\_node, 1);}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00200}00200 }
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00201}00201     \textcolor{comment}{// Set the value of n\_intpt}}
-\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00202}00202     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00202}00202     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00203}00203 }
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00204}00204     \textcolor{comment}{// Storage for the local cooridinate}}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00205}00205     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(1);}
@@ -212,13 +212,13 @@
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00208}00208     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ipt = 0; ipt < n\_intpt; ipt++)}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00209}00209     \{}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00210}00210       \textcolor{comment}{// Get the local coordinate at the integration point}}
-\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00211}00211       \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0] = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>knot(ipt, 0);}
+\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00211}00211       \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0] = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{knot}}(ipt, 0);}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00212}00212 }
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00213}00213       \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00214}00214       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00214}00214       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00215}00215 }
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00216}00216       \textcolor{comment}{// Call the derivatives of the shape function at the knot point}}
-\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00217}00217       this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a864e188f0030720e2e13ef7b56e8e271}{dshape\_local\_at\_knot}}(ipt, psif, dpsifds);}
+\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00217}00217       this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a2214ae814100dcbb553ac97cf243dcfe}{dshape\_local\_at\_knot}}(ipt, psif, dpsifds);}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00218}00218 }
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00219}00219       \textcolor{comment}{// Get position and tangent vector}}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00220}00220       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} interpolated\_t1(2, 0.0);}
@@ -253,7 +253,7 @@
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00249}00249 }
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00250}00250       \textcolor{comment}{// Add to volume with sign chosen so that the volume is}}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00251}00251       \textcolor{comment}{// positive when the elements bound the fluid}}
-\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00252}00252       vol += 0.5 * \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_a3df72a05fe435265c5b42dc232ff351c}{dot}} * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * J;}
+\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00252}00252       vol += 0.5 * \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_a3df72a05fe435265c5b42dc232ff351c}{dot}} * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * J;}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00253}00253     \}}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00254}00254 }
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00255}00255     \textcolor{keywordflow}{return} vol;}
@@ -281,7 +281,7 @@
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00277}00277     \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} dpsifds(n\_node, 1);}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00278}00278 }
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00279}00279     \textcolor{comment}{// Set the value of n\_intpt}}
-\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00280}00280     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00280}00280     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00281}00281 }
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00282}00282     \textcolor{comment}{// Storage for the local cooridinate}}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00283}00283     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(1);}
@@ -290,13 +290,13 @@
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00286}00286     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ipt = 0; ipt < n\_intpt; ipt++)}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00287}00287     \{}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00288}00288       \textcolor{comment}{// Get the local coordinate at the integration point}}
-\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00289}00289       \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0] = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>knot(ipt, 0);}
+\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00289}00289       \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0] = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{knot}}(ipt, 0);}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00290}00290 }
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00291}00291       \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00292}00292       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00292}00292       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00293}00293 }
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00294}00294       \textcolor{comment}{// Call the derivatives of the shape function at the knot point}}
-\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00295}00295       this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a864e188f0030720e2e13ef7b56e8e271}{dshape\_local\_at\_knot}}(ipt, psif, dpsifds);}
+\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00295}00295       this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a2214ae814100dcbb553ac97cf243dcfe}{dshape\_local\_at\_knot}}(ipt, psif, dpsifds);}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00296}00296 }
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00297}00297       \textcolor{comment}{// Get position and tangent vector}}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00298}00298       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} interpolated\_t1(2, 0.0);}
@@ -331,7 +331,7 @@
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00327}00327 }
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00328}00328       \textcolor{comment}{// Add to volume with sign chosen so that the volume is}}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00329}00329       \textcolor{comment}{// positive when the elements bound the fluid}}
-\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00330}00330       vol += \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_a3df72a05fe435265c5b42dc232ff351c}{dot}} * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * J / 3.0;}
+\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00330}00330       vol += \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_a3df72a05fe435265c5b42dc232ff351c}{dot}} * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * J / 3.0;}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00331}00331     \}}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00332}00332 }
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00333}00333     \textcolor{keywordflow}{return} vol;}
@@ -368,7 +368,7 @@
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00364}00364       \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} dpsifds(n\_node, 1);}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00365}00365 }
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00366}00366       \textcolor{comment}{// Set the value of n\_intpt}}
-\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00367}00367       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00367}00367       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00368}00368 }
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00369}00369       \textcolor{comment}{// Storage for the local cooridinate}}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00370}00370       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(1);}
@@ -377,13 +377,13 @@
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00373}00373       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ipt = 0; ipt < n\_intpt; ipt++)}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00374}00374       \{}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00375}00375         \textcolor{comment}{// Get the local coordinate at the integration point}}
-\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00376}00376         \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0] = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>knot(ipt, 0);}
+\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00376}00376         \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0] = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{knot}}(ipt, 0);}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00377}00377 }
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00378}00378         \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00379}00379         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00379}00379         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00380}00380 }
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00381}00381         \textcolor{comment}{// Call the derivatives of the shape function at the knot point}}
-\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00382}00382         this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a864e188f0030720e2e13ef7b56e8e271}{dshape\_local\_at\_knot}}(ipt, psif, dpsifds);}
+\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00382}00382         this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a2214ae814100dcbb553ac97cf243dcfe}{dshape\_local\_at\_knot}}(ipt, psif, dpsifds);}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00383}00383 }
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00384}00384         \textcolor{comment}{// Get position and tangent vector}}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00385}00385         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} interpolated\_t1(2, 0.0);}
@@ -419,7 +419,7 @@
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00415}00415 }
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00416}00416         \textcolor{comment}{// Add to residual with sign chosen so that the volume is}}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00417}00417         \textcolor{comment}{// positive when the elements bound the fluid}}
-\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00418}00418         residuals[local\_eqn] += \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_a3df72a05fe435265c5b42dc232ff351c}{dot}} * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * J / 3.0;}
+\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00418}00418         residuals[local\_eqn] += \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_a3df72a05fe435265c5b42dc232ff351c}{dot}} * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * J / 3.0;}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00419}00419       \}}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00420}00420     \}}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00421}00421   \}}
@@ -451,7 +451,7 @@
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00447}00447       \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} dpsifds(n\_node, 2);}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00448}00448 }
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00449}00449       \textcolor{comment}{// Set the value of n\_intpt}}
-\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00450}00450       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00450}00450       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00451}00451 }
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00452}00452       \textcolor{comment}{// Storage for the local coordinate}}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00453}00453       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(2);}
@@ -462,14 +462,14 @@
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00458}00458         \textcolor{comment}{// Get the local coordinate at the integration point}}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00459}00459         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00460}00460         \{}
-\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00461}00461           \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>knot(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00461}00461           \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{knot}}(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00462}00462         \}}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00463}00463 }
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00464}00464         \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00465}00465         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00465}00465         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00466}00466 }
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00467}00467         \textcolor{comment}{// Call the derivatives of the shape function at the knot point}}
-\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00468}00468         this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a864e188f0030720e2e13ef7b56e8e271}{dshape\_local\_at\_knot}}(ipt, psif, dpsifds);}
+\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00468}00468         this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a2214ae814100dcbb553ac97cf243dcfe}{dshape\_local\_at\_knot}}(ipt, psif, dpsifds);}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00469}00469 }
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00470}00470         \textcolor{comment}{// Get position and tangent vector}}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00471}00471         \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} interpolated\_g(2, 3, 0.0);}
@@ -522,7 +522,7 @@
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00518}00518         \textcolor{comment}{// Add to residual with the sign chosen such that the volume is}}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00519}00519         \textcolor{comment}{// positive when the faces are assembled such that the outer unit}}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00520}00520         \textcolor{comment}{// normal is directed out of the bulk fluid}}
-\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00521}00521         residuals[local\_eqn] += \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_a3df72a05fe435265c5b42dc232ff351c}{dot}} * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} / 3.0;}
+\DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00521}00521         residuals[local\_eqn] += \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_a3df72a05fe435265c5b42dc232ff351c}{dot}} * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} / 3.0;}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00522}00522       \}}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00523}00523     \}}
 \DoxyCodeLine{\Hypertarget{constrained__volume__elements_8cc_source_l00524}00524   \}}

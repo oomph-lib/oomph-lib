@@ -153,7 +153,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00149}00149       this-\/>body\_force(interpolated\_x, b);}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00150}00150 }
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00151}00151       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00152}00152       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00152}00152       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00153}00153 }
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00154}00154       \textcolor{comment}{// Number of master nodes and storage for the weight of the shape function}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00155}00155       \textcolor{keywordtype}{unsigned} n\_master = 1;}
@@ -205,7 +205,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00201}00201             \{}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00202}00202               \textcolor{comment}{// Acceleration and body force}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00203}00203               residuals[local\_eqn] += (\textcolor{comment}{/*hierher Lambda\_sq*accel[a]*/} -\/b[a]) *}
-\DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00204}00204                                       psi(l) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight;}
+\DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00204}00204                                       psi(l) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight;}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00205}00205 }
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00206}00206               \textcolor{comment}{// Stress term}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00207}00207               \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} b = 0; b < DIM; b++)}
@@ -217,7 +217,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00213}00213                     \textcolor{comment}{// Add the stress terms to the residuals}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00214}00214                     residuals[local\_eqn] += this-\/>\mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7da585070bd0e3801c3bbed287ef3c4a265}{E}}(a, b, c, d) *}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00215}00215                                             interpolated\_dudx(c, d) *}
-\DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00216}00216                                             dpsidx(l, b) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight;}
+\DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00216}00216                                             dpsidx(l, b) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight;}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00217}00217                   \}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00218}00218                 \}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00219}00219               \}}
@@ -280,7 +280,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00276}00276                             \textcolor{comment}{// Add the contribution to the Jacobian matrix}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00277}00277                             jacobian(local\_eqn, local\_unknown) +=}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00278}00278                               this-\/>\mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7da585070bd0e3801c3bbed287ef3c4a265}{E}}(a, b, c, d) * dpsidx(l2, d) *}
-\DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00279}00279                               dpsidx(l, b) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight * hang\_weight2;}
+\DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00279}00279                               dpsidx(l, b) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight * hang\_weight2;}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00280}00280                           \}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00281}00281                         \}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00282}00282                       \} \textcolor{comment}{// End of if not boundary condition}}
@@ -312,7 +312,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00308}00308     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00309}00309 }
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00310}00310     \textcolor{comment}{// Vector for coordintes}}
-\DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00311}00311     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(DIM);}
+\DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00311}00311     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(DIM);}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00312}00312 }
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00313}00313     \textcolor{comment}{// Set the value of n\_intpt}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00314}00314     \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>integral\_pt()-\/>nweight();}
@@ -350,21 +350,21 @@
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00346}00346       \textcolor{keywordtype}{double} J = this-\/>J\_eulerian(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00347}00347 }
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00348}00348       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00349}00349       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00349}00349       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00350}00350 }
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00351}00351       \textcolor{comment}{// Get x position as Vector}}
-\DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00352}00352       this-\/>interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00352}00352       this-\/>interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00353}00353 }
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00354}00354       \textcolor{comment}{// Get FE du/dx}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00355}00355       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} dudx\_fe(DIM);}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00356}00356 }
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00357}00357       \textcolor{comment}{// Get exact gradient at this point}}
-\DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00358}00358       (*exact\_grad\_pt)(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, exact\_grad);}
+\DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00358}00358       (*exact\_grad\_pt)(x, exact\_grad);}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00359}00359 }
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00360}00360       \textcolor{comment}{// Output x,y,...,error}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00361}00361       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00362}00362       \{}
-\DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00363}00363         outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00363}00363         outfile << x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00364}00364       \}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00365}00365       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00366}00366       \{}
@@ -376,9 +376,9 @@
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00372}00372       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00373}00373       \{}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00374}00374         \textcolor{comment}{// LinearElasticityEquations<DIM>::get\_flux(s,i,dudx\_fe);}}
-\DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00375}00375         norm += exact\_grad[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * exact\_grad[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00375}00375         norm += exact\_grad[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * exact\_grad[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00376}00376         error +=}
-\DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00377}00377           (exact\_grad[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ dudx\_fe[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]) * (exact\_grad[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ dudx\_fe[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00377}00377           (exact\_grad[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ dudx\_fe[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]) * (exact\_grad[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ dudx\_fe[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00378}00378       \}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00379}00379     \}}
 \DoxyCodeLine{\Hypertarget{refineable__linear__elasticity__elements_8cc_source_l00380}00380   \}}

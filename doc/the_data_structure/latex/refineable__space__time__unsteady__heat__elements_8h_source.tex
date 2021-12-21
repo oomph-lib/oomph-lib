@@ -53,14 +53,14 @@
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00049}00049 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00050}00050   \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} SPATIAL\_DIM>}
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00051}\mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeUnsteadyHeatEquations}{00051}}   \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeUnsteadyHeatEquations}{RefineableSpaceTimeUnsteadyHeatEquations}}}
-\DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00052}00052     : \textcolor{keyword}{public} \textcolor{keyword}{virtual} SpaceTimeUnsteadyHeatEquations<SPATIAL\_DIM>,}
+\DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00052}00052     : \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations}{SpaceTimeUnsteadyHeatEquations}}<SPATIAL\_DIM>,}
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00053}00053       \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1RefineableElement}{RefineableElement}},}
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00054}00054       \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator}{ElementWithZ2ErrorEstimator}}}
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00055}00055   \{}
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00056}00056   \textcolor{keyword}{public}:\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00057}00057 \textcolor{comment}{    /// Constructor}}
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00058}\mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeUnsteadyHeatEquations_a13afd1624d3357330623f256aede29af}{00058}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeUnsteadyHeatEquations_a13afd1624d3357330623f256aede29af}{RefineableSpaceTimeUnsteadyHeatEquations}}()}
-\DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00059}00059       : SpaceTimeUnsteadyHeatEquations<SPATIAL\_DIM>(),}
+\DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00059}00059       : \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations}{SpaceTimeUnsteadyHeatEquations}}<SPATIAL\_DIM>(),}
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00060}00060         \mbox{\hyperlink{classoomph_1_1RefineableElement}{RefineableElement}}(),}
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00061}00061         \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator}{ElementWithZ2ErrorEstimator}}()}
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00062}00062     \{}
@@ -89,7 +89,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00085}00085       \textcolor{keywordtype}{unsigned} n\_node = \mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00086}00086 }
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00087}00087       \textcolor{comment}{// Find the index at which the variable is stored}}
-\DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00088}00088       \textcolor{keywordtype}{unsigned} u\_nodal\_index = this-\/>u\_index\_ust\_heat();}
+\DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00088}00088       \textcolor{keywordtype}{unsigned} u\_nodal\_index = this-\/>\mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_aa60dba450c24092648ba711751a565b8}{u\_index\_ust\_heat}}();}
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00089}00089 }
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00090}00090       \textcolor{comment}{// Set up memory for the shape and test functions}}
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00091}00091       \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} psi(n\_node);}
@@ -134,7 +134,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00130}00130       \textcolor{keywordtype}{unsigned} n\_node = \mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00131}00131 }
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00132}00132       \textcolor{comment}{// Find the nodal index at which the unknown is stored}}
-\DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00133}00133       \textcolor{keywordtype}{unsigned} u\_nodal\_index = this-\/>u\_index\_ust\_heat();}
+\DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00133}00133       \textcolor{keywordtype}{unsigned} u\_nodal\_index = this-\/>\mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_aa60dba450c24092648ba711751a565b8}{u\_index\_ust\_heat}}();}
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00134}00134 }
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00135}00135       \textcolor{comment}{// Local shape function}}
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00136}00136       \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} psi(n\_node);}
@@ -169,7 +169,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00165}00165       \textcolor{keywordtype}{unsigned} n\_node = \mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00166}00166 }
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00167}00167       \textcolor{comment}{// Find the nodal index at which the unknown is stored}}
-\DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00168}00168       \textcolor{keywordtype}{unsigned} u\_nodal\_index = this-\/>u\_index\_ust\_heat();}
+\DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00168}00168       \textcolor{keywordtype}{unsigned} u\_nodal\_index = this-\/>\mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_aa60dba450c24092648ba711751a565b8}{u\_index\_ust\_heat}}();}
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00169}00169 }
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00170}00170       \textcolor{comment}{// Local shape function}}
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00171}00171       \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} psi(n\_node);}
@@ -199,10 +199,10 @@
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00195}00195             this-\/>\mbox{\hyperlink{classoomph_1_1RefineableElement_a637964a7a9892fe0f0b05692c2e8d153}{father\_element\_pt}}());}
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00196}00196 }
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00197}00197       \textcolor{comment}{// Get the source function from the parent and store it}}
-\DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00198}00198       this-\/>Source\_fct\_pt = cast\_father\_element\_pt-\/>source\_fct\_pt();}
+\DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00198}00198       this-\/>\mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_aa82dec41ffaf9f44e11a41da4f718ae1}{Source\_fct\_pt}} = cast\_father\_element\_pt-\/>\mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a731ffd54d96cc9ef4ccdba1484a4618e}{source\_fct\_pt}}();}
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00199}00199 }
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00200}00200       \textcolor{comment}{// Set the ALE status from the father}}
-\DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00201}00201       this-\/>ALE\_is\_disabled = cast\_father\_element\_pt-\/>ALE\_is\_disabled;}
+\DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00201}00201       this-\/>\mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_ac13fdb01e9533a81131ddd7374c0f8b2}{ALE\_is\_disabled}} = cast\_father\_element\_pt-\/>\mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_ac13fdb01e9533a81131ddd7374c0f8b2}{ALE\_is\_disabled}};}
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00202}00202     \} \textcolor{comment}{// End of further\_build}}
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00203}00203 }
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00204}00204   \textcolor{keyword}{private}:\textcolor{comment}{}}
@@ -212,7 +212,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00208}00208 \textcolor{comment}{    /// flag=1: compute both}}
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00209}00209 \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeUnsteadyHeatEquations_a3cdab62da2f5575258a57b5360798c56}{fill\_in\_generic\_residual\_contribution\_ust\_heat}}(}
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00210}00210       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00211}00211       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}},}
+\DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00211}00211       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian,}
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00212}00212       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& flag);}
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00213}00213   \}; \textcolor{comment}{// End of RefineableSpaceTimeUnsteadyHeatEquations class}}
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00214}00214 }
@@ -269,7 +269,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00265}00265 }
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00266}00266 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00267}00267 \textcolor{comment}{    /// Pointer to the j-\/th vertex node in the element}}
-\DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00268}\mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatSpaceTimeElement_a14600139c55eea03a4f32680e0180aa7}{00268}} \textcolor{comment}{}    Node* \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatSpaceTimeElement_a14600139c55eea03a4f32680e0180aa7}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00268}\mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatSpaceTimeElement_a14600139c55eea03a4f32680e0180aa7}{00268}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatSpaceTimeElement_a14600139c55eea03a4f32680e0180aa7}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00269}00269 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00270}00270       \textcolor{comment}{// Call the base class function}}
 \DoxyCodeLine{\Hypertarget{refineable__space__time__unsteady__heat__elements_8h_source_l00271}00271       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{QUnsteadyHeatSpaceTimeElement}}<SPATIAL\_DIM,}

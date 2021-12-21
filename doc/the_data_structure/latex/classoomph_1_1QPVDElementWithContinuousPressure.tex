@@ -20,59 +20,59 @@ Inheritance diagram for oomph\+::QPVDElement\+With\+Continuous\+Pressure\texorpd
 \item 
 \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_a11129d7ef7c335ccf25b06a42b6991ca}{QPVDElement\+With\+Continuous\+Pressure}} ()
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_aa21b5dbde38a2cfc7fa7786052267b50}{solid\+\_\+p\+\_\+nodal\+\_\+index}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+int \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_aa21b5dbde38a2cfc7fa7786052267b50}{solid\+\_\+p\+\_\+nodal\+\_\+index}} () const
 \begin{DoxyCompactList}\small\item\em Set the value at which the solid pressure is stored in the nodes. \end{DoxyCompactList}\item 
-virtual unsigned \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_a58a49882b5db5b044017f0a35bb41241}{required\+\_\+nvalue}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+virtual unsigned \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_a58a49882b5db5b044017f0a35bb41241}{required\+\_\+nvalue}} (const unsigned \&n) const
 \begin{DoxyCompactList}\small\item\em Number of values (pinned or dofs) required at node n. Can be overwritten for hanging node version. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_a28df8e859a4201842857e6ad7dbc7ecd}{solid\+\_\+p}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&l)
+double \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_a28df8e859a4201842857e6ad7dbc7ecd}{solid\+\_\+p}} (const unsigned \&l)
 \begin{DoxyCompactList}\small\item\em Return the l-\/th pressure value, make sure to use the hanging representation if there is one! \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_a796553fe8e806158167c598e4c85596f}{set\+\_\+solid\+\_\+p}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&l, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&p\+\_\+value)
+void \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_a796553fe8e806158167c598e4c85596f}{set\+\_\+solid\+\_\+p}} (const unsigned \&l, const double \&p\+\_\+value)
 \begin{DoxyCompactList}\small\item\em Set the l-\/th solid pressure value to p\+\_\+value. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_a8d5ddf65d4462205dc889af7ba10c527}{npres\+\_\+solid}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_a8d5ddf65d4462205dc889af7ba10c527}{npres\+\_\+solid}} () const
 \begin{DoxyCompactList}\small\item\em Return number of pressure values. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_ac86b448b58ca42cab0561cce11bdbd7d}{fix\+\_\+solid\+\_\+pressure}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&l, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&pvalue)
+void \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_ac86b448b58ca42cab0561cce11bdbd7d}{fix\+\_\+solid\+\_\+pressure}} (const unsigned \&l, const double \&pvalue)
 \begin{DoxyCompactList}\small\item\em Fix the pressure dof l to be the value pvalue. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_acc858925ae5724c02fc1073130f67430}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Generic \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} output function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_a52659b143c819c1fcc86a6473ef324f0}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_a52659b143c819c1fcc86a6473ef324f0}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1PVDEquationsWithPressure}{PVDEquations\+With\+Pressure}} output function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_ae44d9dd8f7a28dafd17e20a0408f4708}{output}} (FILE $\ast$file\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em C-\/style generic \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} output function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_af9d764cc0daeb7151b37284bf2082162}{output}} (FILE $\ast$file\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_af9d764cc0daeb7151b37284bf2082162}{output}} (FILE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em C-\/style \mbox{\hyperlink{classoomph_1_1PVDEquationsWithPressure}{PVDEquations\+With\+Pressure}} output function. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-int \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_a97a8b3bc51a27731f21b06c1a95aaf45}{solid\+\_\+p\+\_\+local\+\_\+eqn}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+int \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_a97a8b3bc51a27731f21b06c1a95aaf45}{solid\+\_\+p\+\_\+local\+\_\+eqn}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Overload the access function that is used to return local equation corresponding to the i-\/th solid pressure value. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_a917e2f9e3b1bd9ff49d28006e47e438f}{solid\+\_\+pshape}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_a917e2f9e3b1bd9ff49d28006e47e438f}{solid\+\_\+pshape}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi) const
 \begin{DoxyCompactList}\small\item\em Return the pressure shape functions. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_a82f7ff46d29897a21c82966ce0512e54}{Pconv}} \mbox{[}4\mbox{]}
-\begin{DoxyCompactList}\small\item\em Conversion from pressure dof to Node number at which pressure is stored. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_a94f1edeee592a294db20a40043493538}{Pconv}} \mbox{[}8\mbox{]}
-\begin{DoxyCompactList}\small\item\em Conversion from pressure dof to Node number at which pressure is stored. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_ab48638387c6474924fa9b4719c586f30}{solid\+\_\+pshape}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+const unsigned \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_a82f7ff46d29897a21c82966ce0512e54}{Pconv}} \mbox{[}4\mbox{]}
+\begin{DoxyCompactList}\small\item\em Conversion from pressure dof to \mbox{\hyperlink{classoomph_1_1Node}{Node}} number at which pressure is stored. \end{DoxyCompactList}\item 
+const unsigned \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_a94f1edeee592a294db20a40043493538}{Pconv}} \mbox{[}8\mbox{]}
+\begin{DoxyCompactList}\small\item\em Conversion from pressure dof to \mbox{\hyperlink{classoomph_1_1Node}{Node}} number at which pressure is stored. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_ab48638387c6474924fa9b4719c586f30}{solid\+\_\+pshape}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi) const
 \begin{DoxyCompactList}\small\item\em Pressure shape functions for 2D \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure}{QPVDElement\+With\+Continuous\+Pressure}} elements. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_a3ae7aa0cf24e89e4c946efed81244727}{solid\+\_\+pshape}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_a3ae7aa0cf24e89e4c946efed81244727}{solid\+\_\+pshape}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi) const
 \begin{DoxyCompactList}\small\item\em Pressure shape functions for 3D \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure}{QPVDElement\+With\+Continuous\+Pressure}} elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_ab8b1c13d0ec7c7734520e52feefb24ad}{Pconv}} \mbox{[}$\,$\mbox{]}
+static const unsigned \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_ab8b1c13d0ec7c7734520e52feefb24ad}{Pconv}} \mbox{[}$\,$\mbox{]}
 \begin{DoxyCompactList}\small\item\em Static array of ints to hold conversion from pressure node numbers to actual node numbers. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_a55d0fa7d145270c4b7a8b127b9afe818}{unpin\+\_\+elemental\+\_\+solid\+\_\+pressure\+\_\+dofs}} ()
 \begin{DoxyCompactList}\small\item\em Unpin all solid pressure dofs in the element. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_a374fded0bdf22bd6df03721dea32e369}{Initial\+\_\+\+Nvalue}} \mbox{[}9\mbox{]}
+const unsigned \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_a374fded0bdf22bd6df03721dea32e369}{Initial\+\_\+\+Nvalue}} \mbox{[}9\mbox{]}
 \begin{DoxyCompactList}\small\item\em /////////////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_a6eeb90ded9d3a20b3765b6c1ac989ec0}{Initial\+\_\+\+Nvalue}} \mbox{[}27\mbox{]}
+const unsigned \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_a6eeb90ded9d3a20b3765b6c1ac989ec0}{Initial\+\_\+\+Nvalue}} \mbox{[}27\mbox{]}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Data}{Data}} for the number of Variables at each node. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_a5681dd388f66361939e18e5c8e7df0a2}{Initial\+\_\+\+Nvalue}} \mbox{[}$\,$\mbox{]}
+static const unsigned \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_a5681dd388f66361939e18e5c8e7df0a2}{Initial\+\_\+\+Nvalue}} \mbox{[}$\,$\mbox{]}
 \begin{DoxyCompactList}\small\item\em Static array of ints to hold number of solid pressure values at each node. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -82,7 +82,7 @@ static \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde16
 class oomph\+::\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$}
 //////////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////////// 
 
-An Element that solves the equations of solid mechanics, based on the discretised principle of virtual displacements, using quadratic interpolation for the positions and continuous linear solid pressure. This is analagous to the \mbox{\hyperlink{classQTaylorHoodElement}{QTaylor\+Hood\+Element}} fluid element. 
+An Element that solves the equations of solid mechanics, based on the discretised principle of virtual displacements, using quadratic interpolation for the positions and continuous linear solid pressure. This is analagous to the \mbox{\hyperlink{classoomph_1_1QTaylorHoodElement}{QTaylor\+Hood\+Element}} fluid element. 
 
 Definition at line \mbox{\hyperlink{solid__elements_8h_source_l01520}{1520}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
 
@@ -112,7 +112,7 @@ Definition at line \mbox{\hyperlink{solid__elements_8h_source_l01560}{1560}} of 
 \index{fix\_solid\_pressure@{fix\_solid\_pressure}!oomph::QPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::QPVDElementWithContinuousPressure$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{fix\_solid\_pressure()}{fix\_solid\_pressure()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure}}$<$ DIM $>$\+::fix\+\_\+solid\+\_\+pressure (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{l,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{pvalue }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure}}$<$ DIM $>$\+::fix\+\_\+solid\+\_\+pressure (\begin{DoxyParamCaption}\item[{const unsigned \&}]{l,  }\item[{const double \&}]{pvalue }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -124,13 +124,13 @@ Definition at line \mbox{\hyperlink{solid__elements_8h_source_l01598}{1598}} of 
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{solid__elements_8h_source_l01566}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$\+::solid\+\_\+p\+\_\+nodal\+\_\+index()}}.
+References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00385}{oomph\+::\+Data\+::pin()}}, \mbox{\hyperlink{nodes_8h_source_l00271}{oomph\+::\+Data\+::set\+\_\+value()}}, and \mbox{\hyperlink{solid__elements_8h_source_l01566}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$\+::solid\+\_\+p\+\_\+nodal\+\_\+index()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QPVDElementWithContinuousPressure_a6eeb90ded9d3a20b3765b6c1ac989ec0}\label{classoomph_1_1QPVDElementWithContinuousPressure_a6eeb90ded9d3a20b3765b6c1ac989ec0}} 
 \index{oomph::QPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::QPVDElementWithContinuousPressure$<$ DIM $>$}!Initial\_Nvalue@{Initial\_Nvalue}}
 \index{Initial\_Nvalue@{Initial\_Nvalue}!oomph::QPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::QPVDElementWithContinuousPressure$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{Initial\_Nvalue()}{Initial\_Nvalue()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure}}$<$ 3 $>$\+::Initial\+\_\+\+Nvalue\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure}}$<$ 3 $>$\+::Initial\+\_\+\+Nvalue\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -144,7 +144,7 @@ Definition at line \mbox{\hyperlink{solid__elements_8cc_source_l02445}{2445}} of
 \index{oomph::QPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::QPVDElementWithContinuousPressure$<$ DIM $>$}!Initial\_Nvalue@{Initial\_Nvalue}}
 \index{Initial\_Nvalue@{Initial\_Nvalue}!oomph::QPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::QPVDElementWithContinuousPressure$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{Initial\_Nvalue()}{Initial\_Nvalue()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure}}$<$ 2 $>$\+::Initial\+\_\+\+Nvalue\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure}}$<$ 2 $>$\+::Initial\+\_\+\+Nvalue\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -198,14 +198,14 @@ Definition at line \mbox{\hyperlink{solid__elements_8h_source_l01618}{1618}} of 
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
+References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QPVDElementWithContinuousPressure_af9d764cc0daeb7151b37284bf2082162}\label{classoomph_1_1QPVDElementWithContinuousPressure_af9d764cc0daeb7151b37284bf2082162}} 
 \index{oomph::QPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::QPVDElementWithContinuousPressure$<$ DIM $>$}!output@{output}}
 \index{output@{output}!oomph::QPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::QPVDElementWithContinuousPressure$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure}}$<$ DIM $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure}}$<$ DIM $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -244,14 +244,14 @@ Definition at line \mbox{\hyperlink{solid__elements_8h_source_l01605}{1605}} of 
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
+References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QPVDElementWithContinuousPressure_a52659b143c819c1fcc86a6473ef324f0}\label{classoomph_1_1QPVDElementWithContinuousPressure_a52659b143c819c1fcc86a6473ef324f0}} 
 \index{oomph::QPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::QPVDElementWithContinuousPressure$<$ DIM $>$}!output@{output}}
 \index{output@{output}!oomph::QPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::QPVDElementWithContinuousPressure$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure}}$<$ DIM $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure}}$<$ DIM $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -273,11 +273,11 @@ References \mbox{\hyperlink{solid__elements_8h_source_l01033}{oomph\+::\+PVDEqua
 \index{oomph::QPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::QPVDElementWithContinuousPressure$<$ DIM $>$}!Pconv@{Pconv}}
 \index{Pconv@{Pconv}!oomph::QPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::QPVDElementWithContinuousPressure$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{Pconv()}{Pconv()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure}}$<$ 2 $>$\+::Pconv\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure}}$<$ 2 $>$\+::Pconv\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
-Conversion from pressure dof to Node number at which pressure is stored. 
+Conversion from pressure dof to \mbox{\hyperlink{classoomph_1_1Node}{Node}} number at which pressure is stored. 
 
 
 
@@ -287,11 +287,11 @@ Definition at line \mbox{\hyperlink{solid__elements_8cc_source_l02439}{2439}} of
 \index{oomph::QPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::QPVDElementWithContinuousPressure$<$ DIM $>$}!Pconv@{Pconv}}
 \index{Pconv@{Pconv}!oomph::QPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::QPVDElementWithContinuousPressure$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{Pconv()}{Pconv()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure}}$<$ 3 $>$\+::Pconv\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure}}$<$ 3 $>$\+::Pconv\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
-Conversion from pressure dof to Node number at which pressure is stored. 
+Conversion from pressure dof to \mbox{\hyperlink{classoomph_1_1Node}{Node}} number at which pressure is stored. 
 
 
 
@@ -302,7 +302,7 @@ Definition at line \mbox{\hyperlink{solid__elements_8cc_source_l02453}{2453}} of
 \index{required\_nvalue@{required\_nvalue}!oomph::QPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::QPVDElementWithContinuousPressure$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{required\_nvalue()}{required\_nvalue()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual unsigned \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure}}$<$ DIM $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+virtual unsigned \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure}}$<$ DIM $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -329,7 +329,7 @@ References \mbox{\hyperlink{solid__elements_8h_source_l01527}{oomph\+::\+QPVDEle
 \index{set\_solid\_p@{set\_solid\_p}!oomph::QPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::QPVDElementWithContinuousPressure$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{set\_solid\_p()}{set\_solid\_p()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure}}$<$ DIM $>$\+::set\+\_\+solid\+\_\+p (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{l,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{p\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure}}$<$ DIM $>$\+::set\+\_\+solid\+\_\+p (\begin{DoxyParamCaption}\item[{const unsigned \&}]{l,  }\item[{const double \&}]{p\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -345,14 +345,14 @@ Definition at line \mbox{\hyperlink{solid__elements_8h_source_l01586}{1586}} of 
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{solid__elements_8h_source_l01566}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$\+::solid\+\_\+p\+\_\+nodal\+\_\+index()}}.
+References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00271}{oomph\+::\+Data\+::set\+\_\+value()}}, and \mbox{\hyperlink{solid__elements_8h_source_l01566}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$\+::solid\+\_\+p\+\_\+nodal\+\_\+index()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QPVDElementWithContinuousPressure_a28df8e859a4201842857e6ad7dbc7ecd}\label{classoomph_1_1QPVDElementWithContinuousPressure_a28df8e859a4201842857e6ad7dbc7ecd}} 
 \index{oomph::QPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::QPVDElementWithContinuousPressure$<$ DIM $>$}!solid\_p@{solid\_p}}
 \index{solid\_p@{solid\_p}!oomph::QPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::QPVDElementWithContinuousPressure$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{solid\_p()}{solid\_p()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure}}$<$ DIM $>$\+::solid\+\_\+p (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{l }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+double \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure}}$<$ DIM $>$\+::solid\+\_\+p (\begin{DoxyParamCaption}\item[{const unsigned \&}]{l }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -368,14 +368,14 @@ Definition at line \mbox{\hyperlink{solid__elements_8h_source_l01580}{1580}} of 
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02598}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, and \mbox{\hyperlink{solid__elements_8h_source_l01566}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$\+::solid\+\_\+p\+\_\+nodal\+\_\+index()}}.
+References \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, and \mbox{\hyperlink{solid__elements_8h_source_l01566}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$\+::solid\+\_\+p\+\_\+nodal\+\_\+index()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QPVDElementWithContinuousPressure_a97a8b3bc51a27731f21b06c1a95aaf45}\label{classoomph_1_1QPVDElementWithContinuousPressure_a97a8b3bc51a27731f21b06c1a95aaf45}} 
 \index{oomph::QPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::QPVDElementWithContinuousPressure$<$ DIM $>$}!solid\_p\_local\_eqn@{solid\_p\_local\_eqn}}
 \index{solid\_p\_local\_eqn@{solid\_p\_local\_eqn}!oomph::QPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::QPVDElementWithContinuousPressure$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{solid\_p\_local\_eqn()}{solid\_p\_local\_eqn()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-int \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure}}$<$ DIM $>$\+::solid\+\_\+p\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+int \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure}}$<$ DIM $>$\+::solid\+\_\+p\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -421,7 +421,7 @@ Referenced by \mbox{\hyperlink{solid__elements_8h_source_l01598}{oomph\+::\+QPVD
 \index{solid\_pshape@{solid\_pshape}!oomph::QPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::QPVDElementWithContinuousPressure$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{solid\_pshape()}{solid\_pshape()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure}}$<$ DIM $>$\+::solid\+\_\+pshape (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure}}$<$ DIM $>$\+::solid\+\_\+pshape (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -439,7 +439,7 @@ Referenced by \mbox{\hyperlink{refineable__solid__elements_8h_source_l01087}{oom
 \index{oomph::QPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::QPVDElementWithContinuousPressure$<$ DIM $>$}!solid\_pshape@{solid\_pshape}}
 \index{solid\_pshape@{solid\_pshape}!oomph::QPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::QPVDElementWithContinuousPressure$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{solid\_pshape()}{solid\_pshape()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
-{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure}}$<$ 2 $>$\+::solid\+\_\+pshape (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure}}$<$ 2 $>$\+::solid\+\_\+pshape (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -461,7 +461,7 @@ References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfo
 \index{oomph::QPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::QPVDElementWithContinuousPressure$<$ DIM $>$}!solid\_pshape@{solid\_pshape}}
 \index{solid\_pshape@{solid\_pshape}!oomph::QPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::QPVDElementWithContinuousPressure$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{solid\_pshape()}{solid\_pshape()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
-{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure}}$<$ 3 $>$\+::solid\+\_\+pshape (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure}}$<$ 3 $>$\+::solid\+\_\+pshape (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -500,7 +500,7 @@ Definition at line \mbox{\hyperlink{solid__elements_8h_source_l01530}{1530}} of 
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{solid__elements_8h_source_l01566}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$\+::solid\+\_\+p\+\_\+nodal\+\_\+index()}}.
+References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{solid__elements_8h_source_l01566}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$\+::solid\+\_\+p\+\_\+nodal\+\_\+index()}}, and \mbox{\hyperlink{nodes_8h_source_l00391}{oomph\+::\+Data\+::unpin()}}.
 
 
 
@@ -510,7 +510,7 @@ References \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Elemen
 \index{Initial\_Nvalue@{Initial\_Nvalue}!oomph::QPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::QPVDElementWithContinuousPressure$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{Initial\_Nvalue}{Initial\_Nvalue}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure}}$<$ DIM $>$\+::Initial\+\_\+\+Nvalue\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+const unsigned \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure}}$<$ DIM $>$\+::Initial\+\_\+\+Nvalue\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 
 
@@ -529,7 +529,7 @@ Referenced by \mbox{\hyperlink{solid__elements_8h_source_l01573}{oomph\+::\+QPVD
 \index{Pconv@{Pconv}!oomph::QPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::QPVDElementWithContinuousPressure$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{Pconv}{Pconv}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure}}$<$ DIM $>$\+::Pconv\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+const unsigned \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure}}$<$ DIM $>$\+::Pconv\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
 
 
 

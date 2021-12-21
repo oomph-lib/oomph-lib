@@ -96,7 +96,7 @@
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00092}00092 }
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00093}00093           \textcolor{comment}{// Work out the node's coordinates in the finite element's local}}
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00094}00094           \textcolor{comment}{// coordinate system}}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00095}00095           this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a585cfcdda38ef0ceefc2a663ef4943d4}{local\_fraction\_of\_node}}(jnod, s\_fraction);}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00095}00095           this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a41640b9a9e5f6461cd8ebb8218502b07}{local\_fraction\_of\_node}}(jnod, s\_fraction);}
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00096}00096 }
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00097}00097 }
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00098}00098           \textcolor{comment}{// Get the position of the node from macro element mapping}}
@@ -106,9 +106,9 @@
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00102}00102           \mbox{\hyperlink{classoomph_1_1EighthSphereMesh_a4b08d71a9da8cbd278cc51919cbb1a17}{Domain\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Domain_abef3886384a9b9e722e490268feecc2d}{macro\_element\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1MacroElement_a85e7842ad949bb4062a9ff302fa452e5}{macro\_map}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, r);}
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00103}00103 }
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00104}00104           \textcolor{comment}{// Assign coordinates}}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00105}00105           this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(jnod)-\/>x(0) = r[0];}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00106}00106           this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(jnod)-\/>x(1) = r[1];}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00107}00107           this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(jnod)-\/>x(2) = r[2];}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00105}00105           this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(jnod)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0) = r[0];}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00106}00106           this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(jnod)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1) = r[1];}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00107}00107           this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(jnod)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2) = r[2];}
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00108}00108 }
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00109}00109           \textcolor{comment}{// Add the node to the appropriate boundary}}
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00110}00110           \textcolor{keywordflow}{if} (\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} == 0)}
@@ -158,7 +158,7 @@
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00154}00154 }
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00155}00155             \textcolor{comment}{// Work out the node's coordinates in the finite element's local}}
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00156}00156             \textcolor{comment}{// coordinate system}}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00157}00157             this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(1)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a585cfcdda38ef0ceefc2a663ef4943d4}{local\_fraction\_of\_node}}(jnod,}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00157}00157             this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(1)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a41640b9a9e5f6461cd8ebb8218502b07}{local\_fraction\_of\_node}}(jnod,}
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00158}00158                                                                s\_fraction);}
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00159}00159 }
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00160}00160             \textcolor{comment}{// Get the position of the node from macro element mapping}}
@@ -168,9 +168,9 @@
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00164}00164             \mbox{\hyperlink{classoomph_1_1EighthSphereMesh_a4b08d71a9da8cbd278cc51919cbb1a17}{Domain\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Domain_abef3886384a9b9e722e490268feecc2d}{macro\_element\_pt}}(1)-\/>\mbox{\hyperlink{classoomph_1_1MacroElement_a85e7842ad949bb4062a9ff302fa452e5}{macro\_map}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, r);}
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00165}00165 }
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00166}00166             \textcolor{comment}{// Assign coordinate}}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00167}00167             this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(1)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(jnod)-\/>x(0) = r[0];}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00168}00168             this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(1)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(jnod)-\/>x(1) = r[1];}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00169}00169             this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(1)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(jnod)-\/>x(2) = r[2];}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00167}00167             this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(1)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(jnod)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0) = r[0];}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00168}00168             this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(1)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(jnod)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1) = r[1];}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00169}00169             this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(1)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(jnod)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2) = r[2];}
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00170}00170 }
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00171}00171             \textcolor{comment}{// Add the node to the approriate boundary}}
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00172}00172             \textcolor{keywordflow}{if} (j == 0)}
@@ -229,7 +229,7 @@
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00225}00225 }
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00226}00226             \textcolor{comment}{// Work out the node's coordinates in the finite element's local}}
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00227}00227             \textcolor{comment}{// coordinate system}}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00228}00228             this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(2)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a585cfcdda38ef0ceefc2a663ef4943d4}{local\_fraction\_of\_node}}(jnod,}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00228}00228             this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(2)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a41640b9a9e5f6461cd8ebb8218502b07}{local\_fraction\_of\_node}}(jnod,}
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00229}00229                                                                s\_fraction);}
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00230}00230 }
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00231}00231             \textcolor{comment}{// Get the position of the node from macro element mapping}}
@@ -239,9 +239,9 @@
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00235}00235             \mbox{\hyperlink{classoomph_1_1EighthSphereMesh_a4b08d71a9da8cbd278cc51919cbb1a17}{Domain\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Domain_abef3886384a9b9e722e490268feecc2d}{macro\_element\_pt}}(2)-\/>\mbox{\hyperlink{classoomph_1_1MacroElement_a85e7842ad949bb4062a9ff302fa452e5}{macro\_map}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, r);}
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00236}00236 }
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00237}00237             \textcolor{comment}{// Assign coordinates}}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00238}00238             this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(2)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(jnod)-\/>x(0) = r[0];}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00239}00239             this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(2)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(jnod)-\/>x(1) = r[1];}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00240}00240             this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(2)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(jnod)-\/>x(2) = r[2];}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00238}00238             this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(2)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(jnod)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0) = r[0];}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00239}00239             this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(2)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(jnod)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1) = r[1];}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00240}00240             this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(2)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(jnod)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2) = r[2];}
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00241}00241 }
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00242}00242             \textcolor{comment}{// Add the node to the appropriate boundary}}
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00243}00243             \textcolor{keywordflow}{if} (\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} == 0)}
@@ -309,7 +309,7 @@
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00305}00305 }
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00306}00306             \textcolor{comment}{// Work out the node's coordinates in the finite element's local}}
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00307}00307             \textcolor{comment}{// coordinate system}}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00308}00308             this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(3)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a585cfcdda38ef0ceefc2a663ef4943d4}{local\_fraction\_of\_node}}(jnod,}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00308}00308             this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(3)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a41640b9a9e5f6461cd8ebb8218502b07}{local\_fraction\_of\_node}}(jnod,}
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00309}00309                                                                s\_fraction);}
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00310}00310 }
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00311}00311             \textcolor{comment}{// Get the position of the node from macro element mapping}}
@@ -319,9 +319,9 @@
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00315}00315             \mbox{\hyperlink{classoomph_1_1EighthSphereMesh_a4b08d71a9da8cbd278cc51919cbb1a17}{Domain\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1Domain_abef3886384a9b9e722e490268feecc2d}{macro\_element\_pt}}(3)-\/>\mbox{\hyperlink{classoomph_1_1MacroElement_a85e7842ad949bb4062a9ff302fa452e5}{macro\_map}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, r);}
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00316}00316 }
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00317}00317             \textcolor{comment}{// Assign coordinates}}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00318}00318             this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(3)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(jnod)-\/>x(0) = r[0];}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00319}00319             this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(3)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(jnod)-\/>x(1) = r[1];}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00320}00320             this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(3)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(jnod)-\/>x(2) = r[2];}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00318}00318             this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(3)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(jnod)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0) = r[0];}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00319}00319             this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(3)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(jnod)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1) = r[1];}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00320}00320             this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(3)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(jnod)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2) = r[2];}
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00321}00321 }
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00322}00322             \textcolor{comment}{// Add the node to the appropriate boundary}}
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00323}00323             \textcolor{keywordflow}{if} (\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} == 0)}
@@ -343,30 +343,32 @@
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00339}00339                                                              (nnode1d -\/ 1));}
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00340}00340             \}}
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00341}00341             \textcolor{keywordflow}{else}}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00342}00342               \textcolor{comment}{// else if i==nnode1d-\/1 the node already exists in element 1}}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00343}00343               \textcolor{keywordflow}{if} (\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} == nnode1d -\/ 1)}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00344}00344             \{}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00345}00345               this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(3)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(jnod) =}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00346}00346                 this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(1)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(k + \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} * nnode1d * nnode1d +}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00347}00347                                                     j * nnode1d);}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00348}00348             \}}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00349}00349             \textcolor{keywordflow}{else}}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00350}00350             \textcolor{comment}{// else, the node exists in element 2}}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00351}00351             \{}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00352}00352               this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(3)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(jnod) =}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00353}00353                 this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(2)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(i + k * nnode1d +}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00354}00354                                                     j * nnode1d * nnode1d);}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00355}00355             \}}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00356}00356           \}}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00357}00357         \}}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00358}00358       \}}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00359}00359     \}}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00360}00360 }
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00361}00361     \textcolor{comment}{// Setup boundary element lookup schemes}}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00362}00362     \mbox{\hyperlink{classoomph_1_1BrickMeshBase_aa2d28d573a5dadd0ddef912e2a2c6828}{setup\_boundary\_element\_info}}();}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00363}00363   \}}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00364}00364 }
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00365}00365 \} \textcolor{comment}{// namespace oomph}}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00366}00366 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00342}00342             \{}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00343}00343               \textcolor{comment}{// else if i==nnode1d-\/1 the node already exists in element 1}}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00344}00344               \textcolor{keywordflow}{if} (\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} == nnode1d -\/ 1)}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00345}00345               \{}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00346}00346                 this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(3)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(jnod) =}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00347}00347                   this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(1)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00348}00348                     k + \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} * nnode1d * nnode1d + j * nnode1d);}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00349}00349               \}}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00350}00350               \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00351}00351               \textcolor{comment}{// else, the node exists in element 2}}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00352}00352               \{}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00353}00353                 this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(3)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(jnod) =}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00354}00354                   this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(2)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(i + k * nnode1d +}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00355}00355                                                       j * nnode1d * nnode1d);}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00356}00356               \}}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00357}00357             \}}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00358}00358           \}}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00359}00359         \}}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00360}00360       \}}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00361}00361     \}}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00362}00362 }
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00363}00363     \textcolor{comment}{// Setup boundary element lookup schemes}}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00364}00364     \mbox{\hyperlink{classoomph_1_1BrickMeshBase_aa2d28d573a5dadd0ddef912e2a2c6828}{setup\_boundary\_element\_info}}();}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00365}00365   \}}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00366}00366 }
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00367}00367 \} \textcolor{comment}{// namespace oomph}}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00368}00368 \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

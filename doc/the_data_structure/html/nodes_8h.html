@@ -126,8 +126,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle"><div class="title">nodes.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -148,14 +147,17 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HangInfo.html">oomph::HangInfo</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that contains data for hanging nodes.  <a href="classoomph_1_1HangInfo.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Node.html">oomph::Node</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nodes are derived from <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a>, but, in addition, have a definite (Eulerian) position in a space of a given dimension.  <a href="classoomph_1_1Node.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SolidNode.html">oomph::SolidNode</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A Class for nodes that deform elastically (i.e. position is an unknown in the problem). The idea is that the Eulerian positions are stored in a <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> object and the Lagrangian coordinates are stored in addition. The pointer that addresses the Eulerian positions is set to the pointer to Value in the <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> object. Hence, <a class="el" href="classoomph_1_1SolidNode.html" title="A Class for nodes that deform elastically (i.e. position is an unknown in the problem)....">SolidNode</a> uses knowledge of the internal structure of <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> and must be a friend of the <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> class. In order to allow a mesh to deform via an elastic-style equation in deforming-domain problems, the positions are stored separately from the values, so that elastic problems may be combined with any other type of problem.  <a href="classoomph_1_1SolidNode.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BoundaryNodeBase.html">oomph::BoundaryNodeBase</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A class that contains the information required by Nodes that are located on <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a> boundaries. A <a class="el" href="classoomph_1_1BoundaryNode.html" title="A template Class for BoundaryNodes; that is Nodes that MAY live on the boundary of a Mesh....">BoundaryNode</a> of a particular type is obtained by combining a given Node with this class. By differentiating between Nodes and BoundaryNodes we avoid a lot of un-necessary storage in the bulk Nodes.  <a href="classoomph_1_1BoundaryNodeBase.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A class that contains the information required by Nodes that are located on <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a> boundaries. A <a class="el" href="classoomph_1_1BoundaryNode.html" title="A template Class for BoundaryNodes; that is Nodes that MAY live on the boundary of a Mesh....">BoundaryNode</a> of a particular type is obtained by combining a given <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a> with this class. By differentiating between Nodes and BoundaryNodes we avoid a lot of un-necessary storage in the bulk Nodes.  <a href="classoomph_1_1BoundaryNodeBase.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BoundaryNode.html">oomph::BoundaryNode&lt; NODE_TYPE &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A template Class for BoundaryNodes; that is Nodes that MAY live on the boundary of a <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a>. The class is formed by a simple composition of the template parameter NODE_TYPE, which must be a Node class and the <a class="el" href="classoomph_1_1BoundaryNodeBase.html" title="A class that contains the information required by Nodes that are located on Mesh boundaries....">BoundaryNodeBase</a> class. Final overloading of functions is always in favour of the <a class="el" href="classoomph_1_1BoundaryNodeBase.html" title="A class that contains the information required by Nodes that are located on Mesh boundaries....">BoundaryNodeBase</a> implementation; i.e. these nodes can live on boundaries.  <a href="classoomph_1_1BoundaryNode.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A template Class for BoundaryNodes; that is Nodes that MAY live on the boundary of a <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a>. The class is formed by a simple composition of the template parameter NODE_TYPE, which must be a <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a> class and the <a class="el" href="classoomph_1_1BoundaryNodeBase.html" title="A class that contains the information required by Nodes that are located on Mesh boundaries....">BoundaryNodeBase</a> class. Final overloading of functions is always in favour of the <a class="el" href="classoomph_1_1BoundaryNodeBase.html" title="A class that contains the information required by Nodes that are located on Mesh boundaries....">BoundaryNodeBase</a> implementation; i.e. these nodes can live on boundaries.  <a href="classoomph_1_1BoundaryNode.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
@@ -163,12 +165,6 @@ Namespaces</h2></td></tr>
 <tr class="memitem:namespaceoomph"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html">oomph</a></td></tr>
 <tr class="memdesc:namespaceoomph"><td class="mdescLeft">&#160;</td><td class="mdescRight">//////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:aff0c55ce31f12df52b2fe5ae647ffebe"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#aff0c55ce31f12df52b2fe5ae647ffebe">oomph::psi_</a></td></tr>
-<tr class="memdesc:aff0c55ce31f12df52b2fe5ae647ffebe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nodes are derived from <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a>, but, in addition, have a definite (Eulerian) position in a space of a given dimension.  <a href="namespaceoomph.html#aff0c55ce31f12df52b2fe5ae647ffebe">More...</a><br /></td></tr>
-<tr class="separator:aff0c55ce31f12df52b2fe5ae647ffebe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 
@@ -198,7 +194,7 @@ Variables</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Nov 2 2021 16:31:16
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Dec 21 2021 17:35:12
         </div>
       </div>
     </footer>

@@ -18,11 +18,11 @@ Inheritance diagram for oomph\+::Non\+Refineable\+Element\+With\+Hanging\+Nodes\
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classoomph_1_1NonRefineableElementWithHangingNodes_aeac85433ef824ba827bb25bbece5dd2d}{build}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ Node $\ast$ $>$ \&new\+\_\+node\+\_\+pt, bool \&was\+\_\+already\+\_\+built, std\+::ofstream \&new\+\_\+nodes\+\_\+file)
+void \mbox{\hyperlink{classoomph_1_1NonRefineableElementWithHangingNodes_aeac85433ef824ba827bb25bbece5dd2d}{build}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ \&new\+\_\+node\+\_\+pt, bool \&was\+\_\+already\+\_\+built, std\+::ofstream \&new\+\_\+nodes\+\_\+file)
 \begin{DoxyCompactList}\small\item\em Broken build function -- shouldn\textquotesingle{}t really be needed. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1NonRefineableElementWithHangingNodes_a0e25496a8ffacdef5fb93a934874b7ef}{get\+\_\+interpolated\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&values)
+void \mbox{\hyperlink{classoomph_1_1NonRefineableElementWithHangingNodes_a0e25496a8ffacdef5fb93a934874b7ef}{get\+\_\+interpolated\+\_\+values}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&values)
 \begin{DoxyCompactList}\small\item\em Broken function -- this shouldn\textquotesingle{}t really be needed. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1NonRefineableElementWithHangingNodes_a864c5d93b38c49401561db85bb545e27}{get\+\_\+interpolated\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&values)
+virtual void \mbox{\hyperlink{classoomph_1_1NonRefineableElementWithHangingNodes_a864c5d93b38c49401561db85bb545e27}{get\+\_\+interpolated\+\_\+values}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&values)
 \begin{DoxyCompactList}\small\item\em Broken function -- this shouldn\textquotesingle{}t really be needed. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1NonRefineableElementWithHangingNodes_a68766070804623a8575bc4be86325fa3}{check\+\_\+integrity}} (double \&max\+\_\+error)
 \begin{DoxyCompactList}\small\item\em Broken function -- this shouldn\textquotesingle{}t really be needed. \end{DoxyCompactList}\item 
@@ -45,7 +45,7 @@ Definition at line \mbox{\hyperlink{refineable__elements_8h_source_l00797}{797}}
 \index{oomph::NonRefineableElementWithHangingNodes@{oomph::NonRefineableElementWithHangingNodes}!build@{build}}
 \index{build@{build}!oomph::NonRefineableElementWithHangingNodes@{oomph::NonRefineableElementWithHangingNodes}}
 \doxysubsubsection{\texorpdfstring{build()}{build()}}
-{\footnotesize\ttfamily void oomph\+::\+Non\+Refineable\+Element\+With\+Hanging\+Nodes\+::build (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ Node $\ast$ $>$ \&}]{new\+\_\+node\+\_\+pt,  }\item[{bool \&}]{was\+\_\+already\+\_\+built,  }\item[{std\+::ofstream \&}]{new\+\_\+nodes\+\_\+file }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Non\+Refineable\+Element\+With\+Hanging\+Nodes\+::build (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ \&}]{new\+\_\+node\+\_\+pt,  }\item[{bool \&}]{was\+\_\+already\+\_\+built,  }\item[{std\+::ofstream \&}]{new\+\_\+nodes\+\_\+file }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -81,7 +81,7 @@ Definition at line \mbox{\hyperlink{refineable__elements_8h_source_l00839}{839}}
 \index{oomph::NonRefineableElementWithHangingNodes@{oomph::NonRefineableElementWithHangingNodes}!get\_interpolated\_values@{get\_interpolated\_values}}
 \index{get\_interpolated\_values@{get\_interpolated\_values}!oomph::NonRefineableElementWithHangingNodes@{oomph::NonRefineableElementWithHangingNodes}}
 \doxysubsubsection{\texorpdfstring{get\_interpolated\_values()}{get\_interpolated\_values()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily virtual void oomph\+::\+Non\+Refineable\+Element\+With\+Hanging\+Nodes\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Non\+Refineable\+Element\+With\+Hanging\+Nodes\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -99,7 +99,7 @@ Definition at line \mbox{\hyperlink{refineable__elements_8h_source_l00826}{826}}
 \index{oomph::NonRefineableElementWithHangingNodes@{oomph::NonRefineableElementWithHangingNodes}!get\_interpolated\_values@{get\_interpolated\_values}}
 \index{get\_interpolated\_values@{get\_interpolated\_values}!oomph::NonRefineableElementWithHangingNodes@{oomph::NonRefineableElementWithHangingNodes}}
 \doxysubsubsection{\texorpdfstring{get\_interpolated\_values()}{get\_interpolated\_values()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void oomph\+::\+Non\+Refineable\+Element\+With\+Hanging\+Nodes\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Non\+Refineable\+Element\+With\+Hanging\+Nodes\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 

@@ -325,7 +325,7 @@
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00321}00321 \textcolor{comment}{    /// and the residual vector: Done by finite differencing the}}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00322}00322 \textcolor{comment}{    /// residual vector w.r.t. all nodal, internal, external and load Data.}}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00323}\mbox{\hyperlink{classoomph_1_1FSIWallElement_a7817d2662c24540d3757cb1a1194a635}{00323}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1FSIWallElement_a7817d2662c24540d3757cb1a1194a635}{fill\_in\_contribution\_to\_jacobian}}(\mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{fsi_8h_source_l00324}00324                                           \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})}
+\DoxyCodeLine{\Hypertarget{fsi_8h_source_l00324}00324                                           \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian)}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00325}00325     \{}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00326}00326       \textcolor{comment}{// Add the contribution to the residuals}}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00327}00327       \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515e8504a48179c0e72c550d7}{fill\_in\_contribution\_to\_residuals}}(residuals);}
@@ -333,7 +333,7 @@
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00329}00329       \textcolor{comment}{// Solve for the consistent acceleraction in the Newmark scheme}}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00330}00330       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a52ba6cbb89b5edfe7592a49171aeb436}{Solve\_for\_consistent\_newmark\_accel\_flag}})}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00331}00331       \{}
-\DoxyCodeLine{\Hypertarget{fsi_8h_source_l00332}00332         fill\_in\_jacobian\_for\_newmark\_accel(\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}});}
+\DoxyCodeLine{\Hypertarget{fsi_8h_source_l00332}00332         \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_ae9b760377a56194d802510527b33c76f}{fill\_in\_jacobian\_for\_newmark\_accel}}(jacobian);}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00333}00333         \textcolor{keywordflow}{return};}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00334}00334       \}}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00335}00335 }
@@ -343,12 +343,12 @@
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00339}00339       \textcolor{comment}{// Get the residuals for the entire element}}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00340}00340       \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a53d348ab71c86b53619129a1dd411d30}{get\_residuals}}(full\_residuals);}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00341}00341       \textcolor{comment}{// Add the internal and external by finite differences}}
-\DoxyCodeLine{\Hypertarget{fsi_8h_source_l00342}00342       \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a3409d6da14739827766547c7338360e3}{fill\_in\_jacobian\_from\_internal\_by\_fd}}(full\_residuals, \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}});}
-\DoxyCodeLine{\Hypertarget{fsi_8h_source_l00343}00343       \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a01ccf0a6a959cff46a36a4b7f1cf1554}{fill\_in\_jacobian\_from\_external\_by\_fd}}(full\_residuals, \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}});}
-\DoxyCodeLine{\Hypertarget{fsi_8h_source_l00344}00344       \mbox{\hyperlink{classoomph_1_1FiniteElement_a0e8482d1fd7938accfa0c9951015f239}{fill\_in\_jacobian\_from\_nodal\_by\_fd}}(full\_residuals, \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}});}
-\DoxyCodeLine{\Hypertarget{fsi_8h_source_l00345}00345       \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_aa4d7dab326ceb0167da34ad4c535fa0d}{fill\_in\_jacobian\_from\_solid\_position\_by\_fd}}(\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}});}
+\DoxyCodeLine{\Hypertarget{fsi_8h_source_l00342}00342       \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a3409d6da14739827766547c7338360e3}{fill\_in\_jacobian\_from\_internal\_by\_fd}}(full\_residuals, jacobian);}
+\DoxyCodeLine{\Hypertarget{fsi_8h_source_l00343}00343       \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a01ccf0a6a959cff46a36a4b7f1cf1554}{fill\_in\_jacobian\_from\_external\_by\_fd}}(full\_residuals, jacobian);}
+\DoxyCodeLine{\Hypertarget{fsi_8h_source_l00344}00344       \mbox{\hyperlink{classoomph_1_1FiniteElement_a4a79882efb07751842d0b714a0c7f2ec}{fill\_in\_jacobian\_from\_nodal\_by\_fd}}(full\_residuals, jacobian);}
+\DoxyCodeLine{\Hypertarget{fsi_8h_source_l00345}00345       \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_aa4d7dab326ceb0167da34ad4c535fa0d}{fill\_in\_jacobian\_from\_solid\_position\_by\_fd}}(jacobian);}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00346}00346       \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_a80731cecc55aee156fb92aa72a77e882}{fill\_in\_jacobian\_from\_external\_interaction\_by\_fd}}(full\_residuals,}
-\DoxyCodeLine{\Hypertarget{fsi_8h_source_l00347}00347                                                        \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}});}
+\DoxyCodeLine{\Hypertarget{fsi_8h_source_l00347}00347                                                        jacobian);}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00348}00348     \}}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00349}00349 }
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00350}00350   \textcolor{keyword}{protected}:\textcolor{comment}{}}
@@ -571,7 +571,7 @@
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00567}00567 \textcolor{comment}{    /// existing Navier-\/Stokes elements. If you use any others,}}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00568}00568 \textcolor{comment}{    /// use this function at your own risk.}}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00569}00569 \textcolor{comment}{}    \textcolor{comment}{//============================================================================}}
-\DoxyCodeLine{\Hypertarget{fsi_8h_source_l00570}00570     \textcolor{keyword}{extern} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1FSI__functions_ac1a95cf31d719f6aeceb72554ee75868}{apply\_no\_slip\_on\_moving\_wall}}(Node* node\_pt);}
+\DoxyCodeLine{\Hypertarget{fsi_8h_source_l00570}00570     \textcolor{keyword}{extern} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1FSI__functions_ac1a95cf31d719f6aeceb72554ee75868}{apply\_no\_slip\_on\_moving\_wall}}(\mbox{\hyperlink{classoomph_1_1Node}{Node}}* node\_pt);}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00571}00571 }
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00572}00572 }
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00573}00573     \textcolor{comment}{//============================================================================}\textcolor{comment}{}}
@@ -837,7 +837,7 @@
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00833}00833           \textcolor{keywordtype}{unsigned} ndim\_local = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5f8fe59f06da1da9f6b7bbcbdb90ef93}{dim}}();}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00834}00834           \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(ndim\_local);}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00835}00835           \textcolor{keywordtype}{unsigned} ndim\_eulerian = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_ab6602b43c3a2f1a5e48729b0b23c0d91}{nodal\_dimension}}();}
-\DoxyCodeLine{\Hypertarget{fsi_8h_source_l00836}00836           \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(ndim\_eulerian);}
+\DoxyCodeLine{\Hypertarget{fsi_8h_source_l00836}00836           \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(ndim\_eulerian);}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00837}00837 }
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00838}00838 }
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00839}00839           \textcolor{comment}{// Map to indicate if the internal Data for a given}}
@@ -846,18 +846,18 @@
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00842}00842 }
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00843}00843           \textcolor{comment}{// Loop over Gauss points and doc their position}}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00844}00844           \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{\Hypertarget{fsi_8h_source_l00845}00845           \textcolor{keywordtype}{unsigned} nint = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{fsi_8h_source_l00845}00845           \textcolor{keywordtype}{unsigned} nint = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00846}00846           some\_file << \textcolor{stringliteral}{"{}ZONE I="{}} << nint << std::endl;}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00847}00847           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < nint; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00848}00848           \{}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00849}00849             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < ndim\_local; j++)}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00850}00850             \{}
-\DoxyCodeLine{\Hypertarget{fsi_8h_source_l00851}00851               \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[j] = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>knot(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j);}
+\DoxyCodeLine{\Hypertarget{fsi_8h_source_l00851}00851               \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[j] = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{knot}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j);}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00852}00852             \}}
-\DoxyCodeLine{\Hypertarget{fsi_8h_source_l00853}00853             el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{fsi_8h_source_l00853}00853             el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00854}00854             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < ndim\_eulerian; j++)}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00855}00855             \{}
-\DoxyCodeLine{\Hypertarget{fsi_8h_source_l00856}00856               some\_file << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[j] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{fsi_8h_source_l00856}00856               some\_file << x[j] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00857}00857             \}}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00858}00858             some\_file << \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} << std::endl;}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00859}00859           \}}
@@ -887,10 +887,10 @@
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00883}00883                 el\_pt-\/>\mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_a13e8fd3c9a0723f0fb6539ba3853b149}{external\_element\_local\_coord}}(face, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00884}00884 }
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00885}00885               \textcolor{comment}{// Get Eulerian position in fluid element}}
-\DoxyCodeLine{\Hypertarget{fsi_8h_source_l00886}00886               fluid\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(s\_fluid, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{fsi_8h_source_l00886}00886               fluid\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(s\_fluid, x);}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00887}00887               \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < ndim\_eulerian; j++)}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00888}00888               \{}
-\DoxyCodeLine{\Hypertarget{fsi_8h_source_l00889}00889                 some\_file << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[j] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{fsi_8h_source_l00889}00889                 some\_file << x[j] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00890}00890               \}}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00891}00891               some\_file << \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} << std::endl;}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00892}00892             \}}
@@ -948,7 +948,7 @@
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00944}00944 }
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00945}00945             \textcolor{comment}{// Try to cast to a Node}}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00946}00946             \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{\Hypertarget{fsi_8h_source_l00947}00947             Node* node\_pt = \textcolor{keyword}{dynamic\_cast<}Node*\textcolor{keyword}{>}(unique\_data\_pt);}
+\DoxyCodeLine{\Hypertarget{fsi_8h_source_l00947}00947             \mbox{\hyperlink{classoomph_1_1Node}{Node}}* node\_pt = \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1Node}{Node}}*\textcolor{keyword}{>}(unique\_data\_pt);}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00948}00948             \textcolor{keywordflow}{if} (node\_pt == 0)}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00949}00949             \{}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00950}00950               \textcolor{comment}{// Is it a solid node? NOTE: This query makes sense as we're}}
@@ -992,7 +992,7 @@
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00988}00988                   \{}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00989}00989                     s\_fluid[k] = 0.5 * (s\_max + s\_min) + 0.1 * (s\_max -\/ s\_min);}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00990}00990                   \}}
-\DoxyCodeLine{\Hypertarget{fsi_8h_source_l00991}00991                   fluid\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(s\_fluid, x\_fluid);}
+\DoxyCodeLine{\Hypertarget{fsi_8h_source_l00991}00991                   fluid\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(s\_fluid, x\_fluid);}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00992}00992                   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < ndim\_eulerian; j++)}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00993}00993                   \{}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l00994}00994                     some\_file << label[j] << x\_fluid[j] << \textcolor{stringliteral}{"{} "{}};}
@@ -1029,7 +1029,7 @@
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l01025}01025               some\_file << \textcolor{stringliteral}{"{}TEXT "{}};}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l01026}01026               \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < ndim\_eulerian; j++)}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l01027}01027               \{}
-\DoxyCodeLine{\Hypertarget{fsi_8h_source_l01028}01028                 some\_file << label[j] << node\_pt-\/>x(j) << \textcolor{stringliteral}{"{}, "{}};}
+\DoxyCodeLine{\Hypertarget{fsi_8h_source_l01028}01028                 some\_file << label[j] << node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(j) << \textcolor{stringliteral}{"{}, "{}};}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l01029}01029               \}}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l01030}01030               some\_file << \textcolor{stringliteral}{"{}CS=GRID, HU=FRAME, H=2.5, AN=MIDCENTER, C=RED "{}}}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l01031}01031                         << \textcolor{stringliteral}{"{}T=\(\backslash\)"{}"{}} << it-\/>second << \textcolor{stringliteral}{"{}\(\backslash\)"{}"{}} << std::endl;}
@@ -1057,7 +1057,7 @@
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l01053}01053         \textcolor{comment}{// Upcast node to appropriate type}}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l01054}01054         NODE* node\_pt = \textcolor{keyword}{dynamic\_cast<}NODE*\textcolor{keyword}{>}(fluid\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}(j));}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l01055}01055 }
-\DoxyCodeLine{\Hypertarget{fsi_8h_source_l01056}01056         \textcolor{keywordtype}{unsigned} ndim\_eulerian = node\_pt-\/>ndim();}
+\DoxyCodeLine{\Hypertarget{fsi_8h_source_l01056}01056         \textcolor{keywordtype}{unsigned} ndim\_eulerian = node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l01057}01057 }
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l01058}01058         \textcolor{comment}{// Cleart the filename}}
 \DoxyCodeLine{\Hypertarget{fsi_8h_source_l01059}01059         filename.str(\textcolor{stringliteral}{"{}"{}});}

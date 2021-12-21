@@ -317,16 +317,16 @@ $(function() {
 <div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>      }</div>
 <div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span> </div>
 <div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span> </div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>      <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>(3);</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>      <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> x(3);</div>
 <div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = 0; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &lt;= nx; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
 <div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>      {</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>        <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>[0] = min_and_max_coordinates[0].first + double(<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) * dx;</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>        x[0] = min_and_max_coordinates[0].first + double(<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) * dx;</div>
 <div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> j = 0; j &lt;= ny; j++)</div>
 <div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>        {</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>          <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>[1] = min_and_max_coordinates[1].first + double(j) * dy;</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>          x[1] = min_and_max_coordinates[1].first + double(j) * dy;</div>
 <div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>          <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> k = 0; k &lt;= nz; k++)</div>
 <div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>          {</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>            <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>[2] = min_and_max_coordinates[2].first + double(k) * dz;</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>            x[2] = min_and_max_coordinates[2].first + double(k) * dz;</div>
 <div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span> </div>
 <div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>            <span class="comment">// Try the specified number of nearest sample points for Newton</span></div>
 <div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>            <span class="comment">// search then just settle on the nearest one</span></div>
@@ -340,7 +340,7 @@ $(function() {
 <div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span> </div>
 <div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>            <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="classCGALSamplePointContainer.html">CGALSamplePointContainer</a>*<span class="keyword">&gt;</span>(</div>
 <div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>              mesh_geom_obj_pt-&gt;<a class="code hl_function" href="classoomph_1_1MeshAsGeomObject.html#a383d5ffb3cdde540a9db380d683f0673">sample_point_container_pt</a>())</div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>              -&gt;limited_locate_zeta(<a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>, max_sample_points, geom_obj_pt, <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>);</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>              -&gt;limited_locate_zeta(x, max_sample_points, geom_obj_pt, <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>);</div>
 <div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span> </div>
 <div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span><span class="preprocessor">#else</span></div>
 <div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span> </div>
@@ -361,7 +361,7 @@ $(function() {
 <div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>            {</div>
 <div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>              std::stringstream error_message;</div>
 <div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>              error_message &lt;&lt; <span class="stringliteral">&quot;Limited locate zeta failed for zeta = [ &quot;</span></div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>                            &lt;&lt; <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>[0] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>[1] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>[2]</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>                            &lt;&lt; x[0] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; x[1] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; x[2]</div>
 <div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>                            &lt;&lt; <span class="stringliteral">&quot; ]. Makes no sense!\n&quot;</span>;</div>
 <div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>              <span class="keywordflow">throw</span> <a class="code hl_class" href="classoomph_1_1OomphLibError.html">OomphLibError</a>(error_message.str(),</div>
 <div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>                                  OOMPH_CURRENT_FUNCTION,</div>
@@ -379,8 +379,8 @@ $(function() {
 <div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>                std::stringstream error_message;</div>
 <div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>                error_message</div>
 <div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>                  &lt;&lt; <span class="stringliteral">&quot;Cast to FE for GeomObject returned by limited &quot;</span></div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>                  &lt;&lt; <span class="stringliteral">&quot;locate zeta failed for zeta = [ &quot;</span> &lt;&lt; <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>[0] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>[1]</div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>                  &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>[2] &lt;&lt; <span class="stringliteral">&quot; ]. Makes no sense!\n&quot;</span>;</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>                  &lt;&lt; <span class="stringliteral">&quot;locate zeta failed for zeta = [ &quot;</span> &lt;&lt; x[0] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; x[1]</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>                  &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; x[2] &lt;&lt; <span class="stringliteral">&quot; ]. Makes no sense!\n&quot;</span>;</div>
 <div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>                <span class="keywordflow">throw</span> <a class="code hl_class" href="classoomph_1_1OomphLibError.html">OomphLibError</a>(error_message.str(),</div>
 <div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>                                    OOMPH_CURRENT_FUNCTION,</div>
 <div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>                                    OOMPH_EXCEPTION_LOCATION);</div>
@@ -398,7 +398,7 @@ $(function() {
 <div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>                <span class="comment">// Doc?</span></div>
 <div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>                <span class="keywordflow">if</span> (doc_target_areas)</div>
 <div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>                {</div>
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>                  latest_sizes_file &lt;&lt; <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>[0] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>[1] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>[2] &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>                  latest_sizes_file &lt;&lt; x[0] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; x[1] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; x[2] &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
 <div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>                                    &lt;&lt; tg_size &lt;&lt; std::endl;</div>
 <div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>                }</div>
 <div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span> </div>
@@ -660,7 +660,6 @@ $(function() {
 <div class="ttc" id="anamespaceoomph_1_1StringConversion_html_a9d30fabdc1a0694bdb91dddd2833bbd6"><div class="ttname"><a href="namespaceoomph_1_1StringConversion.html#a9d30fabdc1a0694bdb91dddd2833bbd6">oomph::StringConversion::to_string</a></div><div class="ttdeci">std::string to_string(T object, unsigned float_precision=8)</div><div class="ttdoc">Conversion function that should work for anything with operator&lt;&lt; defined (at least all basic types).</div><div class="ttdef"><b>Definition:</b> <a href="oomph__utilities_8h_source.html#l00189">oomph_utilities.h:189</a></div></div>
 <div class="ttc" id="anamespaceoomph_1_1TimingHelpers_html_a9fb6ad7e2e01b0914e9f7072ef9ebfa6"><div class="ttname"><a href="namespaceoomph_1_1TimingHelpers.html#a9fb6ad7e2e01b0914e9f7072ef9ebfa6">oomph::TimingHelpers::timer</a></div><div class="ttdeci">double timer()</div><div class="ttdoc">returns the time in seconds after some point in past</div><div class="ttdef"><b>Definition:</b> <a href="oomph__utilities_8cc_source.html#l01295">oomph_utilities.cc:1295</a></div></div>
 <div class="ttc" id="anamespaceoomph_html"><div class="ttname"><a href="namespaceoomph.html">oomph</a></div><div class="ttdoc">//////////////////////////////////////////////////////////////////// ////////////////////////////////...</div><div class="ttdef"><b>Definition:</b> <a href="advection__diffusion__elements_8cc_source.html#l00029">advection_diffusion_elements.cc:30</a></div></div>
-<div class="ttc" id="anamespaceoomph_html_a9d1d2da2b8bb8e73af72b5cadb8fe97c"><div class="ttname"><a href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">oomph::x</a></div><div class="ttdeci">x</div><div class="ttdoc">Pseudo buckling ring: Circular ring deformed by the N-th buckling mode of a thin-wall elastic ring.</div><div class="ttdef"><b>Definition:</b> <a href="pseudo__buckling__ring_8h_source.html#l00049">pseudo_buckling_ring.h:49</a></div></div>
 <div class="ttc" id="anamespaceoomph_html_aec474227917784dc0a255faf289cfc16"><div class="ttname"><a href="namespaceoomph.html#aec474227917784dc0a255faf289cfc16">oomph::oomph_info</a></div><div class="ttdeci">OomphInfo oomph_info</div><div class="ttdoc">Single (global) instantiation of the OomphInfo object – this is used throughout the library as a &quot;rep...</div><div class="ttdef"><b>Definition:</b> <a href="oomph__definitions_8cc_source.html#l00319">oomph_definitions.cc:319</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 
@@ -690,7 +689,7 @@ $(function() {
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Nov 2 2021 16:31:12
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Dec 21 2021 17:35:09
         </div>
       </div>
     </footer>

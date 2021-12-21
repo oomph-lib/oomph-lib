@@ -12,7 +12,7 @@ Refineable version of 2D \mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement}
 Inheritance diagram for oomph\+::Refineable\+QSpectral\+Poisson\+Element\texorpdfstring{$<$}{<} DIM, NNODE\+\_\+1D \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=1.020408cm]{classoomph_1_1RefineableQSpectralPoissonElement}
+\includegraphics[height=0.952381cm]{classoomph_1_1RefineableQSpectralPoissonElement}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
@@ -20,17 +20,17 @@ Inheritance diagram for oomph\+::Refineable\+QSpectral\+Poisson\+Element\texorpd
 \item 
 \mbox{\hyperlink{classoomph_1_1RefineableQSpectralPoissonElement_a861d8b8c338f6719a2adea84d24eb9a8}{Refineable\+QSpectral\+Poisson\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Constructor\+: Pass refinement level to refineable quad element (default 0 = root) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1RefineableQSpectralPoissonElement_aedc0c4951aef86cca098f34b7cfbac23}{Refineable\+QSpectral\+Poisson\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1RefineableQSpectralPoissonElement}{Refineable\+QSpectral\+Poisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$ \&dummy)=delete
+\mbox{\hyperlink{classoomph_1_1RefineableQSpectralPoissonElement_aedc0c4951aef86cca098f34b7cfbac23}{Refineable\+QSpectral\+Poisson\+Element}} (const \mbox{\hyperlink{classoomph_1_1RefineableQSpectralPoissonElement}{Refineable\+QSpectral\+Poisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$ \&dummy)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1RefineableQSpectralPoissonElement_a26af03886ceaba5e55d76e03c06446cf}{ncont\+\_\+interpolated\+\_\+values}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableQSpectralPoissonElement_a26af03886ceaba5e55d76e03c06446cf}{ncont\+\_\+interpolated\+\_\+values}} () const
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1RefineableQSpectralPoissonElement_a10859fa076e489db05d21b30599edda9}{nvertex\+\_\+node}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableQSpectralPoissonElement_a10859fa076e489db05d21b30599edda9}{nvertex\+\_\+node}} () const
 \begin{DoxyCompactList}\small\item\em Number of vertex nodes in the element. \end{DoxyCompactList}\item 
-Node $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQSpectralPoissonElement_ad98e38af0dcac79f593f713a8025b0e2}{vertex\+\_\+node\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&j) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQSpectralPoissonElement_ad98e38af0dcac79f593f713a8025b0e2}{vertex\+\_\+node\+\_\+pt}} (const unsigned \&j) const
 \begin{DoxyCompactList}\small\item\em Pointer to the j-\/th vertex node in the element. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableQSpectralPoissonElement_ac6e937b985ab8af65695dd502f48ab43}{assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} bool \&store\+\_\+local\+\_\+dof\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1RefineableQSpectralPoissonElement_ac6e937b985ab8af65695dd502f48ab43}{assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers}} (const bool \&store\+\_\+local\+\_\+dof\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Overloaded version of the calculation of the local equation numbers. If the boolean argument is true then pointers to the degrees of freedom associated with each equation number are stored locally in the array Dof\+\_\+pt. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableQSpectralPoissonElement_abcb898df228c936e96d47f0b3e790078}{describe\+\_\+local\+\_\+dofs}} (std\+::ostream \&out, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} std\+::string \&current\+\_\+string) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1RefineableQSpectralPoissonElement_abcb898df228c936e96d47f0b3e790078}{describe\+\_\+local\+\_\+dofs}} (std\+::ostream \&out, const std\+::string \&current\+\_\+string) const
 \begin{DoxyCompactList}\small\item\em Function to describe the local dofs of the element. The ostream specifies the output stream to which the description is written; the string stores the currently assembled output that is ultimately written to the output stream by Data\+::describe\+\_\+dofs(...); it is typically built up incrementally as we descend through the call hierarchy of this function when called from Problem\+::describe\+\_\+dofs(...) \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1RefineableQSpectralPoissonElement_a3fec9c4202b17052d7425c6d89d5b745}{nrecovery\+\_\+order}} ()
 \begin{DoxyCompactList}\small\item\em Order of recovery shape functions for Z2 error estimation\+: Same order as shape functions. \end{DoxyCompactList}\item 
@@ -69,7 +69,7 @@ Definition at line \mbox{\hyperlink{refineable__spectral__poisson__elements_8h_s
 \index{RefineableQSpectralPoissonElement@{RefineableQSpectralPoissonElement}!oomph::RefineableQSpectralPoissonElement$<$ DIM, NNODE\_1D $>$@{oomph::RefineableQSpectralPoissonElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{RefineableQSpectralPoissonElement()}{RefineableQSpectralPoissonElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-\mbox{\hyperlink{classoomph_1_1RefineableQSpectralPoissonElement}{oomph\+::\+Refineable\+QSpectral\+Poisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableQSpectralPoissonElement}{Refineable\+QSpectral\+Poisson\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1RefineableQSpectralPoissonElement}{Refineable\+QSpectral\+Poisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+\mbox{\hyperlink{classoomph_1_1RefineableQSpectralPoissonElement}{oomph\+::\+Refineable\+QSpectral\+Poisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableQSpectralPoissonElement}{Refineable\+QSpectral\+Poisson\+Element}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1RefineableQSpectralPoissonElement}{Refineable\+QSpectral\+Poisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
@@ -83,7 +83,7 @@ Broken copy constructor.
 \index{assign\_all\_generic\_local\_eqn\_numbers@{assign\_all\_generic\_local\_eqn\_numbers}!oomph::RefineableQSpectralPoissonElement$<$ DIM, NNODE\_1D $>$@{oomph::RefineableQSpectralPoissonElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{assign\_all\_generic\_local\_eqn\_numbers()}{assign\_all\_generic\_local\_eqn\_numbers()}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableQSpectralPoissonElement}{oomph\+::\+Refineable\+QSpectral\+Poisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} bool \&}]{store\+\_\+local\+\_\+dof\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1RefineableQSpectralPoissonElement}{oomph\+::\+Refineable\+QSpectral\+Poisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers (\begin{DoxyParamCaption}\item[{const bool \&}]{store\+\_\+local\+\_\+dof\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -99,14 +99,14 @@ Definition at line \mbox{\hyperlink{refineable__spectral__poisson__elements_8h_s
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02169}{oomph\+::\+Finite\+Element\+::assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers()}}.
+References \mbox{\hyperlink{elements_8h_source_l02164}{oomph\+::\+Finite\+Element\+::assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQSpectralPoissonElement_abcb898df228c936e96d47f0b3e790078}\label{classoomph_1_1RefineableQSpectralPoissonElement_abcb898df228c936e96d47f0b3e790078}} 
 \index{oomph::RefineableQSpectralPoissonElement$<$ DIM, NNODE\_1D $>$@{oomph::RefineableQSpectralPoissonElement$<$ DIM, NNODE\_1D $>$}!describe\_local\_dofs@{describe\_local\_dofs}}
 \index{describe\_local\_dofs@{describe\_local\_dofs}!oomph::RefineableQSpectralPoissonElement$<$ DIM, NNODE\_1D $>$@{oomph::RefineableQSpectralPoissonElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{describe\_local\_dofs()}{describe\_local\_dofs()}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableQSpectralPoissonElement}{oomph\+::\+Refineable\+QSpectral\+Poisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::describe\+\_\+local\+\_\+dofs (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} std\+::string \&}]{current\+\_\+string }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1RefineableQSpectralPoissonElement}{oomph\+::\+Refineable\+QSpectral\+Poisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::describe\+\_\+local\+\_\+dofs (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out,  }\item[{const std\+::string \&}]{current\+\_\+string }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -200,12 +200,16 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a19495a0e7
 
 Definition at line \mbox{\hyperlink{refineable__spectral__poisson__elements_8h_source_l00088}{88}} of file \mbox{\hyperlink{refineable__spectral__poisson__elements_8h_source}{refineable\+\_\+spectral\+\_\+poisson\+\_\+elements.\+h}}.
 
+
+
+References \mbox{\hyperlink{elements_8h_source_l02491}{oomph\+::\+Finite\+Element\+::nvertex\+\_\+node()}}.
+
 \mbox{\Hypertarget{classoomph_1_1RefineableQSpectralPoissonElement_ad98e38af0dcac79f593f713a8025b0e2}\label{classoomph_1_1RefineableQSpectralPoissonElement_ad98e38af0dcac79f593f713a8025b0e2}} 
 \index{oomph::RefineableQSpectralPoissonElement$<$ DIM, NNODE\_1D $>$@{oomph::RefineableQSpectralPoissonElement$<$ DIM, NNODE\_1D $>$}!vertex\_node\_pt@{vertex\_node\_pt}}
 \index{vertex\_node\_pt@{vertex\_node\_pt}!oomph::RefineableQSpectralPoissonElement$<$ DIM, NNODE\_1D $>$@{oomph::RefineableQSpectralPoissonElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{vertex\_node\_pt()}{vertex\_node\_pt()}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-Node $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQSpectralPoissonElement}{oomph\+::\+Refineable\+QSpectral\+Poisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQSpectralPoissonElement}{oomph\+::\+Refineable\+QSpectral\+Poisson\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -218,6 +222,10 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a6d852edae
 
 
 Definition at line \mbox{\hyperlink{refineable__spectral__poisson__elements_8h_source_l00094}{94}} of file \mbox{\hyperlink{refineable__spectral__poisson__elements_8h_source}{refineable\+\_\+spectral\+\_\+poisson\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{elements_8h_source_l02500}{oomph\+::\+Finite\+Element\+::vertex\+\_\+node\+\_\+pt()}}.
 
 
 

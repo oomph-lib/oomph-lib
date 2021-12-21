@@ -115,7 +115,7 @@
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00111}00111                                 \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& i\_macro,}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00112}00112                                 \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& i\_direct,}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00113}00113                                 \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},}
-\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00114}00114                                 \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}});}
+\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00114}00114                                 \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& f);}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00115}00115 }
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00116}00116   \textcolor{keyword}{private}:\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00117}00117 \textcolor{comment}{    /// Storage for the dividing lines on the boundary}}
@@ -137,12 +137,12 @@
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00133}\mbox{\hyperlink{classoomph_1_1FullCircleDomain_a77b7b1454eb0082545b1b63310cb978a}{00133}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a77b7b1454eb0082545b1b63310cb978a}{lin\_interpolate}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& low,}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00134}00134                          \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& high,}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00135}00135                          \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},}
-\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00136}00136                          \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}})}
+\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00136}00136                          \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& f)}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00137}00137     \{}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00138}00138       \textcolor{comment}{// Loop over all coordinates (we are working in 2D)}}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00139}00139       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00140}00140       \{}
-\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00141}00141         \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = low[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] + (high[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ low[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]) * 0.5 * (\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}} + 1.0);}
+\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00141}00141         f[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = low[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] + (high[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ low[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]) * 0.5 * (\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}} + 1.0);}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00142}00142       \}}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00143}00143     \}}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00144}00144   \};}
@@ -162,7 +162,7 @@
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00158}00158                                                 \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& imacro,}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00159}00159                                                 \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& idirect,}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00160}00160                                                 \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},}
-\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00161}00161                                                 \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}})}
+\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00161}00161                                                 \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& f)}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00162}00162   \{}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00163}00163     \textcolor{keyword}{using namespace }QuadTreeNames;}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00164}00164 }
@@ -207,21 +207,21 @@
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00203}00203         \{}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00204}00204           \textcolor{keywordflow}{case} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7dabc60bec4cc294aa2adf92726c6d6823a}{N}}:}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00205}00205             \textcolor{comment}{// Linearly interpolate between the two corners of the box}}
-\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00206}00206             \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a77b7b1454eb0082545b1b63310cb978a}{lin\_interpolate}}(Box[3], Box[2], \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0], \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}});}
+\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00206}00206             \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a77b7b1454eb0082545b1b63310cb978a}{lin\_interpolate}}(Box[3], Box[2], \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0], f);}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00207}00207             \textcolor{keywordflow}{break};}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00208}00208 }
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00209}00209           \textcolor{keywordflow}{case} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7da85b07d6c087e0cb66bac32a0b6a45198}{S}}:}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00210}00210             \textcolor{comment}{// Linearly interpolate between the two corners of the box}}
-\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00211}00211             \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a77b7b1454eb0082545b1b63310cb978a}{lin\_interpolate}}(Box[0], Box[1], \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0], \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}});}
+\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00211}00211             \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a77b7b1454eb0082545b1b63310cb978a}{lin\_interpolate}}(Box[0], Box[1], \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0], f);}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00212}00212 }
-\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00213}00213           \textcolor{keywordflow}{case} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}}:}
+\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00213}00213           \textcolor{keywordflow}{case} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}}:}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00214}00214             \textcolor{comment}{// Linearly interpolate between the two corners of the box}}
-\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00215}00215             \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a77b7b1454eb0082545b1b63310cb978a}{lin\_interpolate}}(Box[0], Box[3], \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0], \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}});}
+\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00215}00215             \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a77b7b1454eb0082545b1b63310cb978a}{lin\_interpolate}}(Box[0], Box[3], \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0], f);}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00216}00216             \textcolor{keywordflow}{break};}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00217}00217 }
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00218}00218           \textcolor{keywordflow}{case} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7da585070bd0e3801c3bbed287ef3c4a265}{E}}:}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00219}00219             \textcolor{comment}{// Linearly interpolate between the two corners of the box}}
-\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00220}00220             \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a77b7b1454eb0082545b1b63310cb978a}{lin\_interpolate}}(Box[1], Box[2], \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0], \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}});}
+\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00220}00220             \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a77b7b1454eb0082545b1b63310cb978a}{lin\_interpolate}}(Box[1], Box[2], \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0], f);}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00221}00221             \textcolor{keywordflow}{break};}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00222}00222 }
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00223}00223           \textcolor{keywordflow}{default}:}
@@ -245,7 +245,7 @@
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00241}00241         \{}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00242}00242           \textcolor{keywordflow}{case} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7dabc60bec4cc294aa2adf92726c6d6823a}{N}}:}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00243}00243             \textcolor{comment}{// Linearly interpolate between the two corners of the box}}
-\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00244}00244             \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a77b7b1454eb0082545b1b63310cb978a}{lin\_interpolate}}(Box[0], Box[1], \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0], \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}});}
+\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00244}00244             \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a77b7b1454eb0082545b1b63310cb978a}{lin\_interpolate}}(Box[0], Box[1], \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0], f);}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00245}00245             \textcolor{keywordflow}{break};}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00246}00246 }
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00247}00247           \textcolor{keywordflow}{case} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7da85b07d6c087e0cb66bac32a0b6a45198}{S}}:}
@@ -255,17 +255,17 @@
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00251}00251               \mbox{\hyperlink{classoomph_1_1FullCircleDomain_ab995977e0da3045269da04fb15fd2cb6}{Theta\_positions}}[0] +}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00252}00252               (\mbox{\hyperlink{classoomph_1_1FullCircleDomain_ab995977e0da3045269da04fb15fd2cb6}{Theta\_positions}}[1] -\/ \mbox{\hyperlink{classoomph_1_1FullCircleDomain_ab995977e0da3045269da04fb15fd2cb6}{Theta\_positions}}[0]) * 0.5 * (\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0] + 1.0);}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00253}00253 }
-\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00254}00254             \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a49eca6b304caf0840bd99bd18a9a32cd}{Area\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{position}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, zeta, \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}});}
+\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00254}00254             \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a49eca6b304caf0840bd99bd18a9a32cd}{Area\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{position}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, zeta, f);}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00255}00255             \textcolor{keywordflow}{break};}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00256}00256 }
-\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00257}00257           \textcolor{keywordflow}{case} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}}:}
+\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00257}00257           \textcolor{keywordflow}{case} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}}:}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00258}00258             \textcolor{comment}{// Now linearly interpolate between the wall and the box}}
-\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00259}00259             \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a77b7b1454eb0082545b1b63310cb978a}{lin\_interpolate}}(Wall[0], Box[0], \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0], \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}});}
+\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00259}00259             \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a77b7b1454eb0082545b1b63310cb978a}{lin\_interpolate}}(Wall[0], Box[0], \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0], f);}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00260}00260             \textcolor{keywordflow}{break};}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00261}00261 }
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00262}00262           \textcolor{keywordflow}{case} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7da585070bd0e3801c3bbed287ef3c4a265}{E}}:}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00263}00263             \textcolor{comment}{// Linearly interpolate between the wall and the box}}
-\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00264}00264             \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a77b7b1454eb0082545b1b63310cb978a}{lin\_interpolate}}(Wall[1], Box[1], \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0], \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}});}
+\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00264}00264             \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a77b7b1454eb0082545b1b63310cb978a}{lin\_interpolate}}(Wall[1], Box[1], \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0], f);}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00265}00265             \textcolor{keywordflow}{break};}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00266}00266 }
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00267}00267           \textcolor{keywordflow}{default}:}
@@ -291,17 +291,17 @@
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00287}00287         \{}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00288}00288           \textcolor{keywordflow}{case} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7dabc60bec4cc294aa2adf92726c6d6823a}{N}}:}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00289}00289             \textcolor{comment}{// Linearly interpolate between the box and the wall}}
-\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00290}00290             \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a77b7b1454eb0082545b1b63310cb978a}{lin\_interpolate}}(Box[2], Wall[2], \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0], \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}});}
+\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00290}00290             \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a77b7b1454eb0082545b1b63310cb978a}{lin\_interpolate}}(Box[2], Wall[2], \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0], f);}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00291}00291             \textcolor{keywordflow}{break};}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00292}00292 }
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00293}00293           \textcolor{keywordflow}{case} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7da85b07d6c087e0cb66bac32a0b6a45198}{S}}:}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00294}00294             \textcolor{comment}{// Linearly interpolate between the box and the wall}}
-\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00295}00295             \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a77b7b1454eb0082545b1b63310cb978a}{lin\_interpolate}}(Box[1], Wall[1], \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0], \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}});}
+\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00295}00295             \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a77b7b1454eb0082545b1b63310cb978a}{lin\_interpolate}}(Box[1], Wall[1], \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0], f);}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00296}00296             \textcolor{keywordflow}{break};}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00297}00297 }
-\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00298}00298           \textcolor{keywordflow}{case} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}}:}
+\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00298}00298           \textcolor{keywordflow}{case} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}}:}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00299}00299             \textcolor{comment}{// Linearly interpolate between the two corners of the box}}
-\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00300}00300             \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a77b7b1454eb0082545b1b63310cb978a}{lin\_interpolate}}(Box[1], Box[2], \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0], \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}});}
+\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00300}00300             \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a77b7b1454eb0082545b1b63310cb978a}{lin\_interpolate}}(Box[1], Box[2], \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0], f);}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00301}00301             \textcolor{keywordflow}{break};}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00302}00302 }
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00303}00303           \textcolor{keywordflow}{case} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7da585070bd0e3801c3bbed287ef3c4a265}{E}}:}
@@ -311,7 +311,7 @@
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00307}00307               \mbox{\hyperlink{classoomph_1_1FullCircleDomain_ab995977e0da3045269da04fb15fd2cb6}{Theta\_positions}}[1] +}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00308}00308               (\mbox{\hyperlink{classoomph_1_1FullCircleDomain_ab995977e0da3045269da04fb15fd2cb6}{Theta\_positions}}[2] -\/ \mbox{\hyperlink{classoomph_1_1FullCircleDomain_ab995977e0da3045269da04fb15fd2cb6}{Theta\_positions}}[1]) * 0.5 * (\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0] + 1.0);}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00309}00309 }
-\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00310}00310             \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a49eca6b304caf0840bd99bd18a9a32cd}{Area\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{position}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, zeta, \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}});}
+\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00310}00310             \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a49eca6b304caf0840bd99bd18a9a32cd}{Area\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{position}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, zeta, f);}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00311}00311             \textcolor{keywordflow}{break};}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00312}00312 }
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00313}00313           \textcolor{keywordflow}{default}:}
@@ -339,22 +339,22 @@
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00335}00335               \mbox{\hyperlink{classoomph_1_1FullCircleDomain_ab995977e0da3045269da04fb15fd2cb6}{Theta\_positions}}[3] +}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00336}00336               (\mbox{\hyperlink{classoomph_1_1FullCircleDomain_ab995977e0da3045269da04fb15fd2cb6}{Theta\_positions}}[2] -\/ \mbox{\hyperlink{classoomph_1_1FullCircleDomain_ab995977e0da3045269da04fb15fd2cb6}{Theta\_positions}}[3]) * 0.5 * (\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0] + 1.0);}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00337}00337 }
-\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00338}00338             \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a49eca6b304caf0840bd99bd18a9a32cd}{Area\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{position}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, zeta, \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}});}
+\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00338}00338             \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a49eca6b304caf0840bd99bd18a9a32cd}{Area\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{position}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, zeta, f);}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00339}00339             \textcolor{keywordflow}{break};}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00340}00340 }
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00341}00341           \textcolor{keywordflow}{case} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7da85b07d6c087e0cb66bac32a0b6a45198}{S}}:}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00342}00342             \textcolor{comment}{// Linearly interpolate between the two corners of the box}}
-\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00343}00343             \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a77b7b1454eb0082545b1b63310cb978a}{lin\_interpolate}}(Box[3], Box[1], \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0], \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}});}
+\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00343}00343             \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a77b7b1454eb0082545b1b63310cb978a}{lin\_interpolate}}(Box[3], Box[1], \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0], f);}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00344}00344             \textcolor{keywordflow}{break};}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00345}00345 }
-\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00346}00346           \textcolor{keywordflow}{case} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}}:}
+\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00346}00346           \textcolor{keywordflow}{case} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}}:}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00347}00347             \textcolor{comment}{// Linearly interpolate between the box and the wall}}
-\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00348}00348             \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a77b7b1454eb0082545b1b63310cb978a}{lin\_interpolate}}(Box[3], Wall[3], \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0], \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}});}
+\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00348}00348             \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a77b7b1454eb0082545b1b63310cb978a}{lin\_interpolate}}(Box[3], Wall[3], \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0], f);}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00349}00349             \textcolor{keywordflow}{break};}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00350}00350 }
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00351}00351           \textcolor{keywordflow}{case} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7da585070bd0e3801c3bbed287ef3c4a265}{E}}:}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00352}00352             \textcolor{comment}{// Linearly interpolate between the box and the wall}}
-\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00353}00353             \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a77b7b1454eb0082545b1b63310cb978a}{lin\_interpolate}}(Box[2], Wall[2], \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0], \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}});}
+\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00353}00353             \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a77b7b1454eb0082545b1b63310cb978a}{lin\_interpolate}}(Box[2], Wall[2], \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0], f);}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00354}00354             \textcolor{keywordflow}{break};}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00355}00355 }
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00356}00356           \textcolor{keywordflow}{default}:}
@@ -378,15 +378,15 @@
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00374}00374         \{}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00375}00375           \textcolor{keywordflow}{case} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7dabc60bec4cc294aa2adf92726c6d6823a}{N}}:}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00376}00376             \textcolor{comment}{// Linearly interpolate between the wall and the box}}
-\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00377}00377             \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a77b7b1454eb0082545b1b63310cb978a}{lin\_interpolate}}(Wall[3], Box[3], \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0], \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}});}
+\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00377}00377             \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a77b7b1454eb0082545b1b63310cb978a}{lin\_interpolate}}(Wall[3], Box[3], \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0], f);}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00378}00378             \textcolor{keywordflow}{break};}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00379}00379 }
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00380}00380           \textcolor{keywordflow}{case} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7da85b07d6c087e0cb66bac32a0b6a45198}{S}}:}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00381}00381             \textcolor{comment}{// Linearly interpolate between the wall and the box}}
-\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00382}00382             \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a77b7b1454eb0082545b1b63310cb978a}{lin\_interpolate}}(Wall[0], Box[0], \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0], \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}});}
+\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00382}00382             \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a77b7b1454eb0082545b1b63310cb978a}{lin\_interpolate}}(Wall[0], Box[0], \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0], f);}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00383}00383             \textcolor{keywordflow}{break};}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00384}00384 }
-\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00385}00385           \textcolor{keywordflow}{case} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}}:}
+\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00385}00385           \textcolor{keywordflow}{case} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}}:}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00386}00386             \textcolor{comment}{// Entirely on the wall, Need to be careful}}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00387}00387             \textcolor{comment}{// because this is the point at which theta passes through the}}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00388}00388             \textcolor{comment}{//"{}branch cut"{}}}
@@ -395,12 +395,12 @@
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00391}00391                       (\mbox{\hyperlink{classoomph_1_1FullCircleDomain_ab995977e0da3045269da04fb15fd2cb6}{Theta\_positions}}[3] -\/ (\mbox{\hyperlink{classoomph_1_1FullCircleDomain_ab995977e0da3045269da04fb15fd2cb6}{Theta\_positions}}[0] + 2.0 * pi)) *}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00392}00392                         0.5 * (\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0] + 1.0);}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00393}00393 }
-\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00394}00394             \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a49eca6b304caf0840bd99bd18a9a32cd}{Area\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{position}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, zeta, \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}});}
+\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00394}00394             \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a49eca6b304caf0840bd99bd18a9a32cd}{Area\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{position}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, zeta, f);}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00395}00395             \textcolor{keywordflow}{break};}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00396}00396 }
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00397}00397           \textcolor{keywordflow}{case} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7da585070bd0e3801c3bbed287ef3c4a265}{E}}:}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00398}00398             \textcolor{comment}{// Linearly interpolate between the two corners of the box}}
-\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00399}00399             \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a77b7b1454eb0082545b1b63310cb978a}{lin\_interpolate}}(Box[0], Box[3], \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0], \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}});}
+\DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00399}00399             \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a77b7b1454eb0082545b1b63310cb978a}{lin\_interpolate}}(Box[0], Box[3], \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0], f);}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00400}00400             \textcolor{keywordflow}{break};}
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00401}00401 }
 \DoxyCodeLine{\Hypertarget{full__circle__domain_8h_source_l00402}00402           \textcolor{keywordflow}{default}:}

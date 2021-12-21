@@ -45,7 +45,7 @@ static void \mbox{\hyperlink{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomp
 static void \mbox{\hyperlink{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a338f59059891bc045555e3283949c6fa}{Mv\+Trans\+Mv}} (const double alpha, const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&A, const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&mv, Teuchos\+::\+Serial\+Dense\+Matrix$<$ int, double $>$ \&B)
 \begin{DoxyCompactList}\small\item\em Compute a dense matrix {\ttfamily B} through the matrix-\/matrix multiply $ \alpha A^Hmv $. \end{DoxyCompactList}\item 
 static void \mbox{\hyperlink{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_acb2e5efa75fb3970e1ecf716f10b4ee5}{Mv\+Dot}} (const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&mv, const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&A, std\+::vector$<$ double $>$ \&b)
-\begin{DoxyCompactList}\small\item\em Compute a vector {\ttfamily b} where the components are the individual dot-\/products of the {\ttfamily i-\/th} columns of {\ttfamily A} and {\ttfamily mv}, i.\+e. $b[i] = A[i]^Hmv[i]$. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Compute a vector {\ttfamily b} where the components are the individual dot-\/products of the {\ttfamily i-\/th} columns of {\ttfamily A} and {\ttfamily mv}, i.\+e. $ b[i] = * A[i]^Hmv[i] $. \end{DoxyCompactList}\item 
 static void \mbox{\hyperlink{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_ac6fd03656134d6fccd7113a6876ba97e}{Mv\+Norm}} (const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&mv, std\+::vector$<$ double $>$ \&normvec)
 \begin{DoxyCompactList}\small\item\em Compute the 2-\/norm of each individual vector of {\ttfamily mv}. Upon return, {\ttfamily normvec}\mbox{[}i\mbox{]} holds the value of $||mv_i||_2$, the {\ttfamily i-\/th} column of {\ttfamily mv}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \begin{Indent}\textbf{ Initialization methods}\par
@@ -280,7 +280,7 @@ References \mbox{\hyperlink{octree_8h_source_l00073}{oomph\+::\+Oc\+Tree\+Names\
 
 
 
-Compute a vector {\ttfamily b} where the components are the individual dot-\/products of the {\ttfamily i-\/th} columns of {\ttfamily A} and {\ttfamily mv}, i.\+e. $b[i] = A[i]^Hmv[i]$. 
+Compute a vector {\ttfamily b} where the components are the individual dot-\/products of the {\ttfamily i-\/th} columns of {\ttfamily A} and {\ttfamily mv}, i.\+e. $ b[i] = * A[i]^Hmv[i] $. 
 
 
 

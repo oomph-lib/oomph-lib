@@ -18,33 +18,33 @@ Inheritance diagram for oomph\+::PMLTime\+Harmonic\+Linear\+Elasticity\+Traction
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement_a39560a5b7d4a7b5761cd1f85ee3333eb}{PMLTime\+Harmonic\+Linear\+Elasticity\+Traction\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&element\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}})
+\mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement_a39560a5b7d4a7b5761cd1f85ee3333eb}{PMLTime\+Harmonic\+Linear\+Elasticity\+Traction\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&element\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}})
 \begin{DoxyCompactList}\small\item\em Constructor, which takes a \char`\"{}bulk\char`\"{} element and the value of the index and its limit. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement_ae1452136ed8ce12c00470c97266521e9}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em Return the residuals. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement_abde183ce1fbe5c0d8ce199978a972394}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})
+void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement_abde183ce1fbe5c0d8ce199978a972394}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em Fill in contribution from Jacobian. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement_a035a8fcd22c01966f16e83e7c3517569}{zeta\+\_\+nodal}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&k, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement_a035a8fcd22c01966f16e83e7c3517569}{zeta\+\_\+nodal}} (const unsigned \&n, const unsigned \&k, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Specify the value of nodal zeta from the face geometry The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} representation, by default (needed to break indeterminacy if bulk element is Solid\+Element) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement_a56ab485159ea913f58af2a4d984bd408}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Output function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement_ad2d5e08cb9d6b23687ad11cf7788764e}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&nplot)
+void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement_ad2d5e08cb9d6b23687ad11cf7788764e}{output}} (std\+::ostream \&outfile, const unsigned \&nplot)
 \begin{DoxyCompactList}\small\item\em Output function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement_a91e943645cfd3e58d48fe9ad90d1a2d3}{output}} (FILE $\ast$file\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em C\+\_\+style output function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement_abbd6d562916430554b8b39fda992ef37}{output}} (FILE $\ast$file\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement_abbd6d562916430554b8b39fda992ef37}{output}} (FILE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em C-\/style output function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement_ae83042121b4033f28c95ca8899b02ee8}{traction}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&traction)
+void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement_ae83042121b4033f28c95ca8899b02ee8}{traction}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&traction)
 \begin{DoxyCompactList}\small\item\em Compute traction vector at specified local coordinate Should only be used for post-\/processing; ignores dependence on integration point! \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-void($\ast$\&)(\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&n, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&\mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement_ae83042121b4033f28c95ca8899b02ee8}{traction}}) \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement_a0fef0713202ab34d158cc599adc6f1c7}{traction\+\_\+fct\+\_\+pt}} ()
+void($\ast$\&)(const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&n, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&\mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement_ae83042121b4033f28c95ca8899b02ee8}{traction}}) \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement_a0fef0713202ab34d158cc599adc6f1c7}{traction\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Reference to the traction function pointer. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-virtual void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement_ac75ee57c1976bc09d5797584c34d2c06}{get\+\_\+traction}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&intpt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&n, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&\mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement_ae83042121b4033f28c95ca8899b02ee8}{traction}})
+virtual void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement_ac75ee57c1976bc09d5797584c34d2c06}{get\+\_\+traction}} (const unsigned \&intpt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&n, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&\mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement_ae83042121b4033f28c95ca8899b02ee8}{traction}})
 \begin{DoxyCompactList}\small\item\em Get the traction vector\+: Pass number of integration point (dummy), Eulerian coordinate and normal vector and return the load vector (not all of the input arguments will be required for all specific load functions but the list should cover all cases). This function is virtual so it can be overloaded for FSI. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement_a4ac424a9a0f3c1dd67cf22669b3c63cb}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+traction}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em Helper function that actually calculates the residuals. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -53,7 +53,7 @@ void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionEleme
 \item 
 \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement_a8fd99f484eb4629b4ae7d3d76e0a95ec}{U\+\_\+index\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+traction}}
 \begin{DoxyCompactList}\small\item\em Index at which the i-\/th displacement component is stored. \end{DoxyCompactList}\item 
-void($\ast$ \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement_ae7504f02abb41d99815ed97bec261672}{Traction\+\_\+fct\+\_\+pt}} )(\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&n, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&result)
+void($\ast$ \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement_ae7504f02abb41d99815ed97bec261672}{Traction\+\_\+fct\+\_\+pt}} )(const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&n, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&result)
 \begin{DoxyCompactList}\small\item\em Pointer to an imposed traction function. Arguments\+: Eulerian coordinate; outer unit normal; applied traction. (Not all of the input arguments will be required for all specific load functions but the list should cover all cases) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -73,7 +73,7 @@ Definition at line \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__tra
 \index{PMLTimeHarmonicLinearElasticityTractionElement@{PMLTimeHarmonicLinearElasticityTractionElement}!oomph::PMLTimeHarmonicLinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::PMLTimeHarmonicLinearElasticityTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{PMLTimeHarmonicLinearElasticityTractionElement()}{PMLTimeHarmonicLinearElasticityTractionElement()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Traction\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement}{PMLTime\+Harmonic\+Linear\+Elasticity\+Traction\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{element\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Traction\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement}{PMLTime\+Harmonic\+Linear\+Elasticity\+Traction\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{element\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -85,7 +85,7 @@ Definition at line \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__tra
 
 
 
-References \mbox{\hyperlink{classoomph_1_1FiniteElement_a025ab56ef9c6eea66fb34416fdf19152}{oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{elements_8h_source_l04654}{oomph\+::\+Face\+Element\+::face\+\_\+index()}}, \mbox{\hyperlink{elements_8h_source_l02475}{oomph\+::\+Finite\+Element\+::has\+\_\+hanging\+\_\+nodes()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02489}{oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension()}}, \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__traction__elements_8h_source_l00088}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::\+Traction\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__traction__elements_8h_source_l00081}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::\+U\+\_\+index\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+traction}}, and \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__traction__elements_8h_source_l00052}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Traction\+Element\+Helper\+::\+Zero\+\_\+traction\+\_\+fct()}}.
+References \mbox{\hyperlink{elements_8cc_source_l05132}{oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{elements_8h_source_l04626}{oomph\+::\+Face\+Element\+::face\+\_\+index()}}, \mbox{\hyperlink{elements_8h_source_l02470}{oomph\+::\+Finite\+Element\+::has\+\_\+hanging\+\_\+nodes()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02484}{oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension()}}, \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__traction__elements_8h_source_l00088}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::\+Traction\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__traction__elements_8h_source_l00081}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::\+U\+\_\+index\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+traction}}, and \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__traction__elements_8h_source_l00052}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Traction\+Element\+Helper\+::\+Zero\+\_\+traction\+\_\+fct()}}.
 
 
 
@@ -153,7 +153,7 @@ Definition at line \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__tra
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
 
 
 
@@ -164,7 +164,7 @@ Referenced by \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__traction
 \index{get\_traction@{get\_traction}!oomph::PMLTimeHarmonicLinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::PMLTimeHarmonicLinearElasticityTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{get\_traction()}{get\_traction()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-virtual void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Traction\+Element}}$<$ ELEMENT $>$\+::get\+\_\+traction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{intpt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{traction }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+virtual void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Traction\+Element}}$<$ ELEMENT $>$\+::get\+\_\+traction (\begin{DoxyParamCaption}\item[{const unsigned \&}]{intpt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{traction }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -176,7 +176,7 @@ Definition at line \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__tra
 
 
 
-References \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__traction__elements_8h_source_l00290}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::traction()}}, \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__traction__elements_8h_source_l00088}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::\+Traction\+\_\+fct\+\_\+pt}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__traction__elements_8h_source_l00290}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::traction()}}, and \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__traction__elements_8h_source_l00088}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::\+Traction\+\_\+fct\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement_a91e943645cfd3e58d48fe9ad90d1a2d3}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement_a91e943645cfd3e58d48fe9ad90d1a2d3}} 
 \index{oomph::PMLTimeHarmonicLinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::PMLTimeHarmonicLinearElasticityTractionElement$<$ ELEMENT $>$}!output@{output}}
@@ -199,14 +199,14 @@ Definition at line \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__tra
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
+References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement_abbd6d562916430554b8b39fda992ef37}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement_abbd6d562916430554b8b39fda992ef37}} 
 \index{oomph::PMLTimeHarmonicLinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::PMLTimeHarmonicLinearElasticityTractionElement$<$ ELEMENT $>$}!output@{output}}
 \index{output@{output}!oomph::PMLTimeHarmonicLinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::PMLTimeHarmonicLinearElasticityTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Traction\+Element}}$<$ ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Traction\+Element}}$<$ ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -222,7 +222,7 @@ Definition at line \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__tra
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
+References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement_a56ab485159ea913f58af2a4d984bd408}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement_a56ab485159ea913f58af2a4d984bd408}} 
 \index{oomph::PMLTimeHarmonicLinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::PMLTimeHarmonicLinearElasticityTractionElement$<$ ELEMENT $>$}!output@{output}}
@@ -256,7 +256,7 @@ Referenced by \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__traction
 \index{output@{output}!oomph::PMLTimeHarmonicLinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::PMLTimeHarmonicLinearElasticityTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Traction\+Element}}$<$ ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Traction\+Element}}$<$ ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -272,14 +272,14 @@ Definition at line \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__tra
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02616}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8h_source_l03153}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l04556}{oomph\+::\+Face\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{geom__objects_8h_source_l00177}{oomph\+::\+Geom\+Object\+::ndim()}}, \mbox{\hyperlink{elements_8h_source_l03191}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{elements_8h_source_l03166}{oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string()}}, \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__traction__elements_8h_source_l00290}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::traction()}}, \mbox{\hyperlink{elements_8h_source_l03179}{oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer()}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8h_source_l03148}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l04528}{oomph\+::\+Face\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{geom__objects_8h_source_l00177}{oomph\+::\+Geom\+Object\+::ndim()}}, \mbox{\hyperlink{elements_8h_source_l03186}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{elements_8h_source_l03161}{oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string()}}, \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__traction__elements_8h_source_l00290}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::traction()}}, and \mbox{\hyperlink{elements_8h_source_l03174}{oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement_ae83042121b4033f28c95ca8899b02ee8}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement_ae83042121b4033f28c95ca8899b02ee8}} 
 \index{oomph::PMLTimeHarmonicLinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::PMLTimeHarmonicLinearElasticityTractionElement$<$ ELEMENT $>$}!traction@{traction}}
 \index{traction@{traction}!oomph::PMLTimeHarmonicLinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::PMLTimeHarmonicLinearElasticityTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{traction()}{traction()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Traction\+Element}}$<$ ELEMENT $>$\+::traction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{traction }\end{DoxyParamCaption})}
+void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Traction\+Element}}$<$ ELEMENT $>$\+::traction (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{traction }\end{DoxyParamCaption})}
 
 
 
@@ -293,7 +293,7 @@ Definition at line \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__tra
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 
 
@@ -304,7 +304,7 @@ Referenced by \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__traction
 \index{zeta\_nodal@{zeta\_nodal}!oomph::PMLTimeHarmonicLinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::PMLTimeHarmonicLinearElasticityTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{zeta\_nodal()}{zeta\_nodal()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Traction\+Element}}$<$ ELEMENT $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{k,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+double \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Traction\+Element}}$<$ ELEMENT $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{k,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -320,7 +320,7 @@ Definition at line \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__tra
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l04525}{oomph\+::\+Face\+Element\+::zeta\+\_\+nodal()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l04497}{oomph\+::\+Face\+Element\+::zeta\+\_\+nodal()}}.
 
 
 
@@ -330,7 +330,7 @@ References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink
 \index{traction\_fct\_pt@{traction\_fct\_pt}!oomph::PMLTimeHarmonicLinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::PMLTimeHarmonicLinearElasticityTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{traction\_fct\_pt}{traction\_fct\_pt}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-void($\ast$\&)(\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&n, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&\mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement_ae83042121b4033f28c95ca8899b02ee8}{traction}}) \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Traction\+Element}}$<$ ELEMENT $>$\+::traction\+\_\+fct\+\_\+pt()\hspace{0.3cm}{\ttfamily [inline]}}
+void($\ast$\&)(const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&n, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&\mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement_ae83042121b4033f28c95ca8899b02ee8}{traction}}) \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Traction\+Element}}$<$ ELEMENT $>$\+::traction\+\_\+fct\+\_\+pt()\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -345,7 +345,7 @@ Definition at line \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__tra
 \index{Traction\_fct\_pt@{Traction\_fct\_pt}!oomph::PMLTimeHarmonicLinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::PMLTimeHarmonicLinearElasticityTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Traction\_fct\_pt}{Traction\_fct\_pt}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-void($\ast$ \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Traction\+Element}}$<$ ELEMENT $>$\+::Traction\+\_\+fct\+\_\+pt) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&n, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&result)\hspace{0.3cm}{\ttfamily [protected]}}
+void($\ast$ \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Traction\+Element}}$<$ ELEMENT $>$\+::Traction\+\_\+fct\+\_\+pt) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&n, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&result)\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 

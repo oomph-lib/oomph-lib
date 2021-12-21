@@ -77,12 +77,12 @@ In FE computations, most (but not all; see below) {\ttfamily Data} are associate
 
 The nodal positions are accessed by the member function 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{Node::x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) }
+\DoxyCodeLine{Node::x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) }
 
 \end{DoxyCode}
  which returns the current value of i-\/th nodal coordinate or 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{Node::x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}},\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) }
+\DoxyCodeLine{Node::x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}},\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) }
 
 \end{DoxyCode}
  which returns the value of i-\/th nodal coordinate at the present (t=0) timestep or a history value, if (t\texorpdfstring{$>$}{>}0); again, note that the history values are not necessarily positions at previous timesteps.\hypertarget{index_advanced_features_of_nodes}{}\doxysubsubsection{Advanced features\+:}\label{index_advanced_features_of_nodes}
@@ -105,7 +105,7 @@ The nodal positions are accessed by the member function
  all {\ttfamily Nodes} that could lie on boundaries must be {\ttfamily Boundary\+Nodes}; see \mbox{\hyperlink{index_meshes}{Meshes}} for further details.
 \item {\bfseries{Solid\+Nodes\+:}} Many solid mechanics problems are formulated in Lagrangian coordinates. In this case, the governing equations are discretised in a fixed Lagrangian domain; the nodal coordinates represent the {\ttfamily Nodes\textquotesingle{}} fixed positions in this domain. When the elastic body deforms, material points (and hence the {\ttfamily Nodes}) are displaced to new Eulerian positions. The {\ttfamily Solid\+Node} class is derived from {\ttfamily Node} and contains storage for the {\ttfamily Nodes\textquotesingle{}} {\bfseries{fixed}} positions (i.\+e. the Lagrangian coordinates) AND their {\bfseries{variable}} positions (i.\+e. the Eulerian coordinates), which can be unknowns in the problem. To avoid confusion between the two, the access function for the nodal position, 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{Node::x}}(...) }
+\DoxyCodeLine{Node::x(...) }
 
 \end{DoxyCode}
  {\bfseries{always}} refers to a {\ttfamily Node\textquotesingle{}s} Eulerian position/coordinate. In {\ttfamily Solid\+Nodes}, we provide a wrapper 
@@ -359,10 +359,10 @@ At this level, we implement the equations that are represented by the specific e
 \DoxyCodeLine{Vector<double> \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(3);}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Vector of velocity components}}
-\DoxyCodeLine{Vector<double> \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}(3);}
+\DoxyCodeLine{Vector<double> u(3);}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Compute the velocity at local coordinate s}}
-\DoxyCodeLine{fluid\_element.interpolated\_u(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}});}
+\DoxyCodeLine{fluid\_element.interpolated\_u(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},u);}
 
 \end{DoxyCode}
  We introduce wrapper functions to access function values, so that we can formulate \char`\"{}\+The Maths\char`\"{} in generic terms. Rather than referring to the pressure at node {\ttfamily n}, via 

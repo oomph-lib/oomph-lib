@@ -20,7 +20,7 @@ Inheritance diagram for oomph\+::Isotropic\+Strain\+Energy\+Function\+Constituti
 \item 
 \mbox{\hyperlink{classoomph_1_1IsotropicStrainEnergyFunctionConstitutiveLaw_aae7ab7763c630cb8296118da81fc5905}{Isotropic\+Strain\+Energy\+Function\+Constitutive\+Law}} (\mbox{\hyperlink{classoomph_1_1StrainEnergyFunction}{Strain\+Energy\+Function}} $\ast$const \&strain\+\_\+energy\+\_\+function\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Constructor takes a pointer to the strain energy function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1IsotropicStrainEnergyFunctionConstitutiveLaw_af6c25617b8be6cc454d6b526ec6121fc}{calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress}} (const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&g, const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&G, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}})
+void \mbox{\hyperlink{classoomph_1_1IsotropicStrainEnergyFunctionConstitutiveLaw_af6c25617b8be6cc454d6b526ec6121fc}{calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress}} (const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&g, const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&G, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&sigma)
 \begin{DoxyCompactList}\small\item\em Calculate the contravariant 2nd Piola Kirchhoff stress tensor. Arguments are the covariant undeformed and deformed metric tensor and the matrix in which to return the stress tensor. Uses correct 3D invariants for 2D (plane strain) problems. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1IsotropicStrainEnergyFunctionConstitutiveLaw_acf61673ecc4f960fee908378ac48544a}{calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress}} (const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&g, const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&G, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&sigma\+\_\+dev, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&G\+\_\+contra, double \&Gdet)
 \begin{DoxyCompactList}\small\item\em Calculate the deviatoric part $ \overline{ \sigma^{ij}}$ of the contravariant 2nd Piola Kirchhoff stress tensor $ \sigma^{ij}$. Also return the contravariant deformed metric tensor and the determinant of the deformed metric tensor. This form is appropriate for truly-\/incompressible materials for which $ \sigma^{ij} = - p G^{ij} +\overline{ \sigma^{ij}} $ where the \char`\"{}pressure\char`\"{} $ p $ is determined by $ \det G_{ij} - \det g_{ij} = 0 $. \end{DoxyCompactList}\item 
@@ -33,6 +33,7 @@ bool \mbox{\hyperlink{classoomph_1_1IsotropicStrainEnergyFunctionConstitutiveLaw
 \item 
 \mbox{\hyperlink{classoomph_1_1StrainEnergyFunction}{Strain\+Energy\+Function}} $\ast$ \mbox{\hyperlink{classoomph_1_1IsotropicStrainEnergyFunctionConstitutiveLaw_a273d7ba7083654b4adfbe172d9839267}{Strain\+\_\+energy\+\_\+function\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to the strain energy function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
@@ -40,7 +41,7 @@ bool \mbox{\hyperlink{classoomph_1_1IsotropicStrainEnergyFunctionConstitutiveLaw
 
 A class for constitutive laws derived from strain-\/energy functions. Theory is in Green and Zerna. 
 
-Definition at line \mbox{\hyperlink{constitutive__laws_8h_source_l00821}{821}} of file \mbox{\hyperlink{constitutive__laws_8h_source}{constitutive\+\_\+laws.\+h}}.
+Definition at line \mbox{\hyperlink{constitutive__laws_8h_source_l00800}{800}} of file \mbox{\hyperlink{constitutive__laws_8h_source}{constitutive\+\_\+laws.\+h}}.
 
 
 
@@ -57,7 +58,7 @@ Constructor takes a pointer to the strain energy function.
 
 
 
-Definition at line \mbox{\hyperlink{constitutive__laws_8h_source_l00829}{829}} of file \mbox{\hyperlink{constitutive__laws_8h_source}{constitutive\+\_\+laws.\+h}}.
+Definition at line \mbox{\hyperlink{constitutive__laws_8h_source_l00808}{808}} of file \mbox{\hyperlink{constitutive__laws_8h_source}{constitutive\+\_\+laws.\+h}}.
 
 
 
@@ -66,7 +67,7 @@ Definition at line \mbox{\hyperlink{constitutive__laws_8h_source_l00829}{829}} o
 \index{oomph::IsotropicStrainEnergyFunctionConstitutiveLaw@{oomph::IsotropicStrainEnergyFunctionConstitutiveLaw}!calculate\_second\_piola\_kirchhoff\_stress@{calculate\_second\_piola\_kirchhoff\_stress}}
 \index{calculate\_second\_piola\_kirchhoff\_stress@{calculate\_second\_piola\_kirchhoff\_stress}!oomph::IsotropicStrainEnergyFunctionConstitutiveLaw@{oomph::IsotropicStrainEnergyFunctionConstitutiveLaw}}
 \doxysubsubsection{\texorpdfstring{calculate\_second\_piola\_kirchhoff\_stress()}{calculate\_second\_piola\_kirchhoff\_stress()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
-{\footnotesize\ttfamily void oomph\+::\+Isotropic\+Strain\+Energy\+Function\+Constitutive\+Law\+::calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{g,  }\item[{const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{G,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{sigma }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void oomph\+::\+Isotropic\+Strain\+Energy\+Function\+Constitutive\+Law\+::calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{g,  }\item[{const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{G,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{sigma }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -76,17 +77,21 @@ Calculate the contravariant 2nd Piola Kirchhoff stress tensor. Arguments are the
 
 Calculate the contravariant 2nd Piola Kirchhoff stress tensor. Arguments are the covariant undeformed and deformed metric tensor and the matrix in which to return the stress tensor. Uses correct 3D invariants for 2D (plane strain) problems. 
 
+Implements \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a93527d910de908035feb8f41b0401065}{oomph\+::\+Constitutive\+Law}}.
+
+
+
 Definition at line \mbox{\hyperlink{constitutive__laws_8cc_source_l00895}{895}} of file \mbox{\hyperlink{constitutive__laws_8cc_source}{constitutive\+\_\+laws.\+cc}}.
 
 
 
-References \mbox{\hyperlink{constitutive__laws_8h_source_l00102}{oomph\+::\+Strain\+Energy\+Function\+::derivatives()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{namespaceoomph_1_1MathematicalConstants_a609ab3b897b174e49ddf7a19fd95f2ef}{oomph\+::\+Mathematical\+Constants\+::\+I()}}, \mbox{\hyperlink{matrices_8h_source_l00485}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::nrow()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{constitutive__laws_8h_source_l00318}{oomph\+::sigma}}, \mbox{\hyperlink{constitutive__laws_8h_source_l00825}{Strain\+\_\+energy\+\_\+function\+\_\+pt}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
+References \mbox{\hyperlink{constitutive__laws_8cc_source_l00113}{oomph\+::\+Constitutive\+Law\+::calculate\+\_\+contravariant()}}, \mbox{\hyperlink{constitutive__laws_8h_source_l00102}{oomph\+::\+Strain\+Energy\+Function\+::derivatives()}}, \mbox{\hyperlink{constitutive__laws_8cc_source_l00071}{oomph\+::\+Constitutive\+Law\+::error\+\_\+checking\+\_\+in\+\_\+input()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{namespaceoomph_1_1MathematicalConstants_a609ab3b897b174e49ddf7a19fd95f2ef}{oomph\+::\+Mathematical\+Constants\+::\+I()}}, \mbox{\hyperlink{matrices_8h_source_l00485}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::nrow()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{constitutive__laws_8h_source_l00804}{Strain\+\_\+energy\+\_\+function\+\_\+pt}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
 
 \mbox{\Hypertarget{classoomph_1_1IsotropicStrainEnergyFunctionConstitutiveLaw_acf61673ecc4f960fee908378ac48544a}\label{classoomph_1_1IsotropicStrainEnergyFunctionConstitutiveLaw_acf61673ecc4f960fee908378ac48544a}} 
 \index{oomph::IsotropicStrainEnergyFunctionConstitutiveLaw@{oomph::IsotropicStrainEnergyFunctionConstitutiveLaw}!calculate\_second\_piola\_kirchhoff\_stress@{calculate\_second\_piola\_kirchhoff\_stress}}
 \index{calculate\_second\_piola\_kirchhoff\_stress@{calculate\_second\_piola\_kirchhoff\_stress}!oomph::IsotropicStrainEnergyFunctionConstitutiveLaw@{oomph::IsotropicStrainEnergyFunctionConstitutiveLaw}}
 \doxysubsubsection{\texorpdfstring{calculate\_second\_piola\_kirchhoff\_stress()}{calculate\_second\_piola\_kirchhoff\_stress()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
-{\footnotesize\ttfamily void oomph\+::\+Isotropic\+Strain\+Energy\+Function\+Constitutive\+Law\+::calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{g,  }\item[{const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{G,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{sigma\+\_\+dev,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{G\+\_\+contra,  }\item[{double \&}]{Gdet }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void oomph\+::\+Isotropic\+Strain\+Energy\+Function\+Constitutive\+Law\+::calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{g,  }\item[{const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{G,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{sigma\+\_\+dev,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{G\+\_\+contra,  }\item[{double \&}]{Gdet }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -94,17 +99,21 @@ Calculate the deviatoric part $ \overline{ \sigma^{ij}}$ of the contravariant 2n
 
 Calculate the deviatoric part $ \overline{ \sigma^{ij}}$ of the contravariant 2nd Piola Kirchhoff stress tensor $ \sigma^{ij}$. Also return the contravariant deformed metric tensor and the determinant of the deformed metric tensor. Uses correct 3D invariants for 2D (plane strain) problems. This is the version for the pure incompressible formulation. 
 
+Reimplemented from \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_ac8178b1b7cd7e6a64942dba9e0997b30}{oomph\+::\+Constitutive\+Law}}.
+
+
+
 Definition at line \mbox{\hyperlink{constitutive__laws_8cc_source_l01009}{1009}} of file \mbox{\hyperlink{constitutive__laws_8cc_source}{constitutive\+\_\+laws.\+cc}}.
 
 
 
-References \mbox{\hyperlink{constitutive__laws_8h_source_l00102}{oomph\+::\+Strain\+Energy\+Function\+::derivatives()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{namespaceoomph_1_1MathematicalConstants_a609ab3b897b174e49ddf7a19fd95f2ef}{oomph\+::\+Mathematical\+Constants\+::\+I()}}, \mbox{\hyperlink{matrices_8h_source_l00485}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::nrow()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{constitutive__laws_8h_source_l00825}{Strain\+\_\+energy\+\_\+function\+\_\+pt}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
+References \mbox{\hyperlink{constitutive__laws_8cc_source_l00113}{oomph\+::\+Constitutive\+Law\+::calculate\+\_\+contravariant()}}, \mbox{\hyperlink{constitutive__laws_8h_source_l00102}{oomph\+::\+Strain\+Energy\+Function\+::derivatives()}}, \mbox{\hyperlink{constitutive__laws_8cc_source_l00071}{oomph\+::\+Constitutive\+Law\+::error\+\_\+checking\+\_\+in\+\_\+input()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{namespaceoomph_1_1MathematicalConstants_a609ab3b897b174e49ddf7a19fd95f2ef}{oomph\+::\+Mathematical\+Constants\+::\+I()}}, \mbox{\hyperlink{matrices_8h_source_l00485}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::nrow()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{constitutive__laws_8h_source_l00804}{Strain\+\_\+energy\+\_\+function\+\_\+pt}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
 
 \mbox{\Hypertarget{classoomph_1_1IsotropicStrainEnergyFunctionConstitutiveLaw_aa45d82d322fda480f88e78cddd557837}\label{classoomph_1_1IsotropicStrainEnergyFunctionConstitutiveLaw_aa45d82d322fda480f88e78cddd557837}} 
 \index{oomph::IsotropicStrainEnergyFunctionConstitutiveLaw@{oomph::IsotropicStrainEnergyFunctionConstitutiveLaw}!calculate\_second\_piola\_kirchhoff\_stress@{calculate\_second\_piola\_kirchhoff\_stress}}
 \index{calculate\_second\_piola\_kirchhoff\_stress@{calculate\_second\_piola\_kirchhoff\_stress}!oomph::IsotropicStrainEnergyFunctionConstitutiveLaw@{oomph::IsotropicStrainEnergyFunctionConstitutiveLaw}}
 \doxysubsubsection{\texorpdfstring{calculate\_second\_piola\_kirchhoff\_stress()}{calculate\_second\_piola\_kirchhoff\_stress()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
-{\footnotesize\ttfamily void oomph\+::\+Isotropic\+Strain\+Energy\+Function\+Constitutive\+Law\+::calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{g,  }\item[{const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{G,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{sigma\+\_\+dev,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{Gcontra,  }\item[{double \&}]{gen\+\_\+dil,  }\item[{double \&}]{inv\+\_\+kappa }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void oomph\+::\+Isotropic\+Strain\+Energy\+Function\+Constitutive\+Law\+::calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{g,  }\item[{const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{G,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{sigma\+\_\+dev,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{Gcontra,  }\item[{double \&}]{gen\+\_\+dil,  }\item[{double \&}]{inv\+\_\+kappa }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -112,17 +121,21 @@ Calculate the deviatoric part of the contravariant 2nd Piola Kirchoff stress ten
 
 Calculate the deviatoric part of the contravariant 2nd Piola Kirchoff stress tensor. Also return the contravariant deformed metric tensor, the generalised dilatation, $ d, $ and the inverse of the bulk modulus $ \kappa$. Uses correct 3D invariants for 2D (plane strain) problems. This is the version for the near-\/incompressible formulation. 
 
+Reimplemented from \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a26f34355b626bebcad8f498fa5271d20}{oomph\+::\+Constitutive\+Law}}.
+
+
+
 Definition at line \mbox{\hyperlink{constitutive__laws_8cc_source_l01136}{1136}} of file \mbox{\hyperlink{constitutive__laws_8cc_source}{constitutive\+\_\+laws.\+cc}}.
 
 
 
-References \mbox{\hyperlink{constitutive__laws_8h_source_l00102}{oomph\+::\+Strain\+Energy\+Function\+::derivatives()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{namespaceoomph_1_1MathematicalConstants_a609ab3b897b174e49ddf7a19fd95f2ef}{oomph\+::\+Mathematical\+Constants\+::\+I()}}, \mbox{\hyperlink{matrices_8h_source_l00485}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::nrow()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{constitutive__laws_8h_source_l00825}{Strain\+\_\+energy\+\_\+function\+\_\+pt}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
+References \mbox{\hyperlink{constitutive__laws_8cc_source_l00113}{oomph\+::\+Constitutive\+Law\+::calculate\+\_\+contravariant()}}, \mbox{\hyperlink{constitutive__laws_8h_source_l00102}{oomph\+::\+Strain\+Energy\+Function\+::derivatives()}}, \mbox{\hyperlink{constitutive__laws_8cc_source_l00071}{oomph\+::\+Constitutive\+Law\+::error\+\_\+checking\+\_\+in\+\_\+input()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{namespaceoomph_1_1MathematicalConstants_a609ab3b897b174e49ddf7a19fd95f2ef}{oomph\+::\+Mathematical\+Constants\+::\+I()}}, \mbox{\hyperlink{matrices_8h_source_l00485}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::nrow()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{constitutive__laws_8h_source_l00804}{Strain\+\_\+energy\+\_\+function\+\_\+pt}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
 
 \mbox{\Hypertarget{classoomph_1_1IsotropicStrainEnergyFunctionConstitutiveLaw_a6b9a454988b023a42782f78e4e3eebc4}\label{classoomph_1_1IsotropicStrainEnergyFunctionConstitutiveLaw_a6b9a454988b023a42782f78e4e3eebc4}} 
 \index{oomph::IsotropicStrainEnergyFunctionConstitutiveLaw@{oomph::IsotropicStrainEnergyFunctionConstitutiveLaw}!requires\_incompressibility\_constraint@{requires\_incompressibility\_constraint}}
 \index{requires\_incompressibility\_constraint@{requires\_incompressibility\_constraint}!oomph::IsotropicStrainEnergyFunctionConstitutiveLaw@{oomph::IsotropicStrainEnergyFunctionConstitutiveLaw}}
 \doxysubsubsection{\texorpdfstring{requires\_incompressibility\_constraint()}{requires\_incompressibility\_constraint()}}
-{\footnotesize\ttfamily bool oomph\+::\+Isotropic\+Strain\+Energy\+Function\+Constitutive\+Law\+::requires\+\_\+incompressibility\+\_\+constraint (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily bool oomph\+::\+Isotropic\+Strain\+Energy\+Function\+Constitutive\+Law\+::requires\+\_\+incompressibility\+\_\+constraint (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -130,11 +143,15 @@ State if the constitutive equation requires an incompressible formulation in whi
 
 
 
-Definition at line \mbox{\hyperlink{constitutive__laws_8h_source_l00882}{882}} of file \mbox{\hyperlink{constitutive__laws_8h_source}{constitutive\+\_\+laws.\+h}}.
+Implements \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a446452158a8ae9fbc3dde4277155f824}{oomph\+::\+Constitutive\+Law}}.
 
 
 
-References \mbox{\hyperlink{classoomph_1_1StrainEnergyFunction_a312fe03c070f5c45a99ae4e186936147}{oomph\+::\+Strain\+Energy\+Function\+::requires\+\_\+incompressibility\+\_\+constraint()}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00825}{Strain\+\_\+energy\+\_\+function\+\_\+pt}}.
+Definition at line \mbox{\hyperlink{constitutive__laws_8h_source_l00861}{861}} of file \mbox{\hyperlink{constitutive__laws_8h_source}{constitutive\+\_\+laws.\+h}}.
+
+
+
+References \mbox{\hyperlink{classoomph_1_1StrainEnergyFunction_a312fe03c070f5c45a99ae4e186936147}{oomph\+::\+Strain\+Energy\+Function\+::requires\+\_\+incompressibility\+\_\+constraint()}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00804}{Strain\+\_\+energy\+\_\+function\+\_\+pt}}.
 
 
 
@@ -151,11 +168,11 @@ Pointer to the strain energy function.
 
 
 
-Definition at line \mbox{\hyperlink{constitutive__laws_8h_source_l00825}{825}} of file \mbox{\hyperlink{constitutive__laws_8h_source}{constitutive\+\_\+laws.\+h}}.
+Definition at line \mbox{\hyperlink{constitutive__laws_8h_source_l00804}{804}} of file \mbox{\hyperlink{constitutive__laws_8h_source}{constitutive\+\_\+laws.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{constitutive__laws_8cc_source_l00896}{calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress()}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00882}{requires\+\_\+incompressibility\+\_\+constraint()}}.
+Referenced by \mbox{\hyperlink{constitutive__laws_8cc_source_l00896}{calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress()}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00861}{requires\+\_\+incompressibility\+\_\+constraint()}}.
 
 
 

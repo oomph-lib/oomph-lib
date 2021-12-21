@@ -54,14 +54,14 @@
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00050}00050   \{}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00051}00051   \textcolor{keyword}{private}:\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00052}00052 \textcolor{comment}{    /// Pointer to constitutive law}}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00053}\mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquations_a69bc689b112a9b24de68315296ab9c87}{00053}} \textcolor{comment}{}    ConstitutiveLaw* \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquations_a69bc689b112a9b24de68315296ab9c87}{Constitutive\_law\_pt}};}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00053}\mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquations_a69bc689b112a9b24de68315296ab9c87}{00053}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw}{ConstitutiveLaw}}* \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquations_a69bc689b112a9b24de68315296ab9c87}{Constitutive\_law\_pt}};}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00054}00054 }
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00055}00055   \textcolor{keyword}{public}:\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00056}00056 \textcolor{comment}{    /// Constructor}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00057}\mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquations_acb73b32e5b0b2a80b164a445c2c8ac9a}{00057}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquations_acb73b32e5b0b2a80b164a445c2c8ac9a}{AxisymmetricPVDEquations}}() : \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquations_a69bc689b112a9b24de68315296ab9c87}{Constitutive\_law\_pt}}(0) \{\}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00058}00058 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00059}00059 \textcolor{comment}{    /// Return the constitutive law pointer}}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00060}\mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquations_a783cd25741fe5848429b63ca0ee2c1c9}{00060}} \textcolor{comment}{}    ConstitutiveLaw*\& \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquations_a783cd25741fe5848429b63ca0ee2c1c9}{constitutive\_law\_pt}}()}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00060}\mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquations_a783cd25741fe5848429b63ca0ee2c1c9}{00060}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw}{ConstitutiveLaw}}*\& \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquations_a783cd25741fe5848429b63ca0ee2c1c9}{constitutive\_law\_pt}}()}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00061}00061     \{}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00062}00062       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquations_a69bc689b112a9b24de68315296ab9c87}{Constitutive\_law\_pt}};}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00063}00063     \}}
@@ -69,7 +69,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00065}00065 \textcolor{comment}{    /// Return the stress tensor, as calculated from the constitutive law}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00066}\mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquations_ad7984168072632f9d4f7218d81ca50eb}{00066}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquations_ad7984168072632f9d4f7218d81ca50eb}{get\_stress}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& g,}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00067}00067                     \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& G,}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00068}00068                     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}})}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00068}00068                     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& sigma)}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00069}00069     \{}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00070}00070 \textcolor{preprocessor}{\#ifdef PARANOID}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00071}00071       \textcolor{comment}{// If the pointer to the constitutive law hasn't been set, issue an error}}
@@ -85,7 +85,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00081}00081           error\_message, OOMPH\_CURRENT\_FUNCTION, OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00082}00082       \}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00083}00083 \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00084}00084       \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquations_a69bc689b112a9b24de68315296ab9c87}{Constitutive\_law\_pt}}-\/>calculate\_second\_piola\_kirchhoff\_stress(g, G, \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}});}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00084}00084       \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquations_a69bc689b112a9b24de68315296ab9c87}{Constitutive\_law\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a93527d910de908035feb8f41b0401065}{calculate\_second\_piola\_kirchhoff\_stress}}(g, G, sigma);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00085}00085     \}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00086}00086 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00087}00087 \textcolor{comment}{    /// Fill in the residuals by calling the generic function}}
@@ -113,17 +113,17 @@
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00109}00109       \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} dpsidxi(n\_node, n\_position\_type, n\_lagrangian);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00110}00110 }
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00111}00111       \textcolor{comment}{// Set the value of n\_intpt}}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00112}00112       \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00112}00112       \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00113}00113 }
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00114}00114       \textcolor{comment}{// Loop over the integration points}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00115}00115       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ipt = 0; ipt < n\_intpt; ipt++)}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00116}00116       \{}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00117}00117         \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00118}00118         \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00118}00118         \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00119}00119         \textcolor{comment}{// Call the derivatives of the shape functions}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00120}00120         \textcolor{keywordtype}{double} J = \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_aa48b4880f69bb28d267ff27e7b1967e7}{dshape\_lagrangian\_at\_knot}}(ipt, psi, dpsidxi);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00121}00121         \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00122}00122         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00122}00122         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00123}00123 }
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00124}00124         \textcolor{comment}{// Calculate the local Lagrangian coordinates, position components}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00125}00125         \textcolor{comment}{// and the derivatives of global position components}}
@@ -184,7 +184,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00180}00180 }
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00181}00181         \textcolor{comment}{// Now multiply the weight by the square-\/root of the undeformed metric}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00182}00182         \textcolor{comment}{// tensor r\string^2 sin(theta)}}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00183}00183         \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} *= sqrt(g(0, 0) * g(1, 1) * g(2, 2));}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00183}00183         \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} *= sqrt(g(0, 0) * g(1, 1) * g(2, 2));}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00184}00184 }
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00185}00185         \textcolor{comment}{// Now calculate the deformed metric tensor}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00186}00186         \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} G(3);}
@@ -213,8 +213,8 @@
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00209}00209 }
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00210}00210 }
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00211}00211         \textcolor{comment}{// Now calculate the stress tensor from the constitutive law}}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00212}00212         \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(3);}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00213}00213         \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquations_ad7984168072632f9d4f7218d81ca50eb}{get\_stress}}(g, G, \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}});}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00212}00212         \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} sigma(3);}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00213}00213         \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquations_ad7984168072632f9d4f7218d81ca50eb}{get\_stress}}(g, G, sigma);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00214}00214 }
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00215}00215         \textcolor{comment}{//=====EQUATIONS OF ELASTICITY FROM PRINCIPLE OF VIRTUAL}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00216}00216         \textcolor{comment}{// DISPLACEMENTS========}}
@@ -233,21 +233,21 @@
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00229}00229             \{}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00230}00230               \textcolor{comment}{// Add the term for variations in radial position}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00231}00231               residuals[local\_eqn] +=}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00232}00232                 (\mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(0, 1) * interpolated\_dXdxi[1][0] +}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00233}00233                  \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(1, 1) * (interpolated\_dXdxi[1][1] + interpolated\_X[0]) +}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00234}00234                  \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(2, 2) * sin(\mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}[1]) *}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00232}00232                 (sigma(0, 1) * interpolated\_dXdxi[1][0] +}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00233}00233                  sigma(1, 1) * (interpolated\_dXdxi[1][1] + interpolated\_X[0]) +}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00234}00234                  sigma(2, 2) * sin(\mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}[1]) *}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00235}00235                    (interpolated\_X[0] * sin(\mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}[1]) +}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00236}00236                     interpolated\_X[1] * cos(\mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}[1]))) *}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00237}00237                 psi(l, k) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00237}00237                 psi(l, k) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00238}00238 }
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00239}00239               \textcolor{comment}{// Add the terms for the variations in dX\_\{r\}/dxi\_\{j\}}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00240}00240               \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < 2; j++)}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00241}00241               \{}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00242}00242                 residuals[local\_eqn] +=}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00243}00243                   (\mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(j, 0) * interpolated\_dXdxi[0][0] +}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00244}00244                    \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(j, 1) *}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00243}00243                   (sigma(j, 0) * interpolated\_dXdxi[0][0] +}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00244}00244                    sigma(j, 1) *}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00245}00245                      (interpolated\_dXdxi[0][1] -\/ interpolated\_X[1])) *}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00246}00246                   dpsidxi(l, k, j) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00246}00246                   dpsidxi(l, k, j) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00247}00247               \}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00248}00248             \}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00249}00249 }
@@ -259,21 +259,21 @@
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00255}00255             \{}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00256}00256               \textcolor{comment}{// Add the term for variations in azimuthal position}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00257}00257               residuals[local\_eqn] +=}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00258}00258                 (-\/\mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(0, 1) * interpolated\_dXdxi[0][0] -\/}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00259}00259                  \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(1, 1) * (interpolated\_dXdxi[0][1] -\/ interpolated\_X[1]) +}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00260}00260                  \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(2, 2) * cos(\mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}[1]) *}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00258}00258                 (-\/sigma(0, 1) * interpolated\_dXdxi[0][0] -\/}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00259}00259                  sigma(1, 1) * (interpolated\_dXdxi[0][1] -\/ interpolated\_X[1]) +}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00260}00260                  sigma(2, 2) * cos(\mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}[1]) *}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00261}00261                    (interpolated\_X[0] * sin(\mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}[1]) +}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00262}00262                     interpolated\_X[1] * cos(\mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}[1]))) *}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00263}00263                 psi(l, k) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00263}00263                 psi(l, k) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00264}00264 }
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00265}00265               \textcolor{comment}{// Add the terms for the variations in dX\_\{theta\}/dxi\_\{j\}}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00266}00266               \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < 2; j++)}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00267}00267               \{}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00268}00268                 residuals[local\_eqn] +=}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00269}00269                   (\mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(j, 0) * interpolated\_dXdxi[1][0] +}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00270}00270                    \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(j, 1) *}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00269}00269                   (sigma(j, 0) * interpolated\_dXdxi[1][0] +}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00270}00270                    sigma(j, 1) *}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00271}00271                      (interpolated\_dXdxi[1][1] + interpolated\_X[0])) *}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00272}00272                   dpsidxi(l, k, j) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00272}00272                   dpsidxi(l, k, j) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00273}00273               \}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00274}00274             \}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00275}00275           \} \textcolor{comment}{// End of loop over type of dof}}
@@ -297,18 +297,18 @@
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00293}00293       \textcolor{comment}{// Set sum to zero}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00294}00294       \textcolor{keywordtype}{double} sum = 0.0;}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00295}00295       \textcolor{comment}{// Set the value of n\_intpt}}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00296}00296       \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00296}00296       \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00297}00297 }
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00298}00298       \textcolor{comment}{// Loop over the integration points}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00299}00299       \textcolor{comment}{// Loop in s1 direction*}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00300}00300       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ipt = 0; ipt < n\_intpt; ipt++)}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00301}00301       \{}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00302}00302         \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00303}00303         \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00303}00303         \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00304}00304         \textcolor{comment}{// Call the derivatives of the shape function wrt lagrangian coordinates}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00305}00305         \textcolor{keywordtype}{double} J = \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_aa48b4880f69bb28d267ff27e7b1967e7}{dshape\_lagrangian\_at\_knot}}(ipt, psi, dpsidxi);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00306}00306         \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00307}00307         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00307}00307         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00308}00308 }
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00309}00309         \textcolor{comment}{// Calculate the local Lagrangian coordinates, position components}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00310}00310         \textcolor{comment}{// and the derivatives of global position components}}
@@ -381,7 +381,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00377}00377 }
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00378}00378         \textcolor{comment}{// Add the appropriate weight to the integral, i.e. sqrt of metric}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00379}00379         \textcolor{comment}{// tensor}}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00380}00380         sum += \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * sqrt(detG);}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00380}00380         sum += \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * sqrt(detG);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00381}00381       \}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00382}00382 }
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00383}00383       \textcolor{comment}{// Return the volume, need to multiply by 2pi}}
@@ -390,7 +390,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00386}00386 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00387}00387 \textcolor{comment}{    /// Assign the contribution to the residual using only finite differences}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00388}\mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquations_a80e76c7d645e8863f2dd5b1bf456516a}{00388}} \textcolor{comment}{}    \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquations_a80e76c7d645e8863f2dd5b1bf456516a}{fill\_in\_contribution\_to\_jacobian}}(\mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00389}00389                                                  \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00389}00389                                                  \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian)}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00390}00390     \{}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00391}00391       \textcolor{comment}{// Add the solid contribution to the residuals}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00392}00392       \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquations_a12f081b16b2f2a9e8409d4ec12a6d071}{fill\_in\_contribution\_to\_residuals\_axisym\_pvd}}(residuals);}
@@ -398,12 +398,12 @@
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00394}00394       \textcolor{comment}{// Solve for the consistent acceleration in Newmark scheme?}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00395}00395       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a52ba6cbb89b5edfe7592a49171aeb436}{Solve\_for\_consistent\_newmark\_accel\_flag}})}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00396}00396       \{}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00397}00397         fill\_in\_jacobian\_for\_newmark\_accel(\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}});}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00397}00397         \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_ae9b760377a56194d802510527b33c76f}{fill\_in\_jacobian\_for\_newmark\_accel}}(jacobian);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00398}00398         \textcolor{keywordflow}{return};}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00399}00399       \}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00400}00400 }
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00401}00401       \textcolor{comment}{// Get the solid entries in the jacobian using finite differences}}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00402}00402       \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_aa4d7dab326ceb0167da34ad4c535fa0d}{fill\_in\_jacobian\_from\_solid\_position\_by\_fd}}(\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}});}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00402}00402       \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_aa4d7dab326ceb0167da34ad4c535fa0d}{fill\_in\_jacobian\_from\_solid\_position\_by\_fd}}(jacobian);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00403}00403     \}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00404}00404 }
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00405}00405 \textcolor{comment}{}}
@@ -430,7 +430,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00426}00426         \{}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00427}00427           \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0] = -\/1.0 + l1 * 2.0 / (n\_plot -\/ 1);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00428}00428 }
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00429}00429           \textcolor{keywordtype}{double} x\_r = \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0), x\_theta = \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 1);}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00429}00429           \textcolor{keywordtype}{double} x\_r = \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0), x\_theta = \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 1);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00430}00430           \textcolor{keywordtype}{double} theta = \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 1);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00431}00431           \textcolor{comment}{// Output the x,y,u,v}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00432}00432           \textcolor{comment}{// First output x and y assuming phi = 0}}
@@ -438,7 +438,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00434}00434                   << x\_r * cos(theta) -\/ x\_theta * sin(theta) << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00435}00435           \textcolor{comment}{// Now output the true variables}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00436}00436           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00437}00437             outfile << \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00437}00437             outfile << \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00438}00438           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00439}00439             outfile << \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00440}00440           outfile << std::endl;}
@@ -472,7 +472,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00468}00468         \{}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00469}00469           \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0] = -\/1.0 + l1 * 2.0 / (n\_plot -\/ 1);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00470}00470 }
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00471}00471           \textcolor{keywordtype}{double} x\_r = \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0), x\_theta = \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 1);}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00471}00471           \textcolor{keywordtype}{double} x\_r = \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0), x\_theta = \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 1);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00472}00472           \textcolor{keywordtype}{double} theta = \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 1);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00473}00473           \textcolor{comment}{// Output the x,y,u,v}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00474}00474           \textcolor{comment}{// First output x and y assuming phi = 0}}
@@ -485,7 +485,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00481}00481 }
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00482}00482           \textcolor{comment}{// Now output the true variables}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00483}00483           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00484}00484             fprintf(file\_pt, \textcolor{stringliteral}{"{}\%g "{}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00484}00484             fprintf(file\_pt, \textcolor{stringliteral}{"{}\%g "{}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00485}00485           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00486}00486             fprintf(file\_pt, \textcolor{stringliteral}{"{}\%g "{}}, \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00487}00487           fprintf(file\_pt, \textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
@@ -578,7 +578,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00574}00574         \{}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00575}00575           \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0] = 0.0 + l1 * 1.0 / (n\_plot -\/ 1);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00576}00576 }
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00577}00577           \textcolor{keywordtype}{double} x\_r = \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0), x\_theta = \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 1);}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00577}00577           \textcolor{keywordtype}{double} x\_r = \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0), x\_theta = \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 1);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00578}00578           \textcolor{keywordtype}{double} theta = \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 1);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00579}00579           \textcolor{comment}{// Output the x,y,u,v}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00580}00580           \textcolor{comment}{// First output x and y assuming phi = 0}}
@@ -586,7 +586,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00582}00582                   << x\_r * cos(theta) -\/ x\_theta * sin(theta) << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00583}00583           \textcolor{comment}{// Now output the true variables}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00584}00584           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00585}00585             outfile << \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00585}00585             outfile << \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00586}00586           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00587}00587             outfile << \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00588}00588           outfile << std::endl;}
@@ -620,7 +620,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00616}00616         \{}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00617}00617           \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0] = -\/1.0 + l1 * 2.0 / (n\_plot -\/ 1);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00618}00618 }
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00619}00619           \textcolor{keywordtype}{double} x\_r = \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0), x\_theta = \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 1);}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00619}00619           \textcolor{keywordtype}{double} x\_r = \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0), x\_theta = \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 1);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00620}00620           \textcolor{keywordtype}{double} theta = \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 1);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00621}00621           \textcolor{comment}{// Output the x,y,u,v}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00622}00622           \textcolor{comment}{// First output x and y assuming phi = 0}}
@@ -633,7 +633,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00629}00629 }
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00630}00630           \textcolor{comment}{// Now output the true variables}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00631}00631           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00632}00632             fprintf(file\_pt, \textcolor{stringliteral}{"{}\%g "{}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00632}00632             fprintf(file\_pt, \textcolor{stringliteral}{"{}\%g "{}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00633}00633           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00634}00634             fprintf(file\_pt, \textcolor{stringliteral}{"{}\%g "{}}, \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00635}00635           fprintf(file\_pt, \textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
@@ -665,7 +665,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00661}00661   \{}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00662}00662   \textcolor{keyword}{private}:\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00663}00663 \textcolor{comment}{    /// Pointer to constitutive law}}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00664}\mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a792ad265951fa647ca47d4a71b1df02f}{00664}} \textcolor{comment}{}    ConstitutiveLaw* \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a792ad265951fa647ca47d4a71b1df02f}{Constitutive\_law\_pt}};}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00664}\mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a792ad265951fa647ca47d4a71b1df02f}{00664}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw}{ConstitutiveLaw}}* \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a792ad265951fa647ca47d4a71b1df02f}{Constitutive\_law\_pt}};}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00665}00665 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00666}00666 \textcolor{comment}{    /// Boolean to determine whether the solid is incompressible or not}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00667}\mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a2ceef4a0290f5b475c99dd26721659d0}{00667}} \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a2ceef4a0290f5b475c99dd26721659d0}{Incompressible}};}
@@ -689,7 +689,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00685}00685     \}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00686}00686 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00687}00687 \textcolor{comment}{    /// Return the constitutive law pointer}}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00688}\mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a012e0a165cffdb439069cde2e2f82efe}{00688}} \textcolor{comment}{}    ConstitutiveLaw*\& \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a012e0a165cffdb439069cde2e2f82efe}{constitutive\_law\_pt}}()}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00688}\mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a012e0a165cffdb439069cde2e2f82efe}{00688}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw}{ConstitutiveLaw}}*\& \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a012e0a165cffdb439069cde2e2f82efe}{constitutive\_law\_pt}}()}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00689}00689     \{}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00690}00690       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a792ad265951fa647ca47d4a71b1df02f}{Constitutive\_law\_pt}};}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00691}00691     \}}
@@ -698,7 +698,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00694}00694 \textcolor{comment}{    /// in the Near-\/incompresible formulation}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00695}\mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_af74b386309449d7022b9599674d58088}{00695}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_af74b386309449d7022b9599674d58088}{get\_stress}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& g,}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00696}00696                     \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& G,}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00697}00697                     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}},}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00697}00697                     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& sigma,}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00698}00698                     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& Gup,}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00699}00699                     \textcolor{keywordtype}{double}\& pressure\_stress,}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00700}00700                     \textcolor{keywordtype}{double}\& kappa)}
@@ -717,15 +717,15 @@
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00713}00713           error\_message, OOMPH\_CURRENT\_FUNCTION, OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00714}00714       \}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00715}00715 \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00716}00716       \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a792ad265951fa647ca47d4a71b1df02f}{Constitutive\_law\_pt}}-\/>calculate\_second\_piola\_kirchhoff\_stress(}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00717}00717         g, G, \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}, Gup, pressure\_stress, kappa);}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00716}00716       \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a792ad265951fa647ca47d4a71b1df02f}{Constitutive\_law\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a93527d910de908035feb8f41b0401065}{calculate\_second\_piola\_kirchhoff\_stress}}(}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00717}00717         g, G, sigma, Gup, pressure\_stress, kappa);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00718}00718     \}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00719}00719 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00720}00720 \textcolor{comment}{    /// Return the stress tensor, as calculated from the constitutive law}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00721}00721 \textcolor{comment}{    /// in the "{}true"{} incompresible formulation}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00722}\mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_af9614022b7f3e3fe4ffa9d1de15bfda7}{00722}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_af9614022b7f3e3fe4ffa9d1de15bfda7}{get\_stress}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& g,}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00723}00723                     \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& G,}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00724}00724                     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}},}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00724}00724                     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& sigma,}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00725}00725                     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& Gup,}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00726}00726                     \textcolor{keywordtype}{double}\& detG)}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00727}00727     \{}
@@ -743,8 +743,8 @@
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00739}00739           error\_message, OOMPH\_CURRENT\_FUNCTION, OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00740}00740       \}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00741}00741 \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00742}00742       \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a792ad265951fa647ca47d4a71b1df02f}{Constitutive\_law\_pt}}-\/>calculate\_second\_piola\_kirchhoff\_stress(}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00743}00743         g, G, \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}, Gup, detG);}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00742}00742       \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a792ad265951fa647ca47d4a71b1df02f}{Constitutive\_law\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a93527d910de908035feb8f41b0401065}{calculate\_second\_piola\_kirchhoff\_stress}}(}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00743}00743         g, G, sigma, Gup, detG);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00744}00744     \}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00745}00745 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00746}00746 \textcolor{comment}{    /// Return whether the material is incompressible}}
@@ -782,19 +782,19 @@
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00778}00778 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00779}00779 \textcolor{comment}{    /// Return the residuals and the jacobian}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00780}\mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a43c81b1695c9cd22b7546dd7764b70bd}{00780}} \textcolor{comment}{}    \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a43c81b1695c9cd22b7546dd7764b70bd}{fill\_in\_contribution\_to\_jacobian}}(\mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00781}00781                                                  \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00781}00781                                                  \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian)}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00782}00782     \{}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00783}00783       \textcolor{comment}{// Call the generic routine with the flag set to 1}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00784}00784       \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a38ed51aff165e6a9708664a251fe291b}{fill\_in\_generic\_residual\_contribution\_axisym\_pvd\_with\_pressure}}(}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00785}00785         residuals, \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, 1);}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00785}00785         residuals, jacobian, 1);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00786}00786       \textcolor{comment}{// Call the finite difference routine for the displacements}}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00787}00787       \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_aa4d7dab326ceb0167da34ad4c535fa0d}{SolidFiniteElement::fill\_in\_jacobian\_from\_solid\_position\_by\_fd}}(\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}});}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00787}00787       \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_aa4d7dab326ceb0167da34ad4c535fa0d}{SolidFiniteElement::fill\_in\_jacobian\_from\_solid\_position\_by\_fd}}(jacobian);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00788}00788     \}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00789}00789 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00790}00790 \textcolor{comment}{    /// Return the residuals for the equations of solid mechanics}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00791}00791 \textcolor{comment}{    /// formulated in the incompressible case!}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00792}\mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a38ed51aff165e6a9708664a251fe291b}{00792}} \textcolor{comment}{}    \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a38ed51aff165e6a9708664a251fe291b}{fill\_in\_generic\_residual\_contribution\_axisym\_pvd\_with\_pressure}}(}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00793}00793       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \textcolor{keywordtype}{unsigned} flag)}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00793}00793       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian, \textcolor{keywordtype}{unsigned} flag)}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00794}00794     \{}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00795}00795       \textcolor{comment}{// Set the number of Lagrangian coordinates}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00796}00796       \textcolor{keywordtype}{unsigned} n\_lagrangian = 2;}
@@ -816,20 +816,20 @@
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00812}00812       \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} psisp(n\_solid\_pres);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00813}00813 }
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00814}00814       \textcolor{comment}{// Set the value of n\_intpt}}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00815}00815       \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00815}00815       \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00816}00816 }
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00817}00817       \textcolor{comment}{// Loop over the integration points}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00818}00818       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ipt = 0; ipt < n\_intpt; ipt++)}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00819}00819       \{}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00820}00820         \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00821}00821         \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00821}00821         \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00822}00822         \textcolor{comment}{// Call the derivatives of the shape functions}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00823}00823         \textcolor{keywordtype}{double} J = \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_aa48b4880f69bb28d267ff27e7b1967e7}{dshape\_lagrangian\_at\_knot}}(ipt, psi, dpsidxi);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00824}00824         \textcolor{comment}{// Call the pressure shape functions}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00825}00825         \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a2c423c3bfbc0debcf041f11fc24d1510}{solid\_pshape\_at\_knot}}(ipt, psisp);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00826}00826 }
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00827}00827         \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00828}00828         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00828}00828         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00829}00829 }
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00830}00830         \textcolor{comment}{// Calculate the local Lagrangian coordinates, position components}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00831}00831         \textcolor{comment}{// and the derivatives of global position components}}
@@ -900,7 +900,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00896}00896 }
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00897}00897         \textcolor{comment}{// Now multiply the weight by the square-\/root of the determinant of the}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00898}00898         \textcolor{comment}{// undeformed metric tensor r\string^2 sin(theta)}}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00899}00899         \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} *= sqrt(detg);}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00899}00899         \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} *= sqrt(detg);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00900}00900 }
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00901}00901         \textcolor{comment}{// Now calculate the deformed metric tensor}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00902}00902         \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} G(3);}
@@ -929,17 +929,17 @@
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00925}00925 }
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00926}00926 }
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00927}00927         \textcolor{comment}{// Now calculate the stress tensor from the constitutive law}}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00928}00928         \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(3), Gup(3);}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00928}00928         \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} sigma(3), Gup(3);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00929}00929         \textcolor{keywordtype}{double} detG = 0.0, pressure\_stress = 0.0, kappa = 0.0;}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00930}00930         \textcolor{comment}{// If it's incompressible call one form of the constitutive law}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00931}00931         \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a2ceef4a0290f5b475c99dd26721659d0}{Incompressible}})}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00932}00932         \{}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00933}00933           \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_af74b386309449d7022b9599674d58088}{get\_stress}}(g, G, \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}, Gup, detG);}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00933}00933           \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_af74b386309449d7022b9599674d58088}{get\_stress}}(g, G, sigma, Gup, detG);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00934}00934         \}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00935}00935         \textcolor{comment}{// Otherwise call another form}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00936}00936         \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00937}00937         \{}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00938}00938           \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_af74b386309449d7022b9599674d58088}{get\_stress}}(g, G, \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}, Gup, pressure\_stress, kappa);}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00938}00938           \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_af74b386309449d7022b9599674d58088}{get\_stress}}(g, G, sigma, Gup, pressure\_stress, kappa);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00939}00939         \}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00940}00940 }
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00941}00941 }
@@ -960,25 +960,25 @@
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00956}00956             \{}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00957}00957               \textcolor{comment}{// Add the term for variations in radial position}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00958}00958               residuals[local\_eqn] +=}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00959}00959                 ((\mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(0, 1) + \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_adfd0277b2f05d4689fd7b4c6707929ab}{interpolated\_solid\_p}} * Gup(0, 1)) *}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00959}00959                 ((sigma(0, 1) + \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_adfd0277b2f05d4689fd7b4c6707929ab}{interpolated\_solid\_p}} * Gup(0, 1)) *}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00960}00960                    interpolated\_dXdxi[1][0] +}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00961}00961                  (\mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(1, 1) + \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_adfd0277b2f05d4689fd7b4c6707929ab}{interpolated\_solid\_p}} * Gup(1, 1)) *}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00961}00961                  (sigma(1, 1) + \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_adfd0277b2f05d4689fd7b4c6707929ab}{interpolated\_solid\_p}} * Gup(1, 1)) *}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00962}00962                    (interpolated\_dXdxi[1][1] + interpolated\_X[0]) +}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00963}00963                  (\mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(2, 2) + \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_adfd0277b2f05d4689fd7b4c6707929ab}{interpolated\_solid\_p}} * Gup(2, 2)) *}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00963}00963                  (sigma(2, 2) + \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_adfd0277b2f05d4689fd7b4c6707929ab}{interpolated\_solid\_p}} * Gup(2, 2)) *}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00964}00964                    sin(\mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}[1]) *}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00965}00965                    (interpolated\_X[0] * sin(\mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}[1]) +}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00966}00966                     interpolated\_X[1] * cos(\mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}[1]))) *}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00967}00967                 psi(l, k) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00967}00967                 psi(l, k) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00968}00968 }
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00969}00969               \textcolor{comment}{// Add the terms for the variations in dX\_\{r\}/dxi\_\{j\}}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00970}00970               \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < 2; j++)}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00971}00971               \{}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00972}00972                 residuals[local\_eqn] +=}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00973}00973                   ((\mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(j, 0) + \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_adfd0277b2f05d4689fd7b4c6707929ab}{interpolated\_solid\_p}} * Gup(j, 0)) *}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00973}00973                   ((sigma(j, 0) + \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_adfd0277b2f05d4689fd7b4c6707929ab}{interpolated\_solid\_p}} * Gup(j, 0)) *}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00974}00974                      interpolated\_dXdxi[0][0] +}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00975}00975                    (\mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(j, 1) + \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_adfd0277b2f05d4689fd7b4c6707929ab}{interpolated\_solid\_p}} * Gup(j, 1)) *}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00975}00975                    (sigma(j, 1) + \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_adfd0277b2f05d4689fd7b4c6707929ab}{interpolated\_solid\_p}} * Gup(j, 1)) *}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00976}00976                      (interpolated\_dXdxi[0][1] -\/ interpolated\_X[1])) *}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00977}00977                   dpsidxi(l, k, j) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00977}00977                   dpsidxi(l, k, j) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00978}00978               \}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00979}00979 }
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00980}00980               \textcolor{comment}{// Can add in the pressure jacobian terms}}
@@ -991,23 +991,23 @@
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00987}00987                   \textcolor{comment}{// If it's not a boundary condition}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00988}00988                   \textcolor{keywordflow}{if} (local\_unknown >= 0)}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00989}00989                   \{}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00990}00990                     \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn, local\_unknown) +=}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00990}00990                     jacobian(local\_eqn, local\_unknown) +=}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00991}00991                       (psisp[l2] * Gup(0, 1) * interpolated\_dXdxi[1][0] +}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00992}00992                        psisp[l2] * Gup(1, 1) *}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00993}00993                          (interpolated\_dXdxi[1][1] + interpolated\_X[0]) +}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00994}00994                        psisp[l2] * Gup(2, 2) * sin(\mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}[1]) *}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00995}00995                          (interpolated\_X[0] * sin(\mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}[1]) +}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00996}00996                           interpolated\_X[1] * cos(\mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}[1]))) *}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00997}00997                       psi(l, k) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00997}00997                       psi(l, k) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00998}00998 }
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l00999}00999                     \textcolor{comment}{// Add the terms for the variations in dX\_\{r\}/dxi\_\{j\}}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01000}01000                     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < 2; j++)}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01001}01001                     \{}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01002}01002                       \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn, local\_unknown) +=}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01002}01002                       jacobian(local\_eqn, local\_unknown) +=}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01003}01003                         (psisp[l2] * Gup(j, 0) * interpolated\_dXdxi[0][0] +}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01004}01004                          psisp[l2] * Gup(j, 1) *}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01005}01005                            (interpolated\_dXdxi[0][1] -\/ interpolated\_X[1])) *}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01006}01006                         dpsidxi(l, k, j) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01006}01006                         dpsidxi(l, k, j) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01007}01007                     \}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01008}01008                   \} \textcolor{comment}{// End of if not boundary condition}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01009}01009                 \}}
@@ -1022,25 +1022,25 @@
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01018}01018             \{}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01019}01019               \textcolor{comment}{// Add the term for variations in azimuthal position}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01020}01020               residuals[local\_eqn] +=}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01021}01021                 (-\/(\mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(0, 1) + \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_adfd0277b2f05d4689fd7b4c6707929ab}{interpolated\_solid\_p}} * Gup(0, 1)) *}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01021}01021                 (-\/(sigma(0, 1) + \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_adfd0277b2f05d4689fd7b4c6707929ab}{interpolated\_solid\_p}} * Gup(0, 1)) *}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01022}01022                    interpolated\_dXdxi[0][0] -\/}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01023}01023                  (\mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(1, 1) + \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_adfd0277b2f05d4689fd7b4c6707929ab}{interpolated\_solid\_p}} * Gup(1, 1)) *}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01023}01023                  (sigma(1, 1) + \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_adfd0277b2f05d4689fd7b4c6707929ab}{interpolated\_solid\_p}} * Gup(1, 1)) *}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01024}01024                    (interpolated\_dXdxi[0][1] -\/ interpolated\_X[1]) +}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01025}01025                  (\mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(2, 2) + \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_adfd0277b2f05d4689fd7b4c6707929ab}{interpolated\_solid\_p}} * Gup(2, 2)) *}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01025}01025                  (sigma(2, 2) + \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_adfd0277b2f05d4689fd7b4c6707929ab}{interpolated\_solid\_p}} * Gup(2, 2)) *}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01026}01026                    cos(\mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}[1]) *}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01027}01027                    (interpolated\_X[0] * sin(\mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}[1]) +}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01028}01028                     interpolated\_X[1] * cos(\mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}[1]))) *}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01029}01029                 psi(l, k) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01029}01029                 psi(l, k) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01030}01030 }
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01031}01031               \textcolor{comment}{// Add the terms for the variations in dX\_\{theta\}/dxi\_\{j\}}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01032}01032               \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < 2; j++)}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01033}01033               \{}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01034}01034                 residuals[local\_eqn] +=}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01035}01035                   ((\mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(j, 0) + \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_adfd0277b2f05d4689fd7b4c6707929ab}{interpolated\_solid\_p}} * Gup(j, 0)) *}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01035}01035                   ((sigma(j, 0) + \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_adfd0277b2f05d4689fd7b4c6707929ab}{interpolated\_solid\_p}} * Gup(j, 0)) *}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01036}01036                      interpolated\_dXdxi[1][0] +}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01037}01037                    (\mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(j, 1) + \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_adfd0277b2f05d4689fd7b4c6707929ab}{interpolated\_solid\_p}} * Gup(j, 1)) *}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01037}01037                    (sigma(j, 1) + \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_adfd0277b2f05d4689fd7b4c6707929ab}{interpolated\_solid\_p}} * Gup(j, 1)) *}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01038}01038                      (interpolated\_dXdxi[1][1] + interpolated\_X[0])) *}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01039}01039                   dpsidxi(l, k, j) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01039}01039                   dpsidxi(l, k, j) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01040}01040               \}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01041}01041 }
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01042}01042               \textcolor{comment}{// Can add in the pressure jacobian terms}}
@@ -1054,23 +1054,23 @@
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01050}01050                   \textcolor{keywordflow}{if} (local\_unknown >= 0)}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01051}01051                   \{}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01052}01052                     \textcolor{comment}{// Add the term for variations in azimuthal position}}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01053}01053                     \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn, local\_unknown) +=}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01053}01053                     jacobian(local\_eqn, local\_unknown) +=}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01054}01054                       (-\/psisp[l2] * Gup(0, 1) * interpolated\_dXdxi[0][0] -\/}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01055}01055                        psisp[l2] * Gup(1, 1) *}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01056}01056                          (interpolated\_dXdxi[0][1] -\/ interpolated\_X[1]) +}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01057}01057                        psisp[l2] * Gup(2, 2) * cos(\mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}[1]) *}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01058}01058                          (interpolated\_X[0] * sin(\mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}[1]) +}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01059}01059                           interpolated\_X[1] * cos(\mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}[1]))) *}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01060}01060                       psi(l, k) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01060}01060                       psi(l, k) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01061}01061 }
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01062}01062                     \textcolor{comment}{// Add the terms for the variations in dX\_\{theta\}/dxi\_\{j\}}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01063}01063                     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < 2; j++)}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01064}01064                     \{}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01065}01065                       \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn, local\_unknown) +=}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01065}01065                       jacobian(local\_eqn, local\_unknown) +=}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01066}01066                         (psisp[l2] * Gup(j, 0) * interpolated\_dXdxi[1][0] +}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01067}01067                          psisp[l2] * Gup(j, 1) *}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01068}01068                            (interpolated\_dXdxi[1][1] + interpolated\_X[0])) *}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01069}01069                         dpsidxi(l, k, j) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01069}01069                         dpsidxi(l, k, j) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01070}01070                     \}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01071}01071                   \}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01072}01072                 \}}
@@ -1094,7 +1094,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01090}01090             \textcolor{comment}{// the metric tensors to be exactly 1.0}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01091}01091             \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a2ceef4a0290f5b475c99dd26721659d0}{Incompressible}})}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01092}01092             \{}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01093}01093               residuals[local\_eqn] += (detG / detg -\/ 1.0) * psisp[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01093}01093               residuals[local\_eqn] += (detG / detg -\/ 1.0) * psisp[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01094}01094 }
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01095}01095               \textcolor{comment}{// No Jacobian terms since the pressure does not feature}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01096}01096               \textcolor{comment}{// in the incompressibility constraint}}
@@ -1104,7 +1104,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01100}01100               \textcolor{comment}{// Otherwise the pressure must be that calculated by the}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01101}01101               \textcolor{comment}{// constitutive law}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01102}01102               residuals[local\_eqn] +=}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01103}01103                 (kappa * \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_adfd0277b2f05d4689fd7b4c6707929ab}{interpolated\_solid\_p}} -\/ pressure\_stress) * psisp[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01103}01103                 (kappa * \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_adfd0277b2f05d4689fd7b4c6707929ab}{interpolated\_solid\_p}} -\/ pressure\_stress) * psisp[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01104}01104 }
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01105}01105               \textcolor{comment}{// Add in the jacobian terms}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01106}01106               \textcolor{keywordflow}{if} (flag)}
@@ -1116,8 +1116,8 @@
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01112}01112                   \textcolor{comment}{// If not a boundary condition}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01113}01113                   \textcolor{keywordflow}{if} (local\_unknown >= 0)}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01114}01114                   \{}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01115}01115                     \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn, local\_unknown) +=}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01116}01116                       kappa * psisp[l2] * psisp[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01115}01115                     jacobian(local\_eqn, local\_unknown) +=}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01116}01116                       kappa * psisp[l2] * psisp[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01117}01117                   \}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01118}01118                 \}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01119}01119               \} \textcolor{comment}{// End of jacobian terms}}
@@ -1145,18 +1145,18 @@
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01141}01141       \textcolor{comment}{// Set sum to zero}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01142}01142       \textcolor{keywordtype}{double} sum = 0.0;}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01143}01143       \textcolor{comment}{// Set the value of n\_intpt}}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01144}01144       \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01144}01144       \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01145}01145 }
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01146}01146       \textcolor{comment}{// Loop over the integration points}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01147}01147       \textcolor{comment}{// Loop in s1 direction*}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01148}01148       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ipt = 0; ipt < n\_intpt; ipt++)}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01149}01149       \{}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01150}01150         \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01151}01151         \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01151}01151         \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01152}01152         \textcolor{comment}{// Call the derivatives of the shape function wrt lagrangian coordinates}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01153}01153         \textcolor{keywordtype}{double} J = \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_aa48b4880f69bb28d267ff27e7b1967e7}{dshape\_lagrangian\_at\_knot}}(ipt, psi, dpsidxi);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01154}01154         \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01155}01155         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01155}01155         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01156}01156 }
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01157}01157         \textcolor{comment}{// Calculate the local Lagrangian coordinates, position components}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01158}01158         \textcolor{comment}{// and the derivatives of global position components}}
@@ -1229,7 +1229,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01225}01225 }
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01226}01226         \textcolor{comment}{// Add the appropriate weight to the integral, i.e. sqrt of metric}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01227}01227         \textcolor{comment}{// tensor}}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01228}01228         sum += \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * sqrt(detG);}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01228}01228         sum += \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * sqrt(detG);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01229}01229       \}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01230}01230 }
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01231}01231       \textcolor{comment}{// Return the volume}}
@@ -1280,7 +1280,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01276}01276         \{}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01277}01277           \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0] = -\/1.0 + l1 * 2.0 / (n\_plot -\/ 1);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01278}01278 }
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01279}01279           \textcolor{keywordtype}{double} x\_r = \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0), x\_theta = \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 1);}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01279}01279           \textcolor{keywordtype}{double} x\_r = \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0), x\_theta = \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 1);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01280}01280           \textcolor{keywordtype}{double} theta = \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 1);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01281}01281           \textcolor{comment}{// Output the x,y,u,v}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01282}01282           \textcolor{comment}{// First output x and y assuming phi = 0}}
@@ -1289,7 +1289,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01285}01285           outfile << \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_adfd0277b2f05d4689fd7b4c6707929ab}{interpolated\_solid\_p}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01286}01286           \textcolor{comment}{// Now output the true variables}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01287}01287           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01288}01288             outfile << \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01288}01288             outfile << \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01289}01289           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01290}01290             outfile << \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01291}01291           outfile << std::endl;}
@@ -1322,7 +1322,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01318}01318         \{}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01319}01319           \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0] = -\/1.0 + l1 * 2.0 / (n\_plot -\/ 1);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01320}01320 }
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01321}01321           \textcolor{keywordtype}{double} x\_r = \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0), x\_theta = \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 1);}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01321}01321           \textcolor{keywordtype}{double} x\_r = \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0), x\_theta = \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 1);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01322}01322           \textcolor{keywordtype}{double} theta = \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 1);}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01323}01323           \textcolor{comment}{// Output the x,y,u,v}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01324}01324           \textcolor{comment}{// First output x and y assuming phi = 0}}
@@ -1335,7 +1335,7 @@
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01331}01331 }
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01332}01332           \textcolor{comment}{// Now output the true variables}}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01333}01333           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
-\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01334}01334             fprintf(file\_pt, \textcolor{stringliteral}{"{}\%g "{}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
+\DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01334}01334             fprintf(file\_pt, \textcolor{stringliteral}{"{}\%g "{}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01335}01335           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01336}01336             fprintf(file\_pt, \textcolor{stringliteral}{"{}\%g "{}}, \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{interpolated\_xi}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
 \DoxyCodeLine{\Hypertarget{axisym__solid__elements_8h_source_l01337}01337           fprintf(file\_pt, \textcolor{stringliteral}{"{}\(\backslash\)n"{}});}

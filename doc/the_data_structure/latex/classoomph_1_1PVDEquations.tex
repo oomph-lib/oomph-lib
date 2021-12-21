@@ -20,30 +20,30 @@ Inheritance diagram for oomph\+::PVDEquations\texorpdfstring{$<$}{<} DIM \texorp
 \item 
 \mbox{\hyperlink{classoomph_1_1PVDEquations_a887fd03c27e4d7847b5eddeb66b0366d}{PVDEquations}} ()
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PVDEquations_add6a194b0138b09834022b29bbc75eb6}{get\+\_\+stress}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}})
+void \mbox{\hyperlink{classoomph_1_1PVDEquations_add6a194b0138b09834022b29bbc75eb6}{get\+\_\+stress}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&sigma)
 \begin{DoxyCompactList}\small\item\em Return the 2nd Piola Kirchoff stress tensor, as calculated from the constitutive law at specified local coordinate. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PVDEquations_ad21ebcee8cb3539af51304acad82f79c}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em Fill in the residuals for the solid equations (the discretised principle of virtual displacements) \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PVDEquations_a7a84eddfcf9bd10eec76fd4baa739806}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})
+void \mbox{\hyperlink{classoomph_1_1PVDEquations_a7a84eddfcf9bd10eec76fd4baa739806}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em Fill in contribution to Jacobian (either by FD or analytically, control this via evaluate\+\_\+jacobian\+\_\+by\+\_\+fd() \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PVDEquations_ab9e919921934cfe7433420bd2e4482f5}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Output\+: x,y,\mbox{[}z\mbox{]},xi0,xi1,\mbox{[}xi2\mbox{]},gamma. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PVDEquations_a5e3a09d059ced1ee9f9e1a7923171ab7}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1PVDEquations_a5e3a09d059ced1ee9f9e1a7923171ab7}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em Output\+: x,y,\mbox{[}z\mbox{]},xi0,xi1,\mbox{[}xi2\mbox{]},gamma. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PVDEquations_ae5cf4a0254fbb7db5d255db69cfb810e}{output}} (FILE $\ast$file\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em C-\/style output\+: x,y,\mbox{[}z\mbox{]},xi0,xi1,\mbox{[}xi2\mbox{]},gamma. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PVDEquations_ac35042c495411ffc96501d6705b8fa7a}{output}} (FILE $\ast$file\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1PVDEquations_ac35042c495411ffc96501d6705b8fa7a}{output}} (FILE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em Output\+: x,y,\mbox{[}z\mbox{]},xi0,xi1,\mbox{[}xi2\mbox{]},gamma. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PVDEquations_a60ed017dce1a6a98098b8ad3127389c9}{extended\+\_\+output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1PVDEquations_a60ed017dce1a6a98098b8ad3127389c9}{extended\+\_\+output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em Output\+: x,y,\mbox{[}z\mbox{]},xi0,xi1,\mbox{[}xi2\mbox{]},gamma and the strain and stress components. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-virtual void \mbox{\hyperlink{classoomph_1_1PVDEquations_a2e169e572d3715f08e571cb29779a754}{fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+pvd}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&flag)
+virtual void \mbox{\hyperlink{classoomph_1_1PVDEquations_a2e169e572d3715f08e571cb29779a754}{fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+pvd}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, const unsigned \&flag)
 \begin{DoxyCompactList}\small\item\em Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} only (if flag=and/or element Jacobian matrix. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PVDEquations_ae870a58617c8a268a30779e93fb96f54}{get\+\_\+stress}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&g, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&G, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}})
+void \mbox{\hyperlink{classoomph_1_1PVDEquations_ae870a58617c8a268a30779e93fb96f54}{get\+\_\+stress}} (const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&g, const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&G, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&sigma)
 \begin{DoxyCompactList}\small\item\em Return the 2nd Piola Kirchhoff stress tensor, as calculated from the constitutive law\+: Pass metric tensors in the stress free and current configurations. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PVDEquations_a522084ede6bf0e6b6154ec0ac61c3f5f}{get\+\_\+d\+\_\+stress\+\_\+d\+G\+\_\+upper}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&g, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&G, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}, \mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&d\+\_\+sigma\+\_\+dG)
+void \mbox{\hyperlink{classoomph_1_1PVDEquations_a522084ede6bf0e6b6154ec0ac61c3f5f}{get\+\_\+d\+\_\+stress\+\_\+d\+G\+\_\+upper}} (const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&g, const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&G, const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&sigma, \mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&d\+\_\+sigma\+\_\+dG)
 \begin{DoxyCompactList}\small\item\em Return the derivatives of the 2nd Piola Kirchhoff stress tensor, as calculated from the constitutive law\+: Pass metric tensors in the stress free and current configurations and the current value of the the stress tensor. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
@@ -86,7 +86,7 @@ Definition at line \mbox{\hyperlink{solid__elements_8h_source_l00443}{443}} of f
 \index{extended\_output@{extended\_output}!oomph::PVDEquations$<$ DIM $>$@{oomph::PVDEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{extended\_output()}{extended\_output()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1PVDEquations}{oomph\+::\+PVDEquations}}$<$ DIM $>$\+::extended\+\_\+output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})}
+void \mbox{\hyperlink{classoomph_1_1PVDEquations}{oomph\+::\+PVDEquations}}$<$ DIM $>$\+::extended\+\_\+output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})}
 
 
 
@@ -98,7 +98,7 @@ Definition at line \mbox{\hyperlink{solid__elements_8cc_source_l00751}{751}} of 
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1PVDEquations_a7a84eddfcf9bd10eec76fd4baa739806}\label{classoomph_1_1PVDEquations_a7a84eddfcf9bd10eec76fd4baa739806}} 
 \index{oomph::PVDEquations$<$ DIM $>$@{oomph::PVDEquations$<$ DIM $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
@@ -121,7 +121,7 @@ Definition at line \mbox{\hyperlink{solid__elements_8h_source_l00459}{459}} of f
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00227}{oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix}}, \mbox{\hyperlink{solid__elements_8h_source_l00430}{oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::\+Evaluate\+\_\+jacobian\+\_\+by\+\_\+fd}}, \mbox{\hyperlink{solid__elements_8h_source_l00451}{oomph\+::\+PVDEquations$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}, \mbox{\hyperlink{solid__elements_8cc_source_l00179}{oomph\+::\+PVDEquations$<$ DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+pvd()}}, \mbox{\hyperlink{elements_8cc_source_l06989}{oomph\+::\+Solid\+Finite\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+solid\+\_\+position\+\_\+by\+\_\+fd()}}, \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}, \mbox{\hyperlink{elements_8h_source_l04159}{oomph\+::\+Solid\+Finite\+Element\+::\+Solid\+\_\+ic\+\_\+pt}}, and \mbox{\hyperlink{elements_8h_source_l04330}{oomph\+::\+Solid\+Finite\+Element\+::\+Solve\+\_\+for\+\_\+consistent\+\_\+newmark\+\_\+accel\+\_\+flag}}.
+References \mbox{\hyperlink{elements_8h_source_l00227}{oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix}}, \mbox{\hyperlink{solid__elements_8h_source_l00430}{oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::\+Evaluate\+\_\+jacobian\+\_\+by\+\_\+fd}}, \mbox{\hyperlink{solid__elements_8h_source_l00451}{oomph\+::\+PVDEquations$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}, \mbox{\hyperlink{solid__elements_8cc_source_l00179}{oomph\+::\+PVDEquations$<$ DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+pvd()}}, \mbox{\hyperlink{elements_8cc_source_l07227}{oomph\+::\+Solid\+Finite\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+for\+\_\+newmark\+\_\+accel()}}, \mbox{\hyperlink{elements_8h_source_l04035}{oomph\+::\+Solid\+Finite\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+for\+\_\+solid\+\_\+ic()}}, \mbox{\hyperlink{elements_8cc_source_l06985}{oomph\+::\+Solid\+Finite\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+solid\+\_\+position\+\_\+by\+\_\+fd()}}, \mbox{\hyperlink{elements_8h_source_l04131}{oomph\+::\+Solid\+Finite\+Element\+::\+Solid\+\_\+ic\+\_\+pt}}, and \mbox{\hyperlink{elements_8h_source_l04302}{oomph\+::\+Solid\+Finite\+Element\+::\+Solve\+\_\+for\+\_\+consistent\+\_\+newmark\+\_\+accel\+\_\+flag}}.
 
 \mbox{\Hypertarget{classoomph_1_1PVDEquations_ad21ebcee8cb3539af51304acad82f79c}\label{classoomph_1_1PVDEquations_ad21ebcee8cb3539af51304acad82f79c}} 
 \index{oomph::PVDEquations$<$ DIM $>$@{oomph::PVDEquations$<$ DIM $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
@@ -155,7 +155,7 @@ Referenced by \mbox{\hyperlink{solid__elements_8h_source_l00459}{oomph\+::\+PVDE
 \index{fill\_in\_generic\_contribution\_to\_residuals\_pvd@{fill\_in\_generic\_contribution\_to\_residuals\_pvd}!oomph::PVDEquations$<$ DIM $>$@{oomph::PVDEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_generic\_contribution\_to\_residuals\_pvd()}{fill\_in\_generic\_contribution\_to\_residuals\_pvd()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1PVDEquations}{oomph\+::\+PVDEquations}}$<$ DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+pvd (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1PVDEquations}{oomph\+::\+PVDEquations}}$<$ DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+pvd (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{const unsigned \&}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -171,7 +171,7 @@ Definition at line \mbox{\hyperlink{solid__elements_8cc_source_l00179}{179}} of 
 
 
 
-References \mbox{\hyperlink{mesh__smooth_8h_source_l00055}{oomph\+::\+Helper\+\_\+namespace\+\_\+for\+\_\+mesh\+\_\+smoothing\+::\+Constitutive\+\_\+law\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l02096}{oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::offset()}}, \mbox{\hyperlink{shape_8h_source_l00487}{oomph\+::\+DShape\+::offset()}}, \mbox{\hyperlink{matrices_8h_source_l02564}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::offset()}}, \mbox{\hyperlink{nodes_8h_source_l00891}{oomph\+::psi\+\_\+}}, \mbox{\hyperlink{matrices_8h_source_l02078}{oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::raw\+\_\+direct\+\_\+access()}}, \mbox{\hyperlink{matrices_8h_source_l02545}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::raw\+\_\+direct\+\_\+access()}}, \mbox{\hyperlink{shape_8h_source_l00469}{oomph\+::\+DShape\+::raw\+\_\+direct\+\_\+access()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{constitutive__laws_8h_source_l00318}{oomph\+::sigma}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}.
+References \mbox{\hyperlink{mesh__smooth_8h_source_l00055}{oomph\+::\+Helper\+\_\+namespace\+\_\+for\+\_\+mesh\+\_\+smoothing\+::\+Constitutive\+\_\+law\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l02096}{oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::offset()}}, \mbox{\hyperlink{shape_8h_source_l00487}{oomph\+::\+DShape\+::offset()}}, \mbox{\hyperlink{matrices_8h_source_l02564}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::offset()}}, \mbox{\hyperlink{matrices_8h_source_l02078}{oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::raw\+\_\+direct\+\_\+access()}}, \mbox{\hyperlink{matrices_8h_source_l02545}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::raw\+\_\+direct\+\_\+access()}}, \mbox{\hyperlink{shape_8h_source_l00469}{oomph\+::\+DShape\+::raw\+\_\+direct\+\_\+access()}}, \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a446452158a8ae9fbc3dde4277155f824}{oomph\+::\+Constitutive\+Law\+::requires\+\_\+incompressibility\+\_\+constraint()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
 
 
 
@@ -182,7 +182,7 @@ Referenced by \mbox{\hyperlink{solid__elements_8h_source_l00459}{oomph\+::\+PVDE
 \index{get\_d\_stress\_dG\_upper@{get\_d\_stress\_dG\_upper}!oomph::PVDEquations$<$ DIM $>$@{oomph::PVDEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_d\_stress\_dG\_upper()}{get\_d\_stress\_dG\_upper()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1PVDEquations}{oomph\+::\+PVDEquations}}$<$ DIM $>$\+::get\+\_\+d\+\_\+stress\+\_\+d\+G\+\_\+upper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{g,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{G,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{sigma,  }\item[{\mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&}]{d\+\_\+sigma\+\_\+dG }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+void \mbox{\hyperlink{classoomph_1_1PVDEquations}{oomph\+::\+PVDEquations}}$<$ DIM $>$\+::get\+\_\+d\+\_\+stress\+\_\+d\+G\+\_\+upper (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{g,  }\item[{const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{G,  }\item[{const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{sigma,  }\item[{\mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&}]{d\+\_\+sigma\+\_\+dG }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -194,14 +194,14 @@ Definition at line \mbox{\hyperlink{solid__elements_8h_source_l00569}{569}} of f
 
 
 
-References \mbox{\hyperlink{solid__elements_8h_source_l00415}{oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::\+Constitutive\+\_\+law\+\_\+pt}}, \mbox{\hyperlink{constitutive__laws_8h_source_l00318}{oomph\+::sigma}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
+References \mbox{\hyperlink{constitutive__laws_8cc_source_l00352}{oomph\+::\+Constitutive\+Law\+::calculate\+\_\+d\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress\+\_\+d\+G()}}, \mbox{\hyperlink{solid__elements_8h_source_l00415}{oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::\+Constitutive\+\_\+law\+\_\+pt}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PVDEquations_ae870a58617c8a268a30779e93fb96f54}\label{classoomph_1_1PVDEquations_ae870a58617c8a268a30779e93fb96f54}} 
 \index{oomph::PVDEquations$<$ DIM $>$@{oomph::PVDEquations$<$ DIM $>$}!get\_stress@{get\_stress}}
 \index{get\_stress@{get\_stress}!oomph::PVDEquations$<$ DIM $>$@{oomph::PVDEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_stress()}{get\_stress()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1PVDEquations}{oomph\+::\+PVDEquations}}$<$ DIM $>$\+::get\+\_\+stress (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{g,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{G,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{sigma }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+void \mbox{\hyperlink{classoomph_1_1PVDEquations}{oomph\+::\+PVDEquations}}$<$ DIM $>$\+::get\+\_\+stress (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{g,  }\item[{const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{G,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{sigma }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -213,14 +213,14 @@ Definition at line \mbox{\hyperlink{solid__elements_8h_source_l00543}{543}} of f
 
 
 
-References \mbox{\hyperlink{solid__elements_8h_source_l00415}{oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::\+Constitutive\+\_\+law\+\_\+pt}}, \mbox{\hyperlink{constitutive__laws_8h_source_l00318}{oomph\+::sigma}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
+References \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a93527d910de908035feb8f41b0401065}{oomph\+::\+Constitutive\+Law\+::calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress()}}, \mbox{\hyperlink{solid__elements_8h_source_l00415}{oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::\+Constitutive\+\_\+law\+\_\+pt}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PVDEquations_add6a194b0138b09834022b29bbc75eb6}\label{classoomph_1_1PVDEquations_add6a194b0138b09834022b29bbc75eb6}} 
 \index{oomph::PVDEquations$<$ DIM $>$@{oomph::PVDEquations$<$ DIM $>$}!get\_stress@{get\_stress}}
 \index{get\_stress@{get\_stress}!oomph::PVDEquations$<$ DIM $>$@{oomph::PVDEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_stress()}{get\_stress()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1PVDEquations}{oomph\+::\+PVDEquations}}$<$ DIM $>$\+::get\+\_\+stress (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{sigma }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1PVDEquations}{oomph\+::\+PVDEquations}}$<$ DIM $>$\+::get\+\_\+stress (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{sigma }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -236,7 +236,7 @@ Definition at line \mbox{\hyperlink{solid__elements_8cc_source_l00951}{951}} of 
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00318}{oomph\+::sigma}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1PVDEquations_ae5cf4a0254fbb7db5d255db69cfb810e}\label{classoomph_1_1PVDEquations_ae5cf4a0254fbb7db5d255db69cfb810e}} 
 \index{oomph::PVDEquations$<$ DIM $>$@{oomph::PVDEquations$<$ DIM $>$}!output@{output}}
@@ -270,7 +270,7 @@ References \mbox{\hyperlink{solid__elements_8h_source_l00506}{oomph\+::\+PVDEqua
 \index{output@{output}!oomph::PVDEquations$<$ DIM $>$@{oomph::PVDEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1PVDEquations}{oomph\+::\+PVDEquations}}$<$ DIM $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1PVDEquations}{oomph\+::\+PVDEquations}}$<$ DIM $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -290,7 +290,7 @@ Definition at line \mbox{\hyperlink{solid__elements_8cc_source_l00629}{629}} of 
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1PVDEquations_ab9e919921934cfe7433420bd2e4482f5}\label{classoomph_1_1PVDEquations_ab9e919921934cfe7433420bd2e4482f5}} 
 \index{oomph::PVDEquations$<$ DIM $>$@{oomph::PVDEquations$<$ DIM $>$}!output@{output}}
@@ -328,7 +328,7 @@ Referenced by \mbox{\hyperlink{solid__elements_8h_source_l00506}{oomph\+::\+PVDE
 \index{output@{output}!oomph::PVDEquations$<$ DIM $>$@{oomph::PVDEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1PVDEquations}{oomph\+::\+PVDEquations}}$<$ DIM $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1PVDEquations}{oomph\+::\+PVDEquations}}$<$ DIM $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -348,7 +348,7 @@ Definition at line \mbox{\hyperlink{solid__elements_8cc_source_l00575}{575}} of 
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1PVDEquations_a3ed682fe4a6e0919cc6e0d9445174463}\label{classoomph_1_1PVDEquations_a3ed682fe4a6e0919cc6e0d9445174463}} 
 \index{oomph::PVDEquations$<$ DIM $>$@{oomph::PVDEquations$<$ DIM $>$}!unpin\_elemental\_solid\_pressure\_dofs@{unpin\_elemental\_solid\_pressure\_dofs}}

@@ -20,22 +20,22 @@ Inheritance diagram for oomph\+::Refineable\+Linear\+Elasticity\+Equations\texor
 \item 
 \mbox{\hyperlink{classoomph_1_1RefineableLinearElasticityEquations_a948ffa175a7a2299beb06150f69cb750}{Refineable\+Linear\+Elasticity\+Equations}} ()
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableLinearElasticityEquations_ac048280ba30d323e92e42457f20163e4}{get\+\_\+interpolated\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&values)
+void \mbox{\hyperlink{classoomph_1_1RefineableLinearElasticityEquations_ac048280ba30d323e92e42457f20163e4}{get\+\_\+interpolated\+\_\+values}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&values)
 \begin{DoxyCompactList}\small\item\em Get the function value u in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableLinearElasticityEquations_acd2c98989ca38e1534ac70d5b4dc37a5}{get\+\_\+interpolated\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&values)
+void \mbox{\hyperlink{classoomph_1_1RefineableLinearElasticityEquations_acd2c98989ca38e1534ac70d5b4dc37a5}{get\+\_\+interpolated\+\_\+values}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&values)
 \begin{DoxyCompactList}\small\item\em Get the current interpolated values (displacements). Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines),the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1RefineableLinearElasticityEquations_a6f5a39ae1cdb8be2aeb6176cc093bfed}{num\+\_\+\+Z2\+\_\+flux\+\_\+terms}} ()
 \begin{DoxyCompactList}\small\item\em Number of \textquotesingle{}flux\textquotesingle{} terms for Z2 error estimation. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableLinearElasticityEquations_aa3b8251eb0a6d153eb7de8b032c1ffcd}{get\+\_\+\+Z2\+\_\+flux}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux)
+void \mbox{\hyperlink{classoomph_1_1RefineableLinearElasticityEquations_aa3b8251eb0a6d153eb7de8b032c1ffcd}{get\+\_\+\+Z2\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux)
 \begin{DoxyCompactList}\small\item\em Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: Upper triangular entries in strain tensor. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1RefineableLinearElasticityEquations_a1a06914f28c80c10dfb485353a3ea677}{ncont\+\_\+interpolated\+\_\+values}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableLinearElasticityEquations_a1a06914f28c80c10dfb485353a3ea677}{ncont\+\_\+interpolated\+\_\+values}} () const
 \begin{DoxyCompactList}\small\item\em Number of continuously interpolated values\+: DIM. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableLinearElasticityEquations_a59edb90bae16d51048fb8401a91354a3}{further\+\_\+build}} ()
 \begin{DoxyCompactList}\small\item\em Further build function, pass the pointers down to the sons. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classoomph_1_1RefineableLinearElasticityEquations_ae2f77382b9fdb12eb7b4ba0dc6c239ef}{fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+linear\+\_\+elasticity}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, unsigned flag)
+void \mbox{\hyperlink{classoomph_1_1RefineableLinearElasticityEquations_ae2f77382b9fdb12eb7b4ba0dc6c239ef}{fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+linear\+\_\+elasticity}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, unsigned flag)
 \begin{DoxyCompactList}\small\item\em Overloaded helper function to take hanging nodes into account. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -89,7 +89,7 @@ Definition at line \mbox{\hyperlink{refineable__linear__elasticity__elements_8cc
 
 
 
-References \mbox{\hyperlink{quadtree_8h_source_l00061}{oomph\+::\+Quad\+Tree\+Names\+::E}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00808}{oomph\+::\+Hang\+Info\+::master\+\_\+weight()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}.
+References \mbox{\hyperlink{quadtree_8h_source_l00061}{oomph\+::\+Quad\+Tree\+Names\+::E}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00808}{oomph\+::\+Hang\+Info\+::master\+\_\+weight()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableLinearElasticityEquations_a59edb90bae16d51048fb8401a91354a3}\label{classoomph_1_1RefineableLinearElasticityEquations_a59edb90bae16d51048fb8401a91354a3}} 
 \index{oomph::RefineableLinearElasticityEquations$<$ DIM $>$@{oomph::RefineableLinearElasticityEquations$<$ DIM $>$}!further\_build@{further\_build}}
@@ -127,7 +127,7 @@ Referenced by \mbox{\hyperlink{refineable__linear__elasticity__elements_8cc_sour
 \index{get\_interpolated\_values@{get\_interpolated\_values}!oomph::RefineableLinearElasticityEquations$<$ DIM $>$@{oomph::RefineableLinearElasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_interpolated\_values()}{get\_interpolated\_values()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableLinearElasticityEquations}{oomph\+::\+Refineable\+Linear\+Elasticity\+Equations}}$<$ DIM $>$\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1RefineableLinearElasticityEquations}{oomph\+::\+Refineable\+Linear\+Elasticity\+Equations}}$<$ DIM $>$\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -143,14 +143,14 @@ Definition at line \mbox{\hyperlink{refineable__linear__elasticity__elements_8h_
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02598}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, and \mbox{\hyperlink{linear__elasticity__elements_8h_source_l00062}{oomph\+::\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::u\+\_\+index\+\_\+linear\+\_\+elasticity()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, and \mbox{\hyperlink{linear__elasticity__elements_8h_source_l00062}{oomph\+::\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::u\+\_\+index\+\_\+linear\+\_\+elasticity()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableLinearElasticityEquations_acd2c98989ca38e1534ac70d5b4dc37a5}\label{classoomph_1_1RefineableLinearElasticityEquations_acd2c98989ca38e1534ac70d5b4dc37a5}} 
 \index{oomph::RefineableLinearElasticityEquations$<$ DIM $>$@{oomph::RefineableLinearElasticityEquations$<$ DIM $>$}!get\_interpolated\_values@{get\_interpolated\_values}}
 \index{get\_interpolated\_values@{get\_interpolated\_values}!oomph::RefineableLinearElasticityEquations$<$ DIM $>$@{oomph::RefineableLinearElasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_interpolated\_values()}{get\_interpolated\_values()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableLinearElasticityEquations}{oomph\+::\+Refineable\+Linear\+Elasticity\+Equations}}$<$ DIM $>$\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1RefineableLinearElasticityEquations}{oomph\+::\+Refineable\+Linear\+Elasticity\+Equations}}$<$ DIM $>$\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -173,7 +173,7 @@ References \mbox{\hyperlink{linear__elasticity__elements_8h_source_l00098}{oomph
 \index{get\_Z2\_flux@{get\_Z2\_flux}!oomph::RefineableLinearElasticityEquations$<$ DIM $>$@{oomph::RefineableLinearElasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_Z2\_flux()}{get\_Z2\_flux()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableLinearElasticityEquations}{oomph\+::\+Refineable\+Linear\+Elasticity\+Equations}}$<$ DIM $>$\+::get\+\_\+\+Z2\+\_\+flux (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1RefineableLinearElasticityEquations}{oomph\+::\+Refineable\+Linear\+Elasticity\+Equations}}$<$ DIM $>$\+::get\+\_\+\+Z2\+\_\+flux (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 

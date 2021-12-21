@@ -189,7 +189,7 @@
 \DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00185}00185           \textcolor{comment}{// Set boundary coordinate}}
 \DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00186}00186           this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})}
 \DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00187}00187             -\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}((nnode\_1d -\/ 1) * nnode\_1d + \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})}
-\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00188}00188             -\/>set\_coordinates\_on\_boundary(3, zeta);}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00188}00188             -\/>\mbox{\hyperlink{classoomph_1_1Node_a94c19e165ab4e88aabbfa27443c530b7}{set\_coordinates\_on\_boundary}}(3, zeta);}
 \DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00189}00189         \}}
 \DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00190}00190       \}}
 \DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00191}00191       \textcolor{comment}{// Downstream upper rigid bit}}
@@ -260,7 +260,7 @@
 \DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00256}00256     \textcolor{comment}{// position value that is required by the timestepping scheme but it's}}
 \DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00257}00257     \textcolor{comment}{// probably worth flagging this up and forcing the user to manually switch}}
 \DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00258}00258     \textcolor{comment}{// off this warning if he/she is 100\% sure that this is kosher.}}
-\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00259}00259     \textcolor{keywordflow}{if} (\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}} > node\_pt-\/>position\_time\_stepper\_pt()-\/>nprev\_values())}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00259}00259     \textcolor{keywordflow}{if} (\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}} > node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a32b32940186f9d1e2abc5d4bedb6ff0d}{position\_time\_stepper\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1TimeStepper_a0f38713ed304c18d9f7b5cf8131664c1}{nprev\_values}}())}
 \DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00260}00260     \{}
 \DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00261}00261       \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} error\_message =}
 \DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00262}00262         \textcolor{stringliteral}{"{}Trying to update the nodal position at a time level"{}};}
@@ -315,8 +315,8 @@
 \DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00311}00311     geom\_obj\_pt-\/>\mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{position}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, r\_wall);}
 \DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00312}00312 }
 \DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00313}00313     \textcolor{comment}{// Assign new nodal coordinate}}
-\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00314}00314     node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 0) = x\_bottom + fract * (r\_wall[0] -\/ x\_bottom);}
-\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00315}00315     node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 1) = fract * r\_wall[1];}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00314}00314     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 0) = x\_bottom + fract * (r\_wall[0] -\/ x\_bottom);}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00315}00315     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 1) = fract * r\_wall[1];}
 \DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00316}00316   \}}
 \DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00317}00317 }
 \DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00318}00318 }
@@ -341,15 +341,15 @@
 \DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00337}00337       \mbox{\hyperlink{classoomph_1_1AlgebraicNode}{AlgebraicNode}}* nod\_pt = node\_pt(j);}
 \DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00338}00338 }
 \DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00339}00339       \textcolor{comment}{// Get coordinates}}
-\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00340}00340       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}} = nod\_pt-\/>x(0);}
-\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00341}00341       \textcolor{keywordtype}{double} y = nod\_pt-\/>x(1);}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00340}00340       \textcolor{keywordtype}{double} x = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0);}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00341}00341       \textcolor{keywordtype}{double} y = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1);}
 \DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00342}00342 }
 \DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00343}00343       \textcolor{comment}{// Check if it's in the collapsible part:}}
-\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00344}00344       \textcolor{keywordflow}{if} ((\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}} >= l\_up) \&\& (\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}} <= (l\_up + l\_collapsible)))}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00344}00344       \textcolor{keywordflow}{if} ((x >= l\_up) \&\& (x <= (l\_up + l\_collapsible)))}
 \DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00345}00345       \{}
 \DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00346}00346         \textcolor{comment}{// Get zeta coordinate on the undeformed wall}}
 \DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00347}00347         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} zeta(1);}
-\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00348}00348         zeta[0] = \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}} -\/ l\_up;}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00348}00348         zeta[0] = x -\/ l\_up;}
 \DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00349}00349 }
 \DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00350}00350         \textcolor{comment}{// Get pointer to geometric (sub-\/)object and Lagrangian coordinate}}
 \DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00351}00351         \textcolor{comment}{// on that sub-\/object. For a wall that is represented by}}
@@ -369,13 +369,13 @@
 \DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00365}00365 }
 \DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00366}00366         \textcolor{comment}{// Sanity check: Confirm that the wall is in its undeformed position}}
 \DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00367}00367 \textcolor{preprocessor}{\#ifdef PARANOID}}
-\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00368}00368         \textcolor{keywordflow}{if} ((std::fabs(r\_wall[0] -\/ \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}) > 1.0e-\/15) \&\&}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00368}00368         \textcolor{keywordflow}{if} ((std::fabs(r\_wall[0] -\/ x) > 1.0e-\/15) \&\&}
 \DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00369}00369             (std::fabs(r\_wall[1] -\/ y) > 1.0e-\/15))}
 \DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00370}00370         \{}
 \DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00371}00371           std::ostringstream error\_stream;}
 \DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00372}00372           error\_stream << \textcolor{stringliteral}{"{}Wall must be in its undeformed position when\(\backslash\)n"{}}}
 \DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00373}00373                        << \textcolor{stringliteral}{"{}algebraic node update information is set up!\(\backslash\)n "{}}}
-\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00374}00374                        << \textcolor{stringliteral}{"{}x-\/discrepancy: "{}} << std::fabs(r\_wall[0] -\/ \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}})}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00374}00374                        << \textcolor{stringliteral}{"{}x-\/discrepancy: "{}} << std::fabs(r\_wall[0] -\/ x)}
 \DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00375}00375                        << std::endl}
 \DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00376}00376                        << \textcolor{stringliteral}{"{}y-\/discrepancy: "{}} << std::fabs(r\_wall[1] -\/ y)}
 \DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8template_8cc_source_l00377}00377                        << std::endl;}

@@ -15,18 +15,18 @@ Inheritance diagram for oomph\+::QSpectral\+Euler\+Element\texorpdfstring{$<$}{<
 \item 
 \mbox{\hyperlink{classoomph_1_1QSpectralEulerElement_aae6a94602894f21b7596a20c7b6720dd}{QSpectral\+Euler\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1QElement}{QElement}} and Advection Diffusion equations. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1QSpectralEulerElement_ade789b653aba39ddf09ff0428a2e8f4d}{QSpectral\+Euler\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1QSpectralEulerElement}{QSpectral\+Euler\+Element}}$<$ DIM, NNODE\+\_\+1D $>$ \&dummy)=delete
+\mbox{\hyperlink{classoomph_1_1QSpectralEulerElement_ade789b653aba39ddf09ff0428a2e8f4d}{QSpectral\+Euler\+Element}} (const \mbox{\hyperlink{classoomph_1_1QSpectralEulerElement}{QSpectral\+Euler\+Element}}$<$ DIM, NNODE\+\_\+1D $>$ \&dummy)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QSpectralEulerElement_ae3771a5f57f21d3a97595856b089e467}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QSpectralEulerElement_a026cdb8f38d01e15906db12ae1e4c4f1}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1QSpectralEulerElement_a026cdb8f38d01e15906db12ae1e4c4f1}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+DIM plot points. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-double \mbox{\hyperlink{classoomph_1_1QSpectralEulerElement_a1dc148b0c455243d79387ee6399a29df}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+flux\+\_\+transport}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1QSpectralEulerElement_a1dc148b0c455243d79387ee6399a29df}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+flux\+\_\+transport}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) const
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1QSpectralEulerElement_a1aea03c046d9d1bec4717182386d7860}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+flux\+\_\+transport}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1QSpectralEulerElement_a1aea03c046d9d1bec4717182386d7860}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+flux\+\_\+transport}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) const
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. at integration point ipt. Return Jacobian. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -61,7 +61,7 @@ Definition at line \mbox{\hyperlink{euler__elements_8h_source_l00262}{262}} of f
 \index{QSpectralEulerElement@{QSpectralEulerElement}!oomph::QSpectralEulerElement$<$ DIM, NNODE\_1D $>$@{oomph::QSpectralEulerElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{QSpectralEulerElement()}{QSpectralEulerElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-\mbox{\hyperlink{classoomph_1_1QSpectralEulerElement}{oomph\+::\+QSpectral\+Euler\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1QSpectralEulerElement}{QSpectral\+Euler\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1QSpectralEulerElement}{QSpectral\+Euler\+Element}}$<$ DIM, NNODE\+\_\+1D $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+\mbox{\hyperlink{classoomph_1_1QSpectralEulerElement}{oomph\+::\+QSpectral\+Euler\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1QSpectralEulerElement}{QSpectral\+Euler\+Element}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1QSpectralEulerElement}{QSpectral\+Euler\+Element}}$<$ DIM, NNODE\+\_\+1D $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
@@ -75,7 +75,7 @@ Broken copy constructor.
 \index{dshape\_and\_dtest\_eulerian\_at\_knot\_flux\_transport@{dshape\_and\_dtest\_eulerian\_at\_knot\_flux\_transport}!oomph::QSpectralEulerElement$<$ DIM, NNODE\_1D $>$@{oomph::QSpectralEulerElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_at\_knot\_flux\_transport()}{dshape\_and\_dtest\_eulerian\_at\_knot\_flux\_transport()}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-double \mbox{\hyperlink{classoomph_1_1QSpectralEulerElement}{oomph\+::\+QSpectral\+Euler\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+flux\+\_\+transport (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+double \mbox{\hyperlink{classoomph_1_1QSpectralEulerElement}{oomph\+::\+QSpectral\+Euler\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+flux\+\_\+transport (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -96,7 +96,7 @@ Definition at line \mbox{\hyperlink{euler__elements_8h_source_l00396}{396}} of f
 \index{dshape\_and\_dtest\_eulerian\_flux\_transport@{dshape\_and\_dtest\_eulerian\_flux\_transport}!oomph::QSpectralEulerElement$<$ DIM, NNODE\_1D $>$@{oomph::QSpectralEulerElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_flux\_transport()}{dshape\_and\_dtest\_eulerian\_flux\_transport()}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-double \mbox{\hyperlink{classoomph_1_1QSpectralEulerElement}{oomph\+::\+QSpectral\+Euler\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+flux\+\_\+transport (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+double \mbox{\hyperlink{classoomph_1_1QSpectralEulerElement}{oomph\+::\+QSpectral\+Euler\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+flux\+\_\+transport (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -144,7 +144,7 @@ References \mbox{\hyperlink{euler__elements_8h_source_l00203}{oomph\+::\+Euler\+
 \index{output@{output}!oomph::QSpectralEulerElement$<$ DIM, NNODE\_1D $>$@{oomph::QSpectralEulerElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QSpectralEulerElement}{oomph\+::\+QSpectral\+Euler\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1QSpectralEulerElement}{oomph\+::\+QSpectral\+Euler\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 

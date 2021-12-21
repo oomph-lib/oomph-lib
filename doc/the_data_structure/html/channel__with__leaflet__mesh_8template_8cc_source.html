@@ -231,7 +231,7 @@ $(function() {
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    {</div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = 0; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &lt; nnode_1d; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>      {</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        Node* nod_pt = this-&gt;<a class="code hl_function" href="classoomph_1_1Mesh.html#a479059b0964826a8cee6eb506b57268a">finite_element_pt</a>(<a class="code hl_variable" href="cfortran_8h.html#a37cd013acc76697829c324bdd8562d82">e</a>)-&gt;<a class="code hl_function" href="classoomph_1_1FiniteElement.html#a9addfe893ab8205619963aa96204cdc4">node_pt</a>(<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>);</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        <a class="code hl_class" href="classoomph_1_1Node.html">Node</a>* nod_pt = this-&gt;<a class="code hl_function" href="classoomph_1_1Mesh.html#a479059b0964826a8cee6eb506b57268a">finite_element_pt</a>(<a class="code hl_variable" href="cfortran_8h.html#a37cd013acc76697829c324bdd8562d82">e</a>)-&gt;<a class="code hl_function" href="classoomph_1_1FiniteElement.html#a9addfe893ab8205619963aa96204cdc4">node_pt</a>(<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>);</div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        <span class="comment">// do not add the last node : it will go to boundary 6</span></div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="cfortran_8h.html#a37cd013acc76697829c324bdd8562d82">e</a> != nleft - 1 || <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> != 2)</div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        {</div>
@@ -244,7 +244,7 @@ $(function() {
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    {</div>
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = 0; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &lt; nnode_1d; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>      {</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        Node* nod_pt = this-&gt;<a class="code hl_function" href="classoomph_1_1Mesh.html#a479059b0964826a8cee6eb506b57268a">finite_element_pt</a>(<a class="code hl_variable" href="cfortran_8h.html#a37cd013acc76697829c324bdd8562d82">e</a>)-&gt;<a class="code hl_function" href="classoomph_1_1FiniteElement.html#a9addfe893ab8205619963aa96204cdc4">node_pt</a>(<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>);</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        <a class="code hl_class" href="classoomph_1_1Node.html">Node</a>* nod_pt = this-&gt;<a class="code hl_function" href="classoomph_1_1Mesh.html#a479059b0964826a8cee6eb506b57268a">finite_element_pt</a>(<a class="code hl_variable" href="cfortran_8h.html#a37cd013acc76697829c324bdd8562d82">e</a>)-&gt;<a class="code hl_function" href="classoomph_1_1FiniteElement.html#a9addfe893ab8205619963aa96204cdc4">node_pt</a>(<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>);</div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        this-&gt;<a class="code hl_function" href="classoomph_1_1Mesh.html#a007b102ac8e42328872ad658d7110bfc">add_boundary_node</a>(6, nod_pt);</div>
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>      }</div>
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    }</div>
@@ -258,7 +258,7 @@ $(function() {
 <div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>      <span class="keywordtype">unsigned</span> <a class="code hl_variable" href="cfortran_8h.html#a37cd013acc76697829c324bdd8562d82">e</a> = (nleft + nright) * k + nleft - 1;</div>
 <div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = 0; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &lt; nnode_1d; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>      {</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>        Node* nod_pt =</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>        <a class="code hl_class" href="classoomph_1_1Node.html">Node</a>* nod_pt =</div>
 <div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>          this-&gt;<a class="code hl_function" href="classoomph_1_1Mesh.html#a479059b0964826a8cee6eb506b57268a">finite_element_pt</a>(e)-&gt;<a class="code hl_function" href="classoomph_1_1FiniteElement.html#a9addfe893ab8205619963aa96204cdc4">node_pt</a>((<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> + 1) * nnode_1d - 1);</div>
 <div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        this-&gt;<a class="code hl_function" href="classoomph_1_1Mesh.html#aa864cbb7f3ff399eef871c63067894df">convert_to_boundary_node</a>(nod_pt);</div>
 <div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        this-&gt;<a class="code hl_function" href="classoomph_1_1Mesh.html#a007b102ac8e42328872ad658d7110bfc">add_boundary_node</a>(4, nod_pt);</div>
@@ -266,7 +266,7 @@ $(function() {
 <div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        <span class="comment">// Set coordinates</span></div>
 <div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        zeta[0] = double(k) * hleaflet / double(ny1) +</div>
 <div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>                  double(<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) * hleaflet / double(ny1) / double(nnode_1d - 1);</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        nod_pt-&gt;set_coordinates_on_boundary(4, zeta);</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1Node.html#a94c19e165ab4e88aabbfa27443c530b7">set_coordinates_on_boundary</a>(4, zeta);</div>
 <div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>      }</div>
 <div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    }</div>
 <div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> </div>
@@ -287,7 +287,7 @@ $(function() {
 <div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
 <div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    <span class="comment">// Allocate storage for newly created node outside</span></div>
 <div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    <span class="comment">// so we can refer to the most recently created one below.</span></div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    Node* nod_pt = 0;</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    <a class="code hl_class" href="classoomph_1_1Node.html">Node</a>* nod_pt = 0;</div>
 <div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
 <div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    <span class="comment">// duplicate the east nodes and add them to the 6th boundary</span></div>
 <div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    <span class="comment">// Add the first node to the 0th boundary (horizontal)</span></div>
@@ -303,7 +303,7 @@ $(function() {
 <div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>      this-&gt;<a class="code hl_function" href="classoomph_1_1Mesh.html#ac09a9bfeb6d70d8bbefe13c86948a6fc">add_node_pt</a>(nod_pt);</div>
 <div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>      <span class="comment">// Set coordinates</span></div>
 <div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>      zeta[0] = <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> * hleaflet / double(ny1) / double(nnode_1d - 1);</div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>      nod_pt-&gt;set_coordinates_on_boundary(5, zeta);</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>      nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1Node.html#a94c19e165ab4e88aabbfa27443c530b7">set_coordinates_on_boundary</a>(5, zeta);</div>
 <div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>    }</div>
 <div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span> </div>
 <div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span> </div>
@@ -317,7 +317,7 @@ $(function() {
 <div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>      this-&gt;<a class="code hl_function" href="classoomph_1_1Mesh.html#a007b102ac8e42328872ad658d7110bfc">add_boundary_node</a>(5, nod_pt);</div>
 <div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>      <span class="comment">// Set coordinates</span></div>
 <div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>      zeta[0] = k * hleaflet / double(ny1);</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>      nod_pt-&gt;set_coordinates_on_boundary(5, zeta);</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>      nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1Node.html#a94c19e165ab4e88aabbfa27443c530b7">set_coordinates_on_boundary</a>(5, zeta);</div>
 <div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span> </div>
 <div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>      <span class="comment">// Loop over other nodes on element&#39;s eastern edge</span></div>
 <div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = 1; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &lt; nnode_1d; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
@@ -341,7 +341,7 @@ $(function() {
 <div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>        <span class="comment">// Set coordinates</span></div>
 <div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>        zeta[0] = double(k) * hleaflet / double(ny1) +</div>
 <div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>                  double(<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) * hleaflet / double(ny1) / double(nnode_1d - 1);</div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>        nod_pt-&gt;set_coordinates_on_boundary(5, zeta);</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>        nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1Node.html#a94c19e165ab4e88aabbfa27443c530b7">set_coordinates_on_boundary</a>(5, zeta);</div>
 <div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>      }</div>
 <div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    }</div>
 <div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span> </div>
@@ -384,8 +384,8 @@ $(function() {
 <div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>      <a class="code hl_class" href="classoomph_1_1AlgebraicNode.html">AlgebraicNode</a>* nod_pt = node_pt(j);</div>
 <div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span> </div>
 <div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>      <span class="comment">// Get coordinates</span></div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>      <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a> = nod_pt-&gt;x(0);</div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>      <span class="keywordtype">double</span> y = nod_pt-&gt;x(1);</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>      <span class="keywordtype">double</span> x = nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1Node.html#ab76b4773a65b349f143539e07b6e15e2">x</a>(0);</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>      <span class="keywordtype">double</span> y = nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1Node.html#ab76b4773a65b349f143539e07b6e15e2">x</a>(1);</div>
 <div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span> </div>
 <div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>      <span class="comment">// Quick check to know if the wall is in its undeformed position</span></div>
 <div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>      <span class="comment">// It actually checks that the top of the wall is in (x_0,hleaflet)</span></div>
@@ -409,7 +409,7 @@ $(function() {
 <div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>      <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> ref_value(4);</div>
 <div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span> </div>
 <div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>      <span class="comment">// Part I</span></div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>      <span class="keywordflow">if</span> ((<a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a> &lt;= X_0) &amp;&amp; (y &lt;= hleaflet))</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>      <span class="keywordflow">if</span> ((x &lt;= X_0) &amp;&amp; (y &lt;= hleaflet))</div>
 <div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>      {</div>
 <div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>        <span class="comment">// First reference value: y0</span></div>
 <div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>        ref_value[0] = y;</div>
@@ -435,7 +435,7 @@ $(function() {
 <div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span> </div>
 <div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>        <span class="comment">// Third reference value:fraction of the horizontal line</span></div>
 <div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>        <span class="comment">// between the edge and the wall</span></div>
-<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>        ref_value[2] = (lleft + <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a> - X_0) / lleft;</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>        ref_value[2] = (lleft + x - X_0) / lleft;</div>
 <div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span> </div>
 <div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span> </div>
 <div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>        <span class="comment">// Setup algebraic update for node: Pass update information</span></div>
@@ -446,7 +446,7 @@ $(function() {
 <div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>                                     ref_value); <span class="comment">// vector of ref. values</span></div>
 <div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>      }</div>
 <div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>      <span class="comment">// Part II</span></div>
-<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>      <span class="keywordflow">if</span> ((<a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a> &gt;= X_0) &amp;&amp; (y &lt;= hleaflet))</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>      <span class="keywordflow">if</span> ((x &gt;= X_0) &amp;&amp; (y &lt;= hleaflet))</div>
 <div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>      {</div>
 <div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>        <span class="comment">// First reference value: y0</span></div>
 <div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>        ref_value[0] = y;</div>
@@ -472,7 +472,7 @@ $(function() {
 <div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span> </div>
 <div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>        <span class="comment">// Third reference value:fraction of the horizontal line</span></div>
 <div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>        <span class="comment">// between the edge and the wall</span></div>
-<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>        ref_value[2] = (<a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a> - X_0) / lright;</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>        ref_value[2] = (x - X_0) / lright;</div>
 <div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span> </div>
 <div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>        <span class="comment">// Setup algebraic update for node: Pass update information</span></div>
 <div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>        <span class="comment">// to AlgebraicNode:</span></div>
@@ -482,7 +482,7 @@ $(function() {
 <div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>                                     ref_value); <span class="comment">// vector of ref. values</span></div>
 <div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>      }</div>
 <div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>      <span class="comment">// Part III</span></div>
-<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>      <span class="keywordflow">if</span> ((<a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a> &lt;= X_0) &amp;&amp; (y &gt;= hleaflet))</div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>      <span class="keywordflow">if</span> ((x &lt;= X_0) &amp;&amp; (y &gt;= hleaflet))</div>
 <div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>      {</div>
 <div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>        <span class="comment">// First reference value: y0</span></div>
 <div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>        ref_value[0] = y;</div>
@@ -492,7 +492,7 @@ $(function() {
 <div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span> </div>
 <div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>        <span class="comment">// Third reference value:fraction of the horizontal line</span></div>
 <div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>        <span class="comment">// between the edge and the middle line</span></div>
-<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>        ref_value[2] = (lleft + <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a> - X_0) / lleft;</div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>        ref_value[2] = (lleft + x - X_0) / lleft;</div>
 <div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span> </div>
 <div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>        <span class="comment">// geomobject</span></div>
 <div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>        <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;GeomObject*&gt;</a> geom_object_pt(1);</div>
@@ -506,7 +506,7 @@ $(function() {
 <div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>                                     ref_value); <span class="comment">// vector of ref. values</span></div>
 <div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>      }</div>
 <div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>      <span class="comment">// Part IV</span></div>
-<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>      <span class="keywordflow">if</span> ((<a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a> &gt;= X_0) &amp;&amp; (y &gt;= hleaflet))</div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>      <span class="keywordflow">if</span> ((x &gt;= X_0) &amp;&amp; (y &gt;= hleaflet))</div>
 <div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>      {</div>
 <div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>        <span class="comment">// First reference value: y0</span></div>
 <div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>        ref_value[0] = y;</div>
@@ -516,7 +516,7 @@ $(function() {
 <div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span> </div>
 <div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>        <span class="comment">// Third reference value:fraction of the horizontal line</span></div>
 <div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>        <span class="comment">// between the edge and the wall</span></div>
-<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>        ref_value[2] = (<a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a> - X_0) / lright;</div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>        ref_value[2] = (x - X_0) / lright;</div>
 <div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span> </div>
 <div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>        <span class="comment">// geomobject</span></div>
 <div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>        <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;GeomObject*&gt;</a> geom_object_pt(1);</div>
@@ -617,8 +617,8 @@ $(function() {
 <div class="line"><a id="l00488" name="l00488"></a><span class="lineno">  488</span> </div>
 <div class="line"><a id="l00489" name="l00489"></a><span class="lineno">  489</span> </div>
 <div class="line"><a id="l00490" name="l00490"></a><span class="lineno">  490</span>    <span class="comment">// Assign new nodal coordinates</span></div>
-<div class="line"><a id="l00491" name="l00491"></a><span class="lineno">  491</span>    node_pt-&gt;x(<a class="code hl_variable" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, 0) = x0 + r * (r_wall[0] - x0);</div>
-<div class="line"><a id="l00492" name="l00492"></a><span class="lineno">  492</span>    node_pt-&gt;x(<a class="code hl_variable" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, 1) = y0 + r * (r_wall[1] - y0);</div>
+<div class="line"><a id="l00491" name="l00491"></a><span class="lineno">  491</span>    node_pt-&gt;<a class="code hl_function" href="classoomph_1_1Node.html#ab76b4773a65b349f143539e07b6e15e2">x</a>(<a class="code hl_variable" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, 0) = x0 + r * (r_wall[0] - x0);</div>
+<div class="line"><a id="l00492" name="l00492"></a><span class="lineno">  492</span>    node_pt-&gt;<a class="code hl_function" href="classoomph_1_1Node.html#ab76b4773a65b349f143539e07b6e15e2">x</a>(<a class="code hl_variable" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, 1) = y0 + r * (r_wall[1] - y0);</div>
 <div class="line"><a id="l00493" name="l00493"></a><span class="lineno">  493</span>  }</div>
 <div class="line"><a id="l00494" name="l00494"></a><span class="lineno">  494</span> </div>
 <div class="line"><a id="l00495" name="l00495"></a><span class="lineno">  495</span> </div>
@@ -659,8 +659,8 @@ $(function() {
 <div class="line"><a id="l00530" name="l00530"></a><span class="lineno">  530</span>    <span class="keywordtype">double</span> r = ref_value[2];</div>
 <div class="line"><a id="l00531" name="l00531"></a><span class="lineno">  531</span> </div>
 <div class="line"><a id="l00532" name="l00532"></a><span class="lineno">  532</span>    <span class="comment">// Assign new nodal coordinates</span></div>
-<div class="line"><a id="l00533" name="l00533"></a><span class="lineno">  533</span>    node_pt-&gt;x(<a class="code hl_variable" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, 0) = r_wall[0] + r * (x0 - r_wall[0]);</div>
-<div class="line"><a id="l00534" name="l00534"></a><span class="lineno">  534</span>    node_pt-&gt;x(<a class="code hl_variable" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, 1) = r_wall[1] + r * (y0 - r_wall[1]);</div>
+<div class="line"><a id="l00533" name="l00533"></a><span class="lineno">  533</span>    node_pt-&gt;<a class="code hl_function" href="classoomph_1_1Node.html#ab76b4773a65b349f143539e07b6e15e2">x</a>(<a class="code hl_variable" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, 0) = r_wall[0] + r * (x0 - r_wall[0]);</div>
+<div class="line"><a id="l00534" name="l00534"></a><span class="lineno">  534</span>    node_pt-&gt;<a class="code hl_function" href="classoomph_1_1Node.html#ab76b4773a65b349f143539e07b6e15e2">x</a>(<a class="code hl_variable" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, 1) = r_wall[1] + r * (y0 - r_wall[1]);</div>
 <div class="line"><a id="l00535" name="l00535"></a><span class="lineno">  535</span>  }</div>
 <div class="line"><a id="l00536" name="l00536"></a><span class="lineno">  536</span> </div>
 <div class="line"><a id="l00537" name="l00537"></a><span class="lineno">  537</span> </div>
@@ -716,8 +716,8 @@ $(function() {
 <div class="line"><a id="l00587" name="l00587"></a><span class="lineno">  587</span>    <span class="keywordtype">double</span> r = ref_value[2];</div>
 <div class="line"><a id="l00588" name="l00588"></a><span class="lineno">  588</span> </div>
 <div class="line"><a id="l00589" name="l00589"></a><span class="lineno">  589</span>    <span class="comment">// Assign new nodal coordinates</span></div>
-<div class="line"><a id="l00590" name="l00590"></a><span class="lineno">  590</span>    node_pt-&gt;x(<a class="code hl_variable" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, 0) = x0 + r * (r_line[0] - x0);</div>
-<div class="line"><a id="l00591" name="l00591"></a><span class="lineno">  591</span>    node_pt-&gt;x(<a class="code hl_variable" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, 1) = y0 + r * (r_line[1] - y0);</div>
+<div class="line"><a id="l00590" name="l00590"></a><span class="lineno">  590</span>    node_pt-&gt;<a class="code hl_function" href="classoomph_1_1Node.html#ab76b4773a65b349f143539e07b6e15e2">x</a>(<a class="code hl_variable" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, 0) = x0 + r * (r_line[0] - x0);</div>
+<div class="line"><a id="l00591" name="l00591"></a><span class="lineno">  591</span>    node_pt-&gt;<a class="code hl_function" href="classoomph_1_1Node.html#ab76b4773a65b349f143539e07b6e15e2">x</a>(<a class="code hl_variable" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, 1) = y0 + r * (r_line[1] - y0);</div>
 <div class="line"><a id="l00592" name="l00592"></a><span class="lineno">  592</span>  }</div>
 <div class="line"><a id="l00593" name="l00593"></a><span class="lineno">  593</span> </div>
 <div class="line"><a id="l00594" name="l00594"></a><span class="lineno">  594</span>  <span class="comment">//=================================================================</span><span class="comment"></span></div>
@@ -751,8 +751,8 @@ $(function() {
 <div class="line"><a id="l00622" name="l00622"></a><span class="lineno">  622</span>    <span class="keywordtype">double</span> r = ref_value[2];</div>
 <div class="line"><a id="l00623" name="l00623"></a><span class="lineno">  623</span> </div>
 <div class="line"><a id="l00624" name="l00624"></a><span class="lineno">  624</span>    <span class="comment">// Assign new nodal coordinates</span></div>
-<div class="line"><a id="l00625" name="l00625"></a><span class="lineno">  625</span>    node_pt-&gt;x(<a class="code hl_variable" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, 0) = r_line[0] + r * (x0 - r_line[0]);</div>
-<div class="line"><a id="l00626" name="l00626"></a><span class="lineno">  626</span>    node_pt-&gt;x(<a class="code hl_variable" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, 1) = r_line[1] + r * (y0 - r_line[1]);</div>
+<div class="line"><a id="l00625" name="l00625"></a><span class="lineno">  625</span>    node_pt-&gt;<a class="code hl_function" href="classoomph_1_1Node.html#ab76b4773a65b349f143539e07b6e15e2">x</a>(<a class="code hl_variable" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, 0) = r_line[0] + r * (x0 - r_line[0]);</div>
+<div class="line"><a id="l00626" name="l00626"></a><span class="lineno">  626</span>    node_pt-&gt;<a class="code hl_function" href="classoomph_1_1Node.html#ab76b4773a65b349f143539e07b6e15e2">x</a>(<a class="code hl_variable" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, 1) = r_line[1] + r * (y0 - r_line[1]);</div>
 <div class="line"><a id="l00627" name="l00627"></a><span class="lineno">  627</span>  }</div>
 <div class="line"><a id="l00628" name="l00628"></a><span class="lineno">  628</span> </div>
 <div class="line"><a id="l00629" name="l00629"></a><span class="lineno">  629</span><span class="comment"></span> </div>
@@ -851,10 +851,10 @@ $(function() {
 <div class="ttc" id="aclassoomph_1_1ChannelWithLeafletMesh_html_ab210be34e9d7f72af9aefee618d41f3d"><div class="ttname"><a href="classoomph_1_1ChannelWithLeafletMesh.html#ab210be34e9d7f72af9aefee618d41f3d">oomph::ChannelWithLeafletMesh::ChannelWithLeafletMesh</a></div><div class="ttdeci">ChannelWithLeafletMesh(GeomObject *leaflet_pt, const double &amp;lleft, const double &amp;lright, const double &amp;hleaflet, const double &amp;htot, const unsigned &amp;nleft, const unsigned &amp;nright, const unsigned &amp;ny1, const unsigned &amp;ny2, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</div><div class="ttdoc">Constructor: Pass pointer to GeomObject that represents the leaflet, the length of the domain to left...</div><div class="ttdef"><b>Definition:</b> <a href="channel__with__leaflet__mesh_8template_8cc_source.html#l00048">channel_with_leaflet_mesh.template.cc:48</a></div></div>
 <div class="ttc" id="aclassoomph_1_1Domain_html_abef3886384a9b9e722e490268feecc2d"><div class="ttname"><a href="classoomph_1_1Domain.html#abef3886384a9b9e722e490268feecc2d">oomph::Domain::macro_element_pt</a></div><div class="ttdeci">MacroElement * macro_element_pt(const unsigned &amp;i)</div><div class="ttdoc">Access to i-th macro element.</div><div class="ttdef"><b>Definition:</b> <a href="domain_8h_source.html#l00116">domain.h:116</a></div></div>
 <div class="ttc" id="aclassoomph_1_1FiniteElement_html"><div class="ttname"><a href="classoomph_1_1FiniteElement.html">oomph::FiniteElement</a></div><div class="ttdoc">A general Finite Element class.</div><div class="ttdef"><b>Definition:</b> <a href="elements_8h_source.html#l01312">elements.h:1313</a></div></div>
-<div class="ttc" id="aclassoomph_1_1FiniteElement_html_a170b030b8365ebbab5287f0a420cc8c8"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#a170b030b8365ebbab5287f0a420cc8c8">oomph::FiniteElement::set_macro_elem_pt</a></div><div class="ttdeci">virtual void set_macro_elem_pt(MacroElement *macro_elem_pt)</div><div class="ttdoc">Set pointer to macro element – can be overloaded in derived elements to perform additional tasks.</div><div class="ttdef"><b>Definition:</b> <a href="elements_8h_source.html#l01877">elements.h:1877</a></div></div>
-<div class="ttc" id="aclassoomph_1_1FiniteElement_html_a88a427f24deee1be92d6e63eac0fb36f"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#a88a427f24deee1be92d6e63eac0fb36f">oomph::FiniteElement::construct_boundary_node</a></div><div class="ttdeci">virtual Node * construct_boundary_node(const unsigned &amp;n)</div><div class="ttdoc">Construct the local node n as a boundary node; that is a node that MAY be placed on a mesh boundary a...</div><div class="ttdef"><b>Definition:</b> <a href="elements_8h_source.html#l02543">elements.h:2543</a></div></div>
-<div class="ttc" id="aclassoomph_1_1FiniteElement_html_a9addfe893ab8205619963aa96204cdc4"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#a9addfe893ab8205619963aa96204cdc4">oomph::FiniteElement::node_pt</a></div><div class="ttdeci">Node *&amp; node_pt(const unsigned &amp;n)</div><div class="ttdoc">Return a pointer to the local node n.</div><div class="ttdef"><b>Definition:</b> <a href="elements_8h_source.html#l02180">elements.h:2180</a></div></div>
-<div class="ttc" id="aclassoomph_1_1FiniteElement_html_ab65c7a94dda80c1876a09ac12be4e39c"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#ab65c7a94dda80c1876a09ac12be4e39c">oomph::FiniteElement::nnode_1d</a></div><div class="ttdeci">virtual unsigned nnode_1d() const</div><div class="ttdoc">Return the number of nodes along one edge of the element Default is to return zero — must be overload...</div><div class="ttdef"><b>Definition:</b> <a href="elements_8h_source.html#l02223">elements.h:2223</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FiniteElement_html_a170b030b8365ebbab5287f0a420cc8c8"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#a170b030b8365ebbab5287f0a420cc8c8">oomph::FiniteElement::set_macro_elem_pt</a></div><div class="ttdeci">virtual void set_macro_elem_pt(MacroElement *macro_elem_pt)</div><div class="ttdoc">Set pointer to macro element – can be overloaded in derived elements to perform additional tasks.</div><div class="ttdef"><b>Definition:</b> <a href="elements_8h_source.html#l01872">elements.h:1872</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FiniteElement_html_a88a427f24deee1be92d6e63eac0fb36f"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#a88a427f24deee1be92d6e63eac0fb36f">oomph::FiniteElement::construct_boundary_node</a></div><div class="ttdeci">virtual Node * construct_boundary_node(const unsigned &amp;n)</div><div class="ttdoc">Construct the local node n as a boundary node; that is a node that MAY be placed on a mesh boundary a...</div><div class="ttdef"><b>Definition:</b> <a href="elements_8h_source.html#l02538">elements.h:2538</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FiniteElement_html_a9addfe893ab8205619963aa96204cdc4"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#a9addfe893ab8205619963aa96204cdc4">oomph::FiniteElement::node_pt</a></div><div class="ttdeci">Node *&amp; node_pt(const unsigned &amp;n)</div><div class="ttdoc">Return a pointer to the local node n.</div><div class="ttdef"><b>Definition:</b> <a href="elements_8h_source.html#l02175">elements.h:2175</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FiniteElement_html_ab65c7a94dda80c1876a09ac12be4e39c"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#ab65c7a94dda80c1876a09ac12be4e39c">oomph::FiniteElement::nnode_1d</a></div><div class="ttdeci">virtual unsigned nnode_1d() const</div><div class="ttdoc">Return the number of nodes along one edge of the element Default is to return zero — must be overload...</div><div class="ttdef"><b>Definition:</b> <a href="elements_8h_source.html#l02218">elements.h:2218</a></div></div>
 <div class="ttc" id="aclassoomph_1_1GeomObject_html"><div class="ttname"><a href="classoomph_1_1GeomObject.html">oomph::GeomObject</a></div><div class="ttdoc">/////////////////////////////////////////////////////////////////////</div><div class="ttdef"><b>Definition:</b> <a href="geom__objects_8h_source.html#l00100">geom_objects.h:101</a></div></div>
 <div class="ttc" id="aclassoomph_1_1GeomObject_html_a0d04c9d4667817f3ef24bb660fd56065"><div class="ttname"><a href="classoomph_1_1GeomObject.html#a0d04c9d4667817f3ef24bb660fd56065">oomph::GeomObject::position</a></div><div class="ttdeci">virtual void position(const Vector&lt; double &gt; &amp;zeta, Vector&lt; double &gt; &amp;r) const =0</div><div class="ttdoc">Parametrised position on object at current time: r(zeta).</div></div>
 <div class="ttc" id="aclassoomph_1_1GeomObject_html_a78ee9f98bcfd0c5e1f07a459777663d3"><div class="ttname"><a href="classoomph_1_1GeomObject.html#a78ee9f98bcfd0c5e1f07a459777663d3">oomph::GeomObject::locate_zeta</a></div><div class="ttdeci">virtual void locate_zeta(const Vector&lt; double &gt; &amp;zeta, GeomObject *&amp;sub_geom_object_pt, Vector&lt; double &gt; &amp;s, const bool &amp;use_coordinate_as_initial_guess=false)</div><div class="ttdoc">A geometric object may be composed of may sub-objects (e.g. a finite-element representation of a boun...</div><div class="ttdef"><b>Definition:</b> <a href="geom__objects_8h_source.html#l00381">geom_objects.h:381</a></div></div>
@@ -866,6 +866,9 @@ $(function() {
 <div class="ttc" id="aclassoomph_1_1Mesh_html_a95bf112e5e1b3892e70a41f91b3cc523"><div class="ttname"><a href="classoomph_1_1Mesh.html#a95bf112e5e1b3892e70a41f91b3cc523">oomph::Mesh::node_update</a></div><div class="ttdeci">virtual void node_update(const bool &amp;update_all_solid_nodes=false)</div><div class="ttdoc">Update nodal positions in response to changes in the domain shape. Uses the FiniteElement::get_x(....</div><div class="ttdef"><b>Definition:</b> <a href="mesh_8cc_source.html#l00287">mesh.cc:287</a></div></div>
 <div class="ttc" id="aclassoomph_1_1Mesh_html_aa864cbb7f3ff399eef871c63067894df"><div class="ttname"><a href="classoomph_1_1Mesh.html#aa864cbb7f3ff399eef871c63067894df">oomph::Mesh::convert_to_boundary_node</a></div><div class="ttdeci">void convert_to_boundary_node(Node *&amp;node_pt, const Vector&lt; FiniteElement * &gt; &amp;finite_element_pt)</div><div class="ttdoc">A function that upgrades an ordinary node to a boundary node We shouldn't ever really use this,...</div><div class="ttdef"><b>Definition:</b> <a href="mesh_8cc_source.html#l02590">mesh.cc:2590</a></div></div>
 <div class="ttc" id="aclassoomph_1_1Mesh_html_ac09a9bfeb6d70d8bbefe13c86948a6fc"><div class="ttname"><a href="classoomph_1_1Mesh.html#ac09a9bfeb6d70d8bbefe13c86948a6fc">oomph::Mesh::add_node_pt</a></div><div class="ttdeci">void add_node_pt(Node *const &amp;node_pt)</div><div class="ttdoc">Add a (pointer to a) node to the mesh.</div><div class="ttdef"><b>Definition:</b> <a href="mesh_8h_source.html#l00611">mesh.h:611</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Node_html"><div class="ttname"><a href="classoomph_1_1Node.html">oomph::Node</a></div><div class="ttdoc">Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...</div><div class="ttdef"><b>Definition:</b> <a href="nodes_8h_source.html#l00905">nodes.h:906</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Node_html_a94c19e165ab4e88aabbfa27443c530b7"><div class="ttname"><a href="classoomph_1_1Node.html#a94c19e165ab4e88aabbfa27443c530b7">oomph::Node::set_coordinates_on_boundary</a></div><div class="ttdeci">virtual void set_coordinates_on_boundary(const unsigned &amp;b, const unsigned &amp;k, const Vector&lt; double &gt; &amp;boundary_zeta)</div><div class="ttdoc">Set the vector of the k-th generalised boundary coordinates on mesh boundary b. Broken virtual interf...</div><div class="ttdef"><b>Definition:</b> <a href="nodes_8cc_source.html#l02394">nodes.cc:2394</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Node_html_ab76b4773a65b349f143539e07b6e15e2"><div class="ttname"><a href="classoomph_1_1Node.html#ab76b4773a65b349f143539e07b6e15e2">oomph::Node::x</a></div><div class="ttdeci">double &amp; x(const unsigned &amp;i)</div><div class="ttdoc">Return the i-th nodal coordinate.</div><div class="ttdef"><b>Definition:</b> <a href="nodes_8h_source.html#l01060">nodes.h:1060</a></div></div>
 <div class="ttc" id="aclassoomph_1_1OomphLibError_html"><div class="ttname"><a href="classoomph_1_1OomphLibError.html">oomph::OomphLibError</a></div><div class="ttdoc">An OomphLibError object which should be thrown when an run-time error is encountered....</div><div class="ttdef"><b>Definition:</b> <a href="oomph__definitions_8h_source.html#l00221">oomph_definitions.h:222</a></div></div>
 <div class="ttc" id="aclassoomph_1_1QuadMeshBase_html_ad1e5291285fbf34c62cbd45156dded2d"><div class="ttname"><a href="classoomph_1_1QuadMeshBase.html#ad1e5291285fbf34c62cbd45156dded2d">oomph::QuadMeshBase::setup_boundary_element_info</a></div><div class="ttdeci">void setup_boundary_element_info()</div><div class="ttdoc">Setup lookup schemes which establish whic elements are located next to mesh's boundaries (wrapper to ...</div><div class="ttdef"><b>Definition:</b> <a href="quad__mesh_8h_source.html#l00073">quad_mesh.h:73</a></div></div>
 <div class="ttc" id="aclassoomph_1_1RefineableAlgebraicChannelWithLeafletMesh_html_a8ee7168fbb84bb87880a2590dd52eaa8"><div class="ttname"><a href="classoomph_1_1RefineableAlgebraicChannelWithLeafletMesh.html#a8ee7168fbb84bb87880a2590dd52eaa8">oomph::RefineableAlgebraicChannelWithLeafletMesh::update_node_update</a></div><div class="ttdeci">void update_node_update(AlgebraicNode *&amp;node_pt)</div><div class="ttdoc">Update the node update data for specified node following any mesh adapation.</div><div class="ttdef"><b>Definition:</b> <a href="channel__with__leaflet__mesh_8template_8cc_source.html#l00639">channel_with_leaflet_mesh.template.cc:639</a></div></div>
@@ -874,7 +877,6 @@ $(function() {
 <div class="ttc" id="aclassoomph_1_1Vector_html"><div class="ttname"><a href="classoomph_1_1Vector.html">oomph::Vector&lt; double &gt;</a></div></div>
 <div class="ttc" id="anamespaceoomph_1_1Global__string__for__annotation_html_ac5379de2fa7fe44f2cb31785fc208135"><div class="ttname"><a href="namespaceoomph_1_1Global__string__for__annotation.html#ac5379de2fa7fe44f2cb31785fc208135">oomph::Global_string_for_annotation::string</a></div><div class="ttdeci">std::string string(const unsigned &amp;i)</div><div class="ttdoc">Return the i-th string or &quot;&quot; if the relevant string hasn't been defined.</div><div class="ttdef"><b>Definition:</b> <a href="oomph__definitions_8cc_source.html#l00286">oomph_definitions.cc:286</a></div></div>
 <div class="ttc" id="anamespaceoomph_html"><div class="ttname"><a href="namespaceoomph.html">oomph</a></div><div class="ttdoc">//////////////////////////////////////////////////////////////////// ////////////////////////////////...</div><div class="ttdef"><b>Definition:</b> <a href="advection__diffusion__elements_8cc_source.html#l00029">advection_diffusion_elements.cc:30</a></div></div>
-<div class="ttc" id="anamespaceoomph_html_a9d1d2da2b8bb8e73af72b5cadb8fe97c"><div class="ttname"><a href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">oomph::x</a></div><div class="ttdeci">x</div><div class="ttdoc">Pseudo buckling ring: Circular ring deformed by the N-th buckling mode of a thin-wall elastic ring.</div><div class="ttdef"><b>Definition:</b> <a href="pseudo__buckling__ring_8h_source.html#l00049">pseudo_buckling_ring.h:49</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 
     <!-- jQuery for Bootstrap and Doxygen -->
@@ -903,7 +905,7 @@ $(function() {
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Nov 2 2021 16:31:12
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Dec 21 2021 17:35:09
         </div>
       </div>
     </footer>

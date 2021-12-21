@@ -22,83 +22,83 @@ Inheritance diagram for oomph\+::TRaviart\+Thomas\+Darcy\+Element\texorpdfstring
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a6f564e44204a60ea04eb6077d32ecb85}{$\sim$\+TRaviart\+Thomas\+Darcy\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a35bdfb84cea500e383c72cedfe09f933}{required\+\_\+nvalue}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a35bdfb84cea500e383c72cedfe09f933}{required\+\_\+nvalue}} (const unsigned \&n) const
 \begin{DoxyCompactList}\small\item\em Number of values required at node n. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a194a2f0a34700b490e937459a40420d9}{face\+\_\+index\+\_\+of\+\_\+edge}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&j) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a194a2f0a34700b490e937459a40420d9}{face\+\_\+index\+\_\+of\+\_\+edge}} (const unsigned \&j) const
 \begin{DoxyCompactList}\small\item\em Return the face index associated with specified edge. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a21436d43ed647f9c0aeb56fe776d63cd}{face\+\_\+local\+\_\+coordinate\+\_\+of\+\_\+flux\+\_\+interpolation\+\_\+point}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&edge, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a21436d43ed647f9c0aeb56fe776d63cd}{face\+\_\+local\+\_\+coordinate\+\_\+of\+\_\+flux\+\_\+interpolation\+\_\+point}} (const unsigned \&edge, const unsigned \&n, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) const
 \begin{DoxyCompactList}\small\item\em Compute the face element coordinates of the nth flux interpolation point along specified edge. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a7abc470b07eb3e492b4aed3555734548}{face\+\_\+index\+\_\+of\+\_\+q\+\_\+edge\+\_\+basis\+\_\+fct}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&j) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a7abc470b07eb3e492b4aed3555734548}{face\+\_\+index\+\_\+of\+\_\+q\+\_\+edge\+\_\+basis\+\_\+fct}} (const unsigned \&j) const
 \begin{DoxyCompactList}\small\item\em Return the face index associated with edge flux degree of freedom. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_ac2ff2f6ee57c888dbeac1a9e7b7efc61}{q\+\_\+edge\+\_\+local\+\_\+eqn}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+int \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_ac2ff2f6ee57c888dbeac1a9e7b7efc61}{q\+\_\+edge\+\_\+local\+\_\+eqn}} (const unsigned \&n) const
 \begin{DoxyCompactList}\small\item\em Return the equation nunmber of the n-\/th edge (flux) degree of freedom. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a9c2b450d0dc3ce6a683409f2e82b8589}{q\+\_\+internal\+\_\+local\+\_\+eqn}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+int \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a9c2b450d0dc3ce6a683409f2e82b8589}{q\+\_\+internal\+\_\+local\+\_\+eqn}} (const unsigned \&n) const
 \begin{DoxyCompactList}\small\item\em Return the equation number of the n-\/th internal degree of freedom. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a4b36616a52ecf2bcfbff6406d010eeec}{q\+\_\+edge\+\_\+data\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a4b36616a52ecf2bcfbff6406d010eeec}{q\+\_\+edge\+\_\+data\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Return vector of pointers to the \mbox{\hyperlink{classoomph_1_1Data}{Data}} objects that store the edge flux values. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a5e8fdf3de27c08947c0e31f4dbfd3b5d}{q\+\_\+internal\+\_\+data\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a5e8fdf3de27c08947c0e31f4dbfd3b5d}{q\+\_\+internal\+\_\+data\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Return pointer to the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object that stores the internal flux values. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_aabea3c06ebef3cc39e7eb25e5833ae84}{q\+\_\+internal\+\_\+index}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_aabea3c06ebef3cc39e7eb25e5833ae84}{q\+\_\+internal\+\_\+index}} () const
 \begin{DoxyCompactList}\small\item\em Return the index of the internal data where the q\+\_\+internal degrees of freedom are stored. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a5c0de6706bca0a9b006832dd8df30b81}{q\+\_\+edge\+\_\+index}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a5c0de6706bca0a9b006832dd8df30b81}{q\+\_\+edge\+\_\+index}} (const unsigned \&n) const
 \begin{DoxyCompactList}\small\item\em Return the nodal index at which the nth edge unknown is stored. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a81e9386364c70670d6ee4d501cc89da5}{q\+\_\+edge\+\_\+node\+\_\+number}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a81e9386364c70670d6ee4d501cc89da5}{q\+\_\+edge\+\_\+node\+\_\+number}} (const unsigned \&n) const
 \begin{DoxyCompactList}\small\item\em Return the local node number of the node where the nth edge unknown is stored. \end{DoxyCompactList}\item 
-Node $\ast$ \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_adbdb782da701d1a900eebfec568145a5}{edge\+\_\+flux\+\_\+node\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&edge)
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_adbdb782da701d1a900eebfec568145a5}{edge\+\_\+flux\+\_\+node\+\_\+pt}} (const unsigned \&edge)
 \begin{DoxyCompactList}\small\item\em Get pointer to node that stores the edge flux dofs for specified edge. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a822218aa30be662198873b8b73a0c03c}{q\+\_\+edge}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a822218aa30be662198873b8b73a0c03c}{q\+\_\+edge}} (const unsigned \&n) const
 \begin{DoxyCompactList}\small\item\em Return the values of the edge (flux) degree of freedom. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a613264c01085a511a3c30f3f78f00c50}{q\+\_\+internal}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a613264c01085a511a3c30f3f78f00c50}{q\+\_\+internal}} (const unsigned \&n) const
 \begin{DoxyCompactList}\small\item\em Return the values of the internal degree of freedom. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_ad4d0783e51faa448cbbd1978bf4779df}{set\+\_\+q\+\_\+edge}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&value)
+void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_ad4d0783e51faa448cbbd1978bf4779df}{set\+\_\+q\+\_\+edge}} (const unsigned \&n, const double \&value)
 \begin{DoxyCompactList}\small\item\em Set the values of the edge (flux) degree of freedom. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a651973d516923c2c032f44dac1503b60}{set\+\_\+q\+\_\+internal}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&value)
+void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a651973d516923c2c032f44dac1503b60}{set\+\_\+q\+\_\+internal}} (const unsigned \&n, const double \&value)
 \begin{DoxyCompactList}\small\item\em Set the values of the internal degree of freedom. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_af8ab0d926cdbb46da734e4db8461a2e5}{nq\+\_\+basis\+\_\+edge}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_af8ab0d926cdbb46da734e4db8461a2e5}{nq\+\_\+basis\+\_\+edge}} () const
 \begin{DoxyCompactList}\small\item\em Return the number of edge basis functions for q. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_aeff07bf55d4794ab817827c367ec49f8}{nq\+\_\+basis\+\_\+internal}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_aeff07bf55d4794ab817827c367ec49f8}{nq\+\_\+basis\+\_\+internal}} () const
 \begin{DoxyCompactList}\small\item\em Return the number of internal basis functions for q. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a16c5506831abea90f801a4db7022d6a3}{get\+\_\+q\+\_\+basis\+\_\+local}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+basis) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a16c5506831abea90f801a4db7022d6a3}{get\+\_\+q\+\_\+basis\+\_\+local}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+basis) const
 \begin{DoxyCompactList}\small\item\em Return the local form of the q basis at local coordinate s. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a6cbe24cce6930993cba8200964816919}{get\+\_\+div\+\_\+q\+\_\+basis\+\_\+local}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&div\+\_\+q\+\_\+basis\+\_\+ds) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a6cbe24cce6930993cba8200964816919}{get\+\_\+div\+\_\+q\+\_\+basis\+\_\+local}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&div\+\_\+q\+\_\+basis\+\_\+ds) const
 \begin{DoxyCompactList}\small\item\em Return the local form of the q basis and dbasis/ds at local coordinate s. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_aee9de4e429ee7852f960a9cf80bfe4fc}{nedge\+\_\+flux\+\_\+interpolation\+\_\+point}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_aee9de4e429ee7852f960a9cf80bfe4fc}{nedge\+\_\+flux\+\_\+interpolation\+\_\+point}} () const
 \begin{DoxyCompactList}\small\item\em Return the number of flux interpolation points along each edge of the element. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_afe7c2b0b0a48bb26a6cf2154a5e3b586}{edge\+\_\+flux\+\_\+interpolation\+\_\+point}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&edge, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_afe7c2b0b0a48bb26a6cf2154a5e3b586}{edge\+\_\+flux\+\_\+interpolation\+\_\+point}} (const unsigned \&edge, const unsigned \&n) const
 \begin{DoxyCompactList}\small\item\em Return the local coordinate of the nth flux interpolation point along an edge. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a11c49e611acc0becbf0907766b5e9938}{edge\+\_\+flux\+\_\+interpolation\+\_\+point\+\_\+global}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&j, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a11c49e611acc0becbf0907766b5e9938}{edge\+\_\+flux\+\_\+interpolation\+\_\+point\+\_\+global}} (const unsigned \&j, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x) const
 \begin{DoxyCompactList}\small\item\em Compute the global coordinates of the flux interpolation point associated with the j-\/th edge-\/based q basis fct. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a39394c7bd6d9517135f2befcd5e7d646}{edge\+\_\+flux\+\_\+interpolation\+\_\+point\+\_\+global}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&edge, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a39394c7bd6d9517135f2befcd5e7d646}{edge\+\_\+flux\+\_\+interpolation\+\_\+point\+\_\+global}} (const unsigned \&edge, const unsigned \&n, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x) const
 \begin{DoxyCompactList}\small\item\em Compute the global coordinates of the nth flux interpolation point along an edge. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a26fd22715cc5a27e55bca5d760b822e0}{pin\+\_\+q\+\_\+internal\+\_\+value}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n)
+void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a26fd22715cc5a27e55bca5d760b822e0}{pin\+\_\+q\+\_\+internal\+\_\+value}} (const unsigned \&n)
 \begin{DoxyCompactList}\small\item\em Pin the nth internal q value. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a2ecb4c8ab08c0a21dbbf3afbf1101fbf}{p\+\_\+local\+\_\+eqn}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+int \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a2ecb4c8ab08c0a21dbbf3afbf1101fbf}{p\+\_\+local\+\_\+eqn}} (const unsigned \&n) const
 \begin{DoxyCompactList}\small\item\em Return the equation number of the n-\/th pressure degree of freedom. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a4d1ad5a3473c1d8e4b477bedf5cb88d5}{p\+\_\+value}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a4d1ad5a3473c1d8e4b477bedf5cb88d5}{p\+\_\+value}} (const unsigned \&n) const
 \begin{DoxyCompactList}\small\item\em Return the nth pressure value. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a73c28d7e3789db421c5c5eccc3e25581}{np\+\_\+basis}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a73c28d7e3789db421c5c5eccc3e25581}{np\+\_\+basis}} () const
 \begin{DoxyCompactList}\small\item\em Return the total number of pressure basis functions. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_ab28d384f8b0f7c8b6f5c9d2a1b7f44bb}{get\+\_\+p\+\_\+basis}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&p\+\_\+basis) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_ab28d384f8b0f7c8b6f5c9d2a1b7f44bb}{get\+\_\+p\+\_\+basis}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&p\+\_\+basis) const
 \begin{DoxyCompactList}\small\item\em Compute the pressure basis. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_ae7a875ecb7a63af9ab75051d9f5b1839}{pin\+\_\+p\+\_\+value}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n)
+void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_ae7a875ecb7a63af9ab75051d9f5b1839}{pin\+\_\+p\+\_\+value}} (const unsigned \&n)
 \begin{DoxyCompactList}\small\item\em Pin the nth pressure value. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a9b13e7ff1ff8e97562bb8a4081d8497e}{p\+\_\+data\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a9b13e7ff1ff8e97562bb8a4081d8497e}{p\+\_\+data\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Return pointer to the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object that stores the pressure values. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a8ea07dc74e56f09716e7d556aee30d01}{set\+\_\+p\+\_\+value}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&value)
+void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a8ea07dc74e56f09716e7d556aee30d01}{set\+\_\+p\+\_\+value}} (const unsigned \&n, const double \&value)
 \begin{DoxyCompactList}\small\item\em Set the nth pressure value. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_aafe56b344166f0c26889247b80fd76c1}{scale\+\_\+basis}} (\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&basis) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_aafe56b344166f0c26889247b80fd76c1}{scale\+\_\+basis}} (\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&basis) const
 \begin{DoxyCompactList}\small\item\em Scale the edge basis to allow arbitrary edge mappings. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} short \& \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a1c5b35d3bff6ba02d8164034d49ca01e}{sign\+\_\+edge}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+const short \& \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a1c5b35d3bff6ba02d8164034d49ca01e}{sign\+\_\+edge}} (const unsigned \&n) const
 \begin{DoxyCompactList}\small\item\em Accessor for the unit normal sign of edge n (const version) \end{DoxyCompactList}\item 
-short \& \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a8e20df73b1c0204ec5f1c7c59657373e}{sign\+\_\+edge}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n)
+short \& \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a8e20df73b1c0204ec5f1c7c59657373e}{sign\+\_\+edge}} (const unsigned \&n)
 \begin{DoxyCompactList}\small\item\em Accessor for the unit normal sign of edge n. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a5ef511a62668baf093c5531be1e086d7}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Output with default number of plot points. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a92836a1620402bebe5c9e62ec5ea2c5a}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&Nplot)
+void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a92836a1620402bebe5c9e62ec5ea2c5a}{output}} (std\+::ostream \&outfile, const unsigned \&Nplot)
 \begin{DoxyCompactList}\small\item\em Output FE representation of soln\+: x,y,u1,u2,div\+\_\+q,p at Nplot$^\wedge$\+DIM plot points. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a37259bdb01f2dc45d6bf26976e6e1cfd}{nvertex\+\_\+node}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a37259bdb01f2dc45d6bf26976e6e1cfd}{nvertex\+\_\+node}} () const
 \begin{DoxyCompactList}\small\item\em Number of vertex nodes in the element. \end{DoxyCompactList}\item 
-Node $\ast$ \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a77e73ece428221c979eae3685bf9a1c1}{vertex\+\_\+node\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&j) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a77e73ece428221c979eae3685bf9a1c1}{vertex\+\_\+node\+\_\+pt}} (const unsigned \&j) const
 \begin{DoxyCompactList}\small\item\em Pointer to the j-\/th vertex node in the element. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_adb1607a15629d5b7314ddd29bd61fc15}{nrecovery\+\_\+order}} ()
 \begin{DoxyCompactList}\small\item\em Recovery order for Z2 error estimator. \end{DoxyCompactList}\item 
@@ -106,23 +106,23 @@ unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_adb1607a15629
 \begin{DoxyCompactList}\small\item\em /////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////// Lowest-\/order Raviart-\/\+Thomas based Darcy equation element /////////////////////////////////////////////////////////// \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_aace0ec84efca41bbddb4330fd206bb53}{$\sim$\+TRaviart\+Thomas\+Darcy\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a4f88f5d8f94f7279e23aed150e91a305}{nq\+\_\+basis\+\_\+edge}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a4f88f5d8f94f7279e23aed150e91a305}{nq\+\_\+basis\+\_\+edge}} () const
 \begin{DoxyCompactList}\small\item\em Return the number of edge basis functions for q. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a36f80df6ac5a4425f3fbedbe53867df1}{nq\+\_\+basis\+\_\+internal}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a36f80df6ac5a4425f3fbedbe53867df1}{nq\+\_\+basis\+\_\+internal}} () const
 \begin{DoxyCompactList}\small\item\em Return the number of internal basis functions for q. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_afa12d4279f9fea378e9ef08b23517ed4}{get\+\_\+q\+\_\+basis\+\_\+local}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+basis) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_afa12d4279f9fea378e9ef08b23517ed4}{get\+\_\+q\+\_\+basis\+\_\+local}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+basis) const
 \begin{DoxyCompactList}\small\item\em Compute the local form of the q basis at local coordinate s. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_af5828b15b9b21faabbd165672bca60c5}{get\+\_\+div\+\_\+q\+\_\+basis\+\_\+local}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&div\+\_\+q\+\_\+basis\+\_\+ds) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_af5828b15b9b21faabbd165672bca60c5}{get\+\_\+div\+\_\+q\+\_\+basis\+\_\+local}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&div\+\_\+q\+\_\+basis\+\_\+ds) const
 \begin{DoxyCompactList}\small\item\em Compute the local form of the q basis and dbasis/ds at local coordinate s. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a9d072fcfe2c00f09b4351741ca3430b7}{nedge\+\_\+flux\+\_\+interpolation\+\_\+point}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a9d072fcfe2c00f09b4351741ca3430b7}{nedge\+\_\+flux\+\_\+interpolation\+\_\+point}} () const
 \begin{DoxyCompactList}\small\item\em Return the number of flux interpolation points along each edge of the element. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a969b05dcd2a49020e0b5536c55488925}{p\+\_\+local\+\_\+eqn}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+int \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a969b05dcd2a49020e0b5536c55488925}{p\+\_\+local\+\_\+eqn}} (const unsigned \&n) const
 \begin{DoxyCompactList}\small\item\em Return the equation number of the n-\/th pressure degree of freedom. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_af9bdbb5c25b5ab1f68dfdea3adac0a2c}{p\+\_\+value}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_af9bdbb5c25b5ab1f68dfdea3adac0a2c}{p\+\_\+value}} (const unsigned \&n) const
 \begin{DoxyCompactList}\small\item\em Return the nth pressure value. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_ac6605374b89981d2c977a597b034b2f8}{np\+\_\+basis}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_ac6605374b89981d2c977a597b034b2f8}{np\+\_\+basis}} () const
 \begin{DoxyCompactList}\small\item\em Return the total number of pressure basis functions. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a66f860623f9eadf26be3a58ff2e23f15}{get\+\_\+p\+\_\+basis}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&p\+\_\+basis) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a66f860623f9eadf26be3a58ff2e23f15}{get\+\_\+p\+\_\+basis}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&p\+\_\+basis) const
 \begin{DoxyCompactList}\small\item\em Compute the pressure basis. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a596854f13ababaa50863458404174e7e}{nrecovery\+\_\+order}} ()
 \begin{DoxyCompactList}\small\item\em Recovery order for Z2 error estimator. \end{DoxyCompactList}\item 
@@ -130,56 +130,56 @@ unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a596854f13aba
 \begin{DoxyCompactList}\small\item\em /////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////// Second-\/order Raviart-\/\+Thomas based Darcy equation element /////////////////////////////////////////////////////////// \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a8ead89b1ede99124a895ebcd7dae6227}{$\sim$\+TRaviart\+Thomas\+Darcy\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a3de625795790bd491bb933a068c7dc70}{nq\+\_\+basis\+\_\+edge}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a3de625795790bd491bb933a068c7dc70}{nq\+\_\+basis\+\_\+edge}} () const
 \begin{DoxyCompactList}\small\item\em Return the number of edge basis functions for q. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a2d792185c28fa25862e8351f5cb00cbb}{nq\+\_\+basis\+\_\+internal}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a2d792185c28fa25862e8351f5cb00cbb}{nq\+\_\+basis\+\_\+internal}} () const
 \begin{DoxyCompactList}\small\item\em Return the number of internal basis functions for q. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a3c6ba759d020aa8420caf55efea7c524}{get\+\_\+q\+\_\+basis\+\_\+local}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+basis) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a3c6ba759d020aa8420caf55efea7c524}{get\+\_\+q\+\_\+basis\+\_\+local}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+basis) const
 \begin{DoxyCompactList}\small\item\em Compute the local form of the q basis at local coordinate s. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_ac59bd0feebba18b34f49b0398eaa26c1}{get\+\_\+div\+\_\+q\+\_\+basis\+\_\+local}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&div\+\_\+q\+\_\+basis\+\_\+ds) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_ac59bd0feebba18b34f49b0398eaa26c1}{get\+\_\+div\+\_\+q\+\_\+basis\+\_\+local}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&div\+\_\+q\+\_\+basis\+\_\+ds) const
 \begin{DoxyCompactList}\small\item\em Compute the local form of the q basis and dbasis/ds at local coordinate s. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a824db31cdbec9d0b14895dce7ffbf27c}{nedge\+\_\+flux\+\_\+interpolation\+\_\+point}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a824db31cdbec9d0b14895dce7ffbf27c}{nedge\+\_\+flux\+\_\+interpolation\+\_\+point}} () const
 \begin{DoxyCompactList}\small\item\em Return the number of flux\+\_\+interpolation points along each edge of the element. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a2855196f929328df1fafc1ba06b418ec}{p\+\_\+local\+\_\+eqn}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+int \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a2855196f929328df1fafc1ba06b418ec}{p\+\_\+local\+\_\+eqn}} (const unsigned \&n) const
 \begin{DoxyCompactList}\small\item\em Return the equation number of the n-\/th pressure degree of freedom. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a8448466be4982d654fa0a7b1579358f8}{p\+\_\+value}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a8448466be4982d654fa0a7b1579358f8}{p\+\_\+value}} (const unsigned \&n) const
 \begin{DoxyCompactList}\small\item\em Return the nth pressure value. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_ac5c6c76d0d842ca7657ac7bb568191b3}{np\+\_\+basis}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_ac5c6c76d0d842ca7657ac7bb568191b3}{np\+\_\+basis}} () const
 \begin{DoxyCompactList}\small\item\em Return the total number of pressure basis functions. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_aeb1adba35a74d99238571344011a7a57}{get\+\_\+p\+\_\+basis}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&p\+\_\+basis) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_aeb1adba35a74d99238571344011a7a57}{get\+\_\+p\+\_\+basis}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&p\+\_\+basis) const
 \begin{DoxyCompactList}\small\item\em Compute the pressure basis. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a8ead24922bd14ec7c52a4101f13e5077}{nrecovery\+\_\+order}} ()
 \begin{DoxyCompactList}\small\item\em Recovery order for Z2 error estimator. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-double \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_abf52dcfe30546dd3e2617c1253580dfc}{shape\+\_\+basis\+\_\+test\+\_\+local}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+basis, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+test, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&p\+\_\+basis, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&p\+\_\+test, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&div\+\_\+q\+\_\+basis\+\_\+ds, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&div\+\_\+q\+\_\+test\+\_\+ds) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_abf52dcfe30546dd3e2617c1253580dfc}{shape\+\_\+basis\+\_\+test\+\_\+local}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+basis, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+test, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&p\+\_\+basis, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&p\+\_\+test, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&div\+\_\+q\+\_\+basis\+\_\+ds, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&div\+\_\+q\+\_\+test\+\_\+ds) const
 \begin{DoxyCompactList}\small\item\em Return the geometric basis, and the q, p and divergence basis functions and test functions at local coordinate s. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_afdb0540d59f54d7ef112a85a386f7991}{shape\+\_\+basis\+\_\+test\+\_\+local\+\_\+at\+\_\+knot}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+basis, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+test, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&p\+\_\+basis, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&p\+\_\+test, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&div\+\_\+q\+\_\+basis\+\_\+ds, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&div\+\_\+q\+\_\+test\+\_\+ds) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_afdb0540d59f54d7ef112a85a386f7991}{shape\+\_\+basis\+\_\+test\+\_\+local\+\_\+at\+\_\+knot}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+basis, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+test, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&p\+\_\+basis, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&p\+\_\+test, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&div\+\_\+q\+\_\+basis\+\_\+ds, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&div\+\_\+q\+\_\+test\+\_\+ds) const
 \begin{DoxyCompactList}\small\item\em Return the geometric basis, and the q, p and divergence basis functions and test functions at integration point ipt. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a85d99334b16ec29e1a8ee56d2d386130}{Initial\+\_\+\+Nvalue}} \mbox{[}6\mbox{]}
+const unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a85d99334b16ec29e1a8ee56d2d386130}{Initial\+\_\+\+Nvalue}} \mbox{[}6\mbox{]}
 \begin{DoxyCompactList}\small\item\em The number of values stored at each node\+: A single flux dof is stored at each midside node. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a9dd66bc1bde7b2a1a1150336b8d5f81e}{Initial\+\_\+\+Nvalue}} \mbox{[}6\mbox{]}
+const unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a9dd66bc1bde7b2a1a1150336b8d5f81e}{Initial\+\_\+\+Nvalue}} \mbox{[}6\mbox{]}
 \begin{DoxyCompactList}\small\item\em The number of values stored at each node. Two flux values are stored at each midside node. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a703400ff2df7722ffd9771c22bd70811}{Initial\+\_\+\+Nvalue}} \mbox{[}$\,$\mbox{]}
+static const unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a703400ff2df7722ffd9771c22bd70811}{Initial\+\_\+\+Nvalue}} \mbox{[}$\,$\mbox{]}
 \begin{DoxyCompactList}\small\item\em The number of values stored at each node. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a104da495649d9884c20e86d46aff650f}{Face\+\_\+index\+\_\+of\+\_\+edge\+\_\+flux}} \mbox{[}3\mbox{]}
+const unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a104da495649d9884c20e86d46aff650f}{Face\+\_\+index\+\_\+of\+\_\+edge\+\_\+flux}} \mbox{[}3\mbox{]}
 \begin{DoxyCompactList}\small\item\em Face index associated with edge flux degree of freedom. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a59e42aea1ed16a766a5faa857d22edab}{Q\+\_\+edge\+\_\+conv}} \mbox{[}3\mbox{]}
+const unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a59e42aea1ed16a766a5faa857d22edab}{Q\+\_\+edge\+\_\+conv}} \mbox{[}3\mbox{]}
 \begin{DoxyCompactList}\small\item\em Conversion scheme from an edge degree of freedom to the node it\textquotesingle{}s stored at Fluxes are stored at mid-\/side nodes. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_ac89618c0ec7b5ba44b03f6d793bf74c7}{Flux\+\_\+interpolation\+\_\+point}} \mbox{[}1\mbox{]}
+const double \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_ac89618c0ec7b5ba44b03f6d793bf74c7}{Flux\+\_\+interpolation\+\_\+point}} \mbox{[}1\mbox{]}
 \begin{DoxyCompactList}\small\item\em The points along each edge where the fluxes are taken to be. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_aeda935e3c2ce74d478c9ace10adaa9b7}{Face\+\_\+index\+\_\+of\+\_\+edge\+\_\+flux}} \mbox{[}6\mbox{]}
+const unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_aeda935e3c2ce74d478c9ace10adaa9b7}{Face\+\_\+index\+\_\+of\+\_\+edge\+\_\+flux}} \mbox{[}6\mbox{]}
 \begin{DoxyCompactList}\small\item\em Face index associated with edge flux degree of freedom. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_afe141634074a47688bbb4a73697bd111}{Q\+\_\+edge\+\_\+conv}} \mbox{[}3\mbox{]}
+const unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_afe141634074a47688bbb4a73697bd111}{Q\+\_\+edge\+\_\+conv}} \mbox{[}3\mbox{]}
 \begin{DoxyCompactList}\small\item\em Conversion scheme from an edge degree of freedom to the node it\textquotesingle{}s stored at Fluxes are stored at midside nodes. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a8ebe2866174e0f052434aae3f948d527}{Flux\+\_\+interpolation\+\_\+point}} \mbox{[}2\mbox{]}
+const double \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a8ebe2866174e0f052434aae3f948d527}{Flux\+\_\+interpolation\+\_\+point}} \mbox{[}2\mbox{]}
 \begin{DoxyCompactList}\small\item\em The points along each edge where the fluxes are taken to be. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -193,11 +193,11 @@ std\+::vector$<$ short $>$ \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyEle
 \doxysubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a89a31c8a5261b1bca700707147d8a143}{Face\+\_\+index\+\_\+of\+\_\+edge\+\_\+flux}} \mbox{[}$\,$\mbox{]}
+static const unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a89a31c8a5261b1bca700707147d8a143}{Face\+\_\+index\+\_\+of\+\_\+edge\+\_\+flux}} \mbox{[}$\,$\mbox{]}
 \begin{DoxyCompactList}\small\item\em Face index associated with edge flux degree of freedom. \end{DoxyCompactList}\item 
-static \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a7567cd27a9ce08a2a820510dcab2ac20}{Q\+\_\+edge\+\_\+conv}} \mbox{[}$\,$\mbox{]}
+static const unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a7567cd27a9ce08a2a820510dcab2ac20}{Q\+\_\+edge\+\_\+conv}} \mbox{[}$\,$\mbox{]}
 \begin{DoxyCompactList}\small\item\em Conversion scheme from an edge degree of freedom to the node it\textquotesingle{}s stored at. \end{DoxyCompactList}\item 
-static \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_aa8ccb00e2e8aa63690226fad93b7b1e8}{Flux\+\_\+interpolation\+\_\+point}} \mbox{[}$\,$\mbox{]}
+static const double \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_aa8ccb00e2e8aa63690226fad93b7b1e8}{Flux\+\_\+interpolation\+\_\+point}} \mbox{[}$\,$\mbox{]}
 \begin{DoxyCompactList}\small\item\em The points along each edge where the fluxes are interpolated. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -306,7 +306,7 @@ Definition at line \mbox{\hyperlink{Tdarcy__elements_8cc_source_l00227}{227}} of
 \index{edge\_flux\_interpolation\_point@{edge\_flux\_interpolation\_point}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{edge\_flux\_interpolation\_point()}{edge\_flux\_interpolation\_point()}}
 {\footnotesize\ttfamily template$<$unsigned ORDER$>$ \\
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::edge\+\_\+flux\+\_\+interpolation\+\_\+point (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{edge,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::edge\+\_\+flux\+\_\+interpolation\+\_\+point (\begin{DoxyParamCaption}\item[{const unsigned \&}]{edge,  }\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -333,7 +333,7 @@ Referenced by \mbox{\hyperlink{Tdarcy__elements_8h_source_l00249}{oomph\+::\+TRa
 \index{edge\_flux\_interpolation\_point\_global@{edge\_flux\_interpolation\_point\_global}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{edge\_flux\_interpolation\_point\_global()}{edge\_flux\_interpolation\_point\_global()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$unsigned ORDER$>$ \\
-void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::edge\+\_\+flux\+\_\+interpolation\+\_\+point\+\_\+global (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{edge,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::edge\+\_\+flux\+\_\+interpolation\+\_\+point\+\_\+global (\begin{DoxyParamCaption}\item[{const unsigned \&}]{edge,  }\item[{const unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -349,14 +349,14 @@ Definition at line \mbox{\hyperlink{Tdarcy__elements_8h_source_l00249}{249}} of 
 
 
 
-References \mbox{\hyperlink{Tdarcy__elements_8h_source_l00226}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element$<$ ORDER $>$\+::edge\+\_\+flux\+\_\+interpolation\+\_\+point()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{Tdarcy__elements_8h_source_l00056}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element$<$ ORDER $>$\+::\+Q\+\_\+edge\+\_\+conv}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{Tdarcy__elements_8h_source_l00226}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element$<$ ORDER $>$\+::edge\+\_\+flux\+\_\+interpolation\+\_\+point()}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, and \mbox{\hyperlink{Tdarcy__elements_8h_source_l00056}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element$<$ ORDER $>$\+::\+Q\+\_\+edge\+\_\+conv}}.
 
 \mbox{\Hypertarget{classoomph_1_1TRaviartThomasDarcyElement_a11c49e611acc0becbf0907766b5e9938}\label{classoomph_1_1TRaviartThomasDarcyElement_a11c49e611acc0becbf0907766b5e9938}} 
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!edge\_flux\_interpolation\_point\_global@{edge\_flux\_interpolation\_point\_global}}
 \index{edge\_flux\_interpolation\_point\_global@{edge\_flux\_interpolation\_point\_global}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{edge\_flux\_interpolation\_point\_global()}{edge\_flux\_interpolation\_point\_global()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned ORDER$>$ \\
-void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::edge\+\_\+flux\+\_\+interpolation\+\_\+point\+\_\+global (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{j,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::edge\+\_\+flux\+\_\+interpolation\+\_\+point\+\_\+global (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -372,7 +372,7 @@ Definition at line \mbox{\hyperlink{Tdarcy__elements_8h_source_l00238}{238}} of 
 
 
 
-References \mbox{\hyperlink{Tdarcy__elements_8h_source_l00238}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element$<$ ORDER $>$\+::edge\+\_\+flux\+\_\+interpolation\+\_\+point\+\_\+global()}}, \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_aee9de4e429ee7852f960a9cf80bfe4fc}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element$<$ ORDER $>$\+::nedge\+\_\+flux\+\_\+interpolation\+\_\+point()}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{Tdarcy__elements_8h_source_l00238}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element$<$ ORDER $>$\+::edge\+\_\+flux\+\_\+interpolation\+\_\+point\+\_\+global()}}, and \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_aee9de4e429ee7852f960a9cf80bfe4fc}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element$<$ ORDER $>$\+::nedge\+\_\+flux\+\_\+interpolation\+\_\+point()}}.
 
 
 
@@ -383,7 +383,7 @@ Referenced by \mbox{\hyperlink{Tdarcy__elements_8h_source_l00238}{oomph\+::\+TRa
 \index{edge\_flux\_node\_pt@{edge\_flux\_node\_pt}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{edge\_flux\_node\_pt()}{edge\_flux\_node\_pt()}}
 {\footnotesize\ttfamily template$<$unsigned ORDER$>$ \\
-Node $\ast$ \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::edge\+\_\+flux\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{edge }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::edge\+\_\+flux\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{edge }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -395,14 +395,14 @@ Definition at line \mbox{\hyperlink{Tdarcy__elements_8h_source_l00178}{178}} of 
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{Tdarcy__elements_8h_source_l00056}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element$<$ ORDER $>$\+::\+Q\+\_\+edge\+\_\+conv}}.
+References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{Tdarcy__elements_8h_source_l00056}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element$<$ ORDER $>$\+::\+Q\+\_\+edge\+\_\+conv}}.
 
 \mbox{\Hypertarget{classoomph_1_1TRaviartThomasDarcyElement_a194a2f0a34700b490e937459a40420d9}\label{classoomph_1_1TRaviartThomasDarcyElement_a194a2f0a34700b490e937459a40420d9}} 
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!face\_index\_of\_edge@{face\_index\_of\_edge}}
 \index{face\_index\_of\_edge@{face\_index\_of\_edge}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{face\_index\_of\_edge()}{face\_index\_of\_edge()}}
 {\footnotesize\ttfamily template$<$unsigned ORDER$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::face\+\_\+index\+\_\+of\+\_\+edge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::face\+\_\+index\+\_\+of\+\_\+edge (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -420,7 +420,7 @@ Definition at line \mbox{\hyperlink{Tdarcy__elements_8h_source_l00086}{86}} of f
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!Face\_index\_of\_edge\_flux@{Face\_index\_of\_edge\_flux}}
 \index{Face\_index\_of\_edge\_flux@{Face\_index\_of\_edge\_flux}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{Face\_index\_of\_edge\_flux()}{Face\_index\_of\_edge\_flux()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ 0 $>$\+::Face\+\_\+index\+\_\+of\+\_\+edge\+\_\+flux\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ 0 $>$\+::Face\+\_\+index\+\_\+of\+\_\+edge\+\_\+flux\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -434,7 +434,7 @@ Definition at line \mbox{\hyperlink{Tdarcy__elements_8cc_source_l00181}{181}} of
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!Face\_index\_of\_edge\_flux@{Face\_index\_of\_edge\_flux}}
 \index{Face\_index\_of\_edge\_flux@{Face\_index\_of\_edge\_flux}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{Face\_index\_of\_edge\_flux()}{Face\_index\_of\_edge\_flux()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ 1 $>$\+::Face\+\_\+index\+\_\+of\+\_\+edge\+\_\+flux\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ 1 $>$\+::Face\+\_\+index\+\_\+of\+\_\+edge\+\_\+flux\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -449,7 +449,7 @@ Definition at line \mbox{\hyperlink{Tdarcy__elements_8cc_source_l00416}{416}} of
 \index{face\_index\_of\_q\_edge\_basis\_fct@{face\_index\_of\_q\_edge\_basis\_fct}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{face\_index\_of\_q\_edge\_basis\_fct()}{face\_index\_of\_q\_edge\_basis\_fct()}}
 {\footnotesize\ttfamily template$<$unsigned ORDER$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::face\+\_\+index\+\_\+of\+\_\+q\+\_\+edge\+\_\+basis\+\_\+fct (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::face\+\_\+index\+\_\+of\+\_\+q\+\_\+edge\+\_\+basis\+\_\+fct (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -472,7 +472,7 @@ References \mbox{\hyperlink{Tdarcy__elements_8h_source_l00052}{oomph\+::\+TRavia
 \index{face\_local\_coordinate\_of\_flux\_interpolation\_point@{face\_local\_coordinate\_of\_flux\_interpolation\_point}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{face\_local\_coordinate\_of\_flux\_interpolation\_point()}{face\_local\_coordinate\_of\_flux\_interpolation\_point()}}
 {\footnotesize\ttfamily template$<$unsigned ORDER$>$ \\
-void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::face\+\_\+local\+\_\+coordinate\+\_\+of\+\_\+flux\+\_\+interpolation\+\_\+point (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{edge,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::face\+\_\+local\+\_\+coordinate\+\_\+of\+\_\+flux\+\_\+interpolation\+\_\+point (\begin{DoxyParamCaption}\item[{const unsigned \&}]{edge,  }\item[{const unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -494,7 +494,7 @@ References \mbox{\hyperlink{Tdarcy__elements_8h_source_l00226}{oomph\+::\+TRavia
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!Flux\_interpolation\_point@{Flux\_interpolation\_point}}
 \index{Flux\_interpolation\_point@{Flux\_interpolation\_point}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{Flux\_interpolation\_point()}{Flux\_interpolation\_point()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ 0 $>$\+::Flux\+\_\+interpolation\+\_\+point\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily const double \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ 0 $>$\+::Flux\+\_\+interpolation\+\_\+point\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -508,7 +508,7 @@ Definition at line \mbox{\hyperlink{Tdarcy__elements_8cc_source_l00199}{199}} of
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!Flux\_interpolation\_point@{Flux\_interpolation\_point}}
 \index{Flux\_interpolation\_point@{Flux\_interpolation\_point}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{Flux\_interpolation\_point()}{Flux\_interpolation\_point()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ 1 $>$\+::Flux\+\_\+interpolation\+\_\+point\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily const double \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ 1 $>$\+::Flux\+\_\+interpolation\+\_\+point\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -522,7 +522,7 @@ Definition at line \mbox{\hyperlink{Tdarcy__elements_8cc_source_l00432}{432}} of
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!get\_div\_q\_basis\_local@{get\_div\_q\_basis\_local}}
 \index{get\_div\_q\_basis\_local@{get\_div\_q\_basis\_local}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{get\_div\_q\_basis\_local()}{get\_div\_q\_basis\_local()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
-{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ 0 $>$\+::get\+\_\+div\+\_\+q\+\_\+basis\+\_\+local (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{div\+\_\+q\+\_\+basis\+\_\+ds }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ 0 $>$\+::get\+\_\+div\+\_\+q\+\_\+basis\+\_\+local (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{div\+\_\+q\+\_\+basis\+\_\+ds }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -540,7 +540,7 @@ Definition at line \mbox{\hyperlink{Tdarcy__elements_8cc_source_l00098}{98}} of 
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!get\_div\_q\_basis\_local@{get\_div\_q\_basis\_local}}
 \index{get\_div\_q\_basis\_local@{get\_div\_q\_basis\_local}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{get\_div\_q\_basis\_local()}{get\_div\_q\_basis\_local()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
-{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ 1 $>$\+::get\+\_\+div\+\_\+q\+\_\+basis\+\_\+local (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{div\+\_\+q\+\_\+basis\+\_\+ds }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ 1 $>$\+::get\+\_\+div\+\_\+q\+\_\+basis\+\_\+local (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{div\+\_\+q\+\_\+basis\+\_\+ds }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -563,7 +563,7 @@ References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 \index{get\_div\_q\_basis\_local@{get\_div\_q\_basis\_local}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{get\_div\_q\_basis\_local()}{get\_div\_q\_basis\_local()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
 {\footnotesize\ttfamily template$<$unsigned ORDER$>$ \\
-void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::get\+\_\+div\+\_\+q\+\_\+basis\+\_\+local (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{div\+\_\+q\+\_\+basis\+\_\+ds }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::get\+\_\+div\+\_\+q\+\_\+basis\+\_\+local (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{div\+\_\+q\+\_\+basis\+\_\+ds }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -581,7 +581,7 @@ Referenced by \mbox{\hyperlink{Tdarcy__elements_8h_source_l00409}{oomph\+::\+TRa
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!get\_p\_basis@{get\_p\_basis}}
 \index{get\_p\_basis@{get\_p\_basis}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{get\_p\_basis()}{get\_p\_basis()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
-{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ 0 $>$\+::get\+\_\+p\+\_\+basis (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{p\+\_\+basis }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ 0 $>$\+::get\+\_\+p\+\_\+basis (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{p\+\_\+basis }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -599,7 +599,7 @@ Definition at line \mbox{\hyperlink{Tdarcy__elements_8cc_source_l00152}{152}} of
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!get\_p\_basis@{get\_p\_basis}}
 \index{get\_p\_basis@{get\_p\_basis}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{get\_p\_basis()}{get\_p\_basis()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
-{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ 1 $>$\+::get\+\_\+p\+\_\+basis (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{p\+\_\+basis }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ 1 $>$\+::get\+\_\+p\+\_\+basis (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{p\+\_\+basis }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -622,7 +622,7 @@ References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 \index{get\_p\_basis@{get\_p\_basis}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{get\_p\_basis()}{get\_p\_basis()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
 {\footnotesize\ttfamily template$<$unsigned ORDER$>$ \\
-void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::get\+\_\+p\+\_\+basis (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{p\+\_\+basis }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::get\+\_\+p\+\_\+basis (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{p\+\_\+basis }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -640,7 +640,7 @@ Referenced by \mbox{\hyperlink{Tdarcy__elements_8h_source_l00409}{oomph\+::\+TRa
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!get\_q\_basis\_local@{get\_q\_basis\_local}}
 \index{get\_q\_basis\_local@{get\_q\_basis\_local}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{get\_q\_basis\_local()}{get\_q\_basis\_local()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
-{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ 0 $>$\+::get\+\_\+q\+\_\+basis\+\_\+local (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+basis }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ 0 $>$\+::get\+\_\+q\+\_\+basis\+\_\+local (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+basis }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -662,7 +662,7 @@ References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!get\_q\_basis\_local@{get\_q\_basis\_local}}
 \index{get\_q\_basis\_local@{get\_q\_basis\_local}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{get\_q\_basis\_local()}{get\_q\_basis\_local()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
-{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ 1 $>$\+::get\+\_\+q\+\_\+basis\+\_\+local (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+basis }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ 1 $>$\+::get\+\_\+q\+\_\+basis\+\_\+local (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+basis }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -685,7 +685,7 @@ References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 \index{get\_q\_basis\_local@{get\_q\_basis\_local}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{get\_q\_basis\_local()}{get\_q\_basis\_local()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
 {\footnotesize\ttfamily template$<$unsigned ORDER$>$ \\
-void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::get\+\_\+q\+\_\+basis\+\_\+local (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+basis }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::get\+\_\+q\+\_\+basis\+\_\+local (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+basis }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -703,7 +703,7 @@ Referenced by \mbox{\hyperlink{Tdarcy__elements_8h_source_l00409}{oomph\+::\+TRa
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!Initial\_Nvalue@{Initial\_Nvalue}}
 \index{Initial\_Nvalue@{Initial\_Nvalue}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{Initial\_Nvalue()}{Initial\_Nvalue()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ 0 $>$\+::Initial\+\_\+\+Nvalue\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ 0 $>$\+::Initial\+\_\+\+Nvalue\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -717,7 +717,7 @@ Definition at line \mbox{\hyperlink{Tdarcy__elements_8cc_source_l00173}{173}} of
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!Initial\_Nvalue@{Initial\_Nvalue}}
 \index{Initial\_Nvalue@{Initial\_Nvalue}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{Initial\_Nvalue()}{Initial\_Nvalue()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ 1 $>$\+::Initial\+\_\+\+Nvalue\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ 1 $>$\+::Initial\+\_\+\+Nvalue\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -1037,7 +1037,7 @@ References \mbox{\hyperlink{darcy__elements_8h_source_l00423}{oomph\+::\+Darcy\+
 \index{output@{output}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned ORDER$>$ \\
-void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{Nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{Nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -1082,7 +1082,7 @@ References \mbox{\hyperlink{elements_8h_source_l00622}{oomph\+::\+Generalised\+E
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!p\_local\_eqn@{p\_local\_eqn}}
 \index{p\_local\_eqn@{p\_local\_eqn}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{p\_local\_eqn()}{p\_local\_eqn()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
-{\footnotesize\ttfamily int \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ 0 $>$\+::p\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily int \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ 0 $>$\+::p\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -1100,7 +1100,7 @@ Definition at line \mbox{\hyperlink{Tdarcy__elements_8cc_source_l00125}{125}} of
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!p\_local\_eqn@{p\_local\_eqn}}
 \index{p\_local\_eqn@{p\_local\_eqn}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{p\_local\_eqn()}{p\_local\_eqn()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
-{\footnotesize\ttfamily int \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ 1 $>$\+::p\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily int \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ 1 $>$\+::p\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -1119,7 +1119,7 @@ Definition at line \mbox{\hyperlink{Tdarcy__elements_8cc_source_l00358}{358}} of
 \index{p\_local\_eqn@{p\_local\_eqn}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{p\_local\_eqn()}{p\_local\_eqn()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
 {\footnotesize\ttfamily template$<$unsigned ORDER$>$ \\
-int \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::p\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+int \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::p\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -1133,7 +1133,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DarcyEquations_a3eee8ba9fd2256d01c4be1
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!p\_value@{p\_value}}
 \index{p\_value@{p\_value}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{p\_value()}{p\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
-{\footnotesize\ttfamily double \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ 0 $>$\+::p\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily double \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ 0 $>$\+::p\+\_\+value (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -1151,7 +1151,7 @@ Definition at line \mbox{\hyperlink{Tdarcy__elements_8cc_source_l00134}{134}} of
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!p\_value@{p\_value}}
 \index{p\_value@{p\_value}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{p\_value()}{p\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
-{\footnotesize\ttfamily double \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ 1 $>$\+::p\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily double \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ 1 $>$\+::p\+\_\+value (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -1170,7 +1170,7 @@ Definition at line \mbox{\hyperlink{Tdarcy__elements_8cc_source_l00367}{367}} of
 \index{p\_value@{p\_value}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{p\_value()}{p\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
 {\footnotesize\ttfamily template$<$unsigned ORDER$>$ \\
-double \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::p\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+double \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::p\+\_\+value (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -1185,7 +1185,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DarcyEquations_a788824ffa37b4fcae4d45e
 \index{pin\_p\_value@{pin\_p\_value}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{pin\_p\_value()}{pin\_p\_value()}}
 {\footnotesize\ttfamily template$<$unsigned ORDER$>$ \\
-void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::pin\+\_\+p\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::pin\+\_\+p\+\_\+value (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -1208,7 +1208,7 @@ References \mbox{\hyperlink{elements_8h_source_l00622}{oomph\+::\+Generalised\+E
 \index{pin\_q\_internal\_value@{pin\_q\_internal\_value}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{pin\_q\_internal\_value()}{pin\_q\_internal\_value()}}
 {\footnotesize\ttfamily template$<$unsigned ORDER$>$ \\
-void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::pin\+\_\+q\+\_\+internal\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::pin\+\_\+q\+\_\+internal\+\_\+value (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -1231,7 +1231,7 @@ References \mbox{\hyperlink{elements_8h_source_l00622}{oomph\+::\+Generalised\+E
 \index{q\_edge@{q\_edge}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{q\_edge()}{q\_edge()}}
 {\footnotesize\ttfamily template$<$unsigned ORDER$>$ \\
-double \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::q\+\_\+edge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+double \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::q\+\_\+edge (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -1247,13 +1247,13 @@ Definition at line \mbox{\hyperlink{Tdarcy__elements_8h_source_l00184}{184}} of 
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02598}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{Tdarcy__elements_8h_source_l00165}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element$<$ ORDER $>$\+::q\+\_\+edge\+\_\+index()}}, and \mbox{\hyperlink{Tdarcy__elements_8h_source_l00172}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element$<$ ORDER $>$\+::q\+\_\+edge\+\_\+node\+\_\+number()}}.
+References \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{Tdarcy__elements_8h_source_l00165}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element$<$ ORDER $>$\+::q\+\_\+edge\+\_\+index()}}, and \mbox{\hyperlink{Tdarcy__elements_8h_source_l00172}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element$<$ ORDER $>$\+::q\+\_\+edge\+\_\+node\+\_\+number()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TRaviartThomasDarcyElement_a59e42aea1ed16a766a5faa857d22edab}\label{classoomph_1_1TRaviartThomasDarcyElement_a59e42aea1ed16a766a5faa857d22edab}} 
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!Q\_edge\_conv@{Q\_edge\_conv}}
 \index{Q\_edge\_conv@{Q\_edge\_conv}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{Q\_edge\_conv()}{Q\_edge\_conv()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ 0 $>$\+::Q\+\_\+edge\+\_\+conv\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ 0 $>$\+::Q\+\_\+edge\+\_\+conv\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -1267,7 +1267,7 @@ Definition at line \mbox{\hyperlink{Tdarcy__elements_8cc_source_l00191}{191}} of
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!Q\_edge\_conv@{Q\_edge\_conv}}
 \index{Q\_edge\_conv@{Q\_edge\_conv}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{Q\_edge\_conv()}{Q\_edge\_conv()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ 1 $>$\+::Q\+\_\+edge\+\_\+conv\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ 1 $>$\+::Q\+\_\+edge\+\_\+conv\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -1298,14 +1298,14 @@ Definition at line \mbox{\hyperlink{Tdarcy__elements_8h_source_l00141}{141}} of 
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TRaviartThomasDarcyElement_a5c0de6706bca0a9b006832dd8df30b81}\label{classoomph_1_1TRaviartThomasDarcyElement_a5c0de6706bca0a9b006832dd8df30b81}} 
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!q\_edge\_index@{q\_edge\_index}}
 \index{q\_edge\_index@{q\_edge\_index}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{q\_edge\_index()}{q\_edge\_index()}}
 {\footnotesize\ttfamily template$<$unsigned ORDER$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::q\+\_\+edge\+\_\+index (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::q\+\_\+edge\+\_\+index (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -1328,7 +1328,7 @@ Referenced by \mbox{\hyperlink{Tdarcy__elements_8h_source_l00184}{oomph\+::\+TRa
 \index{q\_edge\_local\_eqn@{q\_edge\_local\_eqn}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{q\_edge\_local\_eqn()}{q\_edge\_local\_eqn()}}
 {\footnotesize\ttfamily template$<$unsigned ORDER$>$ \\
-int \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::q\+\_\+edge\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+int \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::q\+\_\+edge\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -1351,7 +1351,7 @@ References \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Elemen
 \index{q\_edge\_node\_number@{q\_edge\_node\_number}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{q\_edge\_node\_number()}{q\_edge\_node\_number()}}
 {\footnotesize\ttfamily template$<$unsigned ORDER$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::q\+\_\+edge\+\_\+node\+\_\+number (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::q\+\_\+edge\+\_\+node\+\_\+number (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -1378,7 +1378,7 @@ Referenced by \mbox{\hyperlink{Tdarcy__elements_8h_source_l00184}{oomph\+::\+TRa
 \index{q\_internal@{q\_internal}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{q\_internal()}{q\_internal()}}
 {\footnotesize\ttfamily template$<$unsigned ORDER$>$ \\
-double \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::q\+\_\+internal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+double \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::q\+\_\+internal (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -1451,7 +1451,7 @@ Referenced by \mbox{\hyperlink{Tdarcy__elements_8h_source_l00288}{oomph\+::\+TRa
 \index{q\_internal\_local\_eqn@{q\_internal\_local\_eqn}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{q\_internal\_local\_eqn()}{q\_internal\_local\_eqn()}}
 {\footnotesize\ttfamily template$<$unsigned ORDER$>$ \\
-int \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::q\+\_\+internal\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+int \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::q\+\_\+internal\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -1474,7 +1474,7 @@ References \mbox{\hyperlink{elements_8h_source_l00267}{oomph\+::\+Generalised\+E
 \index{required\_nvalue@{required\_nvalue}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{required\_nvalue()}{required\_nvalue()}}
 {\footnotesize\ttfamily template$<$unsigned ORDER$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -1513,14 +1513,14 @@ Definition at line \mbox{\hyperlink{Tdarcy__elements_8h_source_l00325}{325}} of 
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{shape_8h_source_l00265}{oomph\+::\+Shape\+::nindex2()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_af8ab0d926cdbb46da734e4db8461a2e5}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element$<$ ORDER $>$\+::nq\+\_\+basis\+\_\+edge()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{shape_8h_source_l00265}{oomph\+::\+Shape\+::nindex2()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_af8ab0d926cdbb46da734e4db8461a2e5}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element$<$ ORDER $>$\+::nq\+\_\+basis\+\_\+edge()}}, and \mbox{\hyperlink{nodes_8h_source_l01060}{oomph\+::\+Node\+::x()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TRaviartThomasDarcyElement_a8ea07dc74e56f09716e7d556aee30d01}\label{classoomph_1_1TRaviartThomasDarcyElement_a8ea07dc74e56f09716e7d556aee30d01}} 
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!set\_p\_value@{set\_p\_value}}
 \index{set\_p\_value@{set\_p\_value}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{set\_p\_value()}{set\_p\_value()}}
 {\footnotesize\ttfamily template$<$unsigned ORDER$>$ \\
-void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::set\+\_\+p\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::set\+\_\+p\+\_\+value (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const double \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -1543,7 +1543,7 @@ References \mbox{\hyperlink{elements_8h_source_l00622}{oomph\+::\+Generalised\+E
 \index{set\_q\_edge@{set\_q\_edge}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{set\_q\_edge()}{set\_q\_edge()}}
 {\footnotesize\ttfamily template$<$unsigned ORDER$>$ \\
-void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::set\+\_\+q\+\_\+edge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::set\+\_\+q\+\_\+edge (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const double \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -1559,14 +1559,14 @@ Definition at line \mbox{\hyperlink{Tdarcy__elements_8h_source_l00196}{196}} of 
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{Tdarcy__elements_8h_source_l00165}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element$<$ ORDER $>$\+::q\+\_\+edge\+\_\+index()}}, and \mbox{\hyperlink{Tdarcy__elements_8h_source_l00172}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element$<$ ORDER $>$\+::q\+\_\+edge\+\_\+node\+\_\+number()}}.
+References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{Tdarcy__elements_8h_source_l00165}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element$<$ ORDER $>$\+::q\+\_\+edge\+\_\+index()}}, \mbox{\hyperlink{Tdarcy__elements_8h_source_l00172}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element$<$ ORDER $>$\+::q\+\_\+edge\+\_\+node\+\_\+number()}}, and \mbox{\hyperlink{nodes_8h_source_l00271}{oomph\+::\+Data\+::set\+\_\+value()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TRaviartThomasDarcyElement_a651973d516923c2c032f44dac1503b60}\label{classoomph_1_1TRaviartThomasDarcyElement_a651973d516923c2c032f44dac1503b60}} 
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!set\_q\_internal@{set\_q\_internal}}
 \index{set\_q\_internal@{set\_q\_internal}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{set\_q\_internal()}{set\_q\_internal()}}
 {\footnotesize\ttfamily template$<$unsigned ORDER$>$ \\
-void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::set\+\_\+q\+\_\+internal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::set\+\_\+q\+\_\+internal (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const double \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -1589,7 +1589,7 @@ References \mbox{\hyperlink{elements_8h_source_l00622}{oomph\+::\+Generalised\+E
 \index{shape\_basis\_test\_local@{shape\_basis\_test\_local}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{shape\_basis\_test\_local()}{shape\_basis\_test\_local()}}
 {\footnotesize\ttfamily template$<$unsigned ORDER$>$ \\
-double \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::shape\+\_\+basis\+\_\+test\+\_\+local (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+basis,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+test,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{p\+\_\+basis,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{p\+\_\+test,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{div\+\_\+q\+\_\+basis\+\_\+ds,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{div\+\_\+q\+\_\+test\+\_\+ds }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+double \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::shape\+\_\+basis\+\_\+test\+\_\+local (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+basis,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+test,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{p\+\_\+basis,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{p\+\_\+test,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{div\+\_\+q\+\_\+basis\+\_\+ds,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{div\+\_\+q\+\_\+test\+\_\+ds }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -1616,7 +1616,7 @@ Referenced by \mbox{\hyperlink{Tdarcy__elements_8h_source_l00436}{oomph\+::\+TRa
 \index{shape\_basis\_test\_local\_at\_knot@{shape\_basis\_test\_local\_at\_knot}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{shape\_basis\_test\_local\_at\_knot()}{shape\_basis\_test\_local\_at\_knot()}}
 {\footnotesize\ttfamily template$<$unsigned ORDER$>$ \\
-double \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::shape\+\_\+basis\+\_\+test\+\_\+local\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+basis,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+test,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{p\+\_\+basis,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{p\+\_\+test,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{div\+\_\+q\+\_\+basis\+\_\+ds,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{div\+\_\+q\+\_\+test\+\_\+ds }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+double \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::shape\+\_\+basis\+\_\+test\+\_\+local\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+basis,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+test,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{p\+\_\+basis,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{p\+\_\+test,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{div\+\_\+q\+\_\+basis\+\_\+ds,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{div\+\_\+q\+\_\+test\+\_\+ds }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -1632,14 +1632,14 @@ Definition at line \mbox{\hyperlink{Tdarcy__elements_8h_source_l00436}{436}} of 
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01968}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{Tdarcy__elements_8h_source_l00409}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element$<$ ORDER $>$\+::shape\+\_\+basis\+\_\+test\+\_\+local()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral\+::knot()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{Tdarcy__elements_8h_source_l00409}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element$<$ ORDER $>$\+::shape\+\_\+basis\+\_\+test\+\_\+local()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TRaviartThomasDarcyElement_a8e20df73b1c0204ec5f1c7c59657373e}\label{classoomph_1_1TRaviartThomasDarcyElement_a8e20df73b1c0204ec5f1c7c59657373e}} 
 \index{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}!sign\_edge@{sign\_edge}}
 \index{sign\_edge@{sign\_edge}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{sign\_edge()}{sign\_edge()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$unsigned ORDER$>$ \\
-short \& \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::sign\+\_\+edge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+short \& \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::sign\+\_\+edge (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1658,7 +1658,7 @@ References \mbox{\hyperlink{Tdarcy__elements_8h_source_l00070}{oomph\+::\+TRavia
 \index{sign\_edge@{sign\_edge}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{sign\_edge()}{sign\_edge()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned ORDER$>$ \\
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} short \& \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::sign\+\_\+edge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+const short \& \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::sign\+\_\+edge (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1681,7 +1681,7 @@ Referenced by \mbox{\hyperlink{Tdarcy__elements_8h_source_l00226}{oomph\+::\+TRa
 \index{vertex\_node\_pt@{vertex\_node\_pt}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{vertex\_node\_pt()}{vertex\_node\_pt()}}
 {\footnotesize\ttfamily template$<$unsigned ORDER$>$ \\
-Node $\ast$ \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -1703,7 +1703,7 @@ Definition at line \mbox{\hyperlink{Tdarcy__elements_8h_source_l00397}{397}} of 
 \index{Face\_index\_of\_edge\_flux@{Face\_index\_of\_edge\_flux}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{Face\_index\_of\_edge\_flux}{Face\_index\_of\_edge\_flux}}
 {\footnotesize\ttfamily template$<$unsigned ORDER$>$ \\
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::Face\+\_\+index\+\_\+of\+\_\+edge\+\_\+flux\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+const unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::Face\+\_\+index\+\_\+of\+\_\+edge\+\_\+flux\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 
 
@@ -1722,7 +1722,7 @@ Referenced by \mbox{\hyperlink{Tdarcy__elements_8h_source_l00122}{oomph\+::\+TRa
 \index{Flux\_interpolation\_point@{Flux\_interpolation\_point}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{Flux\_interpolation\_point}{Flux\_interpolation\_point}}
 {\footnotesize\ttfamily template$<$unsigned ORDER$>$ \\
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::Flux\+\_\+interpolation\+\_\+point\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+const double \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::Flux\+\_\+interpolation\+\_\+point\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 
 
@@ -1741,7 +1741,7 @@ Referenced by \mbox{\hyperlink{Tdarcy__elements_8h_source_l00226}{oomph\+::\+TRa
 \index{Initial\_Nvalue@{Initial\_Nvalue}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{Initial\_Nvalue}{Initial\_Nvalue}}
 {\footnotesize\ttfamily template$<$unsigned ORDER$>$ \\
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::Initial\+\_\+\+Nvalue\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+const unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::Initial\+\_\+\+Nvalue\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
 
 
 
@@ -1779,7 +1779,7 @@ Referenced by \mbox{\hyperlink{Tdarcy__elements_8cc_source_l00042}{oomph\+::\+TR
 \index{Q\_edge\_conv@{Q\_edge\_conv}!oomph::TRaviartThomasDarcyElement$<$ ORDER $>$@{oomph::TRaviartThomasDarcyElement$<$ ORDER $>$}}
 \doxysubsubsection{\texorpdfstring{Q\_edge\_conv}{Q\_edge\_conv}}
 {\footnotesize\ttfamily template$<$unsigned ORDER$>$ \\
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::Q\+\_\+edge\+\_\+conv\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+const unsigned \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement}{oomph\+::\+TRaviart\+Thomas\+Darcy\+Element}}$<$ ORDER $>$\+::Q\+\_\+edge\+\_\+conv\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 
 

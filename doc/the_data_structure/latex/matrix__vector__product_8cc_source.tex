@@ -109,12 +109,12 @@
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00105}00105 \textcolor{comment}{  /// Apply the operator to the vector x and return the result in}}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00106}00106 \textcolor{comment}{  /// the vector y}}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00107}00107 \textcolor{comment}{}  \textcolor{comment}{//============================================================================}}
-\DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00108}\mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_ac29ba50f1a77bf0e316c3417bcff71ee}{00108}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_ac29ba50f1a77bf0e316c3417bcff71ee}{MatrixVectorProduct::multiply}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00108}\mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_ac29ba50f1a77bf0e316c3417bcff71ee}{00108}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_ac29ba50f1a77bf0e316c3417bcff71ee}{MatrixVectorProduct::multiply}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& x,}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00109}00109                                      \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& y)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00110}00110 \textcolor{keyword}{  }\{}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00111}00111 \textcolor{preprocessor}{\#ifdef PARANOID}}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00112}00112     \textcolor{comment}{// check that the distribution of x is setup}}
-\DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00113}00113     \textcolor{keywordflow}{if} (!\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.built())}
+\DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00113}00113     \textcolor{keywordflow}{if} (!x.\mbox{\hyperlink{classoomph_1_1DoubleVector_aae402d422ec4344a4a45cdb7659b7161}{built}}())}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00114}00114     \{}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00115}00115       std::ostringstream error\_message\_stream;}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00116}00116       error\_message\_stream << \textcolor{stringliteral}{"{}The distribution of the vector x must be setup"{}};}
@@ -170,7 +170,7 @@
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00166}00166     \}}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00167}00167     \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00168}00168     \{}
-\DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00169}00169       \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_a3932cd524581a670528ee807bf28ff1a}{Oomph\_matrix\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a54b75960df52e3aebd21aaab20e9869d}{multiply}}(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, y);}
+\DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00169}00169       \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_a3932cd524581a670528ee807bf28ff1a}{Oomph\_matrix\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a54b75960df52e3aebd21aaab20e9869d}{multiply}}(x, y);}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00170}00170     \}}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00171}00171   \}}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00172}00172 }
@@ -178,12 +178,12 @@
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00174}00174 \textcolor{comment}{  /// Apply the transpose of the operator to the vector x and return}}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00175}00175 \textcolor{comment}{  /// the result in the vector y}}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00176}00176 \textcolor{comment}{}  \textcolor{comment}{//============================================================================}}
-\DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00177}\mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_a2b7670797fe289ea814968f2f9469fd5}{00177}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_a2b7670797fe289ea814968f2f9469fd5}{MatrixVectorProduct::multiply\_transpose}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00177}\mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_a2b7670797fe289ea814968f2f9469fd5}{00177}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_a2b7670797fe289ea814968f2f9469fd5}{MatrixVectorProduct::multiply\_transpose}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& x,}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00178}00178                                                \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& y)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00179}00179 \textcolor{keyword}{  }\{}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00180}00180 \textcolor{preprocessor}{\#ifdef PARANOID}}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00181}00181     \textcolor{comment}{// check that the distribution of x is setup}}
-\DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00182}00182     \textcolor{keywordflow}{if} (!\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.built())}
+\DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00182}00182     \textcolor{keywordflow}{if} (!x.\mbox{\hyperlink{classoomph_1_1DoubleVector_aae402d422ec4344a4a45cdb7659b7161}{built}}())}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00183}00183     \{}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00184}00184       std::ostringstream error\_message\_stream;}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00185}00185       error\_message\_stream << \textcolor{stringliteral}{"{}The distribution of the vector x must be setup"{}};}
@@ -234,7 +234,7 @@
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00230}00230     \}}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00231}00231     \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00232}00232     \{}
-\DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00233}00233       \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_a3932cd524581a670528ee807bf28ff1a}{Oomph\_matrix\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a42fb274c98ccf4c2a542ca15343fcc0e}{multiply\_transpose}}(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, y);}
+\DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00233}00233       \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_a3932cd524581a670528ee807bf28ff1a}{Oomph\_matrix\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a42fb274c98ccf4c2a542ca15343fcc0e}{multiply\_transpose}}(x, y);}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00234}00234     \}}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00235}00235   \}}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00236}00236 }
@@ -243,13 +243,13 @@
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00239}00239 \textcolor{comment}{  /// Apply the operator to the vector x and return}}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00240}00240 \textcolor{comment}{  /// the result in the vector y (helper function)}}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00241}00241 \textcolor{comment}{}  \textcolor{comment}{//============================================================================}}
-\DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00242}\mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_a431b4a1aec80593b729aef89d26dd408}{00242}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_a431b4a1aec80593b729aef89d26dd408}{MatrixVectorProduct::trilinos\_multiply\_helper}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00242}\mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_a431b4a1aec80593b729aef89d26dd408}{00242}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_a431b4a1aec80593b729aef89d26dd408}{MatrixVectorProduct::trilinos\_multiply\_helper}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& x,}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00243}00243                                                      \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& y)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00244}00244 \textcolor{keyword}{  }\{}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00245}00245     \textcolor{comment}{// convert x to a Trilinos Epetra vector.}}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00246}00246     \textcolor{comment}{// x is const so it much be copied.}}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00247}00247     Epetra\_Vector* epetra\_x\_pt =}
-\DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00248}00248       \mbox{\hyperlink{namespaceoomph_1_1TrilinosEpetraHelpers_a914dd010ddb4896a7af801945a2db912}{TrilinosEpetraHelpers::create\_distributed\_epetra\_vector}}(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00248}00248       \mbox{\hyperlink{namespaceoomph_1_1TrilinosEpetraHelpers_a914dd010ddb4896a7af801945a2db912}{TrilinosEpetraHelpers::create\_distributed\_epetra\_vector}}(x);}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00249}00249 }
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00250}00250     \textcolor{comment}{// create Trilinos vector for soln ('viewing' the contents of the oomph-\/lib}}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00251}00251     \textcolor{comment}{// matrix)}}
@@ -289,12 +289,12 @@
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00285}00285 \textcolor{comment}{  /// the result in the vector y (helper function)}}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00286}00286 \textcolor{comment}{}  \textcolor{comment}{//============================================================================}}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00287}\mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_a192d6aba55af4354c22bc44ab9c9b064}{00287}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_a192d6aba55af4354c22bc44ab9c9b064}{MatrixVectorProduct::trilinos\_multiply\_transpose\_helper}}(}
-\DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00288}00288     \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& y)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00288}00288     \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& x, \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& y)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00289}00289 \textcolor{keyword}{  }\{}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00290}00290     \textcolor{comment}{// convert x to a Trilinos Epetra vector.}}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00291}00291     \textcolor{comment}{// x is const so it much be copied.}}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00292}00292     Epetra\_Vector* epetra\_x\_pt =}
-\DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00293}00293       \mbox{\hyperlink{namespaceoomph_1_1TrilinosEpetraHelpers_a914dd010ddb4896a7af801945a2db912}{TrilinosEpetraHelpers::create\_distributed\_epetra\_vector}}(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00293}00293       \mbox{\hyperlink{namespaceoomph_1_1TrilinosEpetraHelpers_a914dd010ddb4896a7af801945a2db912}{TrilinosEpetraHelpers::create\_distributed\_epetra\_vector}}(x);}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00294}00294 }
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00295}00295     \textcolor{comment}{// create Trilinos vector for soln ('viewing' the contents of the oomph-\/lib}}
 \DoxyCodeLine{\Hypertarget{matrix__vector__product_8cc_source_l00296}00296     \textcolor{comment}{// matrix)}}

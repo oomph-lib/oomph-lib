@@ -57,14 +57,14 @@
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00053}00053 \textcolor{comment}{  ///}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00054}00054 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00055}00055   \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
-\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00056}\mbox{\hyperlink{classoomph_1_1RefineablePoissonEquations}{00056}}   \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1RefineablePoissonEquations}{RefineablePoissonEquations}} : \textcolor{keyword}{public} \textcolor{keyword}{virtual} PoissonEquations<DIM>,}
+\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00056}\mbox{\hyperlink{classoomph_1_1RefineablePoissonEquations}{00056}}   \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1RefineablePoissonEquations}{RefineablePoissonEquations}} : \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1PoissonEquations}{PoissonEquations}}<DIM>,}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00057}00057                                      \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1RefineableElement}{RefineableElement}},}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00058}00058                                      \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator}{ElementWithZ2ErrorEstimator}}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00059}00059   \{}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00060}00060   \textcolor{keyword}{public}:\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00061}00061 \textcolor{comment}{    /// Constructor, simply call other constructors}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00062}\mbox{\hyperlink{classoomph_1_1RefineablePoissonEquations_acf636e8df990dace7887f67b04142391}{00062}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1RefineablePoissonEquations_acf636e8df990dace7887f67b04142391}{RefineablePoissonEquations}}()}
-\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00063}00063       : PoissonEquations<DIM>(),}
+\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00063}00063       : \mbox{\hyperlink{classoomph_1_1PoissonEquations}{PoissonEquations}}<DIM>(),}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00064}00064         \mbox{\hyperlink{classoomph_1_1RefineableElement}{RefineableElement}}(),}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00065}00065         \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator}{ElementWithZ2ErrorEstimator}}()}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00066}00066     \{}
@@ -86,7 +86,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00082}00082 \textcolor{comment}{    /// Get 'flux' for Z2 error recovery:  Standard flux.from Poisson equations}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00083}\mbox{\hyperlink{classoomph_1_1RefineablePoissonEquations_a8050a73d9e6450e2b861b3d840f5f6ec}{00083}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1RefineablePoissonEquations_a8050a73d9e6450e2b861b3d840f5f6ec}{get\_Z2\_flux}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& flux)}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00084}00084     \{}
-\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00085}00085       this-\/>get\_flux(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, flux);}
+\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00085}00085       this-\/>\mbox{\hyperlink{classoomph_1_1PoissonEquations_aa11374daca090943d5abc70fa73cc763}{get\_flux}}(s, flux);}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00086}00086     \}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00087}00087 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00088}00088 \textcolor{comment}{    /// Get error against and norm of exact flux}}
@@ -119,7 +119,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00115}00115       values[0] = 0.0;}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00116}00116 }
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00117}00117       \textcolor{comment}{// Find the index at which the poisson unknown is stored}}
-\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00118}00118       \textcolor{keywordtype}{unsigned} u\_nodal\_index = this-\/>u\_index\_poisson();}
+\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00118}00118       \textcolor{keywordtype}{unsigned} u\_nodal\_index = this-\/>\mbox{\hyperlink{classoomph_1_1PoissonEquations_ae2e4e133bde4c4cbddf00de6c4feb72c}{u\_index\_poisson}}();}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00119}00119 }
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00120}00120       \textcolor{comment}{// Loop over the local nodes and sum up the values}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00121}00121       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} l = 0; l < n\_node; l++)}
@@ -159,9 +159,9 @@
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00155}00155 \textcolor{comment}{    ///  Further build: Copy source function pointer from father element}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00156}\mbox{\hyperlink{classoomph_1_1RefineablePoissonEquations_adb5a117ca7556e66af8f3eeaf0bbee7a}{00156}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1RefineablePoissonEquations_adb5a117ca7556e66af8f3eeaf0bbee7a}{further\_build}}()}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00157}00157     \{}
-\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00158}00158       this-\/>Source\_fct\_pt = \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1RefineablePoissonEquations}{RefineablePoissonEquations<DIM>}}*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00158}00158       this-\/>\mbox{\hyperlink{classoomph_1_1PoissonEquations_a4e177939f01ea418aa8a965811877b13}{Source\_fct\_pt}} = \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1RefineablePoissonEquations}{RefineablePoissonEquations<DIM>}}*\textcolor{keyword}{>}(}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00159}00159                               this-\/>\mbox{\hyperlink{classoomph_1_1RefineableElement_a637964a7a9892fe0f0b05692c2e8d153}{father\_element\_pt}}())}
-\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00160}00160                               -\/>source\_fct\_pt();}
+\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00160}00160                               -\/>\mbox{\hyperlink{classoomph_1_1PoissonEquations_a4221606c99576ad2ef8ef82a8dcc14ca}{source\_fct\_pt}}();}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00161}00161     \}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00162}00162 }
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00163}00163 }
@@ -172,7 +172,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00168}00168 \textcolor{comment}{    /// flag=0: compute only residual vector}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00169}00169 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1RefineablePoissonEquations_a1cea3422561cd3016aa4cc04c0e5be56}{fill\_in\_generic\_residual\_contribution\_poisson}}(}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00170}00170       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00171}00171       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}},}
+\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00171}00171       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian,}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00172}00172       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& flag);}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00173}00173 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00174}00174 \textcolor{comment}{    /// Compute derivatives of elemental residual vector with respect}}
@@ -222,13 +222,13 @@
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00218}00218 \textcolor{comment}{    /// Number of vertex nodes in the element}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00219}\mbox{\hyperlink{classoomph_1_1RefineableQPoissonElement_aa0459e0394b99cdba6b70780dc33688e}{00219}} \textcolor{comment}{}    \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1RefineableQPoissonElement_aa0459e0394b99cdba6b70780dc33688e}{nvertex\_node}}()\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00220}00220 \textcolor{keyword}{    }\{}
-\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00221}00221       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1QPoissonElement}{QPoissonElement<DIM, NNODE\_1D>::nvertex\_node}}();}
+\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00221}00221       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1FiniteElement_a45631a7aa50efc3123a921d114f84cba}{QPoissonElement<DIM, NNODE\_1D>::nvertex\_node}}();}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00222}00222     \}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00223}00223 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00224}00224 \textcolor{comment}{    /// Pointer to the j-\/th vertex node in the element}}
-\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00225}\mbox{\hyperlink{classoomph_1_1RefineableQPoissonElement_acbf3431677b6df9ee1c69eda8bdc90dc}{00225}} \textcolor{comment}{}    Node* \mbox{\hyperlink{classoomph_1_1RefineableQPoissonElement_acbf3431677b6df9ee1c69eda8bdc90dc}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00225}\mbox{\hyperlink{classoomph_1_1RefineableQPoissonElement_acbf3431677b6df9ee1c69eda8bdc90dc}{00225}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1RefineableQPoissonElement_acbf3431677b6df9ee1c69eda8bdc90dc}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00226}00226 \textcolor{keyword}{    }\{}
-\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00227}00227       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1QPoissonElement}{QPoissonElement<DIM, NNODE\_1D>::vertex\_node\_pt}}(j);}
+\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00227}00227       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1FiniteElement_ac8b551c9d6f1f8e30e8b18fe2f9ae072}{QPoissonElement<DIM, NNODE\_1D>::vertex\_node\_pt}}(j);}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00228}00228     \}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00229}00229 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00230}00230 \textcolor{comment}{    /// Rebuild from sons: empty}}
@@ -267,7 +267,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00263}00263       \textcolor{comment}{// Set integration scheme}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00264}00264       \textcolor{comment}{// (To avoid memory leaks in pre-\/build and p-\/refine where new}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00265}00265       \textcolor{comment}{// integration schemes are created)}}
-\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00266}00266       this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9b8ff92232a3d17ed7d403fbd3419569}{set\_integration\_scheme}}(\textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1GaussLobattoLegendre}{GaussLobattoLegendre<DIM, 2>}});}
+\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00266}00266       this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_ac80983f27f5bcbc08e2eeb6e4d03698b}{set\_integration\_scheme}}(\textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1GaussLobattoLegendre}{GaussLobattoLegendre<DIM, 2>}});}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00267}00267     \}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00268}00268 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00269}00269 \textcolor{comment}{    /// Destructor (to avoid memory leaks)}}
@@ -295,13 +295,13 @@
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00291}00291 \textcolor{comment}{    /// Number of vertex nodes in the element}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00292}\mbox{\hyperlink{classoomph_1_1PRefineableQPoissonElement_a9640f654f06259a532a62a23ed5f3ac7}{00292}} \textcolor{comment}{}    \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1PRefineableQPoissonElement_a9640f654f06259a532a62a23ed5f3ac7}{nvertex\_node}}()\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00293}00293 \textcolor{keyword}{    }\{}
-\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00294}00294       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1QPoissonElement}{QPoissonElement<DIM, 2>::nvertex\_node}}();}
+\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00294}00294       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1FiniteElement_a45631a7aa50efc3123a921d114f84cba}{QPoissonElement<DIM, 2>::nvertex\_node}}();}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00295}00295     \}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00296}00296 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00297}00297 \textcolor{comment}{    /// Pointer to the j-\/th vertex node in the element}}
-\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00298}\mbox{\hyperlink{classoomph_1_1PRefineableQPoissonElement_aea2eb5066cf1c4613b5bf548eb659a3b}{00298}} \textcolor{comment}{}    Node* \mbox{\hyperlink{classoomph_1_1PRefineableQPoissonElement_aea2eb5066cf1c4613b5bf548eb659a3b}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00298}\mbox{\hyperlink{classoomph_1_1PRefineableQPoissonElement_aea2eb5066cf1c4613b5bf548eb659a3b}{00298}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1PRefineableQPoissonElement_aea2eb5066cf1c4613b5bf548eb659a3b}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00299}00299 \textcolor{keyword}{    }\{}
-\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00300}00300       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1QPoissonElement}{QPoissonElement<DIM, 2>::vertex\_node\_pt}}(j);}
+\DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00300}00300       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1FiniteElement_ac8b551c9d6f1f8e30e8b18fe2f9ae072}{QPoissonElement<DIM, 2>::vertex\_node\_pt}}(j);}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00301}00301     \}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00302}00302 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__poisson__elements_8h_source_l00303}00303 \textcolor{comment}{    /// Order of recovery shape functions for Z2 error estimation:}}

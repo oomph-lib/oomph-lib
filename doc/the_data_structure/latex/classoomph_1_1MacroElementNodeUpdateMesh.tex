@@ -27,7 +27,7 @@ virtual \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateMesh_ab835a8aeb9dae
 \mbox{\hyperlink{classoomph_1_1Domain}{Domain}} $\ast$\& \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateMesh_aadb1bf7d9de16c2ab2e6c0ffb36a806e}{macro\+\_\+domain\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateMesh_ab5271c4514bcd236271307361423ac9d}{node\+\_\+update}} (const bool \&update\+\_\+all\+\_\+solid\+\_\+nodes=false)
-\begin{DoxyCompactList}\small\item\em Update all nodal positions via sparse Macro\+Element-\/based update functions. If a Node is hanging its position is updated after updating the position of its masters first. \mbox{[}Doesn\textquotesingle{}t make sense to use this mesh with Solid\+Elements anyway, so we buffer the case if update\+\_\+all\+\_\+solid\+\_\+nodes is set to true.\mbox{]}. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Update all nodal positions via sparse Macro\+Element-\/based update functions. If a \mbox{\hyperlink{classoomph_1_1Node}{Node}} is hanging its position is updated after updating the position of its masters first. \mbox{[}Doesn\textquotesingle{}t make sense to use this mesh with Solid\+Elements anyway, so we buffer the case if update\+\_\+all\+\_\+solid\+\_\+nodes is set to true.\mbox{]}. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateMesh_a7cb22fc156610a84e45981eff99cde54}{distribute}} (\mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} $\ast$comm\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&element\+\_\+domain, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$ $>$ \&deleted\+\_\+element\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} \&doc\+\_\+info, const bool \&report\+\_\+stats, const bool \&overrule\+\_\+keep\+\_\+as\+\_\+halo\+\_\+element\+\_\+status)
 \begin{DoxyCompactList}\small\item\em Overload the base class distribute function to deal with halo nodes on halo elements that may have pointers to macro elements that no longer exist. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateMesh_a28f1505ed1e507018271c5e7c7cbecde}{set\+\_\+geom\+\_\+object\+\_\+vector\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateMesh_aa550e97598d235eb609bd004d8dbfff2}{geom\+\_\+object\+\_\+vector\+\_\+pt}})
@@ -167,7 +167,7 @@ Referenced by \mbox{\hyperlink{multi__domain_8template_8cc_source_l02068}{oomph\
 
 
 
-Update all nodal positions via sparse Macro\+Element-\/based update functions. If a Node is hanging its position is updated after updating the position of its masters first. \mbox{[}Doesn\textquotesingle{}t make sense to use this mesh with Solid\+Elements anyway, so we buffer the case if update\+\_\+all\+\_\+solid\+\_\+nodes is set to true.\mbox{]}. 
+Update all nodal positions via sparse Macro\+Element-\/based update functions. If a \mbox{\hyperlink{classoomph_1_1Node}{Node}} is hanging its position is updated after updating the position of its masters first. \mbox{[}Doesn\textquotesingle{}t make sense to use this mesh with Solid\+Elements anyway, so we buffer the case if update\+\_\+all\+\_\+solid\+\_\+nodes is set to true.\mbox{]}. 
 
 
 

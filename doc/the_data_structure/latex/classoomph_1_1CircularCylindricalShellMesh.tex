@@ -18,7 +18,7 @@ Inheritance diagram for oomph\+::Circular\+Cylindrical\+Shell\+Mesh\texorpdfstri
 \doxysubsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
-typedef double($\ast$ \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_a770336fa72e8911f31b9fe3f70197a51}{Axial\+BLStretching\+Fct\+Pt}}) (const double \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}})
+typedef double($\ast$ \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_a770336fa72e8911f31b9fe3f70197a51}{Axial\+BLStretching\+Fct\+Pt}}) (const double \&x)
 \begin{DoxyCompactList}\small\item\em Typedef for fct that defines the axial stretching fct. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
@@ -38,7 +38,7 @@ void \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_a03bba13301e4de
 \item 
 void \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_a032ddb9b1afa4ef446ca74c8a6965000}{build\+\_\+mesh}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a189759f02bc92144e4abc24cb5bae5a8}{ny}}, const double \&lx, const double \&ly)
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} build helper fct. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_a4fb67c76ca3ad60efadfe2d3aabcfa0b}{scaled\+\_\+x}} (const double \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}})
+double \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_a4fb67c76ca3ad60efadfe2d3aabcfa0b}{scaled\+\_\+x}} (const double \&x)
 \begin{DoxyCompactList}\small\item\em Fct that defines the axial stretching to accomodate bending boundary layers. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_a5730df8baedd890ca909f31e5452f3db}{piecewise\+\_\+linear\+\_\+axial\+\_\+bl\+\_\+stretching\+\_\+fct}} (const double \&xi)
 \begin{DoxyCompactList}\small\item\em Default axial scaling fct. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -69,7 +69,7 @@ Definition at line \mbox{\hyperlink{circular__shell__mesh_8template_8h_source_l0
 \index{AxialBLStretchingFctPt@{AxialBLStretchingFctPt}!oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$@{oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{AxialBLStretchingFctPt}{AxialBLStretchingFctPt}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-typedef double($\ast$ \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh}}$<$ ELEMENT $>$\+::Axial\+BLStretching\+Fct\+Pt) (const double \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}})}
+typedef double($\ast$ \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh}}$<$ ELEMENT $>$\+::Axial\+BLStretching\+Fct\+Pt) (const double \&x)}
 
 
 
@@ -201,7 +201,7 @@ Definition at line \mbox{\hyperlink{circular__shell__mesh_8template_8cc_source_l
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}, \mbox{\hyperlink{nodes_8h_source_l01884}{oomph\+::\+Solid\+Node\+::xi()}}, and \mbox{\hyperlink{nodes_8h_source_l01903}{oomph\+::\+Solid\+Node\+::xi\+\_\+gen()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l01883}{oomph\+::\+Solid\+Node\+::xi()}}, and \mbox{\hyperlink{nodes_8h_source_l01902}{oomph\+::\+Solid\+Node\+::xi\+\_\+gen()}}.
 
 
 
@@ -247,7 +247,7 @@ Definition at line \mbox{\hyperlink{circular__shell__mesh_8template_8h_source_l0
 
 
 
-References \mbox{\hyperlink{circular__shell__mesh_8template_8h_source_l00193}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::\+Axial\+\_\+bl\+\_\+stretching\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{circular__shell__mesh_8template_8h_source_l00165}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::piecewise\+\_\+linear\+\_\+axial\+\_\+bl\+\_\+stretching\+\_\+fct()}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{circular__shell__mesh_8template_8h_source_l00193}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::\+Axial\+\_\+bl\+\_\+stretching\+\_\+fct\+\_\+pt}}, and \mbox{\hyperlink{circular__shell__mesh_8template_8h_source_l00165}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::piecewise\+\_\+linear\+\_\+axial\+\_\+bl\+\_\+stretching\+\_\+fct()}}.
 
 
 

@@ -486,7 +486,7 @@
 \DoxyCodeLine{\Hypertarget{binary__tree_8cc_source_l00482}00482       \textcolor{comment}{// Loop over the vertex nodes of the associated element}}
 \DoxyCodeLine{\Hypertarget{binary__tree_8cc_source_l00483}00483       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < n\_vertex\_node; j++)}
 \DoxyCodeLine{\Hypertarget{binary__tree_8cc_source_l00484}00484       \{}
-\DoxyCodeLine{\Hypertarget{binary__tree_8cc_source_l00485}00485         Node* nod\_pt = \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1LineElementBase}{LineElementBase}}*\textcolor{keyword}{>}(\mbox{\hyperlink{classoomph_1_1TreeForest_a94d44c85e121758945f04aa28aa8df2a}{Trees\_pt}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]-\/>object\_pt())}
+\DoxyCodeLine{\Hypertarget{binary__tree_8cc_source_l00485}00485         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1LineElementBase}{LineElementBase}}*\textcolor{keyword}{>}(\mbox{\hyperlink{classoomph_1_1TreeForest_a94d44c85e121758945f04aa28aa8df2a}{Trees\_pt}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]-\/>object\_pt())}
 \DoxyCodeLine{\Hypertarget{binary__tree_8cc_source_l00486}00486                          -\/>vertex\_node\_pt(j);}
 \DoxyCodeLine{\Hypertarget{binary__tree_8cc_source_l00487}00487         tree\_assoc\_with\_vertex\_node[nod\_pt].insert(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{binary__tree_8cc_source_l00488}00488       \}}
@@ -497,7 +497,7 @@
 \DoxyCodeLine{\Hypertarget{binary__tree_8cc_source_l00493}00493     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<std::set<unsigned>}}> neighb\_tree(numtrees);}
 \DoxyCodeLine{\Hypertarget{binary__tree_8cc_source_l00494}00494 }
 \DoxyCodeLine{\Hypertarget{binary__tree_8cc_source_l00495}00495     \textcolor{comment}{// Loop over vertex nodes}}
-\DoxyCodeLine{\Hypertarget{binary__tree_8cc_source_l00496}00496     \textcolor{keywordflow}{for} (std::map<Node*, std::set<unsigned>>::iterator it =}
+\DoxyCodeLine{\Hypertarget{binary__tree_8cc_source_l00496}00496     \textcolor{keywordflow}{for} (std::map<\mbox{\hyperlink{classoomph_1_1Node}{Node}}*, std::set<unsigned>>::iterator it =}
 \DoxyCodeLine{\Hypertarget{binary__tree_8cc_source_l00497}00497            tree\_assoc\_with\_vertex\_node.begin();}
 \DoxyCodeLine{\Hypertarget{binary__tree_8cc_source_l00498}00498          it != tree\_assoc\_with\_vertex\_node.end();}
 \DoxyCodeLine{\Hypertarget{binary__tree_8cc_source_l00499}00499          it++)}
@@ -682,7 +682,7 @@
 \DoxyCodeLine{\Hypertarget{binary__tree_8cc_source_l00678}00678     \textcolor{keywordtype}{int} edge = \mbox{\hyperlink{classoomph_1_1Tree_a9e532196340dcd859ff8207eea2ddbbc}{OMEGA}};}
 \DoxyCodeLine{\Hypertarget{binary__tree_8cc_source_l00679}00679 }
 \DoxyCodeLine{\Hypertarget{binary__tree_8cc_source_l00680}00680     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(1);}
-\DoxyCodeLine{\Hypertarget{binary__tree_8cc_source_l00681}00681     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(1);}
+\DoxyCodeLine{\Hypertarget{binary__tree_8cc_source_l00681}00681     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(1);}
 \DoxyCodeLine{\Hypertarget{binary__tree_8cc_source_l00682}00682     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<int>}} prev\_son\_type;}
 \DoxyCodeLine{\Hypertarget{binary__tree_8cc_source_l00683}00683 }
 \DoxyCodeLine{\Hypertarget{binary__tree_8cc_source_l00684}00684     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} s\_in\_neighbour(1);}

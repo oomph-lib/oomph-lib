@@ -328,7 +328,7 @@
 \DoxyCodeLine{\Hypertarget{spines_8h_source_l00324}00324 \textcolor{comment}{  /// In general, more complex node updating should be handled by the classes}}
 \DoxyCodeLine{\Hypertarget{spines_8h_source_l00325}00325 \textcolor{comment}{  /// implemented for algebraic node updates.}}
 \DoxyCodeLine{\Hypertarget{spines_8h_source_l00326}00326 \textcolor{comment}{}  \textcolor{comment}{//=====================================================================}}
-\DoxyCodeLine{\Hypertarget{spines_8h_source_l00327}\mbox{\hyperlink{classoomph_1_1SpineNode}{00327}}   \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1SpineNode}{SpineNode}} : \textcolor{keyword}{public} Node}
+\DoxyCodeLine{\Hypertarget{spines_8h_source_l00327}\mbox{\hyperlink{classoomph_1_1SpineNode}{00327}}   \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1SpineNode}{SpineNode}} : \textcolor{keyword}{public} \mbox{\hyperlink{classoomph_1_1Node}{Node}}}
 \DoxyCodeLine{\Hypertarget{spines_8h_source_l00328}00328   \{}
 \DoxyCodeLine{\Hypertarget{spines_8h_source_l00329}00329   \textcolor{keyword}{private}:\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{spines_8h_source_l00330}00330 \textcolor{comment}{    /// Private internal data pointer to a spine}}
@@ -351,7 +351,7 @@
 \DoxyCodeLine{\Hypertarget{spines_8h_source_l00347}\mbox{\hyperlink{classoomph_1_1SpineNode_af2bbfcecaae18b9256de02a0f0a9bddd}{00347}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1SpineNode_af2bbfcecaae18b9256de02a0f0a9bddd}{SpineNode}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_dim,}
 \DoxyCodeLine{\Hypertarget{spines_8h_source_l00348}00348               \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_position\_type,}
 \DoxyCodeLine{\Hypertarget{spines_8h_source_l00349}00349               \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& initial\_nvalue)}
-\DoxyCodeLine{\Hypertarget{spines_8h_source_l00350}00350       : Node(n\_dim, n\_position\_type, initial\_nvalue),}
+\DoxyCodeLine{\Hypertarget{spines_8h_source_l00350}00350       : \mbox{\hyperlink{classoomph_1_1Node}{Node}}(n\_dim, n\_position\_type, initial\_nvalue),}
 \DoxyCodeLine{\Hypertarget{spines_8h_source_l00351}00351         \mbox{\hyperlink{classoomph_1_1SpineNode_aa37f2daad3dddb01e58ecec5d9304cd0}{Spine\_pt}}(0),}
 \DoxyCodeLine{\Hypertarget{spines_8h_source_l00352}00352         \mbox{\hyperlink{classoomph_1_1SpineNode_a87d72975d31d015c4360b5092abdbf69}{Fraction}}(0),}
 \DoxyCodeLine{\Hypertarget{spines_8h_source_l00353}00353         \mbox{\hyperlink{classoomph_1_1SpineNode_a8154a0fe0c361b730edc27e8e85c077a}{Spine\_mesh\_pt}}(0),}
@@ -360,11 +360,11 @@
 \DoxyCodeLine{\Hypertarget{spines_8h_source_l00356}00356     \}}
 \DoxyCodeLine{\Hypertarget{spines_8h_source_l00357}00357 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{spines_8h_source_l00358}00358 \textcolor{comment}{    /// Unsteady Constructor, initialise pointers to zero}}
-\DoxyCodeLine{\Hypertarget{spines_8h_source_l00359}\mbox{\hyperlink{classoomph_1_1SpineNode_a35d835d5f7b549f45b69669044e30545}{00359}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1SpineNode_a35d835d5f7b549f45b69669044e30545}{SpineNode}}(\mbox{\hyperlink{classoomph_1_1TimeStepper}{TimeStepper}}* \textcolor{keyword}{const}\& time\_stepper\_pt,}
+\DoxyCodeLine{\Hypertarget{spines_8h_source_l00359}\mbox{\hyperlink{classoomph_1_1SpineNode_a35d835d5f7b549f45b69669044e30545}{00359}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1SpineNode_a35d835d5f7b549f45b69669044e30545}{SpineNode}}(\mbox{\hyperlink{classoomph_1_1TimeStepper}{TimeStepper}}* \textcolor{keyword}{const}\& \mbox{\hyperlink{classoomph_1_1Data_a065d7bffcec82bf4d4bd7b41f9aa80b3}{time\_stepper\_pt}},}
 \DoxyCodeLine{\Hypertarget{spines_8h_source_l00360}00360               \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_dim,}
 \DoxyCodeLine{\Hypertarget{spines_8h_source_l00361}00361               \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_position\_type,}
 \DoxyCodeLine{\Hypertarget{spines_8h_source_l00362}00362               \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& initial\_nvalue)}
-\DoxyCodeLine{\Hypertarget{spines_8h_source_l00363}00363       : Node(time\_stepper\_pt, n\_dim, n\_position\_type, initial\_nvalue),}
+\DoxyCodeLine{\Hypertarget{spines_8h_source_l00363}00363       : \mbox{\hyperlink{classoomph_1_1Node}{Node}}(\mbox{\hyperlink{classoomph_1_1Data_a065d7bffcec82bf4d4bd7b41f9aa80b3}{time\_stepper\_pt}}, n\_dim, n\_position\_type, initial\_nvalue),}
 \DoxyCodeLine{\Hypertarget{spines_8h_source_l00364}00364         \mbox{\hyperlink{classoomph_1_1SpineNode_aa37f2daad3dddb01e58ecec5d9304cd0}{Spine\_pt}}(0),}
 \DoxyCodeLine{\Hypertarget{spines_8h_source_l00365}00365         \mbox{\hyperlink{classoomph_1_1SpineNode_a87d72975d31d015c4360b5092abdbf69}{Fraction}}(0),}
 \DoxyCodeLine{\Hypertarget{spines_8h_source_l00366}00366         \mbox{\hyperlink{classoomph_1_1SpineNode_a8154a0fe0c361b730edc27e8e85c077a}{Spine\_mesh\_pt}}(0),}

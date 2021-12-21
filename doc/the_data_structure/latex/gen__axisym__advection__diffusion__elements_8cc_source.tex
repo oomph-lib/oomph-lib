@@ -65,7 +65,7 @@
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00061}00061     \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} dpsidx(n\_node, 2), dtestdx(n\_node, 2);}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00062}00062 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00063}00063     \textcolor{comment}{// Set the value of n\_intpt}}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00064}00064     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00064}00064     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00065}00065 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00066}00066     \textcolor{comment}{// Set the Vector to hold local coordinates}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00067}00067     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(2);}
@@ -84,23 +84,23 @@
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00080}00080     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ipt = 0; ipt < n\_intpt; ipt++)}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00081}00081     \{}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00082}00082       \textcolor{comment}{// Assign values of s}}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00083}00083       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++) \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>knot(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00083}00083       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++) \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{knot}}(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00084}00084 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00085}00085       \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00086}00086       \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00086}00086       \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00087}00087 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00088}00088       \textcolor{comment}{// Call the derivatives of the shape and test functions}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00089}00089       \textcolor{keywordtype}{double} J = \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_a304c2efdc6aea2b866aaf6632466fcc2}{dshape\_and\_dtest\_eulerian\_at\_knot\_cons\_axisym\_adv\_diff}}(}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00090}00090         ipt, psi, dpsidx, test, dtestdx);}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00091}00091 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00092}00092       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00093}00093       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00093}00093       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00094}00094 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00095}00095       \textcolor{comment}{// Calculate local values of the solution and its derivatives}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00096}00096       \textcolor{comment}{// Allocate}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00097}00097       \textcolor{keywordtype}{double} interpolated\_u = 0.0;}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00098}00098       \textcolor{keywordtype}{double} dudt = 0.0;}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00099}00099       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(2, 0.0);}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00099}00099       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(2, 0.0);}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00100}00100       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} interpolated\_dudx(2, 0.0);}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00101}00101       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} mesh\_velocity(2, 0.0);}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00102}00102 }
@@ -117,7 +117,7 @@
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00113}00113         \textcolor{comment}{// Loop over directions}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00114}00114         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < 2; j++)}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00115}00115         \{}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00116}00116           \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}[j] += \mbox{\hyperlink{classoomph_1_1FiniteElement_abe831900a6d6a08ee4a43fd9c07af32e}{raw\_nodal\_position}}(l, j) * psi(l);}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00116}00116           \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}[j] += \mbox{\hyperlink{classoomph_1_1FiniteElement_abe831900a6d6a08ee4a43fd9c07af32e}{raw\_nodal\_position}}(l, j) * psi(l);}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00117}00117           interpolated\_dudx[j] += u\_value * dpsidx(l, j);}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00118}00118         \}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00119}00119       \}}
@@ -138,26 +138,26 @@
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00134}00134       \textcolor{comment}{// Get source function}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00135}00135       \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00136}00136       \textcolor{keywordtype}{double} source;}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00137}00137       \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_ad10c2469da2fc4a3fccbe2d798885490}{get\_source\_cons\_axisym\_adv\_diff}}(ipt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}, source);}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00137}00137       \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_ad10c2469da2fc4a3fccbe2d798885490}{get\_source\_cons\_axisym\_adv\_diff}}(ipt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}, source);}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00138}00138 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00139}00139 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00140}00140       \textcolor{comment}{// Get wind (three components because this could come from a NS}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00141}00141       \textcolor{comment}{// computation)}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00142}00142       \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00143}00143       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_aac288cd2423228b533d7fb865c9968f6}{wind}}(3);}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00144}00144       \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_a6725fac49655c8c50f50977a0b8e9c15}{get\_wind\_cons\_axisym\_adv\_diff}}(ipt, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}, \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_aac288cd2423228b533d7fb865c9968f6}{wind}});}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00144}00144       \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_a6725fac49655c8c50f50977a0b8e9c15}{get\_wind\_cons\_axisym\_adv\_diff}}(ipt, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}, \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_aac288cd2423228b533d7fb865c9968f6}{wind}});}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00145}00145 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00146}00146       \textcolor{comment}{// Get the conserved wind (non-\/divergence free)}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00147}00147       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} conserved\_wind(3);}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00148}00148       \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_a2167481afaeb64c9f8bd278e76f68851}{get\_conserved\_wind\_cons\_axisym\_adv\_diff}}(}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00149}00149         ipt, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}, conserved\_wind);}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00149}00149         ipt, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}, conserved\_wind);}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00150}00150 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00151}00151       \textcolor{comment}{// Get diffusivity tensor}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00152}00152       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} \mbox{\hyperlink{namespaceoomph_1_1OcTreeNames_ae7e7e58298b85825061eeff362656c40a51292b8e4d96f2bb9f0d6bb0340d1620}{D}}(3, 3);}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00153}00153       \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_a41ff0dbbece6cfb98d22719b8aa16685}{get\_diff\_cons\_axisym\_adv\_diff}}(ipt, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}, \mbox{\hyperlink{namespaceoomph_1_1OcTreeNames_ae7e7e58298b85825061eeff362656c40a51292b8e4d96f2bb9f0d6bb0340d1620}{D}});}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00153}00153       \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_a41ff0dbbece6cfb98d22719b8aa16685}{get\_diff\_cons\_axisym\_adv\_diff}}(ipt, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}, \mbox{\hyperlink{namespaceoomph_1_1OcTreeNames_ae7e7e58298b85825061eeff362656c40a51292b8e4d96f2bb9f0d6bb0340d1620}{D}});}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00154}00154 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00155}00155       \textcolor{comment}{// r is the first position component}}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00156}00156       \textcolor{keywordtype}{double} r = \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}[0];}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00156}00156       \textcolor{keywordtype}{double} r = \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}[0];}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00157}00157 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00158}00158       \textcolor{comment}{// Assemble residuals and Jacobian}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00159}00159       \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
@@ -172,7 +172,7 @@
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00168}00168         \textcolor{keywordflow}{if} (local\_eqn >= 0)}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00169}00169         \{}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00170}00170           \textcolor{comment}{// Add body force/source term and time derivative}}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00171}00171           residuals[local\_eqn] -\/= (peclet\_st * dudt + source) * r * test(l) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00171}00171           residuals[local\_eqn] -\/= (peclet\_st * dudt + source) * r * test(l) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00172}00172 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00173}00173           \textcolor{comment}{// The Generalised Advection Diffusion bit itself}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00174}00174           \textcolor{comment}{// Only loop over the non azimuthal directions}}
@@ -198,7 +198,7 @@
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00194}00194             \}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00195}00195             \textcolor{comment}{// Now construct the contribution to the residuals}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00196}00196             residuals[local\_eqn] -\/=}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00197}00197               (tmp * test(l) + tmp2 * dtestdx(l, k)) * r * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00197}00197               (tmp * test(l) + tmp2 * dtestdx(l, k)) * r * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00198}00198           \}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00199}00199 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00200}00200           \textcolor{comment}{// Calculate the jacobian}}
@@ -215,15 +215,15 @@
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00211}00211               \textcolor{keywordflow}{if} (local\_unknown >= 0)}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00212}00212               \{}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00213}00213                 \textcolor{comment}{// Mass matrix term}}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00214}00214                 \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn, local\_unknown) -\/=}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00214}00214                 jacobian(local\_eqn, local\_unknown) -\/=}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00215}00215                   peclet\_st * test(l) * psi(l2) *}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00216}00216                   \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l2)-\/>time\_stepper\_pt()-\/>weight(1, 0) * r * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00216}00216                   \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l2)-\/>\mbox{\hyperlink{classoomph_1_1Data_a065d7bffcec82bf4d4bd7b41f9aa80b3}{time\_stepper\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1TimeStepper_a4cb0aecb044b77ba0553cdd54b586d8a}{weight}}(1, 0) * r * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00217}00217 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00218}00218                 \textcolor{comment}{// Add the mass matrix term}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00219}00219                 \textcolor{keywordflow}{if} (flag == 2)}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00220}00220                 \{}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00221}00221                   mass\_matrix(local\_eqn, local\_unknown) +=}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00222}00222                     peclet\_st * test(l) * psi(l2) * r * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00222}00222                     peclet\_st * test(l) * psi(l2) * r * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00223}00223                 \}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00224}00224 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00225}00225                 \textcolor{comment}{// Add contribution to Elemental Matrix}}
@@ -245,8 +245,8 @@
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00241}00241                   \}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00242}00242 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00243}00243                   \textcolor{comment}{// Now assemble Jacobian term}}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00244}00244                   \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn, local\_unknown) -\/=}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00245}00245                     (tmp * test(l) + tmp2 * dtestdx(l, k)) * r * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00244}00244                   jacobian(local\_eqn, local\_unknown) -\/=}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00245}00245                     (tmp * test(l) + tmp2 * dtestdx(l, k)) * r * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00246}00246                 \}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00247}00247               \}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00248}00248             \}}
@@ -267,7 +267,7 @@
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00263}00263     \textcolor{keywordtype}{bool} passed = \textcolor{keyword}{true};}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00264}00264 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00265}00265     \textcolor{comment}{// Check lower-\/level stuff}}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00266}00266     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1FiniteElement_af04bf6f6a9a60946e6afeee7afdd709c}{FiniteElement::self\_test}}() != 0)}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00266}00266     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1FiniteElement_af94c5a5e22175d5420b33b3b79e46ed3}{FiniteElement::self\_test}}() != 0)}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00267}00267     \{}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00268}00268       passed = \textcolor{keyword}{false};}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00269}00269     \}}
@@ -312,12 +312,12 @@
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00308}00308       \mbox{\hyperlink{classoomph_1_1FiniteElement_a82da844fd3ebb2005842464cdc148a03}{get\_s\_plot}}(iplot, nplot, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00309}00309 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00310}00310       \textcolor{comment}{// Get Eulerian coordinate of plot point}}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00311}00311       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(2);}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00312}00312       \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00311}00311       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(2);}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00312}00312       \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00313}00313 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00314}00314       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00315}00315       \{}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00316}00316         outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00316}00316         outfile << x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00317}00317       \}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00318}00318       outfile << \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_a1936b95306c30b97e76039a28b8b2f03}{interpolated\_u\_cons\_axisym\_adv\_diff}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00319}00319 }
@@ -342,7 +342,7 @@
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00338}00338       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_aac288cd2423228b533d7fb865c9968f6}{wind}}(3);}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00339}00339       \textcolor{comment}{// Dummy integration point variable needed}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00340}00340       \textcolor{keywordtype}{unsigned} ipt = 0;}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00341}00341       \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_a6725fac49655c8c50f50977a0b8e9c15}{get\_wind\_cons\_axisym\_adv\_diff}}(ipt, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_aac288cd2423228b533d7fb865c9968f6}{wind}});}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00341}00341       \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_a6725fac49655c8c50f50977a0b8e9c15}{get\_wind\_cons\_axisym\_adv\_diff}}(ipt, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x, \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_aac288cd2423228b533d7fb865c9968f6}{wind}});}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00342}00342       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 3; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00343}00343       \{}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00344}00344         outfile << \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_aac288cd2423228b533d7fb865c9968f6}{wind}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
@@ -380,7 +380,7 @@
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00376}00376 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00377}00377       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00378}00378       \{}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00379}00379         fprintf(file\_pt, \textcolor{stringliteral}{"{}\%g "{}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00379}00379         fprintf(file\_pt, \textcolor{stringliteral}{"{}\%g "{}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00380}00380       \}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00381}00381       fprintf(file\_pt, \textcolor{stringliteral}{"{}\%g \(\backslash\)n"{}}, \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_a1936b95306c30b97e76039a28b8b2f03}{interpolated\_u\_cons\_axisym\_adv\_diff}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}));}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00382}00382     \}}
@@ -407,7 +407,7 @@
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00403}00403     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(2);}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00404}00404 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00405}00405     \textcolor{comment}{// Vector for coordintes}}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00406}00406     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(2);}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00406}00406     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(2);}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00407}00407 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00408}00408     \textcolor{comment}{// Tecplot header info}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00409}00409     outfile << \mbox{\hyperlink{classoomph_1_1FiniteElement_a3193df31f9ce38e0609d17a8ffb386c6}{tecplot\_zone\_string}}(nplot);}
@@ -423,15 +423,15 @@
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00419}00419       \mbox{\hyperlink{classoomph_1_1FiniteElement_a82da844fd3ebb2005842464cdc148a03}{get\_s\_plot}}(iplot, nplot, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00420}00420 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00421}00421       \textcolor{comment}{// Get x position as Vector}}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00422}00422       \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00422}00422       \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00423}00423 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00424}00424       \textcolor{comment}{// Get exact solution at this point}}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00425}00425       (*exact\_soln\_pt)(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, exact\_soln);}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00425}00425       (*exact\_soln\_pt)(x, exact\_soln);}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00426}00426 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00427}00427       \textcolor{comment}{// Output x,y,...,u\_exact}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00428}00428       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00429}00429       \{}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00430}00430         outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00430}00430         outfile << x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00431}00431       \}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00432}00432       outfile << exact\_soln[0] << std::endl;}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00433}00433     \}}
@@ -462,7 +462,7 @@
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00458}00458     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(2);}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00459}00459 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00460}00460     \textcolor{comment}{// Vector for coordintes}}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00461}00461     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(2);}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00461}00461     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(2);}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00462}00462 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00463}00463     \textcolor{comment}{// Find out how many nodes there are in the element}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00464}00464     \textcolor{keywordtype}{unsigned} n\_node = \mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
@@ -470,7 +470,7 @@
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00466}00466     \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} psi(n\_node);}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00467}00467 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00468}00468     \textcolor{comment}{// Set the value of n\_intpt}}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00469}00469     \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00469}00469     \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00470}00470 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00471}00471     \textcolor{comment}{// Tecplot header info}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00472}00472     outfile << \textcolor{stringliteral}{"{}ZONE"{}} << std::endl;}
@@ -484,37 +484,37 @@
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00480}00480       \textcolor{comment}{// Assign values of s}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00481}00481       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00482}00482       \{}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00483}00483         \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>knot(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00483}00483         \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{knot}}(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00484}00484       \}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00485}00485 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00486}00486       \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00487}00487       \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00487}00487       \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00488}00488 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00489}00489       \textcolor{comment}{// Get jacobian of mapping}}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00490}00490       \textcolor{keywordtype}{double} J = \mbox{\hyperlink{classoomph_1_1FiniteElement_a808557a124b98d5bbe3bb3b22c81b44b}{J\_eulerian}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00490}00490       \textcolor{keywordtype}{double} J = \mbox{\hyperlink{classoomph_1_1FiniteElement_a089e58d5ad9b8efee637221b0e264563}{J\_eulerian}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00491}00491 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00492}00492       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00493}00493       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00493}00493       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00494}00494 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00495}00495       \textcolor{comment}{// Get x position as Vector}}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00496}00496       \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00496}00496       \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00497}00497 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00498}00498       \textcolor{comment}{// Get FE function value}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00499}00499       \textcolor{keywordtype}{double} u\_fe = \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations_a1936b95306c30b97e76039a28b8b2f03}{interpolated\_u\_cons\_axisym\_adv\_diff}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00500}00500 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00501}00501       \textcolor{comment}{// Get exact solution at this point}}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00502}00502       (*exact\_soln\_pt)(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, exact\_soln);}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00502}00502       (*exact\_soln\_pt)(x, exact\_soln);}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00503}00503 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00504}00504       \textcolor{comment}{// Output x,y,...,error}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00505}00505       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00506}00506       \{}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00507}00507         outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00507}00507         outfile << x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00508}00508       \}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00509}00509       outfile << exact\_soln[0] << \textcolor{stringliteral}{"{} "{}} << exact\_soln[0] -\/ u\_fe << std::endl;}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00510}00510 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00511}00511       \textcolor{comment}{// Add to error and norm}}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00512}00512       norm += exact\_soln[0] * exact\_soln[0] * \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[0] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00513}00513       error += (exact\_soln[0] -\/ u\_fe) * (exact\_soln[0] -\/ u\_fe) * \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[0] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00512}00512       norm += exact\_soln[0] * exact\_soln[0] * x[0] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00513}00513       error += (exact\_soln[0] -\/ u\_fe) * (exact\_soln[0] -\/ u\_fe) * x[0] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00514}00514     \}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00515}00515   \}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00516}00516 }
@@ -537,16 +537,16 @@
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00533}00533     \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} psi(n\_node);}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00534}00534 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00535}00535     \textcolor{comment}{// Set the value of n\_intpt}}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00536}00536     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00536}00536     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00537}00537 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00538}00538     \textcolor{comment}{// Loop over the integration points}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00539}00539     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ipt = 0; ipt < n\_intpt; ipt++)}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00540}00540     \{}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00541}00541       \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00542}00542       \textcolor{keyword}{const} \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00542}00542       \textcolor{keyword}{const} \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00543}00543 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00544}00544       \textcolor{comment}{// Get the shape functions}}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00545}00545       this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a2de680722518136b5c6bf2aacc267a31}{shape\_at\_knot}}(ipt, psi);}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00545}00545       this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_aeccc0f774e3fab8c536e2d41004a1665}{shape\_at\_knot}}(ipt, psi);}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00546}00546 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00547}00547       \textcolor{comment}{// Calculate the concentration}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00548}00548       \textcolor{keywordtype}{double} interpolated\_u = 0.0;}
@@ -563,7 +563,7 @@
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00559}00559       \}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00560}00560 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00561}00561       \textcolor{comment}{// Get jacobian of mapping}}
-\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00562}00562       \textcolor{keyword}{const} \textcolor{keywordtype}{double} J = \mbox{\hyperlink{classoomph_1_1FiniteElement_a5767755a268db4802392ab15b4cb35a8}{J\_eulerian\_at\_knot}}(ipt);}
+\DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00562}00562       \textcolor{keyword}{const} \textcolor{keywordtype}{double} J = \mbox{\hyperlink{classoomph_1_1FiniteElement_aa8a201e448a9200af7f87d612ef01227}{J\_eulerian\_at\_knot}}(ipt);}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00563}00563 }
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00564}00564       \textcolor{comment}{// Add the values to the sum}}
 \DoxyCodeLine{\Hypertarget{gen__axisym__advection__diffusion__elements_8cc_source_l00565}00565       sum += interpolated\_u * r * w * J;}

@@ -32,11 +32,11 @@ void \mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_adf4be6b7cf66d8b8f
 \begin{DoxyCompactList}\small\item\em This is a steady scheme, so you can\textquotesingle{}t do this. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_a24344971f7f5dd254488f7373ceb2074}{assign\+\_\+initial\+\_\+values\+\_\+impulsive}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&data\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Broken initialisation the time-\/history for the \mbox{\hyperlink{classoomph_1_1Data}{Data}} values corresponding to an impulsive start. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_a6d8eb64dca810444b461cd893ad7526c}{assign\+\_\+initial\+\_\+positions\+\_\+impulsive}} (Node $\ast$const \&node\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_a6d8eb64dca810444b461cd893ad7526c}{assign\+\_\+initial\+\_\+positions\+\_\+impulsive}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&node\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Broken initialisation of the positions for the node corresponding to an impulsive start. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_a74f8d1b2ca6413edfa6fe4a5110a215f}{shift\+\_\+time\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&data\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Broken shifting of time values. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_a2271fd0ad65dda38686851df5a3970d5}{shift\+\_\+time\+\_\+positions}} (Node $\ast$const \&node\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_a2271fd0ad65dda38686851df5a3970d5}{shift\+\_\+time\+\_\+positions}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&node\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Broken shifting of time positions. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_a57108416ef10b5d0a7664ea2d748a4cb}{set\+\_\+weights}} ()
 \begin{DoxyCompactList}\small\item\em Set the weights (Do nothing) \end{DoxyCompactList}\item 
@@ -46,7 +46,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_aedf54b092d3f9
 \begin{DoxyCompactList}\small\item\em Number of timestep increments that need to be stored by the scheme. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_a279e4c16176c0374b9bba05519a17b0c}{set\+\_\+consistent\+\_\+pinned\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&data\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Set consistent values of the derivatives and current value when the data is pinned. This must be done by the \char`\"{}timestepper\char`\"{} because only it knows the local storage scheme. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_ad08f35407fff9e171312d482cfdeacc0}{set\+\_\+consistent\+\_\+pinned\+\_\+positions}} (Node $\ast$const \&node\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_ad08f35407fff9e171312d482cfdeacc0}{set\+\_\+consistent\+\_\+pinned\+\_\+positions}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&node\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Set consistent values of the derivatives and current value when the Nodes position is pinned. This must be done by the \char`\"{}timestepper\char`\"{} because only it knows the local storage scheme. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_acef989300e17ce031538fe447f13c4d8}{dof\+\_\+derivative\+\_\+offset}} ()
 \item 
@@ -105,7 +105,7 @@ Broken copy constructor.
 \index{oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}!assign\_initial\_positions\_impulsive@{assign\_initial\_positions\_impulsive}}
 \index{assign\_initial\_positions\_impulsive@{assign\_initial\_positions\_impulsive}!oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}}
 \doxysubsubsection{\texorpdfstring{assign\_initial\_positions\_impulsive()}{assign\_initial\_positions\_impulsive()}}
-{\footnotesize\ttfamily void oomph\+::\+Continuation\+Storage\+Scheme\+::assign\+\_\+initial\+\_\+positions\+\_\+impulsive (\begin{DoxyParamCaption}\item[{Node $\ast$const \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Continuation\+Storage\+Scheme\+::assign\+\_\+initial\+\_\+positions\+\_\+impulsive (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -251,7 +251,7 @@ Definition at line \mbox{\hyperlink{generalised__timesteppers_8h_source_l00154}{
 \index{oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}!set\_consistent\_pinned\_positions@{set\_consistent\_pinned\_positions}}
 \index{set\_consistent\_pinned\_positions@{set\_consistent\_pinned\_positions}!oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}}
 \doxysubsubsection{\texorpdfstring{set\_consistent\_pinned\_positions()}{set\_consistent\_pinned\_positions()}}
-{\footnotesize\ttfamily void oomph\+::\+Continuation\+Storage\+Scheme\+::set\+\_\+consistent\+\_\+pinned\+\_\+positions (\begin{DoxyParamCaption}\item[{Node $\ast$const \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Continuation\+Storage\+Scheme\+::set\+\_\+consistent\+\_\+pinned\+\_\+positions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -263,7 +263,7 @@ Definition at line \mbox{\hyperlink{generalised__timesteppers_8h_source_l00261}{
 
 
 
-References \mbox{\hyperlink{generalised__timesteppers_8h_source_l00106}{Dof\+\_\+current\+\_\+offset}}, \mbox{\hyperlink{generalised__timesteppers_8h_source_l00103}{Dof\+\_\+derivative\+\_\+offset}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{generalised__timesteppers_8h_source_l00054}{oomph\+::\+Generalised\+Time\+Stepper\+::\+Ndof\+\_\+storage\+\_\+entries}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+References \mbox{\hyperlink{generalised__timesteppers_8h_source_l00106}{Dof\+\_\+current\+\_\+offset}}, \mbox{\hyperlink{generalised__timesteppers_8h_source_l00103}{Dof\+\_\+derivative\+\_\+offset}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{generalised__timesteppers_8h_source_l00054}{oomph\+::\+Generalised\+Time\+Stepper\+::\+Ndof\+\_\+storage\+\_\+entries}}, \mbox{\hyperlink{nodes_8h_source_l01022}{oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
 
 
 
@@ -313,7 +313,7 @@ Definition at line \mbox{\hyperlink{generalised__timesteppers_8h_source_l00204}{
 \index{oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}!shift\_time\_positions@{shift\_time\_positions}}
 \index{shift\_time\_positions@{shift\_time\_positions}!oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}}
 \doxysubsubsection{\texorpdfstring{shift\_time\_positions()}{shift\_time\_positions()}}
-{\footnotesize\ttfamily void oomph\+::\+Continuation\+Storage\+Scheme\+::shift\+\_\+time\+\_\+positions (\begin{DoxyParamCaption}\item[{Node $\ast$const \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Continuation\+Storage\+Scheme\+::shift\+\_\+time\+\_\+positions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 

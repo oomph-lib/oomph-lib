@@ -74,11 +74,11 @@
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00070}00070 \textcolor{comment}{    /// Takes the position  along a boundary (s) in the macro element coordinate}}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00071}00071 \textcolor{comment}{    /// scheme and returns the value of the boundary condition at that point}}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00072}00072 \textcolor{comment}{    /// (u).}}
-\DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00073}\mbox{\hyperlink{classoomph_1_1BiharmonicProblem_ac3e873c52bcd489bc545f3cd2c860e8f}{00073}} \textcolor{comment}{}    \textcolor{keyword}{typedef} void (*\mbox{\hyperlink{classoomph_1_1BiharmonicProblem_ac3e873c52bcd489bc545f3cd2c860e8f}{DirichletBCFctPt}})(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \textcolor{keywordtype}{double}\& \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}});}
+\DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00073}\mbox{\hyperlink{classoomph_1_1BiharmonicProblem_ac3e873c52bcd489bc545f3cd2c860e8f}{00073}} \textcolor{comment}{}    \textcolor{keyword}{typedef} void (*\mbox{\hyperlink{classoomph_1_1BiharmonicProblem_ac3e873c52bcd489bc545f3cd2c860e8f}{DirichletBCFctPt}})(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \textcolor{keywordtype}{double}\& u);}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00074}00074 }
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00075}00075 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00076}00076 \textcolor{comment}{    /// Definition of the Source Function.}}
-\DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00077}\mbox{\hyperlink{classoomph_1_1BiharmonicProblem_a08d7386bbae19862d6fa656b8a2ae2a0}{00077}} \textcolor{comment}{}    \textcolor{keyword}{typedef} void (*\mbox{\hyperlink{classoomph_1_1BiharmonicProblem_a08d7386bbae19862d6fa656b8a2ae2a0}{BiharmonicSourceFctPt}})(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \textcolor{keywordtype}{double}\& \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}});}
+\DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00077}\mbox{\hyperlink{classoomph_1_1BiharmonicProblem_a08d7386bbae19862d6fa656b8a2ae2a0}{00077}} \textcolor{comment}{}    \textcolor{keyword}{typedef} void (*\mbox{\hyperlink{classoomph_1_1BiharmonicProblem_a08d7386bbae19862d6fa656b8a2ae2a0}{BiharmonicSourceFctPt}})(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x, \textcolor{keywordtype}{double}\& f);}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00078}00078 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00079}00079 \textcolor{comment}{    /// Constructor}}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00080}\mbox{\hyperlink{classoomph_1_1BiharmonicProblem_aa7f9273c26bd98238edb58363db9a02e}{00080}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1BiharmonicProblem_aa7f9273c26bd98238edb58363db9a02e}{BiharmonicProblem}}()}
@@ -233,7 +233,7 @@
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00229}00229 \textcolor{comment}{    /// scheme and returns the fluid velocity normal (dpsi/dt) to the boundary}}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00230}00230 \textcolor{comment}{    /// (u[0]) and the fluid velocity tangential (dpsidn) to the boundary}}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00231}00231 \textcolor{comment}{    /// (u[1]).}}
-\DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00232}\mbox{\hyperlink{classoomph_1_1BiharmonicFluidProblem_a93661d3b0c52bd82fd58496f9f853079}{00232}} \textcolor{comment}{}    \textcolor{keyword}{typedef} void (*\mbox{\hyperlink{classoomph_1_1BiharmonicFluidProblem_a93661d3b0c52bd82fd58496f9f853079}{FluidBCFctPt}})(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}});}
+\DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00232}\mbox{\hyperlink{classoomph_1_1BiharmonicFluidProblem_a93661d3b0c52bd82fd58496f9f853079}{00232}} \textcolor{comment}{}    \textcolor{keyword}{typedef} void (*\mbox{\hyperlink{classoomph_1_1BiharmonicFluidProblem_a93661d3b0c52bd82fd58496f9f853079}{FluidBCFctPt}})(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& u);}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00233}00233 }
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00234}00234 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00235}00235 \textcolor{comment}{    /// constructor}}
@@ -316,7 +316,7 @@
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00312}00312   \{}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00313}00313   \textcolor{keyword}{public}:}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00314}00314     \textcolor{comment}{// constructor}}
-\DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00315}\mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement_a7753395db6939adf4c2ebf5b7d251cef}{00315}}     \mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement_a7753395db6939adf4c2ebf5b7d251cef}{BiharmonicFluidBoundaryElement}}(Node* \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} s\_fixed\_index)}
+\DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00315}\mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement_a7753395db6939adf4c2ebf5b7d251cef}{00315}}     \mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement_a7753395db6939adf4c2ebf5b7d251cef}{BiharmonicFluidBoundaryElement}}(\mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} s\_fixed\_index)}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00316}00316     \{}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00317}00317       \textcolor{comment}{// set the node pt}}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00318}00318       this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0) = \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}};}
@@ -370,11 +370,11 @@
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00366}00366 \textcolor{comment}{    /// Compute the elemental residual vector and jacobian matrix -\/}}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00367}00367 \textcolor{comment}{    /// wrapper function called by get\_jacobian in GeneralisedElement}}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00368}\mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement_a9bc299d6f1c70851999b9e9b72c88602}{00368}} \textcolor{comment}{}    \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement_a9bc299d6f1c70851999b9e9b72c88602}{fill\_in\_contribution\_to\_jacobian}}(\mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00369}00369                                                  \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})}
+\DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00369}00369                                                  \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian)}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00370}00370     \{}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00371}00371       \textcolor{comment}{// call generic routine with flag set to 1}}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00372}00372       \mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement_acb845b4b7fe946233d9f656754fa3eac}{fill\_in\_generic\_residual\_contribution\_biharmonic\_boundary}}(}
-\DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00373}00373         residuals, \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, 1);}
+\DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00373}00373         residuals, jacobian, 1);}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00374}00374     \}}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00375}00375 }
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00376}00376 \textcolor{comment}{}}
@@ -382,7 +382,7 @@
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00378}00378 \textcolor{comment}{    /// matrix if JFLAG = 0}}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00379}00379 \textcolor{comment}{    /// Imposes the equations :  du/ds\_n = dt/ds\_n * ds\_t/dt * du/dt}}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00380}00380 \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement_acb845b4b7fe946233d9f656754fa3eac}{fill\_in\_generic\_residual\_contribution\_biharmonic\_boundary}}(}
-\DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00381}00381       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \textcolor{keywordtype}{unsigned} JFLAG);}
+\DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00381}00381       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian, \textcolor{keywordtype}{unsigned} JFLAG);}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00382}00382 }
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00383}00383   \textcolor{keyword}{private}:}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8h_source_l00384}00384     \textcolor{comment}{// fixed local coordinate index on boundary}}

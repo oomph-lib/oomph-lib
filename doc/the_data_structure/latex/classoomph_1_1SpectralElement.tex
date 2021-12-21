@@ -17,13 +17,13 @@ Inheritance diagram for oomph\+::Spectral\+Element\+:\begin{figure}[H]
 \item 
 virtual \mbox{\hyperlink{classoomph_1_1SpectralElement_a98d3738ce6703db8c52ccd19d82a3451}{$\sim$\+Spectral\+Element}} ()
 \item 
-\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1SpectralElement_ae5fbda0333b3720e8dc64a6669118d41}{spectral\+\_\+data\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1SpectralElement_ae5fbda0333b3720e8dc64a6669118d41}{spectral\+\_\+data\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Return the i-\/th data object associated with the polynomials of order p. Note that i \texorpdfstring{$<$}{<}= p. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1SpectralElement_a8482a26d6c6b1e278a5b98cdbb705d67}{describe\+\_\+local\+\_\+dofs}} (std\+::ostream \&out, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} std\+::string \&current\+\_\+string) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+virtual void \mbox{\hyperlink{classoomph_1_1SpectralElement_a8482a26d6c6b1e278a5b98cdbb705d67}{describe\+\_\+local\+\_\+dofs}} (std\+::ostream \&out, const std\+::string \&current\+\_\+string) const
 \begin{DoxyCompactList}\small\item\em Function to describe the local dofs of the element. The ostream specifies the output stream to which the description is written; the string stores the currently assembled output that is ultimately written to the output stream by Data\+::describe\+\_\+dofs(...); it is typically built up incrementally as we descend through the call hierarchy of this function when called from Problem\+::describe\+\_\+dofs(...) \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1SpectralElement_a36eeaa010b3a66ac9ee1556ee7dcc23d}{assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} bool \&store\+\_\+local\+\_\+dof\+\_\+pt)
+virtual void \mbox{\hyperlink{classoomph_1_1SpectralElement_a36eeaa010b3a66ac9ee1556ee7dcc23d}{assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers}} (const bool \&store\+\_\+local\+\_\+dof\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Assign the local equation numbers. If the boolean argument is true then store degrees of freedom at Dof\+\_\+pt. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1SpectralElement_a930a352d4345327c8751165fa1e49a7b}{nspectral}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1SpectralElement_a930a352d4345327c8751165fa1e49a7b}{nspectral}} () const
 \end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -78,7 +78,7 @@ References \mbox{\hyperlink{Qspectral__elements_8h_source_l00156}{Spectral\+\_\+
 \index{oomph::SpectralElement@{oomph::SpectralElement}!assign\_all\_generic\_local\_eqn\_numbers@{assign\_all\_generic\_local\_eqn\_numbers}}
 \index{assign\_all\_generic\_local\_eqn\_numbers@{assign\_all\_generic\_local\_eqn\_numbers}!oomph::SpectralElement@{oomph::SpectralElement}}
 \doxysubsubsection{\texorpdfstring{assign\_all\_generic\_local\_eqn\_numbers()}{assign\_all\_generic\_local\_eqn\_numbers()}}
-{\footnotesize\ttfamily virtual void oomph\+::\+Spectral\+Element\+::assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} bool \&}]{store\+\_\+local\+\_\+dof\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Spectral\+Element\+::assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers (\begin{DoxyParamCaption}\item[{const bool \&}]{store\+\_\+local\+\_\+dof\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -94,13 +94,13 @@ Definition at line \mbox{\hyperlink{Qspectral__elements_8h_source_l00229}{229}} 
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l00156}{oomph\+::\+Generalised\+Element\+::add\+\_\+global\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{elements_8h_source_l02169}{oomph\+::\+Finite\+Element\+::assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{elements_8h_source_l00231}{oomph\+::\+Generalised\+Element\+::\+Dof\+\_\+pt\+\_\+deque}}, \mbox{\hyperlink{nodes_8h_source_l00367}{oomph\+::\+Data\+::eqn\+\_\+number()}}, \mbox{\hyperlink{elements_8h_source_l00704}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_aeb40d7a104d99e6f7d8123e801e53b5b}{oomph\+::\+Finite\+Element\+::get\+\_\+node\+\_\+number()}}, \mbox{\hyperlink{nodes_8h_source_l00183}{oomph\+::\+Data\+::\+Is\+\_\+pinned}}, \mbox{\hyperlink{nodes_8h_source_l00192}{oomph\+::\+Data\+::\+Is\+\_\+unclassified}}, \mbox{\hyperlink{elements_8h_source_l00726}{oomph\+::\+Generalised\+Element\+::local\+\_\+eqn\+\_\+number()}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{Qspectral__elements_8h_source_l00342}{nspectral()}}, \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}, \mbox{\hyperlink{Qspectral__elements_8h_source_l00182}{spectral\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{Qspectral__elements_8h_source_l00165}{Spectral\+\_\+local\+\_\+eqn}}, and \mbox{\hyperlink{nodes_8h_source_l00324}{oomph\+::\+Data\+::value\+\_\+pt()}}.
+References \mbox{\hyperlink{elements_8cc_source_l00156}{oomph\+::\+Generalised\+Element\+::add\+\_\+global\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{elements_8h_source_l02164}{oomph\+::\+Finite\+Element\+::assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{elements_8h_source_l00231}{oomph\+::\+Generalised\+Element\+::\+Dof\+\_\+pt\+\_\+deque}}, \mbox{\hyperlink{nodes_8h_source_l00367}{oomph\+::\+Data\+::eqn\+\_\+number()}}, \mbox{\hyperlink{elements_8h_source_l00704}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{elements_8cc_source_l03814}{oomph\+::\+Finite\+Element\+::get\+\_\+node\+\_\+number()}}, \mbox{\hyperlink{nodes_8h_source_l00183}{oomph\+::\+Data\+::\+Is\+\_\+pinned}}, \mbox{\hyperlink{nodes_8h_source_l00192}{oomph\+::\+Data\+::\+Is\+\_\+unclassified}}, \mbox{\hyperlink{elements_8h_source_l00726}{oomph\+::\+Generalised\+Element\+::local\+\_\+eqn\+\_\+number()}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{Qspectral__elements_8h_source_l00342}{nspectral()}}, \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}, \mbox{\hyperlink{Qspectral__elements_8h_source_l00182}{spectral\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{Qspectral__elements_8h_source_l00165}{Spectral\+\_\+local\+\_\+eqn}}, and \mbox{\hyperlink{nodes_8h_source_l00324}{oomph\+::\+Data\+::value\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SpectralElement_a8482a26d6c6b1e278a5b98cdbb705d67}\label{classoomph_1_1SpectralElement_a8482a26d6c6b1e278a5b98cdbb705d67}} 
 \index{oomph::SpectralElement@{oomph::SpectralElement}!describe\_local\_dofs@{describe\_local\_dofs}}
 \index{describe\_local\_dofs@{describe\_local\_dofs}!oomph::SpectralElement@{oomph::SpectralElement}}
 \doxysubsubsection{\texorpdfstring{describe\_local\_dofs()}{describe\_local\_dofs()}}
-{\footnotesize\ttfamily virtual void oomph\+::\+Spectral\+Element\+::describe\+\_\+local\+\_\+dofs (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} std\+::string \&}]{current\+\_\+string }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Spectral\+Element\+::describe\+\_\+local\+\_\+dofs (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out,  }\item[{const std\+::string \&}]{current\+\_\+string }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -140,7 +140,7 @@ Referenced by \mbox{\hyperlink{Qspectral__elements_8h_source_l00229}{assign\+\_\
 \index{oomph::SpectralElement@{oomph::SpectralElement}!spectral\_data\_pt@{spectral\_data\_pt}}
 \index{spectral\_data\_pt@{spectral\_data\_pt}!oomph::SpectralElement@{oomph::SpectralElement}}
 \doxysubsubsection{\texorpdfstring{spectral\_data\_pt()}{spectral\_data\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ oomph\+::\+Spectral\+Element\+::spectral\+\_\+data\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ oomph\+::\+Spectral\+Element\+::spectral\+\_\+data\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 

@@ -61,8 +61,8 @@ void \mbox{\hyperlink{classoomph_1_1FishDomain_a75131ac72e23d5b1d701b588c0596b5d
 \begin{DoxyCompactList}\small\item\em Boundary of lower body macro element zeta $ \in [-1,1] $. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FishDomain_a4466e68eb38c1e931743db93af2e9ba9}{r\+\_\+lower\+\_\+body\+\_\+W}} (const unsigned \&t, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Boundary of lower body macro element zeta $ \in [-1,1] $. \end{DoxyCompactList}\item 
-f\$ void \mbox{\hyperlink{classoomph_1_1FishDomain_abb89072e961a3d9f073d67f96797625f}{r\+\_\+lower\+\_\+body\+\_\+S}} (const unsigned \&t, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
-\begin{DoxyCompactList}\small\item\em Southern boundary of lower body macro element zeta. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FishDomain_aa33b19ceef5cd574ee0a6756bcfc6da7}{r\+\_\+lower\+\_\+body\+\_\+S}} (const unsigned \&t, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
+\begin{DoxyCompactList}\small\item\em Southern boundary of lower body macro element zeta $\in [-1,1] $. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FishDomain_abb85a2acd9cf3cd8fae60fd9e487bd1c}{r\+\_\+lower\+\_\+body\+\_\+E}} (const unsigned \&t, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Boundary of lower body macro element zeta $ \in [-1,1] $. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FishDomain_a6d45dba13043b2b6df831848da665f21}{r\+\_\+lower\+\_\+fin\+\_\+N}} (const unsigned \&t, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
@@ -157,11 +157,11 @@ Vector representation of the i\+\_\+macro-\/th macro element boundary i\+\_\+dir
 
 Vector representation of the imacro-\/th macro element boundary idirect (N/\+S/\+W/E) at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous)\+: $ {\bf r}({\bf zeta}) $ Note that the local coordinate {\bfseries{zeta}} is a 1D Vector rather than a scalar -- this is unavoidable because this function implements the pure virtual function in the Domain base class. 
 
-Definition at line \mbox{\hyperlink{fish__domain_8h_source_l00309}{309}} of file \mbox{\hyperlink{fish__domain_8h_source}{fish\+\_\+domain.\+h}}.
+Definition at line \mbox{\hyperlink{fish__domain_8h_source_l00308}{308}} of file \mbox{\hyperlink{fish__domain_8h_source}{fish\+\_\+domain.\+h}}.
 
 
 
-References \mbox{\hyperlink{fish__domain_8h_source_l00226}{r\+\_\+lower\+\_\+body\+\_\+\+E()}}, \mbox{\hyperlink{fish__domain_8h_source_l00186}{r\+\_\+lower\+\_\+body\+\_\+\+N()}}, \mbox{\hyperlink{fish__domain_8h_source_l00214}{r\+\_\+lower\+\_\+body\+\_\+\+S()}}, \mbox{\hyperlink{fish__domain_8h_source_l00199}{r\+\_\+lower\+\_\+body\+\_\+\+W()}}, \mbox{\hyperlink{fish__domain_8h_source_l00280}{r\+\_\+lower\+\_\+fin\+\_\+\+E()}}, \mbox{\hyperlink{fish__domain_8h_source_l00241}{r\+\_\+lower\+\_\+fin\+\_\+\+N()}}, \mbox{\hyperlink{fish__domain_8h_source_l00268}{r\+\_\+lower\+\_\+fin\+\_\+\+S()}}, \mbox{\hyperlink{fish__domain_8h_source_l00254}{r\+\_\+lower\+\_\+fin\+\_\+\+W()}}, \mbox{\hyperlink{fish__domain_8h_source_l00573}{r\+\_\+upper\+\_\+body\+\_\+\+E()}}, \mbox{\hyperlink{fish__domain_8h_source_l00556}{r\+\_\+upper\+\_\+body\+\_\+\+N()}}, \mbox{\hyperlink{fish__domain_8h_source_l00598}{r\+\_\+upper\+\_\+body\+\_\+\+S()}}, \mbox{\hyperlink{fish__domain_8h_source_l00618}{r\+\_\+upper\+\_\+body\+\_\+\+W()}}, \mbox{\hyperlink{fish__domain_8h_source_l00543}{r\+\_\+upper\+\_\+fin\+\_\+\+E()}}, \mbox{\hyperlink{fish__domain_8h_source_l00481}{r\+\_\+upper\+\_\+fin\+\_\+\+N()}}, \mbox{\hyperlink{fish__domain_8h_source_l00524}{r\+\_\+upper\+\_\+fin\+\_\+\+S()}}, and \mbox{\hyperlink{fish__domain_8h_source_l00506}{r\+\_\+upper\+\_\+fin\+\_\+\+W()}}.
+References \mbox{\hyperlink{fish__domain_8h_source_l00225}{r\+\_\+lower\+\_\+body\+\_\+\+E()}}, \mbox{\hyperlink{fish__domain_8h_source_l00186}{r\+\_\+lower\+\_\+body\+\_\+\+N()}}, \mbox{\hyperlink{fish__domain_8h_source_l00213}{r\+\_\+lower\+\_\+body\+\_\+\+S()}}, \mbox{\hyperlink{fish__domain_8h_source_l00199}{r\+\_\+lower\+\_\+body\+\_\+\+W()}}, \mbox{\hyperlink{fish__domain_8h_source_l00279}{r\+\_\+lower\+\_\+fin\+\_\+\+E()}}, \mbox{\hyperlink{fish__domain_8h_source_l00240}{r\+\_\+lower\+\_\+fin\+\_\+\+N()}}, \mbox{\hyperlink{fish__domain_8h_source_l00267}{r\+\_\+lower\+\_\+fin\+\_\+\+S()}}, \mbox{\hyperlink{fish__domain_8h_source_l00253}{r\+\_\+lower\+\_\+fin\+\_\+\+W()}}, \mbox{\hyperlink{fish__domain_8h_source_l00572}{r\+\_\+upper\+\_\+body\+\_\+\+E()}}, \mbox{\hyperlink{fish__domain_8h_source_l00555}{r\+\_\+upper\+\_\+body\+\_\+\+N()}}, \mbox{\hyperlink{fish__domain_8h_source_l00597}{r\+\_\+upper\+\_\+body\+\_\+\+S()}}, \mbox{\hyperlink{fish__domain_8h_source_l00617}{r\+\_\+upper\+\_\+body\+\_\+\+W()}}, \mbox{\hyperlink{fish__domain_8h_source_l00542}{r\+\_\+upper\+\_\+fin\+\_\+\+E()}}, \mbox{\hyperlink{fish__domain_8h_source_l00480}{r\+\_\+upper\+\_\+fin\+\_\+\+N()}}, \mbox{\hyperlink{fish__domain_8h_source_l00523}{r\+\_\+upper\+\_\+fin\+\_\+\+S()}}, and \mbox{\hyperlink{fish__domain_8h_source_l00505}{r\+\_\+upper\+\_\+fin\+\_\+\+W()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FishDomain_a3d0bd6adcbe5bb5b2479a92a33a1f6c1}\label{classoomph_1_1FishDomain_a3d0bd6adcbe5bb5b2479a92a33a1f6c1}} 
 \index{oomph::FishDomain@{oomph::FishDomain}!operator=@{operator=}}
@@ -185,15 +185,15 @@ Boundary of lower body macro element zeta $ \in [-1,1] $.
 
 
 
-Definition at line \mbox{\hyperlink{fish__domain_8h_source_l00226}{226}} of file \mbox{\hyperlink{fish__domain_8h_source}{fish\+\_\+domain.\+h}}.
+Definition at line \mbox{\hyperlink{fish__domain_8h_source_l00225}{225}} of file \mbox{\hyperlink{fish__domain_8h_source}{fish\+\_\+domain.\+h}}.
 
 
 
-References \mbox{\hyperlink{fish__domain_8h_source_l00573}{r\+\_\+upper\+\_\+body\+\_\+\+E()}}.
+References \mbox{\hyperlink{fish__domain_8h_source_l00572}{r\+\_\+upper\+\_\+body\+\_\+\+E()}}.
 
 
 
-Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00309}{macro\+\_\+element\+\_\+boundary()}}.
+Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00308}{macro\+\_\+element\+\_\+boundary()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FishDomain_a75131ac72e23d5b1d701b588c0596b5d}\label{classoomph_1_1FishDomain_a75131ac72e23d5b1d701b588c0596b5d}} 
 \index{oomph::FishDomain@{oomph::FishDomain}!r\_lower\_body\_N@{r\_lower\_body\_N}}
@@ -211,33 +211,33 @@ Definition at line \mbox{\hyperlink{fish__domain_8h_source_l00186}{186}} of file
 
 
 
-References \mbox{\hyperlink{fish__domain_8h_source_l00598}{r\+\_\+upper\+\_\+body\+\_\+\+S()}}.
+References \mbox{\hyperlink{fish__domain_8h_source_l00597}{r\+\_\+upper\+\_\+body\+\_\+\+S()}}.
 
 
 
-Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00309}{macro\+\_\+element\+\_\+boundary()}}.
+Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00308}{macro\+\_\+element\+\_\+boundary()}}.
 
-\mbox{\Hypertarget{classoomph_1_1FishDomain_abb89072e961a3d9f073d67f96797625f}\label{classoomph_1_1FishDomain_abb89072e961a3d9f073d67f96797625f}} 
+\mbox{\Hypertarget{classoomph_1_1FishDomain_aa33b19ceef5cd574ee0a6756bcfc6da7}\label{classoomph_1_1FishDomain_aa33b19ceef5cd574ee0a6756bcfc6da7}} 
 \index{oomph::FishDomain@{oomph::FishDomain}!r\_lower\_body\_S@{r\_lower\_body\_S}}
 \index{r\_lower\_body\_S@{r\_lower\_body\_S}!oomph::FishDomain@{oomph::FishDomain}}
 \doxysubsubsection{\texorpdfstring{r\_lower\_body\_S()}{r\_lower\_body\_S()}}
-{\footnotesize\ttfamily f\$ void oomph\+::\+Fish\+Domain\+::r\+\_\+lower\+\_\+body\+\_\+S (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily void oomph\+::\+Fish\+Domain\+::r\+\_\+lower\+\_\+body\+\_\+S (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
-Southern boundary of lower body macro element zeta. 
+Southern boundary of lower body macro element zeta $\in [-1,1] $. 
 
 
 
-Definition at line \mbox{\hyperlink{fish__domain_8h_source_l00214}{214}} of file \mbox{\hyperlink{fish__domain_8h_source}{fish\+\_\+domain.\+h}}.
+Definition at line \mbox{\hyperlink{fish__domain_8h_source_l00213}{213}} of file \mbox{\hyperlink{fish__domain_8h_source}{fish\+\_\+domain.\+h}}.
 
 
 
-References \mbox{\hyperlink{fish__domain_8h_source_l00556}{r\+\_\+upper\+\_\+body\+\_\+\+N()}}.
+References \mbox{\hyperlink{fish__domain_8h_source_l00555}{r\+\_\+upper\+\_\+body\+\_\+\+N()}}.
 
 
 
-Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00309}{macro\+\_\+element\+\_\+boundary()}}.
+Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00308}{macro\+\_\+element\+\_\+boundary()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FishDomain_a4466e68eb38c1e931743db93af2e9ba9}\label{classoomph_1_1FishDomain_a4466e68eb38c1e931743db93af2e9ba9}} 
 \index{oomph::FishDomain@{oomph::FishDomain}!r\_lower\_body\_W@{r\_lower\_body\_W}}
@@ -255,11 +255,11 @@ Definition at line \mbox{\hyperlink{fish__domain_8h_source_l00199}{199}} of file
 
 
 
-References \mbox{\hyperlink{fish__domain_8h_source_l00618}{r\+\_\+upper\+\_\+body\+\_\+\+W()}}.
+References \mbox{\hyperlink{fish__domain_8h_source_l00617}{r\+\_\+upper\+\_\+body\+\_\+\+W()}}.
 
 
 
-Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00309}{macro\+\_\+element\+\_\+boundary()}}.
+Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00308}{macro\+\_\+element\+\_\+boundary()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FishDomain_a956dcbb87e9b37a0b965fcddb9911de3}\label{classoomph_1_1FishDomain_a956dcbb87e9b37a0b965fcddb9911de3}} 
 \index{oomph::FishDomain@{oomph::FishDomain}!r\_lower\_fin\_E@{r\_lower\_fin\_E}}
@@ -273,15 +273,15 @@ Boundary of lower fin macro element zeta $ \in [-1,1] $.
 
 
 
-Definition at line \mbox{\hyperlink{fish__domain_8h_source_l00280}{280}} of file \mbox{\hyperlink{fish__domain_8h_source}{fish\+\_\+domain.\+h}}.
+Definition at line \mbox{\hyperlink{fish__domain_8h_source_l00279}{279}} of file \mbox{\hyperlink{fish__domain_8h_source}{fish\+\_\+domain.\+h}}.
 
 
 
-References \mbox{\hyperlink{fish__domain_8h_source_l00543}{r\+\_\+upper\+\_\+fin\+\_\+\+E()}}.
+References \mbox{\hyperlink{fish__domain_8h_source_l00542}{r\+\_\+upper\+\_\+fin\+\_\+\+E()}}.
 
 
 
-Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00309}{macro\+\_\+element\+\_\+boundary()}}.
+Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00308}{macro\+\_\+element\+\_\+boundary()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FishDomain_a6d45dba13043b2b6df831848da665f21}\label{classoomph_1_1FishDomain_a6d45dba13043b2b6df831848da665f21}} 
 \index{oomph::FishDomain@{oomph::FishDomain}!r\_lower\_fin\_N@{r\_lower\_fin\_N}}
@@ -295,15 +295,15 @@ Boundary of lower fin macro element zeta $ \in [-1,1] $.
 
 
 
-Definition at line \mbox{\hyperlink{fish__domain_8h_source_l00241}{241}} of file \mbox{\hyperlink{fish__domain_8h_source}{fish\+\_\+domain.\+h}}.
+Definition at line \mbox{\hyperlink{fish__domain_8h_source_l00240}{240}} of file \mbox{\hyperlink{fish__domain_8h_source}{fish\+\_\+domain.\+h}}.
 
 
 
-References \mbox{\hyperlink{fish__domain_8h_source_l00524}{r\+\_\+upper\+\_\+fin\+\_\+\+S()}}.
+References \mbox{\hyperlink{fish__domain_8h_source_l00523}{r\+\_\+upper\+\_\+fin\+\_\+\+S()}}.
 
 
 
-Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00309}{macro\+\_\+element\+\_\+boundary()}}.
+Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00308}{macro\+\_\+element\+\_\+boundary()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FishDomain_a2110fb0b776654460d6a3477fbc4979d}\label{classoomph_1_1FishDomain_a2110fb0b776654460d6a3477fbc4979d}} 
 \index{oomph::FishDomain@{oomph::FishDomain}!r\_lower\_fin\_S@{r\_lower\_fin\_S}}
@@ -317,15 +317,15 @@ Boundary of lower fin macro element zeta $ \in [-1,1] $.
 
 
 
-Definition at line \mbox{\hyperlink{fish__domain_8h_source_l00268}{268}} of file \mbox{\hyperlink{fish__domain_8h_source}{fish\+\_\+domain.\+h}}.
+Definition at line \mbox{\hyperlink{fish__domain_8h_source_l00267}{267}} of file \mbox{\hyperlink{fish__domain_8h_source}{fish\+\_\+domain.\+h}}.
 
 
 
-References \mbox{\hyperlink{fish__domain_8h_source_l00481}{r\+\_\+upper\+\_\+fin\+\_\+\+N()}}.
+References \mbox{\hyperlink{fish__domain_8h_source_l00480}{r\+\_\+upper\+\_\+fin\+\_\+\+N()}}.
 
 
 
-Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00309}{macro\+\_\+element\+\_\+boundary()}}.
+Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00308}{macro\+\_\+element\+\_\+boundary()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FishDomain_aaf5f3eb1842dc9d7e3f51d4b727632f9}\label{classoomph_1_1FishDomain_aaf5f3eb1842dc9d7e3f51d4b727632f9}} 
 \index{oomph::FishDomain@{oomph::FishDomain}!r\_lower\_fin\_W@{r\_lower\_fin\_W}}
@@ -339,15 +339,15 @@ Boundary of lower fin macro element zeta $ \in [-1,1] $.
 
 
 
-Definition at line \mbox{\hyperlink{fish__domain_8h_source_l00254}{254}} of file \mbox{\hyperlink{fish__domain_8h_source}{fish\+\_\+domain.\+h}}.
+Definition at line \mbox{\hyperlink{fish__domain_8h_source_l00253}{253}} of file \mbox{\hyperlink{fish__domain_8h_source}{fish\+\_\+domain.\+h}}.
 
 
 
-References \mbox{\hyperlink{fish__domain_8h_source_l00506}{r\+\_\+upper\+\_\+fin\+\_\+\+W()}}.
+References \mbox{\hyperlink{fish__domain_8h_source_l00505}{r\+\_\+upper\+\_\+fin\+\_\+\+W()}}.
 
 
 
-Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00309}{macro\+\_\+element\+\_\+boundary()}}.
+Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00308}{macro\+\_\+element\+\_\+boundary()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FishDomain_a47bdf57eebfa025628e70da2a1ab9e19}\label{classoomph_1_1FishDomain_a47bdf57eebfa025628e70da2a1ab9e19}} 
 \index{oomph::FishDomain@{oomph::FishDomain}!r\_upper\_body\_E@{r\_upper\_body\_E}}
@@ -361,7 +361,7 @@ Boundary of upper body macro element zeta $ \in [-1,1] $.
 
 Eastern edge of upper body macro element; $ \zeta \in [-1,1] $. 
 
-Definition at line \mbox{\hyperlink{fish__domain_8h_source_l00573}{573}} of file \mbox{\hyperlink{fish__domain_8h_source}{fish\+\_\+domain.\+h}}.
+Definition at line \mbox{\hyperlink{fish__domain_8h_source_l00572}{572}} of file \mbox{\hyperlink{fish__domain_8h_source}{fish\+\_\+domain.\+h}}.
 
 
 
@@ -369,7 +369,7 @@ References \mbox{\hyperlink{fish__domain_8h_source_l00142}{Back\+\_\+pt}}, and \
 
 
 
-Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00309}{macro\+\_\+element\+\_\+boundary()}}, and \mbox{\hyperlink{fish__domain_8h_source_l00226}{r\+\_\+lower\+\_\+body\+\_\+\+E()}}.
+Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00308}{macro\+\_\+element\+\_\+boundary()}}, and \mbox{\hyperlink{fish__domain_8h_source_l00225}{r\+\_\+lower\+\_\+body\+\_\+\+E()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FishDomain_a45f1d71d2cf6f4102486b04362ba8b0b}\label{classoomph_1_1FishDomain_a45f1d71d2cf6f4102486b04362ba8b0b}} 
 \index{oomph::FishDomain@{oomph::FishDomain}!r\_upper\_body\_N@{r\_upper\_body\_N}}
@@ -383,7 +383,7 @@ Boundary of upper body macro element zeta $ \in [-1,1] $.
 
 Northern edge of upper body macro element; $ \zeta \in [-1,1] $. 
 
-Definition at line \mbox{\hyperlink{fish__domain_8h_source_l00556}{556}} of file \mbox{\hyperlink{fish__domain_8h_source}{fish\+\_\+domain.\+h}}.
+Definition at line \mbox{\hyperlink{fish__domain_8h_source_l00555}{555}} of file \mbox{\hyperlink{fish__domain_8h_source}{fish\+\_\+domain.\+h}}.
 
 
 
@@ -391,7 +391,7 @@ References \mbox{\hyperlink{fish__domain_8h_source_l00142}{Back\+\_\+pt}}, \mbox
 
 
 
-Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00309}{macro\+\_\+element\+\_\+boundary()}}, and \mbox{\hyperlink{fish__domain_8h_source_l00214}{r\+\_\+lower\+\_\+body\+\_\+\+S()}}.
+Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00308}{macro\+\_\+element\+\_\+boundary()}}, and \mbox{\hyperlink{fish__domain_8h_source_l00213}{r\+\_\+lower\+\_\+body\+\_\+\+S()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FishDomain_af30cc8b5bc73f1d2e71099c19b2a0d98}\label{classoomph_1_1FishDomain_af30cc8b5bc73f1d2e71099c19b2a0d98}} 
 \index{oomph::FishDomain@{oomph::FishDomain}!r\_upper\_body\_S@{r\_upper\_body\_S}}
@@ -405,7 +405,7 @@ Boundary of upper body macro element zeta $ \in [-1,1] $.
 
 Southern edge of upper body macro element; $ \zeta \in [-1,1] $. 
 
-Definition at line \mbox{\hyperlink{fish__domain_8h_source_l00598}{598}} of file \mbox{\hyperlink{fish__domain_8h_source}{fish\+\_\+domain.\+h}}.
+Definition at line \mbox{\hyperlink{fish__domain_8h_source_l00597}{597}} of file \mbox{\hyperlink{fish__domain_8h_source}{fish\+\_\+domain.\+h}}.
 
 
 
@@ -413,7 +413,7 @@ References \mbox{\hyperlink{fish__domain_8h_source_l00142}{Back\+\_\+pt}}, \mbox
 
 
 
-Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00309}{macro\+\_\+element\+\_\+boundary()}}, and \mbox{\hyperlink{fish__domain_8h_source_l00186}{r\+\_\+lower\+\_\+body\+\_\+\+N()}}.
+Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00308}{macro\+\_\+element\+\_\+boundary()}}, and \mbox{\hyperlink{fish__domain_8h_source_l00186}{r\+\_\+lower\+\_\+body\+\_\+\+N()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FishDomain_ac0fadb2212e194bfe9f2ff7f0c892c22}\label{classoomph_1_1FishDomain_ac0fadb2212e194bfe9f2ff7f0c892c22}} 
 \index{oomph::FishDomain@{oomph::FishDomain}!r\_upper\_body\_W@{r\_upper\_body\_W}}
@@ -427,7 +427,7 @@ Boundary of upper body macro element zeta $ \in [-1,1] $.
 
 Western edge of upper body macro element; $ \zeta \in [-1,1] $. 
 
-Definition at line \mbox{\hyperlink{fish__domain_8h_source_l00618}{618}} of file \mbox{\hyperlink{fish__domain_8h_source}{fish\+\_\+domain.\+h}}.
+Definition at line \mbox{\hyperlink{fish__domain_8h_source_l00617}{617}} of file \mbox{\hyperlink{fish__domain_8h_source}{fish\+\_\+domain.\+h}}.
 
 
 
@@ -435,7 +435,7 @@ References \mbox{\hyperlink{fish__domain_8h_source_l00142}{Back\+\_\+pt}}, \mbox
 
 
 
-Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00309}{macro\+\_\+element\+\_\+boundary()}}, and \mbox{\hyperlink{fish__domain_8h_source_l00199}{r\+\_\+lower\+\_\+body\+\_\+\+W()}}.
+Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00308}{macro\+\_\+element\+\_\+boundary()}}, and \mbox{\hyperlink{fish__domain_8h_source_l00199}{r\+\_\+lower\+\_\+body\+\_\+\+W()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FishDomain_a063912bd40138bb84b3cdfc23133eff2}\label{classoomph_1_1FishDomain_a063912bd40138bb84b3cdfc23133eff2}} 
 \index{oomph::FishDomain@{oomph::FishDomain}!r\_upper\_fin\_E@{r\_upper\_fin\_E}}
@@ -449,7 +449,7 @@ Boundary of upper fin macro element zeta $ \in [-1,1] $.
 
 Eastern edge of upper fin macro element; $ \zeta \in [-1,1] $. 
 
-Definition at line \mbox{\hyperlink{fish__domain_8h_source_l00543}{543}} of file \mbox{\hyperlink{fish__domain_8h_source}{fish\+\_\+domain.\+h}}.
+Definition at line \mbox{\hyperlink{fish__domain_8h_source_l00542}{542}} of file \mbox{\hyperlink{fish__domain_8h_source}{fish\+\_\+domain.\+h}}.
 
 
 
@@ -457,7 +457,7 @@ References \mbox{\hyperlink{fish__domain_8h_source_l00133}{X\+\_\+fin}}, and \mb
 
 
 
-Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00309}{macro\+\_\+element\+\_\+boundary()}}, and \mbox{\hyperlink{fish__domain_8h_source_l00280}{r\+\_\+lower\+\_\+fin\+\_\+\+E()}}.
+Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00308}{macro\+\_\+element\+\_\+boundary()}}, and \mbox{\hyperlink{fish__domain_8h_source_l00279}{r\+\_\+lower\+\_\+fin\+\_\+\+E()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FishDomain_a6b0cc31071869ef0e4b4794fe5a46d2f}\label{classoomph_1_1FishDomain_a6b0cc31071869ef0e4b4794fe5a46d2f}} 
 \index{oomph::FishDomain@{oomph::FishDomain}!r\_upper\_fin\_N@{r\_upper\_fin\_N}}
@@ -471,7 +471,7 @@ Boundary of upper fin macro element zeta $ \in [-1,1] $.
 
 Northern edge of upper fin macro element; $ \zeta \in [-1,1] $. 
 
-Definition at line \mbox{\hyperlink{fish__domain_8h_source_l00481}{481}} of file \mbox{\hyperlink{fish__domain_8h_source}{fish\+\_\+domain.\+h}}.
+Definition at line \mbox{\hyperlink{fish__domain_8h_source_l00480}{480}} of file \mbox{\hyperlink{fish__domain_8h_source}{fish\+\_\+domain.\+h}}.
 
 
 
@@ -479,7 +479,7 @@ References \mbox{\hyperlink{fish__domain_8h_source_l00142}{Back\+\_\+pt}}, \mbox
 
 
 
-Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00309}{macro\+\_\+element\+\_\+boundary()}}, and \mbox{\hyperlink{fish__domain_8h_source_l00268}{r\+\_\+lower\+\_\+fin\+\_\+\+S()}}.
+Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00308}{macro\+\_\+element\+\_\+boundary()}}, and \mbox{\hyperlink{fish__domain_8h_source_l00267}{r\+\_\+lower\+\_\+fin\+\_\+\+S()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FishDomain_acd62f651648d85a79e04ced3193c3a2a}\label{classoomph_1_1FishDomain_acd62f651648d85a79e04ced3193c3a2a}} 
 \index{oomph::FishDomain@{oomph::FishDomain}!r\_upper\_fin\_S@{r\_upper\_fin\_S}}
@@ -493,7 +493,7 @@ Boundary of upper fin macro element zeta $ \in [-1,1] $.
 
 Southern edge of upper fin macro element; $ \zeta \in [-1,1] $. 
 
-Definition at line \mbox{\hyperlink{fish__domain_8h_source_l00524}{524}} of file \mbox{\hyperlink{fish__domain_8h_source}{fish\+\_\+domain.\+h}}.
+Definition at line \mbox{\hyperlink{fish__domain_8h_source_l00523}{523}} of file \mbox{\hyperlink{fish__domain_8h_source}{fish\+\_\+domain.\+h}}.
 
 
 
@@ -501,7 +501,7 @@ References \mbox{\hyperlink{fish__domain_8h_source_l00142}{Back\+\_\+pt}}, and \
 
 
 
-Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00309}{macro\+\_\+element\+\_\+boundary()}}, and \mbox{\hyperlink{fish__domain_8h_source_l00241}{r\+\_\+lower\+\_\+fin\+\_\+\+N()}}.
+Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00308}{macro\+\_\+element\+\_\+boundary()}}, and \mbox{\hyperlink{fish__domain_8h_source_l00240}{r\+\_\+lower\+\_\+fin\+\_\+\+N()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FishDomain_a750c0daa893d08038a52fbf20a4b23b8}\label{classoomph_1_1FishDomain_a750c0daa893d08038a52fbf20a4b23b8}} 
 \index{oomph::FishDomain@{oomph::FishDomain}!r\_upper\_fin\_W@{r\_upper\_fin\_W}}
@@ -515,7 +515,7 @@ Boundary of upper fin macro element zeta $ \in [-1,1] $.
 
 Western edge of upper fin macro element; $ \zeta \in [-1,1] $. 
 
-Definition at line \mbox{\hyperlink{fish__domain_8h_source_l00506}{506}} of file \mbox{\hyperlink{fish__domain_8h_source}{fish\+\_\+domain.\+h}}.
+Definition at line \mbox{\hyperlink{fish__domain_8h_source_l00505}{505}} of file \mbox{\hyperlink{fish__domain_8h_source}{fish\+\_\+domain.\+h}}.
 
 
 
@@ -523,7 +523,7 @@ References \mbox{\hyperlink{fish__domain_8h_source_l00142}{Back\+\_\+pt}}, and \
 
 
 
-Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00309}{macro\+\_\+element\+\_\+boundary()}}, and \mbox{\hyperlink{fish__domain_8h_source_l00254}{r\+\_\+lower\+\_\+fin\+\_\+\+W()}}.
+Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00308}{macro\+\_\+element\+\_\+boundary()}}, and \mbox{\hyperlink{fish__domain_8h_source_l00253}{r\+\_\+lower\+\_\+fin\+\_\+\+W()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FishDomain_ae30b2566729bf9c70f5bf447c2da01ce}\label{classoomph_1_1FishDomain_ae30b2566729bf9c70f5bf447c2da01ce}} 
 \index{oomph::FishDomain@{oomph::FishDomain}!x\_fin@{x\_fin}}
@@ -642,7 +642,7 @@ Definition at line \mbox{\hyperlink{fish__domain_8h_source_l00142}{142}} of file
 
 
 
-Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00573}{r\+\_\+upper\+\_\+body\+\_\+\+E()}}, \mbox{\hyperlink{fish__domain_8h_source_l00556}{r\+\_\+upper\+\_\+body\+\_\+\+N()}}, \mbox{\hyperlink{fish__domain_8h_source_l00598}{r\+\_\+upper\+\_\+body\+\_\+\+S()}}, \mbox{\hyperlink{fish__domain_8h_source_l00618}{r\+\_\+upper\+\_\+body\+\_\+\+W()}}, \mbox{\hyperlink{fish__domain_8h_source_l00481}{r\+\_\+upper\+\_\+fin\+\_\+\+N()}}, \mbox{\hyperlink{fish__domain_8h_source_l00524}{r\+\_\+upper\+\_\+fin\+\_\+\+S()}}, and \mbox{\hyperlink{fish__domain_8h_source_l00506}{r\+\_\+upper\+\_\+fin\+\_\+\+W()}}.
+Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00572}{r\+\_\+upper\+\_\+body\+\_\+\+E()}}, \mbox{\hyperlink{fish__domain_8h_source_l00555}{r\+\_\+upper\+\_\+body\+\_\+\+N()}}, \mbox{\hyperlink{fish__domain_8h_source_l00597}{r\+\_\+upper\+\_\+body\+\_\+\+S()}}, \mbox{\hyperlink{fish__domain_8h_source_l00617}{r\+\_\+upper\+\_\+body\+\_\+\+W()}}, \mbox{\hyperlink{fish__domain_8h_source_l00480}{r\+\_\+upper\+\_\+fin\+\_\+\+N()}}, \mbox{\hyperlink{fish__domain_8h_source_l00523}{r\+\_\+upper\+\_\+fin\+\_\+\+S()}}, and \mbox{\hyperlink{fish__domain_8h_source_l00505}{r\+\_\+upper\+\_\+fin\+\_\+\+W()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FishDomain_af27c51fe0272df3dec2ad93c5c231d59}\label{classoomph_1_1FishDomain_af27c51fe0272df3dec2ad93c5c231d59}} 
 \index{oomph::FishDomain@{oomph::FishDomain}!X\_fin@{X\_fin}}
@@ -660,7 +660,7 @@ Definition at line \mbox{\hyperlink{fish__domain_8h_source_l00133}{133}} of file
 
 
 
-Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00048}{Fish\+Domain()}}, \mbox{\hyperlink{fish__domain_8h_source_l00543}{r\+\_\+upper\+\_\+fin\+\_\+\+E()}}, \mbox{\hyperlink{fish__domain_8h_source_l00481}{r\+\_\+upper\+\_\+fin\+\_\+\+N()}}, and \mbox{\hyperlink{fish__domain_8h_source_l00083}{x\+\_\+fin()}}.
+Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00048}{Fish\+Domain()}}, \mbox{\hyperlink{fish__domain_8h_source_l00542}{r\+\_\+upper\+\_\+fin\+\_\+\+E()}}, \mbox{\hyperlink{fish__domain_8h_source_l00480}{r\+\_\+upper\+\_\+fin\+\_\+\+N()}}, and \mbox{\hyperlink{fish__domain_8h_source_l00083}{x\+\_\+fin()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FishDomain_aa25f3280c2453dd725d59f23a478ee11}\label{classoomph_1_1FishDomain_aa25f3280c2453dd725d59f23a478ee11}} 
 \index{oomph::FishDomain@{oomph::FishDomain}!X\_mouth@{X\_mouth}}
@@ -678,7 +678,7 @@ Definition at line \mbox{\hyperlink{fish__domain_8h_source_l00139}{139}} of file
 
 
 
-Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00048}{Fish\+Domain()}}, \mbox{\hyperlink{fish__domain_8h_source_l00598}{r\+\_\+upper\+\_\+body\+\_\+\+S()}}, \mbox{\hyperlink{fish__domain_8h_source_l00618}{r\+\_\+upper\+\_\+body\+\_\+\+W()}}, and \mbox{\hyperlink{fish__domain_8h_source_l00095}{x\+\_\+mouth()}}.
+Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00048}{Fish\+Domain()}}, \mbox{\hyperlink{fish__domain_8h_source_l00597}{r\+\_\+upper\+\_\+body\+\_\+\+S()}}, \mbox{\hyperlink{fish__domain_8h_source_l00617}{r\+\_\+upper\+\_\+body\+\_\+\+W()}}, and \mbox{\hyperlink{fish__domain_8h_source_l00095}{x\+\_\+mouth()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FishDomain_af85c4be86bb87528939778e3f63a40a5}\label{classoomph_1_1FishDomain_af85c4be86bb87528939778e3f63a40a5}} 
 \index{oomph::FishDomain@{oomph::FishDomain}!Xi\_nose@{Xi\_nose}}
@@ -696,7 +696,7 @@ Definition at line \mbox{\hyperlink{fish__domain_8h_source_l00127}{127}} of file
 
 
 
-Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00556}{r\+\_\+upper\+\_\+body\+\_\+\+N()}}, \mbox{\hyperlink{fish__domain_8h_source_l00618}{r\+\_\+upper\+\_\+body\+\_\+\+W()}}, and \mbox{\hyperlink{fish__domain_8h_source_l00101}{xi\+\_\+nose()}}.
+Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00555}{r\+\_\+upper\+\_\+body\+\_\+\+N()}}, \mbox{\hyperlink{fish__domain_8h_source_l00617}{r\+\_\+upper\+\_\+body\+\_\+\+W()}}, and \mbox{\hyperlink{fish__domain_8h_source_l00101}{xi\+\_\+nose()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FishDomain_a38633d4f3e2777be9544b907d1de5870}\label{classoomph_1_1FishDomain_a38633d4f3e2777be9544b907d1de5870}} 
 \index{oomph::FishDomain@{oomph::FishDomain}!Xi\_tail@{Xi\_tail}}
@@ -714,7 +714,7 @@ Definition at line \mbox{\hyperlink{fish__domain_8h_source_l00130}{130}} of file
 
 
 
-Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00573}{r\+\_\+upper\+\_\+body\+\_\+\+E()}}, \mbox{\hyperlink{fish__domain_8h_source_l00556}{r\+\_\+upper\+\_\+body\+\_\+\+N()}}, \mbox{\hyperlink{fish__domain_8h_source_l00598}{r\+\_\+upper\+\_\+body\+\_\+\+S()}}, \mbox{\hyperlink{fish__domain_8h_source_l00481}{r\+\_\+upper\+\_\+fin\+\_\+\+N()}}, \mbox{\hyperlink{fish__domain_8h_source_l00524}{r\+\_\+upper\+\_\+fin\+\_\+\+S()}}, \mbox{\hyperlink{fish__domain_8h_source_l00506}{r\+\_\+upper\+\_\+fin\+\_\+\+W()}}, and \mbox{\hyperlink{fish__domain_8h_source_l00107}{xi\+\_\+tail()}}.
+Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00572}{r\+\_\+upper\+\_\+body\+\_\+\+E()}}, \mbox{\hyperlink{fish__domain_8h_source_l00555}{r\+\_\+upper\+\_\+body\+\_\+\+N()}}, \mbox{\hyperlink{fish__domain_8h_source_l00597}{r\+\_\+upper\+\_\+body\+\_\+\+S()}}, \mbox{\hyperlink{fish__domain_8h_source_l00480}{r\+\_\+upper\+\_\+fin\+\_\+\+N()}}, \mbox{\hyperlink{fish__domain_8h_source_l00523}{r\+\_\+upper\+\_\+fin\+\_\+\+S()}}, \mbox{\hyperlink{fish__domain_8h_source_l00505}{r\+\_\+upper\+\_\+fin\+\_\+\+W()}}, and \mbox{\hyperlink{fish__domain_8h_source_l00107}{xi\+\_\+tail()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FishDomain_a162b4a35d8d0e986d254651571844253}\label{classoomph_1_1FishDomain_a162b4a35d8d0e986d254651571844253}} 
 \index{oomph::FishDomain@{oomph::FishDomain}!Y\_fin@{Y\_fin}}
@@ -732,7 +732,7 @@ Definition at line \mbox{\hyperlink{fish__domain_8h_source_l00136}{136}} of file
 
 
 
-Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00048}{Fish\+Domain()}}, \mbox{\hyperlink{fish__domain_8h_source_l00543}{r\+\_\+upper\+\_\+fin\+\_\+\+E()}}, \mbox{\hyperlink{fish__domain_8h_source_l00481}{r\+\_\+upper\+\_\+fin\+\_\+\+N()}}, and \mbox{\hyperlink{fish__domain_8h_source_l00089}{y\+\_\+fin()}}.
+Referenced by \mbox{\hyperlink{fish__domain_8h_source_l00048}{Fish\+Domain()}}, \mbox{\hyperlink{fish__domain_8h_source_l00542}{r\+\_\+upper\+\_\+fin\+\_\+\+E()}}, \mbox{\hyperlink{fish__domain_8h_source_l00480}{r\+\_\+upper\+\_\+fin\+\_\+\+N()}}, and \mbox{\hyperlink{fish__domain_8h_source_l00089}{y\+\_\+fin()}}.
 
 
 

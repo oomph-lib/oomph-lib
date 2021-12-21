@@ -2,7 +2,7 @@
 \label{classoomph_1_1SpineNode}\index{oomph::SpineNode@{oomph::SpineNode}}
 
 
-Class for nodes that live on spines. The assumption is that each Node lies at a fixed fraction on a single spine (although more complex behaviour could be included by adding more variables to the spine). In general, more complex node updating should be handled by the classes implemented for algebraic node updates.  
+Class for nodes that live on spines. The assumption is that each \mbox{\hyperlink{classoomph_1_1Node}{Node}} lies at a fixed fraction on a single spine (although more complex behaviour could be included by adding more variables to the spine). In general, more complex node updating should be handled by the classes implemented for algebraic node updates.  
 
 
 
@@ -12,7 +12,7 @@ Class for nodes that live on spines. The assumption is that each Node lies at a 
 Inheritance diagram for oomph\+::Spine\+Node\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=2.000000cm]{classoomph_1_1SpineNode}
+\includegraphics[height=3.000000cm]{classoomph_1_1SpineNode}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
@@ -20,7 +20,7 @@ Inheritance diagram for oomph\+::Spine\+Node\+:\begin{figure}[H]
 \item 
 \mbox{\hyperlink{classoomph_1_1SpineNode_af2bbfcecaae18b9256de02a0f0a9bddd}{Spine\+Node}} (const unsigned \&n\+\_\+dim, const unsigned \&n\+\_\+position\+\_\+type, const unsigned \&initial\+\_\+nvalue)
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Steady}{Steady}} Constructor, initialise pointers to zero. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1SpineNode_a35d835d5f7b549f45b69669044e30545}{Spine\+Node}} (\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \&time\+\_\+stepper\+\_\+pt, const unsigned \&n\+\_\+dim, const unsigned \&n\+\_\+position\+\_\+type, const unsigned \&initial\+\_\+nvalue)
+\mbox{\hyperlink{classoomph_1_1SpineNode_a35d835d5f7b549f45b69669044e30545}{Spine\+Node}} (\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Data_a065d7bffcec82bf4d4bd7b41f9aa80b3}{time\+\_\+stepper\+\_\+pt}}, const unsigned \&n\+\_\+dim, const unsigned \&n\+\_\+position\+\_\+type, const unsigned \&initial\+\_\+nvalue)
 \begin{DoxyCompactList}\small\item\em Unsteady Constructor, initialise pointers to zero. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Spine}{Spine}} $\ast$\& \mbox{\hyperlink{classoomph_1_1SpineNode_ae04ead0542be9e109e78b0e0b0c3e260}{spine\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function to spine. \end{DoxyCompactList}\item 
@@ -33,7 +33,7 @@ unsigned \& \mbox{\hyperlink{classoomph_1_1SpineNode_aea3f896adfd22337085a04e816
 double \& \mbox{\hyperlink{classoomph_1_1SpineNode_a5af32b3551d15eb665485d0ed0233bde}{h}} ()
 \begin{DoxyCompactList}\small\item\em Access function to spine height. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SpineNode_afc47a59bee4ca3e42a56545afe20876d}{node\+\_\+update}} (const bool \&update\+\_\+all\+\_\+time\+\_\+levels\+\_\+for\+\_\+new\+\_\+node=false)
-\begin{DoxyCompactList}\small\item\em Overload thet node update function, call the update function in the Node\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1SpineMesh}{Spine\+Mesh}}. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Overload thet node update function, call the update function in the \mbox{\hyperlink{classoomph_1_1Node}{Node}}\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1SpineMesh}{Spine\+Mesh}}. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1SpineNode_a46735b4f430014997c525134c0889b4d}{ngeom\+\_\+data}} () const
 \begin{DoxyCompactList}\small\item\em Return the number of geometric data, zero if no spine. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1SpineNode_afba3d62d2da3b8fa6421958fda3f0a14}{ngeom\+\_\+object}} () const
@@ -53,10 +53,11 @@ double \mbox{\hyperlink{classoomph_1_1SpineNode_a87d72975d31d015c4360b5092abdbf6
 \begin{DoxyCompactList}\small\item\em Pointer to \mbox{\hyperlink{classoomph_1_1SpineMesh}{Spine\+Mesh}} that this node is a part of. (The mesh implements the node update function(s)) \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1SpineNode_ac68d55d54018e5d908c5f81ab4b053a7}{Node\+\_\+update\+\_\+fct\+\_\+id}}
 \begin{DoxyCompactList}\small\item\em ID of node update function (within specific mesh -- useful if there are multiple node update functions, e.\+g. in two-\/layer problems. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
-Class for nodes that live on spines. The assumption is that each Node lies at a fixed fraction on a single spine (although more complex behaviour could be included by adding more variables to the spine). In general, more complex node updating should be handled by the classes implemented for algebraic node updates. 
+Class for nodes that live on spines. The assumption is that each \mbox{\hyperlink{classoomph_1_1Node}{Node}} lies at a fixed fraction on a single spine (although more complex behaviour could be included by adding more variables to the spine). In general, more complex node updating should be handled by the classes implemented for algebraic node updates. 
 
 Definition at line \mbox{\hyperlink{spines_8h_source_l00327}{327}} of file \mbox{\hyperlink{spines_8h_source}{spines.\+h}}.
 
@@ -98,11 +99,15 @@ Definition at line \mbox{\hyperlink{spines_8h_source_l00359}{359}} of file \mbox
 \index{oomph::SpineNode@{oomph::SpineNode}!all\_geom\_data\_pt@{all\_geom\_data\_pt}}
 \index{all\_geom\_data\_pt@{all\_geom\_data\_pt}!oomph::SpineNode@{oomph::SpineNode}}
 \doxysubsubsection{\texorpdfstring{all\_geom\_data\_pt()}{all\_geom\_data\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$$\ast$ oomph\+::\+Spine\+Node\+::all\+\_\+geom\+\_\+data\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$$\ast$ oomph\+::\+Spine\+Node\+::all\+\_\+geom\+\_\+data\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
 Return the vector of all geometric data. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Node_a74cb27c26a1c9a21d9a3ecf655b2efb1}{oomph\+::\+Node}}.
 
 
 
@@ -116,11 +121,15 @@ References \mbox{\hyperlink{spines_8h_source_l00198}{oomph\+::\+Spine\+::geom\+\
 \index{oomph::SpineNode@{oomph::SpineNode}!all\_geom\_object\_pt@{all\_geom\_object\_pt}}
 \index{all\_geom\_object\_pt@{all\_geom\_object\_pt}!oomph::SpineNode@{oomph::SpineNode}}
 \doxysubsubsection{\texorpdfstring{all\_geom\_object\_pt()}{all\_geom\_object\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$$\ast$ oomph\+::\+Spine\+Node\+::all\+\_\+geom\+\_\+object\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$$\ast$ oomph\+::\+Spine\+Node\+::all\+\_\+geom\+\_\+object\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
 Return the vector of all geometric objects. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Node_a3aa7050d81ace38d73d37279beaa5577}{oomph\+::\+Node}}.
 
 
 
@@ -178,11 +187,15 @@ Referenced by \mbox{\hyperlink{horizontal__single__layer__spine__mesh_8template_
 \index{oomph::SpineNode@{oomph::SpineNode}!ngeom\_data@{ngeom\_data}}
 \index{ngeom\_data@{ngeom\_data}!oomph::SpineNode@{oomph::SpineNode}}
 \doxysubsubsection{\texorpdfstring{ngeom\_data()}{ngeom\_data()}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Spine\+Node\+::ngeom\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Spine\+Node\+::ngeom\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
 Return the number of geometric data, zero if no spine. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Node_ad20302b7992437075d3ca42390b39f24}{oomph\+::\+Node}}.
 
 
 
@@ -196,11 +209,15 @@ References \mbox{\hyperlink{spines_8h_source_l00171}{oomph\+::\+Spine\+::ngeom\+
 \index{oomph::SpineNode@{oomph::SpineNode}!ngeom\_object@{ngeom\_object}}
 \index{ngeom\_object@{ngeom\_object}!oomph::SpineNode@{oomph::SpineNode}}
 \doxysubsubsection{\texorpdfstring{ngeom\_object()}{ngeom\_object()}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Spine\+Node\+::ngeom\+\_\+object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Spine\+Node\+::ngeom\+\_\+object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
 Return the number of geometric objects, zero if no spine. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Node_a2c0fb79493f94d2ce19736737ebf5447}{oomph\+::\+Node}}.
 
 
 
@@ -214,21 +231,25 @@ References \mbox{\hyperlink{spines_8h_source_l00218}{oomph\+::\+Spine\+::ngeom\+
 \index{oomph::SpineNode@{oomph::SpineNode}!node\_update@{node\_update}}
 \index{node\_update@{node\_update}!oomph::SpineNode@{oomph::SpineNode}}
 \doxysubsubsection{\texorpdfstring{node\_update()}{node\_update()}}
-{\footnotesize\ttfamily void oomph\+::\+Spine\+Node\+::node\+\_\+update (\begin{DoxyParamCaption}\item[{const bool \&}]{update\+\_\+all\+\_\+time\+\_\+levels\+\_\+for\+\_\+new\+\_\+node = {\ttfamily false} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void oomph\+::\+Spine\+Node\+::node\+\_\+update (\begin{DoxyParamCaption}\item[{const bool \&}]{update\+\_\+all\+\_\+time\+\_\+levels\+\_\+for\+\_\+new\+\_\+node = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
-Overload thet node update function, call the update function in the Node\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1SpineMesh}{Spine\+Mesh}}. 
+Overload thet node update function, call the update function in the \mbox{\hyperlink{classoomph_1_1Node}{Node}}\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1SpineMesh}{Spine\+Mesh}}. 
 
 ////////////////////////////////////////////////////////////////
 
-//////////////////////////////////////////////////////////////// Update function, call the update function in the Node\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1SpineMesh}{Spine\+Mesh}}. 
+//////////////////////////////////////////////////////////////// Update function, call the update function in the \mbox{\hyperlink{classoomph_1_1Node}{Node}}\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1SpineMesh}{Spine\+Mesh}}. 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Node_aecf8c979266300d3609de2b4ddfa3cc8}{oomph\+::\+Node}}.
+
+
 
 Definition at line \mbox{\hyperlink{spines_8cc_source_l00044}{44}} of file \mbox{\hyperlink{spines_8cc_source}{spines.\+cc}}.
 
 
 
-References \mbox{\hyperlink{spines_8h_source_l00338}{Spine\+\_\+mesh\+\_\+pt}}, and \mbox{\hyperlink{classoomph_1_1SpineMesh_aa7843aadce3c540f34442671f59eb75b}{oomph\+::\+Spine\+Mesh\+::spine\+\_\+node\+\_\+update()}}.
+References \mbox{\hyperlink{nodes_8h_source_l00967}{oomph\+::\+Node\+::\+Aux\+\_\+node\+\_\+update\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{spines_8h_source_l00338}{Spine\+\_\+mesh\+\_\+pt}}, and \mbox{\hyperlink{classoomph_1_1SpineMesh_aa7843aadce3c540f34442671f59eb75b}{oomph\+::\+Spine\+Mesh\+::spine\+\_\+node\+\_\+update()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SpineNode_aea3f896adfd22337085a04e81662ed41}\label{classoomph_1_1SpineNode_aea3f896adfd22337085a04e81662ed41}} 
 \index{oomph::SpineNode@{oomph::SpineNode}!node\_update\_fct\_id@{node\_update\_fct\_id}}

@@ -61,7 +61,7 @@
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00057}00057 \textcolor{comment}{    /// Function pointer to the prescribed-\/flux function fct(x,f(x)) -\/-\/}}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00058}00058 \textcolor{comment}{    /// x is a Vector!}}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00059}\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_aeb9eb0a65d6dfe3673f6910a6fd7cf59}{00059}} \textcolor{comment}{}    \textcolor{keyword}{typedef} void (*\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_aeb9eb0a65d6dfe3673f6910a6fd7cf59}{AdvectionDiffusionPrescribedFluxFctPt}})(}
-\DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00060}00060       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \textcolor{keywordtype}{double}\& flux);}
+\DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00060}00060       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x, \textcolor{keywordtype}{double}\& flux);}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00061}00061 }
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00062}00062 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00063}00063 \textcolor{comment}{    /// Constructor, takes the pointer to the "{}bulk"{} element}}
@@ -106,11 +106,11 @@
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00102}00102 \textcolor{comment}{    /// Add the element's contribution to its residual vector and}}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00103}00103 \textcolor{comment}{    /// its Jacobian matrix}}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00104}\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_a5c8e409a31f90858e556fe359b996b9d}{00104}} \textcolor{comment}{}    \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_a5c8e409a31f90858e556fe359b996b9d}{fill\_in\_contribution\_to\_jacobian}}(\mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00105}00105                                                  \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})}
+\DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00105}00105                                                  \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian)}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00106}00106     \{}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00107}00107       \textcolor{comment}{// Call the generic routine with the flag set to 1}}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00108}00108       \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_acbc0c8e1e486601c0f09f7ecbb1995c4}{fill\_in\_generic\_residual\_contribution\_adv\_diff\_flux}}(}
-\DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00109}00109         residuals, \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, 1);}
+\DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00109}00109         residuals, jacobian, 1);}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00110}00110     \}}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00111}00111 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00112}00112 \textcolor{comment}{    /// Specify the value of nodal zeta from the face geometry}}
@@ -176,7 +176,7 @@
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00172}00172       \textcolor{keywordtype}{unsigned} n\_node = \mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00173}00173 }
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00174}00174       \textcolor{comment}{// Get the shape functions}}
-\DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00175}00175       \mbox{\hyperlink{classoomph_1_1FiniteElement_a2de680722518136b5c6bf2aacc267a31}{shape\_at\_knot}}(ipt, psi);}
+\DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00175}00175       \mbox{\hyperlink{classoomph_1_1FiniteElement_aeccc0f774e3fab8c536e2d41004a1665}{shape\_at\_knot}}(ipt, psi);}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00176}00176 }
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00177}00177       \textcolor{comment}{// Set the test functions to be the same as the shape functions}}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00178}00178       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_node; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
@@ -191,7 +191,7 @@
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00187}00187 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00188}00188 \textcolor{comment}{    /// Function to calculate the prescribed flux at a given spatial}}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00189}00189 \textcolor{comment}{    /// position}}
-\DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00190}\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_ab21b7655c7d09d338bc4be4baf4dfca6}{00190}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_ab21b7655c7d09d338bc4be4baf4dfca6}{get\_flux}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \textcolor{keywordtype}{double}\& flux)}
+\DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00190}\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_ab21b7655c7d09d338bc4be4baf4dfca6}{00190}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_ab21b7655c7d09d338bc4be4baf4dfca6}{get\_flux}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x, \textcolor{keywordtype}{double}\& flux)}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00191}00191     \{}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00192}00192       \textcolor{comment}{// If the function pointer is zero return zero}}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00193}00193       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_a7c0b0eda4c03c14b18963c59b2c80a67}{Flux\_fct\_pt}} == 0)}
@@ -201,7 +201,7 @@
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00197}00197       \textcolor{comment}{// Otherwise call the function}}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00198}00198       \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00199}00199       \{}
-\DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00200}00200         (*Flux\_fct\_pt)(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, flux);}
+\DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00200}00200         (*Flux\_fct\_pt)(x, flux);}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00201}00201       \}}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00202}00202     \}}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00203}00203 }
@@ -209,7 +209,7 @@
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00205}00205 \textcolor{comment}{    /// Add the element's contribution to its residual vector.}}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00206}00206 \textcolor{comment}{    /// flag=1(or 0): do (or don't) compute the Jacobian as well.}}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00207}00207 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_acbc0c8e1e486601c0f09f7ecbb1995c4}{fill\_in\_generic\_residual\_contribution\_adv\_diff\_flux}}(}
-\DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00208}00208       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \textcolor{keywordtype}{unsigned} flag);}
+\DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00208}00208       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian, \textcolor{keywordtype}{unsigned} flag);}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00209}00209 }
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00210}00210 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00211}00211 \textcolor{comment}{    /// Function pointer to the (global) prescribed-\/flux function}}
@@ -240,7 +240,7 @@
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00236}00236     \textcolor{comment}{// Let the bulk element build the FaceElement, i.e. setup the pointers}}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00237}00237     \textcolor{comment}{// to its nodes (by referring to the appropriate nodes in the bulk}}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00238}00238     \textcolor{comment}{// element), etc.}}
-\DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00239}00239     bulk\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a025ab56ef9c6eea66fb34416fdf19152}{build\_face\_element}}(\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\_index}}, \textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00239}00239     bulk\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_aaf7bead5b462cfd5401d97b3dbdc7af7}{build\_face\_element}}(\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\_index}}, \textcolor{keyword}{this});}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00240}00240 }
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00241}00241 \textcolor{preprocessor}{\#ifdef PARANOID}}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00242}00242     \{}
@@ -271,7 +271,7 @@
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00267}00267 }
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00268}00268     \textcolor{comment}{// Extract the dimension of the problem from the dimension of}}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00269}00269     \textcolor{comment}{// the first node}}
-\DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00270}00270     \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_a9418de31c96e89d011b6627cb5756e1e}{Dim}} = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>ndim();}
+\DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00270}00270     \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_a9418de31c96e89d011b6627cb5756e1e}{Dim}} = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00271}00271 }
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00272}00272 }
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00273}00273     \textcolor{comment}{// Set up U\_index\_adv\_diff. Initialise to zero, which probably won't change}}
@@ -288,8 +288,8 @@
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00284}00284         \textcolor{comment}{// One dimensional problem}}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00285}00285       \textcolor{keywordflow}{case} 1:}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00286}00286       \{}
-\DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00287}00287         AdvectionDiffusionEquations<1>* eqn\_pt =}
-\DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00288}00288           \textcolor{keyword}{dynamic\_cast<}AdvectionDiffusionEquations<1>*\textcolor{keyword}{>}(bulk\_el\_pt);}
+\DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00287}00287         \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations}{AdvectionDiffusionEquations<1>}}* eqn\_pt =}
+\DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00288}00288           \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations}{AdvectionDiffusionEquations<1>}}*\textcolor{keyword}{>}(bulk\_el\_pt);}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00289}00289         \textcolor{comment}{// If the cast has failed die}}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00290}00290         \textcolor{keywordflow}{if} (eqn\_pt == 0)}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00291}00291         \{}
@@ -308,7 +308,7 @@
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00304}00304         \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00305}00305         \{}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00306}00306           \textcolor{comment}{// Read the index from the (cast) bulk element}}
-\DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00307}00307           \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_a70092d79adb469c7b8fb34b1c31903a1}{U\_index\_adv\_diff}} = eqn\_pt-\/>u\_index\_adv\_diff();}
+\DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00307}00307           \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_a70092d79adb469c7b8fb34b1c31903a1}{U\_index\_adv\_diff}} = eqn\_pt-\/>\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_aadffa26c42be5d4a1156a7467de48fb8}{u\_index\_adv\_diff}}();}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00308}00308         \}}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00309}00309       \}}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00310}00310       \textcolor{keywordflow}{break};}
@@ -316,8 +316,8 @@
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00312}00312       \textcolor{comment}{// Two dimensional problem}}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00313}00313       \textcolor{keywordflow}{case} 2:}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00314}00314       \{}
-\DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00315}00315         AdvectionDiffusionEquations<2>* eqn\_pt =}
-\DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00316}00316           \textcolor{keyword}{dynamic\_cast<}AdvectionDiffusionEquations<2>*\textcolor{keyword}{>}(bulk\_el\_pt);}
+\DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00315}00315         \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations}{AdvectionDiffusionEquations<2>}}* eqn\_pt =}
+\DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00316}00316           \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations}{AdvectionDiffusionEquations<2>}}*\textcolor{keyword}{>}(bulk\_el\_pt);}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00317}00317         \textcolor{comment}{// If the cast has failed die}}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00318}00318         \textcolor{keywordflow}{if} (eqn\_pt == 0)}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00319}00319         \{}
@@ -335,7 +335,7 @@
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00331}00331         \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00332}00332         \{}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00333}00333           \textcolor{comment}{// Read the index from the (cast) bulk element.}}
-\DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00334}00334           \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_a70092d79adb469c7b8fb34b1c31903a1}{U\_index\_adv\_diff}} = eqn\_pt-\/>u\_index\_adv\_diff();}
+\DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00334}00334           \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_a70092d79adb469c7b8fb34b1c31903a1}{U\_index\_adv\_diff}} = eqn\_pt-\/>\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_aadffa26c42be5d4a1156a7467de48fb8}{u\_index\_adv\_diff}}();}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00335}00335         \}}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00336}00336       \}}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00337}00337       \textcolor{keywordflow}{break};}
@@ -343,8 +343,8 @@
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00339}00339       \textcolor{comment}{// Three dimensional problem}}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00340}00340       \textcolor{keywordflow}{case} 3:}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00341}00341       \{}
-\DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00342}00342         AdvectionDiffusionEquations<3>* eqn\_pt =}
-\DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00343}00343           \textcolor{keyword}{dynamic\_cast<}AdvectionDiffusionEquations<3>*\textcolor{keyword}{>}(bulk\_el\_pt);}
+\DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00342}00342         \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations}{AdvectionDiffusionEquations<3>}}* eqn\_pt =}
+\DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00343}00343           \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations}{AdvectionDiffusionEquations<3>}}*\textcolor{keyword}{>}(bulk\_el\_pt);}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00344}00344         \textcolor{comment}{// If the cast has failed die}}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00345}00345         \textcolor{keywordflow}{if} (eqn\_pt == 0)}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00346}00346         \{}
@@ -362,7 +362,7 @@
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00358}00358         \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00359}00359         \{}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00360}00360           \textcolor{comment}{// Read the index from the (cast) bulk element.}}
-\DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00361}00361           \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_a70092d79adb469c7b8fb34b1c31903a1}{U\_index\_adv\_diff}} = eqn\_pt-\/>u\_index\_adv\_diff();}
+\DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00361}00361           \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_a70092d79adb469c7b8fb34b1c31903a1}{U\_index\_adv\_diff}} = eqn\_pt-\/>\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_aadffa26c42be5d4a1156a7467de48fb8}{u\_index\_adv\_diff}}();}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00362}00362         \}}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00363}00363       \}}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00364}00364       \textcolor{keywordflow}{break};}
@@ -426,7 +426,7 @@
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00422}00422       \textcolor{keywordtype}{double} J = shape\_and\_test(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, psif, testf);}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00423}00423 }
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00424}00424       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00425}00425       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00425}00425       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00426}00426 }
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00427}00427       \textcolor{comment}{// Need to find position to feed into flux function}}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00428}00428       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} interpolated\_x(\mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a27cbb5ec7f6fea2f237c11659ffeef58}{Dim}}, 0.0);}
@@ -456,7 +456,7 @@
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00452}00452         \textcolor{keywordflow}{if} (local\_eqn >= 0)}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00453}00453         \{}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00454}00454           \textcolor{comment}{// Add the prescribed flux terms}}
-\DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00455}00455           residuals[local\_eqn] += flux * testf[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00455}00455           residuals[local\_eqn] += flux * testf[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00456}00456 }
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00457}00457           \textcolor{comment}{// Imposed traction doesn't depend upon the solution,}}
 \DoxyCodeLine{\Hypertarget{advection__diffusion__flux__elements_8h_source_l00458}00458           \textcolor{comment}{// -\/-\/> the Jacobian is always zero, so no Jacobian}}

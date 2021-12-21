@@ -18,25 +18,25 @@ Inheritance diagram for oomph\+::FSIWall\+Element\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classoomph_1_1FSIWallElement_afe120348dddfc3acfd95e7d08c2d0a1d}{describe\+\_\+local\+\_\+dofs}} (std\+::ostream \&out, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} std\+::string \&current\+\_\+string) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1FSIWallElement_afe120348dddfc3acfd95e7d08c2d0a1d}{describe\+\_\+local\+\_\+dofs}} (std\+::ostream \&out, const std\+::string \&current\+\_\+string) const
 \begin{DoxyCompactList}\small\item\em Function to describe the local dofs of the element. The ostream specifies the output stream to which the description is written; the string stores the currently assembled output that is ultimately written to the output stream by Data\+::describe\+\_\+dofs(...); it is typically built up incrementally as we descend through the call hierarchy of this function when called from Problem\+::describe\+\_\+dofs(...) \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1FSIWallElement_ae27388763fb781afa1d620fad111f234}{FSIWall\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Constructor. Note that element is not fully-\/functional until its \mbox{\hyperlink{classoomph_1_1FSIWallElement_a487a050241512f3979c4d67bb40b2a63}{setup\+\_\+fsi\+\_\+wall\+\_\+element()}} function has been called! \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FSIWallElement_a17dbdef1035986965a03e6a7836bc2da}{FSIWall\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1FSIWallElement}{FSIWall\+Element}} \&)=delete
+\mbox{\hyperlink{classoomph_1_1FSIWallElement_a17dbdef1035986965a03e6a7836bc2da}{FSIWall\+Element}} (const \mbox{\hyperlink{classoomph_1_1FSIWallElement}{FSIWall\+Element}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1FSIWallElement_a7458dbd590374075f18c48eb60ed1d5b}{operator=}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1FSIWallElement}{FSIWall\+Element}} \&)=delete
+void \mbox{\hyperlink{classoomph_1_1FSIWallElement_a7458dbd590374075f18c48eb60ed1d5b}{operator=}} (const \mbox{\hyperlink{classoomph_1_1FSIWallElement}{FSIWall\+Element}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{classoomph_1_1FSIWallElement_a498254a4b31cfee252a2015a754b03df}{$\sim$\+FSIWall\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Empty virtual destructor for safety. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1FSIWallElement_a487a050241512f3979c4d67bb40b2a63}{setup\+\_\+fsi\+\_\+wall\+\_\+element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&nlagr\+\_\+solid, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&ndim\+\_\+fluid)
+void \mbox{\hyperlink{classoomph_1_1FSIWallElement_a487a050241512f3979c4d67bb40b2a63}{setup\+\_\+fsi\+\_\+wall\+\_\+element}} (const unsigned \&nlagr\+\_\+solid, const unsigned \&ndim\+\_\+fluid)
 \begin{DoxyCompactList}\small\item\em Setup\+: Assign storage -- pass the Eulerian dimension of the \char`\"{}adjacent\char`\"{} fluid elements and the number of local coordinates required to parametrise the wall element. E.\+g. for a FSIKirchhoff\+Love\+Beam, bounding a 2D fluid domain ndim\+\_\+fluid=2 and nlagr\+\_\+solid=1. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \& \mbox{\hyperlink{classoomph_1_1FSIWallElement_a9b5707a182f02e045114c4af62052cf7}{q}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+const double \& \mbox{\hyperlink{classoomph_1_1FSIWallElement_a9b5707a182f02e045114c4af62052cf7}{q}} () const
 \begin{DoxyCompactList}\small\item\em Return the ratio of the stress scales used to non-\/dimensionalise the fluid and solid equations. E.\+g. $ Q = \mu U/(LE) $ if the fluid mechanics stresses (pressures) are scaled on the viscous scale $ \mu U / L$ and the solid mechanics stresses on the solid\textquotesingle{}s Young\textquotesingle{}s modulus $ E $. \end{DoxyCompactList}\item 
 double $\ast$\& \mbox{\hyperlink{classoomph_1_1FSIWallElement_af62c9ca519e60ecae562e3a3967d4877}{q\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return a pointer the ratio of stress scales used to non-\/dimensionalise the fluid and solid equations. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FSIWallElement_a0dc3efdeb5d0abf0ba473c0145652358}{enable\+\_\+fluid\+\_\+loading\+\_\+on\+\_\+both\+\_\+sides}} ()
 \begin{DoxyCompactList}\small\item\em Allow element to be loaded by fluid on both sides. (Resizes containers for lookup schemes and initialises data associated with elements at the \char`\"{}back\char`\"{} of the \mbox{\hyperlink{classoomph_1_1FSIWallElement}{FSIWall\+Element}} to NULL. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{classoomph_1_1FSIWallElement_a5ba035695fb6a51b65280779ff65277b}{only\+\_\+front\+\_\+is\+\_\+loaded\+\_\+by\+\_\+fluid}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+bool \mbox{\hyperlink{classoomph_1_1FSIWallElement_a5ba035695fb6a51b65280779ff65277b}{only\+\_\+front\+\_\+is\+\_\+loaded\+\_\+by\+\_\+fluid}} () const
 \begin{DoxyCompactList}\small\item\em Is the element exposed to (and hence loaded by) fluid only on its \char`\"{}front\char`\"{}? True by default. This flag is set to false if the \mbox{\hyperlink{classoomph_1_1FSIWallElement}{FSIWall\+Element}} is immersed in fluid in which case each integration point is loaded by two adjacent fluid elements, one at the \char`\"{}front\char`\"{} and one at the \char`\"{}back\char`\"{}. This is a read-\/only function -- the ability have loading from both sides must be enabled by a call to \mbox{\hyperlink{classoomph_1_1FSIWallElement_a0dc3efdeb5d0abf0ba473c0145652358}{FSIWall\+Element\+::enable\+\_\+fluid\+\_\+loading\+\_\+on\+\_\+both\+\_\+sides()}};. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FSIWallElement_a872cb60fecdd19234a37be9f98546365}{exclude\+\_\+external\+\_\+load\+\_\+data}} ()
 \begin{DoxyCompactList}\small\item\em Do not include any external data that affects the load in the computation of element\textquotesingle{}s Jacobian matrix. This functionality is provided to allow the \char`\"{}user\char`\"{} to deem the coupling to the fluid equations to be irrelevant and to facilitate the solution of a auxiliary solids-\/only problems, e.\+g. during the assignment of initial conditions for a time-\/dependent FSI problem. \end{DoxyCompactList}\item 
@@ -48,7 +48,7 @@ void \mbox{\hyperlink{classoomph_1_1FSIWallElement_a84dc551f32dcecb5166c8b0c5172
 \begin{DoxyCompactList}\small\item\em Call thi function to re-\/enable calculation of the shear stress componnent of load when calculating the Jacobian (the default) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FSIWallElement_aec47fc9fff885241c68533df8125e0a0}{node\+\_\+update\+\_\+adjacent\+\_\+fluid\+\_\+elements}} ()
 \begin{DoxyCompactList}\small\item\em Update the nodal positions in all fluid elements that affect the traction on this \mbox{\hyperlink{classoomph_1_1FSIWallElement}{FSIWall\+Element}}. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1FSIWallElement_a7817d2662c24540d3757cb1a1194a635}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})
+void \mbox{\hyperlink{classoomph_1_1FSIWallElement_a7817d2662c24540d3757cb1a1194a635}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em Fill in the element\textquotesingle{}s contribution to the Jacobian matrix and the residual vector\+: Done by finite differencing the residual vector w.\+r.\+t. all nodal, internal, external and load \mbox{\hyperlink{classoomph_1_1Data}{Data}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
@@ -58,50 +58,50 @@ static bool \mbox{\hyperlink{classoomph_1_1FSIWallElement_ae7bc07beb09c423ac625a
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classoomph_1_1FSIWallElement_ae3b3a1cbaa1b9f467a25f41307135873}{update\+\_\+in\+\_\+internal\+\_\+fd}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+void \mbox{\hyperlink{classoomph_1_1FSIWallElement_ae3b3a1cbaa1b9f467a25f41307135873}{update\+\_\+in\+\_\+internal\+\_\+fd}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em After an internal data change, update the nodal positions. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1FSIWallElement_aed714993ced295b7ddb5f014ffc2ba6a}{reset\+\_\+in\+\_\+internal\+\_\+fd}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+void \mbox{\hyperlink{classoomph_1_1FSIWallElement_aed714993ced295b7ddb5f014ffc2ba6a}{reset\+\_\+in\+\_\+internal\+\_\+fd}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Function called within the finite difference loop for internal data after the values in the i-\/th external data object are reset. The default behaviour is to call the update function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FSIWallElement_ab0229ea34afffcd6d85a10dafa0b7d10}{reset\+\_\+after\+\_\+internal\+\_\+fd}} ()
 \begin{DoxyCompactList}\small\item\em Function that is call after the finite differencing of the internal data. This may be overloaded to reset any dependent variables that may have changed during the finite differencing. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1FSIWallElement_a8274e2b48101edd84f33b6368bc1c90d}{update\+\_\+in\+\_\+external\+\_\+fd}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+void \mbox{\hyperlink{classoomph_1_1FSIWallElement_a8274e2b48101edd84f33b6368bc1c90d}{update\+\_\+in\+\_\+external\+\_\+fd}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em After an external data change, update the nodal positions. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1FSIWallElement_afbfc79cddd641419f297680674daecfd}{reset\+\_\+in\+\_\+external\+\_\+fd}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+void \mbox{\hyperlink{classoomph_1_1FSIWallElement_afbfc79cddd641419f297680674daecfd}{reset\+\_\+in\+\_\+external\+\_\+fd}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Function called within the finite difference loop for external data after the values in the i-\/th external data object are reset. The default behaviour is to call the update function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FSIWallElement_a2b1dc28716968b01e7bf5513ea4446c5}{reset\+\_\+after\+\_\+external\+\_\+fd}} ()
 \begin{DoxyCompactList}\small\item\em Function that is call after the finite differencing of the external data. This may be overloaded to reset any dependent variables that may have changed during the finite differencing. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1FSIWallElement_adcde92f149843f4a68dffec420b54c6c}{update\+\_\+in\+\_\+nodal\+\_\+fd}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+void \mbox{\hyperlink{classoomph_1_1FSIWallElement_adcde92f149843f4a68dffec420b54c6c}{update\+\_\+in\+\_\+nodal\+\_\+fd}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em After a nodal data change, update the nodal positions. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1FSIWallElement_afb13bbbad0afbf83b45bac82ac7f50b5}{reset\+\_\+in\+\_\+nodal\+\_\+fd}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+void \mbox{\hyperlink{classoomph_1_1FSIWallElement_afb13bbbad0afbf83b45bac82ac7f50b5}{reset\+\_\+in\+\_\+nodal\+\_\+fd}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Function called within the finite difference loop for nodal data after the i-\/th nodal values is reset. The default behaviour is to call the update function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FSIWallElement_a24734c8730cf96234ee2317dd123b19e}{reset\+\_\+after\+\_\+nodal\+\_\+fd}} ()
 \begin{DoxyCompactList}\small\item\em Function that is call after the finite differencing of the nodal data. This may be overloaded to reset any dependent variables that may have changed during the finite differencing. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1FSIWallElement_ab427113ed6de36a5e8458e67eac7b6b4}{update\+\_\+in\+\_\+external\+\_\+interaction\+\_\+field\+\_\+fd}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+void \mbox{\hyperlink{classoomph_1_1FSIWallElement_ab427113ed6de36a5e8458e67eac7b6b4}{update\+\_\+in\+\_\+external\+\_\+interaction\+\_\+field\+\_\+fd}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em After an external field data change, update the nodal positions. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1FSIWallElement_adc6d07122f1624e2b66ce1a12b530e27}{reset\+\_\+in\+\_\+external\+\_\+interaction\+\_\+field\+\_\+fd}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+void \mbox{\hyperlink{classoomph_1_1FSIWallElement_adc6d07122f1624e2b66ce1a12b530e27}{reset\+\_\+in\+\_\+external\+\_\+interaction\+\_\+field\+\_\+fd}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Function called within the finite difference loop for external interaction data after the values in the i-\/th external interaction data object associated with external fields are reset. The default behaviour is to call the update function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FSIWallElement_a5ba540936e15a03aef43bddd4d5b3f33}{reset\+\_\+after\+\_\+external\+\_\+interaction\+\_\+field\+\_\+fd}} ()
 \begin{DoxyCompactList}\small\item\em Function that is call after the finite differencing of the external interaction data associated with external fields This may be overloaded to reset any dependent variables that may have changed during the finite differencing. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1FSIWallElement_a495cc7de04e097186f497a7416655736}{update\+\_\+in\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+fd}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+void \mbox{\hyperlink{classoomph_1_1FSIWallElement_a495cc7de04e097186f497a7416655736}{update\+\_\+in\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+fd}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em After an external geometric data change, update the nodal positions. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1FSIWallElement_aa0b511d7c276578c95d26550576a9be0}{reset\+\_\+in\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+fd}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+void \mbox{\hyperlink{classoomph_1_1FSIWallElement_aa0b511d7c276578c95d26550576a9be0}{reset\+\_\+in\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+fd}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Function called within the finite difference loop for external interaction data after the values in the i-\/th external interaction data object associated with external geometry are reset. The default behaviour is to call the update function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FSIWallElement_ad1d147ea9d6f49f7d0507d783d7572e2}{reset\+\_\+after\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+fd}} ()
 \begin{DoxyCompactList}\small\item\em Function that is call after the finite differencing of the external interaction data associated with external geometry. This may be overloaded to reset any dependent variables that may have changed during the finite differencing. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1FSIWallElement_ae05300394e531c7b80dc44d1f5e1dbfe}{update\+\_\+in\+\_\+solid\+\_\+position\+\_\+fd}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+void \mbox{\hyperlink{classoomph_1_1FSIWallElement_ae05300394e531c7b80dc44d1f5e1dbfe}{update\+\_\+in\+\_\+solid\+\_\+position\+\_\+fd}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em After an internal data change, update the nodal positions. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1FSIWallElement_aa7a250a0958768f5393484ea3c528a37}{reset\+\_\+in\+\_\+solid\+\_\+position\+\_\+fd}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+void \mbox{\hyperlink{classoomph_1_1FSIWallElement_aa7a250a0958768f5393484ea3c528a37}{reset\+\_\+in\+\_\+solid\+\_\+position\+\_\+fd}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Function called within the finite difference loop for solid position data after the values in the i-\/th node are reset. The default behaviour is to call the update function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FSIWallElement_ae960e2a896fc81320f08cdbda6dc6526}{reset\+\_\+after\+\_\+solid\+\_\+position\+\_\+fd}} ()
 \begin{DoxyCompactList}\small\item\em Function that is call after the finite differencing of the solid position data. This may be overloaded to reset any dependent variables that may have changed during the finite differencing. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1FSIWallElement_a4b6eacec41f41006a3884ee0dbda3bcb}{fluid\+\_\+load\+\_\+vector}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&intpt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&N, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&load)
+void \mbox{\hyperlink{classoomph_1_1FSIWallElement_a4b6eacec41f41006a3884ee0dbda3bcb}{fluid\+\_\+load\+\_\+vector}} (const unsigned \&intpt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&N, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&load)
 \begin{DoxyCompactList}\small\item\em Get FE Jacobian by systematic finite differencing w.\+r.\+t. nodal positition \mbox{\hyperlink{classoomph_1_1Data}{Data}}, internal and external \mbox{\hyperlink{classoomph_1_1Data}{Data}} and any load \mbox{\hyperlink{classoomph_1_1Data}{Data}} that is not included in the previous categories. This is a re-\/implementation of the generic FD routines with they key difference being that any updates of values are followed by a node update in the adjacent fluid elements since their position (and hence the shear stresses they exert onto the solid) may be indirectly affected by these. For greater efficiency this may be overloaded in derived classes, e.\+g. if it is known that for a specific \mbox{\hyperlink{classoomph_1_1FSIWallElement}{FSIWall\+Element}}, the internal \mbox{\hyperlink{classoomph_1_1Data}{Data}} does not affect the nodal positions in adjacent fluid elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classoomph_1_1FSIWallElement_a16256fcbc5ddc279db3ab776b92b46a1}{identify\+\_\+all\+\_\+field\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::set$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ $>$ \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&external\+\_\+elements\+\_\+pt, std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&paired\+\_\+iteraction\+\_\+data)
+void \mbox{\hyperlink{classoomph_1_1FSIWallElement_a16256fcbc5ddc279db3ab776b92b46a1}{identify\+\_\+all\+\_\+field\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::set$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ $>$ const \&external\+\_\+elements\+\_\+pt, std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&paired\+\_\+iteraction\+\_\+data)
 \begin{DoxyCompactList}\small\item\em Overload the function that must return all field data involved in the interactions from the external (fluid) element. It allows the velocity degrees of freedom to be ignored if we want to ignore the shear stresses when computing the Jacobian. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1FSIWallElement_a27ef2e85f3486083f7c0577f33327d22}{identify\+\_\+all\+\_\+geometric\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::set$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ $>$ \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&external\+\_\+elements\+\_\+pt, std\+::set$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ $>$ \&external\+\_\+geometric\+\_\+data\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1FSIWallElement_a27ef2e85f3486083f7c0577f33327d22}{identify\+\_\+all\+\_\+geometric\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::set$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ $>$ const \&external\+\_\+elements\+\_\+pt, std\+::set$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ $>$ \&external\+\_\+geometric\+\_\+data\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Function that must return all geometric data involved in the desired interactions from the external element. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -164,7 +164,7 @@ Definition at line \mbox{\hyperlink{fsi_8h_source_l00212}{212}} of file \mbox{\h
 \index{oomph::FSIWallElement@{oomph::FSIWallElement}!FSIWallElement@{FSIWallElement}}
 \index{FSIWallElement@{FSIWallElement}!oomph::FSIWallElement@{oomph::FSIWallElement}}
 \doxysubsubsection{\texorpdfstring{FSIWallElement()}{FSIWallElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily oomph\+::\+FSIWall\+Element\+::\+FSIWall\+Element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1FSIWallElement}{FSIWall\+Element}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+{\footnotesize\ttfamily oomph\+::\+FSIWall\+Element\+::\+FSIWall\+Element (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1FSIWallElement}{FSIWall\+Element}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
@@ -191,7 +191,7 @@ Definition at line \mbox{\hyperlink{fsi_8h_source_l00226}{226}} of file \mbox{\h
 \index{oomph::FSIWallElement@{oomph::FSIWallElement}!describe\_local\_dofs@{describe\_local\_dofs}}
 \index{describe\_local\_dofs@{describe\_local\_dofs}!oomph::FSIWallElement@{oomph::FSIWallElement}}
 \doxysubsubsection{\texorpdfstring{describe\_local\_dofs()}{describe\_local\_dofs()}}
-{\footnotesize\ttfamily void oomph\+::\+FSIWall\+Element\+::describe\+\_\+local\+\_\+dofs (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} std\+::string \&}]{current\+\_\+string }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+FSIWall\+Element\+::describe\+\_\+local\+\_\+dofs (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out,  }\item[{const std\+::string \&}]{current\+\_\+string }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -207,7 +207,7 @@ Definition at line \mbox{\hyperlink{fsi_8cc_source_l00078}{78}} of file \mbox{\h
 
 
 
-References \mbox{\hyperlink{nodes_8cc_source_l00939}{oomph\+::\+Data\+::describe\+\_\+dofs()}}, \mbox{\hyperlink{elements_8cc_source_l01709}{oomph\+::\+Finite\+Element\+::describe\+\_\+local\+\_\+dofs()}}, \mbox{\hyperlink{elements_8cc_source_l06878}{oomph\+::\+Solid\+Finite\+Element\+::describe\+\_\+solid\+\_\+local\+\_\+dofs()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00515}{oomph\+::\+Element\+With\+External\+Element\+::\+External\+\_\+interaction\+\_\+field\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00519}{oomph\+::\+Element\+With\+External\+Element\+::\+External\+\_\+interaction\+\_\+geometric\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00205}{oomph\+::\+Element\+With\+External\+Element\+::nexternal\+\_\+interaction\+\_\+field\+\_\+data()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00232}{oomph\+::\+Element\+With\+External\+Element\+::nexternal\+\_\+interaction\+\_\+geometric\+\_\+data()}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
+References \mbox{\hyperlink{nodes_8cc_source_l00939}{oomph\+::\+Data\+::describe\+\_\+dofs()}}, \mbox{\hyperlink{elements_8cc_source_l01709}{oomph\+::\+Finite\+Element\+::describe\+\_\+local\+\_\+dofs()}}, \mbox{\hyperlink{elements_8cc_source_l06874}{oomph\+::\+Solid\+Finite\+Element\+::describe\+\_\+solid\+\_\+local\+\_\+dofs()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00515}{oomph\+::\+Element\+With\+External\+Element\+::\+External\+\_\+interaction\+\_\+field\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00519}{oomph\+::\+Element\+With\+External\+Element\+::\+External\+\_\+interaction\+\_\+geometric\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00205}{oomph\+::\+Element\+With\+External\+Element\+::nexternal\+\_\+interaction\+\_\+field\+\_\+data()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00232}{oomph\+::\+Element\+With\+External\+Element\+::nexternal\+\_\+interaction\+\_\+geometric\+\_\+data()}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FSIWallElement_a5ccc42f1898bba6c5d04ec284db9fd17}\label{classoomph_1_1FSIWallElement_a5ccc42f1898bba6c5d04ec284db9fd17}} 
 \index{oomph::FSIWallElement@{oomph::FSIWallElement}!disable\_shear\_stress\_in\_jacobian@{disable\_shear\_stress\_in\_jacobian}}
@@ -305,13 +305,13 @@ Definition at line \mbox{\hyperlink{fsi_8h_source_l00323}{323}} of file \mbox{\h
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00357}{oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}, \mbox{\hyperlink{elements_8cc_source_l01199}{oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+by\+\_\+fd()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00345}{oomph\+::\+Element\+With\+External\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+by\+\_\+fd()}}, \mbox{\hyperlink{elements_8cc_source_l01102}{oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+internal\+\_\+by\+\_\+fd()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a0e8482d1fd7938accfa0c9951015f239}{oomph\+::\+Finite\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+nodal\+\_\+by\+\_\+fd()}}, \mbox{\hyperlink{elements_8cc_source_l06989}{oomph\+::\+Solid\+Finite\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+solid\+\_\+position\+\_\+by\+\_\+fd()}}, \mbox{\hyperlink{elements_8h_source_l00980}{oomph\+::\+Generalised\+Element\+::get\+\_\+residuals()}}, \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, and \mbox{\hyperlink{elements_8h_source_l04330}{oomph\+::\+Solid\+Finite\+Element\+::\+Solve\+\_\+for\+\_\+consistent\+\_\+newmark\+\_\+accel\+\_\+flag}}.
+References \mbox{\hyperlink{elements_8h_source_l00357}{oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}, \mbox{\hyperlink{elements_8cc_source_l07227}{oomph\+::\+Solid\+Finite\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+for\+\_\+newmark\+\_\+accel()}}, \mbox{\hyperlink{elements_8cc_source_l01199}{oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+by\+\_\+fd()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00345}{oomph\+::\+Element\+With\+External\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+by\+\_\+fd()}}, \mbox{\hyperlink{elements_8cc_source_l01102}{oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+internal\+\_\+by\+\_\+fd()}}, \mbox{\hyperlink{elements_8cc_source_l03660}{oomph\+::\+Finite\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+nodal\+\_\+by\+\_\+fd()}}, \mbox{\hyperlink{elements_8cc_source_l06985}{oomph\+::\+Solid\+Finite\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+solid\+\_\+position\+\_\+by\+\_\+fd()}}, \mbox{\hyperlink{elements_8h_source_l00980}{oomph\+::\+Generalised\+Element\+::get\+\_\+residuals()}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, and \mbox{\hyperlink{elements_8h_source_l04302}{oomph\+::\+Solid\+Finite\+Element\+::\+Solve\+\_\+for\+\_\+consistent\+\_\+newmark\+\_\+accel\+\_\+flag}}.
 
 \mbox{\Hypertarget{classoomph_1_1FSIWallElement_a4b6eacec41f41006a3884ee0dbda3bcb}\label{classoomph_1_1FSIWallElement_a4b6eacec41f41006a3884ee0dbda3bcb}} 
 \index{oomph::FSIWallElement@{oomph::FSIWallElement}!fluid\_load\_vector@{fluid\_load\_vector}}
 \index{fluid\_load\_vector@{fluid\_load\_vector}!oomph::FSIWallElement@{oomph::FSIWallElement}}
 \doxysubsubsection{\texorpdfstring{fluid\_load\_vector()}{fluid\_load\_vector()}}
-{\footnotesize\ttfamily void oomph\+::\+FSIWall\+Element\+::fluid\+\_\+load\+\_\+vector (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{intpt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{N,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{load }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily void oomph\+::\+FSIWall\+Element\+::fluid\+\_\+load\+\_\+vector (\begin{DoxyParamCaption}\item[{const unsigned \&}]{intpt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{N,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{load }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -329,13 +329,13 @@ References \mbox{\hyperlink{fsi_8h_source_l00208}{Dont\+\_\+warn\+\_\+about\+\_\
 
 
 
-Referenced by \mbox{\hyperlink{solid__traction__elements_8h_source_l00854}{oomph\+::\+FSISolid\+Traction\+Element$<$ ELEMENT, DIM $>$\+::get\+\_\+traction()}}, \mbox{\hyperlink{beam__elements_8h_source_l00421}{oomph\+::\+FSIHermite\+Beam\+Element\+::load\+\_\+vector()}}, \mbox{\hyperlink{shell__elements_8h_source_l00532}{oomph\+::\+FSIDiag\+Hermite\+Shell\+Element\+::load\+\_\+vector()}}, and \mbox{\hyperlink{shell__elements_8h_source_l00442}{oomph\+::\+FSIDiag\+Hermite\+Shell\+Element\+::load\+\_\+vector\+\_\+for\+\_\+rate\+\_\+of\+\_\+work\+\_\+computation()}}.
+Referenced by \mbox{\hyperlink{solid__traction__elements_8h_source_l00854}{oomph\+::\+FSISolid\+Traction\+Element$<$ ELEMENT, DIM $>$\+::get\+\_\+traction()}}, \mbox{\hyperlink{beam__elements_8h_source_l00405}{oomph\+::\+FSIHermite\+Beam\+Element\+::load\+\_\+vector()}}, \mbox{\hyperlink{shell__elements_8h_source_l00532}{oomph\+::\+FSIDiag\+Hermite\+Shell\+Element\+::load\+\_\+vector()}}, and \mbox{\hyperlink{shell__elements_8h_source_l00442}{oomph\+::\+FSIDiag\+Hermite\+Shell\+Element\+::load\+\_\+vector\+\_\+for\+\_\+rate\+\_\+of\+\_\+work\+\_\+computation()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FSIWallElement_a16256fcbc5ddc279db3ab776b92b46a1}\label{classoomph_1_1FSIWallElement_a16256fcbc5ddc279db3ab776b92b46a1}} 
 \index{oomph::FSIWallElement@{oomph::FSIWallElement}!identify\_all\_field\_data\_for\_external\_interaction@{identify\_all\_field\_data\_for\_external\_interaction}}
 \index{identify\_all\_field\_data\_for\_external\_interaction@{identify\_all\_field\_data\_for\_external\_interaction}!oomph::FSIWallElement@{oomph::FSIWallElement}}
 \doxysubsubsection{\texorpdfstring{identify\_all\_field\_data\_for\_external\_interaction()}{identify\_all\_field\_data\_for\_external\_interaction()}}
-{\footnotesize\ttfamily void oomph\+::\+FSIWall\+Element\+::identify\+\_\+all\+\_\+field\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::set$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ $>$ \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{external\+\_\+elements\+\_\+pt,  }\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&}]{paired\+\_\+iteraction\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+FSIWall\+Element\+::identify\+\_\+all\+\_\+field\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::set$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ $>$ const \&}]{external\+\_\+elements\+\_\+pt,  }\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&}]{paired\+\_\+iteraction\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}
 
 
 
@@ -357,7 +357,7 @@ References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cla
 \index{oomph::FSIWallElement@{oomph::FSIWallElement}!identify\_all\_geometric\_data\_for\_external\_interaction@{identify\_all\_geometric\_data\_for\_external\_interaction}}
 \index{identify\_all\_geometric\_data\_for\_external\_interaction@{identify\_all\_geometric\_data\_for\_external\_interaction}!oomph::FSIWallElement@{oomph::FSIWallElement}}
 \doxysubsubsection{\texorpdfstring{identify\_all\_geometric\_data\_for\_external\_interaction()}{identify\_all\_geometric\_data\_for\_external\_interaction()}}
-{\footnotesize\ttfamily void oomph\+::\+FSIWall\+Element\+::identify\+\_\+all\+\_\+geometric\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::set$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ $>$ \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{external\+\_\+elements\+\_\+pt,  }\item[{std\+::set$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ $>$ \&}]{external\+\_\+geometric\+\_\+data\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+FSIWall\+Element\+::identify\+\_\+all\+\_\+geometric\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::set$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ $>$ const \&}]{external\+\_\+elements\+\_\+pt,  }\item[{std\+::set$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ $>$ \&}]{external\+\_\+geometric\+\_\+data\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}
 
 
 
@@ -409,7 +409,7 @@ Definition at line \mbox{\hyperlink{fsi_8cc_source_l00230}{230}} of file \mbox{\
 
 
 
-References \mbox{\hyperlink{element__with__external__element_8h_source_l00107}{oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l01968}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a7ae3f437c142fbdef17db914698ffb10}{oomph\+::\+Finite\+Element\+::node\+\_\+update()}}, and \mbox{\hyperlink{fsi_8h_source_l00535}{Only\+\_\+front\+\_\+is\+\_\+loaded\+\_\+by\+\_\+fluid}}.
+References \mbox{\hyperlink{element__with__external__element_8h_source_l00107}{oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8cc_source_l05072}{oomph\+::\+Finite\+Element\+::node\+\_\+update()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, and \mbox{\hyperlink{fsi_8h_source_l00535}{Only\+\_\+front\+\_\+is\+\_\+loaded\+\_\+by\+\_\+fluid}}.
 
 
 
@@ -441,7 +441,7 @@ Referenced by \mbox{\hyperlink{fsi_8h_source_l00724}{oomph\+::\+FSI\+\_\+functio
 \index{oomph::FSIWallElement@{oomph::FSIWallElement}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::FSIWallElement@{oomph::FSIWallElement}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
-{\footnotesize\ttfamily void oomph\+::\+FSIWall\+Element\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1FSIWallElement}{FSIWall\+Element}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+{\footnotesize\ttfamily void oomph\+::\+FSIWall\+Element\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1FSIWallElement}{FSIWall\+Element}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
@@ -451,7 +451,7 @@ Broken assignment operator.
 \index{oomph::FSIWallElement@{oomph::FSIWallElement}!q@{q}}
 \index{q@{q}!oomph::FSIWallElement@{oomph::FSIWallElement}}
 \doxysubsubsection{\texorpdfstring{q()}{q()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \& oomph\+::\+FSIWall\+Element\+::q (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const double \& oomph\+::\+FSIWall\+Element\+::q (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -623,7 +623,7 @@ References \mbox{\hyperlink{fsi_8h_source_l00547}{Ignore\+\_\+shear\+\_\+stress\
 \index{oomph::FSIWallElement@{oomph::FSIWallElement}!reset\_in\_external\_fd@{reset\_in\_external\_fd}}
 \index{reset\_in\_external\_fd@{reset\_in\_external\_fd}!oomph::FSIWallElement@{oomph::FSIWallElement}}
 \doxysubsubsection{\texorpdfstring{reset\_in\_external\_fd()}{reset\_in\_external\_fd()}}
-{\footnotesize\ttfamily void oomph\+::\+FSIWall\+Element\+::reset\+\_\+in\+\_\+external\+\_\+fd (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+FSIWall\+Element\+::reset\+\_\+in\+\_\+external\+\_\+fd (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -641,7 +641,7 @@ Definition at line \mbox{\hyperlink{fsi_8h_source_l00383}{383}} of file \mbox{\h
 \index{oomph::FSIWallElement@{oomph::FSIWallElement}!reset\_in\_external\_interaction\_field\_fd@{reset\_in\_external\_interaction\_field\_fd}}
 \index{reset\_in\_external\_interaction\_field\_fd@{reset\_in\_external\_interaction\_field\_fd}!oomph::FSIWallElement@{oomph::FSIWallElement}}
 \doxysubsubsection{\texorpdfstring{reset\_in\_external\_interaction\_field\_fd()}{reset\_in\_external\_interaction\_field\_fd()}}
-{\footnotesize\ttfamily void oomph\+::\+FSIWall\+Element\+::reset\+\_\+in\+\_\+external\+\_\+interaction\+\_\+field\+\_\+fd (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+FSIWall\+Element\+::reset\+\_\+in\+\_\+external\+\_\+interaction\+\_\+field\+\_\+fd (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -659,7 +659,7 @@ Definition at line \mbox{\hyperlink{fsi_8h_source_l00426}{426}} of file \mbox{\h
 \index{oomph::FSIWallElement@{oomph::FSIWallElement}!reset\_in\_external\_interaction\_geometric\_fd@{reset\_in\_external\_interaction\_geometric\_fd}}
 \index{reset\_in\_external\_interaction\_geometric\_fd@{reset\_in\_external\_interaction\_geometric\_fd}!oomph::FSIWallElement@{oomph::FSIWallElement}}
 \doxysubsubsection{\texorpdfstring{reset\_in\_external\_interaction\_geometric\_fd()}{reset\_in\_external\_interaction\_geometric\_fd()}}
-{\footnotesize\ttfamily void oomph\+::\+FSIWall\+Element\+::reset\+\_\+in\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+fd (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+FSIWall\+Element\+::reset\+\_\+in\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+fd (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -677,7 +677,7 @@ Definition at line \mbox{\hyperlink{fsi_8h_source_l00449}{449}} of file \mbox{\h
 \index{oomph::FSIWallElement@{oomph::FSIWallElement}!reset\_in\_internal\_fd@{reset\_in\_internal\_fd}}
 \index{reset\_in\_internal\_fd@{reset\_in\_internal\_fd}!oomph::FSIWallElement@{oomph::FSIWallElement}}
 \doxysubsubsection{\texorpdfstring{reset\_in\_internal\_fd()}{reset\_in\_internal\_fd()}}
-{\footnotesize\ttfamily void oomph\+::\+FSIWall\+Element\+::reset\+\_\+in\+\_\+internal\+\_\+fd (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+FSIWall\+Element\+::reset\+\_\+in\+\_\+internal\+\_\+fd (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -695,7 +695,7 @@ Definition at line \mbox{\hyperlink{fsi_8h_source_l00361}{361}} of file \mbox{\h
 \index{oomph::FSIWallElement@{oomph::FSIWallElement}!reset\_in\_nodal\_fd@{reset\_in\_nodal\_fd}}
 \index{reset\_in\_nodal\_fd@{reset\_in\_nodal\_fd}!oomph::FSIWallElement@{oomph::FSIWallElement}}
 \doxysubsubsection{\texorpdfstring{reset\_in\_nodal\_fd()}{reset\_in\_nodal\_fd()}}
-{\footnotesize\ttfamily void oomph\+::\+FSIWall\+Element\+::reset\+\_\+in\+\_\+nodal\+\_\+fd (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+FSIWall\+Element\+::reset\+\_\+in\+\_\+nodal\+\_\+fd (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -713,7 +713,7 @@ Definition at line \mbox{\hyperlink{fsi_8h_source_l00405}{405}} of file \mbox{\h
 \index{oomph::FSIWallElement@{oomph::FSIWallElement}!reset\_in\_solid\_position\_fd@{reset\_in\_solid\_position\_fd}}
 \index{reset\_in\_solid\_position\_fd@{reset\_in\_solid\_position\_fd}!oomph::FSIWallElement@{oomph::FSIWallElement}}
 \doxysubsubsection{\texorpdfstring{reset\_in\_solid\_position\_fd()}{reset\_in\_solid\_position\_fd()}}
-{\footnotesize\ttfamily void oomph\+::\+FSIWall\+Element\+::reset\+\_\+in\+\_\+solid\+\_\+position\+\_\+fd (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+FSIWall\+Element\+::reset\+\_\+in\+\_\+solid\+\_\+position\+\_\+fd (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -731,7 +731,7 @@ Definition at line \mbox{\hyperlink{fsi_8h_source_l00471}{471}} of file \mbox{\h
 \index{oomph::FSIWallElement@{oomph::FSIWallElement}!setup\_fsi\_wall\_element@{setup\_fsi\_wall\_element}}
 \index{setup\_fsi\_wall\_element@{setup\_fsi\_wall\_element}!oomph::FSIWallElement@{oomph::FSIWallElement}}
 \doxysubsubsection{\texorpdfstring{setup\_fsi\_wall\_element()}{setup\_fsi\_wall\_element()}}
-{\footnotesize\ttfamily void oomph\+::\+FSIWall\+Element\+::setup\+\_\+fsi\+\_\+wall\+\_\+element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{nlagr\+\_\+solid,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{ndim\+\_\+fluid }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void oomph\+::\+FSIWall\+Element\+::setup\+\_\+fsi\+\_\+wall\+\_\+element (\begin{DoxyParamCaption}\item[{const unsigned \&}]{nlagr\+\_\+solid,  }\item[{const unsigned \&}]{ndim\+\_\+fluid }\end{DoxyParamCaption})}
 
 
 
@@ -747,13 +747,13 @@ References \mbox{\hyperlink{element__with__external__element_8h_source_l00178}{o
 
 
 
-Referenced by \mbox{\hyperlink{shell__elements_8h_source_l00476}{oomph\+::\+FSIDiag\+Hermite\+Shell\+Element\+::\+FSIDiag\+Hermite\+Shell\+Element()}}, \mbox{\hyperlink{beam__elements_8h_source_l00380}{oomph\+::\+FSIHermite\+Beam\+Element\+::\+FSIHermite\+Beam\+Element()}}, and \mbox{\hyperlink{solid__traction__elements_8h_source_l00795}{oomph\+::\+FSISolid\+Traction\+Element$<$ ELEMENT, DIM $>$\+::\+FSISolid\+Traction\+Element()}}.
+Referenced by \mbox{\hyperlink{shell__elements_8h_source_l00476}{oomph\+::\+FSIDiag\+Hermite\+Shell\+Element\+::\+FSIDiag\+Hermite\+Shell\+Element()}}, \mbox{\hyperlink{beam__elements_8h_source_l00364}{oomph\+::\+FSIHermite\+Beam\+Element\+::\+FSIHermite\+Beam\+Element()}}, and \mbox{\hyperlink{solid__traction__elements_8h_source_l00795}{oomph\+::\+FSISolid\+Traction\+Element$<$ ELEMENT, DIM $>$\+::\+FSISolid\+Traction\+Element()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FSIWallElement_a8274e2b48101edd84f33b6368bc1c90d}\label{classoomph_1_1FSIWallElement_a8274e2b48101edd84f33b6368bc1c90d}} 
 \index{oomph::FSIWallElement@{oomph::FSIWallElement}!update\_in\_external\_fd@{update\_in\_external\_fd}}
 \index{update\_in\_external\_fd@{update\_in\_external\_fd}!oomph::FSIWallElement@{oomph::FSIWallElement}}
 \doxysubsubsection{\texorpdfstring{update\_in\_external\_fd()}{update\_in\_external\_fd()}}
-{\footnotesize\ttfamily void oomph\+::\+FSIWall\+Element\+::update\+\_\+in\+\_\+external\+\_\+fd (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+FSIWall\+Element\+::update\+\_\+in\+\_\+external\+\_\+fd (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -775,7 +775,7 @@ References \mbox{\hyperlink{fsi_8h_source_l00547}{Ignore\+\_\+shear\+\_\+stress\
 \index{oomph::FSIWallElement@{oomph::FSIWallElement}!update\_in\_external\_interaction\_field\_fd@{update\_in\_external\_interaction\_field\_fd}}
 \index{update\_in\_external\_interaction\_field\_fd@{update\_in\_external\_interaction\_field\_fd}!oomph::FSIWallElement@{oomph::FSIWallElement}}
 \doxysubsubsection{\texorpdfstring{update\_in\_external\_interaction\_field\_fd()}{update\_in\_external\_interaction\_field\_fd()}}
-{\footnotesize\ttfamily void oomph\+::\+FSIWall\+Element\+::update\+\_\+in\+\_\+external\+\_\+interaction\+\_\+field\+\_\+fd (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+FSIWall\+Element\+::update\+\_\+in\+\_\+external\+\_\+interaction\+\_\+field\+\_\+fd (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -797,7 +797,7 @@ References \mbox{\hyperlink{fsi_8h_source_l00547}{Ignore\+\_\+shear\+\_\+stress\
 \index{oomph::FSIWallElement@{oomph::FSIWallElement}!update\_in\_external\_interaction\_geometric\_fd@{update\_in\_external\_interaction\_geometric\_fd}}
 \index{update\_in\_external\_interaction\_geometric\_fd@{update\_in\_external\_interaction\_geometric\_fd}!oomph::FSIWallElement@{oomph::FSIWallElement}}
 \doxysubsubsection{\texorpdfstring{update\_in\_external\_interaction\_geometric\_fd()}{update\_in\_external\_interaction\_geometric\_fd()}}
-{\footnotesize\ttfamily void oomph\+::\+FSIWall\+Element\+::update\+\_\+in\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+fd (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+FSIWall\+Element\+::update\+\_\+in\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+fd (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -819,7 +819,7 @@ References \mbox{\hyperlink{fsi_8h_source_l00547}{Ignore\+\_\+shear\+\_\+stress\
 \index{oomph::FSIWallElement@{oomph::FSIWallElement}!update\_in\_internal\_fd@{update\_in\_internal\_fd}}
 \index{update\_in\_internal\_fd@{update\_in\_internal\_fd}!oomph::FSIWallElement@{oomph::FSIWallElement}}
 \doxysubsubsection{\texorpdfstring{update\_in\_internal\_fd()}{update\_in\_internal\_fd()}}
-{\footnotesize\ttfamily void oomph\+::\+FSIWall\+Element\+::update\+\_\+in\+\_\+internal\+\_\+fd (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+FSIWall\+Element\+::update\+\_\+in\+\_\+internal\+\_\+fd (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -841,7 +841,7 @@ References \mbox{\hyperlink{fsi_8h_source_l00547}{Ignore\+\_\+shear\+\_\+stress\
 \index{oomph::FSIWallElement@{oomph::FSIWallElement}!update\_in\_nodal\_fd@{update\_in\_nodal\_fd}}
 \index{update\_in\_nodal\_fd@{update\_in\_nodal\_fd}!oomph::FSIWallElement@{oomph::FSIWallElement}}
 \doxysubsubsection{\texorpdfstring{update\_in\_nodal\_fd()}{update\_in\_nodal\_fd()}}
-{\footnotesize\ttfamily void oomph\+::\+FSIWall\+Element\+::update\+\_\+in\+\_\+nodal\+\_\+fd (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+FSIWall\+Element\+::update\+\_\+in\+\_\+nodal\+\_\+fd (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -863,7 +863,7 @@ References \mbox{\hyperlink{fsi_8h_source_l00547}{Ignore\+\_\+shear\+\_\+stress\
 \index{oomph::FSIWallElement@{oomph::FSIWallElement}!update\_in\_solid\_position\_fd@{update\_in\_solid\_position\_fd}}
 \index{update\_in\_solid\_position\_fd@{update\_in\_solid\_position\_fd}!oomph::FSIWallElement@{oomph::FSIWallElement}}
 \doxysubsubsection{\texorpdfstring{update\_in\_solid\_position\_fd()}{update\_in\_solid\_position\_fd()}}
-{\footnotesize\ttfamily void oomph\+::\+FSIWall\+Element\+::update\+\_\+in\+\_\+solid\+\_\+position\+\_\+fd (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+FSIWall\+Element\+::update\+\_\+in\+\_\+solid\+\_\+position\+\_\+fd (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 

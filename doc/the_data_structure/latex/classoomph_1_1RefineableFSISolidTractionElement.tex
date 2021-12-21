@@ -18,11 +18,11 @@ Inheritance diagram for oomph\+::Refineable\+FSISolid\+Traction\+Element\texorpd
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1RefineableFSISolidTractionElement_aa3b729e477187807b8ade53d64200e22}{Refineable\+FSISolid\+Traction\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&element\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}})
+\mbox{\hyperlink{classoomph_1_1RefineableFSISolidTractionElement_aa3b729e477187807b8ade53d64200e22}{Refineable\+FSISolid\+Traction\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&element\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}})
 \begin{DoxyCompactList}\small\item\em Constructor\+: Create element as \mbox{\hyperlink{classoomph_1_1FSIWallElement}{FSIWall\+Element}} (and thus, by inheritance, a \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}) with DIM-\/1 Lagrangian and DIM Eulerian coordinates. By default, we assume that the normal vector computed by the underlying \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} points into the fluid. If this is not the case, overwrite this with the access function \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement_aaa745c32fe53e76ac0b9d1b00a05fe36}{FSISolid\+Traction\+Element\+::set\+\_\+normal\+\_\+pointing\+\_\+out\+\_\+of\+\_\+fluid()}} Constructor for \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} is called explicitly because of virtual inheritance! \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1RefineableFSISolidTractionElement_a93dba5ec7c731196a4963734543c9395}{$\sim$\+Refineable\+FSISolid\+Traction\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Destructor\+: empty. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1RefineableFSISolidTractionElement_a886a6bcb5722c9535f6f78ccefdc0646}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})
+virtual void \mbox{\hyperlink{classoomph_1_1RefineableFSISolidTractionElement_a886a6bcb5722c9535f6f78ccefdc0646}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em Final overload. Get contributions from refineable solid traction element and derivatives from external data. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -44,7 +44,7 @@ Definition at line \mbox{\hyperlink{solid__traction__elements_8h_source_l01042}{
 \index{RefineableFSISolidTractionElement@{RefineableFSISolidTractionElement}!oomph::RefineableFSISolidTractionElement$<$ ELEMENT, DIM $>$@{oomph::RefineableFSISolidTractionElement$<$ ELEMENT, DIM $>$}}
 \doxysubsubsection{\texorpdfstring{RefineableFSISolidTractionElement()}{RefineableFSISolidTractionElement()}}
 {\footnotesize\ttfamily template$<$class ELEMENT , unsigned DIM$>$ \\
-\mbox{\hyperlink{classoomph_1_1RefineableFSISolidTractionElement}{oomph\+::\+Refineable\+FSISolid\+Traction\+Element}}$<$ ELEMENT, DIM $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableFSISolidTractionElement}{Refineable\+FSISolid\+Traction\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{element\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1RefineableFSISolidTractionElement}{oomph\+::\+Refineable\+FSISolid\+Traction\+Element}}$<$ ELEMENT, DIM $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableFSISolidTractionElement}{Refineable\+FSISolid\+Traction\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{element\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -93,7 +93,7 @@ Definition at line \mbox{\hyperlink{solid__traction__elements_8h_source_l01071}{
 
 
 
-References \mbox{\hyperlink{solid__traction__elements_8h_source_l00504}{oomph\+::\+Refineable\+Solid\+Traction\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00345}{oomph\+::\+Element\+With\+External\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+by\+\_\+fd()}}, and \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}.
+References \mbox{\hyperlink{solid__traction__elements_8h_source_l00504}{oomph\+::\+Refineable\+Solid\+Traction\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, and \mbox{\hyperlink{element__with__external__element_8h_source_l00345}{oomph\+::\+Element\+With\+External\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+by\+\_\+fd()}}.
 
 
 

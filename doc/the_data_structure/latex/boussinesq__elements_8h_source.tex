@@ -68,7 +68,7 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00064}00064   \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00065}\mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement}{00065}}   \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement}{BuoyantQCrouzeixRaviartElement}}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00066}00066     : \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement}{QAdvectionDiffusionElement}}<DIM, 3>,}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00067}00067       \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classQCrouzeixRaviartElement}{QCrouzeixRaviartElement}}<DIM>}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00067}00067       \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement}{QCrouzeixRaviartElement}}<DIM>}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00068}00068   \{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00069}00069   \textcolor{keyword}{private}:\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00070}00070 \textcolor{comment}{    /// Pointer to a private data member, the Rayleigh number}}
@@ -82,7 +82,7 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00078}00078 \textcolor{comment}{    /// initialise the pointer to the Rayleigh number to point}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00079}00079 \textcolor{comment}{    /// to the default value of 0.0.}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00080}\mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_a9651742d190071d973ed5c154341d82b}{00080}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_a9651742d190071d973ed5c154341d82b}{BuoyantQCrouzeixRaviartElement}}()}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00081}00081       : \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement}{QAdvectionDiffusionElement}}<DIM, 3>(), \mbox{\hyperlink{classQCrouzeixRaviartElement}{QCrouzeixRaviartElement}}<DIM>()}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00081}00081       : \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement}{QAdvectionDiffusionElement}}<DIM, 3>(), \mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement}{QCrouzeixRaviartElement}}<DIM>()}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00082}00082     \{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00083}00083       \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_a054ffb965ec8cce9b6b2da2336a1e7d8}{Ra\_pt}} = \&\mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_a3214e603f9b4108348c6a9abcede67ac}{Default\_Physical\_Constant\_Value}};}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00084}00084     \}}
@@ -90,7 +90,7 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00086}00086 \textcolor{comment}{    /// Unpin p\_dof-\/th pressure dof}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00087}\mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_a9468f7a594a5b9a9a07d3bf27dbcff45}{00087}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_a9468f7a594a5b9a9a07d3bf27dbcff45}{unfix\_pressure}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& p\_dof)}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00088}00088     \{}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00089}00089       this-\/>internal\_data\_pt(this-\/>\mbox{\hyperlink{classQCrouzeixRaviartElement_a0185fc0d1320c89323ba4d53ef4d189a}{P\_nst\_internal\_index}})-\/>unpin(p\_dof);}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00089}00089       this-\/>\mbox{\hyperlink{classoomph_1_1GeneralisedElement_a3b83389f2c80788013421c6d59604f0b}{internal\_data\_pt}}(this-\/>\mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement_a50b6de74ff6201ea44db66c72063ecf4}{P\_nst\_internal\_index}})-\/>\mbox{\hyperlink{classoomph_1_1Data_a4e5cb031bf8eceb8f97c2c4fbd74cb05}{unpin}}(p\_dof);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00090}00090     \}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00091}00091 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00092}00092 \textcolor{comment}{    /// The required number of values stored at the nodes is the sum of}}
@@ -99,7 +99,7 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00095}\mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_a64b84c9cf74a06680136d465ff9e037b}{00095}} \textcolor{comment}{}    \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_a64b84c9cf74a06680136d465ff9e037b}{required\_nvalue}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00096}00096 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00097}00097       \textcolor{keywordflow}{return} (\mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement}{QAdvectionDiffusionElement<DIM, 3>::required\_nvalue}}(n) +}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00098}00098               \mbox{\hyperlink{classQCrouzeixRaviartElement}{QCrouzeixRaviartElement<DIM>::required\_nvalue}}(n));}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00098}00098               \mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement}{QCrouzeixRaviartElement<DIM>::required\_nvalue}}(n));}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00099}00099     \}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00100}00100 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00101}00101 \textcolor{comment}{    /// Access function for the Rayleigh number (const version)}}
@@ -118,16 +118,16 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00114}\mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_a534fc134280b7447eecc4cad46b2e4c5}{00114}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_a534fc134280b7447eecc4cad46b2e4c5}{disable\_ALE}}()}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00115}00115     \{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00116}00116       \textcolor{comment}{// Disable ALE in both sets of equations}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00117}00117       \mbox{\hyperlink{classNavierStokesEquations_aa2bcb060d737b27a67979aece346b176}{NavierStokesEquations<DIM>::disable\_ALE}}();}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00118}00118       AdvectionDiffusionEquations<DIM>::disable\_ALE();}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00117}00117       \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a09f47fe68a941eaf9a0080a166eea687}{NavierStokesEquations<DIM>::disable\_ALE}}();}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00118}00118       \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_aa635388e5e1139e0a1eae97ca89279d0}{AdvectionDiffusionEquations<DIM>::disable\_ALE}}();}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00119}00119     \}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00120}00120 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00121}00121 \textcolor{comment}{    /// Final override for enable ALE}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00122}\mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_af551bb70aa118a8db4498f41272fe776}{00122}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_af551bb70aa118a8db4498f41272fe776}{enable\_ALE}}()}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00123}00123     \{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00124}00124       \textcolor{comment}{// Enable ALE in both sets of equations}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00125}00125       \mbox{\hyperlink{classNavierStokesEquations_a604a6a86ce42740cb5f659beed647418}{NavierStokesEquations<DIM>::enable\_ALE}}();}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00126}00126       AdvectionDiffusionEquations<DIM>::enable\_ALE();}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00125}00125       \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a8b3449281debf059f2386526f8b0ee24}{NavierStokesEquations<DIM>::enable\_ALE}}();}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00126}00126       \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a949dd5a3eb9803c993c1f4506cfd5d82}{AdvectionDiffusionEquations<DIM>::enable\_ALE}}();}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00127}00127     \}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00128}00128 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00129}00129 \textcolor{comment}{    /// Number of scalars/fields output by this element. Broken}}
@@ -182,37 +182,37 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00178}00178       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00179}00179 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00180}00180       \textcolor{comment}{// Tecplot header info}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00181}00181       outfile << this-\/>tecplot\_zone\_string(nplot);}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00181}00181       outfile << this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a3193df31f9ce38e0609d17a8ffb386c6}{tecplot\_zone\_string}}(nplot);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00182}00182 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00183}00183       \textcolor{comment}{// Loop over plot points}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00184}00184       \textcolor{keywordtype}{unsigned} num\_plot\_points = this-\/>nplot\_points(nplot);}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00184}00184       \textcolor{keywordtype}{unsigned} num\_plot\_points = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a8ed563c7ff0cfd8bafdbb0132b388106}{nplot\_points}}(nplot);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00185}00185       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} iplot = 0; iplot < num\_plot\_points; iplot++)}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00186}00186       \{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00187}00187         \textcolor{comment}{// Get local coordinates of plot point}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00188}00188         this-\/>get\_s\_plot(iplot, nplot, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00188}00188         this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a82da844fd3ebb2005842464cdc148a03}{get\_s\_plot}}(iplot, nplot, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00189}00189 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00190}00190         \textcolor{comment}{// Output the position of the plot point}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00191}00191         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00192}00192         \{}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00193}00193           outfile << this-\/>interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00193}00193           outfile << this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(s, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00194}00194         \}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00195}00195 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00196}00196         \textcolor{comment}{// Output the fluid velocities at the plot point}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00197}00197         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00198}00198         \{}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00199}00199           outfile << this-\/>\mbox{\hyperlink{classNavierStokesEquations_a9f840839317f3a490239ccaa9c901a62}{interpolated\_u\_nst}}(s, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00199}00199           outfile << this-\/>\mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a34a6866cf9a762ece4c5610d6d25eee9}{interpolated\_u\_nst}}(s, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00200}00200         \}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00201}00201 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00202}00202         \textcolor{comment}{// Output the fluid pressure at the plot point}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00203}00203         outfile << this-\/>\mbox{\hyperlink{classNavierStokesEquations_a813cd7aeb3ec76361d53c63c79e5b534}{interpolated\_p\_nst}}(s) << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00203}00203         outfile << this-\/>\mbox{\hyperlink{classoomph_1_1NavierStokesEquations_aaffc8d182f6bdf382ccbdf54cf3c4e55}{interpolated\_p\_nst}}(s) << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00204}00204 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00205}00205         \textcolor{comment}{// Output the temperature (the advected variable) at the plot point}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00206}00206         outfile << this-\/>interpolated\_u\_adv\_diff(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) << std::endl;}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00206}00206         outfile << this-\/>\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a2c5d80050fd9586bcf2d87951c346f58}{interpolated\_u\_adv\_diff}}(s) << std::endl;}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00207}00207       \}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00208}00208       outfile << std::endl;}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00209}00209 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00210}00210       \textcolor{comment}{// Write tecplot footer (e.g. FE connectivity lists)}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00211}00211       this-\/>write\_tecplot\_zone\_footer(outfile, nplot);}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00211}00211       this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_ac3987a5ead7dc20c63d86b333466e2b5}{write\_tecplot\_zone\_footer}}(outfile, nplot);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00212}00212     \} \textcolor{comment}{// End of output function}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00213}00213 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00214}00214 \textcolor{comment}{}}
@@ -286,11 +286,11 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00282}00282 \textcolor{comment}{    /// advection-\/diffusion equations because the wind is the fluid velocity.}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00283}\mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_ade5820ae7c44a9371dcc348ca5a3ab1c}{00283}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_ade5820ae7c44a9371dcc348ca5a3ab1c}{get\_wind\_adv\_diff}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ipt,}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00284}00284                            \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00285}00285                            \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00285}00285                            \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00286}00286                            \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& wind)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00287}00287 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00288}00288       \textcolor{comment}{// The wind function is simply the velocity at the points}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00289}00289       this-\/>\mbox{\hyperlink{classNavierStokesEquations_a9f840839317f3a490239ccaa9c901a62}{interpolated\_u\_nst}}(s, wind);}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00289}00289       this-\/>\mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a34a6866cf9a762ece4c5610d6d25eee9}{interpolated\_u\_nst}}(s, wind);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00290}00290     \}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00291}00291 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00292}00292 \textcolor{comment}{}}
@@ -302,15 +302,15 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00298}\mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_aeeef7868070fd692b33e5afa811af1da}{00298}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_aeeef7868070fd692b33e5afa811af1da}{get\_body\_force\_nst}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00299}00299                             \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ipt,}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00300}00300                             \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00301}00301                             \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00301}00301                             \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00302}00302                             \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& result)}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00303}00303     \{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00304}00304       \textcolor{comment}{// Get the temperature}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00305}00305       \textcolor{keyword}{const} \textcolor{keywordtype}{double} interpolated\_t = this-\/>interpolated\_u\_adv\_diff(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00305}00305       \textcolor{keyword}{const} \textcolor{keywordtype}{double} interpolated\_t = this-\/>\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a2c5d80050fd9586bcf2d87951c346f58}{interpolated\_u\_adv\_diff}}(s);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00306}00306 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00307}00307       \textcolor{comment}{// Get vector that indicates the direction of gravity from}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00308}00308       \textcolor{comment}{// the Navier-\/Stokes equations}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00309}00309       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} gravity(\mbox{\hyperlink{classNavierStokesEquations}{NavierStokesEquations<DIM>::g}}());}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00309}00309       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} gravity(\mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{NavierStokesEquations<DIM>::g}}());}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00310}00310 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00311}00311       \textcolor{comment}{// Temperature-\/dependent body force:}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00312}00312       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
@@ -327,10 +327,10 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00323}\mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_ab87ed100a54d40884a70a67fcc305ecf}{00323}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_ab87ed100a54d40884a70a67fcc305ecf}{fill\_in\_contribution\_to\_residuals}}(\mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals)}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00324}00324     \{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00325}00325       \textcolor{comment}{// Fill in the residuals of the Navier-\/Stokes equations}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00326}00326       \mbox{\hyperlink{classNavierStokesEquations_ad321a72e152857cc565236ded1cdef51}{NavierStokesEquations<DIM>::fill\_in\_contribution\_to\_residuals}}(residuals);}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00326}00326       \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a314875a11bafbf24d6a84df31e0213e8}{NavierStokesEquations<DIM>::fill\_in\_contribution\_to\_residuals}}(residuals);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00327}00327 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00328}00328       \textcolor{comment}{// Fill in the residuals of the advection-\/diffusion eqautions}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00329}00329       AdvectionDiffusionEquations<DIM>::fill\_in\_contribution\_to\_residuals(}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00329}00329       \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_ae56ee6b085c75be438a598244c527fb5}{AdvectionDiffusionEquations<DIM>::fill\_in\_contribution\_to\_residuals}}(}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00330}00330         residuals);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00331}00331     \}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00332}00332 }
@@ -378,14 +378,14 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00374}00374       \textcolor{keywordtype}{unsigned} u\_nodal\_nst[DIM];}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00375}00375       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00376}00376       \{}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00377}00377         u\_nodal\_nst[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = this-\/>\mbox{\hyperlink{classNavierStokesEquations_adc8563af1b677a8d6a5be5f4b3abcce9}{u\_index\_nst}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00377}00377         u\_nodal\_nst[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = this-\/>\mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a136756d3e5f4248b32ce44ecfcb5fb30}{u\_index\_nst}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00378}00378       \}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00379}00379 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00380}00380       \textcolor{comment}{// Local storage for the  index at which the temperature is stored}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00381}00381       \textcolor{keywordtype}{unsigned} u\_nodal\_adv\_diff = this-\/>\mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_acf5fa44f694c5374c61a964020437bf4}{u\_index\_adv\_diff}}();}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00382}00382 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00383}00383       \textcolor{comment}{// Find the total number of unknowns in the elements}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00384}00384       \textcolor{keywordtype}{unsigned} n\_dof = this-\/>ndof();}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00384}00384       \textcolor{keywordtype}{unsigned} n\_dof = this-\/>\mbox{\hyperlink{classoomph_1_1GeneralisedElement_a37204f67b37d212fd170c68d48f6da57}{ndof}}();}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00385}00385 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00386}00386       \textcolor{comment}{// Temporary storage for residuals}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00387}00387       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} newres(n\_dof);}
@@ -397,7 +397,7 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00393}00393       \textcolor{keywordtype}{double} fd\_step = \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a156163c9f6fbd17548a9fa836616d19b}{FiniteElement::Default\_fd\_jacobian\_step}};}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00394}00394 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00395}00395       \textcolor{comment}{// Find the number of nodes}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00396}00396       \textcolor{keywordtype}{unsigned} n\_node = this-\/>nnode();}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00396}00396       \textcolor{keywordtype}{unsigned} n\_node = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00397}00397 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00398}00398       \textcolor{comment}{// Calculate the contribution of the Navier-\/-\/Stokes velocities to the}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00399}00399       \textcolor{comment}{// advection-\/diffusion equations}}
@@ -409,13 +409,13 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00405}00405         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00406}00406         \{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00407}00407           \textcolor{comment}{// Get the local velocity equation number}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00408}00408           local\_unknown = this-\/>nodal\_local\_eqn(n, u\_nodal\_nst[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]);}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00408}00408           local\_unknown = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5da80bbed97543e586f698251d67941d}{nodal\_local\_eqn}}(n, u\_nodal\_nst[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00409}00409 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00410}00410           \textcolor{comment}{// If it's not pinned}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00411}00411           \textcolor{keywordflow}{if} (local\_unknown >= 0)}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00412}00412           \{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00413}00413             \textcolor{comment}{// Get a pointer to the velocity value}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00414}00414             \textcolor{keywordtype}{double}* value\_pt = this-\/>node\_pt(n)-\/>value\_pt(u\_nodal\_nst[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]);}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00414}00414             \textcolor{keywordtype}{double}* value\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n)-\/>\mbox{\hyperlink{classoomph_1_1Data_af545f88ca20583f0c1b66e4da6076aa3}{value\_pt}}(u\_nodal\_nst[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00415}00415 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00416}00416             \textcolor{comment}{// Save the old value}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00417}00417             \textcolor{keywordtype}{double} old\_var = *value\_pt;}
@@ -431,7 +431,7 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00427}00427             \{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00428}00428               newres[m] = 0.0;}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00429}00429             \}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00430}00430             AdvectionDiffusionEquations<DIM>::fill\_in\_contribution\_to\_residuals(}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00430}00430             \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_ae56ee6b085c75be438a598244c527fb5}{AdvectionDiffusionEquations<DIM>::fill\_in\_contribution\_to\_residuals}}(}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00431}00431               newres);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00432}00432 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00433}00433             \textcolor{comment}{// AdvectionDiffusionEquations<DIM>::get\_residuals(newres);}}
@@ -441,7 +441,7 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00437}00437             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} m = 0; m < n\_node; m++)}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00438}00438             \{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00439}00439               \textcolor{comment}{// Local equation for temperature}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00440}00440               local\_eqn = this-\/>nodal\_local\_eqn(m, u\_nodal\_adv\_diff);}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00440}00440               local\_eqn = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5da80bbed97543e586f698251d67941d}{nodal\_local\_eqn}}(m, u\_nodal\_adv\_diff);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00441}00441 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00442}00442               \textcolor{comment}{// If it's not a boundary condition}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00443}00443               \textcolor{keywordflow}{if} (local\_eqn >= 0)}
@@ -462,13 +462,13 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00458}00458         \textcolor{comment}{// equations}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00459}00459         \{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00460}00460           \textcolor{comment}{// Get the local equation number}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00461}00461           local\_unknown = this-\/>nodal\_local\_eqn(n, u\_nodal\_adv\_diff);}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00461}00461           local\_unknown = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5da80bbed97543e586f698251d67941d}{nodal\_local\_eqn}}(n, u\_nodal\_adv\_diff);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00462}00462 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00463}00463           \textcolor{comment}{// If it's not pinned}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00464}00464           \textcolor{keywordflow}{if} (local\_unknown >= 0)}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00465}00465           \{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00466}00466             \textcolor{comment}{// Get a pointer to the concentration value}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00467}00467             \textcolor{keywordtype}{double}* value\_pt = this-\/>node\_pt(n)-\/>value\_pt(u\_nodal\_adv\_diff);}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00467}00467             \textcolor{keywordtype}{double}* value\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n)-\/>\mbox{\hyperlink{classoomph_1_1Data_af545f88ca20583f0c1b66e4da6076aa3}{value\_pt}}(u\_nodal\_adv\_diff);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00468}00468 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00469}00469             \textcolor{comment}{// Save the old value}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00470}00470             \textcolor{keywordtype}{double} old\_var = *value\_pt;}
@@ -484,7 +484,7 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00480}00480             \{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00481}00481               newres[m] = 0.0;}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00482}00482             \}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00483}00483             \mbox{\hyperlink{classNavierStokesEquations_ad321a72e152857cc565236ded1cdef51}{NavierStokesEquations<DIM>::fill\_in\_contribution\_to\_residuals}}(}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00483}00483             \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a314875a11bafbf24d6a84df31e0213e8}{NavierStokesEquations<DIM>::fill\_in\_contribution\_to\_residuals}}(}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00484}00484               newres);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00485}00485 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00486}00486             \textcolor{comment}{// NavierStokesEquations<DIM>::get\_residuals(newres);}}
@@ -496,7 +496,7 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00492}00492               \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < DIM; j++)}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00493}00493               \{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00494}00494                 \textcolor{comment}{// Local fluid equation}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00495}00495                 local\_eqn = this-\/>nodal\_local\_eqn(m, u\_nodal\_nst[j]);}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00495}00495                 local\_eqn = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5da80bbed97543e586f698251d67941d}{nodal\_local\_eqn}}(m, u\_nodal\_nst[j]);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00496}00496                 \textcolor{keywordflow}{if} (local\_eqn >= 0)}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00497}00497                 \{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00498}00498                   \textcolor{keywordtype}{double} sum =}
@@ -522,12 +522,12 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00518}00518     \{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00519}00519       \textcolor{comment}{// Calculate the Navier-\/Stokes contributions (diagonal block and}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00520}00520       \textcolor{comment}{// residuals)}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00521}00521       \mbox{\hyperlink{classNavierStokesEquations_ae3607c77f4eb575d2e18068b2cc4c563}{NavierStokesEquations<DIM>::fill\_in\_contribution\_to\_jacobian}}(residuals,}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00521}00521       \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_aba9a7da719632a9003d2358e64713241}{NavierStokesEquations<DIM>::fill\_in\_contribution\_to\_jacobian}}(residuals,}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00522}00522                                                                    jacobian);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00523}00523 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00524}00524       \textcolor{comment}{// Calculate the advection-\/diffusion contributions}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00525}00525       \textcolor{comment}{//(diagonal block and residuals)}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00526}00526       AdvectionDiffusionEquations<DIM>::fill\_in\_contribution\_to\_jacobian(}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00526}00526       \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a6ec1e0f92fa79998be9340ecfda4bcd5}{AdvectionDiffusionEquations<DIM>::fill\_in\_contribution\_to\_jacobian}}(}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00527}00527         residuals, jacobian);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00528}00528 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00529}00529       \textcolor{comment}{// We now fill in the off-\/diagonal (interaction) blocks by finite}}
@@ -544,12 +544,12 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00540}00540       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& mass\_matrix)}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00541}00541     \{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00542}00542       \textcolor{comment}{// Get the analytic diagonal terms}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00543}00543       \mbox{\hyperlink{classNavierStokesEquations}{NavierStokesEquations}}<}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00543}00543       \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{NavierStokesEquations}}<}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00544}00544         DIM>\mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_a7d22156d87949e4c64d597d60fe00225}{::fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix}}(residuals,}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00545}00545                                                                jacobian,}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00546}00546                                                                mass\_matrix);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00547}00547 }
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00548}00548       AdvectionDiffusionEquations<}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00548}00548       \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations}{AdvectionDiffusionEquations}}<}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00549}00549         DIM>\mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_a7d22156d87949e4c64d597d60fe00225}{::fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix}}(residuals,}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00550}00550                                                                jacobian,}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00551}00551                                                                mass\_matrix);}
@@ -578,26 +578,26 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00574}00574       \textcolor{keywordtype}{unsigned} u\_nodal\_nst[DIM];}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00575}00575       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00576}00576       \{}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00577}00577         u\_nodal\_nst[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = this-\/>\mbox{\hyperlink{classNavierStokesEquations_adc8563af1b677a8d6a5be5f4b3abcce9}{u\_index\_nst}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00577}00577         u\_nodal\_nst[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = this-\/>\mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a136756d3e5f4248b32ce44ecfcb5fb30}{u\_index\_nst}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00578}00578       \}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00579}00579 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00580}00580       \textcolor{comment}{// Local storage for the  index at which the temperature is stored}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00581}00581       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} u\_nodal\_adv\_diff = this-\/>\mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_acf5fa44f694c5374c61a964020437bf4}{u\_index\_adv\_diff}}();}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00582}00582 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00583}00583       \textcolor{comment}{// Find out how many nodes there are}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00584}00584       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_node = this-\/>nnode();}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00584}00584       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_node = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00585}00585 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00586}00586       \textcolor{comment}{// Set up memory for the shape and test functions and their derivatives}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00587}00587       \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} psif(n\_node), testf(n\_node);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00588}00588       \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} dpsifdx(n\_node, DIM), dtestfdx(n\_node, DIM);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00589}00589 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00590}00590       \textcolor{comment}{// Number of integration points}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00591}00591       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>integral\_pt()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00591}00591       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00592}00592 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00593}00593       \textcolor{comment}{// Get Physical Variables from Element}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00594}00594       \textcolor{keywordtype}{double} Ra = this-\/>\mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_aabd99c1834c82a2cd9e41729e107eb63}{ra}}();}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00595}00595       \textcolor{keywordtype}{double} Pe = this-\/>pe();}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00596}00596       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} gravity = this-\/>\mbox{\hyperlink{classNavierStokesEquations_a0a24cf2867362d675150a7bae2998de7}{g}}();}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00595}00595       \textcolor{keywordtype}{double} Pe = this-\/>\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a9ab4830f90e00cdeb1ce9814865cd466}{pe}}();}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00596}00596       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} gravity = this-\/>\mbox{\hyperlink{classoomph_1_1NavierStokesEquations_ac14ae725a3514406d9c446ce2688aeac}{g}}();}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00597}00597 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00598}00598       \textcolor{comment}{// Integers to store the local equations and unknowns}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00599}00599       \textcolor{keywordtype}{int} local\_eqn = 0, local\_unknown = 0;}
@@ -606,14 +606,14 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00602}00602       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ipt = 0; ipt < n\_intpt; ipt++)}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00603}00603       \{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00604}00604         \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00605}00605         \textcolor{keywordtype}{double} w = this-\/>integral\_pt()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00605}00605         \textcolor{keywordtype}{double} w = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00606}00606 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00607}00607         \textcolor{comment}{// Call the derivatives of the shape and test functions}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00608}00608         \textcolor{keywordtype}{double} J = this-\/>\mbox{\hyperlink{classQCrouzeixRaviartElement_a1080d47e85cdbcb88e12b29e724df6a1}{dshape\_and\_dtest\_eulerian\_at\_knot\_nst}}(}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00608}00608         \textcolor{keywordtype}{double} J = this-\/>\mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement_a3c4261300b81aae3ac358198b3e11906}{dshape\_and\_dtest\_eulerian\_at\_knot\_nst}}(}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00609}00609           ipt, psif, dpsifdx, testf, dtestfdx);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00610}00610 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00611}00611         \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00612}00612         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00612}00612         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00613}00613 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00614}00614         \textcolor{comment}{// Calculate local values of temperature derivatives}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00615}00615         \textcolor{comment}{// Allocate}}
@@ -623,7 +623,7 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00619}00619         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} l = 0; l < n\_node; l++)}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00620}00620         \{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00621}00621           \textcolor{comment}{// Get the nodal value}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00622}00622           \textcolor{keywordtype}{double} u\_value = this-\/>raw\_nodal\_value(l, u\_nodal\_adv\_diff);}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00622}00622           \textcolor{keywordtype}{double} u\_value = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_abdc430bef622e0257397407416e6aac8}{raw\_nodal\_value}}(l, u\_nodal\_adv\_diff);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00623}00623           \textcolor{comment}{// Loop over the derivative directions}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00624}00624           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < DIM; j++)}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00625}00625           \{}
@@ -644,7 +644,7 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00640}00640           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00641}00641           \{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00642}00642             \textcolor{comment}{// If it's not a boundary condition}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00643}00643             local\_eqn = this-\/>nodal\_local\_eqn(l, u\_nodal\_nst[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]);}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00643}00643             local\_eqn = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5da80bbed97543e586f698251d67941d}{nodal\_local\_eqn}}(l, u\_nodal\_nst[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00644}00644             \textcolor{keywordflow}{if} (local\_eqn >= 0)}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00645}00645             \{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00646}00646               \textcolor{comment}{// Loop over the velocity shape functions again}}
@@ -652,12 +652,12 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00648}00648               \{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00649}00649                 \textcolor{comment}{// We have only the temperature degree of freedom to consider}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00650}00650                 \textcolor{comment}{// If it's non-\/zero add in the contribution}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00651}00651                 local\_unknown = this-\/>nodal\_local\_eqn(l2, u\_nodal\_adv\_diff);}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00651}00651                 local\_unknown = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5da80bbed97543e586f698251d67941d}{nodal\_local\_eqn}}(l2, u\_nodal\_adv\_diff);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00652}00652                 \textcolor{keywordflow}{if} (local\_unknown >= 0)}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00653}00653                 \{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00654}00654                   \textcolor{comment}{// Add contribution to jacobian matrix}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00655}00655                   jacobian(local\_eqn, local\_unknown) +=}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00656}00656                     -\/gravity[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * psif(l2) * Ra * testf(l) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00656}00656                     -\/gravity[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * psif(l2) * Ra * testf(l) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00657}00657                 \}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00658}00658               \}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00659}00659             \}}
@@ -666,7 +666,7 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00662}00662           \textcolor{comment}{// Assemble the contributions of the fluid velocities to the}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00663}00663           \textcolor{comment}{// advection-\/diffusion equation for the temperature}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00664}00664           \{}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00665}00665             local\_eqn = this-\/>nodal\_local\_eqn(l, u\_nodal\_adv\_diff);}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00665}00665             local\_eqn = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5da80bbed97543e586f698251d67941d}{nodal\_local\_eqn}}(l, u\_nodal\_adv\_diff);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00666}00666             \textcolor{comment}{// If it's not pinned}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00667}00667             \textcolor{keywordflow}{if} (local\_eqn >= 0)}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00668}00668             \{}
@@ -677,14 +677,14 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00673}00673                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i2 = 0; i2 < DIM; i2++)}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00674}00674                 \{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00675}00675                   \textcolor{comment}{// Get the local unknown}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00676}00676                   local\_unknown = this-\/>nodal\_local\_eqn(l2, u\_nodal\_nst[i2]);}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00676}00676                   local\_unknown = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5da80bbed97543e586f698251d67941d}{nodal\_local\_eqn}}(l2, u\_nodal\_nst[i2]);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00677}00677                   \textcolor{comment}{// If it's not pinned}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00678}00678                   \textcolor{keywordflow}{if} (local\_unknown >= 0)}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00679}00679                   \{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00680}00680                     \textcolor{comment}{// Add the contribution to the jacobian matrix}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00681}00681                     jacobian(local\_eqn, local\_unknown) -\/=}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00682}00682                       Pe * psif(l2) * interpolated\_du\_adv\_diff\_dx[i2] *}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00683}00683                       testf(l) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00683}00683                       testf(l) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00684}00684                   \}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00685}00685                 \}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00686}00686               \}}
@@ -702,12 +702,12 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00698}00698     \{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00699}00699       \textcolor{comment}{// Calculate the Navier-\/Stokes contributions (diagonal block and}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00700}00700       \textcolor{comment}{// residuals)}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00701}00701       \mbox{\hyperlink{classNavierStokesEquations_ae3607c77f4eb575d2e18068b2cc4c563}{NavierStokesEquations<DIM>::fill\_in\_contribution\_to\_jacobian}}(residuals,}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00701}00701       \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_aba9a7da719632a9003d2358e64713241}{NavierStokesEquations<DIM>::fill\_in\_contribution\_to\_jacobian}}(residuals,}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00702}00702                                                                    jacobian);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00703}00703 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00704}00704       \textcolor{comment}{// Calculate the advection-\/diffusion contributions}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00705}00705       \textcolor{comment}{//(diagonal block and residuals)}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00706}00706       AdvectionDiffusionEquations<DIM>::fill\_in\_contribution\_to\_jacobian(}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00706}00706       \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a6ec1e0f92fa79998be9340ecfda4bcd5}{AdvectionDiffusionEquations<DIM>::fill\_in\_contribution\_to\_jacobian}}(}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00707}00707         residuals, jacobian);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00708}00708 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00709}00709       \textcolor{comment}{// Fill in the off diagonal blocks analytically}}
@@ -723,12 +723,12 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00719}00719       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& mass\_matrix)}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00720}00720     \{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00721}00721       \textcolor{comment}{// Get the analytic diagonal terms for the jacobian and mass matrix}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00722}00722       \mbox{\hyperlink{classNavierStokesEquations}{NavierStokesEquations}}<}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00722}00722       \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{NavierStokesEquations}}<}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00723}00723         DIM>\mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_a7d22156d87949e4c64d597d60fe00225}{::fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix}}(residuals,}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00724}00724                                                                jacobian,}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00725}00725                                                                mass\_matrix);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00726}00726 }
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00727}00727       AdvectionDiffusionEquations<}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00727}00727       \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations}{AdvectionDiffusionEquations}}<}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00728}00728         DIM>\mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_a7d22156d87949e4c64d597d60fe00225}{::fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix}}(residuals,}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00729}00729                                                                jacobian,}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00730}00730                                                                mass\_matrix);}
@@ -849,16 +849,16 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00845}\mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a7fdb84a7d69740668514e0dae2d07f7e}{00845}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a7fdb84a7d69740668514e0dae2d07f7e}{disable\_ALE}}()}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00846}00846     \{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00847}00847       \textcolor{comment}{// Disable ALE in both sets of equations}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00848}00848       \mbox{\hyperlink{classNavierStokesEquations_aa2bcb060d737b27a67979aece346b176}{RefineableNavierStokesEquations<DIM>::disable\_ALE}}();}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00849}00849       \mbox{\hyperlink{classoomph_1_1FiniteElement_a625ea6d3f9baccfbdd1323315fb3ec71}{RefineableAdvectionDiffusionEquations<DIM>::disable\_ALE}}();}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00848}00848       \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a09f47fe68a941eaf9a0080a166eea687}{RefineableNavierStokesEquations<DIM>::disable\_ALE}}();}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00849}00849       \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_aa635388e5e1139e0a1eae97ca89279d0}{RefineableAdvectionDiffusionEquations<DIM>::disable\_ALE}}();}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00850}00850     \}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00851}00851 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00852}00852 \textcolor{comment}{    /// Final override for enable ALE}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00853}\mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a7006ef1edd1ac4a178e38945fae581ee}{00853}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a7006ef1edd1ac4a178e38945fae581ee}{enable\_ALE}}()}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00854}00854     \{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00855}00855       \textcolor{comment}{// Enable ALE in both sets of equations}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00856}00856       \mbox{\hyperlink{classNavierStokesEquations_a604a6a86ce42740cb5f659beed647418}{RefineableNavierStokesEquations<DIM>::enable\_ALE}}();}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00857}00857       \mbox{\hyperlink{classoomph_1_1FiniteElement_a92ef8967fa4e2d6c33c51ea3efa3aa82}{RefineableAdvectionDiffusionEquations<DIM>::enable\_ALE}}();}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00856}00856       \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a8b3449281debf059f2386526f8b0ee24}{RefineableNavierStokesEquations<DIM>::enable\_ALE}}();}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00857}00857       \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a949dd5a3eb9803c993c1f4506cfd5d82}{RefineableAdvectionDiffusionEquations<DIM>::enable\_ALE}}();}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00858}00858     \}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00859}00859 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00860}00860 \textcolor{comment}{}}
@@ -924,20 +924,20 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00920}00920         \textcolor{comment}{// Output the position of the plot point}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00921}00921         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00922}00922         \{}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00923}00923           outfile << this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(s, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00923}00923           outfile << this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(s, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00924}00924         \}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00925}00925 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00926}00926         \textcolor{comment}{// Output the fluid velocities at the plot point}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00927}00927         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00928}00928         \{}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00929}00929           outfile << this-\/>\mbox{\hyperlink{classNavierStokesEquations_a9f840839317f3a490239ccaa9c901a62}{interpolated\_u\_nst}}(s, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00929}00929           outfile << this-\/>\mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a34a6866cf9a762ece4c5610d6d25eee9}{interpolated\_u\_nst}}(s, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00930}00930         \}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00931}00931 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00932}00932         \textcolor{comment}{// Output the fluid pressure at the plot point}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00933}00933         outfile << this-\/>\mbox{\hyperlink{classNavierStokesEquations_a813cd7aeb3ec76361d53c63c79e5b534}{interpolated\_p\_nst}}(s) << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00933}00933         outfile << this-\/>\mbox{\hyperlink{classoomph_1_1NavierStokesEquations_aaffc8d182f6bdf382ccbdf54cf3c4e55}{interpolated\_p\_nst}}(s) << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00934}00934 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00935}00935         \textcolor{comment}{// Output the temperature at the plot point}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00936}00936         outfile << this-\/>interpolated\_u\_adv\_diff(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) << \textcolor{stringliteral}{"{} "{}} << std::endl;}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00936}00936         outfile << this-\/>\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a2c5d80050fd9586bcf2d87951c346f58}{interpolated\_u\_adv\_diff}}(s) << \textcolor{stringliteral}{"{} "{}} << std::endl;}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00937}00937       \}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00938}00938       outfile << std::endl;}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00939}00939 }
@@ -992,7 +992,7 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00988}00988 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00989}00989 \textcolor{comment}{    /// Pointer to the j-\/th vertex node in the element,}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00990}00990 \textcolor{comment}{    /// Call the geometric element's function.}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00991}\mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_ae65592457a3a48365e0200325c5bbbbc}{00991}} \textcolor{comment}{}    Node* \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_ae65592457a3a48365e0200325c5bbbbc}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00991}\mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_ae65592457a3a48365e0200325c5bbbbc}{00991}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_ae65592457a3a48365e0200325c5bbbbc}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00992}00992 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00993}00993       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1QElement}{QElement<DIM, 3>::vertex\_node\_pt}}(j);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l00994}00994     \}}
@@ -1219,11 +1219,11 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01215}01215 \textcolor{comment}{    /// advection-\/diffusion equations because the wind is the fluid velocity.}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01216}\mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a093f484b86df6e7cb59d4cc9e605fb51}{01216}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a093f484b86df6e7cb59d4cc9e605fb51}{get\_wind\_adv\_diff}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ipt,}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01217}01217                            \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01218}01218                            \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01218}01218                            \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01219}01219                            \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& wind)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01220}01220 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01221}01221       \textcolor{comment}{// The wind function is simply the velocity at the points}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01222}01222       this-\/>\mbox{\hyperlink{classNavierStokesEquations_a9f840839317f3a490239ccaa9c901a62}{interpolated\_u\_nst}}(s, wind);}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01222}01222       this-\/>\mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a34a6866cf9a762ece4c5610d6d25eee9}{interpolated\_u\_nst}}(s, wind);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01223}01223     \}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01224}01224 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01225}01225 \textcolor{comment}{}}
@@ -1235,15 +1235,15 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01231}\mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a69fb9113989d692dd55eb1983cdbc93b}{01231}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a69fb9113989d692dd55eb1983cdbc93b}{get\_body\_force\_nst}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01232}01232                             \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ipt,}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01233}01233                             \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01234}01234                             \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01234}01234                             \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01235}01235                             \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& result)}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01236}01236     \{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01237}01237       \textcolor{comment}{// Get the temperature}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01238}01238       \textcolor{keyword}{const} \textcolor{keywordtype}{double} interpolated\_t = this-\/>interpolated\_u\_adv\_diff(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01238}01238       \textcolor{keyword}{const} \textcolor{keywordtype}{double} interpolated\_t = this-\/>\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a2c5d80050fd9586bcf2d87951c346f58}{interpolated\_u\_adv\_diff}}(s);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01239}01239 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01240}01240       \textcolor{comment}{// Get vector that indicates the direction of gravity from}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01241}01241       \textcolor{comment}{// the Navier-\/Stokes equations}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01242}01242       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} gravity(\mbox{\hyperlink{classNavierStokesEquations}{NavierStokesEquations<DIM>::g}}());}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01242}01242       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} gravity(\mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{NavierStokesEquations<DIM>::g}}());}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01243}01243 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01244}01244       \textcolor{comment}{// Temperature-\/dependent body force:}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01245}01245       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
@@ -1256,7 +1256,7 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01252}\mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a102b3aeb79d9af430b9ce0a7c8d5bd33}{01252}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a102b3aeb79d9af430b9ce0a7c8d5bd33}{fill\_in\_contribution\_to\_residuals}}(\mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals)}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01253}01253     \{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01254}01254       \textcolor{comment}{// Call the residuals of the Navier-\/Stokes equations}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01255}01255       \mbox{\hyperlink{classNavierStokesEquations_ad321a72e152857cc565236ded1cdef51}{RefineableNavierStokesEquations<DIM>::fill\_in\_contribution\_to\_residuals}}(}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01255}01255       \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a314875a11bafbf24d6a84df31e0213e8}{RefineableNavierStokesEquations<DIM>::fill\_in\_contribution\_to\_residuals}}(}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01256}01256         residuals);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01257}01257 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01258}01258       \textcolor{comment}{// Call the residuals of the advection-\/diffusion equations}}
@@ -1268,23 +1268,23 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01264}01264 \textcolor{comment}{    /// Compute the element's residual Vector and the jacobian matrix}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01265}01265 \textcolor{comment}{    /// using full finite differences, the default implementation}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01266}\mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a0d05a727999c7f102f3fe2bacce38f6b}{01266}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a0d05a727999c7f102f3fe2bacce38f6b}{fill\_in\_contribution\_to\_jacobian}}(\mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01267}01267                                           \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01267}01267                                           \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian)}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01268}01268     \{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01269}01269 \textcolor{preprocessor}{\#ifdef USE\_FD\_JACOBIAN\_FOR\_REFINEABLE\_BUOYANT\_Q\_ELEMENT}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01270}01270       \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0d53bf283dc85bdfea}{FiniteElement::fill\_in\_contribution\_to\_jacobian}}(residuals, \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}});}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01270}01270       \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0d53bf283dc85bdfea}{FiniteElement::fill\_in\_contribution\_to\_jacobian}}(residuals, jacobian);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01271}01271 \textcolor{preprocessor}{\#else}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01272}01272       \textcolor{comment}{// Calculate the Navier-\/Stokes contributions (diagonal block and}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01273}01273       \textcolor{comment}{// residuals)}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01274}01274       \mbox{\hyperlink{classNavierStokesEquations_ae3607c77f4eb575d2e18068b2cc4c563}{RefineableNavierStokesEquations<DIM>::fill\_in\_contribution\_to\_jacobian}}(}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01275}01275         residuals, \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}});}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01274}01274       \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_aba9a7da719632a9003d2358e64713241}{RefineableNavierStokesEquations<DIM>::fill\_in\_contribution\_to\_jacobian}}(}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01275}01275         residuals, jacobian);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01276}01276 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01277}01277       \textcolor{comment}{// Calculate the advection-\/diffusion contributions}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01278}01278       \textcolor{comment}{//(diagonal block and residuals)}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01279}01279       \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations}{RefineableAdvectionDiffusionEquations}}<}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01280}01280         DIM>\mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a0d05a727999c7f102f3fe2bacce38f6b}{::fill\_in\_contribution\_to\_jacobian}}(residuals, \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}});}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01280}01280         DIM>\mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a0d05a727999c7f102f3fe2bacce38f6b}{::fill\_in\_contribution\_to\_jacobian}}(residuals, jacobian);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01281}01281 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01282}01282       \textcolor{comment}{// We now fill in the off-\/diagonal (interaction) blocks analytically}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01283}01283       this-\/>\mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a6fe93946149c696f273be12540099d1a}{fill\_in\_off\_diagonal\_jacobian\_blocks\_analytic}}(residuals, \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}});}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01283}01283       this-\/>\mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a6fe93946149c696f273be12540099d1a}{fill\_in\_off\_diagonal\_jacobian\_blocks\_analytic}}(residuals, jacobian);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01284}01284 \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01285}01285     \} \textcolor{comment}{// End of jacobian calculation}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01286}01286 \textcolor{comment}{}}
@@ -1292,18 +1292,18 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01288}01288 \textcolor{comment}{    /// jacobian matrix and mass matrix}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01289}\mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a06f1e2dbdf7a8ebaa964d421aee453ee}{01289}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a06f1e2dbdf7a8ebaa964d421aee453ee}{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix}}(}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01290}01290       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01291}01291       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}},}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01291}01291       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian,}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01292}01292       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& mass\_matrix)}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01293}01293     \{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01294}01294       \textcolor{comment}{// Call the (broken) version in the base class}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01295}01295       \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a2b6294a730647cf865da94f2531466f8}{FiniteElement::fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix}}(}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01296}01296         residuals, \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, mass\_matrix);}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01296}01296         residuals, jacobian, mass\_matrix);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01297}01297     \}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01298}01298 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01299}01299 \textcolor{comment}{    /// Compute the contribution of the off-\/diagonal blocks}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01300}01300 \textcolor{comment}{    /// analytically.}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01301}\mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a6fe93946149c696f273be12540099d1a}{01301}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a6fe93946149c696f273be12540099d1a}{fill\_in\_off\_diagonal\_jacobian\_blocks\_analytic}}(}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01302}01302       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01302}01302       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian)}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01303}01303     \{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01304}01304       \textcolor{comment}{// Perform another loop over the integration loops using the information}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01305}01305       \textcolor{comment}{// from the original elements' residual assembly loops to determine}}
@@ -1317,7 +1317,7 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01313}01313       \textcolor{keywordtype}{unsigned} u\_nodal\_nst[DIM];}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01314}01314       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01315}01315       \{}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01316}01316         u\_nodal\_nst[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = this-\/>\mbox{\hyperlink{classNavierStokesEquations_adc8563af1b677a8d6a5be5f4b3abcce9}{u\_index\_nst}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01316}01316         u\_nodal\_nst[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = this-\/>\mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a136756d3e5f4248b32ce44ecfcb5fb30}{u\_index\_nst}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01317}01317       \}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01318}01318 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01319}01319       \textcolor{comment}{// Local storage for the  index at which the temperature is stored}}
@@ -1331,12 +1331,12 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01327}01327       \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} dpsifdx(n\_node, DIM), dtestfdx(n\_node, DIM);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01328}01328 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01329}01329       \textcolor{comment}{// Number of integration points}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01330}01330       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01330}01330       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01331}01331 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01332}01332       \textcolor{comment}{// Get Physical Variables from Element}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01333}01333       \textcolor{keywordtype}{double} Ra = this-\/>\mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a5873f594fd21c17ba01594d868f39c11}{ra}}();}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01334}01334       \textcolor{keywordtype}{double} Pe = this-\/>pe();}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01335}01335       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} gravity = this-\/>\mbox{\hyperlink{classNavierStokesEquations_a0a24cf2867362d675150a7bae2998de7}{g}}();}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01334}01334       \textcolor{keywordtype}{double} Pe = this-\/>\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a9ab4830f90e00cdeb1ce9814865cd466}{pe}}();}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01335}01335       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} gravity = this-\/>\mbox{\hyperlink{classoomph_1_1NavierStokesEquations_ac14ae725a3514406d9c446ce2688aeac}{g}}();}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01336}01336 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01337}01337       \textcolor{comment}{// Integers to store the local equations and unknowns}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01338}01338       \textcolor{keywordtype}{int} local\_eqn = 0, local\_unknown = 0;}
@@ -1345,14 +1345,14 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01341}01341       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ipt = 0; ipt < n\_intpt; ipt++)}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01342}01342       \{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01343}01343         \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01344}01344         \textcolor{keywordtype}{double} w = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01344}01344         \textcolor{keywordtype}{double} w = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01345}01345 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01346}01346         \textcolor{comment}{// Call the derivatives of the shape and test functions}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01347}01347         \textcolor{keywordtype}{double} J = this-\/>\mbox{\hyperlink{classQCrouzeixRaviartElement_a1080d47e85cdbcb88e12b29e724df6a1}{dshape\_and\_dtest\_eulerian\_at\_knot\_nst}}(}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01347}01347         \textcolor{keywordtype}{double} J = this-\/>\mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement_a3c4261300b81aae3ac358198b3e11906}{dshape\_and\_dtest\_eulerian\_at\_knot\_nst}}(}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01348}01348           ipt, psif, dpsifdx, testf, dtestfdx);}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01349}01349 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01350}01350         \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01351}01351         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01351}01351         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01352}01352 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01353}01353         \textcolor{comment}{// Calculate local values of temperature derivatives}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01354}01354         \textcolor{comment}{// Allocate}}
@@ -1383,12 +1383,12 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01379}01379           \textcolor{keywordtype}{double} hang\_weight = 1.0;}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01380}01380 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01381}01381           \textcolor{comment}{// Local bool (is the node hanging)}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01382}01382           \textcolor{keywordtype}{bool} is\_node\_hanging = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l)-\/>is\_hanging();}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01382}01382           \textcolor{keywordtype}{bool} is\_node\_hanging = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l)-\/>\mbox{\hyperlink{classoomph_1_1Node_af0e6237dfafad62cf427ff5013ddcfef}{is\_hanging}}();}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01383}01383 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01384}01384           \textcolor{comment}{// If the node is hanging, get the number of master nodes}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01385}01385           \textcolor{keywordflow}{if} (is\_node\_hanging)}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01386}01386           \{}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01387}01387             hang\_info\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l)-\/>hanging\_pt();}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01387}01387             hang\_info\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l)-\/>\mbox{\hyperlink{classoomph_1_1Node_afefa22db8b28e783b8647e3577ee01d9}{hanging\_pt}}();}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01388}01388             n\_master = hang\_info\_pt-\/>\mbox{\hyperlink{classoomph_1_1HangInfo_aa9c1130b58db2ff6d5eee4f923ba365c}{nmaster}}();}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01389}01389           \}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01390}01390           \textcolor{comment}{// Otherwise there is just one master node, the node itself}}
@@ -1443,13 +1443,13 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01439}01439                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} l2 = 0; l2 < n\_node; l2++)}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01440}01440                 \{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01441}01441                   \textcolor{comment}{// Local bool (is the node hanging)}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01442}01442                   \textcolor{keywordtype}{bool} is\_node2\_hanging = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l2)-\/>is\_hanging();}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01442}01442                   \textcolor{keywordtype}{bool} is\_node2\_hanging = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l2)-\/>\mbox{\hyperlink{classoomph_1_1Node_af0e6237dfafad62cf427ff5013ddcfef}{is\_hanging}}();}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01443}01443 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01444}01444                   \textcolor{comment}{// If the node is hanging, get the number of master nodes}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01445}01445                   \textcolor{keywordflow}{if} (is\_node2\_hanging)}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01446}01446                   \{}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01447}01447                     hang\_info2\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l2)-\/>hanging\_pt();}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01448}01448                     n\_master2 = hang\_info2\_pt-\/>nmaster();}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01447}01447                     hang\_info2\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l2)-\/>\mbox{\hyperlink{classoomph_1_1Node_afefa22db8b28e783b8647e3577ee01d9}{hanging\_pt}}();}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01448}01448                     n\_master2 = hang\_info2\_pt-\/>\mbox{\hyperlink{classoomph_1_1HangInfo_aa9c1130b58db2ff6d5eee4f923ba365c}{nmaster}}();}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01449}01449                   \}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01450}01450                   \textcolor{comment}{// Otherwise there is one master node, the node itself}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01451}01451                   \textcolor{keywordflow}{else}}
@@ -1480,8 +1480,8 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01476}01476                     \textcolor{keywordflow}{if} (local\_unknown >= 0)}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01477}01477                     \{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01478}01478                       \textcolor{comment}{// Add contribution to jacobian matrix}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01479}01479                       \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn, local\_unknown) +=}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01480}01480                         -\/gravity[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * psif(l2) * Ra * testf(l) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} *}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01479}01479                       jacobian(local\_eqn, local\_unknown) +=}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01480}01480                         -\/gravity[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * psif(l2) * Ra * testf(l) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} *}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01481}01481                         hang\_weight * hang\_weight2;}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01482}01482                     \}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01483}01483                   \}}
@@ -1518,13 +1518,13 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01514}01514                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} l2 = 0; l2 < n\_node; l2++)}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01515}01515                 \{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01516}01516                   \textcolor{comment}{// Local bool (is the node hanging)}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01517}01517                   \textcolor{keywordtype}{bool} is\_node2\_hanging = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l2)-\/>is\_hanging();}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01517}01517                   \textcolor{keywordtype}{bool} is\_node2\_hanging = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l2)-\/>\mbox{\hyperlink{classoomph_1_1Node_af0e6237dfafad62cf427ff5013ddcfef}{is\_hanging}}();}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01518}01518 }
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01519}01519                   \textcolor{comment}{// If the node is hanging, get the number of master nodes}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01520}01520                   \textcolor{keywordflow}{if} (is\_node2\_hanging)}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01521}01521                   \{}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01522}01522                     hang\_info2\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l2)-\/>hanging\_pt();}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01523}01523                     n\_master2 = hang\_info2\_pt-\/>nmaster();}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01522}01522                     hang\_info2\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l2)-\/>\mbox{\hyperlink{classoomph_1_1Node_afefa22db8b28e783b8647e3577ee01d9}{hanging\_pt}}();}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01523}01523                     n\_master2 = hang\_info2\_pt-\/>\mbox{\hyperlink{classoomph_1_1HangInfo_aa9c1130b58db2ff6d5eee4f923ba365c}{nmaster}}();}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01524}01524                   \}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01525}01525                   \textcolor{comment}{// Otherwise there is one master node, the node itself}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01526}01526                   \textcolor{keywordflow}{else}}
@@ -1569,9 +1569,9 @@
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01565}01565                       \textcolor{keywordflow}{if} (local\_unknown >= 0)}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01566}01566                       \{}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01567}01567                         \textcolor{comment}{// Add the contribution to the jacobian matrix}}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01568}01568                         \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn, local\_unknown) -\/=}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01568}01568                         jacobian(local\_eqn, local\_unknown) -\/=}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01569}01569                           Pe * psif(l2) * interpolated\_du\_adv\_diff\_dx[i2] *}
-\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01570}01570                           testf(l) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight * hang\_weight2;}
+\DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01570}01570                           testf(l) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight * hang\_weight2;}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01571}01571                       \}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01572}01572                     \}}
 \DoxyCodeLine{\Hypertarget{boussinesq__elements_8h_source_l01573}01573                   \}}

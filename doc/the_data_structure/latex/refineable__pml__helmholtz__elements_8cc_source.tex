@@ -75,7 +75,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00071}00071         ipt, psi, dpsidx, test, dtestdx);}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00072}00072 }
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00073}00073       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00074}00074       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00074}00074       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00075}00075 }
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00076}00076       \textcolor{comment}{// Calculate local values of unknown}}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00077}00077       \textcolor{comment}{// Allocate and initialise to zero}}
@@ -216,7 +216,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00212}00212                                   this-\/>k\_squared() * interpolated\_u.real() -\/}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00213}00213                                 alpha\_pml\_k\_squared\_factor.imag() *}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00214}00214                                   this-\/>k\_squared() * interpolated\_u.imag())) *}
-\DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00215}00215               test(l) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight;}
+\DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00215}00215               test(l) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight;}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00216}00216 }
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00217}00217             \textcolor{comment}{// The Laplace bit}}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00218}00218             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < DIM; k++)}
@@ -224,7 +224,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00220}00220               residuals[local\_eqn\_real] +=}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00221}00221                 (pml\_laplace\_factor[k].real() * interpolated\_dudx[k].real() -\/}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00222}00222                  pml\_laplace\_factor[k].imag() * interpolated\_dudx[k].imag()) *}
-\DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00223}00223                 dtestdx(l, k) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight;}
+\DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00223}00223                 dtestdx(l, k) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight;}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00224}00224             \}}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00225}00225 }
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00226}00226             \textcolor{comment}{// Calculate the jacobian}}
@@ -295,12 +295,12 @@
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00291}00291                     \{}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00292}00292                       jacobian(local\_eqn\_real, local\_unknown\_real) +=}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00293}00293                         pml\_laplace\_factor[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}].real() * dpsidx(l2, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) *}
-\DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00294}00294                         dtestdx(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight * hang\_weight2;}
+\DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00294}00294                         dtestdx(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight * hang\_weight2;}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00295}00295                     \}}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00296}00296                     \textcolor{comment}{// Add the helmholtz contribution}}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00297}00297                     jacobian(local\_eqn\_real, local\_unknown\_real) +=}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00298}00298                       -\/alpha\_pml\_k\_squared\_factor.real() * this-\/>k\_squared() *}
-\DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00299}00299                       psi(l2) * test(l) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight * hang\_weight2;}
+\DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00299}00299                       psi(l2) * test(l) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight * hang\_weight2;}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00300}00300                   \}}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00301}00301                   \textcolor{comment}{// If at a non-\/zero degree of freedom add in the entry}}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00302}00302                   \textcolor{keywordflow}{if} (local\_unknown\_imag >= 0)}
@@ -310,12 +310,12 @@
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00306}00306                     \{}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00307}00307                       jacobian(local\_eqn\_real, local\_unknown\_imag) -\/=}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00308}00308                         pml\_laplace\_factor[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}].imag() * dpsidx(l2, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) *}
-\DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00309}00309                         dtestdx(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight * hang\_weight2;}
+\DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00309}00309                         dtestdx(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight * hang\_weight2;}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00310}00310                     \}}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00311}00311                     \textcolor{comment}{// Add the helmholtz contribution}}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00312}00312                     jacobian(local\_eqn\_real, local\_unknown\_imag) +=}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00313}00313                       alpha\_pml\_k\_squared\_factor.imag() * this-\/>k\_squared() *}
-\DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00314}00314                       psi(l2) * test(l) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight * hang\_weight2;}
+\DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00314}00314                       psi(l2) * test(l) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight * hang\_weight2;}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00315}00315                   \}}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00316}00316                 \}}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00317}00317               \}}
@@ -334,7 +334,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00330}00330                                   this-\/>k\_squared() * interpolated\_u.real() +}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00331}00331                                 alpha\_pml\_k\_squared\_factor.real() *}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00332}00332                                   this-\/>k\_squared() * interpolated\_u.imag())) *}
-\DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00333}00333               test(l) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight;}
+\DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00333}00333               test(l) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight;}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00334}00334 }
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00335}00335             \textcolor{comment}{// The Laplace bit}}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00336}00336             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < DIM; k++)}
@@ -342,7 +342,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00338}00338               residuals[local\_eqn\_imag] +=}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00339}00339                 (pml\_laplace\_factor[k].imag() * interpolated\_dudx[k].real() +}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00340}00340                  pml\_laplace\_factor[k].real() * interpolated\_dudx[k].imag()) *}
-\DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00341}00341                 dtestdx(l, k) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight;}
+\DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00341}00341                 dtestdx(l, k) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight;}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00342}00342             \}}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00343}00343 }
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00344}00344             \textcolor{comment}{// Calculate the jacobian}}
@@ -412,12 +412,12 @@
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00408}00408                     \{}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00409}00409                       jacobian(local\_eqn\_imag, local\_unknown\_imag) +=}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00410}00410                         pml\_laplace\_factor[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}].real() * dpsidx(l2, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) *}
-\DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00411}00411                         dtestdx(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight * hang\_weight2;}
+\DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00411}00411                         dtestdx(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight * hang\_weight2;}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00412}00412                     \}}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00413}00413                     \textcolor{comment}{// Add the helmholtz contribution}}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00414}00414                     jacobian(local\_eqn\_imag, local\_unknown\_imag) +=}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00415}00415                       -\/alpha\_pml\_k\_squared\_factor.real() * this-\/>k\_squared() *}
-\DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00416}00416                       psi(l2) * test(l) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight * hang\_weight2;}
+\DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00416}00416                       psi(l2) * test(l) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight * hang\_weight2;}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00417}00417                   \}}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00418}00418                   \textcolor{keywordflow}{if} (local\_unknown\_real >= 0)}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00419}00419                   \{}
@@ -426,12 +426,12 @@
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00422}00422                     \{}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00423}00423                       jacobian(local\_eqn\_imag, local\_unknown\_real) +=}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00424}00424                         pml\_laplace\_factor[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}].imag() * dpsidx(l2, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) *}
-\DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00425}00425                         dtestdx(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight * hang\_weight2;}
+\DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00425}00425                         dtestdx(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight * hang\_weight2;}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00426}00426                     \}}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00427}00427                     \textcolor{comment}{// Add the helmholtz contribution}}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00428}00428                     jacobian(local\_eqn\_imag, local\_unknown\_real) +=}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00429}00429                       -\/alpha\_pml\_k\_squared\_factor.imag() * this-\/>k\_squared() *}
-\DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00430}00430                       psi(l2) * test(l) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight * hang\_weight2;}
+\DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00430}00430                       psi(l2) * test(l) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight * hang\_weight2;}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00431}00431                   \}}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00432}00432                 \}}
 \DoxyCodeLine{\Hypertarget{refineable__pml__helmholtz__elements_8cc_source_l00433}00433               \}}

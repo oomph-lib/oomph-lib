@@ -188,7 +188,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00184}00184 \textcolor{preprocessor}{\#ifdef PARANOID}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00185}00185     \textcolor{comment}{// Check if the constitutive equation requires the explicit imposition of an}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00186}00186     \textcolor{comment}{// incompressibility constraint}}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00187}00187     \textcolor{keywordflow}{if} (this-\/>\mbox{\hyperlink{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_a16460050187c2bd5edb4e5ae24578f0f}{Constitutive\_law\_pt}}-\/>requires\_incompressibility\_constraint())}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00187}00187     \textcolor{keywordflow}{if} (this-\/>\mbox{\hyperlink{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_a16460050187c2bd5edb4e5ae24578f0f}{Constitutive\_law\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a446452158a8ae9fbc3dde4277155f824}{requires\_incompressibility\_constraint}}())}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00188}00188     \{}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00189}00189       \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00190}00190         \textcolor{stringliteral}{"{}PVDEquations cannot be used with incompressible constitutive laws."{}},}
@@ -275,17 +275,17 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00271}00271         \textcolor{comment}{// Loop over positional dofs}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00272}00272         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < n\_position\_type; k++)}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00273}00273         \{}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00274}00274           \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_aff0c55ce31f12df52b2fe5ae647ffebe}{psi\_}} = psi(l, k);}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00274}00274           \textcolor{keywordtype}{double} psi\_ = psi(l, k);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00275}00275           \textcolor{comment}{// Loop over displacement components (deformed position)}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00276}00276           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00277}00277           \{}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00278}00278             \textcolor{comment}{// Calculate the Lagrangian coordinates and the accelerations}}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00279}00279             interpolated\_xi[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += this-\/>lagrangian\_position\_gen(l, k, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * \mbox{\hyperlink{namespaceoomph_aff0c55ce31f12df52b2fe5ae647ffebe}{psi\_}};}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00279}00279             interpolated\_xi[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += this-\/>lagrangian\_position\_gen(l, k, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * psi\_;}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00280}00280 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00281}00281             \textcolor{comment}{// Only compute accelerations if inertia is switched on}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00282}00282             \textcolor{keywordflow}{if} ((lambda\_sq > 0.0) \&\& (this-\/>Unsteady))}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00283}00283             \{}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00284}00284               accel[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += this-\/>dnodal\_position\_gen\_dt(2, l, k, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * \mbox{\hyperlink{namespaceoomph_aff0c55ce31f12df52b2fe5ae647ffebe}{psi\_}};}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00284}00284               accel[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += this-\/>dnodal\_position\_gen\_dt(2, l, k, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * psi\_;}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00285}00285             \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00286}00286 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00287}00287             \textcolor{comment}{// Loop over derivative directions}}
@@ -329,7 +329,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00325}00325 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00326}00326       \textcolor{comment}{// Premultiply the undeformed volume ratio (from the isotropic}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00327}00327       \textcolor{comment}{// growth), the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00328}00328       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = gamma * w * J;}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00328}00328       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = gamma * w * J;}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00329}00329 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00330}00330       \textcolor{comment}{// Declare and calculate the deformed metric tensor}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00331}00331       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} G(DIM);}
@@ -356,15 +356,15 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00352}00352       \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00353}00353 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00354}00354       \textcolor{comment}{// Now calculate the stress tensor from the constitutive law}}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00355}00355       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(DIM);}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00356}00356       get\_stress(g, G, \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}});}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00355}00355       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} sigma(DIM);}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00356}00356       get\_stress(g, G, sigma);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00357}00357 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00358}00358       \textcolor{comment}{// Add pre-\/stress}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00359}00359       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00360}00360       \{}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00361}00361         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < DIM; j++)}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00362}00362         \{}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00363}00363           \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j) += this-\/>prestress(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j, interpolated\_xi);}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00363}00363           sigma(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j) += this-\/>prestress(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j, interpolated\_xi);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00364}00364         \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00365}00365       \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00366}00366 }
@@ -406,7 +406,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00402}00402 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00403}00403         \textcolor{comment}{// Get the "{}upper triangular"{} entries of the derivatives of the stress}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00404}00404         \textcolor{comment}{// tensor with respect to G}}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00405}00405         this-\/>get\_d\_stress\_dG\_upper(g, G, \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}, d\_stress\_dG);}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00405}00405         this-\/>get\_d\_stress\_dG\_upper(g, G, sigma, d\_stress\_dG);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00406}00406       \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00407}00407 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00408}00408       \textcolor{comment}{//=====EQUATIONS OF ELASTICITY FROM PRINCIPLE OF VIRTUAL}}
@@ -443,12 +443,12 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00439}00439                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} b = 0; b < DIM; b++)}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00440}00440                 \{}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00441}00441                   \textcolor{comment}{// Add the stress terms to the residuals}}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00442}00442                   sum += \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(a, b) * interpolated\_G(a, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) *}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00442}00442                   sum += sigma(a, b) * interpolated\_G(a, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) *}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00443}00443                          dpsidxi.\mbox{\hyperlink{classoomph_1_1DShape_a38cdb0625181ca4e7c314136c70c15c9}{raw\_direct\_access}}(count);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00444}00444                   ++count;}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00445}00445                 \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00446}00446               \}}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00447}00447               residuals[local\_eqn] += \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * sum;}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00447}00447               residuals[local\_eqn] += \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * sum;}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00448}00448 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00449}00449               \textcolor{comment}{// Get Jacobian too?}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00450}00450               \textcolor{keywordflow}{if} (flag == 1)}
@@ -518,7 +518,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00514}00514 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00515}00515                         \textcolor{comment}{// Multiply by weight and add contribution}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00516}00516                         \textcolor{comment}{// (Add directly because this bit is nonsymmetric)}}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00517}00517                         jacobian(local\_eqn, local\_unknown) += sum * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00517}00517                         jacobian(local\_eqn, local\_unknown) += sum * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00518}00518 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00519}00519                         \textcolor{comment}{// Only upper triangle (no separate test for bc as}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00520}00520                         \textcolor{comment}{// local\_eqn is already nonnegative)}}
@@ -543,17 +543,17 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00539}00539                             \textcolor{keywordtype}{unsigned} count5 = offset5;}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00540}00540                             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} b = 0; b < DIM; b++)}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00541}00541                             \{}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00542}00542                               sum += \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(a, b) * factor *}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00542}00542                               sum += sigma(a, b) * factor *}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00543}00543                                      dpsidxi.\mbox{\hyperlink{classoomph_1_1DShape_a38cdb0625181ca4e7c314136c70c15c9}{raw\_direct\_access}}(count5); \textcolor{comment}{// l  ,k}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00544}00544                               ++count5;}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00545}00545                             \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00546}00546                           \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00547}00547                           \textcolor{comment}{// Add contribution to jacobian}}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00548}00548                           jacobian(local\_eqn, local\_unknown) += sum * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00548}00548                           jacobian(local\_eqn, local\_unknown) += sum * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00549}00549                           \textcolor{comment}{// Add to lower triangular section}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00550}00550                           \textcolor{keywordflow}{if} (local\_eqn != local\_unknown)}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00551}00551                           \{}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00552}00552                             jacobian(local\_unknown, local\_eqn) += sum * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00552}00552                             jacobian(local\_unknown, local\_eqn) += sum * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00553}00553                           \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00554}00554                         \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00555}00555 }
@@ -578,7 +578,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00574}00574   \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00575}\mbox{\hyperlink{classoomph_1_1PVDEquations_a5e3a09d059ced1ee9f9e1a7923171ab7}{00575}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1PVDEquations_ab9e919921934cfe7433420bd2e4482f5}{PVDEquations<DIM>::output}}(std::ostream\& outfile, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_plot)}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00576}00576   \{}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00577}00577     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(DIM);}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00577}00577     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(DIM);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00578}00578     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} xi(DIM);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00579}00579     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00580}00580 }
@@ -593,7 +593,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00589}00589       this-\/>get\_s\_plot(iplot, n\_plot, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00590}00590 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00591}00591       \textcolor{comment}{// Get Eulerian and Lagrangian coordinates}}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00592}00592       this-\/>interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00592}00592       this-\/>interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00593}00593       this-\/>interpolated\_xi(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, xi);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00594}00594 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00595}00595       \textcolor{comment}{// Get isotropic growth}}
@@ -605,7 +605,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00601}00601       \textcolor{comment}{// Output the x,y,..}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00602}00602       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00603}00603       \{}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00604}00604         outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00604}00604         outfile << x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00605}00605       \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00606}00606 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00607}00607       \textcolor{comment}{// Output xi0,xi1,..}}
@@ -634,7 +634,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00630}00630   \{}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00631}00631     \textcolor{comment}{// Set output Vector}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00632}00632     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00633}00633     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(DIM);}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00633}00633     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(DIM);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00634}00634     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} xi(DIM);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00635}00635 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00636}00636     \textcolor{keywordflow}{switch} (DIM)}
@@ -654,7 +654,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00650}00650             \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0] = -\/1.0 + l1 * 2.0 / (n\_plot -\/ 1);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00651}00651 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00652}00652             \textcolor{comment}{// Get Eulerian and Lagrangian coordinates}}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00653}00653             this-\/>interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00653}00653             this-\/>interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00654}00654             this-\/>interpolated\_xi(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, xi);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00655}00655 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00656}00656             \textcolor{comment}{// Get isotropic growth}}
@@ -667,7 +667,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00663}00663             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00664}00664             \{}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00665}00665               \textcolor{comment}{// outfile << x[i] << "{} "{};}}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00666}00666               fprintf(file\_pt, \textcolor{stringliteral}{"{}\%g "{}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]);}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00666}00666               fprintf(file\_pt, \textcolor{stringliteral}{"{}\%g "{}}, x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00667}00667             \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00668}00668             \textcolor{comment}{// Output xi0,xi1,..}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00669}00669             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
@@ -704,7 +704,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00700}00700               \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0] = -\/1.0 + l1 * 2.0 / (n\_plot -\/ 1);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00701}00701 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00702}00702               \textcolor{comment}{// Get Eulerian and Lagrangian coordinates}}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00703}00703               this-\/>interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00703}00703               this-\/>interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00704}00704               this-\/>interpolated\_xi(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, xi);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00705}00705 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00706}00706               \textcolor{comment}{// Get isotropic growth}}
@@ -717,7 +717,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00713}00713               \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00714}00714               \{}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00715}00715                 \textcolor{comment}{// outfile << x[i] << "{} "{};}}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00716}00716                 fprintf(file\_pt, \textcolor{stringliteral}{"{}\%g "{}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]);}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00716}00716                 fprintf(file\_pt, \textcolor{stringliteral}{"{}\%g "{}}, x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00717}00717               \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00718}00718               \textcolor{comment}{// Output xi0,xi1,xi2}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00719}00719               \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
@@ -755,7 +755,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00751}\mbox{\hyperlink{classoomph_1_1PVDEquations_a60ed017dce1a6a98098b8ad3127389c9}{00751}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1PVDEquations_a60ed017dce1a6a98098b8ad3127389c9}{PVDEquations<DIM>::extended\_output}}(std::ostream\& outfile,}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00752}00752                                           \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_plot)}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00753}00753   \{}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00754}00754     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(DIM);}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00754}00754     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(DIM);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00755}00755     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} xi(DIM);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00756}00756     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00757}00757     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} stress\_or\_strain(DIM, DIM);}
@@ -771,7 +771,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00767}00767       this-\/>get\_s\_plot(iplot, n\_plot, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00768}00768 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00769}00769       \textcolor{comment}{// Get Eulerian and Lagrangian coordinates}}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00770}00770       this-\/>interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00770}00770       this-\/>interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00771}00771       this-\/>interpolated\_xi(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, xi);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00772}00772 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00773}00773       \textcolor{comment}{// Get isotropic growth}}
@@ -783,7 +783,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00779}00779       \textcolor{comment}{// Output the x,y,..}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00780}00780       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00781}00781       \{}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00782}00782         outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00782}00782         outfile << x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00783}00783       \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00784}00784 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00785}00785       \textcolor{comment}{// Output xi0,xi1,..}}
@@ -902,20 +902,20 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00898}00898 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00899}00899       \textcolor{comment}{// Premultiply the undeformed volume ratio (from the isotropic}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00900}00900       \textcolor{comment}{// growth), the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00901}00901       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = gamma * w * J;}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00901}00901       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = gamma * w * J;}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00902}00902 }
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00903}00903       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(DIM, DIM);}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00903}00903       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} sigma(DIM, DIM);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00904}00904       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} strain(DIM, DIM);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00905}00905 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00906}00906       \textcolor{comment}{// Now calculate the stress tensor from the constitutive law}}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00907}00907       this-\/>get\_stress(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}});}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00907}00907       this-\/>get\_stress(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, sigma);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00908}00908 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00909}00909       \textcolor{comment}{// Add pre-\/stress}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00910}00910       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00911}00911       \{}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00912}00912         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < DIM; j++)}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00913}00913         \{}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00914}00914           \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j) += prestress(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j, interpolated\_xi);}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00914}00914           sigma(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j) += prestress(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j, interpolated\_xi);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00915}00915         \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00916}00916       \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00917}00917 }
@@ -931,13 +931,13 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00927}00927       \{}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00928}00928         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < DIM; j++)}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00929}00929         \{}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00930}00930           local\_pot\_en += \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j) * strain(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j);}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00930}00930           local\_pot\_en += sigma(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j) * strain(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00931}00931         \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00932}00932         veloc\_sq += veloc[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * veloc[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00933}00933       \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00934}00934 }
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00935}00935       pot\_en += 0.5 * local\_pot\_en * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00936}00936       kin\_en += lambda\_sq * 0.5 * veloc\_sq * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00935}00935       pot\_en += 0.5 * local\_pot\_en * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00936}00936       kin\_en += lambda\_sq * 0.5 * veloc\_sq * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00937}00937     \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00938}00938   \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00939}00939 }
@@ -953,7 +953,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00949}00949 \textcolor{comment}{}  \textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00950}00950   \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00951}\mbox{\hyperlink{classoomph_1_1PVDEquations_add6a194b0138b09834022b29bbc75eb6}{00951}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1PVDEquations_add6a194b0138b09834022b29bbc75eb6}{PVDEquations<DIM>::get\_stress}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00952}00952                                      \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}})}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00952}00952                                      \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& sigma)}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00953}00953   \{}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00954}00954     \textcolor{comment}{// Find out how many nodes there are}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l00955}00955     \textcolor{keywordtype}{unsigned} n\_node = this-\/>nnode();}
@@ -1057,7 +1057,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01053}01053     \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01054}01054 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01055}01055     \textcolor{comment}{// Now calculate the stress tensor from the constitutive law}}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01056}01056     get\_stress(g, G, \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}});}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01056}01056     get\_stress(g, G, sigma);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01057}01057   \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01058}01058 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01059}01059 \textcolor{comment}{}}
@@ -1078,8 +1078,8 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01074}01074     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& principal\_stress)}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01075}01075   \{}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01076}01076     \textcolor{comment}{// Compute contravariant ("{}upper"{}) 2nd Piola Kirchhoff stress}}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01077}01077     \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix}{DenseDoubleMatrix}} \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(DIM, DIM);}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01078}01078     get\_stress(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}});}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01077}01077     \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix}{DenseDoubleMatrix}} sigma(DIM, DIM);}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01078}01078     get\_stress(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, sigma);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01079}01079 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01080}01080     \textcolor{comment}{// Lagrangian coordinates}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01081}01081     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} xi(DIM);}
@@ -1090,7 +1090,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01086}01086     \{}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01087}01087       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < DIM; j++)}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01088}01088       \{}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01089}01089         \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j) += this-\/>prestress(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j, xi);}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01089}01089         sigma(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j) += this-\/>prestress(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j, xi);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01090}01090       \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01091}01091     \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01092}01092 }
@@ -1138,7 +1138,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01134}01134     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} ev(DIM);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01135}01135 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01136}01136     \textcolor{comment}{// Get eigenvectors of contravariant 2nd Piola Kirchoff stress}}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01137}01137     \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}.eigenvalues\_by\_jacobi(principal\_stress, ev);}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01137}01137     sigma.\mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix_aef56ba05f1ba190c3461cf27d57abd9d}{eigenvalues\_by\_jacobi}}(principal\_stress, ev);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01138}01138 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01139}01139     \textcolor{comment}{// ev(j,i) is the i-\/th component of the j-\/th eigenvector}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01140}01140     \textcolor{comment}{// relative to the deformed "{}lower variance"{} basis!}}
@@ -1281,7 +1281,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01277}01277 \textcolor{preprocessor}{\#ifdef PARANOID}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01278}01278     \textcolor{comment}{// Check if the constitutive equation requires the explicit imposition of an}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01279}01279     \textcolor{comment}{// incompressibility constraint}}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01280}01280     \textcolor{keywordflow}{if} (this-\/>\mbox{\hyperlink{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_a16460050187c2bd5edb4e5ae24578f0f}{Constitutive\_law\_pt}}-\/>requires\_incompressibility\_constraint() \&\&}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01280}01280     \textcolor{keywordflow}{if} (this-\/>\mbox{\hyperlink{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_a16460050187c2bd5edb4e5ae24578f0f}{Constitutive\_law\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a446452158a8ae9fbc3dde4277155f824}{requires\_incompressibility\_constraint}}() \&\&}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01281}01281         (!Incompressible))}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01282}01282     \{}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01283}01283       \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(\textcolor{stringliteral}{"{}The constitutive law requires the use of the "{}}}
@@ -1434,7 +1434,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01430}01430 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01431}01431       \textcolor{comment}{// Premultiply the undeformed volume ratio (from the isotropic}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01432}01432       \textcolor{comment}{// growth), the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01433}01433       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = gamma * w * J;}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01433}01433       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = gamma * w * J;}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01434}01434 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01435}01435       \textcolor{comment}{// Calculate the interpolated solid pressure}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01436}01436       \textcolor{keywordtype}{double} interpolated\_solid\_p = 0.0;}
@@ -1470,7 +1470,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01466}01466 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01467}01467       \textcolor{comment}{// Now calculate the deviatoric stress and all pressure-\/related}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01468}01468       \textcolor{comment}{// quantitites}}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01469}01469       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(DIM, DIM), sigma\_dev(DIM, DIM), Gup(DIM, DIM);}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01469}01469       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} sigma(DIM, DIM), sigma\_dev(DIM, DIM), Gup(DIM, DIM);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01470}01470       \textcolor{keywordtype}{double} detG = 0.0;}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01471}01471       \textcolor{keywordtype}{double} gen\_dil = 0.0;}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01472}01472       \textcolor{keywordtype}{double} inv\_kappa = 0.0;}
@@ -1527,7 +1527,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01523}01523         \{}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01524}01524           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} b = 0; b < DIM; b++)}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01525}01525           \{}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01526}01526             \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(a, b) = sigma\_dev(a, b) -\/ interpolated\_solid\_p * Gup(a, b);}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01526}01526             sigma(a, b) = sigma\_dev(a, b) -\/ interpolated\_solid\_p * Gup(a, b);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01527}01527           \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01528}01528         \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01529}01529 }
@@ -1537,7 +1537,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01533}01533           \textcolor{comment}{// Get the "{}upper triangular"{} entries of the derivatives of the stress}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01534}01534           \textcolor{comment}{// tensor with respect to G}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01535}01535           this-\/>get\_d\_stress\_dG\_upper(}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01536}01536             g, G, \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}, detG, interpolated\_solid\_p, d\_stress\_dG, d\_detG\_dG);}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01536}01536             g, G, sigma, detG, interpolated\_solid\_p, d\_stress\_dG, d\_detG\_dG);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01537}01537         \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01538}01538       \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01539}01539       \textcolor{comment}{// Nearly incompressible: Compute the deviatoric part of the}}
@@ -1552,7 +1552,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01548}01548         \{}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01549}01549           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} b = 0; b < DIM; b++)}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01550}01550           \{}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01551}01551             \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(a, b) = sigma\_dev(a, b) -\/ interpolated\_solid\_p * Gup(a, b);}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01551}01551             sigma(a, b) = sigma\_dev(a, b) -\/ interpolated\_solid\_p * Gup(a, b);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01552}01552           \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01553}01553         \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01554}01554 }
@@ -1563,7 +1563,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01559}01559           \textcolor{comment}{// tensor with respect to G}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01560}01560           this-\/>get\_d\_stress\_dG\_upper(g,}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01561}01561                                       G,}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01562}01562                                       \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}},}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01562}01562                                       sigma,}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01563}01563                                       gen\_dil,}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01564}01564                                       inv\_kappa,}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01565}01565                                       interpolated\_solid\_p,}
@@ -1577,7 +1577,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01573}01573       \{}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01574}01574         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < DIM; j++)}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01575}01575         \{}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01576}01576           \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j) += this-\/>prestress(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j, interpolated\_xi);}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01576}01576           sigma(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j) += this-\/>prestress(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j, interpolated\_xi);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01577}01577         \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01578}01578       \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01579}01579 }
@@ -1615,12 +1615,12 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01611}01611                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} b = 0; b < DIM; b++)}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01612}01612                 \{}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01613}01613                   \textcolor{comment}{// Add the stress terms to the residuals}}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01614}01614                   sum += \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(a, b) * interpolated\_G(a, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) *}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01614}01614                   sum += sigma(a, b) * interpolated\_G(a, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) *}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01615}01615                          dpsidxi.\mbox{\hyperlink{classoomph_1_1DShape_a38cdb0625181ca4e7c314136c70c15c9}{raw\_direct\_access}}(count);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01616}01616                   ++count;}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01617}01617                 \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01618}01618               \}}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01619}01619               residuals[local\_eqn] += \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * sum;}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01619}01619               residuals[local\_eqn] += \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * sum;}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01620}01620 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01621}01621               \textcolor{comment}{// Add in the mass matrix terms}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01622}01622               \textcolor{keywordflow}{if} (flag > 2)}
@@ -1638,7 +1638,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01634}01634                     \textcolor{keywordflow}{if} (local\_unknown >= 0)}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01635}01635                     \{}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01636}01636                       mass\_matrix(local\_eqn, local\_unknown) +=}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01637}01637                         lambda\_sq * psi(l, k) * psi(ll, kk) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01637}01637                         lambda\_sq * psi(l, k) * psi(ll, kk) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01638}01638                     \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01639}01639                   \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01640}01640                 \}}
@@ -1712,7 +1712,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01708}01708 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01709}01709                         \textcolor{comment}{// Multiply by weight and add contribution}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01710}01710                         \textcolor{comment}{// (Add directly because this bit is nonsymmetric)}}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01711}01711                         jacobian(local\_eqn, local\_unknown) += sum * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01711}01711                         jacobian(local\_eqn, local\_unknown) += sum * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01712}01712 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01713}01713                         \textcolor{comment}{// Only upper triangle (no separate test for bc as}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01714}01714                         \textcolor{comment}{// local\_eqn is already nonnegative)}}
@@ -1737,18 +1737,18 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01733}01733                             \textcolor{keywordtype}{unsigned} count5 = offset5;}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01734}01734                             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} b = 0; b < DIM; b++)}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01735}01735                             \{}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01736}01736                               sum += \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(a, b) * factor *}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01736}01736                               sum += sigma(a, b) * factor *}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01737}01737                                      dpsidxi.\mbox{\hyperlink{classoomph_1_1DShape_a38cdb0625181ca4e7c314136c70c15c9}{raw\_direct\_access}}(count5); \textcolor{comment}{// l  ,k}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01738}01738                               ++count5;}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01739}01739                             \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01740}01740                           \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01741}01741 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01742}01742                           \textcolor{comment}{// Add to jacobian}}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01743}01743                           jacobian(local\_eqn, local\_unknown) += sum * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01743}01743                           jacobian(local\_eqn, local\_unknown) += sum * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01744}01744                           \textcolor{comment}{// Add to lower triangular parts}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01745}01745                           \textcolor{keywordflow}{if} (local\_eqn != local\_unknown)}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01746}01746                           \{}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01747}01747                             jacobian(local\_unknown, local\_eqn) += sum * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01747}01747                             jacobian(local\_unknown, local\_eqn) += sum * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01748}01748                           \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01749}01749                         \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01750}01750                       \} \textcolor{comment}{// End of if not boundary condition}}
@@ -1775,7 +1775,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01771}01771                       \{}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01772}01772                         jacobian(local\_eqn, local\_unknown) -\/=}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01773}01773                           psisp[l2] * Gup(a, b) * interpolated\_G(a, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) *}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01774}01774                           dpsidxi(l, k, b) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01774}01774                           dpsidxi(l, k, b) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01775}01775                       \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01776}01776                     \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01777}01777                   \}}
@@ -1803,7 +1803,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01799}01799           \textcolor{comment}{// is equal to the volumetric growth factor}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01800}01800           \textcolor{keywordflow}{if} (Incompressible)}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01801}01801           \{}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01802}01802             residuals[local\_eqn] += (detG -\/ gamma) * psisp[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01802}01802             residuals[local\_eqn] += (detG -\/ gamma) * psisp[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01803}01803 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01804}01804 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01805}01805             \textcolor{comment}{// Get Jacobian too?}}
@@ -1844,7 +1844,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01840}01840                           ++count;}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01841}01841                         \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01842}01842                       \}}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01843}01843                       jacobian(local\_eqn, local\_unknown) += sum * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01843}01843                       jacobian(local\_eqn, local\_unknown) += sum * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01844}01844                     \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01845}01845                   \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01846}01846                 \}}
@@ -1859,7 +1859,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01855}01855           \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01856}01856           \{}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01857}01857             residuals[local\_eqn] +=}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01858}01858               (inv\_kappa * interpolated\_solid\_p + gen\_dil) * psisp[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01858}01858               (inv\_kappa * interpolated\_solid\_p + gen\_dil) * psisp[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01859}01859 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01860}01860             \textcolor{comment}{// Add in the jacobian terms}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01861}01861             \textcolor{keywordflow}{if} ((flag == 1) || (flag == 3))}
@@ -1899,7 +1899,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01895}01895                           ++count;}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01896}01896                         \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01897}01897                       \}}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01898}01898                       jacobian(local\_eqn, local\_unknown) += sum * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01898}01898                       jacobian(local\_eqn, local\_unknown) += sum * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01899}01899                     \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01900}01900                   \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01901}01901                 \}}
@@ -1917,7 +1917,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01913}01913                 \textcolor{keywordflow}{if} (local\_unknown >= 0)}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01914}01914                 \{}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01915}01915                   jacobian(local\_eqn, local\_unknown) +=}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01916}01916                     inv\_kappa * psisp[l2] * psisp[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01916}01916                     inv\_kappa * psisp[l2] * psisp[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01917}01917                 \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01918}01918               \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01919}01919             \} \textcolor{comment}{// End of jacobian terms}}
@@ -1940,7 +1940,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01936}01936   \{}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01937}01937     \textcolor{comment}{// Set output Vector}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01938}01938     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01939}01939     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(DIM);}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01939}01939     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(DIM);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01940}01940     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} xi(DIM);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01941}01941 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01942}01942     \textcolor{comment}{// Tecplot header info}}
@@ -1954,7 +1954,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01950}01950       this-\/>get\_s\_plot(iplot, n\_plot, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01951}01951 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01952}01952       \textcolor{comment}{// Get Eulerian and Lagrangian coordinates}}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01953}01953       this-\/>interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01953}01953       this-\/>interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01954}01954       this-\/>interpolated\_xi(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, xi);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01955}01955 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01956}01956       \textcolor{comment}{// Get isotropic growth}}
@@ -1966,7 +1966,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01962}01962       \textcolor{comment}{// Output the x,y,..}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01963}01963       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01964}01964       \{}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01965}01965         outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01965}01965         outfile << x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01966}01966       \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01967}01967 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01968}01968       \textcolor{comment}{// Output xi0,xi1,..}}
@@ -1996,7 +1996,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01992}01992   \{}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01993}01993     \textcolor{comment}{// Set output Vector}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01994}01994     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01995}01995     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(DIM);}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01995}01995     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(DIM);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01996}01996     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} xi(DIM);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01997}01997 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l01998}01998     \textcolor{keywordflow}{switch} (DIM)}
@@ -2015,7 +2015,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02011}02011             \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0] = -\/1.0 + l1 * 2.0 / (n\_plot -\/ 1);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02012}02012 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02013}02013             \textcolor{comment}{// Get Eulerian and Lagrangian coordinates}}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02014}02014             this-\/>interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02014}02014             this-\/>interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02015}02015             this-\/>interpolated\_xi(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, xi);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02016}02016 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02017}02017             \textcolor{comment}{// Get isotropic growth}}
@@ -2028,7 +2028,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02024}02024             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02025}02025             \{}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02026}02026               \textcolor{comment}{// outfile << x[i] << "{} "{};}}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02027}02027               fprintf(file\_pt, \textcolor{stringliteral}{"{}\%g "{}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]);}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02027}02027               fprintf(file\_pt, \textcolor{stringliteral}{"{}\%g "{}}, x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02028}02028             \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02029}02029             \textcolor{comment}{// Output xi0,xi1,..}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02030}02030             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
@@ -2068,7 +2068,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02064}02064               \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0] = -\/1.0 + l1 * 2.0 / (n\_plot -\/ 1);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02065}02065 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02066}02066               \textcolor{comment}{// Get Eulerian and Lagrangian coordinates}}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02067}02067               this-\/>interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02067}02067               this-\/>interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02068}02068               this-\/>interpolated\_xi(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, xi);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02069}02069 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02070}02070               \textcolor{comment}{// Get isotropic growth}}
@@ -2081,7 +2081,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02077}02077               \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02078}02078               \{}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02079}02079                 \textcolor{comment}{// outfile << x[i] << "{} "{};}}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02080}02080                 fprintf(file\_pt, \textcolor{stringliteral}{"{}\%g "{}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]);}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02080}02080                 fprintf(file\_pt, \textcolor{stringliteral}{"{}\%g "{}}, x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02081}02081               \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02082}02082               \textcolor{comment}{// Output xi0,xi1,..}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02083}02083               \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
@@ -2120,7 +2120,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02116}\mbox{\hyperlink{classoomph_1_1PVDEquationsWithPressure_a9b47b97cb7f3dafac867a0af20650d0d}{02116}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1PVDEquationsWithPressure_a9b47b97cb7f3dafac867a0af20650d0d}{PVDEquationsWithPressure<DIM>::extended\_output}}(std::ostream\& outfile,}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02117}02117                                                       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_plot)}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02118}02118   \{}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02119}02119     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(DIM);}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02119}02119     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(DIM);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02120}02120     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} xi(DIM);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02121}02121     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02122}02122     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} stress\_or\_strain(DIM, DIM);}
@@ -2136,7 +2136,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02132}02132       this-\/>get\_s\_plot(iplot, n\_plot, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02133}02133 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02134}02134       \textcolor{comment}{// Get Eulerian and Lagrangian coordinates}}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02135}02135       this-\/>interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02135}02135       this-\/>interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02136}02136       this-\/>interpolated\_xi(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, xi);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02137}02137 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02138}02138       \textcolor{comment}{// Get isotropic growth}}
@@ -2148,7 +2148,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02144}02144       \textcolor{comment}{// Output the x,y,..}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02145}02145       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02146}02146       \{}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02147}02147         outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02147}02147         outfile << x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02148}02148       \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02149}02149 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02150}02150       \textcolor{comment}{// Output xi0,xi1,..}}
@@ -2231,7 +2231,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02227}02227       \textcolor{keywordtype}{double} J = this-\/>dshape\_lagrangian\_at\_knot(ipt, psi, dpsidxi);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02228}02228 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02229}02229       \textcolor{comment}{// Premultiply weights and Jacobian}}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02230}02230       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02230}02230       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02231}02231 }
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02232}02232       \textcolor{comment}{// Loop over the nodes}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02233}02233       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} l = 0; l < n\_node; l++)}
@@ -2249,7 +2249,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02245}02245             \textcolor{keywordflow}{if} (local\_eqn >= 0)}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02246}02246             \{}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02247}02247               \textcolor{comment}{// Add the contribution}}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02248}02248               mass\_diag[local\_eqn] += pow(psi(l, k), 2) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02248}02248               mass\_diag[local\_eqn] += pow(psi(l, k), 2) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02249}02249             \} \textcolor{comment}{// End of if not boundary condition statement}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02250}02250           \} \textcolor{comment}{// End of loop over dimension}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02251}02251         \} \textcolor{comment}{// End of dof type}}
@@ -2269,7 +2269,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02265}02265 \textcolor{comment}{}  \textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02266}02266   \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02267}\mbox{\hyperlink{classoomph_1_1PVDEquationsWithPressure_a15cfb4084a47c24f7cf108554a4b850d}{02267}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1PVDEquationsWithPressure_a15cfb4084a47c24f7cf108554a4b850d}{PVDEquationsWithPressure<DIM>::get\_stress}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02268}02268                                                  \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}})}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02268}02268                                                  \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& sigma)}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02269}02269   \{}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02270}02270     \textcolor{comment}{// Find out how many nodes there are}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02271}02271     \textcolor{keywordtype}{unsigned} n\_node = this-\/>nnode();}
@@ -2418,7 +2418,7 @@
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02414}02414     \{}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02415}02415       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < DIM; j++)}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02416}02416       \{}
-\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02417}02417         \mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j) = -\/interpolated\_solid\_p * Gup(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j) + sigma\_dev(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j);}
+\DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02417}02417         sigma(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j) = -\/interpolated\_solid\_p * Gup(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j) + sigma\_dev(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j);}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02418}02418       \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02419}02419     \}}
 \DoxyCodeLine{\Hypertarget{solid__elements_8cc_source_l02420}02420   \}}

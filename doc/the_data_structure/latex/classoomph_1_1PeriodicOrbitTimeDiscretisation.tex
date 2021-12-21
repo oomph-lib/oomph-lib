@@ -33,13 +33,13 @@ unsigned \mbox{\hyperlink{classoomph_1_1PeriodicOrbitTimeDiscretisation_a395bce9
 \begin{DoxyCompactList}\small\item\em Return the actual order of the scheme. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitTimeDiscretisation_a45c5cd901ddf52fb1566665a2e161497}{assign\+\_\+initial\+\_\+values\+\_\+impulsive}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&data\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Broken initialisation the time-\/history for the \mbox{\hyperlink{classoomph_1_1Data}{Data}} values corresponding to an impulsive start. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitTimeDiscretisation_ab0445858504afb534970431e8bf2d3c6}{assign\+\_\+initial\+\_\+positions\+\_\+impulsive}} (Node $\ast$const \&node\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitTimeDiscretisation_ab0445858504afb534970431e8bf2d3c6}{assign\+\_\+initial\+\_\+positions\+\_\+impulsive}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&node\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Broken initialisation of the positions for the node corresponding to an impulsive start. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitTimeDiscretisation_abdbc5908a5f202d6ecf37fd1a1431292}{assign\+\_\+initial\+\_\+data\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&data\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1PeriodicOrbitTimeDiscretisation_a0bccd8d239689d95cf7422d877a5eed8}{Initial\+Condition\+Fct\+Pt}} $>$ initial\+\_\+value\+\_\+fct)
 \begin{DoxyCompactList}\small\item\em Initialise the time-\/history for the \mbox{\hyperlink{classoomph_1_1Data}{Data}} values, corresponding to given time history, specified by \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of function pointers. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitTimeDiscretisation_a6893d2c1436831d5ad635b43bd91f42e}{shift\+\_\+time\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&data\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Broken shifting of time values. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitTimeDiscretisation_a246a40f0cfe0ebc3d5020ede92a2d0e9}{shift\+\_\+time\+\_\+positions}} (Node $\ast$const \&node\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitTimeDiscretisation_a246a40f0cfe0ebc3d5020ede92a2d0e9}{shift\+\_\+time\+\_\+positions}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&node\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Broken shifting of time positions. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitTimeDiscretisation_a250509cf3fb767dc65b14b8dea9ea1e8}{set\+\_\+weights}} ()
 \begin{DoxyCompactList}\small\item\em Set the weights. \end{DoxyCompactList}\item 
@@ -133,7 +133,7 @@ References \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Step
 \index{oomph::PeriodicOrbitTimeDiscretisation@{oomph::PeriodicOrbitTimeDiscretisation}!assign\_initial\_positions\_impulsive@{assign\_initial\_positions\_impulsive}}
 \index{assign\_initial\_positions\_impulsive@{assign\_initial\_positions\_impulsive}!oomph::PeriodicOrbitTimeDiscretisation@{oomph::PeriodicOrbitTimeDiscretisation}}
 \doxysubsubsection{\texorpdfstring{assign\_initial\_positions\_impulsive()}{assign\_initial\_positions\_impulsive()}}
-{\footnotesize\ttfamily void oomph\+::\+Periodic\+Orbit\+Time\+Discretisation\+::assign\+\_\+initial\+\_\+positions\+\_\+impulsive (\begin{DoxyParamCaption}\item[{Node $\ast$const \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Periodic\+Orbit\+Time\+Discretisation\+::assign\+\_\+initial\+\_\+positions\+\_\+impulsive (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -259,7 +259,7 @@ Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00152}{1
 \index{oomph::PeriodicOrbitTimeDiscretisation@{oomph::PeriodicOrbitTimeDiscretisation}!shift\_time\_positions@{shift\_time\_positions}}
 \index{shift\_time\_positions@{shift\_time\_positions}!oomph::PeriodicOrbitTimeDiscretisation@{oomph::PeriodicOrbitTimeDiscretisation}}
 \doxysubsubsection{\texorpdfstring{shift\_time\_positions()}{shift\_time\_positions()}}
-{\footnotesize\ttfamily void oomph\+::\+Periodic\+Orbit\+Time\+Discretisation\+::shift\+\_\+time\+\_\+positions (\begin{DoxyParamCaption}\item[{Node $\ast$const \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Periodic\+Orbit\+Time\+Discretisation\+::shift\+\_\+time\+\_\+positions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 

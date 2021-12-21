@@ -63,7 +63,7 @@
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00059}00059   \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00060}\mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTCrouzeixRaviartElement}{00060}}   \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTCrouzeixRaviartElement}{GeneralisedNewtonianTCrouzeixRaviartElement}}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00061}00061     : \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{TBubbleEnrichedElement}}<DIM, 3>,}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00062}00062       \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classGeneralisedNewtonianNavierStokesEquations}{GeneralisedNewtonianNavierStokesEquations}}<DIM>,}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00062}00062       \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianNavierStokesEquations}{GeneralisedNewtonianNavierStokesEquations}}<DIM>,}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00063}00063       \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator}{ElementWithZ2ErrorEstimator}}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00064}00064   \{}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00065}00065   \textcolor{keyword}{protected}:\textcolor{comment}{}}
@@ -101,7 +101,7 @@
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00097}00097       \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\& test,}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00098}00098       \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& dtestdx,}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00099}00099       \mbox{\hyperlink{classoomph_1_1RankFourTensor}{RankFourTensor<double>}}\& d\_dtestdx\_dX,}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00100}00100       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_ab808fc2c7224b2ca13cbe287ad906f32}{djacobian\_dX}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00100}00100       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& djacobian\_dX) \textcolor{keyword}{const};}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00101}00101 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00102}00102 \textcolor{comment}{    /// Pressure shape and test functions and their derivs}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00103}00103 \textcolor{comment}{    /// w.r.t. to global coords  at local coordinate s (taken from geometry)}}
@@ -134,7 +134,7 @@
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00130}00130 \textcolor{comment}{    /// Constructor, there are DIM+1 internal values (for the pressure)}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00131}\mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTCrouzeixRaviartElement_ad69c2f4ea7c8eb81dfc5bce1bb709092}{00131}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTCrouzeixRaviartElement_ad69c2f4ea7c8eb81dfc5bce1bb709092}{GeneralisedNewtonianTCrouzeixRaviartElement}}()}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00132}00132       : \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{TBubbleEnrichedElement}}<DIM, 3>(),}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00133}00133         \mbox{\hyperlink{classGeneralisedNewtonianNavierStokesEquations}{GeneralisedNewtonianNavierStokesEquations}}<DIM>()}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00133}00133         \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianNavierStokesEquations}{GeneralisedNewtonianNavierStokesEquations}}<DIM>()}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00134}00134     \{}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00135}00135       \textcolor{comment}{// Allocate and a single internal datum with DIM+1 entries for the}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00136}00136       \textcolor{comment}{// pressure}}
@@ -213,25 +213,25 @@
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00209}00209 \textcolor{comment}{    /// Redirect output to NavierStokesEquations output}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00210}\mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTCrouzeixRaviartElement_a483703d25945a08046f0792e0321bc59}{00210}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTCrouzeixRaviartElement_a483703d25945a08046f0792e0321bc59}{output}}(std::ostream\& outfile)}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00211}00211     \{}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00212}00212       \mbox{\hyperlink{classGeneralisedNewtonianNavierStokesEquations_a708dc7426d17bafd8e6bcac35f61e689}{GeneralisedNewtonianNavierStokesEquations<DIM>::output}}(outfile);}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00212}00212       \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianNavierStokesEquations_a1f84ecb8a91df11868349a1e826074bd}{GeneralisedNewtonianNavierStokesEquations<DIM>::output}}(outfile);}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00213}00213     \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00214}00214 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00215}00215 \textcolor{comment}{    /// Redirect output to NavierStokesEquations output}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00216}\mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTCrouzeixRaviartElement_a56bdad45189809ed1a288727e63fdb7e}{00216}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTCrouzeixRaviartElement_a56bdad45189809ed1a288727e63fdb7e}{output}}(std::ostream\& outfile, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nplot)}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00217}00217     \{}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00218}00218       \mbox{\hyperlink{classGeneralisedNewtonianNavierStokesEquations_a708dc7426d17bafd8e6bcac35f61e689}{GeneralisedNewtonianNavierStokesEquations<DIM>::output}}(outfile, nplot);}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00218}00218       \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianNavierStokesEquations_a1f84ecb8a91df11868349a1e826074bd}{GeneralisedNewtonianNavierStokesEquations<DIM>::output}}(outfile, nplot);}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00219}00219     \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00220}00220 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00221}00221 \textcolor{comment}{    /// Redirect output to NavierStokesEquations output}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00222}\mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTCrouzeixRaviartElement_a3147cc62be2891996cf4e11fe8e5be79}{00222}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTCrouzeixRaviartElement_a3147cc62be2891996cf4e11fe8e5be79}{output}}(FILE* file\_pt)}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00223}00223     \{}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00224}00224       \mbox{\hyperlink{classGeneralisedNewtonianNavierStokesEquations_a708dc7426d17bafd8e6bcac35f61e689}{GeneralisedNewtonianNavierStokesEquations<DIM>::output}}(file\_pt);}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00224}00224       \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianNavierStokesEquations_a1f84ecb8a91df11868349a1e826074bd}{GeneralisedNewtonianNavierStokesEquations<DIM>::output}}(file\_pt);}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00225}00225     \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00226}00226 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00227}00227 \textcolor{comment}{    /// Redirect output to NavierStokesEquations output}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00228}\mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTCrouzeixRaviartElement_a5cd44245b4ad4ecbf6179be6068d37ea}{00228}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTCrouzeixRaviartElement_a5cd44245b4ad4ecbf6179be6068d37ea}{output}}(FILE* file\_pt, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_plot)}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00229}00229     \{}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00230}00230       \mbox{\hyperlink{classGeneralisedNewtonianNavierStokesEquations_a708dc7426d17bafd8e6bcac35f61e689}{GeneralisedNewtonianNavierStokesEquations<DIM>::output}}(file\_pt, n\_plot);}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00230}00230       \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianNavierStokesEquations_a1f84ecb8a91df11868349a1e826074bd}{GeneralisedNewtonianNavierStokesEquations<DIM>::output}}(file\_pt, n\_plot);}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00231}00231     \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00232}00232 }
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00233}00233 \textcolor{comment}{}}
@@ -249,7 +249,7 @@
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00245}00245     \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00246}00246 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00247}00247 \textcolor{comment}{    /// Pointer to the j-\/th vertex node in the element}}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00248}\mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTCrouzeixRaviartElement_a679131d915502644ee739c91e8f4b6fa}{00248}} \textcolor{comment}{}    Node* \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTCrouzeixRaviartElement_a679131d915502644ee739c91e8f4b6fa}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00248}\mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTCrouzeixRaviartElement_a679131d915502644ee739c91e8f4b6fa}{00248}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTCrouzeixRaviartElement_a679131d915502644ee739c91e8f4b6fa}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00249}00249 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00250}00250       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j);}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00251}00251     \}}
@@ -281,7 +281,7 @@
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00277}00277 }
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00278}00278       \textcolor{comment}{// Get strain rate matrix}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00279}00279       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} strainrate(DIM);}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00280}00280       this-\/>\mbox{\hyperlink{classGeneralisedNewtonianNavierStokesEquations_aa39dd5b276afe1e4d91075100c78702e}{strain\_rate}}(s, strainrate);}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00280}00280       this-\/>\mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianNavierStokesEquations_a2ea3e797f3c7aceb7e3f12188746818c}{strain\_rate}}(s, strainrate);}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00281}00281 }
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00282}00282       \textcolor{comment}{// Pack into flux Vector}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00283}00283       \textcolor{keywordtype}{unsigned} icount = 0;}
@@ -310,7 +310,7 @@
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00306}00306 \textcolor{comment}{    /// in tecplot format. Default number of plot points}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00307}\mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTCrouzeixRaviartElement_abaec416cf3cfb7886e69df9e16aa18ff}{00307}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTCrouzeixRaviartElement_abaec416cf3cfb7886e69df9e16aa18ff}{full\_output}}(std::ostream\& outfile)}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00308}00308     \{}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00309}00309       \mbox{\hyperlink{classGeneralisedNewtonianNavierStokesEquations_a4d3a7679f543cb91283329135e7b9675}{GeneralisedNewtonianNavierStokesEquations<DIM>::full\_output}}(outfile);}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00309}00309       \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianNavierStokesEquations_a37945b6f1c50cd8e559b9dadc131fb39}{GeneralisedNewtonianNavierStokesEquations<DIM>::full\_output}}(outfile);}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00310}00310     \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00311}00311 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00312}00312 \textcolor{comment}{    /// Full output function:}}
@@ -318,7 +318,7 @@
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00314}00314 \textcolor{comment}{    /// in tecplot format. nplot points in each coordinate direction}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00315}\mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTCrouzeixRaviartElement_a9a56e552d21c152d7f39f543834a1eb7}{00315}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTCrouzeixRaviartElement_a9a56e552d21c152d7f39f543834a1eb7}{full\_output}}(std::ostream\& outfile, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nplot)}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00316}00316     \{}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00317}00317       \mbox{\hyperlink{classGeneralisedNewtonianNavierStokesEquations_a4d3a7679f543cb91283329135e7b9675}{GeneralisedNewtonianNavierStokesEquations<DIM>::full\_output}}(outfile,}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00317}00317       \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianNavierStokesEquations_a37945b6f1c50cd8e559b9dadc131fb39}{GeneralisedNewtonianNavierStokesEquations<DIM>::full\_output}}(outfile,}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00318}00318                                                                   nplot);}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00319}00319     \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00320}00320 \textcolor{comment}{}}
@@ -738,7 +738,7 @@
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00734}00734   \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00735}\mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTTaylorHoodElement}{00735}}   \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTTaylorHoodElement}{GeneralisedNewtonianTTaylorHoodElement}}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00736}00736     : \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1TElement}{TElement}}<DIM, 3>,}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00737}00737       \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classGeneralisedNewtonianNavierStokesEquations}{GeneralisedNewtonianNavierStokesEquations}}<DIM>,}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00737}00737       \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianNavierStokesEquations}{GeneralisedNewtonianNavierStokesEquations}}<DIM>,}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00738}00738       \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator}{ElementWithZ2ErrorEstimator}}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00739}00739 }
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00740}00740   \{}
@@ -780,7 +780,7 @@
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00776}00776       \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\& test,}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00777}00777       \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& dtestdx,}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00778}00778       \mbox{\hyperlink{classoomph_1_1RankFourTensor}{RankFourTensor<double>}}\& d\_dtestdx\_dX,}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00779}00779       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_ab808fc2c7224b2ca13cbe287ad906f32}{djacobian\_dX}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00779}00779       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& djacobian\_dX) \textcolor{keyword}{const};}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00780}00780 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00781}00781 \textcolor{comment}{    /// Compute the pressure shape and test functions and derivatives}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00782}00782 \textcolor{comment}{    /// w.r.t. global coords at local coordinate s.}}
@@ -804,7 +804,7 @@
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00800}00800   \textcolor{keyword}{public}:\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00801}00801 \textcolor{comment}{    /// Constructor, no internal data points}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00802}\mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTTaylorHoodElement_a80cba811e2e40c7f6747749899f2773e}{00802}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTTaylorHoodElement_a80cba811e2e40c7f6747749899f2773e}{GeneralisedNewtonianTTaylorHoodElement}}()}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00803}00803       : \mbox{\hyperlink{classoomph_1_1TElement}{TElement}}<DIM, 3>(), \mbox{\hyperlink{classGeneralisedNewtonianNavierStokesEquations}{GeneralisedNewtonianNavierStokesEquations}}<DIM>()}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00803}00803       : \mbox{\hyperlink{classoomph_1_1TElement}{TElement}}<DIM, 3>(), \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianNavierStokesEquations}{GeneralisedNewtonianNavierStokesEquations}}<DIM>()}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00804}00804     \{}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00805}00805     \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00806}00806 }
@@ -879,8 +879,8 @@
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00875}00875 \textcolor{comment}{    /// Pin p\_dof-\/th pressure dof and set it to value specified by p\_value.}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00876}\mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTTaylorHoodElement_a26ba51f8b7adebbd08e8969d622164d0}{00876}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTTaylorHoodElement_a26ba51f8b7adebbd08e8969d622164d0}{fix\_pressure}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& p\_dof, \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& p\_value)}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00877}00877     \{}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00878}00878       this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(Pconv[p\_dof])-\/>pin(DIM);}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00879}00879       this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(Pconv[p\_dof])-\/>set\_value(DIM, p\_value);}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00878}00878       this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(Pconv[p\_dof])-\/>\mbox{\hyperlink{classoomph_1_1Data_a422231c58e423f0b43822827aa334d79}{pin}}(DIM);}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00879}00879       this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(Pconv[p\_dof])-\/>\mbox{\hyperlink{classoomph_1_1Data_a7289ca322725c6fd493970a19474b382}{set\_value}}(DIM, p\_value);}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00880}00880     \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00881}00881 }
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00882}00882 \textcolor{comment}{}}
@@ -908,25 +908,25 @@
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00904}00904 \textcolor{comment}{    /// Redirect output to NavierStokesEquations output}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00905}\mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTTaylorHoodElement_a998c59443d1ac6472d036a5f0a839bed}{00905}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTTaylorHoodElement_a998c59443d1ac6472d036a5f0a839bed}{output}}(std::ostream\& outfile)}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00906}00906     \{}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00907}00907       \mbox{\hyperlink{classGeneralisedNewtonianNavierStokesEquations_a708dc7426d17bafd8e6bcac35f61e689}{GeneralisedNewtonianNavierStokesEquations<DIM>::output}}(outfile);}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00907}00907       \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianNavierStokesEquations_a1f84ecb8a91df11868349a1e826074bd}{GeneralisedNewtonianNavierStokesEquations<DIM>::output}}(outfile);}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00908}00908     \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00909}00909 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00910}00910 \textcolor{comment}{    /// Redirect output to NavierStokesEquations output}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00911}\mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTTaylorHoodElement_a2c0b32513bf821e1b86efecfceaf2b08}{00911}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTTaylorHoodElement_a2c0b32513bf821e1b86efecfceaf2b08}{output}}(std::ostream\& outfile, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nplot)}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00912}00912     \{}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00913}00913       \mbox{\hyperlink{classGeneralisedNewtonianNavierStokesEquations_a708dc7426d17bafd8e6bcac35f61e689}{GeneralisedNewtonianNavierStokesEquations<DIM>::output}}(outfile, nplot);}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00913}00913       \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianNavierStokesEquations_a1f84ecb8a91df11868349a1e826074bd}{GeneralisedNewtonianNavierStokesEquations<DIM>::output}}(outfile, nplot);}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00914}00914     \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00915}00915 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00916}00916 \textcolor{comment}{    /// Redirect output to NavierStokesEquations output}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00917}\mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTTaylorHoodElement_a4792f7006a06e705cf7d54c7933c1375}{00917}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTTaylorHoodElement_a4792f7006a06e705cf7d54c7933c1375}{output}}(FILE* file\_pt)}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00918}00918     \{}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00919}00919       \mbox{\hyperlink{classGeneralisedNewtonianNavierStokesEquations_a708dc7426d17bafd8e6bcac35f61e689}{GeneralisedNewtonianNavierStokesEquations<DIM>::output}}(file\_pt);}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00919}00919       \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianNavierStokesEquations_a1f84ecb8a91df11868349a1e826074bd}{GeneralisedNewtonianNavierStokesEquations<DIM>::output}}(file\_pt);}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00920}00920     \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00921}00921 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00922}00922 \textcolor{comment}{    /// Redirect output to NavierStokesEquations output}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00923}\mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTTaylorHoodElement_acc88cfe3517146492eff605648a22ee3}{00923}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTTaylorHoodElement_acc88cfe3517146492eff605648a22ee3}{output}}(FILE* file\_pt, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_plot)}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00924}00924     \{}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00925}00925       \mbox{\hyperlink{classGeneralisedNewtonianNavierStokesEquations_a708dc7426d17bafd8e6bcac35f61e689}{GeneralisedNewtonianNavierStokesEquations<DIM>::output}}(file\_pt, n\_plot);}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00925}00925       \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianNavierStokesEquations_a1f84ecb8a91df11868349a1e826074bd}{GeneralisedNewtonianNavierStokesEquations<DIM>::output}}(file\_pt, n\_plot);}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00926}00926     \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00927}00927 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00928}00928 \textcolor{comment}{    /// Order of recovery shape functions for Z2 error estimation:}}
@@ -943,7 +943,7 @@
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00939}00939     \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00940}00940 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00941}00941 \textcolor{comment}{    /// Pointer to the j-\/th vertex node in the element}}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00942}\mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTTaylorHoodElement_a72ca68d435f8719e79a75ad01d6bf301}{00942}} \textcolor{comment}{}    Node* \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTTaylorHoodElement_a72ca68d435f8719e79a75ad01d6bf301}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00942}\mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTTaylorHoodElement_a72ca68d435f8719e79a75ad01d6bf301}{00942}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTTaylorHoodElement_a72ca68d435f8719e79a75ad01d6bf301}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00943}00943 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00944}00944       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j);}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00945}00945     \}}
@@ -976,7 +976,7 @@
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00972}00972 }
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00973}00973       \textcolor{comment}{// Get strain rate matrix}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00974}00974       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} strainrate(DIM);}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00975}00975       this-\/>\mbox{\hyperlink{classGeneralisedNewtonianNavierStokesEquations_aa39dd5b276afe1e4d91075100c78702e}{strain\_rate}}(s, strainrate);}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00975}00975       this-\/>\mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianNavierStokesEquations_a2ea3e797f3c7aceb7e3f12188746818c}{strain\_rate}}(s, strainrate);}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00976}00976 }
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00977}00977       \textcolor{comment}{// Pack into flux Vector}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Tnavier__stokes__elements_8h_source_l00978}00978       \textcolor{keywordtype}{unsigned} icount = 0;}

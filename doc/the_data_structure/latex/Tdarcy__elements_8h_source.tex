@@ -179,7 +179,7 @@
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00175}00175     \}}
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00176}00176 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00177}00177 \textcolor{comment}{    /// Get pointer to node that stores the edge flux dofs for specified edge}}
-\DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00178}\mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_adbdb782da701d1a900eebfec568145a5}{00178}} \textcolor{comment}{}    Node* \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_adbdb782da701d1a900eebfec568145a5}{edge\_flux\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& edge)}
+\DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00178}\mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_adbdb782da701d1a900eebfec568145a5}{00178}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_adbdb782da701d1a900eebfec568145a5}{edge\_flux\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& edge)}
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00179}00179     \{}
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00180}00180       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(\mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a7567cd27a9ce08a2a820510dcab2ac20}{Q\_edge\_conv}}[edge]);}
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00181}00181     \}}
@@ -199,7 +199,7 @@
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00195}00195 \textcolor{comment}{    /// Set the values of the edge (flux) degree of freedom}}
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00196}\mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_ad4d0783e51faa448cbbd1978bf4779df}{00196}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_ad4d0783e51faa448cbbd1978bf4779df}{set\_q\_edge}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n, \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& value)}
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00197}00197     \{}
-\DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00198}00198       \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(\mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a81e9386364c70670d6ee4d501cc89da5}{q\_edge\_node\_number}}(n))-\/>set\_value(\mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a5c0de6706bca0a9b006832dd8df30b81}{q\_edge\_index}}(n), value);}
+\DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00198}00198       \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(\mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a81e9386364c70670d6ee4d501cc89da5}{q\_edge\_node\_number}}(n))-\/>\mbox{\hyperlink{classoomph_1_1Data_a7289ca322725c6fd493970a19474b382}{set\_value}}(\mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a5c0de6706bca0a9b006832dd8df30b81}{q\_edge\_index}}(n), value);}
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00199}00199     \}}
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00200}00200 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00201}00201 \textcolor{comment}{    /// Set the values of the internal degree of freedom}}
@@ -240,11 +240,11 @@
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00236}00236 \textcolor{comment}{    /// Compute the global coordinates of the flux interpolation}}
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00237}00237 \textcolor{comment}{    /// point associated with the j-\/th edge-\/based q basis fct}}
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00238}\mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a11c49e611acc0becbf0907766b5e9938}{00238}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a11c49e611acc0becbf0907766b5e9938}{edge\_flux\_interpolation\_point\_global}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j,}
-\DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00239}00239                                               \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}})\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00239}00239                                               \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00240}00240 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00241}00241       \textcolor{keywordtype}{unsigned} n = j \% \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_aee9de4e429ee7852f960a9cf80bfe4fc}{nedge\_flux\_interpolation\_point}}();}
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00242}00242       \textcolor{keywordtype}{unsigned} edge = (j -\/ n) / \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_aee9de4e429ee7852f960a9cf80bfe4fc}{nedge\_flux\_interpolation\_point}}();}
-\DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00243}00243       \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a11c49e611acc0becbf0907766b5e9938}{edge\_flux\_interpolation\_point\_global}}(edge, n, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00243}00243       \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a11c49e611acc0becbf0907766b5e9938}{edge\_flux\_interpolation\_point\_global}}(edge, n, x);}
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00244}00244     \}}
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00245}00245 }
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00246}00246 \textcolor{comment}{}}
@@ -252,7 +252,7 @@
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00248}00248 \textcolor{comment}{    /// point along an edge}}
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00249}\mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a39394c7bd6d9517135f2befcd5e7d646}{00249}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a39394c7bd6d9517135f2befcd5e7d646}{edge\_flux\_interpolation\_point\_global}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& edge,}
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00250}00250                                               \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n,}
-\DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00251}00251                                               \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}})\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00251}00251                                               \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00252}00252 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00253}00253       \textcolor{comment}{// Get the location of the n-\/th flux interpolation point along}}
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00254}00254       \textcolor{comment}{// the edge in terms of the distance along the edge itself}}
@@ -285,7 +285,7 @@
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00281}00281       \}}
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00282}00282 }
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00283}00283       \textcolor{comment}{// Calculate the global coordinates from the local ones}}
-\DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00284}00284       \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(s\_flux\_interpolation, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00284}00284       \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(s\_flux\_interpolation, x);}
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00285}00285     \}}
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00286}00286 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00287}00287 \textcolor{comment}{    /// Pin the nth internal q value}}
@@ -338,10 +338,10 @@
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00334}00334       \textcolor{comment}{// space)}}
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00335}00335       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 3; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00336}00336       \{}
-\DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00337}00337         x0 = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})-\/>x(0);}
-\DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00338}00338         y0 = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})-\/>x(1);}
-\DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00339}00339         x1 = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}((\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} + 1) \% 3)-\/>x(0);}
-\DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00340}00340         y1 = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}((\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} + 1) \% 3)-\/>x(1);}
+\DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00337}00337         x0 = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0);}
+\DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00338}00338         y0 = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1);}
+\DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00339}00339         x1 = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}((\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} + 1) \% 3)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0);}
+\DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00340}00340         y1 = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}((\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} + 1) \% 3)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1);}
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00341}00341 }
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00342}00342         length[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = std::sqrt(std::pow(y1 -\/ y0, 2) + std::pow(x1 -\/ x0, 2));}
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00343}00343       \}}
@@ -398,7 +398,7 @@
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00394}00394     \}}
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00395}00395 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00396}00396 \textcolor{comment}{    /// Pointer to the j-\/th vertex node in the element}}
-\DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00397}\mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a77e73ece428221c979eae3685bf9a1c1}{00397}} \textcolor{comment}{}    Node* \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a77e73ece428221c979eae3685bf9a1c1}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00397}\mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a77e73ece428221c979eae3685bf9a1c1}{00397}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a77e73ece428221c979eae3685bf9a1c1}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00398}00398 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00399}00399       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1TElement}{TElement<2, 3>::vertex\_node\_pt}}(j);}
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00400}00400     \}}
@@ -449,7 +449,7 @@
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00445}00445       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(2);}
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00446}00446       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00447}00447       \{}
-\DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00448}00448         \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>knot(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00448}00448         \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{knot}}(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00449}00449       \}}
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00450}00450 }
 \DoxyCodeLine{\Hypertarget{Tdarcy__elements_8h_source_l00451}00451       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_abf52dcfe30546dd3e2617c1253580dfc}{shape\_basis\_test\_local}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},}

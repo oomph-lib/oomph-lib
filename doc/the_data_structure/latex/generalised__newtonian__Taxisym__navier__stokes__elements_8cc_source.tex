@@ -71,7 +71,7 @@
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source_l00067}00067     \textcolor{keywordtype}{unsigned} u\_index[3];}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source_l00068}00068     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 3; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source_l00069}00069     \{}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source_l00070}00070       u\_index[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = this-\/>u\_index\_axi\_nst(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source_l00070}00070       u\_index[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = this-\/>\mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricNavierStokesEquations_a13fccddff4fd22e3c16b20a5a2227f6d}{u\_index\_axi\_nst}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source_l00071}00071     \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source_l00072}00072 }
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source_l00073}00073     \textcolor{comment}{// Loop over the nodes}}
@@ -148,7 +148,7 @@
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source_l00144}00144       \textcolor{keywordflow}{if} (this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l)-\/>nvalue() == 3 + 1)}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source_l00145}00145       \{}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source_l00146}00146         \textcolor{comment}{// unpin pressure dof}}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source_l00147}00147         this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l)-\/>unpin(3);}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source_l00147}00147         this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l)-\/>\mbox{\hyperlink{classoomph_1_1Data_a4e5cb031bf8eceb8f97c2c4fbd74cb05}{unpin}}(3);}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source_l00148}00148       \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source_l00149}00149     \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source_l00150}00150   \}}
@@ -167,7 +167,7 @@
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source_l00163}00163     \{}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source_l00164}00164       \textcolor{keywordflow}{if} (this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n)-\/>nvalue() == 3 + 1)}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source_l00165}00165       \{}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source_l00166}00166         this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n)-\/>pin(3);}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source_l00166}00166         this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n)-\/>\mbox{\hyperlink{classoomph_1_1Data_a422231c58e423f0b43822827aa334d79}{pin}}(3);}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source_l00167}00167       \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source_l00168}00168     \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source_l00169}00169   \}}
@@ -182,10 +182,10 @@
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source_l00178}00178     \textcolor{keywordtype}{unsigned} n\_pres = \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_adb127de036210e35b09096c7df88b4d5}{npres\_axi\_nst}}();}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source_l00179}00179     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} l = 0; l < n\_pres; l++)}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source_l00180}00180     \{}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source_l00181}00181       Node* nod\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(\mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_acd1d91d33a8a6b6a4f7ffee878512732}{Pconv}}[l]);}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source_l00182}00182       \textcolor{keywordflow}{if} (!nod\_pt-\/>is\_hanging(3))}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source_l00181}00181       \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(\mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_acd1d91d33a8a6b6a4f7ffee878512732}{Pconv}}[l]);}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source_l00182}00182       \textcolor{keywordflow}{if} (!nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_af0e6237dfafad62cf427ff5013ddcfef}{is\_hanging}}(3))}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source_l00183}00183       \{}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source_l00184}00184         nod\_pt-\/>unpin(3);}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source_l00184}00184         nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a4e5cb031bf8eceb8f97c2c4fbd74cb05}{unpin}}(3);}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source_l00185}00185       \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source_l00186}00186     \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source_l00187}00187   \}}

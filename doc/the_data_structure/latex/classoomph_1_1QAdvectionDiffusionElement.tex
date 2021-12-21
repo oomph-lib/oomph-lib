@@ -12,7 +12,7 @@
 Inheritance diagram for oomph\+::QAdvection\+Diffusion\+Element\texorpdfstring{$<$}{<} DIM, NNODE\+\_\+1D \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=1.693122cm]{classoomph_1_1QAdvectionDiffusionElement}
+\includegraphics[height=2.539682cm]{classoomph_1_1QAdvectionDiffusionElement}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
@@ -50,6 +50,7 @@ double \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement_afc66bf00b79622
 \item 
 static const unsigned \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement_a8befb76f93a0969e14d9a70a16668e8c}{Initial\+\_\+\+Nvalue}} = 1
 \begin{DoxyCompactList}\small\item\em Static array of ints to hold number of variables at nodes\+: Initial\+\_\+\+Nvalue\mbox{[}n\mbox{]}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
@@ -59,7 +60,7 @@ class oomph\+::\+QAdvection\+Diffusion\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}
 
 \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement}{QAdvection\+Diffusion\+Element}} elements are linear/quadrilateral/brick-\/shaped Advection Diffusion elements with isoparametric interpolation for the function. 
 
-Definition at line \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00610}{610}} of file \mbox{\hyperlink{advection__diffusion__elements_8h_source}{advection\+\_\+diffusion\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00607}{607}} of file \mbox{\hyperlink{advection__diffusion__elements_8h_source}{advection\+\_\+diffusion\+\_\+elements.\+h}}.
 
 
 
@@ -77,7 +78,7 @@ Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1QElement}{QE
 
 
 
-Definition at line \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00622}{622}} of file \mbox{\hyperlink{advection__diffusion__elements_8h_source}{advection\+\_\+diffusion\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00619}{619}} of file \mbox{\hyperlink{advection__diffusion__elements_8h_source}{advection\+\_\+diffusion\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1QAdvectionDiffusionElement_a7b2edca97e83bd6eb5949916eec7ed69}\label{classoomph_1_1QAdvectionDiffusionElement_a7b2edca97e83bd6eb5949916eec7ed69}} 
 \index{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}!QAdvectionDiffusionElement@{QAdvectionDiffusionElement}}
@@ -98,7 +99,7 @@ Broken copy constructor.
 \index{dshape\_and\_dtest\_eulerian\_adv\_diff@{dshape\_and\_dtest\_eulerian\_adv\_diff}!oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_adv\_diff()}{dshape\_and\_dtest\_eulerian\_adv\_diff()}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-double \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement}{oomph\+::\+QAdvection\+Diffusion\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+adv\+\_\+diff (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+double \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement}{oomph\+::\+QAdvection\+Diffusion\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+adv\+\_\+diff (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -108,7 +109,15 @@ Define the shape functions and test functions and derivatives w.\+r.\+t. global 
 
 Galerkin\+: Test functions = shape functions 
 
-Definition at line \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00723}{723}} of file \mbox{\hyperlink{advection__diffusion__elements_8h_source}{advection\+\_\+diffusion\+\_\+elements.\+h}}.
+Implements \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_ac3c3b0bec7f34f53eb330cd777dcbe59}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement_a07f5aafc7171048c0237574bf74ab265}{oomph\+::\+QSUPGAdvection\+Diffusion\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00720}{720}} of file \mbox{\hyperlink{advection__diffusion__elements_8h_source}{advection\+\_\+diffusion\+\_\+elements.\+h}}.
 
 
 
@@ -119,7 +128,7 @@ References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink
 \index{dshape\_and\_dtest\_eulerian\_at\_knot\_adv\_diff@{dshape\_and\_dtest\_eulerian\_at\_knot\_adv\_diff}!oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_at\_knot\_adv\_diff()}{dshape\_and\_dtest\_eulerian\_at\_knot\_adv\_diff()}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-double \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement}{oomph\+::\+QAdvection\+Diffusion\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+adv\+\_\+diff (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+double \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement}{oomph\+::\+QAdvection\+Diffusion\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+adv\+\_\+diff (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -129,7 +138,15 @@ Define the shape functions and test functions and derivatives w.\+r.\+t. global 
 
 Galerkin\+: Test functions = shape functions 
 
-Definition at line \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00756}{756}} of file \mbox{\hyperlink{advection__diffusion__elements_8h_source}{advection\+\_\+diffusion\+\_\+elements.\+h}}.
+Implements \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a354827df2a149258310ffdd0e4c0d40b}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement_af77acfc13df8c460118d2c1bfbf0d74d}{oomph\+::\+QSUPGAdvection\+Diffusion\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00753}{753}} of file \mbox{\hyperlink{advection__diffusion__elements_8h_source}{advection\+\_\+diffusion\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1QAdvectionDiffusionElement_af38cb6a3a6761fb8a797e00a8b99c41a}\label{classoomph_1_1QAdvectionDiffusionElement_af38cb6a3a6761fb8a797e00a8b99c41a}} 
 \index{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}!operator=@{operator=}}
@@ -147,7 +164,7 @@ Broken assignment operator.
 \index{output@{output}!oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement}{oomph\+::\+QAdvection\+Diffusion\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement}{oomph\+::\+QAdvection\+Diffusion\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -155,18 +172,26 @@ C-\/style output function\+: x,y,u or x,y,z,u.
 
 
 
-Definition at line \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00658}{658}} of file \mbox{\hyperlink{advection__diffusion__elements_8h_source}{advection\+\_\+diffusion\+\_\+elements.\+h}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a063f08a2825608d32eaac5666c2ccec5}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$}}.
 
 
 
-References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement_a57517d0b9c06ffee384f70fe587076c2}{oomph\+::\+QSUPGAdvection\+Diffusion\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a90579086f991da7fbaf7d92b29abf994}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00655}{655}} of file \mbox{\hyperlink{advection__diffusion__elements_8h_source}{advection\+\_\+diffusion\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00225}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QAdvectionDiffusionElement_a891cdaba60a0cd6b3438f161fb537933}\label{classoomph_1_1QAdvectionDiffusionElement_a891cdaba60a0cd6b3438f161fb537933}} 
 \index{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement}{oomph\+::\+QAdvection\+Diffusion\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement}{oomph\+::\+QAdvection\+Diffusion\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -174,18 +199,26 @@ C-\/style output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+DIM plot 
 
 
 
-Definition at line \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00665}{665}} of file \mbox{\hyperlink{advection__diffusion__elements_8h_source}{advection\+\_\+diffusion\+\_\+elements.\+h}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a03a096ff864ee53c8823b08e0d2f6091}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$}}.
 
 
 
-References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement_ac567806bf5318e95b1517cb80e8a3b78}{oomph\+::\+QSUPGAdvection\+Diffusion\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a650e1b0428cd160c72dbc3deda287b26}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00662}{662}} of file \mbox{\hyperlink{advection__diffusion__elements_8h_source}{advection\+\_\+diffusion\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00225}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QAdvectionDiffusionElement_af30152cc8ea671b103239fc6b3e506ce}\label{classoomph_1_1QAdvectionDiffusionElement_af30152cc8ea671b103239fc6b3e506ce}} 
 \index{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement}{oomph\+::\+QAdvection\+Diffusion\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement}{oomph\+::\+QAdvection\+Diffusion\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -193,18 +226,26 @@ Output function\+: x,y,u or x,y,z,u.
 
 
 
-Definition at line \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00643}{643}} of file \mbox{\hyperlink{advection__diffusion__elements_8h_source}{advection\+\_\+diffusion\+\_\+elements.\+h}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a3016c7a56e7f7178b4d9ae8604d0c10b}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$}}.
 
 
 
-References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement_a13469ca1c2520461e62374e600ecf84d}{oomph\+::\+QSUPGAdvection\+Diffusion\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_abbe05b977edbfec7752ed417b90e09fa}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00640}{640}} of file \mbox{\hyperlink{advection__diffusion__elements_8h_source}{advection\+\_\+diffusion\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00225}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QAdvectionDiffusionElement_a248d31c455b267075d437ae2833540c6}\label{classoomph_1_1QAdvectionDiffusionElement_a248d31c455b267075d437ae2833540c6}} 
 \index{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement}{oomph\+::\+QAdvection\+Diffusion\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement}{oomph\+::\+QAdvection\+Diffusion\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -212,18 +253,26 @@ Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+DIM plot points.
 
 
 
-Definition at line \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00650}{650}} of file \mbox{\hyperlink{advection__diffusion__elements_8h_source}{advection\+\_\+diffusion\+\_\+elements.\+h}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_ade5e445c7b99593a68fc8e42631d79be}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$}}.
 
 
 
-References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement_a9055a63b9b8c9f3bf606192e52413326}{oomph\+::\+QSUPGAdvection\+Diffusion\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a36bc6dc9052947f0932a605dd4d0e8f0}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00647}{647}} of file \mbox{\hyperlink{advection__diffusion__elements_8h_source}{advection\+\_\+diffusion\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00225}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QAdvectionDiffusionElement_a0e5d05a939eebc797ec8d6b400296bfd}\label{classoomph_1_1QAdvectionDiffusionElement_a0e5d05a939eebc797ec8d6b400296bfd}} 
 \index{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}!output\_fct@{output\_fct}}
 \index{output\_fct@{output\_fct}!oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output\_fct()}{output\_fct()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement}{oomph\+::\+QAdvection\+Diffusion\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot,  }\item[{const double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement}{oomph\+::\+QAdvection\+Diffusion\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot,  }\item[{const double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -231,14 +280,26 @@ Output function for a time-\/dependent exact solution. x,y,u\+\_\+exact or x,y,z
 
 
 
-Definition at line \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00684}{684}} of file \mbox{\hyperlink{advection__diffusion__elements_8h_source}{advection\+\_\+diffusion\+\_\+elements.\+h}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_affb6feff30ffb8617315e555e1bb7185}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_aa1eaab23a14039a18701b5666629b5bc}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00681}{681}} of file \mbox{\hyperlink{advection__diffusion__elements_8h_source}{advection\+\_\+diffusion\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{advection__diffusion__elements_8cc_source_l00345}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::output\+\_\+fct()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QAdvectionDiffusionElement_a42d9f526bc4bcc8fe51c6dbb1d216b4c}\label{classoomph_1_1QAdvectionDiffusionElement_a42d9f526bc4bcc8fe51c6dbb1d216b4c}} 
 \index{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}!output\_fct@{output\_fct}}
 \index{output\_fct@{output\_fct}!oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output\_fct()}{output\_fct()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement}{oomph\+::\+QAdvection\+Diffusion\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement}{oomph\+::\+QAdvection\+Diffusion\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -246,14 +307,26 @@ Output function for an exact solution\+: x,y,u\+\_\+exact or x,y,z,u\+\_\+exact 
 
 
 
-Definition at line \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00672}{672}} of file \mbox{\hyperlink{advection__diffusion__elements_8h_source}{advection\+\_\+diffusion\+\_\+elements.\+h}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_ab1d0f6bc8d3c9c9826ac1d71f1fd148f}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a9f9feaf2d6003f2328741de2987fd0d1}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00669}{669}} of file \mbox{\hyperlink{advection__diffusion__elements_8h_source}{advection\+\_\+diffusion\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{advection__diffusion__elements_8cc_source_l00345}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::output\+\_\+fct()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QAdvectionDiffusionElement_a5add10bf35486c4ece4505a067cc2fd2}\label{classoomph_1_1QAdvectionDiffusionElement_a5add10bf35486c4ece4505a067cc2fd2}} 
 \index{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}!required\_nvalue@{required\_nvalue}}
 \index{required\_nvalue@{required\_nvalue}!oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{required\_nvalue()}{required\_nvalue()}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement}{oomph\+::\+QAdvection\+Diffusion\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+unsigned \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement}{oomph\+::\+QAdvection\+Diffusion\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -261,11 +334,19 @@ Required \# of `values' (pinned or dofs) at node n.
 
 
 
-Definition at line \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00636}{636}} of file \mbox{\hyperlink{advection__diffusion__elements_8h_source}{advection\+\_\+diffusion\+\_\+elements.\+h}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a56610c60d5bc2d7c27407a1455471b1a}{oomph\+::\+Finite\+Element}}.
 
 
 
-References \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00617}{oomph\+::\+QAdvection\+Diffusion\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::\+Initial\+\_\+\+Nvalue}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a664008af1b7a6444cee34bd4f506c318}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00633}{633}} of file \mbox{\hyperlink{advection__diffusion__elements_8h_source}{advection\+\_\+diffusion\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00614}{oomph\+::\+QAdvection\+Diffusion\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::\+Initial\+\_\+\+Nvalue}}.
 
 
 
@@ -283,11 +364,11 @@ Static array of ints to hold number of variables at nodes\+: Initial\+\_\+\+Nval
 
 
 
-Definition at line \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00617}{617}} of file \mbox{\hyperlink{advection__diffusion__elements_8h_source}{advection\+\_\+diffusion\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00614}{614}} of file \mbox{\hyperlink{advection__diffusion__elements_8h_source}{advection\+\_\+diffusion\+\_\+elements.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00636}{oomph\+::\+QAdvection\+Diffusion\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::required\+\_\+nvalue()}}.
+Referenced by \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00633}{oomph\+::\+QAdvection\+Diffusion\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::required\+\_\+nvalue()}}.
 
 
 

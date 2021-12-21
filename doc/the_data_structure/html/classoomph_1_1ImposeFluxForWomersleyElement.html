@@ -462,7 +462,7 @@ Additional Inherited Members</h2></td></tr>
 class oomph::ImposeFluxForWomersleyElement&lt; DIM &gt;</div><p >//////////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////////// </p>
 <p >Element to impose volume flux through collection of Womersley elements, in exchange for treating the pressure gradient as an unknown. The pressure gradient is created (as a single-valued <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> item) in the constructor for this element which also takes a pointer to the <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a> containing the Womersley elements whose total flux is being controlled. While doing this we tell them that their pressure gradient is now an unknown and must be treated as external <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l00506">506</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l00503">503</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ac7fc5594b9f38a3587f0cd798ff3dfb2" name="ac7fc5594b9f38a3587f0cd798ff3dfb2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac7fc5594b9f38a3587f0cd798ff3dfb2">&#9670;&nbsp;</a></span>ImposeFluxForWomersleyElement()</h2>
@@ -502,9 +502,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Constructor: Pass pointer to mesh that contains the Womersley elements whose volume flux is controlled, and pointer to double that contains the instantaneous value of the prescribed flux. </p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l00513">513</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l00510">510</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8cc_source.html#l00062">oomph::GeneralisedElement::add_internal_data()</a>, <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00448">oomph::Mesh::element_pt()</a>, <a class="el" href="mesh_8h_source.html#l00590">oomph::Mesh::nelement()</a>, <a class="el" href="womersley__elements_8h_source.html#l00616">oomph::ImposeFluxForWomersleyElement&lt; DIM &gt;::Pressure_gradient_data_pt</a>, <a class="el" href="nodes_8h_source.html#l00271">oomph::Data::set_value()</a>, and <a class="el" href="womersley__elements_8h_source.html#l00612">oomph::ImposeFluxForWomersleyElement&lt; DIM &gt;::Womersley_mesh_pt</a>.</p>
+<p class="reference">References <a class="el" href="elements_8cc_source.html#l00062">oomph::GeneralisedElement::add_internal_data()</a>, <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00448">oomph::Mesh::element_pt()</a>, <a class="el" href="mesh_8h_source.html#l00590">oomph::Mesh::nelement()</a>, <a class="el" href="womersley__elements_8h_source.html#l00613">oomph::ImposeFluxForWomersleyElement&lt; DIM &gt;::Pressure_gradient_data_pt</a>, <a class="el" href="womersley__elements_8h_source.html#l00478">oomph::WomersleyEquations&lt; DIM &gt;::set_pressure_gradient_and_add_as_external_data()</a>, <a class="el" href="nodes_8h_source.html#l00271">oomph::Data::set_value()</a>, and <a class="el" href="womersley__elements_8h_source.html#l00609">oomph::ImposeFluxForWomersleyElement&lt; DIM &gt;::Womersley_mesh_pt</a>.</p>
 
 </div>
 </div>
@@ -549,9 +549,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1GeneralisedElement.html#ab915bdad7e6643e5e73a6d98bc7cf48e">oomph::GeneralisedElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l00595">595</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l00592">592</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="womersley__elements_8h_source.html#l00578">oomph::ImposeFluxForWomersleyElement&lt; DIM &gt;::get_residuals()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="elements_8h_source.html#l00835">oomph::GeneralisedElement::ndof()</a>.</p>
+<p class="reference">References <a class="el" href="womersley__elements_8h_source.html#l00575">oomph::ImposeFluxForWomersleyElement&lt; DIM &gt;::get_residuals()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="elements_8h_source.html#l00835">oomph::GeneralisedElement::ndof()</a>.</p>
 
 </div>
 </div>
@@ -585,11 +585,11 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1GeneralisedElement.html#a53d348ab71c86b53619129a1dd411d30">oomph::GeneralisedElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l00578">578</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l00575">575</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l00267">oomph::GeneralisedElement::internal_local_eqn()</a>, and <a class="el" href="womersley__elements_8h_source.html#l00556">oomph::ImposeFluxForWomersleyElement&lt; DIM &gt;::total_volume_flux()</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l00267">oomph::GeneralisedElement::internal_local_eqn()</a>, and <a class="el" href="womersley__elements_8h_source.html#l00553">oomph::ImposeFluxForWomersleyElement&lt; DIM &gt;::total_volume_flux()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="womersley__elements_8h_source.html#l00595">oomph::ImposeFluxForWomersleyElement&lt; DIM &gt;::get_jacobian()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="womersley__elements_8h_source.html#l00592">oomph::ImposeFluxForWomersleyElement&lt; DIM &gt;::get_jacobian()</a>.</p>
 
 </div>
 </div>
@@ -620,9 +620,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Read-only access to the single-valued <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> item that stores the pressure gradient (to be determined via the flux control) </p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l00549">549</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l00546">546</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="womersley__elements_8h_source.html#l00616">oomph::ImposeFluxForWomersleyElement&lt; DIM &gt;::Pressure_gradient_data_pt</a>.</p>
+<p class="reference">References <a class="el" href="womersley__elements_8h_source.html#l00613">oomph::ImposeFluxForWomersleyElement&lt; DIM &gt;::Pressure_gradient_data_pt</a>.</p>
 
 </div>
 </div>
@@ -653,11 +653,11 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Get volume flux through all Womersley elements. </p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l00556">556</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l00553">553</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00448">oomph::Mesh::element_pt()</a>, <a class="el" href="mesh_8h_source.html#l00590">oomph::Mesh::nelement()</a>, and <a class="el" href="womersley__elements_8h_source.html#l00612">oomph::ImposeFluxForWomersleyElement&lt; DIM &gt;::Womersley_mesh_pt</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00448">oomph::Mesh::element_pt()</a>, <a class="el" href="womersley__elements_8cc_source.html#l00219">oomph::WomersleyEquations&lt; DIM &gt;::get_volume_flux()</a>, <a class="el" href="mesh_8h_source.html#l00590">oomph::Mesh::nelement()</a>, and <a class="el" href="womersley__elements_8h_source.html#l00609">oomph::ImposeFluxForWomersleyElement&lt; DIM &gt;::Womersley_mesh_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="womersley__elements_8h_source.html#l00578">oomph::ImposeFluxForWomersleyElement&lt; DIM &gt;::get_residuals()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="womersley__elements_8h_source.html#l00575">oomph::ImposeFluxForWomersleyElement&lt; DIM &gt;::get_residuals()</a>.</p>
 
 </div>
 </div>
@@ -686,7 +686,7 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Pointer to current value of prescribed flux. </p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l00619">619</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l00616">616</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 
 </div>
 </div>
@@ -714,9 +714,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p><a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> item whose one and only value contains the pressure gradient. </p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l00616">616</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l00613">613</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="womersley__elements_8h_source.html#l00513">oomph::ImposeFluxForWomersleyElement&lt; DIM &gt;::ImposeFluxForWomersleyElement()</a>, and <a class="el" href="womersley__elements_8h_source.html#l00549">oomph::ImposeFluxForWomersleyElement&lt; DIM &gt;::pressure_gradient_data_pt()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="womersley__elements_8h_source.html#l00510">oomph::ImposeFluxForWomersleyElement&lt; DIM &gt;::ImposeFluxForWomersleyElement()</a>, and <a class="el" href="womersley__elements_8h_source.html#l00546">oomph::ImposeFluxForWomersleyElement&lt; DIM &gt;::pressure_gradient_data_pt()</a>.</p>
 
 </div>
 </div>
@@ -744,9 +744,9 @@ template&lt;unsigned DIM&gt; </div>
 
 <p>Pointer to mesh that contains the Womersley elements. </p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l00612">612</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l00609">609</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="womersley__elements_8h_source.html#l00513">oomph::ImposeFluxForWomersleyElement&lt; DIM &gt;::ImposeFluxForWomersleyElement()</a>, and <a class="el" href="womersley__elements_8h_source.html#l00556">oomph::ImposeFluxForWomersleyElement&lt; DIM &gt;::total_volume_flux()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="womersley__elements_8h_source.html#l00510">oomph::ImposeFluxForWomersleyElement&lt; DIM &gt;::ImposeFluxForWomersleyElement()</a>, and <a class="el" href="womersley__elements_8h_source.html#l00553">oomph::ImposeFluxForWomersleyElement&lt; DIM &gt;::total_volume_flux()</a>.</p>
 
 </div>
 </div>
@@ -781,7 +781,7 @@ template&lt;unsigned DIM&gt; </div>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Nov 2 2021 16:33:27
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Dec 21 2021 17:36:59
         </div>
       </div>
     </footer>

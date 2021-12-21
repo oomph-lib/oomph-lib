@@ -371,7 +371,7 @@
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00367}00367     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00368}00368 }
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00369}00369     \textcolor{comment}{// Vector for coordintes}}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00370}00370     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(DIM);}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00370}00370     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(DIM);}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00371}00371 }
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00372}00372     \textcolor{comment}{// Tecplot header info}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00373}00373     outfile << this-\/>tecplot\_zone\_string(nplot);}
@@ -388,15 +388,15 @@
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00384}00384       this-\/>get\_s\_plot(iplot, nplot, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00385}00385 }
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00386}00386       \textcolor{comment}{// Get x position as Vector}}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00387}00387       this-\/>interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00387}00387       this-\/>interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00388}00388 }
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00389}00389       \textcolor{comment}{// Get exact solution at this point}}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00390}00390       (*exact\_soln\_pt)(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, exact\_soln);}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00390}00390       (*exact\_soln\_pt)(x, exact\_soln);}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00391}00391 }
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00392}00392       \textcolor{comment}{// Output x,y,q\_exact,p\_exact,div\_q\_exact}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00393}00393       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00394}00394       \{}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00395}00395         outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00395}00395         outfile << x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00396}00396       \}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00397}00397       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2 * DIM + 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00398}00398       \{}
@@ -422,7 +422,7 @@
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00418}00418     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00419}00419 }
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00420}00420     \textcolor{comment}{// Vector for coordintes}}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00421}00421     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(DIM);}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00421}00421     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(DIM);}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00422}00422 }
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00423}00423     \textcolor{comment}{// Tecplot header info}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00424}00424     outfile << this-\/>tecplot\_zone\_string(nplot);}
@@ -439,15 +439,15 @@
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00435}00435       this-\/>get\_s\_plot(iplot, nplot, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00436}00436 }
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00437}00437       \textcolor{comment}{// Get x position as Vector}}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00438}00438       this-\/>interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00438}00438       this-\/>interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00439}00439 }
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00440}00440       \textcolor{comment}{// Get exact solution at this point}}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00441}00441       (*exact\_soln\_pt)(time, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, exact\_soln);}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00441}00441       (*exact\_soln\_pt)(time, x, exact\_soln);}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00442}00442 }
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00443}00443       \textcolor{comment}{// Output x,y,q\_exact,p\_exact,div\_q\_exact}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00444}00444       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00445}00445       \{}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00446}00446         outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00446}00446         outfile << x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00447}00447       \}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00448}00448       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2 * DIM + 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00449}00449       \{}
@@ -479,7 +479,7 @@
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00475}00475     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00476}00476 }
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00477}00477     \textcolor{comment}{// Vector for coordinates}}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00478}00478     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(DIM);}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00478}00478     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(DIM);}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00479}00479 }
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00480}00480     \textcolor{comment}{// Set the value of n\_intpt}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00481}00481     \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>integral\_pt()-\/>nweight();}
@@ -505,46 +505,46 @@
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00501}00501       \textcolor{keywordtype}{double} J = this-\/>J\_eulerian(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00502}00502 }
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00503}00503       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00504}00504       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00504}00504       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00505}00505 }
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00506}00506       \textcolor{comment}{// Get x position as Vector}}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00507}00507       this-\/>interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00507}00507       this-\/>interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00508}00508 }
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00509}00509       \textcolor{comment}{// Get exact solution at this point}}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00510}00510       (*exact\_soln\_pt)(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, exact\_soln);}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00510}00510       (*exact\_soln\_pt)(x, exact\_soln);}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00511}00511 }
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00512}00512       \textcolor{comment}{// Displacement error}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00513}00513       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00514}00514       \{}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00515}00515         norm[0] += exact\_soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * exact\_soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00515}00515         norm[0] += exact\_soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * exact\_soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00516}00516         \textcolor{comment}{// Error due to q\_i}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00517}00517         error[0] += (exact\_soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ this-\/>interpolated\_u(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})) *}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00518}00518                     (exact\_soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ this-\/>interpolated\_u(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00518}00518                     (exact\_soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ this-\/>interpolated\_u(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00519}00519       \}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00520}00520 }
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00521}00521       \textcolor{comment}{// Flux error}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00522}00522       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00523}00523       \{}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00524}00524         norm[1] += exact\_soln[DIM + \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * exact\_soln[DIM + \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00524}00524         norm[1] += exact\_soln[DIM + \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * exact\_soln[DIM + \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00525}00525         \textcolor{comment}{// Error due to q\_i}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00526}00526         error[1] += (exact\_soln[DIM + \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ this-\/>interpolated\_q(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})) *}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00527}00527                     (exact\_soln[DIM + \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ this-\/>interpolated\_q(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00527}00527                     (exact\_soln[DIM + \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ this-\/>interpolated\_q(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00528}00528       \}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00529}00529 }
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00530}00530       \textcolor{comment}{// Flux divergence error}}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00531}00531       norm[1] += exact\_soln[2 * DIM] * exact\_soln[2 * DIM] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00531}00531       norm[1] += exact\_soln[2 * DIM] * exact\_soln[2 * DIM] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00532}00532       error[1] += (exact\_soln[2 * DIM] -\/ interpolated\_div\_q(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})) *}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00533}00533                   (exact\_soln[2 * DIM] -\/ interpolated\_div\_q(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00533}00533                   (exact\_soln[2 * DIM] -\/ interpolated\_div\_q(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00534}00534 }
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00535}00535       \textcolor{comment}{// Pressure error}}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00536}00536       norm[2] += exact\_soln[2 * DIM + 1] * exact\_soln[2 * DIM + 1] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00536}00536       norm[2] += exact\_soln[2 * DIM + 1] * exact\_soln[2 * DIM + 1] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00537}00537       error[2] += (exact\_soln[2 * DIM + 1] -\/ this-\/>interpolated\_p(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})) *}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00538}00538                   (exact\_soln[2 * DIM + 1] -\/ this-\/>interpolated\_p(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00538}00538                   (exact\_soln[2 * DIM + 1] -\/ this-\/>interpolated\_p(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00539}00539 }
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00540}00540       \textcolor{comment}{// Output x,y,[z]}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00541}00541       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00542}00542       \{}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00543}00543         outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00543}00543         outfile << x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00544}00544       \}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00545}00545 }
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00546}00546       \textcolor{comment}{// Output u\_1\_error,u\_2\_error,...}}
@@ -586,7 +586,7 @@
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00582}00582     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00583}00583 }
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00584}00584     \textcolor{comment}{// Vector for coordinates}}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00585}00585     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(DIM);}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00585}00585     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(DIM);}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00586}00586 }
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00587}00587     \textcolor{comment}{// Set the value of n\_intpt}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00588}00588     \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>integral\_pt()-\/>nweight();}
@@ -612,46 +612,46 @@
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00608}00608       \textcolor{keywordtype}{double} J = this-\/>J\_eulerian(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00609}00609 }
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00610}00610       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00611}00611       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00611}00611       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00612}00612 }
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00613}00613       \textcolor{comment}{// Get x position as Vector}}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00614}00614       this-\/>interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00614}00614       this-\/>interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00615}00615 }
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00616}00616       \textcolor{comment}{// Get exact solution at this point}}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00617}00617       (*exact\_soln\_pt)(time, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, exact\_soln);}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00617}00617       (*exact\_soln\_pt)(time, x, exact\_soln);}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00618}00618 }
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00619}00619       \textcolor{comment}{// Displacement error}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00620}00620       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00621}00621       \{}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00622}00622         norm[0] += exact\_soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * exact\_soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00622}00622         norm[0] += exact\_soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * exact\_soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00623}00623         \textcolor{comment}{// Error due to q\_i}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00624}00624         error[0] += (exact\_soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ this-\/>interpolated\_u(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})) *}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00625}00625                     (exact\_soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ this-\/>interpolated\_u(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00625}00625                     (exact\_soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ this-\/>interpolated\_u(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00626}00626       \}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00627}00627 }
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00628}00628       \textcolor{comment}{// Flux error}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00629}00629       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00630}00630       \{}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00631}00631         norm[1] += exact\_soln[DIM + \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * exact\_soln[DIM + \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00631}00631         norm[1] += exact\_soln[DIM + \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * exact\_soln[DIM + \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00632}00632         \textcolor{comment}{// Error due to q\_i}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00633}00633         error[1] += (exact\_soln[DIM + \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ this-\/>interpolated\_q(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})) *}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00634}00634                     (exact\_soln[DIM + \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ this-\/>interpolated\_q(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00634}00634                     (exact\_soln[DIM + \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ this-\/>interpolated\_q(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00635}00635       \}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00636}00636 }
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00637}00637       \textcolor{comment}{// Flux divergence error}}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00638}00638       norm[1] += exact\_soln[2 * DIM] * exact\_soln[2 * DIM] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00638}00638       norm[1] += exact\_soln[2 * DIM] * exact\_soln[2 * DIM] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00639}00639       error[1] += (exact\_soln[2 * DIM] -\/ interpolated\_div\_q(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})) *}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00640}00640                   (exact\_soln[2 * DIM] -\/ interpolated\_div\_q(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00640}00640                   (exact\_soln[2 * DIM] -\/ interpolated\_div\_q(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00641}00641 }
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00642}00642       \textcolor{comment}{// Pressure error}}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00643}00643       norm[2] += exact\_soln[2 * DIM + 1] * exact\_soln[2 * DIM + 1] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00643}00643       norm[2] += exact\_soln[2 * DIM + 1] * exact\_soln[2 * DIM + 1] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00644}00644       error[2] += (exact\_soln[2 * DIM + 1] -\/ this-\/>interpolated\_p(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})) *}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00645}00645                   (exact\_soln[2 * DIM + 1] -\/ this-\/>interpolated\_p(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00645}00645                   (exact\_soln[2 * DIM + 1] -\/ this-\/>interpolated\_p(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00646}00646 }
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00647}00647       \textcolor{comment}{// Output x,y,[z]}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00648}00648       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00649}00649       \{}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00650}00650         outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00650}00650         outfile << x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00651}00651       \}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00652}00652 }
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00653}00653       \textcolor{comment}{// Output u\_1\_error,u\_2\_error,...}}
@@ -844,7 +844,7 @@
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00840}00840       this-\/>mass\_source(time, interpolated\_x, mass\_source\_local);}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00841}00841 }
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00842}00842       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00843}00843       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00843}00843       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00844}00844 }
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00845}00845       \textcolor{comment}{// Linear elasticity:}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00846}00846 }
@@ -860,7 +860,7 @@
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00856}00856               (lambda\_sq * (interpolated\_d2u\_dt2[a] +}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00857}00857                             rho\_f\_over\_rho * interpolated\_dq\_dt[a]) -\/}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00858}00858                f\_solid[a]) *}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00859}00859               u\_test(l) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00859}00859               u\_test(l) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00860}00860 }
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00861}00861             \textcolor{comment}{// Stress term}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00862}00862             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} b = 0; b < DIM; b++)}
@@ -868,7 +868,7 @@
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00864}00864               \textcolor{keywordflow}{if} (a == b)}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00865}00865               \{}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00866}00866                 residuals[local\_eqn] -\/=}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00867}00867                   alpha * interpolated\_p * du\_test\_dx(l, b) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00867}00867                   alpha * interpolated\_p * du\_test\_dx(l, b) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00868}00868               \}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00869}00869 }
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00870}00870               \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} c = 0; c < DIM; c++)}
@@ -878,7 +878,7 @@
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00874}00874                   \textcolor{comment}{// Add the stress terms to the residuals}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00875}00875                   residuals[local\_eqn] += this-\/>\mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7da585070bd0e3801c3bbed287ef3c4a265}{E}}(a, b, c, d) *}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00876}00876                                           interpolated\_du\_dx(c, d) *}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00877}00877                                           du\_test\_dx(l, b) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00877}00877                                           du\_test\_dx(l, b) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00878}00878                 \}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00879}00879               \}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00880}00880             \}}
@@ -898,7 +898,7 @@
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00894}00894                       jacobian(local\_eqn, local\_unknown) +=}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00895}00895                         lambda\_sq *}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00896}00896                         this-\/>node\_pt(l2)-\/>time\_stepper\_pt()-\/>weight(2, 0) *}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00897}00897                         u\_basis(l2) * u\_test(l) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00897}00897                         u\_basis(l2) * u\_test(l) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00898}00898                     \}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00899}00899 }
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00900}00900                     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} b = 0; b < DIM; b++)}
@@ -907,7 +907,7 @@
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00903}00903                       \{}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00904}00904                         jacobian(local\_eqn, local\_unknown) +=}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00905}00905                           this-\/>\mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7da585070bd0e3801c3bbed287ef3c4a265}{E}}(a, b, c, d) * du\_basis\_dx(l2, d) *}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00906}00906                           du\_test\_dx(l, b) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00906}00906                           du\_test\_dx(l, b) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00907}00907                       \}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00908}00908                     \}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00909}00909                   \}}
@@ -936,7 +936,7 @@
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00932}00932                 \{}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00933}00933                   jacobian(local\_eqn, local\_unknown) +=}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00934}00934                     lambda\_sq * rho\_f\_over\_rho * timestepper\_pt-\/>weight(1, 0) *}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00935}00935                     q\_basis(l2, a) * u\_test(l) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00935}00935                     q\_basis(l2, a) * u\_test(l) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00936}00936                 \}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00937}00937               \}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00938}00938 }
@@ -947,7 +947,7 @@
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00943}00943                 \textcolor{keywordflow}{if} (local\_unknown >= 0)}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00944}00944                 \{}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00945}00945                   jacobian(local\_eqn, local\_unknown) -\/=}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00946}00946                     alpha * p\_basis(l2) * du\_test\_dx(l, a) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00946}00946                     alpha * p\_basis(l2) * du\_test\_dx(l, a) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00947}00947                 \}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00948}00948               \}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00949}00949             \} \textcolor{comment}{// End of Jacobian entries}}
@@ -999,7 +999,7 @@
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00995}00995                   jacobian(local\_eqn, local\_unknown) +=}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00996}00996                     rho\_f\_over\_rho * lambda\_sq *}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00997}00997                     this-\/>node\_pt(l2)-\/>time\_stepper\_pt()-\/>weight(2, 0) *}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00998}00998                     u\_basis(l2) * q\_test(l, c) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00998}00998                     u\_basis(l2) * q\_test(l, c) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l00999}00999                 \}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l01000}01000               \}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l01001}01001             \}}
@@ -1030,7 +1030,7 @@
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l01026}01026                     q\_basis(l2, c) * q\_test(l, c) *}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l01027}01027                     (k\_inv + rho\_f\_over\_rho * lambda\_sq *}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l01028}01028                                timestepper\_pt-\/>weight(1, 0) / porosity) *}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l01029}01029                     \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l01029}01029                     \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l01030}01030                 \}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l01031}01031               \}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l01032}01032             \}}
@@ -1080,7 +1080,7 @@
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l01076}01076                 \{}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l01077}01077                   jacobian(local\_eqn, local\_unknown) +=}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l01078}01078                     alpha * this-\/>node\_pt(l2)-\/>time\_stepper\_pt()-\/>weight(1, 0) *}
-\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l01079}01079                     du\_basis\_dx(l2, c) * p\_test(l) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l01079}01079                     du\_basis\_dx(l2, c) * p\_test(l) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l01080}01080                 \}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l01081}01081               \}}
 \DoxyCodeLine{\Hypertarget{poroelasticity__elements_8cc_source_l01082}01082             \}}

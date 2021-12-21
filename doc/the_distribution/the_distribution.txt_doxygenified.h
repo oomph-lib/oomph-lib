@@ -481,6 +481,16 @@ algorithm in its multi-domain algorithms.
 
 \subsection external_dist External (third-party) libraries that are not distributed with oomph-lib
 
+Note: The third-party libraries discussed here are not installed
+by default but are built on demand if suitable tar files are placed
+in the relevant directories in the oomph-lib directory tree. You can
+download the tar files using the script
+<CENTER>
+<a href="../../../bin/get_external_distribution_tar_files.bash">bin/get_external_distribution_tar_files.bash</a>
+</CENTER>
+
+or download them one-by-one using the links provided below.
+
 \subsubsection hypre Hypre
 
 \c oomph-lib provides wrappers to the powerful solvers and
@@ -513,7 +523,7 @@ If this version of \c Hypre is not available on your machine
 download the tar file from the our own website: 
 
 <CENTER>
-<a href="../../../../oomph-lib_external_distfiles/hypre-2.0.0.tar.gz">hypre-2.0.0.tar.gz</a>
+<a href="https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/hypre-2.0.0.tar.gz">hypre-2.0.0.tar.gz</a>
 </CENTER>
 
 You can either build the library yourself
@@ -578,7 +588,7 @@ from our own website:
 
 
 <CENTER>
-<a href="../../../../oomph-lib_external_distfiles/trilinos-11.8.1-Source.tar.gz">trilinos-11.8.1-Source.tar.gz</a>
+<a href="https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/trilinos-11.8.1-Source.tar.gz">trilinos-11.8.1-Source.tar.gz</a>
 </CENTER>
 
 You can either build the library yourself
@@ -657,10 +667,10 @@ external_distributions/mumps_and_scalapack
 
 You can also download both files from our own website:
 <CENTER>
-<a href="../../../../oomph-lib_external_distfiles/MUMPS_4.10.0.tar.gz">MUMPS_4.10.0.tar.gz</a>
+<a href="https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/MUMPS_4.10.0.tar.gz">MUMPS_4.10.0.tar.gz</a>
 </CENTER>
 <CENTER>
-<a href="../../../../oomph-lib_external_distfiles/scalapack_installer.tgz">scalapack_installer.tgz</a>
+<a href="https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/scalapack_installer.tgz">scalapack_installer.tgz</a>
 </CENTER>
 
 Note that the configure option

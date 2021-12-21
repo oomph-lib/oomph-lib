@@ -44,11 +44,11 @@ int \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_a8503c0e46409613c58261ce61
 \begin{DoxyCompactList}\small\item\em Overload the LU decomposition. For this storage scheme the matrix storage will be over-\/writeen by its LU decomposition. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_abcd909e71bdcae1059eb8779de72a99d}{lubksub}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&rhs)
 \begin{DoxyCompactList}\small\item\em Overload the LU back substitution. Note that the rhs will be overwritten with the solution vector. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_a76146afe81a055af475a107231468afb}{residual}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&rhs, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&residual)
+void \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_a76146afe81a055af475a107231468afb}{residual}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&rhs, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&residual)
 \begin{DoxyCompactList}\small\item\em Find the residual of Ax=b, ie r=b-\/\+Ax for the \char`\"{}solution\char`\"{} x. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_afcc47dd450a1ab37d2790b5d0279cadf}{multiply}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&soln)
+void \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_afcc47dd450a1ab37d2790b5d0279cadf}{multiply}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&soln)
 \begin{DoxyCompactList}\small\item\em Multiply the matrix by the vector x\+: soln=Ax. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_aaaf8f0589e011bf720791058711fa952}{multiply\+\_\+transpose}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&soln)
+void \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_aaaf8f0589e011bf720791058711fa952}{multiply\+\_\+transpose}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&soln)
 \begin{DoxyCompactList}\small\item\em Multiply the transposed matrix by the vector x\+: soln=A$^\wedge$T x. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
@@ -248,7 +248,7 @@ Definition at line \mbox{\hyperlink{complex__matrices_8cc_source_l00507}{507}} o
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l00395}{oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l00389}{oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Matrixdata}}, \mbox{\hyperlink{matrices_8h_source_l00392}{oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::N}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l00395}{oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l00389}{oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Matrixdata}}, and \mbox{\hyperlink{matrices_8h_source_l00392}{oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::N}}.
 
 \mbox{\Hypertarget{classoomph_1_1DenseComplexMatrix_aaaf8f0589e011bf720791058711fa952}\label{classoomph_1_1DenseComplexMatrix_aaaf8f0589e011bf720791058711fa952}} 
 \index{oomph::DenseComplexMatrix@{oomph::DenseComplexMatrix}!multiply\_transpose@{multiply\_transpose}}
@@ -270,7 +270,7 @@ Definition at line \mbox{\hyperlink{complex__matrices_8cc_source_l00545}{545}} o
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l00395}{oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l00389}{oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Matrixdata}}, \mbox{\hyperlink{matrices_8h_source_l00392}{oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::N}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l00395}{oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l00389}{oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Matrixdata}}, and \mbox{\hyperlink{matrices_8h_source_l00392}{oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::N}}.
 
 \mbox{\Hypertarget{classoomph_1_1DenseComplexMatrix_a4101f581e470c940bf7daf12ec1b234f}\label{classoomph_1_1DenseComplexMatrix_a4101f581e470c940bf7daf12ec1b234f}} 
 \index{oomph::DenseComplexMatrix@{oomph::DenseComplexMatrix}!ncol@{ncol}}
@@ -394,7 +394,7 @@ Definition at line \mbox{\hyperlink{complex__matrices_8cc_source_l00450}{450}} o
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l00395}{oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l00389}{oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Matrixdata}}, \mbox{\hyperlink{matrices_8h_source_l00392}{oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::N}}, \mbox{\hyperlink{complex__matrices_8cc_source_l00450}{residual()}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l00395}{oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l00389}{oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Matrixdata}}, \mbox{\hyperlink{matrices_8h_source_l00392}{oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::N}}, and \mbox{\hyperlink{complex__matrices_8cc_source_l00450}{residual()}}.
 
 
 

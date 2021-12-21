@@ -49,7 +49,7 @@
 \DoxyCodeLine{\Hypertarget{macro__element__node__update__element_8h_source_l00045}00045 \textcolor{comment}{  /// MacroElementNodeUpdate nodes are nodes with a positional update}}
 \DoxyCodeLine{\Hypertarget{macro__element__node__update__element_8h_source_l00046}00046 \textcolor{comment}{  /// function, based on their element's MacroElement representation.}}
 \DoxyCodeLine{\Hypertarget{macro__element__node__update__element_8h_source_l00047}00047 \textcolor{comment}{}  \textcolor{comment}{//========================================================================}}
-\DoxyCodeLine{\Hypertarget{macro__element__node__update__element_8h_source_l00048}\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateNode}{00048}}   \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateNode}{MacroElementNodeUpdateNode}} : \textcolor{keyword}{public} Node}
+\DoxyCodeLine{\Hypertarget{macro__element__node__update__element_8h_source_l00048}\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateNode}{00048}}   \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateNode}{MacroElementNodeUpdateNode}} : \textcolor{keyword}{public} \mbox{\hyperlink{classoomph_1_1Node}{Node}}}
 \DoxyCodeLine{\Hypertarget{macro__element__node__update__element_8h_source_l00049}00049   \{}
 \DoxyCodeLine{\Hypertarget{macro__element__node__update__element_8h_source_l00050}00050   \textcolor{keyword}{public}:\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{macro__element__node__update__element_8h_source_l00051}00051 \textcolor{comment}{    /// Constructor for steady node of spatial}}
@@ -58,7 +58,7 @@
 \DoxyCodeLine{\Hypertarget{macro__element__node__update__element_8h_source_l00054}\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateNode_a3a5f0c384b32c6ba31bc6ed06c142384}{00054}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateNode_a3a5f0c384b32c6ba31bc6ed06c142384}{MacroElementNodeUpdateNode}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_dim,}
 \DoxyCodeLine{\Hypertarget{macro__element__node__update__element_8h_source_l00055}00055                                \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_position\_type,}
 \DoxyCodeLine{\Hypertarget{macro__element__node__update__element_8h_source_l00056}00056                                \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& initial\_nvalue)}
-\DoxyCodeLine{\Hypertarget{macro__element__node__update__element_8h_source_l00057}00057       : Node(n\_dim, n\_position\_type, initial\_nvalue)}
+\DoxyCodeLine{\Hypertarget{macro__element__node__update__element_8h_source_l00057}00057       : \mbox{\hyperlink{classoomph_1_1Node}{Node}}(n\_dim, n\_position\_type, initial\_nvalue)}
 \DoxyCodeLine{\Hypertarget{macro__element__node__update__element_8h_source_l00058}00058     \{}
 \DoxyCodeLine{\Hypertarget{macro__element__node__update__element_8h_source_l00059}00059       \textcolor{comment}{// By default, only the nodal position is updated and no auxiliary}}
 \DoxyCodeLine{\Hypertarget{macro__element__node__update__element_8h_source_l00060}00060       \textcolor{comment}{// updates of function values are performed.}}
@@ -67,11 +67,11 @@
 \DoxyCodeLine{\Hypertarget{macro__element__node__update__element_8h_source_l00063}00063 \textcolor{comment}{    /// Constructor for bog-\/standard node of spatial}}
 \DoxyCodeLine{\Hypertarget{macro__element__node__update__element_8h_source_l00064}00064 \textcolor{comment}{    /// dimension n\_dim, with n\_position\_type generalised coordinates,}}
 \DoxyCodeLine{\Hypertarget{macro__element__node__update__element_8h_source_l00065}00065 \textcolor{comment}{    /// with initial\_nvalue dofs and with time dependence.}}
-\DoxyCodeLine{\Hypertarget{macro__element__node__update__element_8h_source_l00066}\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateNode_a4088c7ab89b11b5e60900082e076ffc9}{00066}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateNode_a4088c7ab89b11b5e60900082e076ffc9}{MacroElementNodeUpdateNode}}(\mbox{\hyperlink{classoomph_1_1TimeStepper}{TimeStepper}}* time\_stepper\_pt,}
+\DoxyCodeLine{\Hypertarget{macro__element__node__update__element_8h_source_l00066}\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateNode_a4088c7ab89b11b5e60900082e076ffc9}{00066}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateNode_a4088c7ab89b11b5e60900082e076ffc9}{MacroElementNodeUpdateNode}}(\mbox{\hyperlink{classoomph_1_1TimeStepper}{TimeStepper}}* \mbox{\hyperlink{classoomph_1_1Data_a065d7bffcec82bf4d4bd7b41f9aa80b3}{time\_stepper\_pt}},}
 \DoxyCodeLine{\Hypertarget{macro__element__node__update__element_8h_source_l00067}00067                                \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_dim,}
 \DoxyCodeLine{\Hypertarget{macro__element__node__update__element_8h_source_l00068}00068                                \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_position\_type,}
 \DoxyCodeLine{\Hypertarget{macro__element__node__update__element_8h_source_l00069}00069                                \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& initial\_nvalue)}
-\DoxyCodeLine{\Hypertarget{macro__element__node__update__element_8h_source_l00070}00070       : Node(time\_stepper\_pt, n\_dim, n\_position\_type, initial\_nvalue)}
+\DoxyCodeLine{\Hypertarget{macro__element__node__update__element_8h_source_l00070}00070       : \mbox{\hyperlink{classoomph_1_1Node}{Node}}(\mbox{\hyperlink{classoomph_1_1Data_a065d7bffcec82bf4d4bd7b41f9aa80b3}{time\_stepper\_pt}}, n\_dim, n\_position\_type, initial\_nvalue)}
 \DoxyCodeLine{\Hypertarget{macro__element__node__update__element_8h_source_l00071}00071     \{}
 \DoxyCodeLine{\Hypertarget{macro__element__node__update__element_8h_source_l00072}00072       \textcolor{comment}{// By default, only the nodal position is updated and no auxiliary}}
 \DoxyCodeLine{\Hypertarget{macro__element__node__update__element_8h_source_l00073}00073       \textcolor{comment}{// updates of function values are performed.}}

@@ -12,7 +12,7 @@
 Inheritance diagram for oomph\+::QWomersley\+Element\texorpdfstring{$<$}{<} DIM, NNODE\+\_\+1D \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=1.848185cm]{classoomph_1_1QWomersleyElement}
+\includegraphics[height=2.464246cm]{classoomph_1_1QWomersleyElement}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
@@ -50,6 +50,7 @@ double \mbox{\hyperlink{classoomph_1_1QWomersleyElement_a5c4db93fb861995c7910ffe
 \item 
 static const unsigned \mbox{\hyperlink{classoomph_1_1QWomersleyElement_ae91c242198d9b4683a446f711e6acd4b}{Initial\+\_\+\+Nvalue}} = 1
 \begin{DoxyCompactList}\small\item\em Static array of ints to hold number of variables at nodes\+: Initial\+\_\+\+Nvalue\mbox{[}n\mbox{]}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
@@ -59,7 +60,7 @@ class oomph\+::\+QWomersley\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}
 
 \mbox{\hyperlink{classoomph_1_1QWomersleyElement}{QWomersley\+Element}} elements are linear/quadrilateral/brick-\/shaped Womersley elements with isoparametric interpolation for the function. 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00633}{633}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00630}{630}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
 
 
 
@@ -77,7 +78,7 @@ Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1QElement}{QE
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00644}{644}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00641}{641}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1QWomersleyElement_ab3586a3cced227f4705cdaed6c8f00c1}\label{classoomph_1_1QWomersleyElement_ab3586a3cced227f4705cdaed6c8f00c1}} 
 \index{oomph::QWomersleyElement$<$ DIM, NNODE\_1D $>$@{oomph::QWomersleyElement$<$ DIM, NNODE\_1D $>$}!QWomersleyElement@{QWomersleyElement}}
@@ -98,7 +99,7 @@ Broken copy constructor.
 \index{dshape\_and\_dtest\_eulerian\_at\_knot\_womersley@{dshape\_and\_dtest\_eulerian\_at\_knot\_womersley}!oomph::QWomersleyElement$<$ DIM, NNODE\_1D $>$@{oomph::QWomersleyElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_at\_knot\_womersley()}{dshape\_and\_dtest\_eulerian\_at\_knot\_womersley()}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-double \mbox{\hyperlink{classoomph_1_1QWomersleyElement}{oomph\+::\+QWomersley\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+womersley (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+double \mbox{\hyperlink{classoomph_1_1QWomersleyElement}{oomph\+::\+QWomersley\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+womersley (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -108,14 +109,18 @@ Define the shape functions and test functions and derivatives w.\+r.\+t. global 
 
 Galerkin\+: Test functions = shape functions 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l01520}{1520}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Implements \mbox{\hyperlink{classoomph_1_1WomersleyEquations_a5f8bd506dbebc304f30f86ef4acfbd9d}{oomph\+::\+Womersley\+Equations$<$ DIM $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l01517}{1517}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1QWomersleyElement_afe507e9f0d7359d47c0c682fed7c952b}\label{classoomph_1_1QWomersleyElement_afe507e9f0d7359d47c0c682fed7c952b}} 
 \index{oomph::QWomersleyElement$<$ DIM, NNODE\_1D $>$@{oomph::QWomersleyElement$<$ DIM, NNODE\_1D $>$}!dshape\_and\_dtest\_eulerian\_womersley@{dshape\_and\_dtest\_eulerian\_womersley}}
 \index{dshape\_and\_dtest\_eulerian\_womersley@{dshape\_and\_dtest\_eulerian\_womersley}!oomph::QWomersleyElement$<$ DIM, NNODE\_1D $>$@{oomph::QWomersleyElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_womersley()}{dshape\_and\_dtest\_eulerian\_womersley()}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-double \mbox{\hyperlink{classoomph_1_1QWomersleyElement}{oomph\+::\+QWomersley\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+womersley (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+double \mbox{\hyperlink{classoomph_1_1QWomersleyElement}{oomph\+::\+QWomersley\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+womersley (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -127,7 +132,11 @@ Define the shape functions and test functions and derivatives w.\+r.\+t. global 
 
 Galerkin\+: Test functions = shape functions 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l01487}{1487}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Implements \mbox{\hyperlink{classoomph_1_1WomersleyEquations_a26d31e02c3fb483c76402823e09d67c7}{oomph\+::\+Womersley\+Equations$<$ DIM $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l01484}{1484}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
 
 
 
@@ -149,7 +158,7 @@ Broken assignment operator.
 \index{output@{output}!oomph::QWomersleyElement$<$ DIM, NNODE\_1D $>$@{oomph::QWomersleyElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QWomersleyElement}{oomph\+::\+QWomersley\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classoomph_1_1QWomersleyElement}{oomph\+::\+QWomersley\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -157,18 +166,22 @@ C-\/style output function\+: x,y,u or x,y,z,u.
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00679}{679}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1WomersleyEquations_ab317caeb41aefe218596c1ff1c39d40f}{oomph\+::\+Womersley\+Equations$<$ DIM $>$}}.
 
 
 
-References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
+Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00676}{676}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{womersley__elements_8h_source_l00282}{oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QWomersleyElement_aedac8e0c2b41e446b7c835731b179255}\label{classoomph_1_1QWomersleyElement_aedac8e0c2b41e446b7c835731b179255}} 
 \index{oomph::QWomersleyElement$<$ DIM, NNODE\_1D $>$@{oomph::QWomersleyElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::QWomersleyElement$<$ DIM, NNODE\_1D $>$@{oomph::QWomersleyElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QWomersleyElement}{oomph\+::\+QWomersley\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classoomph_1_1QWomersleyElement}{oomph\+::\+QWomersley\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -176,18 +189,22 @@ C-\/style output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+DIM plot 
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00687}{687}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1WomersleyEquations_ad5254560613d0c22280f15cc9cb42dc7}{oomph\+::\+Womersley\+Equations$<$ DIM $>$}}.
 
 
 
-References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
+Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00684}{684}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{womersley__elements_8h_source_l00282}{oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QWomersleyElement_a5a8951b6a947e120821c1a83048975d4}\label{classoomph_1_1QWomersleyElement_a5a8951b6a947e120821c1a83048975d4}} 
 \index{oomph::QWomersleyElement$<$ DIM, NNODE\_1D $>$@{oomph::QWomersleyElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::QWomersleyElement$<$ DIM, NNODE\_1D $>$@{oomph::QWomersleyElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QWomersleyElement}{oomph\+::\+QWomersley\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classoomph_1_1QWomersleyElement}{oomph\+::\+QWomersley\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -195,18 +212,22 @@ Output function\+: x,y,u or x,y,z,u.
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00663}{663}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1WomersleyEquations_a9c1246d883f937888bf052b7078aee9a}{oomph\+::\+Womersley\+Equations$<$ DIM $>$}}.
 
 
 
-References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
+Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00660}{660}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{womersley__elements_8h_source_l00282}{oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QWomersleyElement_a98968ff614577c7796f293cb020831da}\label{classoomph_1_1QWomersleyElement_a98968ff614577c7796f293cb020831da}} 
 \index{oomph::QWomersleyElement$<$ DIM, NNODE\_1D $>$@{oomph::QWomersleyElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::QWomersleyElement$<$ DIM, NNODE\_1D $>$@{oomph::QWomersleyElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QWomersleyElement}{oomph\+::\+QWomersley\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classoomph_1_1QWomersleyElement}{oomph\+::\+QWomersley\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -214,18 +235,22 @@ Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+DIM plot points.
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00671}{671}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1WomersleyEquations_acf07411d652b5c2fc16d5dc309eb6ffc}{oomph\+::\+Womersley\+Equations$<$ DIM $>$}}.
 
 
 
-References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
+Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00668}{668}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{womersley__elements_8h_source_l00282}{oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QWomersleyElement_a2730f3cf9212c0b5cbc22939a376af07}\label{classoomph_1_1QWomersleyElement_a2730f3cf9212c0b5cbc22939a376af07}} 
 \index{oomph::QWomersleyElement$<$ DIM, NNODE\_1D $>$@{oomph::QWomersleyElement$<$ DIM, NNODE\_1D $>$}!output\_fct@{output\_fct}}
 \index{output\_fct@{output\_fct}!oomph::QWomersleyElement$<$ DIM, NNODE\_1D $>$@{oomph::QWomersleyElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output\_fct()}{output\_fct()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QWomersleyElement}{oomph\+::\+QWomersley\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot,  }\item[{const double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classoomph_1_1QWomersleyElement}{oomph\+::\+QWomersley\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot,  }\item[{const double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -233,14 +258,22 @@ Output function for a time-\/dependent exact solution. x,y,u\+\_\+exact or x,y,z
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00706}{706}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1WomersleyEquations_ab1468b769eeb97f0a603526531e01564}{oomph\+::\+Womersley\+Equations$<$ DIM $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00703}{703}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{womersley__elements_8cc_source_l00418}{oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::output\+\_\+fct()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QWomersleyElement_ae15d32d03c1e64811cc29098c85d1e23}\label{classoomph_1_1QWomersleyElement_ae15d32d03c1e64811cc29098c85d1e23}} 
 \index{oomph::QWomersleyElement$<$ DIM, NNODE\_1D $>$@{oomph::QWomersleyElement$<$ DIM, NNODE\_1D $>$}!output\_fct@{output\_fct}}
 \index{output\_fct@{output\_fct}!oomph::QWomersleyElement$<$ DIM, NNODE\_1D $>$@{oomph::QWomersleyElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output\_fct()}{output\_fct()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QWomersleyElement}{oomph\+::\+QWomersley\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classoomph_1_1QWomersleyElement}{oomph\+::\+QWomersley\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -248,14 +281,22 @@ Output function for an exact solution\+: x,y,u\+\_\+exact or x,y,z,u\+\_\+exact 
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00695}{695}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1WomersleyEquations_aebc178cae7a5f50da1f76eed2ea3972d}{oomph\+::\+Womersley\+Equations$<$ DIM $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00692}{692}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{womersley__elements_8cc_source_l00418}{oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::output\+\_\+fct()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QWomersleyElement_a31a20c3d89a4bc5698c81e01ca22dc8d}\label{classoomph_1_1QWomersleyElement_a31a20c3d89a4bc5698c81e01ca22dc8d}} 
 \index{oomph::QWomersleyElement$<$ DIM, NNODE\_1D $>$@{oomph::QWomersleyElement$<$ DIM, NNODE\_1D $>$}!required\_nvalue@{required\_nvalue}}
 \index{required\_nvalue@{required\_nvalue}!oomph::QWomersleyElement$<$ DIM, NNODE\_1D $>$@{oomph::QWomersleyElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{required\_nvalue()}{required\_nvalue()}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1QWomersleyElement}{oomph\+::\+QWomersley\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+unsigned \mbox{\hyperlink{classoomph_1_1QWomersleyElement}{oomph\+::\+QWomersley\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -263,11 +304,15 @@ Required \# of `values' (pinned or dofs) at node n.
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00656}{656}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a56610c60d5bc2d7c27407a1455471b1a}{oomph\+::\+Finite\+Element}}.
 
 
 
-References \mbox{\hyperlink{womersley__elements_8h_source_l00639}{oomph\+::\+QWomersley\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::\+Initial\+\_\+\+Nvalue}}.
+Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00653}{653}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{womersley__elements_8h_source_l00636}{oomph\+::\+QWomersley\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::\+Initial\+\_\+\+Nvalue}}.
 
 
 
@@ -285,11 +330,11 @@ Static array of ints to hold number of variables at nodes\+: Initial\+\_\+\+Nval
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00639}{639}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00636}{636}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{womersley__elements_8h_source_l00656}{oomph\+::\+QWomersley\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::required\+\_\+nvalue()}}.
+Referenced by \mbox{\hyperlink{womersley__elements_8h_source_l00653}{oomph\+::\+QWomersley\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::required\+\_\+nvalue()}}.
 
 
 

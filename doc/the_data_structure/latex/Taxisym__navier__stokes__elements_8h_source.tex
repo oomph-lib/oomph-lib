@@ -61,7 +61,7 @@
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00057}00057 \textcolor{comment}{}  \textcolor{comment}{//==========================================================================}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00058}\mbox{\hyperlink{classoomph_1_1AxisymmetricTCrouzeixRaviartElement}{00058}}   \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1AxisymmetricTCrouzeixRaviartElement}{AxisymmetricTCrouzeixRaviartElement}}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00059}00059     : \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{TBubbleEnrichedElement}}<2, 3>,}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00060}00060       \textcolor{keyword}{public} \textcolor{keyword}{virtual} AxisymmetricNavierStokesEquations,}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00060}00060       \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations}{AxisymmetricNavierStokesEquations}},}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00061}00061       \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator}{ElementWithZ2ErrorEstimator}}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00062}00062   \{}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00063}00063   \textcolor{keyword}{protected}:\textcolor{comment}{}}
@@ -100,7 +100,7 @@
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00096}00096       \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\& test,}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00097}00097       \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& dtestdx,}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00098}00098       \mbox{\hyperlink{classoomph_1_1RankFourTensor}{RankFourTensor<double>}}\& d\_dtestdx\_dX,}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00099}00099       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_ab808fc2c7224b2ca13cbe287ad906f32}{djacobian\_dX}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00099}00099       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& djacobian\_dX) \textcolor{keyword}{const};}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00100}00100 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00101}00101 \textcolor{comment}{    /// Pressure shape and test functions and their derivs}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00102}00102 \textcolor{comment}{    /// w.r.t. to global coords  at local coordinate s (taken from geometry)}}
@@ -132,7 +132,7 @@
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00128}00128   \textcolor{keyword}{public}:\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00129}00129 \textcolor{comment}{    /// Constructor, there are 3 internal values (for the pressure)}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00130}\mbox{\hyperlink{classoomph_1_1AxisymmetricTCrouzeixRaviartElement_a0d98aaabc1f686dc26a6028c6d993dc3}{00130}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1AxisymmetricTCrouzeixRaviartElement_a0d98aaabc1f686dc26a6028c6d993dc3}{AxisymmetricTCrouzeixRaviartElement}}()}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00131}00131       : \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{TBubbleEnrichedElement}}<2, 3>(), AxisymmetricNavierStokesEquations()}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00131}00131       : \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{TBubbleEnrichedElement}}<2, 3>(), \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations}{AxisymmetricNavierStokesEquations}}()}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00132}00132     \{}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00133}00133       \textcolor{comment}{// Allocate and a single internal datum with 3 entries for the}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00134}00134       \textcolor{comment}{// pressure}}
@@ -216,25 +216,25 @@
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00212}00212 \textcolor{comment}{    /// Redirect output to NavierStokesEquations output}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00213}\mbox{\hyperlink{classoomph_1_1AxisymmetricTCrouzeixRaviartElement_a25336476c872ea2e5c26698f44d7d35d}{00213}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AxisymmetricTCrouzeixRaviartElement_a25336476c872ea2e5c26698f44d7d35d}{output}}(std::ostream\& outfile)}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00214}00214     \{}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00215}00215       \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_aca07d359a96b9c7b566142112604ea87}{AxisymmetricNavierStokesEquations::output}}(outfile);}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00215}00215       \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_afe0c7b607ec3fd03a73b7db4f1fe6252}{AxisymmetricNavierStokesEquations::output}}(outfile);}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00216}00216     \}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00217}00217 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00218}00218 \textcolor{comment}{    /// Redirect output to NavierStokesEquations output}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00219}\mbox{\hyperlink{classoomph_1_1AxisymmetricTCrouzeixRaviartElement_ae59a58576380d29570f9ea326d653e5b}{00219}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AxisymmetricTCrouzeixRaviartElement_ae59a58576380d29570f9ea326d653e5b}{output}}(std::ostream\& outfile, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nplot)}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00220}00220     \{}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00221}00221       \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_aca07d359a96b9c7b566142112604ea87}{AxisymmetricNavierStokesEquations::output}}(outfile, nplot);}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00221}00221       \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_afe0c7b607ec3fd03a73b7db4f1fe6252}{AxisymmetricNavierStokesEquations::output}}(outfile, nplot);}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00222}00222     \}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00223}00223 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00224}00224 \textcolor{comment}{    /// Redirect output to NavierStokesEquations output}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00225}\mbox{\hyperlink{classoomph_1_1AxisymmetricTCrouzeixRaviartElement_ad5cb068224ac067b234de78e67866bb6}{00225}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AxisymmetricTCrouzeixRaviartElement_ad5cb068224ac067b234de78e67866bb6}{output}}(FILE* file\_pt)}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00226}00226     \{}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00227}00227       \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_aca07d359a96b9c7b566142112604ea87}{AxisymmetricNavierStokesEquations::output}}(file\_pt);}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00227}00227       \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_afe0c7b607ec3fd03a73b7db4f1fe6252}{AxisymmetricNavierStokesEquations::output}}(file\_pt);}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00228}00228     \}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00229}00229 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00230}00230 \textcolor{comment}{    /// Redirect output to NavierStokesEquations output}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00231}\mbox{\hyperlink{classoomph_1_1AxisymmetricTCrouzeixRaviartElement_aeec639f7ae884f7dd7f1d33ad63ba0b2}{00231}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AxisymmetricTCrouzeixRaviartElement_aeec639f7ae884f7dd7f1d33ad63ba0b2}{output}}(FILE* file\_pt, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_plot)}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00232}00232     \{}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00233}00233       \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_aca07d359a96b9c7b566142112604ea87}{AxisymmetricNavierStokesEquations::output}}(file\_pt, n\_plot);}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00233}00233       \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_afe0c7b607ec3fd03a73b7db4f1fe6252}{AxisymmetricNavierStokesEquations::output}}(file\_pt, n\_plot);}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00234}00234     \}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00235}00235 }
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00236}00236 \textcolor{comment}{}}
@@ -252,7 +252,7 @@
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00248}00248     \}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00249}00249 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00250}00250 \textcolor{comment}{    /// Pointer to the j-\/th vertex node in the element}}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00251}\mbox{\hyperlink{classoomph_1_1AxisymmetricTCrouzeixRaviartElement_a94f17b7ea66f10e4f802fdbe45a40876}{00251}} \textcolor{comment}{}    Node* \mbox{\hyperlink{classoomph_1_1AxisymmetricTCrouzeixRaviartElement_a94f17b7ea66f10e4f802fdbe45a40876}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00251}\mbox{\hyperlink{classoomph_1_1AxisymmetricTCrouzeixRaviartElement_a94f17b7ea66f10e4f802fdbe45a40876}{00251}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1AxisymmetricTCrouzeixRaviartElement_a94f17b7ea66f10e4f802fdbe45a40876}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00252}00252 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00253}00253       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j);}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00254}00254     \}}
@@ -284,7 +284,7 @@
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00280}00280 }
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00281}00281       \textcolor{comment}{// Get strain rate matrix}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00282}00282       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} strainrate(3);}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00283}00283       this-\/>strain\_rate(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, strainrate);}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00283}00283       this-\/>\mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_ad12929a11d71f7d91627f3edc8f2cdce}{strain\_rate}}(s, strainrate);}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00284}00284 }
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00285}00285       \textcolor{comment}{// Pack into flux Vector}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00286}00286       \textcolor{keywordtype}{unsigned} icount = 0;}
@@ -361,7 +361,7 @@
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00357}00357       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < n\_node; n++)}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00358}00358       \{}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00359}00359         \textcolor{comment}{// find the number of values at this node}}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00360}00360         \textcolor{keywordtype}{unsigned} nv = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n)-\/>nvalue();}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00360}00360         \textcolor{keywordtype}{unsigned} nv = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n)-\/>\mbox{\hyperlink{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}{nvalue}}();}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00361}00361 }
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00362}00362         \textcolor{comment}{// loop over these values}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00363}00363         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} v = 0; v < nv; v++)}
@@ -422,7 +422,7 @@
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00418}00418                                               \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& dtestdx)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00419}00419 \textcolor{keyword}{  }\{}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00420}00420     \textcolor{comment}{// Call the geometrical shape functions and derivatives}}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00421}00421     \textcolor{keywordtype}{double} J = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a837c4849f68842295ab5e77c8ecb8b93}{dshape\_eulerian\_at\_knot}}(ipt, psi, dpsidx);}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00421}00421     \textcolor{keywordtype}{double} J = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a368c44e295e35dd0b697be3222ce7b2f}{dshape\_eulerian\_at\_knot}}(ipt, psi, dpsidx);}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00422}00422     \textcolor{comment}{// The test functions are the shape functions}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00423}00423     test = psi;}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00424}00424     dtestdx = dpsidx;}
@@ -451,8 +451,8 @@
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00447}00447       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& djacobian\_dX)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00448}00448 \textcolor{keyword}{  }\{}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00449}00449     \textcolor{comment}{// Call the geometrical shape functions and derivatives}}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00450}00450     \textcolor{keyword}{const} \textcolor{keywordtype}{double} J = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a837c4849f68842295ab5e77c8ecb8b93}{dshape\_eulerian\_at\_knot}}(}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00451}00451       ipt, psi, dpsidx, \mbox{\hyperlink{classoomph_1_1FiniteElement_ab808fc2c7224b2ca13cbe287ad906f32}{djacobian\_dX}}, d\_dpsidx\_dX);}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00450}00450     \textcolor{keyword}{const} \textcolor{keywordtype}{double} J = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a368c44e295e35dd0b697be3222ce7b2f}{dshape\_eulerian\_at\_knot}}(}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00451}00451       ipt, psi, dpsidx, djacobian\_dX, d\_dpsidx\_dX);}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00452}00452 }
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00453}00453     \textcolor{comment}{// Set the test functions equal to the shape functions}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00454}00454     test = psi;}
@@ -519,14 +519,14 @@
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00515}00515     \mbox{\hyperlink{classoomph_1_1FiniteElement_a9db1456b827131c21a991ac9fedf4b0c}{dshape\_local}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, psi, dpsi);}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00516}00516 }
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00517}00517     \textcolor{comment}{// Allocate memory for the inverse 2x2 jacobian}}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00518}00518     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} \mbox{\hyperlink{classoomph_1_1FiniteElement_a72ead1315f6f588e379963ad2a16b88a}{inverse\_jacobian}}(2);}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00518}00518     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} inverse\_jacobian(2);}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00519}00519 }
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00520}00520     \textcolor{comment}{// Now calculate the inverse jacobian}}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00521}00521     \textcolor{keyword}{const} \textcolor{keywordtype}{double} det = \mbox{\hyperlink{classoomph_1_1FiniteElement_a8a8d8f5529b13f3b9f07ee675c8d4d9c}{local\_to\_eulerian\_mapping}}(dpsi, \mbox{\hyperlink{classoomph_1_1FiniteElement_a72ead1315f6f588e379963ad2a16b88a}{inverse\_jacobian}});}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00521}00521     \textcolor{keyword}{const} \textcolor{keywordtype}{double} det = \mbox{\hyperlink{classoomph_1_1FiniteElement_a8a8d8f5529b13f3b9f07ee675c8d4d9c}{local\_to\_eulerian\_mapping}}(dpsi, inverse\_jacobian);}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00522}00522 }
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00523}00523     \textcolor{comment}{// Now set the values of the derivatives to be derivs w.r.t. to the}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00524}00524     \textcolor{comment}{// Eulerian coordinates}}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00525}00525     \mbox{\hyperlink{classoomph_1_1FiniteElement_a1620f469e609d1cc872a5aa8531f70cd}{transform\_derivatives}}(\mbox{\hyperlink{classoomph_1_1FiniteElement_a72ead1315f6f588e379963ad2a16b88a}{inverse\_jacobian}}, dppsidx);}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00525}00525     \mbox{\hyperlink{classoomph_1_1FiniteElement_a2c2f243c9f450c4023e5aa4246facd20}{transform\_derivatives}}(inverse\_jacobian, dppsidx);}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00526}00526 }
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00527}00527     \textcolor{comment}{// The test functions are equal to the shape functions}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00528}00528     ptest = ppsi;}
@@ -573,7 +573,7 @@
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00569}00569 \textcolor{comment}{}  \textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00570}\mbox{\hyperlink{classoomph_1_1AxisymmetricTTaylorHoodElement}{00570}}   \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1AxisymmetricTTaylorHoodElement}{AxisymmetricTTaylorHoodElement}}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00571}00571     : \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1TElement}{TElement}}<2, 3>,}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00572}00572       \textcolor{keyword}{public} \textcolor{keyword}{virtual} AxisymmetricNavierStokesEquations,}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00572}00572       \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations}{AxisymmetricNavierStokesEquations}},}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00573}00573       \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator}{ElementWithZ2ErrorEstimator}}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00574}00574 }
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00575}00575   \{}
@@ -616,7 +616,7 @@
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00612}00612       \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\& test,}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00613}00613       \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& dtestdx,}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00614}00614       \mbox{\hyperlink{classoomph_1_1RankFourTensor}{RankFourTensor<double>}}\& d\_dtestdx\_dX,}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00615}00615       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_ab808fc2c7224b2ca13cbe287ad906f32}{djacobian\_dX}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00615}00615       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& djacobian\_dX) \textcolor{keyword}{const};}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00616}00616 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00617}00617 \textcolor{comment}{    /// Compute the pressure shape and test functions and derivatives}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00618}00618 \textcolor{comment}{    /// w.r.t. global coords at local coordinate s.}}
@@ -640,7 +640,7 @@
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00636}00636   \textcolor{keyword}{public}:\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00637}00637 \textcolor{comment}{    /// Constructor, no internal data points}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00638}\mbox{\hyperlink{classoomph_1_1AxisymmetricTTaylorHoodElement_a0c37daf4d618fad20746a0df0bc0d150}{00638}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1AxisymmetricTTaylorHoodElement_a0c37daf4d618fad20746a0df0bc0d150}{AxisymmetricTTaylorHoodElement}}()}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00639}00639       : \mbox{\hyperlink{classoomph_1_1TElement}{TElement}}<2, 3>(), AxisymmetricNavierStokesEquations()}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00639}00639       : \mbox{\hyperlink{classoomph_1_1TElement}{TElement}}<2, 3>(), \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations}{AxisymmetricNavierStokesEquations}}()}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00640}00640     \{}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00641}00641     \}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00642}00642 }
@@ -711,8 +711,8 @@
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00707}00707 \textcolor{comment}{    /// Pin p\_dof-\/th pressure dof and set it to value specified by p\_value.}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00708}\mbox{\hyperlink{classoomph_1_1AxisymmetricTTaylorHoodElement_a8ae1c5e864429c8c08e7776a5851d042}{00708}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AxisymmetricTTaylorHoodElement_a8ae1c5e864429c8c08e7776a5851d042}{fix\_pressure}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& p\_dof, \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& p\_value)}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00709}00709     \{}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00710}00710       this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(Pconv[p\_dof])-\/>pin(3);}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00711}00711       this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(Pconv[p\_dof])-\/>set\_value(3, p\_value);}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00710}00710       this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(Pconv[p\_dof])-\/>\mbox{\hyperlink{classoomph_1_1Data_a422231c58e423f0b43822827aa334d79}{pin}}(3);}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00711}00711       this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(Pconv[p\_dof])-\/>\mbox{\hyperlink{classoomph_1_1Data_a7289ca322725c6fd493970a19474b382}{set\_value}}(3, p\_value);}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00712}00712     \}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00713}00713 }
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00714}00714 \textcolor{comment}{}}
@@ -752,25 +752,25 @@
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00748}00748 \textcolor{comment}{    /// Redirect output to NavierStokesEquations output}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00749}\mbox{\hyperlink{classoomph_1_1AxisymmetricTTaylorHoodElement_a538cd24096fa521e0dac0f1f78ce5446}{00749}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AxisymmetricTTaylorHoodElement_a538cd24096fa521e0dac0f1f78ce5446}{output}}(std::ostream\& outfile)}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00750}00750     \{}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00751}00751       \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_aca07d359a96b9c7b566142112604ea87}{AxisymmetricNavierStokesEquations::output}}(outfile);}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00751}00751       \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_afe0c7b607ec3fd03a73b7db4f1fe6252}{AxisymmetricNavierStokesEquations::output}}(outfile);}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00752}00752     \}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00753}00753 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00754}00754 \textcolor{comment}{    /// Redirect output to NavierStokesEquations output}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00755}\mbox{\hyperlink{classoomph_1_1AxisymmetricTTaylorHoodElement_a10ec676703edbf68120256082aa8c290}{00755}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AxisymmetricTTaylorHoodElement_a10ec676703edbf68120256082aa8c290}{output}}(std::ostream\& outfile, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nplot)}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00756}00756     \{}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00757}00757       \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_aca07d359a96b9c7b566142112604ea87}{AxisymmetricNavierStokesEquations::output}}(outfile, nplot);}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00757}00757       \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_afe0c7b607ec3fd03a73b7db4f1fe6252}{AxisymmetricNavierStokesEquations::output}}(outfile, nplot);}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00758}00758     \}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00759}00759 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00760}00760 \textcolor{comment}{    /// Redirect output to NavierStokesEquations output}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00761}\mbox{\hyperlink{classoomph_1_1AxisymmetricTTaylorHoodElement_a0b1f01968fd84b28009339e5e478a683}{00761}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AxisymmetricTTaylorHoodElement_a0b1f01968fd84b28009339e5e478a683}{output}}(FILE* file\_pt)}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00762}00762     \{}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00763}00763       \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_aca07d359a96b9c7b566142112604ea87}{AxisymmetricNavierStokesEquations::output}}(file\_pt);}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00763}00763       \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_afe0c7b607ec3fd03a73b7db4f1fe6252}{AxisymmetricNavierStokesEquations::output}}(file\_pt);}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00764}00764     \}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00765}00765 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00766}00766 \textcolor{comment}{    /// Redirect output to NavierStokesEquations output}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00767}\mbox{\hyperlink{classoomph_1_1AxisymmetricTTaylorHoodElement_abc6435ee0ad7a9235b1fc57451f1872c}{00767}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1AxisymmetricTTaylorHoodElement_abc6435ee0ad7a9235b1fc57451f1872c}{output}}(FILE* file\_pt, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_plot)}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00768}00768     \{}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00769}00769       \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_aca07d359a96b9c7b566142112604ea87}{AxisymmetricNavierStokesEquations::output}}(file\_pt, n\_plot);}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00769}00769       \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_afe0c7b607ec3fd03a73b7db4f1fe6252}{AxisymmetricNavierStokesEquations::output}}(file\_pt, n\_plot);}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00770}00770     \}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00771}00771 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00772}00772 \textcolor{comment}{    /// Order of recovery shape functions for Z2 error estimation:}}
@@ -787,7 +787,7 @@
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00783}00783     \}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00784}00784 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00785}00785 \textcolor{comment}{    /// Pointer to the j-\/th vertex node in the element}}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00786}\mbox{\hyperlink{classoomph_1_1AxisymmetricTTaylorHoodElement_a10b9262c7b02c73943cbeabcb9479ee0}{00786}} \textcolor{comment}{}    Node* \mbox{\hyperlink{classoomph_1_1AxisymmetricTTaylorHoodElement_a10b9262c7b02c73943cbeabcb9479ee0}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00786}\mbox{\hyperlink{classoomph_1_1AxisymmetricTTaylorHoodElement_a10b9262c7b02c73943cbeabcb9479ee0}{00786}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1AxisymmetricTTaylorHoodElement_a10b9262c7b02c73943cbeabcb9479ee0}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00787}00787 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00788}00788       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j);}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00789}00789     \}}
@@ -820,7 +820,7 @@
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00816}00816 }
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00817}00817       \textcolor{comment}{// Get strain rate matrix}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00818}00818       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} strainrate(3);}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00819}00819       this-\/>strain\_rate(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, strainrate);}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00819}00819       this-\/>\mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_ad12929a11d71f7d91627f3edc8f2cdce}{strain\_rate}}(s, strainrate);}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00820}00820 }
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00821}00821       \textcolor{comment}{// Pack into flux Vector}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00822}00822       \textcolor{keywordtype}{unsigned} icount = 0;}
@@ -935,7 +935,7 @@
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00931}00931                                               \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& dtestdx)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00932}00932 \textcolor{keyword}{  }\{}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00933}00933     \textcolor{comment}{// Call the geometrical shape functions and derivatives}}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00934}00934     \textcolor{keywordtype}{double} J = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a837c4849f68842295ab5e77c8ecb8b93}{dshape\_eulerian\_at\_knot}}(ipt, psi, dpsidx);}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00934}00934     \textcolor{keywordtype}{double} J = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a368c44e295e35dd0b697be3222ce7b2f}{dshape\_eulerian\_at\_knot}}(ipt, psi, dpsidx);}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00935}00935     \textcolor{comment}{// Test functions are the shape functions}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00936}00936     test = psi;}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00937}00937     dtestdx = dpsidx;}
@@ -963,8 +963,8 @@
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00959}00959       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& djacobian\_dX)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00960}00960 \textcolor{keyword}{  }\{}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00961}00961     \textcolor{comment}{// Call the geometrical shape functions and derivatives}}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00962}00962     \textcolor{keyword}{const} \textcolor{keywordtype}{double} J = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a837c4849f68842295ab5e77c8ecb8b93}{dshape\_eulerian\_at\_knot}}(}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00963}00963       ipt, psi, dpsidx, \mbox{\hyperlink{classoomph_1_1FiniteElement_ab808fc2c7224b2ca13cbe287ad906f32}{djacobian\_dX}}, d\_dpsidx\_dX);}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00962}00962     \textcolor{keyword}{const} \textcolor{keywordtype}{double} J = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a368c44e295e35dd0b697be3222ce7b2f}{dshape\_eulerian\_at\_knot}}(}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00963}00963       ipt, psi, dpsidx, djacobian\_dX, d\_dpsidx\_dX);}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00964}00964 }
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00965}00965     \textcolor{comment}{// Set the test functions equal to the shape functions}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00966}00966     test = psi;}
@@ -1000,7 +1000,7 @@
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00996}00996     dppsidx(2, 1) = -\/1.0;}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00997}00997 }
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00998}00998     \textcolor{comment}{// Allocate memory for the inverse 2x2 jacobian}}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00999}00999     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} \mbox{\hyperlink{classoomph_1_1FiniteElement_a72ead1315f6f588e379963ad2a16b88a}{inverse\_jacobian}}(2);}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00999}00999     \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} inverse\_jacobian(2);}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l01000}01000 }
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l01001}01001 }
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l01002}01002     \textcolor{comment}{// Get the values of the shape functions and their local derivatives}}
@@ -1009,11 +1009,11 @@
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l01005}01005     \mbox{\hyperlink{classoomph_1_1FiniteElement_a9db1456b827131c21a991ac9fedf4b0c}{dshape\_local}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, psi, dpsi);}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l01006}01006 }
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l01007}01007     \textcolor{comment}{// Now calculate the inverse jacobian}}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l01008}01008     \textcolor{keyword}{const} \textcolor{keywordtype}{double} det = \mbox{\hyperlink{classoomph_1_1FiniteElement_a8a8d8f5529b13f3b9f07ee675c8d4d9c}{local\_to\_eulerian\_mapping}}(dpsi, \mbox{\hyperlink{classoomph_1_1FiniteElement_a72ead1315f6f588e379963ad2a16b88a}{inverse\_jacobian}});}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l01008}01008     \textcolor{keyword}{const} \textcolor{keywordtype}{double} det = \mbox{\hyperlink{classoomph_1_1FiniteElement_a8a8d8f5529b13f3b9f07ee675c8d4d9c}{local\_to\_eulerian\_mapping}}(dpsi, inverse\_jacobian);}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l01009}01009 }
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l01010}01010     \textcolor{comment}{// Now set the values of the derivatives to be derivs w.r.t. to the}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l01011}01011     \textcolor{comment}{// Eulerian coordinates}}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l01012}01012     \mbox{\hyperlink{classoomph_1_1FiniteElement_a1620f469e609d1cc872a5aa8531f70cd}{transform\_derivatives}}(\mbox{\hyperlink{classoomph_1_1FiniteElement_a72ead1315f6f588e379963ad2a16b88a}{inverse\_jacobian}}, dppsidx);}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l01012}01012     \mbox{\hyperlink{classoomph_1_1FiniteElement_a2c2f243c9f450c4023e5aa4246facd20}{transform\_derivatives}}(inverse\_jacobian, dppsidx);}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l01013}01013 }
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l01014}01014     \textcolor{comment}{// Test functions are shape functions}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l01015}01015     ptest = ppsi;}

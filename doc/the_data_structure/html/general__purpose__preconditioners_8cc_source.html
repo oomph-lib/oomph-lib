@@ -783,15 +783,15 @@ $(function() {
 <div class="line"><a id="l00654" name="l00654"></a><span class="lineno">  654</span>    }</div>
 <div class="line"><a id="l00655" name="l00655"></a><span class="lineno">  655</span> </div>
 <div class="line"><a id="l00656" name="l00656"></a><span class="lineno">  656</span>    <span class="comment">// solve Uz=y</span></div>
-<div class="line"><a id="l00657" name="l00657"></a><span class="lineno">  657</span>    <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>;</div>
+<div class="line"><a id="l00657" name="l00657"></a><span class="lineno">  657</span>    <span class="keywordtype">double</span> x;</div>
 <div class="line"><a id="l00658" name="l00658"></a><span class="lineno">  658</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = n_row - 1; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &gt;= 0; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>--)</div>
 <div class="line"><a id="l00659" name="l00659"></a><span class="lineno">  659</span>    {</div>
-<div class="line"><a id="l00660" name="l00660"></a><span class="lineno">  660</span>      <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a> = z[<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] / U_row_entry[U_column_start[<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> + 1] - 1].value();</div>
-<div class="line"><a id="l00661" name="l00661"></a><span class="lineno">  661</span>      z[<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] = <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>;</div>
+<div class="line"><a id="l00660" name="l00660"></a><span class="lineno">  660</span>      x = z[<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] / U_row_entry[U_column_start[<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> + 1] - 1].value();</div>
+<div class="line"><a id="l00661" name="l00661"></a><span class="lineno">  661</span>      z[<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] = x;</div>
 <div class="line"><a id="l00662" name="l00662"></a><span class="lineno">  662</span>      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> j = U_column_start[<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>]; j &lt; U_column_start[<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> + 1] - 1; j++)</div>
 <div class="line"><a id="l00663" name="l00663"></a><span class="lineno">  663</span>      {</div>
 <div class="line"><a id="l00664" name="l00664"></a><span class="lineno">  664</span>        z[U_row_entry[j].index()] =</div>
-<div class="line"><a id="l00665" name="l00665"></a><span class="lineno">  665</span>          z[U_row_entry[j].index()] - <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a> * U_row_entry[j].value();</div>
+<div class="line"><a id="l00665" name="l00665"></a><span class="lineno">  665</span>          z[U_row_entry[j].index()] - x * U_row_entry[j].value();</div>
 <div class="line"><a id="l00666" name="l00666"></a><span class="lineno">  666</span>      }</div>
 <div class="line"><a id="l00667" name="l00667"></a><span class="lineno">  667</span>    }</div>
 <div class="line"><a id="l00668" name="l00668"></a><span class="lineno">  668</span> </div>
@@ -903,7 +903,6 @@ $(function() {
 <div class="ttc" id="aclassoomph_1_1SparseMatrix_html_a8b8010edcc0869283621e72a9bbc51e3"><div class="ttname"><a href="classoomph_1_1SparseMatrix.html#a8b8010edcc0869283621e72a9bbc51e3">oomph::SparseMatrix::nnz</a></div><div class="ttdeci">unsigned long nnz() const</div><div class="ttdoc">Return the number of nonzero entries.</div><div class="ttdef"><b>Definition:</b> <a href="matrices_8h_source.html#l00640">matrices.h:640</a></div></div>
 <div class="ttc" id="ageneral__purpose__preconditioners_8h_html"><div class="ttname"><a href="general__purpose__preconditioners_8h.html">general_purpose_preconditioners.h</a></div></div>
 <div class="ttc" id="anamespaceoomph_html"><div class="ttname"><a href="namespaceoomph.html">oomph</a></div><div class="ttdoc">//////////////////////////////////////////////////////////////////// ////////////////////////////////...</div><div class="ttdef"><b>Definition:</b> <a href="advection__diffusion__elements_8cc_source.html#l00029">advection_diffusion_elements.cc:30</a></div></div>
-<div class="ttc" id="anamespaceoomph_html_a9d1d2da2b8bb8e73af72b5cadb8fe97c"><div class="ttname"><a href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">oomph::x</a></div><div class="ttdeci">x</div><div class="ttdoc">Pseudo buckling ring: Circular ring deformed by the N-th buckling mode of a thin-wall elastic ring.</div><div class="ttdef"><b>Definition:</b> <a href="pseudo__buckling__ring_8h_source.html#l00049">pseudo_buckling_ring.h:49</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 
     <!-- jQuery for Bootstrap and Doxygen -->
@@ -932,7 +931,7 @@ $(function() {
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Nov 2 2021 16:31:09
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Dec 21 2021 17:35:07
         </div>
       </div>
     </footer>

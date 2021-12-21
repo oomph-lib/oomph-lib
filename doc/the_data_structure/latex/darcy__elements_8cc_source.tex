@@ -212,7 +212,7 @@
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00208}00208     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00209}00209 }
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00210}00210     \textcolor{comment}{// Vector for coordintes}}
-\DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00211}00211     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(DIM);}
+\DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00211}00211     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(DIM);}
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00212}00212 }
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00213}00213     \textcolor{comment}{// Tecplot header info}}
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00214}00214     outfile << this-\/>tecplot\_zone\_string(nplot);}
@@ -229,15 +229,15 @@
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00225}00225       this-\/>get\_s\_plot(iplot, nplot, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00226}00226 }
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00227}00227       \textcolor{comment}{// Get x position as Vector}}
-\DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00228}00228       this-\/>interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00228}00228       this-\/>interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00229}00229 }
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00230}00230       \textcolor{comment}{// Get exact solution at this point}}
-\DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00231}00231       (*exact\_soln\_pt)(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, exact\_soln);}
+\DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00231}00231       (*exact\_soln\_pt)(x, exact\_soln);}
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00232}00232 }
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00233}00233       \textcolor{comment}{// Output x,y,q\_exact,p\_exact,div\_q\_exact}}
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00234}00234       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00235}00235       \{}
-\DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00236}00236         outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00236}00236         outfile << x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00237}00237       \}}
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00238}00238       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM + 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00239}00239       \{}
@@ -271,7 +271,7 @@
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00267}00267     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00268}00268 }
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00269}00269     \textcolor{comment}{// Vector for coordinates}}
-\DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00270}00270     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(DIM);}
+\DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00270}00270     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(DIM);}
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00271}00271 }
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00272}00272     \textcolor{comment}{// Set the value of n\_intpt}}
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00273}00273     \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>integral\_pt()-\/>nweight();}
@@ -297,21 +297,21 @@
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00293}00293       \textcolor{keywordtype}{double} J = this-\/>J\_eulerian(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00294}00294 }
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00295}00295       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00296}00296       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00296}00296       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00297}00297 }
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00298}00298       \textcolor{comment}{// Get x position as Vector}}
-\DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00299}00299       this-\/>interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00299}00299       this-\/>interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00300}00300 }
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00301}00301       \textcolor{comment}{// Get exact solution at this point}}
-\DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00302}00302       (*exact\_soln\_pt)(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, exact\_soln);}
+\DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00302}00302       (*exact\_soln\_pt)(x, exact\_soln);}
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00303}00303 }
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00304}00304       \textcolor{comment}{// Flux error}}
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00305}00305       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00306}00306       \{}
-\DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00307}00307         norm[0] += exact\_soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * exact\_soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00307}00307         norm[0] += exact\_soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * exact\_soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00308}00308         \textcolor{comment}{// Error due to q\_i}}
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00309}00309         error[0] += (exact\_soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ this-\/>interpolated\_q(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})) *}
-\DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00310}00310                     (exact\_soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ this-\/>interpolated\_q(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00310}00310                     (exact\_soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ this-\/>interpolated\_q(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00311}00311       \}}
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00312}00312 }
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00313}00313       \textcolor{comment}{// // Flux divergence error}}
@@ -320,14 +320,14 @@
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00316}00316       \textcolor{comment}{//           (exact\_soln[DIM]-\/interpolated\_div\_q(s))*W;}}
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00317}00317 }
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00318}00318       \textcolor{comment}{// Pressure error}}
-\DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00319}00319       norm[1] += exact\_soln[DIM + 1] * exact\_soln[DIM + 1] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00319}00319       norm[1] += exact\_soln[DIM + 1] * exact\_soln[DIM + 1] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00320}00320       error[1] += (exact\_soln[DIM + 1] -\/ this-\/>interpolated\_p(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})) *}
-\DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00321}00321                   (exact\_soln[DIM + 1] -\/ this-\/>interpolated\_p(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00321}00321                   (exact\_soln[DIM + 1] -\/ this-\/>interpolated\_p(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00322}00322 }
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00323}00323       \textcolor{comment}{// Output x,y,[z]}}
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00324}00324       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00325}00325       \{}
-\DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00326}00326         outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00326}00326         outfile << x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00327}00327       \}}
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00328}00328 }
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00329}00329       \textcolor{comment}{// Output q\_1\_error,q\_2\_error,...}}
@@ -369,7 +369,7 @@
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00365}00365     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00366}00366 }
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00367}00367     \textcolor{comment}{// Storage for the source function}}
-\DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00368}00368     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}(DIM);}
+\DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00368}00368     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} f(DIM);}
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00369}00369 }
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00370}00370     \textcolor{comment}{// Storage for the mass source function}}
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00371}00371     \textcolor{keywordtype}{double} mass\_source\_local;}
@@ -450,7 +450,7 @@
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00446}00446       \}}
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00447}00447 }
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00448}00448       \textcolor{comment}{// Get the source function}}
-\DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00449}\mbox{\hyperlink{classoomph_1_1DarcyEquations_aafb8f62e6b3f584d28d7547e8d01b6d4}{00449}}       this-\/>source(interpolated\_x, \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}});}
+\DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00449}\mbox{\hyperlink{classoomph_1_1DarcyEquations_aafb8f62e6b3f584d28d7547e8d01b6d4}{00449}}       this-\/>source(interpolated\_x, f);}
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00450}00450 }
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00451}00451       \textcolor{comment}{// Get the mass source function}}
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00452}00452       this-\/>mass\_source(interpolated\_x, mass\_source\_local);}
@@ -473,7 +473,7 @@
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00469}00469           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00470}00470           \{}
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00471}00471             residuals[local\_eqn] +=}
-\DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00472}00472               (interpolated\_q[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]) * q\_test(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * w * J;}
+\DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00472}00472               (interpolated\_q[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ f[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]) * q\_test(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * w * J;}
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00473}00473           \}}
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00474}00474 }
 \DoxyCodeLine{\Hypertarget{darcy__elements_8cc_source_l00475}00475           \textcolor{comment}{// deliberately no jacobian factor in this integral}}

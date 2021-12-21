@@ -18,169 +18,169 @@ Inheritance diagram for oomph\+::Poroelasticity\+Equations\texorpdfstring{$<$}{<
 \doxysubsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a234bc29fbd4c3255ef903a3cb5f6361f}{Source\+Fct\+Pt}}) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}})
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a234bc29fbd4c3255ef903a3cb5f6361f}{Source\+Fct\+Pt}}) (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Source function pointer typedef. \end{DoxyCompactList}\item 
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a8edb2644708db2f2ae03254ea3143262}{Mass\+Source\+Fct\+Pt}}) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, double \&\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}})
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a8edb2644708db2f2ae03254ea3143262}{Mass\+Source\+Fct\+Pt}}) (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&f)
 \begin{DoxyCompactList}\small\item\em Mass source function pointer typedef. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_aaed6a78df898d4b52f5da3454eed8267}{Poroelasticity\+Equations}} ()
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \& \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_ab3f3ed10517c0dac335ae24fc61bf40f}{lambda\+\_\+sq}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+const double \& \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_ab3f3ed10517c0dac335ae24fc61bf40f}{lambda\+\_\+sq}} () const
 \begin{DoxyCompactList}\small\item\em Access function for timescale ratio (nondim density) \end{DoxyCompactList}\item 
 double $\ast$\& \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a93b2c3c74c64432fe0c5589f2f15ea4e}{lambda\+\_\+sq\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for pointer to timescale ratio (nondim density) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \& \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a1e3cf185f2a8dd4a78a83b97ed6fcfcd}{density\+\_\+ratio}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+const double \& \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a1e3cf185f2a8dd4a78a83b97ed6fcfcd}{density\+\_\+ratio}} () const
 \begin{DoxyCompactList}\small\item\em Access function for the density ratio. \end{DoxyCompactList}\item 
 double $\ast$\& \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_adfaf669b6fd2ed566ce71b5668290e82}{density\+\_\+ratio\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for pointer to the density ratio. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \& \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a26a780435d86107b9f80a1673705cb01}{k\+\_\+inv}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+const double \& \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a26a780435d86107b9f80a1673705cb01}{k\+\_\+inv}} () const
 \begin{DoxyCompactList}\small\item\em Access function for the nondim inverse permeability. \end{DoxyCompactList}\item 
 double $\ast$\& \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_ade502773a71701b49c119221fb37786f}{k\+\_\+inv\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for pointer to the nondim inverse permeability. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \& \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a8e40e5409b700312dad4f101becede6c}{alpha}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+const double \& \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a8e40e5409b700312dad4f101becede6c}{alpha}} () const
 \begin{DoxyCompactList}\small\item\em Access function for alpha. \end{DoxyCompactList}\item 
 double $\ast$\& \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_af1255b46a3f906f379d88d77dad4ac17}{alpha\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for pointer to alpha. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \& \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a398c2c49954a3e2eceb046be008bf33c}{porosity}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+const double \& \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a398c2c49954a3e2eceb046be008bf33c}{porosity}} () const
 \begin{DoxyCompactList}\small\item\em Access function for the porosity. \end{DoxyCompactList}\item 
 double $\ast$\& \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_ac65d9a1717405c6d938f949976ea3983}{porosity\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for pointer to the porosity. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a234bc29fbd4c3255ef903a3cb5f6361f}{Source\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a80c061f37dccffda6517d8417079c4b5}{force\+\_\+solid\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to solid force function. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a234bc29fbd4c3255ef903a3cb5f6361f}{Source\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_ae86831a8828e73c666585ac2dcf56456}{force\+\_\+solid\+\_\+fct\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+\mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a234bc29fbd4c3255ef903a3cb5f6361f}{Source\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_ae86831a8828e73c666585ac2dcf56456}{force\+\_\+solid\+\_\+fct\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to solid force function (const version) \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a234bc29fbd4c3255ef903a3cb5f6361f}{Source\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_afa8a301a867c6d713c822a6cad41e1dd}{force\+\_\+fluid\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to fluid force function. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a234bc29fbd4c3255ef903a3cb5f6361f}{Source\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a2523a092b6190b733eb7c97a65587ecf}{force\+\_\+fluid\+\_\+fct\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+\mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a234bc29fbd4c3255ef903a3cb5f6361f}{Source\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a2523a092b6190b733eb7c97a65587ecf}{force\+\_\+fluid\+\_\+fct\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to fluid force function (const version) \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a8edb2644708db2f2ae03254ea3143262}{Mass\+Source\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a3cfe0ef4fd24ab7354cf70ce4fecddb9}{mass\+\_\+source\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to mass source function. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a8edb2644708db2f2ae03254ea3143262}{Mass\+Source\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_abdc8804cf42e7687e5ce9b10f2c1938e}{mass\+\_\+source\+\_\+fct\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+\mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a8edb2644708db2f2ae03254ea3143262}{Mass\+Source\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_abdc8804cf42e7687e5ce9b10f2c1938e}{mass\+\_\+source\+\_\+fct\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to mass source function (const version) \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a2c770c55f51aa2c30febb44815a939cb}{force\+\_\+solid}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&b) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a2c770c55f51aa2c30febb44815a939cb}{force\+\_\+solid}} (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&b) const
 \begin{DoxyCompactList}\small\item\em Indirect access to the solid force function -\/ returns 0 if no forcing function has been set. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_aae946ee5e9f6190e34cd1ca1b2c98971}{force\+\_\+fluid}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&b) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_aae946ee5e9f6190e34cd1ca1b2c98971}{force\+\_\+fluid}} (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&b) const
 \begin{DoxyCompactList}\small\item\em Indirect access to the fluid forcing function -\/ returns 0 if no forcing function has been set. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a316fd839c477c5d4619c894d51c221cd}{mass\+\_\+source}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, double \&b) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a316fd839c477c5d4619c894d51c221cd}{mass\+\_\+source}} (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&b) const
 \begin{DoxyCompactList}\small\item\em Indirect access to the mass source function -\/ returns 0 if no mass source function has been set. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1ElasticityTensor}{Elasticity\+Tensor}} $\ast$\& \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a3c318ea7417203fee527f5118c753687}{elasticity\+\_\+tensor\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return the pointer to the elasticity\+\_\+tensor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_ae40523d3812bc6c50ab5c23fd9359cad}{E}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&j, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&k, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&l) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+const double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_ae40523d3812bc6c50ab5c23fd9359cad}{E}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned \&j, const unsigned \&k, const unsigned \&l) const
 \begin{DoxyCompactList}\small\item\em Access function to the entries in the elasticity tensor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a4f8cb984e4afa174beca76989299f256}{get\+\_\+stress}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a4f8cb984e4afa174beca76989299f256}{get\+\_\+stress}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&sigma) const
 \begin{DoxyCompactList}\small\item\em Return the Cauchy stress tensor, as calculated from the elasticity tensor at specified local coordinate. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_aea601e7d1bc0757b9effa9dcdbfa0617}{get\+\_\+strain}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&strain) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_aea601e7d1bc0757b9effa9dcdbfa0617}{get\+\_\+strain}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&strain) const
 \begin{DoxyCompactList}\small\item\em Return the strain tensor. \end{DoxyCompactList}\item 
-virtual unsigned \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_ab22159684bdf5fdfe1591fb2afea1e95}{required\+\_\+nvalue}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual unsigned \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_ab22159684bdf5fdfe1591fb2afea1e95}{required\+\_\+nvalue}} (const unsigned \&n) const =0
 \begin{DoxyCompactList}\small\item\em Number of values required at node n. \end{DoxyCompactList}\item 
-virtual unsigned \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a3fe57176b22729d251b13e0eb4e7d8fc}{u\+\_\+index}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual unsigned \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a3fe57176b22729d251b13e0eb4e7d8fc}{u\+\_\+index}} (const unsigned \&n) const =0
 \begin{DoxyCompactList}\small\item\em Return the nodal index of the n-\/th solid displacement unknown. \end{DoxyCompactList}\item 
-virtual int \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a0a707c501fd4ae67a423de848845b04c}{q\+\_\+edge\+\_\+local\+\_\+eqn}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual int \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a0a707c501fd4ae67a423de848845b04c}{q\+\_\+edge\+\_\+local\+\_\+eqn}} (const unsigned \&n) const =0
 \begin{DoxyCompactList}\small\item\em Return the equation number of the n-\/th edge (flux) degree of freedom. \end{DoxyCompactList}\item 
-virtual int \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a432e37d70b8fd6c643946609d5e92ddd}{q\+\_\+internal\+\_\+local\+\_\+eqn}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual int \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a432e37d70b8fd6c643946609d5e92ddd}{q\+\_\+internal\+\_\+local\+\_\+eqn}} (const unsigned \&n) const =0
 \begin{DoxyCompactList}\small\item\em Return the equation number of the n-\/th internal (moment) degree of freedom. \end{DoxyCompactList}\item 
-virtual unsigned \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_abe5fd6d829fcefd5760c8802f7887631}{q\+\_\+edge\+\_\+index}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual unsigned \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_abe5fd6d829fcefd5760c8802f7887631}{q\+\_\+edge\+\_\+index}} (const unsigned \&n) const =0
 \begin{DoxyCompactList}\small\item\em Return the nodal index at which the nth edge unknown is stored. \end{DoxyCompactList}\item 
-virtual unsigned \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a51f9afadce69aeb1ca777d5266f5c4d2}{q\+\_\+internal\+\_\+index}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual unsigned \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a51f9afadce69aeb1ca777d5266f5c4d2}{q\+\_\+internal\+\_\+index}} () const =0
 \begin{DoxyCompactList}\small\item\em Return the index of the internal data where the q\+\_\+internal degrees of freedom are stored. \end{DoxyCompactList}\item 
-virtual unsigned \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a34a28eb238815fe3475c09ed256393c4}{q\+\_\+edge\+\_\+node\+\_\+number}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual unsigned \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a34a28eb238815fe3475c09ed256393c4}{q\+\_\+edge\+\_\+node\+\_\+number}} (const unsigned \&n) const =0
 \begin{DoxyCompactList}\small\item\em Return the number of the node where the nth edge unknown is stored. \end{DoxyCompactList}\item 
-virtual double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a67d1df907b555608c1692efdd278a5d7}{q\+\_\+edge}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a67d1df907b555608c1692efdd278a5d7}{q\+\_\+edge}} (const unsigned \&n) const =0
 \begin{DoxyCompactList}\small\item\em Return the values of the edge (flux) degrees of freedom. \end{DoxyCompactList}\item 
-virtual double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_aed66c1aeaa3cadb53537c5a74684ddec}{q\+\_\+edge}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_aed66c1aeaa3cadb53537c5a74684ddec}{q\+\_\+edge}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&n) const =0
 \begin{DoxyCompactList}\small\item\em Return the values of the edge (flux) degrees of freedom at time history level t. \end{DoxyCompactList}\item 
-virtual double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a95ed7bb3ad2efe901453f99f1e42c0a6}{q\+\_\+internal}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a95ed7bb3ad2efe901453f99f1e42c0a6}{q\+\_\+internal}} (const unsigned \&n) const =0
 \begin{DoxyCompactList}\small\item\em Return the values of the internal (moment) degrees of freedom. \end{DoxyCompactList}\item 
-virtual double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a98223c55e8801bce16d77e4361b2aa64}{q\+\_\+internal}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a98223c55e8801bce16d77e4361b2aa64}{q\+\_\+internal}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&n) const =0
 \begin{DoxyCompactList}\small\item\em Return the values of the internal (moment) degrees of freedom at time history level t. \end{DoxyCompactList}\item 
-virtual unsigned \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_aec90144cc61d817c97bee414e90921af}{nq\+\_\+basis}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual unsigned \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_aec90144cc61d817c97bee414e90921af}{nq\+\_\+basis}} () const =0
 \begin{DoxyCompactList}\small\item\em Return the total number of computational basis functions for q. \end{DoxyCompactList}\item 
-virtual unsigned \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a81b78261be29e506dc70a59c2925c061}{nq\+\_\+basis\+\_\+edge}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual unsigned \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a81b78261be29e506dc70a59c2925c061}{nq\+\_\+basis\+\_\+edge}} () const =0
 \begin{DoxyCompactList}\small\item\em Return the number of edge basis functions for q. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_ab1784901ec76efaefc0a4b3f12cd9078}{get\+\_\+q\+\_\+basis\+\_\+local}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+basis) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_ab1784901ec76efaefc0a4b3f12cd9078}{get\+\_\+q\+\_\+basis\+\_\+local}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+basis) const =0
 \begin{DoxyCompactList}\small\item\em Returns the local form of the q basis at local coordinate s. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_ae137222ce1c7904212ce34ad180123f8}{get\+\_\+div\+\_\+q\+\_\+basis\+\_\+local}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&div\+\_\+q\+\_\+basis\+\_\+ds) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_ae137222ce1c7904212ce34ad180123f8}{get\+\_\+div\+\_\+q\+\_\+basis\+\_\+local}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&div\+\_\+q\+\_\+basis\+\_\+ds) const =0
 \begin{DoxyCompactList}\small\item\em Returns the local form of the q basis and dbasis/ds at local coordinate s. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_ab027d56e9fc87ca73290002c10c173df}{get\+\_\+q\+\_\+basis}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+basis) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_ab027d56e9fc87ca73290002c10c173df}{get\+\_\+q\+\_\+basis}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+basis) const
 \begin{DoxyCompactList}\small\item\em Returns the transformed basis at local coordinate s. \end{DoxyCompactList}\item 
-virtual unsigned \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_aa01b0fb38667776634b5f33bf8859886}{nedge\+\_\+gauss\+\_\+point}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual unsigned \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_aa01b0fb38667776634b5f33bf8859886}{nedge\+\_\+gauss\+\_\+point}} () const =0
 \begin{DoxyCompactList}\small\item\em Returns the number of gauss points along each edge of the element. \end{DoxyCompactList}\item 
-virtual double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_af1e01a7f1546cc7e4c19bc3a6de145da}{edge\+\_\+gauss\+\_\+point}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&edge, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_af1e01a7f1546cc7e4c19bc3a6de145da}{edge\+\_\+gauss\+\_\+point}} (const unsigned \&edge, const unsigned \&n) const =0
 \begin{DoxyCompactList}\small\item\em Returns the nth gauss point along an edge. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a9809ca678dced8e69cb74dd7a75dffda}{edge\+\_\+gauss\+\_\+point\+\_\+global}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&edge, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a9809ca678dced8e69cb74dd7a75dffda}{edge\+\_\+gauss\+\_\+point\+\_\+global}} (const unsigned \&edge, const unsigned \&n, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x) const =0
 \begin{DoxyCompactList}\small\item\em Returns the global coordinates of the nth gauss point along an edge. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a25b900a66e8e31ec0e5f432fcdf115d5}{pin\+\_\+q\+\_\+internal\+\_\+value}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n)=0
+virtual void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a25b900a66e8e31ec0e5f432fcdf115d5}{pin\+\_\+q\+\_\+internal\+\_\+value}} (const unsigned \&n)=0
 \begin{DoxyCompactList}\small\item\em Pin the nth internal q value. \end{DoxyCompactList}\item 
-virtual int \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a98642c2cf0e476f4068c12d1fc8b61b9}{p\+\_\+local\+\_\+eqn}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual int \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a98642c2cf0e476f4068c12d1fc8b61b9}{p\+\_\+local\+\_\+eqn}} (const unsigned \&n) const =0
 \begin{DoxyCompactList}\small\item\em Return the equation number of the n-\/th pressure degree of freedom. \end{DoxyCompactList}\item 
-virtual double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_abe547474535cb139acd45cc69e251516}{p\+\_\+value}} (unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_abe547474535cb139acd45cc69e251516}{p\+\_\+value}} (unsigned \&n) const =0
 \begin{DoxyCompactList}\small\item\em Return the nth pressure value. \end{DoxyCompactList}\item 
-virtual unsigned \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a44a16186f2923f811623e0cf088ff815}{np\+\_\+basis}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual unsigned \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a44a16186f2923f811623e0cf088ff815}{np\+\_\+basis}} () const =0
 \begin{DoxyCompactList}\small\item\em Return the total number of pressure basis functions. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_af5dd9aa31ee8da161285e7ed6b7cb8fc}{get\+\_\+p\+\_\+basis}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&p\+\_\+basis) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_af5dd9aa31ee8da161285e7ed6b7cb8fc}{get\+\_\+p\+\_\+basis}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&p\+\_\+basis) const =0
 \begin{DoxyCompactList}\small\item\em Return the pressure basis. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a66ba2228e7e673865b11099e184496ce}{pin\+\_\+p\+\_\+value}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&p)=0
+virtual void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a66ba2228e7e673865b11099e184496ce}{pin\+\_\+p\+\_\+value}} (const unsigned \&n, const double \&p)=0
 \begin{DoxyCompactList}\small\item\em Pin the nth pressure value. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a92c3f4965f318a98eb7c6ac06de7aa4d}{scale\+\_\+basis}} (\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&basis) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a92c3f4965f318a98eb7c6ac06de7aa4d}{scale\+\_\+basis}} (\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&basis) const =0
 \begin{DoxyCompactList}\small\item\em Scale the edge basis to allow arbitrary edge mappings. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a43ab3d7f2f96d78346979b5eb4b2b986}{transform\+\_\+basis}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+basis\+\_\+local, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+basis) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a43ab3d7f2f96d78346979b5eb4b2b986}{transform\+\_\+basis}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, const \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+basis\+\_\+local, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+basis) const
 \begin{DoxyCompactList}\small\item\em Performs a div-\/conserving transformation of the vector basis functions from the reference element to the actual element. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_aef2c46b6662e90e0c09c8825281e4b9c}{transform\+\_\+basis}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+basis\+\_\+local, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+basis) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_aef2c46b6662e90e0c09c8825281e4b9c}{transform\+\_\+basis}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, const \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+basis\+\_\+local, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+basis) const
 \begin{DoxyCompactList}\small\item\em Performs a div-\/conserving transformation of the vector basis functions from the reference element to the actual element. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a5f6d7585f4bb6c27c4cb4134fcf1f5a7}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em Fill in contribution to residuals for the Darcy equations. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a80054aa3b3eb9310430b2c50d45acdda}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a80054aa3b3eb9310430b2c50d45acdda}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em Fill in the Jacobian matrix for the Newton method. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_ae6557d385e674865e4a4c01d8a40b9b6}{interpolated\+\_\+u}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&disp) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_ae6557d385e674865e4a4c01d8a40b9b6}{interpolated\+\_\+u}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&disp) const
 \begin{DoxyCompactList}\small\item\em Calculate the FE representation of u. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a252bb0aa85c006d1a69b60df24d8a206}{interpolated\+\_\+u}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a252bb0aa85c006d1a69b60df24d8a206}{interpolated\+\_\+u}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Calculate the FE representation of the i-\/th component of u. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a693a649af090f9d921ed10326d8c68a5}{interpolated\+\_\+q}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a693a649af090f9d921ed10326d8c68a5}{interpolated\+\_\+q}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&u) const
 \begin{DoxyCompactList}\small\item\em Calculate the FE representation of q. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_acc0ef084dfaa656827ba4444475df2ba}{interpolated\+\_\+q}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_acc0ef084dfaa656827ba4444475df2ba}{interpolated\+\_\+q}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, const unsigned \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Calculate the FE representation of the i-\/th component of q. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_ad391ac29fbda008d06f6c97330cf0bad}{interpolated\+\_\+div\+\_\+q}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, double \&div\+\_\+q) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_ad391ac29fbda008d06f6c97330cf0bad}{interpolated\+\_\+div\+\_\+q}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, double \&div\+\_\+q) const
 \begin{DoxyCompactList}\small\item\em Calculate the FE representation of div u. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a6702594fe37c9b7e3d17e9fe85bf887e}{interpolated\+\_\+div\+\_\+q}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
+double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a6702594fe37c9b7e3d17e9fe85bf887e}{interpolated\+\_\+div\+\_\+q}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
 \begin{DoxyCompactList}\small\item\em Calculate the FE representation of div q and return it. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a5e15413423cccf35153ac009667e0297}{interpolated\+\_\+p}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, double \&p) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a5e15413423cccf35153ac009667e0297}{interpolated\+\_\+p}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, double \&p) const
 \begin{DoxyCompactList}\small\item\em Calculate the FE representation of p. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_ac26b9aaf9872c24d0d99ab651d59196f}{interpolated\+\_\+p}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_ac26b9aaf9872c24d0d99ab651d59196f}{interpolated\+\_\+p}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) const
 \begin{DoxyCompactList}\small\item\em Calculate the FE representation of p and return it. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_ad8e67101cbc50878375025722745675c}{du\+\_\+dt}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_ad8e67101cbc50878375025722745675c}{du\+\_\+dt}} (const unsigned \&n, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em du/dt at local node n \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a63bc087ce05092bd4f4a8defc35cb2ba}{d2u\+\_\+dt2}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a63bc087ce05092bd4f4a8defc35cb2ba}{d2u\+\_\+dt2}} (const unsigned \&n, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em d$^\wedge$2u/dt$^\wedge$2 at local node n \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a571ce9f5c356d617eca9b2d875609c46}{dq\+\_\+edge\+\_\+dt}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a571ce9f5c356d617eca9b2d875609c46}{dq\+\_\+edge\+\_\+dt}} (const unsigned \&n) const
 \begin{DoxyCompactList}\small\item\em dq\+\_\+edge/dt for the n-\/th edge degree of freedom \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a0840e15b074162843932f724018e77c6}{dq\+\_\+internal\+\_\+dt}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a0840e15b074162843932f724018e77c6}{dq\+\_\+internal\+\_\+dt}} (const unsigned \&n) const
 \begin{DoxyCompactList}\small\item\em dq\+\_\+internal/dt for the n-\/th internal degree of freedom \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a9fe9f9e43dd7a2f93753c5d0e882b2c8}{set\+\_\+q\+\_\+internal\+\_\+timestepper}} (\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\+\_\+stepper\+\_\+pt}})
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a9fe9f9e43dd7a2f93753c5d0e882b2c8}{set\+\_\+q\+\_\+internal\+\_\+timestepper}} (\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\+\_\+stepper\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Set the timestepper of the q internal data object. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_ad655780a10fff85d3d0b87738decfb4d}{self\+\_\+test}} ()
 \begin{DoxyCompactList}\small\item\em Self-\/test\+: Check inversion of element \& do self-\/test for \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}}. Return 0 if OK. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_ad5814c1fe98f24ded82b5f9b50fa1fb1}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Output with default number of plot points. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_aa7a99329f02fc199b45e8f1db6b1b0c0}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&nplot)
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_aa7a99329f02fc199b45e8f1db6b1b0c0}{output}} (std\+::ostream \&outfile, const unsigned \&nplot)
 \begin{DoxyCompactList}\small\item\em Output FE representation of soln\+: x,y,u1,u2,div\+\_\+q,p at Nplot$^\wedge$\+DIM plot points. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a11af50ce3426539de63b8efe57a5fa4c}{output\+\_\+fct}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&nplot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a11af50ce3426539de63b8efe57a5fa4c}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&nplot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Output FE representation of exact soln\+: x,y,u1,u2,div\+\_\+q,p at Nplot$^\wedge$\+DIM plot points. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_af6ff5d6c420bb061faab9faedfa02938}{output\+\_\+fct}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&nplot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_af6ff5d6c420bb061faab9faedfa02938}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&nplot, const double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Output FE representation of exact soln\+: x,y,u1,u2,div\+\_\+q,p at Nplot$^\wedge$\+DIM plot points. Unsteady version. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a9ad9413383820342f2c5a967c4bf4e94}{compute\+\_\+error}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&error, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&norm)
 \begin{DoxyCompactList}\small\item\em Compute the error between the FE solution and the exact solution using the H(div) norm for q and L$^\wedge$2 norm for p. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_acc847138fbcb1833934129ef676e03a9}{compute\+\_\+error}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&error, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&norm)
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_acc847138fbcb1833934129ef676e03a9}{compute\+\_\+error}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt, const double \&time, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&error, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&norm)
 \begin{DoxyCompactList}\small\item\em Compute the error between the FE solution and the exact solution using the H(div) norm for q and L$^\wedge$2 norm for p. Unsteady version. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-virtual double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a14fa3f0b43c4d7da65504702aef760bf}{shape\+\_\+basis\+\_\+test\+\_\+local}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&u\+\_\+basis, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&u\+\_\+test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&du\+\_\+basis\+\_\+dx, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&du\+\_\+test\+\_\+dx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+basis, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+test, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&p\+\_\+basis, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&p\+\_\+test, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&div\+\_\+q\+\_\+basis\+\_\+ds, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&div\+\_\+q\+\_\+test\+\_\+ds) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a14fa3f0b43c4d7da65504702aef760bf}{shape\+\_\+basis\+\_\+test\+\_\+local}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&u\+\_\+basis, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&u\+\_\+test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&du\+\_\+basis\+\_\+dx, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&du\+\_\+test\+\_\+dx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+basis, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+test, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&p\+\_\+basis, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&p\+\_\+test, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&div\+\_\+q\+\_\+basis\+\_\+ds, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&div\+\_\+q\+\_\+test\+\_\+ds) const =0
 \begin{DoxyCompactList}\small\item\em Returns the geometric basis, and the q, p and divergence basis functions and test functions at local coordinate s. \end{DoxyCompactList}\item 
-virtual double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a1fe3d6550d835f62011be7c2c1aa5765}{shape\+\_\+basis\+\_\+test\+\_\+local\+\_\+at\+\_\+knot}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&u\+\_\+basis, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&u\+\_\+test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&du\+\_\+basis\+\_\+dx, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&du\+\_\+test\+\_\+dx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+basis, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+test, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&p\+\_\+basis, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&p\+\_\+test, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&div\+\_\+q\+\_\+basis\+\_\+ds, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&div\+\_\+q\+\_\+test\+\_\+ds) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a1fe3d6550d835f62011be7c2c1aa5765}{shape\+\_\+basis\+\_\+test\+\_\+local\+\_\+at\+\_\+knot}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&u\+\_\+basis, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&u\+\_\+test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&du\+\_\+basis\+\_\+dx, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&du\+\_\+test\+\_\+dx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+basis, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+test, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&p\+\_\+basis, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&p\+\_\+test, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&div\+\_\+q\+\_\+basis\+\_\+ds, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&div\+\_\+q\+\_\+test\+\_\+ds) const =0
 \begin{DoxyCompactList}\small\item\em Returns the geometric basis, and the q, p and divergence basis functions and test functions at integration point ipt. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a50bcb2f690fb903504c03ea1cc747477}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, bool flag)
+virtual void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a50bcb2f690fb903504c03ea1cc747477}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, bool flag)
 \begin{DoxyCompactList}\small\item\em Fill in residuals and, if flag==true, jacobian. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -237,7 +237,7 @@ Definition at line \mbox{\hyperlink{poroelasticity__elements_8h_source_l00045}{4
 \index{MassSourceFctPt@{MassSourceFctPt}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{MassSourceFctPt}{MassSourceFctPt}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::Mass\+Source\+Fct\+Pt) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, double \&\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}})}
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::Mass\+Source\+Fct\+Pt) (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&f)}
 
 
 
@@ -252,7 +252,7 @@ Definition at line \mbox{\hyperlink{poroelasticity__elements_8h_source_l00054}{5
 \index{SourceFctPt@{SourceFctPt}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{SourceFctPt}{SourceFctPt}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::Source\+Fct\+Pt) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}})}
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::Source\+Fct\+Pt) (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&f)}
 
 
 
@@ -288,7 +288,7 @@ Definition at line \mbox{\hyperlink{poroelasticity__elements_8h_source_l00059}{5
 \index{alpha@{alpha}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{alpha()}{alpha()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \& \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::alpha (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+const double \& \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::alpha (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -342,14 +342,14 @@ Definition at line \mbox{\hyperlink{poroelasticity__elements_8cc_source_l00462}{
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
 
 \mbox{\Hypertarget{classoomph_1_1PoroelasticityEquations_acc847138fbcb1833934129ef676e03a9}\label{classoomph_1_1PoroelasticityEquations_acc847138fbcb1833934129ef676e03a9}} 
 \index{oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}!compute\_error@{compute\_error}}
 \index{compute\_error@{compute\_error}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{compute\_error()}{compute\_error()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::compute\+\_\+error (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{error,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{norm }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::compute\+\_\+error (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt,  }\item[{const double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{error,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{norm }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -357,7 +357,7 @@ Compute the error between the FE solution and the exact solution using the H(div
 
 Compute the error between the FE solution and the exact solution using the H(div) norm for u and L$^\wedge$2 norm for p. Unsteady version. 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_ac24e1a51acd6a8629d6067277e7f0d2c}{oomph\+::\+Finite\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a6c1220af04b60c1a1c34b44495188daf}{oomph\+::\+Finite\+Element}}.
 
 
 
@@ -365,14 +365,14 @@ Definition at line \mbox{\hyperlink{poroelasticity__elements_8cc_source_l00568}{
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
 
 \mbox{\Hypertarget{classoomph_1_1PoroelasticityEquations_a63bc087ce05092bd4f4a8defc35cb2ba}\label{classoomph_1_1PoroelasticityEquations_a63bc087ce05092bd4f4a8defc35cb2ba}} 
 \index{oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}!d2u\_dt2@{d2u\_dt2}}
 \index{d2u\_dt2@{d2u\_dt2}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{d2u\_dt2()}{d2u\_dt2()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::d2u\+\_\+dt2 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::d2u\+\_\+dt2 (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -384,7 +384,7 @@ Definition at line \mbox{\hyperlink{poroelasticity__elements_8h_source_l00605}{6
 
 
 
-References \mbox{\hyperlink{poroelasticity__elements_8h_source_l00605}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::d2u\+\_\+dt2()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{timesteppers_8h_source_l00389}{oomph\+::\+Time\+Stepper\+::is\+\_\+steady()}}, \mbox{\hyperlink{elements_8h_source_l02598}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a3fe57176b22729d251b13e0eb4e7d8fc}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::u\+\_\+index()}}, and \mbox{\hyperlink{timesteppers_8h_source_l00594}{oomph\+::\+Time\+Stepper\+::weight()}}.
+References \mbox{\hyperlink{poroelasticity__elements_8h_source_l00605}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::d2u\+\_\+dt2()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{timesteppers_8h_source_l00389}{oomph\+::\+Time\+Stepper\+::is\+\_\+steady()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00238}{oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a3fe57176b22729d251b13e0eb4e7d8fc}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::u\+\_\+index()}}, and \mbox{\hyperlink{timesteppers_8h_source_l00594}{oomph\+::\+Time\+Stepper\+::weight()}}.
 
 
 
@@ -395,7 +395,7 @@ Referenced by \mbox{\hyperlink{poroelasticity__elements_8h_source_l00605}{oomph\
 \index{density\_ratio@{density\_ratio}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{density\_ratio()}{density\_ratio()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \& \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::density\+\_\+ratio (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+const double \& \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::density\+\_\+ratio (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -433,7 +433,7 @@ References \mbox{\hyperlink{poroelasticity__elements_8h_source_l00799}{oomph\+::
 \index{dq\_edge\_dt@{dq\_edge\_dt}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{dq\_edge\_dt()}{dq\_edge\_dt()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::dq\+\_\+edge\+\_\+dt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::dq\+\_\+edge\+\_\+dt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -445,14 +445,14 @@ Definition at line \mbox{\hyperlink{poroelasticity__elements_8h_source_l00635}{6
 
 
 
-References \mbox{\hyperlink{timesteppers_8h_source_l00389}{oomph\+::\+Time\+Stepper\+::is\+\_\+steady()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a67d1df907b555608c1692efdd278a5d7}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::q\+\_\+edge()}}, \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a34a28eb238815fe3475c09ed256393c4}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::q\+\_\+edge\+\_\+node\+\_\+number()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}, and \mbox{\hyperlink{timesteppers_8h_source_l00594}{oomph\+::\+Time\+Stepper\+::weight()}}.
+References \mbox{\hyperlink{timesteppers_8h_source_l00389}{oomph\+::\+Time\+Stepper\+::is\+\_\+steady()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a67d1df907b555608c1692efdd278a5d7}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::q\+\_\+edge()}}, \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a34a28eb238815fe3475c09ed256393c4}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::q\+\_\+edge\+\_\+node\+\_\+number()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00238}{oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt()}}, and \mbox{\hyperlink{timesteppers_8h_source_l00594}{oomph\+::\+Time\+Stepper\+::weight()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PoroelasticityEquations_a0840e15b074162843932f724018e77c6}\label{classoomph_1_1PoroelasticityEquations_a0840e15b074162843932f724018e77c6}} 
 \index{oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}!dq\_internal\_dt@{dq\_internal\_dt}}
 \index{dq\_internal\_dt@{dq\_internal\_dt}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{dq\_internal\_dt()}{dq\_internal\_dt()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::dq\+\_\+internal\+\_\+dt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::dq\+\_\+internal\+\_\+dt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -471,7 +471,7 @@ References \mbox{\hyperlink{elements_8h_source_l00622}{oomph\+::\+Generalised\+E
 \index{du\_dt@{du\_dt}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{du\_dt()}{du\_dt()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::du\+\_\+dt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::du\+\_\+dt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -483,7 +483,7 @@ Definition at line \mbox{\hyperlink{poroelasticity__elements_8h_source_l00575}{5
 
 
 
-References \mbox{\hyperlink{poroelasticity__elements_8h_source_l00575}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::du\+\_\+dt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{timesteppers_8h_source_l00389}{oomph\+::\+Time\+Stepper\+::is\+\_\+steady()}}, \mbox{\hyperlink{elements_8h_source_l02598}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a3fe57176b22729d251b13e0eb4e7d8fc}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::u\+\_\+index()}}, and \mbox{\hyperlink{timesteppers_8h_source_l00594}{oomph\+::\+Time\+Stepper\+::weight()}}.
+References \mbox{\hyperlink{poroelasticity__elements_8h_source_l00575}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::du\+\_\+dt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{timesteppers_8h_source_l00389}{oomph\+::\+Time\+Stepper\+::is\+\_\+steady()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00238}{oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a3fe57176b22729d251b13e0eb4e7d8fc}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::u\+\_\+index()}}, and \mbox{\hyperlink{timesteppers_8h_source_l00594}{oomph\+::\+Time\+Stepper\+::weight()}}.
 
 
 
@@ -494,7 +494,7 @@ Referenced by \mbox{\hyperlink{poroelasticity__elements_8h_source_l00575}{oomph\
 \index{E@{E}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{E()}{E()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::E (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{j,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{k,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{l }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+const double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::E (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{j,  }\item[{const unsigned \&}]{k,  }\item[{const unsigned \&}]{l }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -513,7 +513,7 @@ References \mbox{\hyperlink{poroelasticity__elements_8h_source_l00783}{oomph\+::
 \index{edge\_gauss\_point@{edge\_gauss\_point}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{edge\_gauss\_point()}{edge\_gauss\_point()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::edge\+\_\+gauss\+\_\+point (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{edge,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+virtual double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::edge\+\_\+gauss\+\_\+point (\begin{DoxyParamCaption}\item[{const unsigned \&}]{edge,  }\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -528,7 +528,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1TPoroelasticityElement_a1c6d52613f
 \index{edge\_gauss\_point\_global@{edge\_gauss\_point\_global}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{edge\_gauss\_point\_global()}{edge\_gauss\_point\_global()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::edge\+\_\+gauss\+\_\+point\+\_\+global (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{edge,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+virtual void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::edge\+\_\+gauss\+\_\+point\+\_\+global (\begin{DoxyParamCaption}\item[{const unsigned \&}]{edge,  }\item[{const unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -578,7 +578,7 @@ Definition at line \mbox{\hyperlink{poroelasticity__elements_8h_source_l00375}{3
 
 
 
-References \mbox{\hyperlink{poroelasticity__elements_8cc_source_l00674}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution()}}, and \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}.
+References \mbox{\hyperlink{poroelasticity__elements_8cc_source_l00674}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PoroelasticityEquations_a5f6d7585f4bb6c27c4cb4134fcf1f5a7}\label{classoomph_1_1PoroelasticityEquations_a5f6d7585f4bb6c27c4cb4134fcf1f5a7}} 
 \index{oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
@@ -631,7 +631,7 @@ Referenced by \mbox{\hyperlink{poroelasticity__elements_8h_source_l00375}{oomph\
 \index{force\_fluid@{force\_fluid}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{force\_fluid()}{force\_fluid()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::force\+\_\+fluid (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{b }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::force\+\_\+fluid (\begin{DoxyParamCaption}\item[{const double \&}]{time,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{b }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -643,7 +643,7 @@ Definition at line \mbox{\hyperlink{poroelasticity__elements_8h_source_l00192}{1
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02616}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{poroelasticity__elements_8h_source_l00790}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::\+Force\+\_\+fluid\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{poroelasticity__elements_8h_source_l00790}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::\+Force\+\_\+fluid\+\_\+fct\+\_\+pt}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
 
 \mbox{\Hypertarget{classoomph_1_1PoroelasticityEquations_afa8a301a867c6d713c822a6cad41e1dd}\label{classoomph_1_1PoroelasticityEquations_afa8a301a867c6d713c822a6cad41e1dd}} 
 \index{oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}!force\_fluid\_fct\_pt@{force\_fluid\_fct\_pt}}
@@ -688,7 +688,7 @@ References \mbox{\hyperlink{poroelasticity__elements_8h_source_l00790}{oomph\+::
 \index{force\_solid@{force\_solid}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{force\_solid()}{force\_solid()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::force\+\_\+solid (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{b }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::force\+\_\+solid (\begin{DoxyParamCaption}\item[{const double \&}]{time,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{b }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -700,7 +700,7 @@ Definition at line \mbox{\hyperlink{poroelasticity__elements_8h_source_l00170}{1
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02616}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{poroelasticity__elements_8h_source_l00787}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::\+Force\+\_\+solid\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{poroelasticity__elements_8h_source_l00787}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::\+Force\+\_\+solid\+\_\+fct\+\_\+pt}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
 
 \mbox{\Hypertarget{classoomph_1_1PoroelasticityEquations_a80c061f37dccffda6517d8417079c4b5}\label{classoomph_1_1PoroelasticityEquations_a80c061f37dccffda6517d8417079c4b5}} 
 \index{oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}!force\_solid\_fct\_pt@{force\_solid\_fct\_pt}}
@@ -745,7 +745,7 @@ References \mbox{\hyperlink{poroelasticity__elements_8h_source_l00787}{oomph\+::
 \index{get\_div\_q\_basis\_local@{get\_div\_q\_basis\_local}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_div\_q\_basis\_local()}{get\_div\_q\_basis\_local()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::get\+\_\+div\+\_\+q\+\_\+basis\+\_\+local (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{div\+\_\+q\+\_\+basis\+\_\+ds }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+virtual void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::get\+\_\+div\+\_\+q\+\_\+basis\+\_\+local (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{div\+\_\+q\+\_\+basis\+\_\+ds }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -764,7 +764,7 @@ Referenced by \mbox{\hyperlink{poroelasticity__elements_8h_source_l00482}{oomph\
 \index{get\_p\_basis@{get\_p\_basis}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_p\_basis()}{get\_p\_basis()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::get\+\_\+p\+\_\+basis (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{p\+\_\+basis }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+virtual void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::get\+\_\+p\+\_\+basis (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{p\+\_\+basis }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -783,7 +783,7 @@ Referenced by \mbox{\hyperlink{poroelasticity__elements_8h_source_l00540}{oomph\
 \index{get\_q\_basis@{get\_q\_basis}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_q\_basis()}{get\_q\_basis()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::get\+\_\+q\+\_\+basis (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+basis }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::get\+\_\+q\+\_\+basis (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+basis }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -795,7 +795,7 @@ Definition at line \mbox{\hyperlink{poroelasticity__elements_8h_source_l00304}{3
 
 
 
-References \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_ab1784901ec76efaefc0a4b3f12cd9078}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::get\+\_\+q\+\_\+basis\+\_\+local()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_aec90144cc61d817c97bee414e90921af}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::nq\+\_\+basis()}}, and \mbox{\hyperlink{poroelasticity__elements_8cc_source_l00196}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::transform\+\_\+basis()}}.
+References \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_ab1784901ec76efaefc0a4b3f12cd9078}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::get\+\_\+q\+\_\+basis\+\_\+local()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_aec90144cc61d817c97bee414e90921af}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::nq\+\_\+basis()}}, and \mbox{\hyperlink{poroelasticity__elements_8cc_source_l00196}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::transform\+\_\+basis()}}.
 
 
 
@@ -806,7 +806,7 @@ Referenced by \mbox{\hyperlink{poroelasticity__elements_8h_source_l00437}{oomph\
 \index{get\_q\_basis\_local@{get\_q\_basis\_local}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_q\_basis\_local()}{get\_q\_basis\_local()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::get\+\_\+q\+\_\+basis\+\_\+local (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+basis }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+virtual void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::get\+\_\+q\+\_\+basis\+\_\+local (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+basis }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -825,7 +825,7 @@ Referenced by \mbox{\hyperlink{poroelasticity__elements_8h_source_l00304}{oomph\
 \index{get\_strain@{get\_strain}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_strain()}{get\_strain()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::get\+\_\+strain (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{strain }\end{DoxyParamCaption}) const}
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::get\+\_\+strain (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{strain }\end{DoxyParamCaption}) const}
 
 
 
@@ -844,7 +844,7 @@ References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{mat
 \index{get\_stress@{get\_stress}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_stress()}{get\_stress()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::get\+\_\+stress (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{sigma }\end{DoxyParamCaption}) const}
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::get\+\_\+stress (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{sigma }\end{DoxyParamCaption}) const}
 
 
 
@@ -863,7 +863,7 @@ References \mbox{\hyperlink{quadtree_8h_source_l00061}{oomph\+::\+Quad\+Tree\+Na
 \index{interpolated\_div\_q@{interpolated\_div\_q}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{interpolated\_div\_q()}{interpolated\_div\_q()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::interpolated\+\_\+div\+\_\+q (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::interpolated\+\_\+div\+\_\+q (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -882,7 +882,7 @@ References \mbox{\hyperlink{poroelasticity__elements_8h_source_l00482}{oomph\+::
 \index{interpolated\_div\_q@{interpolated\_div\_q}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{interpolated\_div\_q()}{interpolated\_div\_q()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::interpolated\+\_\+div\+\_\+q (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{double \&}]{div\+\_\+q }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::interpolated\+\_\+div\+\_\+q (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{double \&}]{div\+\_\+q }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -894,7 +894,7 @@ Definition at line \mbox{\hyperlink{poroelasticity__elements_8h_source_l00482}{4
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01986}{oomph\+::\+Finite\+Element\+::dshape\+\_\+local()}}, \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_ae137222ce1c7904212ce34ad180123f8}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::get\+\_\+div\+\_\+q\+\_\+basis\+\_\+local()}}, \mbox{\hyperlink{elements_8h_source_l01613}{oomph\+::\+Finite\+Element\+::inverse\+\_\+jacobian}}, \mbox{\hyperlink{elements_8h_source_l01508}{oomph\+::\+Finite\+Element\+::local\+\_\+to\+\_\+eulerian\+\_\+mapping()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_aec90144cc61d817c97bee414e90921af}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::nq\+\_\+basis()}}, \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a81b78261be29e506dc70a59c2925c061}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::nq\+\_\+basis\+\_\+edge()}}, \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a67d1df907b555608c1692efdd278a5d7}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::q\+\_\+edge()}}, \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a95ed7bb3ad2efe901453f99f1e42c0a6}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::q\+\_\+internal()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References \mbox{\hyperlink{elements_8h_source_l01981}{oomph\+::\+Finite\+Element\+::dshape\+\_\+local()}}, \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_ae137222ce1c7904212ce34ad180123f8}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::get\+\_\+div\+\_\+q\+\_\+basis\+\_\+local()}}, \mbox{\hyperlink{elements_8h_source_l01508}{oomph\+::\+Finite\+Element\+::local\+\_\+to\+\_\+eulerian\+\_\+mapping()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_aec90144cc61d817c97bee414e90921af}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::nq\+\_\+basis()}}, \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a81b78261be29e506dc70a59c2925c061}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::nq\+\_\+basis\+\_\+edge()}}, \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a67d1df907b555608c1692efdd278a5d7}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::q\+\_\+edge()}}, \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a95ed7bb3ad2efe901453f99f1e42c0a6}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::q\+\_\+internal()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 
 
@@ -905,7 +905,7 @@ Referenced by \mbox{\hyperlink{poroelasticity__elements_8h_source_l00527}{oomph\
 \index{interpolated\_p@{interpolated\_p}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{interpolated\_p()}{interpolated\_p()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::interpolated\+\_\+p (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::interpolated\+\_\+p (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -924,7 +924,7 @@ References \mbox{\hyperlink{poroelasticity__elements_8h_source_l00540}{oomph\+::
 \index{interpolated\_p@{interpolated\_p}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{interpolated\_p()}{interpolated\_p()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::interpolated\+\_\+p (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{double \&}]{p }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::interpolated\+\_\+p (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{double \&}]{p }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -947,7 +947,7 @@ Referenced by \mbox{\hyperlink{poroelasticity__elements_8h_source_l00562}{oomph\
 \index{interpolated\_q@{interpolated\_q}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{interpolated\_q()}{interpolated\_q()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::interpolated\+\_\+q (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::interpolated\+\_\+q (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const unsigned}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -966,7 +966,7 @@ References \mbox{\hyperlink{poroelasticity__elements_8h_source_l00304}{oomph\+::
 \index{interpolated\_q@{interpolated\_q}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{interpolated\_q()}{interpolated\_q()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::interpolated\+\_\+q (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{u }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::interpolated\+\_\+q (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{u }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -978,14 +978,14 @@ Definition at line \mbox{\hyperlink{poroelasticity__elements_8h_source_l00437}{4
 
 
 
-References \mbox{\hyperlink{poroelasticity__elements_8h_source_l00304}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::get\+\_\+q\+\_\+basis()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_aec90144cc61d817c97bee414e90921af}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::nq\+\_\+basis()}}, \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a81b78261be29e506dc70a59c2925c061}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::nq\+\_\+basis\+\_\+edge()}}, \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a67d1df907b555608c1692efdd278a5d7}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::q\+\_\+edge()}}, \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a95ed7bb3ad2efe901453f99f1e42c0a6}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::q\+\_\+internal()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{error__estimator_8h_source_l00165}{oomph\+::u}}.
+References \mbox{\hyperlink{poroelasticity__elements_8h_source_l00304}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::get\+\_\+q\+\_\+basis()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_aec90144cc61d817c97bee414e90921af}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::nq\+\_\+basis()}}, \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a81b78261be29e506dc70a59c2925c061}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::nq\+\_\+basis\+\_\+edge()}}, \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a67d1df907b555608c1692efdd278a5d7}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::q\+\_\+edge()}}, \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a95ed7bb3ad2efe901453f99f1e42c0a6}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::q\+\_\+internal()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1PoroelasticityEquations_a252bb0aa85c006d1a69b60df24d8a206}\label{classoomph_1_1PoroelasticityEquations_a252bb0aa85c006d1a69b60df24d8a206}} 
 \index{oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}!interpolated\_u@{interpolated\_u}}
 \index{interpolated\_u@{interpolated\_u}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{interpolated\_u()}{interpolated\_u()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::interpolated\+\_\+u (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::interpolated\+\_\+u (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -997,14 +997,14 @@ Definition at line \mbox{\hyperlink{poroelasticity__elements_8h_source_l00410}{4
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{poroelasticity__elements_8h_source_l00382}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::interpolated\+\_\+u()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02598}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, and \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a3fe57176b22729d251b13e0eb4e7d8fc}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::u\+\_\+index()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{poroelasticity__elements_8h_source_l00382}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::interpolated\+\_\+u()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, and \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a3fe57176b22729d251b13e0eb4e7d8fc}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::u\+\_\+index()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PoroelasticityEquations_ae6557d385e674865e4a4c01d8a40b9b6}\label{classoomph_1_1PoroelasticityEquations_ae6557d385e674865e4a4c01d8a40b9b6}} 
 \index{oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}!interpolated\_u@{interpolated\_u}}
 \index{interpolated\_u@{interpolated\_u}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{interpolated\_u()}{interpolated\_u()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::interpolated\+\_\+u (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{disp }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::interpolated\+\_\+u (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{disp }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1016,7 +1016,7 @@ Definition at line \mbox{\hyperlink{poroelasticity__elements_8h_source_l00382}{3
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02598}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, and \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a3fe57176b22729d251b13e0eb4e7d8fc}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::u\+\_\+index()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, and \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations_a3fe57176b22729d251b13e0eb4e7d8fc}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::u\+\_\+index()}}.
 
 
 
@@ -1027,7 +1027,7 @@ Referenced by \mbox{\hyperlink{poroelasticity__elements_8h_source_l00410}{oomph\
 \index{k\_inv@{k\_inv}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{k\_inv()}{k\_inv()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \& \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::k\+\_\+inv (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+const double \& \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::k\+\_\+inv (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1065,7 +1065,7 @@ References \mbox{\hyperlink{poroelasticity__elements_8h_source_l00802}{oomph\+::
 \index{lambda\_sq@{lambda\_sq}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{lambda\_sq()}{lambda\_sq()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \& \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::lambda\+\_\+sq (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+const double \& \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::lambda\+\_\+sq (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1103,7 +1103,7 @@ References \mbox{\hyperlink{poroelasticity__elements_8h_source_l00796}{oomph\+::
 \index{mass\_source@{mass\_source}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{mass\_source()}{mass\_source()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::mass\+\_\+source (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{double \&}]{b }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::mass\+\_\+source (\begin{DoxyParamCaption}\item[{const double \&}]{time,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{double \&}]{b }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1115,7 +1115,7 @@ Definition at line \mbox{\hyperlink{poroelasticity__elements_8h_source_l00214}{2
 
 
 
-References \mbox{\hyperlink{poroelasticity__elements_8h_source_l00793}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::\+Mass\+\_\+source\+\_\+fct\+\_\+pt}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{poroelasticity__elements_8h_source_l00793}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::\+Mass\+\_\+source\+\_\+fct\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1PoroelasticityEquations_a3cfe0ef4fd24ab7354cf70ce4fecddb9}\label{classoomph_1_1PoroelasticityEquations_a3cfe0ef4fd24ab7354cf70ce4fecddb9}} 
 \index{oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}!mass\_source\_fct\_pt@{mass\_source\_fct\_pt}}
@@ -1259,7 +1259,7 @@ Referenced by \mbox{\hyperlink{poroelasticity__elements_8h_source_l00706}{oomph\
 \index{output@{output}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -1282,7 +1282,7 @@ References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfo
 \index{output\_fct@{output\_fct}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{output\_fct()}{output\_fct()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{nplot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot,  }\item[{const double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -1298,14 +1298,14 @@ Definition at line \mbox{\hyperlink{poroelasticity__elements_8cc_source_l00411}{
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1PoroelasticityEquations_a11af50ce3426539de63b8efe57a5fa4c}\label{classoomph_1_1PoroelasticityEquations_a11af50ce3426539de63b8efe57a5fa4c}} 
 \index{oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}!output\_fct@{output\_fct}}
 \index{output\_fct@{output\_fct}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{output\_fct()}{output\_fct()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{nplot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -1321,14 +1321,14 @@ Definition at line \mbox{\hyperlink{poroelasticity__elements_8cc_source_l00361}{
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1PoroelasticityEquations_a98642c2cf0e476f4068c12d1fc8b61b9}\label{classoomph_1_1PoroelasticityEquations_a98642c2cf0e476f4068c12d1fc8b61b9}} 
 \index{oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}!p\_local\_eqn@{p\_local\_eqn}}
 \index{p\_local\_eqn@{p\_local\_eqn}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{p\_local\_eqn()}{p\_local\_eqn()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual int \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::p\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+virtual int \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::p\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -1362,7 +1362,7 @@ Referenced by \mbox{\hyperlink{poroelasticity__elements_8h_source_l00540}{oomph\
 \index{pin\_p\_value@{pin\_p\_value}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{pin\_p\_value()}{pin\_p\_value()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::pin\+\_\+p\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+virtual void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::pin\+\_\+p\+\_\+value (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const double \&}]{p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -1377,7 +1377,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1TPoroelasticityElement_a0f5b5101a7
 \index{pin\_q\_internal\_value@{pin\_q\_internal\_value}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{pin\_q\_internal\_value()}{pin\_q\_internal\_value()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::pin\+\_\+q\+\_\+internal\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+virtual void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::pin\+\_\+q\+\_\+internal\+\_\+value (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -1392,7 +1392,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1TPoroelasticityElement_a47d4f048c1
 \index{porosity@{porosity}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{porosity()}{porosity()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \& \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::porosity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+const double \& \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::porosity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1430,7 +1430,7 @@ References \mbox{\hyperlink{poroelasticity__elements_8h_source_l00808}{oomph\+::
 \index{q\_edge@{q\_edge}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{q\_edge()}{q\_edge()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::q\+\_\+edge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+virtual double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::q\+\_\+edge (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -1449,7 +1449,7 @@ Referenced by \mbox{\hyperlink{poroelasticity__elements_8h_source_l00635}{oomph\
 \index{q\_edge@{q\_edge}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{q\_edge()}{q\_edge()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::q\+\_\+edge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+virtual double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::q\+\_\+edge (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -1464,7 +1464,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1TPoroelasticityElement_aafc2bfff42
 \index{q\_edge\_index@{q\_edge\_index}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{q\_edge\_index()}{q\_edge\_index()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual unsigned \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::q\+\_\+edge\+\_\+index (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+virtual unsigned \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::q\+\_\+edge\+\_\+index (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -1479,7 +1479,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1TPoroelasticityElement_a3486524ccf
 \index{q\_edge\_local\_eqn@{q\_edge\_local\_eqn}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{q\_edge\_local\_eqn()}{q\_edge\_local\_eqn()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual int \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::q\+\_\+edge\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+virtual int \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::q\+\_\+edge\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -1494,7 +1494,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1TPoroelasticityElement_a662897b1ea
 \index{q\_edge\_node\_number@{q\_edge\_node\_number}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{q\_edge\_node\_number()}{q\_edge\_node\_number()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual unsigned \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::q\+\_\+edge\+\_\+node\+\_\+number (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+virtual unsigned \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::q\+\_\+edge\+\_\+node\+\_\+number (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -1513,7 +1513,7 @@ Referenced by \mbox{\hyperlink{poroelasticity__elements_8h_source_l00635}{oomph\
 \index{q\_internal@{q\_internal}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{q\_internal()}{q\_internal()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::q\+\_\+internal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+virtual double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::q\+\_\+internal (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -1532,7 +1532,7 @@ Referenced by \mbox{\hyperlink{poroelasticity__elements_8h_source_l00663}{oomph\
 \index{q\_internal@{q\_internal}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{q\_internal()}{q\_internal()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::q\+\_\+internal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+virtual double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::q\+\_\+internal (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -1566,7 +1566,7 @@ Referenced by \mbox{\hyperlink{poroelasticity__elements_8h_source_l00663}{oomph\
 \index{q\_internal\_local\_eqn@{q\_internal\_local\_eqn}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{q\_internal\_local\_eqn()}{q\_internal\_local\_eqn()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual int \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::q\+\_\+internal\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+virtual int \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::q\+\_\+internal\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -1581,7 +1581,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1TPoroelasticityElement_a6e45ef2eff
 \index{required\_nvalue@{required\_nvalue}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{required\_nvalue()}{required\_nvalue()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual unsigned \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+virtual unsigned \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -1621,9 +1621,9 @@ unsigned \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poro
 
 Self-\/test\+: Check inversion of element \& do self-\/test for \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}}. Return 0 if OK. 
 
+Self-\/test\+: Have all internal values been classified as pinned/unpinned? Has pointer to spatial integration scheme been set? Return 0 if OK. 
 
-
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_af04bf6f6a9a60946e6afeee7afdd709c}{oomph\+::\+Finite\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_af94c5a5e22175d5420b33b3b79e46ed3}{oomph\+::\+Finite\+Element}}.
 
 
 
@@ -1634,7 +1634,7 @@ Definition at line \mbox{\hyperlink{poroelasticity__elements_8h_source_l00700}{7
 \index{set\_q\_internal\_timestepper@{set\_q\_internal\_timestepper}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{set\_q\_internal\_timestepper()}{set\_q\_internal\_timestepper()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::set\+\_\+q\+\_\+internal\+\_\+timestepper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}}]{time\+\_\+stepper\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::set\+\_\+q\+\_\+internal\+\_\+timestepper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const}]{time\+\_\+stepper\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1653,7 +1653,7 @@ References \mbox{\hyperlink{elements_8h_source_l00622}{oomph\+::\+Generalised\+E
 \index{shape\_basis\_test\_local@{shape\_basis\_test\_local}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{shape\_basis\_test\_local()}{shape\_basis\_test\_local()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::shape\+\_\+basis\+\_\+test\+\_\+local (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{u\+\_\+basis,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{u\+\_\+test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{du\+\_\+basis\+\_\+dx,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{du\+\_\+test\+\_\+dx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+basis,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+test,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{p\+\_\+basis,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{p\+\_\+test,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{div\+\_\+q\+\_\+basis\+\_\+ds,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{div\+\_\+q\+\_\+test\+\_\+ds }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+virtual double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::shape\+\_\+basis\+\_\+test\+\_\+local (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{u\+\_\+basis,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{u\+\_\+test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{du\+\_\+basis\+\_\+dx,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{du\+\_\+test\+\_\+dx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+basis,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+test,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{p\+\_\+basis,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{p\+\_\+test,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{div\+\_\+q\+\_\+basis\+\_\+ds,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{div\+\_\+q\+\_\+test\+\_\+ds }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
 
 
 
@@ -1668,7 +1668,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1TPoroelasticityElement_a309bfa8c38
 \index{shape\_basis\_test\_local\_at\_knot@{shape\_basis\_test\_local\_at\_knot}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{shape\_basis\_test\_local\_at\_knot()}{shape\_basis\_test\_local\_at\_knot()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::shape\+\_\+basis\+\_\+test\+\_\+local\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{u\+\_\+basis,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{u\+\_\+test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{du\+\_\+basis\+\_\+dx,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{du\+\_\+test\+\_\+dx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+basis,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+test,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{p\+\_\+basis,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{p\+\_\+test,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{div\+\_\+q\+\_\+basis\+\_\+ds,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{div\+\_\+q\+\_\+test\+\_\+ds }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+virtual double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::shape\+\_\+basis\+\_\+test\+\_\+local\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{u\+\_\+basis,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{u\+\_\+test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{du\+\_\+basis\+\_\+dx,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{du\+\_\+test\+\_\+dx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+basis,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+test,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{p\+\_\+basis,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{p\+\_\+test,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{div\+\_\+q\+\_\+basis\+\_\+ds,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{div\+\_\+q\+\_\+test\+\_\+ds }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
 
 
 
@@ -1683,7 +1683,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1TPoroelasticityElement_a26cc12dec0
 \index{transform\_basis@{transform\_basis}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{transform\_basis()}{transform\_basis()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::transform\+\_\+basis (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+basis\+\_\+local,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+basis }\end{DoxyParamCaption}) const}
+double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::transform\+\_\+basis (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+basis\+\_\+local,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+basis }\end{DoxyParamCaption}) const}
 
 
 
@@ -1706,7 +1706,7 @@ Referenced by \mbox{\hyperlink{poroelasticity__elements_8h_source_l00304}{oomph\
 \index{transform\_basis@{transform\_basis}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{transform\_basis()}{transform\_basis()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::transform\+\_\+basis (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+basis\+\_\+local,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+basis }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+double \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::transform\+\_\+basis (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+basis\+\_\+local,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+basis }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1718,14 +1718,14 @@ Definition at line \mbox{\hyperlink{poroelasticity__elements_8h_source_l00357}{3
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{poroelasticity__elements_8cc_source_l00196}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::transform\+\_\+basis()}}.
+References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{poroelasticity__elements_8cc_source_l00196}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::transform\+\_\+basis()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PoroelasticityEquations_a3fe57176b22729d251b13e0eb4e7d8fc}\label{classoomph_1_1PoroelasticityEquations_a3fe57176b22729d251b13e0eb4e7d8fc}} 
 \index{oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}!u\_index@{u\_index}}
 \index{u\_index@{u\_index}!oomph::PoroelasticityEquations$<$ DIM $>$@{oomph::PoroelasticityEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{u\_index()}{u\_index()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual unsigned \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::u\+\_\+index (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+virtual unsigned \mbox{\hyperlink{classoomph_1_1PoroelasticityEquations}{oomph\+::\+Poroelasticity\+Equations}}$<$ DIM $>$\+::u\+\_\+index (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 

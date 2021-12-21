@@ -30,18 +30,18 @@ void \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_a2f61122d228e81ccff144b1
 \begin{DoxyCompactList}\small\item\em clear the memory \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_aec74f9bdb65ee7ce86590e26a705f3e9}{setup}} (\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$matrix\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} $\ast$col\+\_\+dist\+\_\+pt=0)
 \begin{DoxyCompactList}\small\item\em Setup the matrix vector product operator. WARNING\+: This class is wrapper to Trilinos Epetra matrix vector multiply methods, if Trilinos is not installed then this class will function as expected, but there will be no computational speed gain. By default the Epetra\+\_\+\+Crs\+Matrix\+::multiply(...) are employed. The optional argument col\+\_\+dist\+\_\+pt is the distribution of\+: x if using multiply(...) or y if using multiply\+\_\+transpose(...) where this is A x = y. By default, this is assumed to the uniformly distributed based on matrix\+\_\+pt-\/\texorpdfstring{$>$}{>}\mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_ab11a0763e2cc2ed4e74b06eea664b60e}{ncol()}}. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_ac29ba50f1a77bf0e316c3417bcff71ee}{multiply}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&y) const
+void \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_ac29ba50f1a77bf0e316c3417bcff71ee}{multiply}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&x, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&y) const
 \begin{DoxyCompactList}\small\item\em Apply the operator to the vector x and return the result in the vector y. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_a2b7670797fe289ea814968f2f9469fd5}{multiply\+\_\+transpose}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&y) const
+void \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_a2b7670797fe289ea814968f2f9469fd5}{multiply\+\_\+transpose}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&x, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&y) const
 \begin{DoxyCompactList}\small\item\em Apply the transpose of the operator to the vector x and return the result in the vector y. \end{DoxyCompactList}\item 
 const unsigned \& \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_ab11a0763e2cc2ed4e74b06eea664b60e}{ncol}} () const
 \begin{DoxyCompactList}\small\item\em Access function to the number of columns. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_a431b4a1aec80593b729aef89d26dd408}{trilinos\+\_\+multiply\+\_\+helper}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&y) const
+void \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_a431b4a1aec80593b729aef89d26dd408}{trilinos\+\_\+multiply\+\_\+helper}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&x, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&y) const
 \begin{DoxyCompactList}\small\item\em Helper function for multiply(...) \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_a192d6aba55af4354c22bc44ab9c9b064}{trilinos\+\_\+multiply\+\_\+transpose\+\_\+helper}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&y) const
+void \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_a192d6aba55af4354c22bc44ab9c9b064}{trilinos\+\_\+multiply\+\_\+transpose\+\_\+helper}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&x, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&y) const
 \begin{DoxyCompactList}\small\item\em Helper function for multiply\+\_\+transpose(...) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -154,11 +154,11 @@ Definition at line \mbox{\hyperlink{matrix__vector__product_8cc_source_l00108}{1
 
 
 
-References \mbox{\hyperlink{double__vector_8cc_source_l00035}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{double__vector_8h_source_l00154}{oomph\+::\+Double\+Vector\+::built()}}, \mbox{\hyperlink{matrix__vector__product_8h_source_l00137}{Column\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{matrices_8cc_source_l01782}{oomph\+::\+CRDouble\+Matrix\+::multiply()}}, \mbox{\hyperlink{matrix__vector__product_8h_source_l00133}{Oomph\+\_\+matrix\+\_\+pt}}, \mbox{\hyperlink{matrix__vector__product_8cc_source_l00242}{trilinos\+\_\+multiply\+\_\+helper()}}, \mbox{\hyperlink{matrix__vector__product_8h_source_l00130}{Using\+\_\+trilinos}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{double__vector_8cc_source_l00035}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{double__vector_8h_source_l00154}{oomph\+::\+Double\+Vector\+::built()}}, \mbox{\hyperlink{matrix__vector__product_8h_source_l00137}{Column\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{matrices_8cc_source_l01782}{oomph\+::\+CRDouble\+Matrix\+::multiply()}}, \mbox{\hyperlink{matrix__vector__product_8h_source_l00133}{Oomph\+\_\+matrix\+\_\+pt}}, \mbox{\hyperlink{matrix__vector__product_8cc_source_l00242}{trilinos\+\_\+multiply\+\_\+helper()}}, and \mbox{\hyperlink{matrix__vector__product_8h_source_l00130}{Using\+\_\+trilinos}}.
 
 
 
-Referenced by \mbox{\hyperlink{fsi__preconditioners_8h_source_l00373}{oomph\+::\+FSIPreconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00280}{oomph\+::\+Pseudo\+Elastic\+FSIPreconditioner\+::preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00482}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::preconditioner\+\_\+solve()}}.
+Referenced by \mbox{\hyperlink{fsi__preconditioners_8h_source_l00373}{oomph\+::\+FSIPreconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00280}{oomph\+::\+Pseudo\+Elastic\+FSIPreconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00658}{oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{solid__preconditioners_8cc_source_l00493}{oomph\+::\+Pressure\+Based\+Solid\+LSCPreconditioner\+::preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00482}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::preconditioner\+\_\+solve()}}.
 
 \mbox{\Hypertarget{classoomph_1_1MatrixVectorProduct_a2b7670797fe289ea814968f2f9469fd5}\label{classoomph_1_1MatrixVectorProduct_a2b7670797fe289ea814968f2f9469fd5}} 
 \index{oomph::MatrixVectorProduct@{oomph::MatrixVectorProduct}!multiply\_transpose@{multiply\_transpose}}
@@ -176,11 +176,11 @@ Definition at line \mbox{\hyperlink{matrix__vector__product_8cc_source_l00177}{1
 
 
 
-References \mbox{\hyperlink{double__vector_8cc_source_l00035}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{double__vector_8h_source_l00154}{oomph\+::\+Double\+Vector\+::built()}}, \mbox{\hyperlink{matrix__vector__product_8h_source_l00137}{Column\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{matrices_8cc_source_l01882}{oomph\+::\+CRDouble\+Matrix\+::multiply\+\_\+transpose()}}, \mbox{\hyperlink{matrix__vector__product_8h_source_l00133}{Oomph\+\_\+matrix\+\_\+pt}}, \mbox{\hyperlink{matrix__vector__product_8cc_source_l00287}{trilinos\+\_\+multiply\+\_\+transpose\+\_\+helper()}}, \mbox{\hyperlink{matrix__vector__product_8h_source_l00130}{Using\+\_\+trilinos}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{double__vector_8cc_source_l00035}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{double__vector_8h_source_l00154}{oomph\+::\+Double\+Vector\+::built()}}, \mbox{\hyperlink{matrix__vector__product_8h_source_l00137}{Column\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{matrices_8cc_source_l01882}{oomph\+::\+CRDouble\+Matrix\+::multiply\+\_\+transpose()}}, \mbox{\hyperlink{matrix__vector__product_8h_source_l00133}{Oomph\+\_\+matrix\+\_\+pt}}, \mbox{\hyperlink{matrix__vector__product_8cc_source_l00287}{trilinos\+\_\+multiply\+\_\+transpose\+\_\+helper()}}, and \mbox{\hyperlink{matrix__vector__product_8h_source_l00130}{Using\+\_\+trilinos}}.
 
 
 
-Referenced by \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00482}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::preconditioner\+\_\+solve()}}.
+Referenced by \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00658}{oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{solid__preconditioners_8cc_source_l00493}{oomph\+::\+Pressure\+Based\+Solid\+LSCPreconditioner\+::preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00482}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::preconditioner\+\_\+solve()}}.
 
 \mbox{\Hypertarget{classoomph_1_1MatrixVectorProduct_ab11a0763e2cc2ed4e74b06eea664b60e}\label{classoomph_1_1MatrixVectorProduct_ab11a0763e2cc2ed4e74b06eea664b60e}} 
 \index{oomph::MatrixVectorProduct@{oomph::MatrixVectorProduct}!ncol@{ncol}}
@@ -248,7 +248,7 @@ Definition at line \mbox{\hyperlink{matrix__vector__product_8cc_source_l00242}{2
 
 
 
-References \mbox{\hyperlink{trilinos__helpers_8cc_source_l00180}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::copy\+\_\+to\+\_\+oomphlib\+\_\+vector()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00041}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+vector()}}, \mbox{\hyperlink{matrix__vector__product_8h_source_l00125}{Epetra\+\_\+matrix\+\_\+pt}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{trilinos__helpers_8cc_source_l00180}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::copy\+\_\+to\+\_\+oomphlib\+\_\+vector()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00041}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+vector()}}, and \mbox{\hyperlink{matrix__vector__product_8h_source_l00125}{Epetra\+\_\+matrix\+\_\+pt}}.
 
 
 
@@ -270,7 +270,7 @@ Definition at line \mbox{\hyperlink{matrix__vector__product_8cc_source_l00287}{2
 
 
 
-References \mbox{\hyperlink{trilinos__helpers_8cc_source_l00180}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::copy\+\_\+to\+\_\+oomphlib\+\_\+vector()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00041}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+vector()}}, \mbox{\hyperlink{matrix__vector__product_8h_source_l00125}{Epetra\+\_\+matrix\+\_\+pt}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{trilinos__helpers_8cc_source_l00180}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::copy\+\_\+to\+\_\+oomphlib\+\_\+vector()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00041}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+vector()}}, and \mbox{\hyperlink{matrix__vector__product_8h_source_l00125}{Epetra\+\_\+matrix\+\_\+pt}}.
 
 
 

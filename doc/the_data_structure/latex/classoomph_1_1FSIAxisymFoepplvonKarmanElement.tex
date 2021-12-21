@@ -22,37 +22,37 @@ Inheritance diagram for oomph\+::FSIAxisym\+Foepplvon\+Karman\+Element\texorpdfs
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a27c344167ea99ac58d4212d871ae3af7}{$\sim$\+FSIAxisym\+Foepplvon\+Karman\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Empty virtual destructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \& \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a4000131f6a396a31c45bf4d8d87321c4}{q}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+const double \& \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a4000131f6a396a31c45bf4d8d87321c4}{q}} () const
 \begin{DoxyCompactList}\small\item\em Return the ratio of the stress scales used to non-\/dimensionalise the fluid and elasticity equations. \end{DoxyCompactList}\item 
 double $\ast$\& \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a8a8bd53195c6b68ee11a345752f6f689}{q\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return a pointer the ratio of stress scales used to non-\/dimensionalise the fluid and solid equations. \end{DoxyCompactList}\item 
-virtual unsigned \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_ad3b508a8c906a3e175f9c058a0103023}{ngeom\+\_\+data}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+virtual unsigned \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_ad3b508a8c906a3e175f9c058a0103023}{ngeom\+\_\+data}} () const
 \begin{DoxyCompactList}\small\item\em How many items of \mbox{\hyperlink{classoomph_1_1Data}{Data}} does the shape of the object depend on? All nodal data. \end{DoxyCompactList}\item 
-virtual \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a5bcf4b1b4e1d3126583096ee7e2b216d}{geom\+\_\+data\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&j)
+virtual \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a5bcf4b1b4e1d3126583096ee7e2b216d}{geom\+\_\+data\+\_\+pt}} (const unsigned \&j)
 \begin{DoxyCompactList}\small\item\em Return pointer to the j-\/th \mbox{\hyperlink{classoomph_1_1Data}{Data}} item that the object\textquotesingle{}s shape depends on. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a9fc819d4f7a036a45bd62a484c9749d7}{position}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&r) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a9fc819d4f7a036a45bd62a484c9749d7}{position}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&r) const
 \begin{DoxyCompactList}\small\item\em Overloaded position function\+: Return 2D position vector\+: (r(zeta),z(zeta)) of material point whose \char`\"{}\+Lagrangian coordinate\char`\"{} is given by zeta. Here r=zeta! \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a9c86ac02c60541d451ceb50eb49914ed}{position}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&r) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a9c86ac02c60541d451ceb50eb49914ed}{position}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&r) const
 \begin{DoxyCompactList}\small\item\em Overloaded position function\+: Return 2D position vector\+: (r(zeta),z(zeta)) of material point whose \char`\"{}\+Lagrangian coordinate\char`\"{} is given by zeta. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a83bf7fe6d4d9dc08400aa853198c716d}{dposition\+\_\+dt}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&j, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&drdt)
+void \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a83bf7fe6d4d9dc08400aa853198c716d}{dposition\+\_\+dt}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, const unsigned \&j, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&drdt)
 \begin{DoxyCompactList}\small\item\em j-\/th time-\/derivative on object at current time\+: $ \frac{d^{j} r(\zeta)}{dt^j} $. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a96b9277c8b9ff3ca40f25851fa30b34e}{get\+\_\+pressure\+\_\+fvk}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&r, double \&pressure) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+virtual void \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a96b9277c8b9ff3ca40f25851fa30b34e}{get\+\_\+pressure\+\_\+fvk}} (const unsigned \&ipt, const double \&r, double \&pressure) const
 \begin{DoxyCompactList}\small\item\em Overload pressure term at (Eulerian) position r. Adds fluid traction to pressure imposed by \char`\"{}pressure fct pointer\char`\"{} (which can be regarded as applying an external (i.\+e. \char`\"{}on the other side\char`\"{} of the fluid) pressure. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a8c7be29df60b6ed699d585c9e175333b}{output\+\_\+integration\+\_\+points}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Output integration points (for checking of fsi setup) \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a61bf4a77d5d6b44c037c2fa9d9e9453d}{output\+\_\+adjacent\+\_\+fluid\+\_\+elements}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&nplot)
+void \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a61bf4a77d5d6b44c037c2fa9d9e9453d}{output\+\_\+adjacent\+\_\+fluid\+\_\+elements}} (std\+::ostream \&outfile, const unsigned \&nplot)
 \begin{DoxyCompactList}\small\item\em Output adjacent fluid elements (for checking of fsi setup) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a4ab5ac225a4ecbd709e8bb5ce752f939}{update\+\_\+before\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+fd}} ()
 \begin{DoxyCompactList}\small\item\em Perform any auxiliary node update fcts of the adjacent fluid elements. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a1c8b7e327f305f8399e4d9a2d5deddff}{reset\+\_\+after\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+fd}} ()
 \begin{DoxyCompactList}\small\item\em Perform any auxiliary node update fcts of the adjacent fluid elements. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_ac3284ec67a975078466ec03d55f65416}{update\+\_\+in\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+fd}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+void \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_ac3284ec67a975078466ec03d55f65416}{update\+\_\+in\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+fd}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Perform any auxiliary node update fcts of the adjacent fluid elements. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_aea15fbe491357b33db4b0de7df957314}{reset\+\_\+in\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+fd}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+void \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_aea15fbe491357b33db4b0de7df957314}{reset\+\_\+in\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+fd}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Perform any auxiliary node update fcts of the adjacent fluid elements. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a21466ab3a24ac1f97af078a559a5679b}{node\+\_\+update\+\_\+adjacent\+\_\+fluid\+\_\+elements}} ()
 \begin{DoxyCompactList}\small\item\em Update the nodal positions in all fluid elements that affect the traction on this element. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a03c82e935db8c1c93dfe2f443ec5e817}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a03c82e935db8c1c93dfe2f443ec5e817}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em Output FE representation of soln\+: r,w,dwdt,sigma\+\_\+r\+\_\+r,sigma\+\_\+phi\+\_\+phi at n\+\_\+plot plot points. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -116,7 +116,7 @@ Definition at line \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00572}{572}
 \index{dposition\_dt@{dposition\_dt}!oomph::FSIAxisymFoepplvonKarmanElement$<$ NNODE\_1D, FLUID\_ELEMENT $>$@{oomph::FSIAxisymFoepplvonKarmanElement$<$ NNODE\_1D, FLUID\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{dposition\_dt()}{dposition\_dt()}}
 {\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D, class FLUID\+\_\+\+ELEMENT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D, FLUID\+\_\+\+ELEMENT $>$\+::dposition\+\_\+dt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{j,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{drdt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D, FLUID\+\_\+\+ELEMENT $>$\+::dposition\+\_\+dt (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{zeta,  }\item[{const unsigned \&}]{j,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{drdt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -132,7 +132,7 @@ Definition at line \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00648}{648}
 
 
 
-References \mbox{\hyperlink{timesteppers_8h_source_l00389}{oomph\+::\+Time\+Stepper\+::is\+\_\+steady()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00111}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::nodal\+\_\+index\+\_\+fvk()}}, \mbox{\hyperlink{elements_8h_source_l02598}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}, and \mbox{\hyperlink{timesteppers_8h_source_l00594}{oomph\+::\+Time\+Stepper\+::weight()}}.
+References \mbox{\hyperlink{timesteppers_8h_source_l00389}{oomph\+::\+Time\+Stepper\+::is\+\_\+steady()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00111}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::nodal\+\_\+index\+\_\+fvk()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00238}{oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt()}}, and \mbox{\hyperlink{timesteppers_8h_source_l00594}{oomph\+::\+Time\+Stepper\+::weight()}}.
 
 
 
@@ -143,7 +143,7 @@ Referenced by \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00864}{oomph\+::
 \index{geom\_data\_pt@{geom\_data\_pt}!oomph::FSIAxisymFoepplvonKarmanElement$<$ NNODE\_1D, FLUID\_ELEMENT $>$@{oomph::FSIAxisymFoepplvonKarmanElement$<$ NNODE\_1D, FLUID\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{geom\_data\_pt()}{geom\_data\_pt()}}
 {\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D, class FLUID\+\_\+\+ELEMENT $>$ \\
-virtual \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D, FLUID\+\_\+\+ELEMENT $>$\+::geom\+\_\+data\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+virtual \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D, FLUID\+\_\+\+ELEMENT $>$\+::geom\+\_\+data\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -159,14 +159,14 @@ Definition at line \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00597}{597}
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a96b9277c8b9ff3ca40f25851fa30b34e}\label{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a96b9277c8b9ff3ca40f25851fa30b34e}} 
 \index{oomph::FSIAxisymFoepplvonKarmanElement$<$ NNODE\_1D, FLUID\_ELEMENT $>$@{oomph::FSIAxisymFoepplvonKarmanElement$<$ NNODE\_1D, FLUID\_ELEMENT $>$}!get\_pressure\_fvk@{get\_pressure\_fvk}}
 \index{get\_pressure\_fvk@{get\_pressure\_fvk}!oomph::FSIAxisymFoepplvonKarmanElement$<$ NNODE\_1D, FLUID\_ELEMENT $>$@{oomph::FSIAxisymFoepplvonKarmanElement$<$ NNODE\_1D, FLUID\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{get\_pressure\_fvk()}{get\_pressure\_fvk()}}
 {\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D, class FLUID\+\_\+\+ELEMENT $>$ \\
-virtual void \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D, FLUID\+\_\+\+ELEMENT $>$\+::get\+\_\+pressure\+\_\+fvk (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{r,  }\item[{double \&}]{pressure }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+virtual void \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D, FLUID\+\_\+\+ELEMENT $>$\+::get\+\_\+pressure\+\_\+fvk (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{const double \&}]{r,  }\item[{double \&}]{pressure }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -205,7 +205,7 @@ Definition at line \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00590}{590}
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}.
+References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a21466ab3a24ac1f97af078a559a5679b}\label{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a21466ab3a24ac1f97af078a559a5679b}} 
 \index{oomph::FSIAxisymFoepplvonKarmanElement$<$ NNODE\_1D, FLUID\_ELEMENT $>$@{oomph::FSIAxisymFoepplvonKarmanElement$<$ NNODE\_1D, FLUID\_ELEMENT $>$}!node\_update\_adjacent\_fluid\_elements@{node\_update\_adjacent\_fluid\_elements}}
@@ -224,7 +224,7 @@ Definition at line \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00832}{832}
 
 
 
-References \mbox{\hyperlink{element__with__external__element_8h_source_l00107}{oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+pt()}}, and \mbox{\hyperlink{elements_8h_source_l01968}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}.
+References \mbox{\hyperlink{element__with__external__element_8h_source_l00107}{oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, and \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}.
 
 
 
@@ -235,7 +235,7 @@ Referenced by \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00808}{oomph\+::
 \index{output@{output}!oomph::FSIAxisymFoepplvonKarmanElement$<$ NNODE\_1D, FLUID\_ELEMENT $>$@{oomph::FSIAxisymFoepplvonKarmanElement$<$ NNODE\_1D, FLUID\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}}
 {\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D, class FLUID\+\_\+\+ELEMENT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D, FLUID\+\_\+\+ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D, FLUID\+\_\+\+ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -251,14 +251,14 @@ Definition at line \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00864}{864}
 
 
 
-References \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00648}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$\+::dposition\+\_\+dt()}}, \mbox{\hyperlink{elements_8h_source_l03153}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8cc_source_l00234}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::interpolated\+\_\+stress()}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00249}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::interpolated\+\_\+w\+\_\+fvk()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l03191}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00648}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$\+::dposition\+\_\+dt()}}, \mbox{\hyperlink{elements_8h_source_l03148}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8cc_source_l00234}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::interpolated\+\_\+stress()}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00249}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::interpolated\+\_\+w\+\_\+fvk()}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l03186}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a61bf4a77d5d6b44c037c2fa9d9e9453d}\label{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a61bf4a77d5d6b44c037c2fa9d9e9453d}} 
 \index{oomph::FSIAxisymFoepplvonKarmanElement$<$ NNODE\_1D, FLUID\_ELEMENT $>$@{oomph::FSIAxisymFoepplvonKarmanElement$<$ NNODE\_1D, FLUID\_ELEMENT $>$}!output\_adjacent\_fluid\_elements@{output\_adjacent\_fluid\_elements}}
 \index{output\_adjacent\_fluid\_elements@{output\_adjacent\_fluid\_elements}!oomph::FSIAxisymFoepplvonKarmanElement$<$ NNODE\_1D, FLUID\_ELEMENT $>$@{oomph::FSIAxisymFoepplvonKarmanElement$<$ NNODE\_1D, FLUID\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{output\_adjacent\_fluid\_elements()}{output\_adjacent\_fluid\_elements()}}
 {\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D, class FLUID\+\_\+\+ELEMENT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D, FLUID\+\_\+\+ELEMENT $>$\+::output\+\_\+adjacent\+\_\+fluid\+\_\+elements (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D, FLUID\+\_\+\+ELEMENT $>$\+::output\+\_\+adjacent\+\_\+fluid\+\_\+elements (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -270,7 +270,7 @@ Definition at line \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00783}{783}
 
 
 
-References \mbox{\hyperlink{element__with__external__element_8h_source_l00107}{oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+pt()}}, and \mbox{\hyperlink{elements_8h_source_l01968}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}.
+References \mbox{\hyperlink{element__with__external__element_8h_source_l00107}{oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, and \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a8c7be29df60b6ed699d585c9e175333b}\label{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a8c7be29df60b6ed699d585c9e175333b}} 
 \index{oomph::FSIAxisymFoepplvonKarmanElement$<$ NNODE\_1D, FLUID\_ELEMENT $>$@{oomph::FSIAxisymFoepplvonKarmanElement$<$ NNODE\_1D, FLUID\_ELEMENT $>$}!output\_integration\_points@{output\_integration\_points}}
@@ -289,14 +289,14 @@ Definition at line \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00734}{734}
 
 
 
-References \mbox{\hyperlink{element__with__external__element_8h_source_l00136}{oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+local\+\_\+coord()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00107}{oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l01968}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00111}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::nodal\+\_\+index\+\_\+fvk()}}, \mbox{\hyperlink{elements_8h_source_l02598}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{element__with__external__element_8h_source_l00136}{oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+local\+\_\+coord()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00107}{oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral\+::knot()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00111}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::nodal\+\_\+index\+\_\+fvk()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, and \mbox{\hyperlink{nodes_8h_source_l01060}{oomph\+::\+Node\+::x()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a9c86ac02c60541d451ceb50eb49914ed}\label{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a9c86ac02c60541d451ceb50eb49914ed}} 
 \index{oomph::FSIAxisymFoepplvonKarmanElement$<$ NNODE\_1D, FLUID\_ELEMENT $>$@{oomph::FSIAxisymFoepplvonKarmanElement$<$ NNODE\_1D, FLUID\_ELEMENT $>$}!position@{position}}
 \index{position@{position}!oomph::FSIAxisymFoepplvonKarmanElement$<$ NNODE\_1D, FLUID\_ELEMENT $>$@{oomph::FSIAxisymFoepplvonKarmanElement$<$ NNODE\_1D, FLUID\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{position()}{position()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D, class FLUID\+\_\+\+ELEMENT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D, FLUID\+\_\+\+ELEMENT $>$\+::position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D, FLUID\+\_\+\+ELEMENT $>$\+::position (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -312,14 +312,14 @@ Definition at line \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00614}{614}
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00111}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::nodal\+\_\+index\+\_\+fvk()}}, \mbox{\hyperlink{elements_8h_source_l02598}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00111}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::nodal\+\_\+index\+\_\+fvk()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{nodes_8h_source_l01060}{oomph\+::\+Node\+::x()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a9fc819d4f7a036a45bd62a484c9749d7}\label{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a9fc819d4f7a036a45bd62a484c9749d7}} 
 \index{oomph::FSIAxisymFoepplvonKarmanElement$<$ NNODE\_1D, FLUID\_ELEMENT $>$@{oomph::FSIAxisymFoepplvonKarmanElement$<$ NNODE\_1D, FLUID\_ELEMENT $>$}!position@{position}}
 \index{position@{position}!oomph::FSIAxisymFoepplvonKarmanElement$<$ NNODE\_1D, FLUID\_ELEMENT $>$@{oomph::FSIAxisymFoepplvonKarmanElement$<$ NNODE\_1D, FLUID\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{position()}{position()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D, class FLUID\+\_\+\+ELEMENT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D, FLUID\+\_\+\+ELEMENT $>$\+::position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D, FLUID\+\_\+\+ELEMENT $>$\+::position (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -346,7 +346,7 @@ Referenced by \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00605}{oomph\+::
 \index{q@{q}!oomph::FSIAxisymFoepplvonKarmanElement$<$ NNODE\_1D, FLUID\_ELEMENT $>$@{oomph::FSIAxisymFoepplvonKarmanElement$<$ NNODE\_1D, FLUID\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{q()}{q()}}
 {\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D, class FLUID\+\_\+\+ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \& \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D, FLUID\+\_\+\+ELEMENT $>$\+::q (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+const double \& \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D, FLUID\+\_\+\+ELEMENT $>$\+::q (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -411,7 +411,7 @@ References \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00832}{oomph\+::\+F
 \index{reset\_in\_external\_interaction\_geometric\_fd@{reset\_in\_external\_interaction\_geometric\_fd}!oomph::FSIAxisymFoepplvonKarmanElement$<$ NNODE\_1D, FLUID\_ELEMENT $>$@{oomph::FSIAxisymFoepplvonKarmanElement$<$ NNODE\_1D, FLUID\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{reset\_in\_external\_interaction\_geometric\_fd()}{reset\_in\_external\_interaction\_geometric\_fd()}}
 {\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D, class FLUID\+\_\+\+ELEMENT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D, FLUID\+\_\+\+ELEMENT $>$\+::reset\+\_\+in\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+fd (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D, FLUID\+\_\+\+ELEMENT $>$\+::reset\+\_\+in\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+fd (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -457,7 +457,7 @@ References \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00832}{oomph\+::\+F
 \index{update\_in\_external\_interaction\_geometric\_fd@{update\_in\_external\_interaction\_geometric\_fd}!oomph::FSIAxisymFoepplvonKarmanElement$<$ NNODE\_1D, FLUID\_ELEMENT $>$@{oomph::FSIAxisymFoepplvonKarmanElement$<$ NNODE\_1D, FLUID\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{update\_in\_external\_interaction\_geometric\_fd()}{update\_in\_external\_interaction\_geometric\_fd()}}
 {\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D, class FLUID\+\_\+\+ELEMENT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D, FLUID\+\_\+\+ELEMENT $>$\+::update\+\_\+in\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+fd (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D, FLUID\+\_\+\+ELEMENT $>$\+::update\+\_\+in\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+fd (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 

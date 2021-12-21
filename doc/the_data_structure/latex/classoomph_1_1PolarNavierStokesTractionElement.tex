@@ -18,53 +18,53 @@ Inheritance diagram for oomph\+::Polar\+Navier\+Stokes\+Traction\+Element\texorp
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \& \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_a03b319c4806bf762f52cd661118cecfc}{alpha}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+const double \& \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_a03b319c4806bf762f52cd661118cecfc}{alpha}} () const
 \begin{DoxyCompactList}\small\item\em Alpha. \end{DoxyCompactList}\item 
 double $\ast$\& \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_af7e23e98ee270702014d07481727cfda}{alpha\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Pointer to Alpha. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_ac1b44b5788d5f5f54905a011744f6511}{set\+\_\+external\+\_\+pressure\+\_\+data}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$pext\+\_\+data\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Function for setting up external pressure. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_a07805e640ad3179ad30d53e2210fa98e}{boundary}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+const int \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_a07805e640ad3179ad30d53e2210fa98e}{boundary}} () const
 \begin{DoxyCompactList}\small\item\em Boundary. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_ad014869b40a523b9fe81d8a816e069e2}{set\+\_\+boundary}} (int bound)
 \begin{DoxyCompactList}\small\item\em Function to set boundary. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_a9314ca8da5a3a8fcfff1bb14ce4963d5}{get\+\_\+eta}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+const double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_a9314ca8da5a3a8fcfff1bb14ce4963d5}{get\+\_\+eta}} () const
 \begin{DoxyCompactList}\small\item\em Eta. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_acf82a8786ed974bf6e3606b7c3f5ad8a}{set\+\_\+eta}} (double eta)
 \begin{DoxyCompactList}\small\item\em Function to set Eta. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_a4149e7be21b5028eb684db0488177f66}{Polar\+Navier\+Stokes\+Traction\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&element\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}})
+\mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_a4149e7be21b5028eb684db0488177f66}{Polar\+Navier\+Stokes\+Traction\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&element\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}})
 \begin{DoxyCompactList}\small\item\em Constructor, which takes a \char`\"{}bulk\char`\"{} element and the value of the index and its limit. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_a3ef9959b78ea2bea768f7c90ffae6e91}{$\sim$\+Polar\+Navier\+Stokes\+Traction\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Destructor should not delete anything. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_adedf328068563b40bf9b2a0cafcfe087}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em This function returns just the residuals. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_a4a8aea8b8278cb407348de86309e5074}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})
+void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_a4a8aea8b8278cb407348de86309e5074}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em This function returns the residuals and the jacobian. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_ab3d5f0fb4c4a3c9330ce0b3d99efd321}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix)
+void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_ab3d5f0fb4c4a3c9330ce0b3d99efd321}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix)
 \begin{DoxyCompactList}\small\item\em Compute the element\textquotesingle{}s residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} and the jacobian matrix Plus the mass matrix especially for eigenvalue problems. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_a0376005bcf22e0af08e071dba309a1d9}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Overload the output function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_af52b911eda2c01d9d124ad29d9be1004}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&nplot)
+void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_af52b911eda2c01d9d124ad29d9be1004}{output}} (std\+::ostream \&outfile, const unsigned \&nplot)
 \begin{DoxyCompactList}\small\item\em Output function\+: x,y,\mbox{[}z\mbox{]},u,v,\mbox{[}w\mbox{]},p in tecplot format. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_aa998536fa55d84030a856e6c08efb41f}{u}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&l, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_aa998536fa55d84030a856e6c08efb41f}{u}} (const unsigned \&l, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em local velocities \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_a9c89a9bed61686e2fb60717f133f8f02}{x}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&l, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_a9c89a9bed61686e2fb60717f133f8f02}{x}} (const unsigned \&l, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em local position \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-void($\ast$\&)(\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_a9c89a9bed61686e2fb60717f133f8f02}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result) \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_a786e1c56f487033d89dc3880f42d737b}{traction\+\_\+fct\+\_\+pt}} ()
+void($\ast$\&)(const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_a9c89a9bed61686e2fb60717f133f8f02}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result) \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_a786e1c56f487033d89dc3880f42d737b}{traction\+\_\+fct\+\_\+pt}} ()
 \end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-virtual int \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_ae49f57135d1fdd4ed3e4117b4e9c5801}{u\+\_\+local\+\_\+eqn}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+virtual int \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_ae49f57135d1fdd4ed3e4117b4e9c5801}{u\+\_\+local\+\_\+eqn}} (const unsigned \&n, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Access function that returns the local equation numbers for velocity components. u\+\_\+local\+\_\+eqn(n,i) = local equation number or \texorpdfstring{$<$}{<} 0 if pinned. The default is to asssume that n is the local node number and the i-\/th velocity component is the i-\/th unknown stored at the node. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_aa4c33668b9cf2a9c38cc10c72466f32d}{shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_aa4c33668b9cf2a9c38cc10c72466f32d}{shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) const
 \begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_a19fbac9a9a627b4565440c8ca38ce1da}{get\+\_\+traction}} (double time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_a9c89a9bed61686e2fb60717f133f8f02}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)
+void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_a19fbac9a9a627b4565440c8ca38ce1da}{get\+\_\+traction}} (double time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_a9c89a9bed61686e2fb60717f133f8f02}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)
 \begin{DoxyCompactList}\small\item\em Function to calculate the traction applied to the fluid. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_a5708f04fc0d30cc4a8000680adc8f2cf}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix, unsigned flag)
+void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_a5708f04fc0d30cc4a8000680adc8f2cf}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix, unsigned flag)
 \begin{DoxyCompactList}\small\item\em This function returns the residuals for the traction function. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -82,7 +82,7 @@ double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_ae80d473c
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-void($\ast$ \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_a6ed7d56215a72c40a48ddba355de0fb5}{Traction\+\_\+fct\+\_\+pt}} )(\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_a9c89a9bed61686e2fb60717f133f8f02}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)
+void($\ast$ \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_a6ed7d56215a72c40a48ddba355de0fb5}{Traction\+\_\+fct\+\_\+pt}} )(const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_a9c89a9bed61686e2fb60717f133f8f02}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)
 \begin{DoxyCompactList}\small\item\em Pointer to an imposed traction function. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_a7db691fc3415d54a2a2497a2d0b7aee5}{Dim}}
 \begin{DoxyCompactList}\small\item\em The highest dimension of the problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -104,7 +104,7 @@ Definition at line \mbox{\hyperlink{polar__fluid__traction__elements_8h_source_l
 \index{PolarNavierStokesTractionElement@{PolarNavierStokesTractionElement}!oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$@{oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{PolarNavierStokesTractionElement()}{PolarNavierStokesTractionElement()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement}{oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement}{Polar\+Navier\+Stokes\+Traction\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{element\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement}{oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement}{Polar\+Navier\+Stokes\+Traction\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{element\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -116,7 +116,7 @@ Definition at line \mbox{\hyperlink{polar__fluid__traction__elements_8h_source_l
 
 
 
-References \mbox{\hyperlink{classoomph_1_1FiniteElement_a025ab56ef9c6eea66fb34416fdf19152}{oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{polar__fluid__traction__elements_8h_source_l00062}{oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element$<$ ELEMENT $>$\+::\+Dim}}, \mbox{\hyperlink{elements_8h_source_l04654}{oomph\+::\+Face\+Element\+::face\+\_\+index()}}, \mbox{\hyperlink{elements_8h_source_l02475}{oomph\+::\+Finite\+Element\+::has\+\_\+hanging\+\_\+nodes()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{polar__fluid__traction__elements_8h_source_l00127}{oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element$<$ ELEMENT $>$\+::\+Pext\+\_\+data\+\_\+pt}}, and \mbox{\hyperlink{polar__fluid__traction__elements_8h_source_l00057}{oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element$<$ ELEMENT $>$\+::\+Traction\+\_\+fct\+\_\+pt}}.
+References \mbox{\hyperlink{elements_8cc_source_l05132}{oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{polar__fluid__traction__elements_8h_source_l00062}{oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element$<$ ELEMENT $>$\+::\+Dim}}, \mbox{\hyperlink{elements_8h_source_l04626}{oomph\+::\+Face\+Element\+::face\+\_\+index()}}, \mbox{\hyperlink{elements_8h_source_l02470}{oomph\+::\+Finite\+Element\+::has\+\_\+hanging\+\_\+nodes()}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{polar__fluid__traction__elements_8h_source_l00127}{oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element$<$ ELEMENT $>$\+::\+Pext\+\_\+data\+\_\+pt}}, and \mbox{\hyperlink{polar__fluid__traction__elements_8h_source_l00057}{oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element$<$ ELEMENT $>$\+::\+Traction\+\_\+fct\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1PolarNavierStokesTractionElement_a3ef9959b78ea2bea768f7c90ffae6e91}\label{classoomph_1_1PolarNavierStokesTractionElement_a3ef9959b78ea2bea768f7c90ffae6e91}} 
 \index{oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$@{oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$}!````~PolarNavierStokesTractionElement@{$\sim$PolarNavierStokesTractionElement}}
@@ -141,7 +141,7 @@ Definition at line \mbox{\hyperlink{polar__fluid__traction__elements_8h_source_l
 \index{alpha@{alpha}!oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$@{oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{alpha()}{alpha()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \& \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement}{oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element}}$<$ ELEMENT $>$\+::alpha (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+const double \& \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement}{oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element}}$<$ ELEMENT $>$\+::alpha (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -179,7 +179,7 @@ References \mbox{\hyperlink{polar__fluid__traction__elements_8h_source_l00124}{o
 \index{boundary@{boundary}!oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$@{oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{boundary()}{boundary()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement}{oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element}}$<$ ELEMENT $>$\+::boundary (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+const int \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement}{oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element}}$<$ ELEMENT $>$\+::boundary (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -214,7 +214,7 @@ Definition at line \mbox{\hyperlink{polar__fluid__traction__elements_8h_source_l
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00227}{oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix}}, \mbox{\hyperlink{polar__fluid__traction__elements_8h_source_l00317}{oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution()}}, and \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}.
+References \mbox{\hyperlink{elements_8h_source_l00227}{oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix}}, and \mbox{\hyperlink{polar__fluid__traction__elements_8h_source_l00317}{oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PolarNavierStokesTractionElement_ab3d5f0fb4c4a3c9330ce0b3d99efd321}\label{classoomph_1_1PolarNavierStokesTractionElement_ab3d5f0fb4c4a3c9330ce0b3d99efd321}} 
 \index{oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$@{oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix@{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix}}
@@ -237,7 +237,7 @@ Definition at line \mbox{\hyperlink{polar__fluid__traction__elements_8h_source_l
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00227}{oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix}}, \mbox{\hyperlink{polar__fluid__traction__elements_8h_source_l00317}{oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution()}}, and \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}.
+References \mbox{\hyperlink{elements_8h_source_l00227}{oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix}}, and \mbox{\hyperlink{polar__fluid__traction__elements_8h_source_l00317}{oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PolarNavierStokesTractionElement_adedf328068563b40bf9b2a0cafcfe087}\label{classoomph_1_1PolarNavierStokesTractionElement_adedf328068563b40bf9b2a0cafcfe087}} 
 \index{oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$@{oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
@@ -297,7 +297,7 @@ Definition at line \mbox{\hyperlink{polar__fluid__traction__elements_8h_source_l
 
 
 
-References \mbox{\hyperlink{multi__domain_8cc_source_l00060}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Dim}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l00293}{oomph\+::\+Data\+::value()}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}.
+References \mbox{\hyperlink{multi__domain_8cc_source_l00060}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Dim}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l00293}{oomph\+::\+Data\+::value()}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
 
 
 
@@ -308,7 +308,7 @@ Referenced by \mbox{\hyperlink{polar__fluid__traction__elements_8h_source_l00260
 \index{get\_eta@{get\_eta}!oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$@{oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{get\_eta()}{get\_eta()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement}{oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element}}$<$ ELEMENT $>$\+::get\+\_\+eta (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+const double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement}{oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element}}$<$ ELEMENT $>$\+::get\+\_\+eta (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -327,7 +327,7 @@ References \mbox{\hyperlink{polar__fluid__traction__elements_8h_source_l00140}{o
 \index{get\_traction@{get\_traction}!oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$@{oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{get\_traction()}{get\_traction()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement}{oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element}}$<$ ELEMENT $>$\+::get\+\_\+traction (\begin{DoxyParamCaption}\item[{double}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement}{oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element}}$<$ ELEMENT $>$\+::get\+\_\+traction (\begin{DoxyParamCaption}\item[{double}]{time,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -362,14 +362,14 @@ Definition at line \mbox{\hyperlink{polar__fluid__traction__elements_8h_source_l
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
+References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PolarNavierStokesTractionElement_af52b911eda2c01d9d124ad29d9be1004}\label{classoomph_1_1PolarNavierStokesTractionElement_af52b911eda2c01d9d124ad29d9be1004}} 
 \index{oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$@{oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$}!output@{output}}
 \index{output@{output}!oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$@{oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement}{oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element}}$<$ ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement}{oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element}}$<$ ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -385,7 +385,7 @@ Definition at line \mbox{\hyperlink{polar__fluid__traction__elements_8h_source_l
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
+References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PolarNavierStokesTractionElement_ad014869b40a523b9fe81d8a816e069e2}\label{classoomph_1_1PolarNavierStokesTractionElement_ad014869b40a523b9fe81d8a816e069e2}} 
 \index{oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$@{oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$}!set\_boundary@{set\_boundary}}
@@ -449,7 +449,7 @@ References \mbox{\hyperlink{elements_8cc_source_l00307}{oomph\+::\+Generalised\+
 \index{shape\_and\_test\_at\_knot@{shape\_and\_test\_at\_knot}!oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$@{oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{shape\_and\_test\_at\_knot()}{shape\_and\_test\_at\_knot()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement}{oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element}}$<$ ELEMENT $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement}{oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element}}$<$ ELEMENT $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -461,14 +461,14 @@ Definition at line \mbox{\hyperlink{polar__fluid__traction__elements_8h_source_l
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l05332}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a2de680722518136b5c6bf2aacc267a31}{oomph\+::\+Finite\+Element\+::shape\+\_\+at\+\_\+knot()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l05328}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8cc_source_l03220}{oomph\+::\+Finite\+Element\+::shape\+\_\+at\+\_\+knot()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PolarNavierStokesTractionElement_aa998536fa55d84030a856e6c08efb41f}\label{classoomph_1_1PolarNavierStokesTractionElement_aa998536fa55d84030a856e6c08efb41f}} 
 \index{oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$@{oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$}!u@{u}}
 \index{u@{u}!oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$@{oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{u()}{u()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement}{oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element}}$<$ ELEMENT $>$\+::u (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{l,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement}{oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element}}$<$ ELEMENT $>$\+::u (\begin{DoxyParamCaption}\item[{const unsigned \&}]{l,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -480,14 +480,14 @@ Definition at line \mbox{\hyperlink{polar__fluid__traction__elements_8h_source_l
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l02598}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PolarNavierStokesTractionElement_ae49f57135d1fdd4ed3e4117b4e9c5801}\label{classoomph_1_1PolarNavierStokesTractionElement_ae49f57135d1fdd4ed3e4117b4e9c5801}} 
 \index{oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$@{oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$}!u\_local\_eqn@{u\_local\_eqn}}
 \index{u\_local\_eqn@{u\_local\_eqn}!oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$@{oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{u\_local\_eqn()}{u\_local\_eqn()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-virtual int \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement}{oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element}}$<$ ELEMENT $>$\+::u\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+virtual int \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement}{oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element}}$<$ ELEMENT $>$\+::u\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -506,7 +506,7 @@ References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink
 \index{x@{x}!oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$@{oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{x()}{x()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement}{oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element}}$<$ ELEMENT $>$\+::x (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{l,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement}{oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element}}$<$ ELEMENT $>$\+::x (\begin{DoxyParamCaption}\item[{const unsigned \&}]{l,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -518,7 +518,7 @@ Definition at line \mbox{\hyperlink{polar__fluid__traction__elements_8h_source_l
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l02322}{oomph\+::\+Finite\+Element\+::nodal\+\_\+position()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l02317}{oomph\+::\+Finite\+Element\+::nodal\+\_\+position()}}.
 
 
 
@@ -638,7 +638,7 @@ Referenced by \mbox{\hyperlink{polar__fluid__traction__elements_8h_source_l00192
 \index{traction\_fct\_pt@{traction\_fct\_pt}!oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$@{oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{traction\_fct\_pt}{traction\_fct\_pt}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-void($\ast$\&)(\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_a9c89a9bed61686e2fb60717f133f8f02}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result) \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement}{oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element}}$<$ ELEMENT $>$\+::traction\+\_\+fct\+\_\+pt()\hspace{0.3cm}{\ttfamily [inline]}}
+void($\ast$\&)(const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_a9c89a9bed61686e2fb60717f133f8f02}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result) \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement}{oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element}}$<$ ELEMENT $>$\+::traction\+\_\+fct\+\_\+pt()\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -649,7 +649,7 @@ Definition at line \mbox{\hyperlink{polar__fluid__traction__elements_8h_source_l
 \index{Traction\_fct\_pt@{Traction\_fct\_pt}!oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$@{oomph::PolarNavierStokesTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Traction\_fct\_pt}{Traction\_fct\_pt}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-void($\ast$ \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement}{oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element}}$<$ ELEMENT $>$\+::Traction\+\_\+fct\+\_\+pt) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_a9c89a9bed61686e2fb60717f133f8f02}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)\hspace{0.3cm}{\ttfamily [private]}}
+void($\ast$ \mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement}{oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element}}$<$ ELEMENT $>$\+::Traction\+\_\+fct\+\_\+pt) (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1PolarNavierStokesTractionElement_a9c89a9bed61686e2fb60717f133f8f02}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)\hspace{0.3cm}{\ttfamily [private]}}
 
 
 

@@ -20,7 +20,7 @@ Inheritance diagram for oomph\+::Refineable\+Solid\+QElement\texorpdfstring{$<$}
 \item 
 \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_011_01_4_a018251a542881b575e5994c4bf42fcf8}{Refineable\+Solid\+QElement}} ()
 \begin{DoxyCompactList}\small\item\em Constructor, just call the constructor of the \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_011_01_4}{Refineable\+QElement$<$1$>$}} \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_011_01_4_a49caf4ceb2a0618945a82c17239ef1a8}{Refineable\+Solid\+QElement}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement}{Refineable\+Solid\+QElement}}$<$ 1 $>$ \&dummy)=delete
+\mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_011_01_4_a49caf4ceb2a0618945a82c17239ef1a8}{Refineable\+Solid\+QElement}} (const \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement}{Refineable\+Solid\+QElement}}$<$ 1 $>$ \&dummy)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_011_01_4_ab930f7bef6bac1e6d6ac4a0e93bb8149}{$\sim$\+Refineable\+Solid\+QElement}} ()
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
@@ -28,9 +28,9 @@ void \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_011_01_4_ae0cd264b
 \begin{DoxyCompactList}\small\item\em Final over-\/ride\+: Use version in \mbox{\hyperlink{classoomph_1_1QSolidElementBase}{QSolid\+Element\+Base}}. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_011_01_4_a9dd7e2622260d14c2bf92125707a3401}{set\+\_\+macro\+\_\+elem\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a801bbe89619c28e181afa8fa3e9ac836}{macro\+\_\+elem\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a2c4a2681d29251acc0af8e7d95227cad}{undeformed\+\_\+macro\+\_\+elem\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Final over-\/ride\+: Use version in \mbox{\hyperlink{classoomph_1_1QSolidElementBase}{QSolid\+Element\+Base}}. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_011_01_4_a61a037cc3669af9204c9fa764e5c7081}{get\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})
+void \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_011_01_4_a61a037cc3669af9204c9fa764e5c7081}{get\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em Use the generic finite difference routine defined in \mbox{\hyperlink{classoomph_1_1RefineableSolidElement}{Refineable\+Solid\+Element}} to calculate the Jacobian matrix. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_011_01_4_a2adf7dd8c95f3efac2c3fc845d73be80}{build}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ Node $\ast$ $>$ \&new\+\_\+node\+\_\+pt, bool \&was\+\_\+already\+\_\+built, std\+::ofstream \&new\+\_\+nodes\+\_\+file)
+void \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_011_01_4_a2adf7dd8c95f3efac2c3fc845d73be80}{build}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ \&new\+\_\+node\+\_\+pt, bool \&was\+\_\+already\+\_\+built, std\+::ofstream \&new\+\_\+nodes\+\_\+file)
 \begin{DoxyCompactList}\small\item\em Build the element, i.\+e. give it nodal positions, apply BCs, etc. Incl. documention into new\+\_\+nodes\+\_\+file. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -65,7 +65,7 @@ References \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Glo
 \index{oomph::RefineableSolidQElement$<$ 1 $>$@{oomph::RefineableSolidQElement$<$ 1 $>$}!RefineableSolidQElement@{RefineableSolidQElement}}
 \index{RefineableSolidQElement@{RefineableSolidQElement}!oomph::RefineableSolidQElement$<$ 1 $>$@{oomph::RefineableSolidQElement$<$ 1 $>$}}
 \doxysubsubsection{\texorpdfstring{RefineableSolidQElement()}{RefineableSolidQElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement}{oomph\+::\+Refineable\+Solid\+QElement}}$<$ 1 $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableSolidQElement}{Refineable\+Solid\+QElement}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement}{Refineable\+Solid\+QElement}}$<$ 1 $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement}{oomph\+::\+Refineable\+Solid\+QElement}}$<$ 1 $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableSolidQElement}{Refineable\+Solid\+QElement}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement}{Refineable\+Solid\+QElement}}$<$ 1 $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
@@ -92,7 +92,7 @@ Definition at line \mbox{\hyperlink{refineable__line__element_8h_source_l00213}{
 \index{oomph::RefineableSolidQElement$<$ 1 $>$@{oomph::RefineableSolidQElement$<$ 1 $>$}!build@{build}}
 \index{build@{build}!oomph::RefineableSolidQElement$<$ 1 $>$@{oomph::RefineableSolidQElement$<$ 1 $>$}}
 \doxysubsubsection{\texorpdfstring{build()}{build()}}
-{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement}{oomph\+::\+Refineable\+Solid\+QElement}}$<$ 1 $>$\+::build (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ Node $\ast$ $>$ \&}]{new\+\_\+node\+\_\+pt,  }\item[{bool \&}]{was\+\_\+already\+\_\+built,  }\item[{std\+::ofstream \&}]{new\+\_\+nodes\+\_\+file }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement}{oomph\+::\+Refineable\+Solid\+QElement}}$<$ 1 $>$\+::build (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ \&}]{new\+\_\+node\+\_\+pt,  }\item[{bool \&}]{was\+\_\+already\+\_\+built,  }\item[{std\+::ofstream \&}]{new\+\_\+nodes\+\_\+file }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 

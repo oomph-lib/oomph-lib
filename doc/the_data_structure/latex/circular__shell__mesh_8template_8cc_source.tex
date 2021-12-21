@@ -58,7 +58,7 @@
 \DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8cc_source_l00054}00054     \textcolor{comment}{// coordinates that are set by the generic mesh generator}}
 \DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8cc_source_l00055}00055     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_node; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8cc_source_l00056}00056     \{}
-\DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8cc_source_l00057}00057       node\_pt(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})-\/>xi(0) = scaled\_x(node\_pt(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})-\/>\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(0));}
+\DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8cc_source_l00057}00057       node\_pt(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})-\/>xi(0) = scaled\_x(node\_pt(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})-\/>x(0));}
 \DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8cc_source_l00058}00058       node\_pt(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})-\/>xi(1) = node\_pt(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})-\/>x(1);}
 \DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8cc_source_l00059}00059     \}}
 \DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8cc_source_l00060}00060 }
@@ -80,11 +80,11 @@
 \DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8cc_source_l00076}00076       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < n\_node; j++)}
 \DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8cc_source_l00077}00077       \{}
 \DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8cc_source_l00078}00078         \mbox{\hyperlink{classoomph_1_1SolidNode}{SolidNode}}* nod\_pt = \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1SolidNode}{SolidNode}}*\textcolor{keyword}{>}(el\_pt-\/>node\_pt(j));}
-\DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8cc_source_l00079}00079         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}} = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1SolidNode_aa6780c66ed3f5db5cbb8fe2c0a476974}{xi}}(0);}
+\DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8cc_source_l00079}00079         \textcolor{keywordtype}{double} x = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1SolidNode_aa6780c66ed3f5db5cbb8fe2c0a476974}{xi}}(0);}
 \DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8cc_source_l00080}00080         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < n\_node; k++)}
 \DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8cc_source_l00081}00081         \{}
 \DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8cc_source_l00082}00082           \textcolor{keywordtype}{double} dx =}
-\DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8cc_source_l00083}00083             fabs(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}} -\/ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1SolidNode}{SolidNode}}*\textcolor{keyword}{>}(el\_pt-\/>node\_pt(k))-\/>\mbox{\hyperlink{classoomph_1_1SolidNode_aa6780c66ed3f5db5cbb8fe2c0a476974}{xi}}(0));}
+\DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8cc_source_l00083}00083             fabs(x -\/ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1SolidNode}{SolidNode}}*\textcolor{keyword}{>}(el\_pt-\/>node\_pt(k))-\/>\mbox{\hyperlink{classoomph_1_1SolidNode_aa6780c66ed3f5db5cbb8fe2c0a476974}{xi}}(0));}
 \DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8cc_source_l00084}00084           \textcolor{keywordflow}{if} (dx < min\_dx[nod\_pt])}
 \DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8cc_source_l00085}00085           \{}
 \DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8cc_source_l00086}00086             \textcolor{keywordflow}{if} (dx != 0.0) min\_dx[nod\_pt] = dx;}

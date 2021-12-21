@@ -24,7 +24,7 @@ Inheritance diagram for oomph\+::Algebraic\+Element\+Base\+:\begin{figure}[H]
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AlgebraicElementBase_a5382e00534e9afb9aafbe6e7a1a730bb}{operator=}} (const \mbox{\hyperlink{classoomph_1_1AlgebraicElementBase}{Algebraic\+Element\+Base}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AlgebraicElementBase_ab9ada27015d5cb28ae00b086ace3600f}{setup\+\_\+algebraic\+\_\+node\+\_\+update}} (Node $\ast$\&node\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&s\+\_\+father, \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$father\+\_\+el\+\_\+pt) const
+void \mbox{\hyperlink{classoomph_1_1AlgebraicElementBase_ab9ada27015d5cb28ae00b086ace3600f}{setup\+\_\+algebraic\+\_\+node\+\_\+update}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$\&node\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&s\+\_\+father, \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$father\+\_\+el\+\_\+pt) const
 \begin{DoxyCompactList}\small\item\em Set up node update info for (newly created) algebraic node\+: I.\+e. work out its node update information by interpolation from the father element. Pass pointer to father element and the newly created node\textquotesingle{}s local coordinate in the father element. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -79,7 +79,7 @@ Broken assignment operator.
 \index{oomph::AlgebraicElementBase@{oomph::AlgebraicElementBase}!setup\_algebraic\_node\_update@{setup\_algebraic\_node\_update}}
 \index{setup\_algebraic\_node\_update@{setup\_algebraic\_node\_update}!oomph::AlgebraicElementBase@{oomph::AlgebraicElementBase}}
 \doxysubsubsection{\texorpdfstring{setup\_algebraic\_node\_update()}{setup\_algebraic\_node\_update()}}
-{\footnotesize\ttfamily void oomph\+::\+Algebraic\+Element\+Base\+::setup\+\_\+algebraic\+\_\+node\+\_\+update (\begin{DoxyParamCaption}\item[{Node $\ast$\&}]{node\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s\+\_\+father,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$}]{father\+\_\+el\+\_\+pt }\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily void oomph\+::\+Algebraic\+Element\+Base\+::setup\+\_\+algebraic\+\_\+node\+\_\+update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$\&}]{node\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s\+\_\+father,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$}]{father\+\_\+el\+\_\+pt }\end{DoxyParamCaption}) const}
 
 
 
@@ -93,7 +93,7 @@ Definition at line \mbox{\hyperlink{algebraic__elements_8cc_source_l00048}{48}} 
 
 
 
-References \mbox{\hyperlink{algebraic__elements_8h_source_l00280}{oomph\+::\+Algebraic\+Node\+::add\+\_\+node\+\_\+update\+\_\+info()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00170}{oomph\+::\+Algebraic\+Node\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{algebraic__elements_8cc_source_l00231}{oomph\+::\+Algebraic\+Node\+::node\+\_\+update()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00235}{oomph\+::\+Algebraic\+Node\+::nref\+\_\+value()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, \mbox{\hyperlink{classoomph_1_1AlgebraicMesh_a6c6a35ae2be6e2766f5b80d85693c1ce}{oomph\+::\+Algebraic\+Mesh\+::update\+\_\+node\+\_\+update()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00200}{oomph\+::\+Algebraic\+Node\+::vector\+\_\+geom\+\_\+object\+\_\+pt()}}, and \mbox{\hyperlink{algebraic__elements_8h_source_l00251}{oomph\+::\+Algebraic\+Node\+::vector\+\_\+ref\+\_\+value()}}.
+References \mbox{\hyperlink{algebraic__elements_8h_source_l00280}{oomph\+::\+Algebraic\+Node\+::add\+\_\+node\+\_\+update\+\_\+info()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00170}{oomph\+::\+Algebraic\+Node\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{algebraic__elements_8cc_source_l00231}{oomph\+::\+Algebraic\+Node\+::node\+\_\+update()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00235}{oomph\+::\+Algebraic\+Node\+::nref\+\_\+value()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, \mbox{\hyperlink{classoomph_1_1AlgebraicMesh_a6c6a35ae2be6e2766f5b80d85693c1ce}{oomph\+::\+Algebraic\+Mesh\+::update\+\_\+node\+\_\+update()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00200}{oomph\+::\+Algebraic\+Node\+::vector\+\_\+geom\+\_\+object\+\_\+pt()}}, and \mbox{\hyperlink{algebraic__elements_8h_source_l00251}{oomph\+::\+Algebraic\+Node\+::vector\+\_\+ref\+\_\+value()}}.
 
 
 

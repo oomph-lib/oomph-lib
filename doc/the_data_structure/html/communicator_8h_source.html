@@ -417,7 +417,7 @@ $(function() {
 <div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>    }</div>
 <div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span><span class="comment"></span> </div>
 <div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span><span class="comment">    /// broadcast function for Vector&lt;int&gt;</span></div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span><span class="comment"></span>    <span class="keywordtype">void</span> broadcast(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; source, Vector&lt;int&gt;&amp; <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>)</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span><span class="comment"></span>    <span class="keywordtype">void</span> broadcast(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; source, Vector&lt;int&gt;&amp; x)</div>
 <div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>    {</div>
 <div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>      <span class="keywordtype">int</span> n;</div>
 <div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span> </div>
@@ -425,7 +425,7 @@ $(function() {
 <div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>      <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> n_long;</div>
 <div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>      <span class="keywordflow">if</span> (this-&gt;my_rank() == source)</div>
 <div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>      {</div>
-<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>        n_long = <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>.size();</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>        n_long = x.size();</div>
 <div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span> </div>
 <div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>        <span class="comment">// Convert to int</span></div>
 <div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>        n = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(n_long);</div>
@@ -437,15 +437,15 @@ $(function() {
 <div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>      <span class="comment">// Resize Vector everywhere else in preparation</span></div>
 <div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>      <span class="keywordflow">if</span> (this-&gt;my_rank() != source)</div>
 <div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>      {</div>
-<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>        <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>.resize(n);</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>        x.resize(n);</div>
 <div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>      }</div>
 <div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span> </div>
 <div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>      <span class="comment">// Broadcast the Vector directly</span></div>
-<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>      MPI_Bcast(&amp;<a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>[0], n, MPI_INT, source, this-&gt;mpi_comm());</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>      MPI_Bcast(&amp;x[0], n, MPI_INT, source, this-&gt;mpi_comm());</div>
 <div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>    }</div>
 <div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span><span class="comment"></span> </div>
 <div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span><span class="comment">    /// broadcast function for Vector&lt;double&gt;</span></div>
-<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span><span class="comment"></span>    <span class="keywordtype">void</span> broadcast(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; source, Vector&lt;double&gt;&amp; <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>)</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span><span class="comment"></span>    <span class="keywordtype">void</span> broadcast(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; source, Vector&lt;double&gt;&amp; x)</div>
 <div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>    {</div>
 <div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>      <span class="keywordtype">int</span> n;</div>
 <div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span> </div>
@@ -453,7 +453,7 @@ $(function() {
 <div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>      <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> n_long;</div>
 <div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>      <span class="keywordflow">if</span> (this-&gt;my_rank() == source)</div>
 <div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>      {</div>
-<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>        n_long = <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>.size();</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>        n_long = x.size();</div>
 <div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span> </div>
 <div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>        <span class="comment">// Convert to int</span></div>
 <div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>        n = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(n_long);</div>
@@ -465,15 +465,15 @@ $(function() {
 <div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>      <span class="comment">// Resize Vector everywhere else in preparation</span></div>
 <div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>      <span class="keywordflow">if</span> (this-&gt;my_rank() != source)</div>
 <div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>      {</div>
-<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>        <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>.resize(n);</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>        x.resize(n);</div>
 <div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>      }</div>
 <div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span> </div>
 <div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>      <span class="comment">// Broadcast the Vector directly</span></div>
-<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>      MPI_Bcast(&amp;<a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>[0], n, MPI_DOUBLE, source, this-&gt;mpi_comm());</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>      MPI_Bcast(&amp;x[0], n, MPI_DOUBLE, source, this-&gt;mpi_comm());</div>
 <div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>    }</div>
 <div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span><span class="comment"></span> </div>
 <div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span><span class="comment">    /// broadcast function for DenseMatrix&lt;double&gt;</span></div>
-<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span><span class="comment"></span>    <span class="keywordtype">void</span> broadcast(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; source, DenseMatrix&lt;double&gt;&amp; <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>);</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span><span class="comment"></span>    <span class="keywordtype">void</span> broadcast(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; source, DenseMatrix&lt;double&gt;&amp; x);</div>
 <div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span> </div>
 <div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span> </div>
@@ -503,7 +503,6 @@ $(function() {
 <div class="ttc" id="aclassoomph_1_1OomphCommunicator_html_af94e5be435b9cf1b01bed6242a5e46fe"><div class="ttname"><a href="classoomph_1_1OomphCommunicator.html#af94e5be435b9cf1b01bed6242a5e46fe">oomph::OomphCommunicator::OomphCommunicator</a></div><div class="ttdeci">OomphCommunicator(const MPI_Comm mpi_communicator, const bool &amp;owns_mpi_comm=false)</div><div class="ttdoc">Construct a communicator from a MPI_Comm object. if the bool owns_mpi_comm is true then this communic...</div><div class="ttdef"><b>Definition:</b> <a href="communicator_8h_source.html#l00061">communicator.h:61</a></div></div>
 <div class="ttc" id="anamespaceoomph_1_1DoubleVectorHelpers_html_a3c0fa6de2c35301c556b9530c9ab2bc4"><div class="ttname"><a href="namespaceoomph_1_1DoubleVectorHelpers.html#a3c0fa6de2c35301c556b9530c9ab2bc4">oomph::DoubleVectorHelpers::split</a></div><div class="ttdeci">void split(const DoubleVector &amp;in_vector, Vector&lt; DoubleVector * &gt; &amp;out_vector_pt)</div><div class="ttdoc">Split a DoubleVector into the out DoubleVectors. Let vec_A be the in Vector, and let vec_B and vec_C ...</div><div class="ttdef"><b>Definition:</b> <a href="double__vector_8cc_source.html#l01413">double_vector.cc:1413</a></div></div>
 <div class="ttc" id="anamespaceoomph_html"><div class="ttname"><a href="namespaceoomph.html">oomph</a></div><div class="ttdoc">//////////////////////////////////////////////////////////////////// ////////////////////////////////...</div><div class="ttdef"><b>Definition:</b> <a href="advection__diffusion__elements_8cc_source.html#l00029">advection_diffusion_elements.cc:30</a></div></div>
-<div class="ttc" id="anamespaceoomph_html_a9d1d2da2b8bb8e73af72b5cadb8fe97c"><div class="ttname"><a href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">oomph::x</a></div><div class="ttdeci">x</div><div class="ttdoc">Pseudo buckling ring: Circular ring deformed by the N-th buckling mode of a thin-wall elastic ring.</div><div class="ttdef"><b>Definition:</b> <a href="pseudo__buckling__ring_8h_source.html#l00049">pseudo_buckling_ring.h:49</a></div></div>
 <div class="ttc" id="aoomph__definitions_8h_html"><div class="ttname"><a href="oomph__definitions_8h.html">oomph_definitions.h</a></div></div>
 <div class="ttc" id="aoomph__utilities_8h_html"><div class="ttname"><a href="oomph__utilities_8h.html">oomph_utilities.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
@@ -534,7 +533,7 @@ $(function() {
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Nov 2 2021 16:31:08
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Dec 21 2021 17:35:06
         </div>
       </div>
     </footer>

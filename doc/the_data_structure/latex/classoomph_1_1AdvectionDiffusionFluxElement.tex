@@ -18,44 +18,44 @@ Inheritance diagram for oomph\+::Advection\+Diffusion\+Flux\+Element\texorpdfstr
 \doxysubsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_aeb9eb0a65d6dfe3673f6910a6fd7cf59}{Advection\+Diffusion\+Prescribed\+Flux\+Fct\+Pt}}) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, double \&flux)
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_aeb9eb0a65d6dfe3673f6910a6fd7cf59}{Advection\+Diffusion\+Prescribed\+Flux\+Fct\+Pt}}) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&flux)
 \begin{DoxyCompactList}\small\item\em Function pointer to the prescribed-\/flux function fct(x,f(x)) -- x is a Vector! \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_acdb4a523d9680f6f42128044591c73e0}{Advection\+Diffusion\+Flux\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&bulk\+\_\+el\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}})
+\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_acdb4a523d9680f6f42128044591c73e0}{Advection\+Diffusion\+Flux\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&bulk\+\_\+el\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}})
 \begin{DoxyCompactList}\small\item\em Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the index of the face to be created. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_af91991cc6e255d038f0f8443e0339643}{Advection\+Diffusion\+Flux\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Broken empty constructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_a40817103c71c931dcacaa10234302d71}{Advection\+Diffusion\+Flux\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{Advection\+Diffusion\+Flux\+Element}} \&dummy)=delete
+\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_a40817103c71c931dcacaa10234302d71}{Advection\+Diffusion\+Flux\+Element}} (const \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{Advection\+Diffusion\+Flux\+Element}} \&dummy)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_a5b5c458e348df45df4047ef68f5db7ce}{operator=}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{Advection\+Diffusion\+Flux\+Element}} \&)=delete
+void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_a5b5c458e348df45df4047ef68f5db7ce}{operator=}} (const \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{Advection\+Diffusion\+Flux\+Element}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_aeb9eb0a65d6dfe3673f6910a6fd7cf59}{Advection\+Diffusion\+Prescribed\+Flux\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_a3f73f20f42205eed2b8be68a65eb63b8}{flux\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for the prescribed-\/flux function pointer. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_a7448e4359840f5090f879bc82b2319f8}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_a5c8e409a31f90858e556fe359b996b9d}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})
+void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_a5c8e409a31f90858e556fe359b996b9d}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector and its Jacobian matrix. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_aaf962dc2e0fccdafa7210bbaaf2fbbd6}{zeta\+\_\+nodal}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&k, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_aaf962dc2e0fccdafa7210bbaaf2fbbd6}{zeta\+\_\+nodal}} (const unsigned \&n, const unsigned \&k, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Specify the value of nodal zeta from the face geometry The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} representation, by default (needed to break indeterminacy if bulk element is Solid\+Element) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_a23efe876b380f81188dcb506ac24266b}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_a6a080d1e107612072d9069f909a2b5b0}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&nplot)
+void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_a6a080d1e107612072d9069f909a2b5b0}{output}} (std\+::ostream \&outfile, const unsigned \&nplot)
 \begin{DoxyCompactList}\small\item\em Output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-double \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_a735b7f2134a85a1f856582f52ad773b1}{shape\+\_\+and\+\_\+test}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_a735b7f2134a85a1f856582f52ad773b1}{shape\+\_\+and\+\_\+test}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) const
 \begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping between local and global (Eulerian) coordinates. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_a32af9be97192954538f40cba54facd83}{shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_a32af9be97192954538f40cba54facd83}{shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) const
 \begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping between local and global (Eulerian) coordinates. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_ab21b7655c7d09d338bc4be4baf4dfca6}{get\+\_\+flux}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, double \&flux)
+void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_ab21b7655c7d09d338bc4be4baf4dfca6}{get\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&flux)
 \begin{DoxyCompactList}\small\item\em Function to calculate the prescribed flux at a given spatial position. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_acbc0c8e1e486601c0f09f7ecbb1995c4}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff\+\_\+flux}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, unsigned flag)
+void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_acbc0c8e1e486601c0f09f7ecbb1995c4}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff\+\_\+flux}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, unsigned flag)
 \begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -86,7 +86,7 @@ Definition at line \mbox{\hyperlink{advection__diffusion__flux__elements_8h_sour
 \index{AdvectionDiffusionPrescribedFluxFctPt@{AdvectionDiffusionPrescribedFluxFctPt}!oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{AdvectionDiffusionPrescribedFluxFctPt}{AdvectionDiffusionPrescribedFluxFctPt}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{oomph\+::\+Advection\+Diffusion\+Flux\+Element}}$<$ ELEMENT $>$\+::Advection\+Diffusion\+Prescribed\+Flux\+Fct\+Pt) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, double \&flux)}
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{oomph\+::\+Advection\+Diffusion\+Flux\+Element}}$<$ ELEMENT $>$\+::Advection\+Diffusion\+Prescribed\+Flux\+Fct\+Pt) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&flux)}
 
 
 
@@ -104,7 +104,7 @@ Definition at line \mbox{\hyperlink{advection__diffusion__flux__elements_8h_sour
 \index{AdvectionDiffusionFluxElement@{AdvectionDiffusionFluxElement}!oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{AdvectionDiffusionFluxElement()}{AdvectionDiffusionFluxElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{oomph\+::\+Advection\+Diffusion\+Flux\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{Advection\+Diffusion\+Flux\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{bulk\+\_\+el\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{face\+\_\+index }\end{DoxyParamCaption})}
+\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{oomph\+::\+Advection\+Diffusion\+Flux\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{Advection\+Diffusion\+Flux\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{bulk\+\_\+el\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index }\end{DoxyParamCaption})}
 
 
 
@@ -118,7 +118,7 @@ Definition at line \mbox{\hyperlink{advection__diffusion__flux__elements_8h_sour
 
 
 
-References \mbox{\hyperlink{classoomph_1_1FiniteElement_a025ab56ef9c6eea66fb34416fdf19152}{oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l00215}{oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+::\+Dim}}, \mbox{\hyperlink{elements_8h_source_l04654}{oomph\+::\+Face\+Element\+::face\+\_\+index()}}, \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l00212}{oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l02475}{oomph\+::\+Finite\+Element\+::has\+\_\+hanging\+\_\+nodes()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, and \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l00218}{oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+::\+U\+\_\+index\+\_\+adv\+\_\+diff}}.
+References \mbox{\hyperlink{elements_8cc_source_l05132}{oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l00215}{oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+::\+Dim}}, \mbox{\hyperlink{elements_8h_source_l04626}{oomph\+::\+Face\+Element\+::face\+\_\+index()}}, \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l00212}{oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l02470}{oomph\+::\+Finite\+Element\+::has\+\_\+hanging\+\_\+nodes()}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00091}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+adv\+\_\+diff()}}, and \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l00218}{oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+::\+U\+\_\+index\+\_\+adv\+\_\+diff}}.
 
 \mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionFluxElement_af91991cc6e255d038f0f8443e0339643}\label{classoomph_1_1AdvectionDiffusionFluxElement_af91991cc6e255d038f0f8443e0339643}} 
 \index{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}!AdvectionDiffusionFluxElement@{AdvectionDiffusionFluxElement}}
@@ -140,7 +140,7 @@ Definition at line \mbox{\hyperlink{advection__diffusion__flux__elements_8h_sour
 \index{AdvectionDiffusionFluxElement@{AdvectionDiffusionFluxElement}!oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{AdvectionDiffusionFluxElement()}{AdvectionDiffusionFluxElement()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{oomph\+::\+Advection\+Diffusion\+Flux\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{Advection\+Diffusion\+Flux\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{Advection\+Diffusion\+Flux\+Element}}$<$ ELEMENT $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{oomph\+::\+Advection\+Diffusion\+Flux\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{Advection\+Diffusion\+Flux\+Element}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{Advection\+Diffusion\+Flux\+Element}}$<$ ELEMENT $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
@@ -170,7 +170,7 @@ Definition at line \mbox{\hyperlink{advection__diffusion__flux__elements_8h_sour
 
 
 
-References \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l00384}{oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff\+\_\+flux()}}, and \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}.
+References \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l00384}{oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff\+\_\+flux()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionFluxElement_a7448e4359840f5090f879bc82b2319f8}\label{classoomph_1_1AdvectionDiffusionFluxElement_a7448e4359840f5090f879bc82b2319f8}} 
 \index{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
@@ -212,7 +212,7 @@ Definition at line \mbox{\hyperlink{advection__diffusion__flux__elements_8h_sour
 
 
 
-References \mbox{\hyperlink{multi__domain_8cc_source_l00060}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Dim}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}.
+References \mbox{\hyperlink{multi__domain_8cc_source_l00060}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Dim}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
 
 
 
@@ -242,7 +242,7 @@ References \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l0021
 \index{get\_flux@{get\_flux}!oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{get\_flux()}{get\_flux()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{oomph\+::\+Advection\+Diffusion\+Flux\+Element}}$<$ ELEMENT $>$\+::get\+\_\+flux (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{double \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{oomph\+::\+Advection\+Diffusion\+Flux\+Element}}$<$ ELEMENT $>$\+::get\+\_\+flux (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{double \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -254,14 +254,14 @@ Definition at line \mbox{\hyperlink{advection__diffusion__flux__elements_8h_sour
 
 
 
-References \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l00212}{oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l00212}{oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionFluxElement_a5b5c458e348df45df4047ef68f5db7ce}\label{classoomph_1_1AdvectionDiffusionFluxElement_a5b5c458e348df45df4047ef68f5db7ce}} 
 \index{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{oomph\+::\+Advection\+Diffusion\+Flux\+Element}}$<$ ELEMENT $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{Advection\+Diffusion\+Flux\+Element}}$<$ ELEMENT $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{oomph\+::\+Advection\+Diffusion\+Flux\+Element}}$<$ ELEMENT $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{Advection\+Diffusion\+Flux\+Element}}$<$ ELEMENT $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
@@ -288,14 +288,14 @@ Definition at line \mbox{\hyperlink{advection__diffusion__flux__elements_8h_sour
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
+References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionFluxElement_a6a080d1e107612072d9069f909a2b5b0}\label{classoomph_1_1AdvectionDiffusionFluxElement_a6a080d1e107612072d9069f909a2b5b0}} 
 \index{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}!output@{output}}
 \index{output@{output}!oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{oomph\+::\+Advection\+Diffusion\+Flux\+Element}}$<$ ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{oomph\+::\+Advection\+Diffusion\+Flux\+Element}}$<$ ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -311,14 +311,14 @@ Definition at line \mbox{\hyperlink{advection__diffusion__flux__elements_8h_sour
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
+References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionFluxElement_a735b7f2134a85a1f856582f52ad773b1}\label{classoomph_1_1AdvectionDiffusionFluxElement_a735b7f2134a85a1f856582f52ad773b1}} 
 \index{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}!shape\_and\_test@{shape\_and\_test}}
 \index{shape\_and\_test@{shape\_and\_test}!oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{shape\_and\_test()}{shape\_and\_test()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{oomph\+::\+Advection\+Diffusion\+Flux\+Element}}$<$ ELEMENT $>$\+::shape\+\_\+and\+\_\+test (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+double \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{oomph\+::\+Advection\+Diffusion\+Flux\+Element}}$<$ ELEMENT $>$\+::shape\+\_\+and\+\_\+test (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -330,14 +330,14 @@ Definition at line \mbox{\hyperlink{advection__diffusion__flux__elements_8h_sour
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l05246}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l05242}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionFluxElement_a32af9be97192954538f40cba54facd83}\label{classoomph_1_1AdvectionDiffusionFluxElement_a32af9be97192954538f40cba54facd83}} 
 \index{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}!shape\_and\_test\_at\_knot@{shape\_and\_test\_at\_knot}}
 \index{shape\_and\_test\_at\_knot@{shape\_and\_test\_at\_knot}!oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{shape\_and\_test\_at\_knot()}{shape\_and\_test\_at\_knot()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{oomph\+::\+Advection\+Diffusion\+Flux\+Element}}$<$ ELEMENT $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+double \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{oomph\+::\+Advection\+Diffusion\+Flux\+Element}}$<$ ELEMENT $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -349,14 +349,14 @@ Definition at line \mbox{\hyperlink{advection__diffusion__flux__elements_8h_sour
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l05332}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a2de680722518136b5c6bf2aacc267a31}{oomph\+::\+Finite\+Element\+::shape\+\_\+at\+\_\+knot()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l05328}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8cc_source_l03220}{oomph\+::\+Finite\+Element\+::shape\+\_\+at\+\_\+knot()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionFluxElement_aaf962dc2e0fccdafa7210bbaaf2fbbd6}\label{classoomph_1_1AdvectionDiffusionFluxElement_aaf962dc2e0fccdafa7210bbaaf2fbbd6}} 
 \index{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}!zeta\_nodal@{zeta\_nodal}}
 \index{zeta\_nodal@{zeta\_nodal}!oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{zeta\_nodal()}{zeta\_nodal()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{oomph\+::\+Advection\+Diffusion\+Flux\+Element}}$<$ ELEMENT $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{k,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+double \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{oomph\+::\+Advection\+Diffusion\+Flux\+Element}}$<$ ELEMENT $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{k,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -372,7 +372,7 @@ Definition at line \mbox{\hyperlink{advection__diffusion__flux__elements_8h_sour
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l04525}{oomph\+::\+Face\+Element\+::zeta\+\_\+nodal()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l04497}{oomph\+::\+Face\+Element\+::zeta\+\_\+nodal()}}.
 
 
 

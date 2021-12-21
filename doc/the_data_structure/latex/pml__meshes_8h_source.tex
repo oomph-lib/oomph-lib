@@ -149,16 +149,16 @@
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00145}00145   \textcolor{keyword}{namespace }TwoDimensionalPMLHelper}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00146}00146   \{\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00147}00147 \textcolor{comment}{    /// helper function for sorting the right boundary nodes}}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00148}00148 \textcolor{comment}{}    \textcolor{keyword}{extern} \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespaceoomph_1_1TwoDimensionalPMLHelper_ae66c595a953e030ae366699eec3ca3ab}{sorter\_right\_boundary}}(Node* nod\_i\_pt, Node* nod\_j\_pt);}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00148}00148 \textcolor{comment}{}    \textcolor{keyword}{extern} \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespaceoomph_1_1TwoDimensionalPMLHelper_ae66c595a953e030ae366699eec3ca3ab}{sorter\_right\_boundary}}(\mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_i\_pt, \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_j\_pt);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00149}00149 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00150}00150 \textcolor{comment}{    /// helper function for sorting the top boundary nodes}}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00151}00151 \textcolor{comment}{}    \textcolor{keyword}{extern} \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespaceoomph_1_1TwoDimensionalPMLHelper_a98d2786e22298095bd190435d11c4f0e}{sorter\_top\_boundary}}(Node* nod\_i\_pt, Node* nod\_j\_pt);}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00151}00151 \textcolor{comment}{}    \textcolor{keyword}{extern} \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespaceoomph_1_1TwoDimensionalPMLHelper_a98d2786e22298095bd190435d11c4f0e}{sorter\_top\_boundary}}(\mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_i\_pt, \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_j\_pt);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00152}00152 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00153}00153 \textcolor{comment}{    /// helper function for sorting the left boundary nodes}}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00154}00154 \textcolor{comment}{}    \textcolor{keyword}{extern} \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespaceoomph_1_1TwoDimensionalPMLHelper_aecb74c39efe7c572a9d87b2d11be3d69}{sorter\_left\_boundary}}(Node* nod\_i\_pt, Node* nod\_j\_pt);}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00154}00154 \textcolor{comment}{}    \textcolor{keyword}{extern} \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespaceoomph_1_1TwoDimensionalPMLHelper_aecb74c39efe7c572a9d87b2d11be3d69}{sorter\_left\_boundary}}(\mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_i\_pt, \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_j\_pt);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00155}00155 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00156}00156 \textcolor{comment}{    /// helper function for sorting the bottom boundary nodes}}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00157}00157 \textcolor{comment}{}    \textcolor{keyword}{extern} \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespaceoomph_1_1TwoDimensionalPMLHelper_a0bd68e9d424ff3f05266786cc6c78baa}{sorter\_bottom\_boundary}}(Node* nod\_i\_pt, Node* nod\_j\_pt);}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00157}00157 \textcolor{comment}{}    \textcolor{keyword}{extern} \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespaceoomph_1_1TwoDimensionalPMLHelper_a0bd68e9d424ff3f05266786cc6c78baa}{sorter\_bottom\_boundary}}(\mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_i\_pt, \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_j\_pt);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00158}00158 }
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00159}00159   \} \textcolor{comment}{// namespace TwoDimensionalPMLHelper}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00160}00160 \textcolor{comment}{}}
@@ -178,7 +178,7 @@
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00174}00174 \textcolor{comment}{    /// the locate\_zeta function for PML meshes. As the PML meshes are}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00175}00175 \textcolor{comment}{    /// rectangular (in 2D, or rectangular prisms in 3D) the location of}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00176}00176 \textcolor{comment}{    /// a point in the mesh is simpler than in a more complex mesh}}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00177}\mbox{\hyperlink{classoomph_1_1PMLMeshBase_a49d7e044f51a32bed758d4c16052b995}{00177}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1PMLMeshBase_a49d7e044f51a32bed758d4c16052b995}{pml\_locate\_zeta}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00177}\mbox{\hyperlink{classoomph_1_1PMLMeshBase_a49d7e044f51a32bed758d4c16052b995}{00177}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1PMLMeshBase_a49d7e044f51a32bed758d4c16052b995}{pml\_locate\_zeta}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00178}00178                                  \mbox{\hyperlink{classoomph_1_1FiniteElement}{FiniteElement}}*\& el\_pt) = 0;}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00179}00179   \};}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00180}00180 }
@@ -213,7 +213,7 @@
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00209}00209 \textcolor{comment}{    /// may be nonunique if the given point lies on the boundary of two}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00210}00210 \textcolor{comment}{    /// elements in the mesh. Additionally, we assume that the PML mesh is}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00211}00211 \textcolor{comment}{    /// axis aligned when deciding if the given point lies inside the mesh}}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00212}\mbox{\hyperlink{classoomph_1_1PMLQuadMeshBase_a8054b13b65a898e1364ca30eace6c1e8}{00212}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1PMLQuadMeshBase_a8054b13b65a898e1364ca30eace6c1e8}{pml\_locate\_zeta}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00212}\mbox{\hyperlink{classoomph_1_1PMLQuadMeshBase_a8054b13b65a898e1364ca30eace6c1e8}{00212}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1PMLQuadMeshBase_a8054b13b65a898e1364ca30eace6c1e8}{pml\_locate\_zeta}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00213}00213                          \mbox{\hyperlink{classoomph_1_1FiniteElement}{FiniteElement}}*\& coarse\_mesh\_el\_pt)}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00214}00214     \{}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00215}00215       \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
@@ -238,8 +238,8 @@
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00234}00234       \textcolor{comment}{// Assuming the mesh is axis-\/aligned we merely need to check if the}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00235}00235       \textcolor{comment}{// x-\/coordinate of the input lies in the range [x\_min,x\_max] and the}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00236}00236       \textcolor{comment}{// y-\/coordinate of the input lies in the range [y\_min,y\_max]}}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00237}00237       \textcolor{keywordflow}{if} ((\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[0] < \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ab311c3bec7f9f721bae1f93e0798ab2c}{x\_min}} -\/ tol) || (\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[0] > \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a3449b36a5e4fc4728e517bd38d7b0cc6}{x\_max}} + tol) ||}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00238}00238           (\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[1] < \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a1c493af1dae35746bed7a31e61b46c5b}{y\_min}} -\/ tol) || (\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[1] > \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a7d4a00a545efc20451b00a9b8ad1e17d}{y\_max}} + tol))}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00237}00237       \textcolor{keywordflow}{if} ((x[0] < \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ab311c3bec7f9f721bae1f93e0798ab2c}{x\_min}} -\/ tol) || (x[0] > \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a3449b36a5e4fc4728e517bd38d7b0cc6}{x\_max}} + tol) ||}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00238}00238           (x[1] < \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a1c493af1dae35746bed7a31e61b46c5b}{y\_min}} -\/ tol) || (x[1] > \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a7d4a00a545efc20451b00a9b8ad1e17d}{y\_max}} + tol))}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00239}00239       \{}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00240}00240         \textcolor{comment}{// Open an output string stream}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00241}00241         std::ostringstream error\_message\_stream;}
@@ -320,7 +320,7 @@
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00316}00316 }
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00317}00317         \textcolor{comment}{// Store the x-\/coordinate of the bottom right node in this element}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00318}00318         bottom\_boundary\_x\_coordinates[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} + 1] =}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00319}00319           el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(nnode\_1d -\/ 1)-\/>x(0);}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00319}00319           el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(nnode\_1d -\/ 1)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00320}00320       \}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00321}00321 }
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00322}00322       \textcolor{comment}{// To collect the remaining entries we need to loop over all of the}}
@@ -335,7 +335,7 @@
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00331}00331         el\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a6dcf10c6fff9d13b309549ba73e10069}{boundary\_element\_pt}}(right\_boundary\_id, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00332}00332 }
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00333}00333         \textcolor{comment}{// Store the y-\/coordinate of the top right node in this element}}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00334}00334         right\_boundary\_y\_coordinates[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} + 1] = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(\mbox{\hyperlink{classoomph_1_1Mesh_a945e7823d1a2af243b5b7f7866aaff5e}{nnode}} -\/ 1)-\/>x(1);}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00334}00334         right\_boundary\_y\_coordinates[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} + 1] = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(\mbox{\hyperlink{classoomph_1_1Mesh_a945e7823d1a2af243b5b7f7866aaff5e}{nnode}} -\/ 1)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00335}00335       \}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00336}00336 }
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00337}00337       \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
@@ -361,8 +361,8 @@
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00357}00357       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}}; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00358}00358       \{}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00359}00359         \textcolor{comment}{// Check if the x-\/coordinate of the input lies in this interval}}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00360}00360         \textcolor{keywordflow}{if} ((\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[0] >= bottom\_boundary\_x\_coordinates[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]) \&\&}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00361}00361             (\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[0] <= bottom\_boundary\_x\_coordinates[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} + 1]))}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00360}00360         \textcolor{keywordflow}{if} ((x[0] >= bottom\_boundary\_x\_coordinates[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]) \&\&}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00361}00361             (x[0] <= bottom\_boundary\_x\_coordinates[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} + 1]))}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00362}00362         \{}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00363}00363           \textcolor{comment}{// The point lies in the i-\/th interval so the element ID is i}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00364}00364           element\_x\_id = \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}};}
@@ -392,8 +392,8 @@
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00388}00388       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a189759f02bc92144e4abc24cb5bae5a8}{ny}}; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00389}00389       \{}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00390}00390         \textcolor{comment}{// Check if the y-\/coordinate of the input lies in this interval}}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00391}00391         \textcolor{keywordflow}{if} ((\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[1] >= right\_boundary\_y\_coordinates[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]) \&\&}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00392}00392             (\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[1] <= right\_boundary\_y\_coordinates[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} + 1]))}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00391}00391         \textcolor{keywordflow}{if} ((x[1] >= right\_boundary\_y\_coordinates[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]) \&\&}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00392}00392             (x[1] <= right\_boundary\_y\_coordinates[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} + 1]))}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00393}00393         \{}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00394}00394           \textcolor{comment}{// The point lies in the i-\/th interval so the element ID is i}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00395}00395           element\_y\_id = \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}};}
@@ -523,7 +523,7 @@
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00519}00519 \textcolor{comment}{}      \textcolor{keywordtype}{unsigned} nnod = this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a034677ceb48c67769acb83f304c84f7d}{nboundary\_node}}(quad\_boundary\_id);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00520}00520       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < nnod; j++)}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00521}00521       \{}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00522}00522         this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(quad\_boundary\_id, j)-\/>set\_obsolete();}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00522}00522         this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(quad\_boundary\_id, j)-\/>\mbox{\hyperlink{classoomph_1_1Node_a2f19488a7967f963b073b93dc12728ab}{set\_obsolete}}();}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00523}00523       \}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00524}00524 }
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00525}00525       \textcolor{comment}{// Kill the obsolete nodes}}
@@ -787,7 +787,7 @@
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00783}\mbox{\hyperlink{classoomph_1_1PMLCornerQuadMesh_ad3281c5cd6b8283ddab295c3acbaf218}{00783}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1PMLCornerQuadMesh_ad3281c5cd6b8283ddab295c3acbaf218}{PMLCornerQuadMesh}}(\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}* PMLQuad\_mesh\_x\_pt,}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00784}00784                       \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}* PMLQuad\_mesh\_y\_pt,}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00785}00785                       \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}* bulk\_mesh\_pt,}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00786}00786                       Node* special\_corner\_node\_pt,}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00786}00786                       \mbox{\hyperlink{classoomph_1_1Node}{Node}}* special\_corner\_node\_pt,}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00787}00787                       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& parent\_boundary\_x\_id,}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00788}00788                       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& parent\_boundary\_y\_id,}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00789}00789                       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& current\_boundary\_x\_id,}
@@ -870,13 +870,13 @@
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00866}00866         \textcolor{keywordtype}{unsigned} x\_nnod = this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a034677ceb48c67769acb83f304c84f7d}{nboundary\_node}}(current\_boundary\_x\_id);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00867}00867         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < x\_nnod; j++)}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00868}00868         \{}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00869}00869           this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(current\_boundary\_x\_id, j)-\/>set\_obsolete();}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00869}00869           this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(current\_boundary\_x\_id, j)-\/>\mbox{\hyperlink{classoomph_1_1Node_a2f19488a7967f963b073b93dc12728ab}{set\_obsolete}}();}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00870}00870         \}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00871}00871 }
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00872}00872         \textcolor{keywordtype}{unsigned} y\_nnod = this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a034677ceb48c67769acb83f304c84f7d}{nboundary\_node}}(current\_boundary\_y\_id);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00873}00873         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < y\_nnod; j++)}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00874}00874         \{}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00875}00875           this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(current\_boundary\_y\_id, j)-\/>set\_obsolete();}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00875}00875           this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(current\_boundary\_y\_id, j)-\/>\mbox{\hyperlink{classoomph_1_1Node_a2f19488a7967f963b073b93dc12728ab}{set\_obsolete}}();}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00876}00876         \}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00877}00877 }
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l00878}00878         \textcolor{comment}{// Kill the obsolete nodes}}
@@ -1042,13 +1042,13 @@
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01038}01038         \textcolor{keywordtype}{unsigned} x\_nnod = this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a034677ceb48c67769acb83f304c84f7d}{nboundary\_node}}(current\_boundary\_x\_id);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01039}01039         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < x\_nnod; j++)}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01040}01040         \{}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01041}01041           this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(current\_boundary\_x\_id, j)-\/>set\_obsolete();}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01041}01041           this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(current\_boundary\_x\_id, j)-\/>\mbox{\hyperlink{classoomph_1_1Node_a2f19488a7967f963b073b93dc12728ab}{set\_obsolete}}();}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01042}01042         \}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01043}01043 }
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01044}01044         \textcolor{keywordtype}{unsigned} y\_nnod = this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a034677ceb48c67769acb83f304c84f7d}{nboundary\_node}}(current\_boundary\_y\_id);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01045}01045         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < y\_nnod; j++)}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01046}01046         \{}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01047}01047           this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(current\_boundary\_y\_id, j)-\/>set\_obsolete();}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01047}01047           this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(current\_boundary\_y\_id, j)-\/>\mbox{\hyperlink{classoomph_1_1Node_a2f19488a7967f963b073b93dc12728ab}{set\_obsolete}}();}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01048}01048         \}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01049}01049 }
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01050}01050         \textcolor{comment}{// Kill the obsolete nodes}}
@@ -1220,13 +1220,13 @@
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01216}01216         \textcolor{keywordtype}{unsigned} x\_nnod = this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a034677ceb48c67769acb83f304c84f7d}{nboundary\_node}}(current\_boundary\_x\_id);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01217}01217         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < x\_nnod; j++)}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01218}01218         \{}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01219}01219           this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(current\_boundary\_x\_id, j)-\/>set\_obsolete();}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01219}01219           this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(current\_boundary\_x\_id, j)-\/>\mbox{\hyperlink{classoomph_1_1Node_a2f19488a7967f963b073b93dc12728ab}{set\_obsolete}}();}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01220}01220         \}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01221}01221 }
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01222}01222         \textcolor{keywordtype}{unsigned} y\_nnod = this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a034677ceb48c67769acb83f304c84f7d}{nboundary\_node}}(current\_boundary\_y\_id);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01223}01223         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < y\_nnod; j++)}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01224}01224         \{}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01225}01225           this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(current\_boundary\_y\_id, j)-\/>set\_obsolete();}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01225}01225           this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(current\_boundary\_y\_id, j)-\/>\mbox{\hyperlink{classoomph_1_1Node_a2f19488a7967f963b073b93dc12728ab}{set\_obsolete}}();}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01226}01226         \}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01227}01227 }
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01228}01228         \textcolor{comment}{// Kill the obsolete nodes}}
@@ -1396,13 +1396,13 @@
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01392}01392         \textcolor{keywordtype}{unsigned} x\_nnod = this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a034677ceb48c67769acb83f304c84f7d}{nboundary\_node}}(current\_boundary\_x\_id);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01393}01393         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < x\_nnod; j++)}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01394}01394         \{}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01395}01395           this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(current\_boundary\_x\_id, j)-\/>set\_obsolete();}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01395}01395           this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(current\_boundary\_x\_id, j)-\/>\mbox{\hyperlink{classoomph_1_1Node_a2f19488a7967f963b073b93dc12728ab}{set\_obsolete}}();}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01396}01396         \}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01397}01397 }
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01398}01398         \textcolor{keywordtype}{unsigned} y\_nnod = this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a034677ceb48c67769acb83f304c84f7d}{nboundary\_node}}(current\_boundary\_y\_id);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01399}01399         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < y\_nnod; j++)}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01400}01400         \{}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01401}01401           this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(current\_boundary\_y\_id, j)-\/>set\_obsolete();}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01401}01401           this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(current\_boundary\_y\_id, j)-\/>\mbox{\hyperlink{classoomph_1_1Node_a2f19488a7967f963b073b93dc12728ab}{set\_obsolete}}();}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01402}01402         \}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01403}01403 }
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01404}01404         \textcolor{comment}{// Kill the obsolete nodes}}
@@ -1624,14 +1624,14 @@
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01620}01620         \textcolor{keywordtype}{unsigned} n\_node = pml\_right\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a034677ceb48c67769acb83f304c84f7d}{nboundary\_node}}(b);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01621}01621         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < n\_node; n++)}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01622}01622         \{}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01623}01623           Node* nod\_pt = pml\_right\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(b, n);}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01623}01623           \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = pml\_right\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(b, n);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01624}01624           \textcolor{keywordflow}{if} (b == 1)}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01625}01625           \{}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01626}01626             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < npin; j++)}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01627}01627             \{}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01628}01628               \textcolor{keywordtype}{unsigned} j\_val = values\_to\_pin[j];}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01629}01629               nod\_pt-\/>pin(j\_val);}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01630}01630               nod\_pt-\/>set\_value(j\_val, 0.0);}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01629}01629               nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a422231c58e423f0b43822827aa334d79}{pin}}(j\_val);}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01630}01630               nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7289ca322725c6fd493970a19474b382}{set\_value}}(j\_val, 0.0);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01631}01631             \}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01632}01632           \}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01633}01633         \}}
@@ -1730,14 +1730,14 @@
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01726}01726         \textcolor{keywordtype}{unsigned} n\_node = pml\_top\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a034677ceb48c67769acb83f304c84f7d}{nboundary\_node}}(b);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01727}01727         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < n\_node; n++)}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01728}01728         \{}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01729}01729           Node* nod\_pt = pml\_top\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(b, n);}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01729}01729           \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = pml\_top\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(b, n);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01730}01730           \textcolor{keywordflow}{if} (b == 2)}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01731}01731           \{}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01732}01732             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < npin; j++)}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01733}01733             \{}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01734}01734               \textcolor{keywordtype}{unsigned} j\_val = values\_to\_pin[j];}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01735}01735               nod\_pt-\/>pin(j\_val);}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01736}01736               nod\_pt-\/>set\_value(j\_val, 0.0);}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01735}01735               nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a422231c58e423f0b43822827aa334d79}{pin}}(j\_val);}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01736}01736               nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7289ca322725c6fd493970a19474b382}{set\_value}}(j\_val, 0.0);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01737}01737             \}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01738}01738           \}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01739}01739         \}}
@@ -1838,14 +1838,14 @@
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01834}01834         \textcolor{keywordtype}{unsigned} n\_node = pml\_left\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a034677ceb48c67769acb83f304c84f7d}{nboundary\_node}}(b);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01835}01835         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < n\_node; n++)}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01836}01836         \{}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01837}01837           Node* nod\_pt = pml\_left\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(b, n);}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01837}01837           \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = pml\_left\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(b, n);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01838}01838           \textcolor{keywordflow}{if} (b == 3)}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01839}01839           \{}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01840}01840             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < npin; j++)}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01841}01841             \{}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01842}01842               \textcolor{keywordtype}{unsigned} j\_val = values\_to\_pin[j];}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01843}01843               nod\_pt-\/>pin(j\_val);}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01844}01844               nod\_pt-\/>set\_value(j\_val, 0.0);}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01843}01843               nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a422231c58e423f0b43822827aa334d79}{pin}}(j\_val);}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01844}01844               nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7289ca322725c6fd493970a19474b382}{set\_value}}(j\_val, 0.0);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01845}01845             \}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01846}01846           \}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01847}01847         \}}
@@ -1946,14 +1946,14 @@
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01942}01942         \textcolor{keywordtype}{unsigned} n\_node = pml\_bottom\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a034677ceb48c67769acb83f304c84f7d}{nboundary\_node}}(b);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01943}01943         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < n\_node; n++)}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01944}01944         \{}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01945}01945           Node* nod\_pt = pml\_bottom\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(b, n);}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01945}01945           \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = pml\_bottom\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(b, n);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01946}01946           \textcolor{keywordflow}{if} (b == 0)}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01947}01947           \{}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01948}01948             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < npin; j++)}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01949}01949             \{}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01950}01950               \textcolor{keywordtype}{unsigned} j\_val = values\_to\_pin[j];}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01951}01951               nod\_pt-\/>pin(j\_val);}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01952}01952               nod\_pt-\/>set\_value(j\_val, 0.0);}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01951}01951               nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a422231c58e423f0b43822827aa334d79}{pin}}(j\_val);}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01952}01952               nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7289ca322725c6fd493970a19474b382}{set\_value}}(j\_val, 0.0);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01953}01953             \}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01954}01954           \}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l01955}01955         \}}
@@ -2021,13 +2021,13 @@
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02017}02017       \textcolor{keywordtype}{double} l\_pml\_right\_x\_end =}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02018}02018         pml\_right\_mesh\_pt}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02019}02019           -\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(parent\_boundary\_x\_id, n\_x\_boundary\_nodes -\/ 1)}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02020}02020           -\/>x(0);}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02020}02020           -\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02021}02021       \textcolor{keywordtype}{double} l\_pml\_top\_y\_start =}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02022}02022         ordered\_right\_boundary\_node\_pt[n\_right\_boundary\_node -\/ 1]-\/>x(1);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02023}02023       \textcolor{keywordtype}{double} l\_pml\_top\_y\_end =}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02024}02024         pml\_top\_mesh\_pt}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02025}02025           -\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(parent\_boundary\_y\_id, n\_y\_boundary\_nodes -\/ 1)}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02026}02026           -\/>x(1);}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02026}02026           -\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02027}02027 }
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02028}02028       \textcolor{comment}{// Create the mesh to be designated to the PML}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02029}02029       \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}* pml\_top\_right\_mesh\_pt = 0;}
@@ -2081,14 +2081,14 @@
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02077}02077         \textcolor{keywordtype}{unsigned} n\_node = pml\_top\_right\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a034677ceb48c67769acb83f304c84f7d}{nboundary\_node}}(b);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02078}02078         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < n\_node; n++)}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02079}02079         \{}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02080}02080           Node* nod\_pt = pml\_top\_right\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(b, n);}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02080}02080           \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = pml\_top\_right\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(b, n);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02081}02081           \textcolor{keywordflow}{if} ((b == 1) || (b == 2))}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02082}02082           \{}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02083}02083             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < npin; j++)}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02084}02084             \{}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02085}02085               \textcolor{keywordtype}{unsigned} j\_val = values\_to\_pin[j];}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02086}02086               nod\_pt-\/>pin(j\_val);}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02087}02087               nod\_pt-\/>set\_value(j\_val, 0.0);}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02086}02086               nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a422231c58e423f0b43822827aa334d79}{pin}}(j\_val);}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02087}02087               nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7289ca322725c6fd493970a19474b382}{set\_value}}(j\_val, 0.0);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02088}02088             \}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02089}02089           \}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02090}02090         \}}
@@ -2153,9 +2153,9 @@
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02149}02149       \textcolor{keywordtype}{double} l\_pml\_right\_x\_end =}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02150}02150         pml\_right\_mesh\_pt}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02151}02151           -\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(parent\_boundary\_x\_id, n\_x\_boundary\_nodes -\/ 1)}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02152}02152           -\/>x(0);}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02152}02152           -\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02153}02153       \textcolor{keywordtype}{double} l\_pml\_bottom\_y\_start =}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02154}02154         pml\_bottom\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(parent\_boundary\_y\_id, 0)-\/>x(1);}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02154}02154         pml\_bottom\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(parent\_boundary\_y\_id, 0)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02155}02155       \textcolor{keywordtype}{double} l\_pml\_bottom\_y\_end = ordered\_right\_boundary\_node\_pt[0]-\/>x(1);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02156}02156 }
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02157}02157       \textcolor{comment}{// Create the mesh to be designated to the PML}}
@@ -2212,14 +2212,14 @@
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02208}02208         \textcolor{keywordtype}{unsigned} n\_node = pml\_bottom\_right\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a034677ceb48c67769acb83f304c84f7d}{nboundary\_node}}(b);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02209}02209         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < n\_node; n++)}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02210}02210         \{}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02211}02211           Node* nod\_pt = pml\_bottom\_right\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(b, n);}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02211}02211           \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = pml\_bottom\_right\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(b, n);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02212}02212           \textcolor{keywordflow}{if} ((b == 0) || (b == 1))}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02213}02213           \{}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02214}02214             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < npin; j++)}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02215}02215             \{}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02216}02216               \textcolor{keywordtype}{unsigned} j\_val = values\_to\_pin[j];}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02217}02217               nod\_pt-\/>pin(j\_val);}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02218}02218               nod\_pt-\/>set\_value(j\_val, 0.0);}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02217}02217               nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a422231c58e423f0b43822827aa334d79}{pin}}(j\_val);}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02218}02218               nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7289ca322725c6fd493970a19474b382}{set\_value}}(j\_val, 0.0);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02219}02219             \}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02220}02220           \}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02221}02221         \}}
@@ -2283,7 +2283,7 @@
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02279}02279 \textcolor{comment}{      /// Specific PML sizes needed, taken directly from physical domain}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02280}02280 \textcolor{comment}{      /// and existing PML meshes}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02281}02281 \textcolor{comment}{}      \textcolor{keywordtype}{double} l\_pml\_left\_x\_start =}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02282}02282         pml\_left\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(parent\_boundary\_x\_id, 0)-\/>x(0);}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02282}02282         pml\_left\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(parent\_boundary\_x\_id, 0)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02283}02283       \textcolor{keywordtype}{double} l\_pml\_left\_x\_end =}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02284}02284         ordered\_left\_boundary\_node\_pt[n\_left\_boundary\_node -\/ 1]-\/>x(0);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02285}02285       \textcolor{keywordtype}{double} l\_pml\_top\_y\_start =}
@@ -2291,7 +2291,7 @@
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02287}02287       \textcolor{keywordtype}{double} l\_pml\_top\_y\_end =}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02288}02288         pml\_top\_mesh\_pt}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02289}02289           -\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(parent\_boundary\_y\_id, n\_y\_boundary\_nodes -\/ 1)}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02290}02290           -\/>x(1);}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02290}02290           -\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02291}02291 }
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02292}02292       \textcolor{comment}{// Create the mesh to be designated to the PML}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02293}02293       \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}* pml\_top\_left\_mesh\_pt = 0;}
@@ -2345,14 +2345,14 @@
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02341}02341         \textcolor{keywordtype}{unsigned} n\_node = pml\_top\_left\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a034677ceb48c67769acb83f304c84f7d}{nboundary\_node}}(b);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02342}02342         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < n\_node; n++)}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02343}02343         \{}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02344}02344           Node* nod\_pt = pml\_top\_left\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(b, n);}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02344}02344           \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = pml\_top\_left\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(b, n);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02345}02345           \textcolor{keywordflow}{if} ((b == 2) || (b == 3))}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02346}02346           \{}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02347}02347             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < npin; j++)}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02348}02348             \{}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02349}02349               \textcolor{keywordtype}{unsigned} j\_val = values\_to\_pin[j];}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02350}02350               nod\_pt-\/>pin(j\_val);}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02351}02351               nod\_pt-\/>set\_value(j\_val, 0.0);}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02350}02350               nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a422231c58e423f0b43822827aa334d79}{pin}}(j\_val);}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02351}02351               nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7289ca322725c6fd493970a19474b382}{set\_value}}(j\_val, 0.0);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02352}02352             \}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02353}02353           \}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02354}02354         \}}
@@ -2414,11 +2414,11 @@
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02410}02410 \textcolor{comment}{      /// Specific PML sizes needed, taken directly from physical domain}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02411}02411 \textcolor{comment}{      /// and existing PML meshes}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02412}02412 \textcolor{comment}{}      \textcolor{keywordtype}{double} l\_pml\_left\_x\_start =}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02413}02413         pml\_left\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(parent\_boundary\_x\_id, 0)-\/>x(0);}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02413}02413         pml\_left\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(parent\_boundary\_x\_id, 0)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02414}02414       \textcolor{keywordtype}{double} l\_pml\_left\_x\_end =}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02415}02415         ordered\_left\_boundary\_node\_pt[n\_left\_boundary\_node -\/ 1]-\/>x(0);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02416}02416       \textcolor{keywordtype}{double} l\_pml\_bottom\_y\_start =}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02417}02417         pml\_bottom\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(parent\_boundary\_y\_id, 0)-\/>x(1);}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02417}02417         pml\_bottom\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(parent\_boundary\_y\_id, 0)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02418}02418       \textcolor{keywordtype}{double} l\_pml\_bottom\_y\_end = ordered\_left\_boundary\_node\_pt[0]-\/>x(1);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02419}02419 }
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02420}02420       \textcolor{comment}{// Create the mesh to be designated to the PML}}
@@ -2473,14 +2473,14 @@
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02469}02469         \textcolor{keywordtype}{unsigned} n\_node = pml\_bottom\_left\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a034677ceb48c67769acb83f304c84f7d}{nboundary\_node}}(b);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02470}02470         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < n\_node; n++)}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02471}02471         \{}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02472}02472           Node* nod\_pt = pml\_bottom\_left\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(b, n);}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02472}02472           \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = pml\_bottom\_left\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(b, n);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02473}02473           \textcolor{keywordflow}{if} ((b == 0) || (b == 3))}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02474}02474           \{}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02475}02475             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < npin; j++)}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02476}02476             \{}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02477}02477               \textcolor{keywordtype}{unsigned} j\_val = values\_to\_pin[j];}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02478}02478               nod\_pt-\/>pin(j\_val);}
-\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02479}02479               nod\_pt-\/>set\_value(j\_val, 0.0);}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02478}02478               nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a422231c58e423f0b43822827aa334d79}{pin}}(j\_val);}
+\DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02479}02479               nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7289ca322725c6fd493970a19474b382}{set\_value}}(j\_val, 0.0);}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02480}02480             \}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02481}02481           \}}
 \DoxyCodeLine{\Hypertarget{pml__meshes_8h_source_l02482}02482         \}}

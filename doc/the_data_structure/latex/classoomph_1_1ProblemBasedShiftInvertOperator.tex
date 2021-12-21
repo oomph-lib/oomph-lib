@@ -18,9 +18,9 @@ Inheritance diagram for oomph\+::Problem\+Based\+Shift\+Invert\+Operator\+:\begi
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1ProblemBasedShiftInvertOperator_a2a25d70c81543acf3c97ae7fbe32648e}{Problem\+Based\+Shift\+Invert\+Operator}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} $\ast$const \&linear\+\_\+solver\+\_\+pt, const double \&\mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}=0.\+0)
+\mbox{\hyperlink{classoomph_1_1ProblemBasedShiftInvertOperator_a2a25d70c81543acf3c97ae7fbe32648e}{Problem\+Based\+Shift\+Invert\+Operator}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} $\ast$const \&linear\+\_\+solver\+\_\+pt, const double \&sigma=0.\+0)
 \item 
-void \mbox{\hyperlink{classoomph_1_1ProblemBasedShiftInvertOperator_a1f209382d6023466da7e978ce16f1c09}{apply}} (const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{Double\+Multi\+Vector}} \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{Double\+Multi\+Vector}} \&y) const
+void \mbox{\hyperlink{classoomph_1_1ProblemBasedShiftInvertOperator_a1f209382d6023466da7e978ce16f1c09}{apply}} (const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{Double\+Multi\+Vector}} \&x, \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{Double\+Multi\+Vector}} \&y) const
 \begin{DoxyCompactList}\small\item\em The apply interface. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -82,7 +82,7 @@ Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00524}{52
 
 
 
-References \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00501}{Asigma\+M\+\_\+pt}}, \mbox{\hyperlink{linear__solver_8h_source_l00135}{oomph\+::\+Linear\+Solver\+::enable\+\_\+resolve()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00495}{Linear\+\_\+solver\+\_\+pt}}, \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00501}{M\+\_\+pt}}, \mbox{\hyperlink{matrices_8cc_source_l01782}{oomph\+::\+CRDouble\+Matrix\+::multiply()}}, \mbox{\hyperlink{linear__solver_8h_source_l00225}{oomph\+::\+Linear\+Solver\+::resolve()}}, \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485edacbeb6e}{oomph\+::\+Linear\+Solver\+::solve()}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00501}{Asigma\+M\+\_\+pt}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00692}{oomph\+::\+Double\+Multi\+Vector\+::doublevector()}}, \mbox{\hyperlink{linear__solver_8h_source_l00135}{oomph\+::\+Linear\+Solver\+::enable\+\_\+resolve()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00495}{Linear\+\_\+solver\+\_\+pt}}, \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00501}{M\+\_\+pt}}, \mbox{\hyperlink{matrices_8cc_source_l01782}{oomph\+::\+CRDouble\+Matrix\+::multiply()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00211}{oomph\+::\+Double\+Multi\+Vector\+::nvector()}}, \mbox{\hyperlink{linear__solver_8h_source_l00225}{oomph\+::\+Linear\+Solver\+::resolve()}}, and \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485edacbeb6e}{oomph\+::\+Linear\+Solver\+::solve()}}.
 
 
 

@@ -59,7 +59,7 @@
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00055}00055   \textcolor{keyword}{private}:\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00056}00056 \textcolor{comment}{    /// Function pointer to a wall unit normal function. Returns the}}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00057}00057 \textcolor{comment}{    /// unit normal on the wall, at the specified Eulerian coordinate.}}
-\DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00058}\mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a09c0b1df7d653eaf55e94e3951d409dd}{00058}} \textcolor{comment}{}    \textcolor{keyword}{typedef} void (*\mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a09c0b1df7d653eaf55e94e3951d409dd}{WallUnitNormalFctPt}})(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00058}\mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a09c0b1df7d653eaf55e94e3951d409dd}{00058}} \textcolor{comment}{}    \textcolor{keyword}{typedef} void (*\mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a09c0b1df7d653eaf55e94e3951d409dd}{WallUnitNormalFctPt}})(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00059}00059                                         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& unit\_normal);}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00060}00060 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00061}00061 \textcolor{comment}{    /// Pointer to a wall normal function that returns}}
@@ -91,13 +91,13 @@
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00087}00087 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00088}00088 \textcolor{comment}{    /// Function that returns the unit normal of the bounding wall}}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00089}00089 \textcolor{comment}{    /// directed out of the fluid}}
-\DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00090}\mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a1a715427e2037278891c06afd5d096fb}{00090}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a1a715427e2037278891c06afd5d096fb}{wall\_unit\_normal}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& normal)}
+\DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00090}\mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a1a715427e2037278891c06afd5d096fb}{00090}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a1a715427e2037278891c06afd5d096fb}{wall\_unit\_normal}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& normal)}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00091}00091     \{}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00092}00092 \textcolor{preprocessor}{\#ifdef PARANOID}}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00093}00093       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_abc765a3b2c4eac762a1a5ba85ac4a7a4}{Wall\_unit\_normal\_fct\_pt}})}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00094}00094       \{}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00095}00095 \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00096}00096         (*Wall\_unit\_normal\_fct\_pt)(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, normal);}
+\DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00096}00096         (*Wall\_unit\_normal\_fct\_pt)(x, normal);}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00097}00097 \textcolor{preprocessor}{\#ifdef PARANOID}}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00098}00098       \}}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00099}00099       \textcolor{keywordflow}{else}}
@@ -115,7 +115,7 @@
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00111}\mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_ab2639a1585fe815bed2d2a3d69fa5164}{00111}} \textcolor{comment}{}    \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_ab2639a1585fe815bed2d2a3d69fa5164}{update\_in\_external\_fd}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00112}00112     \{}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00113}00113       \textcolor{comment}{// Update the bulk element}}
-\DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00114}00114       \mbox{\hyperlink{classoomph_1_1FaceElement_a89e9f7ebc8019c47d54dded72f05479e}{bulk\_element\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a7ae3f437c142fbdef17db914698ffb10}{node\_update}}();}
+\DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00114}00114       \mbox{\hyperlink{classoomph_1_1FaceElement_a89e9f7ebc8019c47d54dded72f05479e}{bulk\_element\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_ac27d707cb4f7c1429793c0fdb2fd093b}{node\_update}}();}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00115}00115     \}}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00116}00116 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00117}00117 \textcolor{comment}{    /// The only external data are these geometric data so}}
@@ -128,7 +128,7 @@
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00124}\mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a6b0de0d11dfcfc912e2f56fbd6359ebe}{00124}} \textcolor{comment}{}    \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a6b0de0d11dfcfc912e2f56fbd6359ebe}{reset\_after\_external\_fd}}()}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00125}00125     \{}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00126}00126       \textcolor{comment}{// Update the bulk element}}
-\DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00127}00127       \mbox{\hyperlink{classoomph_1_1FaceElement_a89e9f7ebc8019c47d54dded72f05479e}{bulk\_element\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a7ae3f437c142fbdef17db914698ffb10}{node\_update}}();}
+\DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00127}00127       \mbox{\hyperlink{classoomph_1_1FaceElement_a89e9f7ebc8019c47d54dded72f05479e}{bulk\_element\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_ac27d707cb4f7c1429793c0fdb2fd093b}{node\_update}}();}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00128}00128     \}}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00129}00129 }
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00130}00130   \textcolor{keyword}{public}:\textcolor{comment}{}}
@@ -225,7 +225,7 @@
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00221}00221 \textcolor{comment}{    /// Calculate the generic residuals contribution}}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00222}\mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a69fa099e0cbfe8ae028a4edc77fedc60}{00222}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a69fa099e0cbfe8ae028a4edc77fedc60}{fill\_in\_generic\_residual\_contribution\_interface\_boundary}}(}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00223}00223       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00224}00224       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}},}
+\DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00224}00224       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian,}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00225}00225       \textcolor{keywordtype}{unsigned} flag) = 0;}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00226}00226 }
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00227}00227 \textcolor{comment}{}}
@@ -238,12 +238,12 @@
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00234}00234 \textcolor{comment}{    /// have to be recalculated.}}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00235}\mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a4510bd81b572d758694715f673080041}{00235}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a4510bd81b572d758694715f673080041}{add\_additional\_residual\_contributions\_interface\_boundary}}(}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00236}00236       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00237}00237       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}},}
+\DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00237}00237       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian,}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00238}00238       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& flag,}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00239}00239       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\& psif,}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00240}00240       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& dpsifds,}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00241}00241       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& interpolated\_n,}
-\DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00242}00242       \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}})}
+\DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00242}00242       \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}})}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00243}00243     \{}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00244}00244     \}}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00245}00245 \textcolor{comment}{}}
@@ -286,7 +286,7 @@
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00282}00282 \textcolor{comment}{    /// Specific additional contributions may be provided in}}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00283}00283 \textcolor{comment}{    /// add\_additional\_residual\_contributions\_interface\_boundary(...)}}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00284}00284 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1PointFluidInterfaceBoundingElement_aad95a7d6f4e4349ee1136e623aa69c88}{fill\_in\_generic\_residual\_contribution\_interface\_boundary}}(}
-\DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00285}00285       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \textcolor{keywordtype}{unsigned} flag);}
+\DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00285}00285       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian, \textcolor{keywordtype}{unsigned} flag);}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00286}00286 }
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00287}00287   \textcolor{keyword}{public}:\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00288}00288 \textcolor{comment}{    /// Constructor}}
@@ -306,7 +306,7 @@
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00302}00302 \textcolor{comment}{    /// Specific additional contributions may be provided in}}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00303}00303 \textcolor{comment}{    /// add\_additional\_residual\_contributions\_interface\_boundary()}}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00304}00304 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1LineFluidInterfaceBoundingElement_aa162a09ba8dfcba4d81e6abaa7a29986}{fill\_in\_generic\_residual\_contribution\_interface\_boundary}}(}
-\DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00305}00305       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \textcolor{keywordtype}{unsigned} flag);}
+\DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00305}00305       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian, \textcolor{keywordtype}{unsigned} flag);}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00306}00306 }
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00307}00307   \textcolor{keyword}{public}:\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00308}00308 \textcolor{comment}{    /// Constructor}}
@@ -381,7 +381,7 @@
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00377}00377 \textcolor{comment}{    /// divergence information that is overloaded in each element}}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00378}00378 \textcolor{comment}{    /// i.e. axisymmetric, two-\/ or three-\/dimensional.}}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00379}00379 \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_ae4ea3a18a513bed3725fdf413cf18874}{fill\_in\_generic\_residual\_contribution\_interface}}(}
-\DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00380}00380       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \textcolor{keywordtype}{unsigned} flag);}
+\DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00380}00380       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian, \textcolor{keywordtype}{unsigned} flag);}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00381}00381 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00382}00382 \textcolor{comment}{    /// Compute the surface gradient and surface divergence}}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00383}00383 \textcolor{comment}{    /// operators given the shape functions, derivatives,}}
@@ -406,7 +406,7 @@
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00402}00402 \textcolor{comment}{    /// same, but in Axisymmetric coordinates they are not!}}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00403}\mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a0180a8e36fadbbe6984f9b3c5edffc81}{00403}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a0180a8e36fadbbe6984f9b3c5edffc81}{compute\_surface\_derivatives}}(}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00404}00404       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\& psi,}
-\DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00405}00405       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_ae3d0addae4ef07ae7295fe439483caf0}{dpsids}},}
+\DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00405}00405       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& dpsids,}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00406}00406       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& interpolated\_t,}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00407}00407       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{classoomph_1_1FaceElement_a7aa612fec3604e08344503fbcdc357c8}{interpolated\_x}},}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00408}00408       \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& dpsidS,}
@@ -429,7 +429,7 @@
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00425}00425 \textcolor{comment}{    ///   includes the r term)!}}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00426}\mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a0bc278bb201b861f47dc846453be4c06}{00426}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a0bc278bb201b861f47dc846453be4c06}{add\_additional\_residual\_contributions\_interface}}(}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00427}00427       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00428}00428       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}},}
+\DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00428}00428       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian,}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00429}00429       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& flag,}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00430}00430       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\& psif,}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00431}00431       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\& dpsifds,}
@@ -438,7 +438,7 @@
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00434}00434       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00435}00435       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{classoomph_1_1FaceElement_a7aa612fec3604e08344503fbcdc357c8}{interpolated\_x}},}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00436}00436       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& interpolated\_n,}
-\DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00437}00437       \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}},}
+\DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00437}00437       \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}},}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00438}00438       \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& J)}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00439}00439     \{}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00440}00440     \}}
@@ -513,7 +513,7 @@
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00509}00509 \textcolor{comment}{    /// Return the i-\/th velocity component at local node j.}}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00510}\mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a50a509413ea7f2a481678837846dd476}{00510}} \textcolor{comment}{}    \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a50a509413ea7f2a481678837846dd476}{u}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00511}00511     \{}
-\DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00512}00512       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j)-\/>value(\mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a6a818d9999c68641223edcad217a8c3f}{U\_index\_interface}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]);}
+\DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00512}00512       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j)-\/>\mbox{\hyperlink{classoomph_1_1Node_afcc5cdba40bca251826ae5bee5ca15b4}{value}}(\mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a6a818d9999c68641223edcad217a8c3f}{U\_index\_interface}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]);}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00513}00513     \}}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00514}00514 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{interface__elements_8h_source_l00515}00515 \textcolor{comment}{    /// Calculate the i-\/th velocity component at the local coordinate s.}}

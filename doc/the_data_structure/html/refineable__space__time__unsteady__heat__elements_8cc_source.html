@@ -234,7 +234,7 @@ $(function() {
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        ipt, psi, dpsidx, test, dtestdx);</div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>      <span class="comment">// Premultiply the weights and the Jacobian</span></div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>      <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a> = w * J;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>      <span class="keywordtype">double</span> <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a> = w * J;</div>
 <div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>      <span class="comment">// Storage for the interpolated time value</span></div>
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>      <span class="keywordtype">double</span> interpolated_t = 0.0;</div>
@@ -364,7 +364,7 @@ $(function() {
 <div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>          {</div>
 <div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>            <span class="comment">// Add source term and time derivative</span></div>
 <div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>            residuals[local_eqn] +=</div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>              ((source + alpha_local * interpolated_dudt) * test(l) * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a> *</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>              ((source + alpha_local * interpolated_dudt) * test(l) * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a> *</div>
 <div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>               hang_weight);</div>
 <div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span> </div>
 <div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>            <span class="comment">// If ALE is enabled</span></div>
@@ -376,7 +376,7 @@ $(function() {
 <div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>                <span class="comment">// Add in the mesh velocity contribution</span></div>
 <div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>                residuals[local_eqn] -=</div>
 <div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>                  (alpha_local * mesh_velocity[k] * interpolated_dudx[k] *</div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>                   test(l) * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a> * hang_weight);</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>                   test(l) * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a> * hang_weight);</div>
 <div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>              }</div>
 <div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>            } <span class="comment">// if (!ALE_is_disabled)</span></div>
 <div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span> </div>
@@ -385,7 +385,7 @@ $(function() {
 <div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>            {</div>
 <div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>              <span class="comment">// Add in the contribution from the Laplace operator</span></div>
 <div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>              residuals[local_eqn] += (beta_local * interpolated_dudx[k] *</div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>                                       dtestdx(l, k) * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a> * hang_weight);</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>                                       dtestdx(l, k) * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a> * hang_weight);</div>
 <div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>            }</div>
 <div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span> </div>
 <div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>            <span class="comment">//-----------------------</span></div>
@@ -451,7 +451,7 @@ $(function() {
 <div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>                  {</div>
 <div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>                    <span class="comment">// Time-derivative contribution</span></div>
 <div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>                    jacobian(local_eqn, local_unknown) +=</div>
-<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>                      (alpha_local * test(l) * dpsidx(l2, SPATIAL_DIM) * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a> *</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>                      (alpha_local * test(l) * dpsidx(l2, SPATIAL_DIM) * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a> *</div>
 <div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>                       hang_weight * hang_weight2);</div>
 <div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span> </div>
 <div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>                    <span class="comment">// Laplace operator contribution</span></div>
@@ -460,7 +460,7 @@ $(function() {
 <div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>                      <span class="comment">// Add the Laplacian contribution to the elemental</span></div>
 <div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>                      <span class="comment">// Jacobian</span></div>
 <div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>                      jacobian(local_eqn, local_unknown) +=</div>
-<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>                        (beta_local * dpsidx(l2, k) * dtestdx(l, k) * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a> *</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>                        (beta_local * dpsidx(l2, k) * dtestdx(l, k) * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a> *</div>
 <div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>                         hang_weight * hang_weight2);</div>
 <div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>                    }</div>
 <div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span> </div>
@@ -473,7 +473,7 @@ $(function() {
 <div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>                        <span class="comment">// Add the ALE contribution to the Jacobian</span></div>
 <div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>                        jacobian(local_eqn, local_unknown) -=</div>
 <div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>                          (alpha_local * mesh_velocity[k] * dpsidx(l2, k) *</div>
-<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>                           test(l) * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a> * hang_weight * hang_weight2);</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>                           test(l) * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a> * hang_weight * hang_weight2);</div>
 <div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>                      }</div>
 <div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>                    } <span class="comment">// if (!(this-&gt;ALE_is_disabled))</span></div>
 <div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>                  } <span class="comment">// if (local_unknown&gt;=0)</span></div>
@@ -506,8 +506,8 @@ $(function() {
 <div class="ttc" id="aclassoomph_1_1RefineableSpaceTimeUnsteadyHeatEquations_html_a3cdab62da2f5575258a57b5360798c56"><div class="ttname"><a href="classoomph_1_1RefineableSpaceTimeUnsteadyHeatEquations.html#a3cdab62da2f5575258a57b5360798c56">oomph::RefineableSpaceTimeUnsteadyHeatEquations::fill_in_generic_residual_contribution_ust_heat</a></div><div class="ttdeci">virtual void fill_in_generic_residual_contribution_ust_heat(Vector&lt; double &gt; &amp;residuals, DenseMatrix&lt; double &gt; &amp;jacobian, const unsigned &amp;flag)</div><div class="ttdoc">Add element's contribution to elemental residual vector and/or Jacobian matrix flag=0: compute residu...</div><div class="ttdef"><b>Definition:</b> <a href="refineable__space__time__unsteady__heat__elements_8cc_source.html#l00042">refineable_space_time_unsteady_heat_elements.cc:43</a></div></div>
 <div class="ttc" id="aclassoomph_1_1Shape_html"><div class="ttname"><a href="classoomph_1_1Shape.html">oomph::Shape</a></div><div class="ttdoc">A Class for shape functions. In simple cases, the shape functions have only one index that can be tho...</div><div class="ttdef"><b>Definition:</b> <a href="shape_8h_source.html#l00075">shape.h:76</a></div></div>
 <div class="ttc" id="aclassoomph_1_1Vector_html"><div class="ttname"><a href="classoomph_1_1Vector.html">oomph::Vector&lt; double &gt;</a></div></div>
+<div class="ttc" id="anamespaceoomph_1_1QuadTreeNames_html_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6"><div class="ttname"><a href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">oomph::QuadTreeNames::W</a></div><div class="ttdeci">@ W</div><div class="ttdef"><b>Definition:</b> <a href="quadtree_8h_source.html#l00063">quadtree.h:63</a></div></div>
 <div class="ttc" id="anamespaceoomph_html"><div class="ttname"><a href="namespaceoomph.html">oomph</a></div><div class="ttdoc">//////////////////////////////////////////////////////////////////// ////////////////////////////////...</div><div class="ttdef"><b>Definition:</b> <a href="advection__diffusion__elements_8cc_source.html#l00029">advection_diffusion_elements.cc:30</a></div></div>
-<div class="ttc" id="anamespaceoomph_html_ab40f6d5233caa62dd428818b4cba72d5"><div class="ttname"><a href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">oomph::W</a></div><div class="ttdeci">W</div><div class="ttdoc">///////////////////////////////////////////////////////////////// ///////////////////////////////////...</div><div class="ttdef"><b>Definition:</b> <a href="constitutive__laws_8h_source.html#l00142">constitutive_laws.h:142</a></div></div>
 <div class="ttc" id="arefineable__space__time__unsteady__heat__elements_8h_html"><div class="ttname"><a href="refineable__space__time__unsteady__heat__elements_8h.html">refineable_space_time_unsteady_heat_elements.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 
@@ -537,7 +537,7 @@ $(function() {
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Nov 2 2021 16:31:15
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Dec 21 2021 17:35:11
         </div>
       </div>
     </footer>

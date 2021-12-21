@@ -96,7 +96,7 @@
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00092}00092       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < nnod\_el; j++)}
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00093}00093       \{}
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00094}00094         \textcolor{comment}{// Pointer to node in the scaffold mesh}}
-\DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00095}00095         Node* scaffold\_node\_pt = Tmp\_mesh\_pt-\/>finite\_element\_pt(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>node\_pt(j);}
+\DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00095}00095         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* scaffold\_node\_pt = Tmp\_mesh\_pt-\/>finite\_element\_pt(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>node\_pt(j);}
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00096}00096 }
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00097}00097         \textcolor{comment}{// Get the (pseudo-\/)global node number in scaffold mesh}}
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00098}00098         \textcolor{comment}{// (It's zero [=default] if not visited this one yet)}}
@@ -118,14 +118,14 @@
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00114}00114           Node\_pt[global\_count -\/ 1] = finite\_element\_pt(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>node\_pt(j);}
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00115}00115 }
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00116}00116           \textcolor{comment}{// Assign coordinates}}
-\DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00117}00117           Node\_pt[global\_count -\/ 1]-\/>x(0) = scaffold\_node\_pt-\/>x(0);}
-\DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00118}00118           Node\_pt[global\_count -\/ 1]-\/>x(1) = scaffold\_node\_pt-\/>x(1);}
-\DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00119}00119           Node\_pt[global\_count -\/ 1]-\/>x(2) = scaffold\_node\_pt-\/>x(2);}
+\DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00117}00117           Node\_pt[global\_count -\/ 1]-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0) = scaffold\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0);}
+\DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00118}00118           Node\_pt[global\_count -\/ 1]-\/>x(1) = scaffold\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1);}
+\DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00119}00119           Node\_pt[global\_count -\/ 1]-\/>x(2) = scaffold\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2);}
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00120}00120 }
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00121}00121           \textcolor{comment}{// Get pointer to set of mesh boundaries that this}}
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00122}00122           \textcolor{comment}{// scaffold node occupies; NULL if the node is not on any boundary}}
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00123}00123           std::set<unsigned>* boundaries\_pt;}
-\DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00124}00124           scaffold\_node\_pt-\/>get\_boundaries\_pt(boundaries\_pt);}
+\DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00124}00124           scaffold\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a33092a3d51285282ae8ec8e702d1cbf5}{get\_boundaries\_pt}}(boundaries\_pt);}
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00125}00125 }
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00126}00126           \textcolor{comment}{// Loop over the mesh boundaries that the node in the scaffold mesh}}
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00127}00127           \textcolor{comment}{// occupies and assign new node to the same ones.}}
@@ -196,7 +196,7 @@
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00192}00192       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 4; j < nnode; j++)}
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00193}00193       \{}
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00194}00194         \textcolor{comment}{// Create new node}}
-\DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00195}00195         Node* new\_node\_pt =}
+\DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00195}00195         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* new\_node\_pt =}
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00196}00196           finite\_element\_pt(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>construct\_node(j, time\_stepper\_pt);}
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00197}00197 }
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00198}00198         \textcolor{comment}{// What are the node's local coordinates?}}
@@ -206,7 +206,7 @@
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00202}00202         \textcolor{comment}{// and fully-\/functional element in the scaffold mesh}}
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00203}00203         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < dim; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00204}00204         \{}
-\DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00205}00205           new\_node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) =}
+\DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00205}00205           new\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) =}
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00206}00206             Tmp\_mesh\_pt-\/>finite\_element\_pt(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00207}00207         \}}
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00208}00208       \} \textcolor{comment}{// end of loop over new nodes}}
@@ -218,8 +218,8 @@
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00214}00214     \{}
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00215}00215       \textcolor{comment}{// Storage for pointer to mid-\/edge node}}
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00216}00216       \mbox{\hyperlink{classoomph_1_1MapMatrix}{MapMatrix<Node*, Node*>}} central\_edge\_node\_pt;}
-\DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00217}00217       Node* edge\_node1\_pt = 0;}
-\DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00218}00218       Node* edge\_node2\_pt = 0;}
+\DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00217}00217       \mbox{\hyperlink{classoomph_1_1Node}{Node}}* edge\_node1\_pt = 0;}
+\DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00218}00218       \mbox{\hyperlink{classoomph_1_1Node}{Node}}* edge\_node2\_pt = 0;}
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00219}00219 }
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00220}00220       \textcolor{comment}{// Loop over elements}}
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00221}00221       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}} = 0; \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}} < nelem; \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}++)}
@@ -228,7 +228,7 @@
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00224}00224         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 4; j < nnode; j++)}
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00225}00225         \{}
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00226}00226           \textcolor{comment}{// Pointer to the element's local node}}
-\DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00227}00227           Node* node\_pt = finite\_element\_pt(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>node\_pt(j);}
+\DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00227}00227           \mbox{\hyperlink{classoomph_1_1Node}{Node}}* node\_pt = finite\_element\_pt(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>node\_pt(j);}
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00228}00228 }
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00229}00229           \textcolor{comment}{// By default, we assume the node is not new}}
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00230}00230           \textcolor{keywordtype}{bool} is\_new = \textcolor{keyword}{false};}
@@ -382,10 +382,10 @@
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00378}00378         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} bo = 0; bo < nbound; bo++)}
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00379}00379         \{}
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00380}00380           \textcolor{comment}{// Pointer to the element's local node}}
-\DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00381}00381           Node* loc\_node\_pt = finite\_element\_pt(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>node\_pt(j);}
+\DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00381}00381           \mbox{\hyperlink{classoomph_1_1Node}{Node}}* loc\_node\_pt = finite\_element\_pt(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>node\_pt(j);}
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00382}00382 }
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00383}00383           \textcolor{comment}{// Pointer to original node}}
-\DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00384}00384           Node* orig\_loc\_node\_pt = orig\_node\_pt[\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}][j];}
+\DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00384}00384           \mbox{\hyperlink{classoomph_1_1Node}{Node}}* orig\_loc\_node\_pt = orig\_node\_pt[\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}][j];}
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00385}00385 }
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00386}00386           \textcolor{comment}{// value of the map for the node and boundary specified}}
 \DoxyCodeLine{\Hypertarget{simple__cubic__tet__mesh_8template_8cc_source_l00387}00387           \textcolor{keywordtype}{bool} bound\_test = bound\_node\_done(orig\_loc\_node\_pt, bo);}

@@ -70,7 +70,7 @@
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8cc_source_l00066}00066     \textcolor{keywordtype}{unsigned} u\_index[3];}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8cc_source_l00067}00067     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 3; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8cc_source_l00068}00068     \{}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8cc_source_l00069}00069       u\_index[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = this-\/>u\_index\_axi\_nst(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8cc_source_l00069}00069       u\_index[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = this-\/>\mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_afbdea50fcf4799e2e4e5209ee3249bf0}{u\_index\_axi\_nst}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8cc_source_l00070}00070     \}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8cc_source_l00071}00071 }
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8cc_source_l00072}00072     \textcolor{comment}{// Loop over the nodes}}
@@ -143,7 +143,7 @@
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8cc_source_l00139}00139       \textcolor{keywordflow}{if} (this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l)-\/>nvalue() == 3 + 1)}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8cc_source_l00140}00140       \{}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8cc_source_l00141}00141         \textcolor{comment}{// unpin pressure dof}}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8cc_source_l00142}00142         this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l)-\/>unpin(3);}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8cc_source_l00142}00142         this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l)-\/>\mbox{\hyperlink{classoomph_1_1Data_a4e5cb031bf8eceb8f97c2c4fbd74cb05}{unpin}}(3);}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8cc_source_l00143}00143       \}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8cc_source_l00144}00144     \}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8cc_source_l00145}00145   \}}
@@ -161,7 +161,7 @@
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8cc_source_l00157}00157     \{}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8cc_source_l00158}00158       \textcolor{keywordflow}{if} (this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n)-\/>nvalue() == 3 + 1)}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8cc_source_l00159}00159       \{}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8cc_source_l00160}00160         this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n)-\/>pin(3);}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8cc_source_l00160}00160         this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n)-\/>\mbox{\hyperlink{classoomph_1_1Data_a422231c58e423f0b43822827aa334d79}{pin}}(3);}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8cc_source_l00161}00161       \}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8cc_source_l00162}00162     \}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8cc_source_l00163}00163   \}}
@@ -175,10 +175,10 @@
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8cc_source_l00171}00171     \textcolor{keywordtype}{unsigned} n\_pres = \mbox{\hyperlink{classoomph_1_1AxisymmetricTTaylorHoodElement_a39217f9f550c3488f8f660ae861a61a7}{npres\_axi\_nst}}();}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8cc_source_l00172}00172     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} l = 0; l < n\_pres; l++)}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8cc_source_l00173}00173     \{}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8cc_source_l00174}00174       Node* nod\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(\mbox{\hyperlink{classoomph_1_1AxisymmetricTTaylorHoodElement_a0aeec7081602d00fd711fd9d0b2022b9}{Pconv}}[l]);}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8cc_source_l00175}00175       \textcolor{keywordflow}{if} (!nod\_pt-\/>is\_hanging(3))}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8cc_source_l00174}00174       \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(\mbox{\hyperlink{classoomph_1_1AxisymmetricTTaylorHoodElement_a0aeec7081602d00fd711fd9d0b2022b9}{Pconv}}[l]);}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8cc_source_l00175}00175       \textcolor{keywordflow}{if} (!nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_af0e6237dfafad62cf427ff5013ddcfef}{is\_hanging}}(3))}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8cc_source_l00176}00176       \{}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8cc_source_l00177}00177         nod\_pt-\/>unpin(3);}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8cc_source_l00177}00177         nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a4e5cb031bf8eceb8f97c2c4fbd74cb05}{unpin}}(3);}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8cc_source_l00178}00178       \}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8cc_source_l00179}00179     \}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8cc_source_l00180}00180   \}}

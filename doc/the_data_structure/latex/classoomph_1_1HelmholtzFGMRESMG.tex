@@ -35,7 +35,7 @@ void \mbox{\hyperlink{classoomph_1_1HelmholtzFGMRESMG_a36a1d601676df2ebe39fcdb7a
 \item 
 void \mbox{\hyperlink{classoomph_1_1HelmholtzFGMRESMG_a8bfd5045cf99bbeaf94b69ede3ccf0ad}{solve\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_aec1a6eda2d78d1e3b41ced805534d72d}{matrix\+\_\+pt}}, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&solution)
 \begin{DoxyCompactList}\small\item\em General interface to solve function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HelmholtzFGMRESMG_ac6e87c2d59dcee71ce599dcbabae5445}{update}} (const unsigned \&k, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ $>$ \&hessenberg, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ $>$ \&z\+\_\+m, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}})
+void \mbox{\hyperlink{classoomph_1_1HelmholtzFGMRESMG_ac6e87c2d59dcee71ce599dcbabae5445}{update}} (const unsigned \&k, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ $>$ \&hessenberg, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ $>$ \&z\+\_\+m, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&x)
 \begin{DoxyCompactList}\small\item\em Helper function to update the result vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -47,7 +47,7 @@ class oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$}
 
 The FGMRES method, i.\+e. the flexible variant of the \mbox{\hyperlink{classoomph_1_1GMRES}{GMRES}} method which allows for nonconstant preconditioners \mbox{[}see Saad Y, \char`\"{}\+Iterative methods for sparse linear systems\char`\"{}, p.\+287\mbox{]}. Note, FGMRES can only cater to right preconditioning; if the user tries to switch to left preconditioning they will be notified of this 
 
-Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l03308}{3308}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
+Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l03240}{3240}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
 
 
 
@@ -65,11 +65,11 @@ Constructor (empty)
 
 
 
-Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l03312}{3312}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
+Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l03244}{3244}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
 
 
 
-References \mbox{\hyperlink{complex__smoother_8h_source_l02505}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::\+Preconditioner\+\_\+\+LHS}}.
+References \mbox{\hyperlink{complex__smoother_8h_source_l02437}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::\+Preconditioner\+\_\+\+LHS}}.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzFGMRESMG_a89c8378219342c65d10f2c0af160bebf}\label{classoomph_1_1HelmholtzFGMRESMG_a89c8378219342c65d10f2c0af160bebf}} 
 \index{oomph::HelmholtzFGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzFGMRESMG$<$ MATRIX $>$}!````~HelmholtzFGMRESMG@{$\sim$HelmholtzFGMRESMG}}
@@ -84,11 +84,11 @@ Destructor (cleanup storage)
 
 
 
-Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l03319}{3319}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
+Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l03251}{3251}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
 
 
 
-References \mbox{\hyperlink{complex__smoother_8h_source_l02089}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::clean\+\_\+up\+\_\+memory()}}.
+References \mbox{\hyperlink{complex__smoother_8h_source_l02053}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::clean\+\_\+up\+\_\+memory()}}.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzFGMRESMG_a14c2f9a783973936537427dee3b9628c}\label{classoomph_1_1HelmholtzFGMRESMG_a14c2f9a783973936537427dee3b9628c}} 
 \index{oomph::HelmholtzFGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzFGMRESMG$<$ MATRIX $>$}!HelmholtzFGMRESMG@{HelmholtzFGMRESMG}}
@@ -128,7 +128,7 @@ Overloaded function to let the user know that left preconditioning is not possib
 
 
 
-Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l03333}{3333}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
+Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l03265}{3265}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzFGMRESMG_a36a1d601676df2ebe39fcdb7a0837864}\label{classoomph_1_1HelmholtzFGMRESMG_a36a1d601676df2ebe39fcdb7a0837864}} 
 \index{oomph::HelmholtzFGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzFGMRESMG$<$ MATRIX $>$}!solve@{solve}}
@@ -147,11 +147,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_a5806236b991a
 
 
 
-Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l03352}{3352}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
+Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l03284}{3284}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8cc_source_l02483}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::block\+\_\+setup()}}, \mbox{\hyperlink{double__vector_8cc_source_l00035}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{double__vector_8h_source_l00154}{oomph\+::\+Double\+Vector\+::built()}}, \mbox{\hyperlink{complex__smoother_8h_source_l02089}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01046}{oomph\+::\+MPI\+\_\+\+Helpers\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l01246}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{linear__solver_8h_source_l00077}{oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time}}, \mbox{\hyperlink{linear__solver_8h_source_l00073}{oomph\+::\+Linear\+Solver\+::\+Enable\+\_\+resolve}}, \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{oomph\+::f()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00673}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+block()}}, \mbox{\hyperlink{problem_8cc_source_l03890}{oomph\+::\+Problem\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00248}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Jacobian\+\_\+setup\+\_\+time}}, \mbox{\hyperlink{complex__smoother_8h_source_l02376}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::\+Matrices\+\_\+storage\+\_\+pt}}, \mbox{\hyperlink{complex__smoother_8h_source_l02501}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::\+Matrix\+\_\+can\+\_\+be\+\_\+deleted}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00520}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::matrix\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l01280}{oomph\+::\+Problem\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01670}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::nblock\+\_\+types()}}, \mbox{\hyperlink{problem_8h_source_l01674}{oomph\+::\+Problem\+::ndof()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{double__vector_8cc_source_l00164}{oomph\+::\+Double\+Vector\+::redistribute()}}, \mbox{\hyperlink{complex__smoother_8h_source_l02497}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::\+Resolving}}, \mbox{\hyperlink{preconditioner_8h_source_l00193}{oomph\+::\+Preconditioner\+::set\+\_\+comm\+\_\+pt()}}, \mbox{\hyperlink{preconditioner_8h_source_l00165}{oomph\+::\+Preconditioner\+::set\+\_\+matrix\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02866}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::set\+\_\+mesh()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02851}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::set\+\_\+nmesh()}}, \mbox{\hyperlink{complex__smoother_8h_source_l03619}{oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::solve\+\_\+helper()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}.
+References \mbox{\hyperlink{block__preconditioner_8cc_source_l02483}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::block\+\_\+setup()}}, \mbox{\hyperlink{double__vector_8cc_source_l00035}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{double__vector_8h_source_l00154}{oomph\+::\+Double\+Vector\+::built()}}, \mbox{\hyperlink{complex__smoother_8h_source_l02053}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01046}{oomph\+::\+MPI\+\_\+\+Helpers\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l01246}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{linear__solver_8h_source_l00077}{oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time}}, \mbox{\hyperlink{linear__solver_8h_source_l00073}{oomph\+::\+Linear\+Solver\+::\+Enable\+\_\+resolve}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00673}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+block()}}, \mbox{\hyperlink{problem_8cc_source_l03890}{oomph\+::\+Problem\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00248}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Jacobian\+\_\+setup\+\_\+time}}, \mbox{\hyperlink{complex__smoother_8h_source_l02425}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::\+Matrices\+\_\+storage\+\_\+pt}}, \mbox{\hyperlink{complex__smoother_8h_source_l02433}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::\+Matrix\+\_\+can\+\_\+be\+\_\+deleted}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00520}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::matrix\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l01280}{oomph\+::\+Problem\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01670}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::nblock\+\_\+types()}}, \mbox{\hyperlink{problem_8h_source_l01674}{oomph\+::\+Problem\+::ndof()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{double__vector_8cc_source_l00164}{oomph\+::\+Double\+Vector\+::redistribute()}}, \mbox{\hyperlink{complex__smoother_8h_source_l02429}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::\+Resolving}}, \mbox{\hyperlink{preconditioner_8h_source_l00193}{oomph\+::\+Preconditioner\+::set\+\_\+comm\+\_\+pt()}}, \mbox{\hyperlink{preconditioner_8h_source_l00165}{oomph\+::\+Preconditioner\+::set\+\_\+matrix\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02866}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::set\+\_\+mesh()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02851}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::set\+\_\+nmesh()}}, \mbox{\hyperlink{complex__smoother_8h_source_l03551}{oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::solve\+\_\+helper()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzFGMRESMG_a8bfd5045cf99bbeaf94b69ede3ccf0ad}\label{classoomph_1_1HelmholtzFGMRESMG_a8bfd5045cf99bbeaf94b69ede3ccf0ad}} 
 \index{oomph::HelmholtzFGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzFGMRESMG$<$ MATRIX $>$}!solve\_helper@{solve\_helper}}
@@ -168,7 +168,7 @@ General interface to solve function.
 
 Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. based on the algorithm presented in Templates for the Solution of Linear Systems\+: Building Blocks for Iterative Methods, Barrett, Berry et al, SIAM, 2006 and the implementation in the IML++ library \+: \href{http://math.nist.gov/iml++/}{\texttt{ http\+://math.\+nist.\+gov/iml++/}} 
 
-Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l03619}{3619}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
+Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l03551}{3551}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
 
 
 
@@ -176,7 +176,7 @@ References \mbox{\hyperlink{double__vector_8cc_source_l00035}{oomph\+::\+Double\
 
 
 
-Referenced by \mbox{\hyperlink{complex__smoother_8h_source_l03352}{oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::solve()}}.
+Referenced by \mbox{\hyperlink{complex__smoother_8h_source_l03284}{oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::solve()}}.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzFGMRESMG_ac6e87c2d59dcee71ce599dcbabae5445}\label{classoomph_1_1HelmholtzFGMRESMG_ac6e87c2d59dcee71ce599dcbabae5445}} 
 \index{oomph::HelmholtzFGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzFGMRESMG$<$ MATRIX $>$}!update@{update}}
@@ -191,11 +191,11 @@ Helper function to update the result vector.
 
 
 
-Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l03514}{3514}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
+Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l03446}{3446}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 
 

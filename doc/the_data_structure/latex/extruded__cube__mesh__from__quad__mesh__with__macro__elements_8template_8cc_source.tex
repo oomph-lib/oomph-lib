@@ -200,7 +200,7 @@
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00196}00196     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_node\_in\_quad\_mesh; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00197}00197     \{}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00198}00198       \textcolor{comment}{// Check to see if the i-\/th node is hanging}}
-\DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00199}00199       \textcolor{keywordflow}{if} (quad\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})-\/>is\_hanging())}
+\DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00199}00199       \textcolor{keywordflow}{if} (quad\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})-\/>\mbox{\hyperlink{classoomph_1_1Node_af0e6237dfafad62cf427ff5013ddcfef}{is\_hanging}}())}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00200}00200       \{}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00201}00201         \textcolor{comment}{// Create an output stream}}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00202}00202         std::ostringstream warning\_message\_stream;}
@@ -245,7 +245,7 @@
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00241}00241       \textcolor{comment}{// get around this we store the corner nodes of each quad element}}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00242}00242       \textcolor{comment}{// with its corresponding z-\/value. This will in turn return the}}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00243}00243       \textcolor{comment}{// corresponding node in the extruded mesh}}
-\DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00244}00244       std::map<std::pair<Node*, double>, Node*>}
+\DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00244}00244       std::map<std::pair<Node*, double>, \mbox{\hyperlink{classoomph_1_1Node}{Node}}*>}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00245}00245         quad\_corner\_node\_to\_cube\_node\_map;}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00246}00246 }
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00247}00247       \textcolor{comment}{// Loop over all the elements in one slice}}
@@ -373,10 +373,10 @@
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00369}00369             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i\_edge = \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7dabc60bec4cc294aa2adf92726c6d6823a}{QuadTreeNames::N}}; i\_edge < last\_edge; i\_edge++)}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00370}00370             \{}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00371}00371               \textcolor{comment}{// Pointer for the first node associated with this edge}}
-\DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00372}00372               Node* node1\_pt = 0;}
+\DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00372}00372               \mbox{\hyperlink{classoomph_1_1Node}{Node}}* node1\_pt = 0;}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00373}00373 }
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00374}00374               \textcolor{comment}{// Pointer for the second node associated with this edge}}
-\DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00375}00375               Node* node2\_pt = 0;}
+\DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00375}00375               \mbox{\hyperlink{classoomph_1_1Node}{Node}}* node2\_pt = 0;}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00376}00376 }
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00377}00377               \textcolor{comment}{// Find the corner nodes associated with this edge}}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00378}00378               \textcolor{keywordflow}{switch} (i\_edge)}
@@ -596,7 +596,7 @@
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00592}00592               \textcolor{keywordflow}{if} (!has\_node\_been\_setup[quad\_local\_node\_number])}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00593}00593               \{}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00594}00594                 \textcolor{comment}{// Get a pointer to the first corner node (in the quad mesh)}}
-\DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00595}00595                 Node* quad\_corner\_node\_pt =}
+\DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00595}00595                 \mbox{\hyperlink{classoomph_1_1Node}{Node}}* quad\_corner\_node\_pt =}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00596}00596                   quad\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(quad\_local\_node\_number);}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00597}00597 }
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00598}00598                 \textcolor{comment}{// Pair up the corner node and z-\/value}}
@@ -604,7 +604,7 @@
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00600}00600                   quad\_corner\_node\_pt, z\_value);}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00601}00601 }
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00602}00602                 \textcolor{comment}{// Have we made this Node yet?}}
-\DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00603}00603                 std::map<std::pair<Node*, double>, Node*>::iterator it =}
+\DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00603}00603                 std::map<std::pair<Node*, double>, \mbox{\hyperlink{classoomph_1_1Node}{Node}}*>::iterator it =}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00604}00604                   quad\_corner\_node\_to\_cube\_node\_map.find(}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00605}00605                     quad\_corner\_node\_and\_z\_value);}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00606}00606 }
@@ -649,7 +649,7 @@
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00645}00645                 \}}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00646}00646 }
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00647}00647                 \textcolor{comment}{// Pointer to point to the node we are about to create}}
-\DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00648}00648                 Node* cube\_node\_pt = 0;}
+\DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00648}00648                 \mbox{\hyperlink{classoomph_1_1Node}{Node}}* cube\_node\_pt = 0;}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00649}00649 }
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00650}00650                 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00651}00651 \textcolor{comment}{                /// / Check if the node that we're about to construct lies on}}
@@ -692,17 +692,17 @@
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00688}00688                   \} \textcolor{comment}{// if ((i==0)\&\&(n\_2==0))}}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00689}00689 }
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00690}00690                   \textcolor{comment}{// Get a pointer to the matching quad mesh node}}
-\DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00691}00691                   Node* quad\_node\_pt =}
+\DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00691}00691                   \mbox{\hyperlink{classoomph_1_1Node}{Node}}* quad\_node\_pt =}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00692}00692                     quad\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(quad\_local\_node\_number);}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00693}00693 }
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00694}00694                   \textcolor{comment}{// If this Node lies on a boundary}}
-\DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00695}00695                   \textcolor{keywordflow}{if} (quad\_node\_pt-\/>is\_on\_boundary())}
+\DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00695}00695                   \textcolor{keywordflow}{if} (quad\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a2ca215e42116ee8a2acc7d6a35e37788}{is\_on\_boundary}}())}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00696}00696                   \{}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00697}00697                     \textcolor{comment}{// Storage for the set of boundaries that this Node lies on}}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00698}00698                     std::set<unsigned>* boundaries\_pt;}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00699}00699 }
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00700}00700                     \textcolor{comment}{// Get the boundaries that this Node lies on}}
-\DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00701}00701                     quad\_node\_pt-\/>get\_boundaries\_pt(boundaries\_pt);}
+\DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00701}00701                     quad\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a33092a3d51285282ae8ec8e702d1cbf5}{get\_boundaries\_pt}}(boundaries\_pt);}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00702}00702 }
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00703}00703                     \textcolor{comment}{// Create an iterator to loop over the entries of the set}}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00704}00704                     std::set<unsigned>::const\_iterator const\_it;}
@@ -811,11 +811,11 @@
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00807}00807                 \textcolor{comment}{// is the ONLY Node in the element that lies on the boundary.}}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00808}00808                 \textcolor{comment}{// It's a slightly odd scenario but can easily occur on meshes}}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00809}00809                 \textcolor{comment}{// created using the QuadFromTriangleMesh class.}}
-\DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00810}00810                 Node* quad\_node\_pt =}
+\DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00810}00810                 \mbox{\hyperlink{classoomph_1_1Node}{Node}}* quad\_node\_pt =}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00811}00811                   quad\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(quad\_local\_node\_number);}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00812}00812 }
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00813}00813                 \textcolor{comment}{// If this Node lies on a boundary}}
-\DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00814}00814                 \textcolor{keywordflow}{if} (quad\_node\_pt-\/>is\_on\_boundary())}
+\DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00814}00814                 \textcolor{keywordflow}{if} (quad\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a2ca215e42116ee8a2acc7d6a35e37788}{is\_on\_boundary}}())}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00815}00815                 \{}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00816}00816                   \textcolor{comment}{// If we haven't created the Node yet AND the corresponding}}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00817}00817                   \textcolor{comment}{// Node in the quad mesh definitely lies on the boundary}}
@@ -833,7 +833,7 @@
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00829}00829                   std::set<unsigned>* boundaries\_pt;}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00830}00830 }
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00831}00831                   \textcolor{comment}{// Get the boundaries that this Node lies on}}
-\DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00832}00832                   quad\_node\_pt-\/>get\_boundaries\_pt(boundaries\_pt);}
+\DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00832}00832                   quad\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a33092a3d51285282ae8ec8e702d1cbf5}{get\_boundaries\_pt}}(boundaries\_pt);}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00833}00833 }
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00834}00834                   \textcolor{comment}{// Create an iterator to loop over the entries of the set}}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00835}00835                   std::set<unsigned>::const\_iterator const\_it;}
@@ -861,13 +861,13 @@
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00857}00857                 \}}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00858}00858 }
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00859}00859                 \textcolor{comment}{// Set the x-\/coordinate of the node}}
-\DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00860}00860                 cube\_node\_pt-\/>x(0) = quad\_node\_pt-\/>x(0);}
+\DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00860}00860                 cube\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0) = quad\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0);}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00861}00861 }
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00862}00862                 \textcolor{comment}{// Set the y-\/coordinate of the node}}
-\DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00863}00863                 cube\_node\_pt-\/>x(1) = quad\_node\_pt-\/>x(1);}
+\DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00863}00863                 cube\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1) = quad\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1);}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00864}00864 }
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00865}00865                 \textcolor{comment}{// Set the z-\/coordinate of the node}}
-\DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00866}00866                 cube\_node\_pt-\/>x(2) = z\_value;}
+\DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00866}00866                 cube\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2) = z\_value;}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00867}00867 }
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00868}00868                 \textcolor{comment}{// Add it to global storage}}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00869}00869                 Node\_pt[node\_count] = cube\_node\_pt;}
@@ -981,11 +981,11 @@
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00977}00977                 quad\_local\_node\_number + (n\_node\_1d * n\_node\_1d * n\_2);}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00978}00978 }
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00979}00979               \textcolor{comment}{// Get a pointer to the first corner node (in the quad mesh)}}
-\DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00980}00980               Node* quad\_corner\_node\_pt =}
+\DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00980}00980               \mbox{\hyperlink{classoomph_1_1Node}{Node}}* quad\_corner\_node\_pt =}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00981}00981                 quad\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(quad\_local\_node\_number);}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00982}00982 }
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00983}00983               \textcolor{comment}{// Get a pointer to the first corner node (in the cube mesh)}}
-\DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00984}00984               Node* cube\_corner\_node\_pt =}
+\DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00984}00984               \mbox{\hyperlink{classoomph_1_1Node}{Node}}* cube\_corner\_node\_pt =}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00985}00985                 cube\_el\_pt-\/>node\_pt(cube\_local\_node\_number);}
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00986}00986 }
 \DoxyCodeLine{\Hypertarget{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00987}00987               \textcolor{comment}{// Pair up the corner node and z-\/value}}

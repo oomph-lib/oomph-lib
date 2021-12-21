@@ -443,8 +443,8 @@
 \DoxyCodeLine{\Hypertarget{rectangular__quadmesh_8template_8h_source_l00439}00439       \textcolor{keywordtype}{unsigned} nnod = \mbox{\hyperlink{classoomph_1_1Mesh_a945e7823d1a2af243b5b7f7866aaff5e}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{rectangular__quadmesh_8template_8h_source_l00440}00440       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < nnod; j++)}
 \DoxyCodeLine{\Hypertarget{rectangular__quadmesh_8template_8h_source_l00441}00441       \{}
-\DoxyCodeLine{\Hypertarget{rectangular__quadmesh_8template_8h_source_l00442}00442         \mbox{\hyperlink{classoomph_1_1SolidMesh_a053f864c3df9b7436b2eda1554d30ee5}{node\_pt}}(j)-\/>x(0) += origin[0];}
-\DoxyCodeLine{\Hypertarget{rectangular__quadmesh_8template_8h_source_l00443}00443         \mbox{\hyperlink{classoomph_1_1SolidMesh_a053f864c3df9b7436b2eda1554d30ee5}{node\_pt}}(j)-\/>x(1) += origin[1];}
+\DoxyCodeLine{\Hypertarget{rectangular__quadmesh_8template_8h_source_l00442}00442         \mbox{\hyperlink{classoomph_1_1SolidMesh_a053f864c3df9b7436b2eda1554d30ee5}{node\_pt}}(j)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0) += origin[0];}
+\DoxyCodeLine{\Hypertarget{rectangular__quadmesh_8template_8h_source_l00443}00443         \mbox{\hyperlink{classoomph_1_1SolidMesh_a053f864c3df9b7436b2eda1554d30ee5}{node\_pt}}(j)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1) += origin[1];}
 \DoxyCodeLine{\Hypertarget{rectangular__quadmesh_8template_8h_source_l00444}00444       \}}
 \DoxyCodeLine{\Hypertarget{rectangular__quadmesh_8template_8h_source_l00445}00445 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{rectangular__quadmesh_8template_8h_source_l00446}00446 \textcolor{comment}{      /// Make the current configuration the undeformed one by}}
@@ -528,7 +528,7 @@
 \DoxyCodeLine{\Hypertarget{rectangular__quadmesh_8template_8h_source_l00524}00524         \{}
 \DoxyCodeLine{\Hypertarget{rectangular__quadmesh_8template_8h_source_l00525}00525           \textcolor{comment}{// Boundary coordinate varies between 0 and L}}
 \DoxyCodeLine{\Hypertarget{rectangular__quadmesh_8template_8h_source_l00526}00526           zeta[0] = \mbox{\hyperlink{classoomph_1_1SolidMesh_a562aad8bd129f8482b7d8fb14a94bebd}{boundary\_node\_pt}}(b, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})-\/>\mbox{\hyperlink{classoomph_1_1SolidNode_aa6780c66ed3f5db5cbb8fe2c0a476974}{xi}}(0) -\/ origin[0];}
-\DoxyCodeLine{\Hypertarget{rectangular__quadmesh_8template_8h_source_l00527}00527           \mbox{\hyperlink{classoomph_1_1SolidMesh_a562aad8bd129f8482b7d8fb14a94bebd}{boundary\_node\_pt}}(b, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})-\/>set\_coordinates\_on\_boundary(b, zeta);}
+\DoxyCodeLine{\Hypertarget{rectangular__quadmesh_8template_8h_source_l00527}00527           \mbox{\hyperlink{classoomph_1_1SolidMesh_a562aad8bd129f8482b7d8fb14a94bebd}{boundary\_node\_pt}}(b, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})-\/>\mbox{\hyperlink{classoomph_1_1Node_a94c19e165ab4e88aabbfa27443c530b7}{set\_coordinates\_on\_boundary}}(b, zeta);}
 \DoxyCodeLine{\Hypertarget{rectangular__quadmesh_8template_8h_source_l00528}00528         \}}
 \DoxyCodeLine{\Hypertarget{rectangular__quadmesh_8template_8h_source_l00529}00529         \mbox{\hyperlink{classoomph_1_1Mesh_a412a5051be9e81f0ba61bf85e5abc4a6}{Boundary\_coordinate\_exists}}[b] = \textcolor{keyword}{true};}
 \DoxyCodeLine{\Hypertarget{rectangular__quadmesh_8template_8h_source_l00530}00530       \}}
@@ -547,7 +547,7 @@
 \DoxyCodeLine{\Hypertarget{rectangular__quadmesh_8template_8h_source_l00543}00543           \textcolor{comment}{// Boundary coordinate varies between +/-\/ H/2}}
 \DoxyCodeLine{\Hypertarget{rectangular__quadmesh_8template_8h_source_l00544}00544           zeta[0] = \mbox{\hyperlink{classoomph_1_1SolidMesh_a562aad8bd129f8482b7d8fb14a94bebd}{boundary\_node\_pt}}(b, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})-\/>\mbox{\hyperlink{classoomph_1_1SolidNode_aa6780c66ed3f5db5cbb8fe2c0a476974}{xi}}(1) -\/ origin[1] -\/}
 \DoxyCodeLine{\Hypertarget{rectangular__quadmesh_8template_8h_source_l00545}00545                     0.5 * (this-\/>\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_aacbacc3a0e6ea8508abb3140ba343ffa}{Ymax}} -\/ this-\/>\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ade53fec7446044418ccba9f55d692adb}{Ymin}});}
-\DoxyCodeLine{\Hypertarget{rectangular__quadmesh_8template_8h_source_l00546}00546           \mbox{\hyperlink{classoomph_1_1SolidMesh_a562aad8bd129f8482b7d8fb14a94bebd}{boundary\_node\_pt}}(b, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})-\/>set\_coordinates\_on\_boundary(b, zeta);}
+\DoxyCodeLine{\Hypertarget{rectangular__quadmesh_8template_8h_source_l00546}00546           \mbox{\hyperlink{classoomph_1_1SolidMesh_a562aad8bd129f8482b7d8fb14a94bebd}{boundary\_node\_pt}}(b, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})-\/>\mbox{\hyperlink{classoomph_1_1Node_a94c19e165ab4e88aabbfa27443c530b7}{set\_coordinates\_on\_boundary}}(b, zeta);}
 \DoxyCodeLine{\Hypertarget{rectangular__quadmesh_8template_8h_source_l00547}00547         \}}
 \DoxyCodeLine{\Hypertarget{rectangular__quadmesh_8template_8h_source_l00548}00548         \mbox{\hyperlink{classoomph_1_1Mesh_a412a5051be9e81f0ba61bf85e5abc4a6}{Boundary\_coordinate\_exists}}[b] = \textcolor{keyword}{true};}
 \DoxyCodeLine{\Hypertarget{rectangular__quadmesh_8template_8h_source_l00549}00549       \}}

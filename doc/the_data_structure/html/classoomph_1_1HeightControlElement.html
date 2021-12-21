@@ -150,7 +150,7 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:abb74c76bc5615a50794d1d26711f1203"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HeightControlElement.html#abb74c76bc5615a50794d1d26711f1203">HeightControlElement</a> (Node *control_node_pt, double *prescribed_height_pt)</td></tr>
+<tr class="memitem:abb74c76bc5615a50794d1d26711f1203"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HeightControlElement.html#abb74c76bc5615a50794d1d26711f1203">HeightControlElement</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *control_node_pt, double *prescribed_height_pt)</td></tr>
 <tr class="memdesc:abb74c76bc5615a50794d1d26711f1203"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass pointer to node at which the height is controlled and pointer to double that stores the prescribed height at that node.  <a href="classoomph_1_1HeightControlElement.html#abb74c76bc5615a50794d1d26711f1203">More...</a><br /></td></tr>
 <tr class="separator:abb74c76bc5615a50794d1d26711f1203"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b04177d97f3b599aa33a09d060aeb0c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Data.html">Data</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HeightControlElement.html#a3b04177d97f3b599aa33a09d060aeb0c">kappa_pt</a> ()</td></tr>
@@ -327,7 +327,7 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:a84d4b72f7ce6ed722a5deac748ec874b"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HeightControlElement.html#a84d4b72f7ce6ed722a5deac748ec874b">Prescribed_height_pt</a></td></tr>
 <tr class="memdesc:a84d4b72f7ce6ed722a5deac748ec874b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to value that stores the controlled height.  <a href="classoomph_1_1HeightControlElement.html#a84d4b72f7ce6ed722a5deac748ec874b">More...</a><br /></td></tr>
 <tr class="separator:a84d4b72f7ce6ed722a5deac748ec874b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7950b34b4d99cf59df12a1c458b42540"><td class="memItemLeft" align="right" valign="top">Node *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HeightControlElement.html#a7950b34b4d99cf59df12a1c458b42540">Control_node_pt</a></td></tr>
+<tr class="memitem:a7950b34b4d99cf59df12a1c458b42540"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Node.html">Node</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HeightControlElement.html#a7950b34b4d99cf59df12a1c458b42540">Control_node_pt</a></td></tr>
 <tr class="memdesc:a7950b34b4d99cf59df12a1c458b42540"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to node at which the height is controlled.  <a href="classoomph_1_1HeightControlElement.html#a7950b34b4d99cf59df12a1c458b42540">More...</a><br /></td></tr>
 <tr class="separator:a7950b34b4d99cf59df12a1c458b42540"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e03540694fb3d599770106ca460281e"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HeightControlElement.html#a2e03540694fb3d599770106ca460281e">Curvature_data_index</a></td></tr>
@@ -462,7 +462,7 @@ Additional Inherited Members</h2></td></tr>
 <div class="textblock"><p >///////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////// </p>
 <p >Height control element for YoungLaplace equations: Prescribe displacement along a spine (i.e. the "height of the meniscus" in exchange for treating the curvature as an unknown. Very similar to the <a class="el" href="classoomph_1_1DisplacementControlElement.html" title="Displacement control element: In the &quot;normal&quot; formulation of solid mechanics problems,...">DisplacementControlElement</a> used in solid mechanics problems. </p>
 
-<p class="definition">Definition at line <a class="el" href="young__laplace__elements_8h_source.html#l00559">559</a> of file <a class="el" href="young__laplace__elements_8h_source.html">young_laplace_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="young__laplace__elements_8h_source.html#l00555">555</a> of file <a class="el" href="young__laplace__elements_8h_source.html">young_laplace_elements.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="abb74c76bc5615a50794d1d26711f1203" name="abb74c76bc5615a50794d1d26711f1203"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abb74c76bc5615a50794d1d26711f1203">&#9670;&nbsp;</a></span>HeightControlElement()</h2>
@@ -476,7 +476,7 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">oomph::HeightControlElement::HeightControlElement </td>
           <td>(</td>
-          <td class="paramtype">Node *&#160;</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *&#160;</td>
           <td class="paramname"><em>control_node_pt</em>, </td>
         </tr>
         <tr>
@@ -500,9 +500,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Constructor: Pass pointer to node at which the height is controlled and pointer to double that stores the prescribed height at that node. </p>
 
-<p class="definition">Definition at line <a class="el" href="young__laplace__elements_8h_source.html#l00565">565</a> of file <a class="el" href="young__laplace__elements_8h_source.html">young_laplace_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="young__laplace__elements_8h_source.html#l00561">561</a> of file <a class="el" href="young__laplace__elements_8h_source.html">young_laplace_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8cc_source.html#l00307">oomph::GeneralisedElement::add_external_data()</a>, <a class="el" href="elements_8cc_source.html#l00062">oomph::GeneralisedElement::add_internal_data()</a>, <a class="el" href="young__laplace__elements_8h_source.html#l00616">Control_node_pt</a>, <a class="el" href="young__laplace__elements_8h_source.html#l00620">Curvature_data_index</a>, and <a class="el" href="young__laplace__elements_8h_source.html#l00613">Prescribed_height_pt</a>.</p>
+<p class="reference">References <a class="el" href="elements_8cc_source.html#l00307">oomph::GeneralisedElement::add_external_data()</a>, <a class="el" href="elements_8cc_source.html#l00062">oomph::GeneralisedElement::add_internal_data()</a>, <a class="el" href="young__laplace__elements_8h_source.html#l00612">Control_node_pt</a>, <a class="el" href="young__laplace__elements_8h_source.html#l00616">Curvature_data_index</a>, and <a class="el" href="young__laplace__elements_8h_source.html#l00609">Prescribed_height_pt</a>.</p>
 
 </div>
 </div>
@@ -534,9 +534,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1GeneralisedElement.html#a4cdd0d1eef33b43f652c8f0b9e43967b">oomph::GeneralisedElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="young__laplace__elements_8h_source.html#l00592">592</a> of file <a class="el" href="young__laplace__elements_8h_source.html">young_laplace_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="young__laplace__elements_8h_source.html#l00588">588</a> of file <a class="el" href="young__laplace__elements_8h_source.html">young_laplace_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="young__laplace__elements_8h_source.html#l00620">Curvature_data_index</a>, <a class="el" href="young__laplace__elements_8h_source.html#l00623">Height_ctrl_local_eqn</a>, and <a class="el" href="elements_8h_source.html#l00267">oomph::GeneralisedElement::internal_local_eqn()</a>.</p>
+<p class="reference">References <a class="el" href="young__laplace__elements_8h_source.html#l00616">Curvature_data_index</a>, <a class="el" href="young__laplace__elements_8h_source.html#l00619">Height_ctrl_local_eqn</a>, and <a class="el" href="elements_8h_source.html#l00267">oomph::GeneralisedElement::internal_local_eqn()</a>.</p>
 
 </div>
 </div>
@@ -568,9 +568,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1GeneralisedElement.html#a310c97f515e8504a48179c0e72c550d7">oomph::GeneralisedElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="young__laplace__elements_8h_source.html#l00605">605</a> of file <a class="el" href="young__laplace__elements_8h_source.html">young_laplace_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="young__laplace__elements_8h_source.html#l00601">601</a> of file <a class="el" href="young__laplace__elements_8h_source.html">young_laplace_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="young__laplace__elements_8h_source.html#l00616">Control_node_pt</a>, and <a class="el" href="young__laplace__elements_8h_source.html#l00623">Height_ctrl_local_eqn</a>.</p>
+<p class="reference">References <a class="el" href="young__laplace__elements_8h_source.html#l00612">Control_node_pt</a>, <a class="el" href="young__laplace__elements_8h_source.html#l00619">Height_ctrl_local_eqn</a>, and <a class="el" href="nodes_8cc_source.html#l02408">oomph::Node::value()</a>.</p>
 
 </div>
 </div>
@@ -599,9 +599,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Access function to the pointer to the <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> object that stores the curvature. </p>
 
-<p class="definition">Definition at line <a class="el" href="young__laplace__elements_8h_source.html#l00586">586</a> of file <a class="el" href="young__laplace__elements_8h_source.html">young_laplace_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="young__laplace__elements_8h_source.html#l00582">582</a> of file <a class="el" href="young__laplace__elements_8h_source.html">young_laplace_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="young__laplace__elements_8h_source.html#l00620">Curvature_data_index</a>, and <a class="el" href="elements_8h_source.html#l00622">oomph::GeneralisedElement::internal_data_pt()</a>.</p>
+<p class="reference">References <a class="el" href="young__laplace__elements_8h_source.html#l00616">Curvature_data_index</a>, and <a class="el" href="elements_8h_source.html#l00622">oomph::GeneralisedElement::internal_data_pt()</a>.</p>
 
 </div>
 </div>
@@ -616,7 +616,7 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">Node* oomph::HeightControlElement::Control_node_pt</td>
+          <td class="memname"><a class="el" href="classoomph_1_1Node.html">Node</a>* oomph::HeightControlElement::Control_node_pt</td>
         </tr>
       </table>
   </td>
@@ -628,9 +628,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Pointer to node at which the height is controlled. </p>
 
-<p class="definition">Definition at line <a class="el" href="young__laplace__elements_8h_source.html#l00616">616</a> of file <a class="el" href="young__laplace__elements_8h_source.html">young_laplace_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="young__laplace__elements_8h_source.html#l00612">612</a> of file <a class="el" href="young__laplace__elements_8h_source.html">young_laplace_elements.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="young__laplace__elements_8h_source.html#l00605">fill_in_contribution_to_residuals()</a>, and <a class="el" href="young__laplace__elements_8h_source.html#l00565">HeightControlElement()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="young__laplace__elements_8h_source.html#l00601">fill_in_contribution_to_residuals()</a>, and <a class="el" href="young__laplace__elements_8h_source.html#l00561">HeightControlElement()</a>.</p>
 
 </div>
 </div>
@@ -656,9 +656,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>In which component (in the vector of the element's internal <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a>) is the unknown curvature stored? </p>
 
-<p class="definition">Definition at line <a class="el" href="young__laplace__elements_8h_source.html#l00620">620</a> of file <a class="el" href="young__laplace__elements_8h_source.html">young_laplace_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="young__laplace__elements_8h_source.html#l00616">616</a> of file <a class="el" href="young__laplace__elements_8h_source.html">young_laplace_elements.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="young__laplace__elements_8h_source.html#l00592">assign_additional_local_eqn_numbers()</a>, <a class="el" href="young__laplace__elements_8h_source.html#l00565">HeightControlElement()</a>, and <a class="el" href="young__laplace__elements_8h_source.html#l00586">kappa_pt()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="young__laplace__elements_8h_source.html#l00588">assign_additional_local_eqn_numbers()</a>, <a class="el" href="young__laplace__elements_8h_source.html#l00561">HeightControlElement()</a>, and <a class="el" href="young__laplace__elements_8h_source.html#l00582">kappa_pt()</a>.</p>
 
 </div>
 </div>
@@ -684,9 +684,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Local equation number of the height-control equation. </p>
 
-<p class="definition">Definition at line <a class="el" href="young__laplace__elements_8h_source.html#l00623">623</a> of file <a class="el" href="young__laplace__elements_8h_source.html">young_laplace_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="young__laplace__elements_8h_source.html#l00619">619</a> of file <a class="el" href="young__laplace__elements_8h_source.html">young_laplace_elements.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="young__laplace__elements_8h_source.html#l00592">assign_additional_local_eqn_numbers()</a>, and <a class="el" href="young__laplace__elements_8h_source.html#l00605">fill_in_contribution_to_residuals()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="young__laplace__elements_8h_source.html#l00588">assign_additional_local_eqn_numbers()</a>, and <a class="el" href="young__laplace__elements_8h_source.html#l00601">fill_in_contribution_to_residuals()</a>.</p>
 
 </div>
 </div>
@@ -712,9 +712,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Pointer to value that stores the controlled height. </p>
 
-<p class="definition">Definition at line <a class="el" href="young__laplace__elements_8h_source.html#l00613">613</a> of file <a class="el" href="young__laplace__elements_8h_source.html">young_laplace_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="young__laplace__elements_8h_source.html#l00609">609</a> of file <a class="el" href="young__laplace__elements_8h_source.html">young_laplace_elements.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="young__laplace__elements_8h_source.html#l00565">HeightControlElement()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="young__laplace__elements_8h_source.html#l00561">HeightControlElement()</a>.</p>
 
 </div>
 </div>
@@ -749,7 +749,7 @@ Additional Inherited Members</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Nov 2 2021 16:33:19
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Dec 21 2021 17:36:53
         </div>
       </div>
     </footer>

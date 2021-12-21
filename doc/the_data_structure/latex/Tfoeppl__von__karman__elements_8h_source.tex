@@ -63,14 +63,14 @@
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00059}00059 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00060}00060   \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} NNODE\_1D>}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00061}\mbox{\hyperlink{classoomph_1_1TFoepplvonKarmanElement}{00061}}   \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1TFoepplvonKarmanElement}{TFoepplvonKarmanElement}} : \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1TElement}{TElement}}<2, NNODE\_1D>,}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00062}00062                                   \textcolor{keyword}{public} \textcolor{keyword}{virtual} FoepplvonKarmanEquations,}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00062}00062                                   \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1FoepplvonKarmanEquations}{FoepplvonKarmanEquations}},}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00063}00063                                   \textcolor{keyword}{public} \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator}{ElementWithZ2ErrorEstimator}}}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00064}00064   \{}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00065}00065   \textcolor{keyword}{public}:\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00066}00066 \textcolor{comment}{    /// Constructor: Call constructors for TElement and}}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00067}00067 \textcolor{comment}{    /// Foeppl von Karman equations}}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00068}\mbox{\hyperlink{classoomph_1_1TFoepplvonKarmanElement_a1954fa12bc15c8b8f56b4596eec0696b}{00068}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1TFoepplvonKarmanElement_a1954fa12bc15c8b8f56b4596eec0696b}{TFoepplvonKarmanElement}}()}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00069}00069       : \mbox{\hyperlink{classoomph_1_1TElement}{TElement}}<2, NNODE\_1D>(), FoepplvonKarmanEquations()}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00069}00069       : \mbox{\hyperlink{classoomph_1_1TElement}{TElement}}<2, NNODE\_1D>(), \mbox{\hyperlink{classoomph_1_1FoepplvonKarmanEquations}{FoepplvonKarmanEquations}}()}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00070}00070     \{}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00071}00071     \}}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00072}00072 }
@@ -93,14 +93,14 @@
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00089}00089 \textcolor{comment}{    ///  x,y,w}}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00090}\mbox{\hyperlink{classoomph_1_1TFoepplvonKarmanElement_abc6698f8275d8fc4e526b2d7c7fef6de}{00090}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1TFoepplvonKarmanElement_abc6698f8275d8fc4e526b2d7c7fef6de}{output}}(std::ostream\& outfile)}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00091}00091     \{}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00092}00092       \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_aca07d359a96b9c7b566142112604ea87}{FoepplvonKarmanEquations::output}}(outfile);}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00092}00092       \mbox{\hyperlink{classoomph_1_1FoepplvonKarmanEquations_a44739d9c804206ea60671b0de07ad154}{FoepplvonKarmanEquations::output}}(outfile);}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00093}00093     \}}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00094}00094 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00095}00095 \textcolor{comment}{    ///  Output function:}}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00096}00096 \textcolor{comment}{    ///   x,y,w at n\_plot\string^2 plot points}}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00097}\mbox{\hyperlink{classoomph_1_1TFoepplvonKarmanElement_abd3241a32dacbf790074198c3c30a8c1}{00097}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1TFoepplvonKarmanElement_abd3241a32dacbf790074198c3c30a8c1}{output}}(std::ostream\& outfile, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_plot)}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00098}00098     \{}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00099}00099       \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_aca07d359a96b9c7b566142112604ea87}{FoepplvonKarmanEquations::output}}(outfile, n\_plot);}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00099}00099       \mbox{\hyperlink{classoomph_1_1FoepplvonKarmanEquations_a44739d9c804206ea60671b0de07ad154}{FoepplvonKarmanEquations::output}}(outfile, n\_plot);}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00100}00100     \}}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00101}00101 }
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00102}00102 \textcolor{comment}{}}
@@ -108,7 +108,7 @@
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00104}00104 \textcolor{comment}{    ///  x,y,w}}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00105}\mbox{\hyperlink{classoomph_1_1TFoepplvonKarmanElement_ad6676ce8249127f37757d46b94cd1407}{00105}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1TFoepplvonKarmanElement_ad6676ce8249127f37757d46b94cd1407}{output}}(FILE* file\_pt)}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00106}00106     \{}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00107}00107       \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_aca07d359a96b9c7b566142112604ea87}{FoepplvonKarmanEquations::output}}(file\_pt);}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00107}00107       \mbox{\hyperlink{classoomph_1_1FoepplvonKarmanEquations_a44739d9c804206ea60671b0de07ad154}{FoepplvonKarmanEquations::output}}(file\_pt);}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00108}00108     \}}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00109}00109 }
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00110}00110 \textcolor{comment}{}}
@@ -116,7 +116,7 @@
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00112}00112 \textcolor{comment}{    ///   x,y,w at n\_plot\string^2 plot points}}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00113}\mbox{\hyperlink{classoomph_1_1TFoepplvonKarmanElement_ac3899c4e4e2ae477e5e5afec72ae4730}{00113}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1TFoepplvonKarmanElement_ac3899c4e4e2ae477e5e5afec72ae4730}{output}}(FILE* file\_pt, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_plot)}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00114}00114     \{}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00115}00115       \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_aca07d359a96b9c7b566142112604ea87}{FoepplvonKarmanEquations::output}}(file\_pt, n\_plot);}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00115}00115       \mbox{\hyperlink{classoomph_1_1FoepplvonKarmanEquations_a44739d9c804206ea60671b0de07ad154}{FoepplvonKarmanEquations::output}}(file\_pt, n\_plot);}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00116}00116     \}}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00117}00117 }
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00118}00118 \textcolor{comment}{}}
@@ -126,7 +126,7 @@
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00122}00122                     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_plot,}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00123}00123                     \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{FiniteElement::SteadyExactSolutionFctPt}} exact\_soln\_pt)}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00124}00124     \{}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00125}00125       FoepplvonKarmanEquations::output\_fct(outfile, n\_plot, exact\_soln\_pt);}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00125}00125       \mbox{\hyperlink{classoomph_1_1FoepplvonKarmanEquations_a2e926381021b99050cebb69a07867ebc}{FoepplvonKarmanEquations::output\_fct}}(outfile, n\_plot, exact\_soln\_pt);}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00126}00126     \}}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00127}00127 }
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00128}00128 \textcolor{comment}{}}
@@ -137,7 +137,7 @@
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00133}00133                     \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00134}00134                     \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{FiniteElement::UnsteadyExactSolutionFctPt}} exact\_soln\_pt)}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00135}00135     \{}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00136}00136       FoepplvonKarmanEquations::output\_fct(}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00136}00136       \mbox{\hyperlink{classoomph_1_1FoepplvonKarmanEquations_a2e926381021b99050cebb69a07867ebc}{FoepplvonKarmanEquations::output\_fct}}(}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00137}00137         outfile, n\_plot, time, exact\_soln\_pt);}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00138}00138     \}}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00139}00139 }
@@ -175,7 +175,7 @@
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00171}00171 \textcolor{comment}{    /// Get 'flux' for Z2 error recovery:  Standard flux.from FvK equations}}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00172}\mbox{\hyperlink{classoomph_1_1TFoepplvonKarmanElement_abb5ccf3f6067b81ddecd73c352534ef9}{00172}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1TFoepplvonKarmanElement_abb5ccf3f6067b81ddecd73c352534ef9}{get\_Z2\_flux}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& flux)}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00173}00173     \{}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00174}00174       this-\/>get\_gradient\_of\_deflection(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, flux);}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00174}00174       this-\/>\mbox{\hyperlink{classoomph_1_1FoepplvonKarmanEquations_a1fb7d4b7782b2d04f49b9ed508ec00e6}{get\_gradient\_of\_deflection}}(s, flux);}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00175}00175     \}}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00176}00176 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00177}00177 \textcolor{comment}{    /// Number of vertex nodes in the element}}
@@ -185,7 +185,7 @@
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00181}00181     \}}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00182}00182 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00183}00183 \textcolor{comment}{    /// Pointer to the j-\/th vertex node in the element}}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00184}\mbox{\hyperlink{classoomph_1_1TFoepplvonKarmanElement_aa449e8c706719e84fd80c1d880a10539}{00184}} \textcolor{comment}{}    Node* \mbox{\hyperlink{classoomph_1_1TFoepplvonKarmanElement_aa449e8c706719e84fd80c1d880a10539}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00184}\mbox{\hyperlink{classoomph_1_1TFoepplvonKarmanElement_aa449e8c706719e84fd80c1d880a10539}{00184}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1TFoepplvonKarmanElement_aa449e8c706719e84fd80c1d880a10539}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00185}00185 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00186}00186       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1TElement}{TElement<2, NNODE\_1D>::vertex\_node\_pt}}(j);}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00187}00187     \}}

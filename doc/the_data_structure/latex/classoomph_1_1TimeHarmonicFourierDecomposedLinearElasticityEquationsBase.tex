@@ -18,44 +18,44 @@ Inheritance diagram for oomph\+::Time\+Harmonic\+Fourier\+Decomposed\+Linear\+El
 \doxysubsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_ac582edc989cd98af8a03f5bf58d7a05a}{Body\+Force\+Fct\+Pt}}) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&b)
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_ac582edc989cd98af8a03f5bf58d7a05a}{Body\+Force\+Fct\+Pt}}) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&b)
 \begin{DoxyCompactList}\small\item\em Function pointer to function that specifies the body force as a function of the Cartesian coordinates and time FCT(x,b) -- x and b are Vectors! \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-virtual std\+::complex$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a820ce9d094ac2df322e62f91fd5d2a93}{u\+\_\+index\+\_\+time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+virtual std\+::complex$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a820ce9d094ac2df322e62f91fd5d2a93}{u\+\_\+index\+\_\+time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity}} (const unsigned \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Return the index at which the i-\/th (i=0\+: r, i=1\+: z; i=2\+: theta) real or imag unknown displacement component is stored at the nodes. The default assignment here (u\+\_\+r\+\_\+real, u\+\_\+z\+\_\+real, ..., u\+\_\+theta\+\_\+imag) is appropriate for single-\/physics problems. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a01357567fa0212ff94370a78ebca67b1}{interpolated\+\_\+u\+\_\+time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&disp) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a01357567fa0212ff94370a78ebca67b1}{interpolated\+\_\+u\+\_\+time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&disp) const
 \begin{DoxyCompactList}\small\item\em Compute vector of FE interpolated displacement u at local coordinate s. \end{DoxyCompactList}\item 
-std\+::complex$<$ double $>$ \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_acb4d805ab2cad61656012ee34540f8cd}{interpolated\+\_\+u\+\_\+time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+std\+::complex$<$ double $>$ \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_acb4d805ab2cad61656012ee34540f8cd}{interpolated\+\_\+u\+\_\+time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Return FE interpolated displacement u\mbox{[}i\mbox{]} (i=0\+: r, i=1\+: z; i=2\+: theta) at local coordinate s. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a8c30a3f47a37399b416c493d81504406}{Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base}} ()
 \begin{DoxyCompactList}\small\item\em Constructor\+: Set null pointers for constitutive law. Set physical parameter values to default values, and set body force to zero. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} std\+::complex$<$ double $>$ \& \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a06d6b766640617b92206d2936f2d93fc}{omega\+\_\+sq}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+const std\+::complex$<$ double $>$ \& \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a06d6b766640617b92206d2936f2d93fc}{omega\+\_\+sq}} () const
 \begin{DoxyCompactList}\small\item\em Access function for square of non-\/dim frequency. \end{DoxyCompactList}\item 
 std\+::complex$<$ double $>$ $\ast$\& \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a014674300bf78d19ac00bb4409b39153}{omega\+\_\+sq\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for square of non-\/dim frequency. \end{DoxyCompactList}\item 
 std\+::complex$<$ double $>$ $\ast$\& \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_aefee703132dbfe586822eddcbc92174d}{youngs\+\_\+modulus\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return the pointer to Young\textquotesingle{}s modulus. \end{DoxyCompactList}\item 
-std\+::complex$<$ double $>$ \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a9721d077583251f58dd9c6a63f519f32}{youngs\+\_\+modulus}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+std\+::complex$<$ double $>$ \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a9721d077583251f58dd9c6a63f519f32}{youngs\+\_\+modulus}} () const
 \begin{DoxyCompactList}\small\item\em Access function to Young\textquotesingle{}s modulus. \end{DoxyCompactList}\item 
-std\+::complex$<$ double $>$ \& \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a15822018c8704a09d8ec226f69054ac1}{nu}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+std\+::complex$<$ double $>$ \& \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a15822018c8704a09d8ec226f69054ac1}{nu}} () const
 \begin{DoxyCompactList}\small\item\em Access function for Poisson\textquotesingle{}s ratio. \end{DoxyCompactList}\item 
 std\+::complex$<$ double $>$ $\ast$\& \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_abb3416be4d1417d23c6d92c7180071c7}{nu\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for pointer to Poisson\textquotesingle{}s ratio. \end{DoxyCompactList}\item 
-int \& \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_abf04f486e940346ecc7f08862483a1a6}{fourier\+\_\+wavenumber}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+int \& \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_abf04f486e940346ecc7f08862483a1a6}{fourier\+\_\+wavenumber}} () const
 \begin{DoxyCompactList}\small\item\em Access function for Fourier wavenumber. \end{DoxyCompactList}\item 
 int $\ast$\& \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a8f5df193e533217c6c08763f55c08a1d}{fourier\+\_\+wavenumber\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for pointer to Fourier wavenumber. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_ac582edc989cd98af8a03f5bf58d7a05a}{Body\+Force\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_acb7d6bd635dc31a72cdee6a02d841f93}{body\+\_\+force\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to body force function. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_ac582edc989cd98af8a03f5bf58d7a05a}{Body\+Force\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_aedfbce28438549e162312546f8c31485}{body\+\_\+force\+\_\+fct\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+\mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_ac582edc989cd98af8a03f5bf58d7a05a}{Body\+Force\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_aedfbce28438549e162312546f8c31485}{body\+\_\+force\+\_\+fct\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to body force function (const version) \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a7e28782573e1210b9a5f98f17360f6e9}{body\+\_\+force}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&b) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a7e28782573e1210b9a5f98f17360f6e9}{body\+\_\+force}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&b) const
 \begin{DoxyCompactList}\small\item\em Evaluate body force at Eulerian coordinate x at present time (returns zero vector if no body force function pointer has been set) \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a7fc55ec08c580274e0f0de664c43c249}{ndof\+\_\+types}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a7fc55ec08c580274e0f0de664c43c249}{ndof\+\_\+types}} () const
 \begin{DoxyCompactList}\small\item\em The number of \char`\"{}\+DOF types\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: for now lump them all into one DOF type. Can be adjusted later. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_ae49e9b233a22735986bf1bc3ef31502f}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_ae49e9b233a22735986bf1bc3ef31502f}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const
 \begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+DOF type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -92,7 +92,7 @@ Definition at line \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear_
 \index{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase}!BodyForceFctPt@{BodyForceFctPt}}
 \index{BodyForceFctPt@{BodyForceFctPt}!oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase}}
 \doxysubsubsection{\texorpdfstring{BodyForceFctPt}{BodyForceFctPt}}
-{\footnotesize\ttfamily typedef void($\ast$ oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::\+Body\+Force\+Fct\+Pt) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&b)}
+{\footnotesize\ttfamily typedef void($\ast$ oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::\+Body\+Force\+Fct\+Pt) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&b)}
 
 
 
@@ -126,7 +126,7 @@ Definition at line \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear_
 \index{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase}!body\_force@{body\_force}}
 \index{body\_force@{body\_force}!oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase}}
 \doxysubsubsection{\texorpdfstring{body\_force()}{body\_force()}}
-{\footnotesize\ttfamily void oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::body\+\_\+force (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{b }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::body\+\_\+force (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{b }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -138,7 +138,7 @@ Definition at line \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear_
 
 
 
-References \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8h_source_l00326}{Body\+\_\+force\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l02616}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8h_source_l00326}{Body\+\_\+force\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
 
 
 
@@ -240,13 +240,13 @@ Definition at line \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear_
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00704}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}.
+References \mbox{\hyperlink{elements_8h_source_l00704}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_acb4d805ab2cad61656012ee34540f8cd}\label{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_acb4d805ab2cad61656012ee34540f8cd}} 
 \index{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase}!interpolated\_u\_time\_harmonic\_fourier\_decomposed\_linear\_elasticity@{interpolated\_u\_time\_harmonic\_fourier\_decomposed\_linear\_elasticity}}
 \index{interpolated\_u\_time\_harmonic\_fourier\_decomposed\_linear\_elasticity@{interpolated\_u\_time\_harmonic\_fourier\_decomposed\_linear\_elasticity}!oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase}}
 \doxysubsubsection{\texorpdfstring{interpolated\_u\_time\_harmonic\_fourier\_decomposed\_linear\_elasticity()}{interpolated\_u\_time\_harmonic\_fourier\_decomposed\_linear\_elasticity()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily std\+::complex$<$ double $>$ oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::interpolated\+\_\+u\+\_\+time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily std\+::complex$<$ double $>$ oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::interpolated\+\_\+u\+\_\+time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -258,13 +258,13 @@ Definition at line \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear_
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02598}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, and \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8h_source_l00065}{u\+\_\+index\+\_\+time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, and \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8h_source_l00065}{u\+\_\+index\+\_\+time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a01357567fa0212ff94370a78ebca67b1}\label{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase_a01357567fa0212ff94370a78ebca67b1}} 
 \index{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase}!interpolated\_u\_time\_harmonic\_fourier\_decomposed\_linear\_elasticity@{interpolated\_u\_time\_harmonic\_fourier\_decomposed\_linear\_elasticity}}
 \index{interpolated\_u\_time\_harmonic\_fourier\_decomposed\_linear\_elasticity@{interpolated\_u\_time\_harmonic\_fourier\_decomposed\_linear\_elasticity}!oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase}}
 \doxysubsubsection{\texorpdfstring{interpolated\_u\_time\_harmonic\_fourier\_decomposed\_linear\_elasticity()}{interpolated\_u\_time\_harmonic\_fourier\_decomposed\_linear\_elasticity()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::interpolated\+\_\+u\+\_\+time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{disp }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::interpolated\+\_\+u\+\_\+time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{disp }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -276,7 +276,7 @@ Definition at line \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear_
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02598}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, and \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8h_source_l00065}{u\+\_\+index\+\_\+time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, and \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8h_source_l00065}{u\+\_\+index\+\_\+time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity()}}.
 
 
 
@@ -344,7 +344,7 @@ References \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elastic
 \index{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase}!omega\_sq@{omega\_sq}}
 \index{omega\_sq@{omega\_sq}!oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase}}
 \doxysubsubsection{\texorpdfstring{omega\_sq()}{omega\_sq()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} std\+::complex$<$ double $>$ \& oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::omega\+\_\+sq (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const std\+::complex$<$ double $>$ \& oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::omega\+\_\+sq (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -384,7 +384,7 @@ References \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elastic
 \index{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase}!u\_index\_time\_harmonic\_fourier\_decomposed\_linear\_elasticity@{u\_index\_time\_harmonic\_fourier\_decomposed\_linear\_elasticity}}
 \index{u\_index\_time\_harmonic\_fourier\_decomposed\_linear\_elasticity@{u\_index\_time\_harmonic\_fourier\_decomposed\_linear\_elasticity}!oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase}}
 \doxysubsubsection{\texorpdfstring{u\_index\_time\_harmonic\_fourier\_decomposed\_linear\_elasticity()}{u\_index\_time\_harmonic\_fourier\_decomposed\_linear\_elasticity()}}
-{\footnotesize\ttfamily virtual std\+::complex$<$ unsigned $>$ oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::u\+\_\+index\+\_\+time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual std\+::complex$<$ unsigned $>$ oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::u\+\_\+index\+\_\+time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity (\begin{DoxyParamCaption}\item[{const unsigned}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 

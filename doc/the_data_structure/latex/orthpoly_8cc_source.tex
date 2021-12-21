@@ -34,11 +34,11 @@
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00030}\mbox{\hyperlink{namespaceoomph_1_1Orthpoly}{00030}}   \textcolor{keyword}{namespace }Orthpoly}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00031}00031   \{}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00032}00032     \textcolor{comment}{// Calculates the Gauss Lobatto Legendre abscissas for degree p = NNode-\/1}}
-\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00033}\mbox{\hyperlink{namespaceoomph_1_1Orthpoly_ab6f86bfb7e2a8832560862c47fc60db5}{00033}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1Orthpoly_ab6f86bfb7e2a8832560862c47fc60db5}{gll\_nodes}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& Nnode, \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}})}
+\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00033}\mbox{\hyperlink{namespaceoomph_1_1Orthpoly_ab6f86bfb7e2a8832560862c47fc60db5}{00033}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1Orthpoly_ab6f86bfb7e2a8832560862c47fc60db5}{gll\_nodes}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& Nnode, \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x)}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00034}00034     \{}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00035}00035       \textcolor{keywordtype}{double} z, zold, del;}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00036}00036       \textcolor{keywordtype}{unsigned} p = Nnode -\/ 1;}
-\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00037}00037       \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.resize(Nnode);}
+\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00037}00037       x.resize(Nnode);}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00038}00038       \textcolor{keywordflow}{if} (Nnode < 2)}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00039}00039       \{}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00040}00040         \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(\textcolor{stringliteral}{"{}Invalid number of nodes"{}},}
@@ -47,21 +47,21 @@
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00043}00043       \}}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00044}00044       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (Nnode == 2)}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00045}00045       \{}
-\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00046}00046         \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[0] = -\/1.0;}
-\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00047}00047         \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[1] = 1.0;}
+\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00046}00046         x[0] = -\/1.0;}
+\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00047}00047         x[1] = 1.0;}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00048}00048       \}}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00049}00049       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (Nnode == 3)}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00050}00050       \{}
-\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00051}00051         \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[0] = -\/1;}
-\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00052}00052         \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[1] = 0.0;}
-\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00053}00053         \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[2] = 1.0;}
+\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00051}00051         x[0] = -\/1;}
+\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00052}00052         x[1] = 0.0;}
+\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00053}00053         x[2] = 1.0;}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00054}00054       \}}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00055}00055       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (Nnode == 4)}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00056}00056       \{}
-\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00057}00057         \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[0] = -\/1.0;}
-\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00058}00058         \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[1] = -\/std::sqrt(5.0) / 5.0;}
-\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00059}00059         \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[2] = -\/\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[1];}
-\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00060}00060         \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[3] = 1.0;}
+\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00057}00057         x[0] = -\/1.0;}
+\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00058}00058         x[1] = -\/std::sqrt(5.0) / 5.0;}
+\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00059}00059         x[2] = -\/x[1];}
+\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00060}00060         x[3] = 1.0;}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00061}00061       \}}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00062}00062       \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00063}00063       \{}
@@ -69,7 +69,7 @@
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00065}00065         \textcolor{keywordflow}{if} (p \% 2 == 0)}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00066}00066         \{}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00067}00067           mid = p / 2;}
-\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00068}00068           \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[mid] = 0.0;}
+\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00068}00068           x[mid] = 0.0;}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00069}00069         \}}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00070}00070         \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00071}00071           mid = p / 2 + 1;}
@@ -82,35 +82,35 @@
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00078}00078             zold = z;}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00079}00079             z = zold -\/ del;}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00080}00080           \} \textcolor{keywordflow}{while} (std::fabs(z -\/ zold) > \mbox{\hyperlink{namespaceoomph_1_1Orthpoly_a52ec97f3d99bf542a69568fbdddd68ec}{eps}});}
-\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00081}00081           \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[j] = z;}
-\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00082}00082           \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[p -\/ j] = -\/z;}
+\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00081}00081           x[j] = z;}
+\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00082}00082           x[p -\/ j] = -\/z;}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00083}00083         \}}
-\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00084}00084         \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[0] = -\/1.0;}
-\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00085}00085         \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[p] = 1.0;}
+\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00084}00084         x[0] = -\/1.0;}
+\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00085}00085         x[p] = 1.0;}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00086}00086       \}}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00087}00087     \}}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00088}00088 }
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00089}00089     \textcolor{comment}{// This version of gll\_nodes calculates the abscissas AND weights}}
-\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00090}\mbox{\hyperlink{namespaceoomph_1_1Orthpoly_a49a1cd8050963fdbf455f520e8a8b228}{00090}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1Orthpoly_ab6f86bfb7e2a8832560862c47fc60db5}{gll\_nodes}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& Nnode, \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& w)}
+\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00090}\mbox{\hyperlink{namespaceoomph_1_1Orthpoly_a49a1cd8050963fdbf455f520e8a8b228}{00090}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1Orthpoly_ab6f86bfb7e2a8832560862c47fc60db5}{gll\_nodes}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& Nnode, \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& w)}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00091}00091     \{}
-\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00092}00092       \mbox{\hyperlink{namespaceoomph_1_1Orthpoly_ab6f86bfb7e2a8832560862c47fc60db5}{gll\_nodes}}(Nnode, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00092}00092       \mbox{\hyperlink{namespaceoomph_1_1Orthpoly_ab6f86bfb7e2a8832560862c47fc60db5}{gll\_nodes}}(Nnode, x);}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00093}00093       \textcolor{comment}{// Now calculate the corresponding weights}}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00094}00094       \textcolor{keywordtype}{double} l\_z;}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00095}00095       \textcolor{keywordtype}{unsigned} p = Nnode -\/ 1;}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00096}00096       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < p + 1; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00097}00097       \{}
-\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00098}00098         l\_z = \mbox{\hyperlink{namespaceoomph_1_1Orthpoly_aa71411bff7bff140b78e33bebc5133c0}{legendre}}(p, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]);}
+\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00098}00098         l\_z = \mbox{\hyperlink{namespaceoomph_1_1Orthpoly_aa71411bff7bff140b78e33bebc5133c0}{legendre}}(p, x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]);}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00099}00099         w[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = 2.0 / (p * (p + 1) * l\_z * l\_z);}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00100}00100       \}}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00101}00101     \}}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00102}00102 }
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00103}00103 }
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00104}00104     \textcolor{comment}{// Calculates the Gauss Legendre abscissas of degree p=Nnode-\/1}}
-\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00105}\mbox{\hyperlink{namespaceoomph_1_1Orthpoly_a97c90eff7749f215b78cf88324d77e13}{00105}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1Orthpoly_a97c90eff7749f215b78cf88324d77e13}{gl\_nodes}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& Nnode, \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}})}
+\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00105}\mbox{\hyperlink{namespaceoomph_1_1Orthpoly_a97c90eff7749f215b78cf88324d77e13}{00105}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1Orthpoly_a97c90eff7749f215b78cf88324d77e13}{gl\_nodes}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& Nnode, \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x)}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00106}00106     \{}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00107}00107       \textcolor{keywordtype}{double} z, zold, del;}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00108}00108       \textcolor{keywordtype}{unsigned} p = Nnode -\/ 1;}
-\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00109}00109       \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.resize(Nnode);}
+\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00109}00109       x.resize(Nnode);}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00110}00110       \textcolor{keywordflow}{if} (Nnode < 2)}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00111}00111       \{}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00112}00112         \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(\textcolor{stringliteral}{"{}Invalid number of nodes"{}},}
@@ -119,8 +119,8 @@
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00115}00115       \}}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00116}00116       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (Nnode == 2)}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00117}00117       \{}
-\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00118}00118         \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[0] = -\/1.0 / 3.0 * std::sqrt(3.0);}
-\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00119}00119         \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[1] = -\/\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[0];}
+\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00118}00118         x[0] = -\/1.0 / 3.0 * std::sqrt(3.0);}
+\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00119}00119         x[1] = -\/x[0];}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00120}00120       \}}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00121}00121       \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00122}00122       \{}
@@ -128,7 +128,7 @@
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00124}00124         \textcolor{keywordflow}{if} (p \% 2 == 0)}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00125}00125         \{}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00126}00126           mid = p / 2;}
-\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00127}00127           \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[mid] = 0.0;}
+\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00127}00127           x[mid] = 0.0;}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00128}00128         \}}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00129}00129         \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00130}00130           mid = p / 2 + 1;}
@@ -142,23 +142,23 @@
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00138}00138             zold = z;}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00139}00139             z = zold -\/ del;}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00140}00140           \} \textcolor{keywordflow}{while} (std::fabs(z -\/ zold) > \mbox{\hyperlink{namespaceoomph_1_1Orthpoly_a52ec97f3d99bf542a69568fbdddd68ec}{eps}});}
-\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00141}00141           \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[j] = z;}
-\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00142}00142           \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[p -\/ j] = -\/z;}
+\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00141}00141           x[j] = z;}
+\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00142}00142           x[p -\/ j] = -\/z;}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00143}00143         \}}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00144}00144       \}}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00145}00145     \}}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00146}00146 }
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00147}00147     \textcolor{comment}{// This version of gl\_nodes calculates the abscissas AND weights}}
-\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00148}\mbox{\hyperlink{namespaceoomph_1_1Orthpoly_a9b11a3992826d8daf747565d4cfcc819}{00148}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1Orthpoly_a97c90eff7749f215b78cf88324d77e13}{gl\_nodes}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& Nnode, \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& w)}
+\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00148}\mbox{\hyperlink{namespaceoomph_1_1Orthpoly_a9b11a3992826d8daf747565d4cfcc819}{00148}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1Orthpoly_a97c90eff7749f215b78cf88324d77e13}{gl\_nodes}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& Nnode, \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& w)}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00149}00149     \{}
-\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00150}00150       \mbox{\hyperlink{namespaceoomph_1_1Orthpoly_a97c90eff7749f215b78cf88324d77e13}{gl\_nodes}}(Nnode, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00150}00150       \mbox{\hyperlink{namespaceoomph_1_1Orthpoly_a97c90eff7749f215b78cf88324d77e13}{gl\_nodes}}(Nnode, x);}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00151}00151       \textcolor{comment}{// Now calculate the corresponding weights}}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00152}00152       \textcolor{keywordtype}{double} dl\_z;}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00153}00153       \textcolor{keywordtype}{unsigned} p = Nnode -\/ 1;}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00154}00154       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < p + 1; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00155}00155       \{}
-\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00156}00156         dl\_z = \mbox{\hyperlink{namespaceoomph_1_1Orthpoly_a4062725a9af419d3c0a24927725e5435}{dlegendre}}(p + 1, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]);}
-\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00157}00157         w[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = 2.0 / (1 -\/ \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]) / (dl\_z * dl\_z);}
+\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00156}00156         dl\_z = \mbox{\hyperlink{namespaceoomph_1_1Orthpoly_a4062725a9af419d3c0a24927725e5435}{dlegendre}}(p + 1, x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]);}
+\DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00157}00157         w[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = 2.0 / (1 -\/ x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]) / (dl\_z * dl\_z);}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00158}00158       \}}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00159}00159     \}}
 \DoxyCodeLine{\Hypertarget{orthpoly_8cc_source_l00160}00160   \} \textcolor{comment}{// namespace Orthpoly}}

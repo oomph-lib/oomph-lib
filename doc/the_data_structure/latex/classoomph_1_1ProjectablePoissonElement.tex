@@ -18,21 +18,21 @@ Inheritance diagram for oomph\+::Projectable\+Poisson\+Element\texorpdfstring{$<
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_a1f22fb7c0e2ea9e3e7f022d534c0b69d}{data\+\_\+values\+\_\+of\+\_\+field}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&fld)
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_a1f22fb7c0e2ea9e3e7f022d534c0b69d}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_a0b8e911e3eca8dbfecd30a5e8dc2ff33}{nfields\+\_\+for\+\_\+projection}} ()
 \begin{DoxyCompactList}\small\item\em Number of fields to be projected\+: Just one. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_a6256481549383c8abdd666f691e3dbed}{nhistory\+\_\+values\+\_\+for\+\_\+projection}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&fld)
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_a6256481549383c8abdd666f691e3dbed}{nhistory\+\_\+values\+\_\+for\+\_\+projection}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Number of history values to be stored for fld-\/th field (includes current value!) \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_a42e8ec2cd54a3301190d2b3a10e66370}{nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection}} ()
 \begin{DoxyCompactList}\small\item\em Number of positional history values (Note\+: count includes current value!) \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_a0fa8292f5be360a3c8727cb1790506aa}{jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&fld, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi)
+double \mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_a0fa8292f5be360a3c8727cb1790506aa}{jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field}} (const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi)
 \begin{DoxyCompactList}\small\item\em Return Jacobian of mapping and shape functions of field fld at local coordinate s. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_a39f08edb4ea9e6c4e0def984cee288c6}{get\+\_\+field}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&fld, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
+double \mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_a39f08edb4ea9e6c4e0def984cee288c6}{get\+\_\+field}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
 \begin{DoxyCompactList}\small\item\em Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: history values) \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_a006f46a3072037df9f301ed71af56ac1}{nvalue\+\_\+of\+\_\+field}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&fld)
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_a006f46a3072037df9f301ed71af56ac1}{nvalue\+\_\+of\+\_\+field}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Return number of values in field fld\+: One per node. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_af13ec8e584c3ab11cb501030220fcb87}{local\+\_\+equation}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&fld, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&j)
+int \mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_af13ec8e584c3ab11cb501030220fcb87}{local\+\_\+equation}} (const unsigned \&fld, const unsigned \&j)
 \begin{DoxyCompactList}\small\item\em Return local equation number of value j in field fld. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -44,7 +44,7 @@ class oomph\+::\+Projectable\+Poisson\+Element$<$ POISSON\+\_\+\+ELEMENT $>$}
 
 Poisson upgraded to become projectable 
 
-Definition at line \mbox{\hyperlink{poisson__elements_8h_source_l00793}{793}} of file \mbox{\hyperlink{poisson__elements_8h_source}{poisson\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{poisson__elements_8h_source_l00791}{791}} of file \mbox{\hyperlink{poisson__elements_8h_source}{poisson\+\_\+elements.\+h}}.
 
 
 
@@ -54,7 +54,7 @@ Definition at line \mbox{\hyperlink{poisson__elements_8h_source_l00793}{793}} of
 \index{data\_values\_of\_field@{data\_values\_of\_field}!oomph::ProjectablePoissonElement$<$ POISSON\_ELEMENT $>$@{oomph::ProjectablePoissonElement$<$ POISSON\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{data\_values\_of\_field()}{data\_values\_of\_field()}}
 {\footnotesize\ttfamily template$<$class POISSON\+\_\+\+ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement}{oomph\+::\+Projectable\+Poisson\+Element}}$<$ POISSON\+\_\+\+ELEMENT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement}{oomph\+::\+Projectable\+Poisson\+Element}}$<$ POISSON\+\_\+\+ELEMENT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -66,18 +66,18 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a2292bd9c58694f
 
 
 
-Definition at line \mbox{\hyperlink{poisson__elements_8h_source_l00800}{800}} of file \mbox{\hyperlink{poisson__elements_8h_source}{poisson\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{poisson__elements_8h_source_l00798}{798}} of file \mbox{\hyperlink{poisson__elements_8h_source}{poisson\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectablePoissonElement_a39f08edb4ea9e6c4e0def984cee288c6}\label{classoomph_1_1ProjectablePoissonElement_a39f08edb4ea9e6c4e0def984cee288c6}} 
 \index{oomph::ProjectablePoissonElement$<$ POISSON\_ELEMENT $>$@{oomph::ProjectablePoissonElement$<$ POISSON\_ELEMENT $>$}!get\_field@{get\_field}}
 \index{get\_field@{get\_field}!oomph::ProjectablePoissonElement$<$ POISSON\_ELEMENT $>$@{oomph::ProjectablePoissonElement$<$ POISSON\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{get\_field()}{get\_field()}}
 {\footnotesize\ttfamily template$<$class POISSON\+\_\+\+ELEMENT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement}{oomph\+::\+Projectable\+Poisson\+Element}}$<$ POISSON\+\_\+\+ELEMENT $>$\+::get\+\_\+field (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{fld,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+double \mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement}{oomph\+::\+Projectable\+Poisson\+Element}}$<$ POISSON\+\_\+\+ELEMENT $>$\+::get\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const unsigned \&}]{fld,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -89,18 +89,18 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ae4da5b565b6d33
 
 
 
-Definition at line \mbox{\hyperlink{poisson__elements_8h_source_l00889}{889}} of file \mbox{\hyperlink{poisson__elements_8h_source}{poisson\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{poisson__elements_8h_source_l00887}{887}} of file \mbox{\hyperlink{poisson__elements_8h_source}{poisson\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02598}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
+References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectablePoissonElement_a0fa8292f5be360a3c8727cb1790506aa}\label{classoomph_1_1ProjectablePoissonElement_a0fa8292f5be360a3c8727cb1790506aa}} 
 \index{oomph::ProjectablePoissonElement$<$ POISSON\_ELEMENT $>$@{oomph::ProjectablePoissonElement$<$ POISSON\_ELEMENT $>$}!jacobian\_and\_shape\_of\_field@{jacobian\_and\_shape\_of\_field}}
 \index{jacobian\_and\_shape\_of\_field@{jacobian\_and\_shape\_of\_field}!oomph::ProjectablePoissonElement$<$ POISSON\_ELEMENT $>$@{oomph::ProjectablePoissonElement$<$ POISSON\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{jacobian\_and\_shape\_of\_field()}{jacobian\_and\_shape\_of\_field()}}
 {\footnotesize\ttfamily template$<$class POISSON\+\_\+\+ELEMENT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement}{oomph\+::\+Projectable\+Poisson\+Element}}$<$ POISSON\+\_\+\+ELEMENT $>$\+::jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{fld,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+double \mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement}{oomph\+::\+Projectable\+Poisson\+Element}}$<$ POISSON\+\_\+\+ELEMENT $>$\+::jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -112,18 +112,18 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ad45c21b58c0985
 
 
 
-Definition at line \mbox{\hyperlink{poisson__elements_8h_source_l00862}{862}} of file \mbox{\hyperlink{poisson__elements_8h_source}{poisson\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{poisson__elements_8h_source_l00860}{860}} of file \mbox{\hyperlink{poisson__elements_8h_source}{poisson\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02616}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectablePoissonElement_af13ec8e584c3ab11cb501030220fcb87}\label{classoomph_1_1ProjectablePoissonElement_af13ec8e584c3ab11cb501030220fcb87}} 
 \index{oomph::ProjectablePoissonElement$<$ POISSON\_ELEMENT $>$@{oomph::ProjectablePoissonElement$<$ POISSON\_ELEMENT $>$}!local\_equation@{local\_equation}}
 \index{local\_equation@{local\_equation}!oomph::ProjectablePoissonElement$<$ POISSON\_ELEMENT $>$@{oomph::ProjectablePoissonElement$<$ POISSON\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{local\_equation()}{local\_equation()}}
 {\footnotesize\ttfamily template$<$class POISSON\+\_\+\+ELEMENT $>$ \\
-int \mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement}{oomph\+::\+Projectable\+Poisson\+Element}}$<$ POISSON\+\_\+\+ELEMENT $>$\+::local\+\_\+equation (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{fld,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+int \mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement}{oomph\+::\+Projectable\+Poisson\+Element}}$<$ POISSON\+\_\+\+ELEMENT $>$\+::local\+\_\+equation (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -135,7 +135,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac5c27ae929ff63
 
 
 
-Definition at line \mbox{\hyperlink{poisson__elements_8h_source_l00945}{945}} of file \mbox{\hyperlink{poisson__elements_8h_source}{poisson\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{poisson__elements_8h_source_l00943}{943}} of file \mbox{\hyperlink{poisson__elements_8h_source}{poisson\+\_\+elements.\+h}}.
 
 
 
@@ -158,7 +158,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a44634aa4049332
 
 
 
-Definition at line \mbox{\hyperlink{poisson__elements_8h_source_l00830}{830}} of file \mbox{\hyperlink{poisson__elements_8h_source}{poisson\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{poisson__elements_8h_source_l00828}{828}} of file \mbox{\hyperlink{poisson__elements_8h_source}{poisson\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectablePoissonElement_a42e8ec2cd54a3301190d2b3a10e66370}\label{classoomph_1_1ProjectablePoissonElement_a42e8ec2cd54a3301190d2b3a10e66370}} 
 \index{oomph::ProjectablePoissonElement$<$ POISSON\_ELEMENT $>$@{oomph::ProjectablePoissonElement$<$ POISSON\_ELEMENT $>$}!nhistory\_values\_for\_coordinate\_projection@{nhistory\_values\_for\_coordinate\_projection}}
@@ -177,18 +177,18 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ab4ecd0cd24000a
 
 
 
-Definition at line \mbox{\hyperlink{poisson__elements_8h_source_l00855}{855}} of file \mbox{\hyperlink{poisson__elements_8h_source}{poisson\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{poisson__elements_8h_source_l00853}{853}} of file \mbox{\hyperlink{poisson__elements_8h_source}{poisson\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, and \mbox{\hyperlink{nodes_8h_source_l01022}{oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectablePoissonElement_a6256481549383c8abdd666f691e3dbed}\label{classoomph_1_1ProjectablePoissonElement_a6256481549383c8abdd666f691e3dbed}} 
 \index{oomph::ProjectablePoissonElement$<$ POISSON\_ELEMENT $>$@{oomph::ProjectablePoissonElement$<$ POISSON\_ELEMENT $>$}!nhistory\_values\_for\_projection@{nhistory\_values\_for\_projection}}
 \index{nhistory\_values\_for\_projection@{nhistory\_values\_for\_projection}!oomph::ProjectablePoissonElement$<$ POISSON\_ELEMENT $>$@{oomph::ProjectablePoissonElement$<$ POISSON\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{nhistory\_values\_for\_projection()}{nhistory\_values\_for\_projection()}}
 {\footnotesize\ttfamily template$<$class POISSON\+\_\+\+ELEMENT $>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement}{oomph\+::\+Projectable\+Poisson\+Element}}$<$ POISSON\+\_\+\+ELEMENT $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement}{oomph\+::\+Projectable\+Poisson\+Element}}$<$ POISSON\+\_\+\+ELEMENT $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -200,18 +200,18 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac6790f394630b9
 
 
 
-Definition at line \mbox{\hyperlink{poisson__elements_8h_source_l00837}{837}} of file \mbox{\hyperlink{poisson__elements_8h_source}{poisson\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{poisson__elements_8h_source_l00835}{835}} of file \mbox{\hyperlink{poisson__elements_8h_source}{poisson\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8cc_source_l00879}{oomph\+::\+Data\+::ntstorage()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectablePoissonElement_a006f46a3072037df9f301ed71af56ac1}\label{classoomph_1_1ProjectablePoissonElement_a006f46a3072037df9f301ed71af56ac1}} 
 \index{oomph::ProjectablePoissonElement$<$ POISSON\_ELEMENT $>$@{oomph::ProjectablePoissonElement$<$ POISSON\_ELEMENT $>$}!nvalue\_of\_field@{nvalue\_of\_field}}
 \index{nvalue\_of\_field@{nvalue\_of\_field}!oomph::ProjectablePoissonElement$<$ POISSON\_ELEMENT $>$@{oomph::ProjectablePoissonElement$<$ POISSON\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{nvalue\_of\_field()}{nvalue\_of\_field()}}
 {\footnotesize\ttfamily template$<$class POISSON\+\_\+\+ELEMENT $>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement}{oomph\+::\+Projectable\+Poisson\+Element}}$<$ POISSON\+\_\+\+ELEMENT $>$\+::nvalue\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement}{oomph\+::\+Projectable\+Poisson\+Element}}$<$ POISSON\+\_\+\+ELEMENT $>$\+::nvalue\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -223,11 +223,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a1a9a6de16f3511
 
 
 
-Definition at line \mbox{\hyperlink{poisson__elements_8h_source_l00927}{927}} of file \mbox{\hyperlink{poisson__elements_8h_source}{poisson\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{poisson__elements_8h_source_l00925}{925}} of file \mbox{\hyperlink{poisson__elements_8h_source}{poisson\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}.
+References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}.
 
 
 

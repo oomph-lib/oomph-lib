@@ -18,7 +18,7 @@ Inheritance diagram for oomph\+::Height\+Control\+Element\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1HeightControlElement_abb74c76bc5615a50794d1d26711f1203}{Height\+Control\+Element}} (Node $\ast$control\+\_\+node\+\_\+pt, double $\ast$prescribed\+\_\+height\+\_\+pt)
+\mbox{\hyperlink{classoomph_1_1HeightControlElement_abb74c76bc5615a50794d1d26711f1203}{Height\+Control\+Element}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$control\+\_\+node\+\_\+pt, double $\ast$prescribed\+\_\+height\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to node at which the height is controlled and pointer to double that stores the prescribed height at that node. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$\& \mbox{\hyperlink{classoomph_1_1HeightControlElement_a3b04177d97f3b599aa33a09d060aeb0c}{kappa\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function to the pointer to the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object that stores the curvature. \end{DoxyCompactList}\item 
@@ -31,7 +31,7 @@ void \mbox{\hyperlink{classoomph_1_1HeightControlElement_a4b60627344a4a3d6647aab
 \item 
 double $\ast$ \mbox{\hyperlink{classoomph_1_1HeightControlElement_a84d4b72f7ce6ed722a5deac748ec874b}{Prescribed\+\_\+height\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to value that stores the controlled height. \end{DoxyCompactList}\item 
-Node $\ast$ \mbox{\hyperlink{classoomph_1_1HeightControlElement_a7950b34b4d99cf59df12a1c458b42540}{Control\+\_\+node\+\_\+pt}}
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1HeightControlElement_a7950b34b4d99cf59df12a1c458b42540}{Control\+\_\+node\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to node at which the height is controlled. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1HeightControlElement_a2e03540694fb3d599770106ca460281e}{Curvature\+\_\+data\+\_\+index}}
 \begin{DoxyCompactList}\small\item\em In which component (in the vector of the element\textquotesingle{}s internal \mbox{\hyperlink{classoomph_1_1Data}{Data}}) is the unknown curvature stored? \end{DoxyCompactList}\item 
@@ -45,7 +45,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1HeightControlElement_adbcff51a8787697ba2
 
 Height control element for Young\+Laplace equations\+: Prescribe displacement along a spine (i.\+e. the \char`\"{}height of the meniscus\char`\"{} in exchange for treating the curvature as an unknown. Very similar to the \mbox{\hyperlink{classoomph_1_1DisplacementControlElement}{Displacement\+Control\+Element}} used in solid mechanics problems. 
 
-Definition at line \mbox{\hyperlink{young__laplace__elements_8h_source_l00559}{559}} of file \mbox{\hyperlink{young__laplace__elements_8h_source}{young\+\_\+laplace\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{young__laplace__elements_8h_source_l00555}{555}} of file \mbox{\hyperlink{young__laplace__elements_8h_source}{young\+\_\+laplace\+\_\+elements.\+h}}.
 
 
 
@@ -54,7 +54,7 @@ Definition at line \mbox{\hyperlink{young__laplace__elements_8h_source_l00559}{5
 \index{oomph::HeightControlElement@{oomph::HeightControlElement}!HeightControlElement@{HeightControlElement}}
 \index{HeightControlElement@{HeightControlElement}!oomph::HeightControlElement@{oomph::HeightControlElement}}
 \doxysubsubsection{\texorpdfstring{HeightControlElement()}{HeightControlElement()}}
-{\footnotesize\ttfamily oomph\+::\+Height\+Control\+Element\+::\+Height\+Control\+Element (\begin{DoxyParamCaption}\item[{Node $\ast$}]{control\+\_\+node\+\_\+pt,  }\item[{double $\ast$}]{prescribed\+\_\+height\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+Height\+Control\+Element\+::\+Height\+Control\+Element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$}]{control\+\_\+node\+\_\+pt,  }\item[{double $\ast$}]{prescribed\+\_\+height\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -62,11 +62,11 @@ Constructor\+: Pass pointer to node at which the height is controlled and pointe
 
 
 
-Definition at line \mbox{\hyperlink{young__laplace__elements_8h_source_l00565}{565}} of file \mbox{\hyperlink{young__laplace__elements_8h_source}{young\+\_\+laplace\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{young__laplace__elements_8h_source_l00561}{561}} of file \mbox{\hyperlink{young__laplace__elements_8h_source}{young\+\_\+laplace\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l00307}{oomph\+::\+Generalised\+Element\+::add\+\_\+external\+\_\+data()}}, \mbox{\hyperlink{elements_8cc_source_l00062}{oomph\+::\+Generalised\+Element\+::add\+\_\+internal\+\_\+data()}}, \mbox{\hyperlink{young__laplace__elements_8h_source_l00616}{Control\+\_\+node\+\_\+pt}}, \mbox{\hyperlink{young__laplace__elements_8h_source_l00620}{Curvature\+\_\+data\+\_\+index}}, and \mbox{\hyperlink{young__laplace__elements_8h_source_l00613}{Prescribed\+\_\+height\+\_\+pt}}.
+References \mbox{\hyperlink{elements_8cc_source_l00307}{oomph\+::\+Generalised\+Element\+::add\+\_\+external\+\_\+data()}}, \mbox{\hyperlink{elements_8cc_source_l00062}{oomph\+::\+Generalised\+Element\+::add\+\_\+internal\+\_\+data()}}, \mbox{\hyperlink{young__laplace__elements_8h_source_l00612}{Control\+\_\+node\+\_\+pt}}, \mbox{\hyperlink{young__laplace__elements_8h_source_l00616}{Curvature\+\_\+data\+\_\+index}}, and \mbox{\hyperlink{young__laplace__elements_8h_source_l00609}{Prescribed\+\_\+height\+\_\+pt}}.
 
 
 
@@ -87,11 +87,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a4cdd0d1eef
 
 
 
-Definition at line \mbox{\hyperlink{young__laplace__elements_8h_source_l00592}{592}} of file \mbox{\hyperlink{young__laplace__elements_8h_source}{young\+\_\+laplace\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{young__laplace__elements_8h_source_l00588}{588}} of file \mbox{\hyperlink{young__laplace__elements_8h_source}{young\+\_\+laplace\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{young__laplace__elements_8h_source_l00620}{Curvature\+\_\+data\+\_\+index}}, \mbox{\hyperlink{young__laplace__elements_8h_source_l00623}{Height\+\_\+ctrl\+\_\+local\+\_\+eqn}}, and \mbox{\hyperlink{elements_8h_source_l00267}{oomph\+::\+Generalised\+Element\+::internal\+\_\+local\+\_\+eqn()}}.
+References \mbox{\hyperlink{young__laplace__elements_8h_source_l00616}{Curvature\+\_\+data\+\_\+index}}, \mbox{\hyperlink{young__laplace__elements_8h_source_l00619}{Height\+\_\+ctrl\+\_\+local\+\_\+eqn}}, and \mbox{\hyperlink{elements_8h_source_l00267}{oomph\+::\+Generalised\+Element\+::internal\+\_\+local\+\_\+eqn()}}.
 
 \mbox{\Hypertarget{classoomph_1_1HeightControlElement_a4b60627344a4a3d6647aabc994059d9d}\label{classoomph_1_1HeightControlElement_a4b60627344a4a3d6647aabc994059d9d}} 
 \index{oomph::HeightControlElement@{oomph::HeightControlElement}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
@@ -109,11 +109,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line \mbox{\hyperlink{young__laplace__elements_8h_source_l00605}{605}} of file \mbox{\hyperlink{young__laplace__elements_8h_source}{young\+\_\+laplace\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{young__laplace__elements_8h_source_l00601}{601}} of file \mbox{\hyperlink{young__laplace__elements_8h_source}{young\+\_\+laplace\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{young__laplace__elements_8h_source_l00616}{Control\+\_\+node\+\_\+pt}}, and \mbox{\hyperlink{young__laplace__elements_8h_source_l00623}{Height\+\_\+ctrl\+\_\+local\+\_\+eqn}}.
+References \mbox{\hyperlink{young__laplace__elements_8h_source_l00612}{Control\+\_\+node\+\_\+pt}}, \mbox{\hyperlink{young__laplace__elements_8h_source_l00619}{Height\+\_\+ctrl\+\_\+local\+\_\+eqn}}, and \mbox{\hyperlink{nodes_8cc_source_l02408}{oomph\+::\+Node\+::value()}}.
 
 \mbox{\Hypertarget{classoomph_1_1HeightControlElement_a3b04177d97f3b599aa33a09d060aeb0c}\label{classoomph_1_1HeightControlElement_a3b04177d97f3b599aa33a09d060aeb0c}} 
 \index{oomph::HeightControlElement@{oomph::HeightControlElement}!kappa\_pt@{kappa\_pt}}
@@ -127,11 +127,11 @@ Access function to the pointer to the \mbox{\hyperlink{classoomph_1_1Data}{Data}
 
 
 
-Definition at line \mbox{\hyperlink{young__laplace__elements_8h_source_l00586}{586}} of file \mbox{\hyperlink{young__laplace__elements_8h_source}{young\+\_\+laplace\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{young__laplace__elements_8h_source_l00582}{582}} of file \mbox{\hyperlink{young__laplace__elements_8h_source}{young\+\_\+laplace\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{young__laplace__elements_8h_source_l00620}{Curvature\+\_\+data\+\_\+index}}, and \mbox{\hyperlink{elements_8h_source_l00622}{oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt()}}.
+References \mbox{\hyperlink{young__laplace__elements_8h_source_l00616}{Curvature\+\_\+data\+\_\+index}}, and \mbox{\hyperlink{elements_8h_source_l00622}{oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt()}}.
 
 
 
@@ -140,7 +140,7 @@ References \mbox{\hyperlink{young__laplace__elements_8h_source_l00620}{Curvature
 \index{oomph::HeightControlElement@{oomph::HeightControlElement}!Control\_node\_pt@{Control\_node\_pt}}
 \index{Control\_node\_pt@{Control\_node\_pt}!oomph::HeightControlElement@{oomph::HeightControlElement}}
 \doxysubsubsection{\texorpdfstring{Control\_node\_pt}{Control\_node\_pt}}
-{\footnotesize\ttfamily Node$\ast$ oomph\+::\+Height\+Control\+Element\+::\+Control\+\_\+node\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$ oomph\+::\+Height\+Control\+Element\+::\+Control\+\_\+node\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -148,11 +148,11 @@ Pointer to node at which the height is controlled.
 
 
 
-Definition at line \mbox{\hyperlink{young__laplace__elements_8h_source_l00616}{616}} of file \mbox{\hyperlink{young__laplace__elements_8h_source}{young\+\_\+laplace\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{young__laplace__elements_8h_source_l00612}{612}} of file \mbox{\hyperlink{young__laplace__elements_8h_source}{young\+\_\+laplace\+\_\+elements.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{young__laplace__elements_8h_source_l00605}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}, and \mbox{\hyperlink{young__laplace__elements_8h_source_l00565}{Height\+Control\+Element()}}.
+Referenced by \mbox{\hyperlink{young__laplace__elements_8h_source_l00601}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}, and \mbox{\hyperlink{young__laplace__elements_8h_source_l00561}{Height\+Control\+Element()}}.
 
 \mbox{\Hypertarget{classoomph_1_1HeightControlElement_a2e03540694fb3d599770106ca460281e}\label{classoomph_1_1HeightControlElement_a2e03540694fb3d599770106ca460281e}} 
 \index{oomph::HeightControlElement@{oomph::HeightControlElement}!Curvature\_data\_index@{Curvature\_data\_index}}
@@ -166,11 +166,11 @@ In which component (in the vector of the element\textquotesingle{}s internal \mb
 
 
 
-Definition at line \mbox{\hyperlink{young__laplace__elements_8h_source_l00620}{620}} of file \mbox{\hyperlink{young__laplace__elements_8h_source}{young\+\_\+laplace\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{young__laplace__elements_8h_source_l00616}{616}} of file \mbox{\hyperlink{young__laplace__elements_8h_source}{young\+\_\+laplace\+\_\+elements.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{young__laplace__elements_8h_source_l00592}{assign\+\_\+additional\+\_\+local\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{young__laplace__elements_8h_source_l00565}{Height\+Control\+Element()}}, and \mbox{\hyperlink{young__laplace__elements_8h_source_l00586}{kappa\+\_\+pt()}}.
+Referenced by \mbox{\hyperlink{young__laplace__elements_8h_source_l00588}{assign\+\_\+additional\+\_\+local\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{young__laplace__elements_8h_source_l00561}{Height\+Control\+Element()}}, and \mbox{\hyperlink{young__laplace__elements_8h_source_l00582}{kappa\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classoomph_1_1HeightControlElement_adbcff51a8787697ba2179442b9c2a753}\label{classoomph_1_1HeightControlElement_adbcff51a8787697ba2179442b9c2a753}} 
 \index{oomph::HeightControlElement@{oomph::HeightControlElement}!Height\_ctrl\_local\_eqn@{Height\_ctrl\_local\_eqn}}
@@ -184,11 +184,11 @@ Local equation number of the height-\/control equation.
 
 
 
-Definition at line \mbox{\hyperlink{young__laplace__elements_8h_source_l00623}{623}} of file \mbox{\hyperlink{young__laplace__elements_8h_source}{young\+\_\+laplace\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{young__laplace__elements_8h_source_l00619}{619}} of file \mbox{\hyperlink{young__laplace__elements_8h_source}{young\+\_\+laplace\+\_\+elements.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{young__laplace__elements_8h_source_l00592}{assign\+\_\+additional\+\_\+local\+\_\+eqn\+\_\+numbers()}}, and \mbox{\hyperlink{young__laplace__elements_8h_source_l00605}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}.
+Referenced by \mbox{\hyperlink{young__laplace__elements_8h_source_l00588}{assign\+\_\+additional\+\_\+local\+\_\+eqn\+\_\+numbers()}}, and \mbox{\hyperlink{young__laplace__elements_8h_source_l00601}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}.
 
 \mbox{\Hypertarget{classoomph_1_1HeightControlElement_a84d4b72f7ce6ed722a5deac748ec874b}\label{classoomph_1_1HeightControlElement_a84d4b72f7ce6ed722a5deac748ec874b}} 
 \index{oomph::HeightControlElement@{oomph::HeightControlElement}!Prescribed\_height\_pt@{Prescribed\_height\_pt}}
@@ -202,11 +202,11 @@ Pointer to value that stores the controlled height.
 
 
 
-Definition at line \mbox{\hyperlink{young__laplace__elements_8h_source_l00613}{613}} of file \mbox{\hyperlink{young__laplace__elements_8h_source}{young\+\_\+laplace\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{young__laplace__elements_8h_source_l00609}{609}} of file \mbox{\hyperlink{young__laplace__elements_8h_source}{young\+\_\+laplace\+\_\+elements.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{young__laplace__elements_8h_source_l00565}{Height\+Control\+Element()}}.
+Referenced by \mbox{\hyperlink{young__laplace__elements_8h_source_l00561}{Height\+Control\+Element()}}.
 
 
 

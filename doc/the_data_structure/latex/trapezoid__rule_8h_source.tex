@@ -165,7 +165,7 @@
 \DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00161}00161 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00162}00162 \textcolor{comment}{    /// Initialise the time-\/history for the nodal positions}}
 \DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00163}00163 \textcolor{comment}{    /// corresponding to an impulsive start.}}
-\DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00164}\mbox{\hyperlink{classoomph_1_1TR_a46878c5cd5b9d20afb2f5d9ab7a7df26}{00164}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1TR_a46878c5cd5b9d20afb2f5d9ab7a7df26}{assign\_initial\_positions\_impulsive}}(Node* \textcolor{keyword}{const}\& node\_pt)}
+\DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00164}\mbox{\hyperlink{classoomph_1_1TR_a46878c5cd5b9d20afb2f5d9ab7a7df26}{00164}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1TR_a46878c5cd5b9d20afb2f5d9ab7a7df26}{assign\_initial\_positions\_impulsive}}(\mbox{\hyperlink{classoomph_1_1Node}{Node}}* \textcolor{keyword}{const}\& node\_pt)}
 \DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00165}00165     \{}
 \DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00166}00166       \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(\textcolor{stringliteral}{"{}Function not yet implemented"{}},}
 \DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00167}00167                           OOMPH\_EXCEPTION\_LOCATION,}
@@ -258,21 +258,21 @@
 \DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00254}00254 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00255}00255 \textcolor{comment}{    /// This function advances the time history of the positions at a}}
 \DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00256}00256 \textcolor{comment}{    /// node.}}
-\DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00257}\mbox{\hyperlink{classoomph_1_1TR_a15ab8859ae1a87f14687dcec94f68e03}{00257}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1TR_a15ab8859ae1a87f14687dcec94f68e03}{shift\_time\_positions}}(Node* \textcolor{keyword}{const}\& node\_pt)}
+\DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00257}\mbox{\hyperlink{classoomph_1_1TR_a15ab8859ae1a87f14687dcec94f68e03}{00257}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1TR_a15ab8859ae1a87f14687dcec94f68e03}{shift\_time\_positions}}(\mbox{\hyperlink{classoomph_1_1Node}{Node}}* \textcolor{keyword}{const}\& node\_pt)}
 \DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00258}00258     \{}
 \DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00259}00259       \textcolor{comment}{// do nothing, not implemented for moving nodes}}
 \DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00260}00260     \}}
 \DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00261}00261 }
 \DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00262}00262 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00263}00263 \textcolor{comment}{    /// Function to calculate predicted positions at a node}}
-\DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00264}\mbox{\hyperlink{classoomph_1_1TR_a5ef44b410f646c0f94eb2f5a2d80bb03}{00264}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1TR_a5ef44b410f646c0f94eb2f5a2d80bb03}{calculate\_predicted\_positions}}(Node* \textcolor{keyword}{const}\& node\_pt)}
+\DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00264}\mbox{\hyperlink{classoomph_1_1TR_a5ef44b410f646c0f94eb2f5a2d80bb03}{00264}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1TR_a5ef44b410f646c0f94eb2f5a2d80bb03}{calculate\_predicted\_positions}}(\mbox{\hyperlink{classoomph_1_1Node}{Node}}* \textcolor{keyword}{const}\& node\_pt)}
 \DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00265}00265     \{}
 \DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00266}00266       \textcolor{comment}{// Loop over the dimensions}}
-\DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00267}00267       \textcolor{keywordtype}{unsigned} n\_dim = node\_pt-\/>ndim();}
+\DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00267}00267       \textcolor{keywordtype}{unsigned} n\_dim = node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
 \DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00268}00268       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < n\_dim; j++)}
 \DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00269}00269       \{}
 \DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00270}00270         \textcolor{comment}{// If the node is not copied}}
-\DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00271}00271         \textcolor{keywordflow}{if} (!node\_pt-\/>position\_is\_a\_copy(j))}
+\DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00271}00271         \textcolor{keywordflow}{if} (!node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a80fe9192b35baa5321e8d0ffba4b8b8a}{position\_is\_a\_copy}}(j))}
 \DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00272}00272         \{}
 \DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00273}00273           \textcolor{comment}{// Initialise the predictor to zero}}
 \DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00274}00274           \textcolor{keywordtype}{double} predicted\_value = 0.0;}
@@ -281,11 +281,11 @@
 \DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00277}00277           \textcolor{comment}{// to the predictor}}
 \DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00278}00278           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 1; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 4; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00279}00279           \{}
-\DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00280}00280             predicted\_value += node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j) * \mbox{\hyperlink{classoomph_1_1TR_a32b1f670090854c3e28611ee5b3cf220}{Predictor\_weight}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00280}00280             predicted\_value += node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j) * \mbox{\hyperlink{classoomph_1_1TR_a32b1f670090854c3e28611ee5b3cf220}{Predictor\_weight}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
 \DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00281}00281           \}}
 \DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00282}00282 }
 \DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00283}00283           \textcolor{comment}{// Store the predicted value}}
-\DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00284}00284           node\_pt-\/>x(\mbox{\hyperlink{classoomph_1_1TR_a4416216c3319f42bd7805e136326f8f8}{predicted\_value\_index}}(), j) = predicted\_value;}
+\DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00284}00284           node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{classoomph_1_1TR_a4416216c3319f42bd7805e136326f8f8}{predicted\_value\_index}}(), j) = predicted\_value;}
 \DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00285}00285         \}}
 \DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00286}00286       \}}
 \DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00287}00287     \}}
@@ -316,10 +316,10 @@
 \DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00312}00312 }
 \DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00313}00313 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00314}00314 \textcolor{comment}{    /// Compute the error in the position i at a node}}
-\DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00315}\mbox{\hyperlink{classoomph_1_1TR_ae77caf45f731bfc2cd5212f5934918d7}{00315}} \textcolor{comment}{}    \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1TR_ae77caf45f731bfc2cd5212f5934918d7}{temporal\_error\_in\_position}}(Node* \textcolor{keyword}{const}\& node\_pt, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})}
+\DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00315}\mbox{\hyperlink{classoomph_1_1TR_ae77caf45f731bfc2cd5212f5934918d7}{00315}} \textcolor{comment}{}    \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1TR_ae77caf45f731bfc2cd5212f5934918d7}{temporal\_error\_in\_position}}(\mbox{\hyperlink{classoomph_1_1Node}{Node}}* \textcolor{keyword}{const}\& node\_pt, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})}
 \DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00316}00316     \{}
 \DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00317}00317       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1TR_a5dbcb466fcff21c9780c0cf1b8971bc4}{Error\_weight}} *}
-\DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00318}00318              (node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) -\/ node\_pt-\/>x(\mbox{\hyperlink{classoomph_1_1TR_a4416216c3319f42bd7805e136326f8f8}{predicted\_value\_index}}(), \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
+\DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00318}00318              (node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) -\/ node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{classoomph_1_1TR_a4416216c3319f42bd7805e136326f8f8}{predicted\_value\_index}}(), \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
 \DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00319}00319     \}}
 \DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00320}00320 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{trapezoid__rule_8h_source_l00321}00321 \textcolor{comment}{    /// Compute the error in the value i in a Data structure}}

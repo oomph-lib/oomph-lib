@@ -748,7 +748,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__mesh_8h_source_l00744}00744 }
 \DoxyCodeLine{\Hypertarget{refineable__mesh_8h_source_l00745}00745 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{refineable__mesh_8h_source_l00746}00746 \textcolor{comment}{    /// Auxiliary routine for recursive hanging node completion}}
-\DoxyCodeLine{\Hypertarget{refineable__mesh_8h_source_l00747}00747 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMeshBase_a6dd9c95ee6c2ffcd687ad0ed736c5ba3}{complete\_hanging\_nodes\_recursively}}(Node*\& nod\_pt,}
+\DoxyCodeLine{\Hypertarget{refineable__mesh_8h_source_l00747}00747 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMeshBase_a6dd9c95ee6c2ffcd687ad0ed736c5ba3}{complete\_hanging\_nodes\_recursively}}(\mbox{\hyperlink{classoomph_1_1Node}{Node}}*\& nod\_pt,}
 \DoxyCodeLine{\Hypertarget{refineable__mesh_8h_source_l00748}00748                                             \mbox{\hyperlink{classoomph_1_1Vector}{Vector<Node*>}}\& master\_nodes,}
 \DoxyCodeLine{\Hypertarget{refineable__mesh_8h_source_l00749}00749                                             \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& hang\_weights,}
 \DoxyCodeLine{\Hypertarget{refineable__mesh_8h_source_l00750}00750                                             \textcolor{keyword}{const} \textcolor{keywordtype}{int}\& ival);}
@@ -786,7 +786,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__mesh_8h_source_l00782}\mbox{\hyperlink{structoomph_1_1TreeBasedRefineableMeshBase_1_1HangHelperStruct_ad27054cbdb0f2aee8cc57e2cdd068941}{00782}}       \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{structoomph_1_1TreeBasedRefineableMeshBase_1_1HangHelperStruct_ad27054cbdb0f2aee8cc57e2cdd068941}{Master\_node\_index}};}
 \DoxyCodeLine{\Hypertarget{refineable__mesh_8h_source_l00783}00783       \textcolor{comment}{// Store pointer to node and index of value in case translation attempt}}
 \DoxyCodeLine{\Hypertarget{refineable__mesh_8h_source_l00784}00784       \textcolor{comment}{// fails (see synchronise\_hanging\_nodes())}}
-\DoxyCodeLine{\Hypertarget{refineable__mesh_8h_source_l00785}\mbox{\hyperlink{structoomph_1_1TreeBasedRefineableMeshBase_1_1HangHelperStruct_ad427be917515d875cabad06307e9ae03}{00785}}       Node* \mbox{\hyperlink{structoomph_1_1TreeBasedRefineableMeshBase_1_1HangHelperStruct_ad427be917515d875cabad06307e9ae03}{Node\_pt}};}
+\DoxyCodeLine{\Hypertarget{refineable__mesh_8h_source_l00785}\mbox{\hyperlink{structoomph_1_1TreeBasedRefineableMeshBase_1_1HangHelperStruct_ad427be917515d875cabad06307e9ae03}{00785}}       \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{structoomph_1_1TreeBasedRefineableMeshBase_1_1HangHelperStruct_ad427be917515d875cabad06307e9ae03}{Node\_pt}};}
 \DoxyCodeLine{\Hypertarget{refineable__mesh_8h_source_l00786}\mbox{\hyperlink{structoomph_1_1TreeBasedRefineableMeshBase_1_1HangHelperStruct_af54b83ec0892b7c9f67419dd36d57933}{00786}}       \textcolor{keywordtype}{int} \mbox{\hyperlink{structoomph_1_1TreeBasedRefineableMeshBase_1_1HangHelperStruct_af54b83ec0892b7c9f67419dd36d57933}{icont}};}
 \DoxyCodeLine{\Hypertarget{refineable__mesh_8h_source_l00787}00787     \};}
 \DoxyCodeLine{\Hypertarget{refineable__mesh_8h_source_l00788}00788 }
@@ -947,7 +947,7 @@
 \DoxyCodeLine{\Hypertarget{refineable__mesh_8h_source_l00943}00943         \{}
 \DoxyCodeLine{\Hypertarget{refineable__mesh_8h_source_l00944}00944           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 3; ++\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})}
 \DoxyCodeLine{\Hypertarget{refineable__mesh_8h_source_l00945}00945           \{}
-\DoxyCodeLine{\Hypertarget{refineable__mesh_8h_source_l00946}00946             vertex[n][\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n)-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{refineable__mesh_8h_source_l00946}00946             vertex[n][\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{refineable__mesh_8h_source_l00947}00947           \}}
 \DoxyCodeLine{\Hypertarget{refineable__mesh_8h_source_l00948}00948         \}}
 \DoxyCodeLine{\Hypertarget{refineable__mesh_8h_source_l00949}00949 }

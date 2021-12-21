@@ -585,8 +585,8 @@
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00581}00581     \textcolor{keywordtype}{unsigned} nnodes = \mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{Mesh::finite\_element\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00582}00582 }
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00583}00583     \textcolor{comment}{// Coordinates of central box}}
-\DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00584}00584     \textcolor{keywordtype}{double} x\_box = \mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{Mesh::finite\_element\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(nnodes -\/ 1)-\/>x(0);}
-\DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00585}00585     \textcolor{keywordtype}{double} y\_box = \mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{Mesh::finite\_element\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(nnodes -\/ 1)-\/>x(1);}
+\DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00584}00584     \textcolor{keywordtype}{double} x\_box = \mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{Mesh::finite\_element\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(nnodes -\/ 1)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0);}
+\DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00585}00585     \textcolor{keywordtype}{double} y\_box = \mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{Mesh::finite\_element\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(nnodes -\/ 1)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1);}
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00586}00586 }
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00587}00587     \textcolor{comment}{// Get wall position in bottom right corner}}
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00588}00588     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} r\_br(2);}
@@ -629,8 +629,8 @@
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00625}00625       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} jnod = 0; jnod < nnodes; jnod++)}
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00626}00626       \{}
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00627}00627         \textcolor{comment}{// Nodal coordinates in undeformed mesh}}
-\DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00628}00628         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}} = \mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{Mesh::finite\_element\_pt}}(ielem)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(jnod)-\/>x(0);}
-\DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00629}00629         \textcolor{keywordtype}{double} y = \mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{Mesh::finite\_element\_pt}}(ielem)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(jnod)-\/>x(1);}
+\DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00628}00628         \textcolor{keywordtype}{double} x = \mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{Mesh::finite\_element\_pt}}(ielem)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(jnod)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0);}
+\DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00629}00629         \textcolor{keywordtype}{double} y = \mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{Mesh::finite\_element\_pt}}(ielem)-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(jnod)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1);}
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00630}00630 }
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00631}00631         \textcolor{comment}{// The update function requires two geometric objects}}
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00632}00632         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<GeomObject*>}} geom\_object\_pt(2);}
@@ -639,7 +639,7 @@
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00635}00635         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} ref\_value(4);}
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00636}00636 }
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00637}00637         \textcolor{comment}{// First reference value: fractional x-\/position inside box}}
-\DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00638}00638         ref\_value[0] = \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}} / x\_box;}
+\DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00638}00638         ref\_value[0] = x / x\_box;}
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00639}00639 }
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00640}00640         \textcolor{comment}{// Second reference value: fractional y-\/position inside box}}
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00641}00641         ref\_value[1] = y / y\_box;}
@@ -869,7 +869,7 @@
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00865}00865     \textcolor{comment}{// position value that is required by the timestepping scheme but it's}}
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00866}00866     \textcolor{comment}{// probably worth flagging this up and forcing the user to manually switch}}
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00867}00867     \textcolor{comment}{// off this warning if he/she is 100\% sure that this is kosher.}}
-\DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00868}00868     \textcolor{keywordflow}{if} (\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}} > node\_pt-\/>position\_time\_stepper\_pt()-\/>nprev\_values())}
+\DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00868}00868     \textcolor{keywordflow}{if} (\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}} > node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a32b32940186f9d1e2abc5d4bedb6ff0d}{position\_time\_stepper\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1TimeStepper_a0f38713ed304c18d9f7b5cf8131664c1}{nprev\_values}}())}
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00869}00869     \{}
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00870}00870       \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} error\_message =}
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00871}00871         \textcolor{stringliteral}{"{}Trying to  update the nodal position at a time level\(\backslash\)n"{}};}
@@ -930,8 +930,8 @@
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00926}00926     obj\_tl\_pt-\/>\mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{position}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, s\_tl, r\_tl);}
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00927}00927 }
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00928}00928     \textcolor{comment}{// Assign new nodal coordinate}}
-\DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00929}00929     node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 0) = r\_br[0] * Lambda\_x * rho\_x;}
-\DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00930}00930     node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 1) = r\_tl[1] * Lambda\_y * rho\_y;}
+\DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00929}00929     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 0) = r\_br[0] * Lambda\_x * rho\_x;}
+\DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00930}00930     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 1) = r\_tl[1] * Lambda\_y * rho\_y;}
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00931}00931   \}}
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00932}00932 }
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00933}00933 }
@@ -958,7 +958,7 @@
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00954}00954     \textcolor{comment}{// position value that is required by the timestepping scheme but it's}}
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00955}00955     \textcolor{comment}{// probably worth flagging this up and forcing the user to manually switch}}
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00956}00956     \textcolor{comment}{// off this warning if he/she is 100\% sure that this is kosher.}}
-\DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00957}00957     \textcolor{keywordflow}{if} (\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}} > node\_pt-\/>position\_time\_stepper\_pt()-\/>nprev\_values())}
+\DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00957}00957     \textcolor{keywordflow}{if} (\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}} > node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a32b32940186f9d1e2abc5d4bedb6ff0d}{position\_time\_stepper\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1TimeStepper_a0f38713ed304c18d9f7b5cf8131664c1}{nprev\_values}}())}
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00958}00958     \{}
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00959}00959       \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} error\_message =}
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l00960}00960         \textcolor{stringliteral}{"{}Trying to update the nodal position at a time level"{}};}
@@ -1040,8 +1040,8 @@
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l01036}01036     obj\_wall\_pt-\/>position(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, s\_wall, r\_wall);}
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l01037}01037 }
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l01038}01038     \textcolor{comment}{// Assign new nodal coordinate}}
-\DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l01039}01039     node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 0) = r\_left[0] + rho\_0 * (r\_wall[0] -\/ r\_left[0]);}
-\DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l01040}01040     node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 1) = r\_left[1] + rho\_0 * (r\_wall[1] -\/ r\_left[1]);}
+\DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l01039}01039     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 0) = r\_left[0] + rho\_0 * (r\_wall[0] -\/ r\_left[0]);}
+\DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l01040}01040     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 1) = r\_left[1] + rho\_0 * (r\_wall[1] -\/ r\_left[1]);}
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l01041}01041   \}}
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l01042}01042   \textcolor{comment}{//====================================================================}\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l01043}01043 \textcolor{comment}{  /// Algebraic update function: Update in upper left box according}}
@@ -1066,7 +1066,7 @@
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l01062}01062     \textcolor{comment}{// position value that is required by the timestepping scheme but it's}}
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l01063}01063     \textcolor{comment}{// probably worth flagging this up and forcing the user to manually switch}}
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l01064}01064     \textcolor{comment}{// off this warning if he/she is 100\% sure that this is kosher.}}
-\DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l01065}01065     \textcolor{keywordflow}{if} (\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}} > node\_pt-\/>position\_time\_stepper\_pt()-\/>nprev\_values())}
+\DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l01065}01065     \textcolor{keywordflow}{if} (\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}} > node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a32b32940186f9d1e2abc5d4bedb6ff0d}{position\_time\_stepper\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1TimeStepper_a0f38713ed304c18d9f7b5cf8131664c1}{nprev\_values}}())}
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l01066}01066     \{}
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l01067}01067       \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} error\_message =}
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l01068}01068         \textcolor{stringliteral}{"{}Trying to update the nodal position at a time level"{}};}
@@ -1150,8 +1150,8 @@
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l01146}01146 }
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l01147}01147 }
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l01148}01148     \textcolor{comment}{// Assign new nodal coordinate}}
-\DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l01149}01149     node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 0) = r\_top[0] + rho\_1 * (r\_wall[0] -\/ r\_top[0]);}
-\DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l01150}01150     node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 1) = r\_top[1] + rho\_1 * (r\_wall[1] -\/ r\_top[1]);}
+\DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l01149}01149     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 0) = r\_top[0] + rho\_1 * (r\_wall[0] -\/ r\_top[0]);}
+\DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l01150}01150     node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, 1) = r\_top[1] + rho\_1 * (r\_wall[1] -\/ r\_top[1]);}
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l01151}01151   \}}
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l01152}01152 }
 \DoxyCodeLine{\Hypertarget{quarter__circle__sector__mesh_8template_8cc_source_l01153}01153 }

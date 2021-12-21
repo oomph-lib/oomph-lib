@@ -18,20 +18,20 @@ Inheritance diagram for oomph\+::Polar\+Navier\+Stokes\+Equations\+:\begin{figur
 \doxysubsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_adfe008551ad8039abe5c9bf23af8c0e3}{Navier\+Stokes\+Body\+Force\+Fct\+Pt}}) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&body\+\_\+force)
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_adfe008551ad8039abe5c9bf23af8c0e3}{Navier\+Stokes\+Body\+Force\+Fct\+Pt}}) (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&body\+\_\+force)
 \begin{DoxyCompactList}\small\item\em Function pointer to body force function fct(t,x,f(x)) x is a Vector! \end{DoxyCompactList}\item 
-typedef double($\ast$ \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a9084ecf962b26ccaa72443a807dedb25}{Navier\+Stokes\+Source\+Fct\+Pt}}) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}})
+typedef double($\ast$ \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a9084ecf962b26ccaa72443a807dedb25}{Navier\+Stokes\+Source\+Fct\+Pt}}) (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x)
 \begin{DoxyCompactList}\small\item\em Function pointer to source function fct(t,x) x is a Vector! \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a01afefd52f1b684325bcb13e26e6445c}{Polar\+Navier\+Stokes\+Equations}} ()
 \begin{DoxyCompactList}\small\item\em Constructor\+: NULL the body force and source function. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \& \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a1dc37882197d0a2c1f82ee2dc588c7e4}{re}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+const double \& \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a1dc37882197d0a2c1f82ee2dc588c7e4}{re}} () const
 \begin{DoxyCompactList}\small\item\em Reynolds number. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \& \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a72942681f89baa0af6a5b4c30352ba6f}{alpha}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+const double \& \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a72942681f89baa0af6a5b4c30352ba6f}{alpha}} () const
 \begin{DoxyCompactList}\small\item\em Alpha. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \& \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a2f7b7838a5c60718712f6af273db8942}{re\+\_\+st}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+const double \& \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a2f7b7838a5c60718712f6af273db8942}{re\+\_\+st}} () const
 \begin{DoxyCompactList}\small\item\em Product of Reynolds and Strouhal number (=Womersley number) \end{DoxyCompactList}\item 
 double $\ast$\& \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a2b7c2375fa92579bb2c07f1ed66d36ed}{re\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Pointer to Reynolds number. \end{DoxyCompactList}\item 
@@ -39,101 +39,101 @@ double $\ast$\& \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a6eaa5
 \begin{DoxyCompactList}\small\item\em Pointer to Alpha. \end{DoxyCompactList}\item 
 double $\ast$\& \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a0d5af5536b11f61157222800bcae7541}{re\+\_\+st\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Pointer to product of Reynolds and Strouhal number (=Womersley number) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \& \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a53b353f5dad7c7073bdfb328cc16b5ac}{viscosity\+\_\+ratio}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+const double \& \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a53b353f5dad7c7073bdfb328cc16b5ac}{viscosity\+\_\+ratio}} () const
 \begin{DoxyCompactList}\small\item\em Viscosity ratio for element\+: Element\textquotesingle{}s viscosity relative to the viscosity used in the definition of the Reynolds number. \end{DoxyCompactList}\item 
 double $\ast$\& \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ae01ab26148fe03500a220207480d68cc}{viscosity\+\_\+ratio\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Pointer to Viscosity Ratio. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \& \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a43444e393c2fb0165e4b2160e35d44b2}{density\+\_\+ratio}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+const double \& \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a43444e393c2fb0165e4b2160e35d44b2}{density\+\_\+ratio}} () const
 \begin{DoxyCompactList}\small\item\em Density ratio for element\+: Element\textquotesingle{}s density relative to the viscosity used in the definition of the Reynolds number. \end{DoxyCompactList}\item 
 double $\ast$\& \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a68a3c6437c8a20f412d9a9fc4704f538}{density\+\_\+ratio\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Pointer to Density ratio. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \& \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a757d5d42d7f86a3c02f180f05faf3b18}{re\+\_\+invfr}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+const double \& \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a757d5d42d7f86a3c02f180f05faf3b18}{re\+\_\+invfr}} () const
 \begin{DoxyCompactList}\small\item\em Global inverse Froude number. \end{DoxyCompactList}\item 
 double $\ast$\& \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a08ec91b36d936a636a01a92da5e6c601}{re\+\_\+invfr\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Pointer to global inverse Froude number. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \& \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a77011a9d160cb26ab0d958358c762df3}{g}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \& \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a77011a9d160cb26ab0d958358c762df3}{g}} () const
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of gravitational components. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $\ast$\& \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a3382c06ce244bd3d03fff2fe34d20929}{g\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Pointer to \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of gravitational components. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_adfe008551ad8039abe5c9bf23af8c0e3}{Navier\+Stokes\+Body\+Force\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a6e4b8f8e4f353b67713f9b01b3fa3be4}{body\+\_\+force\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for the body-\/force pointer. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_adfe008551ad8039abe5c9bf23af8c0e3}{Navier\+Stokes\+Body\+Force\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_af72a9132b8efe219c37ff569f2b7d77f}{body\+\_\+force\+\_\+fct\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+\mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_adfe008551ad8039abe5c9bf23af8c0e3}{Navier\+Stokes\+Body\+Force\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_af72a9132b8efe219c37ff569f2b7d77f}{body\+\_\+force\+\_\+fct\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Access function for the body-\/force pointer. Const version. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a9084ecf962b26ccaa72443a807dedb25}{Navier\+Stokes\+Source\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a94c74b11ac3575b2dfc8ff0b2aa27d46}{source\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for the source-\/function pointer. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a9084ecf962b26ccaa72443a807dedb25}{Navier\+Stokes\+Source\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ae96ba2b2234252b7f7b1d2de1420db97}{source\+\_\+fct\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+\mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a9084ecf962b26ccaa72443a807dedb25}{Navier\+Stokes\+Source\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ae96ba2b2234252b7f7b1d2de1420db97}{source\+\_\+fct\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Access function for the source-\/function pointer. Const version. \end{DoxyCompactList}\item 
-virtual unsigned \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_af66cafead00372b56b677ab40a184d1f}{npres\+\_\+pnst}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual unsigned \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_af66cafead00372b56b677ab40a184d1f}{npres\+\_\+pnst}} () const =0
 \begin{DoxyCompactList}\small\item\em Function to return number of pressure degrees of freedom. \end{DoxyCompactList}\item 
-virtual double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ae4bfb7b4c54bf5558111f84119f530d0}{u\+\_\+pnst}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ae4bfb7b4c54bf5558111f84119f530d0}{u\+\_\+pnst}} (const unsigned \&n, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const =0
 \begin{DoxyCompactList}\small\item\em Velocity i at local node n. Uses suitably interpolated value for hanging nodes. \end{DoxyCompactList}\item 
-virtual double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ace9bb9807c722cd910ed54891df7d58c}{u\+\_\+pnst}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ace9bb9807c722cd910ed54891df7d58c}{u\+\_\+pnst}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&n, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const =0
 \begin{DoxyCompactList}\small\item\em Velocity i at local node n at timestep t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous). Uses suitably interpolated value for hanging nodes. \end{DoxyCompactList}\item 
-virtual unsigned \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_aa478578286aece66720cbd841f450ba0}{u\+\_\+index\+\_\+pnst}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+virtual unsigned \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_aa478578286aece66720cbd841f450ba0}{u\+\_\+index\+\_\+pnst}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Return the index at which the i-\/th unknown velocity component is stored. The default value, i, is appropriate for single-\/physics problems. In derived multi-\/physics elements, this function should be overloaded to reflect the chosen storage scheme. Note that these equations require that the unknowns are always stored at the same indices at each node. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ac6c31807b4f2edd3f00965b11b2a0622}{du\+\_\+dt\+\_\+pnst}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ac6c31807b4f2edd3f00965b11b2a0622}{du\+\_\+dt\+\_\+pnst}} (const unsigned \&n, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em i-\/th component of du/dt at local node n. Uses suitably interpolated value for hanging nodes. \end{DoxyCompactList}\item 
-virtual double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a4db8f8149fe830b204de3c5f64fd3113}{p\+\_\+pnst}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+p) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a4db8f8149fe830b204de3c5f64fd3113}{p\+\_\+pnst}} (const unsigned \&n\+\_\+p) const =0
 \begin{DoxyCompactList}\small\item\em Pressure at local pressure \char`\"{}node\char`\"{} n\+\_\+p Uses suitably interpolated value for hanging nodes. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a80333b602104b12993c7d3b242d2adfb}{fix\+\_\+pressure}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&p\+\_\+dof, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&p\+\_\+value)=0
+virtual void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a80333b602104b12993c7d3b242d2adfb}{fix\+\_\+pressure}} (const unsigned \&p\+\_\+dof, const double \&p\+\_\+value)=0
 \begin{DoxyCompactList}\small\item\em Pin p\+\_\+dof-\/th pressure dof and set it to value specified by p\+\_\+value. \end{DoxyCompactList}\item 
 virtual int \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a79266ebf090ed45e71631e9c704f33a5}{p\+\_\+nodal\+\_\+index\+\_\+pnst}} ()
 \begin{DoxyCompactList}\small\item\em Which nodal value represents the pressure? (Default\+: negative, indicating that pressure is not based on nodal interpolation). \end{DoxyCompactList}\item 
-virtual Node $\ast$ \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_adb91c780f55bda62b209573facf9a999}{pressure\+\_\+node\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+p)
+virtual \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_adb91c780f55bda62b209573facf9a999}{pressure\+\_\+node\+\_\+pt}} (const unsigned \&n\+\_\+p)
 \begin{DoxyCompactList}\small\item\em Pointer to n\+\_\+p-\/th pressure node (Default\+: NULL, indicating that pressure is not based on nodal interpolation). \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ad95e0de64c45d54690bcc422cd17a1fc}{pressure\+\_\+integral}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
-\begin{DoxyCompactList}\small\item\em Integral of pressure over element. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a058dc7463bf84d85eebf98a32037adb4}{dissipation}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ad95e0de64c45d54690bcc422cd17a1fc}{pressure\+\_\+integral}} () const
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Integral}{Integral}} of pressure over element. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a058dc7463bf84d85eebf98a32037adb4}{dissipation}} () const
 \begin{DoxyCompactList}\small\item\em Return integral of dissipation over element. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ae8db187877c291548f6249266a4f6341}{dissipation}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ae8db187877c291548f6249266a4f6341}{dissipation}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) const
 \begin{DoxyCompactList}\small\item\em Return dissipation at local coordinate s. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a1e9cfddfe57aa786569129ea22c637b0}{kin\+\_\+energy}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a1e9cfddfe57aa786569129ea22c637b0}{kin\+\_\+energy}} () const
 \begin{DoxyCompactList}\small\item\em Get integral of kinetic energy over element. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a5d46a1417439c7abd56219f8a538a63a}{strain\+\_\+rate}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&strain\+\_\+rate) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a5d46a1417439c7abd56219f8a538a63a}{strain\+\_\+rate}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&strain\+\_\+rate) const
 \begin{DoxyCompactList}\small\item\em Strain-\/rate tensor\+: Now returns polar strain. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a969a6d8caaa879136a4fb6ed00cc6cf2}{strain\+\_\+rate\+\_\+by\+\_\+r}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a5d46a1417439c7abd56219f8a538a63a}{strain\+\_\+rate}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a969a6d8caaa879136a4fb6ed00cc6cf2}{strain\+\_\+rate\+\_\+by\+\_\+r}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a5d46a1417439c7abd56219f8a538a63a}{strain\+\_\+rate}}) const
 \begin{DoxyCompactList}\small\item\em Function to return polar strain multiplied by r. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a535d5104145a0ebb128c850c5d87d3c4}{get\+\_\+traction}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&N, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&traction)
+void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a535d5104145a0ebb128c850c5d87d3c4}{get\+\_\+traction}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&N, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&traction)
 \begin{DoxyCompactList}\small\item\em Compute traction (on the viscous scale) at local coordinate s for outer unit normal N. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a47ae24dc603a7d46bd4a85ccfb2b8e23}{get\+\_\+load}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&N, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&load)
+void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a47ae24dc603a7d46bd4a85ccfb2b8e23}{get\+\_\+load}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&N, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&load)
 \begin{DoxyCompactList}\small\item\em The potential loading on an external Solid\+Element is always provided by the traction function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a720f9b13abd3bf876793f1f9e8538f61}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Output functionget\+\_\+vels(const \mbox{\hyperlink{classoomph_1_1Vector}{Vector$<$double$>$}}\& x\+\_\+to\+\_\+get, \mbox{\hyperlink{classoomph_1_1Vector}{Vector$<$double$>$}}\& vels)\+: x,y,\mbox{[}z\mbox{]},u,v,\mbox{[}w\mbox{]},p in tecplot format. Default number of plot points. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a830bb7a0fc6532994fd1e173f7803d54}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&nplot)
+void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a830bb7a0fc6532994fd1e173f7803d54}{output}} (std\+::ostream \&outfile, const unsigned \&nplot)
 \begin{DoxyCompactList}\small\item\em Output function\+: x,y,\mbox{[}z\mbox{]},u,v,\mbox{[}w\mbox{]},p in tecplot format. nplot points in each coordinate direction. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_aad582ad191d1dd67ee148495ee46778e}{output}} (FILE $\ast$file\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em C-\/style output function\+: x,y,\mbox{[}z\mbox{]},u,v,\mbox{[}w\mbox{]},p in tecplot format. Default number of plot points. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a1dd19ac88c126db21ad12bdb06a512f9}{output}} (FILE $\ast$file\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&nplot)
+void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a1dd19ac88c126db21ad12bdb06a512f9}{output}} (FILE $\ast$file\+\_\+pt, const unsigned \&nplot)
 \begin{DoxyCompactList}\small\item\em C-\/style output function\+: x,y,\mbox{[}z\mbox{]},u,v,\mbox{[}w\mbox{]},p in tecplot format. nplot points in each coordinate direction. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_abe241e9deab5ea6f3b4059a63c19ec3d}{full\+\_\+output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Full output function\+: x,y,\mbox{[}z\mbox{]},u,v,\mbox{[}w\mbox{]},p,du/dt,dv/dt,\mbox{[}dw/dt\mbox{]},dissipation in tecplot format. Default number of plot points. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a51eb6471730901fdc5cccf2edbf2c870}{full\+\_\+output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&nplot)
+void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a51eb6471730901fdc5cccf2edbf2c870}{full\+\_\+output}} (std\+::ostream \&outfile, const unsigned \&nplot)
 \begin{DoxyCompactList}\small\item\em Full output function\+: x,y,\mbox{[}z\mbox{]},u,v,\mbox{[}w\mbox{]},p,du/dt,dv/dt,\mbox{[}dw/dt\mbox{]},dissipation in tecplot format. nplot points in each coordinate direction. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a960e2b96a00d4f29f91aeef9dafb1bdb}{output\+\_\+veloc}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&nplot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}})
+void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a960e2b96a00d4f29f91aeef9dafb1bdb}{output\+\_\+veloc}} (std\+::ostream \&outfile, const unsigned \&nplot, const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}})
 \begin{DoxyCompactList}\small\item\em Output function\+: x,y,\mbox{[}z\mbox{]},u,v,\mbox{[}w\mbox{]} in tecplot format. nplot points in each coordinate direction at timestep t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous timestep) \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a72787983b9bcc07aafb46d5f7a2e592d}{output\+\_\+fct}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&nplot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a72787983b9bcc07aafb46d5f7a2e592d}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&nplot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Output exact solution specified via function pointer at a given number of plot points. Function prints as many components as are returned in solution \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a89353546dd511060090ef8f3e70e840a}{output\+\_\+fct}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&nplot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a89353546dd511060090ef8f3e70e840a}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&nplot, const double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Output exact solution specified via function pointer at a given time and at a given number of plot points. Function prints as many components as are returned in solution \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_af05fc0ab81fac7f46c937220b9ca3ac0}{compute\+\_\+error}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, double \&error, double \&norm)
+void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_af05fc0ab81fac7f46c937220b9ca3ac0}{compute\+\_\+error}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt, const double \&time, double \&error, double \&norm)
 \begin{DoxyCompactList}\small\item\em Validate against exact solution at given time Solution is provided via function pointer. Plot at a given number of plot points and compute L2 error and L2 norm of velocity solution over element. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_afcd9707018a88a40b1c8408f711b9eb6}{compute\+\_\+error}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt, double \&error, double \&norm)
 \begin{DoxyCompactList}\small\item\em Validate against exact solution. Solution is provided via function pointer. Plot at a given number of plot points and compute L2 error and L2 norm of velocity solution over element. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a0f859172293fdaa604e280084e503b68}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em Compute the element\textquotesingle{}s residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a2724cc076b394e59305ed1f7610dfa4f}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})
+void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a2724cc076b394e59305ed1f7610dfa4f}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em Compute the element\textquotesingle{}s residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} and the jacobian matrix Virtual function can be overloaded by hanging-\/node version. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ae4962724a42bb1f6ccdc080bef2c69a1}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix)
+void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ae4962724a42bb1f6ccdc080bef2c69a1}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix)
 \begin{DoxyCompactList}\small\item\em Compute the element\textquotesingle{}s residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} and the jacobian matrix Plus the mass matrix especially for eigenvalue problems. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ad0188bfed5fc5e929017226cde427839}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix, unsigned flag)
+virtual void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ad0188bfed5fc5e929017226cde427839}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix, unsigned flag)
 \begin{DoxyCompactList}\small\item\em Compute the residuals for the Navier--Stokes equations; flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ac3a3e89734b01c9f117520eac5a2ace3}{interpolated\+\_\+u\+\_\+pnst}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&veloc) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ac3a3e89734b01c9f117520eac5a2ace3}{interpolated\+\_\+u\+\_\+pnst}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&veloc) const
 \begin{DoxyCompactList}\small\item\em Compute vector of FE interpolated velocity u at local coordinate s. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a0913099164d0d4762b67aa0c0f46a39e}{interpolated\+\_\+u\+\_\+pnst}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a0913099164d0d4762b67aa0c0f46a39e}{interpolated\+\_\+u\+\_\+pnst}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Return FE interpolated velocity u\mbox{[}i\mbox{]} at local coordinate s. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_afcc85389a45dfa0e811852012fc40442}{interpolated\+\_\+p\+\_\+pnst}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_afcc85389a45dfa0e811852012fc40442}{interpolated\+\_\+p\+\_\+pnst}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) const
 \begin{DoxyCompactList}\small\item\em Return FE interpolated pressure at local coordinate s. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_af92453e32bfbc37cd9dd93992d1e4211}{interpolated\+\_\+dudx\+\_\+pnst}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&j) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_af92453e32bfbc37cd9dd93992d1e4211}{interpolated\+\_\+dudx\+\_\+pnst}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned \&j) const
 \begin{DoxyCompactList}\small\item\em //////////////////////////////////////////////////////////////// My own work\+: /// Return FE interpolated velocity derivative du\mbox{[}i\mbox{]}/dx\mbox{[}j\mbox{]} /// at local coordinate s /// \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
@@ -143,19 +143,19 @@ static \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hype
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-virtual int \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a4738c2cb0df9ba80c581442ceade039e}{p\+\_\+local\+\_\+eqn}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n)=0
+virtual int \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a4738c2cb0df9ba80c581442ceade039e}{p\+\_\+local\+\_\+eqn}} (const unsigned \&n)=0
 \begin{DoxyCompactList}\small\item\em Access function for the local equation number information for the pressure. p\+\_\+local\+\_\+eqn\mbox{[}n\mbox{]} = local equation number or \texorpdfstring{$<$}{<} 0 if pinned. \end{DoxyCompactList}\item 
-virtual double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a5be752caefa4421e221aaccd4712ec11}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+pnst}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a5be752caefa4421e221aaccd4712ec11}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+pnst}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) const =0
 \begin{DoxyCompactList}\small\item\em Compute the shape functions and derivatives w.\+r.\+t. global coords at local coordinate s. Return Jacobian of mapping between local and global coordinates. \end{DoxyCompactList}\item 
-virtual double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a7fda7aac0b9eb09410dfff38f992374c}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+pnst}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a7fda7aac0b9eb09410dfff38f992374c}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+pnst}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) const =0
 \begin{DoxyCompactList}\small\item\em Compute the shape functions and derivatives w.\+r.\+t. global coords at ipt-\/th integration point Return Jacobian of mapping between local and global coordinates. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a1b382bf38d7b7041417bbc91ad85b38f}{pshape\+\_\+pnst}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a1b382bf38d7b7041417bbc91ad85b38f}{pshape\+\_\+pnst}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi) const =0
 \begin{DoxyCompactList}\small\item\em Compute the pressure shape functions at local coordinate s. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a2ec5597d86a5f93615d4a29f0a01ebf7}{pshape\+\_\+pnst}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a2ec5597d86a5f93615d4a29f0a01ebf7}{pshape\+\_\+pnst}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) const =0
 \begin{DoxyCompactList}\small\item\em Compute the pressure shape and test functions at local coordinate s. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a7b8e7dac6fe147c271230d34ef5cf450}{get\+\_\+body\+\_\+force}} (double time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)
+void \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a7b8e7dac6fe147c271230d34ef5cf450}{get\+\_\+body\+\_\+force}} (double time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)
 \begin{DoxyCompactList}\small\item\em Calculate the body force at a given time and Eulerian position. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a6b9fb7f70c3a1858ee4c56bea63d8be2}{get\+\_\+source\+\_\+fct}} (double time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}})
+double \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a6b9fb7f70c3a1858ee4c56bea63d8be2}{get\+\_\+source\+\_\+fct}} (double time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x)
 \begin{DoxyCompactList}\small\item\em Calculate the source fct at given time and Eulerian position. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -204,7 +204,7 @@ Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l0
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!NavierStokesBodyForceFctPt@{NavierStokesBodyForceFctPt}}
 \index{NavierStokesBodyForceFctPt@{NavierStokesBodyForceFctPt}!oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{NavierStokesBodyForceFctPt}{NavierStokesBodyForceFctPt}}
-{\footnotesize\ttfamily typedef void($\ast$ oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::\+Navier\+Stokes\+Body\+Force\+Fct\+Pt) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&body\+\_\+force)}
+{\footnotesize\ttfamily typedef void($\ast$ oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::\+Navier\+Stokes\+Body\+Force\+Fct\+Pt) (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&body\+\_\+force)}
 
 
 
@@ -218,7 +218,7 @@ Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l0
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!NavierStokesSourceFctPt@{NavierStokesSourceFctPt}}
 \index{NavierStokesSourceFctPt@{NavierStokesSourceFctPt}!oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{NavierStokesSourceFctPt}{NavierStokesSourceFctPt}}
-{\footnotesize\ttfamily typedef double($\ast$ oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::\+Navier\+Stokes\+Source\+Fct\+Pt) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}})}
+{\footnotesize\ttfamily typedef double($\ast$ oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::\+Navier\+Stokes\+Source\+Fct\+Pt) (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x)}
 
 
 
@@ -256,7 +256,7 @@ References \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00135}{De
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!alpha@{alpha}}
 \index{alpha@{alpha}!oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{alpha()}{alpha()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \& oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::alpha (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const double \& oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::alpha (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -356,13 +356,13 @@ Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source_l
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01968}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00662}{interpolated\+\_\+u\+\_\+pnst()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a808557a124b98d5bbe3bb3b22c81b44b}{oomph\+::\+Finite\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00662}{interpolated\+\_\+u\+\_\+pnst()}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8cc_source_l04103}{oomph\+::\+Finite\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral\+::knot()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}, and \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral\+::weight()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PolarNavierStokesEquations_af05fc0ab81fac7f46c937220b9ca3ac0}\label{classoomph_1_1PolarNavierStokesEquations_af05fc0ab81fac7f46c937220b9ca3ac0}} 
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!compute\_error@{compute\_error}}
 \index{compute\_error@{compute\_error}!oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{compute\_error()}{compute\_error()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::compute\+\_\+error (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{time,  }\item[{double \&}]{error,  }\item[{double \&}]{norm }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::compute\+\_\+error (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt,  }\item[{const double \&}]{time,  }\item[{double \&}]{error,  }\item[{double \&}]{norm }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -370,7 +370,7 @@ Validate against exact solution at given time Solution is provided via function 
 
 Validate against exact velocity solution at given time. Solution is provided via function pointer. Plot at a given number of plot points and compute L2 error and L2 norm of velocity solution over element. 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a139789dbca25ab5e6c4a04b93a588877}{oomph\+::\+Finite\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a7f67853506dc73fa6b7505108de22d1f}{oomph\+::\+Finite\+Element}}.
 
 
 
@@ -378,13 +378,13 @@ Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source_l
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01968}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00662}{interpolated\+\_\+u\+\_\+pnst()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a808557a124b98d5bbe3bb3b22c81b44b}{oomph\+::\+Finite\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00662}{interpolated\+\_\+u\+\_\+pnst()}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8cc_source_l04103}{oomph\+::\+Finite\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral\+::knot()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}, and \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral\+::weight()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PolarNavierStokesEquations_a43444e393c2fb0165e4b2160e35d44b2}\label{classoomph_1_1PolarNavierStokesEquations_a43444e393c2fb0165e4b2160e35d44b2}} 
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!density\_ratio@{density\_ratio}}
 \index{density\_ratio@{density\_ratio}!oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{density\_ratio()}{density\_ratio()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \& oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::density\+\_\+ratio (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const double \& oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::density\+\_\+ratio (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -436,7 +436,7 @@ Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source_l
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01968}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a808557a124b98d5bbe3bb3b22c81b44b}{oomph\+::\+Finite\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source_l00822}{strain\+\_\+rate()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8cc_source_l04103}{oomph\+::\+Finite\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral\+::knot()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source_l00822}{strain\+\_\+rate()}}, and \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral\+::weight()}}.
 
 
 
@@ -446,7 +446,7 @@ Referenced by \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source_l00607
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!dissipation@{dissipation}}
 \index{dissipation@{dissipation}!oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{dissipation()}{dissipation()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily double oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::dissipation (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily double oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::dissipation (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption}) const}
 
 
 
@@ -464,7 +464,7 @@ References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfo
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!dshape\_and\_dtest\_eulerian\_at\_knot\_pnst@{dshape\_and\_dtest\_eulerian\_at\_knot\_pnst}}
 \index{dshape\_and\_dtest\_eulerian\_at\_knot\_pnst@{dshape\_and\_dtest\_eulerian\_at\_knot\_pnst}!oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_at\_knot\_pnst()}{dshape\_and\_dtest\_eulerian\_at\_knot\_pnst()}}
-{\footnotesize\ttfamily virtual double oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+pnst (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual double oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+pnst (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
 
 
 
@@ -482,7 +482,7 @@ Referenced by \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source_l01100
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!dshape\_and\_dtest\_eulerian\_pnst@{dshape\_and\_dtest\_eulerian\_pnst}}
 \index{dshape\_and\_dtest\_eulerian\_pnst@{dshape\_and\_dtest\_eulerian\_pnst}!oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_pnst()}{dshape\_and\_dtest\_eulerian\_pnst()}}
-{\footnotesize\ttfamily virtual double oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+pnst (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual double oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+pnst (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
 
 
 
@@ -496,7 +496,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1PolarCrouzeixRaviartElement_acd233
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!du\_dt\_pnst@{du\_dt\_pnst}}
 \index{du\_dt\_pnst@{du\_dt\_pnst}!oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{du\_dt\_pnst()}{du\_dt\_pnst()}}
-{\footnotesize\ttfamily double oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::du\+\_\+dt\+\_\+pnst (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::du\+\_\+dt\+\_\+pnst (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -508,7 +508,7 @@ Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l0
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{timesteppers_8h_source_l00490}{oomph\+::\+Time\+Stepper\+::type()}}, \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ae4bfb7b4c54bf5558111f84119f530d0}{u\+\_\+pnst()}}, and \mbox{\hyperlink{timesteppers_8h_source_l00594}{oomph\+::\+Time\+Stepper\+::weight()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00238}{oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{timesteppers_8h_source_l00490}{oomph\+::\+Time\+Stepper\+::type()}}, \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ae4bfb7b4c54bf5558111f84119f530d0}{u\+\_\+pnst()}}, and \mbox{\hyperlink{timesteppers_8h_source_l00594}{oomph\+::\+Time\+Stepper\+::weight()}}.
 
 
 
@@ -534,7 +534,7 @@ Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l0
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00227}{oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix}}, \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source_l01100}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution()}}, and \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}.
+References \mbox{\hyperlink{elements_8h_source_l00227}{oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix}}, and \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source_l01100}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PolarNavierStokesEquations_ae4962724a42bb1f6ccdc080bef2c69a1}\label{classoomph_1_1PolarNavierStokesEquations_ae4962724a42bb1f6ccdc080bef2c69a1}} 
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix@{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix}}
@@ -556,7 +556,7 @@ Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l0
 
 
 
-References \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source_l01100}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution()}}, and \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}.
+References \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source_l01100}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PolarNavierStokesEquations_a0f859172293fdaa604e280084e503b68}\label{classoomph_1_1PolarNavierStokesEquations_a0f859172293fdaa604e280084e503b68}} 
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
@@ -604,7 +604,7 @@ Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source_l
 
 
 
-References \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00272}{alpha()}}, \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a7fda7aac0b9eb09410dfff38f992374c}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+pnst()}}, \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00261}{Gamma}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01968}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{elements_8h_source_l02322}{oomph\+::\+Finite\+Element\+::nodal\+\_\+position()}}, \mbox{\hyperlink{elements_8h_source_l02598}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_af66cafead00372b56b677ab40a184d1f}{npres\+\_\+pnst()}}, \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a4738c2cb0df9ba80c581442ceade039e}{p\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a4db8f8149fe830b204de3c5f64fd3113}{p\+\_\+pnst()}}, \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a1b382bf38d7b7041417bbc91ad85b38f}{pshape\+\_\+pnst()}}, \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00266}{re()}}, \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00278}{re\+\_\+st()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00394}{u\+\_\+index\+\_\+pnst()}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}.
+References \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00272}{alpha()}}, \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a7fda7aac0b9eb09410dfff38f992374c}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+pnst()}}, \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00261}{Gamma}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral\+::knot()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{elements_8h_source_l02317}{oomph\+::\+Finite\+Element\+::nodal\+\_\+position()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_af66cafead00372b56b677ab40a184d1f}{npres\+\_\+pnst()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a4738c2cb0df9ba80c581442ceade039e}{p\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a4db8f8149fe830b204de3c5f64fd3113}{p\+\_\+pnst()}}, \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a1b382bf38d7b7041417bbc91ad85b38f}{pshape\+\_\+pnst()}}, \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00266}{re()}}, \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00278}{re\+\_\+st()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00394}{u\+\_\+index\+\_\+pnst()}}, \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}, and \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral\+::weight()}}.
 
 
 
@@ -614,7 +614,7 @@ Referenced by \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00575}
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!fix\_pressure@{fix\_pressure}}
 \index{fix\_pressure@{fix\_pressure}!oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{fix\_pressure()}{fix\_pressure()}}
-{\footnotesize\ttfamily virtual void oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::fix\+\_\+pressure (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{p\+\_\+dof,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{p\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::fix\+\_\+pressure (\begin{DoxyParamCaption}\item[{const unsigned \&}]{p\+\_\+dof,  }\item[{const double \&}]{p\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -650,7 +650,7 @@ Referenced by \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00510}
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!full\_output@{full\_output}}
 \index{full\_output@{full\_output}!oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{full\_output()}{full\_output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::full\+\_\+output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{nplot }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::full\+\_\+output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot }\end{DoxyParamCaption})}
 
 
 
@@ -662,13 +662,13 @@ Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source_l
 
 
 
-References \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source_l00721}{dissipation()}}, \mbox{\hyperlink{elements_8h_source_l02338}{oomph\+::\+Finite\+Element\+::dnodal\+\_\+position\+\_\+dt()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9296c17b134688049256a4bbc886df69}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian()}}, \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00401}{du\+\_\+dt\+\_\+pnst()}}, \mbox{\hyperlink{elements_8h_source_l03153}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00706}{interpolated\+\_\+p\+\_\+pnst()}}, \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00662}{interpolated\+\_\+u\+\_\+pnst()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l03191}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{elements_8h_source_l03166}{oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string()}}, and \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ae4bfb7b4c54bf5558111f84119f530d0}{u\+\_\+pnst()}}.
+References \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source_l00721}{dissipation()}}, \mbox{\hyperlink{elements_8h_source_l02333}{oomph\+::\+Finite\+Element\+::dnodal\+\_\+position\+\_\+dt()}}, \mbox{\hyperlink{elements_8cc_source_l03298}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian()}}, \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00401}{du\+\_\+dt\+\_\+pnst()}}, \mbox{\hyperlink{elements_8h_source_l03148}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00706}{interpolated\+\_\+p\+\_\+pnst()}}, \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00662}{interpolated\+\_\+u\+\_\+pnst()}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l03186}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{elements_8h_source_l03161}{oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string()}}, and \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ae4bfb7b4c54bf5558111f84119f530d0}{u\+\_\+pnst()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PolarNavierStokesEquations_a77011a9d160cb26ab0d958358c762df3}\label{classoomph_1_1PolarNavierStokesEquations_a77011a9d160cb26ab0d958358c762df3}} 
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!g@{g}}
 \index{g@{g}!oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{g()}{g()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \& oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::g (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \& oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::g (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -708,7 +708,7 @@ Referenced by \mbox{\hyperlink{refineable__polar__navier__stokes__elements_8h_so
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!get\_body\_force@{get\_body\_force}}
 \index{get\_body\_force@{get\_body\_force}!oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{get\_body\_force()}{get\_body\_force()}}
-{\footnotesize\ttfamily void oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::get\+\_\+body\+\_\+force (\begin{DoxyParamCaption}\item[{double}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily void oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::get\+\_\+body\+\_\+force (\begin{DoxyParamCaption}\item[{double}]{time,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -720,13 +720,13 @@ Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l0
 
 
 
-References \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00167}{Body\+\_\+force\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00167}{Body\+\_\+force\+\_\+fct\+\_\+pt}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
 
 \mbox{\Hypertarget{classoomph_1_1PolarNavierStokesEquations_a47ae24dc603a7d46bd4a85ccfb2b8e23}\label{classoomph_1_1PolarNavierStokesEquations_a47ae24dc603a7d46bd4a85ccfb2b8e23}} 
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!get\_load@{get\_load}}
 \index{get\_load@{get\_load}!oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{get\_load()}{get\_load()}}
-{\footnotesize\ttfamily void oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::get\+\_\+load (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{xi,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{N,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{load }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::get\+\_\+load (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{xi,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{N,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{load }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -744,7 +744,7 @@ References \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source_l00772}{g
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!get\_source\_fct@{get\_source\_fct}}
 \index{get\_source\_fct@{get\_source\_fct}!oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{get\_source\_fct()}{get\_source\_fct()}}
-{\footnotesize\ttfamily double oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::get\+\_\+source\+\_\+fct (\begin{DoxyParamCaption}\item[{double}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily double oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::get\+\_\+source\+\_\+fct (\begin{DoxyParamCaption}\item[{double}]{time,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -756,13 +756,13 @@ Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l0
 
 
 
-References \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00170}{Source\+\_\+fct\+\_\+pt}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00170}{Source\+\_\+fct\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1PolarNavierStokesEquations_a535d5104145a0ebb128c850c5d87d3c4}\label{classoomph_1_1PolarNavierStokesEquations_a535d5104145a0ebb128c850c5d87d3c4}} 
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!get\_traction@{get\_traction}}
 \index{get\_traction@{get\_traction}!oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{get\_traction()}{get\_traction()}}
-{\footnotesize\ttfamily void oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::get\+\_\+traction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{N,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{traction }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::get\+\_\+traction (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{N,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{traction }\end{DoxyParamCaption})}
 
 
 
@@ -784,7 +784,7 @@ Referenced by \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00472}
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!interpolated\_dudx\_pnst@{interpolated\_dudx\_pnst}}
 \index{interpolated\_dudx\_pnst@{interpolated\_dudx\_pnst}!oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{interpolated\_dudx\_pnst()}{interpolated\_dudx\_pnst()}}
-{\footnotesize\ttfamily double oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::interpolated\+\_\+dudx\+\_\+pnst (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::interpolated\+\_\+dudx\+\_\+pnst (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -796,13 +796,13 @@ Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l0
 
 
 
-References \mbox{\hyperlink{classoomph_1_1FiniteElement_a9296c17b134688049256a4bbc886df69}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ae4bfb7b4c54bf5558111f84119f530d0}{u\+\_\+pnst()}}.
+References \mbox{\hyperlink{elements_8cc_source_l03298}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ae4bfb7b4c54bf5558111f84119f530d0}{u\+\_\+pnst()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PolarNavierStokesEquations_afcc85389a45dfa0e811852012fc40442}\label{classoomph_1_1PolarNavierStokesEquations_afcc85389a45dfa0e811852012fc40442}} 
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!interpolated\_p\_pnst@{interpolated\_p\_pnst}}
 \index{interpolated\_p\_pnst@{interpolated\_p\_pnst}!oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{interpolated\_p\_pnst()}{interpolated\_p\_pnst()}}
-{\footnotesize\ttfamily double oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::interpolated\+\_\+p\+\_\+pnst (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::interpolated\+\_\+p\+\_\+pnst (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -824,7 +824,7 @@ Referenced by \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source_l00607
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!interpolated\_u\_pnst@{interpolated\_u\_pnst}}
 \index{interpolated\_u\_pnst@{interpolated\_u\_pnst}!oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{interpolated\_u\_pnst()}{interpolated\_u\_pnst()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily double oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::interpolated\+\_\+u\+\_\+pnst (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::interpolated\+\_\+u\+\_\+pnst (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -836,13 +836,13 @@ Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l0
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, and \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ae4bfb7b4c54bf5558111f84119f530d0}{u\+\_\+pnst()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, and \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ae4bfb7b4c54bf5558111f84119f530d0}{u\+\_\+pnst()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PolarNavierStokesEquations_ac3a3e89734b01c9f117520eac5a2ace3}\label{classoomph_1_1PolarNavierStokesEquations_ac3a3e89734b01c9f117520eac5a2ace3}} 
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!interpolated\_u\_pnst@{interpolated\_u\_pnst}}
 \index{interpolated\_u\_pnst@{interpolated\_u\_pnst}!oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{interpolated\_u\_pnst()}{interpolated\_u\_pnst()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::interpolated\+\_\+u\+\_\+pnst (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{veloc }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::interpolated\+\_\+u\+\_\+pnst (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{veloc }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -854,7 +854,7 @@ Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l0
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, and \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ae4bfb7b4c54bf5558111f84119f530d0}{u\+\_\+pnst()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, and \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ae4bfb7b4c54bf5558111f84119f530d0}{u\+\_\+pnst()}}.
 
 
 
@@ -876,7 +876,7 @@ Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source_l
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01968}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00662}{interpolated\+\_\+u\+\_\+pnst()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a808557a124b98d5bbe3bb3b22c81b44b}{oomph\+::\+Finite\+Element\+::\+J\+\_\+eulerian()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00662}{interpolated\+\_\+u\+\_\+pnst()}}, \mbox{\hyperlink{elements_8cc_source_l04103}{oomph\+::\+Finite\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral\+::knot()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral\+::weight()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PolarNavierStokesEquations_af66cafead00372b56b677ab40a184d1f}\label{classoomph_1_1PolarNavierStokesEquations_af66cafead00372b56b677ab40a184d1f}} 
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!npres\_pnst@{npres\_pnst}}
@@ -926,7 +926,7 @@ References \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00485}{ou
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!output@{output}}
 \index{output@{output}!oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
-{\footnotesize\ttfamily void oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -946,7 +946,7 @@ Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source_l
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03153}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00706}{interpolated\+\_\+p\+\_\+pnst()}}, \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00662}{interpolated\+\_\+u\+\_\+pnst()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l03191}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{elements_8h_source_l03166}{oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string()}}.
+References \mbox{\hyperlink{elements_8h_source_l03148}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00706}{interpolated\+\_\+p\+\_\+pnst()}}, \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00662}{interpolated\+\_\+u\+\_\+pnst()}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l03186}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{elements_8h_source_l03161}{oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PolarNavierStokesEquations_a720f9b13abd3bf876793f1f9e8538f61}\label{classoomph_1_1PolarNavierStokesEquations_a720f9b13abd3bf876793f1f9e8538f61}} 
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!output@{output}}
@@ -982,7 +982,7 @@ Referenced by \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00485}
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!output@{output}}
 \index{output@{output}!oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
-{\footnotesize\ttfamily void oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -1002,13 +1002,13 @@ Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source_l
 
 
 
-References \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00272}{alpha()}}, \mbox{\hyperlink{elements_8h_source_l03153}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00706}{interpolated\+\_\+p\+\_\+pnst()}}, \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00662}{interpolated\+\_\+u\+\_\+pnst()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l03191}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{elements_8h_source_l03166}{oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string()}}.
+References \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00272}{alpha()}}, \mbox{\hyperlink{elements_8h_source_l03148}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00706}{interpolated\+\_\+p\+\_\+pnst()}}, \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00662}{interpolated\+\_\+u\+\_\+pnst()}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l03186}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{elements_8h_source_l03161}{oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PolarNavierStokesEquations_a89353546dd511060090ef8f3e70e840a}\label{classoomph_1_1PolarNavierStokesEquations_a89353546dd511060090ef8f3e70e840a}} 
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!output\_fct@{output\_fct}}
 \index{output\_fct@{output\_fct}!oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{output\_fct()}{output\_fct()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{nplot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot,  }\item[{const double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -1024,13 +1024,13 @@ Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source_l
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03153}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l03191}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{elements_8h_source_l03166}{oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string()}}, \mbox{\hyperlink{elements_8h_source_l03179}{oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer()}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{elements_8h_source_l03148}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l03186}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{elements_8h_source_l03161}{oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string()}}, and \mbox{\hyperlink{elements_8h_source_l03174}{oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PolarNavierStokesEquations_a72787983b9bcc07aafb46d5f7a2e592d}\label{classoomph_1_1PolarNavierStokesEquations_a72787983b9bcc07aafb46d5f7a2e592d}} 
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!output\_fct@{output\_fct}}
 \index{output\_fct@{output\_fct}!oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{output\_fct()}{output\_fct()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{nplot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -1046,13 +1046,13 @@ Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source_l
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03153}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l03191}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{elements_8h_source_l03166}{oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string()}}, \mbox{\hyperlink{elements_8h_source_l03179}{oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer()}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{elements_8h_source_l03148}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l03186}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{elements_8h_source_l03161}{oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string()}}, and \mbox{\hyperlink{elements_8h_source_l03174}{oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PolarNavierStokesEquations_a960e2b96a00d4f29f91aeef9dafb1bdb}\label{classoomph_1_1PolarNavierStokesEquations_a960e2b96a00d4f29f91aeef9dafb1bdb}} 
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!output\_veloc@{output\_veloc}}
 \index{output\_veloc@{output\_veloc}!oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{output\_veloc()}{output\_veloc()}}
-{\footnotesize\ttfamily void oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::output\+\_\+veloc (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{nplot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{t }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::output\+\_\+veloc (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot,  }\item[{const unsigned \&}]{t }\end{DoxyParamCaption})}
 
 
 
@@ -1064,13 +1064,13 @@ Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source_l
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03153}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02322}{oomph\+::\+Finite\+Element\+::nodal\+\_\+position()}}, \mbox{\hyperlink{elements_8h_source_l03191}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{elements_8h_source_l03166}{oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string()}}, \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ae4bfb7b4c54bf5558111f84119f530d0}{u\+\_\+pnst()}}, and \mbox{\hyperlink{elements_8h_source_l03179}{oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer()}}.
+References \mbox{\hyperlink{elements_8h_source_l03148}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02317}{oomph\+::\+Finite\+Element\+::nodal\+\_\+position()}}, \mbox{\hyperlink{elements_8h_source_l03186}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{elements_8h_source_l03161}{oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string()}}, \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ae4bfb7b4c54bf5558111f84119f530d0}{u\+\_\+pnst()}}, and \mbox{\hyperlink{elements_8h_source_l03174}{oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PolarNavierStokesEquations_a4738c2cb0df9ba80c581442ceade039e}\label{classoomph_1_1PolarNavierStokesEquations_a4738c2cb0df9ba80c581442ceade039e}} 
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!p\_local\_eqn@{p\_local\_eqn}}
 \index{p\_local\_eqn@{p\_local\_eqn}!oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{p\_local\_eqn()}{p\_local\_eqn()}}
-{\footnotesize\ttfamily virtual int oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::p\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual int oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::p\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
 
 
 
@@ -1114,7 +1114,7 @@ Referenced by \mbox{\hyperlink{refineable__polar__navier__stokes__elements_8cc_s
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!p\_pnst@{p\_pnst}}
 \index{p\_pnst@{p\_pnst}!oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{p\_pnst()}{p\_pnst()}}
-{\footnotesize\ttfamily virtual double oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::p\+\_\+pnst (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+p }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual double oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::p\+\_\+pnst (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+p }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -1136,7 +1136,7 @@ Referenced by \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source_l01100
 
 
 
-Integral of pressure over element. 
+\mbox{\hyperlink{classoomph_1_1Integral}{Integral}} of pressure over element. 
 
 Return pressure integrated over the element. 
 
@@ -1144,13 +1144,13 @@ Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source_l
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01968}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00706}{interpolated\+\_\+p\+\_\+pnst()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a808557a124b98d5bbe3bb3b22c81b44b}{oomph\+::\+Finite\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00706}{interpolated\+\_\+p\+\_\+pnst()}}, \mbox{\hyperlink{elements_8cc_source_l04103}{oomph\+::\+Finite\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral\+::knot()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}, and \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral\+::weight()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PolarNavierStokesEquations_adb91c780f55bda62b209573facf9a999}\label{classoomph_1_1PolarNavierStokesEquations_adb91c780f55bda62b209573facf9a999}} 
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!pressure\_node\_pt@{pressure\_node\_pt}}
 \index{pressure\_node\_pt@{pressure\_node\_pt}!oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{pressure\_node\_pt()}{pressure\_node\_pt()}}
-{\footnotesize\ttfamily virtual Node $\ast$ oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::pressure\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::pressure\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -1168,7 +1168,7 @@ Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l0
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!pshape\_pnst@{pshape\_pnst}}
 \index{pshape\_pnst@{pshape\_pnst}!oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{pshape\_pnst()}{pshape\_pnst()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily virtual void oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::pshape\+\_\+pnst (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::pshape\+\_\+pnst (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
 
 
 
@@ -1186,7 +1186,7 @@ Referenced by \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source_l01100
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!pshape\_pnst@{pshape\_pnst}}
 \index{pshape\_pnst@{pshape\_pnst}!oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{pshape\_pnst()}{pshape\_pnst()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily virtual void oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::pshape\+\_\+pnst (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::pshape\+\_\+pnst (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
 
 
 
@@ -1200,7 +1200,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1PolarCrouzeixRaviartElement_a919b4
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!re@{re}}
 \index{re@{re}!oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{re()}{re()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \& oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::re (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const double \& oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::re (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1222,7 +1222,7 @@ Referenced by \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source_l01100
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!re\_invfr@{re\_invfr}}
 \index{re\_invfr@{re\_invfr}!oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{re\_invfr()}{re\_invfr()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \& oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::re\+\_\+invfr (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const double \& oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::re\+\_\+invfr (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1284,7 +1284,7 @@ Referenced by \mbox{\hyperlink{refineable__polar__navier__stokes__elements_8h_so
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!re\_st@{re\_st}}
 \index{re\_st@{re\_st}!oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{re\_st()}{re\_st()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \& oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::re\+\_\+st (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const double \& oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::re\+\_\+st (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1368,7 +1368,7 @@ References \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00170}{So
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!strain\_rate@{strain\_rate}}
 \index{strain\_rate@{strain\_rate}!oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{strain\_rate()}{strain\_rate()}}
-{\footnotesize\ttfamily void oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::strain\+\_\+rate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{strain\+\_\+rate }\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily void oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::strain\+\_\+rate (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{strain\+\_\+rate }\end{DoxyParamCaption}) const}
 
 
 
@@ -1380,7 +1380,7 @@ Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source_l
 
 
 
-References \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00272}{alpha()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9296c17b134688049256a4bbc886df69}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{matrices_8h_source_l00491}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::ncol()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02322}{oomph\+::\+Finite\+Element\+::nodal\+\_\+position()}}, \mbox{\hyperlink{elements_8h_source_l02598}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{matrices_8h_source_l00485}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::nrow()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00394}{u\+\_\+index\+\_\+pnst()}}.
+References \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00272}{alpha()}}, \mbox{\hyperlink{elements_8cc_source_l03298}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{matrices_8h_source_l00491}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::ncol()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02317}{oomph\+::\+Finite\+Element\+::nodal\+\_\+position()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{matrices_8h_source_l00485}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::nrow()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00394}{u\+\_\+index\+\_\+pnst()}}.
 
 
 
@@ -1390,7 +1390,7 @@ Referenced by \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source_l00721
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!strain\_rate\_by\_r@{strain\_rate\_by\_r}}
 \index{strain\_rate\_by\_r@{strain\_rate\_by\_r}!oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{strain\_rate\_by\_r()}{strain\_rate\_by\_r()}}
-{\footnotesize\ttfamily void oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::strain\+\_\+rate\+\_\+by\+\_\+r (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{strain\+\_\+rate }\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily void oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::strain\+\_\+rate\+\_\+by\+\_\+r (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{strain\+\_\+rate }\end{DoxyParamCaption}) const}
 
 
 
@@ -1402,7 +1402,7 @@ Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source_l
 
 
 
-References \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00272}{alpha()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9296c17b134688049256a4bbc886df69}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{matrices_8h_source_l00491}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::ncol()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02322}{oomph\+::\+Finite\+Element\+::nodal\+\_\+position()}}, \mbox{\hyperlink{elements_8h_source_l02598}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{matrices_8h_source_l00485}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::nrow()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00394}{u\+\_\+index\+\_\+pnst()}}.
+References \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00272}{alpha()}}, \mbox{\hyperlink{elements_8cc_source_l03298}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{matrices_8h_source_l00491}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::ncol()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02317}{oomph\+::\+Finite\+Element\+::nodal\+\_\+position()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{matrices_8h_source_l00485}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::nrow()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00394}{u\+\_\+index\+\_\+pnst()}}.
 
 
 
@@ -1412,7 +1412,7 @@ Referenced by \mbox{\hyperlink{refineable__polar__navier__stokes__elements_8h_so
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!u\_index\_pnst@{u\_index\_pnst}}
 \index{u\_index\_pnst@{u\_index\_pnst}!oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{u\_index\_pnst()}{u\_index\_pnst()}}
-{\footnotesize\ttfamily virtual unsigned oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::u\+\_\+index\+\_\+pnst (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual unsigned oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::u\+\_\+index\+\_\+pnst (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -1434,7 +1434,7 @@ Referenced by \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source_l01100
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!u\_pnst@{u\_pnst}}
 \index{u\_pnst@{u\_pnst}!oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{u\_pnst()}{u\_pnst()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily virtual double oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::u\+\_\+pnst (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual double oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::u\+\_\+pnst (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -1452,7 +1452,7 @@ Referenced by \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00401}
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!u\_pnst@{u\_pnst}}
 \index{u\_pnst@{u\_pnst}!oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{u\_pnst()}{u\_pnst()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily virtual double oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::u\+\_\+pnst (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual double oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::u\+\_\+pnst (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -1466,7 +1466,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1PolarCrouzeixRaviartElement_a0c61f
 \index{oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}!viscosity\_ratio@{viscosity\_ratio}}
 \index{viscosity\_ratio@{viscosity\_ratio}!oomph::PolarNavierStokesEquations@{oomph::PolarNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{viscosity\_ratio()}{viscosity\_ratio()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \& oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::viscosity\+\_\+ratio (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const double \& oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::viscosity\+\_\+ratio (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 

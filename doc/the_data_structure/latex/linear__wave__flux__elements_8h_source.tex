@@ -59,7 +59,7 @@
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00055}00055 \textcolor{comment}{    /// Function pointer to the prescribed-\/flux function fct(x,f(x)) -\/-\/}}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00056}00056 \textcolor{comment}{    /// x is a Vector!}}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00057}\mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a4010abac8856733ae2b152bc41e7b558}{00057}} \textcolor{comment}{}    \textcolor{keyword}{typedef} void (*\mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a4010abac8856733ae2b152bc41e7b558}{LinearWavePrescribedFluxFctPt}})(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
-\DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00058}00058                                                   \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00058}00058                                                   \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00059}00059                                                   \textcolor{keywordtype}{double}\& flux);}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00060}00060 }
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00061}00061 \textcolor{comment}{}}
@@ -103,11 +103,11 @@
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00099}00099 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00100}00100 \textcolor{comment}{    /// Compute the element's residual vector and its Jacobian matrix}}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00101}\mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a76f1a46c72f1ba9c18109416967a568f}{00101}} \textcolor{comment}{}    \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a76f1a46c72f1ba9c18109416967a568f}{fill\_in\_contribution\_to\_jacobian}}(\mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00102}00102                                                  \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})}
+\DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00102}00102                                                  \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian)}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00103}00103     \{}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00104}00104       \textcolor{comment}{// Call the generic routine with the flag set to 1}}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00105}00105       \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_abde1eec8fa1a4c1ff97c1cd33fe1c727}{fill\_in\_generic\_residual\_contribution\_lin\_wave\_flux}}(}
-\DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00106}00106         residuals, \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, 1);}
+\DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00106}00106         residuals, jacobian, 1);}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00107}00107     \}}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00108}00108 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00109}00109 \textcolor{comment}{    /// Specify the value of nodal zeta from the face geometry}}
@@ -179,7 +179,7 @@
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00175}00175 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00176}00176 \textcolor{comment}{    /// Function to calculate the prescribed flux at a given spatial}}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00177}00177 \textcolor{comment}{    /// position and at a gien time}}
-\DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00178}\mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a969d93f5e289c16d581da0851fcd89e7}{00178}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a969d93f5e289c16d581da0851fcd89e7}{get\_flux}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time, \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \textcolor{keywordtype}{double}\& flux)}
+\DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00178}\mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a969d93f5e289c16d581da0851fcd89e7}{00178}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a969d93f5e289c16d581da0851fcd89e7}{get\_flux}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time, \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x, \textcolor{keywordtype}{double}\& flux)}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00179}00179     \{}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00180}00180       \textcolor{comment}{// If the function pointer is zero return zero}}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00181}00181       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a91d78912959e683d299a6778590957d2}{Flux\_fct\_pt}} == 0)}
@@ -189,7 +189,7 @@
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00185}00185       \textcolor{comment}{// Otherwise call the function}}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00186}00186       \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00187}00187       \{}
-\DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00188}00188         (*Flux\_fct\_pt)(time, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, flux);}
+\DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00188}00188         (*Flux\_fct\_pt)(time, x, flux);}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00189}00189       \}}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00190}00190     \}}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00191}00191 }
@@ -198,7 +198,7 @@
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00194}00194 \textcolor{comment}{    /// Compute the element residual vector.}}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00195}00195 \textcolor{comment}{    /// flag=1(or 0): do (or don't) compute the Jacobian as well.}}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00196}00196 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_abde1eec8fa1a4c1ff97c1cd33fe1c727}{fill\_in\_generic\_residual\_contribution\_lin\_wave\_flux}}(}
-\DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00197}00197       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \textcolor{keywordtype}{unsigned} flag);}
+\DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00197}00197       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian, \textcolor{keywordtype}{unsigned} flag);}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00198}00198 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00199}00199 \textcolor{comment}{    /// Function pointer to the (global) prescribed-\/flux function}}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00200}\mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a91d78912959e683d299a6778590957d2}{00200}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a4010abac8856733ae2b152bc41e7b558}{LinearWavePrescribedFluxFctPt}} \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a91d78912959e683d299a6778590957d2}{Flux\_fct\_pt}};}
@@ -228,7 +228,7 @@
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00224}00224     \textcolor{comment}{// Let the bulk element build the FaceElement, i.e. setup the pointers}}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00225}00225     \textcolor{comment}{// to its nodes (by referring to the appropriate nodes in the bulk}}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00226}00226     \textcolor{comment}{// element), etc.}}
-\DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00227}00227     bulk\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a025ab56ef9c6eea66fb34416fdf19152}{build\_face\_element}}(\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\_index}}, \textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00227}00227     bulk\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_aaf7bead5b462cfd5401d97b3dbdc7af7}{build\_face\_element}}(\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\_index}}, \textcolor{keyword}{this});}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00228}00228 }
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00229}00229 \textcolor{preprocessor}{\#ifdef PARANOID}}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00230}00230     \{}
@@ -260,7 +260,7 @@
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00256}00256 }
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00257}00257     \textcolor{comment}{// Extract the dimension of the problem from the dimension of}}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00258}00258     \textcolor{comment}{// the first node}}
-\DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00259}00259     \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a7c846cb5877fbf923be7a42a5b24f926}{Dim}} = \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>ndim();}
+\DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00259}00259     \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a7c846cb5877fbf923be7a42a5b24f926}{Dim}} = \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00260}00260 }
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00261}00261     \textcolor{comment}{// Set up U\_index\_lin\_wave. Initialise to zero, which probably won't change}}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00262}00262     \textcolor{comment}{// in most cases, oh well, the price we pay for generality}}
@@ -276,8 +276,8 @@
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00272}00272         \textcolor{comment}{// One dimensional problem}}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00273}00273       \textcolor{keywordflow}{case} 1:}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00274}00274       \{}
-\DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00275}00275         LinearWaveEquations<1>* eqn\_pt =}
-\DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00276}00276           \textcolor{keyword}{dynamic\_cast<}LinearWaveEquations<1>*\textcolor{keyword}{>}(bulk\_el\_pt);}
+\DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00275}00275         \mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{LinearWaveEquations<1>}}* eqn\_pt =}
+\DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00276}00276           \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{LinearWaveEquations<1>}}*\textcolor{keyword}{>}(bulk\_el\_pt);}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00277}00277         \textcolor{comment}{// If the cast has failed die}}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00278}00278         \textcolor{keywordflow}{if} (eqn\_pt == 0)}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00279}00279         \{}
@@ -296,7 +296,7 @@
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00292}00292         \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00293}00293         \{}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00294}00294           \textcolor{comment}{// Read the index from the (cast) bulk element}}
-\DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00295}00295           \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a6a5e0e000ee602797262490bc49c49e2}{U\_index\_lin\_wave}} = eqn\_pt-\/>u\_index\_lin\_wave();}
+\DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00295}00295           \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a6a5e0e000ee602797262490bc49c49e2}{U\_index\_lin\_wave}} = eqn\_pt-\/>\mbox{\hyperlink{classoomph_1_1LinearWaveEquations_aba49f677e10850fc49d76a982522ce69}{u\_index\_lin\_wave}}();}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00296}00296         \}}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00297}00297       \}}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00298}00298       \textcolor{keywordflow}{break};}
@@ -304,8 +304,8 @@
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00300}00300       \textcolor{comment}{// Two dimensional problem}}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00301}00301       \textcolor{keywordflow}{case} 2:}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00302}00302       \{}
-\DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00303}00303         LinearWaveEquations<2>* eqn\_pt =}
-\DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00304}00304           \textcolor{keyword}{dynamic\_cast<}LinearWaveEquations<2>*\textcolor{keyword}{>}(bulk\_el\_pt);}
+\DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00303}00303         \mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{LinearWaveEquations<2>}}* eqn\_pt =}
+\DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00304}00304           \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{LinearWaveEquations<2>}}*\textcolor{keyword}{>}(bulk\_el\_pt);}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00305}00305         \textcolor{comment}{// If the cast has failed die}}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00306}00306         \textcolor{keywordflow}{if} (eqn\_pt == 0)}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00307}00307         \{}
@@ -323,7 +323,7 @@
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00319}00319         \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00320}00320         \{}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00321}00321           \textcolor{comment}{// Read the index from the (cast) bulk element.}}
-\DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00322}00322           \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a6a5e0e000ee602797262490bc49c49e2}{U\_index\_lin\_wave}} = eqn\_pt-\/>u\_index\_lin\_wave();}
+\DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00322}00322           \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a6a5e0e000ee602797262490bc49c49e2}{U\_index\_lin\_wave}} = eqn\_pt-\/>\mbox{\hyperlink{classoomph_1_1LinearWaveEquations_aba49f677e10850fc49d76a982522ce69}{u\_index\_lin\_wave}}();}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00323}00323         \}}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00324}00324       \}}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00325}00325       \textcolor{keywordflow}{break};}
@@ -331,8 +331,8 @@
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00327}00327         \textcolor{comment}{// Three dimensional problem}}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00328}00328       \textcolor{keywordflow}{case} 3:}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00329}00329       \{}
-\DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00330}00330         LinearWaveEquations<3>* eqn\_pt =}
-\DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00331}00331           \textcolor{keyword}{dynamic\_cast<}LinearWaveEquations<3>*\textcolor{keyword}{>}(bulk\_el\_pt);}
+\DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00330}00330         \mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{LinearWaveEquations<3>}}* eqn\_pt =}
+\DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00331}00331           \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1LinearWaveEquations}{LinearWaveEquations<3>}}*\textcolor{keyword}{>}(bulk\_el\_pt);}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00332}00332         \textcolor{comment}{// If the cast has failed die}}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00333}00333         \textcolor{keywordflow}{if} (eqn\_pt == 0)}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00334}00334         \{}
@@ -350,7 +350,7 @@
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00346}00346         \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00347}00347         \{}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00348}00348           \textcolor{comment}{// Read the index from the (cast) bulk element.}}
-\DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00349}00349           \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a6a5e0e000ee602797262490bc49c49e2}{U\_index\_lin\_wave}} = eqn\_pt-\/>u\_index\_lin\_wave();}
+\DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00349}00349           \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a6a5e0e000ee602797262490bc49c49e2}{U\_index\_lin\_wave}} = eqn\_pt-\/>\mbox{\hyperlink{classoomph_1_1LinearWaveEquations_aba49f677e10850fc49d76a982522ce69}{u\_index\_lin\_wave}}();}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00350}00350         \}}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00351}00351       \}}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00352}00352       \textcolor{keywordflow}{break};}
@@ -415,7 +415,7 @@
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00411}00411       \textcolor{keywordtype}{double} J = shape\_and\_test(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, psif, testf);}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00412}00412 }
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00413}00413       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00414}00414       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00414}00414       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00415}00415 }
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00416}00416       \textcolor{comment}{// Need to find position to feed into flux function}}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00417}00417       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} interpolated\_x(\mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a27cbb5ec7f6fea2f237c11659ffeef58}{Dim}});}
@@ -450,7 +450,7 @@
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00446}00446         \textcolor{keywordflow}{if} (local\_eqn >= 0)}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00447}00447         \{}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00448}00448           \textcolor{comment}{// Add the prescribed flux terms}}
-\DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00449}00449           residuals[local\_eqn] -\/= flux * testf[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00449}00449           residuals[local\_eqn] -\/= flux * testf[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00450}00450 }
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00451}00451           \textcolor{comment}{// Imposed traction doesn't depend upon the solution,}}
 \DoxyCodeLine{\Hypertarget{linear__wave__flux__elements_8h_source_l00452}00452           \textcolor{comment}{// -\/-\/> the Jacobian is always zero, so no Jacobian}}

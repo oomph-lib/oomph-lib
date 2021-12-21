@@ -240,7 +240,7 @@
 \DoxyCodeLine{\Hypertarget{black__box__newton__solver_8cc_source_l00236}00236                      \mbox{\hyperlink{namespaceoomph_1_1BlackBoxFDNewtonSolver_ae43745d4b8933505d52d50820c5ed5bf}{ResidualFctPt}} residual\_fct,}
 \DoxyCodeLine{\Hypertarget{black__box__newton__solver_8cc_source_l00237}00237                      \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& params,}
 \DoxyCodeLine{\Hypertarget{black__box__newton__solver_8cc_source_l00238}00238                      \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& newton\_dir,}
-\DoxyCodeLine{\Hypertarget{black__box__newton__solver_8cc_source_l00239}00239                      \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{black__box__newton__solver_8cc_source_l00239}00239                      \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{black__box__newton__solver_8cc_source_l00240}00240                      \textcolor{keywordtype}{double}\& half\_residual\_squared,}
 \DoxyCodeLine{\Hypertarget{black__box__newton__solver_8cc_source_l00241}00241                      \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& stpmax)}
 \DoxyCodeLine{\Hypertarget{black__box__newton__solver_8cc_source_l00242}00242     \{}
@@ -288,12 +288,12 @@
 \DoxyCodeLine{\Hypertarget{black__box__newton__solver_8cc_source_l00284}00284       \{}
 \DoxyCodeLine{\Hypertarget{black__box__newton__solver_8cc_source_l00285}00285         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{black__box__newton__solver_8cc_source_l00286}00286         \{}
-\DoxyCodeLine{\Hypertarget{black__box__newton__solver_8cc_source_l00287}00287           \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = x\_old[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] + lambda * newton\_dir[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{black__box__newton__solver_8cc_source_l00287}00287           x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = x\_old[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] + lambda * newton\_dir[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
 \DoxyCodeLine{\Hypertarget{black__box__newton__solver_8cc_source_l00288}00288         \}}
 \DoxyCodeLine{\Hypertarget{black__box__newton__solver_8cc_source_l00289}00289 }
 \DoxyCodeLine{\Hypertarget{black__box__newton__solver_8cc_source_l00290}00290         \textcolor{comment}{// Evaluate current residuals}}
 \DoxyCodeLine{\Hypertarget{black__box__newton__solver_8cc_source_l00291}00291         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} residuals(n);}
-\DoxyCodeLine{\Hypertarget{black__box__newton__solver_8cc_source_l00292}00292         residual\_fct(params, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, residuals);}
+\DoxyCodeLine{\Hypertarget{black__box__newton__solver_8cc_source_l00292}00292         residual\_fct(params, x, residuals);}
 \DoxyCodeLine{\Hypertarget{black__box__newton__solver_8cc_source_l00293}00293         half\_residual\_squared = 0.0;}
 \DoxyCodeLine{\Hypertarget{black__box__newton__solver_8cc_source_l00294}00294         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{black__box__newton__solver_8cc_source_l00295}00295         \{}
@@ -303,7 +303,7 @@
 \DoxyCodeLine{\Hypertarget{black__box__newton__solver_8cc_source_l00299}00299 }
 \DoxyCodeLine{\Hypertarget{black__box__newton__solver_8cc_source_l00300}00300         \textcolor{keywordflow}{if} (lambda < lambda\_min)}
 \DoxyCodeLine{\Hypertarget{black__box__newton__solver_8cc_source_l00301}00301         \{}
-\DoxyCodeLine{\Hypertarget{black__box__newton__solver_8cc_source_l00302}00302           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++) \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = x\_old[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{black__box__newton__solver_8cc_source_l00302}00302           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++) x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = x\_old[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
 \DoxyCodeLine{\Hypertarget{black__box__newton__solver_8cc_source_l00303}00303 }
 \DoxyCodeLine{\Hypertarget{black__box__newton__solver_8cc_source_l00304}00304           \textcolor{comment}{// Create an Oomph Lib warning}}
 \DoxyCodeLine{\Hypertarget{black__box__newton__solver_8cc_source_l00305}00305           \mbox{\hyperlink{classoomph_1_1OomphLibWarning}{OomphLibWarning}}(\textcolor{stringliteral}{"{}Warning: Line search converged on x only!"{}},}

@@ -26,12 +26,12 @@ void \mbox{\hyperlink{classoomph_1_1TubeDomain_a4dc5523d0b9493e333b0e0afc904c842
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TubeDomain_ad836e9ab146d2317ed55ee199d54b3e4}{$\sim$\+Tube\+Domain}} ()
 \begin{DoxyCompactList}\small\item\em Destructor\+: Empty; cleanup done in base class. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TubeDomain_a1f16dde7ad082e2557dff9c737dae6c0}{macro\+\_\+element\+\_\+boundary}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&i\+\_\+macro, const unsigned \&i\+\_\+direct, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}})
+void \mbox{\hyperlink{classoomph_1_1TubeDomain_a1f16dde7ad082e2557dff9c737dae6c0}{macro\+\_\+element\+\_\+boundary}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&i\+\_\+macro, const unsigned \&i\+\_\+direct, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} representation of the i\+\_\+macro-\/th macro element boundary i\+\_\+direct (L/\+R/\+D/\+U/\+B/F) at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous)\+: f(s). \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classoomph_1_1TubeDomain_a4e893ffe544f30d0160c41b2aff75d7f}{lin\+\_\+interpolate}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&low, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&high, const double \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}})
+void \mbox{\hyperlink{classoomph_1_1TubeDomain_a4e893ffe544f30d0160c41b2aff75d7f}{lin\+\_\+interpolate}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&low, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&high, const double \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em A very little linear interpolation helper. Interpolate from the low point to the high point using the coordinate s which is assumed to run from -\/1 to 1. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -123,7 +123,7 @@ Definition at line \mbox{\hyperlink{tube__domain_8h_source_l00143}{143}} of file
 
 
 
-References \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{oomph\+::f()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 
 
@@ -151,7 +151,7 @@ Definition at line \mbox{\hyperlink{tube__domain_8h_source_l00167}{167}} of file
 
 
 
-References \mbox{\hyperlink{octree_8h_source_l00073}{oomph\+::\+Oc\+Tree\+Names\+::B}}, \mbox{\hyperlink{tube__domain_8h_source_l00122}{Centreline\+\_\+limits}}, \mbox{\hyperlink{octree_8h_source_l00071}{oomph\+::\+Oc\+Tree\+Names\+::D}}, \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{oomph\+::f()}}, \mbox{\hyperlink{octree_8h_source_l00074}{oomph\+::\+Oc\+Tree\+Names\+::F}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{binary__tree_8h_source_l00050}{oomph\+::\+Binary\+Tree\+Names\+::L}}, \mbox{\hyperlink{tube__domain_8h_source_l00143}{lin\+\_\+interpolate()}}, \mbox{\hyperlink{tube__domain_8h_source_l00134}{Nlayer}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00157}{oomph\+::\+Mathematical\+Constants\+::\+Pi}}, \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}, \mbox{\hyperlink{binary__tree_8h_source_l00051}{oomph\+::\+Binary\+Tree\+Names\+::R}}, \mbox{\hyperlink{tube__domain_8h_source_l00131}{Radius\+\_\+box}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{tube__domain_8h_source_l00127}{Theta\+\_\+positions}}, \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source_l00076}{oomph\+::U}}, and \mbox{\hyperlink{tube__domain_8h_source_l00137}{Volume\+\_\+pt}}.
+References \mbox{\hyperlink{octree_8h_source_l00073}{oomph\+::\+Oc\+Tree\+Names\+::B}}, \mbox{\hyperlink{tube__domain_8h_source_l00122}{Centreline\+\_\+limits}}, \mbox{\hyperlink{octree_8h_source_l00071}{oomph\+::\+Oc\+Tree\+Names\+::D}}, \mbox{\hyperlink{octree_8h_source_l00074}{oomph\+::\+Oc\+Tree\+Names\+::F}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{binary__tree_8h_source_l00050}{oomph\+::\+Binary\+Tree\+Names\+::L}}, \mbox{\hyperlink{tube__domain_8h_source_l00143}{lin\+\_\+interpolate()}}, \mbox{\hyperlink{tube__domain_8h_source_l00134}{Nlayer}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00157}{oomph\+::\+Mathematical\+Constants\+::\+Pi}}, \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}, \mbox{\hyperlink{binary__tree_8h_source_l00051}{oomph\+::\+Binary\+Tree\+Names\+::R}}, \mbox{\hyperlink{tube__domain_8h_source_l00131}{Radius\+\_\+box}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{tube__domain_8h_source_l00127}{Theta\+\_\+positions}}, \mbox{\hyperlink{octree_8h_source_l00072}{oomph\+::\+Oc\+Tree\+Names\+::U}}, and \mbox{\hyperlink{tube__domain_8h_source_l00137}{Volume\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1TubeDomain_a4dc5523d0b9493e333b0e0afc904c842}\label{classoomph_1_1TubeDomain_a4dc5523d0b9493e333b0e0afc904c842}} 
 \index{oomph::TubeDomain@{oomph::TubeDomain}!operator=@{operator=}}

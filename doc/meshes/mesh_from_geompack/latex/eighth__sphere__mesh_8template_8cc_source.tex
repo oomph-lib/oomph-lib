@@ -343,30 +343,32 @@
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00339}00339                                                              (nnode1d -\/ 1));}
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00340}00340             \}}
 \DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00341}00341             \textcolor{keywordflow}{else}}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00342}00342               \textcolor{comment}{// else if i==nnode1d-\/1 the node already exists in element 1}}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00343}00343               \textcolor{keywordflow}{if} (i == nnode1d -\/ 1)}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00344}00344             \{}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00345}00345               this-\/>finite\_element\_pt(3)-\/>node\_pt(jnod) =}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00346}00346                 this-\/>finite\_element\_pt(1)-\/>node\_pt(k + i * nnode1d * nnode1d +}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00347}00347                                                     j * nnode1d);}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00348}00348             \}}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00349}00349             \textcolor{keywordflow}{else}}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00350}00350             \textcolor{comment}{// else, the node exists in element 2}}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00351}00351             \{}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00352}00352               this-\/>finite\_element\_pt(3)-\/>node\_pt(jnod) =}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00353}00353                 this-\/>finite\_element\_pt(2)-\/>node\_pt(i + k * nnode1d +}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00354}00354                                                     j * nnode1d * nnode1d);}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00355}00355             \}}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00356}00356           \}}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00357}00357         \}}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00358}00358       \}}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00359}00359     \}}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00360}00360 }
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00361}00361     \textcolor{comment}{// Setup boundary element lookup schemes}}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00362}00362     setup\_boundary\_element\_info();}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00363}00363   \}}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00364}00364 }
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00365}00365 \} \textcolor{comment}{// namespace oomph}}
-\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00366}00366 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00342}00342             \{}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00343}00343               \textcolor{comment}{// else if i==nnode1d-\/1 the node already exists in element 1}}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00344}00344               \textcolor{keywordflow}{if} (i == nnode1d -\/ 1)}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00345}00345               \{}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00346}00346                 this-\/>finite\_element\_pt(3)-\/>node\_pt(jnod) =}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00347}00347                   this-\/>finite\_element\_pt(1)-\/>node\_pt(}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00348}00348                     k + i * nnode1d * nnode1d + j * nnode1d);}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00349}00349               \}}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00350}00350               \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00351}00351               \textcolor{comment}{// else, the node exists in element 2}}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00352}00352               \{}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00353}00353                 this-\/>finite\_element\_pt(3)-\/>node\_pt(jnod) =}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00354}00354                   this-\/>finite\_element\_pt(2)-\/>node\_pt(i + k * nnode1d +}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00355}00355                                                       j * nnode1d * nnode1d);}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00356}00356               \}}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00357}00357             \}}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00358}00358           \}}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00359}00359         \}}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00360}00360       \}}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00361}00361     \}}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00362}00362 }
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00363}00363     \textcolor{comment}{// Setup boundary element lookup schemes}}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00364}00364     setup\_boundary\_element\_info();}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00365}00365   \}}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00366}00366 }
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00367}00367 \} \textcolor{comment}{// namespace oomph}}
+\DoxyCodeLine{\Hypertarget{eighth__sphere__mesh_8template_8cc_source_l00368}00368 \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

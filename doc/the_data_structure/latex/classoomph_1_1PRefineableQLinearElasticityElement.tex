@@ -22,15 +22,15 @@ Inheritance diagram for oomph\+::PRefineable\+QLinear\+Elasticity\+Element\texor
 \begin{DoxyCompactList}\small\item\em Constructor, simply call the other constructors. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1PRefineableQLinearElasticityElement_aac8e10be4a3bd519a5a33193c44d4695}{$\sim$\+PRefineable\+QLinear\+Elasticity\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Destructor (to avoid memory leaks) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1PRefineableQLinearElasticityElement_a1470f88b0267555b2bd8397fdc2d474d}{PRefineable\+QLinear\+Elasticity\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1PRefineableQLinearElasticityElement}{PRefineable\+QLinear\+Elasticity\+Element}}$<$ DIM $>$ \&dummy)=delete
+\mbox{\hyperlink{classoomph_1_1PRefineableQLinearElasticityElement_a1470f88b0267555b2bd8397fdc2d474d}{PRefineable\+QLinear\+Elasticity\+Element}} (const \mbox{\hyperlink{classoomph_1_1PRefineableQLinearElasticityElement}{PRefineable\+QLinear\+Elasticity\+Element}}$<$ DIM $>$ \&dummy)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PRefineableQLinearElasticityElement_a286182e34bade0d256482bed74e8e77f}{further\+\_\+build}} ()
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1PRefineableQLinearElasticityElement_abdaa00cf9884e4415933748aa2c19672}{ncont\+\_\+interpolated\+\_\+values}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1PRefineableQLinearElasticityElement_abdaa00cf9884e4415933748aa2c19672}{ncont\+\_\+interpolated\+\_\+values}} () const
 \begin{DoxyCompactList}\small\item\em Number of continuously interpolated values\+: 1. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1PRefineableQLinearElasticityElement_a1c3378ffd265b23eb9702a600742782b}{nvertex\+\_\+node}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1PRefineableQLinearElasticityElement_a1c3378ffd265b23eb9702a600742782b}{nvertex\+\_\+node}} () const
 \begin{DoxyCompactList}\small\item\em Number of vertex nodes in the element. \end{DoxyCompactList}\item 
-Node $\ast$ \mbox{\hyperlink{classoomph_1_1PRefineableQLinearElasticityElement_a9ff7b9a9410ee45f4613d43987a8bc4e}{vertex\+\_\+node\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&j) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1PRefineableQLinearElasticityElement_a9ff7b9a9410ee45f4613d43987a8bc4e}{vertex\+\_\+node\+\_\+pt}} (const unsigned \&j) const
 \begin{DoxyCompactList}\small\item\em Pointer to the j-\/th vertex node in the element. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1PRefineableQLinearElasticityElement_afb227be6ae53f1a72a64b58b57d62ef1}{nrecovery\+\_\+order}} ()
 \begin{DoxyCompactList}\small\item\em Order of recovery shape functions for Z2 error estimation\+: \end{DoxyCompactList}\item 
@@ -66,7 +66,7 @@ Definition at line \mbox{\hyperlink{refineable__linear__elasticity__elements_8h_
 
 
 
-References \mbox{\hyperlink{classoomph_1_1FiniteElement_a9b8ff92232a3d17ed7d403fbd3419569}{oomph\+::\+Finite\+Element\+::set\+\_\+integration\+\_\+scheme()}}.
+References \mbox{\hyperlink{elements_8cc_source_l03210}{oomph\+::\+Finite\+Element\+::set\+\_\+integration\+\_\+scheme()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableQLinearElasticityElement_aac8e10be4a3bd519a5a33193c44d4695}\label{classoomph_1_1PRefineableQLinearElasticityElement_aac8e10be4a3bd519a5a33193c44d4695}} 
 \index{oomph::PRefineableQLinearElasticityElement$<$ DIM $>$@{oomph::PRefineableQLinearElasticityElement$<$ DIM $>$}!````~PRefineableQLinearElasticityElement@{$\sim$PRefineableQLinearElasticityElement}}
@@ -85,14 +85,14 @@ Definition at line \mbox{\hyperlink{refineable__linear__elasticity__elements_8h_
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01968}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}.
+References \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableQLinearElasticityElement_a1470f88b0267555b2bd8397fdc2d474d}\label{classoomph_1_1PRefineableQLinearElasticityElement_a1470f88b0267555b2bd8397fdc2d474d}} 
 \index{oomph::PRefineableQLinearElasticityElement$<$ DIM $>$@{oomph::PRefineableQLinearElasticityElement$<$ DIM $>$}!PRefineableQLinearElasticityElement@{PRefineableQLinearElasticityElement}}
 \index{PRefineableQLinearElasticityElement@{PRefineableQLinearElasticityElement}!oomph::PRefineableQLinearElasticityElement$<$ DIM $>$@{oomph::PRefineableQLinearElasticityElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{PRefineableQLinearElasticityElement()}{PRefineableQLinearElasticityElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-\mbox{\hyperlink{classoomph_1_1PRefineableQLinearElasticityElement}{oomph\+::\+PRefineable\+QLinear\+Elasticity\+Element}}$<$ DIM $>$\+::\mbox{\hyperlink{classoomph_1_1PRefineableQLinearElasticityElement}{PRefineable\+QLinear\+Elasticity\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1PRefineableQLinearElasticityElement}{PRefineable\+QLinear\+Elasticity\+Element}}$<$ DIM $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+\mbox{\hyperlink{classoomph_1_1PRefineableQLinearElasticityElement}{oomph\+::\+PRefineable\+QLinear\+Elasticity\+Element}}$<$ DIM $>$\+::\mbox{\hyperlink{classoomph_1_1PRefineableQLinearElasticityElement}{PRefineable\+QLinear\+Elasticity\+Element}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1PRefineableQLinearElasticityElement}{PRefineable\+QLinear\+Elasticity\+Element}}$<$ DIM $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
@@ -118,7 +118,7 @@ Definition at line \mbox{\hyperlink{refineable__linear__elasticity__elements_8cc
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableQLinearElasticityElement_a286182e34bade0d256482bed74e8e77f}\label{classoomph_1_1PRefineableQLinearElasticityElement_a286182e34bade0d256482bed74e8e77f}} 
 \index{oomph::PRefineableQLinearElasticityElement$<$ DIM $>$@{oomph::PRefineableQLinearElasticityElement$<$ DIM $>$}!further\_build@{further\_build}}
@@ -206,14 +206,14 @@ Definition at line \mbox{\hyperlink{refineable__linear__elasticity__elements_8h_
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02496}{oomph\+::\+Finite\+Element\+::nvertex\+\_\+node()}}.
+References \mbox{\hyperlink{elements_8h_source_l02491}{oomph\+::\+Finite\+Element\+::nvertex\+\_\+node()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableQLinearElasticityElement_a9ff7b9a9410ee45f4613d43987a8bc4e}\label{classoomph_1_1PRefineableQLinearElasticityElement_a9ff7b9a9410ee45f4613d43987a8bc4e}} 
 \index{oomph::PRefineableQLinearElasticityElement$<$ DIM $>$@{oomph::PRefineableQLinearElasticityElement$<$ DIM $>$}!vertex\_node\_pt@{vertex\_node\_pt}}
 \index{vertex\_node\_pt@{vertex\_node\_pt}!oomph::PRefineableQLinearElasticityElement$<$ DIM $>$@{oomph::PRefineableQLinearElasticityElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{vertex\_node\_pt()}{vertex\_node\_pt()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-Node $\ast$ \mbox{\hyperlink{classoomph_1_1PRefineableQLinearElasticityElement}{oomph\+::\+PRefineable\+QLinear\+Elasticity\+Element}}$<$ DIM $>$\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1PRefineableQLinearElasticityElement}{oomph\+::\+PRefineable\+QLinear\+Elasticity\+Element}}$<$ DIM $>$\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -229,7 +229,7 @@ Definition at line \mbox{\hyperlink{refineable__linear__elasticity__elements_8h_
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02505}{oomph\+::\+Finite\+Element\+::vertex\+\_\+node\+\_\+pt()}}.
+References \mbox{\hyperlink{elements_8h_source_l02500}{oomph\+::\+Finite\+Element\+::vertex\+\_\+node\+\_\+pt()}}.
 
 
 

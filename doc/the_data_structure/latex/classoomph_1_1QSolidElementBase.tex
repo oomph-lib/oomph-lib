@@ -20,13 +20,13 @@ Inheritance diagram for oomph\+::QSolid\+Element\+Base\+:\begin{figure}[H]
 \item 
 \mbox{\hyperlink{classoomph_1_1QSolidElementBase_a979a96e9b74885769d875a5a1dd6afb3}{QSolid\+Element\+Base}} ()
 \begin{DoxyCompactList}\small\item\em Constructor\+: Empty. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1QSolidElementBase_adca40dbdc7543c76f938609e36ec549b}{QSolid\+Element\+Base}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1QSolidElementBase}{QSolid\+Element\+Base}} \&)=delete
+\mbox{\hyperlink{classoomph_1_1QSolidElementBase_adca40dbdc7543c76f938609e36ec549b}{QSolid\+Element\+Base}} (const \mbox{\hyperlink{classoomph_1_1QSolidElementBase}{QSolid\+Element\+Base}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1QSolidElementBase_a0ceca47c039bbb38b0feb3baa330a27f}{set\+\_\+macro\+\_\+elem\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a801bbe89619c28e181afa8fa3e9ac836}{macro\+\_\+elem\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1QSolidElementBase_aa7f14a039224fb4c513da587448d2c3b}{set\+\_\+macro\+\_\+elem\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a801bbe89619c28e181afa8fa3e9ac836}{macro\+\_\+elem\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a2c4a2681d29251acc0af8e7d95227cad}{undeformed\+\_\+macro\+\_\+elem\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Set pointers to \char`\"{}current\char`\"{} and \char`\"{}undeformed\char`\"{} Macro\+Elements. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QSolidElementBase_a2afc3bfd3aa6ed253f42d55ac4e20839}{get\+\_\+x\+\_\+and\+\_\+xi}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x\+\_\+fe, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi\+\_\+fe, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1QSolidElementBase_a2afc3bfd3aa6ed253f42d55ac4e20839}{get\+\_\+x\+\_\+and\+\_\+xi}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x\+\_\+fe, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi\+\_\+fe, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi) const
 \begin{DoxyCompactList}\small\item\em Eulerian and Lagrangian coordinates as function of the local coordinates\+: The Eulerian position is returned in FE-\/interpolated form ({\ttfamily x\+\_\+fe}) and then in the form obtained from the \char`\"{}current\char`\"{} \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} representation (if it exists -- if not, {\ttfamily x} is the same as {\ttfamily x\+\_\+fe}). This allows the Domain/\+Macro\+Element-\/ based representation to be used to apply displacement boundary conditions exactly. Ditto for the Lagrangian coordinates returned in xi\+\_\+fe and xi. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -59,7 +59,7 @@ Definition at line \mbox{\hyperlink{Qelements_8h_source_l00334}{334}} of file \m
 \index{oomph::QSolidElementBase@{oomph::QSolidElementBase}!QSolidElementBase@{QSolidElementBase}}
 \index{QSolidElementBase@{QSolidElementBase}!oomph::QSolidElementBase@{oomph::QSolidElementBase}}
 \doxysubsubsection{\texorpdfstring{QSolidElementBase()}{QSolidElementBase()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily oomph\+::\+QSolid\+Element\+Base\+::\+QSolid\+Element\+Base (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1QSolidElementBase}{QSolid\+Element\+Base}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+{\footnotesize\ttfamily oomph\+::\+QSolid\+Element\+Base\+::\+QSolid\+Element\+Base (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1QSolidElementBase}{QSolid\+Element\+Base}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
@@ -72,7 +72,7 @@ Broken copy constructor.
 \index{oomph::QSolidElementBase@{oomph::QSolidElementBase}!get\_x\_and\_xi@{get\_x\_and\_xi}}
 \index{get\_x\_and\_xi@{get\_x\_and\_xi}!oomph::QSolidElementBase@{oomph::QSolidElementBase}}
 \doxysubsubsection{\texorpdfstring{get\_x\_and\_xi()}{get\_x\_and\_xi()}}
-{\footnotesize\ttfamily void oomph\+::\+QSolid\+Element\+Base\+::get\+\_\+x\+\_\+and\+\_\+xi (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x\+\_\+fe,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{xi\+\_\+fe,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{xi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+QSolid\+Element\+Base\+::get\+\_\+x\+\_\+and\+\_\+xi (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x\+\_\+fe,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{xi\+\_\+fe,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{xi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -88,7 +88,7 @@ Definition at line \mbox{\hyperlink{Qelements_8h_source_l00379}{379}} of file \m
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02616}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8cc_source_l07108}{oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi()}}, \mbox{\hyperlink{elements_8h_source_l01688}{oomph\+::\+Finite\+Element\+::\+Macro\+\_\+elem\+\_\+pt}}, \mbox{\hyperlink{macro__element_8h_source_l00126}{oomph\+::\+Macro\+Element\+::macro\+\_\+map()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{Qelements_8h_source_l00186}{oomph\+::\+QElement\+Base\+::s\+\_\+macro\+\_\+ll()}}, \mbox{\hyperlink{Qelements_8h_source_l00202}{oomph\+::\+QElement\+Base\+::s\+\_\+macro\+\_\+ur()}}, \mbox{\hyperlink{elements_8h_source_l04104}{oomph\+::\+Solid\+Finite\+Element\+::\+Undeformed\+\_\+macro\+\_\+elem\+\_\+pt}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8cc_source_l07104}{oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi()}}, \mbox{\hyperlink{elements_8h_source_l01683}{oomph\+::\+Finite\+Element\+::\+Macro\+\_\+elem\+\_\+pt}}, \mbox{\hyperlink{macro__element_8h_source_l00126}{oomph\+::\+Macro\+Element\+::macro\+\_\+map()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{Qelements_8h_source_l00186}{oomph\+::\+QElement\+Base\+::s\+\_\+macro\+\_\+ll()}}, \mbox{\hyperlink{Qelements_8h_source_l00202}{oomph\+::\+QElement\+Base\+::s\+\_\+macro\+\_\+ur()}}, and \mbox{\hyperlink{elements_8h_source_l04076}{oomph\+::\+Solid\+Finite\+Element\+::\+Undeformed\+\_\+macro\+\_\+elem\+\_\+pt}}.
 
 
 
@@ -118,7 +118,7 @@ Definition at line \mbox{\hyperlink{Qelements_8h_source_l00349}{349}} of file \m
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01883}{oomph\+::\+Finite\+Element\+::macro\+\_\+elem\+\_\+pt()}}, \mbox{\hyperlink{Qelements_8h_source_l00143}{oomph\+::\+QElement\+Base\+::set\+\_\+macro\+\_\+elem\+\_\+pt()}}, and \mbox{\hyperlink{elements_8h_source_l03706}{oomph\+::\+Solid\+Finite\+Element\+::set\+\_\+undeformed\+\_\+macro\+\_\+elem\+\_\+pt()}}.
+References \mbox{\hyperlink{elements_8h_source_l01878}{oomph\+::\+Finite\+Element\+::macro\+\_\+elem\+\_\+pt()}}, \mbox{\hyperlink{Qelements_8h_source_l00143}{oomph\+::\+QElement\+Base\+::set\+\_\+macro\+\_\+elem\+\_\+pt()}}, and \mbox{\hyperlink{elements_8h_source_l03699}{oomph\+::\+Solid\+Finite\+Element\+::set\+\_\+undeformed\+\_\+macro\+\_\+elem\+\_\+pt()}}.
 
 
 
@@ -148,7 +148,7 @@ Definition at line \mbox{\hyperlink{Qelements_8h_source_l00360}{360}} of file \m
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01883}{oomph\+::\+Finite\+Element\+::macro\+\_\+elem\+\_\+pt()}}, \mbox{\hyperlink{Qelements_8h_source_l00143}{oomph\+::\+QElement\+Base\+::set\+\_\+macro\+\_\+elem\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l03706}{oomph\+::\+Solid\+Finite\+Element\+::set\+\_\+undeformed\+\_\+macro\+\_\+elem\+\_\+pt()}}, and \mbox{\hyperlink{elements_8h_source_l03713}{oomph\+::\+Solid\+Finite\+Element\+::undeformed\+\_\+macro\+\_\+elem\+\_\+pt()}}.
+References \mbox{\hyperlink{elements_8h_source_l01878}{oomph\+::\+Finite\+Element\+::macro\+\_\+elem\+\_\+pt()}}, \mbox{\hyperlink{Qelements_8h_source_l00143}{oomph\+::\+QElement\+Base\+::set\+\_\+macro\+\_\+elem\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l03699}{oomph\+::\+Solid\+Finite\+Element\+::set\+\_\+undeformed\+\_\+macro\+\_\+elem\+\_\+pt()}}, and \mbox{\hyperlink{elements_8h_source_l03706}{oomph\+::\+Solid\+Finite\+Element\+::undeformed\+\_\+macro\+\_\+elem\+\_\+pt()}}.
 
 
 

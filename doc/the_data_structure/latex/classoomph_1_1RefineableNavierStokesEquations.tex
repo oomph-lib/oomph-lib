@@ -12,7 +12,7 @@
 Inheritance diagram for oomph\+::Refineable\+Navier\+Stokes\+Equations\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=1.555556cm]{classoomph_1_1RefineableNavierStokesEquations}
+\includegraphics[height=1.361111cm]{classoomph_1_1RefineableNavierStokesEquations}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
@@ -20,24 +20,24 @@ Inheritance diagram for oomph\+::Refineable\+Navier\+Stokes\+Equations\texorpdfs
 \item 
 \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations_a533bcd11b492c5dbf308079722f7f95d}{Refineable\+Navier\+Stokes\+Equations}} ()
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
-virtual Node $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations_ae1b81d1c44fcc5b1738928f18cd46dd0}{pressure\+\_\+node\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+p)
+virtual \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations_ae1b81d1c44fcc5b1738928f18cd46dd0}{pressure\+\_\+node\+\_\+pt}} (const unsigned \&n\+\_\+p)
 \begin{DoxyCompactList}\small\item\em Pointer to n\+\_\+p-\/th pressure node (Default\+: NULL, indicating that pressure is not based on nodal interpolation). \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations_a94c16c8b4aa810e9e2f8df263654eaed}{get\+\_\+pressure\+\_\+and\+\_\+velocity\+\_\+mass\+\_\+matrix\+\_\+diagonal}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&press\+\_\+mass\+\_\+diag, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&veloc\+\_\+mass\+\_\+diag, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&which\+\_\+one=0)
+void \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations_a94c16c8b4aa810e9e2f8df263654eaed}{get\+\_\+pressure\+\_\+and\+\_\+velocity\+\_\+mass\+\_\+matrix\+\_\+diagonal}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&press\+\_\+mass\+\_\+diag, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&veloc\+\_\+mass\+\_\+diag, const unsigned \&which\+\_\+one=0)
 \begin{DoxyCompactList}\small\item\em Compute the diagonal of the velocity/pressure mass matrices. If which one=0, both are computed, otherwise only the pressure (which\+\_\+one=1) or the velocity mass matrix (which\+\_\+one=2 -- the LSC version of the preconditioner only needs that one) \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations_a7eb93c82d587b3b3c3782e3dc0d0874f}{num\+\_\+\+Z2\+\_\+flux\+\_\+terms}} ()
 \begin{DoxyCompactList}\small\item\em Number of \textquotesingle{}flux\textquotesingle{} terms for Z2 error estimation. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations_af26506994293f9d72d0382c1efe67749}{get\+\_\+\+Z2\+\_\+flux}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux)
+void \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations_af26506994293f9d72d0382c1efe67749}{get\+\_\+\+Z2\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux)
 \begin{DoxyCompactList}\small\item\em Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: Upper triangular entries in strain rate tensor. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations_a7afd6250585ea597c3df65b8c7744da4}{further\+\_\+build}} ()
 \begin{DoxyCompactList}\small\item\em Further build, pass the pointers down to the sons. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations_a7cfd72b42cc9fc665fa79ffe9af9f0bd}{dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&du\+\_\+ddata, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&global\+\_\+eqn\+\_\+number)
+void \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations_a7cfd72b42cc9fc665fa79ffe9af9f0bd}{dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&du\+\_\+ddata, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&global\+\_\+eqn\+\_\+number)
 \begin{DoxyCompactList}\small\item\em Compute the derivatives of the i-\/th component of velocity at point s with respect to all data that can affect its value. In addition, return the global equation numbers corresponding to the data. Overload the non-\/refineable version to take account of hanging node information. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static void \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations_a8dc3e560939c0660ea5eabcc043c05c4}{pin\+\_\+redundant\+\_\+nodal\+\_\+pressures}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$ $>$ \&element\+\_\+pt)
+static void \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations_a8dc3e560939c0660ea5eabcc043c05c4}{pin\+\_\+redundant\+\_\+nodal\+\_\+pressures}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$ $>$ \&element\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Loop over all elements in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} (which typically contains all the elements in a fluid mesh) and pin the nodal pressure degrees of freedom that are not being used. Function uses the member function. \end{DoxyCompactList}\item 
-static void \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations_a16a8cdb89718c5253f6f063a733c0de6}{unpin\+\_\+all\+\_\+pressure\+\_\+dofs}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$ $>$ \&element\+\_\+pt)
+static void \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations_a16a8cdb89718c5253f6f063a733c0de6}{unpin\+\_\+all\+\_\+pressure\+\_\+dofs}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$ $>$ \&element\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Unpin all pressure dofs in elements listed in vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -46,9 +46,9 @@ virtual void \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations_acd0
 \begin{DoxyCompactList}\small\item\em Unpin all pressure dofs in the element. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations_a5dbf8764b44554159043a45df312a7e3}{pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs}} ()
 \begin{DoxyCompactList}\small\item\em Pin unused nodal pressure dofs (empty by default, because by default pressure dofs are not associated with nodes) \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations_a63a9aff288190f8d2abb0e985c08c1f0}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+nst}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix, unsigned flag)
+void \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations_a63a9aff288190f8d2abb0e985c08c1f0}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+nst}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix, unsigned flag)
 \begin{DoxyCompactList}\small\item\em Add element\textquotesingle{}s contribution to elemental residual vector and/or Jacobian matrix flag=1\+: compute both flag=0\+: compute only residual vector. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations_aa5fb8ebc1a96ed6fc7733c5aaa238582}{fill\+\_\+in\+\_\+generic\+\_\+pressure\+\_\+advection\+\_\+diffusion\+\_\+contribution\+\_\+nst}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, unsigned flag)
+void \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations_aa5fb8ebc1a96ed6fc7733c5aaa238582}{fill\+\_\+in\+\_\+generic\+\_\+pressure\+\_\+advection\+\_\+diffusion\+\_\+contribution\+\_\+nst}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, unsigned flag)
 \begin{DoxyCompactList}\small\item\em Compute the residuals for the associated pressure advection diffusion problem. Used by the Fp preconditioner. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations_ac88134acd65f21845e5fc8e83b89c74a}{get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates}} (\mbox{\hyperlink{classoomph_1_1RankThreeTensor}{Rank\+Three\+Tensor}}$<$ double $>$ \&dresidual\+\_\+dnodal\+\_\+coordinates)
 \begin{DoxyCompactList}\small\item\em Compute derivatives of elemental residual vector with respect to nodal coordinates. Overwrites default implementation in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} base class. dresidual\+\_\+dnodal\+\_\+coordinates(l,i,j) = d res(l) / d\+X\+\_\+\{ij\}. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -90,7 +90,7 @@ Definition at line \mbox{\hyperlink{refineable__navier__stokes__elements_8h_sour
 \index{dinterpolated\_u\_nst\_ddata@{dinterpolated\_u\_nst\_ddata}!oomph::RefineableNavierStokesEquations$<$ DIM $>$@{oomph::RefineableNavierStokesEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{dinterpolated\_u\_nst\_ddata()}{dinterpolated\_u\_nst\_ddata()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations}{oomph\+::\+Refineable\+Navier\+Stokes\+Equations}}$<$ DIM $>$\+::dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{du\+\_\+ddata,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{global\+\_\+eqn\+\_\+number }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations}{oomph\+::\+Refineable\+Navier\+Stokes\+Equations}}$<$ DIM $>$\+::dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const unsigned \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{du\+\_\+ddata,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{global\+\_\+eqn\+\_\+number }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -98,11 +98,15 @@ Compute the derivatives of the i-\/th component of velocity at point s with resp
 
 
 
+Reimplemented from \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_aa516b523d6c3b83a01c1bd1e1f9569fe}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$}}.
+
+
+
 Definition at line \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l00482}{482}} of file \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source}{refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00808}{oomph\+::\+Hang\+Info\+::master\+\_\+weight()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, and \mbox{\hyperlink{navier__stokes__elements_8h_source_l00872}{Navier\+Stokes\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+nst()}}.
+References \mbox{\hyperlink{nodes_8h_source_l00367}{oomph\+::\+Data\+::eqn\+\_\+number()}}, \mbox{\hyperlink{nodes_8h_source_l01228}{oomph\+::\+Node\+::hanging\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l01285}{oomph\+::\+Node\+::is\+\_\+hanging()}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00808}{oomph\+::\+Hang\+Info\+::master\+\_\+weight()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, and \mbox{\hyperlink{navier__stokes__elements_8h_source_l00866}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+nst()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableNavierStokesEquations_aa5fb8ebc1a96ed6fc7733c5aaa238582}\label{classoomph_1_1RefineableNavierStokesEquations_aa5fb8ebc1a96ed6fc7733c5aaa238582}} 
 \index{oomph::RefineableNavierStokesEquations$<$ DIM $>$@{oomph::RefineableNavierStokesEquations$<$ DIM $>$}!fill\_in\_generic\_pressure\_advection\_diffusion\_contribution\_nst@{fill\_in\_generic\_pressure\_advection\_diffusion\_contribution\_nst}}
@@ -117,7 +121,7 @@ Compute the residuals for the associated pressure advection diffusion problem. U
 
 
 
-Reimplemented from \mbox{\hyperlink{classNavierStokesEquations_a36443a76cb85b1d58c68c9406b0cc24c}{Navier\+Stokes\+Equations$<$ DIM $>$}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a50d5b099e2f2c16028682ee48571f8a4}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$}}.
 
 
 
@@ -125,7 +129,7 @@ Definition at line \mbox{\hyperlink{refineable__navier__stokes__elements_8cc_sou
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00808}{oomph\+::\+Hang\+Info\+::master\+\_\+weight()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00808}{oomph\+::\+Hang\+Info\+::master\+\_\+weight()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableNavierStokesEquations_a63a9aff288190f8d2abb0e985c08c1f0}\label{classoomph_1_1RefineableNavierStokesEquations_a63a9aff288190f8d2abb0e985c08c1f0}} 
 \index{oomph::RefineableNavierStokesEquations$<$ DIM $>$@{oomph::RefineableNavierStokesEquations$<$ DIM $>$}!fill\_in\_generic\_residual\_contribution\_nst@{fill\_in\_generic\_residual\_contribution\_nst}}
@@ -140,7 +144,7 @@ Add element\textquotesingle{}s contribution to elemental residual vector and/or 
 
 Add element\textquotesingle{}s contribution to the elemental residual vector and/or Jacobian matrix. flag=1\+: compute both flag=0\+: compute only residual vector. 
 
-Reimplemented from \mbox{\hyperlink{classNavierStokesEquations_a24c6a21f062eb4fde085437087d180ee}{Navier\+Stokes\+Equations$<$ DIM $>$}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_acaa521c31b070b81f424e4eec4fed579}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$}}.
 
 
 
@@ -148,7 +152,7 @@ Definition at line \mbox{\hyperlink{refineable__navier__stokes__elements_8cc_sou
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00808}{oomph\+::\+Hang\+Info\+::master\+\_\+weight()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00808}{oomph\+::\+Hang\+Info\+::master\+\_\+weight()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableNavierStokesEquations_a7afd6250585ea597c3df65b8c7744da4}\label{classoomph_1_1RefineableNavierStokesEquations_a7afd6250585ea597c3df65b8c7744da4}} 
 \index{oomph::RefineableNavierStokesEquations$<$ DIM $>$@{oomph::RefineableNavierStokesEquations$<$ DIM $>$}!further\_build@{further\_build}}
@@ -175,7 +179,7 @@ Definition at line \mbox{\hyperlink{refineable__navier__stokes__elements_8h_sour
 
 
 
-References \mbox{\hyperlink{navier__stokes__elements_8h_source_l00476}{Navier\+Stokes\+Equations$<$ DIM $>$\+::\+ALE\+\_\+is\+\_\+disabled}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l00464}{Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Body\+\_\+force\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l00783}{Navier\+Stokes\+Equations$<$ DIM $>$\+::body\+\_\+force\+\_\+fct\+\_\+pt()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l00446}{Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Density\+\_\+\+Ratio\+\_\+pt}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l00753}{Navier\+Stokes\+Equations$<$ DIM $>$\+::density\+\_\+ratio\+\_\+pt()}}, \mbox{\hyperlink{refineable__elements_8h_source_l00539}{oomph\+::\+Refineable\+Element\+::father\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l00461}{Navier\+Stokes\+Equations$<$ DIM $>$\+::\+G\+\_\+pt}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l00777}{Navier\+Stokes\+Equations$<$ DIM $>$\+::g\+\_\+pt()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l00765}{Navier\+Stokes\+Equations$<$ DIM $>$\+::re\+\_\+invfr\+\_\+pt()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l00451}{Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Re\+\_\+pt}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l00721}{Navier\+Stokes\+Equations$<$ DIM $>$\+::re\+\_\+pt()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l00727}{Navier\+Stokes\+Equations$<$ DIM $>$\+::re\+\_\+st\+\_\+pt()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l00458}{Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Re\+Inv\+Fr\+\_\+pt}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l00454}{Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Re\+St\+\_\+pt}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l00467}{Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Source\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l00795}{Navier\+Stokes\+Equations$<$ DIM $>$\+::source\+\_\+fct\+\_\+pt()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l00442}{Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Viscosity\+\_\+\+Ratio\+\_\+pt}}, and \mbox{\hyperlink{navier__stokes__elements_8h_source_l00740}{Navier\+Stokes\+Equations$<$ DIM $>$\+::viscosity\+\_\+ratio\+\_\+pt()}}.
+References \mbox{\hyperlink{navier__stokes__elements_8h_source_l00470}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+ALE\+\_\+is\+\_\+disabled}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l00458}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Body\+\_\+force\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l00777}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::body\+\_\+force\+\_\+fct\+\_\+pt()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l00440}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Density\+\_\+\+Ratio\+\_\+pt}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l00747}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::density\+\_\+ratio\+\_\+pt()}}, \mbox{\hyperlink{refineable__elements_8h_source_l00539}{oomph\+::\+Refineable\+Element\+::father\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l00455}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+G\+\_\+pt}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l00771}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::g\+\_\+pt()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l00759}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::re\+\_\+invfr\+\_\+pt()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l00445}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Re\+\_\+pt}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l00715}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::re\+\_\+pt()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l00721}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::re\+\_\+st\+\_\+pt()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l00452}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Re\+Inv\+Fr\+\_\+pt}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l00448}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Re\+St\+\_\+pt}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l00461}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Source\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l00789}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::source\+\_\+fct\+\_\+pt()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l00436}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Viscosity\+\_\+\+Ratio\+\_\+pt}}, and \mbox{\hyperlink{navier__stokes__elements_8h_source_l00734}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::viscosity\+\_\+ratio\+\_\+pt()}}.
 
 
 
@@ -202,14 +206,14 @@ Definition at line \mbox{\hyperlink{refineable__navier__stokes__elements_8cc_sou
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01198}{oomph\+::\+Generalised\+Element\+::\+Default\+\_\+fd\+\_\+jacobian\+\_\+step}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00808}{oomph\+::\+Hang\+Info\+::master\+\_\+weight()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References \mbox{\hyperlink{elements_8h_source_l01198}{oomph\+::\+Generalised\+Element\+::\+Default\+\_\+fd\+\_\+jacobian\+\_\+step}}, \mbox{\hyperlink{nodes_8h_source_l01606}{oomph\+::\+Node\+::has\+\_\+auxiliary\+\_\+node\+\_\+update\+\_\+fct\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00808}{oomph\+::\+Hang\+Info\+::master\+\_\+weight()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, \mbox{\hyperlink{nodes_8h_source_l01615}{oomph\+::\+Node\+::perform\+\_\+auxiliary\+\_\+node\+\_\+update\+\_\+fct()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{nodes_8h_source_l00324}{oomph\+::\+Data\+::value\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8h_source_l01060}{oomph\+::\+Node\+::x()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableNavierStokesEquations_a94c16c8b4aa810e9e2f8df263654eaed}\label{classoomph_1_1RefineableNavierStokesEquations_a94c16c8b4aa810e9e2f8df263654eaed}} 
 \index{oomph::RefineableNavierStokesEquations$<$ DIM $>$@{oomph::RefineableNavierStokesEquations$<$ DIM $>$}!get\_pressure\_and\_velocity\_mass\_matrix\_diagonal@{get\_pressure\_and\_velocity\_mass\_matrix\_diagonal}}
 \index{get\_pressure\_and\_velocity\_mass\_matrix\_diagonal@{get\_pressure\_and\_velocity\_mass\_matrix\_diagonal}!oomph::RefineableNavierStokesEquations$<$ DIM $>$@{oomph::RefineableNavierStokesEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_pressure\_and\_velocity\_mass\_matrix\_diagonal()}{get\_pressure\_and\_velocity\_mass\_matrix\_diagonal()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations}{oomph\+::\+Refineable\+Navier\+Stokes\+Equations}}$<$ DIM $>$\+::get\+\_\+pressure\+\_\+and\+\_\+velocity\+\_\+mass\+\_\+matrix\+\_\+diagonal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{press\+\_\+mass\+\_\+diag,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{veloc\+\_\+mass\+\_\+diag,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{which\+\_\+one = {\ttfamily 0} }\end{DoxyParamCaption})}
+void \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations}{oomph\+::\+Refineable\+Navier\+Stokes\+Equations}}$<$ DIM $>$\+::get\+\_\+pressure\+\_\+and\+\_\+velocity\+\_\+mass\+\_\+matrix\+\_\+diagonal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{press\+\_\+mass\+\_\+diag,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{veloc\+\_\+mass\+\_\+diag,  }\item[{const unsigned \&}]{which\+\_\+one = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -217,18 +221,22 @@ Compute the diagonal of the velocity/pressure mass matrices. If which one=0, bot
 
 
 
+Reimplemented from \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a2d6e748dd25be78b65f927cd2b257c55}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$}}.
+
+
+
 Definition at line \mbox{\hyperlink{refineable__navier__stokes__elements_8cc_source_l00038}{38}} of file \mbox{\hyperlink{refineable__navier__stokes__elements_8cc_source}{refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc}}.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00808}{oomph\+::\+Hang\+Info\+::master\+\_\+weight()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00808}{oomph\+::\+Hang\+Info\+::master\+\_\+weight()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableNavierStokesEquations_af26506994293f9d72d0382c1efe67749}\label{classoomph_1_1RefineableNavierStokesEquations_af26506994293f9d72d0382c1efe67749}} 
 \index{oomph::RefineableNavierStokesEquations$<$ DIM $>$@{oomph::RefineableNavierStokesEquations$<$ DIM $>$}!get\_Z2\_flux@{get\_Z2\_flux}}
 \index{get\_Z2\_flux@{get\_Z2\_flux}!oomph::RefineableNavierStokesEquations$<$ DIM $>$@{oomph::RefineableNavierStokesEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_Z2\_flux()}{get\_Z2\_flux()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations}{oomph\+::\+Refineable\+Navier\+Stokes\+Equations}}$<$ DIM $>$\+::get\+\_\+\+Z2\+\_\+flux (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations}{oomph\+::\+Refineable\+Navier\+Stokes\+Equations}}$<$ DIM $>$\+::get\+\_\+\+Z2\+\_\+flux (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -244,7 +252,7 @@ Definition at line \mbox{\hyperlink{refineable__navier__stokes__elements_8h_sour
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{navier__stokes__elements_8cc_source_l01185}{Navier\+Stokes\+Equations$<$ DIM $>$\+::strain\+\_\+rate()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{navier__stokes__elements_8cc_source_l01185}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::strain\+\_\+rate()}}.
 
 
 
@@ -301,7 +309,7 @@ Referenced by \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l0
 \index{pin\_redundant\_nodal\_pressures@{pin\_redundant\_nodal\_pressures}!oomph::RefineableNavierStokesEquations$<$ DIM $>$@{oomph::RefineableNavierStokesEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{pin\_redundant\_nodal\_pressures()}{pin\_redundant\_nodal\_pressures()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-static void \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations}{oomph\+::\+Refineable\+Navier\+Stokes\+Equations}}$<$ DIM $>$\+::pin\+\_\+redundant\+\_\+nodal\+\_\+pressures (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$ $>$ \&}]{element\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+static void \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations}{oomph\+::\+Refineable\+Navier\+Stokes\+Equations}}$<$ DIM $>$\+::pin\+\_\+redundant\+\_\+nodal\+\_\+pressures (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$ $>$ \&}]{element\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
 
 
 
@@ -323,7 +331,7 @@ References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, and \mbox{\hyperlink
 \index{pressure\_node\_pt@{pressure\_node\_pt}!oomph::RefineableNavierStokesEquations$<$ DIM $>$@{oomph::RefineableNavierStokesEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{pressure\_node\_pt()}{pressure\_node\_pt()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual Node $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations}{oomph\+::\+Refineable\+Navier\+Stokes\+Equations}}$<$ DIM $>$\+::pressure\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+virtual \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations}{oomph\+::\+Refineable\+Navier\+Stokes\+Equations}}$<$ DIM $>$\+::pressure\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -342,7 +350,7 @@ Definition at line \mbox{\hyperlink{refineable__navier__stokes__elements_8h_sour
 \index{unpin\_all\_pressure\_dofs@{unpin\_all\_pressure\_dofs}!oomph::RefineableNavierStokesEquations$<$ DIM $>$@{oomph::RefineableNavierStokesEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{unpin\_all\_pressure\_dofs()}{unpin\_all\_pressure\_dofs()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-static void \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations}{oomph\+::\+Refineable\+Navier\+Stokes\+Equations}}$<$ DIM $>$\+::unpin\+\_\+all\+\_\+pressure\+\_\+dofs (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$ $>$ \&}]{element\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+static void \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations}{oomph\+::\+Refineable\+Navier\+Stokes\+Equations}}$<$ DIM $>$\+::unpin\+\_\+all\+\_\+pressure\+\_\+dofs (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$ $>$ \&}]{element\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
 
 
 

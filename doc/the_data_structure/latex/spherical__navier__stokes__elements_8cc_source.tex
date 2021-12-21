@@ -98,7 +98,7 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00094}00094     \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} test(n\_node);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00095}00095 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00096}00096     \textcolor{comment}{// Number of integration points}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00097}00097     \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00097}00097     \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00098}00098 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00099}00099     \textcolor{comment}{// Integer to store the local equations no}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00100}00100     \textcolor{keywordtype}{int} local\_eqn = 0;}
@@ -107,17 +107,17 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00103}00103     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ipt = 0; ipt < n\_intpt; ipt++)}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00104}00104     \{}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00105}00105       \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00106}00106       \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00106}00106       \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00107}00107 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00108}00108       \textcolor{comment}{// Get determinant of Jacobian of the mapping}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00109}00109       \textcolor{keywordtype}{double} J = \mbox{\hyperlink{classoomph_1_1FiniteElement_a5767755a268db4802392ab15b4cb35a8}{J\_eulerian\_at\_knot}}(ipt);}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00109}00109       \textcolor{keywordtype}{double} J = \mbox{\hyperlink{classoomph_1_1FiniteElement_aa8a201e448a9200af7f87d612ef01227}{J\_eulerian\_at\_knot}}(ipt);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00110}00110 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00111}00111       \textcolor{comment}{// Premultiply weights and Jacobian}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00112}00112       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00112}00112       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00113}00113 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00114}00114       \textcolor{comment}{// Get the velocity test functions -\/ there is no explicit}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00115}00115       \textcolor{comment}{// function to give the test function so use shape}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00116}00116       \mbox{\hyperlink{classoomph_1_1FiniteElement_a2de680722518136b5c6bf2aacc267a31}{shape\_at\_knot}}(ipt, test);}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00116}00116       \mbox{\hyperlink{classoomph_1_1FiniteElement_aeccc0f774e3fab8c536e2d41004a1665}{shape\_at\_knot}}(ipt, test);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00117}00117 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00118}00118       \textcolor{comment}{// Need to get the position to sort out the jacobian properly}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00119}00119       \textcolor{keywordtype}{double} r = 0.0;}
@@ -129,7 +129,7 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00125}00125       \}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00126}00126 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00127}00127       \textcolor{comment}{// Multiply by the geometric factor}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00128}00128       \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} *= r * r * sin(theta);}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00128}00128       \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} *= r * r * sin(theta);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00129}00129 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00130}00130       \textcolor{comment}{// Loop over the veclocity test functions}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00131}00131       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} l = 0; l < n\_node; l++)}
@@ -143,7 +143,7 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00139}00139           \textcolor{keywordflow}{if} (local\_eqn >= 0)}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00140}00140           \{}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00141}00141             \textcolor{comment}{// Add the contribution}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00142}00142             veloc\_mass\_diag[local\_eqn] += test[l] * test[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00142}00142             veloc\_mass\_diag[local\_eqn] += test[l] * test[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00143}00143           \} \textcolor{comment}{// End of if not boundary condition statement}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00144}00144         \} \textcolor{comment}{// End of loop over dimension}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00145}00145       \} \textcolor{comment}{// End of loop over test functions}}
@@ -171,10 +171,10 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00167}00167     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(2);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00168}00168 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00169}00169     \textcolor{comment}{// Vector for coordintes}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00170}00170     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(2);}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00170}00170     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(2);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00171}00171 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00172}00172     \textcolor{comment}{// Set the value of n\_intpt}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00173}00173     \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00173}00173     \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00174}00174 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00175}00175     outfile << \textcolor{stringliteral}{"{}ZONE"{}} << std::endl;}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00176}00176 }
@@ -187,36 +187,36 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00183}00183       \textcolor{comment}{// Assign values of s}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00184}00184       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00185}00185       \{}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00186}00186         \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>knot(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00186}00186         \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{knot}}(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00187}00187       \}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00188}00188 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00189}00189       \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00190}00190       \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00190}00190       \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00191}00191 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00192}00192       \textcolor{comment}{// Get jacobian of mapping}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00193}00193       \textcolor{keywordtype}{double} J = \mbox{\hyperlink{classoomph_1_1FiniteElement_a808557a124b98d5bbe3bb3b22c81b44b}{J\_eulerian}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00193}00193       \textcolor{keywordtype}{double} J = \mbox{\hyperlink{classoomph_1_1FiniteElement_a089e58d5ad9b8efee637221b0e264563}{J\_eulerian}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00194}00194 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00195}00195       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00196}00196       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00196}00196       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00197}00197 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00198}00198       \textcolor{comment}{// Get x position as Vector}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00199}00199       \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00199}00199       \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00200}00200 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00201}00201       \textcolor{comment}{// Get exact solution at this point}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00202}00202       (*exact\_soln\_pt)(time, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, exact\_soln);}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00202}00202       (*exact\_soln\_pt)(time, x, exact\_soln);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00203}00203 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00204}00204       \textcolor{comment}{// Velocity error}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00205}00205       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 3; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00206}00206       \{}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00207}00207         norm += exact\_soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * exact\_soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00207}00207         norm += exact\_soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * exact\_soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00208}00208         error += (exact\_soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_af59a7941f1ac3c2b3bc9a8aacbfa4625}{interpolated\_u\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})) *}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00209}00209                  (exact\_soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_af59a7941f1ac3c2b3bc9a8aacbfa4625}{interpolated\_u\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00209}00209                  (exact\_soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_af59a7941f1ac3c2b3bc9a8aacbfa4625}{interpolated\_u\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00210}00210       \}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00211}00211 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00212}00212       \textcolor{comment}{// Output x,y,...,u\_exact}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00213}00213       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00214}00214       \{}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00215}00215         outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00215}00215         outfile << x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00216}00216       \}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00217}00217 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00218}00218       \textcolor{comment}{// Output x,y,[z],u\_error,v\_error,[w\_error]}}
@@ -249,10 +249,10 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00245}00245     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(2);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00246}00246 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00247}00247     \textcolor{comment}{// Vector for coordintes}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00248}00248     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(2);}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00248}00248     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(2);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00249}00249 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00250}00250     \textcolor{comment}{// Set the value of n\_intpt}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00251}00251     \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00251}00251     \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00252}00252 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00253}00253 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00254}00254     outfile << \textcolor{stringliteral}{"{}ZONE"{}} << std::endl;}
@@ -266,36 +266,36 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00262}00262       \textcolor{comment}{// Assign values of s}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00263}00263       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00264}00264       \{}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00265}00265         \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>knot(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00265}00265         \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{knot}}(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00266}00266       \}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00267}00267 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00268}00268       \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00269}00269       \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00269}00269       \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00270}00270 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00271}00271       \textcolor{comment}{// Get jacobian of mapping}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00272}00272       \textcolor{keywordtype}{double} J = \mbox{\hyperlink{classoomph_1_1FiniteElement_a808557a124b98d5bbe3bb3b22c81b44b}{J\_eulerian}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00272}00272       \textcolor{keywordtype}{double} J = \mbox{\hyperlink{classoomph_1_1FiniteElement_a089e58d5ad9b8efee637221b0e264563}{J\_eulerian}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00273}00273 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00274}00274       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00275}00275       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00275}00275       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00276}00276 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00277}00277       \textcolor{comment}{// Get x position as Vector}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00278}00278       \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00278}00278       \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00279}00279 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00280}00280       \textcolor{comment}{// Get the exact solution at this point}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00281}00281       (*exact\_soln\_pt)(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, exact\_soln);}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00281}00281       (*exact\_soln\_pt)(x, exact\_soln);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00282}00282 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00283}00283       \textcolor{comment}{// Velocity error}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00284}00284       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 3; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00285}00285       \{}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00286}00286         norm += exact\_soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * exact\_soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00286}00286         norm += exact\_soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * exact\_soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00287}00287         error += (exact\_soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_af59a7941f1ac3c2b3bc9a8aacbfa4625}{interpolated\_u\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})) *}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00288}00288                  (exact\_soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_af59a7941f1ac3c2b3bc9a8aacbfa4625}{interpolated\_u\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00288}00288                  (exact\_soln[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_af59a7941f1ac3c2b3bc9a8aacbfa4625}{interpolated\_u\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00289}00289       \}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00290}00290 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00291}00291       \textcolor{comment}{// Output x,y,...,u\_exact}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00292}00292       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00293}00293       \{}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00294}00294         outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00294}00294         outfile << x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00295}00295       \}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00296}00296 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00297}00297       \textcolor{comment}{// Output x,y,[z],u\_error,v\_error,[w\_error]}}
@@ -332,10 +332,10 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00328}00328     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(2);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00329}00329 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00330}00330     \textcolor{comment}{// Vector for coordinates}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00331}00331     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(2);}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00331}00331     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(2);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00332}00332 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00333}00333     \textcolor{comment}{// Set the value of n\_intpt}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00334}00334     \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00334}00334     \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00335}00335 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00336}00336 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00337}00337 \textcolor{comment}{    /// Exact solution Vectors (u,v,[w],p) -\/}}
@@ -351,35 +351,35 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00347}00347       \textcolor{comment}{// Assign values of s}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00348}00348       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00349}00349       \{}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00350}00350         \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>knot(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00350}00350         \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{knot}}(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00351}00351       \}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00352}00352 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00353}00353       \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00354}00354       \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00354}00354       \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00355}00355 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00356}00356       \textcolor{comment}{// Get jacobian of mapping}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00357}00357       \textcolor{keywordtype}{double} J = \mbox{\hyperlink{classoomph_1_1FiniteElement_a808557a124b98d5bbe3bb3b22c81b44b}{J\_eulerian}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00357}00357       \textcolor{keywordtype}{double} J = \mbox{\hyperlink{classoomph_1_1FiniteElement_a089e58d5ad9b8efee637221b0e264563}{J\_eulerian}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00358}00358 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00359}00359       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00360}00360       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00360}00360       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00361}00361 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00362}00362       \textcolor{comment}{// Get x position as Vector}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00363}00363       \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00363}00363       \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00364}00364 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00365}00365       \textcolor{comment}{// Get exact solution at the point x using the 'actual' functions}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00366}00366       (*exact\_soln\_pt)(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, exact\_soln);}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00367}00367       (*exact\_soln\_dr\_pt)(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, exact\_soln\_dr);}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00368}00368       (*exact\_soln\_dtheta\_pt)(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, exact\_soln\_dth);}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00366}00366       (*exact\_soln\_pt)(x, exact\_soln);}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00367}00367       (*exact\_soln\_dr\_pt)(x, exact\_soln\_dr);}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00368}00368       (*exact\_soln\_dtheta\_pt)(x, exact\_soln\_dth);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00369}00369 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00370}00370       \textcolor{comment}{// exact\_soln = actual(x);}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00371}00371       \textcolor{comment}{// exact\_soln\_dr = actual\_dr(x);}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00372}00372       \textcolor{comment}{// exact\_soln\_dth = actual\_dth(x);}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00373}00373 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00374}00374 }
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00375}00375       \textcolor{keywordtype}{double} r = \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[0];}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00376}00376       \textcolor{keywordtype}{double} theta = \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[1];}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00375}00375       \textcolor{keywordtype}{double} r = x[0];}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00376}00376       \textcolor{keywordtype}{double} theta = x[1];}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00377}00377 }
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00378}00378       \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} *= r * r * sin(theta);}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00378}00378       \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} *= r * r * sin(theta);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00379}00379 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00380}00380 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00381}00381       \textcolor{comment}{// Velocity error in energy norm}}
@@ -395,7 +395,7 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00391}00391       \textcolor{comment}{// Entry (1,2) in dyad matrix}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00392}00392       \textcolor{comment}{// No contribution}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00393}00393       \textcolor{comment}{// Entry (1,3) in dyad matrix}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00394}00394       u\_norm += (1 / (r * r)) * exact\_soln[2] * exact\_soln[2] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00394}00394       u\_norm += (1 / (r * r)) * exact\_soln[2] * exact\_soln[2] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00395}00395       \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00396}00396       \textcolor{comment}{// Entry (2,1) in dyad matrix}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00397}00397       \textcolor{comment}{// No contribution}}
@@ -403,12 +403,12 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00399}00399       \textcolor{comment}{// No contribution}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00400}00400       \textcolor{comment}{// Entry (2,3) in dyad matrix}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00401}00401       u\_norm += \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a8a160b5a04c9ba5bab06f3b2b184499f}{cot}}(theta) * \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a8a160b5a04c9ba5bab06f3b2b184499f}{cot}}(theta) * (1 / (r * r)) * exact\_soln[2] *}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00402}00402                 exact\_soln[2] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00402}00402                 exact\_soln[2] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00403}00403       \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00404}00404       \textcolor{comment}{// Entry (3,1) in dyad matrix}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00405}00405       u\_norm += exact\_soln\_dr[2] * exact\_soln\_dr[2] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00405}00405       u\_norm += exact\_soln\_dr[2] * exact\_soln\_dr[2] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00406}00406       \textcolor{comment}{// Entry (3,2) in dyad matrix}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00407}00407       u\_norm += (1 / (r * r)) * exact\_soln\_dth[2] * exact\_soln\_dth[2] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00407}00407       u\_norm += (1 / (r * r)) * exact\_soln\_dth[2] * exact\_soln\_dth[2] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00408}00408       \textcolor{comment}{// Entry (3,3) in dyad matrix}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00409}00409       \textcolor{comment}{// No contribution}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00410}00410       \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
@@ -420,66 +420,66 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00416}00416       \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00417}00417       \textcolor{comment}{// Entry (1,1) in dyad matrix}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00418}00418       u\_error += \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a103fc06bfd3cad9f5511686e5e5d1ce9}{interpolated\_dudx\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0, 0) *}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00419}00419                  \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a103fc06bfd3cad9f5511686e5e5d1ce9}{interpolated\_dudx\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0, 0) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00419}00419                  \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a103fc06bfd3cad9f5511686e5e5d1ce9}{interpolated\_dudx\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0, 0) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00420}00420       \textcolor{comment}{// Entry (1,2) in dyad matrix}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00421}00421       u\_error += (1 / (r * r)) *}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00422}00422                  (\mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_af59a7941f1ac3c2b3bc9a8aacbfa4625}{interpolated\_u\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 1) -\/}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00423}00423                   \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a103fc06bfd3cad9f5511686e5e5d1ce9}{interpolated\_dudx\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0, 1)) *}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00424}00424                  (\mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_af59a7941f1ac3c2b3bc9a8aacbfa4625}{interpolated\_u\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 1) -\/}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00425}00425                   \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a103fc06bfd3cad9f5511686e5e5d1ce9}{interpolated\_dudx\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0, 1)) *}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00426}00426                  \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00426}00426                  \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00427}00427       \textcolor{comment}{// Entry (1,3) in dyad matrix}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00428}00428       u\_error += (1 / (r * r)) *}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00429}00429                  (\mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_af59a7941f1ac3c2b3bc9a8aacbfa4625}{interpolated\_u\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 2) -\/ exact\_soln[2]) *}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00430}00430                  (\mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_af59a7941f1ac3c2b3bc9a8aacbfa4625}{interpolated\_u\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 2) -\/ exact\_soln[2]) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00430}00430                  (\mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_af59a7941f1ac3c2b3bc9a8aacbfa4625}{interpolated\_u\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 2) -\/ exact\_soln[2]) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00431}00431       \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00432}00432       \textcolor{comment}{// Entry (2,1) in dyad matrix}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00433}00433       u\_error += \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a103fc06bfd3cad9f5511686e5e5d1ce9}{interpolated\_dudx\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 1, 0) *}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00434}00434                  \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a103fc06bfd3cad9f5511686e5e5d1ce9}{interpolated\_dudx\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 1, 0) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00434}00434                  \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a103fc06bfd3cad9f5511686e5e5d1ce9}{interpolated\_dudx\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 1, 0) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00435}00435       \textcolor{comment}{// Entry (2,2) in dyad matrix}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00436}00436       u\_error += (1 / (r * r)) *}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00437}00437                  (\mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a103fc06bfd3cad9f5511686e5e5d1ce9}{interpolated\_dudx\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 1, 1) +}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00438}00438                   \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_af59a7941f1ac3c2b3bc9a8aacbfa4625}{interpolated\_u\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0)) *}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00439}00439                  (\mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a103fc06bfd3cad9f5511686e5e5d1ce9}{interpolated\_dudx\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 1, 1) +}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00440}00440                   \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_af59a7941f1ac3c2b3bc9a8aacbfa4625}{interpolated\_u\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0)) *}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00441}00441                  \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00441}00441                  \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00442}00442       \textcolor{comment}{// Entry (2,3) in dyad matrix}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00443}00443       u\_error += (1 / (r * r)) * \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a8a160b5a04c9ba5bab06f3b2b184499f}{cot}}(theta) * \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a8a160b5a04c9ba5bab06f3b2b184499f}{cot}}(theta) *}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00444}00444                  (\mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_af59a7941f1ac3c2b3bc9a8aacbfa4625}{interpolated\_u\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 2) -\/ exact\_soln[2]) *}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00445}00445                  (\mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_af59a7941f1ac3c2b3bc9a8aacbfa4625}{interpolated\_u\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 2) -\/ exact\_soln[2]) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00445}00445                  (\mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_af59a7941f1ac3c2b3bc9a8aacbfa4625}{interpolated\_u\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 2) -\/ exact\_soln[2]) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00446}00446       \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00447}00447       \textcolor{comment}{// Entry (3,1) in dyad matrix}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00448}00448       u\_error += (exact\_soln\_dr[2] -\/ \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a103fc06bfd3cad9f5511686e5e5d1ce9}{interpolated\_dudx\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 2, 0)) *}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00449}00449                  (exact\_soln\_dr[2] -\/ \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a103fc06bfd3cad9f5511686e5e5d1ce9}{interpolated\_dudx\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 2, 0)) *}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00450}00450                  \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00450}00450                  \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00451}00451       \textcolor{comment}{// Entry (3,2) in dyad matrix}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00452}00452       u\_error +=}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00453}00453         (1 / (r * r)) *}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00454}00454         (exact\_soln\_dth[2] -\/ \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a103fc06bfd3cad9f5511686e5e5d1ce9}{interpolated\_dudx\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 2, 1)) *}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00455}00455         (exact\_soln\_dth[2] -\/ \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a103fc06bfd3cad9f5511686e5e5d1ce9}{interpolated\_dudx\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 2, 1)) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00455}00455         (exact\_soln\_dth[2] -\/ \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a103fc06bfd3cad9f5511686e5e5d1ce9}{interpolated\_dudx\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 2, 1)) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00456}00456       \textcolor{comment}{// Entry (3,3) in dyad matrix}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00457}00457       u\_error += (1 / (r * r)) *}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00458}00458                  (\mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_af59a7941f1ac3c2b3bc9a8aacbfa4625}{interpolated\_u\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0) -\/}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00459}00459                   \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a8a160b5a04c9ba5bab06f3b2b184499f}{cot}}(theta) * \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_af59a7941f1ac3c2b3bc9a8aacbfa4625}{interpolated\_u\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 1)) *}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00460}00460                  (\mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_af59a7941f1ac3c2b3bc9a8aacbfa4625}{interpolated\_u\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0) -\/}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00461}00461                   \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a8a160b5a04c9ba5bab06f3b2b184499f}{cot}}(theta) * \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_af59a7941f1ac3c2b3bc9a8aacbfa4625}{interpolated\_u\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 1)) *}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00462}00462                  \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00462}00462                  \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00463}00463       \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00464}00464       \textcolor{comment}{// End of velocity error calculation}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00465}00465 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00466}00466       \textcolor{comment}{// Pressure error in L2 norm -\/ energy norm not required here as the}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00467}00467       \textcolor{comment}{// pressure only appears undifferentiated in the NS SPC weak form.}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00468}00468 }
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00469}00469       p\_norm += exact\_soln[3] * exact\_soln[3] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00469}00469       p\_norm += exact\_soln[3] * exact\_soln[3] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00470}00470 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00471}00471       p\_error += (exact\_soln[3] -\/ \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a93c638dbbf7fdcb0202514766e71bc73}{interpolated\_p\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})) *}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00472}00472                  (exact\_soln[3] -\/ \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a93c638dbbf7fdcb0202514766e71bc73}{interpolated\_p\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00472}00472                  (exact\_soln[3] -\/ \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a93c638dbbf7fdcb0202514766e71bc73}{interpolated\_p\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00473}00473 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00474}00474 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00475}00475       \textcolor{comment}{// Output r and theta coordinates}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00476}00476       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00477}00477       \{}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00478}00478         outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00478}00478         outfile << x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00479}00479       \}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00480}00480 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00481}00481       \textcolor{comment}{// Output the velocity error details in the energy norm}}
@@ -503,7 +503,7 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00499}00499     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(2);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00500}00500 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00501}00501     \textcolor{comment}{// Vector for coordinates}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00502}00502     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(2);}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00502}00502     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(2);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00503}00503 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00504}00504     \textcolor{comment}{// Number of plot points}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00505}00505     \textcolor{keywordtype}{unsigned} Npts = 3;}
@@ -520,14 +520,14 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00516}00516 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00517}00517 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00518}00518       \textcolor{comment}{// Get position as global coordinate}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00519}00519       \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00519}00519       \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00520}00520 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00521}00521       \textcolor{comment}{// Output r and theta coordinates}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00522}00522       outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[0] << \textcolor{stringliteral}{"{} "{}};}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00523}00523       outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[1] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00522}00522       outfile << x[0] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00523}00523       outfile << x[1] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00524}00524 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00525}00525       \textcolor{comment}{// Output the shear stress at the current coordinate}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00526}00526       \textcolor{keywordtype}{double} r = \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[0];}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00526}00526       \textcolor{keywordtype}{double} r = x[0];}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00527}00527       shear = \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a103fc06bfd3cad9f5511686e5e5d1ce9}{interpolated\_dudx\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 2, 0) -\/}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00528}00528               (1 / r) * \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_af59a7941f1ac3c2b3bc9a8aacbfa4625}{interpolated\_u\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 2);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00529}00529       outfile << shear << \textcolor{stringliteral}{"{}  "{}};}
@@ -547,7 +547,7 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00543}00543     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(2);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00544}00544 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00545}00545     \textcolor{comment}{// Vector for coordinates}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00546}00546     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(2);}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00546}00546     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(2);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00547}00547 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00548}00548     \textcolor{comment}{// Number of plot points}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00549}00549     \textcolor{keywordtype}{unsigned} Npts = 3;}
@@ -561,9 +561,9 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00557}00557 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00558}00558 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00559}00559       \textcolor{comment}{// Get position as global coordinate}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00560}00560       \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00561}00561       \textcolor{keywordtype}{double} r = \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[0];}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00562}00562       \textcolor{keywordtype}{double} theta = \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[1];}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00560}00560       \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00561}00561       \textcolor{keywordtype}{double} r = x[0];}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00562}00562       \textcolor{keywordtype}{double} theta = x[1];}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00563}00563 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00564}00564       \textcolor{comment}{// Output r and theta coordinates}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00565}00565       outfile << r << \textcolor{stringliteral}{"{} "{}};}
@@ -581,43 +581,43 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00577}00577       outfile << shear << \textcolor{stringliteral}{"{}  "{}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00578}00578 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00579}00579       \textcolor{comment}{// Coordinate setup for norm}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00580}00580       \textcolor{keywordtype}{double} J = \mbox{\hyperlink{classoomph_1_1FiniteElement_a808557a124b98d5bbe3bb3b22c81b44b}{J\_eulerian}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00580}00580       \textcolor{keywordtype}{double} J = \mbox{\hyperlink{classoomph_1_1FiniteElement_a089e58d5ad9b8efee637221b0e264563}{J\_eulerian}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00581}00581       \textcolor{keywordflow}{if} (\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} != 1)}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00582}00582       \{}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00583}00583         \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>weight(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00584}00584         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00585}00585         \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} *= r * r * sin(theta);}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00583}00583         \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00584}00584         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00585}00585         \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} *= r * r * sin(theta);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00586}00586 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00587}00587         \textcolor{comment}{// Output the velocity integral at current point}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00588}00588         \textcolor{keywordtype}{double} u\_int = 0.0;}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00589}00589         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < 3; j++)}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00590}00590         \{}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00591}00591           u\_int += \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_af59a7941f1ac3c2b3bc9a8aacbfa4625}{interpolated\_u\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, j) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00591}00591           u\_int += \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_af59a7941f1ac3c2b3bc9a8aacbfa4625}{interpolated\_u\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, j) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00592}00592         \}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00593}00593         outfile << u\_int << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00594}00594 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00595}00595         \textcolor{comment}{// Output the pressure integral at current point}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00596}00596         \textcolor{keywordtype}{double} p\_int = \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a93c638dbbf7fdcb0202514766e71bc73}{interpolated\_p\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00596}00596         \textcolor{keywordtype}{double} p\_int = \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a93c638dbbf7fdcb0202514766e71bc73}{interpolated\_p\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00597}00597         outfile << p\_int;}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00598}00598         outfile << std::endl;}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00599}00599       \}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00600}00600 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00601}00601       \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00602}00602       \{}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00603}00603         \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>weight(5);}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00604}00604         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00605}00605         \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} *= r * r * sin(theta);}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00603}00603         \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(5);}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00604}00604         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00605}00605         \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} *= r * r * sin(theta);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00606}00606 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00607}00607         \textcolor{comment}{// Output the velocity integral at current point}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00608}00608         \textcolor{keywordtype}{double} u\_int = 0.0;}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00609}00609         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < 3; j++)}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00610}00610         \{}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00611}00611           u\_int += \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_af59a7941f1ac3c2b3bc9a8aacbfa4625}{interpolated\_u\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, j) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00611}00611           u\_int += \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_af59a7941f1ac3c2b3bc9a8aacbfa4625}{interpolated\_u\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, j) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00612}00612         \}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00613}00613         outfile << u\_int << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00614}00614 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00615}00615         \textcolor{comment}{// Output the pressure integral at current point}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00616}00616         \textcolor{keywordtype}{double} p\_int = \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a93c638dbbf7fdcb0202514766e71bc73}{interpolated\_p\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00616}00616         \textcolor{keywordtype}{double} p\_int = \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a93c638dbbf7fdcb0202514766e71bc73}{interpolated\_p\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00617}00617         outfile << p\_int;}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00618}00618         outfile << std::endl;}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00619}00619       \}}
@@ -640,7 +640,7 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00636}00636     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(2);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00637}00637 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00638}00638     \textcolor{comment}{// Vector for coordintes}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00639}00639     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(2);}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00639}00639     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(2);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00640}00640 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00641}00641     \textcolor{comment}{// Tecplot header info}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00642}00642     outfile << \mbox{\hyperlink{classoomph_1_1FiniteElement_a3193df31f9ce38e0609d17a8ffb386c6}{tecplot\_zone\_string}}(nplot);}
@@ -657,15 +657,15 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00653}00653       \mbox{\hyperlink{classoomph_1_1FiniteElement_a82da844fd3ebb2005842464cdc148a03}{get\_s\_plot}}(iplot, nplot, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00654}00654 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00655}00655       \textcolor{comment}{// Get x position as Vector}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00656}00656       \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00656}00656       \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00657}00657 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00658}00658       \textcolor{comment}{// Get exact solution at this point}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00659}00659       (*exact\_soln\_pt)(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, exact\_soln);}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00659}00659       (*exact\_soln\_pt)(x, exact\_soln);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00660}00660 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00661}00661       \textcolor{comment}{// Output x,y,...}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00662}00662       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 3; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00663}00663       \{}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00664}00664         outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00664}00664         outfile << x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00665}00665       \}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00666}00666 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00667}00667       \textcolor{comment}{// Output "{}exact solution"{}}}
@@ -697,7 +697,7 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00693}00693     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(2);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00694}00694 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00695}00695     \textcolor{comment}{// Vector for coordinates}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00696}00696     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(2);}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00696}00696     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(2);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00697}00697 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00698}00698     \textcolor{comment}{// Tecplot header info}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00699}00699     outfile << \mbox{\hyperlink{classoomph_1_1FiniteElement_a3193df31f9ce38e0609d17a8ffb386c6}{tecplot\_zone\_string}}(nplot);}
@@ -713,15 +713,15 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00709}00709       \mbox{\hyperlink{classoomph_1_1FiniteElement_a82da844fd3ebb2005842464cdc148a03}{get\_s\_plot}}(iplot, nplot, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00710}00710 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00711}00711       \textcolor{comment}{// Get x position as Vector}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00712}00712       \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00712}00712       \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00713}00713 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00714}00714       \textcolor{comment}{// Get exact solution at this point}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00715}00715       (*exact\_soln\_pt)(time, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, exact\_soln);}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00715}00715       (*exact\_soln\_pt)(time, x, exact\_soln);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00716}00716 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00717}00717       \textcolor{comment}{// Output x,y,...}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00718}00718       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 3; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00719}00719       \{}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00720}00720         outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00720}00720         outfile << x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00721}00721       \}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00722}00722 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00723}00723       \textcolor{comment}{// Output "{}exact solution"{}}}
@@ -756,7 +756,7 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00752}00752 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00753}00753     \textcolor{comment}{// Vectors of local coordinates and coords and velocities}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00754}00754     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(2);}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00755}00755     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(2);}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00755}00755     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(2);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00756}00756     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} interpolated\_u(3);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00757}00757 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00758}00758     \textcolor{comment}{// Tecplot header info}}
@@ -775,7 +775,7 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00771}00771       \textcolor{comment}{// Loop over directions}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00772}00772       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 3; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00773}00773       \{}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00774}00774         \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = 0.0;}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00774}00774         \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = 0.0;}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00775}00775         interpolated\_u[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = 0.0;}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00776}00776         \textcolor{comment}{// Get the index at which velocity i is stored}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00777}00777         \textcolor{keywordtype}{unsigned} u\_nodal\_index = \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a2f269e20874a87df919cc4ece4b05fe5}{u\_index\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
@@ -783,14 +783,14 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00779}00779         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} l = 0; l < n\_node; l++)}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00780}00780         \{}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00781}00781           interpolated\_u[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += \mbox{\hyperlink{classoomph_1_1FiniteElement_a28fd5c2d4aeba5ef65bee0e0d72569f5}{nodal\_value}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, l, u\_nodal\_index) * psi[l];}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00782}00782           \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += \mbox{\hyperlink{classoomph_1_1FiniteElement_a9152c16ae9899168bcdaac7c2f977444}{nodal\_position}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * psi[l];}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00782}00782           \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += \mbox{\hyperlink{classoomph_1_1FiniteElement_a9152c16ae9899168bcdaac7c2f977444}{nodal\_position}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * psi[l];}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00783}00783         \}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00784}00784       \}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00785}00785 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00786}00786       \textcolor{comment}{// Coordinates}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00787}00787       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00788}00788       \{}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00789}00789         outfile << \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00789}00789         outfile << \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00790}00790       \}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00791}00791 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00792}00792       \textcolor{comment}{// Velocities}}
@@ -835,8 +835,8 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00831}00831       \textcolor{comment}{// \}}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00832}00832 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00833}00833       \textcolor{comment}{// Output the coordinates in Cartesian coordintes}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00834}00834       \textcolor{keywordtype}{double} r = \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0);}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00835}00835       \textcolor{keywordtype}{double} theta = \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 1);}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00834}00834       \textcolor{keywordtype}{double} r = \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 0);}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00835}00835       \textcolor{keywordtype}{double} theta = \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, 1);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00836}00836       \textcolor{comment}{// The actual Cartesian values}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00837}00837       outfile << r * sin(theta) << \textcolor{stringliteral}{"{} "{}} << r * cos(theta) << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00838}00838 }
@@ -895,7 +895,7 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00891}00891       \textcolor{comment}{// Coordinates}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00892}00892       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00893}00893       \{}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00894}00894         fprintf(file\_pt, \textcolor{stringliteral}{"{}\%g "{}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00894}00894         fprintf(file\_pt, \textcolor{stringliteral}{"{}\%g "{}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00895}00895       \}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00896}00896 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l00897}00897       \textcolor{comment}{// Velocities}}
@@ -1011,7 +1011,7 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01007}01007       \textcolor{comment}{// Coordinates}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01008}01008       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01009}01009       \{}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01010}01010         outfile << \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01010}01010         outfile << \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01011}01011       \}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01012}01012 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01013}01013       \textcolor{comment}{// Velocities}}
@@ -1069,7 +1069,7 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01065}01065       \textcolor{comment}{// Coordinates}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01066}01066       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01067}01067       \{}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01068}01068         outfile << \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01068}01068         outfile << \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01069}01069       \}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01070}01070 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01071}01071       \textcolor{comment}{// Get vorticity}}
@@ -1093,7 +1093,7 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01089}01089     \textcolor{keywordtype}{double} diss = 0.0;}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01090}01090 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01091}01091     \textcolor{comment}{// Set the value of n\_intpt}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01092}01092     \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01092}01092     \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01093}01093 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01094}01094     \textcolor{comment}{// Set the Vector to hold local coordinates}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01095}01095     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(2);}
@@ -1104,14 +1104,14 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01100}01100       \textcolor{comment}{// Assign values of s}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01101}01101       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01102}01102       \{}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01103}01103         \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>knot(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01103}01103         \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{knot}}(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01104}01104       \}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01105}01105 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01106}01106       \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01107}01107       \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01107}01107       \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01108}01108 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01109}01109       \textcolor{comment}{// Get Jacobian of mapping}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01110}01110       \textcolor{keywordtype}{double} J = \mbox{\hyperlink{classoomph_1_1FiniteElement_a808557a124b98d5bbe3bb3b22c81b44b}{J\_eulerian}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01110}01110       \textcolor{keywordtype}{double} J = \mbox{\hyperlink{classoomph_1_1FiniteElement_a089e58d5ad9b8efee637221b0e264563}{J\_eulerian}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01111}01111 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01112}01112       \textcolor{comment}{// Get strain rate matrix}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01113}01113       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} strainrate(3, 3);}
@@ -1377,7 +1377,7 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01373}01373     \textcolor{keywordtype}{double} kin\_en = 0.0;}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01374}01374 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01375}01375     \textcolor{comment}{// Set the value of n\_intpt}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01376}01376     \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01376}01376     \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01377}01377 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01378}01378     \textcolor{comment}{// Set the Vector to hold local coordinates}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01379}01379     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(2);}
@@ -1388,14 +1388,14 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01384}01384       \textcolor{comment}{// Assign values of s}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01385}01385       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01386}01386       \{}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01387}01387         \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>knot(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01387}01387         \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{knot}}(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01388}01388       \}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01389}01389 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01390}01390       \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01391}01391       \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01391}01391       \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01392}01392 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01393}01393       \textcolor{comment}{// Get Jacobian of mapping}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01394}01394       \textcolor{keywordtype}{double} J = \mbox{\hyperlink{classoomph_1_1FiniteElement_a808557a124b98d5bbe3bb3b22c81b44b}{J\_eulerian}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01394}01394       \textcolor{keywordtype}{double} J = \mbox{\hyperlink{classoomph_1_1FiniteElement_a089e58d5ad9b8efee637221b0e264563}{J\_eulerian}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01395}01395 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01396}01396       \textcolor{comment}{// Loop over directions}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01397}01397       \textcolor{keywordtype}{double} veloc\_squared = 0.0;}
@@ -1426,7 +1426,7 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01422}01422     \textcolor{keywordtype}{double} d\_kin\_en\_dt = 0.0;}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01423}01423 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01424}01424     \textcolor{comment}{// Set the value of n\_intpt}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01425}01425     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01425}01425     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01426}01426 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01427}01427     \textcolor{comment}{// Set the Vector to hold local coordinates}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01428}01428     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(2);}
@@ -1449,10 +1449,10 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01445}01445     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ipt = 0; ipt < n\_intpt; ipt++)}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01446}01446     \{}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01447}01447       \textcolor{comment}{// Get the jacobian of the mapping}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01448}01448       \textcolor{keywordtype}{double} J = \mbox{\hyperlink{classoomph_1_1FiniteElement_a837c4849f68842295ab5e77c8ecb8b93}{dshape\_eulerian\_at\_knot}}(ipt, psi, dpsidx);}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01448}01448       \textcolor{keywordtype}{double} J = \mbox{\hyperlink{classoomph_1_1FiniteElement_a368c44e295e35dd0b697be3222ce7b2f}{dshape\_eulerian\_at\_knot}}(ipt, psi, dpsidx);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01449}01449 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01450}01450       \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01451}01451       \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01451}01451       \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01452}01452 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01453}01453       \textcolor{comment}{// Now work out the velocity and the time derivative}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01454}01454       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} interpolated\_u(3, 0.0), interpolated\_dudt(3, 0.0);}
@@ -1528,7 +1528,7 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01524}01524     \textcolor{keywordtype}{double} press\_int = 0;}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01525}01525 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01526}01526     \textcolor{comment}{// Set the value of n\_intpt}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01527}01527     \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01527}01527     \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01528}01528 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01529}01529     \textcolor{comment}{// Set the Vector to hold local coordinates}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01530}01530     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(2);}
@@ -1539,23 +1539,23 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01535}01535       \textcolor{comment}{// Assign values of s}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01536}01536       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01537}01537       \{}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01538}01538         \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>knot(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01538}01538         \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{knot}}(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01539}01539       \}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01540}01540 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01541}01541       \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01542}01542       \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01542}01542       \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01543}01543 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01544}01544       \textcolor{comment}{// Get Jacobian of mapping}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01545}01545       \textcolor{keywordtype}{double} J = \mbox{\hyperlink{classoomph_1_1FiniteElement_a808557a124b98d5bbe3bb3b22c81b44b}{J\_eulerian}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01545}01545       \textcolor{keywordtype}{double} J = \mbox{\hyperlink{classoomph_1_1FiniteElement_a089e58d5ad9b8efee637221b0e264563}{J\_eulerian}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01546}01546 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01547}01547       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01548}01548       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01548}01548       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01549}01549 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01550}01550       \textcolor{comment}{// Get pressure}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01551}01551       \textcolor{keywordtype}{double} press = \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a93c638dbbf7fdcb0202514766e71bc73}{interpolated\_p\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01552}01552 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01553}01553       \textcolor{comment}{// Add}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01554}01554       press\_int += press * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01554}01554       press\_int += press * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01555}01555     \}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01556}01556 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01557}01557     \textcolor{keywordflow}{return} press\_int;}
@@ -1580,7 +1580,7 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01576}01576     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_node = \mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01577}01577 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01578}01578     \textcolor{comment}{// Get continuous time from timestepper of first node}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01579}01579     \textcolor{keywordtype}{double} time = \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>time\_stepper\_pt()-\/>time\_pt()-\/>time();}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01579}01579     \textcolor{keywordtype}{double} time = \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Data_a065d7bffcec82bf4d4bd7b41f9aa80b3}{time\_stepper\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1TimeStepper_ac73981d5a68161d7b317bebb4ee04adb}{time\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Time_a43461269b799134f4b7a9aca3e79a7c8}{time}}();}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01580}01580 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01581}01581     \textcolor{comment}{// Find out how many pressure dofs there are}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01582}01582     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_pres = \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_ae01203564bc66dacf84c1ed65e4b7930}{npres\_spherical\_nst}}();}
@@ -1600,7 +1600,7 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01596}01596     \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} psip(n\_pres), testp(n\_pres);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01597}01597 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01598}01598     \textcolor{comment}{// Number of integration points}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01599}01599     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01599}01599     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01600}01600 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01601}01601     \textcolor{comment}{// Set the Vector to hold local coordinates}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01602}01602     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(2);}
@@ -1621,9 +1621,9 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01617}01617     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ipt = 0; ipt < n\_intpt; ipt++)}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01618}01618     \{}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01619}01619       \textcolor{comment}{// Assign values of s}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01620}01620       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++) \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>knot(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01620}01620       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++) \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{knot}}(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01621}01621       \textcolor{comment}{// Get the integral weight}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01622}01622       \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01622}01622       \textcolor{keywordtype}{double} w = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{weight}}(ipt);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01623}01623 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01624}01624       \textcolor{comment}{// Call the derivatives of the shape and test functions}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01625}01625       \textcolor{keywordtype}{double} J = \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a10ed6f34245f5b31095ae636fc08749a}{dshape\_and\_dtest\_eulerian\_at\_knot\_spherical\_nst}}(}
@@ -1633,13 +1633,13 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01629}01629       \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a17799ec1f3a1d8bbeee1d357bba0a249}{pshape\_spherical\_nst}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, psip, testp);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01630}01630 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01631}01631       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01632}01632       \textcolor{keyword}{const} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01632}01632       \textcolor{keyword}{const} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01633}01633 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01634}01634       \textcolor{comment}{// Calculate local values of the pressure and velocity components}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01635}01635       \textcolor{comment}{// Allocate}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01636}01636       \textcolor{keywordtype}{double} interpolated\_p = 0.0;}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01637}01637       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} interpolated\_u(3, 0.0);}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01638}01638       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(2, 0.0);}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01638}01638       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(2, 0.0);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01639}01639       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} mesh\_velocity(2, 0.0);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01640}01640       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} dudt(3, 0.0);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01641}01641       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}} interpolated\_dudx(3, 2, 0.0);}
@@ -1657,11 +1657,11 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01653}01653       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} l = 0; l < n\_node; l++)}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01654}01654       \{}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01655}01655         \textcolor{comment}{// cache the shape functions}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01656}01656         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_aff0c55ce31f12df52b2fe5ae647ffebe}{psi\_}} = psif(l);}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01656}01656         \textcolor{keywordtype}{double} psi\_ = psif(l);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01657}01657         \textcolor{comment}{// Loop over the positions separately}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01658}01658         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01659}01659         \{}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01660}01660           \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += \mbox{\hyperlink{classoomph_1_1FiniteElement_abe831900a6d6a08ee4a43fd9c07af32e}{raw\_nodal\_position}}(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * \mbox{\hyperlink{namespaceoomph_aff0c55ce31f12df52b2fe5ae647ffebe}{psi\_}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01660}01660           \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += \mbox{\hyperlink{classoomph_1_1FiniteElement_abe831900a6d6a08ee4a43fd9c07af32e}{raw\_nodal\_position}}(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * psi\_;}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01661}01661         \}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01662}01662 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01663}01663         \textcolor{comment}{// Loop over velocity directions (three of these)}}
@@ -1669,8 +1669,8 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01665}01665         \{}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01666}01666           \textcolor{comment}{// Get the nodal value}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01667}01667           \textcolor{keyword}{const} \textcolor{keywordtype}{double} u\_value = \mbox{\hyperlink{classoomph_1_1FiniteElement_abdc430bef622e0257397407416e6aac8}{raw\_nodal\_value}}(l, u\_nodal\_index[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]);}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01668}01668           interpolated\_u[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += u\_value * \mbox{\hyperlink{namespaceoomph_aff0c55ce31f12df52b2fe5ae647ffebe}{psi\_}};}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01669}01669           dudt[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a6f9ce7398b2f2a767fddc7473046c674}{du\_dt\_spherical\_nst}}(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * \mbox{\hyperlink{namespaceoomph_aff0c55ce31f12df52b2fe5ae647ffebe}{psi\_}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01668}01668           interpolated\_u[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += u\_value * psi\_;}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01669}01669           dudt[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] += \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a6f9ce7398b2f2a767fddc7473046c674}{du\_dt\_spherical\_nst}}(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * psi\_;}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01670}01670 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01671}01671           \textcolor{comment}{// Loop over derivative directions}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01672}01672           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < 2; j++)}
@@ -1698,7 +1698,7 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01694}01694 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01695}01695       \textcolor{comment}{// Get the user-\/defined body force terms}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01696}01696       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} body\_force(3);}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01697}01697       \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a6dbdc5a0b33a0f36494ffefed1a938ac}{get\_body\_force\_spherical\_nst}}(time, ipt, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}, body\_force);}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01697}01697       \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a6dbdc5a0b33a0f36494ffefed1a938ac}{get\_body\_force\_spherical\_nst}}(time, ipt, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}, body\_force);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01698}01698 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01699}01699       \textcolor{comment}{// Get the user-\/defined source function}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01700}01700       \textcolor{comment}{// double source = get\_source\_spherical\_nst(time(),ipt,interpolated\_x);}}
@@ -1707,10 +1707,10 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01703}01703       \textcolor{comment}{// MOMENTUM EQUATIONS}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01704}01704       \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01705}01705 }
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01706}01706       \textcolor{keyword}{const} \textcolor{keywordtype}{double} r = \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}[0];}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01706}01706       \textcolor{keyword}{const} \textcolor{keywordtype}{double} r = \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}[0];}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01707}01707       \textcolor{keyword}{const} \textcolor{keywordtype}{double} r2 = r * r;}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01708}01708       \textcolor{keyword}{const} \textcolor{keywordtype}{double} sin\_theta = sin(\mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}[1]);}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01709}01709       \textcolor{keyword}{const} \textcolor{keywordtype}{double} cos\_theta = cos(\mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}[1]);}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01708}01708       \textcolor{keyword}{const} \textcolor{keywordtype}{double} sin\_theta = sin(\mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}[1]);}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01709}01709       \textcolor{keyword}{const} \textcolor{keywordtype}{double} cos\_theta = cos(\mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}[1]);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01710}01710       \textcolor{keyword}{const} \textcolor{keywordtype}{double} cot\_theta = cos\_theta / sin\_theta;}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01711}01711 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01712}01712       \textcolor{keyword}{const} \textcolor{keywordtype}{double} u\_r = interpolated\_u[0];}
@@ -1776,7 +1776,7 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01772}01772 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01773}01773           \textcolor{comment}{// Make the residuals negative for consistency with the}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01774}01774           \textcolor{comment}{// other Navier-\/Stokes equations}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01775}01775           residuals[local\_eqn] -\/= sum * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01775}01775           residuals[local\_eqn] -\/= sum * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01776}01776 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01777}01777           \textcolor{comment}{// CALCULATE THE JACOBIAN}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01778}01778           \textcolor{keywordflow}{if} (flag)}
@@ -1803,7 +1803,7 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01799}01799                 \textcolor{comment}{// Add the time-\/derivative contribution and the convective}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01800}01800                 \textcolor{comment}{// contribution to the sum}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01801}01801                 \textcolor{keywordtype}{double} jac\_sum =}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01802}01802                   (scaled\_re\_st * \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l2)-\/>time\_stepper\_pt()-\/>weight(1, 0) *}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01802}01802                   (scaled\_re\_st * \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l2)-\/>\mbox{\hyperlink{classoomph_1_1Data_a065d7bffcec82bf4d4bd7b41f9aa80b3}{time\_stepper\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1TimeStepper_a4cb0aecb044b77ba0553cdd54b586d8a}{weight}}(1, 0) *}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01803}01803                      psif(l2) * r2 +}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01804}01804                    scaled\_re * jac\_conv * r) *}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01805}01805                   testf(l);}
@@ -1833,13 +1833,13 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01829}01829 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01830}01830                 \textcolor{comment}{// Add the total contribution to the jacobian multiplied}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01831}01831                 \textcolor{comment}{// by the jacobian weight}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01832}01832                 \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn, local\_unknown) -\/= jac\_sum * sin\_theta * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01832}01832                 jacobian(local\_eqn, local\_unknown) -\/= jac\_sum * sin\_theta * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01833}01833 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01834}01834                 \textcolor{comment}{// Mass matrix term}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01835}01835                 \textcolor{keywordflow}{if} (flag == 2)}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01836}01836                 \{}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01837}01837                   mass\_matrix(local\_eqn, local\_unknown) +=}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01838}01838                     scaled\_re\_st * psif[l2] * testf[l] * r2 * sin\_theta * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01838}01838                     scaled\_re\_st * psif[l2] * testf[l] * r2 * sin\_theta * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01839}01839                 \}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01840}01840               \}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01841}01841               \textcolor{comment}{// End of i2=0 section}}
@@ -1877,7 +1877,7 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01873}01873                            testf(l);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01874}01874 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01875}01875                 \textcolor{comment}{// Add the full contribution to the jacobian matrix}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01876}01876                 \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn, local\_unknown) -\/= jac\_sum * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01876}01876                 jacobian(local\_eqn, local\_unknown) -\/= jac\_sum * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01877}01877 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01878}01878               \} \textcolor{comment}{// End of i2=1 section}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01879}01879 }
@@ -1889,14 +1889,14 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01885}01885               \textcolor{keywordflow}{if} (local\_unknown >= 0)}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01886}01886               \{}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01887}01887                 \textcolor{comment}{// Single convective-\/term contribution}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01888}01888                 \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn, local\_unknown) += 2.0 * scaled\_re * u\_phi *}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01888}01888                 jacobian(local\_eqn, local\_unknown) += 2.0 * scaled\_re * u\_phi *}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01889}01889                                                       psif(l2) * r * sin\_theta *}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01890}01890                                                       testf[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01890}01890                                                       testf[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01891}01891 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01892}01892                 \textcolor{comment}{// Coriolis term}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01893}01893                 \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn, local\_unknown) +=}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01893}01893                 jacobian(local\_eqn, local\_unknown) +=}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01894}01894                   2.0 * scaled\_re\_inv\_ro * sin\_theta * psif(l2) * r2 *}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01895}01895                   sin\_theta * testf[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01895}01895                   sin\_theta * testf[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01896}01896               \}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01897}01897               \textcolor{comment}{// End of i2=2 section}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01898}01898             \}}
@@ -1910,9 +1910,9 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01906}01906               local\_unknown = \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_ad8d9a0edbe3793a008a6bff670c26643}{p\_local\_eqn}}(l2);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01907}01907               \textcolor{keywordflow}{if} (local\_unknown >= 0)}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01908}01908               \{}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01909}01909                 \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn, local\_unknown) +=}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01909}01909                 jacobian(local\_eqn, local\_unknown) +=}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01910}01910                   psip(l2) * (r2 * dtestfdx(l, 0) + 2.0 * r * testf(l)) *}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01911}01911                   sin\_theta * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01911}01911                   sin\_theta * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01912}01912               \}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01913}01913             \}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01914}01914           \} \textcolor{comment}{// End of Jacobian calculation}}
@@ -1974,7 +1974,7 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01970}01970 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01971}01971           \textcolor{comment}{// Add the sum to the residuals,}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01972}01972           \textcolor{comment}{//(Negative for consistency)}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01973}01973           residuals[local\_eqn] -\/= sum * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01973}01973           residuals[local\_eqn] -\/= sum * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01974}01974 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01975}01975           \textcolor{comment}{// CALCULATE THE JACOBIAN}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l01976}01976           \textcolor{keywordflow}{if} (flag)}
@@ -2020,7 +2020,7 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02016}02016                   testf(l);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02017}02017 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02018}02018                 \textcolor{comment}{// Add the sum to the jacobian}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02019}02019                 \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn, local\_unknown) -\/= jac\_sum * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02019}02019                 jacobian(local\_eqn, local\_unknown) -\/= jac\_sum * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02020}02020               \}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02021}02021               \textcolor{comment}{// End of i2=0 section}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02022}02022 }
@@ -2039,7 +2039,7 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02035}02035                 \textcolor{comment}{// Add the time-\/derivative term and the}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02036}02036                 \textcolor{comment}{// convective terms}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02037}02037                 \textcolor{keywordtype}{double} jac\_sum =}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02038}02038                   (scaled\_re\_st * \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l2)-\/>time\_stepper\_pt()-\/>weight(1, 0) *}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02038}02038                   (scaled\_re\_st * \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l2)-\/>\mbox{\hyperlink{classoomph_1_1Data_a065d7bffcec82bf4d4bd7b41f9aa80b3}{time\_stepper\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1TimeStepper_a4cb0aecb044b77ba0553cdd54b586d8a}{weight}}(1, 0) *}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02039}02039                      psif(l2) * r2 +}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02040}02040                    scaled\_re * r * jac\_conv) *}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02041}02041                   testf(l) * sin\_theta;}
@@ -2070,13 +2070,13 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02066}02066                            testf(l);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02067}02067 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02068}02068                 \textcolor{comment}{// Add the contribution to the jacobian}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02069}02069                 \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn, local\_unknown) -\/= jac\_sum * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02069}02069                 jacobian(local\_eqn, local\_unknown) -\/= jac\_sum * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02070}02070 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02071}02071                 \textcolor{comment}{// Mass matrix term}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02072}02072                 \textcolor{keywordflow}{if} (flag == 2)}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02073}02073                 \{}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02074}02074                   mass\_matrix(local\_eqn, local\_unknown) +=}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02075}02075                     scaled\_re\_st * psif[l2] * testf[l] * r2 * sin\_theta * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02075}02075                     scaled\_re\_st * psif[l2] * testf[l] * r2 * sin\_theta * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02076}02076                 \}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02077}02077               \}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02078}02078               \textcolor{comment}{// End of i2=1 section}}
@@ -2089,14 +2089,14 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02085}02085               \textcolor{keywordflow}{if} (local\_unknown >= 0)}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02086}02086               \{}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02087}02087                 \textcolor{comment}{// Only a convective term contribution}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02088}02088                 \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn, local\_unknown) += scaled\_re * 2.0 * r *}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02088}02088                 jacobian(local\_eqn, local\_unknown) += scaled\_re * 2.0 * r *}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02089}02089                                                       psif(l2) * u\_phi *}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02090}02090                                                       cos\_theta * testf(l) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02090}02090                                                       cos\_theta * testf(l) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02091}02091 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02092}02092                 \textcolor{comment}{// Coriolis term}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02093}02093                 \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn, local\_unknown) +=}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02093}02093                 jacobian(local\_eqn, local\_unknown) +=}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02094}02094                   2.0 * scaled\_re\_inv\_ro * cos\_theta * psif(l2) * r2 *}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02095}02095                   sin\_theta * testf[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02095}02095                   sin\_theta * testf[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02096}02096               \}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02097}02097               \textcolor{comment}{// End of i2=2 section}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02098}02098             \}}
@@ -2110,9 +2110,9 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02106}02106               local\_unknown = \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_ad8d9a0edbe3793a008a6bff670c26643}{p\_local\_eqn}}(l2);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02107}02107               \textcolor{keywordflow}{if} (local\_unknown >= 0)}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02108}02108               \{}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02109}02109                 \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn, local\_unknown) +=}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02109}02109                 jacobian(local\_eqn, local\_unknown) +=}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02110}02110                   psip(l2) * r *}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02111}02111                   (dtestfdx(l, 1) * sin\_theta + cos\_theta * testf[l]) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02111}02111                   (dtestfdx(l, 1) * sin\_theta + cos\_theta * testf[l]) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02112}02112               \}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02113}02113             \}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02114}02114           \} \textcolor{comment}{/*End of Jacobian calculation*/}}
@@ -2171,7 +2171,7 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02167}02167                  testf(l);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02168}02168 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02169}02169           \textcolor{comment}{// Add the sum to the residuals}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02170}02170           residuals[local\_eqn] -\/= sum * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02170}02170           residuals[local\_eqn] -\/= sum * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02171}02171 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02172}02172 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02173}02173           \textcolor{comment}{// CALCULATE THE JACOBIAN}}
@@ -2190,14 +2190,14 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02186}02186               \textcolor{keywordflow}{if} (local\_unknown >= 0)}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02187}02187               \{}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02188}02188                 \textcolor{comment}{// Contribution from convective terms}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02189}02189                 \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn, local\_unknown) -\/=}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02189}02189                 jacobian(local\_eqn, local\_unknown) -\/=}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02190}02190                   scaled\_re * (r * interpolated\_dudx(2, 0) + u\_phi) * psif(l2) *}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02191}02191                   testf(l) * r * sin\_theta * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02191}02191                   testf(l) * r * sin\_theta * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02192}02192 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02193}02193                 \textcolor{comment}{// Coriolis term}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02194}02194                 \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn, local\_unknown) -\/=}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02194}02194                 jacobian(local\_eqn, local\_unknown) -\/=}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02195}02195                   2.0 * scaled\_re\_inv\_ro * sin\_theta * psif(l2) * r2 *}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02196}02196                   sin\_theta * testf[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02196}02196                   sin\_theta * testf[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02197}02197               \}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02198}02198               \textcolor{comment}{// End of i2=0 section}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02199}02199 }
@@ -2208,16 +2208,16 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02204}02204               \textcolor{keywordflow}{if} (local\_unknown >= 0)}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02205}02205               \{}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02206}02206                 \textcolor{comment}{// Contribution from convective terms}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02207}02207                 \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn, local\_unknown) -\/=}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02207}02207                 jacobian(local\_eqn, local\_unknown) -\/=}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02208}02208                   scaled\_re *}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02209}02209                   (interpolated\_dudx(2, 1) * sin\_theta + u\_phi * cos\_theta) *}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02210}02210                   r * psif(l2) * testf(l) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02210}02210                   r * psif(l2) * testf(l) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02211}02211 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02212}02212 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02213}02213                 \textcolor{comment}{// Coriolis term}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02214}02214                 \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn, local\_unknown) -\/=}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02214}02214                 jacobian(local\_eqn, local\_unknown) -\/=}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02215}02215                   2.0 * scaled\_re\_inv\_ro * cos\_theta * psif(l2) * r2 *}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02216}02216                   sin\_theta * testf[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02216}02216                   sin\_theta * testf[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02217}02217               \}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02218}02218               \textcolor{comment}{// End of i2=1 section}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02219}02219 }
@@ -2239,7 +2239,7 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02235}02235 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02236}02236                 \textcolor{comment}{// Add the convective and time derivatives}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02237}02237                 \textcolor{keywordtype}{double} jac\_sum =}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02238}02238                   (scaled\_re\_st * \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l2)-\/>time\_stepper\_pt()-\/>weight(1, 0) *}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02238}02238                   (scaled\_re\_st * \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(l2)-\/>\mbox{\hyperlink{classoomph_1_1Data_a065d7bffcec82bf4d4bd7b41f9aa80b3}{time\_stepper\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1TimeStepper_a4cb0aecb044b77ba0553cdd54b586d8a}{weight}}(1, 0) *}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02239}02239                      psif(l2) * r2 * sin\_theta +}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02240}02240                    scaled\_re * r * jac\_conv) *}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02241}02241                   testf(l);}
@@ -2272,13 +2272,13 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02268}02268                   testf(l);}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02269}02269 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02270}02270                 \textcolor{comment}{// Add to the jacobian}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02271}02271                 \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn, local\_unknown) -\/= jac\_sum * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02271}02271                 jacobian(local\_eqn, local\_unknown) -\/= jac\_sum * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02272}02272 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02273}02273                 \textcolor{comment}{// Mass matrix term}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02274}02274                 \textcolor{keywordflow}{if} (flag == 2)}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02275}02275                 \{}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02276}02276                   mass\_matrix(local\_eqn, local\_unknown) +=}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02277}02277                     scaled\_re\_st * psif(l2) * testf[l] * r2 * sin\_theta * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02277}02277                     scaled\_re\_st * psif(l2) * testf[l] * r2 * sin\_theta * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02278}02278                 \}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02279}02279               \}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02280}02280               \textcolor{comment}{// End of i2=2 section}}
@@ -2311,7 +2311,7 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02307}02307                                     interpolated\_dudx(1, 1)) *}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02308}02308                                      sin\_theta +}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02309}02309                                    u\_theta * cos\_theta) *}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02310}02310                                   r * testp(l) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02310}02310                                   r * testp(l) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02311}02311 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02312}02312           \textcolor{comment}{// CALCULATE THE JACOBIAN}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02313}02313           \textcolor{keywordflow}{if} (flag)}
@@ -2328,9 +2328,9 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02324}02324 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02325}02325               \textcolor{keywordflow}{if} (local\_unknown >= 0)}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02326}02326               \{}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02327}02327                 \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn, local\_unknown) +=}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02327}02327                 jacobian(local\_eqn, local\_unknown) +=}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02328}02328                   (2.0 * psif(l2) + r * dpsifdx(l2, 0)) * r * sin\_theta *}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02329}02329                   testp(l) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02329}02329                   testp(l) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02330}02330               \}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02331}02331               \textcolor{comment}{// End of contribution from r-\/component}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02332}02332 }
@@ -2342,9 +2342,9 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02338}02338 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02339}02339               \textcolor{keywordflow}{if} (local\_unknown >= 0)}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02340}02340               \{}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02341}02341                 \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(local\_eqn, local\_unknown) +=}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02341}02341                 jacobian(local\_eqn, local\_unknown) +=}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02342}02342                   r * (dpsifdx(l2, 1) * sin\_theta + psif(l2) * cos\_theta) *}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02343}02343                   testp(l) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02343}02343                   testp(l) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02344}02344               \}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02345}02345               \textcolor{comment}{// End of contribution from theta-\/component}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02346}02346 }
@@ -2470,7 +2470,7 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02466}02466     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < n\_node; n++)}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02467}02467     \{}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02468}02468       \textcolor{comment}{// find the number of values at this node}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02469}02469       \textcolor{keywordtype}{unsigned} nv = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n)-\/>nvalue();}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02469}02469       \textcolor{keywordtype}{unsigned} nv = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n)-\/>\mbox{\hyperlink{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}{nvalue}}();}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02470}02470 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02471}02471       \textcolor{comment}{// loop over these values}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02472}02472       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} v = 0; v < nv; v++)}
@@ -2593,7 +2593,7 @@
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02589}02589     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < n\_node; n++)}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02590}02590     \{}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02591}02591       \textcolor{comment}{// find the number of values at this node}}
-\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02592}02592       \textcolor{keywordtype}{unsigned} nv = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n)-\/>nvalue();}
+\DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02592}02592       \textcolor{keywordtype}{unsigned} nv = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n)-\/>\mbox{\hyperlink{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}{nvalue}}();}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02593}02593 }
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02594}02594       \textcolor{comment}{// loop over these values}}
 \DoxyCodeLine{\Hypertarget{spherical__navier__stokes__elements_8cc_source_l02595}02595       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} v = 0; v < nv; v++)}

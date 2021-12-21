@@ -18,25 +18,25 @@ Inheritance diagram for oomph\+::Biharmonic\+Fluid\+Boundary\+Element\+:\begin{f
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement_a7753395db6939adf4c2ebf5b7d251cef}{Biharmonic\+Fluid\+Boundary\+Element}} (Node $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned s\+\_\+fixed\+\_\+index)
+\mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement_a7753395db6939adf4c2ebf5b7d251cef}{Biharmonic\+Fluid\+Boundary\+Element}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\+\_\+pt}}, const unsigned s\+\_\+fixed\+\_\+index)
 \item 
 void \mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement_a20586e08a9a747f2165b9e2eeb62a4dc}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Output function -- does nothing. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement_a74ffdc1669962263212c95e7acc3cce2}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement_a74ffdc1669962263212c95e7acc3cce2}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em Output function -- does nothing. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement_a9a639b1f556286e525b221ed9a96e7f5}{output\+\_\+fluid\+\_\+velocity}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement_a9a639b1f556286e525b221ed9a96e7f5}{output\+\_\+fluid\+\_\+velocity}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em Output function -- does nothing. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement_a69586e3f67ee447c376e0a5c6bac9461}{output}} (FILE $\ast$file\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em C-\/style output function -- does nothing. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement_a41c4acc14c45cb120c33d02baf7a5189}{output}} (FILE $\ast$file\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement_a41c4acc14c45cb120c33d02baf7a5189}{output}} (FILE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em C-\/style output function -- does nothing. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement_ac49d98d2b2633a3adf86489e246845a9}{compute\+\_\+error}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt, double \&error, double \&norm)
 \begin{DoxyCompactList}\small\item\em compute\+\_\+error -- does nothing \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement_a448d3143a92e1f67b3c829c02a4f28c3}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em Compute the elemental residual vector -\/ wrapper function called by get\+\_\+residuals in \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}}. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement_a9bc299d6f1c70851999b9e9b72c88602}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})
+void \mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement_a9bc299d6f1c70851999b9e9b72c88602}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em Compute the elemental residual vector and jacobian matrix -\/ wrapper function called by get\+\_\+jacobian in \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}}. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement_acb845b4b7fe946233d9f656754fa3eac}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+biharmonic\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, unsigned JFLAG)
+virtual void \mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement_acb845b4b7fe946233d9f656754fa3eac}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+biharmonic\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, unsigned JFLAG)
 \begin{DoxyCompactList}\small\item\em Computes the elemental residual vector and the elemental jacobian matrix if JFLAG = 0 Imposes the equations \+: du/ds\+\_\+n = dt/ds\+\_\+n $\ast$ ds\+\_\+t/dt $\ast$ du/dt. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -58,7 +58,7 @@ Definition at line \mbox{\hyperlink{biharmonic__problem_8h_source_l00311}{311}} 
 \index{oomph::BiharmonicFluidBoundaryElement@{oomph::BiharmonicFluidBoundaryElement}!BiharmonicFluidBoundaryElement@{BiharmonicFluidBoundaryElement}}
 \index{BiharmonicFluidBoundaryElement@{BiharmonicFluidBoundaryElement}!oomph::BiharmonicFluidBoundaryElement@{oomph::BiharmonicFluidBoundaryElement}}
 \doxysubsubsection{\texorpdfstring{BiharmonicFluidBoundaryElement()}{BiharmonicFluidBoundaryElement()}}
-{\footnotesize\ttfamily oomph\+::\+Biharmonic\+Fluid\+Boundary\+Element\+::\+Biharmonic\+Fluid\+Boundary\+Element (\begin{DoxyParamCaption}\item[{Node $\ast$}]{node\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned}]{s\+\_\+fixed\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+Biharmonic\+Fluid\+Boundary\+Element\+::\+Biharmonic\+Fluid\+Boundary\+Element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$}]{node\+\_\+pt,  }\item[{const unsigned}]{s\+\_\+fixed\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -66,7 +66,7 @@ Definition at line \mbox{\hyperlink{biharmonic__problem_8h_source_l00315}{315}} 
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{biharmonic__problem_8h_source_l00385}{S\+\_\+fixed\+\_\+index}}.
+References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{biharmonic__problem_8h_source_l00385}{S\+\_\+fixed\+\_\+index}}.
 
 
 
@@ -109,7 +109,7 @@ Definition at line \mbox{\hyperlink{biharmonic__problem_8h_source_l00368}{368}} 
 
 
 
-References \mbox{\hyperlink{biharmonic__problem_8cc_source_l00391}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+biharmonic\+\_\+boundary()}}, and \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}.
+References \mbox{\hyperlink{biharmonic__problem_8cc_source_l00391}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+biharmonic\+\_\+boundary()}}.
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicFluidBoundaryElement_a448d3143a92e1f67b3c829c02a4f28c3}\label{classoomph_1_1BiharmonicFluidBoundaryElement_a448d3143a92e1f67b3c829c02a4f28c3}} 
 \index{oomph::BiharmonicFluidBoundaryElement@{oomph::BiharmonicFluidBoundaryElement}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
@@ -149,7 +149,7 @@ Definition at line \mbox{\hyperlink{biharmonic__problem_8cc_source_l00390}{390}}
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}, \mbox{\hyperlink{elements_8h_source_l00726}{oomph\+::\+Generalised\+Element\+::local\+\_\+eqn\+\_\+number()}}, \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{biharmonic__problem_8h_source_l00385}{S\+\_\+fixed\+\_\+index}}.
+References \mbox{\hyperlink{elements_8h_source_l00726}{oomph\+::\+Generalised\+Element\+::local\+\_\+eqn\+\_\+number()}}, \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{biharmonic__problem_8h_source_l00385}{S\+\_\+fixed\+\_\+index}}, \mbox{\hyperlink{nodes_8cc_source_l02408}{oomph\+::\+Node\+::value()}}, and \mbox{\hyperlink{nodes_8h_source_l01126}{oomph\+::\+Node\+::x\+\_\+gen()}}.
 
 
 
@@ -177,7 +177,7 @@ Definition at line \mbox{\hyperlink{biharmonic__problem_8h_source_l00337}{337}} 
 \index{oomph::BiharmonicFluidBoundaryElement@{oomph::BiharmonicFluidBoundaryElement}!output@{output}}
 \index{output@{output}!oomph::BiharmonicFluidBoundaryElement@{oomph::BiharmonicFluidBoundaryElement}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
-{\footnotesize\ttfamily void oomph\+::\+Biharmonic\+Fluid\+Boundary\+Element\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Biharmonic\+Fluid\+Boundary\+Element\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -213,7 +213,7 @@ Definition at line \mbox{\hyperlink{biharmonic__problem_8h_source_l00325}{325}} 
 \index{oomph::BiharmonicFluidBoundaryElement@{oomph::BiharmonicFluidBoundaryElement}!output@{output}}
 \index{output@{output}!oomph::BiharmonicFluidBoundaryElement@{oomph::BiharmonicFluidBoundaryElement}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
-{\footnotesize\ttfamily void oomph\+::\+Biharmonic\+Fluid\+Boundary\+Element\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Biharmonic\+Fluid\+Boundary\+Element\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -231,7 +231,7 @@ Definition at line \mbox{\hyperlink{biharmonic__problem_8h_source_l00329}{329}} 
 \index{oomph::BiharmonicFluidBoundaryElement@{oomph::BiharmonicFluidBoundaryElement}!output\_fluid\_velocity@{output\_fluid\_velocity}}
 \index{output\_fluid\_velocity@{output\_fluid\_velocity}!oomph::BiharmonicFluidBoundaryElement@{oomph::BiharmonicFluidBoundaryElement}}
 \doxysubsubsection{\texorpdfstring{output\_fluid\_velocity()}{output\_fluid\_velocity()}}
-{\footnotesize\ttfamily void oomph\+::\+Biharmonic\+Fluid\+Boundary\+Element\+::output\+\_\+fluid\+\_\+velocity (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Biharmonic\+Fluid\+Boundary\+Element\+::output\+\_\+fluid\+\_\+velocity (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 

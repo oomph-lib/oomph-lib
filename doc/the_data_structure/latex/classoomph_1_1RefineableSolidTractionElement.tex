@@ -18,15 +18,15 @@ Inheritance diagram for oomph\+::Refineable\+Solid\+Traction\+Element\texorpdfst
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1RefineableSolidTractionElement_a46b3cbd28e9a4eb8cc24e000250e3639}{Refineable\+Solid\+Traction\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&element\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}})
+\mbox{\hyperlink{classoomph_1_1RefineableSolidTractionElement_a46b3cbd28e9a4eb8cc24e000250e3639}{Refineable\+Solid\+Traction\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&element\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}})
 \begin{DoxyCompactList}\small\item\em Constructor, which takes a \char`\"{}bulk\char`\"{} element and the face index. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1RefineableSolidTractionElement_a29953035bc2d3e0f0c5ca276c57a9fba}{$\sim$\+Refineable\+Solid\+Traction\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Destructor should not delete anything. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1RefineableSolidTractionElement_a9119a5b387cf3e5c3e3dee4dcabb08a3}{ncont\+\_\+interpolated\+\_\+values}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableSolidTractionElement_a9119a5b387cf3e5c3e3dee4dcabb08a3}{ncont\+\_\+interpolated\+\_\+values}} () const
 \begin{DoxyCompactList}\small\item\em Number of continuously interpolated values are the same as those in the bulk element. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableSolidTractionElement_a43a01cb9d3cb2bed34bc0fb811e5f830}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em This function returns just the residuals. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableSolidTractionElement_ad1921c9d88c2d71c0f3735259faaef35}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})
+void \mbox{\hyperlink{classoomph_1_1RefineableSolidTractionElement_ad1921c9d88c2d71c0f3735259faaef35}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em This function returns the residuals and the Jacobian. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -55,7 +55,7 @@ Definition at line \mbox{\hyperlink{solid__traction__elements_8h_source_l00471}{
 \index{RefineableSolidTractionElement@{RefineableSolidTractionElement}!oomph::RefineableSolidTractionElement$<$ ELEMENT $>$@{oomph::RefineableSolidTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{RefineableSolidTractionElement()}{RefineableSolidTractionElement()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1RefineableSolidTractionElement}{oomph\+::\+Refineable\+Solid\+Traction\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableSolidTractionElement}{Refineable\+Solid\+Traction\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{element\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1RefineableSolidTractionElement}{oomph\+::\+Refineable\+Solid\+Traction\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableSolidTractionElement}{Refineable\+Solid\+Traction\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{element\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -108,7 +108,7 @@ Definition at line \mbox{\hyperlink{solid__traction__elements_8h_source_l00504}{
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l01199}{oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+by\+\_\+fd()}}, \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}, and \mbox{\hyperlink{solid__traction__elements_8h_source_l00539}{oomph\+::\+Refineable\+Solid\+Traction\+Element$<$ ELEMENT $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+solid\+\_\+traction()}}.
+References \mbox{\hyperlink{elements_8cc_source_l01199}{oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+by\+\_\+fd()}}, and \mbox{\hyperlink{solid__traction__elements_8h_source_l00539}{oomph\+::\+Refineable\+Solid\+Traction\+Element$<$ ELEMENT $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+solid\+\_\+traction()}}.
 
 
 
@@ -158,7 +158,7 @@ Definition at line \mbox{\hyperlink{solid__traction__elements_8h_source_l00489}{
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l04763}{oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt()}}, and \mbox{\hyperlink{solid__traction__elements_8h_source_l00489}{oomph\+::\+Refineable\+Solid\+Traction\+Element$<$ ELEMENT $>$\+::ncont\+\_\+interpolated\+\_\+values()}}.
+References \mbox{\hyperlink{elements_8h_source_l04735}{oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt()}}, and \mbox{\hyperlink{solid__traction__elements_8h_source_l00489}{oomph\+::\+Refineable\+Solid\+Traction\+Element$<$ ELEMENT $>$\+::ncont\+\_\+interpolated\+\_\+values()}}.
 
 
 
@@ -183,7 +183,7 @@ Definition at line \mbox{\hyperlink{solid__traction__elements_8h_source_l00538}{
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}.
+References \mbox{\hyperlink{nodes_8h_source_l01228}{oomph\+::\+Node\+::hanging\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l01285}{oomph\+::\+Node\+::is\+\_\+hanging()}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00808}{oomph\+::\+Hang\+Info\+::master\+\_\+weight()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
 
 
 

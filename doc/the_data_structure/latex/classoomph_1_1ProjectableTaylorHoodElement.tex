@@ -1,0 +1,260 @@
+\hypertarget{classoomph_1_1ProjectableTaylorHoodElement}{}\doxysection{oomph\+::Projectable\+Taylor\+Hood\+Element\texorpdfstring{$<$}{<} TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\label{classoomph_1_1ProjectableTaylorHoodElement}\index{oomph::ProjectableTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}}
+
+
+///////////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////////  
+
+
+
+
+{\ttfamily \#include $<$navier\+\_\+stokes\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Projectable\+Taylor\+Hood\+Element\texorpdfstring{$<$}{<} TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.662708cm]{classoomph_1_1ProjectableTaylorHoodElement}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodElement_ae87b1286fc74007436210e4114c0c8f1}{Projectable\+Taylor\+Hood\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards...\mbox{]}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodElement_afff7261fc99f4f6558222e4b417048d9}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
+\begin{DoxyCompactList}\small\item\em Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. In the underlying Taylor Hood elements the fld-\/th velocities are stored at the fld-\/th value of the nodes; the pressures (the dim-\/th field) are the dim-\/th values at the vertex nodes etc. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodElement_a86f40ce1d2f04cfe2a4b738cdc72a318}{nfields\+\_\+for\+\_\+projection}} ()
+\begin{DoxyCompactList}\small\item\em Number of fields to be projected\+: dim+1, corresponding to velocity components and pressure. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodElement_a5d64cb39e6ae0e286c08cbb6c84bcaeb}{nhistory\+\_\+values\+\_\+for\+\_\+projection}} (const unsigned \&fld)
+\begin{DoxyCompactList}\small\item\em Number of history values to be stored for fld-\/th field. Whatever the timestepper has set up for the velocity components and none for the pressure field. (Note\+: count includes current value!) \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodElement_a7b93892cedb3a4da3dc9f30c186fdec4}{nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection}} ()
+\begin{DoxyCompactList}\small\item\em Number of positional history values (Note\+: count includes current value!) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodElement_a1893ca2bf9bf81d12350b9534cbf30d8}{jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field}} (const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi)
+\begin{DoxyCompactList}\small\item\em Return Jacobian of mapping and shape functions of field fld at local coordinate s. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodElement_aff36e945b4f1c625b5b539bac2518b6f}{get\+\_\+field}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
+\begin{DoxyCompactList}\small\item\em Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: history values) \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodElement_acc580c5ee1ce18d7d6b42d67e9323e99}{nvalue\+\_\+of\+\_\+field}} (const unsigned \&fld)
+\begin{DoxyCompactList}\small\item\em Return number of values in field fld. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodElement_abbe179e61df43528604207a4eddcd0e6}{local\+\_\+equation}} (const unsigned \&fld, const unsigned \&j)
+\begin{DoxyCompactList}\small\item\em Return local equation number of value j in field fld. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT$>$\newline
+class oomph\+::\+Projectable\+Taylor\+Hood\+Element$<$ TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT $>$}
+///////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////// 
+
+Taylor Hood upgraded to become projectable 
+
+Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l02912}{2912}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodElement_ae87b1286fc74007436210e4114c0c8f1}\label{classoomph_1_1ProjectableTaylorHoodElement_ae87b1286fc74007436210e4114c0c8f1}} 
+\index{oomph::ProjectableTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!ProjectableTaylorHoodElement@{ProjectableTaylorHoodElement}}
+\index{ProjectableTaylorHoodElement@{ProjectableTaylorHoodElement}!oomph::ProjectableTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{ProjectableTaylorHoodElement()}{ProjectableTaylorHoodElement()}}
+{\footnotesize\ttfamily template$<$class TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodElement}{oomph\+::\+Projectable\+Taylor\+Hood\+Element}}$<$ TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodElement}{Projectable\+Taylor\+Hood\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards...\mbox{]}. 
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l02918}{2918}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodElement_afff7261fc99f4f6558222e4b417048d9}\label{classoomph_1_1ProjectableTaylorHoodElement_afff7261fc99f4f6558222e4b417048d9}} 
+\index{oomph::ProjectableTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!data\_values\_of\_field@{data\_values\_of\_field}}
+\index{data\_values\_of\_field@{data\_values\_of\_field}!oomph::ProjectableTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{data\_values\_of\_field()}{data\_values\_of\_field()}}
+{\footnotesize\ttfamily template$<$class TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodElement}{oomph\+::\+Projectable\+Taylor\+Hood\+Element}}$<$ TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. In the underlying Taylor Hood elements the fld-\/th velocities are stored at the fld-\/th value of the nodes; the pressures (the dim-\/th field) are the dim-\/th values at the vertex nodes etc. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a2292bd9c58694f89839bd7d198cfe86a}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l02927}{2927}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+
+\mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodElement_aff36e945b4f1c625b5b539bac2518b6f}\label{classoomph_1_1ProjectableTaylorHoodElement_aff36e945b4f1c625b5b539bac2518b6f}} 
+\index{oomph::ProjectableTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!get\_field@{get\_field}}
+\index{get\_field@{get\_field}!oomph::ProjectableTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{get\_field()}{get\_field()}}
+{\footnotesize\ttfamily template$<$class TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodElement}{oomph\+::\+Projectable\+Taylor\+Hood\+Element}}$<$ TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT $>$\+::get\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const unsigned \&}]{fld,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: history values) 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ae4da5b565b6d333be2f5920f7be763cd}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l03029}{3029}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+
+\mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodElement_a1893ca2bf9bf81d12350b9534cbf30d8}\label{classoomph_1_1ProjectableTaylorHoodElement_a1893ca2bf9bf81d12350b9534cbf30d8}} 
+\index{oomph::ProjectableTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!jacobian\_and\_shape\_of\_field@{jacobian\_and\_shape\_of\_field}}
+\index{jacobian\_and\_shape\_of\_field@{jacobian\_and\_shape\_of\_field}!oomph::ProjectableTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{jacobian\_and\_shape\_of\_field()}{jacobian\_and\_shape\_of\_field()}}
+{\footnotesize\ttfamily template$<$class TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodElement}{oomph\+::\+Projectable\+Taylor\+Hood\+Element}}$<$ TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT $>$\+::jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return Jacobian of mapping and shape functions of field fld at local coordinate s. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ad45c21b58c0985d52f68ab2d79cbb488}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l02994}{2994}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+
+\mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodElement_abbe179e61df43528604207a4eddcd0e6}\label{classoomph_1_1ProjectableTaylorHoodElement_abbe179e61df43528604207a4eddcd0e6}} 
+\index{oomph::ProjectableTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!local\_equation@{local\_equation}}
+\index{local\_equation@{local\_equation}!oomph::ProjectableTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{local\_equation()}{local\_equation()}}
+{\footnotesize\ttfamily template$<$class TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT $>$ \\
+int \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodElement}{oomph\+::\+Projectable\+Taylor\+Hood\+Element}}$<$ TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT $>$\+::local\+\_\+equation (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return local equation number of value j in field fld. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac5c27ae929ff636dc7747fe23fd4f738}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l03081}{3081}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, and \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}.
+
+\mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodElement_a86f40ce1d2f04cfe2a4b738cdc72a318}\label{classoomph_1_1ProjectableTaylorHoodElement_a86f40ce1d2f04cfe2a4b738cdc72a318}} 
+\index{oomph::ProjectableTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!nfields\_for\_projection@{nfields\_for\_projection}}
+\index{nfields\_for\_projection@{nfields\_for\_projection}!oomph::ProjectableTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nfields\_for\_projection()}{nfields\_for\_projection()}}
+{\footnotesize\ttfamily template$<$class TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodElement}{oomph\+::\+Projectable\+Taylor\+Hood\+Element}}$<$ TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT $>$\+::nfields\+\_\+for\+\_\+projection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of fields to be projected\+: dim+1, corresponding to velocity components and pressure. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a44634aa4049332a580d249c25564638c}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l02963}{2963}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}.
+
+\mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodElement_a7b93892cedb3a4da3dc9f30c186fdec4}\label{classoomph_1_1ProjectableTaylorHoodElement_a7b93892cedb3a4da3dc9f30c186fdec4}} 
+\index{oomph::ProjectableTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!nhistory\_values\_for\_coordinate\_projection@{nhistory\_values\_for\_coordinate\_projection}}
+\index{nhistory\_values\_for\_coordinate\_projection@{nhistory\_values\_for\_coordinate\_projection}!oomph::ProjectableTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nhistory\_values\_for\_coordinate\_projection()}{nhistory\_values\_for\_coordinate\_projection()}}
+{\footnotesize\ttfamily template$<$class TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodElement}{oomph\+::\+Projectable\+Taylor\+Hood\+Element}}$<$ TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of positional history values (Note\+: count includes current value!) 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ab4ecd0cd24000a3ed675dc7198203c1f}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l02987}{2987}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, and \mbox{\hyperlink{nodes_8h_source_l01022}{oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt()}}.
+
+\mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodElement_a5d64cb39e6ae0e286c08cbb6c84bcaeb}\label{classoomph_1_1ProjectableTaylorHoodElement_a5d64cb39e6ae0e286c08cbb6c84bcaeb}} 
+\index{oomph::ProjectableTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!nhistory\_values\_for\_projection@{nhistory\_values\_for\_projection}}
+\index{nhistory\_values\_for\_projection@{nhistory\_values\_for\_projection}!oomph::ProjectableTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nhistory\_values\_for\_projection()}{nhistory\_values\_for\_projection()}}
+{\footnotesize\ttfamily template$<$class TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodElement}{oomph\+::\+Projectable\+Taylor\+Hood\+Element}}$<$ TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of history values to be stored for fld-\/th field. Whatever the timestepper has set up for the velocity components and none for the pressure field. (Note\+: count includes current value!) 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac6790f394630b964663281f8740f43a5}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l02972}{2972}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8cc_source_l00879}{oomph\+::\+Data\+::ntstorage()}}.
+
+\mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodElement_acc580c5ee1ce18d7d6b42d67e9323e99}\label{classoomph_1_1ProjectableTaylorHoodElement_acc580c5ee1ce18d7d6b42d67e9323e99}} 
+\index{oomph::ProjectableTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!nvalue\_of\_field@{nvalue\_of\_field}}
+\index{nvalue\_of\_field@{nvalue\_of\_field}!oomph::ProjectableTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nvalue\_of\_field()}{nvalue\_of\_field()}}
+{\footnotesize\ttfamily template$<$class TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodElement}{oomph\+::\+Projectable\+Taylor\+Hood\+Element}}$<$ TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT $>$\+::nvalue\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return number of values in field fld. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a1a9a6de16f3511bca8e8be770abb9c2e}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l03067}{3067}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, and \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{navier__stokes__elements_8h}{navier\+\_\+stokes\+\_\+elements.\+h}}\end{DoxyCompactItemize}

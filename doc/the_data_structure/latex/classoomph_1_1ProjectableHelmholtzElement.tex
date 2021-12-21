@@ -20,23 +20,23 @@ Inheritance diagram for oomph\+::Projectable\+Helmholtz\+Element\texorpdfstring{
 \item 
 \mbox{\hyperlink{classoomph_1_1ProjectableHelmholtzElement_a2432f702db869a4a50bec026b5fabc7b}{Projectable\+Helmholtz\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards...\mbox{]}. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableHelmholtzElement_a685828d6a5c0da793b9e2911f1213d5d}{data\+\_\+values\+\_\+of\+\_\+field}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&fld)
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableHelmholtzElement_a685828d6a5c0da793b9e2911f1213d5d}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectableHelmholtzElement_a8a516cbf286391aa6e3c0651db47de6f}{nfields\+\_\+for\+\_\+projection}} ()
 \begin{DoxyCompactList}\small\item\em Number of fields to be projected\+: 2 (real and imag part) \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1ProjectableHelmholtzElement_aae069d7dba3ab7ae1677053e5c55ba93}{nhistory\+\_\+values\+\_\+for\+\_\+projection}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&fld)
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableHelmholtzElement_aae069d7dba3ab7ae1677053e5c55ba93}{nhistory\+\_\+values\+\_\+for\+\_\+projection}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Number of history values to be stored for fld-\/th field. (includes current value!) \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectableHelmholtzElement_a4ec9aaa5311ce1724014c4c4240a4d59}{nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection}} ()
 \begin{DoxyCompactList}\small\item\em Number of positional history values (includes current value!) \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1ProjectableHelmholtzElement_a651580abfd2d133f7cd6cd38e0bcca61}{jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&fld, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi)
+double \mbox{\hyperlink{classoomph_1_1ProjectableHelmholtzElement_a651580abfd2d133f7cd6cd38e0bcca61}{jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field}} (const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi)
 \begin{DoxyCompactList}\small\item\em Return Jacobian of mapping and shape functions of field fld at local coordinate s. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1ProjectableHelmholtzElement_a6635aa1b760348ac92784c4e7bb6db38}{get\+\_\+field}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&fld, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
+double \mbox{\hyperlink{classoomph_1_1ProjectableHelmholtzElement_a6635aa1b760348ac92784c4e7bb6db38}{get\+\_\+field}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
 \begin{DoxyCompactList}\small\item\em Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: history values) \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1ProjectableHelmholtzElement_abcab89ec5baac0407527579afc8aac15}{nvalue\+\_\+of\+\_\+field}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&fld)
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableHelmholtzElement_abcab89ec5baac0407527579afc8aac15}{nvalue\+\_\+of\+\_\+field}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Return number of values in field fld\+: One per node. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{classoomph_1_1ProjectableHelmholtzElement_ada5e8cc58f2c0be72da7b66e07d174be}{local\+\_\+equation}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&fld, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&j)
+int \mbox{\hyperlink{classoomph_1_1ProjectableHelmholtzElement_ada5e8cc58f2c0be72da7b66e07d174be}{local\+\_\+equation}} (const unsigned \&fld, const unsigned \&j)
 \begin{DoxyCompactList}\small\item\em Return local equation number of value j in field fld. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1ProjectableHelmholtzElement_ab7b86d1f7ae0c54e512ebf0816dab665}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&nplot)
+void \mbox{\hyperlink{classoomph_1_1ProjectableHelmholtzElement_ab7b86d1f7ae0c54e512ebf0816dab665}{output}} (std\+::ostream \&outfile, const unsigned \&nplot)
 \begin{DoxyCompactList}\small\item\em Output FE representation of soln\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+DIM plot points. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -48,7 +48,7 @@ class oomph\+::\+Projectable\+Helmholtz\+Element$<$ HELMHOLTZ\+\_\+\+ELEMENT $>$
 
 Helmholtz upgraded to become projectable 
 
-Definition at line \mbox{\hyperlink{helmholtz__elements_8h_source_l00687}{687}} of file \mbox{\hyperlink{helmholtz__elements_8h_source}{helmholtz\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{helmholtz__elements_8h_source_l00685}{685}} of file \mbox{\hyperlink{helmholtz__elements_8h_source}{helmholtz\+\_\+elements.\+h}}.
 
 
 
@@ -66,7 +66,7 @@ Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards
 
 
 
-Definition at line \mbox{\hyperlink{helmholtz__elements_8h_source_l00693}{693}} of file \mbox{\hyperlink{helmholtz__elements_8h_source}{helmholtz\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{helmholtz__elements_8h_source_l00691}{691}} of file \mbox{\hyperlink{helmholtz__elements_8h_source}{helmholtz\+\_\+elements.\+h}}.
 
 
 
@@ -76,7 +76,7 @@ Definition at line \mbox{\hyperlink{helmholtz__elements_8h_source_l00693}{693}} 
 \index{data\_values\_of\_field@{data\_values\_of\_field}!oomph::ProjectableHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$@{oomph::ProjectableHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{data\_values\_of\_field()}{data\_values\_of\_field()}}
 {\footnotesize\ttfamily template$<$class HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableHelmholtzElement}{oomph\+::\+Projectable\+Helmholtz\+Element}}$<$ HELMHOLTZ\+\_\+\+ELEMENT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableHelmholtzElement}{oomph\+::\+Projectable\+Helmholtz\+Element}}$<$ HELMHOLTZ\+\_\+\+ELEMENT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -88,18 +88,18 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a2292bd9c58694f
 
 
 
-Definition at line \mbox{\hyperlink{helmholtz__elements_8h_source_l00698}{698}} of file \mbox{\hyperlink{helmholtz__elements_8h_source}{helmholtz\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{helmholtz__elements_8h_source_l00696}{696}} of file \mbox{\hyperlink{helmholtz__elements_8h_source}{helmholtz\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableHelmholtzElement_a6635aa1b760348ac92784c4e7bb6db38}\label{classoomph_1_1ProjectableHelmholtzElement_a6635aa1b760348ac92784c4e7bb6db38}} 
 \index{oomph::ProjectableHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$@{oomph::ProjectableHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$}!get\_field@{get\_field}}
 \index{get\_field@{get\_field}!oomph::ProjectableHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$@{oomph::ProjectableHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{get\_field()}{get\_field()}}
 {\footnotesize\ttfamily template$<$class HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1ProjectableHelmholtzElement}{oomph\+::\+Projectable\+Helmholtz\+Element}}$<$ HELMHOLTZ\+\_\+\+ELEMENT $>$\+::get\+\_\+field (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{fld,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+double \mbox{\hyperlink{classoomph_1_1ProjectableHelmholtzElement}{oomph\+::\+Projectable\+Helmholtz\+Element}}$<$ HELMHOLTZ\+\_\+\+ELEMENT $>$\+::get\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const unsigned \&}]{fld,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -111,18 +111,18 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ae4da5b565b6d33
 
 
 
-Definition at line \mbox{\hyperlink{helmholtz__elements_8h_source_l00784}{784}} of file \mbox{\hyperlink{helmholtz__elements_8h_source}{helmholtz\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{helmholtz__elements_8h_source_l00782}{782}} of file \mbox{\hyperlink{helmholtz__elements_8h_source}{helmholtz\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02598}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
+References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableHelmholtzElement_a651580abfd2d133f7cd6cd38e0bcca61}\label{classoomph_1_1ProjectableHelmholtzElement_a651580abfd2d133f7cd6cd38e0bcca61}} 
 \index{oomph::ProjectableHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$@{oomph::ProjectableHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$}!jacobian\_and\_shape\_of\_field@{jacobian\_and\_shape\_of\_field}}
 \index{jacobian\_and\_shape\_of\_field@{jacobian\_and\_shape\_of\_field}!oomph::ProjectableHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$@{oomph::ProjectableHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{jacobian\_and\_shape\_of\_field()}{jacobian\_and\_shape\_of\_field()}}
 {\footnotesize\ttfamily template$<$class HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1ProjectableHelmholtzElement}{oomph\+::\+Projectable\+Helmholtz\+Element}}$<$ HELMHOLTZ\+\_\+\+ELEMENT $>$\+::jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{fld,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+double \mbox{\hyperlink{classoomph_1_1ProjectableHelmholtzElement}{oomph\+::\+Projectable\+Helmholtz\+Element}}$<$ HELMHOLTZ\+\_\+\+ELEMENT $>$\+::jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -134,18 +134,18 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ad45c21b58c0985
 
 
 
-Definition at line \mbox{\hyperlink{helmholtz__elements_8h_source_l00758}{758}} of file \mbox{\hyperlink{helmholtz__elements_8h_source}{helmholtz\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{helmholtz__elements_8h_source_l00756}{756}} of file \mbox{\hyperlink{helmholtz__elements_8h_source}{helmholtz\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02616}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableHelmholtzElement_ada5e8cc58f2c0be72da7b66e07d174be}\label{classoomph_1_1ProjectableHelmholtzElement_ada5e8cc58f2c0be72da7b66e07d174be}} 
 \index{oomph::ProjectableHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$@{oomph::ProjectableHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$}!local\_equation@{local\_equation}}
 \index{local\_equation@{local\_equation}!oomph::ProjectableHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$@{oomph::ProjectableHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{local\_equation()}{local\_equation()}}
 {\footnotesize\ttfamily template$<$class HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-int \mbox{\hyperlink{classoomph_1_1ProjectableHelmholtzElement}{oomph\+::\+Projectable\+Helmholtz\+Element}}$<$ HELMHOLTZ\+\_\+\+ELEMENT $>$\+::local\+\_\+equation (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{fld,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+int \mbox{\hyperlink{classoomph_1_1ProjectableHelmholtzElement}{oomph\+::\+Projectable\+Helmholtz\+Element}}$<$ HELMHOLTZ\+\_\+\+ELEMENT $>$\+::local\+\_\+equation (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -157,7 +157,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac5c27ae929ff63
 
 
 
-Definition at line \mbox{\hyperlink{helmholtz__elements_8h_source_l00848}{848}} of file \mbox{\hyperlink{helmholtz__elements_8h_source}{helmholtz\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{helmholtz__elements_8h_source_l00846}{846}} of file \mbox{\hyperlink{helmholtz__elements_8h_source}{helmholtz\+\_\+elements.\+h}}.
 
 
 
@@ -180,7 +180,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a44634aa4049332
 
 
 
-Definition at line \mbox{\hyperlink{helmholtz__elements_8h_source_l00727}{727}} of file \mbox{\hyperlink{helmholtz__elements_8h_source}{helmholtz\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{helmholtz__elements_8h_source_l00725}{725}} of file \mbox{\hyperlink{helmholtz__elements_8h_source}{helmholtz\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableHelmholtzElement_a4ec9aaa5311ce1724014c4c4240a4d59}\label{classoomph_1_1ProjectableHelmholtzElement_a4ec9aaa5311ce1724014c4c4240a4d59}} 
 \index{oomph::ProjectableHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$@{oomph::ProjectableHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$}!nhistory\_values\_for\_coordinate\_projection@{nhistory\_values\_for\_coordinate\_projection}}
@@ -199,18 +199,18 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ab4ecd0cd24000a
 
 
 
-Definition at line \mbox{\hyperlink{helmholtz__elements_8h_source_l00751}{751}} of file \mbox{\hyperlink{helmholtz__elements_8h_source}{helmholtz\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{helmholtz__elements_8h_source_l00749}{749}} of file \mbox{\hyperlink{helmholtz__elements_8h_source}{helmholtz\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, and \mbox{\hyperlink{nodes_8h_source_l01022}{oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableHelmholtzElement_aae069d7dba3ab7ae1677053e5c55ba93}\label{classoomph_1_1ProjectableHelmholtzElement_aae069d7dba3ab7ae1677053e5c55ba93}} 
 \index{oomph::ProjectableHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$@{oomph::ProjectableHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$}!nhistory\_values\_for\_projection@{nhistory\_values\_for\_projection}}
 \index{nhistory\_values\_for\_projection@{nhistory\_values\_for\_projection}!oomph::ProjectableHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$@{oomph::ProjectableHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{nhistory\_values\_for\_projection()}{nhistory\_values\_for\_projection()}}
 {\footnotesize\ttfamily template$<$class HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1ProjectableHelmholtzElement}{oomph\+::\+Projectable\+Helmholtz\+Element}}$<$ HELMHOLTZ\+\_\+\+ELEMENT $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableHelmholtzElement}{oomph\+::\+Projectable\+Helmholtz\+Element}}$<$ HELMHOLTZ\+\_\+\+ELEMENT $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -222,18 +222,18 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac6790f394630b9
 
 
 
-Definition at line \mbox{\hyperlink{helmholtz__elements_8h_source_l00734}{734}} of file \mbox{\hyperlink{helmholtz__elements_8h_source}{helmholtz\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{helmholtz__elements_8h_source_l00732}{732}} of file \mbox{\hyperlink{helmholtz__elements_8h_source}{helmholtz\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8cc_source_l00879}{oomph\+::\+Data\+::ntstorage()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableHelmholtzElement_abcab89ec5baac0407527579afc8aac15}\label{classoomph_1_1ProjectableHelmholtzElement_abcab89ec5baac0407527579afc8aac15}} 
 \index{oomph::ProjectableHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$@{oomph::ProjectableHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$}!nvalue\_of\_field@{nvalue\_of\_field}}
 \index{nvalue\_of\_field@{nvalue\_of\_field}!oomph::ProjectableHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$@{oomph::ProjectableHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{nvalue\_of\_field()}{nvalue\_of\_field()}}
 {\footnotesize\ttfamily template$<$class HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1ProjectableHelmholtzElement}{oomph\+::\+Projectable\+Helmholtz\+Element}}$<$ HELMHOLTZ\+\_\+\+ELEMENT $>$\+::nvalue\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableHelmholtzElement}{oomph\+::\+Projectable\+Helmholtz\+Element}}$<$ HELMHOLTZ\+\_\+\+ELEMENT $>$\+::nvalue\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -245,18 +245,18 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a1a9a6de16f3511
 
 
 
-Definition at line \mbox{\hyperlink{helmholtz__elements_8h_source_l00831}{831}} of file \mbox{\hyperlink{helmholtz__elements_8h_source}{helmholtz\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{helmholtz__elements_8h_source_l00829}{829}} of file \mbox{\hyperlink{helmholtz__elements_8h_source}{helmholtz\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}.
+References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableHelmholtzElement_ab7b86d1f7ae0c54e512ebf0816dab665}\label{classoomph_1_1ProjectableHelmholtzElement_ab7b86d1f7ae0c54e512ebf0816dab665}} 
 \index{oomph::ProjectableHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$@{oomph::ProjectableHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$}!output@{output}}
 \index{output@{output}!oomph::ProjectableHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$@{oomph::ProjectableHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}}
 {\footnotesize\ttfamily template$<$class HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1ProjectableHelmholtzElement}{oomph\+::\+Projectable\+Helmholtz\+Element}}$<$ HELMHOLTZ\+\_\+\+ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1ProjectableHelmholtzElement}{oomph\+::\+Projectable\+Helmholtz\+Element}}$<$ HELMHOLTZ\+\_\+\+ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -268,7 +268,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line \mbox{\hyperlink{helmholtz__elements_8h_source_l00876}{876}} of file \mbox{\hyperlink{helmholtz__elements_8h_source}{helmholtz\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{helmholtz__elements_8h_source_l00874}{874}} of file \mbox{\hyperlink{helmholtz__elements_8h_source}{helmholtz\+\_\+elements.\+h}}.
 
 
 

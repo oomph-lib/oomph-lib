@@ -681,13 +681,9 @@ namespace oomph
       // Calculate the 2-norm (noting that the 2-norm of a complex vector a of
       // length n is simply the square root of the sum of the squares of each
       // real and imaginary component). That is:
-      // \f[
-      // \|a\|_2^2=\sum_{i=0}^{i=n-1}\real(a[i])^2+\imag(a[i])^2.
-      // \f]
+      /// \f[ \|a\|_2^2=\sum_{i=0}^{i=n-1}\real(a[i])^2+\imag(a[i])^2. \f]
       // can be written as:
-      // \f[
-      // \|a\|_2^2=\|\real(a)\|_2^2+\|\imag(a)\|_2^2.
-      // \f]
+      /// \f[ \|a\|_2^2=\|\real(a)\|_2^2+\|\imag(a)\|_2^2. \f]
       double res_real_norm = residual_real.norm();
       double res_imag_norm = residual_imag.norm();
       double norm_res =
@@ -1097,31 +1093,13 @@ namespace oomph
     /// Helper function: Generate a plane rotation. This is done by
     /// finding the value of \f$ \cos(\theta) \f$ (i.e. cs) and the value of
     /// \f$ \sin(\theta) \f$ (i.e. sn) such that:
-    /// \f[
-    /// \begin{bmatrix}
-    /// \overline{\cos\theta} & \overline{\sin\theta} \cr
-    /// -\sin\theta & \cos\theta
-    /// \end{bmatrix}
-    /// \begin{bmatrix}
-    /// dx
-    /// \\ dy
-    /// \end{bmatrix}
-    /// =
-    /// \begin{bmatrix}
-    /// r
-    /// \\ 0
-    /// \end{bmatrix},
-    /// \f]
+    /// \f[ \begin{bmatrix} \overline{\cos\theta} & \overline{\sin\theta} \cr -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} dx \\ dy \end{bmatrix} = \begin{bmatrix} r \\ 0 \end{bmatrix}, \f]
     /// where \f$ r=\sqrt{pow(|dx|,2)+pow(|dy|,2)} \f$. The values of a and b
     /// are given by:
     /// The values of dx and dy are given by:
-    /// \f[
-    /// \cos\theta&=\dfrac{dx}{\sqrt{|dx|^2+|dy|^2}},
-    /// \f]
+    /// \f[ \cos\theta&=\dfrac{dx}{\sqrt{|dx|^2+|dy|^2}}, \f]
     /// and
-    /// \f[
-    /// \sin\theta&=\dfrac{dy}{\sqrt{|dx|^2+|dy|^2}}.
-    /// \f]
+    /// \f[ \sin\theta&=\dfrac{dy}{\sqrt{|dx|^2+|dy|^2}}. \f]
     /// Taken from: Saad Y."Iterative methods for sparse linear systems", p.193.
     /// We also check to see that sn is always a real (nonnegative) number. See
     /// pp.193-194 for an explanation.
@@ -1202,21 +1180,7 @@ namespace oomph
 
     /// Helper function: Apply plane rotation. This is done using the
     /// update:
-    /// \f[
-    /// \begin{bmatrix}
-    /// dx
-    /// \\ dy
-    /// \end{bmatrix}
-    /// \leftarrow
-    /// \begin{bmatrix}
-    /// \overline{\cos\theta} & \overline{\sin\theta}
-    /// \\ -\sin\theta & \cos\theta
-    /// \end{bmatrix}
-    /// \begin{bmatrix}
-    /// dx
-    /// \\ dy
-    /// \end{bmatrix}.
-    /// \f]
+    /// \f[ \begin{bmatrix} dx \\ dy \end{bmatrix} \leftarrow \begin{bmatrix} \overline{\cos\theta} & \overline{\sin\theta} \\ -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} dx \\ dy \end{bmatrix}. \f]
     /// Taken from: Saad Y."Iterative methods for sparse linear systems", p.193.
     void apply_plane_rotation(std::complex<double>& dx,
                               std::complex<double>& dy,
@@ -2350,31 +2314,13 @@ namespace oomph
     /// Helper function: Generate a plane rotation. This is done by
     /// finding the value of \f$ \cos(\theta) \f$ (i.e. cs) and the value of
     /// \f$ \sin(\theta) \f$ (i.e. sn) such that:
-    /// \f[
-    /// \begin{bmatrix}
-    /// \overline{\cos\theta} & \overline{\sin\theta}
-    /// \\ -\sin\theta & \cos\theta
-    /// \end{bmatrix}
-    /// \begin{bmatrix}
-    /// dx
-    /// \\ dy
-    /// \end{bmatrix}
-    /// =
-    /// \begin{bmatrix}
-    /// r
-    /// \\ 0
-    /// \end{bmatrix},
-    /// \f]
+    /// \f[ \begin{bmatrix} \overline{\cos\theta} & \overline{\sin\theta} \\ -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} dx \\ dy \end{bmatrix} = \begin{bmatrix} r \\ 0 \end{bmatrix}, \f]
     /// where \f$ r=\sqrt{pow(|dx|,2)+pow(|dy|,2)} \f$. The values of a and b
     /// are given by:
     /// The values of dx and dy are given by:
-    /// \f[
-    /// \cos\theta&=\dfrac{dx}{\sqrt{|dx|^2+|dy|^2}},
-    /// \f]
+    /// \f[ \cos\theta&=\dfrac{dx}{\sqrt{|dx|^2+|dy|^2}}, \f]
     /// and
-    /// \f[
-    /// \sin\theta&=\dfrac{dy}{\sqrt{|dx|^2+|dy|^2}}.
-    /// \f]
+    /// \f[ \sin\theta&=\dfrac{dy}{\sqrt{|dx|^2+|dy|^2}}. \f]
     /// Taken from: Saad Y."Iterative methods for sparse linear systems", p.193.
     /// We also check to see that sn is always a real (nonnegative) number. See
     /// pp.193-194 for an explanation.
@@ -2455,21 +2401,7 @@ namespace oomph
 
     /// Helper function: Apply plane rotation. This is done using the
     /// update:
-    /// \f[
-    /// \begin{bmatrix}
-    /// dx
-    /// \\ dy
-    /// \end{bmatrix}
-    /// \leftarrow
-    /// \begin{bmatrix}
-    /// \overline{\cos\theta} & \overline{\sin\theta}
-    /// \\ -\sin\theta & \cos\theta
-    /// \end{bmatrix}
-    /// \begin{bmatrix}
-    /// dx
-    /// \\ dy
-    /// \end{bmatrix}.
-    /// \f]
+    /// \f[ \begin{bmatrix} dx \\ dy \end{bmatrix} \leftarrow \begin{bmatrix} \overline{\cos\theta} & \overline{\sin\theta} \\ -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} dx \\ dy \end{bmatrix}. \f]
     /// Taken from: Saad Y."Iterative methods for sparse linear systems", p.193.
     void apply_plane_rotation(std::complex<double>& dx,
                               std::complex<double>& dy,

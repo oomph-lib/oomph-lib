@@ -1359,8 +1359,8 @@
 \DoxyCodeLine{\Hypertarget{block__preconditioner_8cc_source_l01355}01355           \textcolor{comment}{// send to self}}
 \DoxyCodeLine{\Hypertarget{block__preconditioner_8cc_source_l01356}01356           \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{block__preconditioner_8cc_source_l01357}01357           \{}
-\DoxyCodeLine{\Hypertarget{block__preconditioner_8cc_source_l01358}01358             \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}} = first\_dof\_to\_send[p] + ndof\_to\_recv[p];}
-\DoxyCodeLine{\Hypertarget{block__preconditioner_8cc_source_l01359}01359             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = first\_dof\_to\_send[p]; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
+\DoxyCodeLine{\Hypertarget{block__preconditioner_8cc_source_l01358}01358             \textcolor{keywordtype}{unsigned} u = first\_dof\_to\_send[p] + ndof\_to\_recv[p];}
+\DoxyCodeLine{\Hypertarget{block__preconditioner_8cc_source_l01359}01359             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = first\_dof\_to\_send[p]; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < u; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{block__preconditioner_8cc_source_l01360}01360             \{}
 \DoxyCodeLine{\Hypertarget{block__preconditioner_8cc_source_l01361}01361 \textcolor{preprocessor}{\#ifdef PARANOID}}
 \DoxyCodeLine{\Hypertarget{block__preconditioner_8cc_source_l01362}01362               \textcolor{comment}{// indicate that this dof has ben recv}}

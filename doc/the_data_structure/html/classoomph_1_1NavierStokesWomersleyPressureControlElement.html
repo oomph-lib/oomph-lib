@@ -476,7 +476,7 @@ Additional Inherited Members</h2></td></tr>
 <p >An element to impose a fluid pressure obtained from a Womersley impedance tube at a boundary. This element is used in conjunction with a <a class="el" href="classoomph_1_1NetFluxControlElementForWomersleyPressureControl.html" title="/////////////////////////////////////////////////////////////////////// /////////////////////////////...">NetFluxControlElementForWomersleyPressureControl</a> element, and is passed to the <a class="el" href="classoomph_1_1NetFluxControlElementForWomersleyPressureControl.html" title="/////////////////////////////////////////////////////////////////////// /////////////////////////////...">NetFluxControlElementForWomersleyPressureControl</a> element's constructor. The volume flux across the boundary is then an unknown of the problem. The constructor argument for this element is a suitable Womersley impedance tube to give the pressure via its get_response(...) function.</p>
 <p >Note: the <a class="el" href="classoomph_1_1NavierStokesWomersleyPressureControlElement.html" title="/////////////////////////////////////////////////////////////////////// /////////////////////////////...">NavierStokesWomersleyPressureControlElement</a> element calculates Jacobian entries BOTH for itself AND for the <a class="el" href="classoomph_1_1NetFluxControlElementForWomersleyPressureControl.html" title="/////////////////////////////////////////////////////////////////////// /////////////////////////////...">NetFluxControlElementForWomersleyPressureControl</a> with respect to the unknowns in this (<a class="el" href="classoomph_1_1NavierStokesWomersleyPressureControlElement.html" title="/////////////////////////////////////////////////////////////////////// /////////////////////////////...">NavierStokesWomersleyPressureControlElement</a>) element. </p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l02579">2579</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l02576">2576</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad3293da10ac3a22cd70ae7c8c11980d9" name="ad3293da10ac3a22cd70ae7c8c11980d9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad3293da10ac3a22cd70ae7c8c11980d9">&#9670;&nbsp;</a></span>NavierStokesWomersleyPressureControlElement()</h2>
@@ -504,9 +504,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Constructor takes a pointer to a suitable Womersley impedance tube which defines the pressure via get_response(...) </p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l02585">2585</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l02582">2582</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8cc_source.html#l00062">oomph::GeneralisedElement::add_internal_data()</a>, <a class="el" href="womersley__elements_8h_source.html#l02712">Volume_flux_data_id</a>, and <a class="el" href="womersley__elements_8h_source.html#l02702">Volume_flux_data_pt</a>.</p>
+<p class="reference">References <a class="el" href="elements_8cc_source.html#l00062">oomph::GeneralisedElement::add_internal_data()</a>, <a class="el" href="womersley__elements_8h_source.html#l02709">Volume_flux_data_id</a>, and <a class="el" href="womersley__elements_8h_source.html#l02699">Volume_flux_data_pt</a>.</p>
 
 </div>
 </div>
@@ -535,7 +535,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Destructor should not delete anything. </p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l02597">2597</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l02594">2594</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 
 </div>
 </div>
@@ -566,11 +566,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Function to add to external data the <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> object whose single value is the pressure applied at the boundary. </p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l02628">2628</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l02625">2625</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8cc_source.html#l00307">oomph::GeneralisedElement::add_external_data()</a>, and <a class="el" href="womersley__elements_8h_source.html#l02708">Pressure_data_id</a>.</p>
+<p class="reference">References <a class="el" href="elements_8cc_source.html#l00307">oomph::GeneralisedElement::add_external_data()</a>, and <a class="el" href="womersley__elements_8h_source.html#l02705">Pressure_data_id</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="womersley__elements_8h_source.html#l02743">oomph::NetFluxControlElementForWomersleyPressureControl::NetFluxControlElementForWomersleyPressureControl()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="womersley__elements_8h_source.html#l02740">oomph::NetFluxControlElementForWomersleyPressureControl::NetFluxControlElementForWomersleyPressureControl()</a>.</p>
 
 </div>
 </div>
@@ -612,9 +612,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1GeneralisedElement.html#a6ae09fc0d68e4309ac1b03583d252845">oomph::GeneralisedElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l02611">2611</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l02608">2608</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="womersley__elements_8h_source.html#l02664">fill_in_generic_residual_contribution_pressure_control()</a>.</p>
+<p class="reference">References <a class="el" href="womersley__elements_8h_source.html#l02661">fill_in_generic_residual_contribution_pressure_control()</a>.</p>
 
 </div>
 </div>
@@ -646,9 +646,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1GeneralisedElement.html#a310c97f515e8504a48179c0e72c550d7">oomph::GeneralisedElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l02600">2600</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l02597">2597</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l00227">oomph::GeneralisedElement::Dummy_matrix</a>, and <a class="el" href="womersley__elements_8h_source.html#l02664">fill_in_generic_residual_contribution_pressure_control()</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l00227">oomph::GeneralisedElement::Dummy_matrix</a>, and <a class="el" href="womersley__elements_8h_source.html#l02661">fill_in_generic_residual_contribution_pressure_control()</a>.</p>
 
 </div>
 </div>
@@ -694,11 +694,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>This function returns the residuals. flag=1(or 0): do (or don't) compute the Jacobian as well. Note that this function also calculates the Jacobian contribution for the <a class="el" href="classoomph_1_1NetFluxControlElementForWomersleyPressureControl.html" title="/////////////////////////////////////////////////////////////////////// /////////////////////////////...">NetFluxControlElementForWomersleyPressureControl</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l02664">2664</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l02661">2661</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l00659">oomph::GeneralisedElement::external_data_pt()</a>, <a class="el" href="elements_8h_source.html#l00311">oomph::GeneralisedElement::external_local_eqn()</a>, <a class="el" href="classoomph_1_1TemplateFreeWomersleyImpedanceTubeBase.html#a95c60d5f7661be3ee298cd2b4bd45de5">oomph::TemplateFreeWomersleyImpedanceTubeBase::get_response()</a>, <a class="el" href="elements_8h_source.html#l00267">oomph::GeneralisedElement::internal_local_eqn()</a>, <a class="el" href="womersley__elements_8h_source.html#l02708">Pressure_data_id</a>, <a class="el" href="nodes_8h_source.html#l00293">oomph::Data::value()</a>, <a class="el" href="womersley__elements_8h_source.html#l02712">Volume_flux_data_id</a>, and <a class="el" href="womersley__elements_8h_source.html#l02705">Womersley_tube_pt</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l00659">oomph::GeneralisedElement::external_data_pt()</a>, <a class="el" href="elements_8h_source.html#l00311">oomph::GeneralisedElement::external_local_eqn()</a>, <a class="el" href="classoomph_1_1TemplateFreeWomersleyImpedanceTubeBase.html#a95c60d5f7661be3ee298cd2b4bd45de5">oomph::TemplateFreeWomersleyImpedanceTubeBase::get_response()</a>, <a class="el" href="elements_8h_source.html#l00267">oomph::GeneralisedElement::internal_local_eqn()</a>, <a class="el" href="womersley__elements_8h_source.html#l02705">Pressure_data_id</a>, <a class="el" href="nodes_8h_source.html#l00293">oomph::Data::value()</a>, <a class="el" href="womersley__elements_8h_source.html#l02709">Volume_flux_data_id</a>, and <a class="el" href="womersley__elements_8h_source.html#l02702">Womersley_tube_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="womersley__elements_8h_source.html#l02611">fill_in_contribution_to_jacobian()</a>, and <a class="el" href="womersley__elements_8h_source.html#l02600">fill_in_contribution_to_residuals()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="womersley__elements_8h_source.html#l02608">fill_in_contribution_to_jacobian()</a>, and <a class="el" href="womersley__elements_8h_source.html#l02597">fill_in_contribution_to_residuals()</a>.</p>
 
 </div>
 </div>
@@ -730,7 +730,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1GeneralisedElement.html#a069f59bfc3e607a5bebba52c6314d777">oomph::GeneralisedElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l02646">2646</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l02643">2643</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 
 <p class="reference">References <a class="el" href="elements_8h_source.html#l00704">oomph::GeneralisedElement::eqn_number()</a>.</p>
 
@@ -763,7 +763,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1GeneralisedElement.html#a0c6037a870597b35dcf1c780710b9a56">oomph::GeneralisedElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l02635">2635</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l02632">2632</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 
 </div>
 </div>
@@ -792,9 +792,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Function to return a pointer to the <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> object whose single value is the flux degree of freedom. </p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l02621">2621</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l02618">2618</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="womersley__elements_8h_source.html#l02702">Volume_flux_data_pt</a>.</p>
+<p class="reference">References <a class="el" href="womersley__elements_8h_source.html#l02699">Volume_flux_data_pt</a>.</p>
 
 </div>
 </div>
@@ -821,9 +821,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Id of external <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> object whose single value is the pressure. </p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l02708">2708</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l02705">2705</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="womersley__elements_8h_source.html#l02628">add_pressure_data()</a>, and <a class="el" href="womersley__elements_8h_source.html#l02664">fill_in_generic_residual_contribution_pressure_control()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="womersley__elements_8h_source.html#l02625">add_pressure_data()</a>, and <a class="el" href="womersley__elements_8h_source.html#l02661">fill_in_generic_residual_contribution_pressure_control()</a>.</p>
 
 </div>
 </div>
@@ -849,9 +849,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Id of internal <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> object whose single value is the volume flux. </p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l02712">2712</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l02709">2709</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="womersley__elements_8h_source.html#l02664">fill_in_generic_residual_contribution_pressure_control()</a>, and <a class="el" href="womersley__elements_8h_source.html#l02585">NavierStokesWomersleyPressureControlElement()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="womersley__elements_8h_source.html#l02661">fill_in_generic_residual_contribution_pressure_control()</a>, and <a class="el" href="womersley__elements_8h_source.html#l02582">NavierStokesWomersleyPressureControlElement()</a>.</p>
 
 </div>
 </div>
@@ -877,9 +877,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p><a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> object whose single value is the volume flux applied by the elements in the Flux_control_mesh_pt. </p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l02702">2702</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l02699">2699</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="womersley__elements_8h_source.html#l02585">NavierStokesWomersleyPressureControlElement()</a>, and <a class="el" href="womersley__elements_8h_source.html#l02621">volume_flux_data_pt()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="womersley__elements_8h_source.html#l02582">NavierStokesWomersleyPressureControlElement()</a>, and <a class="el" href="womersley__elements_8h_source.html#l02618">volume_flux_data_pt()</a>.</p>
 
 </div>
 </div>
@@ -905,9 +905,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Pointer to the Womersley impedance tube. </p>
 
-<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l02705">2705</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="womersley__elements_8h_source.html#l02702">2702</a> of file <a class="el" href="womersley__elements_8h_source.html">womersley_elements.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="womersley__elements_8h_source.html#l02664">fill_in_generic_residual_contribution_pressure_control()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="womersley__elements_8h_source.html#l02661">fill_in_generic_residual_contribution_pressure_control()</a>.</p>
 
 </div>
 </div>
@@ -942,7 +942,7 @@ Additional Inherited Members</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Nov 2 2021 16:33:41
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Dec 21 2021 17:37:11
         </div>
       </div>
     </footer>

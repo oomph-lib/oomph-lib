@@ -109,8 +109,8 @@
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00105}00105           -\/>get\_coordinates\_on\_boundary(b, m);}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00106}00106 }
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00107}00107         \textcolor{comment}{// get u at node}}
-\DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00108}00108         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}};}
-\DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00109}00109         (*u\_fn)(m[0], \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}});}
+\DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00108}00108         \textcolor{keywordtype}{double} u;}
+\DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00109}00109         (*u\_fn)(m[0], u);}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00110}00110 }
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00111}00111         \textcolor{comment}{// finite difference is used to compute dudm\_t}}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00112}00112         \textcolor{comment}{// u0 and u1 store values of u left/below and right/above node n}}
@@ -143,7 +143,7 @@
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00139}00139 }
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00140}00140         \textcolor{comment}{// pin and set u type dof}}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00141}00141         Bulk\_element\_mesh\_pt-\/>boundary\_node\_pt(b, n)-\/>pin(0);}
-\DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00142}00142         Bulk\_element\_mesh\_pt-\/>boundary\_node\_pt(b, n)-\/>set\_value(0, \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}});}
+\DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00142}00142         Bulk\_element\_mesh\_pt-\/>boundary\_node\_pt(b, n)-\/>set\_value(0, u);}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00143}00143 }
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00144}00144         \textcolor{comment}{// pin and set duds\_t type degree of freedom}}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00145}00145         Bulk\_element\_mesh\_pt-\/>boundary\_node\_pt(b, n)-\/>pin(2 -\/ s\_fixed\_index);}
@@ -404,15 +404,15 @@
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00400}00400     \textcolor{comment}{// vectors for dx\_i/ds\_n and dx\_i/ds\_t}}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00401}00401     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} dxds\_n(2);}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00402}00402     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} dxds\_t(2);}
-\DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00403}00403     dxds\_n[0] = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>x\_gen(1 + \mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement_a4f72d42e59d5797067b69b31b9e440f5}{S\_fixed\_index}}, 0);}
-\DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00404}00404     dxds\_n[1] = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>x\_gen(1 + \mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement_a4f72d42e59d5797067b69b31b9e440f5}{S\_fixed\_index}}, 1);}
-\DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00405}00405     dxds\_t[0] = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>x\_gen(2 -\/ \mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement_a4f72d42e59d5797067b69b31b9e440f5}{S\_fixed\_index}}, 0);}
-\DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00406}00406     dxds\_t[1] = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>x\_gen(2 -\/ \mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement_a4f72d42e59d5797067b69b31b9e440f5}{S\_fixed\_index}}, 1);}
+\DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00403}00403     dxds\_n[0] = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Node_af7fdc0dfda495d69bd31c790ee77da73}{x\_gen}}(1 + \mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement_a4f72d42e59d5797067b69b31b9e440f5}{S\_fixed\_index}}, 0);}
+\DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00404}00404     dxds\_n[1] = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Node_af7fdc0dfda495d69bd31c790ee77da73}{x\_gen}}(1 + \mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement_a4f72d42e59d5797067b69b31b9e440f5}{S\_fixed\_index}}, 1);}
+\DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00405}00405     dxds\_t[0] = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Node_af7fdc0dfda495d69bd31c790ee77da73}{x\_gen}}(2 -\/ \mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement_a4f72d42e59d5797067b69b31b9e440f5}{S\_fixed\_index}}, 0);}
+\DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00406}00406     dxds\_t[1] = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Node_af7fdc0dfda495d69bd31c790ee77da73}{x\_gen}}(2 -\/ \mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement_a4f72d42e59d5797067b69b31b9e440f5}{S\_fixed\_index}}, 1);}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00407}00407 }
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00408}00408     \textcolor{comment}{// vector for d2xi/ds\_n ds\_t}}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00409}00409     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} d2xds\_nds\_t(2);}
-\DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00410}00410     d2xds\_nds\_t[0] = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>x\_gen(3, 0);}
-\DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00411}00411     d2xds\_nds\_t[1] = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>x\_gen(3, 1);}
+\DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00410}00410     d2xds\_nds\_t[0] = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Node_af7fdc0dfda495d69bd31c790ee77da73}{x\_gen}}(3, 0);}
+\DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00411}00411     d2xds\_nds\_t[1] = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Node_af7fdc0dfda495d69bd31c790ee77da73}{x\_gen}}(3, 1);}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00412}00412 }
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00413}00413     \textcolor{comment}{// compute dt/ds\_n}}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00414}00414     \textcolor{keywordtype}{double} dtds\_n = ((dxds\_n[0] * dxds\_t[0]) + (dxds\_n[1] * dxds\_t[1])) /}
@@ -429,8 +429,8 @@
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00425}00425     \{}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00426}00426       \textcolor{comment}{// additions to residual for duds\_n}}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00427}00427       residual[\mbox{\hyperlink{classoomph_1_1GeneralisedElement_a3d46b71d27f94aeba21aff1ef84fd0a6}{local\_eqn\_number}}] +=}
-\DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00428}00428         (this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>value(k\_normal) -\/}
-\DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00429}00429          dtds\_n * ds\_tdt * this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>value(k\_tangential));}
+\DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00428}00428         (this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Node_afcc5cdba40bca251826ae5bee5ca15b4}{value}}(k\_normal) -\/}
+\DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00429}00429          dtds\_n * ds\_tdt * this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Node_afcc5cdba40bca251826ae5bee5ca15b4}{value}}(k\_tangential));}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00430}00430 }
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00431}00431       \textcolor{comment}{// if contributions to jacobian are required}}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00432}00432       \textcolor{keywordflow}{if} (JFLAG == 1)}
@@ -439,12 +439,12 @@
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00435}00435         \textcolor{keywordtype}{int} local\_dof\_number = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5da80bbed97543e586f698251d67941d}{nodal\_local\_eqn}}(0, k\_normal);}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00436}00436         \textcolor{keywordflow}{if} (local\_dof\_number >= 0)}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00437}00437         \{}
-\DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00438}00438           \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(\mbox{\hyperlink{classoomph_1_1GeneralisedElement_a3d46b71d27f94aeba21aff1ef84fd0a6}{local\_eqn\_number}}, local\_dof\_number) += 1.0;}
+\DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00438}00438           jacobian(\mbox{\hyperlink{classoomph_1_1GeneralisedElement_a3d46b71d27f94aeba21aff1ef84fd0a6}{local\_eqn\_number}}, local\_dof\_number) += 1.0;}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00439}00439         \}}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00440}00440         local\_dof\_number = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5da80bbed97543e586f698251d67941d}{nodal\_local\_eqn}}(0, k\_tangential);}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00441}00441         \textcolor{keywordflow}{if} (local\_dof\_number >= 0)}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00442}00442         \{}
-\DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00443}00443           \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(\mbox{\hyperlink{classoomph_1_1GeneralisedElement_a3d46b71d27f94aeba21aff1ef84fd0a6}{local\_eqn\_number}}, local\_dof\_number) -\/= dtds\_n * ds\_tdt;}
+\DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00443}00443           jacobian(\mbox{\hyperlink{classoomph_1_1GeneralisedElement_a3d46b71d27f94aeba21aff1ef84fd0a6}{local\_eqn\_number}}, local\_dof\_number) -\/= dtds\_n * ds\_tdt;}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00444}00444         \}}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00445}00445       \}}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00446}00446     \}}
@@ -751,10 +751,10 @@
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00747}00747         sqrt(dxds\_t[0] * dxds\_t[0] + dxds\_t[1] * dxds\_t[1]);}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00748}00748 }
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00749}00749       \textcolor{comment}{// get imposed velocities}}
-\DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00750}00750       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}(2);}
-\DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00751}00751       (*u\_imposed\_fn)(m\_N[0], \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}});}
-\DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00752}00752       \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}[0] *= edge\_sign;}
-\DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00753}00753       \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}[1] *= -\/edge\_sign;}
+\DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00750}00750       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} u(2);}
+\DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00751}00751       (*u\_imposed\_fn)(m\_N[0], u);}
+\DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00752}00752       u[0] *= edge\_sign;}
+\DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00753}00753       u[1] *= -\/edge\_sign;}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00754}00754 }
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00755}00755       \textcolor{comment}{// compute  d/dm\_t(dpsidn) by finite difference}}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00756}00756       \textcolor{keywordtype}{double} ddm\_tdudn = 0;}
@@ -782,13 +782,13 @@
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00778}00778       ddm\_tdudt = (u\_R[0] -\/ u\_L[0]) / h;}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00779}00779 }
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00780}00780       \textcolor{comment}{// compute du/ds\_t}}
-\DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00781}00781       \textcolor{keywordtype}{double} duds\_t = dtds\_t * \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}[0];}
+\DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00781}00781       \textcolor{keywordtype}{double} duds\_t = dtds\_t * u[0];}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00782}00782 }
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00783}00783       \textcolor{comment}{// compute du/ds\_n}}
-\DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00784}00784       \textcolor{keywordtype}{double} duds\_n = dnds\_n * \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}[1] + dtds\_n * \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}[0];}
+\DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00784}00784       \textcolor{keywordtype}{double} duds\_n = dnds\_n * u[1] + dtds\_n * u[0];}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00785}00785 }
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00786}00786       \textcolor{comment}{// compute d2u/ds\_n ds\_t}}
-\DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00787}00787       \textcolor{keywordtype}{double} d2uds\_nds\_t = dnds\_n * m\_N[1] * ddm\_tdudn + d2tds\_nds\_t * \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}[0] +}
+\DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00787}00787       \textcolor{keywordtype}{double} d2uds\_nds\_t = dnds\_n * m\_N[1] * ddm\_tdudn + d2tds\_nds\_t * u[0] +}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00788}00788                            dtds\_n * m\_N[1] * ddm\_tdudt;}
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00789}00789 }
 \DoxyCodeLine{\Hypertarget{biharmonic__problem_8cc_source_l00790}00790       \textcolor{comment}{// pin du/ds\_n dof and set value}}

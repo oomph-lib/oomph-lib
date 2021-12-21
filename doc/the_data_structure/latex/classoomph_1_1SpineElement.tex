@@ -20,11 +20,11 @@ Inheritance diagram for oomph\+::Spine\+Element\texorpdfstring{$<$}{<} ELEMENT \
 \item 
 \mbox{\hyperlink{classoomph_1_1SpineElement_ab8d0c3d5ff2a820c76a9eaef12d1b71c}{Spine\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Constructor, call the constructor of the base element. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1SpineElement_aaf749916e9365affb7bed85dcc129e74}{Spine\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&element\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&face\+\_\+index)
+\mbox{\hyperlink{classoomph_1_1SpineElement_aaf749916e9365affb7bed85dcc129e74}{Spine\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&element\+\_\+pt, const int \&face\+\_\+index)
 \begin{DoxyCompactList}\small\item\em Constructor used for spine face elements. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1SpineElement_a54acf4222f3807c53075beedd25ed824}{$\sim$\+Spine\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Destructor, clean up the storage allocated to the local equation numbers. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{classoomph_1_1SpineElement_aaee520873e49100368ac2362e3d16324}{spine\+\_\+local\+\_\+eqn}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n)
+int \mbox{\hyperlink{classoomph_1_1SpineElement_aaee520873e49100368ac2362e3d16324}{spine\+\_\+local\+\_\+eqn}} (const unsigned \&n)
 \begin{DoxyCompactList}\small\item\em Return the local equation number corresponding to the height of the spine at the n-\/th node. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
@@ -69,7 +69,7 @@ Definition at line \mbox{\hyperlink{spines_8h_source_l00494}{494}} of file \mbox
 \index{SpineElement@{SpineElement}!oomph::SpineElement$<$ ELEMENT $>$@{oomph::SpineElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{SpineElement()}{SpineElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1SpineElement}{oomph\+::\+Spine\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1SpineElement}{Spine\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{element\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1SpineElement}{oomph\+::\+Spine\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1SpineElement}{Spine\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{element\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -131,7 +131,7 @@ References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink
 \index{spine\_local\_eqn@{spine\_local\_eqn}!oomph::SpineElement$<$ ELEMENT $>$@{oomph::SpineElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{spine\_local\_eqn()}{spine\_local\_eqn()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-int \mbox{\hyperlink{classoomph_1_1SpineElement}{oomph\+::\+Spine\+Element}}$<$ ELEMENT $>$\+::spine\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+int \mbox{\hyperlink{classoomph_1_1SpineElement}{oomph\+::\+Spine\+Element}}$<$ ELEMENT $>$\+::spine\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -143,7 +143,7 @@ Definition at line \mbox{\hyperlink{spines_8h_source_l00521}{521}} of file \mbox
 
 
 
-References \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00126}{oomph\+::\+Element\+With\+Moving\+Nodes\+::geometric\+\_\+data\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00345}{oomph\+::\+Element\+With\+Moving\+Nodes\+::ngeom\+\_\+data()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{spines_8h_source_l00481}{oomph\+::\+Spine\+Element$<$ ELEMENT $>$\+::\+Spine\+\_\+geometric\+\_\+index}}.
+References \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00126}{oomph\+::\+Element\+With\+Moving\+Nodes\+::geometric\+\_\+data\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00345}{oomph\+::\+Element\+With\+Moving\+Nodes\+::ngeom\+\_\+data()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{spines_8h_source_l00481}{oomph\+::\+Spine\+Element$<$ ELEMENT $>$\+::\+Spine\+\_\+geometric\+\_\+index}}.
 
 
 

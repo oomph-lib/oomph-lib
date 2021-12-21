@@ -316,12 +316,12 @@
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00312}00312 \textcolor{comment}{    /// and is passed in as the first argument -\/-\/ needed in case}}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00313}00313 \textcolor{comment}{    /// the derivatives are computed by FD.}}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00314}00314 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_ad0f8a6ecdbc0e410fee8ae90f7464ded}{fill\_in\_jacobian\_from\_geometric\_data}}(\mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00315}00315                                               \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}});}
+\DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00315}00315                                               \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian);}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00316}00316 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00317}00317 \textcolor{comment}{    /// Calculate the contributions to the Jacobian matrix from the}}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00318}00318 \textcolor{comment}{    /// geometric data. This version computes}}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00319}00319 \textcolor{comment}{    /// the residuals vector before calculating the Jacobian terms}}
-\DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00320}\mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_ac9750cea96c52b31fe059ba109fea076}{00320}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_ac9750cea96c52b31fe059ba109fea076}{fill\_in\_jacobian\_from\_geometric\_data}}(\mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})}
+\DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00320}\mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_ac9750cea96c52b31fe059ba109fea076}{00320}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_ac9750cea96c52b31fe059ba109fea076}{fill\_in\_jacobian\_from\_geometric\_data}}(\mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian)}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00321}00321     \{}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00322}00322       \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_a69258bc20d31d8212f4096e46aa80b6b}{Bypass\_fill\_in\_jacobian\_from\_geometric\_data}})}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00323}00323       \{}
@@ -333,7 +333,7 @@
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00329}00329         \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a53d348ab71c86b53619129a1dd411d30}{get\_residuals}}(residuals);}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00330}00330 }
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00331}00331         \textcolor{comment}{// Call the jacobian calculation}}
-\DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00332}00332         \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_ad0f8a6ecdbc0e410fee8ae90f7464ded}{fill\_in\_jacobian\_from\_geometric\_data}}(residuals, \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}});}
+\DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00332}00332         \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_ad0f8a6ecdbc0e410fee8ae90f7464ded}{fill\_in\_jacobian\_from\_geometric\_data}}(residuals, jacobian);}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00333}00333       \}}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00334}00334     \}}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00335}00335 }
@@ -423,7 +423,7 @@
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00419}00419 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00420}00420 \textcolor{comment}{    /// Overload the node assignment routine to assign nodes of the}}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00421}00421 \textcolor{comment}{    /// appropriate type.}}
-\DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00422}\mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a60d5782fbfb3b7488be18d0508af5334}{00422}} \textcolor{comment}{}    Node* \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a60d5782fbfb3b7488be18d0508af5334}{construct\_node}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n)}
+\DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00422}\mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a60d5782fbfb3b7488be18d0508af5334}{00422}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a60d5782fbfb3b7488be18d0508af5334}{construct\_node}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n)}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00423}00423     \{}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00424}00424       \textcolor{comment}{// Assign a node to the local node pointer}}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00425}00425       \textcolor{comment}{// The dimension and number of values are taken from internal element data}}
@@ -436,7 +436,7 @@
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00432}00432     \}}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00433}00433 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00434}00434 \textcolor{comment}{    /// Overloaded node allocation for unsteady problems}}
-\DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00435}\mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a097a73f508a14b37c837c8a80cd4eec8}{00435}} \textcolor{comment}{}    Node* \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a097a73f508a14b37c837c8a80cd4eec8}{construct\_node}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n, \mbox{\hyperlink{classoomph_1_1TimeStepper}{TimeStepper}}* \textcolor{keyword}{const}\& \mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\_stepper\_pt}})}
+\DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00435}\mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a097a73f508a14b37c837c8a80cd4eec8}{00435}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a097a73f508a14b37c837c8a80cd4eec8}{construct\_node}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n, \mbox{\hyperlink{classoomph_1_1TimeStepper}{TimeStepper}}* \textcolor{keyword}{const}\& \mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\_stepper\_pt}})}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00436}00436     \{}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00437}00437       \textcolor{comment}{// Assign a node to the local node pointer}}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00438}00438       \textcolor{comment}{// The dimension and number of values are taken from internal element data}}
@@ -450,7 +450,7 @@
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00446}00446     \}}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00447}00447 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00448}00448 \textcolor{comment}{    /// Overload the node assignment routine to assign boundary nodes}}
-\DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00449}\mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a674645064a9c81a24c2ce122f1f2c96f}{00449}} \textcolor{comment}{}    Node* \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a674645064a9c81a24c2ce122f1f2c96f}{construct\_boundary\_node}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n)}
+\DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00449}\mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a674645064a9c81a24c2ce122f1f2c96f}{00449}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a674645064a9c81a24c2ce122f1f2c96f}{construct\_boundary\_node}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n)}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00450}00450     \{}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00451}00451       \textcolor{comment}{// Assign a node to the local node pointer}}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00452}00452       \textcolor{comment}{// The dimension and number of values are taken from internal element data}}
@@ -464,7 +464,7 @@
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00460}00460     \}}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00461}00461 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00462}00462 \textcolor{comment}{    /// Overloaded boundary node allocation for unsteady problems}}
-\DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00463}\mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a74bae8e5faf4ac3cf80c2f6d54efdec8}{00463}} \textcolor{comment}{}    Node* \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a74bae8e5faf4ac3cf80c2f6d54efdec8}{construct\_boundary\_node}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n,}
+\DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00463}\mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a74bae8e5faf4ac3cf80c2f6d54efdec8}{00463}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a74bae8e5faf4ac3cf80c2f6d54efdec8}{construct\_boundary\_node}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n,}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00464}00464                                   \mbox{\hyperlink{classoomph_1_1TimeStepper}{TimeStepper}}* \textcolor{keyword}{const}\& \mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\_stepper\_pt}})}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00465}00465     \{}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00466}00466       \textcolor{comment}{// Assign a node to the local node pointer}}
@@ -507,10 +507,10 @@
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00503}00503     \}}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00504}00504 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00505}00505 \textcolor{comment}{    /// Compute the element's residuals vector and jacobian matrix}}
-\DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00506}\mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_ad6f4748cbd652a05cf2bff03549e5aaa}{00506}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_ad6f4748cbd652a05cf2bff03549e5aaa}{get\_jacobian}}(\mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})}
+\DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00506}\mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_ad6f4748cbd652a05cf2bff03549e5aaa}{00506}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_ad6f4748cbd652a05cf2bff03549e5aaa}{get\_jacobian}}(\mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian)}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00507}00507     \{\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00508}00508 \textcolor{comment}{      /// Call the element's get jacobian function}}
-\DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00509}00509 \textcolor{comment}{}      ELEMENT::get\_jacobian(residuals, \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}});}
+\DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00509}00509 \textcolor{comment}{}      ELEMENT::get\_jacobian(residuals, jacobian);}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00510}00510 }
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00511}00511       \textcolor{comment}{// Now call the additional geometric Jacobian terms}}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00512}00512       this-\/>\mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_ad0f8a6ecdbc0e410fee8ae90f7464ded}{fill\_in\_jacobian\_from\_geometric\_data}}(jacobian);}
@@ -518,11 +518,11 @@
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00514}00514 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00515}00515 \textcolor{comment}{    /// Compute the element's residuals vector and jacobian matrix}}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00516}\mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a02faf26f26815b4315d6ae82ff00da4c}{00516}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a02faf26f26815b4315d6ae82ff00da4c}{get\_jacobian\_and\_mass\_matrix}}(\mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00517}00517                                       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}},}
+\DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00517}00517                                       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian,}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00518}00518                                       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& mass\_matrix)}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00519}00519     \{\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00520}00520 \textcolor{comment}{      /// Call the element's get jacobian function}}
-\DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00521}00521 \textcolor{comment}{}      ELEMENT::get\_jacobian\_and\_mass\_matrix(residuals, \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, mass\_matrix);}
+\DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00521}00521 \textcolor{comment}{}      ELEMENT::get\_jacobian\_and\_mass\_matrix(residuals, jacobian, mass\_matrix);}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00522}00522 }
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00523}00523       \textcolor{comment}{// Now call the additional geometric Jacobian terms}}
 \DoxyCodeLine{\Hypertarget{element__with__moving__nodes_8h_source_l00524}00524       this-\/>\mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_ad0f8a6ecdbc0e410fee8ae90f7464ded}{fill\_in\_jacobian\_from\_geometric\_data}}(jacobian);}

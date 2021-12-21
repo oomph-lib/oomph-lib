@@ -50,19 +50,19 @@
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00046}00046 \textcolor{comment}{  /// Calculate the pressure value from the unknowns}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00047}00047 \textcolor{comment}{}  \textcolor{comment}{//=====================================================}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00048}00048   \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
-\DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00049}\mbox{\hyperlink{classoomph_1_1EulerEquations_a227a4ad24989e3d1e50e41815436791f}{00049}}   \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1EulerEquations_a227a4ad24989e3d1e50e41815436791f}{EulerEquations<DIM>::pressure}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}})\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00049}\mbox{\hyperlink{classoomph_1_1EulerEquations_a227a4ad24989e3d1e50e41815436791f}{00049}}   \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1EulerEquations_a227a4ad24989e3d1e50e41815436791f}{EulerEquations<DIM>::pressure}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& u)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00050}00050 \textcolor{keyword}{  }\{}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00051}00051     \textcolor{comment}{// Initialise the pressure to zero}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00052}00052     \textcolor{keywordtype}{double} p = 0.0;}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00053}00053     \textcolor{comment}{// Subtract off the momentum components}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00054}00054     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < DIM; j++)}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00055}00055     \{}
-\DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00056}00056       p -\/= \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}[2 + j] * \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}[2 + j];}
+\DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00056}00056       p -\/= u[2 + j] * u[2 + j];}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00057}00057     \}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00058}00058     \textcolor{comment}{// Multiply by half and divide by the extra density component}}
-\DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00059}00059     p *= 0.5 / \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}[0];}
+\DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00059}00059     p *= 0.5 / u[0];}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00060}00060     \textcolor{comment}{// Now add on the energy}}
-\DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00061}00061     p += \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}[1];}
+\DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00061}00061     p += u[1];}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00062}00062     \textcolor{comment}{// Finaly multiply by gamma minus 1}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00063}00063     p *= (this-\/>gamma() -\/ 1);}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00064}00064 }
@@ -77,23 +77,23 @@
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00073}00073 \textcolor{comment}{  /// the velocity components}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00074}00074 \textcolor{comment}{}  \textcolor{comment}{//=========================================================}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00075}00075   \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
-\DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00076}\mbox{\hyperlink{classoomph_1_1EulerEquations_a2596b0523e6e40d3ece23f9fd0c6d97c}{00076}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1EulerEquations_a2596b0523e6e40d3ece23f9fd0c6d97c}{EulerEquations<DIM>::flux}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}},}
-\DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00077}00077                                  \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}})}
+\DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00076}\mbox{\hyperlink{classoomph_1_1EulerEquations_a2596b0523e6e40d3ece23f9fd0c6d97c}{00076}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1EulerEquations_a2596b0523e6e40d3ece23f9fd0c6d97c}{EulerEquations<DIM>::flux}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& u,}
+\DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00077}00077                                  \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& f)}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00078}00078   \{}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00079}00079     \textcolor{comment}{// The density flux is the momentum}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00080}00080     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < DIM; j++)}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00081}00081     \{}
-\DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00082}00082       \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}(0, j) = \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}[2 + j];}
+\DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00082}00082       f(0, j) = u[2 + j];}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00083}00083     \}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00084}00084     \textcolor{comment}{// The energy flux is given by the velocity component multiplied by}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00085}00085     \textcolor{comment}{// E + p}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00086}00086     \textcolor{comment}{// Find the pressure}}
-\DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00087}00087     \textcolor{keywordtype}{double} p = pressure(\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}});}
+\DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00087}00087     \textcolor{keywordtype}{double} p = pressure(u);}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00088}00088 }
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00089}00089     \textcolor{comment}{// The we can do the energy fluxes}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00090}00090     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < DIM; j++)}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00091}00091     \{}
-\DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00092}00092       \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}(1, j) = \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}[2 + j] * (\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}[1] + p) / \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}[0];}
+\DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00092}00092       f(1, j) = u[2 + j] * (u[1] + p) / u[0];}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00093}00093     \}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00094}00094 }
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00095}00095     \textcolor{comment}{// Now the momentum fluxes}}
@@ -101,10 +101,10 @@
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00097}00097     \{}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00098}00098       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < DIM; j++)}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00099}00099       \{}
-\DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00100}00100         \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}(2 + \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j) = \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}[2 + j] * \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}[2 + \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] / \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}[0];}
+\DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00100}00100         f(2 + \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j) = u[2 + j] * u[2 + \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] / u[0];}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00101}00101       \}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00102}00102       \textcolor{comment}{// Add the additional diagonal terms}}
-\DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00103}00103       \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}(2 + \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) += p;}
+\DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00103}00103       f(2 + \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) += p;}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00104}00104     \}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00105}00105   \}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00106}00106 }
@@ -121,7 +121,7 @@
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00117}00117     \textcolor{comment}{// Vector of local coordinates}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00118}00118     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00119}00119     \textcolor{comment}{// Vector of values}}
-\DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00120}00120     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}(n\_flux, 0.0);}
+\DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00120}00120     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} u(n\_flux, 0.0);}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00121}00121 }
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00122}00122     \textcolor{comment}{// Tecplot header info}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00123}00123     outfile << this-\/>tecplot\_zone\_string(nplot);}
@@ -142,18 +142,18 @@
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00138}00138       \textcolor{comment}{// Values}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00139}00139       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_flux; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00140}00140       \{}
-\DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00141}00141         \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = this-\/>interpolated\_u\_flux\_transport(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
-\DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00142}00142         outfile << \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00141}00141         u[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = this-\/>interpolated\_u\_flux\_transport(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00142}00142         outfile << u[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00143}00143       \}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00144}00144 }
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00145}00145       \textcolor{comment}{// Now output the velocity}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00146}00146       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < DIM; j++)}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00147}00147       \{}
-\DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00148}00148         outfile << \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}[2 + j] / \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}[0] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00148}00148         outfile << u[2 + j] / u[0] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00149}00149       \}}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00150}00150 }
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00151}00151       \textcolor{comment}{// Also the pressure}}
-\DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00152}00152       outfile << pressure(\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}});}
+\DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00152}00152       outfile << pressure(u);}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00153}00153 }
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00154}00154       outfile << std::endl;}
 \DoxyCodeLine{\Hypertarget{euler__elements_8cc_source_l00155}00155     \}}

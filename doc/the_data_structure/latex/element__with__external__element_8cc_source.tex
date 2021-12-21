@@ -82,7 +82,7 @@
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00078}00078     \textcolor{comment}{// Find the number of interactions}}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00079}00079     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_interaction = this-\/>\mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_ae0507a6c0f498237fa1e8fb75425374e}{Ninteraction}};}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00080}00080     \textcolor{comment}{// Find the number of integration points}}
-\DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00081}00081     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00081}00081     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00082}00082 }
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00083}00083     \textcolor{comment}{// Work out the required storage}}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00084}00084     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_external\_element\_storage = n\_interaction * n\_intpt;}
@@ -302,7 +302,7 @@
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00298}00298         \textcolor{comment}{// Number of interactions}}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00299}00299         \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_interaction = this-\/>\mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_ad63351d9c35ebe15e194a898a5daebc1}{ninteraction}}();}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00300}00300         \textcolor{comment}{// Number of integration points}}
-\DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00301}00301         \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00301}00301         \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00302}00302 }
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00303}00303         \textcolor{comment}{// Sets of all (external) FiniteElements that affect the interactions}}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00304}00304         \textcolor{comment}{// One set per interaction}}
@@ -356,9 +356,9 @@
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00352}00352         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < n\_node; n++)}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00353}00353         \{}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00354}00354           \textcolor{comment}{// Find the node point}}
-\DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00355}00355           Node* \textcolor{keyword}{const} nod\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n);}
+\DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00355}00355           \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \textcolor{keyword}{const} nod\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n);}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00356}00356           \textcolor{comment}{// Find the number of values stored at the node}}
-\DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00357}00357           \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_value = nod\_pt-\/>nvalue();}
+\DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00357}00357           \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_value = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}{nvalue}}();}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00358}00358           \textcolor{comment}{// Loop over values and erase all pairs from the set}}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00359}00359           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_value; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00360}00360           \{}
@@ -439,7 +439,7 @@
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00435}00435           \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_node = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00436}00436           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < n\_node; n++)}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00437}00437           \{}
-\DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00438}00438             Node* \textcolor{keyword}{const} nod\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n);}
+\DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00438}00438             \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \textcolor{keyword}{const} nod\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n);}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00439}00439             external\_geometric\_data\_pt.erase(nod\_pt);}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00440}00440 }
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00441}00441             \mbox{\hyperlink{classoomph_1_1SolidNode}{SolidNode}}* solid\_nod\_pt = \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1SolidNode}{SolidNode}}*\textcolor{keyword}{>}(nod\_pt);}
@@ -696,7 +696,7 @@
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00692}00692         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} m = 0; m < n\_dof; m++)}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00693}00693         \{}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00694}00694           \textcolor{comment}{// Stick the entry into the Jacobian matrix}}
-\DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00695}00695           \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(m, local\_unknown) = (newres[m] -\/ residuals[m]) / fd\_step;}
+\DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00695}00695           jacobian(m, local\_unknown) = (newres[m] -\/ residuals[m]) / fd\_step;}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00696}00696         \}}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00697}00697 }
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00698}00698         \textcolor{comment}{// Reset the variables}}
@@ -777,7 +777,7 @@
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00773}00773         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} m = 0; m < n\_dof; m++)}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00774}00774         \{}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00775}00775           \textcolor{comment}{// Stick the entry into the Jacobian matrix}}
-\DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00776}00776           \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}(m, local\_unknown) = (newres[m] -\/ residuals[m]) / fd\_step;}
+\DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00776}00776           jacobian(m, local\_unknown) = (newres[m] -\/ residuals[m]) / fd\_step;}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00777}00777         \}}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00778}00778 }
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00779}00779         \textcolor{comment}{// Reset the variables}}
@@ -807,22 +807,22 @@
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00803}00803     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(n\_dim\_el);}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00804}00804 }
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00805}00805     \textcolor{comment}{// Vectors for coordintes}}
-\DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00806}00806     \textcolor{keywordtype}{unsigned} n\_dim = \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>ndim();}
-\DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00807}00807     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(n\_dim);}
+\DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00806}00806     \textcolor{keywordtype}{unsigned} n\_dim = \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
+\DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00807}00807     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(n\_dim);}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00808}00808     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x\_ext(n\_dim);}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00809}00809 }
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00810}00810     \textcolor{comment}{// Loop over the integration points}}
-\DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00811}00811     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00811}00811     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_intpt = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{nweight}}();}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00812}00812     outfile << \textcolor{stringliteral}{"{}ZONE I="{}} << n\_intpt << std::endl;}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00813}00813     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ipt = 0; ipt < n\_intpt; ipt++)}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00814}00814     \{}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00815}00815       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_dim\_el; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00816}00816       \{}
-\DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00817}00817         \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>knot(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00817}00817         \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{classoomph_1_1FiniteElement_a1a4723c4ee3fe4c6404203bb987f804e}{integral\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{knot}}(ipt, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00818}00818       \}}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00819}00819 }
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00820}00820       \textcolor{comment}{// Eulerian coordinates of integration point}}
-\DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00821}00821       \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00821}00821       \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00822}00822 }
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00823}00823       \textcolor{comment}{// Get pointer to external element}}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00824}00824       \mbox{\hyperlink{classoomph_1_1FiniteElement}{FiniteElement}}* ext\_el\_pt = \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_aab865822c3ad3d29393f8d74153d180e}{external\_element\_pt}}(interaction\_index, ipt);}
@@ -831,17 +831,17 @@
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00827}00827         \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_a13e8fd3c9a0723f0fb6539ba3853b149}{external\_element\_local\_coord}}(interaction\_index, ipt));}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00828}00828 }
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00829}00829       \textcolor{comment}{// Eulerian coordinates of point in external element}}
-\DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00830}00830       ext\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{interpolated\_x}}(s\_ext, x\_ext);}
+\DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00830}00830       ext\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(s\_ext, x\_ext);}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00831}00831 }
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00832}00832       \textcolor{comment}{// Output coords of interation point}}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00833}00833       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_dim; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00834}00834       \{}
-\DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00835}00835         outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00835}00835         outfile << x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00836}00836       \}}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00837}00837       \textcolor{comment}{// Write vector to point in external element}}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00838}00838       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_dim; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00839}00839       \{}
-\DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00840}00840         outfile << x\_ext[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00840}00840         outfile << x\_ext[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] -\/ x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00841}00841       \}}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00842}00842       outfile << std::endl;}
 \DoxyCodeLine{\Hypertarget{element__with__external__element_8cc_source_l00843}00843     \}}

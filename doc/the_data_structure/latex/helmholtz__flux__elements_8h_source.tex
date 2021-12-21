@@ -59,7 +59,7 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00055}00055 \textcolor{comment}{    /// Function pointer to the prescribed-\/flux function fct(x,f(x)) -\/-\/}}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00056}00056 \textcolor{comment}{    /// x is a Vector and  the flux is a complex}}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00057}00057 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00058}\mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_ad53ce405c551a39ac9baeaaab7f254df}{00058}}     \textcolor{keyword}{typedef} void (*\mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_ad53ce405c551a39ac9baeaaab7f254df}{HelmholtzPrescribedFluxFctPt}})(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00058}\mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_ad53ce405c551a39ac9baeaaab7f254df}{00058}}     \textcolor{keyword}{typedef} void (*\mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_ad53ce405c551a39ac9baeaaab7f254df}{HelmholtzPrescribedFluxFctPt}})(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00059}00059                                                  std::complex<double>\& flux);}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00060}00060 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00061}00061 \textcolor{comment}{    /// Constructor, takes the pointer to the "{}bulk"{} element and the}}
@@ -108,11 +108,11 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00104}00104 \textcolor{comment}{    /// Add the element's contribution to its residual vector and its}}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00105}00105 \textcolor{comment}{    /// Jacobian matrix}}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00106}\mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_ac388e1c565715ffc9953fc548def1bf5}{00106}} \textcolor{comment}{}    \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_ac388e1c565715ffc9953fc548def1bf5}{fill\_in\_contribution\_to\_jacobian}}(\mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00107}00107                                                  \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})}
+\DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00107}00107                                                  \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian)}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00108}00108     \{}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00109}00109       \textcolor{comment}{// Call the generic routine with the flag set to 1}}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00110}00110       \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a4f6caf80f078c526144990ee77bfaf92}{fill\_in\_generic\_residual\_contribution\_helmholtz\_flux}}(}
-\DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00111}00111         residuals, \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, 1);}
+\DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00111}00111         residuals, jacobian, 1);}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00112}00112     \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00113}00113 }
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00114}00114 \textcolor{comment}{}}
@@ -205,7 +205,7 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00201}00201       \textcolor{keywordtype}{unsigned} n\_node = \mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00202}00202 }
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00203}00203       \textcolor{comment}{// Get the shape functions}}
-\DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00204}00204       \mbox{\hyperlink{classoomph_1_1FiniteElement_a2de680722518136b5c6bf2aacc267a31}{shape\_at\_knot}}(ipt, psi);}
+\DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00204}00204       \mbox{\hyperlink{classoomph_1_1FiniteElement_aeccc0f774e3fab8c536e2d41004a1665}{shape\_at\_knot}}(ipt, psi);}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00205}00205 }
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00206}00206       \textcolor{comment}{// Set the test functions to be the same as the shape functions}}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00207}00207       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_node; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
@@ -220,7 +220,7 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00216}00216 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00217}00217 \textcolor{comment}{    /// Function to calculate the prescribed flux at a given spatial}}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00218}00218 \textcolor{comment}{    /// position}}
-\DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00219}\mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a0e43870b7dc404d05c58c835a79e7121}{00219}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a0e43870b7dc404d05c58c835a79e7121}{get\_flux}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, std::complex<double>\& flux)}
+\DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00219}\mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a0e43870b7dc404d05c58c835a79e7121}{00219}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a0e43870b7dc404d05c58c835a79e7121}{get\_flux}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x, std::complex<double>\& flux)}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00220}00220     \{}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00221}00221       \textcolor{comment}{// If the function pointer is zero return zero}}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00222}00222       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a28e520786dcd619f8e362356f9492728}{Flux\_fct\_pt}} == 0)}
@@ -230,7 +230,7 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00226}00226       \textcolor{comment}{// Otherwise call the function}}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00227}00227       \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00228}00228       \{}
-\DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00229}00229         (*Flux\_fct\_pt)(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, flux);}
+\DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00229}00229         (*Flux\_fct\_pt)(x, flux);}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00230}00230       \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00231}00231     \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00232}00232 }
@@ -245,7 +245,7 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00241}00241 \textcolor{comment}{    /// Jacobian as well.}}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00242}00242 \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a4f6caf80f078c526144990ee77bfaf92}{fill\_in\_generic\_residual\_contribution\_helmholtz\_flux}}(}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00243}00243       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00244}00244       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}},}
+\DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00244}00244       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian,}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00245}00245       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& flag);}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00246}00246 }
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00247}00247 \textcolor{comment}{}}
@@ -276,7 +276,7 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00272}00272     \textcolor{comment}{// Let the bulk element build the FaceElement, i.e. setup the pointers}}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00273}00273     \textcolor{comment}{// to its nodes (by referring to the appropriate nodes in the bulk}}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00274}00274     \textcolor{comment}{// element), etc.}}
-\DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00275}00275     bulk\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a025ab56ef9c6eea66fb34416fdf19152}{build\_face\_element}}(\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\_index}}, \textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00275}00275     bulk\_el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_aaf7bead5b462cfd5401d97b3dbdc7af7}{build\_face\_element}}(\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\_index}}, \textcolor{keyword}{this});}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00276}00276 }
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00277}00277 \textcolor{preprocessor}{\#ifdef PARANOID}}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00278}00278     \{}
@@ -307,7 +307,7 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00303}00303 }
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00304}00304     \textcolor{comment}{// Extract the dimension of the problem from the dimension of}}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00305}00305     \textcolor{comment}{// the first node}}
-\DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00306}00306     \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a5d1b709d1f2120ca7a8429bc0260bcc0}{Dim}} = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>ndim();}
+\DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00306}00306     \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a5d1b709d1f2120ca7a8429bc0260bcc0}{Dim}} = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00307}00307 }
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00308}00308     \textcolor{comment}{// Set up U\_index\_helmholtz. Initialise to zero, which probably won't change}}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00309}00309     \textcolor{comment}{// in most cases, oh well, the price we pay for generality}}
@@ -323,8 +323,8 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00319}00319         \textcolor{comment}{// One dimensional problem}}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00320}00320       \textcolor{keywordflow}{case} 1:}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00321}00321       \{}
-\DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00322}00322         HelmholtzEquations<1>* eqn\_pt =}
-\DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00323}00323           \textcolor{keyword}{dynamic\_cast<}HelmholtzEquations<1>*\textcolor{keyword}{>}(bulk\_el\_pt);}
+\DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00322}00322         \mbox{\hyperlink{classoomph_1_1HelmholtzEquations}{HelmholtzEquations<1>}}* eqn\_pt =}
+\DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00323}00323           \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1HelmholtzEquations}{HelmholtzEquations<1>}}*\textcolor{keyword}{>}(bulk\_el\_pt);}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00324}00324         \textcolor{comment}{// If the cast has failed die}}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00325}00325         \textcolor{keywordflow}{if} (eqn\_pt == 0)}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00326}00326         \{}
@@ -343,7 +343,7 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00339}00339         \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00340}00340         \{}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00341}00341           \textcolor{comment}{// Read the index from the (cast) bulk element}}
-\DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00342}00342           \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_ac5fd419a34614c3ae7a784faa28b773e}{U\_index\_helmholtz}} = eqn\_pt-\/>u\_index\_helmholtz();}
+\DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00342}00342           \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_ac5fd419a34614c3ae7a784faa28b773e}{U\_index\_helmholtz}} = eqn\_pt-\/>\mbox{\hyperlink{classoomph_1_1HelmholtzEquations_aa358171d391002d64aa2fcd69d5e1caa}{u\_index\_helmholtz}}();}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00343}00343         \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00344}00344       \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00345}00345       \textcolor{keywordflow}{break};}
@@ -351,8 +351,8 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00347}00347       \textcolor{comment}{// Two dimensional problem}}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00348}00348       \textcolor{keywordflow}{case} 2:}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00349}00349       \{}
-\DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00350}00350         HelmholtzEquations<2>* eqn\_pt =}
-\DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00351}00351           \textcolor{keyword}{dynamic\_cast<}HelmholtzEquations<2>*\textcolor{keyword}{>}(bulk\_el\_pt);}
+\DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00350}00350         \mbox{\hyperlink{classoomph_1_1HelmholtzEquations}{HelmholtzEquations<2>}}* eqn\_pt =}
+\DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00351}00351           \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1HelmholtzEquations}{HelmholtzEquations<2>}}*\textcolor{keyword}{>}(bulk\_el\_pt);}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00352}00352         \textcolor{comment}{// If the cast has failed die}}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00353}00353         \textcolor{keywordflow}{if} (eqn\_pt == 0)}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00354}00354         \{}
@@ -370,7 +370,7 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00366}00366         \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00367}00367         \{}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00368}00368           \textcolor{comment}{// Read the index from the (cast) bulk element}}
-\DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00369}00369           \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_ac5fd419a34614c3ae7a784faa28b773e}{U\_index\_helmholtz}} = eqn\_pt-\/>u\_index\_helmholtz();}
+\DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00369}00369           \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_ac5fd419a34614c3ae7a784faa28b773e}{U\_index\_helmholtz}} = eqn\_pt-\/>\mbox{\hyperlink{classoomph_1_1HelmholtzEquations_aa358171d391002d64aa2fcd69d5e1caa}{u\_index\_helmholtz}}();}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00370}00370         \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00371}00371       \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00372}00372 }
@@ -379,8 +379,8 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00375}00375       \textcolor{comment}{// Three dimensional problem}}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00376}00376       \textcolor{keywordflow}{case} 3:}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00377}00377       \{}
-\DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00378}00378         HelmholtzEquations<3>* eqn\_pt =}
-\DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00379}00379           \textcolor{keyword}{dynamic\_cast<}HelmholtzEquations<3>*\textcolor{keyword}{>}(bulk\_el\_pt);}
+\DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00378}00378         \mbox{\hyperlink{classoomph_1_1HelmholtzEquations}{HelmholtzEquations<3>}}* eqn\_pt =}
+\DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00379}00379           \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1HelmholtzEquations}{HelmholtzEquations<3>}}*\textcolor{keyword}{>}(bulk\_el\_pt);}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00380}00380         \textcolor{comment}{// If the cast has failed die}}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00381}00381         \textcolor{keywordflow}{if} (eqn\_pt == 0)}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00382}00382         \{}
@@ -398,7 +398,7 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00394}00394         \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00395}00395         \{}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00396}00396           \textcolor{comment}{// Read the index from the (cast) bulk element}}
-\DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00397}00397           \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_ac5fd419a34614c3ae7a784faa28b773e}{U\_index\_helmholtz}} = eqn\_pt-\/>u\_index\_helmholtz();}
+\DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00397}00397           \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_ac5fd419a34614c3ae7a784faa28b773e}{U\_index\_helmholtz}} = eqn\_pt-\/>\mbox{\hyperlink{classoomph_1_1HelmholtzEquations_aa358171d391002d64aa2fcd69d5e1caa}{u\_index\_helmholtz}}();}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00398}00398         \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00399}00399       \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00400}00400       \textcolor{keywordflow}{break};}
@@ -459,7 +459,7 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00455}00455       \textcolor{keywordtype}{double} J = shape\_and\_test(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, psif, testf);}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00456}00456 }
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00457}00457       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00458}00458       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00458}00458       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00459}00459 }
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00460}00460       \textcolor{comment}{// Need to find position to feed into flux function, initialise to zero}}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00461}00461       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} interpolated\_x(\mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a27cbb5ec7f6fea2f237c11659ffeef58}{Dim}}, 0.0);}
@@ -486,7 +486,7 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00482}00482         \textcolor{keywordflow}{if} (local\_eqn\_real >= 0)}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00483}00483         \{}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00484}00484           \textcolor{comment}{// Add the prescribed flux terms}}
-\DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00485}00485           residuals[local\_eqn\_real] -\/= flux.real() * testf[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00485}00485           residuals[local\_eqn\_real] -\/= flux.real() * testf[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00486}00486 }
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00487}00487           \textcolor{comment}{// Imposed traction doesn't depend upon the solution,}}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00488}00488           \textcolor{comment}{// -\/-\/> the Jacobian is always zero, so no Jacobian}}
@@ -497,7 +497,7 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00493}00493         \textcolor{keywordflow}{if} (local\_eqn\_imag >= 0)}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00494}00494         \{}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00495}00495           \textcolor{comment}{// Add the prescribed flux terms}}
-\DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00496}00496           residuals[local\_eqn\_imag] -\/= flux.imag() * testf[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00496}00496           residuals[local\_eqn\_imag] -\/= flux.imag() * testf[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00497}00497 }
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00498}00498           \textcolor{comment}{// Imposed traction doesn't depend upon the solution,}}
 \DoxyCodeLine{\Hypertarget{helmholtz__flux__elements_8h_source_l00499}00499           \textcolor{comment}{// -\/-\/> the Jacobian is always zero, so no Jacobian}}

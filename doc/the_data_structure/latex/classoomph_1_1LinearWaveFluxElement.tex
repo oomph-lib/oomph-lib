@@ -18,46 +18,46 @@ Inheritance diagram for oomph\+::Linear\+Wave\+Flux\+Element\texorpdfstring{$<$}
 \doxysubsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a4010abac8856733ae2b152bc41e7b558}{Linear\+Wave\+Prescribed\+Flux\+Fct\+Pt}}) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, double \&flux)
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a4010abac8856733ae2b152bc41e7b558}{Linear\+Wave\+Prescribed\+Flux\+Fct\+Pt}}) (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&flux)
 \begin{DoxyCompactList}\small\item\em Function pointer to the prescribed-\/flux function fct(x,f(x)) -- x is a Vector! \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a40752d5ceccceb1fa0ee94feb4760468}{Linear\+Wave\+Flux\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$bulk\+\_\+el\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}})
+\mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a40752d5ceccceb1fa0ee94feb4760468}{Linear\+Wave\+Flux\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$bulk\+\_\+el\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}})
 \begin{DoxyCompactList}\small\item\em Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the index of the face to be created. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_aa87a90e74c1f27929ab60d7fef3044fd}{Linear\+Wave\+Flux\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Broken empty constructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a6c9bc8cee30eb29351cbb83521877362}{Linear\+Wave\+Flux\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement}{Linear\+Wave\+Flux\+Element}} \&dummy)=delete
+\mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a6c9bc8cee30eb29351cbb83521877362}{Linear\+Wave\+Flux\+Element}} (const \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement}{Linear\+Wave\+Flux\+Element}} \&dummy)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a8e7589367d5c33303cc1906dc6479b9c}{operator=}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement}{Linear\+Wave\+Flux\+Element}} \&)=delete
+void \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a8e7589367d5c33303cc1906dc6479b9c}{operator=}} (const \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement}{Linear\+Wave\+Flux\+Element}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a4010abac8856733ae2b152bc41e7b558}{Linear\+Wave\+Prescribed\+Flux\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a5a478df5f79b7873a285fd7c61003cde}{flux\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for the prescribed-\/flux function pointer. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a1bc14657ec786579cc01096f42e8c30c}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em Compute the element residual vector. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a76f1a46c72f1ba9c18109416967a568f}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})
+void \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a76f1a46c72f1ba9c18109416967a568f}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em Compute the element\textquotesingle{}s residual vector and its Jacobian matrix. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a6fb1a0846c91406e86f598c8eb0fafb2}{zeta\+\_\+nodal}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&k, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a6fb1a0846c91406e86f598c8eb0fafb2}{zeta\+\_\+nodal}} (const unsigned \&n, const unsigned \&k, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Specify the value of nodal zeta from the face geometry The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} representation, by default (needed to break indeterminacy if bulk element is Solid\+Element) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_ad969d2df96dd76f0cab08ad7a80dda9f}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_ae767010f3b965889d917a4c41f8db956}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_ae767010f3b965889d917a4c41f8db956}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em Output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a8c857d40393967eb1e88314ba9efc729}{output}} (FILE $\ast$file\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a09230e7c17c744a62ed8d3e317ba1eeb}{output}} (FILE $\ast$file\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a09230e7c17c744a62ed8d3e317ba1eeb}{output}} (FILE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em Output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-double \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_ae9568e5e47bea6bbcb17ef1b88a2845b}{shape\+\_\+and\+\_\+test}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_ae9568e5e47bea6bbcb17ef1b88a2845b}{shape\+\_\+and\+\_\+test}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) const
 \begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping between local and global (Eulerian) coordinates. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a969d93f5e289c16d581da0851fcd89e7}{get\+\_\+flux}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, double \&flux)
+void \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a969d93f5e289c16d581da0851fcd89e7}{get\+\_\+flux}} (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&flux)
 \begin{DoxyCompactList}\small\item\em Function to calculate the prescribed flux at a given spatial position and at a gien time. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_abde1eec8fa1a4c1ff97c1cd33fe1c727}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+lin\+\_\+wave\+\_\+flux}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, unsigned flag)
+void \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_abde1eec8fa1a4c1ff97c1cd33fe1c727}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+lin\+\_\+wave\+\_\+flux}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, unsigned flag)
 \begin{DoxyCompactList}\small\item\em Compute the element residual vector. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -88,7 +88,7 @@ Definition at line \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l0005
 \index{LinearWavePrescribedFluxFctPt@{LinearWavePrescribedFluxFctPt}!oomph::LinearWaveFluxElement$<$ ELEMENT $>$@{oomph::LinearWaveFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{LinearWavePrescribedFluxFctPt}{LinearWavePrescribedFluxFctPt}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement}{oomph\+::\+Linear\+Wave\+Flux\+Element}}$<$ ELEMENT $>$\+::Linear\+Wave\+Prescribed\+Flux\+Fct\+Pt) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, double \&flux)}
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement}{oomph\+::\+Linear\+Wave\+Flux\+Element}}$<$ ELEMENT $>$\+::Linear\+Wave\+Prescribed\+Flux\+Fct\+Pt) (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&flux)}
 
 
 
@@ -106,7 +106,7 @@ Definition at line \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l0005
 \index{LinearWaveFluxElement@{LinearWaveFluxElement}!oomph::LinearWaveFluxElement$<$ ELEMENT $>$@{oomph::LinearWaveFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{LinearWaveFluxElement()}{LinearWaveFluxElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement}{oomph\+::\+Linear\+Wave\+Flux\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement}{Linear\+Wave\+Flux\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$}]{bulk\+\_\+el\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{face\+\_\+index }\end{DoxyParamCaption})}
+\mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement}{oomph\+::\+Linear\+Wave\+Flux\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement}{Linear\+Wave\+Flux\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$}]{bulk\+\_\+el\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index }\end{DoxyParamCaption})}
 
 
 
@@ -120,7 +120,7 @@ Definition at line \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l0022
 
 
 
-References \mbox{\hyperlink{classoomph_1_1FiniteElement_a025ab56ef9c6eea66fb34416fdf19152}{oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00203}{oomph\+::\+Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$\+::\+Dim}}, \mbox{\hyperlink{elements_8h_source_l04654}{oomph\+::\+Face\+Element\+::face\+\_\+index()}}, \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00200}{oomph\+::\+Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l02475}{oomph\+::\+Finite\+Element\+::has\+\_\+hanging\+\_\+nodes()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, and \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00206}{oomph\+::\+Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$\+::\+U\+\_\+index\+\_\+lin\+\_\+wave}}.
+References \mbox{\hyperlink{elements_8cc_source_l05132}{oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00203}{oomph\+::\+Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$\+::\+Dim}}, \mbox{\hyperlink{elements_8h_source_l04626}{oomph\+::\+Face\+Element\+::face\+\_\+index()}}, \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00200}{oomph\+::\+Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l02470}{oomph\+::\+Finite\+Element\+::has\+\_\+hanging\+\_\+nodes()}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, \mbox{\hyperlink{linear__wave__elements_8h_source_l00077}{oomph\+::\+Linear\+Wave\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+lin\+\_\+wave()}}, and \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00206}{oomph\+::\+Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$\+::\+U\+\_\+index\+\_\+lin\+\_\+wave}}.
 
 \mbox{\Hypertarget{classoomph_1_1LinearWaveFluxElement_aa87a90e74c1f27929ab60d7fef3044fd}\label{classoomph_1_1LinearWaveFluxElement_aa87a90e74c1f27929ab60d7fef3044fd}} 
 \index{oomph::LinearWaveFluxElement$<$ ELEMENT $>$@{oomph::LinearWaveFluxElement$<$ ELEMENT $>$}!LinearWaveFluxElement@{LinearWaveFluxElement}}
@@ -142,7 +142,7 @@ Definition at line \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l0006
 \index{LinearWaveFluxElement@{LinearWaveFluxElement}!oomph::LinearWaveFluxElement$<$ ELEMENT $>$@{oomph::LinearWaveFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{LinearWaveFluxElement()}{LinearWaveFluxElement()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement}{oomph\+::\+Linear\+Wave\+Flux\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement}{Linear\+Wave\+Flux\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement}{Linear\+Wave\+Flux\+Element}}$<$ ELEMENT $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+\mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement}{oomph\+::\+Linear\+Wave\+Flux\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement}{Linear\+Wave\+Flux\+Element}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement}{Linear\+Wave\+Flux\+Element}}$<$ ELEMENT $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
@@ -172,7 +172,7 @@ Definition at line \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l0010
 
 
 
-References \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00372}{oomph\+::\+Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+lin\+\_\+wave\+\_\+flux()}}, and \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}.
+References \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00372}{oomph\+::\+Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+lin\+\_\+wave\+\_\+flux()}}.
 
 \mbox{\Hypertarget{classoomph_1_1LinearWaveFluxElement_a1bc14657ec786579cc01096f42e8c30c}\label{classoomph_1_1LinearWaveFluxElement_a1bc14657ec786579cc01096f42e8c30c}} 
 \index{oomph::LinearWaveFluxElement$<$ ELEMENT $>$@{oomph::LinearWaveFluxElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
@@ -214,7 +214,7 @@ Definition at line \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l0037
 
 
 
-References \mbox{\hyperlink{multi__domain_8cc_source_l00060}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Dim}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}.
+References \mbox{\hyperlink{multi__domain_8cc_source_l00060}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Dim}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
 
 
 
@@ -244,7 +244,7 @@ References \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00200}{oomph
 \index{get\_flux@{get\_flux}!oomph::LinearWaveFluxElement$<$ ELEMENT $>$@{oomph::LinearWaveFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{get\_flux()}{get\_flux()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement}{oomph\+::\+Linear\+Wave\+Flux\+Element}}$<$ ELEMENT $>$\+::get\+\_\+flux (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{double \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+void \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement}{oomph\+::\+Linear\+Wave\+Flux\+Element}}$<$ ELEMENT $>$\+::get\+\_\+flux (\begin{DoxyParamCaption}\item[{const double \&}]{time,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{double \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -256,14 +256,14 @@ Definition at line \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l0017
 
 
 
-References \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00200}{oomph\+::\+Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00200}{oomph\+::\+Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1LinearWaveFluxElement_a8e7589367d5c33303cc1906dc6479b9c}\label{classoomph_1_1LinearWaveFluxElement_a8e7589367d5c33303cc1906dc6479b9c}} 
 \index{oomph::LinearWaveFluxElement$<$ ELEMENT $>$@{oomph::LinearWaveFluxElement$<$ ELEMENT $>$}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::LinearWaveFluxElement$<$ ELEMENT $>$@{oomph::LinearWaveFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement}{oomph\+::\+Linear\+Wave\+Flux\+Element}}$<$ ELEMENT $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement}{Linear\+Wave\+Flux\+Element}}$<$ ELEMENT $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+void \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement}{oomph\+::\+Linear\+Wave\+Flux\+Element}}$<$ ELEMENT $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement}{Linear\+Wave\+Flux\+Element}}$<$ ELEMENT $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
@@ -290,14 +290,14 @@ Definition at line \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l0013
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
+References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1LinearWaveFluxElement_a09230e7c17c744a62ed8d3e317ba1eeb}\label{classoomph_1_1LinearWaveFluxElement_a09230e7c17c744a62ed8d3e317ba1eeb}} 
 \index{oomph::LinearWaveFluxElement$<$ ELEMENT $>$@{oomph::LinearWaveFluxElement$<$ ELEMENT $>$}!output@{output}}
 \index{output@{output}!oomph::LinearWaveFluxElement$<$ ELEMENT $>$@{oomph::LinearWaveFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement}{oomph\+::\+Linear\+Wave\+Flux\+Element}}$<$ ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement}{oomph\+::\+Linear\+Wave\+Flux\+Element}}$<$ ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -313,7 +313,7 @@ Definition at line \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l0014
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
+References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1LinearWaveFluxElement_ad969d2df96dd76f0cab08ad7a80dda9f}\label{classoomph_1_1LinearWaveFluxElement_ad969d2df96dd76f0cab08ad7a80dda9f}} 
 \index{oomph::LinearWaveFluxElement$<$ ELEMENT $>$@{oomph::LinearWaveFluxElement$<$ ELEMENT $>$}!output@{output}}
@@ -336,14 +336,14 @@ Definition at line \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l0012
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
+References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1LinearWaveFluxElement_ae767010f3b965889d917a4c41f8db956}\label{classoomph_1_1LinearWaveFluxElement_ae767010f3b965889d917a4c41f8db956}} 
 \index{oomph::LinearWaveFluxElement$<$ ELEMENT $>$@{oomph::LinearWaveFluxElement$<$ ELEMENT $>$}!output@{output}}
 \index{output@{output}!oomph::LinearWaveFluxElement$<$ ELEMENT $>$@{oomph::LinearWaveFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement}{oomph\+::\+Linear\+Wave\+Flux\+Element}}$<$ ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement}{oomph\+::\+Linear\+Wave\+Flux\+Element}}$<$ ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -359,14 +359,14 @@ Definition at line \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l0013
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
+References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1LinearWaveFluxElement_ae9568e5e47bea6bbcb17ef1b88a2845b}\label{classoomph_1_1LinearWaveFluxElement_ae9568e5e47bea6bbcb17ef1b88a2845b}} 
 \index{oomph::LinearWaveFluxElement$<$ ELEMENT $>$@{oomph::LinearWaveFluxElement$<$ ELEMENT $>$}!shape\_and\_test@{shape\_and\_test}}
 \index{shape\_and\_test@{shape\_and\_test}!oomph::LinearWaveFluxElement$<$ ELEMENT $>$@{oomph::LinearWaveFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{shape\_and\_test()}{shape\_and\_test()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement}{oomph\+::\+Linear\+Wave\+Flux\+Element}}$<$ ELEMENT $>$\+::shape\+\_\+and\+\_\+test (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+double \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement}{oomph\+::\+Linear\+Wave\+Flux\+Element}}$<$ ELEMENT $>$\+::shape\+\_\+and\+\_\+test (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -378,14 +378,14 @@ Definition at line \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l0015
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l05246}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l05242}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
 
 \mbox{\Hypertarget{classoomph_1_1LinearWaveFluxElement_a6fb1a0846c91406e86f598c8eb0fafb2}\label{classoomph_1_1LinearWaveFluxElement_a6fb1a0846c91406e86f598c8eb0fafb2}} 
 \index{oomph::LinearWaveFluxElement$<$ ELEMENT $>$@{oomph::LinearWaveFluxElement$<$ ELEMENT $>$}!zeta\_nodal@{zeta\_nodal}}
 \index{zeta\_nodal@{zeta\_nodal}!oomph::LinearWaveFluxElement$<$ ELEMENT $>$@{oomph::LinearWaveFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{zeta\_nodal()}{zeta\_nodal()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement}{oomph\+::\+Linear\+Wave\+Flux\+Element}}$<$ ELEMENT $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{k,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+double \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement}{oomph\+::\+Linear\+Wave\+Flux\+Element}}$<$ ELEMENT $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{k,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -401,7 +401,7 @@ Definition at line \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l0011
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l04525}{oomph\+::\+Face\+Element\+::zeta\+\_\+nodal()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l04497}{oomph\+::\+Face\+Element\+::zeta\+\_\+nodal()}}.
 
 
 

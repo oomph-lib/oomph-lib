@@ -60,7 +60,7 @@
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00056}00056   \textcolor{keyword}{private}:\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00057}00057 \textcolor{comment}{    /// Pointer to an imposed traction function}}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00058}\mbox{\hyperlink{classoomph_1_1NavierStokesTractionElement_a487a7d11742c2e08c5d2c804df6d5eda}{00058}} \textcolor{comment}{}    void (*\mbox{\hyperlink{classoomph_1_1NavierStokesTractionElement_a487a7d11742c2e08c5d2c804df6d5eda}{Traction\_fct\_pt}})(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
-\DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00059}00059                             \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00059}00059                             \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00060}00060                             \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& n,}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00061}00061                             \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& result);}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00062}00062 }
@@ -94,7 +94,7 @@
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00090}00090       \textcolor{comment}{// Find number of nodes}}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00091}00091       \textcolor{keywordtype}{unsigned} n\_node = \mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00092}00092       \textcolor{comment}{// Calculate the shape functions}}
-\DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00093}00093       \mbox{\hyperlink{classoomph_1_1FiniteElement_a2de680722518136b5c6bf2aacc267a31}{shape\_at\_knot}}(ipt, psi);}
+\DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00093}00093       \mbox{\hyperlink{classoomph_1_1FiniteElement_aeccc0f774e3fab8c536e2d41004a1665}{shape\_at\_knot}}(ipt, psi);}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00094}00094       \textcolor{comment}{// Set the test functions to be the same as the shape functions}}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00095}00095       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_node; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00096}00096       \{}
@@ -107,7 +107,7 @@
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00103}00103 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00104}00104 \textcolor{comment}{    /// Function to calculate the traction applied to the fluid}}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00105}\mbox{\hyperlink{classoomph_1_1NavierStokesTractionElement_ab5b0454a2b29fc69938235af430702bf}{00105}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1NavierStokesTractionElement_ab5b0454a2b29fc69938235af430702bf}{get\_traction}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
-\DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00106}00106                       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00106}00106                       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00107}00107                       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& n,}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00108}00108                       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& result)}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00109}00109     \{}
@@ -123,7 +123,7 @@
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00119}00119       \textcolor{comment}{// Otherwise call the function}}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00120}00120       \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00121}00121       \{}
-\DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00122}00122         (*Traction\_fct\_pt)(time, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, n, result);}
+\DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00122}00122         (*Traction\_fct\_pt)(time, x, n, result);}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00123}00123       \}}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00124}00124     \}}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00125}00125 }
@@ -132,7 +132,7 @@
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00128}00128 \textcolor{comment}{    /// traction function.}}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00129}00129 \textcolor{comment}{    /// flag=1(or 0): do (or don't) compute the Jacobian as well.}}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00130}00130 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1NavierStokesTractionElement_a7c28b510ac27af92bae51f521cec5890}{fill\_in\_generic\_residual\_contribution\_fluid\_traction}}(}
-\DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00131}00131       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \textcolor{keywordtype}{unsigned} flag);}
+\DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00131}00131       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian, \textcolor{keywordtype}{unsigned} flag);}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00132}00132 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00133}00133 \textcolor{comment}{    /// The highest dimension of the problem}}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00134}\mbox{\hyperlink{classoomph_1_1NavierStokesTractionElement_a93c55d3fa89463f7a39ed84998c569d0}{00134}} \textcolor{comment}{}    \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1NavierStokesTractionElement_a93c55d3fa89463f7a39ed84998c569d0}{Dim}};}
@@ -148,7 +148,7 @@
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00144}00144     \{}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00145}00145       \textcolor{comment}{// Attach the geometrical information to the element. N.B. This function}}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00146}00146       \textcolor{comment}{// also assigns nbulk\_value from the required\_nvalue of the bulk element}}
-\DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00147}00147       element\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a025ab56ef9c6eea66fb34416fdf19152}{build\_face\_element}}(\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\_index}}, \textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00147}00147       element\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_aaf7bead5b462cfd5401d97b3dbdc7af7}{build\_face\_element}}(\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\_index}}, \textcolor{keyword}{this});}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00148}00148 }
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00149}00149 \textcolor{preprocessor}{\#ifdef PARANOID}}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00150}00150       \{}
@@ -180,7 +180,7 @@
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00176}00176       \mbox{\hyperlink{classoomph_1_1NavierStokesTractionElement_a487a7d11742c2e08c5d2c804df6d5eda}{Traction\_fct\_pt}} = 0;}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00177}00177 }
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00178}00178       \textcolor{comment}{// Set the dimension from the dimension of the first node}}
-\DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00179}00179       \mbox{\hyperlink{classoomph_1_1NavierStokesTractionElement_a93c55d3fa89463f7a39ed84998c569d0}{Dim}} = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>ndim();}
+\DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00179}00179       \mbox{\hyperlink{classoomph_1_1NavierStokesTractionElement_a93c55d3fa89463f7a39ed84998c569d0}{Dim}} = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00180}00180     \}}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00181}00181 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00182}00182 \textcolor{comment}{    /// Destructor should not delete anything}}
@@ -188,7 +188,7 @@
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00184}00184 }
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00185}00185     \textcolor{comment}{// Access function for the imposed traction pointer}}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00186}\mbox{\hyperlink{classoomph_1_1NavierStokesTractionElement_a3506de297d13142e859212f7dbf54fbf}{00186}}     void (*\&\mbox{\hyperlink{classoomph_1_1NavierStokesTractionElement_a3506de297d13142e859212f7dbf54fbf}{traction\_fct\_pt}}())(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}},}
-\DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00187}00187                                \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00187}00187                                \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00188}00188                                \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& n,}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00189}00189                                \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& result)}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00190}00190     \{}
@@ -206,11 +206,11 @@
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00202}00202 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00203}00203 \textcolor{comment}{    /// This function returns the residuals and the jacobian}}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00204}\mbox{\hyperlink{classoomph_1_1NavierStokesTractionElement_a87adb28c2292e58aab9ff1d1ebbd3fc7}{00204}} \textcolor{comment}{}    \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1NavierStokesTractionElement_a87adb28c2292e58aab9ff1d1ebbd3fc7}{fill\_in\_contribution\_to\_jacobian}}(\mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00205}00205                                                  \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})}
+\DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00205}00205                                                  \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian)}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00206}00206     \{}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00207}00207       \textcolor{comment}{// Call the generic routine with the flag set to 1}}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00208}00208       \mbox{\hyperlink{classoomph_1_1NavierStokesTractionElement_a7c28b510ac27af92bae51f521cec5890}{fill\_in\_generic\_residual\_contribution\_fluid\_traction}}(}
-\DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00209}00209         residuals, \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, 1);}
+\DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00209}00209         residuals, jacobian, 1);}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00210}00210     \}}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00211}00211 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00212}00212 \textcolor{comment}{    /// Overload the output function}}
@@ -267,7 +267,7 @@
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00263}00263       \textcolor{keywordtype}{double} J = shape\_and\_test\_at\_knot(ipt, psif, testf);}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00264}00264 }
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00265}00265       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00266}00266       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00266}00266       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00267}00267 }
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00268}00268       \textcolor{comment}{// Need to find position to feed into Traction function}}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00269}00269       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} interpolated\_x(\mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a27cbb5ec7f6fea2f237c11659ffeef58}{Dim}});}
@@ -309,7 +309,7 @@
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00305}00305           \textcolor{keywordflow}{if} (local\_eqn >= 0)}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00306}00306           \{}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00307}00307             \textcolor{comment}{// Add the user-\/defined traction terms}}
-\DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00308}00308             residuals[local\_eqn] += traction[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * testf[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00308}00308             residuals[local\_eqn] += traction[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * testf[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00309}00309 }
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00310}00310             \textcolor{comment}{// Assuming the the traction DOES NOT depend upon velocities}}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00311}00311             \textcolor{comment}{// or pressures, the jacobian is always zero, so no jacobian}}
@@ -371,11 +371,11 @@
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00367}00367 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00368}00368 \textcolor{comment}{    /// This function returns the residuals and the Jacobian}}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00369}\mbox{\hyperlink{classoomph_1_1RefineableNavierStokesTractionElement_a67eea13f9a419e35576b6183f0438bab}{00369}} \textcolor{comment}{}    \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesTractionElement_a67eea13f9a419e35576b6183f0438bab}{fill\_in\_contribution\_to\_jacobian}}(\mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00370}00370                                                  \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})}
+\DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00370}00370                                                  \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian)}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00371}00371     \{}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00372}00372       \textcolor{comment}{// Call the generic routine}}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00373}00373       \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesTractionElement_a0de3c98cabf491ff91a7daefab16505e}{refineable\_fill\_in\_generic\_residual\_contribution\_fluid\_traction}}(}
-\DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00374}00374         residuals, \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, 1);}
+\DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00374}00374         residuals, jacobian, 1);}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00375}00375     \}}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00376}00376 }
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00377}00377 }
@@ -384,7 +384,7 @@
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00380}00380 \textcolor{comment}{    /// traction function.}}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00381}00381 \textcolor{comment}{    /// flag=1(or 0): do (or don't) compute the Jacobian as well.}}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00382}00382 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesTractionElement_a0de3c98cabf491ff91a7daefab16505e}{refineable\_fill\_in\_generic\_residual\_contribution\_fluid\_traction}}(}
-\DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00383}00383       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \textcolor{keywordtype}{unsigned} flag);}
+\DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00383}00383       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian, \textcolor{keywordtype}{unsigned} flag);}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00384}00384   \};}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00385}00385 }
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00386}00386 \textcolor{comment}{}}
@@ -436,7 +436,7 @@
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00432}00432       \textcolor{keywordtype}{double} J = this-\/>shape\_and\_test\_at\_knot(ipt, psif, testf);}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00433}00433 }
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00434}00434       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00435}00435       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00435}00435       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00436}00436 }
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00437}00437       \textcolor{comment}{// Need to find position to feed into Traction function}}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00438}00438       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} interpolated\_x(this-\/>Dim);}
@@ -537,7 +537,7 @@
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00533}00533 }
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00534}00534 }
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00535}00535               \textcolor{comment}{// Add the user-\/defined traction terms}}
-\DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00536}00536               residuals[local\_eqn] += traction[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * testf[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight;}
+\DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00536}00536               residuals[local\_eqn] += traction[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * testf[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight;}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00537}00537 }
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00538}00538               \textcolor{comment}{// Assuming the the traction DOES NOT depend upon velocities}}
 \DoxyCodeLine{\Hypertarget{fluid__traction__elements_8h_source_l00539}00539               \textcolor{comment}{// or pressures, the jacobian is always zero, so no jacobian}}

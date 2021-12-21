@@ -170,16 +170,16 @@ $(function() {
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  <span class="comment">//=============================================================================</span><span class="comment"></span></div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">  /// A broadcast function for DenseMatrix&lt;double&gt;</span></div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment"></span>  <span class="comment">//=============================================================================</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  <span class="keywordtype">void</span> OomphCommunicator::broadcast(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; source, DenseMatrix&lt;double&gt;&amp; <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>)</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  <span class="keywordtype">void</span> OomphCommunicator::broadcast(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; source, DenseMatrix&lt;double&gt;&amp; x)</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  {</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="comment">// Get number of entries on processor source (where the matrix exists)</span></div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordtype">unsigned</span> nrow, ncol;</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordflow">if</span> (this-&gt;my_rank() == source)</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    {</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>      nrow = <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>.nrow();</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>      nrow = x.nrow();</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>      <span class="keywordflow">if</span> (nrow &gt; 0)</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>      {</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        ncol = <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>.ncol();</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        ncol = x.ncol();</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>      }</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>      <span class="keywordflow">else</span></div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>      {</div>
@@ -201,7 +201,7 @@ $(function() {
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        {</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>          <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> j = 0; j &lt; ncol; j++)</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>          {</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>            x_bcast[<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> * ncol + j] = <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>(<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, j);</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>            x_bcast[<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> * ncol + j] = x(<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, j);</div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>          }</div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        }</div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
@@ -211,11 +211,11 @@ $(function() {
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>      <span class="comment">// Now convert back into matrix (everywhere apart from source)</span></div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>      <span class="keywordflow">if</span> (this-&gt;my_rank() != source)</div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>      {</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>.resize(nrow, ncol);</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        x.resize(nrow, ncol);</div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = 0; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &lt; nrow; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>          <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> j = 0; j &lt; ncol; j++)</div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>          {</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>            <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>(<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, j) = x_bcast[<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> * ncol + j];</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>            x(<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, j) = x_bcast[<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> * ncol + j];</div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>          }</div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>      }</div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>      <span class="comment">// delete C-style array</span></div>
@@ -223,7 +223,7 @@ $(function() {
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    }</div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="keywordflow">else</span></div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    {</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>      <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>.resize(0, 0);</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>      x.resize(0, 0);</div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    }</div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>  }</div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
@@ -234,7 +234,6 @@ $(function() {
 <div class="ttc" id="acommunicator_8h_html"><div class="ttname"><a href="communicator_8h.html">communicator.h</a></div></div>
 <div class="ttc" id="amatrices_8h_html"><div class="ttname"><a href="matrices_8h.html">matrices.h</a></div></div>
 <div class="ttc" id="anamespaceoomph_html"><div class="ttname"><a href="namespaceoomph.html">oomph</a></div><div class="ttdoc">//////////////////////////////////////////////////////////////////// ////////////////////////////////...</div><div class="ttdef"><b>Definition:</b> <a href="advection__diffusion__elements_8cc_source.html#l00029">advection_diffusion_elements.cc:30</a></div></div>
-<div class="ttc" id="anamespaceoomph_html_a9d1d2da2b8bb8e73af72b5cadb8fe97c"><div class="ttname"><a href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">oomph::x</a></div><div class="ttdeci">x</div><div class="ttdoc">Pseudo buckling ring: Circular ring deformed by the N-th buckling mode of a thin-wall elastic ring.</div><div class="ttdef"><b>Definition:</b> <a href="pseudo__buckling__ring_8h_source.html#l00049">pseudo_buckling_ring.h:49</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 
     <!-- jQuery for Bootstrap and Doxygen -->
@@ -263,7 +262,7 @@ $(function() {
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Nov 2 2021 16:31:08
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Dec 21 2021 17:35:06
         </div>
       </div>
     </footer>

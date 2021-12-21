@@ -22,15 +22,15 @@ Inheritance diagram for oomph\+::Refineable\+Element\+:\begin{figure}[H]
 \begin{DoxyCompactList}\small\item\em Constructor, calls the \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} constructor and initialises the member data. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{classoomph_1_1RefineableElement_ae38105494105430513f05c3cd22b8f48}{$\sim$\+Refineable\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Destructor, delete the allocated storage for the hanging equations. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1RefineableElement_acaf83c3c7441c1a289955e83138beec6}{Refineable\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} \&)=delete
+\mbox{\hyperlink{classoomph_1_1RefineableElement_acaf83c3c7441c1a289955e83138beec6}{Refineable\+Element}} (const \mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableElement_aea9007e8a4b2ca3ff83ec132f04a8fc1}{operator=}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} \&)=delete
+void \mbox{\hyperlink{classoomph_1_1RefineableElement_aea9007e8a4b2ca3ff83ec132f04a8fc1}{operator=}} (const \mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableElement_a4b783f4e5b6aeed83d49e478510d614f}{tree\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to quadtree representation of this element. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableElement_acd004aa826f0249007b63d573e9b8b36}{set\+\_\+tree\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$my\+\_\+tree\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Set pointer to quadtree representation of this element. \end{DoxyCompactList}\item 
-virtual unsigned \mbox{\hyperlink{classoomph_1_1RefineableElement_a9761852271f6cc9a1a0552ad7e054e4b}{required\+\_\+nsons}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+virtual unsigned \mbox{\hyperlink{classoomph_1_1RefineableElement_a9761852271f6cc9a1a0552ad7e054e4b}{required\+\_\+nsons}} () const
 \begin{DoxyCompactList}\small\item\em Set the number of sons that can be constructed by the element The default is none. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1RefineableElement_a8f5e9e69342ed6258c6f450fec4d0999}{refinement\+\_\+is\+\_\+enabled}} ()
 \begin{DoxyCompactList}\small\item\em Flag to indicate suppression of any refinement. \end{DoxyCompactList}\item 
@@ -38,15 +38,15 @@ void \mbox{\hyperlink{classoomph_1_1RefineableElement_a8625a89189db0116f323a85d3
 \begin{DoxyCompactList}\small\item\em Suppress of any refinement for this element. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableElement_ab633c494a3815e0dc68139f7175eb3c7}{enable\+\_\+refinement}} ()
 \begin{DoxyCompactList}\small\item\em Emnable refinement for this element. \end{DoxyCompactList}\item 
-{\footnotesize template$<$class ELEMENT $>$ }\\void \mbox{\hyperlink{classoomph_1_1RefineableElement_ab44829515670645a6f4b3a9b6836bb1c}{split}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ ELEMENT $\ast$ $>$ \&son\+\_\+pt) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+{\footnotesize template$<$class ELEMENT $>$ }\\void \mbox{\hyperlink{classoomph_1_1RefineableElement_ab44829515670645a6f4b3a9b6836bb1c}{split}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ ELEMENT $\ast$ $>$ \&son\+\_\+pt) const
 \begin{DoxyCompactList}\small\item\em Split the element into the number of sons to be constructed and return a vector of pointers to the sons. Elements are allocated, but they are not given any properties. The refinement level of the sons is one higher than that of the father elemern. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{classoomph_1_1RefineableElement_abc3d0cb0131ebf717ff0620242c9ca2b}{local\+\_\+hang\+\_\+eqn}} (Node $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+int \mbox{\hyperlink{classoomph_1_1RefineableElement_abc3d0cb0131ebf717ff0620242c9ca2b}{local\+\_\+hang\+\_\+eqn}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\+\_\+pt}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Access function that returns the local equation number for the hanging node variables (values stored at master nodes). The local equation number corresponds to the i-\/th unknown stored at the node addressed by node\+\_\+pt. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1RefineableElement_a1e24734937a96abfb4ae35a2ccb647f4}{build}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ Node $\ast$ $>$ \&new\+\_\+node\+\_\+pt, bool \&was\+\_\+already\+\_\+built, std\+::ofstream \&new\+\_\+nodes\+\_\+file)=0
+virtual void \mbox{\hyperlink{classoomph_1_1RefineableElement_a1e24734937a96abfb4ae35a2ccb647f4}{build}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ \&new\+\_\+node\+\_\+pt, bool \&was\+\_\+already\+\_\+built, std\+::ofstream \&new\+\_\+nodes\+\_\+file)=0
 \begin{DoxyCompactList}\small\item\em Interface to function that builds the element\+: i.\+e. construct the nodes, assign their positions, apply boundary conditions, etc. The required procedures depend on the geometrical type of the element and must be implemented in specific refineable elements. Any new nodes created during the build process are returned in the vector new\+\_\+node\+\_\+pt. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableElement_a3b8879c7bcebdd70ffa94dbbf8203be1}{set\+\_\+refinement\+\_\+level}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&refine\+\_\+level)
+void \mbox{\hyperlink{classoomph_1_1RefineableElement_a3b8879c7bcebdd70ffa94dbbf8203be1}{set\+\_\+refinement\+\_\+level}} (const int \&refine\+\_\+level)
 \begin{DoxyCompactList}\small\item\em Set the refinement level. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1RefineableElement_a6b9153d7933baf6092febaca278a6fc7}{refinement\+\_\+level}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableElement_a6b9153d7933baf6092febaca278a6fc7}{refinement\+\_\+level}} () const
 \begin{DoxyCompactList}\small\item\em Return the Refinement level. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableElement_a2a129d9c143cb0bb330c1bcba0343826}{select\+\_\+for\+\_\+refinement}} ()
 \begin{DoxyCompactList}\small\item\em Select the element for refinement. \end{DoxyCompactList}\item 
@@ -68,43 +68,43 @@ virtual void \mbox{\hyperlink{classoomph_1_1RefineableElement_a4931ee06e1f064f28
 \begin{DoxyCompactList}\small\item\em Final operations that must be performed when the element is no longer active in the mesh, but still resident in the \mbox{\hyperlink{classoomph_1_1QuadTree}{Quad\+Tree}}. \end{DoxyCompactList}\item 
 virtual bool \mbox{\hyperlink{classoomph_1_1RefineableElement_a50758228db823d72ea8da23dbb000901}{nodes\+\_\+built}} ()
 \begin{DoxyCompactList}\small\item\em Return true if all the nodes have been built, false if not. \end{DoxyCompactList}\item 
-long \mbox{\hyperlink{classoomph_1_1RefineableElement_a49698dae92649ebf102dfb4359d7b0bf}{number}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+long \mbox{\hyperlink{classoomph_1_1RefineableElement_a49698dae92649ebf102dfb4359d7b0bf}{number}} () const
 \begin{DoxyCompactList}\small\item\em Element number (for debugging/plotting) \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableElement_a01c12f1b800cfc4176bf218bb73c7f14}{set\+\_\+number}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} long \&mynumber)
+void \mbox{\hyperlink{classoomph_1_1RefineableElement_a01c12f1b800cfc4176bf218bb73c7f14}{set\+\_\+number}} (const long \&mynumber)
 \begin{DoxyCompactList}\small\item\em Set element number (for debugging/plotting) \end{DoxyCompactList}\item 
-virtual unsigned \mbox{\hyperlink{classoomph_1_1RefineableElement_a53e171a18c9f43f1db90a6876516a073}{ncont\+\_\+interpolated\+\_\+values}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual unsigned \mbox{\hyperlink{classoomph_1_1RefineableElement_a53e171a18c9f43f1db90a6876516a073}{ncont\+\_\+interpolated\+\_\+values}} () const =0
 \begin{DoxyCompactList}\small\item\em Number of continuously interpolated values. Note\+: We assume that they are located at the beginning of the value\+\_\+pt Vector! (Used for interpolation to son elements, for integrity check and post-\/processing -- we can only expect the continously interpolated values to be continous across element boundaries). \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1RefineableElement_ad9a4f92880668a2373326d8306365c43}{get\+\_\+interpolated\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&values)
+virtual void \mbox{\hyperlink{classoomph_1_1RefineableElement_ad9a4f92880668a2373326d8306365c43}{get\+\_\+interpolated\+\_\+values}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&values)
 \begin{DoxyCompactList}\small\item\em Get all continously interpolated function values in this element as a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets is own size to ensure that that this function can be used in black-\/box fashion. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1RefineableElement_ada6f0efe831ffefb1d2829ce01d45bfc}{get\+\_\+interpolated\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&values)=0
+virtual void \mbox{\hyperlink{classoomph_1_1RefineableElement_ada6f0efe831ffefb1d2829ce01d45bfc}{get\+\_\+interpolated\+\_\+values}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&values)=0
 \begin{DoxyCompactList}\small\item\em Get all continously interpolated function values at previous timestep in this element as a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: prev. timestep) Note\+: \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets is own size to ensure that that this function can be used in black-\/box fashion. \end{DoxyCompactList}\item 
-virtual Node $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableElement_a7ce034d6dff9963f1620f878ca714052}{interpolating\+\_\+node\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&value\+\_\+id)
+virtual \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableElement_a7ce034d6dff9963f1620f878ca714052}{interpolating\+\_\+node\+\_\+pt}} (const unsigned \&n, const int \&value\+\_\+id)
 \begin{DoxyCompactList}\small\item\em In mixed elements, different sets of nodes are used to interpolate different unknowns. This function returns the n-\/th node that interpolates the value\+\_\+id-\/th unknown. Default implementation is that all variables use the positional nodes, i.\+e. isoparametric elements. Note that any overloaded versions of this function MUST provide a set of nodes for the position, which always has the value\+\_\+id -\/1. \end{DoxyCompactList}\item 
-virtual double \mbox{\hyperlink{classoomph_1_1RefineableElement_ac4e4ae5374154855ae9b072c6269f76e}{local\+\_\+one\+\_\+d\+\_\+fraction\+\_\+of\+\_\+interpolating\+\_\+node}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n1d, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&value\+\_\+id)
+virtual double \mbox{\hyperlink{classoomph_1_1RefineableElement_ac4e4ae5374154855ae9b072c6269f76e}{local\+\_\+one\+\_\+d\+\_\+fraction\+\_\+of\+\_\+interpolating\+\_\+node}} (const unsigned \&n1d, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const int \&value\+\_\+id)
 \begin{DoxyCompactList}\small\item\em Return the local one dimensional fraction of the n1d-\/th node in the direction of the local coordinate s\mbox{[}i\mbox{]} that is used to interpolate the value\+\_\+id-\/th continuously interpolated unknown. Default assumes isoparametric interpolation for all unknowns. \end{DoxyCompactList}\item 
-virtual Node $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableElement_a98332b71c658a2a6d4293380e58473b3}{get\+\_\+interpolating\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&value\+\_\+id)
+virtual \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableElement_a98332b71c658a2a6d4293380e58473b3}{get\+\_\+interpolating\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, const int \&value\+\_\+id)
 \begin{DoxyCompactList}\small\item\em Return a pointer to the node that interpolates the value-\/id-\/th unknown at local coordinate s. If there is not a node at that position, then return 0. \end{DoxyCompactList}\item 
-virtual unsigned \mbox{\hyperlink{classoomph_1_1RefineableElement_a8b1b5031b55141567ba24913a21534f4}{ninterpolating\+\_\+node}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&value\+\_\+id)
+virtual unsigned \mbox{\hyperlink{classoomph_1_1RefineableElement_a8b1b5031b55141567ba24913a21534f4}{ninterpolating\+\_\+node}} (const int \&value\+\_\+id)
 \begin{DoxyCompactList}\small\item\em Return the number of nodes that are used to interpolate the value\+\_\+id-\/th unknown. Default is to assume isoparametric elements. \end{DoxyCompactList}\item 
-virtual unsigned \mbox{\hyperlink{classoomph_1_1RefineableElement_a850180084aaf164550b4f4978b42cda7}{ninterpolating\+\_\+node\+\_\+1d}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&value\+\_\+id)
+virtual unsigned \mbox{\hyperlink{classoomph_1_1RefineableElement_a850180084aaf164550b4f4978b42cda7}{ninterpolating\+\_\+node\+\_\+1d}} (const int \&value\+\_\+id)
 \begin{DoxyCompactList}\small\item\em Return the number of nodes in a one\+\_\+d direction that are used to interpolate the value\+\_\+id-\/th unknown. Default is to assume an isoparametric mapping. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1RefineableElement_a8ca420443c28708e5c6315a80f520137}{interpolating\+\_\+basis}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&value\+\_\+id) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+virtual void \mbox{\hyperlink{classoomph_1_1RefineableElement_a8ca420443c28708e5c6315a80f520137}{interpolating\+\_\+basis}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, const int \&value\+\_\+id) const
 \begin{DoxyCompactList}\small\item\em Return the basis functions that are used to interpolate the value\+\_\+id-\/th unknown. By default assume isoparameteric interpolation. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1RefineableElement_ae665f2d2eb0b6410ddcb101caa80922a}{check\+\_\+integrity}} (double \&max\+\_\+error)=0
 \begin{DoxyCompactList}\small\item\em Check the integrity of the element\+: Continuity of positions values, etc. Essentially, check that the approximation of the functions is consistent when viewed from both sides of the element boundaries Must be overloaded for each different geometric element. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableElement_acad7a1ad82b7d818ddbec4200b339ade}{identify\+\_\+field\+\_\+data\+\_\+for\+\_\+interactions}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&paired\+\_\+field\+\_\+data)
 \begin{DoxyCompactList}\small\item\em The purpose of this function is to identify all possible \mbox{\hyperlink{classoomph_1_1Data}{Data}} that can affect the fields interpolated by the \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}}. This must be overloaded to include data from any hanging nodes correctly. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableElement_ab2ac14f6019818fc4efb411e9486ae3c}{assign\+\_\+nodal\+\_\+local\+\_\+eqn\+\_\+numbers}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} bool \&store\+\_\+local\+\_\+dof\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1RefineableElement_ab2ac14f6019818fc4efb411e9486ae3c}{assign\+\_\+nodal\+\_\+local\+\_\+eqn\+\_\+numbers}} (const bool \&store\+\_\+local\+\_\+dof\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Overload the function that assigns local equation numbers for the \mbox{\hyperlink{classoomph_1_1Data}{Data}} stored at the nodes so that hanging data is taken into account. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableElement_a8bbcee798e87bd7e5d88273c71500f76}{root\+\_\+element\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Pointer to the root element in refinement hierarchy (must be implemented in specific elements that do refinement via tree-\/like refinement structure. Here we provide a default implementation that is appropriate for cases where tree-\/like refinement doesn\textquotesingle{}t exist or if the element doesn\textquotesingle{}t have root in that tree (i.\+e. if it\textquotesingle{}s a root itself)\+: We return \char`\"{}this\char`\"{}. \end{DoxyCompactList}\item 
-virtual \mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableElement_a637964a7a9892fe0f0b05692c2e8d153}{father\+\_\+element\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+virtual \mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableElement_a637964a7a9892fe0f0b05692c2e8d153}{father\+\_\+element\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Return a pointer to the father element. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableElement_a6ade15684ccece690c3ba8aebcc02797}{get\+\_\+father\+\_\+at\+\_\+refinement\+\_\+level}} (unsigned \&\mbox{\hyperlink{classoomph_1_1RefineableElement_a6b9153d7933baf6092febaca278a6fc7}{refinement\+\_\+level}}, \mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$\&father\+\_\+at\+\_\+reflevel\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Return a pointer to the \char`\"{}father\char`\"{} element at the specified refinement level. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1RefineableElement_a61ae74d94be7abc7231f34f3322f8e13}{initial\+\_\+setup}} (\mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&adopted\+\_\+father\+\_\+pt=0, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&initial\+\_\+p\+\_\+order=0)
+virtual void \mbox{\hyperlink{classoomph_1_1RefineableElement_a61ae74d94be7abc7231f34f3322f8e13}{initial\+\_\+setup}} (\mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$const \&adopted\+\_\+father\+\_\+pt=0, const unsigned \&initial\+\_\+p\+\_\+order=0)
 \begin{DoxyCompactList}\small\item\em Initial setup of the element\+: e.\+g. set the appropriate internal p-\/order. If an adopted father is specified, information from this is used instead of using the father found from the tree. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1RefineableElement_a3968e7b77a0374cebe3be35281828676}{pre\+\_\+build}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ Node $\ast$ $>$ \&new\+\_\+node\+\_\+pt)
+virtual void \mbox{\hyperlink{classoomph_1_1RefineableElement_a3968e7b77a0374cebe3be35281828676}{pre\+\_\+build}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ \&new\+\_\+node\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Pre-\/build the element. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1RefineableElement_a26628ce36dfad028686adeb4694a9ef3}{further\+\_\+build}} ()
 \begin{DoxyCompactList}\small\item\em Further build\+: e.\+g. deal with interpolation of internal values. \end{DoxyCompactList}\item 
@@ -116,7 +116,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableElement_a83d4f26d6f427a6c9001c65c4
 \begin{DoxyCompactList}\small\item\em Compute derivatives of elemental residual vector with respect to nodal coordinates. Default implementation by FD can be overwritten for specific elements. dresidual\+\_\+dnodal\+\_\+coordinates(l,i,j) = d res(l) / d\+X\+\_\+\{ij\} This version is overloaded from the version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} and takes hanging nodes into account -- j in the above loop loops over all the nodes that actively control the shape of the element (i.\+e. they are non-\/hanging or master nodes of hanging nodes in this element). \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1RefineableElement_aa3344f0bf971faad9188fd3931979f09}{nshape\+\_\+controlling\+\_\+nodes}} ()
 \begin{DoxyCompactList}\small\item\em Number of shape-\/controlling nodes = the number of non-\/hanging nodes plus the number of master nodes associated with hanging nodes. \end{DoxyCompactList}\item 
-std\+::map$<$ Node $\ast$, unsigned $>$ \mbox{\hyperlink{classoomph_1_1RefineableElement_a3c42a7688703d9770155dd48bc688365}{shape\+\_\+controlling\+\_\+node\+\_\+lookup}} ()
+std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$, unsigned $>$ \mbox{\hyperlink{classoomph_1_1RefineableElement_a3c42a7688703d9770155dd48bc688365}{shape\+\_\+controlling\+\_\+node\+\_\+lookup}} ()
 \begin{DoxyCompactList}\small\item\em Return lookup scheme for unique number associated with any of the nodes that actively control the shape of the element (i.\+e. they are either non-\/hanging nodes of this element or master nodes of hanging nodes. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
@@ -126,22 +126,22 @@ static double \& \mbox{\hyperlink{classoomph_1_1RefineableElement_a5cdf00847c81f
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classoomph_1_1RefineableElement_a9936fe72471f1bd977b800c9e5696949}{assemble\+\_\+local\+\_\+to\+\_\+eulerian\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&\mbox{\hyperlink{classoomph_1_1FiniteElement_ae3d0addae4ef07ae7295fe439483caf0}{dpsids}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1RefineableElement_a9936fe72471f1bd977b800c9e5696949}{assemble\+\_\+local\+\_\+to\+\_\+eulerian\+\_\+jacobian}} (const \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsids, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian) const
 \begin{DoxyCompactList}\small\item\em Assemble the jacobian matrix for the mapping from local to Eulerian coordinates, given the derivatives of the shape function w.\+r.\+t the local coordinates. Overload the standard version to use the hanging information for the Eulerian coordinates. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableElement_a16ee7ab5ebf6d105815d49e1a23aa2ca}{assemble\+\_\+local\+\_\+to\+\_\+eulerian\+\_\+jacobian2}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&d2psids, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian2) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1RefineableElement_a16ee7ab5ebf6d105815d49e1a23aa2ca}{assemble\+\_\+local\+\_\+to\+\_\+eulerian\+\_\+jacobian2}} (const \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&d2psids, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian2) const
 \begin{DoxyCompactList}\small\item\em Assemble the the \char`\"{}jacobian\char`\"{} matrix of second derivatives of the mapping from local to Eulerian coordinates, given the second derivatives of the shape functions w.\+r.\+t. local coordinates. Overload the standard version to use the hanging information for the Eulerian coordinates. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableElement_abd80668ecabd71ea8d992cfaabb6633c}{assemble\+\_\+eulerian\+\_\+base\+\_\+vectors}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&\mbox{\hyperlink{classoomph_1_1FiniteElement_ae3d0addae4ef07ae7295fe439483caf0}{dpsids}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&interpolated\+\_\+G) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1RefineableElement_abd80668ecabd71ea8d992cfaabb6633c}{assemble\+\_\+eulerian\+\_\+base\+\_\+vectors}} (const \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsids, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&interpolated\+\_\+G) const
 \begin{DoxyCompactList}\small\item\em Assemble the covariant Eulerian base vectors, assuming that the derivatives of the shape functions with respect to the local coordinates have already been constructed. Overload the standard version to account for hanging nodes. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1RefineableElement_a4edbc4a35b1b37b346c802b0a04f2f82}{local\+\_\+to\+\_\+eulerian\+\_\+mapping\+\_\+diagonal}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&\mbox{\hyperlink{classoomph_1_1FiniteElement_ae3d0addae4ef07ae7295fe439483caf0}{dpsids}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_a72ead1315f6f588e379963ad2a16b88a}{inverse\+\_\+jacobian}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1RefineableElement_a4edbc4a35b1b37b346c802b0a04f2f82}{local\+\_\+to\+\_\+eulerian\+\_\+mapping\+\_\+diagonal}} (const \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsids, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&inverse\+\_\+jacobian) const
 \begin{DoxyCompactList}\small\item\em Calculate the mapping from local to Eulerian coordinates given the derivatives of the shape functions w.\+r.\+t the local coordinates. assuming that the coordinates are aligned in the direction of the local coordinates, i.\+e. there are no cross terms and the jacobian is diagonal. This funciton returns the determinant of the jacobian, the jacobian and the inverse jacobian. Overload the standard version to take hanging info into account. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableElement_a381592dd61261f9d5e0b2f88f799c3fc}{assign\+\_\+hanging\+\_\+local\+\_\+eqn\+\_\+numbers}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} bool \&store\+\_\+local\+\_\+dof\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1RefineableElement_a381592dd61261f9d5e0b2f88f799c3fc}{assign\+\_\+hanging\+\_\+local\+\_\+eqn\+\_\+numbers}} (const bool \&store\+\_\+local\+\_\+dof\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Assign the local equation numbers for hanging node variables. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1RefineableElement_a83ff8606d2ccf11f7c70a95991cd50d5}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+nodal\+\_\+by\+\_\+fd}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})
+virtual void \mbox{\hyperlink{classoomph_1_1RefineableElement_a83ff8606d2ccf11f7c70a95991cd50d5}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+nodal\+\_\+by\+\_\+fd}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em Calculate the contributions to the jacobian from the nodal degrees of freedom using finite differences. This version is overloaded to take hanging node information into account. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static void \mbox{\hyperlink{classoomph_1_1RefineableElement_a6d48d9a4d43fbd7f089b17dc8cf4fc1d}{check\+\_\+value\+\_\+id}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&n\+\_\+continuously\+\_\+interpolated\+\_\+values, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&value\+\_\+id)
+static void \mbox{\hyperlink{classoomph_1_1RefineableElement_a6d48d9a4d43fbd7f089b17dc8cf4fc1d}{check\+\_\+value\+\_\+id}} (const int \&n\+\_\+continuously\+\_\+interpolated\+\_\+values, const int \&value\+\_\+id)
 \begin{DoxyCompactList}\small\item\em Static helper function that is used to check that the value\+\_\+id is in range. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -166,9 +166,9 @@ static double \mbox{\hyperlink{classoomph_1_1RefineableElement_a24e8e8cbfd68f967
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-std\+::map$<$ Node $\ast$, int $>$ $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableElement_aab1d370b39952b63e7ac8f3e10e388b4}{Local\+\_\+hang\+\_\+eqn}}
-\begin{DoxyCompactList}\small\item\em Storage for local equation numbers of hanging node variables (values stored at master nodes). It is essential that these are indexed by a Node pointer because the Node may be internal or external to the element. local equation number = Local\+\_\+hang\+\_\+eqn(master\+\_\+node\+\_\+pt,ival) \end{DoxyCompactList}\item 
-std\+::map$<$ Node $\ast$, unsigned $>$ \mbox{\hyperlink{classoomph_1_1RefineableElement_ada422236067871191ca14de8369efb9f}{Shape\+\_\+controlling\+\_\+node\+\_\+lookup}}
+std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$, int $>$ $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableElement_aab1d370b39952b63e7ac8f3e10e388b4}{Local\+\_\+hang\+\_\+eqn}}
+\begin{DoxyCompactList}\small\item\em Storage for local equation numbers of hanging node variables (values stored at master nodes). It is essential that these are indexed by a \mbox{\hyperlink{classoomph_1_1Node}{Node}} pointer because the \mbox{\hyperlink{classoomph_1_1Node}{Node}} may be internal or external to the element. local equation number = Local\+\_\+hang\+\_\+eqn(master\+\_\+node\+\_\+pt,ival) \end{DoxyCompactList}\item 
+std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$, unsigned $>$ \mbox{\hyperlink{classoomph_1_1RefineableElement_ada422236067871191ca14de8369efb9f}{Shape\+\_\+controlling\+\_\+node\+\_\+lookup}}
 \begin{DoxyCompactList}\small\item\em Lookup scheme for unique number associated with any of the nodes that actively control the shape of the element (i.\+e. they are either non-\/hanging nodes of this element or master nodes of hanging nodes. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -252,7 +252,7 @@ References \mbox{\hyperlink{refineable__elements_8h_source_l00167}{Local\+\_\+ha
 \index{oomph::RefineableElement@{oomph::RefineableElement}!RefineableElement@{RefineableElement}}
 \index{RefineableElement@{RefineableElement}!oomph::RefineableElement@{oomph::RefineableElement}}
 \doxysubsubsection{\texorpdfstring{RefineableElement()}{RefineableElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily oomph\+::\+Refineable\+Element\+::\+Refineable\+Element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+{\footnotesize\ttfamily oomph\+::\+Refineable\+Element\+::\+Refineable\+Element (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
@@ -265,7 +265,7 @@ Broken copy constructor.
 \index{oomph::RefineableElement@{oomph::RefineableElement}!assemble\_eulerian\_base\_vectors@{assemble\_eulerian\_base\_vectors}}
 \index{assemble\_eulerian\_base\_vectors@{assemble\_eulerian\_base\_vectors}!oomph::RefineableElement@{oomph::RefineableElement}}
 \doxysubsubsection{\texorpdfstring{assemble\_eulerian\_base\_vectors()}{assemble\_eulerian\_base\_vectors()}}
-{\footnotesize\ttfamily void oomph\+::\+Refineable\+Element\+::assemble\+\_\+eulerian\+\_\+base\+\_\+vectors (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsids,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{interpolated\+\_\+G }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Refineable\+Element\+::assemble\+\_\+eulerian\+\_\+base\+\_\+vectors (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsids,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{interpolated\+\_\+G }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -281,13 +281,13 @@ Definition at line \mbox{\hyperlink{refineable__elements_8cc_source_l00177}{177}
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02616}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8h_source_l01614}{oomph\+::\+Finite\+Element\+::dpsids}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02468}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02489}{oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension()}}, and \mbox{\hyperlink{elements_8h_source_l02354}{oomph\+::\+Finite\+Element\+::nodal\+\_\+position\+\_\+gen()}}.
+References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02463}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02484}{oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension()}}, and \mbox{\hyperlink{elements_8h_source_l02349}{oomph\+::\+Finite\+Element\+::nodal\+\_\+position\+\_\+gen()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableElement_a9936fe72471f1bd977b800c9e5696949}\label{classoomph_1_1RefineableElement_a9936fe72471f1bd977b800c9e5696949}} 
 \index{oomph::RefineableElement@{oomph::RefineableElement}!assemble\_local\_to\_eulerian\_jacobian@{assemble\_local\_to\_eulerian\_jacobian}}
 \index{assemble\_local\_to\_eulerian\_jacobian@{assemble\_local\_to\_eulerian\_jacobian}!oomph::RefineableElement@{oomph::RefineableElement}}
 \doxysubsubsection{\texorpdfstring{assemble\_local\_to\_eulerian\_jacobian()}{assemble\_local\_to\_eulerian\_jacobian()}}
-{\footnotesize\ttfamily void oomph\+::\+Refineable\+Element\+::assemble\+\_\+local\+\_\+to\+\_\+eulerian\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsids,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Refineable\+Element\+::assemble\+\_\+local\+\_\+to\+\_\+eulerian\+\_\+jacobian (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsids,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -303,13 +303,13 @@ Definition at line \mbox{\hyperlink{refineable__elements_8cc_source_l00077}{77}}
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02616}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8h_source_l01614}{oomph\+::\+Finite\+Element\+::dpsids}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}, \mbox{\hyperlink{elements_8h_source_l02468}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02489}{oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension()}}, and \mbox{\hyperlink{elements_8h_source_l02354}{oomph\+::\+Finite\+Element\+::nodal\+\_\+position\+\_\+gen()}}.
+References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02463}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02484}{oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension()}}, and \mbox{\hyperlink{elements_8h_source_l02349}{oomph\+::\+Finite\+Element\+::nodal\+\_\+position\+\_\+gen()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableElement_a16ee7ab5ebf6d105815d49e1a23aa2ca}\label{classoomph_1_1RefineableElement_a16ee7ab5ebf6d105815d49e1a23aa2ca}} 
 \index{oomph::RefineableElement@{oomph::RefineableElement}!assemble\_local\_to\_eulerian\_jacobian2@{assemble\_local\_to\_eulerian\_jacobian2}}
 \index{assemble\_local\_to\_eulerian\_jacobian2@{assemble\_local\_to\_eulerian\_jacobian2}!oomph::RefineableElement@{oomph::RefineableElement}}
 \doxysubsubsection{\texorpdfstring{assemble\_local\_to\_eulerian\_jacobian2()}{assemble\_local\_to\_eulerian\_jacobian2()}}
-{\footnotesize\ttfamily void oomph\+::\+Refineable\+Element\+::assemble\+\_\+local\+\_\+to\+\_\+eulerian\+\_\+jacobian2 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{d2psids,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian2 }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Refineable\+Element\+::assemble\+\_\+local\+\_\+to\+\_\+eulerian\+\_\+jacobian2 (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{d2psids,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian2 }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -325,13 +325,13 @@ Definition at line \mbox{\hyperlink{refineable__elements_8cc_source_l00133}{133}
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02616}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01483}{oomph\+::\+Finite\+Element\+::\+N2deriv}}, \mbox{\hyperlink{elements_8h_source_l02468}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8h_source_l02354}{oomph\+::\+Finite\+Element\+::nodal\+\_\+position\+\_\+gen()}}.
+References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01483}{oomph\+::\+Finite\+Element\+::\+N2deriv}}, \mbox{\hyperlink{elements_8h_source_l02463}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8h_source_l02349}{oomph\+::\+Finite\+Element\+::nodal\+\_\+position\+\_\+gen()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableElement_a381592dd61261f9d5e0b2f88f799c3fc}\label{classoomph_1_1RefineableElement_a381592dd61261f9d5e0b2f88f799c3fc}} 
 \index{oomph::RefineableElement@{oomph::RefineableElement}!assign\_hanging\_local\_eqn\_numbers@{assign\_hanging\_local\_eqn\_numbers}}
 \index{assign\_hanging\_local\_eqn\_numbers@{assign\_hanging\_local\_eqn\_numbers}!oomph::RefineableElement@{oomph::RefineableElement}}
 \doxysubsubsection{\texorpdfstring{assign\_hanging\_local\_eqn\_numbers()}{assign\_hanging\_local\_eqn\_numbers()}}
-{\footnotesize\ttfamily void oomph\+::\+Refineable\+Element\+::assign\+\_\+hanging\+\_\+local\+\_\+eqn\+\_\+numbers (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} bool \&}]{store\+\_\+local\+\_\+dof\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily void oomph\+::\+Refineable\+Element\+::assign\+\_\+hanging\+\_\+local\+\_\+eqn\+\_\+numbers (\begin{DoxyParamCaption}\item[{const bool \&}]{store\+\_\+local\+\_\+dof\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -343,7 +343,7 @@ Definition at line \mbox{\hyperlink{refineable__elements_8cc_source_l00312}{312}
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l00156}{oomph\+::\+Generalised\+Element\+::add\+\_\+global\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{elements_8h_source_l00231}{oomph\+::\+Generalised\+Element\+::\+Dof\+\_\+pt\+\_\+deque}}, \mbox{\hyperlink{elements_8h_source_l00704}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{nodes_8h_source_l00183}{oomph\+::\+Data\+::\+Is\+\_\+pinned}}, \mbox{\hyperlink{elements_8h_source_l00726}{oomph\+::\+Generalised\+Element\+::local\+\_\+eqn\+\_\+number()}}, \mbox{\hyperlink{refineable__elements_8h_source_l00167}{Local\+\_\+hang\+\_\+eqn}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1RefineableElement_a53e171a18c9f43f1db90a6876516a073}{ncont\+\_\+interpolated\+\_\+values()}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{refineable__elements_8h_source_l00172}{Shape\+\_\+controlling\+\_\+node\+\_\+lookup}}.
+References \mbox{\hyperlink{elements_8cc_source_l00156}{oomph\+::\+Generalised\+Element\+::add\+\_\+global\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{elements_8h_source_l00231}{oomph\+::\+Generalised\+Element\+::\+Dof\+\_\+pt\+\_\+deque}}, \mbox{\hyperlink{nodes_8h_source_l00367}{oomph\+::\+Data\+::eqn\+\_\+number()}}, \mbox{\hyperlink{elements_8h_source_l00704}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{nodes_8h_source_l01228}{oomph\+::\+Node\+::hanging\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l01285}{oomph\+::\+Node\+::is\+\_\+hanging()}}, \mbox{\hyperlink{nodes_8h_source_l00183}{oomph\+::\+Data\+::\+Is\+\_\+pinned}}, \mbox{\hyperlink{elements_8h_source_l00726}{oomph\+::\+Generalised\+Element\+::local\+\_\+eqn\+\_\+number()}}, \mbox{\hyperlink{refineable__elements_8h_source_l00167}{Local\+\_\+hang\+\_\+eqn}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1RefineableElement_a53e171a18c9f43f1db90a6876516a073}{ncont\+\_\+interpolated\+\_\+values()}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}, \mbox{\hyperlink{refineable__elements_8h_source_l00172}{Shape\+\_\+controlling\+\_\+node\+\_\+lookup}}, and \mbox{\hyperlink{nodes_8h_source_l00324}{oomph\+::\+Data\+::value\+\_\+pt()}}.
 
 
 
@@ -353,7 +353,7 @@ Referenced by \mbox{\hyperlink{refineable__elements_8h_source_l00511}{assign\+\_
 \index{oomph::RefineableElement@{oomph::RefineableElement}!assign\_nodal\_local\_eqn\_numbers@{assign\_nodal\_local\_eqn\_numbers}}
 \index{assign\_nodal\_local\_eqn\_numbers@{assign\_nodal\_local\_eqn\_numbers}!oomph::RefineableElement@{oomph::RefineableElement}}
 \doxysubsubsection{\texorpdfstring{assign\_nodal\_local\_eqn\_numbers()}{assign\_nodal\_local\_eqn\_numbers()}}
-{\footnotesize\ttfamily void oomph\+::\+Refineable\+Element\+::assign\+\_\+nodal\+\_\+local\+\_\+eqn\+\_\+numbers (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} bool \&}]{store\+\_\+local\+\_\+dof\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Refineable\+Element\+::assign\+\_\+nodal\+\_\+local\+\_\+eqn\+\_\+numbers (\begin{DoxyParamCaption}\item[{const bool \&}]{store\+\_\+local\+\_\+dof\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -361,7 +361,7 @@ Overload the function that assigns local equation numbers for the \mbox{\hyperli
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_aabd4c886bdbd09b1fdb1fd2d656aea19}{oomph\+::\+Finite\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a4136e6f2a0d782f4c23540d71050db30}{oomph\+::\+Finite\+Element}}.
 
 
 
@@ -369,13 +369,13 @@ Definition at line \mbox{\hyperlink{refineable__elements_8h_source_l00511}{511}}
 
 
 
-References \mbox{\hyperlink{refineable__elements_8cc_source_l00312}{assign\+\_\+hanging\+\_\+local\+\_\+eqn\+\_\+numbers()}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_aabd4c886bdbd09b1fdb1fd2d656aea19}{oomph\+::\+Finite\+Element\+::assign\+\_\+nodal\+\_\+local\+\_\+eqn\+\_\+numbers()}}.
+References \mbox{\hyperlink{refineable__elements_8cc_source_l00312}{assign\+\_\+hanging\+\_\+local\+\_\+eqn\+\_\+numbers()}}, and \mbox{\hyperlink{elements_8cc_source_l03544}{oomph\+::\+Finite\+Element\+::assign\+\_\+nodal\+\_\+local\+\_\+eqn\+\_\+numbers()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableElement_a1e24734937a96abfb4ae35a2ccb647f4}\label{classoomph_1_1RefineableElement_a1e24734937a96abfb4ae35a2ccb647f4}} 
 \index{oomph::RefineableElement@{oomph::RefineableElement}!build@{build}}
 \index{build@{build}!oomph::RefineableElement@{oomph::RefineableElement}}
 \doxysubsubsection{\texorpdfstring{build()}{build()}}
-{\footnotesize\ttfamily virtual void oomph\+::\+Refineable\+Element\+::build (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ Node $\ast$ $>$ \&}]{new\+\_\+node\+\_\+pt,  }\item[{bool \&}]{was\+\_\+already\+\_\+built,  }\item[{std\+::ofstream \&}]{new\+\_\+nodes\+\_\+file }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Refineable\+Element\+::build (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ \&}]{new\+\_\+node\+\_\+pt,  }\item[{bool \&}]{was\+\_\+already\+\_\+built,  }\item[{std\+::ofstream \&}]{new\+\_\+nodes\+\_\+file }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -403,7 +403,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1PRefineableQElement_3_011_00_01INI
 \index{oomph::RefineableElement@{oomph::RefineableElement}!check\_value\_id@{check\_value\_id}}
 \index{check\_value\_id@{check\_value\_id}!oomph::RefineableElement@{oomph::RefineableElement}}
 \doxysubsubsection{\texorpdfstring{check\_value\_id()}{check\_value\_id()}}
-{\footnotesize\ttfamily void oomph\+::\+Refineable\+Element\+::check\+\_\+value\+\_\+id (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{n\+\_\+continuously\+\_\+interpolated\+\_\+values,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{value\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily void oomph\+::\+Refineable\+Element\+::check\+\_\+value\+\_\+id (\begin{DoxyParamCaption}\item[{const int \&}]{n\+\_\+continuously\+\_\+interpolated\+\_\+values,  }\item[{const int \&}]{value\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
 
 
 
@@ -433,7 +433,7 @@ Definition at line \mbox{\hyperlink{refineable__elements_8cc_source_l00293}{293}
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
 
 
 
@@ -553,7 +553,7 @@ Calculate the contributions to the jacobian from the nodal degrees of freedom us
 
 This function calculates the entries of Jacobian matrix, used in the Newton method, associated with the nodal degrees of freedom. This is done by finite differences to handle the general case Overload the standard case to include hanging node case. 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0e8482d1fd7938accfa0c9951015f239}{oomph\+::\+Finite\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a4a79882efb07751842d0b714a0c7f2ec}{oomph\+::\+Finite\+Element}}.
 
 
 
@@ -561,7 +561,7 @@ Definition at line \mbox{\hyperlink{refineable__elements_8cc_source_l00675}{675}
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01198}{oomph\+::\+Generalised\+Element\+::\+Default\+\_\+fd\+\_\+jacobian\+\_\+step}}, \mbox{\hyperlink{elements_8h_source_l00980}{oomph\+::\+Generalised\+Element\+::get\+\_\+residuals()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}, \mbox{\hyperlink{refineable__elements_8h_source_l00278}{local\+\_\+hang\+\_\+eqn()}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l01719}{oomph\+::\+Finite\+Element\+::reset\+\_\+after\+\_\+nodal\+\_\+fd()}}, \mbox{\hyperlink{elements_8h_source_l01728}{oomph\+::\+Finite\+Element\+::reset\+\_\+in\+\_\+nodal\+\_\+fd()}}, \mbox{\hyperlink{elements_8h_source_l01714}{oomph\+::\+Finite\+Element\+::update\+\_\+before\+\_\+nodal\+\_\+fd()}}, and \mbox{\hyperlink{elements_8h_source_l01723}{oomph\+::\+Finite\+Element\+::update\+\_\+in\+\_\+nodal\+\_\+fd()}}.
+References \mbox{\hyperlink{elements_8h_source_l01198}{oomph\+::\+Generalised\+Element\+::\+Default\+\_\+fd\+\_\+jacobian\+\_\+step}}, \mbox{\hyperlink{elements_8h_source_l00980}{oomph\+::\+Generalised\+Element\+::get\+\_\+residuals()}}, \mbox{\hyperlink{nodes_8h_source_l01228}{oomph\+::\+Node\+::hanging\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l01285}{oomph\+::\+Node\+::is\+\_\+hanging()}}, \mbox{\hyperlink{refineable__elements_8h_source_l00278}{local\+\_\+hang\+\_\+eqn()}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}, \mbox{\hyperlink{elements_8h_source_l01714}{oomph\+::\+Finite\+Element\+::reset\+\_\+after\+\_\+nodal\+\_\+fd()}}, \mbox{\hyperlink{elements_8h_source_l01723}{oomph\+::\+Finite\+Element\+::reset\+\_\+in\+\_\+nodal\+\_\+fd()}}, \mbox{\hyperlink{elements_8h_source_l01709}{oomph\+::\+Finite\+Element\+::update\+\_\+before\+\_\+nodal\+\_\+fd()}}, \mbox{\hyperlink{elements_8h_source_l01718}{oomph\+::\+Finite\+Element\+::update\+\_\+in\+\_\+nodal\+\_\+fd()}}, and \mbox{\hyperlink{nodes_8h_source_l00324}{oomph\+::\+Data\+::value\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableElement_a26628ce36dfad028686adeb4694a9ef3}\label{classoomph_1_1RefineableElement_a26628ce36dfad028686adeb4694a9ef3}} 
 \index{oomph::RefineableElement@{oomph::RefineableElement}!further\_build@{further\_build}}
@@ -615,7 +615,7 @@ Compute derivatives of elemental residual vector with respect to nodal coordinat
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_ad3e5e89f43bd6e4a2a46e524a71da0ff}{oomph\+::\+Finite\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_ae4b85a31a983a52d3010930f9e0851b8}{oomph\+::\+Finite\+Element}}.
 
 
 
@@ -627,7 +627,7 @@ Definition at line \mbox{\hyperlink{refineable__elements_8cc_source_l00597}{597}
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01198}{oomph\+::\+Generalised\+Element\+::\+Default\+\_\+fd\+\_\+jacobian\+\_\+step}}, \mbox{\hyperlink{elements_8h_source_l00980}{oomph\+::\+Generalised\+Element\+::get\+\_\+residuals()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{refineable__elements_8h_source_l00172}{Shape\+\_\+controlling\+\_\+node\+\_\+lookup}}.
+References \mbox{\hyperlink{elements_8h_source_l01198}{oomph\+::\+Generalised\+Element\+::\+Default\+\_\+fd\+\_\+jacobian\+\_\+step}}, \mbox{\hyperlink{elements_8h_source_l00980}{oomph\+::\+Generalised\+Element\+::get\+\_\+residuals()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l01615}{oomph\+::\+Node\+::perform\+\_\+auxiliary\+\_\+node\+\_\+update\+\_\+fct()}}, \mbox{\hyperlink{refineable__elements_8h_source_l00172}{Shape\+\_\+controlling\+\_\+node\+\_\+lookup}}, and \mbox{\hyperlink{nodes_8h_source_l01060}{oomph\+::\+Node\+::x()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableElement_a6ade15684ccece690c3ba8aebcc02797}\label{classoomph_1_1RefineableElement_a6ade15684ccece690c3ba8aebcc02797}} 
 \index{oomph::RefineableElement@{oomph::RefineableElement}!get\_father\_at\_refinement\_level@{get\_father\_at\_refinement\_level}}
@@ -655,7 +655,7 @@ Referenced by \mbox{\hyperlink{refineable__elements_8h_source_l00564}{get\+\_\+f
 \index{oomph::RefineableElement@{oomph::RefineableElement}!get\_interpolated\_values@{get\_interpolated\_values}}
 \index{get\_interpolated\_values@{get\_interpolated\_values}!oomph::RefineableElement@{oomph::RefineableElement}}
 \doxysubsubsection{\texorpdfstring{get\_interpolated\_values()}{get\_interpolated\_values()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily virtual void oomph\+::\+Refineable\+Element\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Refineable\+Element\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -669,7 +669,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1SpectralPeriodicOrbitElement_a49df
 \index{oomph::RefineableElement@{oomph::RefineableElement}!get\_interpolated\_values@{get\_interpolated\_values}}
 \index{get\_interpolated\_values@{get\_interpolated\_values}!oomph::RefineableElement@{oomph::RefineableElement}}
 \doxysubsubsection{\texorpdfstring{get\_interpolated\_values()}{get\_interpolated\_values()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily virtual void oomph\+::\+Refineable\+Element\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Refineable\+Element\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -695,7 +695,7 @@ Referenced by \mbox{\hyperlink{refineable__brick__element_8cc_source_l01293}{oom
 \index{oomph::RefineableElement@{oomph::RefineableElement}!get\_interpolating\_node\_at\_local\_coordinate@{get\_interpolating\_node\_at\_local\_coordinate}}
 \index{get\_interpolating\_node\_at\_local\_coordinate@{get\_interpolating\_node\_at\_local\_coordinate}!oomph::RefineableElement@{oomph::RefineableElement}}
 \doxysubsubsection{\texorpdfstring{get\_interpolating\_node\_at\_local\_coordinate()}{get\_interpolating\_node\_at\_local\_coordinate()}}
-{\footnotesize\ttfamily virtual Node $\ast$ oomph\+::\+Refineable\+Element\+::get\+\_\+interpolating\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{value\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ oomph\+::\+Refineable\+Element\+::get\+\_\+interpolating\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const int \&}]{value\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -711,7 +711,7 @@ Definition at line \mbox{\hyperlink{refineable__elements_8h_source_l00456}{456}}
 
 
 
-References \mbox{\hyperlink{classoomph_1_1FiniteElement_adf4424f1040fb5c4b6abfbd1c2bf65fc}{oomph\+::\+Finite\+Element\+::get\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References \mbox{\hyperlink{elements_8cc_source_l03882}{oomph\+::\+Finite\+Element\+::get\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 
 
@@ -729,7 +729,7 @@ The purpose of this function is to identify all possible \mbox{\hyperlink{classo
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a9174a1814b1e8e15bfd9e728143e7e0f}{oomph\+::\+Finite\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_aee5883ba2e464257c3a9c775d8e24c02}{oomph\+::\+Finite\+Element}}.
 
 
 
@@ -737,13 +737,13 @@ Definition at line \mbox{\hyperlink{refineable__elements_8cc_source_l00523}{523}
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l00622}{oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l00823}{oomph\+::\+Generalised\+Element\+::ninternal\+\_\+data()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}.
+References \mbox{\hyperlink{nodes_8h_source_l01228}{oomph\+::\+Node\+::hanging\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l00622}{oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l01285}{oomph\+::\+Node\+::is\+\_\+hanging()}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l00823}{oomph\+::\+Generalised\+Element\+::ninternal\+\_\+data()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableElement_a61ae74d94be7abc7231f34f3322f8e13}\label{classoomph_1_1RefineableElement_a61ae74d94be7abc7231f34f3322f8e13}} 
 \index{oomph::RefineableElement@{oomph::RefineableElement}!initial\_setup@{initial\_setup}}
 \index{initial\_setup@{initial\_setup}!oomph::RefineableElement@{oomph::RefineableElement}}
 \doxysubsubsection{\texorpdfstring{initial\_setup()}{initial\_setup()}}
-{\footnotesize\ttfamily virtual void oomph\+::\+Refineable\+Element\+::initial\+\_\+setup (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{adopted\+\_\+father\+\_\+pt = {\ttfamily 0},  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{initial\+\_\+p\+\_\+order = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Refineable\+Element\+::initial\+\_\+setup (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$const \&}]{adopted\+\_\+father\+\_\+pt = {\ttfamily 0},  }\item[{const unsigned \&}]{initial\+\_\+p\+\_\+order = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -765,7 +765,7 @@ Referenced by \mbox{\hyperlink{missing__masters_8template_8cc_source_l00251}{oom
 \index{oomph::RefineableElement@{oomph::RefineableElement}!interpolating\_basis@{interpolating\_basis}}
 \index{interpolating\_basis@{interpolating\_basis}!oomph::RefineableElement@{oomph::RefineableElement}}
 \doxysubsubsection{\texorpdfstring{interpolating\_basis()}{interpolating\_basis()}}
-{\footnotesize\ttfamily virtual void oomph\+::\+Refineable\+Element\+::interpolating\+\_\+basis (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{value\+\_\+id }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Refineable\+Element\+::interpolating\+\_\+basis (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{const int \&}]{value\+\_\+id }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -791,7 +791,7 @@ Referenced by \mbox{\hyperlink{refineable__brick__element_8cc_source_l02142}{oom
 \index{oomph::RefineableElement@{oomph::RefineableElement}!interpolating\_node\_pt@{interpolating\_node\_pt}}
 \index{interpolating\_node\_pt@{interpolating\_node\_pt}!oomph::RefineableElement@{oomph::RefineableElement}}
 \doxysubsubsection{\texorpdfstring{interpolating\_node\_pt()}{interpolating\_node\_pt()}}
-{\footnotesize\ttfamily virtual Node $\ast$ oomph\+::\+Refineable\+Element\+::interpolating\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{value\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ oomph\+::\+Refineable\+Element\+::interpolating\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const int \&}]{value\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -807,7 +807,7 @@ Definition at line \mbox{\hyperlink{refineable__elements_8h_source_l00437}{437}}
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
 
 
 
@@ -817,7 +817,7 @@ Referenced by \mbox{\hyperlink{refineable__brick__element_8cc_source_l02142}{oom
 \index{oomph::RefineableElement@{oomph::RefineableElement}!local\_hang\_eqn@{local\_hang\_eqn}}
 \index{local\_hang\_eqn@{local\_hang\_eqn}!oomph::RefineableElement@{oomph::RefineableElement}}
 \doxysubsubsection{\texorpdfstring{local\_hang\_eqn()}{local\_hang\_eqn()}}
-{\footnotesize\ttfamily int oomph\+::\+Refineable\+Element\+::local\+\_\+hang\+\_\+eqn (\begin{DoxyParamCaption}\item[{Node $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{node\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily int oomph\+::\+Refineable\+Element\+::local\+\_\+hang\+\_\+eqn (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&}]{node\+\_\+pt,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -829,7 +829,7 @@ Definition at line \mbox{\hyperlink{refineable__elements_8h_source_l00278}{278}}
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{refineable__elements_8h_source_l00167}{Local\+\_\+hang\+\_\+eqn}}, \mbox{\hyperlink{classoomph_1_1RefineableElement_a53e171a18c9f43f1db90a6876516a073}{ncont\+\_\+interpolated\+\_\+values()}}, and \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{refineable__elements_8h_source_l00167}{Local\+\_\+hang\+\_\+eqn}}, \mbox{\hyperlink{classoomph_1_1RefineableElement_a53e171a18c9f43f1db90a6876516a073}{ncont\+\_\+interpolated\+\_\+values()}}, and \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
 
 
 
@@ -839,7 +839,7 @@ Referenced by \mbox{\hyperlink{refineable__young__laplace__elements_8cc_source_l
 \index{oomph::RefineableElement@{oomph::RefineableElement}!local\_one\_d\_fraction\_of\_interpolating\_node@{local\_one\_d\_fraction\_of\_interpolating\_node}}
 \index{local\_one\_d\_fraction\_of\_interpolating\_node@{local\_one\_d\_fraction\_of\_interpolating\_node}!oomph::RefineableElement@{oomph::RefineableElement}}
 \doxysubsubsection{\texorpdfstring{local\_one\_d\_fraction\_of\_interpolating\_node()}{local\_one\_d\_fraction\_of\_interpolating\_node()}}
-{\footnotesize\ttfamily virtual double oomph\+::\+Refineable\+Element\+::local\+\_\+one\+\_\+d\+\_\+fraction\+\_\+of\+\_\+interpolating\+\_\+node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n1d,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{value\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual double oomph\+::\+Refineable\+Element\+::local\+\_\+one\+\_\+d\+\_\+fraction\+\_\+of\+\_\+interpolating\+\_\+node (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n1d,  }\item[{const unsigned \&}]{i,  }\item[{const int \&}]{value\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -855,13 +855,13 @@ Definition at line \mbox{\hyperlink{refineable__elements_8h_source_l00447}{447}}
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l01863}{oomph\+::\+Finite\+Element\+::local\+\_\+one\+\_\+d\+\_\+fraction\+\_\+of\+\_\+node()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l01858}{oomph\+::\+Finite\+Element\+::local\+\_\+one\+\_\+d\+\_\+fraction\+\_\+of\+\_\+node()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableElement_a4edbc4a35b1b37b346c802b0a04f2f82}\label{classoomph_1_1RefineableElement_a4edbc4a35b1b37b346c802b0a04f2f82}} 
 \index{oomph::RefineableElement@{oomph::RefineableElement}!local\_to\_eulerian\_mapping\_diagonal@{local\_to\_eulerian\_mapping\_diagonal}}
 \index{local\_to\_eulerian\_mapping\_diagonal@{local\_to\_eulerian\_mapping\_diagonal}!oomph::RefineableElement@{oomph::RefineableElement}}
 \doxysubsubsection{\texorpdfstring{local\_to\_eulerian\_mapping\_diagonal()}{local\_to\_eulerian\_mapping\_diagonal()}}
-{\footnotesize\ttfamily double oomph\+::\+Refineable\+Element\+::local\+\_\+to\+\_\+eulerian\+\_\+mapping\+\_\+diagonal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsids,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{inverse\+\_\+jacobian }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily double oomph\+::\+Refineable\+Element\+::local\+\_\+to\+\_\+eulerian\+\_\+mapping\+\_\+diagonal (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsids,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{inverse\+\_\+jacobian }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -877,7 +877,7 @@ Definition at line \mbox{\hyperlink{refineable__elements_8cc_source_l00215}{215}
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l01750}{oomph\+::\+Finite\+Element\+::check\+\_\+jacobian()}}, \mbox{\hyperlink{elements_8h_source_l02616}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8h_source_l01614}{oomph\+::\+Finite\+Element\+::dpsids}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01613}{oomph\+::\+Finite\+Element\+::inverse\+\_\+jacobian}}, \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}, \mbox{\hyperlink{elements_8h_source_l02468}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02489}{oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension()}}, and \mbox{\hyperlink{elements_8h_source_l02354}{oomph\+::\+Finite\+Element\+::nodal\+\_\+position\+\_\+gen()}}.
+References \mbox{\hyperlink{elements_8cc_source_l01750}{oomph\+::\+Finite\+Element\+::check\+\_\+jacobian()}}, \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02463}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02484}{oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension()}}, and \mbox{\hyperlink{elements_8h_source_l02349}{oomph\+::\+Finite\+Element\+::nodal\+\_\+position\+\_\+gen()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableElement_a5cdf00847c81f896f91193d82c00d5b2}\label{classoomph_1_1RefineableElement_a5cdf00847c81f896f91193d82c00d5b2}} 
 \index{oomph::RefineableElement@{oomph::RefineableElement}!max\_integrity\_tolerance@{max\_integrity\_tolerance}}
@@ -923,7 +923,7 @@ Referenced by \mbox{\hyperlink{refineable__elements_8cc_source_l00312}{assign\+\
 \index{oomph::RefineableElement@{oomph::RefineableElement}!ninterpolating\_node@{ninterpolating\_node}}
 \index{ninterpolating\_node@{ninterpolating\_node}!oomph::RefineableElement@{oomph::RefineableElement}}
 \doxysubsubsection{\texorpdfstring{ninterpolating\_node()}{ninterpolating\_node()}}
-{\footnotesize\ttfamily virtual unsigned oomph\+::\+Refineable\+Element\+::ninterpolating\+\_\+node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{value\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual unsigned oomph\+::\+Refineable\+Element\+::ninterpolating\+\_\+node (\begin{DoxyParamCaption}\item[{const int \&}]{value\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -939,7 +939,7 @@ Definition at line \mbox{\hyperlink{refineable__elements_8h_source_l00466}{466}}
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}.
+References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}.
 
 
 
@@ -949,7 +949,7 @@ Referenced by \mbox{\hyperlink{refineable__brick__element_8cc_source_l02142}{oom
 \index{oomph::RefineableElement@{oomph::RefineableElement}!ninterpolating\_node\_1d@{ninterpolating\_node\_1d}}
 \index{ninterpolating\_node\_1d@{ninterpolating\_node\_1d}!oomph::RefineableElement@{oomph::RefineableElement}}
 \doxysubsubsection{\texorpdfstring{ninterpolating\_node\_1d()}{ninterpolating\_node\_1d()}}
-{\footnotesize\ttfamily virtual unsigned oomph\+::\+Refineable\+Element\+::ninterpolating\+\_\+node\+\_\+1d (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{value\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual unsigned oomph\+::\+Refineable\+Element\+::ninterpolating\+\_\+node\+\_\+1d (\begin{DoxyParamCaption}\item[{const int \&}]{value\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -965,7 +965,7 @@ Definition at line \mbox{\hyperlink{refineable__elements_8h_source_l00474}{474}}
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02223}{oomph\+::\+Finite\+Element\+::nnode\+\_\+1d()}}.
+References \mbox{\hyperlink{elements_8h_source_l02218}{oomph\+::\+Finite\+Element\+::nnode\+\_\+1d()}}.
 
 
 
@@ -991,7 +991,7 @@ Definition at line \mbox{\hyperlink{refineable__elements_8h_source_l00389}{389}}
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
 
 
 
@@ -1045,7 +1045,7 @@ Referenced by \mbox{\hyperlink{octree_8cc_source_l04275}{oomph\+::\+Oc\+Tree\+::
 \index{oomph::RefineableElement@{oomph::RefineableElement}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::RefineableElement@{oomph::RefineableElement}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
-{\footnotesize\ttfamily void oomph\+::\+Refineable\+Element\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+{\footnotesize\ttfamily void oomph\+::\+Refineable\+Element\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
@@ -1055,7 +1055,7 @@ Broken assignment operator.
 \index{oomph::RefineableElement@{oomph::RefineableElement}!pre\_build@{pre\_build}}
 \index{pre\_build@{pre\_build}!oomph::RefineableElement@{oomph::RefineableElement}}
 \doxysubsubsection{\texorpdfstring{pre\_build()}{pre\_build()}}
-{\footnotesize\ttfamily virtual void oomph\+::\+Refineable\+Element\+::pre\+\_\+build (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ Node $\ast$ $>$ \&}]{new\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Refineable\+Element\+::pre\+\_\+build (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ \&}]{new\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -1223,7 +1223,7 @@ Referenced by \mbox{\hyperlink{refineable__mesh_8cc_source_l00307}{oomph\+::\+Tr
 \index{oomph::RefineableElement@{oomph::RefineableElement}!set\_number@{set\_number}}
 \index{set\_number@{set\_number}!oomph::RefineableElement@{oomph::RefineableElement}}
 \doxysubsubsection{\texorpdfstring{set\_number()}{set\_number()}}
-{\footnotesize\ttfamily void oomph\+::\+Refineable\+Element\+::set\+\_\+number (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} long \&}]{mynumber }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Refineable\+Element\+::set\+\_\+number (\begin{DoxyParamCaption}\item[{const long \&}]{mynumber }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1241,7 +1241,7 @@ References \mbox{\hyperlink{refineable__elements_8h_source_l00115}{Number}}.
 \index{oomph::RefineableElement@{oomph::RefineableElement}!set\_refinement\_level@{set\_refinement\_level}}
 \index{set\_refinement\_level@{set\_refinement\_level}!oomph::RefineableElement@{oomph::RefineableElement}}
 \doxysubsubsection{\texorpdfstring{set\_refinement\_level()}{set\_refinement\_level()}}
-{\footnotesize\ttfamily void oomph\+::\+Refineable\+Element\+::set\+\_\+refinement\+\_\+level (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{refine\+\_\+level }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Refineable\+Element\+::set\+\_\+refinement\+\_\+level (\begin{DoxyParamCaption}\item[{const int \&}]{refine\+\_\+level }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1299,7 +1299,7 @@ Definition at line \mbox{\hyperlink{refineable__elements_8h_source_l00604}{604}}
 \index{oomph::RefineableElement@{oomph::RefineableElement}!shape\_controlling\_node\_lookup@{shape\_controlling\_node\_lookup}}
 \index{shape\_controlling\_node\_lookup@{shape\_controlling\_node\_lookup}!oomph::RefineableElement@{oomph::RefineableElement}}
 \doxysubsubsection{\texorpdfstring{shape\_controlling\_node\_lookup()}{shape\_controlling\_node\_lookup()}}
-{\footnotesize\ttfamily std\+::map$<$ Node $\ast$, unsigned $>$ oomph\+::\+Refineable\+Element\+::shape\+\_\+controlling\+\_\+node\+\_\+lookup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$, unsigned $>$ oomph\+::\+Refineable\+Element\+::shape\+\_\+controlling\+\_\+node\+\_\+lookup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1422,7 +1422,7 @@ Definition at line \mbox{\hyperlink{refineable__elements_8h_source_l00362}{362}}
 
 
 
-References \mbox{\hyperlink{refineable__elements_8h_source_l00539}{father\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_aeb40d7a104d99e6f7d8123e801e53b5b}{oomph\+::\+Finite\+Element\+::get\+\_\+node\+\_\+number()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References \mbox{\hyperlink{refineable__elements_8h_source_l00539}{father\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{elements_8cc_source_l03814}{oomph\+::\+Finite\+Element\+::get\+\_\+node\+\_\+number()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8h_source_l01442}{oomph\+::\+Node\+::set\+\_\+non\+\_\+obsolete()}}.
 
 
 
@@ -1435,11 +1435,11 @@ Referenced by \mbox{\hyperlink{tree_8cc_source_l00302}{oomph\+::\+Tree\+::merge\
 \index{oomph::RefineableElement@{oomph::RefineableElement}!Local\_hang\_eqn@{Local\_hang\_eqn}}
 \index{Local\_hang\_eqn@{Local\_hang\_eqn}!oomph::RefineableElement@{oomph::RefineableElement}}
 \doxysubsubsection{\texorpdfstring{Local\_hang\_eqn}{Local\_hang\_eqn}}
-{\footnotesize\ttfamily std\+::map$<$Node$\ast$, int$>$$\ast$ oomph\+::\+Refineable\+Element\+::\+Local\+\_\+hang\+\_\+eqn\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily std\+::map$<$\mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$, int$>$$\ast$ oomph\+::\+Refineable\+Element\+::\+Local\+\_\+hang\+\_\+eqn\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Storage for local equation numbers of hanging node variables (values stored at master nodes). It is essential that these are indexed by a Node pointer because the Node may be internal or external to the element. local equation number = Local\+\_\+hang\+\_\+eqn(master\+\_\+node\+\_\+pt,ival) 
+Storage for local equation numbers of hanging node variables (values stored at master nodes). It is essential that these are indexed by a \mbox{\hyperlink{classoomph_1_1Node}{Node}} pointer because the \mbox{\hyperlink{classoomph_1_1Node}{Node}} may be internal or external to the element. local equation number = Local\+\_\+hang\+\_\+eqn(master\+\_\+node\+\_\+pt,ival) 
 
 
 
@@ -1525,7 +1525,7 @@ Referenced by \mbox{\hyperlink{refineable__elements_8h_source_l00237}{disable\+\
 \index{oomph::RefineableElement@{oomph::RefineableElement}!Shape\_controlling\_node\_lookup@{Shape\_controlling\_node\_lookup}}
 \index{Shape\_controlling\_node\_lookup@{Shape\_controlling\_node\_lookup}!oomph::RefineableElement@{oomph::RefineableElement}}
 \doxysubsubsection{\texorpdfstring{Shape\_controlling\_node\_lookup}{Shape\_controlling\_node\_lookup}}
-{\footnotesize\ttfamily std\+::map$<$Node$\ast$, unsigned$>$ oomph\+::\+Refineable\+Element\+::\+Shape\+\_\+controlling\+\_\+node\+\_\+lookup\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily std\+::map$<$\mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$, unsigned$>$ oomph\+::\+Refineable\+Element\+::\+Shape\+\_\+controlling\+\_\+node\+\_\+lookup\hspace{0.3cm}{\ttfamily [private]}}
 
 
 

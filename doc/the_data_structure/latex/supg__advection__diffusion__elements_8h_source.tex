@@ -74,7 +74,7 @@
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00070}\mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement_a0aaae49d23075bac8fc1f2d467354dce}{00070}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement_a0aaae49d23075bac8fc1f2d467354dce}{compute\_stabilisation\_parameter}}()}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00071}00071     \{}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00072}00072       \textcolor{comment}{// Find out how many nodes there are}}
-\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00073}00073       \textcolor{keywordtype}{unsigned} n\_node = this-\/>nnode();}
+\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00073}00073       \textcolor{keywordtype}{unsigned} n\_node = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00074}00074 }
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00075}00075       \textcolor{comment}{// Set up memory for the shape functions and their derivatives}}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00076}00076       \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} psi(n\_node), test(n\_node);}
@@ -87,7 +87,7 @@
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00083}00083       (void)\mbox{\hyperlink{classoomph_1_1QElement}{QElement<DIM, NNODE\_1D>::dshape\_eulerian}}(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, psi, dpsidx);}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00084}00084 }
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00085}00085       \textcolor{comment}{// Calculate Eulerian coordinates}}
-\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00086}00086       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} interpolated\_x(DIM, 0.0);}
+\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00086}00086       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(DIM, 0.0);}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00087}00087 }
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00088}00088       \textcolor{comment}{// Loop over nodes}}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00089}00089       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} l = 0; l < n\_node; l++)}
@@ -95,7 +95,7 @@
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00091}00091         \textcolor{comment}{// Loop over directions (we're in 2D)}}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00092}00092         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < DIM; j++)}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00093}00093         \{}
-\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00094}00094           interpolated\_x[j] += this-\/>nodal\_position(l, j) * psi[l];}
+\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00094}00094           \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}[j] += this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9152c16ae9899168bcdaac7c2f977444}{nodal\_position}}(l, j) * psi[l];}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00095}00095         \}}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00096}00096       \}}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00097}00097 }
@@ -103,19 +103,19 @@
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00099}00099       \textcolor{keywordtype}{double} h = 0;}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00100}00100       \textcolor{keywordflow}{if} (DIM == 1)}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00101}00101       \{}
-\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00102}00102         h = std::fabs(this-\/>vertex\_node\_pt(1)-\/>\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(0) -\/}
-\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00103}00103                       this-\/>vertex\_node\_pt(0)-\/>\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(0));}
+\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00102}00102         h = std::fabs(this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_ac8b551c9d6f1f8e30e8b18fe2f9ae072}{vertex\_node\_pt}}(1)-\/>x(0) -\/}
+\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00103}00103                       this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_ac8b551c9d6f1f8e30e8b18fe2f9ae072}{vertex\_node\_pt}}(0)-\/>x(0));}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00104}00104       \}}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00105}00105       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (DIM == 2)}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00106}00106       \{}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00107}00107         h =}
-\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00108}00108           pow(this-\/>vertex\_node\_pt(3)-\/>\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(0) -\/ this-\/>vertex\_node\_pt(0)-\/>\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(0),}
+\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00108}00108           pow(this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_ac8b551c9d6f1f8e30e8b18fe2f9ae072}{vertex\_node\_pt}}(3)-\/>x(0) -\/ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_ac8b551c9d6f1f8e30e8b18fe2f9ae072}{vertex\_node\_pt}}(0)-\/>x(0),}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00109}00109               2) +}
-\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00110}00110           pow(this-\/>vertex\_node\_pt(3)-\/>\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(1) -\/ this-\/>vertex\_node\_pt(0)-\/>\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(1), 2);}
+\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00110}00110           pow(this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_ac8b551c9d6f1f8e30e8b18fe2f9ae072}{vertex\_node\_pt}}(3)-\/>x(1) -\/ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_ac8b551c9d6f1f8e30e8b18fe2f9ae072}{vertex\_node\_pt}}(0)-\/>x(1), 2);}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00111}00111         \textcolor{keywordtype}{double} h1 =}
-\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00112}00112           pow(this-\/>vertex\_node\_pt(2)-\/>\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(0) -\/ this-\/>vertex\_node\_pt(1)-\/>\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(0),}
+\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00112}00112           pow(this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_ac8b551c9d6f1f8e30e8b18fe2f9ae072}{vertex\_node\_pt}}(2)-\/>x(0) -\/ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_ac8b551c9d6f1f8e30e8b18fe2f9ae072}{vertex\_node\_pt}}(1)-\/>x(0),}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00113}00113               2) +}
-\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00114}00114           pow(this-\/>vertex\_node\_pt(2)-\/>\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(1) -\/ this-\/>vertex\_node\_pt(1)-\/>\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(1), 2);}
+\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00114}00114           pow(this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_ac8b551c9d6f1f8e30e8b18fe2f9ae072}{vertex\_node\_pt}}(2)-\/>x(1) -\/ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_ac8b551c9d6f1f8e30e8b18fe2f9ae072}{vertex\_node\_pt}}(1)-\/>x(1), 2);}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00115}00115         \textcolor{keywordflow}{if} (h1 > h) h = h1;}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00116}00116         h = sqrt(h);}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00117}00117       \}}
@@ -127,11 +127,11 @@
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00123}00123         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 4; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00124}00124         \{}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00125}00125           \textcolor{keywordtype}{double} h1 =}
-\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00126}00126             pow(this-\/>vertex\_node\_pt(n1)-\/>\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(0) -\/ this-\/>vertex\_node\_pt(n2)-\/>\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(0),}
+\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00126}00126             pow(this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_ac8b551c9d6f1f8e30e8b18fe2f9ae072}{vertex\_node\_pt}}(n1)-\/>x(0) -\/ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_ac8b551c9d6f1f8e30e8b18fe2f9ae072}{vertex\_node\_pt}}(n2)-\/>x(0),}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00127}00127                 2) +}
-\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00128}00128             pow(this-\/>vertex\_node\_pt(n1)-\/>\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(1) -\/ this-\/>vertex\_node\_pt(n2)-\/>\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(1),}
+\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00128}00128             pow(this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_ac8b551c9d6f1f8e30e8b18fe2f9ae072}{vertex\_node\_pt}}(n1)-\/>x(1) -\/ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_ac8b551c9d6f1f8e30e8b18fe2f9ae072}{vertex\_node\_pt}}(n2)-\/>x(1),}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00129}00129                 2) +}
-\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00130}00130             pow(this-\/>vertex\_node\_pt(n1)-\/>\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(2) -\/ this-\/>vertex\_node\_pt(n2)-\/>\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(2),}
+\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00130}00130             pow(this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_ac8b551c9d6f1f8e30e8b18fe2f9ae072}{vertex\_node\_pt}}(n1)-\/>x(2) -\/ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_ac8b551c9d6f1f8e30e8b18fe2f9ae072}{vertex\_node\_pt}}(n2)-\/>x(2),}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00131}00131                 2);}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00132}00132           \textcolor{keywordflow}{if} (h1 > h) h = h1;}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00133}00133           n1++;}
@@ -144,7 +144,7 @@
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00140}00140       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} wind(DIM);}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00141}00141       \textcolor{comment}{// Dummy ipt argument?}}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00142}00142       \textcolor{keywordtype}{unsigned} ipt = 0;}
-\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00143}00143       this-\/>get\_wind\_adv\_diff(ipt, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, interpolated\_x, wind);}
+\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00143}00143       this-\/>\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a32cb2f977b32fabfc23d1134749371ed}{get\_wind\_adv\_diff}}(ipt, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}, wind);}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00144}00144       \textcolor{keywordtype}{double} abs\_wind = 0;}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00145}00145       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < DIM; j++)}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00146}00146       \{}
@@ -153,7 +153,7 @@
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00149}00149       abs\_wind = sqrt(abs\_wind);}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00150}00150 }
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00151}00151       \textcolor{comment}{// Mesh Peclet number}}
-\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00152}00152       \textcolor{keywordtype}{double} Pe\_mesh = 0.5 * this-\/>pe() * h * abs\_wind;}
+\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00152}00152       \textcolor{keywordtype}{double} Pe\_mesh = 0.5 * this-\/>\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a9ab4830f90e00cdeb1ce9814865cd466}{pe}}() * h * abs\_wind;}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00153}00153 }
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00154}00154       \textcolor{comment}{// Stabilisation parameter}}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00155}00155       \textcolor{keywordflow}{if} (Pe\_mesh > 1.0)}
@@ -176,30 +176,30 @@
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00172}00172       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(DIM);}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00173}00173 }
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00174}00174       \textcolor{comment}{// Tecplot header info}}
-\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00175}00175       outfile << this-\/>tecplot\_zone\_string(nplot);}
+\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00175}00175       outfile << this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a3193df31f9ce38e0609d17a8ffb386c6}{tecplot\_zone\_string}}(nplot);}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00176}00176 }
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00177}00177       \textcolor{comment}{// Loop over plot points}}
-\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00178}00178       \textcolor{keywordtype}{unsigned} num\_plot\_points = this-\/>nplot\_points(nplot);}
+\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00178}00178       \textcolor{keywordtype}{unsigned} num\_plot\_points = this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a8ed563c7ff0cfd8bafdbb0132b388106}{nplot\_points}}(nplot);}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00179}00179       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} iplot = 0; iplot < num\_plot\_points; iplot++)}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00180}00180       \{}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00181}00181         \textcolor{comment}{// Get local coordinates of plot point}}
-\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00182}00182         this-\/>get\_s\_plot(iplot, nplot, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
+\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00182}00182         this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a82da844fd3ebb2005842464cdc148a03}{get\_s\_plot}}(iplot, nplot, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00183}00183 }
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00184}00184         \textcolor{comment}{// Get Eulerian coordinate of plot point}}
-\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00185}00185         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(DIM);}
-\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00186}00186         this-\/>interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00185}00185         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(DIM);}
+\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00186}00186         this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(s, x);}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00187}00187 }
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00188}00188         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00189}00189         \{}
-\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00190}00190           outfile << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00190}00190           outfile << x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00191}00191         \}}
-\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00192}00192         outfile << this-\/>interpolated\_u\_adv\_diff(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00192}00192         outfile << this-\/>\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a2c5d80050fd9586bcf2d87951c346f58}{interpolated\_u\_adv\_diff}}(s) << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00193}00193 }
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00194}00194         \textcolor{comment}{// Get the wind}}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00195}00195         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} wind(DIM);}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00196}00196         \textcolor{comment}{// Dummy ipt argument}}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00197}00197         \textcolor{keywordtype}{unsigned} ipt = 0;}
-\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00198}00198         this-\/>get\_wind\_adv\_diff(ipt, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, wind);}
+\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00198}00198         this-\/>\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a32cb2f977b32fabfc23d1134749371ed}{get\_wind\_adv\_diff}}(ipt, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x, wind);}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00199}00199         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00200}00200         \{}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00201}00201           outfile << wind[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
@@ -210,7 +210,7 @@
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00206}00206       \}}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00207}00207 }
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00208}00208       \textcolor{comment}{// Write tecplot footer (e.g. FE connectivity lists)}}
-\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00209}00209       this-\/>write\_tecplot\_zone\_footer(outfile, nplot);}
+\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00209}00209       this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_ac3987a5ead7dc20c63d86b333466e2b5}{write\_tecplot\_zone\_footer}}(outfile, nplot);}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00210}00210     \}}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00211}00211 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00212}00212 \textcolor{comment}{    /// Output at default number of plot points}}
@@ -301,13 +301,13 @@
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00297}00297 \textcolor{comment}{    /// Number of vertex nodes in the element}}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00298}\mbox{\hyperlink{classoomph_1_1RefineableQSUPGAdvectionDiffusionElement_a7cd6f311a712fba0bf53a148cd737d1b}{00298}} \textcolor{comment}{}    \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1RefineableQSUPGAdvectionDiffusionElement_a7cd6f311a712fba0bf53a148cd737d1b}{nvertex\_node}}()\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00299}00299 \textcolor{keyword}{    }\{}
-\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00300}00300       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement}{QSUPGAdvectionDiffusionElement<DIM, NNODE\_1D>::nvertex\_node}}();}
+\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00300}00300       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1FiniteElement_a45631a7aa50efc3123a921d114f84cba}{QSUPGAdvectionDiffusionElement<DIM, NNODE\_1D>::nvertex\_node}}();}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00301}00301     \}}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00302}00302 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00303}00303 \textcolor{comment}{    /// Pointer to the j-\/th vertex node in the element}}
-\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00304}\mbox{\hyperlink{classoomph_1_1RefineableQSUPGAdvectionDiffusionElement_a5c6663979cd548c77054a407369ec275}{00304}} \textcolor{comment}{}    Node* \mbox{\hyperlink{classoomph_1_1RefineableQSUPGAdvectionDiffusionElement_a5c6663979cd548c77054a407369ec275}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00304}\mbox{\hyperlink{classoomph_1_1RefineableQSUPGAdvectionDiffusionElement_a5c6663979cd548c77054a407369ec275}{00304}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1RefineableQSUPGAdvectionDiffusionElement_a5c6663979cd548c77054a407369ec275}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00305}00305 \textcolor{keyword}{    }\{}
-\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00306}00306       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement}{QSUPGAdvectionDiffusionElement<DIM, NNODE\_1D>::vertex\_node\_pt}}(j);}
+\DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00306}00306       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1FiniteElement_ac8b551c9d6f1f8e30e8b18fe2f9ae072}{QSUPGAdvectionDiffusionElement<DIM, NNODE\_1D>::vertex\_node\_pt}}(j);}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00307}00307     \}}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00308}00308 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{supg__advection__diffusion__elements_8h_source_l00309}00309 \textcolor{comment}{    /// Rebuild from sons: empty}}

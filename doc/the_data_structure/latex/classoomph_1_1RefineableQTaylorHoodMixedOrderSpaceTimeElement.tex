@@ -12,7 +12,7 @@ Refineable version of Taylor Hood elements. These classes can be written in tota
 Inheritance diagram for oomph\+::Refineable\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=0.815851cm]{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement}
+\includegraphics[height=0.712015cm]{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
@@ -20,39 +20,39 @@ Inheritance diagram for oomph\+::Refineable\+QTaylor\+Hood\+Mixed\+Order\+Space\
 \item 
 \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_a196f6f034601a9cf0515a276455c1398}{Refineable\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_acce9cad86a207e701900ed2f4783ddef}{required\+\_\+nvalue}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_acce9cad86a207e701900ed2f4783ddef}{required\+\_\+nvalue}} (const unsigned \&n) const
 \begin{DoxyCompactList}\small\item\em Number of values required at local node n. In order to simplify matters, we allocate storage for pressure variables at all the nodes and then pin those that are not used. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_a1b9eee1d481b795d78491818c3d9a202}{ncont\+\_\+interpolated\+\_\+values}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_a1b9eee1d481b795d78491818c3d9a202}{ncont\+\_\+interpolated\+\_\+values}} () const
 \begin{DoxyCompactList}\small\item\em Number of continuously interpolated values. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_a858e238455df6a310afc7fd71eb7c637}{rebuild\+\_\+from\+\_\+sons}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&mesh\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Rebuild from sons\+: empty. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_a14f6e5ebdea8522fc621e9f6f2d8c487}{nrecovery\+\_\+order}} ()
 \begin{DoxyCompactList}\small\item\em Order of recovery shape functions for Z2 error estimation\+: Same order as shape functions. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_a11f9c3baed9563b439053997d1e598a4}{nvertex\+\_\+node}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_a11f9c3baed9563b439053997d1e598a4}{nvertex\+\_\+node}} () const
 \begin{DoxyCompactList}\small\item\em Number of vertex nodes in the element. \end{DoxyCompactList}\item 
-Node $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_a4d3743b2933ca080d4dda62cdd8ecf6d}{vertex\+\_\+node\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&j) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_a4d3743b2933ca080d4dda62cdd8ecf6d}{vertex\+\_\+node\+\_\+pt}} (const unsigned \&j) const
 \begin{DoxyCompactList}\small\item\em Pointer to the j-\/th vertex node in the element. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_ab45e8dbf2aee041db94b81e3a717993c}{get\+\_\+interpolated\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&values)
+void \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_ab45e8dbf2aee041db94b81e3a717993c}{get\+\_\+interpolated\+\_\+values}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&values)
 \begin{DoxyCompactList}\small\item\em Get the function value u in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_a8f3e4e9d752a6632a66e17d245b94b15}{get\+\_\+interpolated\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&values)
+void \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_a8f3e4e9d752a6632a66e17d245b94b15}{get\+\_\+interpolated\+\_\+values}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&values)
 \begin{DoxyCompactList}\small\item\em Get the function value u in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_ade8f36a5249e3529b65c7508d5908e5c}{further\+\_\+setup\+\_\+hanging\+\_\+nodes}} ()
 \begin{DoxyCompactList}\small\item\em Perform additional hanging node procedures for variables that are not interpolated by all nodes. The pressures are stored at the p\+\_\+nodal\+\_\+index\+\_\+nst-\/th location in each node. \end{DoxyCompactList}\item 
-Node $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_acb03cfb03256146f390fd2a84fb0a48d}{pressure\+\_\+node\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+p)
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_acb03cfb03256146f390fd2a84fb0a48d}{pressure\+\_\+node\+\_\+pt}} (const unsigned \&n\+\_\+p)
 \begin{DoxyCompactList}\small\item\em Pointer to n\+\_\+p-\/th pressure node. \end{DoxyCompactList}\item 
-Node $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_a461abe131c63d69fd20e2edd2a5c362e}{interpolating\+\_\+node\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&value\+\_\+id)
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_a461abe131c63d69fd20e2edd2a5c362e}{interpolating\+\_\+node\+\_\+pt}} (const unsigned \&n, const int \&value\+\_\+id)
 \begin{DoxyCompactList}\small\item\em The velocities are isoparametric and so the \char`\"{}nodes\char`\"{} interpolating the velocities are the geometric nodes. The pressure \char`\"{}nodes\char`\"{} are a subset of the nodes, so when value\+\_\+id==DIM, the n-\/th pressure node is returned. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_a8623e6e423daa901ecd4619b416a7221}{local\+\_\+one\+\_\+d\+\_\+fraction\+\_\+of\+\_\+interpolating\+\_\+node}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+1d, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&value\+\_\+id)
+double \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_a8623e6e423daa901ecd4619b416a7221}{local\+\_\+one\+\_\+d\+\_\+fraction\+\_\+of\+\_\+interpolating\+\_\+node}} (const unsigned \&n\+\_\+1d, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const int \&value\+\_\+id)
 \begin{DoxyCompactList}\small\item\em The pressure nodes are the corner nodes, so when n\+\_\+value==DIM, the fraction is the same as the 1D node number, 0 or 1. \end{DoxyCompactList}\item 
-Node $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_a21985570eaf90442e7e8a7983b713a3f}{get\+\_\+interpolating\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&value\+\_\+id)
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_a21985570eaf90442e7e8a7983b713a3f}{get\+\_\+interpolating\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, const int \&value\+\_\+id)
 \begin{DoxyCompactList}\small\item\em The velocity nodes are the same as the geometric nodes. The pressure nodes must be calculated by using the same methods as the geometric nodes, but by recalling that there are only two pressure nodes per edge. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_a3c904e96d3b65fb9e5495f3d741f0254}{ninterpolating\+\_\+node\+\_\+1d}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&value\+\_\+id)
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_a3c904e96d3b65fb9e5495f3d741f0254}{ninterpolating\+\_\+node\+\_\+1d}} (const int \&value\+\_\+id)
 \begin{DoxyCompactList}\small\item\em The number of 1D pressure nodes is 2, the number of 1D velocity nodes is the same as the number of 1D geometric nodes. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_a2dcfd19ffc2836e6ec0eacb64e5018c3}{ninterpolating\+\_\+node}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&value\+\_\+id)
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_a2dcfd19ffc2836e6ec0eacb64e5018c3}{ninterpolating\+\_\+node}} (const int \&value\+\_\+id)
 \begin{DoxyCompactList}\small\item\em The number of pressure nodes is 2$^\wedge$\+DIM. The number of velocity nodes is the same as the number of geometric nodes. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_ad95249499e0335c94cdf2196fcd2d39a}{interpolating\+\_\+basis}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&value\+\_\+id) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_ad95249499e0335c94cdf2196fcd2d39a}{interpolating\+\_\+basis}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, const int \&value\+\_\+id) const
 \begin{DoxyCompactList}\small\item\em The basis interpolating the pressure is given by pshape(). / The basis interpolating the velocity is \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{shape()}}. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_a7467b05a49d7d8b938390d4b25d440ff}{build\+\_\+fp\+\_\+press\+\_\+adv\+\_\+diff\+\_\+robin\+\_\+bc\+\_\+element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&face\+\_\+index)
+void \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_a7467b05a49d7d8b938390d4b25d440ff}{build\+\_\+fp\+\_\+press\+\_\+adv\+\_\+diff\+\_\+robin\+\_\+bc\+\_\+element}} (const unsigned \&face\+\_\+index)
 \begin{DoxyCompactList}\small\item\em Build Face\+Elements that apply the Robin boundary condition to the pressure advection diffusion problem required by Fp preconditioner. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_ad217200aa1a08d9e56f647b94b5a6990}{identify\+\_\+load\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&paired\+\_\+load\+\_\+data)
 \begin{DoxyCompactList}\small\item\em Add to the set {\ttfamily paired\+\_\+load\+\_\+data} pairs containing. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -99,7 +99,7 @@ Definition at line \mbox{\hyperlink{refineable__mixed__order__petrov__galerkin__
 \index{build\_fp\_press\_adv\_diff\_robin\_bc\_element@{build\_fp\_press\_adv\_diff\_robin\_bc\_element}!oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$@{oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{build\_fp\_press\_adv\_diff\_robin\_bc\_element()}{build\_fp\_press\_adv\_diff\_robin\_bc\_element()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement}{oomph\+::\+Refineable\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element}}$<$ DIM $>$\+::build\+\_\+fp\+\_\+press\+\_\+adv\+\_\+diff\+\_\+robin\+\_\+bc\+\_\+element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement}{oomph\+::\+Refineable\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element}}$<$ DIM $>$\+::build\+\_\+fp\+\_\+press\+\_\+adv\+\_\+diff\+\_\+robin\+\_\+bc\+\_\+element (\begin{DoxyParamCaption}\item[{const unsigned \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -107,7 +107,7 @@ Build Face\+Elements that apply the Robin boundary condition to the pressure adv
 
 
 
-Reimplemented from \mbox{\hyperlink{classQTaylorHoodMixedOrderSpaceTimeElement_a23996787fa9b9bc6f274df88dfc6c337}{QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ DIM $>$}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1QTaylorHoodMixedOrderSpaceTimeElement_ab7b4de0396eaae4804789c6e79010776}{oomph\+::\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ DIM $>$}}.
 
 
 
@@ -115,7 +115,7 @@ Definition at line \mbox{\hyperlink{refineable__mixed__order__petrov__galerkin__
 
 
 
-References \mbox{\hyperlink{mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source_l00558}{Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ DIM $>$\+::\+Pressure\+\_\+advection\+\_\+diffusion\+\_\+robin\+\_\+element\+\_\+pt}}.
+References \mbox{\hyperlink{mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source_l00552}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ DIM $>$\+::\+Pressure\+\_\+advection\+\_\+diffusion\+\_\+robin\+\_\+element\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_ade8f36a5249e3529b65c7508d5908e5c}\label{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_ade8f36a5249e3529b65c7508d5908e5c}} 
 \index{oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$@{oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$}!further\_setup\_hanging\_nodes@{further\_setup\_hanging\_nodes}}
@@ -138,14 +138,14 @@ Definition at line \mbox{\hyperlink{refineable__mixed__order__petrov__galerkin__
 
 
 
-References \mbox{\hyperlink{mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source_l02318}{QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ DIM $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst()}}.
+References \mbox{\hyperlink{mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source_l02312}{oomph\+::\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ DIM $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_a8f3e4e9d752a6632a66e17d245b94b15}\label{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_a8f3e4e9d752a6632a66e17d245b94b15}} 
 \index{oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$@{oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$}!get\_interpolated\_values@{get\_interpolated\_values}}
 \index{get\_interpolated\_values@{get\_interpolated\_values}!oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$@{oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_interpolated\_values()}{get\_interpolated\_values()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement}{oomph\+::\+Refineable\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element}}$<$ DIM $>$\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement}{oomph\+::\+Refineable\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element}}$<$ DIM $>$\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -168,7 +168,7 @@ References \mbox{\hyperlink{refineable__mixed__order__petrov__galerkin__space__t
 \index{get\_interpolated\_values@{get\_interpolated\_values}!oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$@{oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_interpolated\_values()}{get\_interpolated\_values()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement}{oomph\+::\+Refineable\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element}}$<$ DIM $>$\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement}{oomph\+::\+Refineable\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element}}$<$ DIM $>$\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -184,7 +184,7 @@ Definition at line \mbox{\hyperlink{refineable__mixed__order__petrov__galerkin__
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source_l02070}{Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ DIM $>$\+::interpolated\+\_\+p\+\_\+nst()}}, and \mbox{\hyperlink{mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source_l01925}{Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ DIM $>$\+::interpolated\+\_\+u\+\_\+nst()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source_l02064}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ DIM $>$\+::interpolated\+\_\+p\+\_\+nst()}}, and \mbox{\hyperlink{mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source_l01919}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ DIM $>$\+::interpolated\+\_\+u\+\_\+nst()}}.
 
 
 
@@ -195,7 +195,7 @@ Referenced by \mbox{\hyperlink{refineable__mixed__order__petrov__galerkin__space
 \index{get\_interpolating\_node\_at\_local\_coordinate@{get\_interpolating\_node\_at\_local\_coordinate}!oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$@{oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_interpolating\_node\_at\_local\_coordinate()}{get\_interpolating\_node\_at\_local\_coordinate()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-Node $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement}{oomph\+::\+Refineable\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element}}$<$ DIM $>$\+::get\+\_\+interpolating\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{value\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement}{oomph\+::\+Refineable\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element}}$<$ DIM $>$\+::get\+\_\+interpolating\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const int \&}]{value\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -211,14 +211,14 @@ Definition at line \mbox{\hyperlink{refineable__mixed__order__petrov__galerkin__
 
 
 
-References \mbox{\hyperlink{classoomph_1_1FiniteElement_adf4424f1040fb5c4b6abfbd1c2bf65fc}{oomph\+::\+Finite\+Element\+::get\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02223}{oomph\+::\+Finite\+Element\+::nnode\+\_\+1d()}}, \mbox{\hyperlink{elements_8h_source_l01374}{oomph\+::\+Finite\+Element\+::\+Node\+\_\+location\+\_\+tolerance}}, \mbox{\hyperlink{refineable__mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source_l00885}{oomph\+::\+Refineable\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ DIM $>$\+::pressure\+\_\+node\+\_\+pt()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References \mbox{\hyperlink{elements_8cc_source_l03882}{oomph\+::\+Finite\+Element\+::get\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02218}{oomph\+::\+Finite\+Element\+::nnode\+\_\+1d()}}, \mbox{\hyperlink{elements_8h_source_l01374}{oomph\+::\+Finite\+Element\+::\+Node\+\_\+location\+\_\+tolerance}}, \mbox{\hyperlink{refineable__mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source_l00885}{oomph\+::\+Refineable\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ DIM $>$\+::pressure\+\_\+node\+\_\+pt()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_ad217200aa1a08d9e56f647b94b5a6990}\label{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_ad217200aa1a08d9e56f647b94b5a6990}} 
 \index{oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$@{oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$}!identify\_load\_data@{identify\_load\_data}}
 \index{identify\_load\_data@{identify\_load\_data}!oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$@{oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{identify\_load\_data()}{identify\_load\_data()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement}{oomph\+::\+Refineable\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element}}$<$ DIM $>$\+::identify\+\_\+load\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&}]{paired\+\_\+load\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement}{oomph\+::\+Refineable\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element}}$<$ DIM $>$\+::identify\+\_\+load\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&}]{paired\+\_\+load\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -230,18 +230,22 @@ Add to the set {\ttfamily paired\+\_\+load\+\_\+data} pairs containing.
 \item the index of the value in that \mbox{\hyperlink{classoomph_1_1Data}{Data}} object
 \end{DoxyItemize}for all values (pressures, velocities) that affect the load computed in the {\ttfamily get\+\_\+load(...)} function. (Overloads non-\/refineable version and takes hanging nodes into account) 
 
+Reimplemented from \mbox{\hyperlink{classoomph_1_1QTaylorHoodMixedOrderSpaceTimeElement_aa971f0cd42c6430ba31b68234ae05dcc}{oomph\+::\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ DIM $>$}}.
+
+
+
 Definition at line \mbox{\hyperlink{refineable__mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source_l01091}{1091}} of file \mbox{\hyperlink{refineable__mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source}{refineable\+\_\+mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source_l02352}{QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ DIM $>$\+::npres\+\_\+nst()}}, \mbox{\hyperlink{mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source_l02318}{QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ DIM $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst()}}, \mbox{\hyperlink{refineable__mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source_l00885}{oomph\+::\+Refineable\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ DIM $>$\+::pressure\+\_\+node\+\_\+pt()}}, and \mbox{\hyperlink{mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source_l01121}{Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+nst()}}.
+References \mbox{\hyperlink{nodes_8h_source_l01228}{oomph\+::\+Node\+::hanging\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l01285}{oomph\+::\+Node\+::is\+\_\+hanging()}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source_l02346}{oomph\+::\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ DIM $>$\+::npres\+\_\+nst()}}, \mbox{\hyperlink{mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source_l02312}{oomph\+::\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ DIM $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst()}}, \mbox{\hyperlink{refineable__mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source_l00885}{oomph\+::\+Refineable\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ DIM $>$\+::pressure\+\_\+node\+\_\+pt()}}, and \mbox{\hyperlink{mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source_l01115}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+nst()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_ad95249499e0335c94cdf2196fcd2d39a}\label{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_ad95249499e0335c94cdf2196fcd2d39a}} 
 \index{oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$@{oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$}!interpolating\_basis@{interpolating\_basis}}
 \index{interpolating\_basis@{interpolating\_basis}!oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$@{oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{interpolating\_basis()}{interpolating\_basis()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement}{oomph\+::\+Refineable\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element}}$<$ DIM $>$\+::interpolating\+\_\+basis (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{value\+\_\+id }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement}{oomph\+::\+Refineable\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element}}$<$ DIM $>$\+::interpolating\+\_\+basis (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{const int \&}]{value\+\_\+id }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -257,14 +261,14 @@ Definition at line \mbox{\hyperlink{refineable__mixed__order__petrov__galerkin__
 
 
 
-References \mbox{\hyperlink{classQTaylorHoodMixedOrderSpaceTimeElement_a72a059fba8a21b5ffeba6b14c2e97fb9}{QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ DIM $>$\+::pshape\+\_\+nst()}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
+References \mbox{\hyperlink{classoomph_1_1QTaylorHoodMixedOrderSpaceTimeElement_a8a97fab7bb89983ab5d4903a47f1258c}{oomph\+::\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ DIM $>$\+::pshape\+\_\+nst()}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_a461abe131c63d69fd20e2edd2a5c362e}\label{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_a461abe131c63d69fd20e2edd2a5c362e}} 
 \index{oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$@{oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$}!interpolating\_node\_pt@{interpolating\_node\_pt}}
 \index{interpolating\_node\_pt@{interpolating\_node\_pt}!oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$@{oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{interpolating\_node\_pt()}{interpolating\_node\_pt()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-Node $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement}{oomph\+::\+Refineable\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element}}$<$ DIM $>$\+::interpolating\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{value\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement}{oomph\+::\+Refineable\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element}}$<$ DIM $>$\+::interpolating\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const int \&}]{value\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -280,14 +284,14 @@ Definition at line \mbox{\hyperlink{refineable__mixed__order__petrov__galerkin__
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{refineable__mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source_l00885}{oomph\+::\+Refineable\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ DIM $>$\+::pressure\+\_\+node\+\_\+pt()}}.
+References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{refineable__mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source_l00885}{oomph\+::\+Refineable\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ DIM $>$\+::pressure\+\_\+node\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_a8623e6e423daa901ecd4619b416a7221}\label{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_a8623e6e423daa901ecd4619b416a7221}} 
 \index{oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$@{oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$}!local\_one\_d\_fraction\_of\_interpolating\_node@{local\_one\_d\_fraction\_of\_interpolating\_node}}
 \index{local\_one\_d\_fraction\_of\_interpolating\_node@{local\_one\_d\_fraction\_of\_interpolating\_node}!oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$@{oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{local\_one\_d\_fraction\_of\_interpolating\_node()}{local\_one\_d\_fraction\_of\_interpolating\_node()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement}{oomph\+::\+Refineable\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element}}$<$ DIM $>$\+::local\+\_\+one\+\_\+d\+\_\+fraction\+\_\+of\+\_\+interpolating\+\_\+node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+1d,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{value\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+double \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement}{oomph\+::\+Refineable\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element}}$<$ DIM $>$\+::local\+\_\+one\+\_\+d\+\_\+fraction\+\_\+of\+\_\+interpolating\+\_\+node (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+1d,  }\item[{const unsigned \&}]{i,  }\item[{const int \&}]{value\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -303,7 +307,7 @@ Definition at line \mbox{\hyperlink{refineable__mixed__order__petrov__galerkin__
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l01863}{oomph\+::\+Finite\+Element\+::local\+\_\+one\+\_\+d\+\_\+fraction\+\_\+of\+\_\+node()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l01858}{oomph\+::\+Finite\+Element\+::local\+\_\+one\+\_\+d\+\_\+fraction\+\_\+of\+\_\+node()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_a1b9eee1d481b795d78491818c3d9a202}\label{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_a1b9eee1d481b795d78491818c3d9a202}} 
 \index{oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$@{oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$}!ncont\_interpolated\_values@{ncont\_interpolated\_values}}
@@ -329,7 +333,7 @@ Definition at line \mbox{\hyperlink{refineable__mixed__order__petrov__galerkin__
 \index{ninterpolating\_node@{ninterpolating\_node}!oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$@{oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{ninterpolating\_node()}{ninterpolating\_node()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement}{oomph\+::\+Refineable\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element}}$<$ DIM $>$\+::ninterpolating\+\_\+node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{value\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement}{oomph\+::\+Refineable\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element}}$<$ DIM $>$\+::ninterpolating\+\_\+node (\begin{DoxyParamCaption}\item[{const int \&}]{value\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -345,14 +349,14 @@ Definition at line \mbox{\hyperlink{refineable__mixed__order__petrov__galerkin__
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}.
+References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_a3c904e96d3b65fb9e5495f3d741f0254}\label{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_a3c904e96d3b65fb9e5495f3d741f0254}} 
 \index{oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$@{oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$}!ninterpolating\_node\_1d@{ninterpolating\_node\_1d}}
 \index{ninterpolating\_node\_1d@{ninterpolating\_node\_1d}!oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$@{oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{ninterpolating\_node\_1d()}{ninterpolating\_node\_1d()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement}{oomph\+::\+Refineable\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element}}$<$ DIM $>$\+::ninterpolating\+\_\+node\+\_\+1d (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{value\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement}{oomph\+::\+Refineable\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element}}$<$ DIM $>$\+::ninterpolating\+\_\+node\+\_\+1d (\begin{DoxyParamCaption}\item[{const int \&}]{value\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -368,7 +372,7 @@ Definition at line \mbox{\hyperlink{refineable__mixed__order__petrov__galerkin__
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02223}{oomph\+::\+Finite\+Element\+::nnode\+\_\+1d()}}.
+References \mbox{\hyperlink{elements_8h_source_l02218}{oomph\+::\+Finite\+Element\+::nnode\+\_\+1d()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_a14f6e5ebdea8522fc621e9f6f2d8c487}\label{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_a14f6e5ebdea8522fc621e9f6f2d8c487}} 
 \index{oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$@{oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$}!nrecovery\_order@{nrecovery\_order}}
@@ -408,6 +412,10 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a19495a0e7
 
 Definition at line \mbox{\hyperlink{refineable__mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source_l00806}{806}} of file \mbox{\hyperlink{refineable__mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source}{refineable\+\_\+mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
+
+
+References \mbox{\hyperlink{elements_8h_source_l02491}{oomph\+::\+Finite\+Element\+::nvertex\+\_\+node()}}.
+
 \mbox{\Hypertarget{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_a7293406c3fffa371145f6589bdc73747}\label{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_a7293406c3fffa371145f6589bdc73747}} 
 \index{oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$@{oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$}!pin\_elemental\_redundant\_nodal\_pressure\_dofs@{pin\_elemental\_redundant\_nodal\_pressure\_dofs}}
 \index{pin\_elemental\_redundant\_nodal\_pressure\_dofs@{pin\_elemental\_redundant\_nodal\_pressure\_dofs}!oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$@{oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$}}
@@ -429,14 +437,14 @@ Definition at line \mbox{\hyperlink{refineable__mixed__order__petrov__galerkin__
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source_l02352}{QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ DIM $>$\+::npres\+\_\+nst()}}, \mbox{\hyperlink{mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source_l02318}{QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ DIM $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst()}}, and \mbox{\hyperlink{refineable__mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source_l00885}{oomph\+::\+Refineable\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ DIM $>$\+::pressure\+\_\+node\+\_\+pt()}}.
+References \mbox{\hyperlink{nodes_8h_source_l01285}{oomph\+::\+Node\+::is\+\_\+hanging()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source_l02346}{oomph\+::\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ DIM $>$\+::npres\+\_\+nst()}}, \mbox{\hyperlink{mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source_l02312}{oomph\+::\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ DIM $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst()}}, \mbox{\hyperlink{nodes_8h_source_l00385}{oomph\+::\+Data\+::pin()}}, \mbox{\hyperlink{refineable__mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source_l00885}{oomph\+::\+Refineable\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ DIM $>$\+::pressure\+\_\+node\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8h_source_l00391}{oomph\+::\+Data\+::unpin()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_acb03cfb03256146f390fd2a84fb0a48d}\label{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_acb03cfb03256146f390fd2a84fb0a48d}} 
 \index{oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$@{oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$}!pressure\_node\_pt@{pressure\_node\_pt}}
 \index{pressure\_node\_pt@{pressure\_node\_pt}!oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$@{oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{pressure\_node\_pt()}{pressure\_node\_pt()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-Node $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement}{oomph\+::\+Refineable\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element}}$<$ DIM $>$\+::pressure\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement}{oomph\+::\+Refineable\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element}}$<$ DIM $>$\+::pressure\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -452,7 +460,7 @@ Definition at line \mbox{\hyperlink{refineable__mixed__order__petrov__galerkin__
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source_l02167}{QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ DIM $>$\+::\+Pconv}}.
+References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source_l02161}{oomph\+::\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ DIM $>$\+::\+Pconv}}.
 
 
 
@@ -482,7 +490,7 @@ Definition at line \mbox{\hyperlink{refineable__mixed__order__petrov__galerkin__
 \index{required\_nvalue@{required\_nvalue}!oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$@{oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{required\_nvalue()}{required\_nvalue()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement}{oomph\+::\+Refineable\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element}}$<$ DIM $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement}{oomph\+::\+Refineable\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element}}$<$ DIM $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -490,7 +498,7 @@ Number of values required at local node n. In order to simplify matters, we allo
 
 
 
-Reimplemented from \mbox{\hyperlink{classQTaylorHoodMixedOrderSpaceTimeElement_a0347322e1cc7619ee290fced78ed2faa}{QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ DIM $>$}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1QTaylorHoodMixedOrderSpaceTimeElement_ab24b3081facced8721f95e9fecc168e2}{oomph\+::\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ DIM $>$}}.
 
 
 
@@ -517,14 +525,14 @@ Definition at line \mbox{\hyperlink{refineable__mixed__order__petrov__galerkin__
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source_l02318}{QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ DIM $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst()}}.
+References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source_l02312}{oomph\+::\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ DIM $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst()}}, and \mbox{\hyperlink{nodes_8h_source_l00391}{oomph\+::\+Data\+::unpin()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_a4d3743b2933ca080d4dda62cdd8ecf6d}\label{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_a4d3743b2933ca080d4dda62cdd8ecf6d}} 
 \index{oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$@{oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$}!vertex\_node\_pt@{vertex\_node\_pt}}
 \index{vertex\_node\_pt@{vertex\_node\_pt}!oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$@{oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{vertex\_node\_pt()}{vertex\_node\_pt()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-Node $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement}{oomph\+::\+Refineable\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element}}$<$ DIM $>$\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement}{oomph\+::\+Refineable\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element}}$<$ DIM $>$\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -537,6 +545,10 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a6d852edae
 
 
 Definition at line \mbox{\hyperlink{refineable__mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source_l00814}{814}} of file \mbox{\hyperlink{refineable__mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source}{refineable\+\_\+mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{elements_8h_source_l02500}{oomph\+::\+Finite\+Element\+::vertex\+\_\+node\+\_\+pt()}}.
 
 
 

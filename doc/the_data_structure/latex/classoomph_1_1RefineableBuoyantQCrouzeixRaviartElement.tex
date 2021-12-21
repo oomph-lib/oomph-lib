@@ -20,9 +20,9 @@ Inheritance diagram for oomph\+::Refineable\+Buoyant\+QCrouzeix\+Raviart\+Elemen
 \item 
 \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a180c3373158434bc08fc69cc0f4392f9}{Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Constructor\+: call the underlying constructors and initialise the pointer to the Rayleigh number to address the default value of 0.\+0. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a664008af1b7a6444cee34bd4f506c318}{required\+\_\+nvalue}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a664008af1b7a6444cee34bd4f506c318}{required\+\_\+nvalue}} (const unsigned \&n) const
 \begin{DoxyCompactList}\small\item\em The required number of values stored at the nodes is the sum of the required values of the two single-\/physics elements. This step is generic for any composed element of this type. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \& \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a5873f594fd21c17ba01594d868f39c11}{ra}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+const double \& \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a5873f594fd21c17ba01594d868f39c11}{ra}} () const
 \begin{DoxyCompactList}\small\item\em Access function for the Rayleigh number (const version) \end{DoxyCompactList}\item 
 double $\ast$\& \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_ab17c9cfc829f8a8a0dd81e4c47a94376}{ra\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for the pointer to the Rayleigh number. \end{DoxyCompactList}\item 
@@ -30,35 +30,35 @@ void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a7f
 \begin{DoxyCompactList}\small\item\em Final override for disable ALE. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a7006ef1edd1ac4a178e38945fae581ee}{enable\+\_\+\+ALE}} ()
 \begin{DoxyCompactList}\small\item\em Final override for enable ALE. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a2167093a1902a2ed4c79d45eff457ca8}{nscalar\+\_\+paraview}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a2167093a1902a2ed4c79d45eff457ca8}{nscalar\+\_\+paraview}} () const
 \begin{DoxyCompactList}\small\item\em Number of scalars/fields output by this element. Broken virtual. Needs to be implemented for each new specific element type. Temporary dummy. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a9a8ee12b27daa327e97fbacc89c341c6}{scalar\+\_\+value\+\_\+paraview}} (std\+::ofstream \&file\+\_\+out, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&nplot) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a9a8ee12b27daa327e97fbacc89c341c6}{scalar\+\_\+value\+\_\+paraview}} (std\+::ofstream \&file\+\_\+out, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned \&nplot) const
 \begin{DoxyCompactList}\small\item\em Write values of the i-\/th scalar field at the plot points. Broken virtual. Needs to be implemented for each new specific element type. Temporary dummy. \end{DoxyCompactList}\item 
-std\+::string \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_ae9b9687a5a15a0089431ad1b143356e5}{scalar\+\_\+name\+\_\+paraview}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+std\+::string \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_ae9b9687a5a15a0089431ad1b143356e5}{scalar\+\_\+name\+\_\+paraview}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Name of the i-\/th scalar field. Default implementation returns V1 for the first one, V2 for the second etc. Can (should!) be overloaded with more meaningful names. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_abbe05b977edbfec7752ed417b90e09fa}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Overload the standard output function with the broken default. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a36bc6dc9052947f0932a605dd4d0e8f0}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&nplot)
+void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a36bc6dc9052947f0932a605dd4d0e8f0}{output}} (std\+::ostream \&outfile, const unsigned \&nplot)
 \begin{DoxyCompactList}\small\item\em Output function\+: x,y,u or x,y,z,u at Nplot$^\wedge$\+DIM plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a90579086f991da7fbaf7d92b29abf994}{output}} (FILE $\ast$file\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em C-\/style output function\+: Broken default. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a650e1b0428cd160c72dbc3deda287b26}{output}} (FILE $\ast$file\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a650e1b0428cd160c72dbc3deda287b26}{output}} (FILE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em C-\/style output function\+: Broken default. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a9f9feaf2d6003f2328741de2987fd0d1}{output\+\_\+fct}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&Nplot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a9f9feaf2d6003f2328741de2987fd0d1}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&Nplot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Output function for an exact solution\+: Broken default. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_aa1eaab23a14039a18701b5666629b5bc}{output\+\_\+fct}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&Nplot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_aa1eaab23a14039a18701b5666629b5bc}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&Nplot, const double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Output function for a time-\/dependent exact solution. Broken default. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_ac6a973ee5e4d7425db2e7f9a259bab46}{u\+\_\+index\+\_\+adv\+\_\+diff}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_ac6a973ee5e4d7425db2e7f9a259bab46}{u\+\_\+index\+\_\+adv\+\_\+diff}} () const
 \begin{DoxyCompactList}\small\item\em Overload the index at which the temperature variable is stored. We choose to store is after the fluid velocities. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a868eb9a7f06469da529dbbc5b1efe34e}{nvertex\+\_\+node}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a868eb9a7f06469da529dbbc5b1efe34e}{nvertex\+\_\+node}} () const
 \begin{DoxyCompactList}\small\item\em Number of vertex nodes in the element is obtained from the geometric element. \end{DoxyCompactList}\item 
-Node $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_ae65592457a3a48365e0200325c5bbbbc}{vertex\+\_\+node\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&j) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_ae65592457a3a48365e0200325c5bbbbc}{vertex\+\_\+node\+\_\+pt}} (const unsigned \&j) const
 \begin{DoxyCompactList}\small\item\em Pointer to the j-\/th vertex node in the element, Call the geometric element\textquotesingle{}s function. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a98f094a1c3080905d0e90f5ac6ebd1b6}{ncont\+\_\+interpolated\+\_\+values}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a98f094a1c3080905d0e90f5ac6ebd1b6}{ncont\+\_\+interpolated\+\_\+values}} () const
 \begin{DoxyCompactList}\small\item\em The total number of continously interpolated values is DIM+1 (DIM fluid velocities and one temperature). \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_aa89e116d612b3530edd2b0666d25cf01}{get\+\_\+interpolated\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&values)
+void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_aa89e116d612b3530edd2b0666d25cf01}{get\+\_\+interpolated\+\_\+values}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&values)
 \begin{DoxyCompactList}\small\item\em Get the continuously interpolated values at the local coordinate s. We choose to put the fluid velocities first, followed by the temperature. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_af178c04f0e6ee09a5d05574fcd68ac41}{get\+\_\+interpolated\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&values)
+void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_af178c04f0e6ee09a5d05574fcd68ac41}{get\+\_\+interpolated\+\_\+values}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&values)
 \begin{DoxyCompactList}\small\item\em Get all continuously interpolated values at the local coordinate s at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous). We choose to put the fluid velocities first, followed by the temperature. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_ab0a823598e014557e7d2ef2d533972d1}{further\+\_\+setup\+\_\+hanging\+\_\+nodes}} ()
 \begin{DoxyCompactList}\small\item\em The additional hanging node information must be set up for both single-\/physics elements. \end{DoxyCompactList}\item 
@@ -70,27 +70,27 @@ unsigned \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement
 \begin{DoxyCompactList}\small\item\em The recovery order is that of the Navier\+Stokes elements. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a630b9aa6c5cf924d32996e89ed230175}{num\+\_\+\+Z2\+\_\+flux\+\_\+terms}} ()
 \begin{DoxyCompactList}\small\item\em The number of Z2 flux terms is the same as that in the fluid element plus that in the advection-\/diffusion element. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a1b78fb6b311b89cff1b57fcaacd924d7}{get\+\_\+\+Z2\+\_\+flux}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux)
+void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a1b78fb6b311b89cff1b57fcaacd924d7}{get\+\_\+\+Z2\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux)
 \begin{DoxyCompactList}\small\item\em Get the Z2 flux by concatenating the fluxes from the fluid and the advection diffusion elements. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a395397240c5745ad7ed66ce6f66b5d99}{ncompound\+\_\+fluxes}} ()
 \begin{DoxyCompactList}\small\item\em The number of compound fluxes is two (one for the fluid and one for the temperature) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_ac8b5c8d8df0dc6d7af67570c609f591b}{get\+\_\+\+Z2\+\_\+compound\+\_\+flux\+\_\+indices}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&flux\+\_\+index)
 \begin{DoxyCompactList}\small\item\em Fill in which flux components are associated with the fluid measure and which are associated with the temperature measure. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_ad239e9a0ebe88136d68e1521fc51e0bb}{compute\+\_\+error}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, double \&error, double \&norm)
+void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_ad239e9a0ebe88136d68e1521fc51e0bb}{compute\+\_\+error}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt, const double \&time, double \&error, double \&norm)
 \begin{DoxyCompactList}\small\item\em Validate against exact solution at given time Solution is provided via function pointer. Plot at a given number of plot points and compute L2 error and L2 norm of velocity solution over element Overload to broken default. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a078039343f5f9bb467a1183f725d1873}{compute\+\_\+error}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt, double \&error, double \&norm)
 \begin{DoxyCompactList}\small\item\em Validate against exact solution. Solution is provided via function pointer. Plot at a given number of plot points and compute L2 error and L2 norm of velocity solution over element Overload to broken default. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a093f484b86df6e7cb59d4cc9e605fb51}{get\+\_\+wind\+\_\+adv\+\_\+diff}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&wind) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a093f484b86df6e7cb59d4cc9e605fb51}{get\+\_\+wind\+\_\+adv\+\_\+diff}} (const unsigned \&ipt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&wind) const
 \begin{DoxyCompactList}\small\item\em Overload the wind function in the advection-\/diffusion equations. This provides the coupling from the Navier--Stokes equations to the advection-\/diffusion equations because the wind is the fluid velocity. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a69fb9113989d692dd55eb1983cdbc93b}{get\+\_\+body\+\_\+force\+\_\+nst}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)
+void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a69fb9113989d692dd55eb1983cdbc93b}{get\+\_\+body\+\_\+force\+\_\+nst}} (const double \&time, const unsigned \&ipt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)
 \begin{DoxyCompactList}\small\item\em Overload the body force in the navier-\/stokes equations This provides the coupling from the advection-\/diffusion equations to the Navier--Stokes equations, the body force is the temperature multiplied by the Rayleigh number acting in the direction opposite to gravity. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a102b3aeb79d9af430b9ce0a7c8d5bd33}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em Fill in the constituent elements\textquotesingle{} contribution to the residual vector. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a0d05a727999c7f102f3fe2bacce38f6b}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})
+void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a0d05a727999c7f102f3fe2bacce38f6b}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em Compute the element\textquotesingle{}s residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} and the jacobian matrix using full finite differences, the default implementation. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a06f1e2dbdf7a8ebaa964d421aee453ee}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix)
+void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a06f1e2dbdf7a8ebaa964d421aee453ee}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix)
 \begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residuals vector, jacobian matrix and mass matrix. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a6fe93946149c696f273be12540099d1a}{fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+jacobian\+\_\+blocks\+\_\+analytic}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})
+void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a6fe93946149c696f273be12540099d1a}{fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+jacobian\+\_\+blocks\+\_\+analytic}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em Compute the contribution of the off-\/diagonal blocks analytically. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
@@ -117,7 +117,7 @@ static double \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartEl
 class oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$}
 ////////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////// 
 
-A \mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} class that solves the Boussinesq approximation of the Navier--Stokes and energy equations by coupling two pre-\/existing classes. The \mbox{\hyperlink{classoomph_1_1RefineableQAdvectionDiffusionElement}{Refineable\+QAdvection\+Diffusion\+Element}} with bi-\/quadratic interpolation for the scalar variable (temperature) and \mbox{\hyperlink{classoomph_1_1RefineableQCrouzeixRaviartElement}{Refineable\+QCrouzeix\+Raviart\+Element}} which solves the Navier--Stokes equations using bi-\/quadratic interpolation for the velocities and a discontinuous bi-\/linear interpolation for the pressure. Note that we are free to choose the order in which we store the variables at the nodes. In this case we choose to store the variables in the order fluid velocities followed by temperature. We must, therefore, overload the function Advection\+Diffusion\+Equations$<$\+DIM$>$\+::u\+\_\+index\+\_\+adv\+\_\+diff() to indicate that the temperature is stored at the DIM-\/th position not the 0-\/th. We do not need to overload the corresponding function in the Navier\+Stokes\+Equations$<$\+DIM$>$ class because the velocities are stored first. Finally, we choose to use the flux-\/recovery calculation from the fluid velocities to provide the error used in the mesh adaptation. 
+A \mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} class that solves the Boussinesq approximation of the Navier--Stokes and energy equations by coupling two pre-\/existing classes. The \mbox{\hyperlink{classoomph_1_1RefineableQAdvectionDiffusionElement}{Refineable\+QAdvection\+Diffusion\+Element}} with bi-\/quadratic interpolation for the scalar variable (temperature) and \mbox{\hyperlink{classoomph_1_1RefineableQCrouzeixRaviartElement}{Refineable\+QCrouzeix\+Raviart\+Element}} which solves the Navier--Stokes equations using bi-\/quadratic interpolation for the velocities and a discontinuous bi-\/linear interpolation for the pressure. Note that we are free to choose the order in which we store the variables at the nodes. In this case we choose to store the variables in the order fluid velocities followed by temperature. We must, therefore, overload the function \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_aadffa26c42be5d4a1156a7467de48fb8}{Advection\+Diffusion\+Equations$<$\+DIM$>$\+::u\+\_\+index\+\_\+adv\+\_\+diff()}} to indicate that the temperature is stored at the DIM-\/th position not the 0-\/th. We do not need to overload the corresponding function in the Navier\+Stokes\+Equations$<$\+DIM$>$ class because the velocities are stored first. Finally, we choose to use the flux-\/recovery calculation from the fluid velocities to provide the error used in the mesh adaptation. 
 
 Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00800}{800}} of file \mbox{\hyperlink{boussinesq__elements_8h_source}{boussinesq\+\_\+elements.\+h}}.
 
@@ -159,7 +159,7 @@ Validate against exact solution. Solution is provided via function pointer. Plot
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a73c79a1f1e5b1d334757812a6bbd58ff}{oomph\+::\+Finite\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_acb1fcfb29911210ad7c0bc252f0ed665}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$}}.
 
 
 
@@ -167,14 +167,14 @@ Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l01205}{1205}
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03203}{oomph\+::\+Finite\+Element\+::compute\+\_\+error()}}.
+References \mbox{\hyperlink{elements_8h_source_l03198}{oomph\+::\+Finite\+Element\+::compute\+\_\+error()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_ad239e9a0ebe88136d68e1521fc51e0bb}\label{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_ad239e9a0ebe88136d68e1521fc51e0bb}} 
 \index{oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$}!compute\_error@{compute\_error}}
 \index{compute\_error@{compute\_error}!oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{compute\_error()}{compute\_error()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element}}$<$ DIM $>$\+::compute\+\_\+error (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{time,  }\item[{double \&}]{error,  }\item[{double \&}]{norm }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element}}$<$ DIM $>$\+::compute\+\_\+error (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt,  }\item[{const double \&}]{time,  }\item[{double \&}]{error,  }\item[{double \&}]{norm }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -182,7 +182,7 @@ Validate against exact solution at given time Solution is provided via function 
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a139789dbca25ab5e6c4a04b93a588877}{oomph\+::\+Finite\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a87c8c4e8ff5ea6e6dcb243ec83bb4fd2}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$}}.
 
 
 
@@ -190,7 +190,7 @@ Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l01191}{1191}
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03203}{oomph\+::\+Finite\+Element\+::compute\+\_\+error()}}.
+References \mbox{\hyperlink{elements_8h_source_l03198}{oomph\+::\+Finite\+Element\+::compute\+\_\+error()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_ae308bf4efa0180a3bd8915ecfa857187}\label{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_ae308bf4efa0180a3bd8915ecfa857187}} 
 \index{oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$}!Default\_Physical\_Constant\_Value@{Default\_Physical\_Constant\_Value}}
@@ -229,7 +229,7 @@ Final override for disable ALE.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a625ea6d3f9baccfbdd1323315fb3ec71}{oomph\+::\+Finite\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_aa635388e5e1139e0a1eae97ca89279d0}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$}}.
 
 
 
@@ -237,7 +237,7 @@ Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00845}{845}}
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02413}{oomph\+::\+Finite\+Element\+::disable\+\_\+\+ALE()}}, and \mbox{\hyperlink{navier__stokes__elements_8h_source_l00915}{Navier\+Stokes\+Equations$<$ DIM $>$\+::disable\+\_\+\+ALE()}}.
+References \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00125}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::disable\+\_\+\+ALE()}}, and \mbox{\hyperlink{navier__stokes__elements_8h_source_l00909}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::disable\+\_\+\+ALE()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a7006ef1edd1ac4a178e38945fae581ee}\label{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a7006ef1edd1ac4a178e38945fae581ee}} 
 \index{oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$}!enable\_ALE@{enable\_ALE}}
@@ -252,7 +252,7 @@ Final override for enable ALE.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a92ef8967fa4e2d6c33c51ea3efa3aa82}{oomph\+::\+Finite\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a949dd5a3eb9803c993c1f4506cfd5d82}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$}}.
 
 
 
@@ -260,7 +260,7 @@ Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00853}{853}}
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02435}{oomph\+::\+Finite\+Element\+::enable\+\_\+\+ALE()}}, and \mbox{\hyperlink{navier__stokes__elements_8h_source_l00924}{Navier\+Stokes\+Equations$<$ DIM $>$\+::enable\+\_\+\+ALE()}}.
+References \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00135}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::enable\+\_\+\+ALE()}}, and \mbox{\hyperlink{navier__stokes__elements_8h_source_l00918}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::enable\+\_\+\+ALE()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a0d05a727999c7f102f3fe2bacce38f6b}\label{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a0d05a727999c7f102f3fe2bacce38f6b}} 
 \index{oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
@@ -275,7 +275,7 @@ Compute the element\textquotesingle{}s residual \mbox{\hyperlink{classoomph_1_1V
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0d53bf283dc85bdfea}{oomph\+::\+Finite\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a6ec1e0f92fa79998be9340ecfda4bcd5}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$}}.
 
 
 
@@ -283,7 +283,7 @@ Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l01266}{1266}
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01740}{oomph\+::\+Finite\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{boussinesq__elements_8h_source_l01266}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l01279}{Navier\+Stokes\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{boussinesq__elements_8h_source_l01301}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+jacobian\+\_\+blocks\+\_\+analytic()}}, and \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}.
+References \mbox{\hyperlink{elements_8h_source_l01735}{oomph\+::\+Finite\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{boussinesq__elements_8h_source_l01266}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l01273}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, and \mbox{\hyperlink{boussinesq__elements_8h_source_l01301}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+jacobian\+\_\+blocks\+\_\+analytic()}}.
 
 
 
@@ -302,7 +302,7 @@ Add the element\textquotesingle{}s contribution to its residuals vector, jacobia
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a2b6294a730647cf865da94f2531466f8}{oomph\+::\+Generalised\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_aed50fe00556434c01bc855766edeb564}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$}}.
 
 
 
@@ -310,7 +310,7 @@ Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l01289}{1289}
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l01322}{oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix()}}, and \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}.
+References \mbox{\hyperlink{elements_8cc_source_l01322}{oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a102b3aeb79d9af430b9ce0a7c8d5bd33}\label{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a102b3aeb79d9af430b9ce0a7c8d5bd33}} 
 \index{oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
@@ -325,7 +325,7 @@ Fill in the constituent elements\textquotesingle{} contribution to the residual 
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515e8504a48179c0e72c550d7}{oomph\+::\+Generalised\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_ae56ee6b085c75be438a598244c527fb5}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$}}.
 
 
 
@@ -333,7 +333,7 @@ Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l01252}{1252}
 
 
 
-References \mbox{\hyperlink{boussinesq__elements_8h_source_l01252}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}, and \mbox{\hyperlink{navier__stokes__elements_8h_source_l01266}{Navier\+Stokes\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}.
+References \mbox{\hyperlink{boussinesq__elements_8h_source_l01252}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}, and \mbox{\hyperlink{navier__stokes__elements_8h_source_l01260}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}.
 
 
 
@@ -356,7 +356,7 @@ Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l01301}{1301}
 
 
 
-References \mbox{\hyperlink{navier__stokes__elements_8h_source_l01987}{QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+nst()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l00771}{Navier\+Stokes\+Equations$<$ DIM $>$\+::g()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01968}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}, \mbox{\hyperlink{refineable__elements_8h_source_l00278}{oomph\+::\+Refineable\+Element\+::local\+\_\+hang\+\_\+eqn()}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00808}{oomph\+::\+Hang\+Info\+::master\+\_\+weight()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{elements_8h_source_l02598}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{boussinesq__elements_8h_source_l00832}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::ra()}}, \mbox{\hyperlink{boussinesq__elements_8h_source_l00977}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::u\+\_\+index\+\_\+adv\+\_\+diff()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l00872}{Navier\+Stokes\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+nst()}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}.
+References \mbox{\hyperlink{navier__stokes__elements_8h_source_l01981}{oomph\+::\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+nst()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l00765}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::g()}}, \mbox{\hyperlink{nodes_8h_source_l01228}{oomph\+::\+Node\+::hanging\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l01285}{oomph\+::\+Node\+::is\+\_\+hanging()}}, \mbox{\hyperlink{refineable__elements_8h_source_l00278}{oomph\+::\+Refineable\+Element\+::local\+\_\+hang\+\_\+eqn()}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00808}{oomph\+::\+Hang\+Info\+::master\+\_\+weight()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00318}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::pe()}}, \mbox{\hyperlink{boussinesq__elements_8h_source_l00832}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::ra()}}, \mbox{\hyperlink{boussinesq__elements_8h_source_l00977}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::u\+\_\+index\+\_\+adv\+\_\+diff()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l00866}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+nst()}}, \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}, and \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral\+::weight()}}.
 
 
 
@@ -417,7 +417,7 @@ Referenced by \mbox{\hyperlink{boussinesq__elements_8h_source_l01071}{oomph\+::\
 \index{get\_body\_force\_nst@{get\_body\_force\_nst}!oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_body\_force\_nst()}{get\_body\_force\_nst()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element}}$<$ DIM $>$\+::get\+\_\+body\+\_\+force\+\_\+nst (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element}}$<$ DIM $>$\+::get\+\_\+body\+\_\+force\+\_\+nst (\begin{DoxyParamCaption}\item[{const double \&}]{time,  }\item[{const unsigned \&}]{ipt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -425,7 +425,7 @@ Overload the body force in the navier-\/stokes equations This provides the coupl
 
 
 
-Reimplemented from \mbox{\hyperlink{classNavierStokesEquations_a85020048856641f08d913055ea5fa4b7}{Navier\+Stokes\+Equations$<$ DIM $>$}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a8a3f44daab0e804f2d9b03ab9a962440}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$}}.
 
 
 
@@ -433,14 +433,14 @@ Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l01231}{1231}
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{boussinesq__elements_8h_source_l00832}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::ra()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00458}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::interpolated\+\_\+u\+\_\+adv\+\_\+diff()}}, and \mbox{\hyperlink{boussinesq__elements_8h_source_l00832}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::ra()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_af178c04f0e6ee09a5d05574fcd68ac41}\label{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_af178c04f0e6ee09a5d05574fcd68ac41}} 
 \index{oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$}!get\_interpolated\_values@{get\_interpolated\_values}}
 \index{get\_interpolated\_values@{get\_interpolated\_values}!oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_interpolated\_values()}{get\_interpolated\_values()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element}}$<$ DIM $>$\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element}}$<$ DIM $>$\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -463,7 +463,7 @@ References \mbox{\hyperlink{refineable__advection__diffusion__elements_8h_source
 \index{get\_interpolated\_values@{get\_interpolated\_values}!oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_interpolated\_values()}{get\_interpolated\_values()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element}}$<$ DIM $>$\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element}}$<$ DIM $>$\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -486,7 +486,7 @@ References \mbox{\hyperlink{refineable__advection__diffusion__elements_8h_source
 \index{get\_wind\_adv\_diff@{get\_wind\_adv\_diff}!oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_wind\_adv\_diff()}{get\_wind\_adv\_diff()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element}}$<$ DIM $>$\+::get\+\_\+wind\+\_\+adv\+\_\+diff (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{wind }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element}}$<$ DIM $>$\+::get\+\_\+wind\+\_\+adv\+\_\+diff (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{wind }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -494,11 +494,15 @@ Overload the wind function in the advection-\/diffusion equations. This provides
 
 
 
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a32cb2f977b32fabfc23d1134749371ed}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$}}.
+
+
+
 Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l01216}{1216}} of file \mbox{\hyperlink{boussinesq__elements_8h_source}{boussinesq\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{navier__stokes__elements_8h_source_l01511}{Navier\+Stokes\+Equations$<$ DIM $>$\+::interpolated\+\_\+u\+\_\+nst()}}.
+References \mbox{\hyperlink{navier__stokes__elements_8h_source_l01505}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::interpolated\+\_\+u\+\_\+nst()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_ac8b5c8d8df0dc6d7af67570c609f591b}\label{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_ac8b5c8d8df0dc6d7af67570c609f591b}} 
 \index{oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$}!get\_Z2\_compound\_flux\_indices@{get\_Z2\_compound\_flux\_indices}}
@@ -528,7 +532,7 @@ References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{ref
 \index{get\_Z2\_flux@{get\_Z2\_flux}!oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_Z2\_flux()}{get\_Z2\_flux()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element}}$<$ DIM $>$\+::get\+\_\+\+Z2\+\_\+flux (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element}}$<$ DIM $>$\+::get\+\_\+\+Z2\+\_\+flux (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -620,7 +624,7 @@ Number of scalars/fields output by this element. Broken virtual. Needs to be imp
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a865e2e5586552ba80babdbe26a77fe8c}{oomph\+::\+Finite\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a70205e9d39d7ff9660a53402d5636c1f}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$}}.
 
 
 
@@ -677,7 +681,7 @@ C-\/style output function\+: Broken default.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a72cddd09f8ddbee1a20a1ff404c6943e}{oomph\+::\+Finite\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement_a792f83bb2d8c22365cce60c43853396c}{oomph\+::\+QAdvection\+Diffusion\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}.
 
 
 
@@ -685,14 +689,14 @@ Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00945}{945}}
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
+References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a650e1b0428cd160c72dbc3deda287b26}\label{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a650e1b0428cd160c72dbc3deda287b26}} 
 \index{oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$}!output@{output}}
 \index{output@{output}!oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element}}$<$ DIM $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element}}$<$ DIM $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -700,7 +704,7 @@ C-\/style output function\+: Broken default.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f03320eeb9d110d48c}{oomph\+::\+Finite\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement_a891cdaba60a0cd6b3438f161fb537933}{oomph\+::\+QAdvection\+Diffusion\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}.
 
 
 
@@ -708,7 +712,7 @@ Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00951}{951}}
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
+References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_abbe05b977edbfec7752ed417b90e09fa}\label{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_abbe05b977edbfec7752ed417b90e09fa}} 
 \index{oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$}!output@{output}}
@@ -723,7 +727,7 @@ Overload the standard output function with the broken default.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999f1bef62c0ff13f2a7}{oomph\+::\+Finite\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement_af30152cc8ea671b103239fc6b3e506ce}{oomph\+::\+QAdvection\+Diffusion\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}.
 
 
 
@@ -731,14 +735,14 @@ Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00898}{898}}
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
+References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a36bc6dc9052947f0932a605dd4d0e8f0}\label{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a36bc6dc9052947f0932a605dd4d0e8f0}} 
 \index{oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$}!output@{output}}
 \index{output@{output}!oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element}}$<$ DIM $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element}}$<$ DIM $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -746,7 +750,7 @@ Output function\+: x,y,u or x,y,z,u at Nplot$^\wedge$\+DIM plot points.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b43e6679c9dd28c457}{oomph\+::\+Finite\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement_a248d31c455b267075d437ae2833540c6}{oomph\+::\+QAdvection\+Diffusion\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}.
 
 
 
@@ -754,14 +758,14 @@ Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00905}{905}}
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03153}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l01645}{Navier\+Stokes\+Equations$<$ DIM $>$\+::interpolated\+\_\+p\+\_\+nst()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l01511}{Navier\+Stokes\+Equations$<$ DIM $>$\+::interpolated\+\_\+u\+\_\+nst()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l03191}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{elements_8h_source_l03166}{oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string()}}, and \mbox{\hyperlink{elements_8h_source_l03179}{oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer()}}.
+References \mbox{\hyperlink{elements_8h_source_l03148}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l01639}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::interpolated\+\_\+p\+\_\+nst()}}, \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00458}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::interpolated\+\_\+u\+\_\+adv\+\_\+diff()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l01505}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::interpolated\+\_\+u\+\_\+nst()}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l03186}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{elements_8h_source_l03161}{oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string()}}, and \mbox{\hyperlink{elements_8h_source_l03174}{oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_aa1eaab23a14039a18701b5666629b5bc}\label{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_aa1eaab23a14039a18701b5666629b5bc}} 
 \index{oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$}!output\_fct@{output\_fct}}
 \index{output\_fct@{output\_fct}!oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{output\_fct()}{output\_fct()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element}}$<$ DIM $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{Nplot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element}}$<$ DIM $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{Nplot,  }\item[{const double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -769,7 +773,7 @@ Output function for a time-\/dependent exact solution. Broken default.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2a8426dccd57b927be0ae0eec00d0479}{oomph\+::\+Finite\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement_a0e5d05a939eebc797ec8d6b400296bfd}{oomph\+::\+QAdvection\+Diffusion\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}.
 
 
 
@@ -777,14 +781,14 @@ Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00967}{967}}
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03109}{oomph\+::\+Finite\+Element\+::output\+\_\+fct()}}.
+References \mbox{\hyperlink{elements_8h_source_l03104}{oomph\+::\+Finite\+Element\+::output\+\_\+fct()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a9f9feaf2d6003f2328741de2987fd0d1}\label{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a9f9feaf2d6003f2328741de2987fd0d1}} 
 \index{oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$}!output\_fct@{output\_fct}}
 \index{output\_fct@{output\_fct}!oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{output\_fct()}{output\_fct()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element}}$<$ DIM $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{Nplot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element}}$<$ DIM $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{Nplot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -792,7 +796,7 @@ Output function for an exact solution\+: Broken default.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a22b695c714f60ee6cd145be348042035}{oomph\+::\+Finite\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement_a42d9f526bc4bcc8fe51c6dbb1d216b4c}{oomph\+::\+QAdvection\+Diffusion\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}.
 
 
 
@@ -800,14 +804,14 @@ Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00957}{957}}
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03109}{oomph\+::\+Finite\+Element\+::output\+\_\+fct()}}.
+References \mbox{\hyperlink{elements_8h_source_l03104}{oomph\+::\+Finite\+Element\+::output\+\_\+fct()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a5873f594fd21c17ba01594d868f39c11}\label{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a5873f594fd21c17ba01594d868f39c11}} 
 \index{oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$}!ra@{ra}}
 \index{ra@{ra}!oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{ra()}{ra()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \& \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element}}$<$ DIM $>$\+::ra (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+const double \& \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element}}$<$ DIM $>$\+::ra (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -876,7 +880,7 @@ References \mbox{\hyperlink{refineable__advection__diffusion__elements_8h_source
 \index{required\_nvalue@{required\_nvalue}!oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{required\_nvalue()}{required\_nvalue()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element}}$<$ DIM $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element}}$<$ DIM $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -884,7 +888,7 @@ The required number of values stored at the nodes is the sum of the required val
 
 
 
-Reimplemented from \mbox{\hyperlink{classQCrouzeixRaviartElement_a3bbe471139c3eae417d8a14f05a641cf}{QCrouzeix\+Raviart\+Element$<$ DIM $>$}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement_a5add10bf35486c4ece4505a067cc2fd2}{oomph\+::\+QAdvection\+Diffusion\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}.
 
 
 
@@ -895,7 +899,7 @@ Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00825}{825}}
 \index{scalar\_name\_paraview@{scalar\_name\_paraview}!oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{scalar\_name\_paraview()}{scalar\_name\_paraview()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-std\+::string \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element}}$<$ DIM $>$\+::scalar\+\_\+name\+\_\+paraview (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+std\+::string \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element}}$<$ DIM $>$\+::scalar\+\_\+name\+\_\+paraview (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -903,7 +907,7 @@ Name of the i-\/th scalar field. Default implementation returns V1 for the first
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a49cc2d4f7ed5772bbc96f06760372b51}{oomph\+::\+Finite\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a37c30bb64389d12ffef51f046d846886}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$}}.
 
 
 
@@ -918,7 +922,7 @@ References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink
 \index{scalar\_value\_paraview@{scalar\_value\_paraview}!oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{scalar\_value\_paraview()}{scalar\_value\_paraview()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element}}$<$ DIM $>$\+::scalar\+\_\+value\+\_\+paraview (\begin{DoxyParamCaption}\item[{std\+::ofstream \&}]{file\+\_\+out,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{nplot }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element}}$<$ DIM $>$\+::scalar\+\_\+value\+\_\+paraview (\begin{DoxyParamCaption}\item[{std\+::ofstream \&}]{file\+\_\+out,  }\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{nplot }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -926,7 +930,7 @@ Write values of the i-\/th scalar field at the plot points. Broken virtual. Need
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a02cf8832a5e2886f1572bd36f7a7c1e3}{oomph\+::\+Finite\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a7e4c60334ef457e6155e84a9d24062cf}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$}}.
 
 
 
@@ -937,11 +941,15 @@ Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00878}{878}}
 \index{u\_index\_adv\_diff@{u\_index\_adv\_diff}!oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{u\_index\_adv\_diff()}{u\_index\_adv\_diff()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element}}$<$ DIM $>$\+::u\+\_\+index\+\_\+adv\+\_\+diff (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element}}$<$ DIM $>$\+::u\+\_\+index\+\_\+adv\+\_\+diff (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
 Overload the index at which the temperature variable is stored. We choose to store is after the fluid velocities. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_aadffa26c42be5d4a1156a7467de48fb8}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$}}.
 
 
 
@@ -956,7 +964,7 @@ Referenced by \mbox{\hyperlink{boussinesq__elements_8h_source_l01301}{oomph\+::\
 \index{vertex\_node\_pt@{vertex\_node\_pt}!oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::RefineableBuoyantQCrouzeixRaviartElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{vertex\_node\_pt()}{vertex\_node\_pt()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-Node $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element}}$<$ DIM $>$\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element}}$<$ DIM $>$\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 

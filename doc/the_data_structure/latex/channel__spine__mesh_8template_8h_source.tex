@@ -137,7 +137,7 @@
 \DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8h_source_l00133}\mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_aefa38017e44e64ad0cd86d87d397bf8d}{00133}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_aefa38017e44e64ad0cd86d87d397bf8d}{spine\_node\_update}}(\mbox{\hyperlink{classoomph_1_1SpineNode}{SpineNode}}* spine\_node\_pt)}
 \DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8h_source_l00134}00134     \{}
 \DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8h_source_l00135}00135       \textcolor{comment}{// Get spine node's fraction along the spine}}
-\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8h_source_l00136}00136       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = spine\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1SpineNode_a3980c5355fa505586d4fb1e8456fbc45}{fraction}}();}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8h_source_l00136}00136       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = spine\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1SpineNode_a3980c5355fa505586d4fb1e8456fbc45}{fraction}}();}
 \DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8h_source_l00137}00137 }
 \DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8h_source_l00138}00138       \textcolor{comment}{// Get local coordinates}}
 \DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8h_source_l00139}00139       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} s\_wall(1);}
@@ -148,7 +148,7 @@
 \DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8h_source_l00144}00144       spine\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1SpineNode_ae04ead0542be9e109e78b0e0b0c3e260}{spine\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1Spine_a890e10095665c9429995c5e3f66de788}{geom\_object\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{position}}(s\_wall, position);}
 \DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8h_source_l00145}00145 }
 \DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8h_source_l00146}00146       \textcolor{comment}{// Set the value of y}}
-\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8h_source_l00147}00147       spine\_node\_pt-\/>x(1) = this-\/>\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ade53fec7446044418ccba9f55d692adb}{Ymin}} + W * position[1];}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8h_source_l00147}00147       spine\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1) = this-\/>\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ade53fec7446044418ccba9f55d692adb}{Ymin}} + W * position[1];}
 \DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8h_source_l00148}00148     \}}
 \DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8h_source_l00149}00149 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8h_source_l00150}00150 \textcolor{comment}{    /// Return the value of the x-\/coordinate at the node given by the}}

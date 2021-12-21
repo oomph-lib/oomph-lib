@@ -163,11 +163,11 @@ $(function() {
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment"></span> </div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">  /// Default value for Alpha parameter (thermal inertia)</span></div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment"></span>  <span class="keyword">template</span>&lt;<span class="keywordtype">unsigned</span> DIM&gt;</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  <span class="keywordtype">double</span> UnsteadyHeatEquations&lt;DIM&gt;::Default_alpha_parameter = 1.0;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  <span class="keywordtype">double</span> <a class="code hl_variable" href="classoomph_1_1UnsteadyHeatEquations.html#ad2647a621a4cb3f4a8301a56badd1e4e">UnsteadyHeatEquations&lt;DIM&gt;::Default_alpha_parameter</a> = 1.0;</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment"></span> </div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">  /// Default value for Beta parameter (thermal conductivity)</span></div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment"></span>  <span class="keyword">template</span>&lt;<span class="keywordtype">unsigned</span> DIM&gt;</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  <span class="keywordtype">double</span> UnsteadyHeatEquations&lt;DIM&gt;::Default_beta_parameter = 1.0;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  <span class="keywordtype">double</span> <a class="code hl_variable" href="classoomph_1_1UnsteadyHeatEquations.html#a85ec71a0ce9a5b85ce30b0aab0495ee4">UnsteadyHeatEquations&lt;DIM&gt;::Default_beta_parameter</a> = 1.0;</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  <span class="comment">//======================================================================</span></div>
@@ -185,9 +185,9 @@ $(function() {
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">  /// Pure version without hanging nodes</span></div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment"></span>  <span class="comment">//======================================================================</span></div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  <span class="keyword">template</span>&lt;<span class="keywordtype">unsigned</span> DIM&gt;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  <span class="keywordtype">void</span> UnsteadyHeatEquations&lt;DIM&gt;::</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    fill_in_generic_residual_contribution_ust_heat(</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>      Vector&lt;double&gt;&amp; residuals, DenseMatrix&lt;double&gt;&amp; jacobian, <span class="keywordtype">unsigned</span> flag)</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="classoomph_1_1UnsteadyHeatEquations.html#acde24104d5adcabe8a76a3a52c17ab5f">   59</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classoomph_1_1UnsteadyHeatEquations.html#acde24104d5adcabe8a76a3a52c17ab5f">UnsteadyHeatEquations&lt;DIM&gt;::</a></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><a class="code hl_function" href="classoomph_1_1UnsteadyHeatEquations.html#acde24104d5adcabe8a76a3a52c17ab5f">    fill_in_generic_residual_contribution_ust_heat</a>(</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>      <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a>&amp; residuals, <a class="code hl_class" href="classoomph_1_1DenseMatrix.html">DenseMatrix&lt;double&gt;</a>&amp; jacobian, <span class="keywordtype">unsigned</span> flag)</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  {</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="comment">// Find out how many nodes there are</span></div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keywordtype">unsigned</span> n_node = nnode();</div>
@@ -199,14 +199,14 @@ $(function() {
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keywordtype">unsigned</span> u_nodal_index = u_index_ust_heat();</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="comment">// Set up memory for the shape and test functions</span></div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    Shape psi(n_node), test(n_node);</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    DShape dpsidx(n_node, DIM), dtestdx(n_node, DIM);</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <a class="code hl_class" href="classoomph_1_1Shape.html">Shape</a> psi(n_node), test(n_node);</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <a class="code hl_class" href="classoomph_1_1DShape.html">DShape</a> dpsidx(n_node, DIM), dtestdx(n_node, DIM);</div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <span class="comment">// Set the value of n_intpt</span></div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <span class="keywordtype">unsigned</span> n_intpt = integral_pt()-&gt;nweight();</div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="comment">// Set the Vector to hold local coordinates</span></div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    Vector&lt;double&gt; <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>(DIM);</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>(DIM);</div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="comment">// Get Alpha and beta parameters number</span></div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keywordtype">double</span> alpha_local = alpha();</div>
@@ -229,14 +229,14 @@ $(function() {
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        ipt, psi, dpsidx, test, dtestdx);</div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>      <span class="comment">// Premultiply the weights and the Jacobian</span></div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>      <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a> = w * J;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>      <span class="keywordtype">double</span> <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a> = w * J;</div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>      <span class="comment">// Allocate memory for local quantities and initialise to zero</span></div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>      <span class="keywordtype">double</span> interpolated_u = 0.0;</div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>      <span class="keywordtype">double</span> dudt = 0.0;</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>      Vector&lt;double&gt; interpolated_x(DIM, 0.0);</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>      Vector&lt;double&gt; interpolated_dudx(DIM, 0.0);</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>      Vector&lt;double&gt; mesh_velocity(DIM, 0.0);</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>      <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> interpolated_x(DIM, 0.0);</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>      <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> interpolated_dudx(DIM, 0.0);</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>      <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> mesh_velocity(DIM, 0.0);</div>
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>      <span class="comment">// Calculate function value and derivatives:</span></div>
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>      <span class="comment">// Loop over nodes</span></div>
@@ -282,7 +282,7 @@ $(function() {
 <div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>        <span class="keywordflow">if</span> (local_eqn &gt;= 0)</div>
 <div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>        {</div>
 <div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>          <span class="comment">// Add body force/source term and time derivative</span></div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>          residuals[local_eqn] += (alpha_local * dudt + source) * test(l) * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a>;</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>          residuals[local_eqn] += (alpha_local * dudt + source) * test(l) * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a>;</div>
 <div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span> </div>
 <div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>          <span class="comment">// The mesh velocity bit</span></div>
 <div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>          <span class="keywordflow">if</span> (!ALE_is_disabled)</div>
@@ -290,7 +290,7 @@ $(function() {
 <div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>            <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> k = 0; k &lt; DIM; k++)</div>
 <div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>            {</div>
 <div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>              residuals[local_eqn] -= alpha_local * mesh_velocity[k] *</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>                                      interpolated_dudx[k] * test(l) * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a>;</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>                                      interpolated_dudx[k] * test(l) * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a>;</div>
 <div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>            }</div>
 <div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>          }</div>
 <div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
@@ -298,7 +298,7 @@ $(function() {
 <div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>          <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> k = 0; k &lt; DIM; k++)</div>
 <div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>          {</div>
 <div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>            residuals[local_eqn] +=</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>              beta_local * interpolated_dudx[k] * dtestdx(l, k) * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a>;</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>              beta_local * interpolated_dudx[k] * dtestdx(l, k) * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a>;</div>
 <div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>          }</div>
 <div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span> </div>
 <div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span> </div>
@@ -316,7 +316,7 @@ $(function() {
 <div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>                <span class="comment">// Mass matrix</span></div>
 <div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>                jacobian(local_eqn, local_unknown) +=</div>
 <div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>                  alpha_local * test(l) * psi(l2) *</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>                  node_pt(l2)-&gt;time_stepper_pt()-&gt;weight(1, 0) * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a>;</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>                  node_pt(l2)-&gt;time_stepper_pt()-&gt;weight(1, 0) * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a>;</div>
 <div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span> </div>
 <div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>                <span class="comment">// Laplace operator &amp; mesh velocity bit</span></div>
 <div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>                <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = 0; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &lt; DIM; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
@@ -324,7 +324,7 @@ $(function() {
 <div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>                  <span class="keywordtype">double</span> tmp = beta_local * dtestdx(l, <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>);</div>
 <div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>                  <span class="keywordflow">if</span> (!ALE_is_disabled)</div>
 <div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>                    tmp -= alpha_local * mesh_velocity[<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] * test(l);</div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>                  jacobian(local_eqn, local_unknown) += dpsidx(l2, <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) * tmp * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a>;</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>                  jacobian(local_eqn, local_unknown) += dpsidx(l2, <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) * tmp * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a>;</div>
 <div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>                }</div>
 <div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>              }</div>
 <div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>            }</div>
@@ -341,21 +341,21 @@ $(function() {
 <div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span><span class="comment">  /// Compute norm of fe solution</span></div>
 <div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span><span class="comment"></span>  <span class="comment">//======================================================================</span></div>
 <div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>  <span class="keyword">template</span>&lt;<span class="keywordtype">unsigned</span> DIM&gt;</div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>  <span class="keywordtype">void</span> UnsteadyHeatEquations&lt;DIM&gt;::compute_norm(<span class="keywordtype">double</span>&amp; norm)</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno"><a class="line" href="classoomph_1_1UnsteadyHeatEquations.html#a0b5413cd78f410efd7ab3273a34cca5f">  215</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classoomph_1_1UnsteadyHeatEquations.html#a0b5413cd78f410efd7ab3273a34cca5f">UnsteadyHeatEquations&lt;DIM&gt;::compute_norm</a>(<span class="keywordtype">double</span>&amp; norm)</div>
 <div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>  {</div>
 <div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    <span class="comment">// Initialise</span></div>
 <div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>    norm = 0.0;</div>
 <div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span> </div>
 <div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    <span class="comment">// Vector of local coordinates</span></div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    Vector&lt;double&gt; <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>(DIM);</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>(DIM);</div>
 <div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span> </div>
 <div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    <span class="comment">// Vector for coordintes</span></div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    Vector&lt;double&gt; <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>(DIM);</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> x(DIM);</div>
 <div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span> </div>
 <div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    <span class="comment">// Find out how many nodes there are in the element</span></div>
 <div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>    <span class="keywordtype">unsigned</span> n_node = nnode();</div>
 <div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span> </div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>    Shape psi(n_node);</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>    <a class="code hl_class" href="classoomph_1_1Shape.html">Shape</a> psi(n_node);</div>
 <div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span> </div>
 <div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    <span class="comment">// Set the value of n_intpt</span></div>
 <div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>    <span class="keywordtype">unsigned</span> n_intpt = integral_pt()-&gt;nweight();</div>
@@ -376,13 +376,13 @@ $(function() {
 <div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>      <span class="keywordtype">double</span> J = J_eulerian(<a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>);</div>
 <div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span> </div>
 <div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>      <span class="comment">// Premultiply the weights and the Jacobian</span></div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>      <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a> = w * J;</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>      <span class="keywordtype">double</span> <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a> = w * J;</div>
 <div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span> </div>
 <div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>      <span class="comment">// Get FE function value</span></div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>      <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceoomph.html#ac0ed65f6db53d9ad737e1d2a69767d25">u</a> = interpolated_u_ust_heat(<a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>);</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>      <span class="keywordtype">double</span> u = interpolated_u_ust_heat(<a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>);</div>
 <div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span> </div>
 <div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>      <span class="comment">// Add to  norm</span></div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>      norm += <a class="code hl_variable" href="namespaceoomph.html#ac0ed65f6db53d9ad737e1d2a69767d25">u</a> * <a class="code hl_variable" href="namespaceoomph.html#ac0ed65f6db53d9ad737e1d2a69767d25">u</a> * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a>;</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>      norm += u * u * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a>;</div>
 <div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>    }</div>
 <div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>  }</div>
 <div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span> </div>
@@ -390,12 +390,12 @@ $(function() {
 <div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span><span class="comment">  /// Self-test:  Return 0 for OK</span></div>
 <div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span><span class="comment"></span>  <span class="comment">//======================================================================</span></div>
 <div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>  <span class="keyword">template</span>&lt;<span class="keywordtype">unsigned</span> DIM&gt;</div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>  <span class="keywordtype">unsigned</span> UnsteadyHeatEquations&lt;DIM&gt;::self_test()</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno"><a class="line" href="classoomph_1_1UnsteadyHeatEquations.html#a6f16f48984d7edf9e67818d9e4bbcf13">  264</a></span>  <span class="keywordtype">unsigned</span> <a class="code hl_function" href="classoomph_1_1UnsteadyHeatEquations.html#a6f16f48984d7edf9e67818d9e4bbcf13">UnsteadyHeatEquations&lt;DIM&gt;::self_test</a>()</div>
 <div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>  {</div>
 <div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>    <span class="keywordtype">bool</span> passed = <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span> </div>
 <div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>    <span class="comment">// Check lower-level stuff</span></div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="classoomph_1_1FiniteElement.html#af04bf6f6a9a60946e6afeee7afdd709c">FiniteElement::self_test</a>() != 0)</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="classoomph_1_1FiniteElement.html#af94c5a5e22175d5420b33b3b79e46ed3">FiniteElement::self_test</a>() != 0)</div>
 <div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>    {</div>
 <div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>      passed = <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>    }</div>
@@ -420,11 +420,11 @@ $(function() {
 <div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span><span class="comment">  /// nplot points in each coordinate direction</span></div>
 <div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span><span class="comment"></span>  <span class="comment">//======================================================================</span></div>
 <div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>  <span class="keyword">template</span>&lt;<span class="keywordtype">unsigned</span> DIM&gt;</div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceoomph_1_1CommandLineArgs.html#aca07d359a96b9c7b566142112604ea87">UnsteadyHeatEquations&lt;DIM&gt;::output</a>(std::ostream&amp; outfile,</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno"><a class="line" href="classoomph_1_1UnsteadyHeatEquations.html#a68794ad133c4a06bed09488cc7cd5e94">  294</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classoomph_1_1UnsteadyHeatEquations.html#a1d73897c7329f0b82f29542cb5c72fff">UnsteadyHeatEquations&lt;DIM&gt;::output</a>(std::ostream&amp; outfile,</div>
 <div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>                                          <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; nplot)</div>
 <div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>  {</div>
 <div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>    <span class="comment">// Vector of local coordinates</span></div>
-<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>    Vector&lt;double&gt; <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>(DIM);</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>    <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>(DIM);</div>
 <div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span> </div>
 <div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>    <span class="comment">// Tecplot header info</span></div>
 <div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>    outfile &lt;&lt; tecplot_zone_string(nplot);</div>
@@ -456,10 +456,10 @@ $(function() {
 <div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span><span class="comment">  /// nplot points in each coordinate direction</span></div>
 <div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span><span class="comment"></span>  <span class="comment">//======================================================================</span></div>
 <div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>  <span class="keyword">template</span>&lt;<span class="keywordtype">unsigned</span> DIM&gt;</div>
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceoomph_1_1CommandLineArgs.html#aca07d359a96b9c7b566142112604ea87">UnsteadyHeatEquations&lt;DIM&gt;::output</a>(FILE* file_pt, <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; nplot)</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno"><a class="line" href="classoomph_1_1UnsteadyHeatEquations.html#aa63371c8600cb17a05b7bd00d89d1d2b">  330</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classoomph_1_1UnsteadyHeatEquations.html#a1d73897c7329f0b82f29542cb5c72fff">UnsteadyHeatEquations&lt;DIM&gt;::output</a>(FILE* file_pt, <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; nplot)</div>
 <div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>  {</div>
 <div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>    <span class="comment">// Vector of local coordinates</span></div>
-<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>    Vector&lt;double&gt; <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>(DIM);</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>    <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>(DIM);</div>
 <div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span> </div>
 <div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>    <span class="comment">// Tecplot header info</span></div>
 <div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>    fprintf(file_pt, <span class="stringliteral">&quot;%s&quot;</span>, tecplot_zone_string(nplot).c_str());</div>
@@ -492,22 +492,22 @@ $(function() {
 <div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span><span class="comment">  ///   x,y,u_exact    or    x,y,z,u_exact</span></div>
 <div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span><span class="comment"></span>  <span class="comment">//======================================================================</span></div>
 <div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>  <span class="keyword">template</span>&lt;<span class="keywordtype">unsigned</span> DIM&gt;</div>
-<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>  <span class="keywordtype">void</span> UnsteadyHeatEquations&lt;DIM&gt;::output_fct(</div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno"><a class="line" href="classoomph_1_1UnsteadyHeatEquations.html#acdd4e941a196d267ad9534aef16db1a9">  366</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classoomph_1_1UnsteadyHeatEquations.html#acdd4e941a196d267ad9534aef16db1a9">UnsteadyHeatEquations&lt;DIM&gt;::output_fct</a>(</div>
 <div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>    std::ostream&amp; outfile,</div>
 <div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>    <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; nplot,</div>
 <div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>    <a class="code hl_typedef" href="classoomph_1_1FiniteElement.html#a690fd33af26cc3e84f39bba6d5a85202">FiniteElement::SteadyExactSolutionFctPt</a> exact_soln_pt)</div>
 <div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>  {</div>
 <div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>    <span class="comment">// Vector of local coordinates</span></div>
-<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>    Vector&lt;double&gt; <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>(DIM);</div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>    <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>(DIM);</div>
 <div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span> </div>
 <div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>    <span class="comment">// Vector for coordintes</span></div>
-<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>    Vector&lt;double&gt; <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>(DIM);</div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>    <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> x(DIM);</div>
 <div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span> </div>
 <div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>    <span class="comment">// Tecplot header info</span></div>
 <div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>    outfile &lt;&lt; tecplot_zone_string(nplot);</div>
 <div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span> </div>
 <div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>    <span class="comment">// Exact solution Vector (here a scalar)</span></div>
-<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>    Vector&lt;double&gt; exact_soln(1);</div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>    <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> exact_soln(1);</div>
 <div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span> </div>
 <div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>    <span class="comment">// Loop over plot points</span></div>
 <div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>    <span class="keywordtype">unsigned</span> num_plot_points = nplot_points(nplot);</div>
@@ -517,15 +517,15 @@ $(function() {
 <div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>      get_s_plot(iplot, nplot, <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>);</div>
 <div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span> </div>
 <div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>      <span class="comment">// Get x position as Vector</span></div>
-<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>      interpolated_x(<a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>);</div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>      interpolated_x(<a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, x);</div>
 <div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span> </div>
 <div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>      <span class="comment">// Get exact solution at this point</span></div>
-<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>      (*exact_soln_pt)(<a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>, exact_soln);</div>
+<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>      (*exact_soln_pt)(x, exact_soln);</div>
 <div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span> </div>
 <div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span>      <span class="comment">// Output x,y,...,u_exact</span></div>
 <div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = 0; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &lt; DIM; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
 <div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span>      {</div>
-<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>        outfile &lt;&lt; <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>[<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>        outfile &lt;&lt; x[<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
 <div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span>      }</div>
 <div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>      outfile &lt;&lt; exact_soln[0] &lt;&lt; std::endl;</div>
 <div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span>    }</div>
@@ -544,7 +544,7 @@ $(function() {
 <div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span><span class="comment">  ///   x,y,u_exact    or    x,y,z,u_exact</span></div>
 <div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span><span class="comment"></span>  <span class="comment">//======================================================================</span></div>
 <div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span>  <span class="keyword">template</span>&lt;<span class="keywordtype">unsigned</span> DIM&gt;</div>
-<div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span>  <span class="keywordtype">void</span> UnsteadyHeatEquations&lt;DIM&gt;::output_fct(</div>
+<div class="line"><a id="l00418" name="l00418"></a><span class="lineno"><a class="line" href="classoomph_1_1UnsteadyHeatEquations.html#ab6f0a3d6afeec2fc0395f6185d91e588">  418</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classoomph_1_1UnsteadyHeatEquations.html#acdd4e941a196d267ad9534aef16db1a9">UnsteadyHeatEquations&lt;DIM&gt;::output_fct</a>(</div>
 <div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span>    std::ostream&amp; outfile,</div>
 <div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span>    <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; nplot,</div>
 <div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span>    <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; time,</div>
@@ -552,17 +552,17 @@ $(function() {
 <div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span> </div>
 <div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span>  {</div>
 <div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span>    <span class="comment">// Vector of local coordinates</span></div>
-<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span>    Vector&lt;double&gt; <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>(DIM);</div>
+<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span>    <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>(DIM);</div>
 <div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span> </div>
 <div class="line"><a id="l00428" name="l00428"></a><span class="lineno">  428</span>    <span class="comment">// Vector for coordintes</span></div>
-<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span>    Vector&lt;double&gt; <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>(DIM);</div>
+<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span>    <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> x(DIM);</div>
 <div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span> </div>
 <div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span> </div>
 <div class="line"><a id="l00432" name="l00432"></a><span class="lineno">  432</span>    <span class="comment">// Tecplot header info</span></div>
 <div class="line"><a id="l00433" name="l00433"></a><span class="lineno">  433</span>    outfile &lt;&lt; tecplot_zone_string(nplot);</div>
 <div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span> </div>
 <div class="line"><a id="l00435" name="l00435"></a><span class="lineno">  435</span>    <span class="comment">// Exact solution Vector (here a scalar)</span></div>
-<div class="line"><a id="l00436" name="l00436"></a><span class="lineno">  436</span>    Vector&lt;double&gt; exact_soln(1);</div>
+<div class="line"><a id="l00436" name="l00436"></a><span class="lineno">  436</span>    <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> exact_soln(1);</div>
 <div class="line"><a id="l00437" name="l00437"></a><span class="lineno">  437</span> </div>
 <div class="line"><a id="l00438" name="l00438"></a><span class="lineno">  438</span>    <span class="comment">// Loop over plot points</span></div>
 <div class="line"><a id="l00439" name="l00439"></a><span class="lineno">  439</span>    <span class="keywordtype">unsigned</span> num_plot_points = nplot_points(nplot);</div>
@@ -572,15 +572,15 @@ $(function() {
 <div class="line"><a id="l00443" name="l00443"></a><span class="lineno">  443</span>      get_s_plot(iplot, nplot, <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>);</div>
 <div class="line"><a id="l00444" name="l00444"></a><span class="lineno">  444</span> </div>
 <div class="line"><a id="l00445" name="l00445"></a><span class="lineno">  445</span>      <span class="comment">// Get x position as Vector</span></div>
-<div class="line"><a id="l00446" name="l00446"></a><span class="lineno">  446</span>      interpolated_x(<a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>);</div>
+<div class="line"><a id="l00446" name="l00446"></a><span class="lineno">  446</span>      interpolated_x(<a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, x);</div>
 <div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span> </div>
 <div class="line"><a id="l00448" name="l00448"></a><span class="lineno">  448</span>      <span class="comment">// Get exact solution at this point</span></div>
-<div class="line"><a id="l00449" name="l00449"></a><span class="lineno">  449</span>      (*exact_soln_pt)(time, <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>, exact_soln);</div>
+<div class="line"><a id="l00449" name="l00449"></a><span class="lineno">  449</span>      (*exact_soln_pt)(time, x, exact_soln);</div>
 <div class="line"><a id="l00450" name="l00450"></a><span class="lineno">  450</span> </div>
 <div class="line"><a id="l00451" name="l00451"></a><span class="lineno">  451</span>      <span class="comment">// Output x,y,...,u_exact</span></div>
 <div class="line"><a id="l00452" name="l00452"></a><span class="lineno">  452</span>      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = 0; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &lt; DIM; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
 <div class="line"><a id="l00453" name="l00453"></a><span class="lineno">  453</span>      {</div>
-<div class="line"><a id="l00454" name="l00454"></a><span class="lineno">  454</span>        outfile &lt;&lt; <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>[<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a id="l00454" name="l00454"></a><span class="lineno">  454</span>        outfile &lt;&lt; x[<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
 <div class="line"><a id="l00455" name="l00455"></a><span class="lineno">  455</span>      }</div>
 <div class="line"><a id="l00456" name="l00456"></a><span class="lineno">  456</span>      outfile &lt;&lt; exact_soln[0] &lt;&lt; std::endl;</div>
 <div class="line"><a id="l00457" name="l00457"></a><span class="lineno">  457</span>    }</div>
@@ -598,7 +598,7 @@ $(function() {
 <div class="line"><a id="l00469" name="l00469"></a><span class="lineno">  469</span><span class="comment">  ///</span></div>
 <div class="line"><a id="l00470" name="l00470"></a><span class="lineno">  470</span><span class="comment"></span>  <span class="comment">//======================================================================</span></div>
 <div class="line"><a id="l00471" name="l00471"></a><span class="lineno">  471</span>  <span class="keyword">template</span>&lt;<span class="keywordtype">unsigned</span> DIM&gt;</div>
-<div class="line"><a id="l00472" name="l00472"></a><span class="lineno">  472</span>  <span class="keywordtype">void</span> UnsteadyHeatEquations&lt;DIM&gt;::compute_error(</div>
+<div class="line"><a id="l00472" name="l00472"></a><span class="lineno"><a class="line" href="classoomph_1_1UnsteadyHeatEquations.html#a14e50a4b041d961cf3450788a3e231f0">  472</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classoomph_1_1UnsteadyHeatEquations.html#a14e50a4b041d961cf3450788a3e231f0">UnsteadyHeatEquations&lt;DIM&gt;::compute_error</a>(</div>
 <div class="line"><a id="l00473" name="l00473"></a><span class="lineno">  473</span>    std::ostream&amp; outfile,</div>
 <div class="line"><a id="l00474" name="l00474"></a><span class="lineno">  474</span>    <a class="code hl_typedef" href="classoomph_1_1FiniteElement.html#a690fd33af26cc3e84f39bba6d5a85202">FiniteElement::SteadyExactSolutionFctPt</a> exact_soln_pt,</div>
 <div class="line"><a id="l00475" name="l00475"></a><span class="lineno">  475</span>    <span class="keywordtype">double</span>&amp; error,</div>
@@ -609,15 +609,15 @@ $(function() {
 <div class="line"><a id="l00480" name="l00480"></a><span class="lineno">  480</span>    norm = 0.0;</div>
 <div class="line"><a id="l00481" name="l00481"></a><span class="lineno">  481</span> </div>
 <div class="line"><a id="l00482" name="l00482"></a><span class="lineno">  482</span>    <span class="comment">// Vector of local coordinates</span></div>
-<div class="line"><a id="l00483" name="l00483"></a><span class="lineno">  483</span>    Vector&lt;double&gt; <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>(DIM);</div>
+<div class="line"><a id="l00483" name="l00483"></a><span class="lineno">  483</span>    <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>(DIM);</div>
 <div class="line"><a id="l00484" name="l00484"></a><span class="lineno">  484</span> </div>
 <div class="line"><a id="l00485" name="l00485"></a><span class="lineno">  485</span>    <span class="comment">// Vector for coordintes</span></div>
-<div class="line"><a id="l00486" name="l00486"></a><span class="lineno">  486</span>    Vector&lt;double&gt; <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>(DIM);</div>
+<div class="line"><a id="l00486" name="l00486"></a><span class="lineno">  486</span>    <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> x(DIM);</div>
 <div class="line"><a id="l00487" name="l00487"></a><span class="lineno">  487</span> </div>
 <div class="line"><a id="l00488" name="l00488"></a><span class="lineno">  488</span>    <span class="comment">// Find out how many nodes there are in the element</span></div>
 <div class="line"><a id="l00489" name="l00489"></a><span class="lineno">  489</span>    <span class="keywordtype">unsigned</span> n_node = nnode();</div>
 <div class="line"><a id="l00490" name="l00490"></a><span class="lineno">  490</span> </div>
-<div class="line"><a id="l00491" name="l00491"></a><span class="lineno">  491</span>    Shape psi(n_node);</div>
+<div class="line"><a id="l00491" name="l00491"></a><span class="lineno">  491</span>    <a class="code hl_class" href="classoomph_1_1Shape.html">Shape</a> psi(n_node);</div>
 <div class="line"><a id="l00492" name="l00492"></a><span class="lineno">  492</span> </div>
 <div class="line"><a id="l00493" name="l00493"></a><span class="lineno">  493</span>    <span class="comment">// Set the value of n_intpt</span></div>
 <div class="line"><a id="l00494" name="l00494"></a><span class="lineno">  494</span>    <span class="keywordtype">unsigned</span> n_intpt = integral_pt()-&gt;nweight();</div>
@@ -626,7 +626,7 @@ $(function() {
 <div class="line"><a id="l00497" name="l00497"></a><span class="lineno">  497</span>    outfile &lt;&lt; <span class="stringliteral">&quot;ZONE&quot;</span> &lt;&lt; std::endl;</div>
 <div class="line"><a id="l00498" name="l00498"></a><span class="lineno">  498</span> </div>
 <div class="line"><a id="l00499" name="l00499"></a><span class="lineno">  499</span>    <span class="comment">// Exact solution Vector (here a scalar)</span></div>
-<div class="line"><a id="l00500" name="l00500"></a><span class="lineno">  500</span>    Vector&lt;double&gt; exact_soln(1);</div>
+<div class="line"><a id="l00500" name="l00500"></a><span class="lineno">  500</span>    <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> exact_soln(1);</div>
 <div class="line"><a id="l00501" name="l00501"></a><span class="lineno">  501</span> </div>
 <div class="line"><a id="l00502" name="l00502"></a><span class="lineno">  502</span>    <span class="comment">// Loop over the integration points</span></div>
 <div class="line"><a id="l00503" name="l00503"></a><span class="lineno">  503</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> ipt = 0; ipt &lt; n_intpt; ipt++)</div>
@@ -644,27 +644,27 @@ $(function() {
 <div class="line"><a id="l00515" name="l00515"></a><span class="lineno">  515</span>      <span class="keywordtype">double</span> J = J_eulerian(<a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>);</div>
 <div class="line"><a id="l00516" name="l00516"></a><span class="lineno">  516</span> </div>
 <div class="line"><a id="l00517" name="l00517"></a><span class="lineno">  517</span>      <span class="comment">// Premultiply the weights and the Jacobian</span></div>
-<div class="line"><a id="l00518" name="l00518"></a><span class="lineno">  518</span>      <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a> = w * J;</div>
+<div class="line"><a id="l00518" name="l00518"></a><span class="lineno">  518</span>      <span class="keywordtype">double</span> <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a> = w * J;</div>
 <div class="line"><a id="l00519" name="l00519"></a><span class="lineno">  519</span> </div>
 <div class="line"><a id="l00520" name="l00520"></a><span class="lineno">  520</span>      <span class="comment">// Get x position as Vector</span></div>
-<div class="line"><a id="l00521" name="l00521"></a><span class="lineno">  521</span>      interpolated_x(<a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>);</div>
+<div class="line"><a id="l00521" name="l00521"></a><span class="lineno">  521</span>      interpolated_x(<a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, x);</div>
 <div class="line"><a id="l00522" name="l00522"></a><span class="lineno">  522</span> </div>
 <div class="line"><a id="l00523" name="l00523"></a><span class="lineno">  523</span>      <span class="comment">// Get FE function value</span></div>
 <div class="line"><a id="l00524" name="l00524"></a><span class="lineno">  524</span>      <span class="keywordtype">double</span> u_fe = interpolated_u_ust_heat(<a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>);</div>
 <div class="line"><a id="l00525" name="l00525"></a><span class="lineno">  525</span> </div>
 <div class="line"><a id="l00526" name="l00526"></a><span class="lineno">  526</span>      <span class="comment">// Get exact solution at this point</span></div>
-<div class="line"><a id="l00527" name="l00527"></a><span class="lineno">  527</span>      (*exact_soln_pt)(<a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>, exact_soln);</div>
+<div class="line"><a id="l00527" name="l00527"></a><span class="lineno">  527</span>      (*exact_soln_pt)(x, exact_soln);</div>
 <div class="line"><a id="l00528" name="l00528"></a><span class="lineno">  528</span> </div>
 <div class="line"><a id="l00529" name="l00529"></a><span class="lineno">  529</span>      <span class="comment">// Output x,y,...,error</span></div>
 <div class="line"><a id="l00530" name="l00530"></a><span class="lineno">  530</span>      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = 0; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &lt; DIM; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
 <div class="line"><a id="l00531" name="l00531"></a><span class="lineno">  531</span>      {</div>
-<div class="line"><a id="l00532" name="l00532"></a><span class="lineno">  532</span>        outfile &lt;&lt; <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>[<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a id="l00532" name="l00532"></a><span class="lineno">  532</span>        outfile &lt;&lt; x[<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
 <div class="line"><a id="l00533" name="l00533"></a><span class="lineno">  533</span>      }</div>
 <div class="line"><a id="l00534" name="l00534"></a><span class="lineno">  534</span>      outfile &lt;&lt; exact_soln[0] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; exact_soln[0] - u_fe &lt;&lt; std::endl;</div>
 <div class="line"><a id="l00535" name="l00535"></a><span class="lineno">  535</span> </div>
 <div class="line"><a id="l00536" name="l00536"></a><span class="lineno">  536</span>      <span class="comment">// Add to error and norm</span></div>
-<div class="line"><a id="l00537" name="l00537"></a><span class="lineno">  537</span>      norm += exact_soln[0] * exact_soln[0] * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a>;</div>
-<div class="line"><a id="l00538" name="l00538"></a><span class="lineno">  538</span>      error += (exact_soln[0] - u_fe) * (exact_soln[0] - u_fe) * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a>;</div>
+<div class="line"><a id="l00537" name="l00537"></a><span class="lineno">  537</span>      norm += exact_soln[0] * exact_soln[0] * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a>;</div>
+<div class="line"><a id="l00538" name="l00538"></a><span class="lineno">  538</span>      error += (exact_soln[0] - u_fe) * (exact_soln[0] - u_fe) * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a>;</div>
 <div class="line"><a id="l00539" name="l00539"></a><span class="lineno">  539</span>    }</div>
 <div class="line"><a id="l00540" name="l00540"></a><span class="lineno">  540</span>  }</div>
 <div class="line"><a id="l00541" name="l00541"></a><span class="lineno">  541</span> </div>
@@ -677,7 +677,7 @@ $(function() {
 <div class="line"><a id="l00548" name="l00548"></a><span class="lineno">  548</span><span class="comment">  ///</span></div>
 <div class="line"><a id="l00549" name="l00549"></a><span class="lineno">  549</span><span class="comment"></span>  <span class="comment">//======================================================================</span></div>
 <div class="line"><a id="l00550" name="l00550"></a><span class="lineno">  550</span>  <span class="keyword">template</span>&lt;<span class="keywordtype">unsigned</span> DIM&gt;</div>
-<div class="line"><a id="l00551" name="l00551"></a><span class="lineno">  551</span>  <span class="keywordtype">void</span> UnsteadyHeatEquations&lt;DIM&gt;::compute_error(</div>
+<div class="line"><a id="l00551" name="l00551"></a><span class="lineno"><a class="line" href="classoomph_1_1UnsteadyHeatEquations.html#ab6d9162fbdc253de4cc7064e3c1459aa">  551</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classoomph_1_1UnsteadyHeatEquations.html#a14e50a4b041d961cf3450788a3e231f0">UnsteadyHeatEquations&lt;DIM&gt;::compute_error</a>(</div>
 <div class="line"><a id="l00552" name="l00552"></a><span class="lineno">  552</span>    std::ostream&amp; outfile,</div>
 <div class="line"><a id="l00553" name="l00553"></a><span class="lineno">  553</span>    <a class="code hl_typedef" href="classoomph_1_1FiniteElement.html#ad4ecf2b61b158a4b4d351a60d23c633e">FiniteElement::UnsteadyExactSolutionFctPt</a> exact_soln_pt,</div>
 <div class="line"><a id="l00554" name="l00554"></a><span class="lineno">  554</span>    <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; time,</div>
@@ -690,16 +690,16 @@ $(function() {
 <div class="line"><a id="l00561" name="l00561"></a><span class="lineno">  561</span>    norm = 0.0;</div>
 <div class="line"><a id="l00562" name="l00562"></a><span class="lineno">  562</span> </div>
 <div class="line"><a id="l00563" name="l00563"></a><span class="lineno">  563</span>    <span class="comment">// Vector of local coordinates</span></div>
-<div class="line"><a id="l00564" name="l00564"></a><span class="lineno">  564</span>    Vector&lt;double&gt; <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>(DIM);</div>
+<div class="line"><a id="l00564" name="l00564"></a><span class="lineno">  564</span>    <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>(DIM);</div>
 <div class="line"><a id="l00565" name="l00565"></a><span class="lineno">  565</span> </div>
 <div class="line"><a id="l00566" name="l00566"></a><span class="lineno">  566</span>    <span class="comment">// Vector for coordintes</span></div>
-<div class="line"><a id="l00567" name="l00567"></a><span class="lineno">  567</span>    Vector&lt;double&gt; <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>(DIM);</div>
+<div class="line"><a id="l00567" name="l00567"></a><span class="lineno">  567</span>    <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> x(DIM);</div>
 <div class="line"><a id="l00568" name="l00568"></a><span class="lineno">  568</span> </div>
 <div class="line"><a id="l00569" name="l00569"></a><span class="lineno">  569</span> </div>
 <div class="line"><a id="l00570" name="l00570"></a><span class="lineno">  570</span>    <span class="comment">// Find out how many nodes there are in the element</span></div>
 <div class="line"><a id="l00571" name="l00571"></a><span class="lineno">  571</span>    <span class="keywordtype">unsigned</span> n_node = nnode();</div>
 <div class="line"><a id="l00572" name="l00572"></a><span class="lineno">  572</span> </div>
-<div class="line"><a id="l00573" name="l00573"></a><span class="lineno">  573</span>    Shape psi(n_node);</div>
+<div class="line"><a id="l00573" name="l00573"></a><span class="lineno">  573</span>    <a class="code hl_class" href="classoomph_1_1Shape.html">Shape</a> psi(n_node);</div>
 <div class="line"><a id="l00574" name="l00574"></a><span class="lineno">  574</span> </div>
 <div class="line"><a id="l00575" name="l00575"></a><span class="lineno">  575</span>    <span class="comment">// Set the value of n_intpt</span></div>
 <div class="line"><a id="l00576" name="l00576"></a><span class="lineno">  576</span>    <span class="keywordtype">unsigned</span> n_intpt = integral_pt()-&gt;nweight();</div>
@@ -708,7 +708,7 @@ $(function() {
 <div class="line"><a id="l00579" name="l00579"></a><span class="lineno">  579</span>    outfile &lt;&lt; <span class="stringliteral">&quot;ZONE&quot;</span> &lt;&lt; std::endl;</div>
 <div class="line"><a id="l00580" name="l00580"></a><span class="lineno">  580</span> </div>
 <div class="line"><a id="l00581" name="l00581"></a><span class="lineno">  581</span>    <span class="comment">// Exact solution Vector (here a scalar)</span></div>
-<div class="line"><a id="l00582" name="l00582"></a><span class="lineno">  582</span>    Vector&lt;double&gt; exact_soln(1);</div>
+<div class="line"><a id="l00582" name="l00582"></a><span class="lineno">  582</span>    <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> exact_soln(1);</div>
 <div class="line"><a id="l00583" name="l00583"></a><span class="lineno">  583</span> </div>
 <div class="line"><a id="l00584" name="l00584"></a><span class="lineno">  584</span>    <span class="comment">// Loop over the integration points</span></div>
 <div class="line"><a id="l00585" name="l00585"></a><span class="lineno">  585</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> ipt = 0; ipt &lt; n_intpt; ipt++)</div>
@@ -726,27 +726,27 @@ $(function() {
 <div class="line"><a id="l00597" name="l00597"></a><span class="lineno">  597</span>      <span class="keywordtype">double</span> J = J_eulerian(<a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>);</div>
 <div class="line"><a id="l00598" name="l00598"></a><span class="lineno">  598</span> </div>
 <div class="line"><a id="l00599" name="l00599"></a><span class="lineno">  599</span>      <span class="comment">// Premultiply the weights and the Jacobian</span></div>
-<div class="line"><a id="l00600" name="l00600"></a><span class="lineno">  600</span>      <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a> = w * J;</div>
+<div class="line"><a id="l00600" name="l00600"></a><span class="lineno">  600</span>      <span class="keywordtype">double</span> <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a> = w * J;</div>
 <div class="line"><a id="l00601" name="l00601"></a><span class="lineno">  601</span> </div>
 <div class="line"><a id="l00602" name="l00602"></a><span class="lineno">  602</span>      <span class="comment">// Get x position as Vector</span></div>
-<div class="line"><a id="l00603" name="l00603"></a><span class="lineno">  603</span>      interpolated_x(<a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>);</div>
+<div class="line"><a id="l00603" name="l00603"></a><span class="lineno">  603</span>      interpolated_x(<a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, x);</div>
 <div class="line"><a id="l00604" name="l00604"></a><span class="lineno">  604</span> </div>
 <div class="line"><a id="l00605" name="l00605"></a><span class="lineno">  605</span>      <span class="comment">// Get FE function value</span></div>
 <div class="line"><a id="l00606" name="l00606"></a><span class="lineno">  606</span>      <span class="keywordtype">double</span> u_fe = interpolated_u_ust_heat(<a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>);</div>
 <div class="line"><a id="l00607" name="l00607"></a><span class="lineno">  607</span> </div>
 <div class="line"><a id="l00608" name="l00608"></a><span class="lineno">  608</span>      <span class="comment">// Get exact solution at this point</span></div>
-<div class="line"><a id="l00609" name="l00609"></a><span class="lineno">  609</span>      (*exact_soln_pt)(time, <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>, exact_soln);</div>
+<div class="line"><a id="l00609" name="l00609"></a><span class="lineno">  609</span>      (*exact_soln_pt)(time, x, exact_soln);</div>
 <div class="line"><a id="l00610" name="l00610"></a><span class="lineno">  610</span> </div>
 <div class="line"><a id="l00611" name="l00611"></a><span class="lineno">  611</span>      <span class="comment">// Output x,y,...,error</span></div>
 <div class="line"><a id="l00612" name="l00612"></a><span class="lineno">  612</span>      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = 0; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &lt; DIM; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
 <div class="line"><a id="l00613" name="l00613"></a><span class="lineno">  613</span>      {</div>
-<div class="line"><a id="l00614" name="l00614"></a><span class="lineno">  614</span>        outfile &lt;&lt; <a class="code hl_variable" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>[<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a id="l00614" name="l00614"></a><span class="lineno">  614</span>        outfile &lt;&lt; x[<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
 <div class="line"><a id="l00615" name="l00615"></a><span class="lineno">  615</span>      }</div>
 <div class="line"><a id="l00616" name="l00616"></a><span class="lineno">  616</span>      outfile &lt;&lt; exact_soln[0] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; exact_soln[0] - u_fe &lt;&lt; std::endl;</div>
 <div class="line"><a id="l00617" name="l00617"></a><span class="lineno">  617</span> </div>
 <div class="line"><a id="l00618" name="l00618"></a><span class="lineno">  618</span>      <span class="comment">// Add to error and norm</span></div>
-<div class="line"><a id="l00619" name="l00619"></a><span class="lineno">  619</span>      norm += exact_soln[0] * exact_soln[0] * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a>;</div>
-<div class="line"><a id="l00620" name="l00620"></a><span class="lineno">  620</span>      error += (exact_soln[0] - u_fe) * (exact_soln[0] - u_fe) * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a>;</div>
+<div class="line"><a id="l00619" name="l00619"></a><span class="lineno">  619</span>      norm += exact_soln[0] * exact_soln[0] * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a>;</div>
+<div class="line"><a id="l00620" name="l00620"></a><span class="lineno">  620</span>      error += (exact_soln[0] - u_fe) * (exact_soln[0] - u_fe) * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a>;</div>
 <div class="line"><a id="l00621" name="l00621"></a><span class="lineno">  621</span>    }</div>
 <div class="line"><a id="l00622" name="l00622"></a><span class="lineno">  622</span>  }</div>
 <div class="line"><a id="l00623" name="l00623"></a><span class="lineno">  623</span> </div>
@@ -754,31 +754,41 @@ $(function() {
 <div class="line"><a id="l00625" name="l00625"></a><span class="lineno">  625</span>  <span class="comment">//====================================================================</span></div>
 <div class="line"><a id="l00626" name="l00626"></a><span class="lineno">  626</span>  <span class="comment">// Force build of templates</span></div>
 <div class="line"><a id="l00627" name="l00627"></a><span class="lineno">  627</span>  <span class="comment">//====================================================================</span></div>
-<div class="line"><a id="l00628" name="l00628"></a><span class="lineno">  628</span>  <span class="keyword">template</span> <span class="keyword">class </span>QUnsteadyHeatElement&lt;1, 2&gt;;</div>
-<div class="line"><a id="l00629" name="l00629"></a><span class="lineno">  629</span>  <span class="keyword">template</span> <span class="keyword">class </span>QUnsteadyHeatElement&lt;1, 3&gt;;</div>
-<div class="line"><a id="l00630" name="l00630"></a><span class="lineno">  630</span>  <span class="keyword">template</span> <span class="keyword">class </span>QUnsteadyHeatElement&lt;1, 4&gt;;</div>
+<div class="line"><a id="l00628" name="l00628"></a><span class="lineno">  628</span>  <span class="keyword">template</span> <span class="keyword">class </span><a class="code hl_class" href="classoomph_1_1QUnsteadyHeatElement.html">QUnsteadyHeatElement&lt;1, 2&gt;</a>;</div>
+<div class="line"><a id="l00629" name="l00629"></a><span class="lineno">  629</span>  <span class="keyword">template</span> <span class="keyword">class </span><a class="code hl_class" href="classoomph_1_1QUnsteadyHeatElement.html">QUnsteadyHeatElement&lt;1, 3&gt;</a>;</div>
+<div class="line"><a id="l00630" name="l00630"></a><span class="lineno">  630</span>  <span class="keyword">template</span> <span class="keyword">class </span><a class="code hl_class" href="classoomph_1_1QUnsteadyHeatElement.html">QUnsteadyHeatElement&lt;1, 4&gt;</a>;</div>
 <div class="line"><a id="l00631" name="l00631"></a><span class="lineno">  631</span> </div>
-<div class="line"><a id="l00632" name="l00632"></a><span class="lineno">  632</span>  <span class="keyword">template</span> <span class="keyword">class </span>QUnsteadyHeatElement&lt;2, 2&gt;;</div>
-<div class="line"><a id="l00633" name="l00633"></a><span class="lineno">  633</span>  <span class="keyword">template</span> <span class="keyword">class </span>QUnsteadyHeatElement&lt;2, 3&gt;;</div>
-<div class="line"><a id="l00634" name="l00634"></a><span class="lineno">  634</span>  <span class="keyword">template</span> <span class="keyword">class </span>QUnsteadyHeatElement&lt;2, 4&gt;;</div>
+<div class="line"><a id="l00632" name="l00632"></a><span class="lineno">  632</span>  <span class="keyword">template</span> <span class="keyword">class </span><a class="code hl_class" href="classoomph_1_1QUnsteadyHeatElement.html">QUnsteadyHeatElement&lt;2, 2&gt;</a>;</div>
+<div class="line"><a id="l00633" name="l00633"></a><span class="lineno">  633</span>  <span class="keyword">template</span> <span class="keyword">class </span><a class="code hl_class" href="classoomph_1_1QUnsteadyHeatElement.html">QUnsteadyHeatElement&lt;2, 3&gt;</a>;</div>
+<div class="line"><a id="l00634" name="l00634"></a><span class="lineno">  634</span>  <span class="keyword">template</span> <span class="keyword">class </span><a class="code hl_class" href="classoomph_1_1QUnsteadyHeatElement.html">QUnsteadyHeatElement&lt;2, 4&gt;</a>;</div>
 <div class="line"><a id="l00635" name="l00635"></a><span class="lineno">  635</span> </div>
-<div class="line"><a id="l00636" name="l00636"></a><span class="lineno">  636</span>  <span class="keyword">template</span> <span class="keyword">class </span>QUnsteadyHeatElement&lt;3, 2&gt;;</div>
-<div class="line"><a id="l00637" name="l00637"></a><span class="lineno">  637</span>  <span class="keyword">template</span> <span class="keyword">class </span>QUnsteadyHeatElement&lt;3, 3&gt;;</div>
-<div class="line"><a id="l00638" name="l00638"></a><span class="lineno">  638</span>  <span class="keyword">template</span> <span class="keyword">class </span>QUnsteadyHeatElement&lt;3, 4&gt;;</div>
+<div class="line"><a id="l00636" name="l00636"></a><span class="lineno">  636</span>  <span class="keyword">template</span> <span class="keyword">class </span><a class="code hl_class" href="classoomph_1_1QUnsteadyHeatElement.html">QUnsteadyHeatElement&lt;3, 2&gt;</a>;</div>
+<div class="line"><a id="l00637" name="l00637"></a><span class="lineno">  637</span>  <span class="keyword">template</span> <span class="keyword">class </span><a class="code hl_class" href="classoomph_1_1QUnsteadyHeatElement.html">QUnsteadyHeatElement&lt;3, 3&gt;</a>;</div>
+<div class="line"><a id="l00638" name="l00638"></a><span class="lineno">  638</span>  <span class="keyword">template</span> <span class="keyword">class </span><a class="code hl_class" href="classoomph_1_1QUnsteadyHeatElement.html">QUnsteadyHeatElement&lt;3, 4&gt;</a>;</div>
 <div class="line"><a id="l00639" name="l00639"></a><span class="lineno">  639</span> </div>
 <div class="line"><a id="l00640" name="l00640"></a><span class="lineno">  640</span> </div>
 <div class="line"><a id="l00641" name="l00641"></a><span class="lineno">  641</span>} <span class="comment">// namespace oomph</span></div>
 <div class="ttc" id="acfortran_8h_html_ab7123126e4885ef647dd9c6e3807a21c"><div class="ttname"><a href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a></div><div class="ttdeci">static char t char * s</div><div class="ttdef"><b>Definition:</b> <a href="cfortran_8h_source.html#l00568">cfortran.h:568</a></div></div>
 <div class="ttc" id="acfortran_8h_html_adb50e893b86b3e55e751a42eab3cba82"><div class="ttname"><a href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a></div><div class="ttdeci">cstr elem_len * i</div><div class="ttdef"><b>Definition:</b> <a href="cfortran_8h_source.html#l00603">cfortran.h:603</a></div></div>
-<div class="ttc" id="aclassoomph_1_1FiniteElement_html_a690fd33af26cc3e84f39bba6d5a85202"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#a690fd33af26cc3e84f39bba6d5a85202">oomph::FiniteElement::SteadyExactSolutionFctPt</a></div><div class="ttdeci">void(* SteadyExactSolutionFctPt)(const Vector&lt; double &gt; &amp;, Vector&lt; double &gt; &amp;)</div><div class="ttdoc">Function pointer for function that computes vector-valued steady &quot;exact solution&quot;  as .</div><div class="ttdef"><b>Definition:</b> <a href="elements_8h_source.html#l01764">elements.h:1764</a></div></div>
-<div class="ttc" id="aclassoomph_1_1FiniteElement_html_ad4ecf2b61b158a4b4d351a60d23c633e"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#ad4ecf2b61b158a4b4d351a60d23c633e">oomph::FiniteElement::UnsteadyExactSolutionFctPt</a></div><div class="ttdeci">void(* UnsteadyExactSolutionFctPt)(const double &amp;, const Vector&lt; double &gt; &amp;, Vector&lt; double &gt; &amp;)</div><div class="ttdoc">Function pointer for function that computes Vector-valued time-dependent function  as .</div><div class="ttdef"><b>Definition:</b> <a href="elements_8h_source.html#l01770">elements.h:1770</a></div></div>
-<div class="ttc" id="aclassoomph_1_1FiniteElement_html_af04bf6f6a9a60946e6afeee7afdd709c"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#af04bf6f6a9a60946e6afeee7afdd709c">oomph::FiniteElement::self_test</a></div><div class="ttdeci">virtual unsigned self_test()</div><div class="ttdoc">Self-test: Check inversion of element &amp; do self-test for GeneralisedElement. Return 0 if OK.</div></div>
-<div class="ttc" id="aclassoomph_1_1QUnsteadyHeatElement_html_ad6279983f8f8301b1c3d9ec1160a53a0"><div class="ttname"><a href="classoomph_1_1QUnsteadyHeatElement.html#ad6279983f8f8301b1c3d9ec1160a53a0">oomph::QUnsteadyHeatElement::Initial_Nvalue</a></div><div class="ttdeci">static const unsigned Initial_Nvalue</div><div class="ttdoc">Static array of ints to hold number of variables at nodes: Initial_Nvalue[n].</div><div class="ttdef"><b>Definition:</b> <a href="unsteady__heat__elements_8h_source.html#l00488">unsteady_heat_elements.h:488</a></div></div>
-<div class="ttc" id="anamespaceoomph_1_1CommandLineArgs_html_aca07d359a96b9c7b566142112604ea87"><div class="ttname"><a href="namespaceoomph_1_1CommandLineArgs.html#aca07d359a96b9c7b566142112604ea87">oomph::CommandLineArgs::output</a></div><div class="ttdeci">void output()</div><div class="ttdoc">Doc the command line arguments.</div><div class="ttdef"><b>Definition:</b> <a href="oomph__utilities_8cc_source.html#l00436">oomph_utilities.cc:436</a></div></div>
+<div class="ttc" id="aclassoomph_1_1DShape_html"><div class="ttname"><a href="classoomph_1_1DShape.html">oomph::DShape</a></div><div class="ttdoc">A Class for the derivatives of shape functions The class design is essentially the same as Shape,...</div><div class="ttdef"><b>Definition:</b> <a href="shape_8h_source.html#l00277">shape.h:278</a></div></div>
+<div class="ttc" id="aclassoomph_1_1DenseMatrix_html"><div class="ttname"><a href="classoomph_1_1DenseMatrix.html">oomph::DenseMatrix&lt; double &gt;</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FiniteElement_html_a690fd33af26cc3e84f39bba6d5a85202"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#a690fd33af26cc3e84f39bba6d5a85202">oomph::FiniteElement::SteadyExactSolutionFctPt</a></div><div class="ttdeci">void(* SteadyExactSolutionFctPt)(const Vector&lt; double &gt; &amp;, Vector&lt; double &gt; &amp;)</div><div class="ttdoc">Function pointer for function that computes vector-valued steady &quot;exact solution&quot;  as .</div><div class="ttdef"><b>Definition:</b> <a href="elements_8h_source.html#l01759">elements.h:1759</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FiniteElement_html_ad4ecf2b61b158a4b4d351a60d23c633e"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#ad4ecf2b61b158a4b4d351a60d23c633e">oomph::FiniteElement::UnsteadyExactSolutionFctPt</a></div><div class="ttdeci">void(* UnsteadyExactSolutionFctPt)(const double &amp;, const Vector&lt; double &gt; &amp;, Vector&lt; double &gt; &amp;)</div><div class="ttdoc">Function pointer for function that computes Vector-valued time-dependent function  as .</div><div class="ttdef"><b>Definition:</b> <a href="elements_8h_source.html#l01765">elements.h:1765</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FiniteElement_html_af94c5a5e22175d5420b33b3b79e46ed3"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#af94c5a5e22175d5420b33b3b79e46ed3">oomph::FiniteElement::self_test</a></div><div class="ttdeci">virtual unsigned self_test()</div><div class="ttdoc">Self-test: Check inversion of element &amp; do self-test for GeneralisedElement. Return 0 if OK.</div><div class="ttdef"><b>Definition:</b> <a href="elements_8cc_source.html#l04440">elements.cc:4440</a></div></div>
+<div class="ttc" id="aclassoomph_1_1QUnsteadyHeatElement_html"><div class="ttname"><a href="classoomph_1_1QUnsteadyHeatElement.html">oomph::QUnsteadyHeatElement</a></div><div class="ttdoc">//////////////////////////////////////////////////////////////////////// ////////////////////////////...</div><div class="ttdef"><b>Definition:</b> <a href="unsteady__heat__elements_8h_source.html#l00480">unsteady_heat_elements.h:482</a></div></div>
+<div class="ttc" id="aclassoomph_1_1QUnsteadyHeatElement_html_ad6279983f8f8301b1c3d9ec1160a53a0"><div class="ttname"><a href="classoomph_1_1QUnsteadyHeatElement.html#ad6279983f8f8301b1c3d9ec1160a53a0">oomph::QUnsteadyHeatElement::Initial_Nvalue</a></div><div class="ttdeci">static const unsigned Initial_Nvalue</div><div class="ttdoc">Static array of ints to hold number of variables at nodes: Initial_Nvalue[n].</div><div class="ttdef"><b>Definition:</b> <a href="unsteady__heat__elements_8h_source.html#l00486">unsteady_heat_elements.h:486</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Shape_html"><div class="ttname"><a href="classoomph_1_1Shape.html">oomph::Shape</a></div><div class="ttdoc">A Class for shape functions. In simple cases, the shape functions have only one index that can be tho...</div><div class="ttdef"><b>Definition:</b> <a href="shape_8h_source.html#l00075">shape.h:76</a></div></div>
+<div class="ttc" id="aclassoomph_1_1UnsteadyHeatEquations_html_a0b5413cd78f410efd7ab3273a34cca5f"><div class="ttname"><a href="classoomph_1_1UnsteadyHeatEquations.html#a0b5413cd78f410efd7ab3273a34cca5f">oomph::UnsteadyHeatEquations::compute_norm</a></div><div class="ttdeci">void compute_norm(double &amp;norm)</div><div class="ttdoc">Compute norm of fe solution.</div><div class="ttdef"><b>Definition:</b> <a href="unsteady__heat__elements_8cc_source.html#l00215">unsteady_heat_elements.cc:215</a></div></div>
+<div class="ttc" id="aclassoomph_1_1UnsteadyHeatEquations_html_a14e50a4b041d961cf3450788a3e231f0"><div class="ttname"><a href="classoomph_1_1UnsteadyHeatEquations.html#a14e50a4b041d961cf3450788a3e231f0">oomph::UnsteadyHeatEquations::compute_error</a></div><div class="ttdeci">void compute_error(std::ostream &amp;outfile, FiniteElement::SteadyExactSolutionFctPt exact_soln_pt, double &amp;error, double &amp;norm)</div><div class="ttdoc">Get error against and norm of exact solution.</div><div class="ttdef"><b>Definition:</b> <a href="unsteady__heat__elements_8cc_source.html#l00472">unsteady_heat_elements.cc:472</a></div></div>
+<div class="ttc" id="aclassoomph_1_1UnsteadyHeatEquations_html_a1d73897c7329f0b82f29542cb5c72fff"><div class="ttname"><a href="classoomph_1_1UnsteadyHeatEquations.html#a1d73897c7329f0b82f29542cb5c72fff">oomph::UnsteadyHeatEquations::output</a></div><div class="ttdeci">void output(std::ostream &amp;outfile)</div><div class="ttdoc">Output with default number of plot points.</div><div class="ttdef"><b>Definition:</b> <a href="unsteady__heat__elements_8h_source.html#l00167">unsteady_heat_elements.h:167</a></div></div>
+<div class="ttc" id="aclassoomph_1_1UnsteadyHeatEquations_html_a6f16f48984d7edf9e67818d9e4bbcf13"><div class="ttname"><a href="classoomph_1_1UnsteadyHeatEquations.html#a6f16f48984d7edf9e67818d9e4bbcf13">oomph::UnsteadyHeatEquations::self_test</a></div><div class="ttdeci">unsigned self_test()</div><div class="ttdoc">Self-test: Return 0 for OK.</div><div class="ttdef"><b>Definition:</b> <a href="unsteady__heat__elements_8cc_source.html#l00264">unsteady_heat_elements.cc:264</a></div></div>
+<div class="ttc" id="aclassoomph_1_1UnsteadyHeatEquations_html_a85ec71a0ce9a5b85ce30b0aab0495ee4"><div class="ttname"><a href="classoomph_1_1UnsteadyHeatEquations.html#a85ec71a0ce9a5b85ce30b0aab0495ee4">oomph::UnsteadyHeatEquations::Default_beta_parameter</a></div><div class="ttdeci">static double Default_beta_parameter</div><div class="ttdoc">Static default value for the Beta parameter (thermal conductivity): One for natural scaling.</div><div class="ttdef"><b>Definition:</b> <a href="unsteady__heat__elements_8h_source.html#l00466">unsteady_heat_elements.h:466</a></div></div>
+<div class="ttc" id="aclassoomph_1_1UnsteadyHeatEquations_html_acdd4e941a196d267ad9534aef16db1a9"><div class="ttname"><a href="classoomph_1_1UnsteadyHeatEquations.html#acdd4e941a196d267ad9534aef16db1a9">oomph::UnsteadyHeatEquations::output_fct</a></div><div class="ttdeci">void output_fct(std::ostream &amp;outfile, const unsigned &amp;nplot, FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)</div><div class="ttdoc">Output exact soln: x,y,u_exact or x,y,z,u_exact at nplot^DIM plot points.</div><div class="ttdef"><b>Definition:</b> <a href="unsteady__heat__elements_8cc_source.html#l00366">unsteady_heat_elements.cc:366</a></div></div>
+<div class="ttc" id="aclassoomph_1_1UnsteadyHeatEquations_html_acde24104d5adcabe8a76a3a52c17ab5f"><div class="ttname"><a href="classoomph_1_1UnsteadyHeatEquations.html#acde24104d5adcabe8a76a3a52c17ab5f">oomph::UnsteadyHeatEquations::fill_in_generic_residual_contribution_ust_heat</a></div><div class="ttdeci">virtual void fill_in_generic_residual_contribution_ust_heat(Vector&lt; double &gt; &amp;residuals, DenseMatrix&lt; double &gt; &amp;jacobian, unsigned flag)</div><div class="ttdoc">Compute element residual Vector only (if flag=and/or element Jacobian matrix.</div><div class="ttdef"><b>Definition:</b> <a href="unsteady__heat__elements_8cc_source.html#l00059">unsteady_heat_elements.cc:60</a></div></div>
+<div class="ttc" id="aclassoomph_1_1UnsteadyHeatEquations_html_ad2647a621a4cb3f4a8301a56badd1e4e"><div class="ttname"><a href="classoomph_1_1UnsteadyHeatEquations.html#ad2647a621a4cb3f4a8301a56badd1e4e">oomph::UnsteadyHeatEquations::Default_alpha_parameter</a></div><div class="ttdeci">static double Default_alpha_parameter</div><div class="ttdoc">Static default value for the Alpha parameter: (thermal inertia): One for natural scaling.</div><div class="ttdef"><b>Definition:</b> <a href="unsteady__heat__elements_8h_source.html#l00462">unsteady_heat_elements.h:462</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Vector_html"><div class="ttname"><a href="classoomph_1_1Vector.html">oomph::Vector&lt; double &gt;</a></div></div>
+<div class="ttc" id="anamespaceoomph_1_1QuadTreeNames_html_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6"><div class="ttname"><a href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">oomph::QuadTreeNames::W</a></div><div class="ttdeci">@ W</div><div class="ttdef"><b>Definition:</b> <a href="quadtree_8h_source.html#l00063">quadtree.h:63</a></div></div>
 <div class="ttc" id="anamespaceoomph_html"><div class="ttname"><a href="namespaceoomph.html">oomph</a></div><div class="ttdoc">//////////////////////////////////////////////////////////////////// ////////////////////////////////...</div><div class="ttdef"><b>Definition:</b> <a href="advection__diffusion__elements_8cc_source.html#l00029">advection_diffusion_elements.cc:30</a></div></div>
-<div class="ttc" id="anamespaceoomph_html_a9d1d2da2b8bb8e73af72b5cadb8fe97c"><div class="ttname"><a href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">oomph::x</a></div><div class="ttdeci">x</div><div class="ttdoc">Pseudo buckling ring: Circular ring deformed by the N-th buckling mode of a thin-wall elastic ring.</div><div class="ttdef"><b>Definition:</b> <a href="pseudo__buckling__ring_8h_source.html#l00049">pseudo_buckling_ring.h:49</a></div></div>
-<div class="ttc" id="anamespaceoomph_html_ab40f6d5233caa62dd428818b4cba72d5"><div class="ttname"><a href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">oomph::W</a></div><div class="ttdeci">W</div><div class="ttdoc">///////////////////////////////////////////////////////////////// ///////////////////////////////////...</div><div class="ttdef"><b>Definition:</b> <a href="constitutive__laws_8h_source.html#l00142">constitutive_laws.h:142</a></div></div>
-<div class="ttc" id="anamespaceoomph_html_ac0ed65f6db53d9ad737e1d2a69767d25"><div class="ttname"><a href="namespaceoomph.html#ac0ed65f6db53d9ad737e1d2a69767d25">oomph::u</a></div><div class="ttdeci">u</div><div class="ttdoc">Z2-error-estimator: Elements that can be used with Z2 error estimation should be derived from the bas...</div><div class="ttdef"><b>Definition:</b> <a href="error__estimator_8h_source.html#l00165">error_estimator.h:165</a></div></div>
 <div class="ttc" id="aunsteady__heat__elements_8h_html"><div class="ttname"><a href="unsteady__heat__elements_8h.html">unsteady_heat_elements.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 
@@ -808,7 +818,7 @@ $(function() {
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Nov 2 2021 16:31:15
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Dec 21 2021 17:35:12
         </div>
       </div>
     </footer>

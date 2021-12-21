@@ -7,6 +7,8 @@ class \mbox{\hyperlink{classoomph_1_1ErrorEstimator}{oomph\+::\+Error\+Estimator
 \begin{DoxyCompactList}\small\item\em Base class for spatial error estimators. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}
 \begin{DoxyCompactList}\small\item\em Base class for finite elements that can compute the quantities that are required for the Z2 error estimator. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1Z2ErrorEstimator}{oomph\+::\+Z2\+Error\+Estimator}}
+\begin{DoxyCompactList}\small\item\em Z2-\/error-\/estimator\+: Elements that can be used with Z2 error estimation should be derived from the base class \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator}{Element\+With\+Z2\+Error\+Estimator}} and implement its pure virtual member functions to provide the following functionality\+: \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1DummyErrorEstimator}{oomph\+::\+Dummy\+Error\+Estimator}}
 \begin{DoxyCompactList}\small\item\em ///////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
@@ -14,10 +16,3 @@ class \mbox{\hyperlink{classoomph_1_1DummyErrorEstimator}{oomph\+::\+Dummy\+Erro
 \item 
 namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
 \begin{DoxyCompactList}\small\item\em //////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Variables}
-\begin{DoxyCompactItemize}
-\item 
-\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{oomph\+::u}} \{\mbox{[}FE\mbox{]}\}(x\+\_\+k) = \textbackslash{}sum\+\_\+\{j=1\}$^\wedge$\{N\} U\+\_\+j \textbackslash{} \textbackslash{}psi\+\_\+j(x\+\_\+k)
-\begin{DoxyCompactList}\small\item\em Z2-\/error-\/estimator\+: Elements that can be used with Z2 error estimation should be derived from the base class \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator}{Element\+With\+Z2\+Error\+Estimator}} and implement its pure virtual member functions to provide the following functionality\+: \end{DoxyCompactList}\item 
-f \mbox{\hyperlink{namespaceoomph_ae8b63f2a0003b8aab9d2dda967f43fa0}{oomph\+::f\+\_\+i}}
-\begin{DoxyCompactList}\small\item\em where the $ \psi_j(x_k) $ are the (global) $ C^0 $ basis functions, the finite-\/element representation of the flux, $ f_i = \partial u/\partial x_i $, \end{DoxyCompactList}\end{DoxyCompactItemize}

@@ -166,7 +166,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a7c46336fdc3b386b0bab6111a3c55d44"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HelmholtzSmoother.html#a7c46336fdc3b386b0bab6111a3c55d44">complex_smoother_setup</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> * &gt; matrix_pt)=0</td></tr>
 <tr class="memdesc:a7c46336fdc3b386b0bab6111a3c55d44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup the smoother for the matrix specified by the pointer.  <a href="classoomph_1_1HelmholtzSmoother.html#a7c46336fdc3b386b0bab6111a3c55d44">More...</a><br /></td></tr>
 <tr class="separator:a7c46336fdc3b386b0bab6111a3c55d44"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeabcedb15b9f86681bcbcfbbbcc6b45c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HelmholtzSmoother.html#aeabcedb15b9f86681bcbcfbbbcc6b45c">complex_matrix_multiplication</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> * &gt; matrices_pt, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;<a class="el" href="namespaceoomph.html#a9d1d2da2b8bb8e73af72b5cadb8fe97c">x</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;soln)</td></tr>
+<tr class="memitem:aeabcedb15b9f86681bcbcfbbbcc6b45c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HelmholtzSmoother.html#aeabcedb15b9f86681bcbcfbbbcc6b45c">complex_matrix_multiplication</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> * &gt; matrices_pt, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;x, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;soln)</td></tr>
 <tr class="memdesc:aeabcedb15b9f86681bcbcfbbbcc6b45c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to calculate a complex matrix-vector product. Assumes the matrix has been provided as a <a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> of length two; the first entry containing the real part of the system matrix and the second entry containing the imaginary part.  <a href="classoomph_1_1HelmholtzSmoother.html#aeabcedb15b9f86681bcbcfbbbcc6b45c">More...</a><br /></td></tr>
 <tr class="separator:aeabcedb15b9f86681bcbcfbbbcc6b45c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a10dbef9689095e84e92f6864938850f7"><td class="memTemplParams" colspan="2">template&lt;typename MATRIX &gt; </td></tr>
@@ -587,7 +587,7 @@ template&lt;typename MATRIX &gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="complex__smoother_8h_source.html#l00069">69</a> of file <a class="el" href="complex__smoother_8h_source.html">complex_smoother.h</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00457">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, and <a class="el" href="pseudo__buckling__ring_8h_source.html#l00049">oomph::x</a>.</p>
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00457">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>.</p>
 
 </div>
 </div>
@@ -686,7 +686,7 @@ template&lt;typename MATRIX &gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="complex__smoother_8h_source.html#l00176">176</a> of file <a class="el" href="complex__smoother_8h_source.html">complex_smoother.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="complex__smoother_8h_source.html#l00472">oomph::ComplexDampedJacobi&lt; MATRIX &gt;::complex_smoother_solve()</a>, and <a class="el" href="complex__smoother_8h_source.html#l00991">oomph::ComplexGMRES&lt; MATRIX &gt;::complex_smoother_solve()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="complex__smoother_8h_source.html#l00472">oomph::ComplexDampedJacobi&lt; MATRIX &gt;::complex_smoother_solve()</a>, and <a class="el" href="complex__smoother_8h_source.html#l00987">oomph::ComplexGMRES&lt; MATRIX &gt;::complex_smoother_solve()</a>.</p>
 
 </div>
 </div>
@@ -721,7 +721,7 @@ template&lt;typename MATRIX &gt; </div>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Nov 2 2021 16:33:22
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Dec 21 2021 17:36:55
         </div>
       </div>
     </footer>

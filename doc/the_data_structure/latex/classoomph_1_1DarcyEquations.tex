@@ -18,9 +18,9 @@ Inheritance diagram for oomph\+::Darcy\+Equations\texorpdfstring{$<$}{<} DIM \te
 \doxysubsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1DarcyEquations_adcf88d9573b0f1c1988bdae6234eb7f8}{Source\+Fct\+Pt}}) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}})
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1DarcyEquations_adcf88d9573b0f1c1988bdae6234eb7f8}{Source\+Fct\+Pt}}) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Source function pointer typedef. \end{DoxyCompactList}\item 
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1DarcyEquations_abb20685508a2704d195f3b8e124d20b4}{Mass\+Source\+Fct\+Pt}}) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, double \&\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}})
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1DarcyEquations_abb20685508a2704d195f3b8e124d20b4}{Mass\+Source\+Fct\+Pt}}) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&f)
 \begin{DoxyCompactList}\small\item\em Mass source function pointer typedef. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
@@ -29,99 +29,99 @@ typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1DarcyEquations_abb20685508a27
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1DarcyEquations_adcf88d9573b0f1c1988bdae6234eb7f8}{Source\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1DarcyEquations_ae772a2a301660b62b132615c1a927c94}{source\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to body force function. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1DarcyEquations_adcf88d9573b0f1c1988bdae6234eb7f8}{Source\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1DarcyEquations_a670893e19f2ac6f7f02f0d5b03ca0b16}{source\+\_\+fct\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+\mbox{\hyperlink{classoomph_1_1DarcyEquations_adcf88d9573b0f1c1988bdae6234eb7f8}{Source\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1DarcyEquations_a670893e19f2ac6f7f02f0d5b03ca0b16}{source\+\_\+fct\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to body force function (const version) \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1DarcyEquations_abb20685508a2704d195f3b8e124d20b4}{Mass\+Source\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1DarcyEquations_ac437236f0ce03138b35a719db8e49022}{mass\+\_\+source\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to mass source function. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1DarcyEquations_abb20685508a2704d195f3b8e124d20b4}{Mass\+Source\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1DarcyEquations_a076ef9f7b1292436e7fd522476c73fc5}{mass\+\_\+source\+\_\+fct\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+\mbox{\hyperlink{classoomph_1_1DarcyEquations_abb20685508a2704d195f3b8e124d20b4}{Mass\+Source\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1DarcyEquations_a076ef9f7b1292436e7fd522476c73fc5}{mass\+\_\+source\+\_\+fct\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to mass source function (const version) \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DarcyEquations_aca046624f129486cc4ced6a2c056a53c}{source}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&b) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1DarcyEquations_aca046624f129486cc4ced6a2c056a53c}{source}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&b) const
 \begin{DoxyCompactList}\small\item\em Indirect access to the source function -\/ returns 0 if no source function has been set. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DarcyEquations_ae1074a981107175c6b5344003cb1fb85}{mass\+\_\+source}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, double \&b) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1DarcyEquations_ae1074a981107175c6b5344003cb1fb85}{mass\+\_\+source}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&b) const
 \begin{DoxyCompactList}\small\item\em Indirect access to the mass source function -\/ returns 0 if no mass source function has been set. \end{DoxyCompactList}\item 
-virtual unsigned \mbox{\hyperlink{classoomph_1_1DarcyEquations_a05d86d0d0568c5f90e6d735730798571}{required\+\_\+nvalue}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual unsigned \mbox{\hyperlink{classoomph_1_1DarcyEquations_a05d86d0d0568c5f90e6d735730798571}{required\+\_\+nvalue}} (const unsigned \&n) const =0
 \begin{DoxyCompactList}\small\item\em Number of values required at node n. \end{DoxyCompactList}\item 
-virtual int \mbox{\hyperlink{classoomph_1_1DarcyEquations_a559ad66d750c27f54ad342f0c8815e74}{q\+\_\+edge\+\_\+local\+\_\+eqn}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual int \mbox{\hyperlink{classoomph_1_1DarcyEquations_a559ad66d750c27f54ad342f0c8815e74}{q\+\_\+edge\+\_\+local\+\_\+eqn}} (const unsigned \&n) const =0
 \begin{DoxyCompactList}\small\item\em Return the equation number of the n-\/th edge (flux) degree of freedom. \end{DoxyCompactList}\item 
-virtual int \mbox{\hyperlink{classoomph_1_1DarcyEquations_a17e99902b01ea42312fa6148a796255f}{q\+\_\+internal\+\_\+local\+\_\+eqn}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual int \mbox{\hyperlink{classoomph_1_1DarcyEquations_a17e99902b01ea42312fa6148a796255f}{q\+\_\+internal\+\_\+local\+\_\+eqn}} (const unsigned \&n) const =0
 \begin{DoxyCompactList}\small\item\em Return the equation number of the n-\/th internal degree of freedom. \end{DoxyCompactList}\item 
-virtual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1DarcyEquations_a2c1b47887349b185b6d559cee71653d3}{q\+\_\+edge\+\_\+data\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1DarcyEquations_a2c1b47887349b185b6d559cee71653d3}{q\+\_\+edge\+\_\+data\+\_\+pt}} () const =0
 \begin{DoxyCompactList}\small\item\em Return vector of pointers to the \mbox{\hyperlink{classoomph_1_1Data}{Data}} objects that store the edge flux values. \end{DoxyCompactList}\item 
-virtual \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1DarcyEquations_a32dc61536e0a6cd3a6995f01727cfe00}{q\+\_\+internal\+\_\+data\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1DarcyEquations_a32dc61536e0a6cd3a6995f01727cfe00}{q\+\_\+internal\+\_\+data\+\_\+pt}} () const =0
 \begin{DoxyCompactList}\small\item\em Return pointer to the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object that stores the internal flux values. \end{DoxyCompactList}\item 
-virtual unsigned \mbox{\hyperlink{classoomph_1_1DarcyEquations_a2df2b20433444d1c8d3a9b6b9525c1ed}{q\+\_\+edge\+\_\+index}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual unsigned \mbox{\hyperlink{classoomph_1_1DarcyEquations_a2df2b20433444d1c8d3a9b6b9525c1ed}{q\+\_\+edge\+\_\+index}} (const unsigned \&n) const =0
 \begin{DoxyCompactList}\small\item\em Return the nodal index at which the nth edge unknown is stored. \end{DoxyCompactList}\item 
-virtual unsigned \mbox{\hyperlink{classoomph_1_1DarcyEquations_a84f8df62f86028a3519df586a18a3d20}{q\+\_\+internal\+\_\+index}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual unsigned \mbox{\hyperlink{classoomph_1_1DarcyEquations_a84f8df62f86028a3519df586a18a3d20}{q\+\_\+internal\+\_\+index}} () const =0
 \begin{DoxyCompactList}\small\item\em Return the index of the internal data where the q\+\_\+internal degrees of freedom are stored. \end{DoxyCompactList}\item 
-virtual unsigned \mbox{\hyperlink{classoomph_1_1DarcyEquations_a8b16b4fef19d8a785aae3cbf59e3a7cd}{q\+\_\+edge\+\_\+node\+\_\+number}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual unsigned \mbox{\hyperlink{classoomph_1_1DarcyEquations_a8b16b4fef19d8a785aae3cbf59e3a7cd}{q\+\_\+edge\+\_\+node\+\_\+number}} (const unsigned \&n) const =0
 \begin{DoxyCompactList}\small\item\em Return the number of the node where the nth edge unknown is stored. \end{DoxyCompactList}\item 
-virtual double \mbox{\hyperlink{classoomph_1_1DarcyEquations_ab66fb06e7f90655229b0eb2b96cf3f1e}{q\+\_\+edge}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual double \mbox{\hyperlink{classoomph_1_1DarcyEquations_ab66fb06e7f90655229b0eb2b96cf3f1e}{q\+\_\+edge}} (const unsigned \&n) const =0
 \begin{DoxyCompactList}\small\item\em Return the values of the n-\/th edge (flux) degree of freedom. \end{DoxyCompactList}\item 
-virtual unsigned \mbox{\hyperlink{classoomph_1_1DarcyEquations_a7800978eb25207be715250ad446150c5}{face\+\_\+index\+\_\+of\+\_\+q\+\_\+edge\+\_\+basis\+\_\+fct}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&j) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual unsigned \mbox{\hyperlink{classoomph_1_1DarcyEquations_a7800978eb25207be715250ad446150c5}{face\+\_\+index\+\_\+of\+\_\+q\+\_\+edge\+\_\+basis\+\_\+fct}} (const unsigned \&j) const =0
 \begin{DoxyCompactList}\small\item\em Return the face index associated with edge flux degree of freedom. \end{DoxyCompactList}\item 
-virtual unsigned \mbox{\hyperlink{classoomph_1_1DarcyEquations_ae1ab5c1d06efe95dfd2db523c6f34eb9}{face\+\_\+index\+\_\+of\+\_\+edge}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&j) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual unsigned \mbox{\hyperlink{classoomph_1_1DarcyEquations_ae1ab5c1d06efe95dfd2db523c6f34eb9}{face\+\_\+index\+\_\+of\+\_\+edge}} (const unsigned \&j) const =0
 \begin{DoxyCompactList}\small\item\em Return the face index associated with specified edge. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations_a7597d6d7e22f97fd2a6f4ab811dd2b72}{face\+\_\+local\+\_\+coordinate\+\_\+of\+\_\+flux\+\_\+interpolation\+\_\+point}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&edge, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations_a7597d6d7e22f97fd2a6f4ab811dd2b72}{face\+\_\+local\+\_\+coordinate\+\_\+of\+\_\+flux\+\_\+interpolation\+\_\+point}} (const unsigned \&edge, const unsigned \&n, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) const =0
 \begin{DoxyCompactList}\small\item\em Compute the face element coordinates of the nth flux interpolation point along an edge. \end{DoxyCompactList}\item 
-virtual double \mbox{\hyperlink{classoomph_1_1DarcyEquations_af92e9914e062e894514cca6a7cec0a26}{q\+\_\+internal}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual double \mbox{\hyperlink{classoomph_1_1DarcyEquations_af92e9914e062e894514cca6a7cec0a26}{q\+\_\+internal}} (const unsigned \&n) const =0
 \begin{DoxyCompactList}\small\item\em Return the values of the internal degree of freedom. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations_a6e1c3c5e23d71d80b7976e61be0ae8e9}{set\+\_\+q\+\_\+edge}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&value)=0
+virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations_a6e1c3c5e23d71d80b7976e61be0ae8e9}{set\+\_\+q\+\_\+edge}} (const unsigned \&n, const double \&value)=0
 \begin{DoxyCompactList}\small\item\em Set the values of the edge (flux) degree of freedom. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations_aafb7955f9dd5b433383ccff10f0fb7a0}{set\+\_\+q\+\_\+internal}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&value)=0
+virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations_aafb7955f9dd5b433383ccff10f0fb7a0}{set\+\_\+q\+\_\+internal}} (const unsigned \&n, const double \&value)=0
 \begin{DoxyCompactList}\small\item\em Set the values of the internal degree of freedom. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1DarcyEquations_abe00f95bb3c562a27799dd6dc3791c8c}{nq\+\_\+basis}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1DarcyEquations_abe00f95bb3c562a27799dd6dc3791c8c}{nq\+\_\+basis}} () const
 \begin{DoxyCompactList}\small\item\em Return the total number of computational basis functions for q. \end{DoxyCompactList}\item 
-virtual unsigned \mbox{\hyperlink{classoomph_1_1DarcyEquations_a13cbb6dce25734c0d3844466b0435d17}{nq\+\_\+basis\+\_\+edge}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual unsigned \mbox{\hyperlink{classoomph_1_1DarcyEquations_a13cbb6dce25734c0d3844466b0435d17}{nq\+\_\+basis\+\_\+edge}} () const =0
 \begin{DoxyCompactList}\small\item\em Return the number of edge basis functions for q. \end{DoxyCompactList}\item 
-virtual unsigned \mbox{\hyperlink{classoomph_1_1DarcyEquations_ad1836d0919835cd1d5f6af654ca03a52}{nq\+\_\+basis\+\_\+internal}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual unsigned \mbox{\hyperlink{classoomph_1_1DarcyEquations_ad1836d0919835cd1d5f6af654ca03a52}{nq\+\_\+basis\+\_\+internal}} () const =0
 \begin{DoxyCompactList}\small\item\em Return the number of internal basis functions for q. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations_ae4098060d7311ceab8ad7673876f070c}{get\+\_\+q\+\_\+basis\+\_\+local}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+basis) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations_ae4098060d7311ceab8ad7673876f070c}{get\+\_\+q\+\_\+basis\+\_\+local}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+basis) const =0
 \begin{DoxyCompactList}\small\item\em Returns the local form of the q basis at local coordinate s. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations_ad1d3676060924184befea1157a0735cd}{get\+\_\+div\+\_\+q\+\_\+basis\+\_\+local}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&div\+\_\+q\+\_\+basis\+\_\+ds) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations_ad1d3676060924184befea1157a0735cd}{get\+\_\+div\+\_\+q\+\_\+basis\+\_\+local}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&div\+\_\+q\+\_\+basis\+\_\+ds) const =0
 \begin{DoxyCompactList}\small\item\em Returns the local form of the q basis and dbasis/ds at local coordinate s. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DarcyEquations_a4d92638d654ee061508dbd2a6b1c5e95}{get\+\_\+q\+\_\+basis}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+basis) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1DarcyEquations_a4d92638d654ee061508dbd2a6b1c5e95}{get\+\_\+q\+\_\+basis}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+basis) const
 \begin{DoxyCompactList}\small\item\em Returns the transformed basis at local coordinate s. \end{DoxyCompactList}\item 
-virtual unsigned \mbox{\hyperlink{classoomph_1_1DarcyEquations_a4e09bc2cc0d08dc6dd43580c2a45d5c4}{nedge\+\_\+flux\+\_\+interpolation\+\_\+point}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual unsigned \mbox{\hyperlink{classoomph_1_1DarcyEquations_a4e09bc2cc0d08dc6dd43580c2a45d5c4}{nedge\+\_\+flux\+\_\+interpolation\+\_\+point}} () const =0
 \begin{DoxyCompactList}\small\item\em Returns the number of flux interpolation points along each edge of the element. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations_a250719cbe94e97c88996b5b4f5553649}{edge\+\_\+flux\+\_\+interpolation\+\_\+point\+\_\+global}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&j, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations_a250719cbe94e97c88996b5b4f5553649}{edge\+\_\+flux\+\_\+interpolation\+\_\+point\+\_\+global}} (const unsigned \&j, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x) const =0
 \begin{DoxyCompactList}\small\item\em Compute the global coordinates of the flux\+\_\+interpolation point associated with the j-\/th edge-\/based q basis fct. \end{DoxyCompactList}\item 
-virtual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1DarcyEquations_a4ce2b84b2e34b3d09c76328ddad99dfc}{edge\+\_\+flux\+\_\+interpolation\+\_\+point}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&edge, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1DarcyEquations_a4ce2b84b2e34b3d09c76328ddad99dfc}{edge\+\_\+flux\+\_\+interpolation\+\_\+point}} (const unsigned \&edge, const unsigned \&n) const =0
 \begin{DoxyCompactList}\small\item\em Returns the local coordinate of nth flux interpolation point along an edge. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations_a46a2b8488be8bb249852b4771b25c30a}{edge\+\_\+flux\+\_\+interpolation\+\_\+point\+\_\+global}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&edge, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations_a46a2b8488be8bb249852b4771b25c30a}{edge\+\_\+flux\+\_\+interpolation\+\_\+point\+\_\+global}} (const unsigned \&edge, const unsigned \&n, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x) const =0
 \begin{DoxyCompactList}\small\item\em Returns the global coordinates of the nth flux interpolation point along an edge. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations_a7731ceb6bd31bfd6cc6c8fa1ee369779}{pin\+\_\+q\+\_\+internal\+\_\+value}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n)=0
+virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations_a7731ceb6bd31bfd6cc6c8fa1ee369779}{pin\+\_\+q\+\_\+internal\+\_\+value}} (const unsigned \&n)=0
 \begin{DoxyCompactList}\small\item\em Pin the nth internal q value. \end{DoxyCompactList}\item 
-virtual int \mbox{\hyperlink{classoomph_1_1DarcyEquations_a3eee8ba9fd2256d01c4be1141a5d6eb1}{p\+\_\+local\+\_\+eqn}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual int \mbox{\hyperlink{classoomph_1_1DarcyEquations_a3eee8ba9fd2256d01c4be1141a5d6eb1}{p\+\_\+local\+\_\+eqn}} (const unsigned \&n) const =0
 \begin{DoxyCompactList}\small\item\em Return the equation number of the n-\/th pressure degree of freedom. \end{DoxyCompactList}\item 
-virtual double \mbox{\hyperlink{classoomph_1_1DarcyEquations_a788824ffa37b4fcae4d45eee75f2c39e}{p\+\_\+value}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual double \mbox{\hyperlink{classoomph_1_1DarcyEquations_a788824ffa37b4fcae4d45eee75f2c39e}{p\+\_\+value}} (const unsigned \&n) const =0
 \begin{DoxyCompactList}\small\item\em Return the nth pressure value. \end{DoxyCompactList}\item 
-virtual unsigned \mbox{\hyperlink{classoomph_1_1DarcyEquations_a2a27050f99b0dd3ab6686807fa84f866}{np\+\_\+basis}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual unsigned \mbox{\hyperlink{classoomph_1_1DarcyEquations_a2a27050f99b0dd3ab6686807fa84f866}{np\+\_\+basis}} () const =0
 \begin{DoxyCompactList}\small\item\em Return the total number of pressure basis functions. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations_ab413b560166194e4a9d1b7de4742c5c0}{get\+\_\+p\+\_\+basis}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&p\+\_\+basis) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations_ab413b560166194e4a9d1b7de4742c5c0}{get\+\_\+p\+\_\+basis}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&p\+\_\+basis) const =0
 \begin{DoxyCompactList}\small\item\em Return the pressure basis. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations_a93c88bdb79b37be378f5ef4dbe197fa6}{pin\+\_\+p\+\_\+value}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n)=0
+virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations_a93c88bdb79b37be378f5ef4dbe197fa6}{pin\+\_\+p\+\_\+value}} (const unsigned \&n)=0
 \begin{DoxyCompactList}\small\item\em Pin the nth pressure value. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations_a7c950999d5108350bd8a44f4ab286b2c}{set\+\_\+p\+\_\+value}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&value)=0
+virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations_a7c950999d5108350bd8a44f4ab286b2c}{set\+\_\+p\+\_\+value}} (const unsigned \&n, const double \&value)=0
 \begin{DoxyCompactList}\small\item\em Set the nth pressure value. \end{DoxyCompactList}\item 
-virtual \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1DarcyEquations_a79e5b9ff0bd9dbf5647109dcbc4766ba}{p\+\_\+data\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1DarcyEquations_a79e5b9ff0bd9dbf5647109dcbc4766ba}{p\+\_\+data\+\_\+pt}} () const =0
 \begin{DoxyCompactList}\small\item\em Return pointer to the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object that stores the pressure values. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations_a2d2b51170939e5804d18d59e2f6b4222}{scale\+\_\+basis}} (\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&basis) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations_a2d2b51170939e5804d18d59e2f6b4222}{scale\+\_\+basis}} (\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&basis) const =0
 \begin{DoxyCompactList}\small\item\em Scale the edge basis to allow arbitrary edge mappings. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1DarcyEquations_a7baf04e00b11ce49b04ff78022b5e382}{transform\+\_\+basis}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+basis\+\_\+local, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+basis) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1DarcyEquations_a7baf04e00b11ce49b04ff78022b5e382}{transform\+\_\+basis}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, const \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+basis\+\_\+local, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+basis) const
 \begin{DoxyCompactList}\small\item\em Performs a div-\/conserving transformation of the vector basis functions from the reference element to the actual element. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1DarcyEquations_a80171b8774d687ec6337f5be1a7f5fdd}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em Fill in contribution to residuals for the Darcy equations. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DarcyEquations_a60153f3aba6a1b68b09ea175f41b9edf}{interpolated\+\_\+q}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&q) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1DarcyEquations_a60153f3aba6a1b68b09ea175f41b9edf}{interpolated\+\_\+q}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&q) const
 \begin{DoxyCompactList}\small\item\em Calculate the FE representation of q. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1DarcyEquations_a38e9886909c756f121dd3d0ae6036328}{interpolated\+\_\+q}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1DarcyEquations_a38e9886909c756f121dd3d0ae6036328}{interpolated\+\_\+q}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, const unsigned \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Calculate the FE representation of the i-\/th component of q. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DarcyEquations_ab9f255825c7bc27d042b936757960f7a}{interpolated\+\_\+div\+\_\+q}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, double \&div\+\_\+q) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1DarcyEquations_ab9f255825c7bc27d042b936757960f7a}{interpolated\+\_\+div\+\_\+q}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, double \&div\+\_\+q) const
 \begin{DoxyCompactList}\small\item\em Calculate the FE representation of div q. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1DarcyEquations_a1a01360c1c30124f862f85c411afa016}{interpolated\+\_\+div\+\_\+q}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
+double \mbox{\hyperlink{classoomph_1_1DarcyEquations_a1a01360c1c30124f862f85c411afa016}{interpolated\+\_\+div\+\_\+q}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
 \begin{DoxyCompactList}\small\item\em Calculate the FE representation of div q and return it. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DarcyEquations_a800717c69f8a472d98ad0d9714a9598b}{interpolated\+\_\+p}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, double \&p) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1DarcyEquations_a800717c69f8a472d98ad0d9714a9598b}{interpolated\+\_\+p}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, double \&p) const
 \begin{DoxyCompactList}\small\item\em Calculate the FE representation of p. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1DarcyEquations_a564a225d0e00cf5923ef725b73a68fda}{interpolated\+\_\+p}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1DarcyEquations_a564a225d0e00cf5923ef725b73a68fda}{interpolated\+\_\+p}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) const
 \begin{DoxyCompactList}\small\item\em Calculate the FE representation of p and return it. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations_a7a98829567782b4973208317ab7bcd50}{pin\+\_\+superfluous\+\_\+darcy\+\_\+dofs}} ()
 \begin{DoxyCompactList}\small\item\em Helper function to pin superfluous dofs (empty; can be overloaded in projectable elements where we introduce at least one dof per node to allow projection during unstructured refinement) \end{DoxyCompactList}\item 
@@ -129,26 +129,26 @@ unsigned \mbox{\hyperlink{classoomph_1_1DarcyEquations_adee6b430a8f62190a5cad003
 \begin{DoxyCompactList}\small\item\em Self test -- empty for now. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1DarcyEquations_ac523da40b92a26e3d32c1a5e985e0d40}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Output with default number of plot points. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DarcyEquations_afa8de4033583509bffda8b0b8b34d6de}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&nplot)
+void \mbox{\hyperlink{classoomph_1_1DarcyEquations_afa8de4033583509bffda8b0b8b34d6de}{output}} (std\+::ostream \&outfile, const unsigned \&nplot)
 \begin{DoxyCompactList}\small\item\em Output FE representation of soln\+: x,y,q1,q2,div\+\_\+q,p at Nplot$^\wedge$\+DIM plot points. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DarcyEquations_a386bf5d62e4ad7dc8df9e0a55bc9d158}{output\+\_\+with\+\_\+projected\+\_\+flux}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&nplot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ unit\+\_\+normal)
+void \mbox{\hyperlink{classoomph_1_1DarcyEquations_a386bf5d62e4ad7dc8df9e0a55bc9d158}{output\+\_\+with\+\_\+projected\+\_\+flux}} (std\+::ostream \&outfile, const unsigned \&nplot, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ unit\+\_\+normal)
 \begin{DoxyCompactList}\small\item\em Output incl. projection of fluxes into direction of the specified unit vector. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DarcyEquations_a2b072036a9fba0dfcf682f9a5d2fa2b6}{output\+\_\+fct}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&nplot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1DarcyEquations_a2b072036a9fba0dfcf682f9a5d2fa2b6}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&nplot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Output FE representation of exact soln\+: x,y,q1,q2,div\+\_\+q,p at Nplot$^\wedge$\+DIM plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1DarcyEquations_aafb8f62e6b3f584d28d7547e8d01b6d4}{compute\+\_\+error}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&error, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&norm)
 \begin{DoxyCompactList}\small\item\em Compute the error between the FE solution and the exact solution using the H(div) norm for q and L$^\wedge$2 norm for p. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1DarcyEquations_a8315f65f0b04934eea304e60725a7268}{num\+\_\+\+Z2\+\_\+flux\+\_\+terms}} ()
 \begin{DoxyCompactList}\small\item\em Number off flux terms for Z2 error estimator (use actual flux) \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DarcyEquations_a5c077b66056e1d66c0bd8f0430875bf8}{get\+\_\+\+Z2\+\_\+flux}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux)
+void \mbox{\hyperlink{classoomph_1_1DarcyEquations_a5c077b66056e1d66c0bd8f0430875bf8}{get\+\_\+\+Z2\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux)
 \begin{DoxyCompactList}\small\item\em Z2 flux (use actual flux) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-virtual double \mbox{\hyperlink{classoomph_1_1DarcyEquations_a4052cf1c7cd03d9ea206f4cf885ef5ae}{shape\+\_\+basis\+\_\+test\+\_\+local}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+basis, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+test, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&p\+\_\+basis, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&p\+\_\+test, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&div\+\_\+q\+\_\+basis\+\_\+ds, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&div\+\_\+q\+\_\+test\+\_\+ds) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual double \mbox{\hyperlink{classoomph_1_1DarcyEquations_a4052cf1c7cd03d9ea206f4cf885ef5ae}{shape\+\_\+basis\+\_\+test\+\_\+local}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+basis, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+test, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&p\+\_\+basis, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&p\+\_\+test, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&div\+\_\+q\+\_\+basis\+\_\+ds, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&div\+\_\+q\+\_\+test\+\_\+ds) const =0
 \begin{DoxyCompactList}\small\item\em Returns the geometric basis, and the q, p and divergence basis functions and test functions at local coordinate s. \end{DoxyCompactList}\item 
-virtual double \mbox{\hyperlink{classoomph_1_1DarcyEquations_a43dc36e25fe5eed15066f50e4122c42b}{shape\+\_\+basis\+\_\+test\+\_\+local\+\_\+at\+\_\+knot}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+basis, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+test, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&p\+\_\+basis, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&p\+\_\+test, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&div\+\_\+q\+\_\+basis\+\_\+ds, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&div\+\_\+q\+\_\+test\+\_\+ds) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
+virtual double \mbox{\hyperlink{classoomph_1_1DarcyEquations_a43dc36e25fe5eed15066f50e4122c42b}{shape\+\_\+basis\+\_\+test\+\_\+local\+\_\+at\+\_\+knot}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+basis, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&q\+\_\+test, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&p\+\_\+basis, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&p\+\_\+test, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&div\+\_\+q\+\_\+basis\+\_\+ds, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&div\+\_\+q\+\_\+test\+\_\+ds) const =0
 \begin{DoxyCompactList}\small\item\em Returns the geometric basis, and the q, p and divergence basis functions and test functions at integration point ipt. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations_a3ca52cedfaf3579f2854c3f9b57de622}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, bool flag)
+virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations_a3ca52cedfaf3579f2854c3f9b57de622}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, bool flag)
 \begin{DoxyCompactList}\small\item\em Fill in residuals and, if flag==true, jacobian. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -175,7 +175,7 @@ Definition at line \mbox{\hyperlink{darcy__elements_8h_source_l00047}{47}} of fi
 \index{MassSourceFctPt@{MassSourceFctPt}!oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{MassSourceFctPt}{MassSourceFctPt}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::Mass\+Source\+Fct\+Pt) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, double \&\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}})}
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::Mass\+Source\+Fct\+Pt) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&f)}
 
 
 
@@ -190,7 +190,7 @@ Definition at line \mbox{\hyperlink{darcy__elements_8h_source_l00055}{55}} of fi
 \index{SourceFctPt@{SourceFctPt}!oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{SourceFctPt}{SourceFctPt}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::Source\+Fct\+Pt) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}})}
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::Source\+Fct\+Pt) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&f)}
 
 
 
@@ -242,14 +242,14 @@ Definition at line \mbox{\hyperlink{darcy__elements_8cc_source_l00254}{254}} of 
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
 
 \mbox{\Hypertarget{classoomph_1_1DarcyEquations_a4ce2b84b2e34b3d09c76328ddad99dfc}\label{classoomph_1_1DarcyEquations_a4ce2b84b2e34b3d09c76328ddad99dfc}} 
 \index{oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}!edge\_flux\_interpolation\_point@{edge\_flux\_interpolation\_point}}
 \index{edge\_flux\_interpolation\_point@{edge\_flux\_interpolation\_point}!oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{edge\_flux\_interpolation\_point()}{edge\_flux\_interpolation\_point()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::edge\+\_\+flux\+\_\+interpolation\+\_\+point (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{edge,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+virtual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::edge\+\_\+flux\+\_\+interpolation\+\_\+point (\begin{DoxyParamCaption}\item[{const unsigned \&}]{edge,  }\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -264,7 +264,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_afe7c2b
 \index{edge\_flux\_interpolation\_point\_global@{edge\_flux\_interpolation\_point\_global}!oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{edge\_flux\_interpolation\_point\_global()}{edge\_flux\_interpolation\_point\_global()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::edge\+\_\+flux\+\_\+interpolation\+\_\+point\+\_\+global (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{edge,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::edge\+\_\+flux\+\_\+interpolation\+\_\+point\+\_\+global (\begin{DoxyParamCaption}\item[{const unsigned \&}]{edge,  }\item[{const unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -279,7 +279,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a39394c
 \index{edge\_flux\_interpolation\_point\_global@{edge\_flux\_interpolation\_point\_global}!oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{edge\_flux\_interpolation\_point\_global()}{edge\_flux\_interpolation\_point\_global()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::edge\+\_\+flux\+\_\+interpolation\+\_\+point\+\_\+global (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{j,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::edge\+\_\+flux\+\_\+interpolation\+\_\+point\+\_\+global (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -294,7 +294,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a11c49e
 \index{face\_index\_of\_edge@{face\_index\_of\_edge}!oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{face\_index\_of\_edge()}{face\_index\_of\_edge()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual unsigned \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::face\+\_\+index\+\_\+of\+\_\+edge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+virtual unsigned \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::face\+\_\+index\+\_\+of\+\_\+edge (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -309,7 +309,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a194a2f
 \index{face\_index\_of\_q\_edge\_basis\_fct@{face\_index\_of\_q\_edge\_basis\_fct}!oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{face\_index\_of\_q\_edge\_basis\_fct()}{face\_index\_of\_q\_edge\_basis\_fct()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual unsigned \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::face\+\_\+index\+\_\+of\+\_\+q\+\_\+edge\+\_\+basis\+\_\+fct (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+virtual unsigned \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::face\+\_\+index\+\_\+of\+\_\+q\+\_\+edge\+\_\+basis\+\_\+fct (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -324,7 +324,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a7abc47
 \index{face\_local\_coordinate\_of\_flux\_interpolation\_point@{face\_local\_coordinate\_of\_flux\_interpolation\_point}!oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{face\_local\_coordinate\_of\_flux\_interpolation\_point()}{face\_local\_coordinate\_of\_flux\_interpolation\_point()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::face\+\_\+local\+\_\+coordinate\+\_\+of\+\_\+flux\+\_\+interpolation\+\_\+point (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{edge,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::face\+\_\+local\+\_\+coordinate\+\_\+of\+\_\+flux\+\_\+interpolation\+\_\+point (\begin{DoxyParamCaption}\item[{const unsigned \&}]{edge,  }\item[{const unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -374,7 +374,7 @@ Definition at line \mbox{\hyperlink{darcy__elements_8cc_source_l00346}{346}} of 
 
 
 
-References \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{oomph\+::f()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 
 
@@ -385,7 +385,7 @@ Referenced by \mbox{\hyperlink{darcy__elements_8h_source_l00258}{oomph\+::\+Darc
 \index{get\_div\_q\_basis\_local@{get\_div\_q\_basis\_local}!oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_div\_q\_basis\_local()}{get\_div\_q\_basis\_local()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::get\+\_\+div\+\_\+q\+\_\+basis\+\_\+local (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{div\+\_\+q\+\_\+basis\+\_\+ds }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::get\+\_\+div\+\_\+q\+\_\+basis\+\_\+local (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{div\+\_\+q\+\_\+basis\+\_\+ds }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -404,7 +404,7 @@ Referenced by \mbox{\hyperlink{darcy__elements_8h_source_l00317}{oomph\+::\+Darc
 \index{get\_p\_basis@{get\_p\_basis}!oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_p\_basis()}{get\_p\_basis()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::get\+\_\+p\+\_\+basis (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{p\+\_\+basis }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::get\+\_\+p\+\_\+basis (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{p\+\_\+basis }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -423,7 +423,7 @@ Referenced by \mbox{\hyperlink{darcy__elements_8h_source_l00375}{oomph\+::\+Darc
 \index{get\_q\_basis@{get\_q\_basis}!oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_q\_basis()}{get\_q\_basis()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::get\+\_\+q\+\_\+basis (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+basis }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::get\+\_\+q\+\_\+basis (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+basis }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -435,7 +435,7 @@ Definition at line \mbox{\hyperlink{darcy__elements_8h_source_l00193}{193}} of f
 
 
 
-References \mbox{\hyperlink{classoomph_1_1DarcyEquations_ae4098060d7311ceab8ad7673876f070c}{oomph\+::\+Darcy\+Equations$<$ DIM $>$\+::get\+\_\+q\+\_\+basis\+\_\+local()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{darcy__elements_8h_source_l00172}{oomph\+::\+Darcy\+Equations$<$ DIM $>$\+::nq\+\_\+basis()}}, and \mbox{\hyperlink{darcy__elements_8cc_source_l00035}{oomph\+::\+Darcy\+Equations$<$ DIM $>$\+::transform\+\_\+basis()}}.
+References \mbox{\hyperlink{classoomph_1_1DarcyEquations_ae4098060d7311ceab8ad7673876f070c}{oomph\+::\+Darcy\+Equations$<$ DIM $>$\+::get\+\_\+q\+\_\+basis\+\_\+local()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{darcy__elements_8h_source_l00172}{oomph\+::\+Darcy\+Equations$<$ DIM $>$\+::nq\+\_\+basis()}}, and \mbox{\hyperlink{darcy__elements_8cc_source_l00035}{oomph\+::\+Darcy\+Equations$<$ DIM $>$\+::transform\+\_\+basis()}}.
 
 
 
@@ -446,7 +446,7 @@ Referenced by \mbox{\hyperlink{darcy__elements_8h_source_l00272}{oomph\+::\+Darc
 \index{get\_q\_basis\_local@{get\_q\_basis\_local}!oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_q\_basis\_local()}{get\_q\_basis\_local()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::get\+\_\+q\+\_\+basis\+\_\+local (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+basis }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::get\+\_\+q\+\_\+basis\+\_\+local (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+basis }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -465,7 +465,7 @@ Referenced by \mbox{\hyperlink{darcy__elements_8h_source_l00193}{oomph\+::\+Darc
 \index{get\_Z2\_flux@{get\_Z2\_flux}!oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_Z2\_flux()}{get\_Z2\_flux()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::get\+\_\+\+Z2\+\_\+flux (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::get\+\_\+\+Z2\+\_\+flux (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -488,7 +488,7 @@ References \mbox{\hyperlink{darcy__elements_8h_source_l00272}{oomph\+::\+Darcy\+
 \index{interpolated\_div\_q@{interpolated\_div\_q}!oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{interpolated\_div\_q()}{interpolated\_div\_q()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::interpolated\+\_\+div\+\_\+q (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+double \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::interpolated\+\_\+div\+\_\+q (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -507,7 +507,7 @@ References \mbox{\hyperlink{darcy__elements_8h_source_l00317}{oomph\+::\+Darcy\+
 \index{interpolated\_div\_q@{interpolated\_div\_q}!oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{interpolated\_div\_q()}{interpolated\_div\_q()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::interpolated\+\_\+div\+\_\+q (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{double \&}]{div\+\_\+q }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::interpolated\+\_\+div\+\_\+q (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{double \&}]{div\+\_\+q }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -519,7 +519,7 @@ Definition at line \mbox{\hyperlink{darcy__elements_8h_source_l00317}{317}} of f
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01986}{oomph\+::\+Finite\+Element\+::dshape\+\_\+local()}}, \mbox{\hyperlink{classoomph_1_1DarcyEquations_ad1d3676060924184befea1157a0735cd}{oomph\+::\+Darcy\+Equations$<$ DIM $>$\+::get\+\_\+div\+\_\+q\+\_\+basis\+\_\+local()}}, \mbox{\hyperlink{elements_8h_source_l01613}{oomph\+::\+Finite\+Element\+::inverse\+\_\+jacobian}}, \mbox{\hyperlink{elements_8h_source_l01508}{oomph\+::\+Finite\+Element\+::local\+\_\+to\+\_\+eulerian\+\_\+mapping()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{darcy__elements_8h_source_l00172}{oomph\+::\+Darcy\+Equations$<$ DIM $>$\+::nq\+\_\+basis()}}, \mbox{\hyperlink{classoomph_1_1DarcyEquations_a13cbb6dce25734c0d3844466b0435d17}{oomph\+::\+Darcy\+Equations$<$ DIM $>$\+::nq\+\_\+basis\+\_\+edge()}}, \mbox{\hyperlink{classoomph_1_1DarcyEquations_ab66fb06e7f90655229b0eb2b96cf3f1e}{oomph\+::\+Darcy\+Equations$<$ DIM $>$\+::q\+\_\+edge()}}, \mbox{\hyperlink{classoomph_1_1DarcyEquations_af92e9914e062e894514cca6a7cec0a26}{oomph\+::\+Darcy\+Equations$<$ DIM $>$\+::q\+\_\+internal()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References \mbox{\hyperlink{elements_8h_source_l01981}{oomph\+::\+Finite\+Element\+::dshape\+\_\+local()}}, \mbox{\hyperlink{classoomph_1_1DarcyEquations_ad1d3676060924184befea1157a0735cd}{oomph\+::\+Darcy\+Equations$<$ DIM $>$\+::get\+\_\+div\+\_\+q\+\_\+basis\+\_\+local()}}, \mbox{\hyperlink{elements_8h_source_l01508}{oomph\+::\+Finite\+Element\+::local\+\_\+to\+\_\+eulerian\+\_\+mapping()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{darcy__elements_8h_source_l00172}{oomph\+::\+Darcy\+Equations$<$ DIM $>$\+::nq\+\_\+basis()}}, \mbox{\hyperlink{classoomph_1_1DarcyEquations_a13cbb6dce25734c0d3844466b0435d17}{oomph\+::\+Darcy\+Equations$<$ DIM $>$\+::nq\+\_\+basis\+\_\+edge()}}, \mbox{\hyperlink{classoomph_1_1DarcyEquations_ab66fb06e7f90655229b0eb2b96cf3f1e}{oomph\+::\+Darcy\+Equations$<$ DIM $>$\+::q\+\_\+edge()}}, \mbox{\hyperlink{classoomph_1_1DarcyEquations_af92e9914e062e894514cca6a7cec0a26}{oomph\+::\+Darcy\+Equations$<$ DIM $>$\+::q\+\_\+internal()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 
 
@@ -530,7 +530,7 @@ Referenced by \mbox{\hyperlink{darcy__elements_8h_source_l00362}{oomph\+::\+Darc
 \index{interpolated\_p@{interpolated\_p}!oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{interpolated\_p()}{interpolated\_p()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::interpolated\+\_\+p (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+double \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::interpolated\+\_\+p (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -549,7 +549,7 @@ References \mbox{\hyperlink{darcy__elements_8h_source_l00375}{oomph\+::\+Darcy\+
 \index{interpolated\_p@{interpolated\_p}!oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{interpolated\_p()}{interpolated\_p()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::interpolated\+\_\+p (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{double \&}]{p }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::interpolated\+\_\+p (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{double \&}]{p }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -572,7 +572,7 @@ Referenced by \mbox{\hyperlink{darcy__elements_8h_source_l00397}{oomph\+::\+Darc
 \index{interpolated\_q@{interpolated\_q}!oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{interpolated\_q()}{interpolated\_q()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::interpolated\+\_\+q (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+double \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::interpolated\+\_\+q (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const unsigned}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -591,7 +591,7 @@ References \mbox{\hyperlink{darcy__elements_8h_source_l00193}{oomph\+::\+Darcy\+
 \index{interpolated\_q@{interpolated\_q}!oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{interpolated\_q()}{interpolated\_q()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::interpolated\+\_\+q (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{q }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::interpolated\+\_\+q (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{q }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -614,7 +614,7 @@ Referenced by \mbox{\hyperlink{darcy__elements_8h_source_l00465}{oomph\+::\+Darc
 \index{mass\_source@{mass\_source}!oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{mass\_source()}{mass\_source()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::mass\+\_\+source (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{double \&}]{b }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::mass\+\_\+source (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{double \&}]{b }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -626,7 +626,7 @@ Definition at line \mbox{\hyperlink{darcy__elements_8h_source_l00107}{107}} of f
 
 
 
-References \mbox{\hyperlink{darcy__elements_8h_source_l00504}{oomph\+::\+Darcy\+Equations$<$ DIM $>$\+::\+Mass\+\_\+source\+\_\+fct\+\_\+pt}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{darcy__elements_8h_source_l00504}{oomph\+::\+Darcy\+Equations$<$ DIM $>$\+::\+Mass\+\_\+source\+\_\+fct\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1DarcyEquations_ac437236f0ce03138b35a719db8e49022}\label{classoomph_1_1DarcyEquations_ac437236f0ce03138b35a719db8e49022}} 
 \index{oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}!mass\_source\_fct\_pt@{mass\_source\_fct\_pt}}
@@ -812,7 +812,7 @@ Referenced by \mbox{\hyperlink{darcy__elements_8h_source_l00423}{oomph\+::\+Darc
 \index{output@{output}!oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -835,7 +835,7 @@ References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink
 \index{output\_fct@{output\_fct}!oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{output\_fct()}{output\_fct()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{nplot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -851,14 +851,14 @@ Definition at line \mbox{\hyperlink{darcy__elements_8cc_source_l00202}{202}} of 
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1DarcyEquations_a386bf5d62e4ad7dc8df9e0a55bc9d158}\label{classoomph_1_1DarcyEquations_a386bf5d62e4ad7dc8df9e0a55bc9d158}} 
 \index{oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}!output\_with\_projected\_flux@{output\_with\_projected\_flux}}
 \index{output\_with\_projected\_flux@{output\_with\_projected\_flux}!oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{output\_with\_projected\_flux()}{output\_with\_projected\_flux()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::output\+\_\+with\+\_\+projected\+\_\+flux (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{nplot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$}]{unit\+\_\+normal }\end{DoxyParamCaption})}
+void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::output\+\_\+with\+\_\+projected\+\_\+flux (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$}]{unit\+\_\+normal }\end{DoxyParamCaption})}
 
 
 
@@ -892,7 +892,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a9b13e7
 \index{p\_local\_eqn@{p\_local\_eqn}!oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{p\_local\_eqn()}{p\_local\_eqn()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual int \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::p\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+virtual int \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::p\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -907,7 +907,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a969b05
 \index{p\_value@{p\_value}!oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{p\_value()}{p\_value()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual double \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::p\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+virtual double \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::p\+\_\+value (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -926,7 +926,7 @@ Referenced by \mbox{\hyperlink{darcy__elements_8h_source_l00375}{oomph\+::\+Darc
 \index{pin\_p\_value@{pin\_p\_value}!oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{pin\_p\_value()}{pin\_p\_value()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::pin\+\_\+p\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::pin\+\_\+p\+\_\+value (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -941,7 +941,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_ae7a875
 \index{pin\_q\_internal\_value@{pin\_q\_internal\_value}!oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{pin\_q\_internal\_value()}{pin\_q\_internal\_value()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::pin\+\_\+q\+\_\+internal\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::pin\+\_\+q\+\_\+internal\+\_\+value (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -971,7 +971,7 @@ Definition at line \mbox{\hyperlink{darcy__elements_8h_source_l00413}{413}} of f
 \index{q\_edge@{q\_edge}!oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{q\_edge()}{q\_edge()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual double \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::q\+\_\+edge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+virtual double \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::q\+\_\+edge (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -1005,7 +1005,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a4b3661
 \index{q\_edge\_index@{q\_edge\_index}!oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{q\_edge\_index()}{q\_edge\_index()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual unsigned \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::q\+\_\+edge\+\_\+index (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+virtual unsigned \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::q\+\_\+edge\+\_\+index (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -1020,7 +1020,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a5c0de6
 \index{q\_edge\_local\_eqn@{q\_edge\_local\_eqn}!oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{q\_edge\_local\_eqn()}{q\_edge\_local\_eqn()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual int \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::q\+\_\+edge\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+virtual int \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::q\+\_\+edge\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -1035,7 +1035,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_ac2ff2f
 \index{q\_edge\_node\_number@{q\_edge\_node\_number}!oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{q\_edge\_node\_number()}{q\_edge\_node\_number()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual unsigned \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::q\+\_\+edge\+\_\+node\+\_\+number (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+virtual unsigned \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::q\+\_\+edge\+\_\+node\+\_\+number (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -1050,7 +1050,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a81e938
 \index{q\_internal@{q\_internal}!oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{q\_internal()}{q\_internal()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual double \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::q\+\_\+internal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+virtual double \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::q\+\_\+internal (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -1099,7 +1099,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_aabea3c
 \index{q\_internal\_local\_eqn@{q\_internal\_local\_eqn}!oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{q\_internal\_local\_eqn()}{q\_internal\_local\_eqn()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual int \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::q\+\_\+internal\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+virtual int \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::q\+\_\+internal\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -1114,7 +1114,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a9c2b45
 \index{required\_nvalue@{required\_nvalue}!oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{required\_nvalue()}{required\_nvalue()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual unsigned \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+virtual unsigned \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -1156,7 +1156,7 @@ Self test -- empty for now.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_af04bf6f6a9a60946e6afeee7afdd709c}{oomph\+::\+Finite\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_af94c5a5e22175d5420b33b3b79e46ed3}{oomph\+::\+Finite\+Element}}.
 
 
 
@@ -1167,7 +1167,7 @@ Definition at line \mbox{\hyperlink{darcy__elements_8h_source_l00417}{417}} of f
 \index{set\_p\_value@{set\_p\_value}!oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{set\_p\_value()}{set\_p\_value()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::set\+\_\+p\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::set\+\_\+p\+\_\+value (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const double \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -1182,7 +1182,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a8ea07d
 \index{set\_q\_edge@{set\_q\_edge}!oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{set\_q\_edge()}{set\_q\_edge()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::set\+\_\+q\+\_\+edge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::set\+\_\+q\+\_\+edge (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const double \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -1197,7 +1197,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_ad4d078
 \index{set\_q\_internal@{set\_q\_internal}!oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{set\_q\_internal()}{set\_q\_internal()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::set\+\_\+q\+\_\+internal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+virtual void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::set\+\_\+q\+\_\+internal (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const double \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -1212,7 +1212,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_a651973
 \index{shape\_basis\_test\_local@{shape\_basis\_test\_local}!oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{shape\_basis\_test\_local()}{shape\_basis\_test\_local()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual double \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::shape\+\_\+basis\+\_\+test\+\_\+local (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+basis,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+test,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{p\+\_\+basis,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{p\+\_\+test,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{div\+\_\+q\+\_\+basis\+\_\+ds,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{div\+\_\+q\+\_\+test\+\_\+ds }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+virtual double \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::shape\+\_\+basis\+\_\+test\+\_\+local (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+basis,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+test,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{p\+\_\+basis,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{p\+\_\+test,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{div\+\_\+q\+\_\+basis\+\_\+ds,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{div\+\_\+q\+\_\+test\+\_\+ds }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
 
 
 
@@ -1227,7 +1227,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_abf52dc
 \index{shape\_basis\_test\_local\_at\_knot@{shape\_basis\_test\_local\_at\_knot}!oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{shape\_basis\_test\_local\_at\_knot()}{shape\_basis\_test\_local\_at\_knot()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual double \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::shape\+\_\+basis\+\_\+test\+\_\+local\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+basis,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+test,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{p\+\_\+basis,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{p\+\_\+test,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{div\+\_\+q\+\_\+basis\+\_\+ds,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{div\+\_\+q\+\_\+test\+\_\+ds }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+virtual double \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::shape\+\_\+basis\+\_\+test\+\_\+local\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+basis,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+test,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{p\+\_\+basis,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{p\+\_\+test,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{div\+\_\+q\+\_\+basis\+\_\+ds,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{div\+\_\+q\+\_\+test\+\_\+ds }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
 
 
 
@@ -1242,7 +1242,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1TRaviartThomasDarcyElement_afdb054
 \index{source@{source}!oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{source()}{source()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::source (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{b }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::source (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{b }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1254,7 +1254,7 @@ Definition at line \mbox{\hyperlink{darcy__elements_8h_source_l00086}{86}} of fi
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02616}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{darcy__elements_8h_source_l00501}{oomph\+::\+Darcy\+Equations$<$ DIM $>$\+::\+Source\+\_\+fct\+\_\+pt}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{darcy__elements_8h_source_l00501}{oomph\+::\+Darcy\+Equations$<$ DIM $>$\+::\+Source\+\_\+fct\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1DarcyEquations_ae772a2a301660b62b132615c1a927c94}\label{classoomph_1_1DarcyEquations_ae772a2a301660b62b132615c1a927c94}} 
 \index{oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}!source\_fct\_pt@{source\_fct\_pt}}
@@ -1299,7 +1299,7 @@ References \mbox{\hyperlink{darcy__elements_8h_source_l00501}{oomph\+::\+Darcy\+
 \index{transform\_basis@{transform\_basis}!oomph::DarcyEquations$<$ DIM $>$@{oomph::DarcyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{transform\_basis()}{transform\_basis()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::transform\+\_\+basis (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+basis\+\_\+local,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+basis }\end{DoxyParamCaption}) const}
+double \mbox{\hyperlink{classoomph_1_1DarcyEquations}{oomph\+::\+Darcy\+Equations}}$<$ DIM $>$\+::transform\+\_\+basis (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+basis\+\_\+local,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{q\+\_\+basis }\end{DoxyParamCaption}) const}
 
 
 

@@ -20,43 +20,43 @@ Inheritance diagram for oomph\+::Projectable\+Unsteady\+Heat\+Space\+Time\+Eleme
 \item 
 \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_aaa048cb524029e81faee1c9c67efed0c}{Projectable\+Unsteady\+Heat\+Space\+Time\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards...\mbox{]}. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a4f0b3b7062efeaf66917230ceb472f1f}{data\+\_\+values\+\_\+of\+\_\+field}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&fld)
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a4f0b3b7062efeaf66917230ceb472f1f}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a8efa94e5a3145a6be2d903ce3e03d075}{nfields\+\_\+for\+\_\+projection}} ()
 \begin{DoxyCompactList}\small\item\em Number of fields to be projected\+: Just one. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a0fc8ec5028f2d7e52036babafb895442}{nhistory\+\_\+values\+\_\+for\+\_\+projection}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&fld)
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a0fc8ec5028f2d7e52036babafb895442}{nhistory\+\_\+values\+\_\+for\+\_\+projection}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Number of history values to be stored for fld-\/th field. (Note\+: count includes current value!) \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a6fa0baef8723cd4f6f413a3308622b35}{nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection}} ()
 \begin{DoxyCompactList}\small\item\em Number of positional history values (Note\+: count includes current value!) \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_abffad68b686c161f623183f5db539c1e}{jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&fld, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi)
+double \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_abffad68b686c161f623183f5db539c1e}{jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field}} (const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi)
 \begin{DoxyCompactList}\small\item\em Return Jacobian of mapping and shape functions of field fld at local coordinate s. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a09c12a1c8968d3450f8a826cc7e79277}{get\+\_\+field}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&fld, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
+double \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a09c12a1c8968d3450f8a826cc7e79277}{get\+\_\+field}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
 \begin{DoxyCompactList}\small\item\em Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: history values) \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a72785da013a5b9579367fe3965f1c65a}{nvalue\+\_\+of\+\_\+field}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&fld)
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a72785da013a5b9579367fe3965f1c65a}{nvalue\+\_\+of\+\_\+field}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Return number of values in field fld\+: One per node. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a0590f6d157e23ae674518acc98503658}{local\+\_\+equation}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&fld, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&j)
+int \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a0590f6d157e23ae674518acc98503658}{local\+\_\+equation}} (const unsigned \&fld, const unsigned \&j)
 \begin{DoxyCompactList}\small\item\em Return local equation number of value j in field fld. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a4ce7c79eade9f403c602c34020cf8beb}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&nplot)
+void \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a4ce7c79eade9f403c602c34020cf8beb}{output}} (std\+::ostream \&outfile, const unsigned \&nplot)
 \begin{DoxyCompactList}\small\item\em Output FE representation of soln\+: x,t,u or x,y,t,u at n\+\_\+plot$^\wedge$(SPATIAL\+\_\+\+DIM+1) plot points. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_aaa048cb524029e81faee1c9c67efed0c}{Projectable\+Unsteady\+Heat\+Space\+Time\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards...\mbox{]}. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a4f0b3b7062efeaf66917230ceb472f1f}{data\+\_\+values\+\_\+of\+\_\+field}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&fld)
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a4f0b3b7062efeaf66917230ceb472f1f}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a8efa94e5a3145a6be2d903ce3e03d075}{nfields\+\_\+for\+\_\+projection}} ()
 \begin{DoxyCompactList}\small\item\em Number of fields to be projected\+: Just one. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a0fc8ec5028f2d7e52036babafb895442}{nhistory\+\_\+values\+\_\+for\+\_\+projection}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&fld)
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a0fc8ec5028f2d7e52036babafb895442}{nhistory\+\_\+values\+\_\+for\+\_\+projection}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Number of history values to be stored for fld-\/th field. (Note\+: count includes current value!) \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a6fa0baef8723cd4f6f413a3308622b35}{nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection}} ()
 \begin{DoxyCompactList}\small\item\em Number of positional history values (Note\+: count includes current value!) \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_abffad68b686c161f623183f5db539c1e}{jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&fld, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi)
+double \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_abffad68b686c161f623183f5db539c1e}{jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field}} (const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi)
 \begin{DoxyCompactList}\small\item\em Return Jacobian of mapping and shape functions of field fld at local coordinate s. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a09c12a1c8968d3450f8a826cc7e79277}{get\+\_\+field}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&fld, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
+double \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a09c12a1c8968d3450f8a826cc7e79277}{get\+\_\+field}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
 \begin{DoxyCompactList}\small\item\em Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: history values) \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a72785da013a5b9579367fe3965f1c65a}{nvalue\+\_\+of\+\_\+field}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&fld)
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a72785da013a5b9579367fe3965f1c65a}{nvalue\+\_\+of\+\_\+field}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Return number of values in field fld\+: One per node. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a0590f6d157e23ae674518acc98503658}{local\+\_\+equation}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&fld, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&j)
+int \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a0590f6d157e23ae674518acc98503658}{local\+\_\+equation}} (const unsigned \&fld, const unsigned \&j)
 \begin{DoxyCompactList}\small\item\em Return local equation number of value j in field fld. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a4ce7c79eade9f403c602c34020cf8beb}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&nplot)
+void \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a4ce7c79eade9f403c602c34020cf8beb}{output}} (std\+::ostream \&outfile, const unsigned \&nplot)
 \begin{DoxyCompactList}\small\item\em Output FE representation of soln\+: x,t,u or x,y,t,u at n\+\_\+plot$^\wedge$(SPATIAL\+\_\+\+DIM+1) plot points. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -68,7 +68,7 @@ class oomph\+::\+Projectable\+Unsteady\+Heat\+Space\+Time\+Element$<$ UNSTEADY\+
 
 Space\+Time\+Unsteady\+Heat upgraded to become projectable 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00927}{927}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00925}{925}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 
 
@@ -86,7 +86,7 @@ Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00933}{933}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00931}{931}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_aaa048cb524029e81faee1c9c67efed0c}\label{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_aaa048cb524029e81faee1c9c67efed0c}} 
 \index{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$@{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$}!ProjectableUnsteadyHeatSpaceTimeElement@{ProjectableUnsteadyHeatSpaceTimeElement}}
@@ -101,7 +101,7 @@ Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l01015}{1015}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l01013}{1013}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 
 
@@ -111,7 +111,7 @@ Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unstea
 \index{data\_values\_of\_field@{data\_values\_of\_field}!oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$@{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{data\_values\_of\_field()}{data\_values\_of\_field()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$class UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement}{oomph\+::\+Projectable\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement}{oomph\+::\+Projectable\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -123,18 +123,18 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a2292bd9c58694f
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00939}{939}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00937}{937}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a4f0b3b7062efeaf66917230ceb472f1f}\label{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a4f0b3b7062efeaf66917230ceb472f1f}} 
 \index{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$@{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$}!data\_values\_of\_field@{data\_values\_of\_field}}
 \index{data\_values\_of\_field@{data\_values\_of\_field}!oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$@{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{data\_values\_of\_field()}{data\_values\_of\_field()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$class UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement}{oomph\+::\+Projectable\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement}{oomph\+::\+Projectable\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -146,18 +146,18 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a2292bd9c58694f
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l01021}{1021}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l01019}{1019}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a09c12a1c8968d3450f8a826cc7e79277}\label{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a09c12a1c8968d3450f8a826cc7e79277}} 
 \index{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$@{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$}!get\_field@{get\_field}}
 \index{get\_field@{get\_field}!oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$@{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{get\_field()}{get\_field()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$class UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement}{oomph\+::\+Projectable\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$\+::get\+\_\+field (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{fld,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+double \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement}{oomph\+::\+Projectable\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$\+::get\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const unsigned \&}]{fld,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -169,18 +169,18 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ae4da5b565b6d33
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l01073}{1073}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l01071}{1071}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02598}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
+References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a09c12a1c8968d3450f8a826cc7e79277}\label{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a09c12a1c8968d3450f8a826cc7e79277}} 
 \index{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$@{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$}!get\_field@{get\_field}}
 \index{get\_field@{get\_field}!oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$@{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{get\_field()}{get\_field()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$class UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement}{oomph\+::\+Projectable\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$\+::get\+\_\+field (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{fld,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+double \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement}{oomph\+::\+Projectable\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$\+::get\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const unsigned \&}]{fld,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -192,18 +192,18 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ae4da5b565b6d33
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l01155}{1155}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l01153}{1153}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02598}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
+References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_abffad68b686c161f623183f5db539c1e}\label{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_abffad68b686c161f623183f5db539c1e}} 
 \index{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$@{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$}!jacobian\_and\_shape\_of\_field@{jacobian\_and\_shape\_of\_field}}
 \index{jacobian\_and\_shape\_of\_field@{jacobian\_and\_shape\_of\_field}!oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$@{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{jacobian\_and\_shape\_of\_field()}{jacobian\_and\_shape\_of\_field()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$class UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement}{oomph\+::\+Projectable\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$\+::jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{fld,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+double \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement}{oomph\+::\+Projectable\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$\+::jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -215,18 +215,18 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ad45c21b58c0985
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l01023}{1023}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l01021}{1021}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02616}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_abffad68b686c161f623183f5db539c1e}\label{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_abffad68b686c161f623183f5db539c1e}} 
 \index{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$@{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$}!jacobian\_and\_shape\_of\_field@{jacobian\_and\_shape\_of\_field}}
 \index{jacobian\_and\_shape\_of\_field@{jacobian\_and\_shape\_of\_field}!oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$@{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{jacobian\_and\_shape\_of\_field()}{jacobian\_and\_shape\_of\_field()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$class UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement}{oomph\+::\+Projectable\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$\+::jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{fld,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+double \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement}{oomph\+::\+Projectable\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$\+::jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -238,18 +238,18 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ad45c21b58c0985
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l01105}{1105}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l01103}{1103}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02616}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a0590f6d157e23ae674518acc98503658}\label{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a0590f6d157e23ae674518acc98503658}} 
 \index{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$@{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$}!local\_equation@{local\_equation}}
 \index{local\_equation@{local\_equation}!oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$@{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{local\_equation()}{local\_equation()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$class UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$ \\
-int \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement}{oomph\+::\+Projectable\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$\+::local\+\_\+equation (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{fld,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+int \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement}{oomph\+::\+Projectable\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$\+::local\+\_\+equation (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -261,7 +261,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac5c27ae929ff63
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l01149}{1149}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l01147}{1147}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 
 
@@ -272,7 +272,7 @@ References \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Elemen
 \index{local\_equation@{local\_equation}!oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$@{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{local\_equation()}{local\_equation()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$class UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$ \\
-int \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement}{oomph\+::\+Projectable\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$\+::local\+\_\+equation (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{fld,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+int \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement}{oomph\+::\+Projectable\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$\+::local\+\_\+equation (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -284,7 +284,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac5c27ae929ff63
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l01231}{1231}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l01229}{1229}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 
 
@@ -307,7 +307,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a44634aa4049332
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00978}{978}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00976}{976}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a8efa94e5a3145a6be2d903ce3e03d075}\label{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a8efa94e5a3145a6be2d903ce3e03d075}} 
 \index{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$@{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$}!nfields\_for\_projection@{nfields\_for\_projection}}
@@ -326,7 +326,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a44634aa4049332
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l01060}{1060}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l01058}{1058}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a6fa0baef8723cd4f6f413a3308622b35}\label{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a6fa0baef8723cd4f6f413a3308622b35}} 
 \index{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$@{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$}!nhistory\_values\_for\_coordinate\_projection@{nhistory\_values\_for\_coordinate\_projection}}
@@ -345,11 +345,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ab4ecd0cd24000a
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l01014}{1014}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l01012}{1012}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, and \mbox{\hyperlink{nodes_8h_source_l01022}{oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a6fa0baef8723cd4f6f413a3308622b35}\label{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a6fa0baef8723cd4f6f413a3308622b35}} 
 \index{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$@{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$}!nhistory\_values\_for\_coordinate\_projection@{nhistory\_values\_for\_coordinate\_projection}}
@@ -368,18 +368,18 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ab4ecd0cd24000a
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l01096}{1096}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l01094}{1094}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, and \mbox{\hyperlink{nodes_8h_source_l01022}{oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a0fc8ec5028f2d7e52036babafb895442}\label{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a0fc8ec5028f2d7e52036babafb895442}} 
 \index{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$@{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$}!nhistory\_values\_for\_projection@{nhistory\_values\_for\_projection}}
 \index{nhistory\_values\_for\_projection@{nhistory\_values\_for\_projection}!oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$@{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{nhistory\_values\_for\_projection()}{nhistory\_values\_for\_projection()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$class UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement}{oomph\+::\+Projectable\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement}{oomph\+::\+Projectable\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -391,18 +391,18 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac6790f394630b9
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00987}{987}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00985}{985}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8cc_source_l00879}{oomph\+::\+Data\+::ntstorage()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a0fc8ec5028f2d7e52036babafb895442}\label{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a0fc8ec5028f2d7e52036babafb895442}} 
 \index{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$@{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$}!nhistory\_values\_for\_projection@{nhistory\_values\_for\_projection}}
 \index{nhistory\_values\_for\_projection@{nhistory\_values\_for\_projection}!oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$@{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{nhistory\_values\_for\_projection()}{nhistory\_values\_for\_projection()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$class UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement}{oomph\+::\+Projectable\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement}{oomph\+::\+Projectable\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -414,18 +414,18 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac6790f394630b9
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l01069}{1069}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l01067}{1067}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8cc_source_l00879}{oomph\+::\+Data\+::ntstorage()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a72785da013a5b9579367fe3965f1c65a}\label{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a72785da013a5b9579367fe3965f1c65a}} 
 \index{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$@{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$}!nvalue\_of\_field@{nvalue\_of\_field}}
 \index{nvalue\_of\_field@{nvalue\_of\_field}!oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$@{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{nvalue\_of\_field()}{nvalue\_of\_field()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$class UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement}{oomph\+::\+Projectable\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$\+::nvalue\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement}{oomph\+::\+Projectable\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$\+::nvalue\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -437,18 +437,18 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a1a9a6de16f3511
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l01123}{1123}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l01121}{1121}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}.
+References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a72785da013a5b9579367fe3965f1c65a}\label{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a72785da013a5b9579367fe3965f1c65a}} 
 \index{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$@{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$}!nvalue\_of\_field@{nvalue\_of\_field}}
 \index{nvalue\_of\_field@{nvalue\_of\_field}!oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$@{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{nvalue\_of\_field()}{nvalue\_of\_field()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$class UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement}{oomph\+::\+Projectable\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$\+::nvalue\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement}{oomph\+::\+Projectable\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$\+::nvalue\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -460,18 +460,18 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a1a9a6de16f3511
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l01205}{1205}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l01203}{1203}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}.
+References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a4ce7c79eade9f403c602c34020cf8beb}\label{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a4ce7c79eade9f403c602c34020cf8beb}} 
 \index{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$@{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$}!output@{output}}
 \index{output@{output}!oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$@{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$class UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement}{oomph\+::\+Projectable\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement}{oomph\+::\+Projectable\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -483,18 +483,18 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l01179}{1179}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l01177}{1177}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02616}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8h_source_l03153}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l03191}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{elements_8h_source_l03166}{oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string()}}, and \mbox{\hyperlink{elements_8h_source_l03179}{oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer()}}.
+References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8h_source_l03148}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l03186}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, \mbox{\hyperlink{nodes_8h_source_l01022}{oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{elements_8h_source_l03161}{oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string()}}, \mbox{\hyperlink{nodes_8h_source_l00238}{oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt()}}, and \mbox{\hyperlink{elements_8h_source_l03174}{oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a4ce7c79eade9f403c602c34020cf8beb}\label{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement_a4ce7c79eade9f403c602c34020cf8beb}} 
 \index{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$@{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$}!output@{output}}
 \index{output@{output}!oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$@{oomph::ProjectableUnsteadyHeatSpaceTimeElement$<$ UNSTEADY\_HEAT\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$class UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement}{oomph\+::\+Projectable\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement}{oomph\+::\+Projectable\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -506,11 +506,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l01261}{1261}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l01259}{1259}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02616}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8h_source_l03153}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l03191}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{elements_8h_source_l03166}{oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string()}}, and \mbox{\hyperlink{elements_8h_source_l03179}{oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer()}}.
+References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8h_source_l03148}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l03186}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, \mbox{\hyperlink{nodes_8h_source_l01022}{oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{elements_8h_source_l03161}{oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string()}}, \mbox{\hyperlink{nodes_8h_source_l00238}{oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt()}}, and \mbox{\hyperlink{elements_8h_source_l03174}{oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer()}}.
 
 
 

@@ -73,9 +73,9 @@
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00069}00069     \}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00070}00070 }
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00071}00071     \textcolor{comment}{// Constructor: Take coordinates from a node}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00072}\mbox{\hyperlink{classoomph_1_1TetMeshVertex_a6226592d4d5ee64955d8652a2e818ee3}{00072}}     \mbox{\hyperlink{classoomph_1_1TetMeshVertex_a6226592d4d5ee64955d8652a2e818ee3}{TetMeshVertex}}(Node* \textcolor{keyword}{const}\& node\_pt)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00072}\mbox{\hyperlink{classoomph_1_1TetMeshVertex_a6226592d4d5ee64955d8652a2e818ee3}{00072}}     \mbox{\hyperlink{classoomph_1_1TetMeshVertex_a6226592d4d5ee64955d8652a2e818ee3}{TetMeshVertex}}(\mbox{\hyperlink{classoomph_1_1Node}{Node}}* \textcolor{keyword}{const}\& node\_pt)}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00073}00073     \{}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00074}00074       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_dim = node\_pt-\/>ndim();}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00074}00074       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_dim = node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}}();}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00075}00075 \textcolor{preprocessor}{\#ifdef PARANOID}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00076}00076       \textcolor{keywordflow}{if} (n\_dim != 3)}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00077}00077       \{}
@@ -92,7 +92,7 @@
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00088}00088       \mbox{\hyperlink{classoomph_1_1TetMeshVertex_a32a797224c3506b9594b657e1032e7d9}{X}}.resize(n\_dim);}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00089}00089       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_dim; ++\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00090}00090       \{}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00091}00091         \mbox{\hyperlink{classoomph_1_1TetMeshVertex_a32a797224c3506b9594b657e1032e7d9}{X}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = node\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00091}00091         \mbox{\hyperlink{classoomph_1_1TetMeshVertex_a32a797224c3506b9594b657e1032e7d9}{X}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00092}00092       \}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00093}00093     \}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00094}00094 }
@@ -473,13 +473,13 @@
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00469}00469 \textcolor{comment}{    /// Facet connectivity: vertex\_index[j] is the index of the}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00470}00470 \textcolor{comment}{    /// j-\/th vertex (in the Vertex\_pt vector) in facet f. Bit of an obscure}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00471}00471 \textcolor{comment}{    /// functionality that's only needed for setup tetgen\_io.}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00472}\mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a6ed1b3038fb88005c2c637543fd20433}{00472}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Vector}{Vector<unsigned>}} \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a6ed1b3038fb88005c2c637543fd20433}{vertex\_index\_in\_tetgen}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}})}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00472}\mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a6ed1b3038fb88005c2c637543fd20433}{00472}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Vector}{Vector<unsigned>}} \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a6ed1b3038fb88005c2c637543fd20433}{vertex\_index\_in\_tetgen}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& f)}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00473}00473     \{}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00474}00474       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a609f107e2737cec4b52b81977464c02b}{Facet\_vertex\_index\_in\_tetgen}}.size() != \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a6036f2a5e11bea9d72f9bba9a89faec7}{nfacet}}())}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00475}00475       \{}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00476}00476         \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_aad0696eb07125a0847587b356ebaf735}{setup\_facet\_connectivity\_for\_tetgen}}();}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00477}00477       \}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00478}00478       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a609f107e2737cec4b52b81977464c02b}{Facet\_vertex\_index\_in\_tetgen}}[\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}];}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00478}00478       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a609f107e2737cec4b52b81977464c02b}{Facet\_vertex\_index\_in\_tetgen}}[f];}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00479}00479     \}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00480}00480 }
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00481}00481   \textcolor{keyword}{protected}:\textcolor{comment}{}}
@@ -508,18 +508,18 @@
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00504}00504       \textcolor{keywordtype}{unsigned} nv\_overall = \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a5a755b2062fa4ed18f3bdd18236b0f72}{Vertex\_pt}}.size();}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00505}00505       \textcolor{keywordtype}{unsigned} nf = \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a6036f2a5e11bea9d72f9bba9a89faec7}{nfacet}}();}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00506}00506       \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a609f107e2737cec4b52b81977464c02b}{Facet\_vertex\_index\_in\_tetgen}}.resize(nf);}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00507}00507       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}} = 0; \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}} < nf; \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}++)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00507}00507       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} f = 0; f < nf; f++)}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00508}00508       \{}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00509}00509         \textcolor{keywordtype}{unsigned} nv = \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a84ddd979ab9031b80c6328b150669986}{Facet\_pt}}[\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}]-\/>nvertex();}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00510}00510         \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a609f107e2737cec4b52b81977464c02b}{Facet\_vertex\_index\_in\_tetgen}}[\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}].resize(nv);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00509}00509         \textcolor{keywordtype}{unsigned} nv = \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a84ddd979ab9031b80c6328b150669986}{Facet\_pt}}[f]-\/>nvertex();}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00510}00510         \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a609f107e2737cec4b52b81977464c02b}{Facet\_vertex\_index\_in\_tetgen}}[f].resize(nv);}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00511}00511         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} v = 0; v < nv; v++)}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00512}00512         \{}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00513}00513           \mbox{\hyperlink{classoomph_1_1TetMeshVertex}{TetMeshVertex}}* my\_vertex\_pt = \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a84ddd979ab9031b80c6328b150669986}{Facet\_pt}}[\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}]-\/>vertex\_pt(v);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00513}00513           \mbox{\hyperlink{classoomph_1_1TetMeshVertex}{TetMeshVertex}}* my\_vertex\_pt = \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a84ddd979ab9031b80c6328b150669986}{Facet\_pt}}[f]-\/>vertex\_pt(v);}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00514}00514           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < nv\_overall; j++)}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00515}00515           \{}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00516}00516             \textcolor{keywordflow}{if} (my\_vertex\_pt == \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a5a755b2062fa4ed18f3bdd18236b0f72}{Vertex\_pt}}[j])}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00517}00517             \{}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00518}00518               \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a609f107e2737cec4b52b81977464c02b}{Facet\_vertex\_index\_in\_tetgen}}[\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}][v] = j;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00518}00518               \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a609f107e2737cec4b52b81977464c02b}{Facet\_vertex\_index\_in\_tetgen}}[f][v] = j;}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00519}00519               \textcolor{keywordflow}{break};}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00520}00520             \}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l00521}00521           \}}
@@ -1097,8 +1097,8 @@
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01093}01093                                                \textcolor{keyword}{const} \textcolor{keywordtype}{bool}\& switch\_normal,}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01094}01094                                                std::ofstream\& outfile)}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01095}01095   \{}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01096}01096     Node* lower\_left\_node\_pt = 0;}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01097}01097     Node* upper\_right\_node\_pt = 0;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01096}01096     \mbox{\hyperlink{classoomph_1_1Node}{Node}}* lower\_left\_node\_pt = 0;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01097}01097     \mbox{\hyperlink{classoomph_1_1Node}{Node}}* upper\_right\_node\_pt = 0;}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01098}01098 }
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01099}01099     \textcolor{comment}{// Unit vector connecting lower left and upper right nodes}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01100}01100     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} b0(3);}
@@ -1165,27 +1165,27 @@
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01161}01161         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < nnod; j++)}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01162}01162         \{}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01163}01163           \textcolor{comment}{// Get node}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01164}01164           Node* nod\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(b, j);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01164}01164           \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(b, j);}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01165}01165 }
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01166}01166           \textcolor{comment}{// Primary criterion for lower left: Does it have a lower}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01167}01167           \textcolor{comment}{// z-\/coordinate?}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01168}01168           \textcolor{keywordflow}{if} (nod\_pt-\/>x(2) < lower\_left\_node\_pt-\/>x(2))}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01168}01168           \textcolor{keywordflow}{if} (nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2) < lower\_left\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2))}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01169}01169           \{}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01170}01170             lower\_left\_node\_pt = nod\_pt;}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01171}01171           \}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01172}01172           \textcolor{comment}{// ...or is it a draw?}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01173}01173           \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (nod\_pt-\/>x(2) == lower\_left\_node\_pt-\/>x(2))}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01173}01173           \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2) == lower\_left\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2))}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01174}01174           \{}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01175}01175             \textcolor{comment}{// If it's a draw: Does it have a lower y-\/coordinate?}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01176}01176             \textcolor{keywordflow}{if} (nod\_pt-\/>x(1) < lower\_left\_node\_pt-\/>x(1))}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01176}01176             \textcolor{keywordflow}{if} (nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1) < lower\_left\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1))}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01177}01177             \{}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01178}01178               lower\_left\_node\_pt = nod\_pt;}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01179}01179             \}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01180}01180             \textcolor{comment}{// ...or is it a draw?}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01181}01181             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (nod\_pt-\/>x(1) == lower\_left\_node\_pt-\/>x(1))}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01181}01181             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1) == lower\_left\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1))}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01182}01182             \{}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01183}01183               \textcolor{comment}{// If it's a draw: Does it have a lower x-\/coordinate?}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01184}01184               \textcolor{keywordflow}{if} (nod\_pt-\/>x(0) < lower\_left\_node\_pt-\/>x(0))}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01184}01184               \textcolor{keywordflow}{if} (nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0) < lower\_left\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0))}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01185}01185               \{}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01186}01186                 lower\_left\_node\_pt = nod\_pt;}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01187}01187               \}}
@@ -1194,23 +1194,23 @@
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01190}01190 }
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01191}01191           \textcolor{comment}{// Primary criterion for upper right: Does it have a higher}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01192}01192           \textcolor{comment}{// z-\/coordinate?}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01193}01193           \textcolor{keywordflow}{if} (nod\_pt-\/>x(2) > upper\_right\_node\_pt-\/>x(2))}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01193}01193           \textcolor{keywordflow}{if} (nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2) > upper\_right\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2))}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01194}01194           \{}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01195}01195             upper\_right\_node\_pt = nod\_pt;}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01196}01196           \}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01197}01197           \textcolor{comment}{// ...or is it a draw?}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01198}01198           \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (nod\_pt-\/>x(2) == upper\_right\_node\_pt-\/>x(2))}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01198}01198           \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2) == upper\_right\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2))}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01199}01199           \{}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01200}01200             \textcolor{comment}{// If it's a draw: Does it have a higher y-\/coordinate?}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01201}01201             \textcolor{keywordflow}{if} (nod\_pt-\/>x(1) > upper\_right\_node\_pt-\/>x(1))}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01201}01201             \textcolor{keywordflow}{if} (nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1) > upper\_right\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1))}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01202}01202             \{}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01203}01203               upper\_right\_node\_pt = nod\_pt;}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01204}01204             \}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01205}01205             \textcolor{comment}{// ...or is it a draw?}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01206}01206             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (nod\_pt-\/>x(1) == upper\_right\_node\_pt-\/>x(1))}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01206}01206             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1) == upper\_right\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1))}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01207}01207             \{}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01208}01208               \textcolor{comment}{// If it's a draw: Does it have a higher x-\/coordinate?}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01209}01209               \textcolor{keywordflow}{if} (nod\_pt-\/>x(0) > upper\_right\_node\_pt-\/>x(0))}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01209}01209               \textcolor{keywordflow}{if} (nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0) > upper\_right\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0))}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01210}01210               \{}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01211}01211                 upper\_right\_node\_pt = nod\_pt;}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01212}01212               \}}
@@ -1229,9 +1229,9 @@
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01225}01225 }
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01226}01226 }
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01227}01227         \textcolor{comment}{// Unit vector connecting lower left and upper right nodes}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01228}01228         b0[0] = upper\_right\_node\_pt-\/>x(0) -\/ lower\_left\_node\_pt-\/>x(0);}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01229}01229         b0[1] = upper\_right\_node\_pt-\/>x(1) -\/ lower\_left\_node\_pt-\/>x(1);}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01230}01230         b0[2] = upper\_right\_node\_pt-\/>x(2) -\/ lower\_left\_node\_pt-\/>x(2);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01228}01228         b0[0] = upper\_right\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0) -\/ lower\_left\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01229}01229         b0[1] = upper\_right\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1) -\/ lower\_left\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01230}01230         b0[2] = upper\_right\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2) -\/ lower\_left\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2);}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01231}01231 }
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01232}01232         \textcolor{comment}{// Normalise}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01233}01233         \textcolor{keywordtype}{double} inv\_length =}
@@ -1324,13 +1324,13 @@
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01320}01320           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < nnod; j++)}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01321}01321           \{}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01322}01322             \textcolor{comment}{// Get node}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01323}01323             Node* nod\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(b, j);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01323}01323             \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(b, j);}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01324}01324 }
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01325}01325             \textcolor{comment}{// Difference vector to lower left corner}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01326}01326             \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} delta(3);}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01327}01327             delta[0] = nod\_pt-\/>x(0) -\/ lower\_left\_node\_pt-\/>x(0);}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01328}01328             delta[1] = nod\_pt-\/>x(1) -\/ lower\_left\_node\_pt-\/>x(1);}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01329}01329             delta[2] = nod\_pt-\/>x(2) -\/ lower\_left\_node\_pt-\/>x(2);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01327}01327             delta[0] = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0) -\/ lower\_left\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01328}01328             delta[1] = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1) -\/ lower\_left\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01329}01329             delta[2] = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2) -\/ lower\_left\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2);}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01330}01330 }
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01331}01331             \textcolor{comment}{/*std::cout << j << "{}: "{}}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01332}01332 \textcolor{comment}{                      << nod\_pt-\/>x(0) << "{} "{} << nod\_pt-\/>x(1)}}
@@ -1343,14 +1343,14 @@
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01339}01339             zeta[1] = delta[0] * b1[0] + delta[1] * b1[1] + delta[2] * b1[2];}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01340}01340 }
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01341}01341             \textcolor{comment}{// Check:}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01342}01342             \textcolor{keywordtype}{double} error = pow(lower\_left\_node\_pt-\/>x(0) + zeta[0] * b0[0] +}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01343}01343                                  zeta[1] * b1[0] -\/ nod\_pt-\/>x(0),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01342}01342             \textcolor{keywordtype}{double} error = pow(lower\_left\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0) + zeta[0] * b0[0] +}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01343}01343                                  zeta[1] * b1[0] -\/ nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0),}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01344}01344                                2) +}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01345}01345                            pow(lower\_left\_node\_pt-\/>x(1) + zeta[0] * b0[1] +}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01346}01346                                  zeta[1] * b1[1] -\/ nod\_pt-\/>x(1),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01345}01345                            pow(lower\_left\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1) + zeta[0] * b0[1] +}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01346}01346                                  zeta[1] * b1[1] -\/ nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1),}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01347}01347                                2) +}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01348}01348                            pow(lower\_left\_node\_pt-\/>x(2) + zeta[0] * b0[2] +}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01349}01349                                  zeta[1] * b1[2] -\/ nod\_pt-\/>x(2),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01348}01348                            pow(lower\_left\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2) + zeta[0] * b0[2] +}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01349}01349                                  zeta[1] * b1[2] -\/ nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2),}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01350}01350                                2);}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01351}01351 }
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01352}01352             \textcolor{keywordflow}{if} (sqrt(error) > \mbox{\hyperlink{classoomph_1_1TetMeshBase_a8ec167eda551633acb8896cb0e87be40}{Tolerance\_for\_boundary\_finding}})}
@@ -1361,19 +1361,19 @@
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01357}01357                 << sqrt(error) << \textcolor{stringliteral}{"{} > Tolerance\_for\_boundary\_finding = "{}}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01358}01358                 << \mbox{\hyperlink{classoomph_1_1TetMeshBase_a8ec167eda551633acb8896cb0e87be40}{Tolerance\_for\_boundary\_finding}} << std::endl}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01359}01359                 << \textcolor{stringliteral}{"{}nv = "{}} << nv << std::endl}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01360}01360                 << \textcolor{stringliteral}{"{}Lower left: "{}} << lower\_left\_node\_pt-\/>x(0) << \textcolor{stringliteral}{"{} "{}}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01361}01361                 << lower\_left\_node\_pt-\/>x(1) << \textcolor{stringliteral}{"{} "{}} << lower\_left\_node\_pt-\/>x(2)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01360}01360                 << \textcolor{stringliteral}{"{}Lower left: "{}} << lower\_left\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0) << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01361}01361                 << lower\_left\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1) << \textcolor{stringliteral}{"{} "{}} << lower\_left\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2)}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01362}01362                 << \textcolor{stringliteral}{"{} "{}} << std::endl}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01363}01363                 << \textcolor{stringliteral}{"{}Upper right: "{}} << upper\_right\_node\_pt-\/>x(0) << \textcolor{stringliteral}{"{} "{}}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01364}01364                 << upper\_right\_node\_pt-\/>x(1) << \textcolor{stringliteral}{"{} "{}} << upper\_right\_node\_pt-\/>x(2)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01363}01363                 << \textcolor{stringliteral}{"{}Upper right: "{}} << upper\_right\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0) << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01364}01364                 << upper\_right\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1) << \textcolor{stringliteral}{"{} "{}} << upper\_right\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2)}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01365}01365                 << \textcolor{stringliteral}{"{} "{}} << std::endl}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01366}01366                 << \textcolor{stringliteral}{"{}Nodes: "{}};}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01367}01367               \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < nnod; j++)}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01368}01368               \{}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01369}01369                 \textcolor{comment}{// Get node}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01370}01370                 Node* nod\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(b, j);}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01371}01371                 error\_message << nod\_pt-\/>x(0) << \textcolor{stringliteral}{"{} "{}} << nod\_pt-\/>x(1) << \textcolor{stringliteral}{"{} "{}}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01372}01372                               << nod\_pt-\/>x(2) << \textcolor{stringliteral}{"{} "{}} << std::endl;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01370}01370                 \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(b, j);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01371}01371                 error\_message << nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0) << \textcolor{stringliteral}{"{} "{}} << nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1) << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01372}01372                               << nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2) << \textcolor{stringliteral}{"{} "{}} << std::endl;}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01373}01373               \}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01374}01374               \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message.str(),}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01375}01375                                   OOMPH\_CURRENT\_FUNCTION,}
@@ -1383,7 +1383,7 @@
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01379}01379             \textcolor{comment}{// Set boundary coordinate}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01380}01380             \textcolor{keywordflow}{if} (do\_for\_real == 1)}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01381}01381             \{}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01382}01382               nod\_pt-\/>set\_coordinates\_on\_boundary(b, zeta);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01382}01382               nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a94c19e165ab4e88aabbfa27443c530b7}{set\_coordinates\_on\_boundary}}(b, zeta);}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01383}01383             \}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01384}01384           \}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01385}01385         \} \textcolor{comment}{// End of if vertices are in the same plane}}
@@ -1409,9 +1409,9 @@
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01405}01405 }
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01406}01406               \textcolor{comment}{// Difference vector to lower left corner}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01407}01407               \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} delta(3);}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01408}01408               delta[0] = f\_pt-\/>\mbox{\hyperlink{classoomph_1_1TetMeshFacet_ac3e8bb06cabd39c2108af501b163df48}{vertex\_pt}}(j)-\/>\mbox{\hyperlink{classoomph_1_1TetMeshVertex_af579c7e0bb184bc2d67aa31f25872a2b}{x}}(0) -\/ lower\_left\_node\_pt-\/>x(0);}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01409}01409               delta[1] = f\_pt-\/>\mbox{\hyperlink{classoomph_1_1TetMeshFacet_ac3e8bb06cabd39c2108af501b163df48}{vertex\_pt}}(j)-\/>\mbox{\hyperlink{classoomph_1_1TetMeshVertex_af579c7e0bb184bc2d67aa31f25872a2b}{x}}(1) -\/ lower\_left\_node\_pt-\/>x(1);}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01410}01410               delta[2] = f\_pt-\/>\mbox{\hyperlink{classoomph_1_1TetMeshFacet_ac3e8bb06cabd39c2108af501b163df48}{vertex\_pt}}(j)-\/>\mbox{\hyperlink{classoomph_1_1TetMeshVertex_af579c7e0bb184bc2d67aa31f25872a2b}{x}}(2) -\/ lower\_left\_node\_pt-\/>x(2);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01408}01408               delta[0] = f\_pt-\/>\mbox{\hyperlink{classoomph_1_1TetMeshFacet_ac3e8bb06cabd39c2108af501b163df48}{vertex\_pt}}(j)-\/>\mbox{\hyperlink{classoomph_1_1TetMeshVertex_af579c7e0bb184bc2d67aa31f25872a2b}{x}}(0) -\/ lower\_left\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01409}01409               delta[1] = f\_pt-\/>\mbox{\hyperlink{classoomph_1_1TetMeshFacet_ac3e8bb06cabd39c2108af501b163df48}{vertex\_pt}}(j)-\/>\mbox{\hyperlink{classoomph_1_1TetMeshVertex_af579c7e0bb184bc2d67aa31f25872a2b}{x}}(1) -\/ lower\_left\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01410}01410               delta[2] = f\_pt-\/>\mbox{\hyperlink{classoomph_1_1TetMeshFacet_ac3e8bb06cabd39c2108af501b163df48}{vertex\_pt}}(j)-\/>\mbox{\hyperlink{classoomph_1_1TetMeshVertex_af579c7e0bb184bc2d67aa31f25872a2b}{x}}(2) -\/ lower\_left\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2);}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01411}01411 }
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01412}01412               \textcolor{comment}{// Project}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01413}01413               \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} zeta(2);}
@@ -1561,33 +1561,33 @@
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01557}01557       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<Vector<double>}}> vertex\_boundary\_coord(3);}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01558}01558 }
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01559}01559       \textcolor{comment}{// Loop over all nodes to find the lower left and upper right ones}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01560}01560       Node* lower\_left\_node\_pt = face\_el\_pt[\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}]-\/>node\_pt(0);}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01561}01561       Node* upper\_right\_node\_pt = face\_el\_pt[\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}]-\/>node\_pt(0);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01560}01560       \mbox{\hyperlink{classoomph_1_1Node}{Node}}* lower\_left\_node\_pt = face\_el\_pt[\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}]-\/>node\_pt(0);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01561}01561       \mbox{\hyperlink{classoomph_1_1Node}{Node}}* upper\_right\_node\_pt = face\_el\_pt[\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}]-\/>node\_pt(0);}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01562}01562 }
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01563}01563       \textcolor{comment}{// Loop over all vertex nodes}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01564}01564       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < 3; j++)}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01565}01565       \{}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01566}01566         \textcolor{comment}{// Get node}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01567}01567         Node* nod\_pt = face\_el\_pt[\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}]-\/>node\_pt(j);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01567}01567         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = face\_el\_pt[\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}]-\/>node\_pt(j);}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01568}01568 }
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01569}01569         \textcolor{comment}{// Primary criterion for lower left: Does it have a lower z-\/coordinate?}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01570}01570         \textcolor{keywordflow}{if} (nod\_pt-\/>x(2) < lower\_left\_node\_pt-\/>x(2))}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01570}01570         \textcolor{keywordflow}{if} (nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2) < lower\_left\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2))}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01571}01571         \{}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01572}01572           lower\_left\_node\_pt = nod\_pt;}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01573}01573         \}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01574}01574         \textcolor{comment}{// ...or is it a draw?}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01575}01575         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (nod\_pt-\/>x(2) == lower\_left\_node\_pt-\/>x(2))}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01575}01575         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2) == lower\_left\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2))}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01576}01576         \{}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01577}01577           \textcolor{comment}{// If it's a draw: Does it have a lower y-\/coordinate?}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01578}01578           \textcolor{keywordflow}{if} (nod\_pt-\/>x(1) < lower\_left\_node\_pt-\/>x(1))}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01578}01578           \textcolor{keywordflow}{if} (nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1) < lower\_left\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1))}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01579}01579           \{}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01580}01580             lower\_left\_node\_pt = nod\_pt;}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01581}01581           \}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01582}01582           \textcolor{comment}{// ...or is it a draw?}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01583}01583           \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (nod\_pt-\/>x(1) == lower\_left\_node\_pt-\/>x(1))}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01583}01583           \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1) == lower\_left\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1))}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01584}01584           \{}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01585}01585             \textcolor{comment}{// If it's a draw: Does it have a lower x-\/coordinate?}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01586}01586             \textcolor{keywordflow}{if} (nod\_pt-\/>x(0) < lower\_left\_node\_pt-\/>x(0))}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01586}01586             \textcolor{keywordflow}{if} (nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0) < lower\_left\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0))}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01587}01587             \{}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01588}01588               lower\_left\_node\_pt = nod\_pt;}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01589}01589             \}}
@@ -1596,23 +1596,23 @@
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01592}01592 }
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01593}01593         \textcolor{comment}{// Primary criterion for upper right: Does it have a higher}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01594}01594         \textcolor{comment}{// z-\/coordinate?}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01595}01595         \textcolor{keywordflow}{if} (nod\_pt-\/>x(2) > upper\_right\_node\_pt-\/>x(2))}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01595}01595         \textcolor{keywordflow}{if} (nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2) > upper\_right\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2))}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01596}01596         \{}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01597}01597           upper\_right\_node\_pt = nod\_pt;}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01598}01598         \}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01599}01599         \textcolor{comment}{// ...or is it a draw?}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01600}01600         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (nod\_pt-\/>x(2) == upper\_right\_node\_pt-\/>x(2))}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01600}01600         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2) == upper\_right\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2))}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01601}01601         \{}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01602}01602           \textcolor{comment}{// If it's a draw: Does it have a higher y-\/coordinate?}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01603}01603           \textcolor{keywordflow}{if} (nod\_pt-\/>x(1) > upper\_right\_node\_pt-\/>x(1))}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01603}01603           \textcolor{keywordflow}{if} (nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1) > upper\_right\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1))}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01604}01604           \{}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01605}01605             upper\_right\_node\_pt = nod\_pt;}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01606}01606           \}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01607}01607           \textcolor{comment}{// ...or is it a draw?}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01608}01608           \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (nod\_pt-\/>x(1) == upper\_right\_node\_pt-\/>x(1))}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01608}01608           \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1) == upper\_right\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1))}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01609}01609           \{}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01610}01610             \textcolor{comment}{// If it's a draw: Does it have a higher x-\/coordinate?}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01611}01611             \textcolor{keywordflow}{if} (nod\_pt-\/>x(0) > upper\_right\_node\_pt-\/>x(0))}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01611}01611             \textcolor{keywordflow}{if} (nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0) > upper\_right\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0))}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01612}01612             \{}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01613}01613               upper\_right\_node\_pt = nod\_pt;}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01614}01614             \}}
@@ -1625,9 +1625,9 @@
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01621}01621 }
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01622}01622       \textcolor{comment}{// Unit vector connecting lower left and upper right nodes}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01623}01623       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} b0(3);}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01624}01624       b0[0] = upper\_right\_node\_pt-\/>x(0) -\/ lower\_left\_node\_pt-\/>x(0);}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01625}01625       b0[1] = upper\_right\_node\_pt-\/>x(1) -\/ lower\_left\_node\_pt-\/>x(1);}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01626}01626       b0[2] = upper\_right\_node\_pt-\/>x(2) -\/ lower\_left\_node\_pt-\/>x(2);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01624}01624       b0[0] = upper\_right\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0) -\/ lower\_left\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01625}01625       b0[1] = upper\_right\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1) -\/ lower\_left\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01626}01626       b0[2] = upper\_right\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2) -\/ lower\_left\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2);}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01627}01627 }
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01628}01628       \textcolor{comment}{// Normalise}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01629}01629       \textcolor{keywordtype}{double} inv\_length =}
@@ -1684,13 +1684,13 @@
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01680}01680       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < 3; j++)}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01681}01681       \{}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01682}01682         \textcolor{comment}{// Get node}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01683}01683         Node* nod\_pt = face\_el\_pt[\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}]-\/>node\_pt(j);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01683}01683         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = face\_el\_pt[\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}]-\/>node\_pt(j);}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01684}01684 }
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01685}01685         \textcolor{comment}{// Difference vector to lower left corner}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01686}01686         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} delta(3);}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01687}01687         delta[0] = nod\_pt-\/>x(0) -\/ lower\_left\_node\_pt-\/>x(0);}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01688}01688         delta[1] = nod\_pt-\/>x(1) -\/ lower\_left\_node\_pt-\/>x(1);}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01689}01689         delta[2] = nod\_pt-\/>x(2) -\/ lower\_left\_node\_pt-\/>x(2);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01687}01687         delta[0] = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0) -\/ lower\_left\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01688}01688         delta[1] = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1) -\/ lower\_left\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01689}01689         delta[2] = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2) -\/ lower\_left\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2);}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01690}01690 }
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01691}01691         \textcolor{comment}{// Project}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01692}01692         zeta[0] = delta[0] * b0[0] + delta[1] * b0[1] + delta[2] * b0[2];}
@@ -1703,14 +1703,14 @@
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01699}01699 \textcolor{preprocessor}{\#ifdef PARANOID}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01700}01700 }
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01701}01701         \textcolor{comment}{// Check:}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01702}01702         \textcolor{keywordtype}{double} error = pow(lower\_left\_node\_pt-\/>x(0) + zeta[0] * b0[0] +}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01703}01703                              zeta[1] * b1[0] -\/ nod\_pt-\/>x(0),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01702}01702         \textcolor{keywordtype}{double} error = pow(lower\_left\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0) + zeta[0] * b0[0] +}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01703}01703                              zeta[1] * b1[0] -\/ nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0),}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01704}01704                            2) +}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01705}01705                        pow(lower\_left\_node\_pt-\/>x(1) + zeta[0] * b0[1] +}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01706}01706                              zeta[1] * b1[1] -\/ nod\_pt-\/>x(1),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01705}01705                        pow(lower\_left\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1) + zeta[0] * b0[1] +}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01706}01706                              zeta[1] * b1[1] -\/ nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1),}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01707}01707                            2) +}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01708}01708                        pow(lower\_left\_node\_pt-\/>x(2) + zeta[0] * b0[2] +}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01709}01709                              zeta[1] * b1[2] -\/ nod\_pt-\/>x(2),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01708}01708                        pow(lower\_left\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2) + zeta[0] * b0[2] +}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01709}01709                              zeta[1] * b1[2] -\/ nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2),}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01710}01710                            2);}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01711}01711 }
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01712}01712         \textcolor{keywordflow}{if} (sqrt(error) > \mbox{\hyperlink{classoomph_1_1TetMeshBase_a8ec167eda551633acb8896cb0e87be40}{Tolerance\_for\_boundary\_finding}})}
@@ -1732,7 +1732,7 @@
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01728}01728 \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01729}01729 }
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01730}01730         \textcolor{comment}{// Set boundary coordinate}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01731}01731         nod\_pt-\/>set\_coordinates\_on\_boundary(boundary\_id[\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}], zeta);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01731}01731         nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a94c19e165ab4e88aabbfa27443c530b7}{set\_coordinates\_on\_boundary}}(boundary\_id[\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}], zeta);}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01732}01732       \}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01733}01733 }
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01734}01734       \textcolor{comment}{// Assign boundary coordinates of three midside nodes by linear}}
@@ -1798,7 +1798,7 @@
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01794}01794       \{}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01795}01795         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(2);}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01796}01796         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} zeta(2);}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01797}01797         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(3);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01797}01797         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(3);}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01798}01798         \textcolor{keywordtype}{unsigned} n\_plot = 3;}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01799}01799         the\_file << el\_pt-\/>tecplot\_zone\_string(n\_plot);}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01800}01800 }
@@ -1809,10 +1809,10 @@
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01805}01805           \textcolor{comment}{// Get local coordinates of plot point}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01806}01806           el\_pt-\/>get\_s\_plot(iplot, n\_plot, \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01807}01807           el\_pt-\/>interpolated\_zeta(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, zeta);}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01808}01808           el\_pt-\/>interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01808}01808           el\_pt-\/>interpolated\_x(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, x);}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01809}01809           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 3; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01810}01810           \{}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01811}01811             the\_file << \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01811}01811             the\_file << x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01812}01812           \}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01813}01813           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 2; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01814}01814           \{}
@@ -1846,16 +1846,16 @@
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01842}01842         \textcolor{keywordtype}{unsigned} nnod = bulk\_elem\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01843}01843         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < nnod; j++)}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01844}01844         \{}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01845}01845           Node* nod\_pt = bulk\_elem\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j);}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01846}01846           \textcolor{keywordflow}{if} (nod\_pt-\/>is\_on\_boundary(boundary\_id[b]))}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01845}01845           \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = bulk\_elem\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01846}01846           \textcolor{keywordflow}{if} (nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a2ca215e42116ee8a2acc7d6a35e37788}{is\_on\_boundary}}(boundary\_id[b]))}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01847}01847           \{}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01848}01848             nod\_pt-\/>get\_coordinates\_on\_boundary(boundary\_id[b], boundary\_zeta);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01848}01848             nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_abc8b7dc78cc1d0aab34eeaf856e21ea8}{get\_coordinates\_on\_boundary}}(boundary\_id[b], boundary\_zeta);}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01849}01849 }
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01850}01850             \textcolor{comment}{// Doc it?}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01851}01851             \textcolor{keywordflow}{if} (doc\_info.\mbox{\hyperlink{classoomph_1_1DocInfo_a2ce90cf54f24b4ab523c624031fbb76b}{is\_doc\_enabled}}())}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01852}01852             \{}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01853}01853               the\_file\_before << nod\_pt-\/>x(0) << \textcolor{stringliteral}{"{} "{}} << nod\_pt-\/>x(1) << \textcolor{stringliteral}{"{} "{}}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01854}01854                               << nod\_pt-\/>x(2) << \textcolor{stringliteral}{"{} "{}} << boundary\_zeta[0] << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01853}01853               the\_file\_before << nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0) << \textcolor{stringliteral}{"{} "{}} << nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1) << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01854}01854                               << nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2) << \textcolor{stringliteral}{"{} "{}} << boundary\_zeta[0] << \textcolor{stringliteral}{"{} "{}}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01855}01855                               << boundary\_zeta[1] << \textcolor{stringliteral}{"{} "{}} << std::endl;}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01856}01856             \}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01857}01857 }
@@ -1864,9 +1864,9 @@
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01860}01860             \textcolor{keywordflow}{if} (geom\_obj\_pt != 0)}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01861}01861             \{}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01862}01862               geom\_obj\_pt-\/>\mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{position}}(s\_geom\_obj, quadratic\_coordinates);}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01863}01863               nod\_pt-\/>x(0) = quadratic\_coordinates[0];}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01864}01864               nod\_pt-\/>x(1) = quadratic\_coordinates[1];}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01865}01865               nod\_pt-\/>x(2) = quadratic\_coordinates[2];}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01863}01863               nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0) = quadratic\_coordinates[0];}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01864}01864               nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1) = quadratic\_coordinates[1];}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01865}01865               nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2) = quadratic\_coordinates[2];}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01866}01866             \}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01867}01867             \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01868}01868             \{}
@@ -1886,8 +1886,8 @@
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01882}01882               \{}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01883}01883                 the\_file\_non\_snapped.open(non\_snapped\_filename.c\_str());}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01884}01884               \}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01885}01885               the\_file\_non\_snapped << nod\_pt-\/>x(0) << \textcolor{stringliteral}{"{} "{}} << nod\_pt-\/>x(1) << \textcolor{stringliteral}{"{} "{}}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01886}01886                                    << nod\_pt-\/>x(2) << \textcolor{stringliteral}{"{} "{}} << boundary\_zeta[0]}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01885}01885               the\_file\_non\_snapped << nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0) << \textcolor{stringliteral}{"{} "{}} << nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1) << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01886}01886                                    << nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2) << \textcolor{stringliteral}{"{} "{}} << boundary\_zeta[0]}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01887}01887                                    << \textcolor{stringliteral}{"{} "{}} << boundary\_zeta[1] << \textcolor{stringliteral}{"{} "{}}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01888}01888                                    << std::endl;}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01889}01889             \}}
@@ -1895,8 +1895,8 @@
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01891}01891             \textcolor{comment}{// Doc it?}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01892}01892             \textcolor{keywordflow}{if} (doc\_info.\mbox{\hyperlink{classoomph_1_1DocInfo_a2ce90cf54f24b4ab523c624031fbb76b}{is\_doc\_enabled}}())}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01893}01893             \{}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01894}01894               the\_file\_after << nod\_pt-\/>x(0) << \textcolor{stringliteral}{"{} "{}} << nod\_pt-\/>x(1) << \textcolor{stringliteral}{"{} "{}}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01895}01895                              << nod\_pt-\/>x(2) << \textcolor{stringliteral}{"{} "{}} << boundary\_zeta[0] << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01894}01894               the\_file\_after << nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(0) << \textcolor{stringliteral}{"{} "{}} << nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(1) << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01895}01895                              << nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(2) << \textcolor{stringliteral}{"{} "{}} << boundary\_zeta[0] << \textcolor{stringliteral}{"{} "{}}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01896}01896                              << boundary\_zeta[1] << \textcolor{stringliteral}{"{} "{}} << std::endl;}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01897}01897             \}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l01898}01898           \}}
@@ -2044,17 +2044,17 @@
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02040}02040       \{}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02041}02041         \textcolor{comment}{// Storage for new nodes -\/-\/ Note: All new nodes are interior and}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02042}02042         \textcolor{comment}{// therefore cannot be boundary nodes!}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02043}02043         Node* node0\_pt = 0;}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02044}02044         Node* node1\_pt = 0;}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02045}02045         Node* node2\_pt = 0;}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02046}02046         Node* node3\_pt = 0;}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02047}02047         Node* node4\_pt = 0;}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02048}02048         Node* node5\_pt = 0;}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02049}02049         Node* node6\_pt = 0;}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02050}02050         Node* node7\_pt = 0;}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02051}02051         Node* node8\_pt = 0;}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02052}02052         Node* node9\_pt = 0;}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02053}02053         Node* node10\_pt = 0;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02043}02043         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* node0\_pt = 0;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02044}02044         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* node1\_pt = 0;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02045}02045         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* node2\_pt = 0;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02046}02046         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* node3\_pt = 0;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02047}02047         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* node4\_pt = 0;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02048}02048         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* node5\_pt = 0;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02049}02049         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* node6\_pt = 0;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02050}02050         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* node7\_pt = 0;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02051}02051         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* node8\_pt = 0;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02052}02052         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* node9\_pt = 0;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02053}02053         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* node10\_pt = 0;}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02054}02054 }
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02055}02055         \textcolor{comment}{// Create first new element}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02056}02056         \mbox{\hyperlink{classoomph_1_1FiniteElement}{FiniteElement}}* el1\_pt = \textcolor{keyword}{new} ELEMENT;}
@@ -2241,17 +2241,17 @@
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02237}02237           \textcolor{comment}{// Only bother to set centroid if does not already exist}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02238}02238           \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1Mesh_a945e7823d1a2af243b5b7f7866aaff5e}{nnode}} != 15)}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02239}02239           \{}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02240}02240             node0\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) =}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02241}02241               0.25 * (el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) + el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(1)-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) +}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02242}02242                       el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(2)-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) + el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(3)-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02240}02240             node0\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) =}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02241}02241               0.25 * (el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) + el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(1)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) +}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02242}02242                       el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(2)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) + el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(3)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02243}02243           \}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02244}02244 }
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02245}02245           \textcolor{keywordflow}{if} (nnode\_1d == 3)}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02246}02246           \{}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02247}02247             node1\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = 0.5 * (el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) + node0\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02248}02248             node2\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = 0.5 * (el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(1)-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) + node0\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02249}02249             node3\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = 0.5 * (el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(2)-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) + node0\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02250}02250             node4\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = 0.5 * (el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(3)-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) + node0\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02247}02247             node1\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = 0.5 * (el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) + node0\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02248}02248             node2\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = 0.5 * (el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(1)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) + node0\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02249}02249             node3\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = 0.5 * (el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(2)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) + node0\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02250}02250             node4\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = 0.5 * (el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(3)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) + node0\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}));}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02251}02251           \}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02252}02252         \}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02253}02253 }
@@ -2264,70 +2264,70 @@
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02260}02260           \textcolor{comment}{// New Node 5 lies in the plane between original nodes 0 1 centroid}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02261}02261           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 3; ++\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02262}02262           \{}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02263}02263             node5\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) =}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02264}02264               (el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) + el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(1)-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) +}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02265}02265                el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(14)-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})) /}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02263}02263             node5\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) =}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02264}02264               (el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) + el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(1)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) +}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02265}02265                el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(14)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})) /}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02266}02266               3.0;}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02267}02267           \}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02268}02268 }
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02269}02269           \textcolor{comment}{// New Node 6 lies in the plane between original nodes 1 3 centroid}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02270}02270           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 3; ++\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02271}02271           \{}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02272}02272             node6\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) =}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02273}02273               (el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(1)-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) + el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(3)-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) +}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02274}02274                el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(14)-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})) /}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02272}02272             node6\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) =}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02273}02273               (el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(1)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) + el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(3)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) +}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02274}02274                el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(14)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})) /}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02275}02275               3.0;}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02276}02276           \}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02277}02277 }
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02278}02278           \textcolor{comment}{// New Node 7 lies in the plane between original nodes 2 3 centroid}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02279}02279           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 3; ++\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02280}02280           \{}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02281}02281             node7\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) =}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02282}02282               (el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(2)-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) + el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(3)-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) +}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02283}02283                el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(14)-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})) /}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02281}02281             node7\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) =}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02282}02282               (el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(2)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) + el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(3)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) +}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02283}02283                el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(14)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})) /}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02284}02284               3.0;}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02285}02285           \}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02286}02286 }
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02287}02287           \textcolor{comment}{// New Node 8 lies in the plane between original nodes 0 2 centroid}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02288}02288           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 3; ++\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02289}02289           \{}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02290}02290             node8\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) =}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02291}02291               (el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) + el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(2)-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) +}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02292}02292                el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(14)-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})) /}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02290}02290             node8\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) =}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02291}02291               (el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) + el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(2)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) +}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02292}02292                el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(14)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})) /}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02293}02293               3.0;}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02294}02294           \}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02295}02295 }
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02296}02296           \textcolor{comment}{// New Node 9 lies in the plane between original nodes 0 3 centroid}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02297}02297           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 3; ++\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02298}02298           \{}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02299}02299             node9\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) =}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02300}02300               (el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) + el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(3)-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) +}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02301}02301                el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(14)-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})) /}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02299}02299             node9\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) =}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02300}02300               (el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) + el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(3)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) +}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02301}02301                el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(14)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})) /}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02302}02302               3.0;}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02303}02303           \}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02304}02304 }
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02305}02305           \textcolor{comment}{// New Node 10 lies in the plane between original nodes 1 2 centroid}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02306}02306           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 3; ++\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02307}02307           \{}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02308}02308             node10\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) =}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02309}02309               (el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(1)-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) + el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(2)-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) +}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02310}02310                el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(14)-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})) /}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02308}02308             node10\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) =}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02309}02309               (el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(1)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) + el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(2)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) +}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02310}02310                el\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(14)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})) /}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02311}02311               3.0;}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02312}02312           \}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02313}02313 }
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02314}02314           \textcolor{comment}{// Now create the new centroid nodes}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02315}02315 }
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02316}02316           \textcolor{comment}{// First element}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02317}02317           Node* temp\_nod\_pt = el1\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a54676a4e37813f207d53ef9a7d16fd41}{construct\_node}}(14, time\_stepper\_pt);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02317}02317           \mbox{\hyperlink{classoomph_1_1Node}{Node}}* temp\_nod\_pt = el1\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a54676a4e37813f207d53ef9a7d16fd41}{construct\_node}}(14, time\_stepper\_pt);}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02318}02318           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 3; ++\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02319}02319           \{}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02320}02320             \textcolor{keywordtype}{double} av\_pos = 0.0;}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02321}02321             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < 4; j++)}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02322}02322             \{}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02323}02323               av\_pos += el1\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j)-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02323}02323               av\_pos += el1\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02324}02324             \}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02325}02325 }
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02326}02326             temp\_nod\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = 0.25 * av\_pos;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02326}02326             temp\_nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = 0.25 * av\_pos;}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02327}02327           \}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02328}02328 }
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02329}02329           this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_ac09a9bfeb6d70d8bbefe13c86948a6fc}{add\_node\_pt}}(temp\_nod\_pt);}
@@ -2339,9 +2339,9 @@
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02335}02335             \textcolor{keywordtype}{double} av\_pos = 0.0;}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02336}02336             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < 4; j++)}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02337}02337             \{}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02338}02338               av\_pos += el2\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j)-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02338}02338               av\_pos += el2\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02339}02339             \}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02340}02340             temp\_nod\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = 0.25 * av\_pos;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02340}02340             temp\_nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = 0.25 * av\_pos;}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02341}02341           \}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02342}02342           this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_ac09a9bfeb6d70d8bbefe13c86948a6fc}{add\_node\_pt}}(temp\_nod\_pt);}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02343}02343 }
@@ -2352,9 +2352,9 @@
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02348}02348             \textcolor{keywordtype}{double} av\_pos = 0.0;}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02349}02349             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < 4; j++)}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02350}02350             \{}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02351}02351               av\_pos += el3\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j)-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02351}02351               av\_pos += el3\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02352}02352             \}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02353}02353             temp\_nod\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = 0.25 * av\_pos;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02353}02353             temp\_nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = 0.25 * av\_pos;}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02354}02354           \}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02355}02355           this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_ac09a9bfeb6d70d8bbefe13c86948a6fc}{add\_node\_pt}}(temp\_nod\_pt);}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02356}02356 }
@@ -2365,9 +2365,9 @@
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02361}02361             \textcolor{keywordtype}{double} av\_pos = 0.0;}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02362}02362             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < 4; j++)}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02363}02363             \{}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02364}02364               av\_pos += el4\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j)-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02364}02364               av\_pos += el4\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02365}02365             \}}
-\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02366}02366             temp\_nod\_pt-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = 0.25 * av\_pos;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02366}02366             temp\_nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) = 0.25 * av\_pos;}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02367}02367           \}}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02368}02368           this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_ac09a9bfeb6d70d8bbefe13c86948a6fc}{add\_node\_pt}}(temp\_nod\_pt);}
 \DoxyCodeLine{\Hypertarget{tet__mesh_8h_source_l02369}02369         \}}

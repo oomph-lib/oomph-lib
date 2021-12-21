@@ -87,7 +87,7 @@
 \DoxyCodeLine{\Hypertarget{annular__domain_8h_source_l00083}00083                                 \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& i\_macro,}
 \DoxyCodeLine{\Hypertarget{annular__domain_8h_source_l00084}00084                                 \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& i\_direct,}
 \DoxyCodeLine{\Hypertarget{annular__domain_8h_source_l00085}00085                                 \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},}
-\DoxyCodeLine{\Hypertarget{annular__domain_8h_source_l00086}00086                                 \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}});}
+\DoxyCodeLine{\Hypertarget{annular__domain_8h_source_l00086}00086                                 \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& f);}
 \DoxyCodeLine{\Hypertarget{annular__domain_8h_source_l00087}00087 }
 \DoxyCodeLine{\Hypertarget{annular__domain_8h_source_l00088}00088   \textcolor{keyword}{private}:\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{annular__domain_8h_source_l00089}00089 \textcolor{comment}{    /// Azimuthal fraction}}
@@ -124,7 +124,7 @@
 \DoxyCodeLine{\Hypertarget{annular__domain_8h_source_l00120}00120                                              \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& imacro,}
 \DoxyCodeLine{\Hypertarget{annular__domain_8h_source_l00121}00121                                              \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& idirect,}
 \DoxyCodeLine{\Hypertarget{annular__domain_8h_source_l00122}00122                                              \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},}
-\DoxyCodeLine{\Hypertarget{annular__domain_8h_source_l00123}00123                                              \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}})}
+\DoxyCodeLine{\Hypertarget{annular__domain_8h_source_l00123}00123                                              \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& f)}
 \DoxyCodeLine{\Hypertarget{annular__domain_8h_source_l00124}00124   \{}
 \DoxyCodeLine{\Hypertarget{annular__domain_8h_source_l00125}00125     \textcolor{keyword}{using namespace }QuadTreeNames;}
 \DoxyCodeLine{\Hypertarget{annular__domain_8h_source_l00126}00126 }
@@ -170,7 +170,7 @@
 \DoxyCodeLine{\Hypertarget{annular__domain_8h_source_l00166}00166 }
 \DoxyCodeLine{\Hypertarget{annular__domain_8h_source_l00167}00167         \textcolor{keywordflow}{break};}
 \DoxyCodeLine{\Hypertarget{annular__domain_8h_source_l00168}00168 }
-\DoxyCodeLine{\Hypertarget{annular__domain_8h_source_l00169}00169       \textcolor{keywordflow}{case} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}}:}
+\DoxyCodeLine{\Hypertarget{annular__domain_8h_source_l00169}00169       \textcolor{keywordflow}{case} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}}:}
 \DoxyCodeLine{\Hypertarget{annular__domain_8h_source_l00170}00170 }
 \DoxyCodeLine{\Hypertarget{annular__domain_8h_source_l00171}00171         theta = theta\_lo;}
 \DoxyCodeLine{\Hypertarget{annular__domain_8h_source_l00172}00172         r = r\_lo + 0.5 * (\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}[0] + 1.0) * (r\_hi -\/ r\_lo);}
@@ -193,8 +193,8 @@
 \DoxyCodeLine{\Hypertarget{annular__domain_8h_source_l00189}00189           error\_stream.str(), OOMPH\_CURRENT\_FUNCTION, OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{\Hypertarget{annular__domain_8h_source_l00190}00190     \}}
 \DoxyCodeLine{\Hypertarget{annular__domain_8h_source_l00191}00191 }
-\DoxyCodeLine{\Hypertarget{annular__domain_8h_source_l00192}00192     \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}[0] = r * cos(theta + \mbox{\hyperlink{classoomph_1_1AnnularDomain_a0280549bd7a88cabb84a7223ed114040}{Phi}});}
-\DoxyCodeLine{\Hypertarget{annular__domain_8h_source_l00193}00193     \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}[1] = r * sin(theta + \mbox{\hyperlink{classoomph_1_1AnnularDomain_a0280549bd7a88cabb84a7223ed114040}{Phi}});}
+\DoxyCodeLine{\Hypertarget{annular__domain_8h_source_l00192}00192     f[0] = r * cos(theta + \mbox{\hyperlink{classoomph_1_1AnnularDomain_a0280549bd7a88cabb84a7223ed114040}{Phi}});}
+\DoxyCodeLine{\Hypertarget{annular__domain_8h_source_l00193}00193     f[1] = r * sin(theta + \mbox{\hyperlink{classoomph_1_1AnnularDomain_a0280549bd7a88cabb84a7223ed114040}{Phi}});}
 \DoxyCodeLine{\Hypertarget{annular__domain_8h_source_l00194}00194   \}}
 \DoxyCodeLine{\Hypertarget{annular__domain_8h_source_l00195}00195 }
 \DoxyCodeLine{\Hypertarget{annular__domain_8h_source_l00196}00196 \} \textcolor{comment}{// namespace oomph}}

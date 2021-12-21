@@ -292,7 +292,7 @@
 \DoxyCodeLine{\Hypertarget{communicator_8h_source_l00288}00288     \}}
 \DoxyCodeLine{\Hypertarget{communicator_8h_source_l00289}00289 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{communicator_8h_source_l00290}00290 \textcolor{comment}{    /// broadcast function for Vector<int>}}
-\DoxyCodeLine{\Hypertarget{communicator_8h_source_l00291}00291 \textcolor{comment}{}    \textcolor{keywordtype}{void} broadcast(\textcolor{keyword}{const} \textcolor{keywordtype}{int}\& source, Vector<int>\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}})}
+\DoxyCodeLine{\Hypertarget{communicator_8h_source_l00291}00291 \textcolor{comment}{}    \textcolor{keywordtype}{void} broadcast(\textcolor{keyword}{const} \textcolor{keywordtype}{int}\& source, Vector<int>\& x)}
 \DoxyCodeLine{\Hypertarget{communicator_8h_source_l00292}00292     \{}
 \DoxyCodeLine{\Hypertarget{communicator_8h_source_l00293}00293       \textcolor{keywordtype}{int} n;}
 \DoxyCodeLine{\Hypertarget{communicator_8h_source_l00294}00294 }
@@ -300,7 +300,7 @@
 \DoxyCodeLine{\Hypertarget{communicator_8h_source_l00296}00296       \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} n\_long;}
 \DoxyCodeLine{\Hypertarget{communicator_8h_source_l00297}00297       \textcolor{keywordflow}{if} (this-\/>my\_rank() == source)}
 \DoxyCodeLine{\Hypertarget{communicator_8h_source_l00298}00298       \{}
-\DoxyCodeLine{\Hypertarget{communicator_8h_source_l00299}00299         n\_long = \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.size();}
+\DoxyCodeLine{\Hypertarget{communicator_8h_source_l00299}00299         n\_long = x.size();}
 \DoxyCodeLine{\Hypertarget{communicator_8h_source_l00300}00300 }
 \DoxyCodeLine{\Hypertarget{communicator_8h_source_l00301}00301         \textcolor{comment}{// Convert to int}}
 \DoxyCodeLine{\Hypertarget{communicator_8h_source_l00302}00302         n = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(n\_long);}
@@ -312,15 +312,15 @@
 \DoxyCodeLine{\Hypertarget{communicator_8h_source_l00308}00308       \textcolor{comment}{// Resize Vector everywhere else in preparation}}
 \DoxyCodeLine{\Hypertarget{communicator_8h_source_l00309}00309       \textcolor{keywordflow}{if} (this-\/>my\_rank() != source)}
 \DoxyCodeLine{\Hypertarget{communicator_8h_source_l00310}00310       \{}
-\DoxyCodeLine{\Hypertarget{communicator_8h_source_l00311}00311         \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.resize(n);}
+\DoxyCodeLine{\Hypertarget{communicator_8h_source_l00311}00311         x.resize(n);}
 \DoxyCodeLine{\Hypertarget{communicator_8h_source_l00312}00312       \}}
 \DoxyCodeLine{\Hypertarget{communicator_8h_source_l00313}00313 }
 \DoxyCodeLine{\Hypertarget{communicator_8h_source_l00314}00314       \textcolor{comment}{// Broadcast the Vector directly}}
-\DoxyCodeLine{\Hypertarget{communicator_8h_source_l00315}00315       MPI\_Bcast(\&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[0], n, MPI\_INT, source, this-\/>mpi\_comm());}
+\DoxyCodeLine{\Hypertarget{communicator_8h_source_l00315}00315       MPI\_Bcast(\&x[0], n, MPI\_INT, source, this-\/>mpi\_comm());}
 \DoxyCodeLine{\Hypertarget{communicator_8h_source_l00316}00316     \}}
 \DoxyCodeLine{\Hypertarget{communicator_8h_source_l00317}00317 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{communicator_8h_source_l00318}00318 \textcolor{comment}{    /// broadcast function for Vector<double>}}
-\DoxyCodeLine{\Hypertarget{communicator_8h_source_l00319}00319 \textcolor{comment}{}    \textcolor{keywordtype}{void} broadcast(\textcolor{keyword}{const} \textcolor{keywordtype}{int}\& source, Vector<double>\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}})}
+\DoxyCodeLine{\Hypertarget{communicator_8h_source_l00319}00319 \textcolor{comment}{}    \textcolor{keywordtype}{void} broadcast(\textcolor{keyword}{const} \textcolor{keywordtype}{int}\& source, Vector<double>\& x)}
 \DoxyCodeLine{\Hypertarget{communicator_8h_source_l00320}00320     \{}
 \DoxyCodeLine{\Hypertarget{communicator_8h_source_l00321}00321       \textcolor{keywordtype}{int} n;}
 \DoxyCodeLine{\Hypertarget{communicator_8h_source_l00322}00322 }
@@ -328,7 +328,7 @@
 \DoxyCodeLine{\Hypertarget{communicator_8h_source_l00324}00324       \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} n\_long;}
 \DoxyCodeLine{\Hypertarget{communicator_8h_source_l00325}00325       \textcolor{keywordflow}{if} (this-\/>my\_rank() == source)}
 \DoxyCodeLine{\Hypertarget{communicator_8h_source_l00326}00326       \{}
-\DoxyCodeLine{\Hypertarget{communicator_8h_source_l00327}00327         n\_long = \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.size();}
+\DoxyCodeLine{\Hypertarget{communicator_8h_source_l00327}00327         n\_long = x.size();}
 \DoxyCodeLine{\Hypertarget{communicator_8h_source_l00328}00328 }
 \DoxyCodeLine{\Hypertarget{communicator_8h_source_l00329}00329         \textcolor{comment}{// Convert to int}}
 \DoxyCodeLine{\Hypertarget{communicator_8h_source_l00330}00330         n = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(n\_long);}
@@ -340,15 +340,15 @@
 \DoxyCodeLine{\Hypertarget{communicator_8h_source_l00336}00336       \textcolor{comment}{// Resize Vector everywhere else in preparation}}
 \DoxyCodeLine{\Hypertarget{communicator_8h_source_l00337}00337       \textcolor{keywordflow}{if} (this-\/>my\_rank() != source)}
 \DoxyCodeLine{\Hypertarget{communicator_8h_source_l00338}00338       \{}
-\DoxyCodeLine{\Hypertarget{communicator_8h_source_l00339}00339         \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.resize(n);}
+\DoxyCodeLine{\Hypertarget{communicator_8h_source_l00339}00339         x.resize(n);}
 \DoxyCodeLine{\Hypertarget{communicator_8h_source_l00340}00340       \}}
 \DoxyCodeLine{\Hypertarget{communicator_8h_source_l00341}00341 }
 \DoxyCodeLine{\Hypertarget{communicator_8h_source_l00342}00342       \textcolor{comment}{// Broadcast the Vector directly}}
-\DoxyCodeLine{\Hypertarget{communicator_8h_source_l00343}00343       MPI\_Bcast(\&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[0], n, MPI\_DOUBLE, source, this-\/>mpi\_comm());}
+\DoxyCodeLine{\Hypertarget{communicator_8h_source_l00343}00343       MPI\_Bcast(\&x[0], n, MPI\_DOUBLE, source, this-\/>mpi\_comm());}
 \DoxyCodeLine{\Hypertarget{communicator_8h_source_l00344}00344     \}}
 \DoxyCodeLine{\Hypertarget{communicator_8h_source_l00345}00345 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{communicator_8h_source_l00346}00346 \textcolor{comment}{    /// broadcast function for DenseMatrix<double>}}
-\DoxyCodeLine{\Hypertarget{communicator_8h_source_l00347}00347 \textcolor{comment}{}    \textcolor{keywordtype}{void} broadcast(\textcolor{keyword}{const} \textcolor{keywordtype}{int}\& source, DenseMatrix<double>\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{communicator_8h_source_l00347}00347 \textcolor{comment}{}    \textcolor{keywordtype}{void} broadcast(\textcolor{keyword}{const} \textcolor{keywordtype}{int}\& source, DenseMatrix<double>\& x);}
 \DoxyCodeLine{\Hypertarget{communicator_8h_source_l00348}00348 }
 \DoxyCodeLine{\Hypertarget{communicator_8h_source_l00349}00349 \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{\Hypertarget{communicator_8h_source_l00350}00350 }

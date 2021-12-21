@@ -18,31 +18,31 @@ Inheritance diagram for oomph\+::Element\+With\+Specific\+Moving\+Nodes\texorpdf
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_abbcb617eac0cb1d5763fae6ff81cb154}{describe\+\_\+local\+\_\+dofs}} (std\+::ostream \&out, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} std\+::string \&current\+\_\+string) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_abbcb617eac0cb1d5763fae6ff81cb154}{describe\+\_\+local\+\_\+dofs}} (std\+::ostream \&out, const std\+::string \&current\+\_\+string) const
 \begin{DoxyCompactList}\small\item\em Function to describe the local dofs of the element. The ostream specifies the output stream to which the description is written; the string stores the currently assembled output that is ultimately written to the output stream by Data\+::describe\+\_\+dofs(...); it is typically built up incrementally as we descend through the call hierarchy of this function when called from Problem\+::describe\+\_\+dofs(...) \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_ab1be9f676f0ba2b545da3573015cfe69}{Element\+With\+Specific\+Moving\+Nodes}} ()
 \begin{DoxyCompactList}\small\item\em Constructor, call the constructor of the base element. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a26d26c4b88c457b65bce492a23f7ad99}{Element\+With\+Specific\+Moving\+Nodes}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&element\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&face\+\_\+index)
+\mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a26d26c4b88c457b65bce492a23f7ad99}{Element\+With\+Specific\+Moving\+Nodes}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&element\+\_\+pt, const int \&face\+\_\+index)
 \begin{DoxyCompactList}\small\item\em Constructor used for face elements. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a923a9f53ff6354798982ca8830bad824}{$\sim$\+Element\+With\+Specific\+Moving\+Nodes}} ()
 \begin{DoxyCompactList}\small\item\em Empty Destructor,. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a8f67562d3b274bb2f4f8926c4c9a186d}{describe\+\_\+local\+\_\+dofs}} (std\+::ostream \&out, std\+::string \&curr\+\_\+str)
 \begin{DoxyCompactList}\small\item\em Unique final overrider for describe\+\_\+dofs. \end{DoxyCompactList}\item 
-Node $\ast$ \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a60d5782fbfb3b7488be18d0508af5334}{construct\+\_\+node}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n)
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a60d5782fbfb3b7488be18d0508af5334}{construct\+\_\+node}} (const unsigned \&n)
 \begin{DoxyCompactList}\small\item\em Overload the node assignment routine to assign nodes of the appropriate type. \end{DoxyCompactList}\item 
-Node $\ast$ \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a097a73f508a14b37c837c8a80cd4eec8}{construct\+\_\+node}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&\mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\+\_\+stepper\+\_\+pt}})
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a097a73f508a14b37c837c8a80cd4eec8}{construct\+\_\+node}} (const unsigned \&n, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\+\_\+stepper\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Overloaded node allocation for unsteady problems. \end{DoxyCompactList}\item 
-Node $\ast$ \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a674645064a9c81a24c2ce122f1f2c96f}{construct\+\_\+boundary\+\_\+node}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n)
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a674645064a9c81a24c2ce122f1f2c96f}{construct\+\_\+boundary\+\_\+node}} (const unsigned \&n)
 \begin{DoxyCompactList}\small\item\em Overload the node assignment routine to assign boundary nodes. \end{DoxyCompactList}\item 
-Node $\ast$ \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a74bae8e5faf4ac3cf80c2f6d54efdec8}{construct\+\_\+boundary\+\_\+node}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&\mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\+\_\+stepper\+\_\+pt}})
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a74bae8e5faf4ac3cf80c2f6d54efdec8}{construct\+\_\+boundary\+\_\+node}} (const unsigned \&n, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\+\_\+stepper\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Overloaded boundary node allocation for unsteady problems. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_ae54ee1d8772757d72d9df3e7229d8ecf}{complete\+\_\+setup\+\_\+of\+\_\+dependencies}} ()
 \begin{DoxyCompactList}\small\item\em Complete the setup of additional dependencies. Overloads empty virtual function in \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} to determine the \char`\"{}geometric \+Data\char`\"{}, i.\+e. the \mbox{\hyperlink{classoomph_1_1Data}{Data}} that affects the element\textquotesingle{}s shape. This function is called (for all elements) at the very beginning of the equation numbering procedure to ensure that all dependencies are accounted for. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a82531e83f80254735130558f0562cdff}{assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} bool \&store\+\_\+local\+\_\+dof\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a82531e83f80254735130558f0562cdff}{assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers}} (const bool \&store\+\_\+local\+\_\+dof\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Assign local equation numbers for the underlying element, then deal with the additional geometric dofs. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_ad6f4748cbd652a05cf2bff03549e5aaa}{get\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})
+void \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_ad6f4748cbd652a05cf2bff03549e5aaa}{get\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em Compute the element\textquotesingle{}s residuals vector and jacobian matrix. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a02faf26f26815b4315d6ae82ff00da4c}{get\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix)
+void \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a02faf26f26815b4315d6ae82ff00da4c}{get\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix)
 \begin{DoxyCompactList}\small\item\em Compute the element\textquotesingle{}s residuals vector and jacobian matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -77,7 +77,7 @@ Definition at line \mbox{\hyperlink{element__with__moving__nodes_8h_source_l0040
 \index{ElementWithSpecificMovingNodes@{ElementWithSpecificMovingNodes}!oomph::ElementWithSpecificMovingNodes$<$ ELEMENT, NODE\_TYPE $>$@{oomph::ElementWithSpecificMovingNodes$<$ ELEMENT, NODE\_TYPE $>$}}
 \doxysubsubsection{\texorpdfstring{ElementWithSpecificMovingNodes()}{ElementWithSpecificMovingNodes()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$class ELEMENT , class NODE\+\_\+\+TYPE $>$ \\
-\mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes}}$<$ ELEMENT, NODE\+\_\+\+TYPE $>$\+::\mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes}{Element\+With\+Specific\+Moving\+Nodes}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{element\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes}}$<$ ELEMENT, NODE\+\_\+\+TYPE $>$\+::\mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes}{Element\+With\+Specific\+Moving\+Nodes}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{element\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -110,7 +110,7 @@ Definition at line \mbox{\hyperlink{element__with__moving__nodes_8h_source_l0041
 \index{assign\_all\_generic\_local\_eqn\_numbers@{assign\_all\_generic\_local\_eqn\_numbers}!oomph::ElementWithSpecificMovingNodes$<$ ELEMENT, NODE\_TYPE $>$@{oomph::ElementWithSpecificMovingNodes$<$ ELEMENT, NODE\_TYPE $>$}}
 \doxysubsubsection{\texorpdfstring{assign\_all\_generic\_local\_eqn\_numbers()}{assign\_all\_generic\_local\_eqn\_numbers()}}
 {\footnotesize\ttfamily template$<$class ELEMENT , class NODE\+\_\+\+TYPE $>$ \\
-void \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes}}$<$ ELEMENT, NODE\+\_\+\+TYPE $>$\+::assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} bool \&}]{store\+\_\+local\+\_\+dof\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes}}$<$ ELEMENT, NODE\+\_\+\+TYPE $>$\+::assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers (\begin{DoxyParamCaption}\item[{const bool \&}]{store\+\_\+local\+\_\+dof\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -160,7 +160,7 @@ References \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l00138}{oomp
 \index{construct\_boundary\_node@{construct\_boundary\_node}!oomph::ElementWithSpecificMovingNodes$<$ ELEMENT, NODE\_TYPE $>$@{oomph::ElementWithSpecificMovingNodes$<$ ELEMENT, NODE\_TYPE $>$}}
 \doxysubsubsection{\texorpdfstring{construct\_boundary\_node()}{construct\_boundary\_node()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$class ELEMENT , class NODE\+\_\+\+TYPE $>$ \\
-Node $\ast$ \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes}}$<$ ELEMENT, NODE\+\_\+\+TYPE $>$\+::construct\+\_\+boundary\+\_\+node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes}}$<$ ELEMENT, NODE\+\_\+\+TYPE $>$\+::construct\+\_\+boundary\+\_\+node (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -176,14 +176,14 @@ Definition at line \mbox{\hyperlink{element__with__moving__nodes_8h_source_l0044
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02468}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02489}{oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{elements_8h_source_l02460}{oomph\+::\+Finite\+Element\+::required\+\_\+nvalue()}}.
+References \mbox{\hyperlink{elements_8h_source_l02463}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02484}{oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{elements_8h_source_l02455}{oomph\+::\+Finite\+Element\+::required\+\_\+nvalue()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithSpecificMovingNodes_a74bae8e5faf4ac3cf80c2f6d54efdec8}\label{classoomph_1_1ElementWithSpecificMovingNodes_a74bae8e5faf4ac3cf80c2f6d54efdec8}} 
 \index{oomph::ElementWithSpecificMovingNodes$<$ ELEMENT, NODE\_TYPE $>$@{oomph::ElementWithSpecificMovingNodes$<$ ELEMENT, NODE\_TYPE $>$}!construct\_boundary\_node@{construct\_boundary\_node}}
 \index{construct\_boundary\_node@{construct\_boundary\_node}!oomph::ElementWithSpecificMovingNodes$<$ ELEMENT, NODE\_TYPE $>$@{oomph::ElementWithSpecificMovingNodes$<$ ELEMENT, NODE\_TYPE $>$}}
 \doxysubsubsection{\texorpdfstring{construct\_boundary\_node()}{construct\_boundary\_node()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$class ELEMENT , class NODE\+\_\+\+TYPE $>$ \\
-Node $\ast$ \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes}}$<$ ELEMENT, NODE\+\_\+\+TYPE $>$\+::construct\+\_\+boundary\+\_\+node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{time\+\_\+stepper\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes}}$<$ ELEMENT, NODE\+\_\+\+TYPE $>$\+::construct\+\_\+boundary\+\_\+node (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \&}]{time\+\_\+stepper\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -199,14 +199,14 @@ Definition at line \mbox{\hyperlink{element__with__moving__nodes_8h_source_l0046
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02468}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02489}{oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02460}{oomph\+::\+Finite\+Element\+::required\+\_\+nvalue()}}, and \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}.
+References \mbox{\hyperlink{elements_8h_source_l02463}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02484}{oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02455}{oomph\+::\+Finite\+Element\+::required\+\_\+nvalue()}}, and \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithSpecificMovingNodes_a60d5782fbfb3b7488be18d0508af5334}\label{classoomph_1_1ElementWithSpecificMovingNodes_a60d5782fbfb3b7488be18d0508af5334}} 
 \index{oomph::ElementWithSpecificMovingNodes$<$ ELEMENT, NODE\_TYPE $>$@{oomph::ElementWithSpecificMovingNodes$<$ ELEMENT, NODE\_TYPE $>$}!construct\_node@{construct\_node}}
 \index{construct\_node@{construct\_node}!oomph::ElementWithSpecificMovingNodes$<$ ELEMENT, NODE\_TYPE $>$@{oomph::ElementWithSpecificMovingNodes$<$ ELEMENT, NODE\_TYPE $>$}}
 \doxysubsubsection{\texorpdfstring{construct\_node()}{construct\_node()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$class ELEMENT , class NODE\+\_\+\+TYPE $>$ \\
-Node $\ast$ \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes}}$<$ ELEMENT, NODE\+\_\+\+TYPE $>$\+::construct\+\_\+node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes}}$<$ ELEMENT, NODE\+\_\+\+TYPE $>$\+::construct\+\_\+node (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -222,14 +222,14 @@ Definition at line \mbox{\hyperlink{element__with__moving__nodes_8h_source_l0042
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02468}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02489}{oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{elements_8h_source_l02460}{oomph\+::\+Finite\+Element\+::required\+\_\+nvalue()}}.
+References \mbox{\hyperlink{elements_8h_source_l02463}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02484}{oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{elements_8h_source_l02455}{oomph\+::\+Finite\+Element\+::required\+\_\+nvalue()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithSpecificMovingNodes_a097a73f508a14b37c837c8a80cd4eec8}\label{classoomph_1_1ElementWithSpecificMovingNodes_a097a73f508a14b37c837c8a80cd4eec8}} 
 \index{oomph::ElementWithSpecificMovingNodes$<$ ELEMENT, NODE\_TYPE $>$@{oomph::ElementWithSpecificMovingNodes$<$ ELEMENT, NODE\_TYPE $>$}!construct\_node@{construct\_node}}
 \index{construct\_node@{construct\_node}!oomph::ElementWithSpecificMovingNodes$<$ ELEMENT, NODE\_TYPE $>$@{oomph::ElementWithSpecificMovingNodes$<$ ELEMENT, NODE\_TYPE $>$}}
 \doxysubsubsection{\texorpdfstring{construct\_node()}{construct\_node()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$class ELEMENT , class NODE\+\_\+\+TYPE $>$ \\
-Node $\ast$ \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes}}$<$ ELEMENT, NODE\+\_\+\+TYPE $>$\+::construct\+\_\+node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{time\+\_\+stepper\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes}}$<$ ELEMENT, NODE\+\_\+\+TYPE $>$\+::construct\+\_\+node (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \&}]{time\+\_\+stepper\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -245,14 +245,14 @@ Definition at line \mbox{\hyperlink{element__with__moving__nodes_8h_source_l0043
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02468}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02489}{oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02460}{oomph\+::\+Finite\+Element\+::required\+\_\+nvalue()}}, and \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}.
+References \mbox{\hyperlink{elements_8h_source_l02463}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02484}{oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02455}{oomph\+::\+Finite\+Element\+::required\+\_\+nvalue()}}, and \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithSpecificMovingNodes_abbcb617eac0cb1d5763fae6ff81cb154}\label{classoomph_1_1ElementWithSpecificMovingNodes_abbcb617eac0cb1d5763fae6ff81cb154}} 
 \index{oomph::ElementWithSpecificMovingNodes$<$ ELEMENT, NODE\_TYPE $>$@{oomph::ElementWithSpecificMovingNodes$<$ ELEMENT, NODE\_TYPE $>$}!describe\_local\_dofs@{describe\_local\_dofs}}
 \index{describe\_local\_dofs@{describe\_local\_dofs}!oomph::ElementWithSpecificMovingNodes$<$ ELEMENT, NODE\_TYPE $>$@{oomph::ElementWithSpecificMovingNodes$<$ ELEMENT, NODE\_TYPE $>$}}
 \doxysubsubsection{\texorpdfstring{describe\_local\_dofs()}{describe\_local\_dofs()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$class ELEMENT , class NODE\+\_\+\+TYPE $>$ \\
-void \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes}}$<$ ELEMENT, NODE\+\_\+\+TYPE $>$\+::describe\+\_\+local\+\_\+dofs (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} std\+::string \&}]{current\+\_\+string }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes}}$<$ ELEMENT, NODE\+\_\+\+TYPE $>$\+::describe\+\_\+local\+\_\+dofs (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out,  }\item[{const std\+::string \&}]{current\+\_\+string }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -314,7 +314,7 @@ Definition at line \mbox{\hyperlink{element__with__moving__nodes_8h_source_l0050
 
 
 
-References \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l00323}{oomph\+::\+Element\+With\+Moving\+Nodes\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data()}}, and \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}.
+References \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l00323}{oomph\+::\+Element\+With\+Moving\+Nodes\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithSpecificMovingNodes_a02faf26f26815b4315d6ae82ff00da4c}\label{classoomph_1_1ElementWithSpecificMovingNodes_a02faf26f26815b4315d6ae82ff00da4c}} 
 \index{oomph::ElementWithSpecificMovingNodes$<$ ELEMENT, NODE\_TYPE $>$@{oomph::ElementWithSpecificMovingNodes$<$ ELEMENT, NODE\_TYPE $>$}!get\_jacobian\_and\_mass\_matrix@{get\_jacobian\_and\_mass\_matrix}}
@@ -337,7 +337,7 @@ Definition at line \mbox{\hyperlink{element__with__moving__nodes_8h_source_l0051
 
 
 
-References \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l00323}{oomph\+::\+Element\+With\+Moving\+Nodes\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data()}}, and \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}.
+References \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l00323}{oomph\+::\+Element\+With\+Moving\+Nodes\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data()}}.
 
 
 

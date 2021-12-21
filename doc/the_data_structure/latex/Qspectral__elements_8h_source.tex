@@ -208,13 +208,13 @@
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00204}00204       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < n\_spectral; n++)}
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00205}00205       \{}
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00206}00206         \textcolor{comment}{// Can we upcast to a node}}
-\DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00207}00207         Node* cast\_node\_pt = \textcolor{keyword}{dynamic\_cast<}Node*\textcolor{keyword}{>}(\mbox{\hyperlink{classoomph_1_1SpectralElement_ae5fbda0333b3720e8dc64a6669118d41}{spectral\_data\_pt}}(n));}
+\DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00207}00207         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* cast\_node\_pt = \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1Node}{Node}}*\textcolor{keyword}{>}(\mbox{\hyperlink{classoomph_1_1SpectralElement_ae5fbda0333b3720e8dc64a6669118d41}{spectral\_data\_pt}}(n));}
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00208}00208         \textcolor{keywordflow}{if} (cast\_node\_pt)}
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00209}00209         \{}
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00210}00210           std::stringstream conversion;}
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00211}00211           conversion << \textcolor{stringliteral}{"{} of Node "{}} << n << current\_string;}
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00212}00212           \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} in(conversion.str());}
-\DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00213}00213           cast\_node\_pt-\/>describe\_dofs(out, in);}
+\DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00213}00213           cast\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a2dae16e2dcff9a40029f834c83364df5}{describe\_dofs}}(out, in);}
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00214}00214         \}}
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00215}00215         \textcolor{comment}{// Otherwise it is data.}}
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00216}00216         \textcolor{keywordflow}{else}}
@@ -279,12 +279,12 @@
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00275}00275           \textcolor{comment}{//(and hence already assigned)}}
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00276}00276 }
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00277}00277           \textcolor{comment}{// Can we upcast to a node}}
-\DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00278}00278           Node* cast\_node\_pt = \textcolor{keyword}{dynamic\_cast<}Node*\textcolor{keyword}{>}(\mbox{\hyperlink{classoomph_1_1SpectralElement_ae5fbda0333b3720e8dc64a6669118d41}{spectral\_data\_pt}}(n));}
+\DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00278}00278           \mbox{\hyperlink{classoomph_1_1Node}{Node}}* cast\_node\_pt = \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1Node}{Node}}*\textcolor{keyword}{>}(\mbox{\hyperlink{classoomph_1_1SpectralElement_ae5fbda0333b3720e8dc64a6669118d41}{spectral\_data\_pt}}(n));}
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00279}00279           \textcolor{keywordflow}{if} ((cast\_node\_pt) \&\&}
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00280}00280               (set\_of\_node\_pt.find(cast\_node\_pt) != set\_of\_node\_pt.end()))}
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00281}00281           \{}
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00282}00282             \textcolor{comment}{// Find the number of values}}
-\DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00283}00283             \textcolor{keywordtype}{unsigned} n\_value = cast\_node\_pt-\/>nvalue();}
+\DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00283}00283             \textcolor{keywordtype}{unsigned} n\_value = cast\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}{nvalue}}();}
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00284}00284             \textcolor{comment}{// Copy them across}}
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00285}00285             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < n\_value; j++)}
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00286}00286             \{}
@@ -419,10 +419,10 @@
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00415}00415     \}}
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00416}00416 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00417}00417 \textcolor{comment}{    /// Pointer to the j-\/th vertex node in the element}}
-\DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00418}\mbox{\hyperlink{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a300ae44431cce9b74fde6ccd7b4a57fc}{00418}} \textcolor{comment}{}    Node* \mbox{\hyperlink{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a300ae44431cce9b74fde6ccd7b4a57fc}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00418}\mbox{\hyperlink{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a300ae44431cce9b74fde6ccd7b4a57fc}{00418}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a300ae44431cce9b74fde6ccd7b4a57fc}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00419}00419 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00420}00420       \textcolor{keywordtype}{unsigned} n\_node\_1d = nnode\_1d();}
-\DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00421}00421       Node* nod\_pt;}
+\DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00421}00421       \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt;}
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00422}00422       \textcolor{keywordflow}{switch} (j)}
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00423}00423       \{}
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00424}00424         \textcolor{keywordflow}{case} 0:}
@@ -697,10 +697,10 @@
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00693}00693     \}}
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00694}00694 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00695}00695 \textcolor{comment}{    /// Pointer to the j-\/th vertex node in the element}}
-\DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00696}\mbox{\hyperlink{classoomph_1_1QSpectralElement_3_012_00_01NNODE__1D_01_4_a3d87628dd490dd33bb954146e280f9da}{00696}} \textcolor{comment}{}    Node* \mbox{\hyperlink{classoomph_1_1QSpectralElement_3_012_00_01NNODE__1D_01_4_a3d87628dd490dd33bb954146e280f9da}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00696}\mbox{\hyperlink{classoomph_1_1QSpectralElement_3_012_00_01NNODE__1D_01_4_a3d87628dd490dd33bb954146e280f9da}{00696}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1QSpectralElement_3_012_00_01NNODE__1D_01_4_a3d87628dd490dd33bb954146e280f9da}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00697}00697 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00698}00698       \textcolor{keywordtype}{unsigned} n\_node\_1d = nnode\_1d();}
-\DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00699}00699       Node* nod\_pt;}
+\DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00699}00699       \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt;}
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00700}00700       \textcolor{keywordflow}{switch} (j)}
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00701}00701       \{}
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l00702}00702         \textcolor{keywordflow}{case} 0:}
@@ -1012,10 +1012,10 @@
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l01008}01008     \}}
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l01009}01009 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l01010}01010 \textcolor{comment}{    /// Pointer to the j-\/th vertex node in the element}}
-\DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l01011}\mbox{\hyperlink{classoomph_1_1QSpectralElement_3_013_00_01NNODE__1D_01_4_ad9b1675c148058568ba6ae301c1118b7}{01011}} \textcolor{comment}{}    Node* \mbox{\hyperlink{classoomph_1_1QSpectralElement_3_013_00_01NNODE__1D_01_4_ad9b1675c148058568ba6ae301c1118b7}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l01011}\mbox{\hyperlink{classoomph_1_1QSpectralElement_3_013_00_01NNODE__1D_01_4_ad9b1675c148058568ba6ae301c1118b7}{01011}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1QSpectralElement_3_013_00_01NNODE__1D_01_4_ad9b1675c148058568ba6ae301c1118b7}{vertex\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l01012}01012 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l01013}01013       \textcolor{keywordtype}{unsigned} n\_node\_1d = nnode\_1d();}
-\DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l01014}01014       Node* nod\_pt;}
+\DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l01014}01014       \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt;}
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l01015}01015       \textcolor{keywordflow}{switch} (j)}
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l01016}01016       \{}
 \DoxyCodeLine{\Hypertarget{Qspectral__elements_8h_source_l01017}01017         \textcolor{keywordflow}{case} 0:}

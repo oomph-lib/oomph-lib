@@ -22,15 +22,15 @@ Inheritance diagram for oomph\+::Spine\+Point\+Fluid\+Interface\+Bounding\+Eleme
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SpinePointFluidInterfaceBoundingElement_ac35833173407cde9359c8163a0eba35c}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Overload the output function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1SpinePointFluidInterfaceBoundingElement_a05a5383f07c840e07d8c2279cce80aaa}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1SpinePointFluidInterfaceBoundingElement_a05a5383f07c840e07d8c2279cce80aaa}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em Output the element. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SpinePointFluidInterfaceBoundingElement_a2435b4b786ede183808834b4d0c5210c}{output}} (FILE $\ast$file\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Overload the C-\/style output function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1SpinePointFluidInterfaceBoundingElement_a75a530620bfa2a983fec2e1c7f801db2}{output}} (FILE $\ast$file\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1SpinePointFluidInterfaceBoundingElement_a75a530620bfa2a983fec2e1c7f801db2}{output}} (FILE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em C-\/style Output function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1SpinePointFluidInterfaceBoundingElement_afe714a2a2b9f741558376cc144e19232}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})
+void \mbox{\hyperlink{classoomph_1_1SpinePointFluidInterfaceBoundingElement_afe714a2a2b9f741558376cc144e19232}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em Calculate the elemental residual vector and the Jacobian. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{classoomph_1_1SpinePointFluidInterfaceBoundingElement_a7c1c2f31b1d9f9c925889ad199a78947}{kinematic\+\_\+local\+\_\+eqn}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n)
+int \mbox{\hyperlink{classoomph_1_1SpinePointFluidInterfaceBoundingElement_a7c1c2f31b1d9f9c925889ad199a78947}{kinematic\+\_\+local\+\_\+eqn}} (const unsigned \&n)
 \begin{DoxyCompactList}\small\item\em Return local equation number associated with the kinematic constraint for local node n. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -84,14 +84,14 @@ Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_
 
 
 
-References \mbox{\hyperlink{interface__elements_8cc_source_l00086}{oomph\+::\+Point\+Fluid\+Interface\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+interface\+\_\+boundary()}}, \mbox{\hyperlink{elements_8cc_source_l01199}{oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+by\+\_\+fd()}}, \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l00323}{oomph\+::\+Element\+With\+Moving\+Nodes\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data()}}, and \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}.
+References \mbox{\hyperlink{interface__elements_8cc_source_l00086}{oomph\+::\+Point\+Fluid\+Interface\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+interface\+\_\+boundary()}}, \mbox{\hyperlink{elements_8cc_source_l01199}{oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+by\+\_\+fd()}}, and \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l00323}{oomph\+::\+Element\+With\+Moving\+Nodes\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SpinePointFluidInterfaceBoundingElement_a7c1c2f31b1d9f9c925889ad199a78947}\label{classoomph_1_1SpinePointFluidInterfaceBoundingElement_a7c1c2f31b1d9f9c925889ad199a78947}} 
 \index{oomph::SpinePointFluidInterfaceBoundingElement$<$ ELEMENT $>$@{oomph::SpinePointFluidInterfaceBoundingElement$<$ ELEMENT $>$}!kinematic\_local\_eqn@{kinematic\_local\_eqn}}
 \index{kinematic\_local\_eqn@{kinematic\_local\_eqn}!oomph::SpinePointFluidInterfaceBoundingElement$<$ ELEMENT $>$@{oomph::SpinePointFluidInterfaceBoundingElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{kinematic\_local\_eqn()}{kinematic\_local\_eqn()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-int \mbox{\hyperlink{classoomph_1_1SpinePointFluidInterfaceBoundingElement}{oomph\+::\+Spine\+Point\+Fluid\+Interface\+Bounding\+Element}}$<$ ELEMENT $>$\+::kinematic\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+int \mbox{\hyperlink{classoomph_1_1SpinePointFluidInterfaceBoundingElement}{oomph\+::\+Spine\+Point\+Fluid\+Interface\+Bounding\+Element}}$<$ ELEMENT $>$\+::kinematic\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -130,14 +130,14 @@ Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
+References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SpinePointFluidInterfaceBoundingElement_a75a530620bfa2a983fec2e1c7f801db2}\label{classoomph_1_1SpinePointFluidInterfaceBoundingElement_a75a530620bfa2a983fec2e1c7f801db2}} 
 \index{oomph::SpinePointFluidInterfaceBoundingElement$<$ ELEMENT $>$@{oomph::SpinePointFluidInterfaceBoundingElement$<$ ELEMENT $>$}!output@{output}}
 \index{output@{output}!oomph::SpinePointFluidInterfaceBoundingElement$<$ ELEMENT $>$@{oomph::SpinePointFluidInterfaceBoundingElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1SpinePointFluidInterfaceBoundingElement}{oomph\+::\+Spine\+Point\+Fluid\+Interface\+Bounding\+Element}}$<$ ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1SpinePointFluidInterfaceBoundingElement}{oomph\+::\+Spine\+Point\+Fluid\+Interface\+Bounding\+Element}}$<$ ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -176,14 +176,14 @@ Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
+References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SpinePointFluidInterfaceBoundingElement_a05a5383f07c840e07d8c2279cce80aaa}\label{classoomph_1_1SpinePointFluidInterfaceBoundingElement_a05a5383f07c840e07d8c2279cce80aaa}} 
 \index{oomph::SpinePointFluidInterfaceBoundingElement$<$ ELEMENT $>$@{oomph::SpinePointFluidInterfaceBoundingElement$<$ ELEMENT $>$}!output@{output}}
 \index{output@{output}!oomph::SpinePointFluidInterfaceBoundingElement$<$ ELEMENT $>$@{oomph::SpinePointFluidInterfaceBoundingElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1SpinePointFluidInterfaceBoundingElement}{oomph\+::\+Spine\+Point\+Fluid\+Interface\+Bounding\+Element}}$<$ ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1SpinePointFluidInterfaceBoundingElement}{oomph\+::\+Spine\+Point\+Fluid\+Interface\+Bounding\+Element}}$<$ ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 

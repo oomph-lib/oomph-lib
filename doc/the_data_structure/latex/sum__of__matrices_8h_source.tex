@@ -205,7 +205,7 @@
 \DoxyCodeLine{\Hypertarget{sum__of__matrices_8h_source_l00201}00201       \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup_a6c172dfd7d00b7af01c83e46b072955b}{Added\_to\_main\_mapping}}.resize(mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a945e7823d1a2af243b5b7f7866aaff5e}{nnode}}());}
 \DoxyCodeLine{\Hypertarget{sum__of__matrices_8h_source_l00202}00202       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} nd = 0, nnode = mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a945e7823d1a2af243b5b7f7866aaff5e}{nnode}}(); nd < nnode; nd++)}
 \DoxyCodeLine{\Hypertarget{sum__of__matrices_8h_source_l00203}00203       \{}
-\DoxyCodeLine{\Hypertarget{sum__of__matrices_8h_source_l00204}00204         \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup_a6c172dfd7d00b7af01c83e46b072955b}{Added\_to\_main\_mapping}}[nd] = mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}(nd)-\/>eqn\_number(dof\_index);}
+\DoxyCodeLine{\Hypertarget{sum__of__matrices_8h_source_l00204}00204         \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup_a6c172dfd7d00b7af01c83e46b072955b}{Added\_to\_main\_mapping}}[nd] = mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}(nd)-\/>\mbox{\hyperlink{classoomph_1_1Data_ab6845db69833c541766d9a073b023fc4}{eqn\_number}}(dof\_index);}
 \DoxyCodeLine{\Hypertarget{sum__of__matrices_8h_source_l00205}00205       \}}
 \DoxyCodeLine{\Hypertarget{sum__of__matrices_8h_source_l00206}00206     \}}
 \DoxyCodeLine{\Hypertarget{sum__of__matrices_8h_source_l00207}00207 \textcolor{comment}{}}
@@ -537,7 +537,7 @@
 \DoxyCodeLine{\Hypertarget{sum__of__matrices_8h_source_l00533}00533 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{sum__of__matrices_8h_source_l00534}00534 \textcolor{comment}{    /// Multiply: just call multiply on each of the matrices and add up}}
 \DoxyCodeLine{\Hypertarget{sum__of__matrices_8h_source_l00535}00535 \textcolor{comment}{    /// the results (with appropriate bookeeping of the relative positions).}}
-\DoxyCodeLine{\Hypertarget{sum__of__matrices_8h_source_l00536}00536 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1SumOfMatrices_ae6c97ff92220835df3c3eeb1b0a85cc5}{multiply}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& soln) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{sum__of__matrices_8h_source_l00536}00536 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1SumOfMatrices_ae6c97ff92220835df3c3eeb1b0a85cc5}{multiply}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& x, \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& soln) \textcolor{keyword}{const};}
 \DoxyCodeLine{\Hypertarget{sum__of__matrices_8h_source_l00537}00537 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{sum__of__matrices_8h_source_l00538}00538 \textcolor{comment}{    /// Broken operator() because it does not make sense to return}}
 \DoxyCodeLine{\Hypertarget{sum__of__matrices_8h_source_l00539}00539 \textcolor{comment}{    /// anything by reference.}}
@@ -574,7 +574,7 @@
 \DoxyCodeLine{\Hypertarget{sum__of__matrices_8h_source_l00570}00570 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{sum__of__matrices_8h_source_l00571}00571 \textcolor{comment}{    /// Dummy overload of a pure virtual function. I'm not sure how best}}
 \DoxyCodeLine{\Hypertarget{sum__of__matrices_8h_source_l00572}00572 \textcolor{comment}{    /// to implement this and I don't think I need it.}}
-\DoxyCodeLine{\Hypertarget{sum__of__matrices_8h_source_l00573}\mbox{\hyperlink{classoomph_1_1SumOfMatrices_a0028fb64f602aa07ff557b0a11a1c659}{00573}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1SumOfMatrices_a0028fb64f602aa07ff557b0a11a1c659}{multiply\_transpose}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{sum__of__matrices_8h_source_l00573}\mbox{\hyperlink{classoomph_1_1SumOfMatrices_a0028fb64f602aa07ff557b0a11a1c659}{00573}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1SumOfMatrices_a0028fb64f602aa07ff557b0a11a1c659}{multiply\_transpose}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& x,}
 \DoxyCodeLine{\Hypertarget{sum__of__matrices_8h_source_l00574}00574                                     \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& soln)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{sum__of__matrices_8h_source_l00575}00575 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{sum__of__matrices_8h_source_l00576}00576       std::ostringstream error\_msg;}

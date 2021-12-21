@@ -20,54 +20,54 @@ Inheritance diagram for oomph\+::Linearised\+QTaylor\+Hood\+Element\+:\begin{fig
 \item 
 \mbox{\hyperlink{classoomph_1_1LinearisedQTaylorHoodElement_ad12c05ff1bac20a6e7d344df2ab064a0}{Linearised\+QTaylor\+Hood\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Constructor, no internal data points. \end{DoxyCompactList}\item 
-virtual unsigned \mbox{\hyperlink{classoomph_1_1LinearisedQTaylorHoodElement_ad91af0bc54b6c61cf43cbf867e939bc9}{required\+\_\+nvalue}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+virtual unsigned \mbox{\hyperlink{classoomph_1_1LinearisedQTaylorHoodElement_ad91af0bc54b6c61cf43cbf867e939bc9}{required\+\_\+nvalue}} (const unsigned \&n) const
 \begin{DoxyCompactList}\small\item\em Number of values (pinned or dofs) required at node n. Can be overwritten for hanging node version. \end{DoxyCompactList}\item 
-virtual int \mbox{\hyperlink{classoomph_1_1LinearisedQTaylorHoodElement_a9b411b9d761bbefa1ff7133fd053433f}{p\+\_\+index\+\_\+linearised\+\_\+nst}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+virtual int \mbox{\hyperlink{classoomph_1_1LinearisedQTaylorHoodElement_a9b411b9d761bbefa1ff7133fd053433f}{p\+\_\+index\+\_\+linearised\+\_\+nst}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Which nodal value represents the pressure? Overload version in base class which returns static int \char`\"{}\+Pressure\+\_\+not\+\_\+stored\+\_\+at\+\_\+node\char`\"{}. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1LinearisedQTaylorHoodElement_a9f8724c0006b99cf422040d429033828}{p\+\_\+linearised\+\_\+nst}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+p, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1LinearisedQTaylorHoodElement_a9f8724c0006b99cf422040d429033828}{p\+\_\+linearised\+\_\+nst}} (const unsigned \&n\+\_\+p, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Access function for the i-\/th component of pressure at local pressure node n\+\_\+p (const version). \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1LinearisedQTaylorHoodElement_a21bc414ed57b79f986d4f1bff6cece4b}{pin\+\_\+pressure\+\_\+normalisation\+\_\+dofs}} ()
 \begin{DoxyCompactList}\small\item\em Pin the normalisation dofs. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1LinearisedQTaylorHoodElement_a84bb4ee14849c6ed91b0005b1c9b06dc}{pin\+\_\+real\+\_\+or\+\_\+imag}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&real)
+virtual void \mbox{\hyperlink{classoomph_1_1LinearisedQTaylorHoodElement_a84bb4ee14849c6ed91b0005b1c9b06dc}{pin\+\_\+real\+\_\+or\+\_\+imag}} (const unsigned \&real)
 \begin{DoxyCompactList}\small\item\em Pin the real or imaginary part of the problem Input integer 0 for real 1 for imaginary. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1LinearisedQTaylorHoodElement_aed1b1549f18cc58931bf86b67ac9e6a2}{unpin\+\_\+real\+\_\+or\+\_\+imag}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&real)
+virtual void \mbox{\hyperlink{classoomph_1_1LinearisedQTaylorHoodElement_aed1b1549f18cc58931bf86b67ac9e6a2}{unpin\+\_\+real\+\_\+or\+\_\+imag}} (const unsigned \&real)
 \item 
-unsigned \mbox{\hyperlink{classoomph_1_1LinearisedQTaylorHoodElement_a39fbc88bf3d2d013337c1a5009e0168f}{npres\+\_\+linearised\+\_\+nst}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1LinearisedQTaylorHoodElement_a39fbc88bf3d2d013337c1a5009e0168f}{npres\+\_\+linearised\+\_\+nst}} () const
 \begin{DoxyCompactList}\small\item\em Return number of pressure values corresponding to a single pressure component. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1LinearisedQTaylorHoodElement_a09568188690809c7ef85f4e524c4ee7c}{fix\+\_\+pressure}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+p, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&pvalue)
+void \mbox{\hyperlink{classoomph_1_1LinearisedQTaylorHoodElement_a09568188690809c7ef85f4e524c4ee7c}{fix\+\_\+pressure}} (const unsigned \&n\+\_\+p, const double \&pvalue)
 \begin{DoxyCompactList}\small\item\em Fix both components of the pressure at local pressure node n\+\_\+p to pvalue. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{classoomph_1_1LinearisedQTaylorHoodElement_add790a7adf9472c27b4da3c0f6c9e4a5}{p\+\_\+local\+\_\+eqn}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+int \mbox{\hyperlink{classoomph_1_1LinearisedQTaylorHoodElement_add790a7adf9472c27b4da3c0f6c9e4a5}{p\+\_\+local\+\_\+eqn}} (const unsigned \&n, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Overload the access function for the i-\/th component of the pressure\textquotesingle{}s local equation numbers. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1LinearisedQTaylorHoodElement_a0a51768cb37a15ede6bc402a2c22e718}{output}} (std\+::ostream \&outfile)
-\begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classNavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1LinearisedQTaylorHoodElement_a323f84cf9d6e3fc85e96e6e0a0f23ada}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classNavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1LinearisedQTaylorHoodElement_a323f84cf9d6e3fc85e96e6e0a0f23ada}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1LinearisedQTaylorHoodElement_a93a43aa55672d50f4fde9b0f088c95ab}{output}} (FILE $\ast$file\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classNavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1LinearisedQTaylorHoodElement_a2725e5c308afb58f54dfb16aef114a31}{output}} (FILE $\ast$file\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classNavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1LinearisedQTaylorHoodElement_a2cd2df4e56d4bd418e63ce1d15336082}{ndof\+\_\+types}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+\begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1LinearisedQTaylorHoodElement_a2725e5c308afb58f54dfb16aef114a31}{output}} (FILE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1LinearisedQTaylorHoodElement_a2cd2df4e56d4bd418e63ce1d15336082}{ndof\+\_\+types}} () const
 \begin{DoxyCompactList}\small\item\em Returns the number of \char`\"{}dof-\/blocks\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: Velocity and pressure. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-double \mbox{\hyperlink{classoomph_1_1LinearisedQTaylorHoodElement_ae6cdd6036b58e98ddabffddb645270be}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+linearised\+\_\+nst}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1LinearisedQTaylorHoodElement_ae6cdd6036b58e98ddabffddb645270be}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+linearised\+\_\+nst}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) const
 \begin{DoxyCompactList}\small\item\em Velocity shape and test functions and their derivatives w.\+r.\+t. global coordinates at local coordinate s (taken from geometry). Return Jacobian of mapping between local and global coordinates. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1LinearisedQTaylorHoodElement_a03f34e02301c483325c4d77ed714ad56}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+linearised\+\_\+nst}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1LinearisedQTaylorHoodElement_a03f34e02301c483325c4d77ed714ad56}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+linearised\+\_\+nst}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) const
 \begin{DoxyCompactList}\small\item\em Velocity shape and test functions and their derivatives w.\+r.\+t. global coordinates the ipt-\/th integation point (taken from geometry). Return Jacobian of mapping between local and global coordinates. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1LinearisedQTaylorHoodElement_a948a02f3480faa9439fb72932e344dcf}{pshape\+\_\+linearised\+\_\+nst}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1LinearisedQTaylorHoodElement_a948a02f3480faa9439fb72932e344dcf}{pshape\+\_\+linearised\+\_\+nst}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi) const
 \begin{DoxyCompactList}\small\item\em Compute the pressure shape functions at local coordinate s. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1LinearisedQTaylorHoodElement_a468b7ce0892709fada4b19acf74646e7}{pshape\+\_\+linearised\+\_\+nst}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1LinearisedQTaylorHoodElement_a468b7ce0892709fada4b19acf74646e7}{pshape\+\_\+linearised\+\_\+nst}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) const
 \begin{DoxyCompactList}\small\item\em Compute the pressure shape and test functions at local coordinte s. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \mbox{\hyperlink{classoomph_1_1LinearisedQTaylorHoodElement_a5dd0e67f659985e38ce27719011e02ca}{Pconv}} \mbox{[}$\,$\mbox{]} = \{0, 2, 6, 8\}
+static const unsigned \mbox{\hyperlink{classoomph_1_1LinearisedQTaylorHoodElement_a5dd0e67f659985e38ce27719011e02ca}{Pconv}} \mbox{[}$\,$\mbox{]} = \{0, 2, 6, 8\}
 \begin{DoxyCompactList}\small\item\em Static array of ints to hold conversion from pressure node numbers to actual node numbers. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \mbox{\hyperlink{classoomph_1_1LinearisedQTaylorHoodElement_a88edb1c077b40603e7f48c7f17c79fc0}{Initial\+\_\+\+Nvalue}} \mbox{[}$\,$\mbox{]}
+static const unsigned \mbox{\hyperlink{classoomph_1_1LinearisedQTaylorHoodElement_a88edb1c077b40603e7f48c7f17c79fc0}{Initial\+\_\+\+Nvalue}} \mbox{[}$\,$\mbox{]}
 \begin{DoxyCompactList}\small\item\em Static array of ints to hold number of variables at node. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -103,7 +103,7 @@ Definition at line \mbox{\hyperlink{linearised__navier__stokes__elements_8h_sour
 \index{oomph::LinearisedQTaylorHoodElement@{oomph::LinearisedQTaylorHoodElement}!dshape\_and\_dtest\_eulerian\_at\_knot\_linearised\_nst@{dshape\_and\_dtest\_eulerian\_at\_knot\_linearised\_nst}}
 \index{dshape\_and\_dtest\_eulerian\_at\_knot\_linearised\_nst@{dshape\_and\_dtest\_eulerian\_at\_knot\_linearised\_nst}!oomph::LinearisedQTaylorHoodElement@{oomph::LinearisedQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_at\_knot\_linearised\_nst()}{dshape\_and\_dtest\_eulerian\_at\_knot\_linearised\_nst()}}
-{\footnotesize\ttfamily double oomph\+::\+Linearised\+QTaylor\+Hood\+Element\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+linearised\+\_\+nst (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily double oomph\+::\+Linearised\+QTaylor\+Hood\+Element\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+linearised\+\_\+nst (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -119,13 +119,13 @@ Definition at line \mbox{\hyperlink{linearised__navier__stokes__elements_8h_sour
 
 
 
-References \mbox{\hyperlink{classoomph_1_1FiniteElement_a837c4849f68842295ab5e77c8ecb8b93}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian\+\_\+at\+\_\+knot()}}.
+References \mbox{\hyperlink{elements_8cc_source_l03325}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian\+\_\+at\+\_\+knot()}}.
 
 \mbox{\Hypertarget{classoomph_1_1LinearisedQTaylorHoodElement_ae6cdd6036b58e98ddabffddb645270be}\label{classoomph_1_1LinearisedQTaylorHoodElement_ae6cdd6036b58e98ddabffddb645270be}} 
 \index{oomph::LinearisedQTaylorHoodElement@{oomph::LinearisedQTaylorHoodElement}!dshape\_and\_dtest\_eulerian\_linearised\_nst@{dshape\_and\_dtest\_eulerian\_linearised\_nst}}
 \index{dshape\_and\_dtest\_eulerian\_linearised\_nst@{dshape\_and\_dtest\_eulerian\_linearised\_nst}!oomph::LinearisedQTaylorHoodElement@{oomph::LinearisedQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_linearised\_nst()}{dshape\_and\_dtest\_eulerian\_linearised\_nst()}}
-{\footnotesize\ttfamily double oomph\+::\+Linearised\+QTaylor\+Hood\+Element\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+linearised\+\_\+nst (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily double oomph\+::\+Linearised\+QTaylor\+Hood\+Element\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+linearised\+\_\+nst (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -141,13 +141,13 @@ Definition at line \mbox{\hyperlink{linearised__navier__stokes__elements_8h_sour
 
 
 
-References \mbox{\hyperlink{classoomph_1_1FiniteElement_a9296c17b134688049256a4bbc886df69}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian()}}.
+References \mbox{\hyperlink{elements_8cc_source_l03298}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian()}}.
 
 \mbox{\Hypertarget{classoomph_1_1LinearisedQTaylorHoodElement_a09568188690809c7ef85f4e524c4ee7c}\label{classoomph_1_1LinearisedQTaylorHoodElement_a09568188690809c7ef85f4e524c4ee7c}} 
 \index{oomph::LinearisedQTaylorHoodElement@{oomph::LinearisedQTaylorHoodElement}!fix\_pressure@{fix\_pressure}}
 \index{fix\_pressure@{fix\_pressure}!oomph::LinearisedQTaylorHoodElement@{oomph::LinearisedQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{fix\_pressure()}{fix\_pressure()}}
-{\footnotesize\ttfamily void oomph\+::\+Linearised\+QTaylor\+Hood\+Element\+::fix\+\_\+pressure (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+p,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{pvalue }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Linearised\+QTaylor\+Hood\+Element\+::fix\+\_\+pressure (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+p,  }\item[{const double \&}]{pvalue }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -159,7 +159,7 @@ Definition at line \mbox{\hyperlink{linearised__navier__stokes__elements_8h_sour
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{linearised__navier__stokes__elements_8h_source_l00983}{p\+\_\+index\+\_\+linearised\+\_\+nst()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{linearised__navier__stokes__elements_8h_source_l00983}{p\+\_\+index\+\_\+linearised\+\_\+nst()}}, \mbox{\hyperlink{nodes_8h_source_l00385}{oomph\+::\+Data\+::pin()}}, and \mbox{\hyperlink{nodes_8h_source_l00271}{oomph\+::\+Data\+::set\+\_\+value()}}.
 
 \mbox{\Hypertarget{classoomph_1_1LinearisedQTaylorHoodElement_a2cd2df4e56d4bd418e63ce1d15336082}\label{classoomph_1_1LinearisedQTaylorHoodElement_a2cd2df4e56d4bd418e63ce1d15336082}} 
 \index{oomph::LinearisedQTaylorHoodElement@{oomph::LinearisedQTaylorHoodElement}!ndof\_types@{ndof\_types}}
@@ -209,7 +209,7 @@ Referenced by \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_
 
 
 
-Redirect output to \mbox{\hyperlink{classNavierStokesEquations}{Navier\+Stokes\+Equations}} output. 
+Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. 
 
 
 
@@ -227,11 +227,11 @@ References \mbox{\hyperlink{linearised__navier__stokes__elements_8h_source_l0046
 \index{oomph::LinearisedQTaylorHoodElement@{oomph::LinearisedQTaylorHoodElement}!output@{output}}
 \index{output@{output}!oomph::LinearisedQTaylorHoodElement@{oomph::LinearisedQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
-{\footnotesize\ttfamily void oomph\+::\+Linearised\+QTaylor\+Hood\+Element\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Linearised\+QTaylor\+Hood\+Element\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
-Redirect output to \mbox{\hyperlink{classNavierStokesEquations}{Navier\+Stokes\+Equations}} output. 
+Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. 
 
 
 
@@ -253,7 +253,7 @@ References \mbox{\hyperlink{linearised__navier__stokes__elements_8h_source_l0046
 
 
 
-Redirect output to \mbox{\hyperlink{classNavierStokesEquations}{Navier\+Stokes\+Equations}} output. 
+Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. 
 
 
 
@@ -271,11 +271,11 @@ References \mbox{\hyperlink{linearised__navier__stokes__elements_8h_source_l0046
 \index{oomph::LinearisedQTaylorHoodElement@{oomph::LinearisedQTaylorHoodElement}!output@{output}}
 \index{output@{output}!oomph::LinearisedQTaylorHoodElement@{oomph::LinearisedQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
-{\footnotesize\ttfamily void oomph\+::\+Linearised\+QTaylor\+Hood\+Element\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Linearised\+QTaylor\+Hood\+Element\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
-Redirect output to \mbox{\hyperlink{classNavierStokesEquations}{Navier\+Stokes\+Equations}} output. 
+Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. 
 
 
 
@@ -293,7 +293,7 @@ References \mbox{\hyperlink{linearised__navier__stokes__elements_8h_source_l0046
 \index{oomph::LinearisedQTaylorHoodElement@{oomph::LinearisedQTaylorHoodElement}!p\_index\_linearised\_nst@{p\_index\_linearised\_nst}}
 \index{p\_index\_linearised\_nst@{p\_index\_linearised\_nst}!oomph::LinearisedQTaylorHoodElement@{oomph::LinearisedQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{p\_index\_linearised\_nst()}{p\_index\_linearised\_nst()}}
-{\footnotesize\ttfamily virtual int oomph\+::\+Linearised\+QTaylor\+Hood\+Element\+::p\+\_\+index\+\_\+linearised\+\_\+nst (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual int oomph\+::\+Linearised\+QTaylor\+Hood\+Element\+::p\+\_\+index\+\_\+linearised\+\_\+nst (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -319,7 +319,7 @@ Referenced by \mbox{\hyperlink{linearised__navier__stokes__elements_8h_source_l0
 \index{oomph::LinearisedQTaylorHoodElement@{oomph::LinearisedQTaylorHoodElement}!p\_linearised\_nst@{p\_linearised\_nst}}
 \index{p\_linearised\_nst@{p\_linearised\_nst}!oomph::LinearisedQTaylorHoodElement@{oomph::LinearisedQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{p\_linearised\_nst()}{p\_linearised\_nst()}}
-{\footnotesize\ttfamily double oomph\+::\+Linearised\+QTaylor\+Hood\+Element\+::p\+\_\+linearised\+\_\+nst (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+p,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily double oomph\+::\+Linearised\+QTaylor\+Hood\+Element\+::p\+\_\+linearised\+\_\+nst (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+p,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -335,13 +335,13 @@ Definition at line \mbox{\hyperlink{linearised__navier__stokes__elements_8h_sour
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02598}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{linearised__navier__stokes__elements_8h_source_l00983}{p\+\_\+index\+\_\+linearised\+\_\+nst()}}, and \mbox{\hyperlink{linearised__navier__stokes__elements_8h_source_l00935}{Pconv}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{linearised__navier__stokes__elements_8h_source_l00983}{p\+\_\+index\+\_\+linearised\+\_\+nst()}}, and \mbox{\hyperlink{linearised__navier__stokes__elements_8h_source_l00935}{Pconv}}.
 
 \mbox{\Hypertarget{classoomph_1_1LinearisedQTaylorHoodElement_add790a7adf9472c27b4da3c0f6c9e4a5}\label{classoomph_1_1LinearisedQTaylorHoodElement_add790a7adf9472c27b4da3c0f6c9e4a5}} 
 \index{oomph::LinearisedQTaylorHoodElement@{oomph::LinearisedQTaylorHoodElement}!p\_local\_eqn@{p\_local\_eqn}}
 \index{p\_local\_eqn@{p\_local\_eqn}!oomph::LinearisedQTaylorHoodElement@{oomph::LinearisedQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{p\_local\_eqn()}{p\_local\_eqn()}}
-{\footnotesize\ttfamily int oomph\+::\+Linearised\+QTaylor\+Hood\+Element\+::p\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily int oomph\+::\+Linearised\+QTaylor\+Hood\+Element\+::p\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -381,7 +381,7 @@ Definition at line \mbox{\hyperlink{linearised__navier__stokes__elements_8h_sour
 \index{oomph::LinearisedQTaylorHoodElement@{oomph::LinearisedQTaylorHoodElement}!pin\_real\_or\_imag@{pin\_real\_or\_imag}}
 \index{pin\_real\_or\_imag@{pin\_real\_or\_imag}!oomph::LinearisedQTaylorHoodElement@{oomph::LinearisedQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{pin\_real\_or\_imag()}{pin\_real\_or\_imag()}}
-{\footnotesize\ttfamily virtual void oomph\+::\+Linearised\+QTaylor\+Hood\+Element\+::pin\+\_\+real\+\_\+or\+\_\+imag (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{real }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Linearised\+QTaylor\+Hood\+Element\+::pin\+\_\+real\+\_\+or\+\_\+imag (\begin{DoxyParamCaption}\item[{const unsigned \&}]{real }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -399,7 +399,7 @@ Definition at line \mbox{\hyperlink{linearised__navier__stokes__elements_8h_sour
 \index{oomph::LinearisedQTaylorHoodElement@{oomph::LinearisedQTaylorHoodElement}!pshape\_linearised\_nst@{pshape\_linearised\_nst}}
 \index{pshape\_linearised\_nst@{pshape\_linearised\_nst}!oomph::LinearisedQTaylorHoodElement@{oomph::LinearisedQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{pshape\_linearised\_nst()}{pshape\_linearised\_nst()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void oomph\+::\+Linearised\+QTaylor\+Hood\+Element\+::pshape\+\_\+linearised\+\_\+nst (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Linearised\+QTaylor\+Hood\+Element\+::pshape\+\_\+linearised\+\_\+nst (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -425,7 +425,7 @@ Referenced by \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_
 \index{oomph::LinearisedQTaylorHoodElement@{oomph::LinearisedQTaylorHoodElement}!pshape\_linearised\_nst@{pshape\_linearised\_nst}}
 \index{pshape\_linearised\_nst@{pshape\_linearised\_nst}!oomph::LinearisedQTaylorHoodElement@{oomph::LinearisedQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{pshape\_linearised\_nst()}{pshape\_linearised\_nst()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void oomph\+::\+Linearised\+QTaylor\+Hood\+Element\+::pshape\+\_\+linearised\+\_\+nst (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Linearised\+QTaylor\+Hood\+Element\+::pshape\+\_\+linearised\+\_\+nst (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -447,7 +447,7 @@ References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{lin
 \index{oomph::LinearisedQTaylorHoodElement@{oomph::LinearisedQTaylorHoodElement}!required\_nvalue@{required\_nvalue}}
 \index{required\_nvalue@{required\_nvalue}!oomph::LinearisedQTaylorHoodElement@{oomph::LinearisedQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{required\_nvalue()}{required\_nvalue()}}
-{\footnotesize\ttfamily virtual unsigned oomph\+::\+Linearised\+QTaylor\+Hood\+Element\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual unsigned oomph\+::\+Linearised\+QTaylor\+Hood\+Element\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -473,7 +473,7 @@ References \mbox{\hyperlink{linearised__navier__stokes__elements_8h_source_l0093
 \index{oomph::LinearisedQTaylorHoodElement@{oomph::LinearisedQTaylorHoodElement}!unpin\_real\_or\_imag@{unpin\_real\_or\_imag}}
 \index{unpin\_real\_or\_imag@{unpin\_real\_or\_imag}!oomph::LinearisedQTaylorHoodElement@{oomph::LinearisedQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{unpin\_real\_or\_imag()}{unpin\_real\_or\_imag()}}
-{\footnotesize\ttfamily virtual void oomph\+::\+Linearised\+QTaylor\+Hood\+Element\+::unpin\+\_\+real\+\_\+or\+\_\+imag (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{real }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Linearised\+QTaylor\+Hood\+Element\+::unpin\+\_\+real\+\_\+or\+\_\+imag (\begin{DoxyParamCaption}\item[{const unsigned \&}]{real }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -490,7 +490,7 @@ Definition at line \mbox{\hyperlink{linearised__navier__stokes__elements_8h_sour
 \index{oomph::LinearisedQTaylorHoodElement@{oomph::LinearisedQTaylorHoodElement}!Initial\_Nvalue@{Initial\_Nvalue}}
 \index{Initial\_Nvalue@{Initial\_Nvalue}!oomph::LinearisedQTaylorHoodElement@{oomph::LinearisedQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{Initial\_Nvalue}{Initial\_Nvalue}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned oomph\+::\+Linearised\+QTaylor\+Hood\+Element\+::\+Initial\+\_\+\+Nvalue\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily const unsigned oomph\+::\+Linearised\+QTaylor\+Hood\+Element\+::\+Initial\+\_\+\+Nvalue\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 {\bfseries Initial value\+:}
 \begin{DoxyCode}{0}
@@ -515,7 +515,7 @@ Referenced by \mbox{\hyperlink{linearised__navier__stokes__elements_8h_source_l0
 \index{oomph::LinearisedQTaylorHoodElement@{oomph::LinearisedQTaylorHoodElement}!Pconv@{Pconv}}
 \index{Pconv@{Pconv}!oomph::LinearisedQTaylorHoodElement@{oomph::LinearisedQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{Pconv}{Pconv}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned oomph\+::\+Linearised\+QTaylor\+Hood\+Element\+::\+Pconv = \{0, 2, 6, 8\}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily const unsigned oomph\+::\+Linearised\+QTaylor\+Hood\+Element\+::\+Pconv = \{0, 2, 6, 8\}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
 
 
 

@@ -12,7 +12,7 @@ Refineable version of Axisymmetric Quad Taylor Hood elements. (note that unlike 
 Inheritance diagram for oomph\+::Refineable\+Axisymmetric\+QTaylor\+Hood\+Element\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=1.202454cm]{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement}
+\includegraphics[height=0.928690cm]{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
@@ -20,40 +20,40 @@ Inheritance diagram for oomph\+::Refineable\+Axisymmetric\+QTaylor\+Hood\+Elemen
 \item 
 \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a569f6f6fffca13180c20a66090ba0ddd}{Refineable\+Axisymmetric\+QTaylor\+Hood\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Constructor\+: \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a3a7d2c7272f30b217c992b2c90ce8881}{required\+\_\+nvalue}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a3a7d2c7272f30b217c992b2c90ce8881}{required\+\_\+nvalue}} (const unsigned \&n) const
 \begin{DoxyCompactList}\small\item\em Number of values (pinned or dofs) required at node n. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_af1fe431fc8cdb9df1533b58bef408c49}{ncont\+\_\+interpolated\+\_\+values}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_af1fe431fc8cdb9df1533b58bef408c49}{ncont\+\_\+interpolated\+\_\+values}} () const
 \begin{DoxyCompactList}\small\item\em Number of continuously interpolated values\+: 4 (3 velocities + 1 pressure) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a72b408f405d92ec892af7c0d74e913a7}{rebuild\+\_\+from\+\_\+sons}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&mesh\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Rebuild from sons\+: empty. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a76415a2111375cf4b88cea3b2ade9c68}{nrecovery\+\_\+order}} ()
 \begin{DoxyCompactList}\small\item\em Order of recovery shape functions for Z2 error estimation\+: Same order as shape functions. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_ae60cce9a7c941a9e82ef31d1da23908b}{nvertex\+\_\+node}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_ae60cce9a7c941a9e82ef31d1da23908b}{nvertex\+\_\+node}} () const
 \begin{DoxyCompactList}\small\item\em Number of vertex nodes in the element. \end{DoxyCompactList}\item 
-Node $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a397d996058428ccee1c717182df3bc17}{vertex\+\_\+node\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&j) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a397d996058428ccee1c717182df3bc17}{vertex\+\_\+node\+\_\+pt}} (const unsigned \&j) const
 \begin{DoxyCompactList}\small\item\em Pointer to the j-\/th vertex node in the element. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_ad562d06fd2b1a02a13cbc49ea4b1ccb4}{get\+\_\+interpolated\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&values)
+void \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_ad562d06fd2b1a02a13cbc49ea4b1ccb4}{get\+\_\+interpolated\+\_\+values}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&values)
 \begin{DoxyCompactList}\small\item\em Get the function value u in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_aa3313e6c8f4aad4472807339723d3314}{get\+\_\+interpolated\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&values)
+void \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_aa3313e6c8f4aad4472807339723d3314}{get\+\_\+interpolated\+\_\+values}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&values)
 \begin{DoxyCompactList}\small\item\em Get the function value u in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_ae98562e5c0460648cf785dce08aac278}{further\+\_\+setup\+\_\+hanging\+\_\+nodes}} ()
 \begin{DoxyCompactList}\small\item\em Perform additional hanging node procedures for variables that are not interpolated by all nodes. The pressures are stored at the 3rd location in each node. \end{DoxyCompactList}\item 
-Node $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_af9b677f06e756c6df672f08e4b91e336}{interpolating\+\_\+node\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&n\+\_\+value)
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_af9b677f06e756c6df672f08e4b91e336}{interpolating\+\_\+node\+\_\+pt}} (const unsigned \&n, const int \&n\+\_\+value)
 \begin{DoxyCompactList}\small\item\em The velocities are isoparametric and so the \char`\"{}nodes\char`\"{} interpolating the velocities are the geometric nodes. The pressure \char`\"{}nodes\char`\"{} are a subset of the nodes, so when n\+\_\+value==DIM, the n-\/th pressure node is returned. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_afab94536fc743be9392f97a482a9307c}{local\+\_\+one\+\_\+d\+\_\+fraction\+\_\+of\+\_\+interpolating\+\_\+node}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n1d, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&n\+\_\+value)
+double \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_afab94536fc743be9392f97a482a9307c}{local\+\_\+one\+\_\+d\+\_\+fraction\+\_\+of\+\_\+interpolating\+\_\+node}} (const unsigned \&n1d, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const int \&n\+\_\+value)
 \begin{DoxyCompactList}\small\item\em The pressure nodes are the corner nodes, so when n\+\_\+value==DIM, the fraction is the same as the 1d node number, 0 or 1. \end{DoxyCompactList}\item 
-Node $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a3bc07c62b82afc292bd39a71d289f0e9}{get\+\_\+interpolating\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&n\+\_\+value)
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a3bc07c62b82afc292bd39a71d289f0e9}{get\+\_\+interpolating\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, const int \&n\+\_\+value)
 \begin{DoxyCompactList}\small\item\em The velocity nodes are the same as the geometric nodes. The pressure nodes must be calculated by using the same methods as the geometric nodes, but by recalling that there are only two pressure nodes per edge. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a7ceb3cf8da736561a0536aec2527ccd7}{ninterpolating\+\_\+node\+\_\+1d}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&n\+\_\+value)
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a7ceb3cf8da736561a0536aec2527ccd7}{ninterpolating\+\_\+node\+\_\+1d}} (const int \&n\+\_\+value)
 \begin{DoxyCompactList}\small\item\em The number of 1d pressure nodes is 2, the number of 1d velocity nodes is the same as the number of 1d geometric nodes. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a637fff45cb50b55c9c05633321489b89}{ninterpolating\+\_\+node}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&n\+\_\+value)
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a637fff45cb50b55c9c05633321489b89}{ninterpolating\+\_\+node}} (const int \&n\+\_\+value)
 \begin{DoxyCompactList}\small\item\em The number of pressure nodes is 4. The number of velocity nodes is the same as the number of geometric nodes. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a20d24729129ee059ab89b407c02d1cb8}{interpolating\+\_\+basis}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&n\+\_\+value) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+void \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a20d24729129ee059ab89b407c02d1cb8}{interpolating\+\_\+basis}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, const int \&n\+\_\+value) const
 \begin{DoxyCompactList}\small\item\em The basis interpolating the pressure is given by pshape(). / The basis interpolating the velocity is \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{shape()}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-Node $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_af7405eb5f80db02f5351d9d9e5f441cb}{pressure\+\_\+node\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+p)
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_af7405eb5f80db02f5351d9d9e5f441cb}{pressure\+\_\+node\+\_\+pt}} (const unsigned \&n\+\_\+p)
 \begin{DoxyCompactList}\small\item\em Pointer to n\+\_\+p-\/th pressure node. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a8f9a8ab37c89caf1460ee47dc667a4f0}{unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs}} ()
 \begin{DoxyCompactList}\small\item\em Unpin all pressure dofs. \end{DoxyCompactList}\item 
@@ -113,7 +113,7 @@ References \mbox{\hyperlink{refineable__quad__element_8cc_source_l01506}{oomph\+
 \index{oomph::RefineableAxisymmetricQTaylorHoodElement@{oomph::RefineableAxisymmetricQTaylorHoodElement}!get\_interpolated\_values@{get\_interpolated\_values}}
 \index{get\_interpolated\_values@{get\_interpolated\_values}!oomph::RefineableAxisymmetricQTaylorHoodElement@{oomph::RefineableAxisymmetricQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{get\_interpolated\_values()}{get\_interpolated\_values()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void oomph\+::\+Refineable\+Axisymmetric\+QTaylor\+Hood\+Element\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Refineable\+Axisymmetric\+QTaylor\+Hood\+Element\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -129,13 +129,13 @@ Definition at line \mbox{\hyperlink{refineable__axisym__navier__stokes__elements
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02598}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01001}{oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::interpolated\+\_\+p\+\_\+axi\+\_\+nst()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l00506}{oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::u\+\_\+index\+\_\+axi\+\_\+nst()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_ad562d06fd2b1a02a13cbc49ea4b1ccb4}\label{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_ad562d06fd2b1a02a13cbc49ea4b1ccb4}} 
 \index{oomph::RefineableAxisymmetricQTaylorHoodElement@{oomph::RefineableAxisymmetricQTaylorHoodElement}!get\_interpolated\_values@{get\_interpolated\_values}}
 \index{get\_interpolated\_values@{get\_interpolated\_values}!oomph::RefineableAxisymmetricQTaylorHoodElement@{oomph::RefineableAxisymmetricQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{get\_interpolated\_values()}{get\_interpolated\_values()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void oomph\+::\+Refineable\+Axisymmetric\+QTaylor\+Hood\+Element\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Refineable\+Axisymmetric\+QTaylor\+Hood\+Element\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -151,13 +151,13 @@ Definition at line \mbox{\hyperlink{refineable__axisym__navier__stokes__elements
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01001}{oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::interpolated\+\_\+p\+\_\+axi\+\_\+nst()}}, \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l00865}{oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::interpolated\+\_\+u\+\_\+axi\+\_\+nst()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a3bc07c62b82afc292bd39a71d289f0e9}\label{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a3bc07c62b82afc292bd39a71d289f0e9}} 
 \index{oomph::RefineableAxisymmetricQTaylorHoodElement@{oomph::RefineableAxisymmetricQTaylorHoodElement}!get\_interpolating\_node\_at\_local\_coordinate@{get\_interpolating\_node\_at\_local\_coordinate}}
 \index{get\_interpolating\_node\_at\_local\_coordinate@{get\_interpolating\_node\_at\_local\_coordinate}!oomph::RefineableAxisymmetricQTaylorHoodElement@{oomph::RefineableAxisymmetricQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{get\_interpolating\_node\_at\_local\_coordinate()}{get\_interpolating\_node\_at\_local\_coordinate()}}
-{\footnotesize\ttfamily Node $\ast$ oomph\+::\+Refineable\+Axisymmetric\+QTaylor\+Hood\+Element\+::get\+\_\+interpolating\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{n\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ oomph\+::\+Refineable\+Axisymmetric\+QTaylor\+Hood\+Element\+::get\+\_\+interpolating\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const int \&}]{n\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -173,13 +173,13 @@ Definition at line \mbox{\hyperlink{refineable__axisym__navier__stokes__elements
 
 
 
-References \mbox{\hyperlink{classoomph_1_1FiniteElement_adf4424f1040fb5c4b6abfbd1c2bf65fc}{oomph\+::\+Finite\+Element\+::get\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01374}{oomph\+::\+Finite\+Element\+::\+Node\+\_\+location\+\_\+tolerance}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01644}{oomph\+::\+Axisymmetric\+QTaylor\+Hood\+Element\+::\+Pconv}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References \mbox{\hyperlink{elements_8cc_source_l03882}{oomph\+::\+Finite\+Element\+::get\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01374}{oomph\+::\+Finite\+Element\+::\+Node\+\_\+location\+\_\+tolerance}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01540}{oomph\+::\+Axisymmetric\+QTaylor\+Hood\+Element\+::\+Pconv}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a20d24729129ee059ab89b407c02d1cb8}\label{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a20d24729129ee059ab89b407c02d1cb8}} 
 \index{oomph::RefineableAxisymmetricQTaylorHoodElement@{oomph::RefineableAxisymmetricQTaylorHoodElement}!interpolating\_basis@{interpolating\_basis}}
 \index{interpolating\_basis@{interpolating\_basis}!oomph::RefineableAxisymmetricQTaylorHoodElement@{oomph::RefineableAxisymmetricQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{interpolating\_basis()}{interpolating\_basis()}}
-{\footnotesize\ttfamily void oomph\+::\+Refineable\+Axisymmetric\+QTaylor\+Hood\+Element\+::interpolating\+\_\+basis (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{n\+\_\+value }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Refineable\+Axisymmetric\+QTaylor\+Hood\+Element\+::interpolating\+\_\+basis (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{const int \&}]{n\+\_\+value }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -195,13 +195,13 @@ Definition at line \mbox{\hyperlink{refineable__axisym__navier__stokes__elements
 
 
 
-References \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01884}{oomph\+::\+Axisymmetric\+QTaylor\+Hood\+Element\+::pshape\+\_\+axi\+\_\+nst()}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
+References \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01780}{oomph\+::\+Axisymmetric\+QTaylor\+Hood\+Element\+::pshape\+\_\+axi\+\_\+nst()}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_af9b677f06e756c6df672f08e4b91e336}\label{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_af9b677f06e756c6df672f08e4b91e336}} 
 \index{oomph::RefineableAxisymmetricQTaylorHoodElement@{oomph::RefineableAxisymmetricQTaylorHoodElement}!interpolating\_node\_pt@{interpolating\_node\_pt}}
 \index{interpolating\_node\_pt@{interpolating\_node\_pt}!oomph::RefineableAxisymmetricQTaylorHoodElement@{oomph::RefineableAxisymmetricQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{interpolating\_node\_pt()}{interpolating\_node\_pt()}}
-{\footnotesize\ttfamily Node $\ast$ oomph\+::\+Refineable\+Axisymmetric\+QTaylor\+Hood\+Element\+::interpolating\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{n\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ oomph\+::\+Refineable\+Axisymmetric\+QTaylor\+Hood\+Element\+::interpolating\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const int \&}]{n\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -217,13 +217,13 @@ Definition at line \mbox{\hyperlink{refineable__axisym__navier__stokes__elements
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01644}{oomph\+::\+Axisymmetric\+QTaylor\+Hood\+Element\+::\+Pconv}}.
+References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01540}{oomph\+::\+Axisymmetric\+QTaylor\+Hood\+Element\+::\+Pconv}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_afab94536fc743be9392f97a482a9307c}\label{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_afab94536fc743be9392f97a482a9307c}} 
 \index{oomph::RefineableAxisymmetricQTaylorHoodElement@{oomph::RefineableAxisymmetricQTaylorHoodElement}!local\_one\_d\_fraction\_of\_interpolating\_node@{local\_one\_d\_fraction\_of\_interpolating\_node}}
 \index{local\_one\_d\_fraction\_of\_interpolating\_node@{local\_one\_d\_fraction\_of\_interpolating\_node}!oomph::RefineableAxisymmetricQTaylorHoodElement@{oomph::RefineableAxisymmetricQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{local\_one\_d\_fraction\_of\_interpolating\_node()}{local\_one\_d\_fraction\_of\_interpolating\_node()}}
-{\footnotesize\ttfamily double oomph\+::\+Refineable\+Axisymmetric\+QTaylor\+Hood\+Element\+::local\+\_\+one\+\_\+d\+\_\+fraction\+\_\+of\+\_\+interpolating\+\_\+node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n1d,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{n\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily double oomph\+::\+Refineable\+Axisymmetric\+QTaylor\+Hood\+Element\+::local\+\_\+one\+\_\+d\+\_\+fraction\+\_\+of\+\_\+interpolating\+\_\+node (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n1d,  }\item[{const unsigned \&}]{i,  }\item[{const int \&}]{n\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -239,7 +239,7 @@ Definition at line \mbox{\hyperlink{refineable__axisym__navier__stokes__elements
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l01863}{oomph\+::\+Finite\+Element\+::local\+\_\+one\+\_\+d\+\_\+fraction\+\_\+of\+\_\+node()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l01858}{oomph\+::\+Finite\+Element\+::local\+\_\+one\+\_\+d\+\_\+fraction\+\_\+of\+\_\+node()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_af1fe431fc8cdb9df1533b58bef408c49}\label{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_af1fe431fc8cdb9df1533b58bef408c49}} 
 \index{oomph::RefineableAxisymmetricQTaylorHoodElement@{oomph::RefineableAxisymmetricQTaylorHoodElement}!ncont\_interpolated\_values@{ncont\_interpolated\_values}}
@@ -263,7 +263,7 @@ Definition at line \mbox{\hyperlink{refineable__axisym__navier__stokes__elements
 \index{oomph::RefineableAxisymmetricQTaylorHoodElement@{oomph::RefineableAxisymmetricQTaylorHoodElement}!ninterpolating\_node@{ninterpolating\_node}}
 \index{ninterpolating\_node@{ninterpolating\_node}!oomph::RefineableAxisymmetricQTaylorHoodElement@{oomph::RefineableAxisymmetricQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{ninterpolating\_node()}{ninterpolating\_node()}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Refineable\+Axisymmetric\+QTaylor\+Hood\+Element\+::ninterpolating\+\_\+node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{n\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Refineable\+Axisymmetric\+QTaylor\+Hood\+Element\+::ninterpolating\+\_\+node (\begin{DoxyParamCaption}\item[{const int \&}]{n\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -279,13 +279,13 @@ Definition at line \mbox{\hyperlink{refineable__axisym__navier__stokes__elements
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}.
+References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a7ceb3cf8da736561a0536aec2527ccd7}\label{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a7ceb3cf8da736561a0536aec2527ccd7}} 
 \index{oomph::RefineableAxisymmetricQTaylorHoodElement@{oomph::RefineableAxisymmetricQTaylorHoodElement}!ninterpolating\_node\_1d@{ninterpolating\_node\_1d}}
 \index{ninterpolating\_node\_1d@{ninterpolating\_node\_1d}!oomph::RefineableAxisymmetricQTaylorHoodElement@{oomph::RefineableAxisymmetricQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{ninterpolating\_node\_1d()}{ninterpolating\_node\_1d()}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Refineable\+Axisymmetric\+QTaylor\+Hood\+Element\+::ninterpolating\+\_\+node\+\_\+1d (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{n\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Refineable\+Axisymmetric\+QTaylor\+Hood\+Element\+::ninterpolating\+\_\+node\+\_\+1d (\begin{DoxyParamCaption}\item[{const int \&}]{n\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -301,7 +301,7 @@ Definition at line \mbox{\hyperlink{refineable__axisym__navier__stokes__elements
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02223}{oomph\+::\+Finite\+Element\+::nnode\+\_\+1d()}}.
+References \mbox{\hyperlink{elements_8h_source_l02218}{oomph\+::\+Finite\+Element\+::nnode\+\_\+1d()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a76415a2111375cf4b88cea3b2ade9c68}\label{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a76415a2111375cf4b88cea3b2ade9c68}} 
 \index{oomph::RefineableAxisymmetricQTaylorHoodElement@{oomph::RefineableAxisymmetricQTaylorHoodElement}!nrecovery\_order@{nrecovery\_order}}
@@ -339,6 +339,10 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a19495a0e7
 
 Definition at line \mbox{\hyperlink{refineable__axisym__navier__stokes__elements_8h_source_l00487}{487}} of file \mbox{\hyperlink{refineable__axisym__navier__stokes__elements_8h_source}{refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
+
+
+References \mbox{\hyperlink{elements_8h_source_l02491}{oomph\+::\+Finite\+Element\+::nvertex\+\_\+node()}}.
+
 \mbox{\Hypertarget{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a14e45b922f221125dcfccae8817e1534}\label{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a14e45b922f221125dcfccae8817e1534}} 
 \index{oomph::RefineableAxisymmetricQTaylorHoodElement@{oomph::RefineableAxisymmetricQTaylorHoodElement}!pin\_elemental\_redundant\_nodal\_pressure\_dofs@{pin\_elemental\_redundant\_nodal\_pressure\_dofs}}
 \index{pin\_elemental\_redundant\_nodal\_pressure\_dofs@{pin\_elemental\_redundant\_nodal\_pressure\_dofs}!oomph::RefineableAxisymmetricQTaylorHoodElement@{oomph::RefineableAxisymmetricQTaylorHoodElement}}
@@ -359,13 +363,13 @@ Definition at line \mbox{\hyperlink{refineable__axisym__navier__stokes__elements
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01714}{oomph\+::\+Axisymmetric\+QTaylor\+Hood\+Element\+::npres\+\_\+axi\+\_\+nst()}}, \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01701}{oomph\+::\+Axisymmetric\+QTaylor\+Hood\+Element\+::p\+\_\+nodal\+\_\+index\+\_\+axi\+\_\+nst()}}, and \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01644}{oomph\+::\+Axisymmetric\+QTaylor\+Hood\+Element\+::\+Pconv}}.
+References \mbox{\hyperlink{nodes_8h_source_l01285}{oomph\+::\+Node\+::is\+\_\+hanging()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01610}{oomph\+::\+Axisymmetric\+QTaylor\+Hood\+Element\+::npres\+\_\+axi\+\_\+nst()}}, \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01597}{oomph\+::\+Axisymmetric\+QTaylor\+Hood\+Element\+::p\+\_\+nodal\+\_\+index\+\_\+axi\+\_\+nst()}}, \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01540}{oomph\+::\+Axisymmetric\+QTaylor\+Hood\+Element\+::\+Pconv}}, \mbox{\hyperlink{nodes_8h_source_l00385}{oomph\+::\+Data\+::pin()}}, and \mbox{\hyperlink{nodes_8h_source_l00391}{oomph\+::\+Data\+::unpin()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_af7405eb5f80db02f5351d9d9e5f441cb}\label{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_af7405eb5f80db02f5351d9d9e5f441cb}} 
 \index{oomph::RefineableAxisymmetricQTaylorHoodElement@{oomph::RefineableAxisymmetricQTaylorHoodElement}!pressure\_node\_pt@{pressure\_node\_pt}}
 \index{pressure\_node\_pt@{pressure\_node\_pt}!oomph::RefineableAxisymmetricQTaylorHoodElement@{oomph::RefineableAxisymmetricQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{pressure\_node\_pt()}{pressure\_node\_pt()}}
-{\footnotesize\ttfamily Node $\ast$ oomph\+::\+Refineable\+Axisymmetric\+QTaylor\+Hood\+Element\+::pressure\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ oomph\+::\+Refineable\+Axisymmetric\+QTaylor\+Hood\+Element\+::pressure\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}, {\ttfamily [virtual]}}
 
 
 
@@ -381,7 +385,7 @@ Definition at line \mbox{\hyperlink{refineable__axisym__navier__stokes__elements
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01644}{oomph\+::\+Axisymmetric\+QTaylor\+Hood\+Element\+::\+Pconv}}.
+References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01540}{oomph\+::\+Axisymmetric\+QTaylor\+Hood\+Element\+::\+Pconv}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a72b408f405d92ec892af7c0d74e913a7}\label{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a72b408f405d92ec892af7c0d74e913a7}} 
 \index{oomph::RefineableAxisymmetricQTaylorHoodElement@{oomph::RefineableAxisymmetricQTaylorHoodElement}!rebuild\_from\_sons@{rebuild\_from\_sons}}
@@ -405,7 +409,7 @@ Definition at line \mbox{\hyperlink{refineable__axisym__navier__stokes__elements
 \index{oomph::RefineableAxisymmetricQTaylorHoodElement@{oomph::RefineableAxisymmetricQTaylorHoodElement}!required\_nvalue@{required\_nvalue}}
 \index{required\_nvalue@{required\_nvalue}!oomph::RefineableAxisymmetricQTaylorHoodElement@{oomph::RefineableAxisymmetricQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{required\_nvalue()}{required\_nvalue()}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Refineable\+Axisymmetric\+QTaylor\+Hood\+Element\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Refineable\+Axisymmetric\+QTaylor\+Hood\+Element\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -439,13 +443,13 @@ Definition at line \mbox{\hyperlink{refineable__axisym__navier__stokes__elements
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01701}{oomph\+::\+Axisymmetric\+QTaylor\+Hood\+Element\+::p\+\_\+nodal\+\_\+index\+\_\+axi\+\_\+nst()}}.
+References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01597}{oomph\+::\+Axisymmetric\+QTaylor\+Hood\+Element\+::p\+\_\+nodal\+\_\+index\+\_\+axi\+\_\+nst()}}, and \mbox{\hyperlink{nodes_8h_source_l00391}{oomph\+::\+Data\+::unpin()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a397d996058428ccee1c717182df3bc17}\label{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a397d996058428ccee1c717182df3bc17}} 
 \index{oomph::RefineableAxisymmetricQTaylorHoodElement@{oomph::RefineableAxisymmetricQTaylorHoodElement}!vertex\_node\_pt@{vertex\_node\_pt}}
 \index{vertex\_node\_pt@{vertex\_node\_pt}!oomph::RefineableAxisymmetricQTaylorHoodElement@{oomph::RefineableAxisymmetricQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{vertex\_node\_pt()}{vertex\_node\_pt()}}
-{\footnotesize\ttfamily Node $\ast$ oomph\+::\+Refineable\+Axisymmetric\+QTaylor\+Hood\+Element\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ oomph\+::\+Refineable\+Axisymmetric\+QTaylor\+Hood\+Element\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -458,6 +462,10 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a6d852edae
 
 
 Definition at line \mbox{\hyperlink{refineable__axisym__navier__stokes__elements_8h_source_l00493}{493}} of file \mbox{\hyperlink{refineable__axisym__navier__stokes__elements_8h_source}{refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{elements_8h_source_l02500}{oomph\+::\+Finite\+Element\+::vertex\+\_\+node\+\_\+pt()}}.
 
 
 

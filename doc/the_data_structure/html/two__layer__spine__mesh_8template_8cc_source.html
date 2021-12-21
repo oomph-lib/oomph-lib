@@ -450,12 +450,12 @@ $(function() {
 <div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> n = 0; n &lt; n_boundary_node; n++)</div>
 <div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>      {</div>
 <div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>        <span class="comment">// Cache pointer to the node</span></div>
-<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>        Node* <span class="keyword">const</span> nod_pt = this-&gt;boundary_node_pt(3, n);</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>        <a class="code hl_class" href="classoomph_1_1Node.html">Node</a>* <span class="keyword">const</span> nod_pt = this-&gt;boundary_node_pt(3, n);</div>
 <div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>        <span class="comment">// Get the boundary coordinates if set</span></div>
 <div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>        <span class="keywordflow">if</span> (boundary_coordinate_exists(3))</div>
 <div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>        {</div>
-<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>          b_coord.resize(nod_pt-&gt;ncoordinates_on_boundary(3));</div>
-<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>          nod_pt-&gt;get_coordinates_on_boundary(3, b_coord);</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>          b_coord.resize(nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1Node.html#a245b0e182ca0877bda9bbcb978807273">ncoordinates_on_boundary</a>(3));</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>          nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1Node.html#abc8b7dc78cc1d0aab34eeaf856e21ea8">get_coordinates_on_boundary</a>(3, b_coord);</div>
 <div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>          <span class="comment">// Indicate that the boundary coordinates are to be set on the</span></div>
 <div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>          <span class="comment">// new boundaries</span></div>
 <div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>          this-&gt;Boundary_coordinate_exists[4] = <span class="keyword">true</span>;</div>
@@ -463,10 +463,10 @@ $(function() {
 <div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>        }</div>
 <div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span> </div>
 <div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>        <span class="comment">// Now remove the node from the boundary</span></div>
-<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>        nod_pt-&gt;remove_from_boundary(3);</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>        nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1Node.html#a68d4703f8c8aa9f504ec2111dc1908f4">remove_from_boundary</a>(3);</div>
 <div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span> </div>
 <div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>        <span class="comment">// Find the height of the node</span></div>
-<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>        <span class="keywordtype">double</span> y = nod_pt-&gt;x(1);</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>        <span class="keywordtype">double</span> y = nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1Node.html#ab76b4773a65b349f143539e07b6e15e2">x</a>(1);</div>
 <div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>        <span class="comment">// If it&#39;s above or equal to the interface, it&#39;s on boundary 4</span></div>
 <div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>        <span class="keywordflow">if</span> (y &gt;= y_interface)</div>
 <div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>        {</div>
@@ -474,7 +474,7 @@ $(function() {
 <div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>          <span class="comment">// Add the boundary coordinate if it has been set up</span></div>
 <div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>          <span class="keywordflow">if</span> (this-&gt;Boundary_coordinate_exists[4])</div>
 <div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>          {</div>
-<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>            nod_pt-&gt;set_coordinates_on_boundary(4, b_coord);</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>            nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1Node.html#a94c19e165ab4e88aabbfa27443c530b7">set_coordinates_on_boundary</a>(4, b_coord);</div>
 <div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>          }</div>
 <div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>        }</div>
 <div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>        <span class="comment">// otherwise it&#39;s on boundary 5</span></div>
@@ -484,7 +484,7 @@ $(function() {
 <div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>          <span class="comment">// Add the boundary coordinate if it has been set up</span></div>
 <div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>          <span class="keywordflow">if</span> (this-&gt;Boundary_coordinate_exists[5])</div>
 <div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>          {</div>
-<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>            nod_pt-&gt;set_coordinates_on_boundary(5, b_coord);</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>            nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1Node.html#a94c19e165ab4e88aabbfa27443c530b7">set_coordinates_on_boundary</a>(5, b_coord);</div>
 <div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>          }</div>
 <div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>        }</div>
 <div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>      }</div>
@@ -499,22 +499,22 @@ $(function() {
 <div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> n = 0; n &lt; n_boundary_node; n++)</div>
 <div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>      {</div>
 <div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>        <span class="comment">// Cache pointer to the node</span></div>
-<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>        Node* <span class="keyword">const</span> nod_pt = this-&gt;boundary_node_pt(2, n);</div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>        <a class="code hl_class" href="classoomph_1_1Node.html">Node</a>* <span class="keyword">const</span> nod_pt = this-&gt;boundary_node_pt(2, n);</div>
 <div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>        <span class="comment">// Get the boundary coordinates if set</span></div>
 <div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>        <span class="keywordflow">if</span> (this-&gt;boundary_coordinate_exists(2))</div>
 <div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>        {</div>
-<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>          b_coord.resize(nod_pt-&gt;ncoordinates_on_boundary(2));</div>
-<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>          nod_pt-&gt;get_coordinates_on_boundary(2, b_coord);</div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>          b_coord.resize(nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1Node.html#a245b0e182ca0877bda9bbcb978807273">ncoordinates_on_boundary</a>(2));</div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>          nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1Node.html#abc8b7dc78cc1d0aab34eeaf856e21ea8">get_coordinates_on_boundary</a>(2, b_coord);</div>
 <div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>          this-&gt;Boundary_coordinate_exists[3] = <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>        }</div>
 <div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span> </div>
 <div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>        <span class="comment">// Now remove the node from the boundary 2</span></div>
-<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>        nod_pt-&gt;remove_from_boundary(2);</div>
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>        nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1Node.html#a68d4703f8c8aa9f504ec2111dc1908f4">remove_from_boundary</a>(2);</div>
 <div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>        <span class="comment">// and add to boundary 3</span></div>
 <div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>        this-&gt;add_boundary_node(3, nod_pt);</div>
 <div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>        <span class="keywordflow">if</span> (this-&gt;Boundary_coordinate_exists[3])</div>
 <div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>        {</div>
-<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>          nod_pt-&gt;set_coordinates_on_boundary(3, b_coord);</div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>          nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1Node.html#a94c19e165ab4e88aabbfa27443c530b7">set_coordinates_on_boundary</a>(3, b_coord);</div>
 <div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>        }</div>
 <div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>      }</div>
 <div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span> </div>
@@ -529,18 +529,18 @@ $(function() {
 <div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span>      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> n = 0; n &lt; n_boundary_node; n++)</div>
 <div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>      {</div>
 <div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span>        <span class="comment">// Cache pointer to the node</span></div>
-<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>        Node* <span class="keyword">const</span> nod_pt = this-&gt;boundary_node_pt(1, n);</div>
+<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>        <a class="code hl_class" href="classoomph_1_1Node.html">Node</a>* <span class="keyword">const</span> nod_pt = this-&gt;boundary_node_pt(1, n);</div>
 <div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span> </div>
 <div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span>        <span class="comment">// Find the height of the node</span></div>
-<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>        <span class="keywordtype">double</span> y = nod_pt-&gt;x(1);</div>
+<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>        <span class="keywordtype">double</span> y = nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1Node.html#ab76b4773a65b349f143539e07b6e15e2">x</a>(1);</div>
 <div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>        <span class="comment">// If it&#39;s above or equal to the interface it&#39;s on boundary 2</span></div>
 <div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span>        <span class="keywordflow">if</span> (y &gt;= y_interface)</div>
 <div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span>        {</div>
 <div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span>          <span class="comment">// Get the boundary coordinates if set</span></div>
 <div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>          <span class="keywordflow">if</span> (this-&gt;boundary_coordinate_exists(1))</div>
 <div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span>          {</div>
-<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span>            b_coord.resize(nod_pt-&gt;ncoordinates_on_boundary(1));</div>
-<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>            nod_pt-&gt;get_coordinates_on_boundary(1, b_coord);</div>
+<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span>            b_coord.resize(nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1Node.html#a245b0e182ca0877bda9bbcb978807273">ncoordinates_on_boundary</a>(1));</div>
+<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>            nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1Node.html#abc8b7dc78cc1d0aab34eeaf856e21ea8">get_coordinates_on_boundary</a>(1, b_coord);</div>
 <div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span>            this-&gt;Boundary_coordinate_exists[2] = <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span>          }</div>
 <div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span> </div>
@@ -554,7 +554,7 @@ $(function() {
 <div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span>          <span class="comment">// Add the boundary coordinate if it has been set up</span></div>
 <div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span>          <span class="keywordflow">if</span> (this-&gt;Boundary_coordinate_exists[2])</div>
 <div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span>          {</div>
-<div class="line"><a id="l00428" name="l00428"></a><span class="lineno">  428</span>            nod_pt-&gt;set_coordinates_on_boundary(2, b_coord);</div>
+<div class="line"><a id="l00428" name="l00428"></a><span class="lineno">  428</span>            nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1Node.html#a94c19e165ab4e88aabbfa27443c530b7">set_coordinates_on_boundary</a>(2, b_coord);</div>
 <div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span>          }</div>
 <div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span>        }</div>
 <div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span>      }</div>
@@ -594,11 +594,11 @@ $(function() {
 <div class="line"><a id="l00465" name="l00465"></a><span class="lineno">  465</span>      <span class="comment">// The first n_p nodes lie on the boundary</span></div>
 <div class="line"><a id="l00466" name="l00466"></a><span class="lineno">  466</span>      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> n = n_start; n &lt; n_p; n++)</div>
 <div class="line"><a id="l00467" name="l00467"></a><span class="lineno">  467</span>      {</div>
-<div class="line"><a id="l00468" name="l00468"></a><span class="lineno">  468</span>        Node* nod_pt = el_pt-&gt;<a class="code hl_function" href="classoomph_1_1FiniteElement.html#a9addfe893ab8205619963aa96204cdc4">node_pt</a>(n);</div>
+<div class="line"><a id="l00468" name="l00468"></a><span class="lineno">  468</span>        <a class="code hl_class" href="classoomph_1_1Node.html">Node</a>* nod_pt = el_pt-&gt;<a class="code hl_function" href="classoomph_1_1FiniteElement.html#a9addfe893ab8205619963aa96204cdc4">node_pt</a>(n);</div>
 <div class="line"><a id="l00469" name="l00469"></a><span class="lineno">  469</span>        this-&gt;convert_to_boundary_node(nod_pt);</div>
 <div class="line"><a id="l00470" name="l00470"></a><span class="lineno">  470</span>        this-&gt;add_boundary_node(6, nod_pt);</div>
-<div class="line"><a id="l00471" name="l00471"></a><span class="lineno">  471</span>        b_coord[0] = nod_pt-&gt;x(0);</div>
-<div class="line"><a id="l00472" name="l00472"></a><span class="lineno">  472</span>        nod_pt-&gt;set_coordinates_on_boundary(6, b_coord);</div>
+<div class="line"><a id="l00471" name="l00471"></a><span class="lineno">  471</span>        b_coord[0] = nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1Node.html#ab76b4773a65b349f143539e07b6e15e2">x</a>(0);</div>
+<div class="line"><a id="l00472" name="l00472"></a><span class="lineno">  472</span>        nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1Node.html#a94c19e165ab4e88aabbfa27443c530b7">set_coordinates_on_boundary</a>(6, b_coord);</div>
 <div class="line"><a id="l00473" name="l00473"></a><span class="lineno">  473</span>      }</div>
 <div class="line"><a id="l00474" name="l00474"></a><span class="lineno">  474</span>    }</div>
 <div class="line"><a id="l00475" name="l00475"></a><span class="lineno">  475</span> </div>
@@ -646,7 +646,7 @@ $(function() {
 <div class="line"><a id="l00517" name="l00517"></a><span class="lineno">  517</span>        <span class="comment">// Set the pointer to the spine</span></div>
 <div class="line"><a id="l00518" name="l00518"></a><span class="lineno">  518</span>        nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1SpineNode.html#ae04ead0542be9e109e78b0e0b0c3e260">spine_pt</a>() = new_spine_pt;</div>
 <div class="line"><a id="l00519" name="l00519"></a><span class="lineno">  519</span>        <span class="comment">// Set the fraction</span></div>
-<div class="line"><a id="l00520" name="l00520"></a><span class="lineno">  520</span>        nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1SpineNode.html#a3980c5355fa505586d4fb1e8456fbc45">fraction</a>() = (nod_pt-&gt;x(1) - this-&gt;Ymin) / (H1);</div>
+<div class="line"><a id="l00520" name="l00520"></a><span class="lineno">  520</span>        nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1SpineNode.html#a3980c5355fa505586d4fb1e8456fbc45">fraction</a>() = (nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1Node.html#ab76b4773a65b349f143539e07b6e15e2">x</a>(1) - this-&gt;Ymin) / (H1);</div>
 <div class="line"><a id="l00521" name="l00521"></a><span class="lineno">  521</span>        <span class="comment">// Pointer to the mesh that implements the update fct</span></div>
 <div class="line"><a id="l00522" name="l00522"></a><span class="lineno">  522</span>        nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1SpineNode.html#aa113d107e57ebaa3053e4cb899616b79">spine_mesh_pt</a>() = <span class="keyword">this</span>;</div>
 <div class="line"><a id="l00523" name="l00523"></a><span class="lineno">  523</span>        <span class="comment">// ID of update function within this mesh: 0 = lower; 1 = upper</span></div>
@@ -666,7 +666,7 @@ $(function() {
 <div class="line"><a id="l00537" name="l00537"></a><span class="lineno">  537</span>        <span class="comment">// Set the pointer to the spine</span></div>
 <div class="line"><a id="l00538" name="l00538"></a><span class="lineno">  538</span>        nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1SpineNode.html#ae04ead0542be9e109e78b0e0b0c3e260">spine_pt</a>() = new_spine_pt;</div>
 <div class="line"><a id="l00539" name="l00539"></a><span class="lineno">  539</span>        <span class="comment">// Set the fraction</span></div>
-<div class="line"><a id="l00540" name="l00540"></a><span class="lineno">  540</span>        nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1SpineNode.html#a3980c5355fa505586d4fb1e8456fbc45">fraction</a>() = (nod_pt-&gt;x(1) - (this-&gt;Ymin + H1)) / (H2);</div>
+<div class="line"><a id="l00540" name="l00540"></a><span class="lineno">  540</span>        nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1SpineNode.html#a3980c5355fa505586d4fb1e8456fbc45">fraction</a>() = (nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1Node.html#ab76b4773a65b349f143539e07b6e15e2">x</a>(1) - (this-&gt;Ymin + H1)) / (H2);</div>
 <div class="line"><a id="l00541" name="l00541"></a><span class="lineno">  541</span>        <span class="comment">// Pointer to the mesh that implements the update fct</span></div>
 <div class="line"><a id="l00542" name="l00542"></a><span class="lineno">  542</span>        nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1SpineNode.html#aa113d107e57ebaa3053e4cb899616b79">spine_mesh_pt</a>() = <span class="keyword">this</span>;</div>
 <div class="line"><a id="l00543" name="l00543"></a><span class="lineno">  543</span>        <span class="comment">// ID of update function within this mesh: 0 = lower; 1 = upper</span></div>
@@ -719,7 +719,7 @@ $(function() {
 <div class="line"><a id="l00590" name="l00590"></a><span class="lineno">  590</span>            <span class="comment">// Set the pointer to the spine</span></div>
 <div class="line"><a id="l00591" name="l00591"></a><span class="lineno">  591</span>            nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1SpineNode.html#ae04ead0542be9e109e78b0e0b0c3e260">spine_pt</a>() = new_spine_pt;</div>
 <div class="line"><a id="l00592" name="l00592"></a><span class="lineno">  592</span>            <span class="comment">// Set the fraction</span></div>
-<div class="line"><a id="l00593" name="l00593"></a><span class="lineno">  593</span>            nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1SpineNode.html#a3980c5355fa505586d4fb1e8456fbc45">fraction</a>() = (nod_pt-&gt;x(1) - this-&gt;Ymin) / H1;</div>
+<div class="line"><a id="l00593" name="l00593"></a><span class="lineno">  593</span>            nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1SpineNode.html#a3980c5355fa505586d4fb1e8456fbc45">fraction</a>() = (nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1Node.html#ab76b4773a65b349f143539e07b6e15e2">x</a>(1) - this-&gt;Ymin) / H1;</div>
 <div class="line"><a id="l00594" name="l00594"></a><span class="lineno">  594</span>            <span class="comment">// Pointer to the mesh that implements the update fct</span></div>
 <div class="line"><a id="l00595" name="l00595"></a><span class="lineno">  595</span>            nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1SpineNode.html#aa113d107e57ebaa3053e4cb899616b79">spine_mesh_pt</a>() = <span class="keyword">this</span>;</div>
 <div class="line"><a id="l00596" name="l00596"></a><span class="lineno">  596</span>            <span class="comment">// ID of update function within this mesh: 0 = lower; 1 = upper</span></div>
@@ -740,7 +740,7 @@ $(function() {
 <div class="line"><a id="l00611" name="l00611"></a><span class="lineno">  611</span>            <span class="comment">// Set the pointer to the spine</span></div>
 <div class="line"><a id="l00612" name="l00612"></a><span class="lineno">  612</span>            nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1SpineNode.html#ae04ead0542be9e109e78b0e0b0c3e260">spine_pt</a>() = new_spine_pt;</div>
 <div class="line"><a id="l00613" name="l00613"></a><span class="lineno">  613</span>            <span class="comment">// Set the fraction</span></div>
-<div class="line"><a id="l00614" name="l00614"></a><span class="lineno">  614</span>            nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1SpineNode.html#a3980c5355fa505586d4fb1e8456fbc45">fraction</a>() = (nod_pt-&gt;x(1) - (this-&gt;Ymin + H1)) / H2;</div>
+<div class="line"><a id="l00614" name="l00614"></a><span class="lineno">  614</span>            nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1SpineNode.html#a3980c5355fa505586d4fb1e8456fbc45">fraction</a>() = (nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1Node.html#ab76b4773a65b349f143539e07b6e15e2">x</a>(1) - (this-&gt;Ymin + H1)) / H2;</div>
 <div class="line"><a id="l00615" name="l00615"></a><span class="lineno">  615</span>            <span class="comment">// Pointer to the mesh that implements the update fct</span></div>
 <div class="line"><a id="l00616" name="l00616"></a><span class="lineno">  616</span>            nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1SpineNode.html#aa113d107e57ebaa3053e4cb899616b79">spine_mesh_pt</a>() = <span class="keyword">this</span>;</div>
 <div class="line"><a id="l00617" name="l00617"></a><span class="lineno">  617</span>            <span class="comment">// ID of update function within this mesh: 0 = lower; 1 = upper</span></div>
@@ -875,7 +875,13 @@ $(function() {
 <div class="ttc" id="acfortran_8h_html_a37cd013acc76697829c324bdd8562d82"><div class="ttname"><a href="cfortran_8h.html#a37cd013acc76697829c324bdd8562d82">e</a></div><div class="ttdeci">e</div><div class="ttdef"><b>Definition:</b> <a href="cfortran_8h_source.html#l00571">cfortran.h:571</a></div></div>
 <div class="ttc" id="acfortran_8h_html_adb50e893b86b3e55e751a42eab3cba82"><div class="ttname"><a href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a></div><div class="ttdeci">cstr elem_len * i</div><div class="ttdef"><b>Definition:</b> <a href="cfortran_8h_source.html#l00603">cfortran.h:603</a></div></div>
 <div class="ttc" id="aclassoomph_1_1FiniteElement_html"><div class="ttname"><a href="classoomph_1_1FiniteElement.html">oomph::FiniteElement</a></div><div class="ttdoc">A general Finite Element class.</div><div class="ttdef"><b>Definition:</b> <a href="elements_8h_source.html#l01312">elements.h:1313</a></div></div>
-<div class="ttc" id="aclassoomph_1_1FiniteElement_html_a9addfe893ab8205619963aa96204cdc4"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#a9addfe893ab8205619963aa96204cdc4">oomph::FiniteElement::node_pt</a></div><div class="ttdeci">Node *&amp; node_pt(const unsigned &amp;n)</div><div class="ttdoc">Return a pointer to the local node n.</div><div class="ttdef"><b>Definition:</b> <a href="elements_8h_source.html#l02180">elements.h:2180</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FiniteElement_html_a9addfe893ab8205619963aa96204cdc4"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#a9addfe893ab8205619963aa96204cdc4">oomph::FiniteElement::node_pt</a></div><div class="ttdeci">Node *&amp; node_pt(const unsigned &amp;n)</div><div class="ttdoc">Return a pointer to the local node n.</div><div class="ttdef"><b>Definition:</b> <a href="elements_8h_source.html#l02175">elements.h:2175</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Node_html"><div class="ttname"><a href="classoomph_1_1Node.html">oomph::Node</a></div><div class="ttdoc">Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...</div><div class="ttdef"><b>Definition:</b> <a href="nodes_8h_source.html#l00905">nodes.h:906</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Node_html_a245b0e182ca0877bda9bbcb978807273"><div class="ttname"><a href="classoomph_1_1Node.html#a245b0e182ca0877bda9bbcb978807273">oomph::Node::ncoordinates_on_boundary</a></div><div class="ttdeci">virtual unsigned ncoordinates_on_boundary(const unsigned &amp;b)</div><div class="ttdoc">Get the number of boundary coordinates on mesh boundary b. Broken virtual interface provides run-time...</div><div class="ttdef"><b>Definition:</b> <a href="nodes_8cc_source.html#l02363">nodes.cc:2363</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Node_html_a68d4703f8c8aa9f504ec2111dc1908f4"><div class="ttname"><a href="classoomph_1_1Node.html#a68d4703f8c8aa9f504ec2111dc1908f4">oomph::Node::remove_from_boundary</a></div><div class="ttdeci">virtual void remove_from_boundary(const unsigned &amp;b)</div><div class="ttdoc">Broken interface for removing the node from the mesh boundary b Here to provide error reporting.</div><div class="ttdef"><b>Definition:</b> <a href="nodes_8cc_source.html#l02350">nodes.cc:2350</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Node_html_a94c19e165ab4e88aabbfa27443c530b7"><div class="ttname"><a href="classoomph_1_1Node.html#a94c19e165ab4e88aabbfa27443c530b7">oomph::Node::set_coordinates_on_boundary</a></div><div class="ttdeci">virtual void set_coordinates_on_boundary(const unsigned &amp;b, const unsigned &amp;k, const Vector&lt; double &gt; &amp;boundary_zeta)</div><div class="ttdoc">Set the vector of the k-th generalised boundary coordinates on mesh boundary b. Broken virtual interf...</div><div class="ttdef"><b>Definition:</b> <a href="nodes_8cc_source.html#l02394">nodes.cc:2394</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Node_html_ab76b4773a65b349f143539e07b6e15e2"><div class="ttname"><a href="classoomph_1_1Node.html#ab76b4773a65b349f143539e07b6e15e2">oomph::Node::x</a></div><div class="ttdeci">double &amp; x(const unsigned &amp;i)</div><div class="ttdoc">Return the i-th nodal coordinate.</div><div class="ttdef"><b>Definition:</b> <a href="nodes_8h_source.html#l01060">nodes.h:1060</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Node_html_abc8b7dc78cc1d0aab34eeaf856e21ea8"><div class="ttname"><a href="classoomph_1_1Node.html#abc8b7dc78cc1d0aab34eeaf856e21ea8">oomph::Node::get_coordinates_on_boundary</a></div><div class="ttdeci">virtual void get_coordinates_on_boundary(const unsigned &amp;b, const unsigned &amp;k, Vector&lt; double &gt; &amp;boundary_zeta)</div><div class="ttdoc">Return the vector of the k-th generalised boundary coordinates on mesh boundary b....</div><div class="ttdef"><b>Definition:</b> <a href="nodes_8cc_source.html#l02379">nodes.cc:2379</a></div></div>
 <div class="ttc" id="aclassoomph_1_1RectangularQuadMesh_html"><div class="ttname"><a href="classoomph_1_1RectangularQuadMesh.html">oomph::RectangularQuadMesh</a></div><div class="ttdoc">RectangularQuadMesh is a two-dimensional mesh of Quad elements with Nx elements in the &quot;x&quot; (horizonal...</div><div class="ttdef"><b>Definition:</b> <a href="rectangular__quadmesh_8template_8h_source.html#l00058">rectangular_quadmesh.template.h:59</a></div></div>
 <div class="ttc" id="aclassoomph_1_1RectangularQuadMesh_html_afa579b413a2d8120e8228d840cb3582c"><div class="ttname"><a href="classoomph_1_1RectangularQuadMesh.html#afa579b413a2d8120e8228d840cb3582c">oomph::RectangularQuadMesh::build_mesh</a></div><div class="ttdeci">void build_mesh(TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</div><div class="ttdoc">Generic mesh construction function: contains all the hard work.</div><div class="ttdef"><b>Definition:</b> <a href="rectangular__quadmesh_8template_8cc_source.html#l00043">rectangular_quadmesh.template.cc:43</a></div></div>
 <div class="ttc" id="aclassoomph_1_1SpineNode_html"><div class="ttname"><a href="classoomph_1_1SpineNode.html">oomph::SpineNode</a></div><div class="ttdoc">Class for nodes that live on spines. The assumption is that each Node lies at a fixed fraction on a s...</div><div class="ttdef"><b>Definition:</b> <a href="spines_8h_source.html#l00327">spines.h:328</a></div></div>
@@ -925,7 +931,7 @@ $(function() {
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Nov 2 2021 16:31:13
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Dec 21 2021 17:35:10
         </div>
       </div>
     </footer>

@@ -45,16 +45,16 @@
 \DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00041}00041   \textcolor{comment}{//=============================================================================}\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00042}00042 \textcolor{comment}{  /// A broadcast function for DenseMatrix<double>}}
 \DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00043}00043 \textcolor{comment}{}  \textcolor{comment}{//=============================================================================}}
-\DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00044}00044   \textcolor{keywordtype}{void} OomphCommunicator::broadcast(\textcolor{keyword}{const} \textcolor{keywordtype}{int}\& source, DenseMatrix<double>\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}})}
+\DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00044}00044   \textcolor{keywordtype}{void} OomphCommunicator::broadcast(\textcolor{keyword}{const} \textcolor{keywordtype}{int}\& source, DenseMatrix<double>\& x)}
 \DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00045}00045   \{}
 \DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00046}00046     \textcolor{comment}{// Get number of entries on processor source (where the matrix exists)}}
 \DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00047}00047     \textcolor{keywordtype}{unsigned} nrow, ncol;}
 \DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00048}00048     \textcolor{keywordflow}{if} (this-\/>my\_rank() == source)}
 \DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00049}00049     \{}
-\DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00050}00050       nrow = \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.nrow();}
+\DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00050}00050       nrow = x.nrow();}
 \DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00051}00051       \textcolor{keywordflow}{if} (nrow > 0)}
 \DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00052}00052       \{}
-\DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00053}00053         ncol = \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.ncol();}
+\DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00053}00053         ncol = x.ncol();}
 \DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00054}00054       \}}
 \DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00055}00055       \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00056}00056       \{}
@@ -76,7 +76,7 @@
 \DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00072}00072         \{}
 \DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00073}00073           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} j = 0; j < ncol; j++)}
 \DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00074}00074           \{}
-\DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00075}00075             x\_bcast[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} * ncol + j] = \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j);}
+\DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00075}00075             x\_bcast[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} * ncol + j] = x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j);}
 \DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00076}00076           \}}
 \DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00077}00077         \}}
 \DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00078}00078 }
@@ -86,11 +86,11 @@
 \DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00082}00082       \textcolor{comment}{// Now convert back into matrix (everywhere apart from source)}}
 \DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00083}00083       \textcolor{keywordflow}{if} (this-\/>my\_rank() != source)}
 \DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00084}00084       \{}
-\DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00085}00085         \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.resize(nrow, ncol);}
+\DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00085}00085         x.resize(nrow, ncol);}
 \DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00086}00086         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < nrow; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00087}00087           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} j = 0; j < ncol; j++)}
 \DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00088}00088           \{}
-\DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00089}00089             \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j) = x\_bcast[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} * ncol + j];}
+\DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00089}00089             x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, j) = x\_bcast[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} * ncol + j];}
 \DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00090}00090           \}}
 \DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00091}00091       \}}
 \DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00092}00092       \textcolor{comment}{// delete C-\/style array}}
@@ -98,7 +98,7 @@
 \DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00094}00094     \}}
 \DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00095}00095     \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00096}00096     \{}
-\DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00097}00097       \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}.resize(0, 0);}
+\DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00097}00097       x.resize(0, 0);}
 \DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00098}00098     \}}
 \DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00099}00099   \}}
 \DoxyCodeLine{\Hypertarget{communicator_8cc_source_l00100}00100 }

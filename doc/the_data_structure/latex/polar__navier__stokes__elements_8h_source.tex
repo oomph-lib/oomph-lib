@@ -114,13 +114,13 @@
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00110}00110 \textcolor{comment}{    /// Function pointer to body force function fct(t,x,f(x))}}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00111}00111 \textcolor{comment}{    /// x is a Vector!}}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00112}\mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_adfe008551ad8039abe5c9bf23af8c0e3}{00112}} \textcolor{comment}{}    \textcolor{keyword}{typedef} void (*\mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_adfe008551ad8039abe5c9bf23af8c0e3}{NavierStokesBodyForceFctPt}})(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
-\DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00113}00113                                                \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00113}00113                                                \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00114}00114                                                \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& body\_force);}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00115}00115 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00116}00116 \textcolor{comment}{    /// Function pointer to source function fct(t,x)}}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00117}00117 \textcolor{comment}{    /// x is a Vector!}}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00118}\mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a9084ecf962b26ccaa72443a807dedb25}{00118}} \textcolor{comment}{}    \textcolor{keyword}{typedef} double (*\mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a9084ecf962b26ccaa72443a807dedb25}{NavierStokesSourceFctPt}})(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
-\DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00119}00119                                               \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00119}00119                                               \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x);}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00120}00120 }
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00121}00121   \textcolor{keyword}{private}:\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00122}00122 \textcolor{comment}{    /// Static "{}magic"{} number that indicates that the pressure is}}
@@ -209,7 +209,7 @@
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00205}00205 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00206}00206 \textcolor{comment}{    /// Calculate the body force at a given time and Eulerian position}}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00207}\mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a7b8e7dac6fe147c271230d34ef5cf450}{00207}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a7b8e7dac6fe147c271230d34ef5cf450}{get\_body\_force}}(\textcolor{keywordtype}{double} time,}
-\DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00208}00208                         \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00208}00208                         \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00209}00209                         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& result)}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00210}00210     \{}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00211}00211       \textcolor{comment}{// If the function pointer is zero return zero}}
@@ -224,13 +224,13 @@
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00220}00220       \textcolor{comment}{// Otherwise call the function}}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00221}00221       \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00222}00222       \{}
-\DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00223}00223         (*Body\_force\_fct\_pt)(time, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, result);}
+\DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00223}00223         (*Body\_force\_fct\_pt)(time, x, result);}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00224}00224       \}}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00225}00225     \}}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00226}00226 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00227}00227 \textcolor{comment}{    /// Calculate the source fct at given time and}}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00228}00228 \textcolor{comment}{    /// Eulerian position}}
-\DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00229}\mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a6b9fb7f70c3a1858ee4c56bea63d8be2}{00229}} \textcolor{comment}{}    \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a6b9fb7f70c3a1858ee4c56bea63d8be2}{get\_source\_fct}}(\textcolor{keywordtype}{double} time, \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}})}
+\DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00229}\mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a6b9fb7f70c3a1858ee4c56bea63d8be2}{00229}} \textcolor{comment}{}    \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a6b9fb7f70c3a1858ee4c56bea63d8be2}{get\_source\_fct}}(\textcolor{keywordtype}{double} time, \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x)}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00230}00230     \{}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00231}00231       \textcolor{comment}{// If the function pointer is zero return zero}}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00232}00232       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ab33675bd49ce0e250e58e26cc02f920c}{Source\_fct\_pt}} == 0)}
@@ -240,7 +240,7 @@
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00236}00236       \textcolor{comment}{// Otherwise call the function}}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00237}00237       \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00238}00238       \{}
-\DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00239}00239         \textcolor{keywordflow}{return} (*\mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ab33675bd49ce0e250e58e26cc02f920c}{Source\_fct\_pt}})(time, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00239}00239         \textcolor{keywordflow}{return} (*\mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ab33675bd49ce0e250e58e26cc02f920c}{Source\_fct\_pt}})(time, x);}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00240}00240       \}}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00241}00241     \}}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00242}00242 }
@@ -405,7 +405,7 @@
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00401}\mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ac6c31807b4f2edd3f00965b11b2a0622}{00401}} \textcolor{comment}{}    \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ac6c31807b4f2edd3f00965b11b2a0622}{du\_dt\_pnst}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00402}00402 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00403}00403       \textcolor{comment}{// Get the data's timestepper}}
-\DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00404}00404       \mbox{\hyperlink{classoomph_1_1TimeStepper}{TimeStepper}}* \mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\_stepper\_pt}} = \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n)-\/>time\_stepper\_pt();}
+\DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00404}00404       \mbox{\hyperlink{classoomph_1_1TimeStepper}{TimeStepper}}* \mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\_stepper\_pt}} = \mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(n)-\/>\mbox{\hyperlink{classoomph_1_1Data_a065d7bffcec82bf4d4bd7b41f9aa80b3}{time\_stepper\_pt}}();}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00405}00405 }
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00406}00406       \textcolor{comment}{// Number of timsteps (past \& present)}}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00407}00407       \textcolor{keywordtype}{unsigned} n\_time = \mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\_stepper\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1TimeStepper_a3939b77ec3578e4bd5b453c85649d631}{ntstorage}}();}
@@ -440,7 +440,7 @@
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00436}00436 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00437}00437 \textcolor{comment}{    /// Pointer to n\_p-\/th pressure node (Default: NULL,}}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00438}00438 \textcolor{comment}{    /// indicating that pressure is not based on nodal interpolation).}}
-\DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00439}\mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_adb91c780f55bda62b209573facf9a999}{00439}} \textcolor{comment}{}    \textcolor{keyword}{virtual} Node* \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_adb91c780f55bda62b209573facf9a999}{pressure\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_p)}
+\DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00439}\mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_adb91c780f55bda62b209573facf9a999}{00439}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_adb91c780f55bda62b209573facf9a999}{pressure\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_p)}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00440}00440     \{}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00441}00441       \textcolor{keywordflow}{return} NULL;}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00442}00442     \}}
@@ -475,7 +475,7 @@
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00471}00471 \textcolor{comment}{    /// provided by the traction function}}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00472}\mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a47ae24dc603a7d46bd4a85ccfb2b8e23}{00472}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a47ae24dc603a7d46bd4a85ccfb2b8e23}{get\_load}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00473}00473                   \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& xi,}
-\DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00474}00474                   \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}},}
+\DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00474}00474                   \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00475}00475                   \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7dabc60bec4cc294aa2adf92726c6d6823a}{N}},}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00476}00476                   \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& load)}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00477}00477     \{}
@@ -577,11 +577,11 @@
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00573}00573 \textcolor{comment}{    /// Compute the element's residual Vector and the jacobian matrix}}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00574}00574 \textcolor{comment}{    /// Virtual function can be overloaded by hanging-\/node version}}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00575}\mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a2724cc076b394e59305ed1f7610dfa4f}{00575}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a2724cc076b394e59305ed1f7610dfa4f}{fill\_in\_contribution\_to\_jacobian}}(\mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00576}00576                                           \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})}
+\DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00576}00576                                           \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian)}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00577}00577     \{}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00578}00578       \textcolor{comment}{// Call the generic routine with the flag set to 1}}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00579}00579       \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ad0188bfed5fc5e929017226cde427839}{fill\_in\_generic\_residual\_contribution}}(}
-\DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00580}00580         residuals, \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a4bff11b8ff97aefabb2df41e61e1779f}{GeneralisedElement::Dummy\_matrix}}, 1);}
+\DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00580}00580         residuals, jacobian, \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a4bff11b8ff97aefabb2df41e61e1779f}{GeneralisedElement::Dummy\_matrix}}, 1);}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00581}00581 }
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00582}00582       \textcolor{comment}{/*}}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00583}00583 \textcolor{comment}{      // Only needed for test purposes}}
@@ -646,19 +646,19 @@
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00642}00642 \textcolor{comment}{    /// Plus the mass matrix especially for eigenvalue problems}}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00643}\mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ae4962724a42bb1f6ccdc080bef2c69a1}{00643}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ae4962724a42bb1f6ccdc080bef2c69a1}{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix}}(}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00644}00644       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00645}00645       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}},}
+\DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00645}00645       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian,}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00646}00646       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& mass\_matrix)}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00647}00647     \{}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00648}00648       \textcolor{comment}{// Call the generic routine with the flag set to 2}}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00649}00649       \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ad0188bfed5fc5e929017226cde427839}{fill\_in\_generic\_residual\_contribution}}(}
-\DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00650}00650         residuals, \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, mass\_matrix, 2);}
+\DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00650}00650         residuals, jacobian, mass\_matrix, 2);}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00651}00651     \}}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00652}00652 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00653}00653 \textcolor{comment}{    /// Compute the residuals for the Navier-\/-\/Stokes equations;}}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00654}00654 \textcolor{comment}{    /// flag=1(or 0): do (or don't) compute the Jacobian as well.}}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00655}00655 \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ad0188bfed5fc5e929017226cde427839}{fill\_in\_generic\_residual\_contribution}}(}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00656}00656       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& residuals,}
-\DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00657}00657       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}},}
+\DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00657}00657       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& jacobian,}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00658}00658       \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& mass\_matrix,}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00659}00659       \textcolor{keywordtype}{unsigned} flag);}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l00660}00660 \textcolor{comment}{}}
@@ -1075,7 +1075,7 @@
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l01071}01071     \}}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l01072}01072 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l01073}01073 \textcolor{comment}{    /// Pointer to n\_p-\/th pressure node}}
-\DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l01074}\mbox{\hyperlink{classoomph_1_1PolarTaylorHoodElement_a8ffcfc12bbb93b42b1b1b37911f29715}{01074}} \textcolor{comment}{}    Node* \mbox{\hyperlink{classoomph_1_1PolarTaylorHoodElement_a8ffcfc12bbb93b42b1b1b37911f29715}{pressure\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_p)}
+\DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l01074}\mbox{\hyperlink{classoomph_1_1PolarTaylorHoodElement_a8ffcfc12bbb93b42b1b1b37911f29715}{01074}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Node}{Node}}* \mbox{\hyperlink{classoomph_1_1PolarTaylorHoodElement_a8ffcfc12bbb93b42b1b1b37911f29715}{pressure\_node\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_p)}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l01075}01075     \{}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l01076}01076       \textcolor{keywordflow}{return} this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(Pconv[n\_p]);}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l01077}01077     \}}
@@ -1112,8 +1112,8 @@
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l01108}01108 \textcolor{comment}{    /// Pin p\_dof-\/th pressure dof and set it to value specified by p\_value.}}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l01109}\mbox{\hyperlink{classoomph_1_1PolarTaylorHoodElement_aea2da4c0a1114dacbf15d463da2f3d4f}{01109}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1PolarTaylorHoodElement_aea2da4c0a1114dacbf15d463da2f3d4f}{fix\_pressure}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& p\_dof, \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& p\_value)}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l01110}01110     \{}
-\DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l01111}01111       this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(Pconv[p\_dof])-\/>pin(this-\/>\mbox{\hyperlink{classoomph_1_1PolarTaylorHoodElement_af7ced5d7811bc4f5f5d86c211cb40500}{p\_nodal\_index\_pnst}}());}
-\DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l01112}01112       *this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(Pconv[p\_dof])-\/>value\_pt(this-\/>\mbox{\hyperlink{classoomph_1_1PolarTaylorHoodElement_af7ced5d7811bc4f5f5d86c211cb40500}{p\_nodal\_index\_pnst}}()) =}
+\DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l01111}01111       this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(Pconv[p\_dof])-\/>\mbox{\hyperlink{classoomph_1_1Data_a422231c58e423f0b43822827aa334d79}{pin}}(this-\/>\mbox{\hyperlink{classoomph_1_1PolarTaylorHoodElement_af7ced5d7811bc4f5f5d86c211cb40500}{p\_nodal\_index\_pnst}}());}
+\DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l01112}01112       *this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(Pconv[p\_dof])-\/>\mbox{\hyperlink{classoomph_1_1Data_af545f88ca20583f0c1b66e4da6076aa3}{value\_pt}}(this-\/>\mbox{\hyperlink{classoomph_1_1PolarTaylorHoodElement_af7ced5d7811bc4f5f5d86c211cb40500}{p\_nodal\_index\_pnst}}()) =}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l01113}01113         p\_value;}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l01114}01114     \}}
 \DoxyCodeLine{\Hypertarget{polar__navier__stokes__elements_8h_source_l01115}01115 }

@@ -127,7 +127,7 @@
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00123}00123 \{}
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00124}00124 }
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00125}00125   SuperMatrix A, AC, \mbox{\hyperlink{namespaceoomph_1_1OcTreeNames_ae7e7e58298b85825061eeff362656c40a43c804e2bcf9862a4bf629d5f01761e8}{B}};}
-\DoxyCodeLine{\Hypertarget{superlu_8c_source_l00126}00126   SuperMatrix *\mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a8df863dabb4096fa066f7a6dbf7502d1}{L}}, *\mbox{\hyperlink{namespaceoomph_a0593b984eb38bc1e68275a8aed5b9382}{U}};}
+\DoxyCodeLine{\Hypertarget{superlu_8c_source_l00126}00126   SuperMatrix *\mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a8df863dabb4096fa066f7a6dbf7502d1}{L}}, *\mbox{\hyperlink{namespaceoomph_1_1OcTreeNames_ae7e7e58298b85825061eeff362656c40a9d5dc3f8f9d04ae80237132101f4258f}{U}};}
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00127}00127   \textcolor{keywordtype}{int} *perm\_r; \textcolor{comment}{/* row permutations from partial pivoting */}}
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00128}00128   \textcolor{keywordtype}{int} *perm\_c; \textcolor{comment}{/* column permutation vector */}}
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00129}00129   \textcolor{keywordtype}{int} *etree;  \textcolor{comment}{/* column elimination tree */}}
@@ -170,7 +170,7 @@
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00166}00166     dCreate\_CompCol\_Matrix(\&A, *n, *n, *nnz, values, rowind, colptr,}
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00167}00167                            SLU\_NC, SLU\_D, SLU\_GE);}
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00168}00168     \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a8df863dabb4096fa066f7a6dbf7502d1}{L}} = (SuperMatrix *) SUPERLU\_MALLOC(\textcolor{keyword}{sizeof}(SuperMatrix));}
-\DoxyCodeLine{\Hypertarget{superlu_8c_source_l00169}00169     \mbox{\hyperlink{namespaceoomph_a0593b984eb38bc1e68275a8aed5b9382}{U}} = (SuperMatrix *) SUPERLU\_MALLOC(\textcolor{keyword}{sizeof}(SuperMatrix));}
+\DoxyCodeLine{\Hypertarget{superlu_8c_source_l00169}00169     \mbox{\hyperlink{namespaceoomph_1_1OcTreeNames_ae7e7e58298b85825061eeff362656c40a9d5dc3f8f9d04ae80237132101f4258f}{U}} = (SuperMatrix *) SUPERLU\_MALLOC(\textcolor{keyword}{sizeof}(SuperMatrix));}
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00170}00170     \textcolor{keywordflow}{if} (!(perm\_r = intMalloc(*n))) ABORT(\textcolor{stringliteral}{"{}Malloc fails for perm\_r[]."{}});}
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00171}00171     \textcolor{keywordflow}{if} (!(perm\_c = intMalloc(*n))) ABORT(\textcolor{stringliteral}{"{}Malloc fails for perm\_c[]."{}});}
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00172}00172     \textcolor{keywordflow}{if} (!(etree = intMalloc(*n))) ABORT(\textcolor{stringliteral}{"{}Malloc fails for etree[]."{}});}
@@ -191,13 +191,13 @@
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00187}00187     relax = sp\_ienv(2);}
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00188}00188 }
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00189}00189     dgstrf(\&options, \&AC, \textcolor{comment}{/*drop\_tol,*/} relax, panel\_size,}
-\DoxyCodeLine{\Hypertarget{superlu_8c_source_l00190}00190            etree, NULL, 0, perm\_c, perm\_r, \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a8df863dabb4096fa066f7a6dbf7502d1}{L}}, \mbox{\hyperlink{namespaceoomph_a0593b984eb38bc1e68275a8aed5b9382}{U}}, \&stat, info);}
+\DoxyCodeLine{\Hypertarget{superlu_8c_source_l00190}00190            etree, NULL, 0, perm\_c, perm\_r, \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a8df863dabb4096fa066f7a6dbf7502d1}{L}}, \mbox{\hyperlink{namespaceoomph_1_1OcTreeNames_ae7e7e58298b85825061eeff362656c40a9d5dc3f8f9d04ae80237132101f4258f}{U}}, \&stat, info);}
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00191}00191 }
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00192}00192     \textcolor{keywordflow}{if} (*info == 0)}
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00193}00193     \{}
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00194}00194       Lstore = (SCformat *) \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a8df863dabb4096fa066f7a6dbf7502d1}{L}}-\/>Store;}
-\DoxyCodeLine{\Hypertarget{superlu_8c_source_l00195}00195       Ustore = (NCformat *) \mbox{\hyperlink{namespaceoomph_a0593b984eb38bc1e68275a8aed5b9382}{U}}-\/>Store;}
-\DoxyCodeLine{\Hypertarget{superlu_8c_source_l00196}00196       dQuerySpace(\mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a8df863dabb4096fa066f7a6dbf7502d1}{L}}, \mbox{\hyperlink{namespaceoomph_a0593b984eb38bc1e68275a8aed5b9382}{U}}, \&\mbox{\hyperlink{superlu_8c_a2c4a0d7993d6af11809efcf0bfe3fcd8}{memory\_statistics\_storage}}.\mbox{\hyperlink{structMemoryStatisticsStorage_a7f0872fb1f9455b2046bd06702a2a8f6}{Memory\_usage}});}
+\DoxyCodeLine{\Hypertarget{superlu_8c_source_l00195}00195       Ustore = (NCformat *) \mbox{\hyperlink{namespaceoomph_1_1OcTreeNames_ae7e7e58298b85825061eeff362656c40a9d5dc3f8f9d04ae80237132101f4258f}{U}}-\/>Store;}
+\DoxyCodeLine{\Hypertarget{superlu_8c_source_l00196}00196       dQuerySpace(\mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a8df863dabb4096fa066f7a6dbf7502d1}{L}}, \mbox{\hyperlink{namespaceoomph_1_1OcTreeNames_ae7e7e58298b85825061eeff362656c40a9d5dc3f8f9d04ae80237132101f4258f}{U}}, \&\mbox{\hyperlink{superlu_8c_a2c4a0d7993d6af11809efcf0bfe3fcd8}{memory\_statistics\_storage}}.\mbox{\hyperlink{structMemoryStatisticsStorage_a7f0872fb1f9455b2046bd06702a2a8f6}{Memory\_usage}});}
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00197}00197       \textcolor{keywordflow}{if} (*\mbox{\hyperlink{namespaceoomph_1_1LeakCheckNames_ad5ef7bca3a63e643b0eec22dd3bab58b}{doc}}!=0)}
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00198}00198       \{}
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00199}00199         printf(\textcolor{stringliteral}{"{} No of nonzeros in factor L = \%d\(\backslash\)n"{}}, Lstore-\/>nnz);}
@@ -221,7 +221,7 @@
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00217}00217       \{}
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00218}00218         printf(\textcolor{stringliteral}{"{}U(\%i,\%i) is exactly zero so U is exactly singular."{}},}
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00219}00219                *n, *n);}
-\DoxyCodeLine{\Hypertarget{superlu_8c_source_l00220}00220         dQuerySpace(\mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a8df863dabb4096fa066f7a6dbf7502d1}{L}}, \mbox{\hyperlink{namespaceoomph_a0593b984eb38bc1e68275a8aed5b9382}{U}}, \&\mbox{\hyperlink{superlu_8c_a2c4a0d7993d6af11809efcf0bfe3fcd8}{memory\_statistics\_storage}}.\mbox{\hyperlink{structMemoryStatisticsStorage_a7f0872fb1f9455b2046bd06702a2a8f6}{Memory\_usage}});}
+\DoxyCodeLine{\Hypertarget{superlu_8c_source_l00220}00220         dQuerySpace(\mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a8df863dabb4096fa066f7a6dbf7502d1}{L}}, \mbox{\hyperlink{namespaceoomph_1_1OcTreeNames_ae7e7e58298b85825061eeff362656c40a9d5dc3f8f9d04ae80237132101f4258f}{U}}, \&\mbox{\hyperlink{superlu_8c_a2c4a0d7993d6af11809efcf0bfe3fcd8}{memory\_statistics\_storage}}.\mbox{\hyperlink{structMemoryStatisticsStorage_a7f0872fb1f9455b2046bd06702a2a8f6}{Memory\_usage}});}
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00221}00221         printf(\textcolor{stringliteral}{"{} L\(\backslash\)\(\backslash\)U MB \%.3f\(\backslash\)ttotal MB needed \%.3f\(\backslash\)n"{}},}
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00222}00222                \textcolor{comment}{//\(\backslash\)texpansions \%d\(\backslash\)n\(\backslash\)n"{},}}
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00223}00223                \mbox{\hyperlink{superlu_8c_a2c4a0d7993d6af11809efcf0bfe3fcd8}{memory\_statistics\_storage}}.\mbox{\hyperlink{structMemoryStatisticsStorage_a7f0872fb1f9455b2046bd06702a2a8f6}{Memory\_usage}}.for\_lu/1e6,}
@@ -240,7 +240,7 @@
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00236}00236     \textcolor{comment}{/* Save the LU factors in the factors handle */}}
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00237}00237     LUfactors = (\mbox{\hyperlink{structfactors__t}{factors\_t}}*) SUPERLU\_MALLOC(\textcolor{keyword}{sizeof}(\mbox{\hyperlink{structfactors__t}{factors\_t}}));}
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00238}00238     LUfactors-\/>\mbox{\hyperlink{structfactors__t_a17d4587aa0c7b0e0e39300d4087d4131}{L}} = \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a8df863dabb4096fa066f7a6dbf7502d1}{L}};}
-\DoxyCodeLine{\Hypertarget{superlu_8c_source_l00239}00239     LUfactors-\/>\mbox{\hyperlink{structfactors__t_a336bf3fd72304c337b78e71607de7d1e}{U}} = \mbox{\hyperlink{namespaceoomph_a0593b984eb38bc1e68275a8aed5b9382}{U}};}
+\DoxyCodeLine{\Hypertarget{superlu_8c_source_l00239}00239     LUfactors-\/>\mbox{\hyperlink{structfactors__t_a336bf3fd72304c337b78e71607de7d1e}{U}} = \mbox{\hyperlink{namespaceoomph_1_1OcTreeNames_ae7e7e58298b85825061eeff362656c40a9d5dc3f8f9d04ae80237132101f4258f}{U}};}
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00240}00240     LUfactors-\/>\mbox{\hyperlink{structfactors__t_af26c51d6a48540340d440ff1c20a28cc}{perm\_c}} = perm\_c;}
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00241}00241     LUfactors-\/>\mbox{\hyperlink{structfactors__t_af0016e789d7a575ffc8945a23b3b812a}{perm\_r}} = perm\_r;}
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00242}00242     *f\_factors = (\mbox{\hyperlink{superlu_8c_a2b91e9b8520a970ebe560735f71ba3bd}{fptr}}) LUfactors;}
@@ -320,14 +320,14 @@
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00316}00316     \textcolor{comment}{/* Extract the LU factors in the factors handle */}}
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00317}00317     LUfactors = (\mbox{\hyperlink{structfactors__t}{factors\_t}}*) *f\_factors;}
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00318}00318     \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a8df863dabb4096fa066f7a6dbf7502d1}{L}} = LUfactors-\/>\mbox{\hyperlink{structfactors__t_a17d4587aa0c7b0e0e39300d4087d4131}{L}};}
-\DoxyCodeLine{\Hypertarget{superlu_8c_source_l00319}00319     \mbox{\hyperlink{namespaceoomph_a0593b984eb38bc1e68275a8aed5b9382}{U}} = LUfactors-\/>\mbox{\hyperlink{structfactors__t_a336bf3fd72304c337b78e71607de7d1e}{U}};}
+\DoxyCodeLine{\Hypertarget{superlu_8c_source_l00319}00319     \mbox{\hyperlink{namespaceoomph_1_1OcTreeNames_ae7e7e58298b85825061eeff362656c40a9d5dc3f8f9d04ae80237132101f4258f}{U}} = LUfactors-\/>\mbox{\hyperlink{structfactors__t_a336bf3fd72304c337b78e71607de7d1e}{U}};}
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00320}00320     perm\_c = LUfactors-\/>\mbox{\hyperlink{structfactors__t_af26c51d6a48540340d440ff1c20a28cc}{perm\_c}};}
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00321}00321     perm\_r = LUfactors-\/>\mbox{\hyperlink{structfactors__t_af0016e789d7a575ffc8945a23b3b812a}{perm\_r}};}
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00322}00322 }
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00323}00323     dCreate\_Dense\_Matrix(\&\mbox{\hyperlink{namespaceoomph_1_1OcTreeNames_ae7e7e58298b85825061eeff362656c40a43c804e2bcf9862a4bf629d5f01761e8}{B}}, *n, *nrhs, b, *ldb, SLU\_DN, SLU\_D, SLU\_GE);}
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00324}00324 }
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00325}00325     \textcolor{comment}{/* Solve the system A*X=B, overwriting B with X. */}}
-\DoxyCodeLine{\Hypertarget{superlu_8c_source_l00326}00326     dgstrs(trans, \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a8df863dabb4096fa066f7a6dbf7502d1}{L}}, \mbox{\hyperlink{namespaceoomph_a0593b984eb38bc1e68275a8aed5b9382}{U}}, perm\_c, perm\_r, \&\mbox{\hyperlink{namespaceoomph_1_1OcTreeNames_ae7e7e58298b85825061eeff362656c40a43c804e2bcf9862a4bf629d5f01761e8}{B}}, \&stat, info);}
+\DoxyCodeLine{\Hypertarget{superlu_8c_source_l00326}00326     dgstrs(trans, \mbox{\hyperlink{namespaceoomph_1_1BinaryTreeNames_a7ff5e7e46beae31bf81579531b1f9895a8df863dabb4096fa066f7a6dbf7502d1}{L}}, \mbox{\hyperlink{namespaceoomph_1_1OcTreeNames_ae7e7e58298b85825061eeff362656c40a9d5dc3f8f9d04ae80237132101f4258f}{U}}, perm\_c, perm\_r, \&\mbox{\hyperlink{namespaceoomph_1_1OcTreeNames_ae7e7e58298b85825061eeff362656c40a43c804e2bcf9862a4bf629d5f01761e8}{B}}, \&stat, info);}
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00327}00327 }
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00328}00328     Destroy\_SuperMatrix\_Store(\&\mbox{\hyperlink{namespaceoomph_1_1OcTreeNames_ae7e7e58298b85825061eeff362656c40a43c804e2bcf9862a4bf629d5f01761e8}{B}});}
 \DoxyCodeLine{\Hypertarget{superlu_8c_source_l00329}00329     StatFree(\&stat);}

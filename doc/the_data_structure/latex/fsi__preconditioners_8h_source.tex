@@ -76,7 +76,7 @@
 \DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00072}00072 }
 \DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00073}00073       \textcolor{comment}{// Create the Navier Stokes Schur complement preconditioner}}
 \DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00074}00074       \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_adc98903b78d0bc97c40eb733eaf6e498}{Navier\_stokes\_preconditioner\_pt}} =}
-\DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00075}00075         \textcolor{keyword}{new} NavierStokesSchurComplementPreconditioner(problem\_pt);}
+\DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00075}00075         \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner}{NavierStokesSchurComplementPreconditioner}}(problem\_pt);}
 \DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00076}00076 }
 \DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00077}00077       \textcolor{comment}{// Create the Solid preconditioner}}
 \DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00078}00078       \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a9a6616d03bd67e2c1c406bcb6d332893}{Solid\_preconditioner\_pt}} = \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1SuperLUPreconditioner}{SuperLUPreconditioner}};}
@@ -199,7 +199,7 @@
 \DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00195}00195 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a31c84c3ca19c31488acd0bf2fe333a6b}{preconditioner\_solve}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& r, \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}}\& z);}
 \DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00196}00196 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00197}00197 \textcolor{comment}{    /// Access function to the Navier Stokes preconditioner (inexact solver)}}
-\DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00198}\mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a26be7d10862b057d139e4e0de102b426}{00198}} \textcolor{comment}{}    NavierStokesSchurComplementPreconditioner* \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a26be7d10862b057d139e4e0de102b426}{navier\_stokes\_preconditioner\_pt}}()\textcolor{keyword}{}}
+\DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00198}\mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a26be7d10862b057d139e4e0de102b426}{00198}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner}{NavierStokesSchurComplementPreconditioner}}* \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a26be7d10862b057d139e4e0de102b426}{navier\_stokes\_preconditioner\_pt}}()\textcolor{keyword}{}}
 \DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00199}00199 \textcolor{keyword}{      const}}
 \DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00200}00200 \textcolor{keyword}{    }\{}
 \DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00201}00201       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_adc98903b78d0bc97c40eb733eaf6e498}{Navier\_stokes\_preconditioner\_pt}};}
@@ -220,7 +220,7 @@
 \DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00216}00216 }
 \DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00217}00217   \textcolor{keyword}{private}:\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00218}00218 \textcolor{comment}{    /// Pointer the Navier Stokes preconditioner (inexact solver)}}
-\DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00219}\mbox{\hyperlink{classoomph_1_1FSIPreconditioner_adc98903b78d0bc97c40eb733eaf6e498}{00219}} \textcolor{comment}{}    NavierStokesSchurComplementPreconditioner* \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_adc98903b78d0bc97c40eb733eaf6e498}{Navier\_stokes\_preconditioner\_pt}};}
+\DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00219}\mbox{\hyperlink{classoomph_1_1FSIPreconditioner_adc98903b78d0bc97c40eb733eaf6e498}{00219}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner}{NavierStokesSchurComplementPreconditioner}}* \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_adc98903b78d0bc97c40eb733eaf6e498}{Navier\_stokes\_preconditioner\_pt}};}
 \DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00220}00220 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00221}00221 \textcolor{comment}{    /// Pointer to the solid preconditioner  (inexact solver)}}
 \DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00222}\mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a9a6616d03bd67e2c1c406bcb6d332893}{00222}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}}* \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a9a6616d03bd67e2c1c406bcb6d332893}{Solid\_preconditioner\_pt}};}
@@ -321,14 +321,14 @@
 \DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00317}00317 }
 \DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00318}00318     \textcolor{comment}{// Turn the Navier Stokes Schur complement preconditioner into a}}
 \DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00319}00319     \textcolor{comment}{// subsidiary preconditioner of this preconditioner}}
-\DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00320}00320     \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_adc98903b78d0bc97c40eb733eaf6e498}{Navier\_stokes\_preconditioner\_pt}}-\/>turn\_into\_subsidiary\_block\_preconditioner(}
+\DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00320}00320     \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_adc98903b78d0bc97c40eb733eaf6e498}{Navier\_stokes\_preconditioner\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_ab8e2478caa8370dd12462f17e1cc8082}{turn\_into\_subsidiary\_block\_preconditioner}}(}
 \DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00321}00321       \textcolor{keyword}{this}, ns\_dof\_lookup);}
 \DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00322}00322 }
 \DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00323}00323     \textcolor{comment}{// Setup the navier stokes preconditioner: Tell it about the}}
 \DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00324}00324     \textcolor{comment}{// Navier Stokes mesh and set it up.}}
-\DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00325}00325     \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_adc98903b78d0bc97c40eb733eaf6e498}{Navier\_stokes\_preconditioner\_pt}}-\/>set\_navier\_stokes\_mesh(}
+\DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00325}00325     \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_adc98903b78d0bc97c40eb733eaf6e498}{Navier\_stokes\_preconditioner\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_abe80b5bb32d24f49f427d04118de284a}{set\_navier\_stokes\_mesh}}(}
 \DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00326}00326       \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a201e3fcf3e13bd19b3871e9d3a734a1d}{Navier\_stokes\_mesh\_pt}});}
-\DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00327}00327     \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_adc98903b78d0bc97c40eb733eaf6e498}{Navier\_stokes\_preconditioner\_pt}}-\/>setup(\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_aec1a6eda2d78d1e3b41ced805534d72d}{matrix\_pt}}());}
+\DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00327}00327     \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_adc98903b78d0bc97c40eb733eaf6e498}{Navier\_stokes\_preconditioner\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_a03cbfa527081ea03c910aadc281615d7}{setup}}(\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_aec1a6eda2d78d1e3b41ced805534d72d}{matrix\_pt}}());}
 \DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00328}00328 }
 \DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00329}00329     \textcolor{comment}{// Extract the additional blocks we need for FSI:}}
 \DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00330}00330 }
@@ -420,7 +420,7 @@
 \DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00416}00416       this-\/>\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a1dd4d3cd6b64fa64e1ff6730b0deecc7}{return\_block\_vector}}(0, another\_temp\_vec, res);}
 \DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00417}00417 }
 \DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00418}00418       \textcolor{comment}{// now apply the navier stokes lsc preconditioner}}
-\DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00419}00419       \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_adc98903b78d0bc97c40eb733eaf6e498}{Navier\_stokes\_preconditioner\_pt}}-\/>preconditioner\_solve(res, z);}
+\DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00419}00419       \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_adc98903b78d0bc97c40eb733eaf6e498}{Navier\_stokes\_preconditioner\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_adbc87003dd8e8c924ae802651b18f2ed}{preconditioner\_solve}}(res, z);}
 \DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00420}00420     \}}
 \DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00421}00421 }
 \DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00422}00422 }
@@ -431,7 +431,7 @@
 \DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00427}00427     \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00428}00428     \{}
 \DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00429}00429       \textcolor{comment}{// Call fluid preconditioner for fluid block}}
-\DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00430}00430       \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_adc98903b78d0bc97c40eb733eaf6e498}{Navier\_stokes\_preconditioner\_pt}}-\/>preconditioner\_solve(res, z);}
+\DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00430}00430       \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_adc98903b78d0bc97c40eb733eaf6e498}{Navier\_stokes\_preconditioner\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner_adbc87003dd8e8c924ae802651b18f2ed}{preconditioner\_solve}}(res, z);}
 \DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00431}00431 }
 \DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00432}00432       \textcolor{comment}{// Working vectors}}
 \DoxyCodeLine{\Hypertarget{fsi__preconditioners_8h_source_l00433}00433       \mbox{\hyperlink{classoomph_1_1DoubleVector}{DoubleVector}} temp\_solid\_vec;}

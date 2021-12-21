@@ -309,16 +309,16 @@
 \DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00305}00305 \textcolor{comment}{    /// t>0: previous)}}
 \DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00306}\mbox{\hyperlink{classoomph_1_1QMacroElement_3_012_01_4_a1fe56200453a2200e5103d3fb4793e38}{00306}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1QMacroElement_3_012_01_4_a1fe56200453a2200e5103d3fb4793e38}{output}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, std::ostream\& outfile, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nplot)}
 \DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00307}00307     \{}
-\DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00308}00308       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(2), \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}(2);}
+\DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00308}00308       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(2), f(2);}
 \DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00309}00309       outfile << \textcolor{stringliteral}{"{}ZONE I="{}} << nplot << \textcolor{stringliteral}{"{}, J="{}} << nplot << std::endl;}
 \DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00310}00310       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < nplot; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00311}00311       \{}
-\DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00312}00312         \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[1] = -\/1.0 + 2.0 * double(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) / double(nplot -\/ 1);}
+\DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00312}00312         x[1] = -\/1.0 + 2.0 * double(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) / double(nplot -\/ 1);}
 \DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00313}00313         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < nplot; j++)}
 \DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00314}00314         \{}
-\DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00315}00315           \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[0] = -\/1.0 + 2.0 * double(j) / double(nplot -\/ 1);}
-\DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00316}00316           \mbox{\hyperlink{classoomph_1_1MacroElement_a85e7842ad949bb4062a9ff302fa452e5}{macro\_map}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}});}
-\DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00317}00317           outfile << \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}[0] << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}[1] << std::endl;}
+\DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00315}00315           x[0] = -\/1.0 + 2.0 * double(j) / double(nplot -\/ 1);}
+\DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00316}00316           \mbox{\hyperlink{classoomph_1_1MacroElement_a85e7842ad949bb4062a9ff302fa452e5}{macro\_map}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, x, f);}
+\DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00317}00317           outfile << f[0] << \textcolor{stringliteral}{"{} "{}} << f[1] << std::endl;}
 \DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00318}00318         \}}
 \DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00319}00319       \}}
 \DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00320}00320     \}}
@@ -403,25 +403,25 @@
 \DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00399}00399 \textcolor{comment}{    /// t>0: previous)}}
 \DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00400}\mbox{\hyperlink{classoomph_1_1QMacroElement_3_013_01_4_a5c1916d58b2d3142b5fa85f209e16b4c}{00400}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1QMacroElement_3_013_01_4_a5c1916d58b2d3142b5fa85f209e16b4c}{output}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, std::ostream\& outfile, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nplot)}
 \DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00401}00401     \{}
-\DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00402}00402       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}(3), \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}(3);}
+\DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00402}00402       \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x(3), f(3);}
 \DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00403}00403 }
 \DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00404}00404       outfile << \textcolor{stringliteral}{"{}ZONE I="{}} << nplot << \textcolor{stringliteral}{"{}, J="{}} << nplot << \textcolor{stringliteral}{"{}, k="{}} << nplot}
 \DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00405}00405               << std::endl;}
 \DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00406}00406       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < nplot; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00407}00407       \{}
-\DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00408}00408         \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[2] = -\/1.0 + 2.0 * double(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) / double(nplot -\/ 1);}
+\DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00408}00408         x[2] = -\/1.0 + 2.0 * double(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) / double(nplot -\/ 1);}
 \DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00409}00409 }
 \DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00410}00410         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < nplot; j++)}
 \DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00411}00411         \{}
-\DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00412}00412           \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[1] = -\/1.0 + 2.0 * double(j) / double(nplot -\/ 1);}
+\DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00412}00412           x[1] = -\/1.0 + 2.0 * double(j) / double(nplot -\/ 1);}
 \DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00413}00413 }
 \DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00414}00414           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < nplot; k++)}
 \DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00415}00415           \{}
-\DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00416}00416             \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[0] = -\/1.0 + 2.0 * double(k) / double(nplot -\/ 1);}
+\DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00416}00416             x[0] = -\/1.0 + 2.0 * double(k) / double(nplot -\/ 1);}
 \DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00417}00417 }
-\DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00418}00418             \mbox{\hyperlink{classoomph_1_1MacroElement_a85e7842ad949bb4062a9ff302fa452e5}{macro\_map}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}});}
+\DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00418}00418             \mbox{\hyperlink{classoomph_1_1MacroElement_a85e7842ad949bb4062a9ff302fa452e5}{macro\_map}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, x, f);}
 \DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00419}00419 }
-\DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00420}00420             outfile << \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}[0] << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}[1] << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}[2] << std::endl;}
+\DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00420}00420             outfile << f[0] << \textcolor{stringliteral}{"{} "{}} << f[1] << \textcolor{stringliteral}{"{} "{}} << f[2] << std::endl;}
 \DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00421}00421           \}}
 \DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00422}00422         \}}
 \DoxyCodeLine{\Hypertarget{macro__element_8h_source_l00423}00423       \}}

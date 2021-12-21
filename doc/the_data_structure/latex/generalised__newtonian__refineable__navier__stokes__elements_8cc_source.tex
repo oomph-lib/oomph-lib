@@ -131,7 +131,7 @@
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00127}00127       \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00128}00128 }
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00129}00129       \textcolor{comment}{// Premultiply weights and Jacobian}}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00130}00130       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00130}00130       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00131}00131 }
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00132}00132 }
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00133}00133       \textcolor{comment}{// Do we want the velocity one?}}
@@ -210,7 +210,7 @@
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00206}00206 }
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00207}00207 }
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00208}00208                 \textcolor{comment}{// Add the contribution}}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00209}00209                 veloc\_mass\_diag[local\_eqn] += pow(psi[l] * hang\_weight, 2) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00209}00209                 veloc\_mass\_diag[local\_eqn] += pow(psi[l] * hang\_weight, 2) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00210}00210               \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00211}00211             \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00212}00212           \}}
@@ -276,7 +276,7 @@
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00272}00272 }
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00273}00273 }
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00274}00274               \textcolor{comment}{// Add the contribution}}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00275}00275               press\_mass\_diag[local\_eqn] += pow(psi\_p[l] * hang\_weight, 2) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}};}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00275}00275               press\_mass\_diag[local\_eqn] += pow(psi\_p[l] * hang\_weight, 2) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}};}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00276}00276             \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00277}00277           \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00278}00278         \}}
@@ -390,7 +390,7 @@
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00386}00386       this-\/>pshape\_nst(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, psip, testp);}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00387}00387 }
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00388}00388       \textcolor{comment}{// Premultiply the weights and the Jacobian}}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00389}00389       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} = w * J;}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00389}00389       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} = w * J;}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00390}00390 }
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00391}00391       \textcolor{comment}{// Calculate local values of the pressure and velocity components}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00392}00392       \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
@@ -663,12 +663,12 @@
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00659}00659               \textcolor{keywordflow}{if} (this-\/>Pre\_multiply\_by\_viscosity\_ratio)}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00660}00660               \{}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00661}00661                 sum = visc\_ratio * viscosity *}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00662}00662                       (sum * testf[l] + interpolated\_p * dtestfdx(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} *}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00662}00662                       (sum * testf[l] + interpolated\_p * dtestfdx(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} *}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00663}00663                       hang\_weight;}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00664}00664               \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00665}00665               \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00666}00666               \{}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00667}00667                 sum = (sum * testf[l] + interpolated\_p * dtestfdx(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} *}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00667}00667                 sum = (sum * testf[l] + interpolated\_p * dtestfdx(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} *}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00668}00668                       hang\_weight;}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00669}00669               \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00670}00670 }
@@ -681,7 +681,7 @@
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00677}00677                 sum -\/= visc\_ratio * viscosity *}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00678}00678                        (interpolated\_dudx(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, k) +}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00679}00679                         this-\/>Gamma[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * interpolated\_dudx(k, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})) *}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00680}00680                        dtestfdx(l, k) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight;}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00680}00680                        dtestfdx(l, k) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight;}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00681}00681               \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00682}00682 }
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00683}00683               \textcolor{comment}{// Add contribution}}
@@ -741,13 +741,13 @@
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00737}00737                         \textcolor{comment}{// Add contribution to Elemental Matrix}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00738}00738                         jacobian(local\_eqn, local\_unknown) -\/=}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00739}00739                           visc\_ratio * viscosity * this-\/>Gamma[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] *}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00740}00740                           dpsifdx(l2, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * dtestfdx(l, i2) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight *}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00740}00740                           dpsifdx(l2, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * dtestfdx(l, i2) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight *}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00741}00741                           hang\_weight2;}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00742}00742 }
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00743}00743                         \textcolor{comment}{// Now add in the inertial terms}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00744}00744                         jacobian(local\_eqn, local\_unknown) -\/=}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00745}00745                           scaled\_re * psif[l2] * interpolated\_dudx(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, i2) *}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00746}00746                           testf[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight * hang\_weight2;}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00746}00746                           testf[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight * hang\_weight2;}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00747}00747 }
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00748}00748                         \textcolor{keywordflow}{if} (}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00749}00749                           !\textcolor{keyword}{this}}
@@ -759,7 +759,7 @@
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00755}00755                               visc\_ratio * dviscosity\_dunknown(i2, l2) *}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00756}00756                               (interpolated\_dudx(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, k) +}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00757}00757                                this-\/>Gamma[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] * interpolated\_dudx(k, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})) *}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00758}00758                               dtestfdx(l, k) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight * hang\_weight2;}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00758}00758                               dtestfdx(l, k) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight * hang\_weight2;}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00759}00759                           \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00760}00760                         \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00761}00761 }
@@ -772,7 +772,7 @@
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00768}00768                           \textcolor{keywordflow}{if} (flag == 2)}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00769}00769                           \{}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00770}00770                             mass\_matrix(local\_eqn, local\_unknown) +=}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00771}00771                               scaled\_re\_st * psif[l2] * testf[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} *}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00771}00771                               scaled\_re\_st * psif[l2] * testf[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} *}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00772}00772                               hang\_weight * hang\_weight2;}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00773}00773                           \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00774}00774 }
@@ -780,7 +780,7 @@
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00776}00776                           jacobian(local\_eqn, local\_unknown) -\/=}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00777}00777                             scaled\_re\_st *}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00778}00778                             node\_pt(l2)-\/>time\_stepper\_pt()-\/>weight(1, 0) *}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00779}00779                             psif[l2] * testf[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight *}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00779}00779                             psif[l2] * testf[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight *}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00780}00780                             hang\_weight2;}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00781}00781 }
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00782}00782                           \textcolor{comment}{// Extra advective terms}}
@@ -793,7 +793,7 @@
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00789}00789                             \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00790}00790 }
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00791}00791                             jacobian(local\_eqn, local\_unknown) -\/=}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00792}00792                               tmp * dpsifdx(l2, k) * testf[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} *}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00792}00792                               tmp * dpsifdx(l2, k) * testf[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} *}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00793}00793                               hang\_weight * hang\_weight2;}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00794}00794                           \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00795}00795 }
@@ -802,7 +802,7 @@
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00798}00798                           \{}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00799}00799                             jacobian(local\_eqn, local\_unknown) -\/=}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00800}00800                               visc\_ratio * viscosity * dpsifdx(l2, k) *}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00801}00801                               dtestfdx(l, k) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight * hang\_weight2;}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00801}00801                               dtestfdx(l, k) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight * hang\_weight2;}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00802}00802                           \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00803}00803                         \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00804}00804                       \}}
@@ -854,12 +854,12 @@
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00850}00850                       \{}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00851}00851                         jacobian(local\_eqn, local\_unknown) +=}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00852}00852                           visc\_ratio * viscosity * psip[l2] * dtestfdx(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) *}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00853}00853                           \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight * hang\_weight2;}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00853}00853                           \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight * hang\_weight2;}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00854}00854                       \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00855}00855                       \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00856}00856                       \{}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00857}00857                         jacobian(local\_eqn, local\_unknown) +=}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00858}00858                           psip[l2] * dtestfdx(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight *}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00858}00858                           psip[l2] * dtestfdx(l, \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight *}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00859}00859                           hang\_weight2;}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00860}00860                       \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00861}00861                     \}}
@@ -922,7 +922,7 @@
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00918}00918           \textcolor{keywordflow}{if} (local\_eqn >= 0)}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00919}00919           \{}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00920}00920             \textcolor{comment}{// Source term}}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00921}00921             residuals[local\_eqn] -\/= source * testp[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight;}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00921}00921             residuals[local\_eqn] -\/= source * testp[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight;}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00922}00922 }
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00923}00923             \textcolor{comment}{// Loop over velocity components}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00924}00924             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < DIM; k++)}
@@ -931,13 +931,13 @@
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00927}00927               \textcolor{keywordflow}{if} (this-\/>Pre\_multiply\_by\_viscosity\_ratio)}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00928}00928               \{}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00929}00929                 residuals[local\_eqn] += visc\_ratio * viscosity *}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00930}00930                                         interpolated\_dudx(k, k) * testp[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} *}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00930}00930                                         interpolated\_dudx(k, k) * testp[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} *}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00931}00931                                         hang\_weight;}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00932}00932               \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00933}00933               \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00934}00934               \{}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00935}00935                 residuals[local\_eqn] +=}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00936}00936                   interpolated\_dudx(k, k) * testp[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight;}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00936}00936                   interpolated\_dudx(k, k) * testp[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight;}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00937}00937               \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00938}00938             \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00939}00939 }
@@ -994,12 +994,12 @@
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00990}00990                       \{}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00991}00991                         jacobian(local\_eqn, local\_unknown) +=}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00992}00992                           visc\_ratio * viscosity * dpsifdx(l2, i2) * testp[l] *}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00993}00993                           \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight * hang\_weight2;}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00993}00993                           \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight * hang\_weight2;}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00994}00994                       \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00995}00995                       \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00996}00996                       \{}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00997}00997                         jacobian(local\_eqn, local\_unknown) +=}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00998}00998                           dpsifdx(l2, i2) * testp[l] * \mbox{\hyperlink{namespaceoomph_ab40f6d5233caa62dd428818b4cba72d5}{W}} * hang\_weight *}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00998}00998                           dpsifdx(l2, i2) * testp[l] * \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{W}} * hang\_weight *}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l00999}00999                           hang\_weight2;}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01000}01000                       \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01001}01001                     \}}
@@ -1136,13 +1136,13 @@
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01132}01132          it++)}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01133}01133     \{}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01134}01134       \textcolor{comment}{// Get node}}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01135}01135       Node* nod\_pt = it-\/>first;}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01135}01135       \mbox{\hyperlink{classoomph_1_1Node}{Node}}* nod\_pt = it-\/>first;}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01136}01136 }
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01137}01137       \textcolor{comment}{// Get its number}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01138}01138       \textcolor{keywordtype}{unsigned} q = it-\/>second;}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01139}01139 }
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01140}01140       \textcolor{comment}{// Only compute if there's a node-\/update fct involved}}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01141}01141       \textcolor{keywordflow}{if} (nod\_pt-\/>has\_auxiliary\_node\_update\_fct\_pt())}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01141}01141       \textcolor{keywordflow}{if} (nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ad5fe8ac9dcb705612903bc6945926375}{has\_auxiliary\_node\_update\_fct\_pt}}())}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01142}01142       \{}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01143}01143         element\_has\_node\_with\_aux\_node\_update\_fct = \textcolor{keyword}{true};}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01144}01144 }
@@ -1150,31 +1150,31 @@
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01146}01146         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} u\_ref(DIM);}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01147}01147         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < DIM; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01148}01148         \{}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01149}01149           u\_ref[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = *(nod\_pt-\/>value\_pt(u\_nodal\_index[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]));}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01149}01149           u\_ref[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = *(nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_af545f88ca20583f0c1b66e4da6076aa3}{value\_pt}}(u\_nodal\_index[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]));}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01150}01150         \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01151}01151 }
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01152}01152         \textcolor{comment}{// FD}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01153}01153         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} p = 0; p < DIM; p++)}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01154}01154         \{}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01155}01155           \textcolor{comment}{// Make backup}}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01156}01156           \textcolor{keywordtype}{double} backup = nod\_pt-\/>x(p);}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01156}01156           \textcolor{keywordtype}{double} backup = nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(p);}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01157}01157 }
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01158}01158           \textcolor{comment}{// Do FD step. No node update required as we're}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01159}01159           \textcolor{comment}{// attacking the coordinate directly...}}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01160}01160           nod\_pt-\/>x(p) += eps\_fd;}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01160}01160           nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(p) += eps\_fd;}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01161}01161 }
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01162}01162           \textcolor{comment}{// Do auxiliary node update (to apply no slip)}}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01163}01163           nod\_pt-\/>perform\_auxiliary\_node\_update\_fct();}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01163}01163           nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a6c287aa85c19f2d37ed7952ece5c76dd}{perform\_auxiliary\_node\_update\_fct}}();}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01164}01164 }
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01165}01165           \textcolor{comment}{// Evaluate}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01166}01166           d\_U\_dX(p, q) =}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01167}01167             (*(nod\_pt-\/>value\_pt(u\_nodal\_index[p])) -\/ u\_ref[p]) / eps\_fd;}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01167}01167             (*(nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_af545f88ca20583f0c1b66e4da6076aa3}{value\_pt}}(u\_nodal\_index[p])) -\/ u\_ref[p]) / eps\_fd;}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01168}01168 }
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01169}01169           \textcolor{comment}{// Reset}}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01170}01170           nod\_pt-\/>x(p) = backup;}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01170}01170           nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(p) = backup;}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01171}01171 }
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01172}01172           \textcolor{comment}{// Do auxiliary node update (to apply no slip)}}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01173}01173           nod\_pt-\/>perform\_auxiliary\_node\_update\_fct();}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01173}01173           nod\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a6c287aa85c19f2d37ed7952ece5c76dd}{perform\_auxiliary\_node\_update\_fct}}();}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01174}01174         \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01175}01175       \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01176}01176     \}}
@@ -1480,7 +1480,7 @@
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01476}01476                   \textcolor{comment}{// Local boolean to indicate whether the node is hanging}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01477}01477                   \textcolor{keywordtype}{bool} is\_node\_hanging2 = node\_pt(q\_local)-\/>is\_hanging();}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01478}01478 }
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01479}01479                   Node* actual\_shape\_controlling\_node\_pt = node\_pt(q\_local);}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01479}01479                   \mbox{\hyperlink{classoomph_1_1Node}{Node}}* actual\_shape\_controlling\_node\_pt = node\_pt(q\_local);}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01480}01480 }
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01481}01481                   \textcolor{comment}{// If the node is hanging}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01482}01482                   \textcolor{keywordflow}{if} (is\_node\_hanging2)}
@@ -1647,7 +1647,7 @@
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01643}01643                 \textcolor{comment}{// Local boolean to indicate whether the node is hanging}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01644}01644                 \textcolor{keywordtype}{bool} is\_node\_hanging2 = node\_pt(q\_local)-\/>is\_hanging();}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01645}01645 }
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01646}01646                 Node* actual\_shape\_controlling\_node\_pt = node\_pt(q\_local);}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01646}01646                 \mbox{\hyperlink{classoomph_1_1Node}{Node}}* actual\_shape\_controlling\_node\_pt = node\_pt(q\_local);}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01647}01647 }
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01648}01648                 \textcolor{comment}{// If the node is hanging}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01649}01649                 \textcolor{keywordflow}{if} (is\_node\_hanging2)}
@@ -1777,7 +1777,7 @@
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01773}01773         \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01774}01774 }
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01775}01775         \textcolor{comment}{// Get pressure value in father element}}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01776}01776         \textcolor{keywordtype}{double} press = father\_element\_pt-\/>\mbox{\hyperlink{classGeneralisedNewtonianNavierStokesEquations_a6fe9cb1f9a6fd1fd7301f062e80acdda}{interpolated\_p\_nst}}(s\_father);}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01776}01776         \textcolor{keywordtype}{double} press = father\_element\_pt-\/>\mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianNavierStokesEquations_ae8667c5b11f023c60dda98329f9c13f3}{interpolated\_p\_nst}}(s\_father);}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01777}01777 }
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01778}01778         \textcolor{comment}{// Reset all pressures to zero}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01779}01779         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} p = 0; p < this-\/>npres\_nst(); p++)}
@@ -1867,7 +1867,7 @@
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01863}01863         \}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01864}01864 }
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01865}01865         \textcolor{comment}{// Get pressure value in father element}}
-\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01866}01866         \textcolor{keywordtype}{double} press = father\_element\_pt-\/>\mbox{\hyperlink{classGeneralisedNewtonianNavierStokesEquations_a6fe9cb1f9a6fd1fd7301f062e80acdda}{interpolated\_p\_nst}}(s\_father);}
+\DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01866}01866         \textcolor{keywordtype}{double} press = father\_element\_pt-\/>\mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianNavierStokesEquations_ae8667c5b11f023c60dda98329f9c13f3}{interpolated\_p\_nst}}(s\_father);}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01867}01867 }
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01868}01868         \textcolor{comment}{// Reset all pressures to zero}}
 \DoxyCodeLine{\Hypertarget{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01869}01869         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} p = 0; p < this-\/>npres\_nst(); p++)}

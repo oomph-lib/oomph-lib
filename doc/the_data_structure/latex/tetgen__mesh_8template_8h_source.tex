@@ -405,7 +405,7 @@
 \DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00401}00401       tetgenio\& tetgen\_io)}
 \DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00402}00402     \{}
 \DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00403}00403       \textcolor{comment}{// Pointer to Tetgen facet}}
-\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00404}00404       tetgenio::facet* \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}};}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00404}00404       tetgenio::facet* f;}
 \DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00405}00405       \textcolor{comment}{// Pointer to Tetgen polygon}}
 \DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00406}00406       tetgenio::polygon* p;}
 \DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00407}00407 }
@@ -497,12 +497,12 @@
 \DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00493}00493       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < n\_outer\_facet; ++n)}
 \DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00494}00494       \{}
 \DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00495}00495         \textcolor{comment}{// Set pointer to facet}}
-\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00496}00496         \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}} = \&tetgen\_io.facetlist[counter];}
-\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00497}00497         \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}-\/>numberofpolygons = 1;}
-\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00498}00498         \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}-\/>polygonlist = \textcolor{keyword}{new} tetgenio::polygon[\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}-\/>numberofpolygons];}
-\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00499}00499         \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}-\/>numberofholes = 0;}
-\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00500}00500         \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}-\/>holelist = NULL;}
-\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00501}00501         p = \&\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}-\/>polygonlist[0];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00496}00496         f = \&tetgen\_io.facetlist[counter];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00497}00497         f-\/>numberofpolygons = 1;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00498}00498         f-\/>polygonlist = \textcolor{keyword}{new} tetgenio::polygon[f-\/>numberofpolygons];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00499}00499         f-\/>numberofholes = 0;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00500}00500         f-\/>holelist = NULL;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00501}00501         p = \&f-\/>polygonlist[0];}
 \DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00502}00502 }
 \DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00503}00503         \mbox{\hyperlink{classoomph_1_1Vector}{Vector<unsigned>}} facet = outer\_boundary\_pt-\/>\mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a6ed1b3038fb88005c2c637543fd20433}{vertex\_index\_in\_tetgen}}(n);}
 \DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00504}00504 }
@@ -532,12 +532,12 @@
 \DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00528}00528         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < n\_inner\_facet[h]; ++n)}
 \DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00529}00529         \{}
 \DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00530}00530           \textcolor{comment}{// Set pointer to facet}}
-\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00531}00531           \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}} = \&tetgen\_io.facetlist[counter];}
-\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00532}00532           \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}-\/>numberofpolygons = 1;}
-\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00533}00533           \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}-\/>polygonlist = \textcolor{keyword}{new} tetgenio::polygon[\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}-\/>numberofpolygons];}
-\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00534}00534           \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}-\/>numberofholes = 0;}
-\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00535}00535           \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}-\/>holelist = NULL;}
-\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00536}00536           p = \&\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}}-\/>polygonlist[0];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00531}00531           f = \&tetgen\_io.facetlist[counter];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00532}00532           f-\/>numberofpolygons = 1;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00533}00533           f-\/>polygonlist = \textcolor{keyword}{new} tetgenio::polygon[f-\/>numberofpolygons];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00534}00534           f-\/>numberofholes = 0;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00535}00535           f-\/>holelist = NULL;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00536}00536           p = \&f-\/>polygonlist[0];}
 \DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00537}00537 }
 \DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00538}00538           \mbox{\hyperlink{classoomph_1_1Vector}{Vector<unsigned>}} facet =}
 \DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8h_source_l00539}00539             internal\_surface\_pt[h]-\/>vertex\_index\_in\_tetgen(n);}

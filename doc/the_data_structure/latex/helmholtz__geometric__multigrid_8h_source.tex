@@ -2258,10 +2258,10 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02254}02254     \textcolor{comment}{// Create storage for the nodal information:}}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02255}02255     \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02256}02256     \textcolor{comment}{// Pointer to the first corner node on the j-\/th edge}}
-\DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02257}02257     Node* first\_node\_pt = 0;}
+\DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02257}02257     \mbox{\hyperlink{classoomph_1_1Node}{Node}}* first\_node\_pt = 0;}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02258}02258 }
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02259}02259     \textcolor{comment}{// Pointer to the second corner node on the j-\/th edge}}
-\DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02260}02260     Node* second\_node\_pt = 0;}
+\DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02260}02260     \mbox{\hyperlink{classoomph_1_1Node}{Node}}* second\_node\_pt = 0;}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02261}02261 }
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02262}02262     \textcolor{comment}{// Vector to store the (Eulerian) position of the first corner node}}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02263}02263     \textcolor{comment}{// along a given edge of the element}}
@@ -2311,7 +2311,7 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02307}02307         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < 2; n++)}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02308}02308         \{}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02309}02309           \textcolor{comment}{// Grab the n-\/th coordinate of this node}}
-\DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02310}02310           second\_node\_x[n] = second\_node\_pt-\/>x(n);}
+\DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02310}02310           second\_node\_x[n] = second\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(n);}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02311}02311         \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02312}02312 }
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02313}02313         \textcolor{comment}{// Reset the value of test\_h}}
@@ -2462,10 +2462,10 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02458}02458     \textcolor{comment}{// Create storage for the nodal information:}}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02459}02459     \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02460}02460     \textcolor{comment}{// Pointer to the first corner node on the j-\/th edge}}
-\DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02461}02461     Node* first\_node\_pt = 0;}
+\DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02461}02461     \mbox{\hyperlink{classoomph_1_1Node}{Node}}* first\_node\_pt = 0;}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02462}02462 }
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02463}02463     \textcolor{comment}{// Pointer to the second corner node on the j-\/th edge}}
-\DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02464}02464     Node* second\_node\_pt = 0;}
+\DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02464}02464     \mbox{\hyperlink{classoomph_1_1Node}{Node}}* second\_node\_pt = 0;}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02465}02465 }
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02466}02466     \textcolor{comment}{// Vector to store the (Eulerian) position of the first corner node}}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02467}02467     \textcolor{comment}{// along a given edge of the element}}
@@ -2505,14 +2505,14 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02501}02501         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < 3; n++)}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02502}02502         \{}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02503}02503           \textcolor{comment}{// Grab the n-\/th coordinate of this node}}
-\DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02504}02504           first\_node\_x[n] = first\_node\_pt-\/>x(n);}
+\DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02504}02504           first\_node\_x[n] = first\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(n);}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02505}02505         \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02506}02506 }
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02507}02507         \textcolor{comment}{// Obtain the (Eulerian) position of the second corner node}}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02508}02508         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < 3; n++)}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02509}02509         \{}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02510}02510           \textcolor{comment}{// Grab the n-\/th coordinate of this node}}
-\DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02511}02511           second\_node\_x[n] = second\_node\_pt-\/>x(n);}
+\DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02511}02511           second\_node\_x[n] = second\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(n);}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02512}02512         \}}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02513}02513 }
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l02514}02514         \textcolor{comment}{// Reset the value of test\_h}}
@@ -3164,13 +3164,13 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03160}03160                     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i\_master = 0; i\_master < nmaster; i\_master++)}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03161}03161                     \{}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03162}03162                       \textcolor{comment}{// Set up a pointer to the master node}}
-\DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03163}03163                       Node* master\_node\_pt =}
+\DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03163}03163                       \mbox{\hyperlink{classoomph_1_1Node}{Node}}* master\_node\_pt =}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03164}03164                         hang\_info\_pt-\/>\mbox{\hyperlink{classoomph_1_1HangInfo_a7a935ae7eeca594a648ca1800444827c}{master\_node\_pt}}(i\_master);}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03165}03165 }
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03166}03166                       \textcolor{comment}{// The column number in the interpolation matrix: the}}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03167}03167                       \textcolor{comment}{// global equation number of the d.o.f. stored at this}}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03168}03168                       \textcolor{comment}{// master node for the coarse element}}
-\DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03169}03169                       \textcolor{keywordtype}{int} master\_jj = master\_node\_pt-\/>eqn\_number(0);}
+\DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03169}03169                       \textcolor{keywordtype}{int} master\_jj = master\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_ab6845db69833c541766d9a073b023fc4}{eqn\_number}}(0);}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03170}03170 }
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03171}03171                       \textcolor{comment}{// Is the master node a proper d.o.f.?}}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03172}03172                       \textcolor{keywordflow}{if} (master\_jj >= 0)}
@@ -3308,10 +3308,10 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03304}03304            i\_fine\_node++)}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03305}03305       \{}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03306}03306         \textcolor{comment}{// Set a pointer to the i\_fine\_unknown-\/th node in the fine mesh}}
-\DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03307}03307         Node* fine\_node\_pt = ref\_fine\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}(i\_fine\_node);}
+\DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03307}03307         \mbox{\hyperlink{classoomph_1_1Node}{Node}}* fine\_node\_pt = ref\_fine\_mesh\_pt-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}(i\_fine\_node);}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03308}03308 }
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03309}03309         \textcolor{comment}{// Get the global equation number}}
-\DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03310}03310         \textcolor{keywordtype}{int} i\_fine = fine\_node\_pt-\/>eqn\_number(0);}
+\DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03310}03310         \textcolor{keywordtype}{int} i\_fine = fine\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_ab6845db69833c541766d9a073b023fc4}{eqn\_number}}(0);}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03311}03311 }
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03312}03312         \textcolor{comment}{// If the node is a proper d.o.f.}}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03313}03313         \textcolor{keywordflow}{if} (i\_fine >= 0)}
@@ -3321,7 +3321,7 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03317}03317           row\_start[i\_fine] = value.size();}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03318}03318 }
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03319}03319           \textcolor{comment}{// Get the (Eulerian) spatial location of the fine node}}
-\DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03320}03320           fine\_node\_pt-\/>position(fine\_node\_position);}
+\DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03320}03320           fine\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_a61c3ad6b319e4d2cce38dc8faae1bfae}{position}}(fine\_node\_position);}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03321}03321 }
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03322}03322           \textcolor{comment}{// Create a null pointer to the GeomObject class}}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03323}03323           \mbox{\hyperlink{classoomph_1_1GeomObject}{GeomObject}}* el\_pt = 0;}
@@ -3351,34 +3351,34 @@
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03347}03347           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j\_node = 0; j\_node < n\_node; j\_node++)}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03348}03348           \{}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03349}03349             \textcolor{comment}{// Get the j\_coarse\_unknown-\/th node in the coarse element}}
-\DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03350}03350             Node* coarse\_node\_pt = el\_coarse\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j\_node);}
+\DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03350}03350             \mbox{\hyperlink{classoomph_1_1Node}{Node}}* coarse\_node\_pt = el\_coarse\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j\_node);}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03351}03351 }
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03352}03352             \textcolor{comment}{// Column number in interpolation matrix: Global equation number of}}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03353}03353             \textcolor{comment}{// the d.o.f. stored at this node in the coarse element}}
-\DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03354}03354             \textcolor{keywordtype}{int} j\_coarse = coarse\_node\_pt-\/>eqn\_number(0);}
+\DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03354}03354             \textcolor{keywordtype}{int} j\_coarse = coarse\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_ab6845db69833c541766d9a073b023fc4}{eqn\_number}}(0);}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03355}03355 }
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03356}03356             \textcolor{comment}{// If the value stored at this node is pinned or hanging}}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03357}03357             \textcolor{keywordflow}{if} (j\_coarse < 0)}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03358}03358             \{}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03359}03359               \textcolor{comment}{// Hanging node: In this case we need to accumulate the}}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03360}03360               \textcolor{comment}{// contributions from the master nodes}}
-\DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03361}03361               \textcolor{keywordflow}{if} (el\_coarse\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j\_node)-\/>is\_hanging())}
+\DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03361}03361               \textcolor{keywordflow}{if} (el\_coarse\_pt-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j\_node)-\/>\mbox{\hyperlink{classoomph_1_1Node_af0e6237dfafad62cf427ff5013ddcfef}{is\_hanging}}())}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03362}03362               \{}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03363}03363                 \textcolor{comment}{// Find the number of master nodes of the hanging}}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03364}03364                 \textcolor{comment}{// the node in the reference element}}
-\DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03365}03365                 \mbox{\hyperlink{classoomph_1_1HangInfo}{HangInfo}}* hang\_info\_pt = coarse\_node\_pt-\/>hanging\_pt();}
+\DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03365}03365                 \mbox{\hyperlink{classoomph_1_1HangInfo}{HangInfo}}* hang\_info\_pt = coarse\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Node_afefa22db8b28e783b8647e3577ee01d9}{hanging\_pt}}();}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03366}03366                 \textcolor{keywordtype}{unsigned} nmaster = hang\_info\_pt-\/>\mbox{\hyperlink{classoomph_1_1HangInfo_aa9c1130b58db2ff6d5eee4f923ba365c}{nmaster}}();}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03367}03367 }
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03368}03368                 \textcolor{comment}{// Loop over the master nodes}}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03369}03369                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i\_master = 0; i\_master < nmaster; i\_master++)}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03370}03370                 \{}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03371}03371                   \textcolor{comment}{// Set up a pointer to the master node}}
-\DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03372}03372                   Node* master\_node\_pt = hang\_info\_pt-\/>\mbox{\hyperlink{classoomph_1_1HangInfo_a7a935ae7eeca594a648ca1800444827c}{master\_node\_pt}}(i\_master);}
+\DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03372}03372                   \mbox{\hyperlink{classoomph_1_1Node}{Node}}* master\_node\_pt = hang\_info\_pt-\/>\mbox{\hyperlink{classoomph_1_1HangInfo_a7a935ae7eeca594a648ca1800444827c}{master\_node\_pt}}(i\_master);}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03373}03373 }
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03374}03374                   \textcolor{comment}{// The column number in the interpolation matrix: the}}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03375}03375                   \textcolor{comment}{// global equation number of the d.o.f. stored at this master}}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03376}03376                   \textcolor{comment}{// node for the coarse element}}
-\DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03377}03377                   \textcolor{keywordtype}{int} master\_jj = master\_node\_pt-\/>eqn\_number(0);}
+\DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03377}03377                   \textcolor{keywordtype}{int} master\_jj = master\_node\_pt-\/>\mbox{\hyperlink{classoomph_1_1Data_ab6845db69833c541766d9a073b023fc4}{eqn\_number}}(0);}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03378}03378 }
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03379}03379                   \textcolor{comment}{// Is the master node a proper d.o.f.?}}
 \DoxyCodeLine{\Hypertarget{helmholtz__geometric__multigrid_8h_source_l03380}03380                   \textcolor{keywordflow}{if} (master\_jj >= 0)}

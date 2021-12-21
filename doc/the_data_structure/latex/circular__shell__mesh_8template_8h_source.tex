@@ -58,7 +58,7 @@
 \DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8h_source_l00054}00054   \{}
 \DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8h_source_l00055}00055   \textcolor{keyword}{public}:\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8h_source_l00056}00056 \textcolor{comment}{    /// Typedef for fct that defines the axial stretching fct}}
-\DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8h_source_l00057}\mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_a770336fa72e8911f31b9fe3f70197a51}{00057}} \textcolor{comment}{}    \textcolor{keyword}{typedef} double (*\mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_a770336fa72e8911f31b9fe3f70197a51}{AxialBLStretchingFctPt}})(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8h_source_l00057}\mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_a770336fa72e8911f31b9fe3f70197a51}{00057}} \textcolor{comment}{}    \textcolor{keyword}{typedef} double (*\mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_a770336fa72e8911f31b9fe3f70197a51}{AxialBLStretchingFctPt}})(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& x);}
 \DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8h_source_l00058}00058 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8h_source_l00059}00059 \textcolor{comment}{    /// Constructor for the mesh -\/-\/ uniformly spaced elements}}
 \DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8h_source_l00060}\mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_ad392c085b9a8f87fd9a24e02738f5d60}{00060}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_ad392c085b9a8f87fd9a24e02738f5d60}{CircularCylindricalShellMesh}}(}
@@ -153,15 +153,15 @@
 \DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8h_source_l00149}00149 \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8h_source_l00150}00150 \textcolor{comment}{    /// Fct that defines the axial stretching to accomodate}}
 \DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8h_source_l00151}00151 \textcolor{comment}{    /// bending boundary layers}}
-\DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8h_source_l00152}\mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_a4fb67c76ca3ad60efadfe2d3aabcfa0b}{00152}} \textcolor{comment}{}    \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_a4fb67c76ca3ad60efadfe2d3aabcfa0b}{scaled\_x}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}})}
+\DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8h_source_l00152}\mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_a4fb67c76ca3ad60efadfe2d3aabcfa0b}{00152}} \textcolor{comment}{}    \textcolor{keywordtype}{double} \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_a4fb67c76ca3ad60efadfe2d3aabcfa0b}{scaled\_x}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& x)}
 \DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8h_source_l00153}00153     \{}
 \DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8h_source_l00154}00154       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_a5669a7c088fe0d30f7d011275861f6b9}{Axial\_bl\_stretching\_fct\_pt}} == 0)}
 \DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8h_source_l00155}00155       \{}
-\DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8h_source_l00156}00156         \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_a5730df8baedd890ca909f31e5452f3db}{piecewise\_linear\_axial\_bl\_stretching\_fct}}(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8h_source_l00156}00156         \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_a5730df8baedd890ca909f31e5452f3db}{piecewise\_linear\_axial\_bl\_stretching\_fct}}(x);}
 \DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8h_source_l00157}00157       \}}
 \DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8h_source_l00158}00158       \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8h_source_l00159}00159       \{}
-\DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8h_source_l00160}00160         \textcolor{keywordflow}{return} (*\mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_a5669a7c088fe0d30f7d011275861f6b9}{Axial\_bl\_stretching\_fct\_pt}})(\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}});}
+\DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8h_source_l00160}00160         \textcolor{keywordflow}{return} (*\mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_a5669a7c088fe0d30f7d011275861f6b9}{Axial\_bl\_stretching\_fct\_pt}})(x);}
 \DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8h_source_l00161}00161       \}}
 \DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8h_source_l00162}00162     \}}
 \DoxyCodeLine{\Hypertarget{circular__shell__mesh_8template_8h_source_l00163}00163 \textcolor{comment}{}}

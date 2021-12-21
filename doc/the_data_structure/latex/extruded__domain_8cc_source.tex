@@ -153,7 +153,7 @@
 \DoxyCodeLine{\Hypertarget{extruded__domain_8cc_source_l00149}00149                                               \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& i\_macro,}
 \DoxyCodeLine{\Hypertarget{extruded__domain_8cc_source_l00150}00150                                               \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& i\_direct,}
 \DoxyCodeLine{\Hypertarget{extruded__domain_8cc_source_l00151}00151                                               \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},}
-\DoxyCodeLine{\Hypertarget{extruded__domain_8cc_source_l00152}00152                                               \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}})}
+\DoxyCodeLine{\Hypertarget{extruded__domain_8cc_source_l00152}00152                                               \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x)}
 \DoxyCodeLine{\Hypertarget{extruded__domain_8cc_source_l00153}00153   \{}
 \DoxyCodeLine{\Hypertarget{extruded__domain_8cc_source_l00154}00154     \textcolor{comment}{// Make sure that time=0 otherwise this doesn't make sense}}
 \DoxyCodeLine{\Hypertarget{extruded__domain_8cc_source_l00155}00155     \textcolor{keywordflow}{if} (time != 0)}
@@ -289,11 +289,11 @@
 \DoxyCodeLine{\Hypertarget{extruded__domain_8cc_source_l00285}00285     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_dim -\/ 1; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
 \DoxyCodeLine{\Hypertarget{extruded__domain_8cc_source_l00286}00286     \{}
 \DoxyCodeLine{\Hypertarget{extruded__domain_8cc_source_l00287}00287       \textcolor{comment}{// Copy the global coordinates over}}
-\DoxyCodeLine{\Hypertarget{extruded__domain_8cc_source_l00288}00288       \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = x\_project[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{extruded__domain_8cc_source_l00288}00288       x[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = x\_project[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
 \DoxyCodeLine{\Hypertarget{extruded__domain_8cc_source_l00289}00289     \}}
 \DoxyCodeLine{\Hypertarget{extruded__domain_8cc_source_l00290}00290 }
 \DoxyCodeLine{\Hypertarget{extruded__domain_8cc_source_l00291}00291     \textcolor{comment}{// Finally, add in the final coordinate (the time value)}}
-\DoxyCodeLine{\Hypertarget{extruded__domain_8cc_source_l00292}00292     \mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}[n\_dim -\/ 1] = \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}};}
+\DoxyCodeLine{\Hypertarget{extruded__domain_8cc_source_l00292}00292     x[n\_dim -\/ 1] = \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}};}
 \DoxyCodeLine{\Hypertarget{extruded__domain_8cc_source_l00293}00293   \} \textcolor{comment}{// End of macro\_element\_boundary}}
 \DoxyCodeLine{\Hypertarget{extruded__domain_8cc_source_l00294}00294 \} \textcolor{comment}{// End of namespace oomph}}
 

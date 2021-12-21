@@ -18,48 +18,48 @@ Inheritance diagram for oomph\+::Poisson\+Flux\+Element\texorpdfstring{$<$}{<} E
 \doxysubsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a667254e1d7fea39ba393e0d9853f216d}{Poisson\+Prescribed\+Flux\+Fct\+Pt}}) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, double \&flux)
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a667254e1d7fea39ba393e0d9853f216d}{Poisson\+Prescribed\+Flux\+Fct\+Pt}}) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&flux)
 \begin{DoxyCompactList}\small\item\em Function pointer to the prescribed-\/flux function fct(x,f(x)) -- x is a Vector! \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a484772fcf9b2488d6c8e6d8d0c1c95db}{Poisson\+Flux\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&bulk\+\_\+el\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}})
+\mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a484772fcf9b2488d6c8e6d8d0c1c95db}{Poisson\+Flux\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&bulk\+\_\+el\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}})
 \begin{DoxyCompactList}\small\item\em Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the index of the face to which the element is attached. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a137480da853112a2180a9eafb30ace49}{Poisson\+Flux\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Broken empty constructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a1c3c4a8216c6764c0845d2deb169b39e}{Poisson\+Flux\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1PoissonFluxElement}{Poisson\+Flux\+Element}} \&dummy)=delete
+\mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a1c3c4a8216c6764c0845d2deb169b39e}{Poisson\+Flux\+Element}} (const \mbox{\hyperlink{classoomph_1_1PoissonFluxElement}{Poisson\+Flux\+Element}} \&dummy)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a2e7215aa7abfcffacdfba35643c17ea6}{operator=}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1PoissonFluxElement}{Poisson\+Flux\+Element}} \&)=delete
+void \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a2e7215aa7abfcffacdfba35643c17ea6}{operator=}} (const \mbox{\hyperlink{classoomph_1_1PoissonFluxElement}{Poisson\+Flux\+Element}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_acf4651fa89a7f6c5a23c1960423dc8e6}{zeta\+\_\+nodal}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&k, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_acf4651fa89a7f6c5a23c1960423dc8e6}{zeta\+\_\+nodal}} (const unsigned \&n, const unsigned \&k, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Specify the value of nodal zeta from the face geometry The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} representation, by default (needed to break indeterminacy if bulk element is Solid\+Element) \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a667254e1d7fea39ba393e0d9853f216d}{Poisson\+Prescribed\+Flux\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a12cb2e6e8076c8b052dacee3e94d7c8d}{flux\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for the prescribed-\/flux function pointer. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_aca66501e8cbbf029660e45819f3ba7d8}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a7be7daf3b3b3ba50a216d40d1d8016f5}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})
+void \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a7be7daf3b3b3ba50a216d40d1d8016f5}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector and its Jacobian matrix. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_ab8b5786144b8fed902bd7c47754675ba}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Output function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a81b328ed2127556fa9e5b948d94aca97}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&nplot)
+void \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a81b328ed2127556fa9e5b948d94aca97}{output}} (std\+::ostream \&outfile, const unsigned \&nplot)
 \begin{DoxyCompactList}\small\item\em Output function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a06e4e314f0173f14d804dfa653194570}{output}} (FILE $\ast$file\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em C-\/style output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_acef72a7460036c88ba254d58e26bc820}{output}} (FILE $\ast$file\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_acef72a7460036c88ba254d58e26bc820}{output}} (FILE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em C-\/style output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-double \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a027e2abd393a9e53d0da0374eb556aab}{shape\+\_\+and\+\_\+test}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a027e2abd393a9e53d0da0374eb556aab}{shape\+\_\+and\+\_\+test}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) const
 \begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping between local and global (Eulerian) coordinates. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a49ebbe60e94144a39bfa0169df410cfc}{shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+double \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a49ebbe60e94144a39bfa0169df410cfc}{shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) const
 \begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping between local and global (Eulerian) coordinates. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a51a332a35b271f1d61512ae66397aecb}{get\+\_\+flux}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, double \&flux)
+void \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a51a332a35b271f1d61512ae66397aecb}{get\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&flux)
 \begin{DoxyCompactList}\small\item\em Function to calculate the prescribed flux at a given spatial position. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a78a7d6879d80f26ea06a905b721a3d25}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+poisson\+\_\+flux}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&flag)
+void \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a78a7d6879d80f26ea06a905b721a3d25}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+poisson\+\_\+flux}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, const unsigned \&flag)
 \begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the contribution to the Jacobian as well. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -88,7 +88,7 @@ Definition at line \mbox{\hyperlink{poisson__flux__elements_8h_source_l00049}{49
 \index{PoissonPrescribedFluxFctPt@{PoissonPrescribedFluxFctPt}!oomph::PoissonFluxElement$<$ ELEMENT $>$@{oomph::PoissonFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{PoissonPrescribedFluxFctPt}{PoissonPrescribedFluxFctPt}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1PoissonFluxElement}{oomph\+::\+Poisson\+Flux\+Element}}$<$ ELEMENT $>$\+::Poisson\+Prescribed\+Flux\+Fct\+Pt) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, double \&flux)}
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1PoissonFluxElement}{oomph\+::\+Poisson\+Flux\+Element}}$<$ ELEMENT $>$\+::Poisson\+Prescribed\+Flux\+Fct\+Pt) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&flux)}
 
 
 
@@ -106,7 +106,7 @@ Definition at line \mbox{\hyperlink{poisson__flux__elements_8h_source_l00055}{55
 \index{PoissonFluxElement@{PoissonFluxElement}!oomph::PoissonFluxElement$<$ ELEMENT $>$@{oomph::PoissonFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{PoissonFluxElement()}{PoissonFluxElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1PoissonFluxElement}{oomph\+::\+Poisson\+Flux\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1PoissonFluxElement}{Poisson\+Flux\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{bulk\+\_\+el\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{face\+\_\+index }\end{DoxyParamCaption})}
+\mbox{\hyperlink{classoomph_1_1PoissonFluxElement}{oomph\+::\+Poisson\+Flux\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1PoissonFluxElement}{Poisson\+Flux\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{bulk\+\_\+el\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index }\end{DoxyParamCaption})}
 
 
 
@@ -120,7 +120,7 @@ Definition at line \mbox{\hyperlink{poisson__flux__elements_8h_source_l00271}{27
 
 
 
-References \mbox{\hyperlink{classoomph_1_1FiniteElement_a025ab56ef9c6eea66fb34416fdf19152}{oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{poisson__flux__elements_8h_source_l00252}{oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::\+Dim}}, \mbox{\hyperlink{elements_8h_source_l04654}{oomph\+::\+Face\+Element\+::face\+\_\+index()}}, \mbox{\hyperlink{poisson__flux__elements_8h_source_l00249}{oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l02475}{oomph\+::\+Finite\+Element\+::has\+\_\+hanging\+\_\+nodes()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, and \mbox{\hyperlink{poisson__flux__elements_8h_source_l00255}{oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::\+U\+\_\+index\+\_\+poisson}}.
+References \mbox{\hyperlink{elements_8cc_source_l05132}{oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{poisson__flux__elements_8h_source_l00252}{oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::\+Dim}}, \mbox{\hyperlink{elements_8h_source_l04626}{oomph\+::\+Face\+Element\+::face\+\_\+index()}}, \mbox{\hyperlink{poisson__flux__elements_8h_source_l00249}{oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l02470}{oomph\+::\+Finite\+Element\+::has\+\_\+hanging\+\_\+nodes()}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, \mbox{\hyperlink{poisson__elements_8h_source_l00085}{oomph\+::\+Poisson\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+poisson()}}, and \mbox{\hyperlink{poisson__flux__elements_8h_source_l00255}{oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::\+U\+\_\+index\+\_\+poisson}}.
 
 \mbox{\Hypertarget{classoomph_1_1PoissonFluxElement_a137480da853112a2180a9eafb30ace49}\label{classoomph_1_1PoissonFluxElement_a137480da853112a2180a9eafb30ace49}} 
 \index{oomph::PoissonFluxElement$<$ ELEMENT $>$@{oomph::PoissonFluxElement$<$ ELEMENT $>$}!PoissonFluxElement@{PoissonFluxElement}}
@@ -142,7 +142,7 @@ Definition at line \mbox{\hyperlink{poisson__flux__elements_8h_source_l00063}{63
 \index{PoissonFluxElement@{PoissonFluxElement}!oomph::PoissonFluxElement$<$ ELEMENT $>$@{oomph::PoissonFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{PoissonFluxElement()}{PoissonFluxElement()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1PoissonFluxElement}{oomph\+::\+Poisson\+Flux\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1PoissonFluxElement}{Poisson\+Flux\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1PoissonFluxElement}{Poisson\+Flux\+Element}}$<$ ELEMENT $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+\mbox{\hyperlink{classoomph_1_1PoissonFluxElement}{oomph\+::\+Poisson\+Flux\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1PoissonFluxElement}{Poisson\+Flux\+Element}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1PoissonFluxElement}{Poisson\+Flux\+Element}}$<$ ELEMENT $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
@@ -172,7 +172,7 @@ Definition at line \mbox{\hyperlink{poisson__flux__elements_8h_source_l00107}{10
 
 
 
-References \mbox{\hyperlink{poisson__flux__elements_8h_source_l00422}{oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+poisson\+\_\+flux()}}, and \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}.
+References \mbox{\hyperlink{poisson__flux__elements_8h_source_l00422}{oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+poisson\+\_\+flux()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PoissonFluxElement_aca66501e8cbbf029660e45819f3ba7d8}\label{classoomph_1_1PoissonFluxElement_aca66501e8cbbf029660e45819f3ba7d8}} 
 \index{oomph::PoissonFluxElement$<$ ELEMENT $>$@{oomph::PoissonFluxElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
@@ -202,7 +202,7 @@ References \mbox{\hyperlink{elements_8h_source_l00227}{oomph\+::\+Generalised\+E
 \index{fill\_in\_generic\_residual\_contribution\_poisson\_flux@{fill\_in\_generic\_residual\_contribution\_poisson\_flux}!oomph::PoissonFluxElement$<$ ELEMENT $>$@{oomph::PoissonFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_generic\_residual\_contribution\_poisson\_flux()}{fill\_in\_generic\_residual\_contribution\_poisson\_flux()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1PoissonFluxElement}{oomph\+::\+Poisson\+Flux\+Element}}$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+poisson\+\_\+flux (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+void \mbox{\hyperlink{classoomph_1_1PoissonFluxElement}{oomph\+::\+Poisson\+Flux\+Element}}$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+poisson\+\_\+flux (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{const unsigned \&}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -214,7 +214,7 @@ Definition at line \mbox{\hyperlink{poisson__flux__elements_8h_source_l00421}{42
 
 
 
-References \mbox{\hyperlink{multi__domain_8cc_source_l00060}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Dim}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}.
+References \mbox{\hyperlink{multi__domain_8cc_source_l00060}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Dim}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
 
 
 
@@ -244,7 +244,7 @@ References \mbox{\hyperlink{poisson__flux__elements_8h_source_l00249}{oomph\+::\
 \index{get\_flux@{get\_flux}!oomph::PoissonFluxElement$<$ ELEMENT $>$@{oomph::PoissonFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{get\_flux()}{get\_flux()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1PoissonFluxElement}{oomph\+::\+Poisson\+Flux\+Element}}$<$ ELEMENT $>$\+::get\+\_\+flux (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{double \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+void \mbox{\hyperlink{classoomph_1_1PoissonFluxElement}{oomph\+::\+Poisson\+Flux\+Element}}$<$ ELEMENT $>$\+::get\+\_\+flux (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{double \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -256,7 +256,7 @@ Definition at line \mbox{\hyperlink{poisson__flux__elements_8h_source_l00224}{22
 
 
 
-References \mbox{\hyperlink{poisson__flux__elements_8h_source_l00249}{oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{poisson__flux__elements_8h_source_l00249}{oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt}}.
 
 
 
@@ -267,7 +267,7 @@ Referenced by \mbox{\hyperlink{poisson__flux__elements_8h_source_l00123}{oomph\+
 \index{operator=@{operator=}!oomph::PoissonFluxElement$<$ ELEMENT $>$@{oomph::PoissonFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1PoissonFluxElement}{oomph\+::\+Poisson\+Flux\+Element}}$<$ ELEMENT $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1PoissonFluxElement}{Poisson\+Flux\+Element}}$<$ ELEMENT $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+void \mbox{\hyperlink{classoomph_1_1PoissonFluxElement}{oomph\+::\+Poisson\+Flux\+Element}}$<$ ELEMENT $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1PoissonFluxElement}{Poisson\+Flux\+Element}}$<$ ELEMENT $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
@@ -294,14 +294,14 @@ Definition at line \mbox{\hyperlink{poisson__flux__elements_8h_source_l00159}{15
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
+References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PoissonFluxElement_acef72a7460036c88ba254d58e26bc820}\label{classoomph_1_1PoissonFluxElement_acef72a7460036c88ba254d58e26bc820}} 
 \index{oomph::PoissonFluxElement$<$ ELEMENT $>$@{oomph::PoissonFluxElement$<$ ELEMENT $>$}!output@{output}}
 \index{output@{output}!oomph::PoissonFluxElement$<$ ELEMENT $>$@{oomph::PoissonFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1PoissonFluxElement}{oomph\+::\+Poisson\+Flux\+Element}}$<$ ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1PoissonFluxElement}{oomph\+::\+Poisson\+Flux\+Element}}$<$ ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -317,7 +317,7 @@ Definition at line \mbox{\hyperlink{poisson__flux__elements_8h_source_l00167}{16
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
+References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PoissonFluxElement_ab8b5786144b8fed902bd7c47754675ba}\label{classoomph_1_1PoissonFluxElement_ab8b5786144b8fed902bd7c47754675ba}} 
 \index{oomph::PoissonFluxElement$<$ ELEMENT $>$@{oomph::PoissonFluxElement$<$ ELEMENT $>$}!output@{output}}
@@ -351,7 +351,7 @@ Referenced by \mbox{\hyperlink{poisson__flux__elements_8h_source_l00116}{oomph\+
 \index{output@{output}!oomph::PoissonFluxElement$<$ ELEMENT $>$@{oomph::PoissonFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1PoissonFluxElement}{oomph\+::\+Poisson\+Flux\+Element}}$<$ ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1PoissonFluxElement}{oomph\+::\+Poisson\+Flux\+Element}}$<$ ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -367,14 +367,14 @@ Definition at line \mbox{\hyperlink{poisson__flux__elements_8h_source_l00123}{12
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02616}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{poisson__flux__elements_8h_source_l00224}{oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::get\+\_\+flux()}}, \mbox{\hyperlink{elements_8h_source_l03153}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l04556}{oomph\+::\+Face\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l03191}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{elements_8h_source_l03166}{oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string()}}, \mbox{\hyperlink{elements_8h_source_l03179}{oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer()}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{poisson__flux__elements_8h_source_l00224}{oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::get\+\_\+flux()}}, \mbox{\hyperlink{elements_8h_source_l03148}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l04528}{oomph\+::\+Face\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l03186}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{elements_8h_source_l03161}{oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string()}}, and \mbox{\hyperlink{elements_8h_source_l03174}{oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PoissonFluxElement_a027e2abd393a9e53d0da0374eb556aab}\label{classoomph_1_1PoissonFluxElement_a027e2abd393a9e53d0da0374eb556aab}} 
 \index{oomph::PoissonFluxElement$<$ ELEMENT $>$@{oomph::PoissonFluxElement$<$ ELEMENT $>$}!shape\_and\_test@{shape\_and\_test}}
 \index{shape\_and\_test@{shape\_and\_test}!oomph::PoissonFluxElement$<$ ELEMENT $>$@{oomph::PoissonFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{shape\_and\_test()}{shape\_and\_test()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1PoissonFluxElement}{oomph\+::\+Poisson\+Flux\+Element}}$<$ ELEMENT $>$\+::shape\+\_\+and\+\_\+test (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+double \mbox{\hyperlink{classoomph_1_1PoissonFluxElement}{oomph\+::\+Poisson\+Flux\+Element}}$<$ ELEMENT $>$\+::shape\+\_\+and\+\_\+test (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -386,14 +386,14 @@ Definition at line \mbox{\hyperlink{poisson__flux__elements_8h_source_l00177}{17
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l05246}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l05242}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PoissonFluxElement_a49ebbe60e94144a39bfa0169df410cfc}\label{classoomph_1_1PoissonFluxElement_a49ebbe60e94144a39bfa0169df410cfc}} 
 \index{oomph::PoissonFluxElement$<$ ELEMENT $>$@{oomph::PoissonFluxElement$<$ ELEMENT $>$}!shape\_and\_test\_at\_knot@{shape\_and\_test\_at\_knot}}
 \index{shape\_and\_test\_at\_knot@{shape\_and\_test\_at\_knot}!oomph::PoissonFluxElement$<$ ELEMENT $>$@{oomph::PoissonFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{shape\_and\_test\_at\_knot()}{shape\_and\_test\_at\_knot()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1PoissonFluxElement}{oomph\+::\+Poisson\+Flux\+Element}}$<$ ELEMENT $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+double \mbox{\hyperlink{classoomph_1_1PoissonFluxElement}{oomph\+::\+Poisson\+Flux\+Element}}$<$ ELEMENT $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -405,14 +405,14 @@ Definition at line \mbox{\hyperlink{poisson__flux__elements_8h_source_l00201}{20
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l05332}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a2de680722518136b5c6bf2aacc267a31}{oomph\+::\+Finite\+Element\+::shape\+\_\+at\+\_\+knot()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l05328}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8cc_source_l03220}{oomph\+::\+Finite\+Element\+::shape\+\_\+at\+\_\+knot()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PoissonFluxElement_acf4651fa89a7f6c5a23c1960423dc8e6}\label{classoomph_1_1PoissonFluxElement_acf4651fa89a7f6c5a23c1960423dc8e6}} 
 \index{oomph::PoissonFluxElement$<$ ELEMENT $>$@{oomph::PoissonFluxElement$<$ ELEMENT $>$}!zeta\_nodal@{zeta\_nodal}}
 \index{zeta\_nodal@{zeta\_nodal}!oomph::PoissonFluxElement$<$ ELEMENT $>$@{oomph::PoissonFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{zeta\_nodal()}{zeta\_nodal()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1PoissonFluxElement}{oomph\+::\+Poisson\+Flux\+Element}}$<$ ELEMENT $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{k,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+double \mbox{\hyperlink{classoomph_1_1PoissonFluxElement}{oomph\+::\+Poisson\+Flux\+Element}}$<$ ELEMENT $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{k,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -428,7 +428,7 @@ Definition at line \mbox{\hyperlink{poisson__flux__elements_8h_source_l00081}{81
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l04525}{oomph\+::\+Face\+Element\+::zeta\+\_\+nodal()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l04497}{oomph\+::\+Face\+Element\+::zeta\+\_\+nodal()}}.
 
 
 

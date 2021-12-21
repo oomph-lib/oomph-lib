@@ -1,0 +1,258 @@
+\hypertarget{classoomph_1_1ProjectableCrouzeixRaviartElement}{}\doxysection{oomph\+::Projectable\+Crouzeix\+Raviart\+Element\texorpdfstring{$<$}{<} CROUZEIX\+\_\+\+RAVIART\+\_\+\+ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\label{classoomph_1_1ProjectableCrouzeixRaviartElement}\index{oomph::ProjectableCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$@{oomph::ProjectableCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$}}
+
+
+Crouzeix Raviart upgraded to become projectable.  
+
+
+
+
+{\ttfamily \#include $<$navier\+\_\+stokes\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Projectable\+Crouzeix\+Raviart\+Element\texorpdfstring{$<$}{<} CROUZEIX\+\_\+\+RAVIART\+\_\+\+ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.476793cm]{classoomph_1_1ProjectableCrouzeixRaviartElement}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1ProjectableCrouzeixRaviartElement_a3475345b8d605f73710a2dde57029985}{Projectable\+Crouzeix\+Raviart\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards...\mbox{]}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableCrouzeixRaviartElement_ab8bd0fb4ed48a10baeed2e2fc41a3b55}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
+\begin{DoxyCompactList}\small\item\em Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. In the underlying Crouzeix Raviart elements the fld-\/th velocities are stored at the fld-\/th value of the nodes; the pressures are stored internally. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableCrouzeixRaviartElement_a90aa4875deb63383d5e4bf7b4a860a3c}{nfields\+\_\+for\+\_\+projection}} ()
+\begin{DoxyCompactList}\small\item\em Number of fields to be projected\+: dim+1, corresponding to velocity components and pressure. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableCrouzeixRaviartElement_aa86ac441dc201801e0d96c634cb4e251}{nhistory\+\_\+values\+\_\+for\+\_\+projection}} (const unsigned \&fld)
+\begin{DoxyCompactList}\small\item\em Number of history values to be stored for fld-\/th field. Whatever the timestepper has set up for the velocity components and none for the pressure field. (Note\+: count includes current value!) \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableCrouzeixRaviartElement_a95661958f80183560ddd50bb201a0532}{nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection}} ()
+\begin{DoxyCompactList}\small\item\em Number of positional history values. (Note\+: count includes current value!) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1ProjectableCrouzeixRaviartElement_a91b2d0d2f6cb0fdfe3cd8d4f93373b05}{jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field}} (const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi)
+\begin{DoxyCompactList}\small\item\em Return Jacobian of mapping and shape functions of field fld at local coordinate s. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1ProjectableCrouzeixRaviartElement_a7a344f2a19106f7c46f75d97c2cc5afd}{get\+\_\+field}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
+\begin{DoxyCompactList}\small\item\em Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: history values) \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableCrouzeixRaviartElement_adee290d9544673529406381ccdfbe818}{nvalue\+\_\+of\+\_\+field}} (const unsigned \&fld)
+\begin{DoxyCompactList}\small\item\em Return number of values in field fld. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classoomph_1_1ProjectableCrouzeixRaviartElement_a1cea4dd9a75e28f84b1b7ab71a5c64eb}{local\+\_\+equation}} (const unsigned \&fld, const unsigned \&j)
+\begin{DoxyCompactList}\small\item\em Return local equation number of value j in field fld. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class CROUZEIX\+\_\+\+RAVIART\+\_\+\+ELEMENT$>$\newline
+class oomph\+::\+Projectable\+Crouzeix\+Raviart\+Element$<$ CROUZEIX\+\_\+\+RAVIART\+\_\+\+ELEMENT $>$}
+Crouzeix Raviart upgraded to become projectable. 
+
+Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l03126}{3126}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1ProjectableCrouzeixRaviartElement_a3475345b8d605f73710a2dde57029985}\label{classoomph_1_1ProjectableCrouzeixRaviartElement_a3475345b8d605f73710a2dde57029985}} 
+\index{oomph::ProjectableCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$@{oomph::ProjectableCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$}!ProjectableCrouzeixRaviartElement@{ProjectableCrouzeixRaviartElement}}
+\index{ProjectableCrouzeixRaviartElement@{ProjectableCrouzeixRaviartElement}!oomph::ProjectableCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$@{oomph::ProjectableCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{ProjectableCrouzeixRaviartElement()}{ProjectableCrouzeixRaviartElement()}}
+{\footnotesize\ttfamily template$<$class CROUZEIX\+\_\+\+RAVIART\+\_\+\+ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1ProjectableCrouzeixRaviartElement}{oomph\+::\+Projectable\+Crouzeix\+Raviart\+Element}}$<$ CROUZEIX\+\_\+\+RAVIART\+\_\+\+ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1ProjectableCrouzeixRaviartElement}{Projectable\+Crouzeix\+Raviart\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards...\mbox{]}. 
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l03132}{3132}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1ProjectableCrouzeixRaviartElement_ab8bd0fb4ed48a10baeed2e2fc41a3b55}\label{classoomph_1_1ProjectableCrouzeixRaviartElement_ab8bd0fb4ed48a10baeed2e2fc41a3b55}} 
+\index{oomph::ProjectableCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$@{oomph::ProjectableCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$}!data\_values\_of\_field@{data\_values\_of\_field}}
+\index{data\_values\_of\_field@{data\_values\_of\_field}!oomph::ProjectableCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$@{oomph::ProjectableCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{data\_values\_of\_field()}{data\_values\_of\_field()}}
+{\footnotesize\ttfamily template$<$class CROUZEIX\+\_\+\+RAVIART\+\_\+\+ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableCrouzeixRaviartElement}{oomph\+::\+Projectable\+Crouzeix\+Raviart\+Element}}$<$ CROUZEIX\+\_\+\+RAVIART\+\_\+\+ELEMENT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. In the underlying Crouzeix Raviart elements the fld-\/th velocities are stored at the fld-\/th value of the nodes; the pressures are stored internally. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a2292bd9c58694f89839bd7d198cfe86a}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l03140}{3140}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8h_source_l00622}{oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+
+\mbox{\Hypertarget{classoomph_1_1ProjectableCrouzeixRaviartElement_a7a344f2a19106f7c46f75d97c2cc5afd}\label{classoomph_1_1ProjectableCrouzeixRaviartElement_a7a344f2a19106f7c46f75d97c2cc5afd}} 
+\index{oomph::ProjectableCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$@{oomph::ProjectableCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$}!get\_field@{get\_field}}
+\index{get\_field@{get\_field}!oomph::ProjectableCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$@{oomph::ProjectableCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{get\_field()}{get\_field()}}
+{\footnotesize\ttfamily template$<$class CROUZEIX\+\_\+\+RAVIART\+\_\+\+ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1ProjectableCrouzeixRaviartElement}{oomph\+::\+Projectable\+Crouzeix\+Raviart\+Element}}$<$ CROUZEIX\+\_\+\+RAVIART\+\_\+\+ELEMENT $>$\+::get\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const unsigned \&}]{fld,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: history values) 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ae4da5b565b6d333be2f5920f7be763cd}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l03241}{3241}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+
+\mbox{\Hypertarget{classoomph_1_1ProjectableCrouzeixRaviartElement_a91b2d0d2f6cb0fdfe3cd8d4f93373b05}\label{classoomph_1_1ProjectableCrouzeixRaviartElement_a91b2d0d2f6cb0fdfe3cd8d4f93373b05}} 
+\index{oomph::ProjectableCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$@{oomph::ProjectableCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$}!jacobian\_and\_shape\_of\_field@{jacobian\_and\_shape\_of\_field}}
+\index{jacobian\_and\_shape\_of\_field@{jacobian\_and\_shape\_of\_field}!oomph::ProjectableCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$@{oomph::ProjectableCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{jacobian\_and\_shape\_of\_field()}{jacobian\_and\_shape\_of\_field()}}
+{\footnotesize\ttfamily template$<$class CROUZEIX\+\_\+\+RAVIART\+\_\+\+ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1ProjectableCrouzeixRaviartElement}{oomph\+::\+Projectable\+Crouzeix\+Raviart\+Element}}$<$ CROUZEIX\+\_\+\+RAVIART\+\_\+\+ELEMENT $>$\+::jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return Jacobian of mapping and shape functions of field fld at local coordinate s. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ad45c21b58c0985d52f68ab2d79cbb488}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l03206}{3206}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+
+\mbox{\Hypertarget{classoomph_1_1ProjectableCrouzeixRaviartElement_a1cea4dd9a75e28f84b1b7ab71a5c64eb}\label{classoomph_1_1ProjectableCrouzeixRaviartElement_a1cea4dd9a75e28f84b1b7ab71a5c64eb}} 
+\index{oomph::ProjectableCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$@{oomph::ProjectableCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$}!local\_equation@{local\_equation}}
+\index{local\_equation@{local\_equation}!oomph::ProjectableCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$@{oomph::ProjectableCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{local\_equation()}{local\_equation()}}
+{\footnotesize\ttfamily template$<$class CROUZEIX\+\_\+\+RAVIART\+\_\+\+ELEMENT $>$ \\
+int \mbox{\hyperlink{classoomph_1_1ProjectableCrouzeixRaviartElement}{oomph\+::\+Projectable\+Crouzeix\+Raviart\+Element}}$<$ CROUZEIX\+\_\+\+RAVIART\+\_\+\+ELEMENT $>$\+::local\+\_\+equation (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return local equation number of value j in field fld. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac5c27ae929ff636dc7747fe23fd4f738}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l03275}{3275}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, and \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}.
+
+\mbox{\Hypertarget{classoomph_1_1ProjectableCrouzeixRaviartElement_a90aa4875deb63383d5e4bf7b4a860a3c}\label{classoomph_1_1ProjectableCrouzeixRaviartElement_a90aa4875deb63383d5e4bf7b4a860a3c}} 
+\index{oomph::ProjectableCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$@{oomph::ProjectableCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$}!nfields\_for\_projection@{nfields\_for\_projection}}
+\index{nfields\_for\_projection@{nfields\_for\_projection}!oomph::ProjectableCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$@{oomph::ProjectableCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nfields\_for\_projection()}{nfields\_for\_projection()}}
+{\footnotesize\ttfamily template$<$class CROUZEIX\+\_\+\+RAVIART\+\_\+\+ELEMENT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableCrouzeixRaviartElement}{oomph\+::\+Projectable\+Crouzeix\+Raviart\+Element}}$<$ CROUZEIX\+\_\+\+RAVIART\+\_\+\+ELEMENT $>$\+::nfields\+\_\+for\+\_\+projection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of fields to be projected\+: dim+1, corresponding to velocity components and pressure. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a44634aa4049332a580d249c25564638c}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l03175}{3175}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}.
+
+\mbox{\Hypertarget{classoomph_1_1ProjectableCrouzeixRaviartElement_a95661958f80183560ddd50bb201a0532}\label{classoomph_1_1ProjectableCrouzeixRaviartElement_a95661958f80183560ddd50bb201a0532}} 
+\index{oomph::ProjectableCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$@{oomph::ProjectableCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$}!nhistory\_values\_for\_coordinate\_projection@{nhistory\_values\_for\_coordinate\_projection}}
+\index{nhistory\_values\_for\_coordinate\_projection@{nhistory\_values\_for\_coordinate\_projection}!oomph::ProjectableCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$@{oomph::ProjectableCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nhistory\_values\_for\_coordinate\_projection()}{nhistory\_values\_for\_coordinate\_projection()}}
+{\footnotesize\ttfamily template$<$class CROUZEIX\+\_\+\+RAVIART\+\_\+\+ELEMENT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableCrouzeixRaviartElement}{oomph\+::\+Projectable\+Crouzeix\+Raviart\+Element}}$<$ CROUZEIX\+\_\+\+RAVIART\+\_\+\+ELEMENT $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of positional history values. (Note\+: count includes current value!) 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ab4ecd0cd24000a3ed675dc7198203c1f}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l03199}{3199}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, and \mbox{\hyperlink{nodes_8h_source_l01022}{oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt()}}.
+
+\mbox{\Hypertarget{classoomph_1_1ProjectableCrouzeixRaviartElement_aa86ac441dc201801e0d96c634cb4e251}\label{classoomph_1_1ProjectableCrouzeixRaviartElement_aa86ac441dc201801e0d96c634cb4e251}} 
+\index{oomph::ProjectableCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$@{oomph::ProjectableCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$}!nhistory\_values\_for\_projection@{nhistory\_values\_for\_projection}}
+\index{nhistory\_values\_for\_projection@{nhistory\_values\_for\_projection}!oomph::ProjectableCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$@{oomph::ProjectableCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nhistory\_values\_for\_projection()}{nhistory\_values\_for\_projection()}}
+{\footnotesize\ttfamily template$<$class CROUZEIX\+\_\+\+RAVIART\+\_\+\+ELEMENT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableCrouzeixRaviartElement}{oomph\+::\+Projectable\+Crouzeix\+Raviart\+Element}}$<$ CROUZEIX\+\_\+\+RAVIART\+\_\+\+ELEMENT $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of history values to be stored for fld-\/th field. Whatever the timestepper has set up for the velocity components and none for the pressure field. (Note\+: count includes current value!) 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac6790f394630b964663281f8740f43a5}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l03184}{3184}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8cc_source_l00879}{oomph\+::\+Data\+::ntstorage()}}.
+
+\mbox{\Hypertarget{classoomph_1_1ProjectableCrouzeixRaviartElement_adee290d9544673529406381ccdfbe818}\label{classoomph_1_1ProjectableCrouzeixRaviartElement_adee290d9544673529406381ccdfbe818}} 
+\index{oomph::ProjectableCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$@{oomph::ProjectableCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$}!nvalue\_of\_field@{nvalue\_of\_field}}
+\index{nvalue\_of\_field@{nvalue\_of\_field}!oomph::ProjectableCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$@{oomph::ProjectableCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nvalue\_of\_field()}{nvalue\_of\_field()}}
+{\footnotesize\ttfamily template$<$class CROUZEIX\+\_\+\+RAVIART\+\_\+\+ELEMENT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableCrouzeixRaviartElement}{oomph\+::\+Projectable\+Crouzeix\+Raviart\+Element}}$<$ CROUZEIX\+\_\+\+RAVIART\+\_\+\+ELEMENT $>$\+::nvalue\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return number of values in field fld. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a1a9a6de16f3511bca8e8be770abb9c2e}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l03261}{3261}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, and \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{navier__stokes__elements_8h}{navier\+\_\+stokes\+\_\+elements.\+h}}\end{DoxyCompactItemize}

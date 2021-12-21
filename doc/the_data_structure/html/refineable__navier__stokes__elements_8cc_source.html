@@ -256,7 +256,7 @@ $(function() {
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>      }</div>
 <div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
 <div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>      <span class="comment">// Premultiply weights and Jacobian</span></div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>      <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a> = w * J;</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>      <span class="keywordtype">double</span> <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a> = w * J;</div>
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
 <div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span> </div>
 <div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>      <span class="comment">// Do we want the velocity one?</span></div>
@@ -335,7 +335,7 @@ $(function() {
 <div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span> </div>
 <div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span> </div>
 <div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>                <span class="comment">// Add the contribution</span></div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>                veloc_mass_diag[local_eqn] += pow(psi[l] * hang_weight, 2) * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a>;</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>                veloc_mass_diag[local_eqn] += pow(psi[l] * hang_weight, 2) * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a>;</div>
 <div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>              }</div>
 <div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>            }</div>
 <div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>          }</div>
@@ -401,7 +401,7 @@ $(function() {
 <div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span> </div>
 <div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span> </div>
 <div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>              <span class="comment">// Add the contribution</span></div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>              press_mass_diag[local_eqn] += pow(psi_p[l] * hang_weight, 2) * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a>;</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>              press_mass_diag[local_eqn] += pow(psi_p[l] * hang_weight, 2) * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a>;</div>
 <div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>            }</div>
 <div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>          }</div>
 <div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>        }</div>
@@ -510,7 +510,7 @@ $(function() {
 <div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>      this-&gt;dpshape_and_dptest_eulerian_nst(<a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, psip, dpsip, testp, dtestp);</div>
 <div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span> </div>
 <div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>      <span class="comment">// Premultiply the weights and the Jacobian</span></div>
-<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>      <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a> = w * J;</div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>      <span class="keywordtype">double</span> <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a> = w * J;</div>
 <div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span> </div>
 <div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>      <span class="comment">// Calculate local values of the pressure and velocity components</span></div>
 <div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>      <span class="comment">// Allocate</span></div>
@@ -596,12 +596,12 @@ $(function() {
 <div class="line"><a id="l00467" name="l00467"></a><span class="lineno">  467</span>          <span class="comment">// If the equation is not pinned</span></div>
 <div class="line"><a id="l00468" name="l00468"></a><span class="lineno">  468</span>          <span class="keywordflow">if</span> (local_eqn &gt;= 0)</div>
 <div class="line"><a id="l00469" name="l00469"></a><span class="lineno">  469</span>          {</div>
-<div class="line"><a id="l00470" name="l00470"></a><span class="lineno">  470</span>            residuals[local_eqn] -= source * testp[l] * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a> * hang_weight;</div>
+<div class="line"><a id="l00470" name="l00470"></a><span class="lineno">  470</span>            residuals[local_eqn] -= source * testp[l] * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a> * hang_weight;</div>
 <div class="line"><a id="l00471" name="l00471"></a><span class="lineno">  471</span>            <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> k = 0; k &lt; DIM; k++)</div>
 <div class="line"><a id="l00472" name="l00472"></a><span class="lineno">  472</span>            {</div>
 <div class="line"><a id="l00473" name="l00473"></a><span class="lineno">  473</span>              residuals[local_eqn] +=</div>
 <div class="line"><a id="l00474" name="l00474"></a><span class="lineno">  474</span>                interpolated_dpdx[k] *</div>
-<div class="line"><a id="l00475" name="l00475"></a><span class="lineno">  475</span>                (scaled_re * interpolated_u[k] * testp[l] + dtestp(l, k)) * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a> *</div>
+<div class="line"><a id="l00475" name="l00475"></a><span class="lineno">  475</span>                (scaled_re * interpolated_u[k] * testp[l] + dtestp(l, k)) * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a> *</div>
 <div class="line"><a id="l00476" name="l00476"></a><span class="lineno">  476</span>                hang_weight;</div>
 <div class="line"><a id="l00477" name="l00477"></a><span class="lineno">  477</span>            }</div>
 <div class="line"><a id="l00478" name="l00478"></a><span class="lineno">  478</span> </div>
@@ -663,7 +663,7 @@ $(function() {
 <div class="line"><a id="l00534" name="l00534"></a><span class="lineno">  534</span>                          dtestp(l2, k) *</div>
 <div class="line"><a id="l00535" name="l00535"></a><span class="lineno">  535</span>                          (scaled_re * interpolated_u[k] * testp[l] +</div>
 <div class="line"><a id="l00536" name="l00536"></a><span class="lineno">  536</span>                           dtestp(l, k)) *</div>
-<div class="line"><a id="l00537" name="l00537"></a><span class="lineno">  537</span>                          <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a> * hang_weight * hang_weight2;</div>
+<div class="line"><a id="l00537" name="l00537"></a><span class="lineno">  537</span>                          <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a> * hang_weight * hang_weight2;</div>
 <div class="line"><a id="l00538" name="l00538"></a><span class="lineno">  538</span>                      }</div>
 <div class="line"><a id="l00539" name="l00539"></a><span class="lineno">  539</span>                    }</div>
 <div class="line"><a id="l00540" name="l00540"></a><span class="lineno">  540</span>                    <span class="keywordflow">else</span></div>
@@ -802,7 +802,7 @@ $(function() {
 <div class="line"><a id="l00673" name="l00673"></a><span class="lineno">  673</span>      this-&gt;pshape_nst(<a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, psip, testp);</div>
 <div class="line"><a id="l00674" name="l00674"></a><span class="lineno">  674</span> </div>
 <div class="line"><a id="l00675" name="l00675"></a><span class="lineno">  675</span>      <span class="comment">// Premultiply the weights and the Jacobian</span></div>
-<div class="line"><a id="l00676" name="l00676"></a><span class="lineno">  676</span>      <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a> = w * J;</div>
+<div class="line"><a id="l00676" name="l00676"></a><span class="lineno">  676</span>      <span class="keywordtype">double</span> <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a> = w * J;</div>
 <div class="line"><a id="l00677" name="l00677"></a><span class="lineno">  677</span> </div>
 <div class="line"><a id="l00678" name="l00678"></a><span class="lineno">  678</span>      <span class="comment">// Calculate local values of the pressure and velocity components</span></div>
 <div class="line"><a id="l00679" name="l00679"></a><span class="lineno">  679</span>      <span class="comment">//--------------------------------------------------------------</span></div>
@@ -943,7 +943,7 @@ $(function() {
 <div class="line"><a id="l00814" name="l00814"></a><span class="lineno">  814</span>              }</div>
 <div class="line"><a id="l00815" name="l00815"></a><span class="lineno">  815</span> </div>
 <div class="line"><a id="l00816" name="l00816"></a><span class="lineno">  816</span>              <span class="comment">// Add the pressure gradient term</span></div>
-<div class="line"><a id="l00817" name="l00817"></a><span class="lineno">  817</span>              sum = (sum * testf[l] + interpolated_p * dtestfdx(l, <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)) * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a> *</div>
+<div class="line"><a id="l00817" name="l00817"></a><span class="lineno">  817</span>              sum = (sum * testf[l] + interpolated_p * dtestfdx(l, <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)) * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a> *</div>
 <div class="line"><a id="l00818" name="l00818"></a><span class="lineno">  818</span>                    hang_weight;</div>
 <div class="line"><a id="l00819" name="l00819"></a><span class="lineno">  819</span> </div>
 <div class="line"><a id="l00820" name="l00820"></a><span class="lineno">  820</span>              <span class="comment">// Add in the stress tensor terms</span></div>
@@ -955,7 +955,7 @@ $(function() {
 <div class="line"><a id="l00826" name="l00826"></a><span class="lineno">  826</span>                sum -= visc_ratio *</div>
 <div class="line"><a id="l00827" name="l00827"></a><span class="lineno">  827</span>                       (interpolated_dudx(<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, k) +</div>
 <div class="line"><a id="l00828" name="l00828"></a><span class="lineno">  828</span>                        this-&gt;Gamma[<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] * interpolated_dudx(k, <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)) *</div>
-<div class="line"><a id="l00829" name="l00829"></a><span class="lineno">  829</span>                       dtestfdx(l, k) * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a> * hang_weight;</div>
+<div class="line"><a id="l00829" name="l00829"></a><span class="lineno">  829</span>                       dtestfdx(l, k) * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a> * hang_weight;</div>
 <div class="line"><a id="l00830" name="l00830"></a><span class="lineno">  830</span>              }</div>
 <div class="line"><a id="l00831" name="l00831"></a><span class="lineno">  831</span> </div>
 <div class="line"><a id="l00832" name="l00832"></a><span class="lineno">  832</span>              <span class="comment">// Add contribution</span></div>
@@ -1015,12 +1015,12 @@ $(function() {
 <div class="line"><a id="l00886" name="l00886"></a><span class="lineno">  886</span>                        <span class="comment">// Add contribution to Elemental Matrix</span></div>
 <div class="line"><a id="l00887" name="l00887"></a><span class="lineno">  887</span>                        jacobian(local_eqn, local_unknown) -=</div>
 <div class="line"><a id="l00888" name="l00888"></a><span class="lineno">  888</span>                          visc_ratio * this-&gt;Gamma[<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] * dpsifdx(l2, <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) *</div>
-<div class="line"><a id="l00889" name="l00889"></a><span class="lineno">  889</span>                          dtestfdx(l, i2) * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a> * hang_weight * hang_weight2;</div>
+<div class="line"><a id="l00889" name="l00889"></a><span class="lineno">  889</span>                          dtestfdx(l, i2) * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a> * hang_weight * hang_weight2;</div>
 <div class="line"><a id="l00890" name="l00890"></a><span class="lineno">  890</span> </div>
 <div class="line"><a id="l00891" name="l00891"></a><span class="lineno">  891</span>                        <span class="comment">// Now add in the inertial terms</span></div>
 <div class="line"><a id="l00892" name="l00892"></a><span class="lineno">  892</span>                        jacobian(local_eqn, local_unknown) -=</div>
 <div class="line"><a id="l00893" name="l00893"></a><span class="lineno">  893</span>                          scaled_re * psif[l2] * interpolated_dudx(<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, i2) *</div>
-<div class="line"><a id="l00894" name="l00894"></a><span class="lineno">  894</span>                          testf[l] * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a> * hang_weight * hang_weight2;</div>
+<div class="line"><a id="l00894" name="l00894"></a><span class="lineno">  894</span>                          testf[l] * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a> * hang_weight * hang_weight2;</div>
 <div class="line"><a id="l00895" name="l00895"></a><span class="lineno">  895</span> </div>
 <div class="line"><a id="l00896" name="l00896"></a><span class="lineno">  896</span>                        <span class="comment">// Extra diagonal components if i2=i</span></div>
 <div class="line"><a id="l00897" name="l00897"></a><span class="lineno">  897</span>                        <span class="keywordflow">if</span> (i2 == <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)</div>
@@ -1031,7 +1031,7 @@ $(function() {
 <div class="line"><a id="l00902" name="l00902"></a><span class="lineno">  902</span>                          <span class="keywordflow">if</span> (flag == 2)</div>
 <div class="line"><a id="l00903" name="l00903"></a><span class="lineno">  903</span>                          {</div>
 <div class="line"><a id="l00904" name="l00904"></a><span class="lineno">  904</span>                            mass_matrix(local_eqn, local_unknown) +=</div>
-<div class="line"><a id="l00905" name="l00905"></a><span class="lineno">  905</span>                              scaled_re_st * psif[l2] * testf[l] * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a> *</div>
+<div class="line"><a id="l00905" name="l00905"></a><span class="lineno">  905</span>                              scaled_re_st * psif[l2] * testf[l] * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a> *</div>
 <div class="line"><a id="l00906" name="l00906"></a><span class="lineno">  906</span>                              hang_weight * hang_weight2;</div>
 <div class="line"><a id="l00907" name="l00907"></a><span class="lineno">  907</span>                          }</div>
 <div class="line"><a id="l00908" name="l00908"></a><span class="lineno">  908</span> </div>
@@ -1039,7 +1039,7 @@ $(function() {
 <div class="line"><a id="l00910" name="l00910"></a><span class="lineno">  910</span>                          jacobian(local_eqn, local_unknown) -=</div>
 <div class="line"><a id="l00911" name="l00911"></a><span class="lineno">  911</span>                            scaled_re_st *</div>
 <div class="line"><a id="l00912" name="l00912"></a><span class="lineno">  912</span>                            node_pt(l2)-&gt;time_stepper_pt()-&gt;weight(1, 0) *</div>
-<div class="line"><a id="l00913" name="l00913"></a><span class="lineno">  913</span>                            psif[l2] * testf[l] * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a> * hang_weight *</div>
+<div class="line"><a id="l00913" name="l00913"></a><span class="lineno">  913</span>                            psif[l2] * testf[l] * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a> * hang_weight *</div>
 <div class="line"><a id="l00914" name="l00914"></a><span class="lineno">  914</span>                            hang_weight2;</div>
 <div class="line"><a id="l00915" name="l00915"></a><span class="lineno">  915</span> </div>
 <div class="line"><a id="l00916" name="l00916"></a><span class="lineno">  916</span>                          <span class="comment">// Extra advective terms</span></div>
@@ -1052,7 +1052,7 @@ $(function() {
 <div class="line"><a id="l00923" name="l00923"></a><span class="lineno">  923</span>                            }</div>
 <div class="line"><a id="l00924" name="l00924"></a><span class="lineno">  924</span> </div>
 <div class="line"><a id="l00925" name="l00925"></a><span class="lineno">  925</span>                            jacobian(local_eqn, local_unknown) -=</div>
-<div class="line"><a id="l00926" name="l00926"></a><span class="lineno">  926</span>                              tmp * dpsifdx(l2, k) * testf[l] * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a> *</div>
+<div class="line"><a id="l00926" name="l00926"></a><span class="lineno">  926</span>                              tmp * dpsifdx(l2, k) * testf[l] * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a> *</div>
 <div class="line"><a id="l00927" name="l00927"></a><span class="lineno">  927</span>                              hang_weight * hang_weight2;</div>
 <div class="line"><a id="l00928" name="l00928"></a><span class="lineno">  928</span>                          }</div>
 <div class="line"><a id="l00929" name="l00929"></a><span class="lineno">  929</span> </div>
@@ -1060,7 +1060,7 @@ $(function() {
 <div class="line"><a id="l00931" name="l00931"></a><span class="lineno">  931</span>                          <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> k = 0; k &lt; DIM; k++)</div>
 <div class="line"><a id="l00932" name="l00932"></a><span class="lineno">  932</span>                          {</div>
 <div class="line"><a id="l00933" name="l00933"></a><span class="lineno">  933</span>                            jacobian(local_eqn, local_unknown) -=</div>
-<div class="line"><a id="l00934" name="l00934"></a><span class="lineno">  934</span>                              visc_ratio * dpsifdx(l2, k) * dtestfdx(l, k) * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a> *</div>
+<div class="line"><a id="l00934" name="l00934"></a><span class="lineno">  934</span>                              visc_ratio * dpsifdx(l2, k) * dtestfdx(l, k) * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a> *</div>
 <div class="line"><a id="l00935" name="l00935"></a><span class="lineno">  935</span>                              hang_weight * hang_weight2;</div>
 <div class="line"><a id="l00936" name="l00936"></a><span class="lineno">  936</span>                          }</div>
 <div class="line"><a id="l00937" name="l00937"></a><span class="lineno">  937</span>                        }</div>
@@ -1110,7 +1110,7 @@ $(function() {
 <div class="line"><a id="l00981" name="l00981"></a><span class="lineno">  981</span>                    <span class="keywordflow">if</span> (local_unknown &gt;= 0)</div>
 <div class="line"><a id="l00982" name="l00982"></a><span class="lineno">  982</span>                    {</div>
 <div class="line"><a id="l00983" name="l00983"></a><span class="lineno">  983</span>                      jacobian(local_eqn, local_unknown) +=</div>
-<div class="line"><a id="l00984" name="l00984"></a><span class="lineno">  984</span>                        psip[l2] * dtestfdx(l, <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a> * hang_weight *</div>
+<div class="line"><a id="l00984" name="l00984"></a><span class="lineno">  984</span>                        psip[l2] * dtestfdx(l, <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a> * hang_weight *</div>
 <div class="line"><a id="l00985" name="l00985"></a><span class="lineno">  985</span>                        hang_weight2;</div>
 <div class="line"><a id="l00986" name="l00986"></a><span class="lineno">  986</span>                    }</div>
 <div class="line"><a id="l00987" name="l00987"></a><span class="lineno">  987</span>                  }</div>
@@ -1172,13 +1172,13 @@ $(function() {
 <div class="line"><a id="l01043" name="l01043"></a><span class="lineno"> 1043</span>          <span class="keywordflow">if</span> (local_eqn &gt;= 0)</div>
 <div class="line"><a id="l01044" name="l01044"></a><span class="lineno"> 1044</span>          {</div>
 <div class="line"><a id="l01045" name="l01045"></a><span class="lineno"> 1045</span>            <span class="comment">// Source term</span></div>
-<div class="line"><a id="l01046" name="l01046"></a><span class="lineno"> 1046</span>            residuals[local_eqn] -= source * testp[l] * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a> * hang_weight;</div>
+<div class="line"><a id="l01046" name="l01046"></a><span class="lineno"> 1046</span>            residuals[local_eqn] -= source * testp[l] * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a> * hang_weight;</div>
 <div class="line"><a id="l01047" name="l01047"></a><span class="lineno"> 1047</span> </div>
 <div class="line"><a id="l01048" name="l01048"></a><span class="lineno"> 1048</span>            <span class="comment">// Loop over velocity components</span></div>
 <div class="line"><a id="l01049" name="l01049"></a><span class="lineno"> 1049</span>            <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> k = 0; k &lt; DIM; k++)</div>
 <div class="line"><a id="l01050" name="l01050"></a><span class="lineno"> 1050</span>            {</div>
 <div class="line"><a id="l01051" name="l01051"></a><span class="lineno"> 1051</span>              residuals[local_eqn] +=</div>
-<div class="line"><a id="l01052" name="l01052"></a><span class="lineno"> 1052</span>                interpolated_dudx(k, k) * testp[l] * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a> * hang_weight;</div>
+<div class="line"><a id="l01052" name="l01052"></a><span class="lineno"> 1052</span>                interpolated_dudx(k, k) * testp[l] * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a> * hang_weight;</div>
 <div class="line"><a id="l01053" name="l01053"></a><span class="lineno"> 1053</span>            }</div>
 <div class="line"><a id="l01054" name="l01054"></a><span class="lineno"> 1054</span> </div>
 <div class="line"><a id="l01055" name="l01055"></a><span class="lineno"> 1055</span>            <span class="comment">// CALCULATE THE JACOBIAN</span></div>
@@ -1231,7 +1231,7 @@ $(function() {
 <div class="line"><a id="l01102" name="l01102"></a><span class="lineno"> 1102</span>                    <span class="keywordflow">if</span> (local_unknown &gt;= 0)</div>
 <div class="line"><a id="l01103" name="l01103"></a><span class="lineno"> 1103</span>                    {</div>
 <div class="line"><a id="l01104" name="l01104"></a><span class="lineno"> 1104</span>                      jacobian(local_eqn, local_unknown) +=</div>
-<div class="line"><a id="l01105" name="l01105"></a><span class="lineno"> 1105</span>                        dpsifdx(l2, i2) * testp[l] * <a class="code hl_variable" href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">W</a> * hang_weight *</div>
+<div class="line"><a id="l01105" name="l01105"></a><span class="lineno"> 1105</span>                        dpsifdx(l2, i2) * testp[l] * <a class="code hl_enumvalue" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a> * hang_weight *</div>
 <div class="line"><a id="l01106" name="l01106"></a><span class="lineno"> 1106</span>                        hang_weight2;</div>
 <div class="line"><a id="l01107" name="l01107"></a><span class="lineno"> 1107</span>                    }</div>
 <div class="line"><a id="l01108" name="l01108"></a><span class="lineno"> 1108</span>                  }</div>
@@ -1366,13 +1366,13 @@ $(function() {
 <div class="line"><a id="l01237" name="l01237"></a><span class="lineno"> 1237</span>         it++)</div>
 <div class="line"><a id="l01238" name="l01238"></a><span class="lineno"> 1238</span>    {</div>
 <div class="line"><a id="l01239" name="l01239"></a><span class="lineno"> 1239</span>      <span class="comment">// Get node</span></div>
-<div class="line"><a id="l01240" name="l01240"></a><span class="lineno"> 1240</span>      Node* nod_pt = it-&gt;first;</div>
+<div class="line"><a id="l01240" name="l01240"></a><span class="lineno"> 1240</span>      <a class="code hl_class" href="classoomph_1_1Node.html">Node</a>* nod_pt = it-&gt;first;</div>
 <div class="line"><a id="l01241" name="l01241"></a><span class="lineno"> 1241</span> </div>
 <div class="line"><a id="l01242" name="l01242"></a><span class="lineno"> 1242</span>      <span class="comment">// Get its number</span></div>
 <div class="line"><a id="l01243" name="l01243"></a><span class="lineno"> 1243</span>      <span class="keywordtype">unsigned</span> q = it-&gt;second;</div>
 <div class="line"><a id="l01244" name="l01244"></a><span class="lineno"> 1244</span> </div>
 <div class="line"><a id="l01245" name="l01245"></a><span class="lineno"> 1245</span>      <span class="comment">// Only compute if there&#39;s a node-update fct involved</span></div>
-<div class="line"><a id="l01246" name="l01246"></a><span class="lineno"> 1246</span>      <span class="keywordflow">if</span> (nod_pt-&gt;has_auxiliary_node_update_fct_pt())</div>
+<div class="line"><a id="l01246" name="l01246"></a><span class="lineno"> 1246</span>      <span class="keywordflow">if</span> (nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1Node.html#ad5fe8ac9dcb705612903bc6945926375">has_auxiliary_node_update_fct_pt</a>())</div>
 <div class="line"><a id="l01247" name="l01247"></a><span class="lineno"> 1247</span>      {</div>
 <div class="line"><a id="l01248" name="l01248"></a><span class="lineno"> 1248</span>        element_has_node_with_aux_node_update_fct = <span class="keyword">true</span>;</div>
 <div class="line"><a id="l01249" name="l01249"></a><span class="lineno"> 1249</span> </div>
@@ -1380,31 +1380,31 @@ $(function() {
 <div class="line"><a id="l01251" name="l01251"></a><span class="lineno"> 1251</span>        <a class="code hl_class" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> u_ref(DIM);</div>
 <div class="line"><a id="l01252" name="l01252"></a><span class="lineno"> 1252</span>        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = 0; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &lt; DIM; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
 <div class="line"><a id="l01253" name="l01253"></a><span class="lineno"> 1253</span>        {</div>
-<div class="line"><a id="l01254" name="l01254"></a><span class="lineno"> 1254</span>          u_ref[<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] = *(nod_pt-&gt;value_pt(u_nodal_index[<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>]));</div>
+<div class="line"><a id="l01254" name="l01254"></a><span class="lineno"> 1254</span>          u_ref[<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] = *(nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1Data.html#af545f88ca20583f0c1b66e4da6076aa3">value_pt</a>(u_nodal_index[<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>]));</div>
 <div class="line"><a id="l01255" name="l01255"></a><span class="lineno"> 1255</span>        }</div>
 <div class="line"><a id="l01256" name="l01256"></a><span class="lineno"> 1256</span> </div>
 <div class="line"><a id="l01257" name="l01257"></a><span class="lineno"> 1257</span>        <span class="comment">// FD</span></div>
 <div class="line"><a id="l01258" name="l01258"></a><span class="lineno"> 1258</span>        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> p = 0; p &lt; DIM; p++)</div>
 <div class="line"><a id="l01259" name="l01259"></a><span class="lineno"> 1259</span>        {</div>
 <div class="line"><a id="l01260" name="l01260"></a><span class="lineno"> 1260</span>          <span class="comment">// Make backup</span></div>
-<div class="line"><a id="l01261" name="l01261"></a><span class="lineno"> 1261</span>          <span class="keywordtype">double</span> backup = nod_pt-&gt;x(p);</div>
+<div class="line"><a id="l01261" name="l01261"></a><span class="lineno"> 1261</span>          <span class="keywordtype">double</span> backup = nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1Node.html#ab76b4773a65b349f143539e07b6e15e2">x</a>(p);</div>
 <div class="line"><a id="l01262" name="l01262"></a><span class="lineno"> 1262</span> </div>
 <div class="line"><a id="l01263" name="l01263"></a><span class="lineno"> 1263</span>          <span class="comment">// Do FD step. No node update required as we&#39;re</span></div>
 <div class="line"><a id="l01264" name="l01264"></a><span class="lineno"> 1264</span>          <span class="comment">// attacking the coordinate directly...</span></div>
-<div class="line"><a id="l01265" name="l01265"></a><span class="lineno"> 1265</span>          nod_pt-&gt;x(p) += eps_fd;</div>
+<div class="line"><a id="l01265" name="l01265"></a><span class="lineno"> 1265</span>          nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1Node.html#ab76b4773a65b349f143539e07b6e15e2">x</a>(p) += eps_fd;</div>
 <div class="line"><a id="l01266" name="l01266"></a><span class="lineno"> 1266</span> </div>
 <div class="line"><a id="l01267" name="l01267"></a><span class="lineno"> 1267</span>          <span class="comment">// Do auxiliary node update (to apply no slip)</span></div>
-<div class="line"><a id="l01268" name="l01268"></a><span class="lineno"> 1268</span>          nod_pt-&gt;perform_auxiliary_node_update_fct();</div>
+<div class="line"><a id="l01268" name="l01268"></a><span class="lineno"> 1268</span>          nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1Node.html#a6c287aa85c19f2d37ed7952ece5c76dd">perform_auxiliary_node_update_fct</a>();</div>
 <div class="line"><a id="l01269" name="l01269"></a><span class="lineno"> 1269</span> </div>
 <div class="line"><a id="l01270" name="l01270"></a><span class="lineno"> 1270</span>          <span class="comment">// Evaluate</span></div>
 <div class="line"><a id="l01271" name="l01271"></a><span class="lineno"> 1271</span>          d_U_dX(p, q) =</div>
-<div class="line"><a id="l01272" name="l01272"></a><span class="lineno"> 1272</span>            (*(nod_pt-&gt;value_pt(u_nodal_index[p])) - u_ref[p]) / eps_fd;</div>
+<div class="line"><a id="l01272" name="l01272"></a><span class="lineno"> 1272</span>            (*(nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1Data.html#af545f88ca20583f0c1b66e4da6076aa3">value_pt</a>(u_nodal_index[p])) - u_ref[p]) / eps_fd;</div>
 <div class="line"><a id="l01273" name="l01273"></a><span class="lineno"> 1273</span> </div>
 <div class="line"><a id="l01274" name="l01274"></a><span class="lineno"> 1274</span>          <span class="comment">// Reset</span></div>
-<div class="line"><a id="l01275" name="l01275"></a><span class="lineno"> 1275</span>          nod_pt-&gt;x(p) = backup;</div>
+<div class="line"><a id="l01275" name="l01275"></a><span class="lineno"> 1275</span>          nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1Node.html#ab76b4773a65b349f143539e07b6e15e2">x</a>(p) = backup;</div>
 <div class="line"><a id="l01276" name="l01276"></a><span class="lineno"> 1276</span> </div>
 <div class="line"><a id="l01277" name="l01277"></a><span class="lineno"> 1277</span>          <span class="comment">// Do auxiliary node update (to apply no slip)</span></div>
-<div class="line"><a id="l01278" name="l01278"></a><span class="lineno"> 1278</span>          nod_pt-&gt;perform_auxiliary_node_update_fct();</div>
+<div class="line"><a id="l01278" name="l01278"></a><span class="lineno"> 1278</span>          nod_pt-&gt;<a class="code hl_function" href="classoomph_1_1Node.html#a6c287aa85c19f2d37ed7952ece5c76dd">perform_auxiliary_node_update_fct</a>();</div>
 <div class="line"><a id="l01279" name="l01279"></a><span class="lineno"> 1279</span>        }</div>
 <div class="line"><a id="l01280" name="l01280"></a><span class="lineno"> 1280</span>      }</div>
 <div class="line"><a id="l01281" name="l01281"></a><span class="lineno"> 1281</span>    }</div>
@@ -1710,7 +1710,7 @@ $(function() {
 <div class="line"><a id="l01581" name="l01581"></a><span class="lineno"> 1581</span>                  <span class="comment">// Local boolean to indicate whether the node is hanging</span></div>
 <div class="line"><a id="l01582" name="l01582"></a><span class="lineno"> 1582</span>                  <span class="keywordtype">bool</span> is_node_hanging2 = node_pt(q_local)-&gt;is_hanging();</div>
 <div class="line"><a id="l01583" name="l01583"></a><span class="lineno"> 1583</span> </div>
-<div class="line"><a id="l01584" name="l01584"></a><span class="lineno"> 1584</span>                  Node* actual_shape_controlling_node_pt = node_pt(q_local);</div>
+<div class="line"><a id="l01584" name="l01584"></a><span class="lineno"> 1584</span>                  <a class="code hl_class" href="classoomph_1_1Node.html">Node</a>* actual_shape_controlling_node_pt = node_pt(q_local);</div>
 <div class="line"><a id="l01585" name="l01585"></a><span class="lineno"> 1585</span> </div>
 <div class="line"><a id="l01586" name="l01586"></a><span class="lineno"> 1586</span>                  <span class="comment">// If the node is hanging</span></div>
 <div class="line"><a id="l01587" name="l01587"></a><span class="lineno"> 1587</span>                  <span class="keywordflow">if</span> (is_node_hanging2)</div>
@@ -1877,7 +1877,7 @@ $(function() {
 <div class="line"><a id="l01748" name="l01748"></a><span class="lineno"> 1748</span>                <span class="comment">// Local boolean to indicate whether the node is hanging</span></div>
 <div class="line"><a id="l01749" name="l01749"></a><span class="lineno"> 1749</span>                <span class="keywordtype">bool</span> is_node_hanging2 = node_pt(q_local)-&gt;is_hanging();</div>
 <div class="line"><a id="l01750" name="l01750"></a><span class="lineno"> 1750</span> </div>
-<div class="line"><a id="l01751" name="l01751"></a><span class="lineno"> 1751</span>                Node* actual_shape_controlling_node_pt = node_pt(q_local);</div>
+<div class="line"><a id="l01751" name="l01751"></a><span class="lineno"> 1751</span>                <a class="code hl_class" href="classoomph_1_1Node.html">Node</a>* actual_shape_controlling_node_pt = node_pt(q_local);</div>
 <div class="line"><a id="l01752" name="l01752"></a><span class="lineno"> 1752</span> </div>
 <div class="line"><a id="l01753" name="l01753"></a><span class="lineno"> 1753</span>                <span class="comment">// If the node is hanging</span></div>
 <div class="line"><a id="l01754" name="l01754"></a><span class="lineno"> 1754</span>                <span class="keywordflow">if</span> (is_node_hanging2)</div>
@@ -2005,7 +2005,7 @@ $(function() {
 <div class="line"><a id="l01876" name="l01876"></a><span class="lineno"> 1876</span>        }</div>
 <div class="line"><a id="l01877" name="l01877"></a><span class="lineno"> 1877</span> </div>
 <div class="line"><a id="l01878" name="l01878"></a><span class="lineno"> 1878</span>        <span class="comment">// Get pressure value in father element</span></div>
-<div class="line"><a id="l01879" name="l01879"></a><span class="lineno"> 1879</span>        <span class="keywordtype">double</span> press = father_element_pt-&gt;<a class="code hl_function" href="classNavierStokesEquations.html#a813cd7aeb3ec76361d53c63c79e5b534">interpolated_p_nst</a>(s_father);</div>
+<div class="line"><a id="l01879" name="l01879"></a><span class="lineno"> 1879</span>        <span class="keywordtype">double</span> press = father_element_pt-&gt;<a class="code hl_function" href="classoomph_1_1NavierStokesEquations.html#aaffc8d182f6bdf382ccbdf54cf3c4e55">interpolated_p_nst</a>(s_father);</div>
 <div class="line"><a id="l01880" name="l01880"></a><span class="lineno"> 1880</span> </div>
 <div class="line"><a id="l01881" name="l01881"></a><span class="lineno"> 1881</span>        <span class="comment">// Reset all pressures to zero</span></div>
 <div class="line"><a id="l01882" name="l01882"></a><span class="lineno"> 1882</span>        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> p = 0; p &lt; this-&gt;npres_nst(); p++)</div>
@@ -2093,7 +2093,7 @@ $(function() {
 <div class="line"><a id="l01964" name="l01964"></a><span class="lineno"> 1964</span>        }</div>
 <div class="line"><a id="l01965" name="l01965"></a><span class="lineno"> 1965</span> </div>
 <div class="line"><a id="l01966" name="l01966"></a><span class="lineno"> 1966</span>        <span class="comment">// Get pressure value in father element</span></div>
-<div class="line"><a id="l01967" name="l01967"></a><span class="lineno"> 1967</span>        <span class="keywordtype">double</span> press = father_element_pt-&gt;<a class="code hl_function" href="classNavierStokesEquations.html#a813cd7aeb3ec76361d53c63c79e5b534">interpolated_p_nst</a>(s_father);</div>
+<div class="line"><a id="l01967" name="l01967"></a><span class="lineno"> 1967</span>        <span class="keywordtype">double</span> press = father_element_pt-&gt;<a class="code hl_function" href="classoomph_1_1NavierStokesEquations.html#aaffc8d182f6bdf382ccbdf54cf3c4e55">interpolated_p_nst</a>(s_father);</div>
 <div class="line"><a id="l01968" name="l01968"></a><span class="lineno"> 1968</span> </div>
 <div class="line"><a id="l01969" name="l01969"></a><span class="lineno"> 1969</span>        <span class="comment">// Reset all pressures to zero</span></div>
 <div class="line"><a id="l01970" name="l01970"></a><span class="lineno"> 1970</span>        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> p = 0; p &lt; this-&gt;npres_nst(); p++)</div>
@@ -2137,15 +2137,20 @@ $(function() {
 <div class="ttc" id="acfortran_8h_html_a37cd013acc76697829c324bdd8562d82"><div class="ttname"><a href="cfortran_8h.html#a37cd013acc76697829c324bdd8562d82">e</a></div><div class="ttdeci">e</div><div class="ttdef"><b>Definition:</b> <a href="cfortran_8h_source.html#l00571">cfortran.h:571</a></div></div>
 <div class="ttc" id="acfortran_8h_html_ab7123126e4885ef647dd9c6e3807a21c"><div class="ttname"><a href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a></div><div class="ttdeci">static char t char * s</div><div class="ttdef"><b>Definition:</b> <a href="cfortran_8h_source.html#l00568">cfortran.h:568</a></div></div>
 <div class="ttc" id="acfortran_8h_html_adb50e893b86b3e55e751a42eab3cba82"><div class="ttname"><a href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a></div><div class="ttdeci">cstr elem_len * i</div><div class="ttdef"><b>Definition:</b> <a href="cfortran_8h_source.html#l00603">cfortran.h:603</a></div></div>
-<div class="ttc" id="aclassNavierStokesEquations_html_a813cd7aeb3ec76361d53c63c79e5b534"><div class="ttname"><a href="classNavierStokesEquations.html#a813cd7aeb3ec76361d53c63c79e5b534">NavierStokesEquations::interpolated_p_nst</a></div><div class="ttdeci">virtual double interpolated_p_nst(const Vector&lt; double &gt; &amp;s) const</div><div class="ttdoc">Return FE interpolated pressure at local coordinate s.</div><div class="ttdef"><b>Definition:</b> <a href="navier__stokes__elements_8h_source.html#l01645">navier_stokes_elements.h:1645</a></div></div>
 <div class="ttc" id="aclassoomph_1_1DShape_html"><div class="ttname"><a href="classoomph_1_1DShape.html">oomph::DShape</a></div><div class="ttdoc">A Class for the derivatives of shape functions The class design is essentially the same as Shape,...</div><div class="ttdef"><b>Definition:</b> <a href="shape_8h_source.html#l00277">shape.h:278</a></div></div>
 <div class="ttc" id="aclassoomph_1_1Data_html"><div class="ttname"><a href="classoomph_1_1Data.html">oomph::Data</a></div><div class="ttdoc">A class that represents a collection of data; each Data object may contain many different individual ...</div><div class="ttdef"><b>Definition:</b> <a href="nodes_8h_source.html#l00085">nodes.h:86</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Data_html_af545f88ca20583f0c1b66e4da6076aa3"><div class="ttname"><a href="classoomph_1_1Data.html#af545f88ca20583f0c1b66e4da6076aa3">oomph::Data::value_pt</a></div><div class="ttdeci">double * value_pt(const unsigned &amp;i) const</div><div class="ttdoc">Return the pointer to the i-the stored value. Typically this is required when direct access to the st...</div><div class="ttdef"><b>Definition:</b> <a href="nodes_8h_source.html#l00324">nodes.h:324</a></div></div>
 <div class="ttc" id="aclassoomph_1_1DenseMatrix_html"><div class="ttname"><a href="classoomph_1_1DenseMatrix.html">oomph::DenseMatrix&lt; double &gt;</a></div></div>
 <div class="ttc" id="aclassoomph_1_1GeneralisedElement_html_a156163c9f6fbd17548a9fa836616d19b"><div class="ttname"><a href="classoomph_1_1GeneralisedElement.html#a156163c9f6fbd17548a9fa836616d19b">oomph::GeneralisedElement::Default_fd_jacobian_step</a></div><div class="ttdeci">static double Default_fd_jacobian_step</div><div class="ttdoc">Double used for the default finite difference step in elemental jacobian calculations.</div><div class="ttdef"><b>Definition:</b> <a href="elements_8h_source.html#l01198">elements.h:1198</a></div></div>
 <div class="ttc" id="aclassoomph_1_1HangInfo_html"><div class="ttname"><a href="classoomph_1_1HangInfo.html">oomph::HangInfo</a></div><div class="ttdoc">Class that contains data for hanging nodes.</div><div class="ttdef"><b>Definition:</b> <a href="nodes_8h_source.html#l00741">nodes.h:742</a></div></div>
 <div class="ttc" id="aclassoomph_1_1HangInfo_html_a7a935ae7eeca594a648ca1800444827c"><div class="ttname"><a href="classoomph_1_1HangInfo.html#a7a935ae7eeca594a648ca1800444827c">oomph::HangInfo::master_node_pt</a></div><div class="ttdeci">Node *const &amp; master_node_pt(const unsigned &amp;i) const</div><div class="ttdoc">Return a pointer to the i-th master node.</div><div class="ttdef"><b>Definition:</b> <a href="nodes_8h_source.html#l00791">nodes.h:791</a></div></div>
 <div class="ttc" id="aclassoomph_1_1HangInfo_html_aa9c1130b58db2ff6d5eee4f923ba365c"><div class="ttname"><a href="classoomph_1_1HangInfo.html#aa9c1130b58db2ff6d5eee4f923ba365c">oomph::HangInfo::nmaster</a></div><div class="ttdeci">unsigned nmaster() const</div><div class="ttdoc">Return the number of master nodes.</div><div class="ttdef"><b>Definition:</b> <a href="nodes_8h_source.html#l00785">nodes.h:785</a></div></div>
 <div class="ttc" id="aclassoomph_1_1HangInfo_html_ac49ebdd8957a658fe4a2420108d2dcee"><div class="ttname"><a href="classoomph_1_1HangInfo.html#ac49ebdd8957a658fe4a2420108d2dcee">oomph::HangInfo::master_weight</a></div><div class="ttdeci">double const &amp; master_weight(const unsigned &amp;i) const</div><div class="ttdoc">Return weight for dofs on i-th master node.</div><div class="ttdef"><b>Definition:</b> <a href="nodes_8h_source.html#l00808">nodes.h:808</a></div></div>
+<div class="ttc" id="aclassoomph_1_1NavierStokesEquations_html_aaffc8d182f6bdf382ccbdf54cf3c4e55"><div class="ttname"><a href="classoomph_1_1NavierStokesEquations.html#aaffc8d182f6bdf382ccbdf54cf3c4e55">oomph::NavierStokesEquations::interpolated_p_nst</a></div><div class="ttdeci">virtual double interpolated_p_nst(const Vector&lt; double &gt; &amp;s) const</div><div class="ttdoc">Return FE interpolated pressure at local coordinate s.</div><div class="ttdef"><b>Definition:</b> <a href="navier__stokes__elements_8h_source.html#l01639">navier_stokes_elements.h:1639</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Node_html"><div class="ttname"><a href="classoomph_1_1Node.html">oomph::Node</a></div><div class="ttdoc">Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...</div><div class="ttdef"><b>Definition:</b> <a href="nodes_8h_source.html#l00905">nodes.h:906</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Node_html_a6c287aa85c19f2d37ed7952ece5c76dd"><div class="ttname"><a href="classoomph_1_1Node.html#a6c287aa85c19f2d37ed7952ece5c76dd">oomph::Node::perform_auxiliary_node_update_fct</a></div><div class="ttdeci">void perform_auxiliary_node_update_fct()</div><div class="ttdoc">Execute auxiliary update function (if any) – this can be used to update any nodal values following th...</div><div class="ttdef"><b>Definition:</b> <a href="nodes_8h_source.html#l01615">nodes.h:1615</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Node_html_ab76b4773a65b349f143539e07b6e15e2"><div class="ttname"><a href="classoomph_1_1Node.html#ab76b4773a65b349f143539e07b6e15e2">oomph::Node::x</a></div><div class="ttdeci">double &amp; x(const unsigned &amp;i)</div><div class="ttdoc">Return the i-th nodal coordinate.</div><div class="ttdef"><b>Definition:</b> <a href="nodes_8h_source.html#l01060">nodes.h:1060</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Node_html_ad5fe8ac9dcb705612903bc6945926375"><div class="ttname"><a href="classoomph_1_1Node.html#ad5fe8ac9dcb705612903bc6945926375">oomph::Node::has_auxiliary_node_update_fct_pt</a></div><div class="ttdeci">bool has_auxiliary_node_update_fct_pt()</div><div class="ttdoc">Boolean to indicate if node has a pointer to and auxiliary update function.</div><div class="ttdef"><b>Definition:</b> <a href="nodes_8h_source.html#l01606">nodes.h:1606</a></div></div>
 <div class="ttc" id="aclassoomph_1_1OcTree_html_adf813fbb9cffe89fb51f3c8ccd3083ca"><div class="ttname"><a href="classoomph_1_1OcTree.html#adf813fbb9cffe89fb51f3c8ccd3083ca">oomph::OcTree::Direction_to_vector</a></div><div class="ttdeci">static Vector&lt; Vector&lt; int &gt; &gt; Direction_to_vector</div><div class="ttdoc">For each direction, i.e. a son_type (vertex), a face or an edge, this defines a vector that indicates...</div><div class="ttdef"><b>Definition:</b> <a href="octree_8h_source.html#l00353">octree.h:353</a></div></div>
 <div class="ttc" id="aclassoomph_1_1OomphLibError_html"><div class="ttname"><a href="classoomph_1_1OomphLibError.html">oomph::OomphLibError</a></div><div class="ttdoc">An OomphLibError object which should be thrown when an run-time error is encountered....</div><div class="ttdef"><b>Definition:</b> <a href="oomph__definitions_8h_source.html#l00221">oomph_definitions.h:222</a></div></div>
 <div class="ttc" id="aclassoomph_1_1PRefineableQCrouzeixRaviartElement_html"><div class="ttname"><a href="classoomph_1_1PRefineableQCrouzeixRaviartElement.html">oomph::PRefineableQCrouzeixRaviartElement</a></div><div class="ttdoc">p-refineable version of Crouzeix Raviart elements. Generic class definitions</div><div class="ttdef"><b>Definition:</b> <a href="refineable__navier__stokes__elements_8h_source.html#l01332">refineable_navier_stokes_elements.h:1336</a></div></div>
@@ -2166,9 +2171,9 @@ $(function() {
 <div class="ttc" id="anamespaceoomph_1_1QuadTreeNames_html_a8954a5947b19986b8c4b755bc7639f7da03479dd620c853ccd3c767125d6f29a4"><div class="ttname"><a href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7da03479dd620c853ccd3c767125d6f29a4">oomph::QuadTreeNames::SE</a></div><div class="ttdeci">@ SE</div><div class="ttdef"><b>Definition:</b> <a href="quadtree_8h_source.html#l00057">quadtree.h:57</a></div></div>
 <div class="ttc" id="anamespaceoomph_1_1QuadTreeNames_html_a8954a5947b19986b8c4b755bc7639f7daa01c8378aad2e474250e6ebefb9fa942"><div class="ttname"><a href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daa01c8378aad2e474250e6ebefb9fa942">oomph::QuadTreeNames::NW</a></div><div class="ttdeci">@ NW</div><div class="ttdef"><b>Definition:</b> <a href="quadtree_8h_source.html#l00058">quadtree.h:58</a></div></div>
 <div class="ttc" id="anamespaceoomph_1_1QuadTreeNames_html_a8954a5947b19986b8c4b755bc7639f7daa66bca2eb077ff943b39305b1965826f"><div class="ttname"><a href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daa66bca2eb077ff943b39305b1965826f">oomph::QuadTreeNames::NE</a></div><div class="ttdeci">@ NE</div><div class="ttdef"><b>Definition:</b> <a href="quadtree_8h_source.html#l00059">quadtree.h:59</a></div></div>
+<div class="ttc" id="anamespaceoomph_1_1QuadTreeNames_html_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6"><div class="ttname"><a href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">oomph::QuadTreeNames::W</a></div><div class="ttdeci">@ W</div><div class="ttdef"><b>Definition:</b> <a href="quadtree_8h_source.html#l00063">quadtree.h:63</a></div></div>
 <div class="ttc" id="anamespaceoomph_1_1QuadTreeNames_html_a8954a5947b19986b8c4b755bc7639f7dab02ffb52d34a25323447061474613d81"><div class="ttname"><a href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7dab02ffb52d34a25323447061474613d81">oomph::QuadTreeNames::SW</a></div><div class="ttdeci">@ SW</div><div class="ttdef"><b>Definition:</b> <a href="quadtree_8h_source.html#l00056">quadtree.h:56</a></div></div>
 <div class="ttc" id="anamespaceoomph_html"><div class="ttname"><a href="namespaceoomph.html">oomph</a></div><div class="ttdoc">//////////////////////////////////////////////////////////////////// ////////////////////////////////...</div><div class="ttdef"><b>Definition:</b> <a href="advection__diffusion__elements_8cc_source.html#l00029">advection_diffusion_elements.cc:30</a></div></div>
-<div class="ttc" id="anamespaceoomph_html_ab40f6d5233caa62dd428818b4cba72d5"><div class="ttname"><a href="namespaceoomph.html#ab40f6d5233caa62dd428818b4cba72d5">oomph::W</a></div><div class="ttdeci">W</div><div class="ttdoc">///////////////////////////////////////////////////////////////// ///////////////////////////////////...</div><div class="ttdef"><b>Definition:</b> <a href="constitutive__laws_8h_source.html#l00142">constitutive_laws.h:142</a></div></div>
 <div class="ttc" id="arefineable__navier__stokes__elements_8h_html"><div class="ttname"><a href="refineable__navier__stokes__elements_8h.html">refineable_navier_stokes_elements.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 
@@ -2198,7 +2203,7 @@ $(function() {
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Nov 2 2021 16:31:14
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Dec 21 2021 17:35:10
         </div>
       </div>
     </footer>
