@@ -74,8 +74,9 @@ namespace oomph
     if (Doc_time)
     {
       oomph_info << std::endl
-                 << "CPU for setup of Dense Jacobian [sec]: "
-                 << Jacobian_setup_time << std::endl;
+                 << "CPU for setup of Dense Jacobian: "
+                 << TimingHelpers::convert_secs_to_formatted_string(
+		   Jacobian_setup_time) << std::endl;
     }
 
     // Solve by dense LU decomposition VERY INEFFICIENT!
@@ -89,7 +90,8 @@ namespace oomph
     double total_time = t_end - t_start;
     if (Doc_time)
     {
-      oomph_info << "CPU for DenseLU LinearSolver [sec]: " << total_time
+      oomph_info << "CPU for DenseLU LinearSolver: "
+		 << TimingHelpers::convert_secs_to_formatted_string(total_time)
                  << std::endl
                  << std::endl;
     }
@@ -517,7 +519,9 @@ namespace oomph
     if (Doc_time)
     {
       oomph_info << std::endl
-                 << "CPU for solve with DenseLU   [sec]: " << Solution_time
+                 << "CPU for solve with DenseLU   : "
+		 << TimingHelpers::convert_secs_to_formatted_string(
+		   Solution_time)
                  << std::endl
                  << std::endl;
     }
@@ -549,7 +553,9 @@ namespace oomph
     Solution_time = double(t_end - t_start) / CLOCKS_PER_SEC;
     if (Doc_time)
     {
-      oomph_info << "CPU for solve with DenseLU   [sec]: " << Solution_time
+      oomph_info << "CPU for solve with DenseLU   : "
+		 << TimingHelpers::convert_secs_to_formatted_string(
+		   Solution_time)
                  << std::endl;
     }
 
@@ -608,8 +614,10 @@ namespace oomph
       if (Doc_time)
       {
         oomph_info << std::endl
-                   << "CPU for setup of Dense Jacobian [sec]: "
-                   << Jacobian_setup_time << std::endl
+                   << "CPU for setup of Dense Jacobian: "
+                   << TimingHelpers::convert_secs_to_formatted_string(
+		     Jacobian_setup_time)
+		   << std::endl
                    << std::endl;
       }
     }
@@ -625,7 +633,9 @@ namespace oomph
     double total_time = double(t_end - t_start) / CLOCKS_PER_SEC;
     if (Doc_time)
     {
-      oomph_info << "CPU for FD DenseLU LinearSolver [sec]: " << total_time
+      oomph_info << "CPU for FD DenseLU LinearSolver: "
+		 << TimingHelpers::convert_secs_to_formatted_string(
+		   total_time)
                  << std::endl
                  << std::endl;
     }
@@ -847,8 +857,9 @@ namespace oomph
         Jacobian_setup_time = t_end - t_start;
         if (Doc_time)
         {
-          oomph_info << "Time to set up CRDoubleMatrix Jacobian [sec]        : "
-                     << Jacobian_setup_time << std::endl;
+          oomph_info << "Time to set up CRDoubleMatrix Jacobian         : "
+                     << TimingHelpers::convert_secs_to_formatted_string(
+		       Jacobian_setup_time) << std::endl;
         }
 
         // Now call the linear algebra solve, if desired
@@ -891,8 +902,9 @@ namespace oomph
         Jacobian_setup_time = t_end - t_start;
         if (Doc_time)
         {
-          oomph_info << "Time to set up CR Jacobian [sec]   : "
-                     << Jacobian_setup_time << std::endl;
+          oomph_info << "Time to set up CR Jacobian    : "
+                     << TimingHelpers::convert_secs_to_formatted_string(
+		       Jacobian_setup_time) << std::endl;
         }
 
         // Now call the linear algebra solve, if desired
@@ -960,8 +972,9 @@ namespace oomph
         if (Doc_time)
         {
           oomph_info << std::endl
-                     << "Time to set up CRDoubleMatrix Jacobian [sec]: "
-                     << Jacobian_setup_time << std::endl;
+                     << "Time to set up CRDoubleMatrix Jacobian : "
+                     << TimingHelpers::convert_secs_to_formatted_string(
+		       Jacobian_setup_time) << std::endl;
         }
 
         // Now call the linear algebra solve, if desired
@@ -1012,8 +1025,9 @@ namespace oomph
         Jacobian_setup_time = t_end - t_start;
         if (Doc_time)
         {
-          oomph_info << "\nTime to set up CCDoubleMatrix Jacobian [sec]: "
-                     << Jacobian_setup_time << std::endl;
+          oomph_info << "\nTime to set up CCDoubleMatrix Jacobian: "
+                     << TimingHelpers::convert_secs_to_formatted_string(
+		       Jacobian_setup_time) << std::endl;
         }
 
         // Now call the linear algebra solve, if desired
@@ -1222,9 +1236,9 @@ namespace oomph
 
         // How much memory have we used in the subsidiary preconditioners?
         oomph_info << "\nMemory statistics:"
-                   << "\n - Memory used to store the Jacobian (MB): "
+                   << "\n - Memory used to store the Jacobian (MB)   : "
                    << memory_usage_for_jacobian / 1.0e+06
-                   << "\n - Memory used to store the LU factors (MB): "
+                   << "\n - Memory used to store the LU factors (MB) : "
                    << memory_usage_for_lu_storage / 1.0e+06
                    << "\n - Total memory used for matrix storage (MB): "
                    << total_memory_usage / 1.0e+06 << "\n"
@@ -1249,10 +1263,14 @@ namespace oomph
     Solution_time = t_end - t_start;
     if (Doc_time)
     {
-      oomph_info << "Time for LU factorisation [sec]: " << factorise_time
-                 << "\nTime for back-substitution [sec]: " << backsub_time
+      oomph_info << "Time for LU factorisation : "
+		 << TimingHelpers::convert_secs_to_formatted_string(factorise_time)
+                 << "\nTime for back-substitution: "
+		 << TimingHelpers::convert_secs_to_formatted_string(backsub_time)
                  << "\nTime for SuperLUSolver solve (ndof=" << matrix_pt->nrow()
-                 << ") [sec]: " << Solution_time << std::endl;
+                 << "): "
+		 << TimingHelpers::convert_secs_to_formatted_string(Solution_time)
+		 << std::endl;
     }
 
     // If we are not storing the solver data for resolves, delete it
@@ -1315,8 +1333,9 @@ namespace oomph
         Jacobian_setup_time = t_end - t_start;
         if (Doc_time)
         {
-          oomph_info << "Time to set up CRDoubleMatrix Jacobian [sec]        : "
-                     << Jacobian_setup_time << std::endl;
+          oomph_info << "Time to set up CRDoubleMatrix Jacobian         : "
+                     << TimingHelpers::convert_secs_to_formatted_string(
+		       Jacobian_setup_time) << std::endl;
         }
 
         // Now call the linear algebra solve, if desired
@@ -1359,8 +1378,9 @@ namespace oomph
         Jacobian_setup_time = t_end - t_start;
         if (Doc_time)
         {
-          oomph_info << "Time to set up CR Jacobian [sec]   : "
-                     << Jacobian_setup_time << std::endl;
+          oomph_info << "Time to set up CR Jacobian    : "
+                     << TimingHelpers::convert_secs_to_formatted_string(
+		       Jacobian_setup_time) << std::endl;
         }
 
         // Now call the linear algebra solve, if desired
@@ -1428,8 +1448,9 @@ namespace oomph
         if (Doc_time)
         {
           oomph_info << std::endl
-                     << "Time to set up CRDoubleMatrix Jacobian [sec]: "
-                     << Jacobian_setup_time << std::endl;
+                     << "Time to set up CRDoubleMatrix Jacobian: "
+                     << TimingHelpers::convert_secs_to_formatted_string(
+		       Jacobian_setup_time) << std::endl;
         }
 
         // Now call the linear algebra solve, if desired
@@ -1480,8 +1501,9 @@ namespace oomph
         Jacobian_setup_time = t_end - t_start;
         if (Doc_time)
         {
-          oomph_info << "\nTime to set up CCDoubleMatrix Jacobian [sec]: "
-                     << Jacobian_setup_time << std::endl;
+          oomph_info << "\nTime to set up CCDoubleMatrix Jacobian: "
+                     << TimingHelpers::convert_secs_to_formatted_string(
+		       Jacobian_setup_time) << std::endl;
         }
 
         // Now call the linear algebra solve, if desired
@@ -1716,10 +1738,16 @@ namespace oomph
     Solution_time = t_end - t_start;
     if (Doc_time)
     {
-      oomph_info << "Time for LU factorisation [sec]: " << factorise_time
-                 << "\nTime for back-substitution [sec]: " << backsub_time
+      oomph_info << "Time for LU factorisation : "
+		 << TimingHelpers::convert_secs_to_formatted_string(
+		   factorise_time)
+                 << "\nTime for back-substitution: "
+		 << TimingHelpers::convert_secs_to_formatted_string(
+		   backsub_time)
                  << "\nTime for SuperLUSolver solve (ndof=" << matrix_pt->nrow()
-                 << ") [sec]: " << Solution_time << std::endl;
+                 << "): "
+		 << TimingHelpers::convert_secs_to_formatted_string(
+		   Solution_time) << std::endl;
     }
 
     // If we are not storing the solver data for resolves, delete it
@@ -1746,7 +1774,10 @@ namespace oomph
     if (Doc_time)
     {
       oomph_info << "Time for SuperLUSolver solve (ndof=" << rhs.nrow()
-                 << ") [sec]: " << t_end - t_start << std::endl;
+                 << "): "
+		 << TimingHelpers::convert_secs_to_formatted_string(
+		   t_end - t_start)
+		 << std::endl;
     }
   }
 
@@ -1769,7 +1800,9 @@ namespace oomph
     if (Doc_time)
     {
       oomph_info << "Time for SuperLUSolver solve (ndof=" << rhs.nrow()
-                 << ") [sec]: " << t_end - t_start << std::endl;
+                 << "): "
+		 << TimingHelpers::convert_secs_to_formatted_string(
+		   t_end - t_start) << std::endl;
     }
   }
 

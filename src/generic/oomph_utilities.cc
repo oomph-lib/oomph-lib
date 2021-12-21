@@ -1314,38 +1314,39 @@ namespace oomph
     ///   700 will be printed as 11m:40
     ///    59 will be printed as 59s
     std::string convert_secs_to_formatted_string(
-      const long unsigned& time_in_sec)
+      const double& time_in_sec)
     {
       std::ostringstream ss;
 
-      unsigned sec_within_day = time_in_sec % (3600 * 24);
+      unsigned sec_within_day = unsigned(time_in_sec) % (3600 * 24);
 
-      unsigned time_days = time_in_sec / (3600 * 24);
-      unsigned time_hrs  = sec_within_day / 3600;
-      unsigned time_min  = (sec_within_day % 3600) / 60;
-      unsigned time_sec  = (sec_within_day % 3600) % 60;
+      unsigned days    = unsigned(time_in_sec) / (3600 * 24);
+      unsigned hours   = sec_within_day / 3600;
+      unsigned minutes = (sec_within_day % 3600) / 60;
+      unsigned seconds = (sec_within_day % 3600) % 60;
 
-      if (time_days > 0)
+      if (days > 0)
       {
-	ss << time_days << "d ";
+	ss << days << "d ";
       }
       
-      if (time_hrs > 0)
+      if (hours > 0)
       {
-        ss << time_hrs << "h:";
+        ss << hours << "h:";
         ss << std::setw(2) << std::setfill('0');
-        ss << time_min << ":";
-        ss << time_sec;
+        ss << minutes << ":";
+        ss << seconds;
       }
-      else if (time_min > 0)
+      else if (minutes > 0)
       {
-        ss << time_min << "m:";
+        ss << minutes << "m:";
         ss << std::setw(2) << std::setfill('0');
-        ss << time_sec;
+        ss << seconds;
       }
       else
       {
-        ss << time_sec << "s";
+        double seconds_double = seconds + (time_in_sec - double(seconds));
+        ss << std::setprecision(1) << std::fixed << seconds_double << "s";
       }
 
       return ss.str();
