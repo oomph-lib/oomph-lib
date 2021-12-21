@@ -43,10 +43,7 @@ namespace oomph
   //=============================================================
   /// A class for all elements that solve the Advection
   /// Diffusion equations using isoparametric elements.
-  /// \f[
-  /// \frac{\partial^2 u}{\partial x_i^2} =
-  /// Pe w_i(x_k) \frac{\partial u}{\partial x_i} + f(x_j)
-  /// \f]
+  /// \f[ \frac{\partial^2 u}{\partial x_i^2} = Pe w_i(x_k) \frac{\partial u}{\partial x_i} + f(x_j) \f]
   /// This contains the generic maths. Shape functions, geometric
   /// mapping etc. must get implemented in derived class.
   //=============================================================

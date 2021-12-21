@@ -138,9 +138,7 @@ namespace oomph
   //=====================================================================
   /// MooneyRivlin strain-energy function.
   /// with constitutive parameters C1 and C2:
-  /// \f[
-  /// W = C_1 (I_0 - 3) + C_2 (I_1 - 3)
-  /// \f]
+  /// \f[ W = C_1 (I_0 - 3) + C_2 (I_1 - 3) \f]
   /// where incompressibility (\f$ I_2 \equiv 1\f$) is assumed.
   //====================================================================
   class MooneyRivlin : public StrainEnergyFunction
@@ -314,13 +312,9 @@ namespace oomph
   /// constitutive law is the (2nd Piola-Kirchhoff) stress tensor
   /// \f$ \sigma^{ij} \f$ as a function of the (Green) strain
   /// \f$ \gamma^{ij} \f$:
-  /// \f[
-  /// \sigma^{ij} = \sigma^{ij}(\gamma_{ij}).
-  /// \f]
+  /// \f[ \sigma^{ij} = \sigma^{ij}(\gamma_{ij}). \f]
   /// The Green strain is defined as
-  /// \f[
-  /// \gamma_{ij} = \frac{1}{2} (G_{ij} - g_{ij}), \ \ \ \ \ \ \ \ \ \ \ (1)
-  /// \f]
+  /// \f[ \gamma_{ij} = \frac{1}{2} (G_{ij} - g_{ij}), \ \ \ \ \ \ \ \ \ \ \ (1) \f]
   /// where \f$G_{ij} \f$ and \f$ g_{ij}\f$ are the metric tensors
   /// in the deformed and undeformed (stress-free) configurations, respectively.
   /// A specific ConstitutiveLaw needs to be implement the pure
@@ -342,10 +336,8 @@ namespace oomph
   /// -# \b Compressible \b Behaviour: \n If the material is compressible,
   ///    the stress can be computed from the deformed and undeformed
   ///    metric tensors,
-  ///    \f[
-  ///   \sigma^{ij} = \sigma^{ij}(\gamma_{ij}) =
-  ///   \sigma^{ij}\bigg( \frac{1}{2} (G_{ij} - g_{ij})\bigg),
-  ///   \f]
+  ///
+  /// \f[ \sigma^{ij} = \sigma^{ij}(\gamma_{ij}) = \sigma^{ij}\bigg( \frac{1}{2} (G_{ij} - g_{ij})\bigg), \f]
   ///   using the interface
   ///   \code
   ///   // 2nd Piola Kirchhoff stress tensor
@@ -363,20 +355,15 @@ namespace oomph
   ///   \n \n  \n
   /// -# \b Incompressible \b Behaviour: \n If the material is incompressible,
   ///    its deformation is constrained by the condition that
-  ///    \f[
-  ///    \det G_{ij} - \det g_{ij}= 0
-  ///    \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2)
-  ///    \f]
+  ///
+  /// \f[ \det G_{ij} - \det g_{ij}= 0 \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2) \f]
   ///    which ensures that the volume of infinitesimal material
   ///    elements remains constant during the deformation. This
   ///    condition is typically enforced by a Lagrange multiplier which
   ///    plays the role of a pressure. In such cases, the
   ///    stress tensor has form
-  ///    \f[
-  ///    \sigma^{ij} = -p G^{ij} +
-  ///    \overline{\sigma}^{ij}\big(\gamma_{kl}\big),
-  ///    \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3)
-  ///    \f]
+  ///
+  /// \f[ \sigma^{ij} = -p G^{ij} + \overline{\sigma}^{ij}\big(\gamma_{kl}\big), \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3) \f]
   ///    where only the deviatoric part of the stress tensor,
   ///    \f$ \overline{\sigma}^{ij}, \f$ depends directly on the
   ///    strain. The pressure \f$ p \f$ needs to be determined
@@ -418,11 +405,8 @@ namespace oomph
   ///    incompressible, it is advantageous to split the stress into
   ///    its deviatoric and hydrostatic parts by writing the
   ///    constitutive law in the form
-  ///    \f[
-  ///    \sigma^{ij} = -p G^{ij} +
-  ///    \overline{\sigma}^{ij}\big(\gamma_{kl}\big),
-  ///    \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3)
-  ///    \f]
+  ///
+  ///    \f[ \sigma^{ij} = -p G^{ij} + \overline{\sigma}^{ij}\big(\gamma_{kl}\big), \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3) \f]
   ///    where the deviatoric part of the stress tensor,
   ///    \f$ \overline{\sigma}^{ij}, \f$ depends on the
   ///    strain. This form of the constitutive
@@ -433,10 +417,8 @@ namespace oomph
   ///    constraint (2). Here, we need to augment the constitutive law (3) by
   ///    a separate equation for the pressure. Generally this takes the
   ///    form
-  ///    \f[
-  ///    p = - \kappa \ d
-  ///    \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4)
-  ///    \f]
+  ///
+  ///    \f[ p = - \kappa \ d \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4) \f]
   ///    where \f$ \kappa \f$ is the "bulk modulus", a material property
   ///    that needs to be specified by the constitutive law.
   ///    \f$ d \f$ is the (generalised) dilatation, i.e. the relative change
@@ -445,8 +427,8 @@ namespace oomph
   ///    material approaches incompressibility, \f$ \kappa \to \infty\f$, so
   ///    that infinitely large pressures would be required to achieve any change
   ///    in volume. To facilitate the implementation of (4) as the equation for
-  ///    the pressure, we re-write it in the form \f[ p \ \frac{1}{\kappa} +
-  ///    d\big(g_{ij},G_{ij}\big) = 0 \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5) \f]
+  ///    the pressure, we re-write it in the form
+  ///    \f[ p \ \frac{1}{\kappa} + d\big(g_{ij},G_{ij}\big) = 0 \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5) \f]
   ///    which only involves quantities that remain finite
   ///    as we approach true incompressibility.
   ///    \n
@@ -661,9 +643,7 @@ namespace oomph
   /// to large displacements:
   /// \f[ \sigma^{ij} = E^{ijkl} \gamma_{kl} \f]
   /// where
-  /// \f[ E^{ijkl} = \frac{E}{(1+\nu)} \left( \frac{\nu}{(1-2\nu)} G^{ij} G^{kl}
-  ///                + \frac{1}{2} \left(
-  ///                G^{ik} G^{jl} + G^{il} G^{jk} \right) \right) \f]
+  /// \f[ E^{ijkl} = \frac{E}{(1+\nu)} \left( \frac{\nu}{(1-2\nu)} G^{ij} G^{kl} + \frac{1}{2} \left( G^{ik} G^{jl} + G^{il} G^{jk} \right) \right) \f]
   /// For small strains \f$ (| G_{ij} - g_{ij} | \ll 1)\f$ this approaches
   /// the version appropriate for linear elasticity, obtained
   /// by replacing \f$ G^{ij}\f$ with \f$ g^{ij}\f$.
@@ -676,44 +656,43 @@ namespace oomph
   ///    the first term in the above expression for  \f$ E^{ijkl} \f$
   ///    is singular. We re-write the constitutive equation for this
   ///    case as
-  ///    \f[ \sigma^{ij} = -p G^{ij}
-  ///                + \frac{E}{3} \left(
-  ///                G^{ik} G^{jl} + G^{il} G^{jk} \right) \gamma_{kl} \f]
+  ///
+  ///    \f[ \sigma^{ij} = -p G^{ij} + \frac{E}{3} \left( G^{ik} G^{jl} + G^{il} G^{jk} \right) \gamma_{kl} \f]
   ///    where the pressure \f$ p \f$ needs to be determined independently
   ///    via the incompressibility constraint.
   ///    In this case, the stress returned by
   ///    \c calculate_second_piola_kirchhoff_stress()
   ///    contains only the deviatoric part of the 2nd Piola Kirchhoff stress,
-  ///    \f[ \overline{\sigma}^{ij} =
-  ///                \frac{E}{3} \left(
-  ///                G^{ik} G^{jl} + G^{il} G^{jk} \right) \gamma_{kl}. \f]
+  ///
+  ///    \f[ \overline{\sigma}^{ij} = \frac{E}{3} \left( G^{ik} G^{jl} + G^{il} G^{jk} \right) \gamma_{kl}. \f]
   ///    The function also returns the contravariant metric tensor
   ///    \f$ G^{ij}\f$ (since it is needed to form the complete stress
   ///    tensor), and the determinant of the deformed covariant metric
   ///    tensor \f$ {\tt detG} = \det G_{ij} \f$ (since it is needed
   ///    in the equation that enforces the incompressibility).
-  /// -# If  \f$ \nu \approx 1/2 \f$, the original form of the
-  ///     constitutive equation could be used, but the resulting
-  ///     equations tend to be ill-conditioned since they contain
-  ///     the product of the large "bulk modulus"
-  ///     \f[ \kappa = \frac{E\nu}{(1+\nu)(1-2\nu)} \f]
-  ///     and the small "generalised dilatation"
-  ///     \f[ d = \frac{1}{2} G^{ij} (G_{ij}-g_{ij}). \f]
-  ///     [\f$ d \f$ represents the actual dilatation in the small
-  ///     strain limit; for large deformations it doesn't have
-  ///     any sensible interpretation (or does it?). It is simply
-  ///     the term that needs to go to zero as \f$ \kappa \to \infty\f$.]
-  ///     In this case, the stress returned by
-  ///     \c calculate_second_piola_kirchhoff_stress()
-  ///     contains only the deviatoric part of the 2nd Piola Kirchhoff stress,
-  ///     \f[ \overline{\sigma}^{ij} =
-  ///                  \frac{E}{3} \left(
-  ///                 G^{ik} G^{jl} + G^{il} G^{jk} \right) \gamma_{kl}. \f]
-  ///     The function also returns the contravariant metric tensor
-  ///     \f$ G^{ij}\f$ (since it is needed to form the complete stress
-  ///     tensor), the inverse of the bulk modulus, and the generalised
-  ///     dilatation (since they are needed in the equation
-  ///     that determines the pressure).
+  /// -# If \f$ \nu \approx 1/2 \f$, the original form of the
+  ///    constitutive equation could be used, but the resulting
+  ///    equations tend to be ill-conditioned since they contain
+  ///    the product of the large "bulk modulus"
+  ///
+  ///    \f[ \kappa = \frac{E\nu}{(1+\nu)(1-2\nu)} \f]
+  ///    and the small "generalised dilatation"
+  ///
+  ///    \f[ d = \frac{1}{2} G^{ij} (G_{ij}-g_{ij}). \f]
+  ///    [\f$ d \f$ represents the actual dilatation in the small
+  ///    strain limit; for large deformations it doesn't have
+  ///    any sensible interpretation (or does it?). It is simply
+  ///    the term that needs to go to zero as \f$ \kappa \to \infty\f$.]
+  ///    In this case, the stress returned by
+  ///    \c calculate_second_piola_kirchhoff_stress()
+  ///    contains only the deviatoric part of the 2nd Piola Kirchhoff stress,
+  ///
+  ///    \f[ \overline{\sigma}^{ij} = \frac{E}{3} \left( G^{ik} G^{jl} + G^{il} G^{jk} \right) \gamma_{kl}. \f]
+  ///    The function also returns the contravariant metric tensor
+  ///    \f$ G^{ij}\f$ (since it is needed to form the complete stress
+  ///    tensor), the inverse of the bulk modulus, and the generalised
+  ///    dilatation (since they are needed in the equation
+  ///    that determines the pressure).
   ///
   //=========================================================================
   class GeneralisedHookean : public ConstitutiveLaw

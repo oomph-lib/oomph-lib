@@ -45,16 +45,9 @@ namespace oomph
   //=============================================================
   /// A class for all isoparametric elements that solve the
   /// Foeppl von Karman equations.
-  /// \f[
-  /// \nabla^4 w -  \eta  \frac{\partial}{\partial x_{\beta}}
-  ///                     \left( \sigma^{\alpha \beta}
-  ///                            \frac{\partial w}{\partial x_{\alpha}}
-  ///                     \right) = p(x,y)
-  /// \f]
+  /// \f[ \nabla^4 w - \eta \frac{\partial}{\partial x_{\beta}} \left( \sigma^{\alpha \beta} \frac{\partial w}{\partial x_{\alpha}} \right) = p(x,y) \f]
   /// and
-  /// \f[
-  /// \frac{\sigma^{\alpha \beta}}{\partial x_{\beta}} = \tau_\alpha
-  /// \f]
+  /// \f[ \frac{\sigma^{\alpha \beta}}{\partial x_{\beta}} = \tau_\alpha \f]
   /// This contains the generic maths. Shape functions, geometric
   /// mapping etc. must get implemented in derived class.
   //=============================================================

@@ -41,8 +41,7 @@ namespace oomph
   //==================================================================
   /// Base class for the flux transport equations templated by the
   /// dimension DIM.  The equations that are solved are
-  /// \f[ \frac{\partial u_{i}}{\partial t} + \frac{\partial}{\partial x_{j}}
-  /// \left(F_{ij}(u_{k})\right), \f]
+  /// \f[ \frac{\partial u_{i}}{\partial t} + \frac{\partial}{\partial x_{j}} \left(F_{ij}(u_{k})\right), \f]
   /// where \f$ F_{ij} \f$ is a matrix of flux components.
   //==================================================================
   template<unsigned DIM>

@@ -43,11 +43,7 @@ namespace oomph
 {
   //=========================================================
   /// Generic class for numerical integration schemes:
-  /// \f[
-  /// \int f(x_0,x_1...)\  dx_0 \ dx_1...  =
-  /// \sum_{i_{int}=0}^{\mbox{\tt nweight()} }
-  /// f( x_j=\mbox{\tt knot($i_{int}$,j)} )  \ \ \ \mbox{\tt weight($i_{int}$)}
-  /// \f]
+  /// \f[ \int f(x_0,x_1...)\ dx_0 \ dx_1... = \sum_{i_{int}=0}^{\mbox{\tt nweight()} } f( x_j=\mbox{\tt knot($i_{int}$,j)} ) \ \ \ \mbox{\tt weight($i_{int}$)} \f]
   //=========================================================
   class Integral
   {

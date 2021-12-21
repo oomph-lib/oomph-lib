@@ -72,13 +72,9 @@ namespace oomph
   //=============================================================
   /// A class for all isoparametric elements that solve the
   /// Helmholtz equations.
-  /// \f[
-  /// \nabla^2 U + k^2 U = f
-  /// \f]
+  /// \f[ \nabla^2 U + k^2 U = f \f]
   /// in Fourier decomposed form (cylindrical polars):
-  /// \f[
-  /// U(r,\varphi,z) = \Re( u^{(n)}(r,z) \exp(-i n \varphi))
-  /// \f]
+  /// \f[ U(r,\varphi,z) = \Re( u^{(n)}(r,z) \exp(-i n \varphi)) \f]
   /// We are solving for \f$ u^{(n)}(r,z)\f$ for given parameters
   /// \f$ k^2 \f$ and \f$ n \f$ .
   /// This contains the generic maths. Shape functions, geometric
