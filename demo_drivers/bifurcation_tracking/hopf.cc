@@ -273,7 +273,7 @@ void PredPreyProblem<ELEMENT>::solve()
          << mesh_pt()->element_pt(0)->internal_data_pt(0)->value(2) 
          << std::endl;
    
-   solve_eigenproblem(3,eigenvalues,eigenvectors);
+   solve_eigenproblem_legacy(3,eigenvalues,eigenvectors);
    
    for(unsigned e=0;e<eigenvalues.size();e++)
     {

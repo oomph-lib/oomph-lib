@@ -1924,9 +1924,23 @@ namespace oomph
     /// then the weighted mass-matrix terms from the timestepper will
     /// be included in the jacobian --- this is almost certainly never
     /// wanted.
+    void solve_eigenproblem_legacy(const unsigned& n_eval,
+                                   Vector<std::complex<double>>& eigenvalue,
+                                   Vector<DoubleVector>& eigenvector,
+                                   const bool& steady = true);
+    
+    /// Solve an eigenproblem as assembled by EigenElements
+    /// calculate n_eval eigenvalues and return the corresponding
+    /// eigenvectors. The boolean flag (default true) specifies whether
+    /// the steady jacobian should be assembled. If the flag is false
+    /// then the weighted mass-matrix terms from the timestepper will
+    /// be included in the jacobian --- this is almost certainly never
+    /// wanted.
+    // hierher update comment above
     void solve_eigenproblem(const unsigned& n_eval,
-                            Vector<std::complex<double>>& eigenvalue,
-                            Vector<DoubleVector>& eigenvector,
+                            Vector<std::complex<double>>& alpha,
+                            Vector<double>& beta,
+                            Vector<Vector<std::complex<double>>> & eigenvector,
                             const bool& steady = true);
 
     /// Solve an eigenproblem as assembled by EigenElements,
@@ -1934,13 +1948,14 @@ namespace oomph
     /// The boolean flag (default true) is used to specify whether the
     /// weighted mass-matrix terms from the timestepping scheme should
     /// be included in the jacobian.
+    // hierher change to legacy and provide non-legacy version with alpha and betas
     void solve_eigenproblem(const unsigned& n_eval,
                             Vector<std::complex<double>>& eigenvalue,
                             const bool& steady = true)
     {
       // Create temporary storage for the eigenvectors (potentially wasteful)
       Vector<DoubleVector> eigenvector;
-      solve_eigenproblem(n_eval, eigenvalue, eigenvector, steady);
+      solve_eigenproblem_legacy(n_eval, eigenvalue, eigenvector, steady);
     }
 
     /// Get the matrices required by a eigensolver. If the

@@ -821,7 +821,7 @@ int main()
 
  //Solve the eigenproblem
  cout << "facking" << endl;
- problem.solve_eigenproblem(n_eval,eigenvalues,eigenvectors);
+ problem.solve_eigenproblem_legacy(n_eval,eigenvalues,eigenvectors);
  for(unsigned k=0;k<n_eval;k++)  cout << "eigenvalue: " << eigenvalues[k] << endl;
  cout << "arpack" << endl;
  //Activate pitchfork tracking
@@ -885,7 +885,7 @@ int main()
  cout << "========================================================" << endl;
  cout << endl << "Computing eigenvalue at pitchfork.  Re = " << Re << endl << endl;
  //Solve the eigenproblem
- problem.solve_eigenproblem(n_eval,eigenvalues,eigenvectors);
+ problem.solve_eigenproblem_legacy(n_eval,eigenvalues,eigenvectors);
  for(unsigned k=0;k<n_eval;k++)  cout << "eigenvalue: " << eigenvalues[k] << endl;
 
  // OUTPUT THE EIGENMODE

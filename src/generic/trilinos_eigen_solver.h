@@ -607,6 +607,7 @@ namespace oomph
 
 
   public:
+    
     /// Constructor
     ANASAZI()
       : Linear_solver_pt(0),
@@ -659,10 +660,10 @@ namespace oomph
     }
 
     /// Solve the eigen problem
-    void solve_eigenproblem(Problem* const& problem_pt,
-                            const int& n_eval,
-                            Vector<std::complex<double>>& eigenvalue,
-                            Vector<DoubleVector>& eigenvector)
+    void solve_eigenproblem_legacy(Problem* const& problem_pt,
+                                   const int& n_eval,
+                                   Vector<std::complex<double>>& eigenvalue,
+                                   Vector<DoubleVector>& eigenvector)
     {
       // No access to sigma, so set from sigma real
       Sigma = Sigma_real;
@@ -748,6 +749,8 @@ namespace oomph
 
       for (unsigned i = 0; i < evals.size(); i++)
       {
+       // hierher what is this? And what about NaN and Inf eigenvalues?
+       
         // Undo shift and invert
         double a = evals[i].realpart;
         double b = evals[i].imagpart;
@@ -757,6 +760,12 @@ namespace oomph
         // Now set the eigenvectors, I hope
         eigenvector[i].build(evecs->distribution_pt());
         unsigned nrow_local = evecs->nrow_local();
+
+        // hierher this is the legacy stuff. Use 
+        // std::vector<int> Anasazi::Eigensolution< ScalarType, MV >::index
+        // to translate into proper complex vector; see
+        // https://docs.trilinos.org/dev/packages/anasazi/doc/html/structAnasazi_1_1Eigensolution.html#ac9d141d98adcba85fbad011a7b7bda6e
+        
         // Would be faster with pointers, but I'll sort that out later!
         for (unsigned n = 0; n < nrow_local; n++)
         {

@@ -60,11 +60,13 @@ namespace oomph
   class EigenSolver : public DistributableLinearAlgebraObject
   {
   protected:
+   
     /// Double value that represents the real part of the shift in
     /// shifted eigensolvers
     double Sigma_real;
 
   public:
+    
     /// Empty constructor
     EigenSolver() : Sigma_real(0.0) {}
 
@@ -74,35 +76,85 @@ namespace oomph
     /// Empty destructor
     virtual ~EigenSolver() {}
 
-    /// Actual eigensolver. This takes a pointer to a problem and returns
+    /// Eigensolver. This takes a pointer to a problem and returns
     /// a vector of complex numbers representing the eigenvalues
-    /// and a corresponding vector of eigenvectors
+    /// and a corresponding vector of eigenvectors. n_eval specifies the
+    /// number of eigenvalues/vectors required. This primarily used in Arnoldi
+    /// type implementations; direct solvers such as QZ compute all the
+    /// eigenvalues/vectors.
+    /// Note: this is actually a helper function that stores re & imag parts of
+    /// eigenvectors in some solver-specific collection of real vectors.
+    /// hierher kill
+    virtual void solve_eigenproblem_legacy(
+     Problem* const& problem_pt,
+     const int& n_eval,
+     Vector<std::complex<double>>& eigenvalue,
+     Vector<DoubleVector>& eigenvector) = 0;
+    
+
+    /// Solve the real eigenproblem that is assembled by elements in
+    /// a mesh in a Problem object. Note that the assembled matrices include the
+    /// shift and are real. The eigenvalues and eigenvectors are,
+    /// in general, complex, and the eigenvalues can be NaNs of Inf.
+    /// This function is therefore merely provided as a convience, to be
+    /// used if the user is confident that NaNs don't arise (e.g. in Arnoldi
+    /// based solvers where typically only a small number of (finite) eigenvalues
+    /// are computed, or if the users is happy to deal with NaNs in the subsequent
+    /// post-processing.
+    void solve_eigenproblem(Problem* const& problem_pt,
+                            const int& n_eval,
+                            Vector<std::complex<double>>& eigenvalue,
+                            Vector<Vector<std::complex<double>>> & eigenvector)
+    {
+     // hierher should be able to implement this generically;
+     // in fact arnoldi solvers do actually only return eigenvalues...
+     oomph_info << "hierher implement this!\n";
+     abort();
+    }
+    
+    /// Solve the real eigenproblem that is assembled by elements in
+    /// a mesh in a Problem object. Note that the assembled matrices include the
+    /// shift and are real. The eigenvalues and eigenvectors are,
+    /// in general, complex. Eigenvalues may be infinite and are therefore
+    /// returned as
+    /// \f$ \lambda_i = \alpha_i / \beta_i \f$ where \f$ \alpha_i \f$ is complex
+    /// while \f$ \beta_i \f$ is real. The actual eigenvalues may then be
+    /// computed by doing the division, checking for zero betas to avoid NaNs.
+    /// There's a convenience wrapper to this function that simply computes these
+    /// eigenvalues regardless. That version may die in NaN checking is enabled
+    /// (via the fenv.h header and the associated feenable function).
     virtual void solve_eigenproblem(Problem* const& problem_pt,
                                     const int& n_eval,
-                                    Vector<std::complex<double>>& eigenvalue,
-                                    Vector<DoubleVector>& eigenvector) = 0;
+                                    Vector<std::complex<double>>& alpha,
+                                    Vector<double>& beta,
+                                    Vector<Vector<std::complex<double>>> & eigenvector)=0;
 
-
-    /// Set the value of the shift
+    
+    /// Set the value of the (real) shift
     void set_shift(const double& shift_value)
     {
       Sigma_real = shift_value;
     }
 
-    /// Return the value of the shift (const version)
+    /// Return the value of the (real) shift (const version)
     const double& get_shift() const
     {
       return Sigma_real;
     }
   };
 
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 
+  
   //=====================================================================
   /// Class for the ARPACK eigensolver
   //=====================================================================
   class ARPACK : public EigenSolver
   {
   private:
+   
     /// Pointer to a linear solver
     LinearSolver* Linear_solver_pt;
 
@@ -114,10 +166,8 @@ namespace oomph
     /// to be small or large.
     int Spectrum;
 
-
     /// Number of Arnoldi vectors to compute
     int NArnoldi;
-
 
     /// Boolean to set which part of the spectrum left (default) or right
     /// of the shifted value.
@@ -128,6 +178,7 @@ namespace oomph
 
 
   public:
+    
     /// Constructor
     ARPACK();
 
@@ -162,17 +213,34 @@ namespace oomph
     }
 
     /// Solve the eigen problem
+    void solve_eigenproblem_legacy(Problem* const& problem_pt,
+                                   const int& n_eval,
+                                   Vector<std::complex<double>>& eigenvalue,
+                                   Vector<DoubleVector>& eigenvector);
+
+
+    /// Solve the real eigenproblem that is assembled by elements in
+    /// a mesh in a Problem object. Note that the assembled matrices include the
+    /// shift and are real. The eigenvalues and eigenvectors are,
+    /// in general, complex. Eigenvalues may be infinite and are therefore
+    /// returned as
+    /// \f$ \lambda_i = \alpha_i / \beta_i \f$ where \f$ \alpha_i \f$ is complex
+    /// while \f$ \beta_i \f$ is real. The actual eigenvalues may then be
+    /// computed by doing the division, checking for zero betas to avoid NaNs.
+    /// There's a convenience wrapper to this function that simply computes these
+    /// eigenvalues regardless. That version may die in NaN checking is enabled
+    /// (via the fenv.h header and the associated feenable function).
     void solve_eigenproblem(Problem* const& problem_pt,
                             const int& n_eval,
-                            Vector<std::complex<double>>& eigenvalue,
-                            Vector<DoubleVector>& eigenvector);
+                            Vector<std::complex<double>>& alpha,
+                            Vector<double>& beta,
+                            Vector<Vector<std::complex<double>>> & eigenvector)
+    {
+     oomph_info << "Broken, but then don't we want arpack to go anyway?\n";
+     abort();
+    }
 
-    /// Use the eigensolver to find the eigenvalues of a given matrix
-    // void find_eigenvalues(const DoubleMatrixBase &A, const int &n_eval,
-    //                      Vector<std::complex<double> > &eigenvalue,
-    //                      Vector<Vector<double> > &eigenvector);
-
-
+    
     /// Set the desired eigenvalues to be left of the shift
     void get_eigenvalues_left_of_shift()
     {
@@ -217,12 +285,18 @@ namespace oomph
   };
 
 
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+
   //=====================================================================
-  /// Class for the LAPACK eigensolver
+  /// Class for the LAPACK QZ eigensolver
   //=====================================================================
   class LAPACK_QZ : public EigenSolver
   {
+   
   public:
+   
     /// Empty constructor
     LAPACK_QZ() : EigenSolver() {}
 
@@ -232,24 +306,104 @@ namespace oomph
     /// Empty desctructor
     virtual ~LAPACK_QZ() {}
 
-    /// Solve the eigen problem
+    /// Use LAPACK QZ to solve the real eigenproblem that is assembled 
+    /// by elements in a mesh in a Problem object. Note that the assembled
+    /// matrices include the shift and are real. The eigenvalues and
+    /// eigenvectors are, in general, complex. 
+    /// This is actually a helper function that stores re & imag parts of
+    /// eigenvectors in some solver-specific collection of real vectors; 
+    /// they are disentangled in the alternative version of this function 
+    /// that returns Vectors of complex Vectors.
+    // hierher kill
+    void solve_eigenproblem_legacy(Problem* const& problem_pt,
+                                   const int& n_eval,
+                                   Vector<std::complex<double>>& eigenvalue,
+                                   Vector<DoubleVector>& eigenvector);
+    
+    /// Solve the real eigenproblem that is assembled by elements in
+    /// a mesh in a Problem object. Note that the assembled matrices include the
+    /// shift and are real. The eigenvalues and eigenvectors are,
+    /// in general, complex. Eigenvalues may be infinite and are therefore
+    /// returned as
+    /// \f$ \lambda_i = \alpha_i / \beta_i \f$ where \f$ \alpha_i \f$ is complex
+    /// while \f$ \beta_i \f$ is real. The actual eigenvalues may then be
+    /// computed by doing the division, checking for zero betas to avoid NaNs.
+    /// There's a convenience wrapper to this function that simply computes these
+    /// eigenvalues regardless. That version may die in NaN checking is enabled
+    /// (via the fenv.h header and the associated feenable function).
     void solve_eigenproblem(Problem* const& problem_pt,
                             const int& n_eval,
-                            Vector<std::complex<double>>& eigenvalue,
-                            Vector<DoubleVector>& eigenvector);
+                            Vector<std::complex<double>>& alpha,
+                            Vector<double>& beta,
+                            Vector<Vector<std::complex<double>>> & eigenvector);
 
-    /// Find the eigenvalues of a generalised eigenvalue problem
-    /// specified by \f$ Ax = \lambda  Mx \f$
+
+    /// Find the eigenvalues of a complex generalised eigenvalue problem
+    /// specified by \f$ Ax = \lambda  Mx \f$. Note: the (real) shift
+    /// that's specifiable via the EigenSolver base class is ignored here.
+    /// A warning gets issued if it's set to a nonzero value.
     void find_eigenvalues(const ComplexMatrixBase& A,
                           const ComplexMatrixBase& M,
                           Vector<std::complex<double>>& eigenvalue,
                           Vector<Vector<std::complex<double>>>& eigenvector);
 
-    /// Set the desired eigenvalues to be right of the shift
-    /// Dummy at the moment
-    void get_eigenvalues_right_of_shift() {}
-  };
 
+
+    private:
+
+
+    /// Helper function called from legacy and updated version from "raw" lapack code
+    // hierher elaborate on args
+    void solve_eigenproblem_helper(Problem* const& problem_pt,
+                                   const int& n_eval,
+                                   Vector<std::complex<double>>& alpha,
+                                   Vector<double>& beta,
+                                   Vector<DoubleVector>& eigenvector);
+
+
+    
+    /// Provide diagonstic for DGGEV error return
+    void DGGEV_error(const int& info, const int& n)
+    {
+     // Throw an error
+     std::ostringstream error_stream;
+     error_stream << "Failure in LAPACK_DGGEV(...).\n"
+                  << "info = " << info << std::endl;
+     error_stream
+      << "Diagnostics below are from \n\n"
+      << "http://www.netlib.org/lapack/explore-html/d9/d8e/group__double_g_eeigen_ga4f59e87e670a755b41cbdd7e97f36bea.html"
+      << std::endl;
+     if (info<0)
+      {
+       error_stream << -info << "-th input arg had an illegal value\n";
+      }
+     else if (info <= n)
+      {
+       error_stream
+        << "The QZ iteration failed.  No eigenvectors have been\n"
+        << "calculated, but ALPHAR(j), ALPHAI(j), and BETA(j)\n"
+        << "should be correct for j=INFO+1,...,N, where \n"
+        << "info = " << info << " and N = " << n << std::endl;
+      }
+     else if (info==(n+1))
+      {
+       error_stream << "QZ iteration failed in DHGEQZ.\n";
+      }
+     else if (info==(n+2))
+      {
+       error_stream << "error return from DTGEVC.\n";
+      }
+     error_stream
+      << "Aborting here; if you know how to proceed then\n"
+      << "then implement ability to catch this error and continue\n";
+     
+     throw OomphLibError(
+      error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+    }
+  
+  
+  };
+  
 } // namespace oomph
 
 #endif

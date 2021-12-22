@@ -963,7 +963,7 @@ public:
    
    //Solve the eigenvalue problem
    Vector<complex<double> > eval;
-   eigenvalue_problem_pt->solve_eigenproblem(4,eval);
+   eigenvalue_problem_pt->solve_eigenproblem_legacy(4,eval);
    //We need to make sure that we pick the eigenvalue with the largest real 
    //part
    unsigned index=0;

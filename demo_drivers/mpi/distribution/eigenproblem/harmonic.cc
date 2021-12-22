@@ -443,7 +443,7 @@ solve(const unsigned& label)
  unsigned n_eval=4;
 
  //Solve the eigenproblem
- this->solve_eigenproblem(n_eval,eigenvalues,eigenvectors);
+ this->solve_eigenproblem_legacy(n_eval,eigenvalues,eigenvectors);
 
  //We now need to sort the output based on the size of the real part
  //of the eigenvalues.

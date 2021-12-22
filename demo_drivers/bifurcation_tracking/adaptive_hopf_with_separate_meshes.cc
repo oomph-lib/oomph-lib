@@ -1867,7 +1867,7 @@ int main()
   {
    Vector<std::complex<double> > eigenvalues;
    //Now solve the eigenproblem
-   problem.solve_eigenproblem(6,eigenvalues,eigenvectors);
+   problem.solve_eigenproblem_legacy(6,eigenvalues,eigenvectors);
    frequency = eigenvalues[0].imag();
   }
 

@@ -400,7 +400,7 @@ void ABCProblem<ELEMENT,TIMESTEPPER>::solve()
          << mesh_pt()->element_pt(0)->internal_data_pt(0)->value(2) 
          << std::endl;
    
-   this->solve_eigenproblem(3,eigenvalues,eigenvectors);
+   this->solve_eigenproblem_legacy(3,eigenvalues,eigenvectors);
    
    for(unsigned e=0;e<eigenvalues.size();e++)
     {
