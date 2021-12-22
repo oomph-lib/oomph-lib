@@ -1928,7 +1928,7 @@ namespace oomph
                                    Vector<std::complex<double>>& eigenvalue,
                                    Vector<DoubleVector>& eigenvector,
                                    const bool& steady = true);
-    
+
     /// Solve an eigenproblem as assembled by EigenElements
     /// calculate n_eval eigenvalues and return the corresponding
     /// eigenvectors. The boolean flag (default true) specifies whether
@@ -1940,7 +1940,7 @@ namespace oomph
     void solve_eigenproblem(const unsigned& n_eval,
                             Vector<std::complex<double>>& alpha,
                             Vector<double>& beta,
-                            Vector<Vector<std::complex<double>>> & eigenvector,
+                            Vector<Vector<std::complex<double>>>& eigenvector,
                             const bool& steady = true);
 
     /// Solve an eigenproblem as assembled by EigenElements,
@@ -1948,7 +1948,8 @@ namespace oomph
     /// The boolean flag (default true) is used to specify whether the
     /// weighted mass-matrix terms from the timestepping scheme should
     /// be included in the jacobian.
-    // hierher change to legacy and provide non-legacy version with alpha and betas
+    // hierher change to legacy and provide non-legacy version with alpha and
+    // betas
     void solve_eigenproblem(const unsigned& n_eval,
                             Vector<std::complex<double>>& eigenvalue,
                             const bool& steady = true)
