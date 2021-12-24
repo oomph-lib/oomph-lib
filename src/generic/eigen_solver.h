@@ -106,10 +106,24 @@ namespace oomph
                             Vector<std::complex<double>>& eigenvalue,
                             Vector<Vector<std::complex<double>>> & eigenvector)
     {
-     // hierher should be able to implement this generically;
-     // in fact arnoldi solvers do actually only return eigenvalues...
-     oomph_info << "hierher implement this!\n";
-     abort();
+     Vector<std::complex<double>> alpha;
+     Vector<double> beta;
+     
+     // Call the "safe" version
+     solve_eigenproblem(problem_pt,
+                        n_eval,
+                        alpha,
+                        beta,
+                        eigenvector);
+
+     // Now do the brute force conversion, possibly creating NaNs and Infs...
+     unsigned n=alpha.size();
+     eigenvalue.resize(n);
+     for (unsigned i=0;i<n;i++)
+      {
+       eigenvalue[i]=alpha[i]/beta[i];
+      }
+     
     }
     
     /// Solve the real eigenproblem that is assembled by elements in
@@ -141,6 +155,8 @@ namespace oomph
     {
       return Sigma_real;
     }
+
+    
   };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -298,8 +314,9 @@ namespace oomph
   public:
    
     /// Empty constructor
-    LAPACK_QZ() : EigenSolver() {}
+    LAPACK_QZ() : EigenSolver(), Tolerance_for_ccness_check(1.0e-13) {}
 
+   // hierher break
     /// Empty copy constructor
     LAPACK_QZ(const LAPACK_QZ&) {}
 
@@ -348,6 +365,19 @@ namespace oomph
                           Vector<Vector<std::complex<double>>>& eigenvector);
 
 
+    /// Access to tolerance for checking complex conjugateness of eigenvalues
+    /// (const version)
+    double tolerance_for_ccness_check() const
+    {
+     return Tolerance_for_ccness_check;
+    }
+
+    
+    /// Access to tolerance for checking complex conjugateness of eigenvalues
+    double& tolerance_for_ccness_check()
+    {
+     return Tolerance_for_ccness_check;
+    }
 
     private:
 
@@ -400,8 +430,12 @@ namespace oomph
      throw OomphLibError(
       error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
-  
-  
+
+
+    /// Tolerance for checking complex conjugateness of eigenvalues
+    double Tolerance_for_ccness_check;
+
+    
   };
   
 } // namespace oomph

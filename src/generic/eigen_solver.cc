@@ -571,7 +571,9 @@ namespace oomph
   
   // Get the dimension of the matrix
   int n = problem_pt->ndof(); // Total size of matrix
-  
+
+
+  oomph_info << "Problem based :solve_eigenproblem_helper n = " << n << std::endl;
   
   // hierher copy across to matrix-based solver
   
@@ -609,6 +611,9 @@ namespace oomph
    // Assemble the matrices; pass the shift into the assembly
    problem_pt->get_eigenproblem_matrices(temp_M, temp_AsigmaM, Sigma_real);
    
+   temp_AsigmaM.sparse_indexed_output("a_from_eigensolve_helper_mat.dat");
+   temp_M.sparse_indexed_output("m_from_eigensolve_helper_mat.dat");
+  
    // Now convert these matrices into the appropriate packed form
    unsigned index = 0;
    for (int i = 0; i < n; ++i)
@@ -798,12 +803,12 @@ namespace oomph
   //==========================================================================
  void LAPACK_QZ::solve_eigenproblem(Problem* const& problem_pt,
                                     const int& n_eval,
-                                    Vector<std::complex<double>>& alpha,
-                                    Vector<double>& beta,
+                                    Vector<std::complex<double>>& alpha_eval,
+                                    Vector<double>& beta_eval,
                                     Vector<Vector<std::complex<double>>> & eigenvector)
  {
-  Vector<std::complex<double>> alpha_eval;
-  Vector<double> beta_eval;
+  // Vector<std::complex<double>> alpha_eval;
+  // Vector<double> beta_eval;
   Vector<DoubleVector> eigenvector_aux;
 
   // Call raw interface to lapack qz
@@ -840,6 +845,8 @@ namespace oomph
          eigenvector[eval_count][j]=
           std::complex<double>(eigenvector_aux[j][eval_count],0.0);
         }
+       oomph_info << "Alpha " << eval_count << " (real) " <<  alpha_eval[eval_count].real()
+                  << " BETA: " << beta_eval[eval_count] << std::endl;
        eval_count++;
       }
      // Assume (and check!) that complex conjugate pairs follow each other
@@ -849,23 +856,67 @@ namespace oomph
       {
 #ifdef PARANOID
        // Are consecutive eigenvalues cc?
-       if (alpha_eval[eval_count].imag()+alpha_eval[eval_count+1].imag()!=0.0)
+
+       // Are the eigenvalues finite?
+       if ((beta_eval[eval_count]!=0.0)&&(beta_eval[eval_count+1]!=0.0))
         {
-         std::ostringstream error_stream;
-         error_stream
-          << "(Scaled) non-zero imaginary part of eigenvalue "
-          << eval_count << " : " <<  alpha_eval[eval_count].imag() << std::endl;
-         error_stream
-          << "isn't the negative of its subsequent value :\n"
-          << alpha_eval[eval_count+1].imag() << std::endl
-          << "Their sum is " 
-          << alpha_eval[eval_count].imag()+alpha_eval[eval_count+1].imag()
-          << std::endl;
-         throw OomphLibError(
-          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+         std::complex<double> lambda_this=
+          alpha_eval[eval_count]/beta_eval[eval_count];
+
+         std::complex<double> lambda_next=
+          alpha_eval[eval_count+1]/beta_eval[eval_count+1];
+
+         if (fabs(lambda_this.imag()+lambda_next.imag())>Tolerance_for_ccness_check)
+          {
+           std::ostringstream error_stream;
+           error_stream
+            << "Non-zero imaginary part of eigenvalue "
+            << eval_count << " : " <<  lambda_this.imag() << std::endl;
+           error_stream
+            << "isn't the negative of its subsequent value       : "
+            << lambda_next.imag() << std::endl
+            << "Their sum " 
+            << (lambda_this.imag()+lambda_next.imag())
+            << " is greater than Tolerance_for_ccness_check = "
+            << Tolerance_for_ccness_check 
+            << std::endl;
+           oomph_info << error_stream.str();
+           // hierher throw
+           // OomphLibError(
+           //  error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+          }
+         if (fabs(lambda_this.real()-lambda_next.real())>Tolerance_for_ccness_check)
+          {
+           std::ostringstream error_stream;
+           error_stream
+            << "Real parts of complex eigenvalue  "
+            << eval_count << " : " <<  lambda_this.real() << std::endl;
+           error_stream
+            << " doesn't agree with its supposed-to-be cc counterpart     : "
+            << lambda_next.real() << std::endl
+            << "Their difference " 
+            << (lambda_this.real()-lambda_next.real())
+            << " is greater than Tolerance_for_ccness_check = "
+            << Tolerance_for_ccness_check 
+            << std::endl;
+           oomph_info << error_stream.str();
+           // hierher throw
+           // OomphLibError(
+           //  error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+          }
         }
+       else
+        {
+         oomph_info << "supposed-to-be cc eigenvalues or both infinite; skipping test.\n";
+        }
+
 #endif
-       
+       oomph_info << "Alpha " << eval_count   << " (imag) " <<  alpha_eval[eval_count  ] 
+                  << " BETA: " << beta_eval[eval_count] << std::endl;
+       oomph_info << "Alpha " << eval_count+1 << " (imag) " <<  alpha_eval[eval_count+1] 
+                  << " BETA: " << beta_eval[eval_count+1]  << std::endl;
+
+
        // Resize the two cc eigenvectors associated with the
        // two cc eigenvalues
        eigenvector[eval_count].resize(n);
@@ -873,12 +924,12 @@ namespace oomph
        for (unsigned j = 0; j < n; ++j)
         {
          eigenvector[eval_count][j]=std::complex<double>(
-          eigenvector_aux[j][eval_count],
-          eigenvector_aux[j][eval_count+1]);
+          eigenvector_aux[eval_count][j],
+          eigenvector_aux[eval_count+1][j]);
          
          eigenvector[eval_count+1][j]=std::complex<double>(
-          eigenvector_aux[j][eval_count],
-          -eigenvector_aux[j][eval_count+1]);
+          eigenvector_aux[eval_count][j],
+          -eigenvector_aux[eval_count+1][j]);
         }
        eval_count+=2;
       }
@@ -906,7 +957,9 @@ namespace oomph
 
     // Get the dimension of the matrix
     int n = A.nrow(); // Total size of matrix
-   
+    
+     oomph_info << "Matrix based :find_eigenproblem n = " << n << std::endl;
+
     // Storage for the matrices in the packed form required by the LAPACK
     // routine
     double* M_linear = new double[2 * n * n];

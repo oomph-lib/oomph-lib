@@ -1943,6 +1943,19 @@ namespace oomph
                             Vector<Vector<std::complex<double>>> & eigenvector,
                             const bool& steady = true);
 
+    /// Solve an eigenproblem as assembled by EigenElements
+    /// calculate n_eval eigenvalues and return the corresponding
+    /// eigenvectors. The boolean flag (default true) specifies whether
+    /// the steady jacobian should be assembled. If the flag is false
+    /// then the weighted mass-matrix terms from the timestepper will
+    /// be included in the jacobian --- this is almost certainly never
+    /// wanted.
+    // hierher update comment above this one allows nans and infs in eigenvalues
+    void solve_eigenproblem(const unsigned& n_eval,
+                            Vector<std::complex<double>>& eigenvalue,
+                            Vector<Vector<std::complex<double>>> & eigenvector,
+                            const bool& steady = true);
+
     /// Solve an eigenproblem as assembled by EigenElements,
     /// but only return the eigenvalues, not the eigenvectors.
     /// The boolean flag (default true) is used to specify whether the
