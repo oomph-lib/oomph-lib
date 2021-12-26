@@ -607,7 +607,6 @@ namespace oomph
 
 
   public:
-    
     /// Constructor
     ANASAZI()
       : Linear_solver_pt(0),
@@ -659,6 +658,30 @@ namespace oomph
       Compute_eigenvectors = false;
     }
 
+    /// Solve the real eigenproblem that is assembled by elements in
+    /// a mesh in a Problem object. Note that the assembled matrices include the
+    /// shift and are real. The eigenvalues and eigenvectors are,
+    /// in general, complex. Eigenvalues may be infinite and are therefore
+    /// returned as
+    /// \f$ \lambda_i = \alpha_i / \beta_i \f$ where \f$ \alpha_i \f$ is complex
+    /// while \f$ \beta_i \f$ is real. The actual eigenvalues may then be
+    /// computed by doing the division, checking for zero betas to avoid NaNs.
+    /// There's a convenience wrapper to this function that simply computes
+    /// these eigenvalues regardless. That version may die in NaN checking is
+    /// enabled (via the fenv.h header and the associated feenable function).
+    virtual void solve_eigenproblem(
+      Problem* const& problem_pt,
+      const int& n_eval,
+      Vector<std::complex<double>>& alpha,
+      Vector<double>& beta,
+      Vector<Vector<std::complex<double>>>& eigenvector)
+    {
+     // hierher still broken
+     abort();
+    }
+
+
+    
     /// Solve the eigen problem
     void solve_eigenproblem_legacy(Problem* const& problem_pt,
                                    const int& n_eval,
@@ -744,13 +767,18 @@ namespace oomph
       std::vector<Anasazi::Value<double>> evals = sol.Evals;
       Teuchos::RCP<DoubleMultiVector> evecs = sol.Evecs;
 
+      
+      //std::vector<int> Anasazi::Eigensolution< ScalarType, MV >::index
+      std::vector<int> index_vector=sol.index;
+
+      
       eigenvalue.resize(evals.size());
       eigenvector.resize(evals.size());
 
       for (unsigned i = 0; i < evals.size(); i++)
       {
-       // hierher what is this? And what about NaN and Inf eigenvalues?
-       
+        // hierher what is this? And what about NaN and Inf eigenvalues?
+
         // Undo shift and invert
         double a = evals[i].realpart;
         double b = evals[i].imagpart;
@@ -761,10 +789,13 @@ namespace oomph
         eigenvector[i].build(evecs->distribution_pt());
         unsigned nrow_local = evecs->nrow_local();
 
-        // hierher this is the legacy stuff. Use 
+        // hierher this is the legacy stuff. Use
         // std::vector<int> Anasazi::Eigensolution< ScalarType, MV >::index
         // to translate into proper complex vector; see
         // https://docs.trilinos.org/dev/packages/anasazi/doc/html/structAnasazi_1_1Eigensolution.html#ac9d141d98adcba85fbad011a7b7bda6e
+
+        oomph_info << "hierher index: " << i << " index_vector "
+                   << index_vector[i] << std::endl;
         
         // Would be faster with pointers, but I'll sort that out later!
         for (unsigned n = 0; n < nrow_local; n++)
