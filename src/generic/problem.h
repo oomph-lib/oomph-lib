@@ -1953,7 +1953,7 @@ namespace oomph
     // hierher update comment above this one allows nans and infs in eigenvalues
     void solve_eigenproblem(const unsigned& n_eval,
                             Vector<std::complex<double>>& eigenvalue,
-                            Vector<Vector<std::complex<double>>> & eigenvector,
+                            Vector<Vector<std::complex<double>>>& eigenvector,
                             const bool& steady = true);
 
     /// Solve an eigenproblem as assembled by EigenElements,

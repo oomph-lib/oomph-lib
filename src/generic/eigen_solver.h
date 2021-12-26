@@ -60,7 +60,6 @@ namespace oomph
   class EigenSolver : public DistributableLinearAlgebraObject
   {
   protected:
-   
     /// Double value that represents the real part of the shift in
     /// shifted eigensolvers
     double Sigma_real;
@@ -105,22 +104,18 @@ namespace oomph
                             Vector<std::complex<double>>& eigenvalue,
                             Vector<Vector<std::complex<double>>>& eigenvector)
     {
-     Vector<std::complex<double>> alpha;
-     Vector<double> beta;
-     
-     // Call the "safe" version
-     solve_eigenproblem(problem_pt,
-                        n_eval,
-                        alpha,
-                        beta,
-                        eigenvector);
+      Vector<std::complex<double>> alpha;
+      Vector<double> beta;
 
-     // Now do the brute force conversion, possibly creating NaNs and Infs...
-     unsigned n=alpha.size();
-     eigenvalue.resize(n);
-     for (unsigned i=0;i<n;i++)
+      // Call the "safe" version
+      solve_eigenproblem(problem_pt, n_eval, alpha, beta, eigenvector);
+
+      // Now do the brute force conversion, possibly creating NaNs and Infs...
+      unsigned n = alpha.size();
+      eigenvalue.resize(n);
+      for (unsigned i = 0; i < n; i++)
       {
-       eigenvalue[i]=alpha[i]/beta[i];
+        eigenvalue[i] = alpha[i] / beta[i];
       }
     }
 
@@ -154,8 +149,6 @@ namespace oomph
     {
       return Sigma_real;
     }
-
-    
   };
 
   ////////////////////////////////////////////////////////////////////////////////
@@ -311,7 +304,7 @@ namespace oomph
     /// Empty constructor
     LAPACK_QZ() : EigenSolver(), Tolerance_for_ccness_check(1.0e-13) {}
 
-   // hierher break
+    // hierher break
     /// Empty copy constructor
     LAPACK_QZ(const LAPACK_QZ&) {}
 
@@ -364,20 +357,19 @@ namespace oomph
     /// (const version)
     double tolerance_for_ccness_check() const
     {
-     return Tolerance_for_ccness_check;
+      return Tolerance_for_ccness_check;
     }
 
-    
+
     /// Access to tolerance for checking complex conjugateness of eigenvalues
     double& tolerance_for_ccness_check()
     {
-     return Tolerance_for_ccness_check;
+      return Tolerance_for_ccness_check;
     }
 
-    private:
-
-
-    /// Helper function called from legacy and updated version from "raw" lapack code
+  private:
+    /// Helper function called from legacy and updated version from "raw" lapack
+    /// code
     // hierher elaborate on args
     void solve_eigenproblem_helper(Problem* const& problem_pt,
                                    const int& n_eval,
@@ -427,7 +419,6 @@ namespace oomph
 
     /// Tolerance for checking complex conjugateness of eigenvalues
     double Tolerance_for_ccness_check;
-
   };
 
 } // namespace oomph

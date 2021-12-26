@@ -676,12 +676,11 @@ namespace oomph
       Vector<double>& beta,
       Vector<Vector<std::complex<double>>>& eigenvector)
     {
-     // hierher still broken
-     abort();
+      // hierher still broken
+      abort();
     }
 
 
-    
     /// Solve the eigen problem
     void solve_eigenproblem_legacy(Problem* const& problem_pt,
                                    const int& n_eval,
@@ -767,11 +766,11 @@ namespace oomph
       std::vector<Anasazi::Value<double>> evals = sol.Evals;
       Teuchos::RCP<DoubleMultiVector> evecs = sol.Evecs;
 
-      
-      //std::vector<int> Anasazi::Eigensolution< ScalarType, MV >::index
-      std::vector<int> index_vector=sol.index;
 
-      
+      // std::vector<int> Anasazi::Eigensolution< ScalarType, MV >::index
+      std::vector<int> index_vector = sol.index;
+
+
       eigenvalue.resize(evals.size());
       eigenvector.resize(evals.size());
 
@@ -796,7 +795,7 @@ namespace oomph
 
         oomph_info << "hierher index: " << i << " index_vector "
                    << index_vector[i] << std::endl;
-        
+
         // Would be faster with pointers, but I'll sort that out later!
         for (unsigned n = 0; n < nrow_local; n++)
         {

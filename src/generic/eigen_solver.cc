@@ -539,154 +539,163 @@ namespace oomph
   ////////////////////////////////////////////////////////////////////////////
 
 
-// hierher <<<<<<< HEAD
- 
- ////////////////////////////////////////////////////////////////////////////
- ////////////////////////////////////////////////////////////////////////////
- ////////////////////////////////////////////////////////////////////////////
+  // hierher <<<<<<< HEAD
+
+  ////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////
 
 
- //==========================================================================
- /// Use LAPACK QZ to solve the real eigenproblem that is assembled by elements in
- /// a mesh in a Problem object. Note that the assembled matrices include the
- /// shift and are real. The eigenvalues and eigenvectors are, in general, complex. 
- /// This is actually a helper function that stores re & imag parts of
- /// eigenvectors in some solver-specific collection of real vectors; they 
- /// are disentangled in the alternative version of this function that returns
- /// Vectors of complex vectors.
- ///
- /// hierher update comment above
- //==========================================================================
- void LAPACK_QZ::solve_eigenproblem_helper(
-  Problem* const& problem_pt,
-  const int& n_eval,
-  Vector<std::complex<double>>& alpha_eval,
-  Vector<double>& beta_eval,
-  Vector<DoubleVector>& eigenvector_aux)
- {
-  
-  // Some character identifiers for use in the LAPACK routine
-  // Do not calculate the left eigenvectors
-  char no_eigvecs[2] = "N";
-  
-  // Do caculate the eigenvectors
-  char eigvecs[2] = "V";
-  
-  // Get the dimension of the matrix
-  int n = problem_pt->ndof(); // Total size of matrix
-
-
-  oomph_info << "Problem based :solve_eigenproblem_helper n = " << n << std::endl;
-  
-  // hierher copy across to matrix-based solver
-  
-  // Use padding?
-  bool use_padding = false;
-  
-  // If the dimension of the matrix is even, then pad the arrays to
-  // make the size odd. This somehow sorts out a strange run-time behaviour
-  // identified by Rich Hewitt.
-  // Actual size of matrix that will be allocated
-  int padded_n = n;
-  if (n % 2 == 0)
-   {
-    use_padding = true;
-    padded_n+=1;
-   }
-  
-  // Storage for the matrices in the packed form required by the LAPACK
-  // routine
-  double* M = new double[padded_n * padded_n];
-  double* A = new double[padded_n * padded_n];
-  
-  // TEMPORARY
-  // only use non-distributed matrices and vectors
-  LinearAlgebraDistribution dist(problem_pt->communicator_pt(), n, false);
-  this->build_distribution(dist);
-  
-  // Enclose in a separate scope so that memory is cleaned after assembly
+  //==========================================================================
+  /// Use LAPACK QZ to solve the real eigenproblem that is assembled by elements
+  /// in a mesh in a Problem object. Note that the assembled matrices include
+  /// the shift and are real. The eigenvalues and eigenvectors are, in general,
+  /// complex. This is actually a helper function that stores re & imag parts of
+  /// eigenvectors in some solver-specific collection of real vectors; they
+  /// are disentangled in the alternative version of this function that returns
+  /// Vectors of complex vectors.
+  ///
+  /// hierher update comment above
+  //==========================================================================
+  void LAPACK_QZ::solve_eigenproblem_helper(
+    Problem* const& problem_pt,
+    const int& n_eval,
+    Vector<std::complex<double>>& alpha_eval,
+    Vector<double>& beta_eval,
+    Vector<DoubleVector>& eigenvector_aux)
   {
-   // Allocated Row compressed matrices for the mass matrix and shifted main
-   // matrix
-   CRDoubleMatrix temp_M(this->distribution_pt()),
-    temp_AsigmaM(this->distribution_pt());
-   
-   // Assemble the matrices; pass the shift into the assembly
-   problem_pt->get_eigenproblem_matrices(temp_M, temp_AsigmaM, Sigma_real);
-   
-   temp_AsigmaM.sparse_indexed_output("a_from_eigensolve_helper_mat.dat");
-   temp_M.sparse_indexed_output("m_from_eigensolve_helper_mat.dat");
-  
-   // // Now convert these matrices into the appropriate packed form
-   // unsigned index = 0;
-   // for (int i = 0; i < n; ++i)
-    
-// // hierher =======
-//   //==========================================================================
-//   /// Use LAPACK QZ to solve the real eigenproblem that is assembled by elements
-//   /// in a mesh in a Problem object. Note that the assembled matrices include
-//   /// the shift and are real. The eigenvalues and eigenvectors are, in general,
-//   /// complex. This is actually a helper function that stores re & imag parts of
-//   /// eigenvectors in some solver-specific collection of real vectors; they
-//   /// are disentangled in the alternative version of this function that returns
-//   /// Vectors of complex vectors.
-//   ///
-//   /// hierher update comment above
-//   //==========================================================================
-//   void LAPACK_QZ::solve_eigenproblem_helper(
-//     Problem* const& problem_pt,
-//     const int& n_eval,
-//     Vector<std::complex<double>>& alpha_eval,
-//     Vector<double>& beta_eval,
-//     Vector<DoubleVector>& eigenvector_aux)
-//   {
-//     // Some character identifiers for use in the LAPACK routine
-//     // Do not calculate the left eigenvectors
-//     char no_eigvecs[2] = "N";
+    // Some character identifiers for use in the LAPACK routine
+    // Do not calculate the left eigenvectors
+    char no_eigvecs[2] = "N";
 
-//     // Do caculate the eigenvectors
-//     char eigvecs[2] = "V";
+    // Do caculate the eigenvectors
+    char eigvecs[2] = "V";
 
-//     // Get the dimension of the matrix
-//     int n = problem_pt->ndof(); // Total size of matrix
+    // Get the dimension of the matrix
+    int n = problem_pt->ndof(); // Total size of matrix
 
 
-//     // hierher copy across to matrix-based solver
+    oomph_info << "Problem based :solve_eigenproblem_helper n = " << n
+               << std::endl;
 
-//     // Use padding?
-//     bool use_padding = false;
+    // hierher copy across to matrix-based solver
 
-//     // If the dimension of the matrix is even, then pad the arrays to
-//     // make the size odd. This somehow sorts out a strange run-time behaviour
-//     // identified by Rich Hewitt.
-//     // Actual size of matrix that will be allocated
-//     int padded_n = n;
-//     if (n % 2 == 0)
-// hierher >>>>>>> 51e8f2100011ccdfdafbc80d49124f36cd448d54
-    // {
-    //   use_padding = true;
-    //   padded_n += 1;
-    // }
+    // Use padding?
+    bool use_padding = false;
 
-    // // Storage for the matrices in the packed form required by the LAPACK
-    // // routine
-    // double* M = new double[padded_n * padded_n];
-    // double* A = new double[padded_n * padded_n];
+    // If the dimension of the matrix is even, then pad the arrays to
+    // make the size odd. This somehow sorts out a strange run-time behaviour
+    // identified by Rich Hewitt.
+    // Actual size of matrix that will be allocated
+    int padded_n = n;
+    if (n % 2 == 0)
+    {
+      use_padding = true;
+      padded_n += 1;
+    }
 
-    // // TEMPORARY
-    // // only use non-distributed matrices and vectors
-    // LinearAlgebraDistribution dist(problem_pt->communicator_pt(), n, false);
-    // this->build_distribution(dist);
+    // Storage for the matrices in the packed form required by the LAPACK
+    // routine
+    double* M = new double[padded_n * padded_n];
+    double* A = new double[padded_n * padded_n];
 
-    // // Enclose in a separate scope so that memory is cleaned after assembly
-    // {
-    //   // Allocated Row compressed matrices for the mass matrix and shifted main
-    //   // matrix
-    //   CRDoubleMatrix temp_M(this->distribution_pt()),
-    //     temp_AsigmaM(this->distribution_pt());
+    // TEMPORARY
+    // only use non-distributed matrices and vectors
+    LinearAlgebraDistribution dist(problem_pt->communicator_pt(), n, false);
+    this->build_distribution(dist);
 
-    //   // Assemble the matrices; pass the shift into the assembly
-    //   problem_pt->get_eigenproblem_matrices(temp_M, temp_AsigmaM, Sigma_real);
+    // Enclose in a separate scope so that memory is cleaned after assembly
+    {
+      // Allocated Row compressed matrices for the mass matrix and shifted main
+      // matrix
+      CRDoubleMatrix temp_M(this->distribution_pt()),
+        temp_AsigmaM(this->distribution_pt());
+
+      // Assemble the matrices; pass the shift into the assembly
+      problem_pt->get_eigenproblem_matrices(temp_M, temp_AsigmaM, Sigma_real);
+
+      temp_AsigmaM.sparse_indexed_output("a_from_eigensolve_helper_mat.dat");
+      temp_M.sparse_indexed_output("m_from_eigensolve_helper_mat.dat");
+
+      // // Now convert these matrices into the appropriate packed form
+      // unsigned index = 0;
+      // for (int i = 0; i < n; ++i)
+
+      // // hierher =======
+      //   //==========================================================================
+      //   /// Use LAPACK QZ to solve the real eigenproblem that is assembled by
+      //   elements
+      //   /// in a mesh in a Problem object. Note that the assembled matrices
+      //   include
+      //   /// the shift and are real. The eigenvalues and eigenvectors are, in
+      //   general,
+      //   /// complex. This is actually a helper function that stores re & imag
+      //   parts of
+      //   /// eigenvectors in some solver-specific collection of real vectors;
+      //   they
+      //   /// are disentangled in the alternative version of this function that
+      //   returns
+      //   /// Vectors of complex vectors.
+      //   ///
+      //   /// hierher update comment above
+      //   //==========================================================================
+      //   void LAPACK_QZ::solve_eigenproblem_helper(
+      //     Problem* const& problem_pt,
+      //     const int& n_eval,
+      //     Vector<std::complex<double>>& alpha_eval,
+      //     Vector<double>& beta_eval,
+      //     Vector<DoubleVector>& eigenvector_aux)
+      //   {
+      //     // Some character identifiers for use in the LAPACK routine
+      //     // Do not calculate the left eigenvectors
+      //     char no_eigvecs[2] = "N";
+
+      //     // Do caculate the eigenvectors
+      //     char eigvecs[2] = "V";
+
+      //     // Get the dimension of the matrix
+      //     int n = problem_pt->ndof(); // Total size of matrix
+
+
+      //     // hierher copy across to matrix-based solver
+
+      //     // Use padding?
+      //     bool use_padding = false;
+
+      //     // If the dimension of the matrix is even, then pad the arrays to
+      //     // make the size odd. This somehow sorts out a strange run-time
+      //     behaviour
+      //     // identified by Rich Hewitt.
+      //     // Actual size of matrix that will be allocated
+      //     int padded_n = n;
+      //     if (n % 2 == 0)
+      // hierher >>>>>>> 51e8f2100011ccdfdafbc80d49124f36cd448d54
+      // {
+      //   use_padding = true;
+      //   padded_n += 1;
+      // }
+
+      // // Storage for the matrices in the packed form required by the LAPACK
+      // // routine
+      // double* M = new double[padded_n * padded_n];
+      // double* A = new double[padded_n * padded_n];
+
+      // // TEMPORARY
+      // // only use non-distributed matrices and vectors
+      // LinearAlgebraDistribution dist(problem_pt->communicator_pt(), n,
+      // false); this->build_distribution(dist);
+
+      // // Enclose in a separate scope so that memory is cleaned after assembly
+      // {
+      //   // Allocated Row compressed matrices for the mass matrix and shifted
+      //   main
+      //   // matrix
+      //   CRDoubleMatrix temp_M(this->distribution_pt()),
+      //     temp_AsigmaM(this->distribution_pt());
+
+      //   // Assemble the matrices; pass the shift into the assembly
+      //   problem_pt->get_eigenproblem_matrices(temp_M, temp_AsigmaM,
+      //   Sigma_real);
 
       // Now convert these matrices into the appropriate packed form
       unsigned index = 0;
@@ -858,89 +867,99 @@ namespace oomph
   }
 
   //==========================================================================
-/// Use LAPACK QZ to solve the real eigenproblem that is assembled by elements
-//   /// in a mesh in a Problem object. Note that the assembled matrices include
-//   /// the shift and are real. The eigenvalues and eigenvectors are, in general,
-//   /// complex. This is actually a helper function that stores re & imag parts of
-//   /// eigenvectors in some solver-specific collection of real vectors; they
-//   /// are disentangled in the alternative version of this function that returns
-//   /// Vectors of complex vectors.
-//   // hierher update
+  /// Use LAPACK QZ to solve the real eigenproblem that is assembled by elements
+  //   /// in a mesh in a Problem object. Note that the assembled matrices
+  //   include
+  //   /// the shift and are real. The eigenvalues and eigenvectors are, in
+  //   general,
+  //   /// complex. This is actually a helper function that stores re & imag
+  //   parts of
+  //   /// eigenvectors in some solver-specific collection of real vectors; they
+  //   /// are disentangled in the alternative version of this function that
+  //   returns
+  //   /// Vectors of complex vectors.
+  //   // hierher update
   //==========================================================================
-// hierher <<<<<<< HEAD
- void LAPACK_QZ::solve_eigenproblem(Problem* const& problem_pt,
-                                    const int& n_eval,
-                                    Vector<std::complex<double>>& alpha_eval,
-                                    Vector<double>& beta_eval,
-                                    Vector<Vector<std::complex<double>>> & eigenvector)
- {
-  // Vector<std::complex<double>> alpha_eval;
-  // Vector<double> beta_eval;
-  Vector<DoubleVector> eigenvector_aux;
+  // hierher <<<<<<< HEAD
+  void LAPACK_QZ::solve_eigenproblem(
+    Problem* const& problem_pt,
+    const int& n_eval,
+    Vector<std::complex<double>>& alpha_eval,
+    Vector<double>& beta_eval,
+    Vector<Vector<std::complex<double>>>& eigenvector)
+  {
+    // Vector<std::complex<double>> alpha_eval;
+    // Vector<double> beta_eval;
+    Vector<DoubleVector> eigenvector_aux;
 
-  // Call raw interface to lapack qz
-  solve_eigenproblem_helper(problem_pt,
-                            n_eval,
-                            alpha_eval,
-                            beta_eval,
-                            eigenvector_aux);
+    // Call raw interface to lapack qz
+    solve_eigenproblem_helper(
+      problem_pt, n_eval, alpha_eval, beta_eval, eigenvector_aux);
 
-  // Now moved auxiliary data into actual complex eigenvalues
-  // Instrutions from lapack qz (where VR translates into eigenvector_aux):
-  //        VR is DOUBLE PRECISION array, dimension (LDVR,N)
-  //        If JOBVR = 'V', the right eigenvectors v(j) are stored one
-  //        after another in the columns of VR, in the same order as
-  //        their eigenvalues. If the j-th eigenvalue is real, then
-  //        v(j) = VR(:,j), the j-th column of VR. If the j-th and
-  //        (j+1)-th eigenvalues form a complex conjugate pair, then
-  //        v(j) = VR(:,j)+i*VR(:,j+1) and v(j+1) = VR(:,j)-i*VR(:,j+1).
-  //        Each eigenvector is scaled so the largest component has
-  //        abs(real part)+abs(imag. part)=1.
-  unsigned n=problem_pt->ndof();
-  eigenvector.resize(n);
-  unsigned eval_count=0;
-  while (eval_count<n)
-// hierher =======
-//   /// Use LAPACK QZ to solve the real eigenproblem that is assembled by elements
-//   /// in a mesh in a Problem object. Note that the assembled matrices include
-//   /// the shift and are real. The eigenvalues and eigenvectors are, in general,
-//   /// complex. This is actually a helper function that stores re & imag parts of
-//   /// eigenvectors in some solver-specific collection of real vectors; they
-//   /// are disentangled in the alternative version of this function that returns
-//   /// Vectors of complex vectors.
-//   // hierher update
-//   //==========================================================================
-//   void LAPACK_QZ::solve_eigenproblem(
-//     Problem* const& problem_pt,
-//     const int& n_eval,
-//     Vector<std::complex<double>>& alpha,
-//     Vector<double>& beta,
-//     Vector<Vector<std::complex<double>>>& eigenvector)
-//   {
-//     Vector<std::complex<double>> alpha_eval;
-//     Vector<double> beta_eval;
-//     Vector<DoubleVector> eigenvector_aux;
+    // Now moved auxiliary data into actual complex eigenvalues
+    // Instrutions from lapack qz (where VR translates into eigenvector_aux):
+    //        VR is DOUBLE PRECISION array, dimension (LDVR,N)
+    //        If JOBVR = 'V', the right eigenvectors v(j) are stored one
+    //        after another in the columns of VR, in the same order as
+    //        their eigenvalues. If the j-th eigenvalue is real, then
+    //        v(j) = VR(:,j), the j-th column of VR. If the j-th and
+    //        (j+1)-th eigenvalues form a complex conjugate pair, then
+    //        v(j) = VR(:,j)+i*VR(:,j+1) and v(j+1) = VR(:,j)-i*VR(:,j+1).
+    //        Each eigenvector is scaled so the largest component has
+    //        abs(real part)+abs(imag. part)=1.
+    unsigned n = problem_pt->ndof();
+    eigenvector.resize(n);
+    unsigned eval_count = 0;
+    while (eval_count < n)
+    // hierher =======
+    //   /// Use LAPACK QZ to solve the real eigenproblem that is assembled by
+    //   elements
+    //   /// in a mesh in a Problem object. Note that the assembled matrices
+    //   include
+    //   /// the shift and are real. The eigenvalues and eigenvectors are, in
+    //   general,
+    //   /// complex. This is actually a helper function that stores re & imag
+    //   parts of
+    //   /// eigenvectors in some solver-specific collection of real vectors;
+    //   they
+    //   /// are disentangled in the alternative version of this function that
+    //   returns
+    //   /// Vectors of complex vectors.
+    //   // hierher update
+    //   //==========================================================================
+    //   void LAPACK_QZ::solve_eigenproblem(
+    //     Problem* const& problem_pt,
+    //     const int& n_eval,
+    //     Vector<std::complex<double>>& alpha,
+    //     Vector<double>& beta,
+    //     Vector<Vector<std::complex<double>>>& eigenvector)
+    //   {
+    //     Vector<std::complex<double>> alpha_eval;
+    //     Vector<double> beta_eval;
+    //     Vector<DoubleVector> eigenvector_aux;
 
-//     // Call raw interface to lapack qz
-//     solve_eigenproblem_helper(
-//       problem_pt, n_eval, alpha_eval, beta_eval, eigenvector_aux);
+    //     // Call raw interface to lapack qz
+    //     solve_eigenproblem_helper(
+    //       problem_pt, n_eval, alpha_eval, beta_eval, eigenvector_aux);
 
-//     // Now moved auxiliary data into actual complex eigenvalues
-//     // Instrutions from lapack qz (where VR translates into eigenvector_aux):
-//     //        VR is DOUBLE PRECISION array, dimension (LDVR,N)
-//     //        If JOBVR = 'V', the right eigenvectors v(j) are stored one
-//     //        after another in the columns of VR, in the same order as
-//     //        their eigenvalues. If the j-th eigenvalue is real, then
-//     //        v(j) = VR(:,j), the j-th column of VR. If the j-th and
-//     //        (j+1)-th eigenvalues form a complex conjugate pair, then
-//     //        v(j) = VR(:,j)+i*VR(:,j+1) and v(j+1) = VR(:,j)-i*VR(:,j+1).
-//     //        Each eigenvector is scaled so the largest component has
-//     //        abs(real part)+abs(imag. part)=1.
-//     unsigned n = problem_pt->ndof();
-//     eigenvector.resize(n);
-//     unsigned eval_count = 0;
-//     while (eval_count < n)
-// // hierher >>>>>>> 51e8f2100011ccdfdafbc80d49124f36cd448d54
+    //     // Now moved auxiliary data into actual complex eigenvalues
+    //     // Instrutions from lapack qz (where VR translates into
+    //     eigenvector_aux):
+    //     //        VR is DOUBLE PRECISION array, dimension (LDVR,N)
+    //     //        If JOBVR = 'V', the right eigenvectors v(j) are stored one
+    //     //        after another in the columns of VR, in the same order as
+    //     //        their eigenvalues. If the j-th eigenvalue is real, then
+    //     //        v(j) = VR(:,j), the j-th column of VR. If the j-th and
+    //     //        (j+1)-th eigenvalues form a complex conjugate pair, then
+    //     //        v(j) = VR(:,j)+i*VR(:,j+1) and v(j+1) =
+    //     VR(:,j)-i*VR(:,j+1).
+    //     //        Each eigenvector is scaled so the largest component has
+    //     //        abs(real part)+abs(imag. part)=1.
+    //     unsigned n = problem_pt->ndof();
+    //     eigenvector.resize(n);
+    //     unsigned eval_count = 0;
+    //     while (eval_count < n)
+    // // hierher >>>>>>> 51e8f2100011ccdfdafbc80d49124f36cd448d54
     {
       // i-th eigenvalue is real:
       if (alpha_eval[eval_count].imag() == 0.0)
@@ -953,9 +972,10 @@ namespace oomph
           eigenvector[eval_count][j] =
             std::complex<double>(eigenvector_aux[j][eval_count], 0.0);
         }
-       oomph_info << "Alpha " << eval_count << " (real) " <<  alpha_eval[eval_count].real()
-                  << " BETA: " << beta_eval[eval_count] << std::endl;
-       eval_count++;
+        oomph_info << "Alpha " << eval_count << " (real) "
+                   << alpha_eval[eval_count].real()
+                   << " BETA: " << beta_eval[eval_count] << std::endl;
+        eval_count++;
       }
       // Assume (and check!) that complex conjugate pairs follow each other
       // as implied by
@@ -963,117 +983,127 @@ namespace oomph
       else
       {
 #ifdef PARANOID
-// hierher <<<<<<< HEAD
-       // Are consecutive eigenvalues cc?
+        // hierher <<<<<<< HEAD
+        // Are consecutive eigenvalues cc?
 
-       // Are the eigenvalues finite?
-       if ((beta_eval[eval_count]!=0.0)&&(beta_eval[eval_count+1]!=0.0))
+        // Are the eigenvalues finite?
+        if ((beta_eval[eval_count] != 0.0) &&
+            (beta_eval[eval_count + 1] != 0.0))
         {
-         std::complex<double> lambda_this=
-          alpha_eval[eval_count]/beta_eval[eval_count];
+          std::complex<double> lambda_this =
+            alpha_eval[eval_count] / beta_eval[eval_count];
 
-         std::complex<double> lambda_next=
-          alpha_eval[eval_count+1]/beta_eval[eval_count+1];
+          std::complex<double> lambda_next =
+            alpha_eval[eval_count + 1] / beta_eval[eval_count + 1];
 
-         if (fabs(lambda_this.imag()+lambda_next.imag())>Tolerance_for_ccness_check)
+          if (fabs(lambda_this.imag() + lambda_next.imag()) >
+              Tolerance_for_ccness_check)
           {
-           std::ostringstream error_stream;
-           error_stream
-            << "Non-zero imaginary part of eigenvalue "
-            << eval_count << " : " <<  lambda_this.imag() << std::endl;
-           error_stream
-            << "isn't the negative of its subsequent value       : "
-            << lambda_next.imag() << std::endl
-            << "Their sum " 
-            << (lambda_this.imag()+lambda_next.imag())
-            << " is greater than Tolerance_for_ccness_check = "
-            << Tolerance_for_ccness_check 
-            << std::endl;
-           oomph_info << error_stream.str();
-           // hierher throw
-           // OomphLibError(
-           //  error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+            std::ostringstream error_stream;
+            error_stream << "Non-zero imaginary part of eigenvalue "
+                         << eval_count << " : " << lambda_this.imag()
+                         << std::endl;
+            error_stream
+              << "isn't the negative of its subsequent value       : "
+              << lambda_next.imag() << std::endl
+              << "Their sum " << (lambda_this.imag() + lambda_next.imag())
+              << " is greater than Tolerance_for_ccness_check = "
+              << Tolerance_for_ccness_check << std::endl;
+            oomph_info << error_stream.str();
+            // hierher throw
+            // OomphLibError(
+            //  error_stream.str(), OOMPH_CURRENT_FUNCTION,
+            //  OOMPH_EXCEPTION_LOCATION);
           }
-         if (fabs(lambda_this.real()-lambda_next.real())>Tolerance_for_ccness_check)
+          if (fabs(lambda_this.real() - lambda_next.real()) >
+              Tolerance_for_ccness_check)
           {
-           std::ostringstream error_stream;
-           error_stream
-            << "Real parts of complex eigenvalue  "
-            << eval_count << " : " <<  lambda_this.real() << std::endl;
-           error_stream
-            << " doesn't agree with its supposed-to-be cc counterpart     : "
-            << lambda_next.real() << std::endl
-            << "Their difference " 
-            << (lambda_this.real()-lambda_next.real())
-            << " is greater than Tolerance_for_ccness_check = "
-            << Tolerance_for_ccness_check 
-            << std::endl;
-           oomph_info << error_stream.str();
-           // hierher throw
-           // OomphLibError(
-           //  error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+            std::ostringstream error_stream;
+            error_stream << "Real parts of complex eigenvalue  " << eval_count
+                         << " : " << lambda_this.real() << std::endl;
+            error_stream
+              << " doesn't agree with its supposed-to-be cc counterpart     : "
+              << lambda_next.real() << std::endl
+              << "Their difference "
+              << (lambda_this.real() - lambda_next.real())
+              << " is greater than Tolerance_for_ccness_check = "
+              << Tolerance_for_ccness_check << std::endl;
+            oomph_info << error_stream.str();
+            // hierher throw
+            // OomphLibError(
+            //  error_stream.str(), OOMPH_CURRENT_FUNCTION,
+            //  OOMPH_EXCEPTION_LOCATION);
           }
-// hierher =======
-//         // Are consecutive eigenvalues cc?
-//         if (alpha_eval[eval_count].imag() + alpha_eval[eval_count + 1].imag() !=
-//             0.0)
-//         {
-//           std::ostringstream error_stream;
-//           error_stream << "(Scaled) non-zero imaginary part of eigenvalue "
-//                        << eval_count << " : " << alpha_eval[eval_count].imag()
-//                        << std::endl;
-//           error_stream << "isn't the negative of its subsequent value :\n"
-//                        << alpha_eval[eval_count + 1].imag() << std::endl
-//                        << "Their sum is "
-//                        << alpha_eval[eval_count].imag() +
-//                             alpha_eval[eval_count + 1].imag()
-//                        << std::endl;
-//           throw OomphLibError(error_stream.str(),
-//                               OOMPH_CURRENT_FUNCTION,
-//                               OOMPH_EXCEPTION_LOCATION);
-// hierher >>>>>>> 51e8f2100011ccdfdafbc80d49124f36cd448d54
+          // hierher =======
+          //         // Are consecutive eigenvalues cc?
+          //         if (alpha_eval[eval_count].imag() + alpha_eval[eval_count +
+          //         1].imag() !=
+          //             0.0)
+          //         {
+          //           std::ostringstream error_stream;
+          //           error_stream << "(Scaled) non-zero imaginary part of
+          //           eigenvalue "
+          //                        << eval_count << " : " <<
+          //                        alpha_eval[eval_count].imag()
+          //                        << std::endl;
+          //           error_stream << "isn't the negative of its subsequent
+          //           value :\n"
+          //                        << alpha_eval[eval_count + 1].imag() <<
+          //                        std::endl
+          //                        << "Their sum is "
+          //                        << alpha_eval[eval_count].imag() +
+          //                             alpha_eval[eval_count + 1].imag()
+          //                        << std::endl;
+          //           throw OomphLibError(error_stream.str(),
+          //                               OOMPH_CURRENT_FUNCTION,
+          //                               OOMPH_EXCEPTION_LOCATION);
+          // hierher >>>>>>> 51e8f2100011ccdfdafbc80d49124f36cd448d54
         }
-       else
+        else
         {
-         oomph_info << "supposed-to-be cc eigenvalues or both infinite; skipping test.\n";
+          oomph_info << "supposed-to-be cc eigenvalues or both infinite; "
+                        "skipping test.\n";
         }
 
 #endif
-// hierher <<<<<<< HEAD
-       oomph_info << "Alpha " << eval_count   << " (imag) " <<  alpha_eval[eval_count  ] 
-                  << " BETA: " << beta_eval[eval_count] << std::endl;
-       oomph_info << "Alpha " << eval_count+1 << " (imag) " <<  alpha_eval[eval_count+1] 
-                  << " BETA: " << beta_eval[eval_count+1]  << std::endl;
+        // hierher <<<<<<< HEAD
+        oomph_info << "Alpha " << eval_count << " (imag) "
+                   << alpha_eval[eval_count]
+                   << " BETA: " << beta_eval[eval_count] << std::endl;
+        oomph_info << "Alpha " << eval_count + 1 << " (imag) "
+                   << alpha_eval[eval_count + 1]
+                   << " BETA: " << beta_eval[eval_count + 1] << std::endl;
 
 
-       // Resize the two cc eigenvectors associated with the
-       // two cc eigenvalues
-       eigenvector[eval_count].resize(n);
-       eigenvector[eval_count+1].resize(n);
-       for (unsigned j = 0; j < n; ++j)
+        // Resize the two cc eigenvectors associated with the
+        // two cc eigenvalues
+        eigenvector[eval_count].resize(n);
+        eigenvector[eval_count + 1].resize(n);
+        for (unsigned j = 0; j < n; ++j)
         {
-         eigenvector[eval_count][j]=std::complex<double>(
-          eigenvector_aux[eval_count][j],
-          eigenvector_aux[eval_count+1][j]);
-         
-         eigenvector[eval_count+1][j]=std::complex<double>(
-          eigenvector_aux[eval_count][j],
-          -eigenvector_aux[eval_count+1][j]);
-// hierher =======
+          eigenvector[eval_count][j] = std::complex<double>(
+            eigenvector_aux[eval_count][j], eigenvector_aux[eval_count + 1][j]);
 
-//         // Resize the two cc eigenvectors associated with the
-//         // two cc eigenvalues
-//         eigenvector[eval_count].resize(n);
-//         eigenvector[eval_count + 1].resize(n);
-//         for (unsigned j = 0; j < n; ++j)
-//         {
-//           eigenvector[eval_count][j] = std::complex<double>(
-//             eigenvector_aux[j][eval_count], eigenvector_aux[j][eval_count + 1]);
+          eigenvector[eval_count + 1][j] =
+            std::complex<double>(eigenvector_aux[eval_count][j],
+                                 -eigenvector_aux[eval_count + 1][j]);
+          // hierher =======
 
-//           eigenvector[eval_count + 1][j] =
-//             std::complex<double>(eigenvector_aux[j][eval_count],
-//                                  -eigenvector_aux[j][eval_count + 1]);
-// hierher >>>>>>> 51e8f2100011ccdfdafbc80d49124f36cd448d54
+          //         // Resize the two cc eigenvectors associated with the
+          //         // two cc eigenvalues
+          //         eigenvector[eval_count].resize(n);
+          //         eigenvector[eval_count + 1].resize(n);
+          //         for (unsigned j = 0; j < n; ++j)
+          //         {
+          //           eigenvector[eval_count][j] = std::complex<double>(
+          //             eigenvector_aux[j][eval_count],
+          //             eigenvector_aux[j][eval_count + 1]);
+
+          //           eigenvector[eval_count + 1][j] =
+          //             std::complex<double>(eigenvector_aux[j][eval_count],
+          //                                  -eigenvector_aux[j][eval_count +
+          //                                  1]);
+          // hierher >>>>>>> 51e8f2100011ccdfdafbc80d49124f36cd448d54
         }
         eval_count += 2;
       }
@@ -1101,7 +1131,7 @@ namespace oomph
 
     // Get the dimension of the matrix
     int n = A.nrow(); // Total size of matrix
-     oomph_info << "Matrix based :find_eigenproblem n = " << n << std::endl;
+    oomph_info << "Matrix based :find_eigenproblem n = " << n << std::endl;
 
     // Storage for the matrices in the packed form required by the LAPACK
     // routine
