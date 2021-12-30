@@ -1222,7 +1222,7 @@ namespace oomph
 
         // How much memory have we used?
         if (Doc_stats)
-         {
+        {
           oomph_info << "\nMemory statistics:"
                      << "\n - Memory used to store the Jacobian (MB): "
                      << memory_usage_for_jacobian / 1.0e+06
@@ -1231,7 +1231,7 @@ namespace oomph
                      << "\n - Total memory used for matrix storage (MB): "
                      << total_memory_usage / 1.0e+06 << "\n"
                      << std::endl;
-         }
+        }
       }
     } // if (cr_pt!=0)
 
@@ -1692,7 +1692,7 @@ namespace oomph
 
         // How much memory have we used?
         if (Doc_stats)
-         {
+        {
           oomph_info << "\nMemory statistics:"
                      << "\n - Memory used to store the Jacobian (MB): "
                      << memory_usage_for_jacobian / 1.0e+06
@@ -1701,7 +1701,7 @@ namespace oomph
                      << "\n - Total memory used for matrix storage (MB): "
                      << total_memory_usage / 1.0e+06 << "\n"
                      << std::endl;
-         }
+        }
       }
     } // if (cr_pt!=0)
 
