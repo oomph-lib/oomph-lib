@@ -99,11 +99,16 @@ namespace oomph
     /// based solvers where typically only a small number of (finite)
     /// eigenvalues are computed, or if the users is happy to deal with NaNs in
     /// the subsequent post-processing.
-    void solve_eigenproblem(Problem* const& problem_pt,
-                            const int& n_eval,
-                            Vector<std::complex<double>>& eigenvalue,
-                            Vector<Vector<std::complex<double>>>& eigenvector)
+   /// hierher virtual so it can be overloaded for arnoldi type solvers
+   /// tha compute the eigenvalues directly
+   virtual void solve_eigenproblem(
+    Problem* const& problem_pt,
+    const int& n_eval,
+    Vector<std::complex<double>>& eigenvalue,
+    Vector<Vector<std::complex<double>>>& eigenvector)
     {
+     oomph_info << "hierher in helper version that computes eigenvalues from save version\n";
+
       Vector<std::complex<double>> alpha;
       Vector<double> beta;
 

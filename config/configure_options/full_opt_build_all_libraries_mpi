@@ -1,0 +1,125 @@
+#=====================================================================
+# File that specifies options and compile/link flags for 
+# autogen.sh script: Needs to be processed with autogen-setup.sh
+# and creates the shell script autogen-configure.sh that is executed
+# by autogen.sh. 
+#
+#  NOTE: Options need to go first!
+#
+# A few options:    [type ./configure --help to see the full list] 
+# --------------
+#
+#         --enable-MPI   includes all MPI sources into the build
+#                        (you will probably have to specify
+#                        your MPI libraries and include directories
+#                        in the compiler/linker options; see the 
+#                        examples enclosed below).
+#         --enable-suppress-doc  Don't build the documentation (can take a long
+#                        and uses quite a bit of diskspace. You might
+#                        prefer to consult the online documentation at
+#                        http://www.oomph-lib.org
+#         --enable-suppress-demo Don't build the demo codes/self test  
+#
+# Common compiler/linker flags:
+# -----------------------------            
+#
+# - CXX =  C++ compiler (defaults to gcc/g++ if not specified)
+# - CC  =  C compiler (defaults to gcc if not specified)
+# - F77 =  F77 compiler (defaults to gcc/g77 if not specified)
+# 
+# - CXXFLAGS = flags for the C++ compiler. Specify optmisation flags
+#              for your compiler (e.g. -O3 for maximum optimisation
+#              with the gcc compiler suite, enable debugging (-g for
+#              the gcc compilers), etc.)
+#
+#              Here's a list of useful oomph-lib related flags:
+#              
+#              -DPARANOID enables "general paranoia", allowing the
+#                         code to perform various sanity checks
+#                         during execution. Incurs a moderate run-time
+#                         overhead.
+#              -DRANGE_CHECKING switches on bounds checking in
+#                         oomph-lib's Vector class (a wrapper to the
+#                         the STL vector class). This is VERY costly
+#                         in terms of run time but very useful for
+#                         tracking down the source of otherwise
+#                         inexcplicable segmentation faults...
+#              -DLEAK_CHECK mainly used during code developement. Used
+#                         to allow optional checks that objects are 
+#                         deleted to avoid memory leaks.
+#              -DWARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES throws
+#                         an oomph-lib warning whenever a function
+#                         whose interface has been changed "subtly"
+#                         (i.e. in a way that the compiler can't detect,
+#                         e.g. a change in the order of two arguments
+#                         of the same type) during some revision is called.
+#                         Use this only (!) if your code behaves
+#                         oddly after upgrading to a newer release
+#                         of the library.
+# 
+# - CFLAGS   = flags for the C compiler. Specify optimisation flags
+#              for your compiler (e.g. -O3 for maximum optimisation
+#              with the gcc compiler suite, enable debugging (-g for
+#              the gcc compilers), etc.) The C-compiler is only used
+#              to compile certain external libraries, such as superlu.
+#              Therefore it is not necessary to specify any of 
+#              oomph-lib's own compilation flags.
+# 
+# - FFLAGS   = flags for the f77 compiler. Specify optimisation flags
+#              for your compiler (e.g. -O3 for maximum optimisation
+#              with the gcc compiler suite, enable debugging (-g for
+#              the gcc compilers), etc.) The f77-compiler is only used
+#              to compile certain external libraries, such as the
+#              frontal solver from the hsl library.
+#              Therefore it is not necessary to specify any of 
+#              oomph-lib's own compilation flags.
+#
+# - FFLAGS_NO_OPT   = flags for the f77 compiler without optimisation, 
+#              required for a couple of files in the BLAS library.
+#              Usually the flag is -O0, but you may wish/need to pass other
+#              flags as well. Unfortunately, there is no easy way to do this 
+#              automatically so you have to do it yourself, sorry. In almost
+#              all cases you can copy FFLAGS and replace -O3 with -O0.
+#
+# - LIBS     = Specify any additional libraries that you might have
+#              to link against -- typically only required if  mpi is
+#              used. autoconf should automatically detect any 
+#              other libraries.
+#=====================================================================
+#
+#--enable-suppress-pdf-doc
+--enable-MPI
+--enable-multiple_teuchos_libraries
+--enable-symbolic-links-for-headers
+--with-mpi-self-tests="mpirun -np 2"
+--with-mpi-self-tests-variablenp="mpirun -np OOMPHNP"
+--with-mpi-include-directory=/usr/lib/x86_64-linux-gnu/openmpi/include
+CXXFLAGS="-O3 -Wall"
+CFLAGS=" -O3 -Wno-implicit-function-declaration"
+FFLAGS="-O3"
+FFLAGS_NO_OPT="-O0"
+CXX=mpic++
+CC=mpicc
+F77=mpif77
+FC=mpif90
+LD=mpif77
+
+#CXXFLAGS="-g -DPARANOID -DRANGE_CHECKING -Wall"
+#CFLAGS="-g"
+#FFLAGS="-g"
+
+#CXXFLAGS="-O3 -Wall -fPIC"
+#CFLAGS="-O3 -fPIC"
+#FFLAGS="-O3 -fPIC"
+#--with-blacs=/home/mheil/local/mumps_and_scalapack_default_installation/lib
+#--with-scalapack=/home/mheil/local/mumps_and_scalapack_default_installation/lib/libscalapack.a
+#--with-pord=/home/mheil/local/mumps_and_scalapack_default_installation/lib/libpord.a 
+#--with-mumps=/home/mheil/local/mumps_and_scalapack_default_installation
+#--with-blas=/home/mheil/local/lib/blas/blas.a
+#--with-lapack=/home/mheil/local/lib/lapack/lapack.a
+#--with-hypre=/home/mheil/local/hypre_default_installation_mpi
+#--with-trilinos=/home/mheil/local/trilinos_default_installation_mpi
+
+
+
+#--with-boost=/home/mheil/version_from_christians_first_checkin/external_distributions/boost/boost_default_installation

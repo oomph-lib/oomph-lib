@@ -972,9 +972,9 @@ namespace oomph
           eigenvector[eval_count][j] =
             std::complex<double>(eigenvector_aux[j][eval_count], 0.0);
         }
-        oomph_info << "Alpha " << eval_count << " (real) "
-                   << alpha_eval[eval_count].real()
-                   << " BETA: " << beta_eval[eval_count] << std::endl;
+        // oomph_info << "Alpha " << eval_count << " (real) "
+        //            << alpha_eval[eval_count].real()
+        //            << " BETA: " << beta_eval[eval_count] << std::endl;
         eval_count++;
       }
       // Assume (and check!) that complex conjugate pairs follow each other
@@ -1067,12 +1067,12 @@ namespace oomph
 
 #endif
         // hierher <<<<<<< HEAD
-        oomph_info << "Alpha " << eval_count << " (imag) "
-                   << alpha_eval[eval_count]
-                   << " BETA: " << beta_eval[eval_count] << std::endl;
-        oomph_info << "Alpha " << eval_count + 1 << " (imag) "
-                   << alpha_eval[eval_count + 1]
-                   << " BETA: " << beta_eval[eval_count + 1] << std::endl;
+        // oomph_info << "Alpha " << eval_count << " (imag) "
+        //            << alpha_eval[eval_count]
+        //            << " BETA: " << beta_eval[eval_count] << std::endl;
+        // oomph_info << "Alpha " << eval_count + 1 << " (imag) "
+        //            << alpha_eval[eval_count + 1]
+        //            << " BETA: " << beta_eval[eval_count + 1] << std::endl;
 
 
         // Resize the two cc eigenvectors associated with the
@@ -1131,7 +1131,6 @@ namespace oomph
 
     // Get the dimension of the matrix
     int n = A.nrow(); // Total size of matrix
-    oomph_info << "Matrix based :find_eigenproblem n = " << n << std::endl;
 
     // Storage for the matrices in the packed form required by the LAPACK
     // routine
@@ -1221,10 +1220,6 @@ namespace oomph
     // We get them all!
     eigenvalue.resize(n);
     eigenvector.resize(n);
-
-
-    oomph_info << "hierher size of eigenvalues: " << eigenvalue.size()
-               << std::endl;
 
     // Now convert the output into our format
     for (int i = 0; i < n; ++i)

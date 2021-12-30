@@ -1220,15 +1220,18 @@ namespace oomph
         double total_memory_usage =
           memory_usage_for_jacobian + memory_usage_for_lu_storage;
 
-        // How much memory have we used in the subsidiary preconditioners?
-        oomph_info << "\nMemory statistics:"
-                   << "\n - Memory used to store the Jacobian (MB): "
-                   << memory_usage_for_jacobian / 1.0e+06
-                   << "\n - Memory used to store the LU factors (MB): "
-                   << memory_usage_for_lu_storage / 1.0e+06
-                   << "\n - Total memory used for matrix storage (MB): "
-                   << total_memory_usage / 1.0e+06 << "\n"
-                   << std::endl;
+        // How much memory have we used?
+        if (Doc_stats)
+         {
+          oomph_info << "\nMemory statistics:"
+                     << "\n - Memory used to store the Jacobian (MB): "
+                     << memory_usage_for_jacobian / 1.0e+06
+                     << "\n - Memory used to store the LU factors (MB): "
+                     << memory_usage_for_lu_storage / 1.0e+06
+                     << "\n - Total memory used for matrix storage (MB): "
+                     << total_memory_usage / 1.0e+06 << "\n"
+                     << std::endl;
+         }
       }
     } // if (cr_pt!=0)
 
@@ -1687,15 +1690,18 @@ namespace oomph
         double total_memory_usage =
           memory_usage_for_jacobian + memory_usage_for_lu_storage;
 
-        // How much memory have we used in the subsidiary preconditioners?
-        oomph_info << "\nMemory statistics:"
-                   << "\n - Memory used to store the Jacobian (MB): "
-                   << memory_usage_for_jacobian / 1.0e+06
-                   << "\n - Memory used to store the LU factors (MB): "
-                   << memory_usage_for_lu_storage / 1.0e+06
-                   << "\n - Total memory used for matrix storage (MB): "
-                   << total_memory_usage / 1.0e+06 << "\n"
-                   << std::endl;
+        // How much memory have we used?
+        if (Doc_stats)
+         {
+          oomph_info << "\nMemory statistics:"
+                     << "\n - Memory used to store the Jacobian (MB): "
+                     << memory_usage_for_jacobian / 1.0e+06
+                     << "\n - Memory used to store the LU factors (MB): "
+                     << memory_usage_for_lu_storage / 1.0e+06
+                     << "\n - Total memory used for matrix storage (MB): "
+                     << total_memory_usage / 1.0e+06 << "\n"
+                     << std::endl;
+         }
       }
     } // if (cr_pt!=0)
 
