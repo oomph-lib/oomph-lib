@@ -341,6 +341,18 @@ apt-get install libtool
   </tt>
   <br>
   <tt>
+apt-get install libtool-bin
+  </tt>
+  <br>
+  <tt>
+apt-get install cmake
+  </tt>
+  <br>
+  <tt>
+apt-get install python2
+  </tt>
+  <br>
+  <tt>
 apt-get install autoconf
   </tt>
   <br>
@@ -371,8 +383,7 @@ apt-get install texlive texlive-latex-extra texlive-font-utils
   <br>
   <br>
   <tt>
-apt-get install git make automake libtool autoconf doxygen
-  gfortran g++ texlive texlive-latex-extra texlive-font-utils
+apt-get install git make automake libtool libtool-bin cmake python2 autoconf doxygen gfortran g++ texlive texlive-latex-extra texlive-font-utils
   </tt>
   </article>
   

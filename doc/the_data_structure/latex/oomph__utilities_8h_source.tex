@@ -7,7 +7,7 @@
 \DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00003}00003 \textcolor{comment}{// LIC// multi-\/physics finite-\/element library, available}}
 \DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00004}00004 \textcolor{comment}{// LIC// at http://www.oomph-\/lib.org.}}
 \DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00005}00005 \textcolor{comment}{// LIC//}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00006}00006 \textcolor{comment}{// LIC// Copyright (C) 2006-\/2021 Matthias Heil and Andrew Hazel}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00006}00006 \textcolor{comment}{// LIC// Copyright (C) 2006-\/2022 Matthias Heil and Andrew Hazel}}
 \DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00007}00007 \textcolor{comment}{// LIC//}}
 \DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00008}00008 \textcolor{comment}{// LIC// This library is free software; you can redistribute it and/or}}
 \DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00009}00009 \textcolor{comment}{// LIC// modify it under the terms of the GNU Lesser General Public}}
@@ -955,292 +955,300 @@
 \DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00951}00951   \{\textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00952}00952 \textcolor{comment}{    /// returns the time in seconds after some point in past}}
 \DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00953}00953 \textcolor{comment}{}    \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_a9fb6ad7e2e01b0914e9f7072ef9ebfa6}{timer}}();}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00954}00954 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00955}00955   \} \textcolor{comment}{// end of namespace TimingHelpers}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00956}00956 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00957}00957 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00958}00958 \textcolor{comment}{  /// /////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00959}00959 \textcolor{comment}{  /// /////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00960}00960 \textcolor{comment}{  /// /////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00961}00961 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00954}00954 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00955}00955 \textcolor{comment}{    /// Returns a nicely formatted string from an input time in seconds;}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00956}00956 \textcolor{comment}{    /// the format depends on the size of time, e.g.:}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00957}00957 \textcolor{comment}{    /// 86510 will be printed as 1d 1m:50}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00958}00958 \textcolor{comment}{    ///  3710 will be printed as 1h:01:50}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00959}00959 \textcolor{comment}{    ///   700 will be printed as 11m:40}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00960}00960 \textcolor{comment}{    /// 59.15 will be printed as 59.2s}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00961}00961 \textcolor{comment}{}    \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_ae746b756dfb86c00c7cf37558a7870f3}{convert\_secs\_to\_formatted\_string}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time\_in\_sec);}
 \DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00962}00962 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00963}00963   \textcolor{comment}{//===============================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00964}00964 \textcolor{comment}{  /// Namespace with helper functions to assess total memory usage}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00965}00965 \textcolor{comment}{  /// on the fly using system() -\/-\/ details are very machine specific! This just}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00966}00966 \textcolor{comment}{  /// provides the overall machinery with default settings for}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00967}00967 \textcolor{comment}{  /// our own (linux machines). Uses the system command}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00968}00968 \textcolor{comment}{  /// to spawn a command that computes the total memory usage}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00969}00969 \textcolor{comment}{  /// on the machine where this is called.  [Disclaimer: works}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00970}00970 \textcolor{comment}{  /// on my machine(s) -\/-\/ no guarantees for any other platform;}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00971}00971 \textcolor{comment}{  /// Linux or not. MH]}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00972}00972 \textcolor{comment}{}  \textcolor{comment}{//===============================================================}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00973}00973   \textcolor{keyword}{namespace }MemoryUsage}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00974}00974   \{\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00975}00975 \textcolor{comment}{    /// Boolean to suppress synchronisation of doc memory}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00976}00976 \textcolor{comment}{    /// usage on processors (via mpi barriers). True (i.e. sync is}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00977}00977 \textcolor{comment}{    /// is suppressed by default because not all processors may}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00978}00978 \textcolor{comment}{    /// execute the reach the relevant doc memory usage statements}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00979}00979 \textcolor{comment}{    /// causing the code to hang).}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00980}00980 \textcolor{comment}{}    \textcolor{keyword}{extern} \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a77ed83cae1c77e9a046bc6b1ff55645a}{Suppress\_mpi\_synchronisation}};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00981}00981 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00982}00982 \textcolor{comment}{    /// String containing system command that obtains memory usage}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00983}00983 \textcolor{comment}{    /// of all processes.}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00984}00984 \textcolor{comment}{    /// Default assignment for Linux. [Disclaimer: works on my machine(s) -\/-\/}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00985}00985 \textcolor{comment}{    /// no guarantees for any other platform; Linux or not. MH]}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00986}00986 \textcolor{comment}{}    \textcolor{keyword}{extern} \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_ae5280b46bc1ce506ba96494d6dacbdbe}{My\_memory\_usage\_system\_string}};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00987}00987 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00988}00988 \textcolor{comment}{    /// Bool allowing quick bypassing of ALL operations related}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00989}00989 \textcolor{comment}{    /// to memory usage monitoring -\/-\/ this allows the code to remain}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00990}00990 \textcolor{comment}{    /// "{}instrumented"{} without incurring the heavy penalties associated}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00991}00991 \textcolor{comment}{    /// with the system calls and i/o. Default setting: false.}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00992}00992 \textcolor{comment}{}    \textcolor{keyword}{extern} \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a1b52934e2d3ddd6779f5f9581d14abc1}{Bypass\_all\_memory\_usage\_monitoring}};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00993}00993 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00994}00994 \textcolor{comment}{    /// String containing name of file in which we document}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00995}00995 \textcolor{comment}{    /// my memory usage -\/-\/ you may want to change this to allow different}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00996}00996 \textcolor{comment}{    /// processors to write to separate files (especially in mpi}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00997}00997 \textcolor{comment}{    /// context). Note that file is appended to}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00998}00998 \textcolor{comment}{    /// so it ought to be emptied (either manually or by calling}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00999}00999 \textcolor{comment}{    /// helper function empty\_memory\_usage\_file()}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01000}01000 \textcolor{comment}{}    \textcolor{keyword}{extern} \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_aa764cf2d9bfd321a3784aafdd32714bf}{My\_memory\_usage\_filename}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00963}00963   \} \textcolor{comment}{// end of namespace TimingHelpers}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00964}00964 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00965}00965 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00966}00966 \textcolor{comment}{  /// /////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00967}00967 \textcolor{comment}{  /// /////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00968}00968 \textcolor{comment}{  /// /////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00969}00969 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00970}00970 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00971}00971   \textcolor{comment}{//===============================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00972}00972 \textcolor{comment}{  /// Namespace with helper functions to assess total memory usage}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00973}00973 \textcolor{comment}{  /// on the fly using system() -\/-\/ details are very machine specific! This just}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00974}00974 \textcolor{comment}{  /// provides the overall machinery with default settings for}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00975}00975 \textcolor{comment}{  /// our own (linux machines). Uses the system command}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00976}00976 \textcolor{comment}{  /// to spawn a command that computes the total memory usage}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00977}00977 \textcolor{comment}{  /// on the machine where this is called.  [Disclaimer: works}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00978}00978 \textcolor{comment}{  /// on my machine(s) -\/-\/ no guarantees for any other platform;}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00979}00979 \textcolor{comment}{  /// Linux or not. MH]}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00980}00980 \textcolor{comment}{}  \textcolor{comment}{//===============================================================}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00981}00981   \textcolor{keyword}{namespace }MemoryUsage}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00982}00982   \{\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00983}00983 \textcolor{comment}{    /// Boolean to suppress synchronisation of doc memory}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00984}00984 \textcolor{comment}{    /// usage on processors (via mpi barriers). True (i.e. sync is}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00985}00985 \textcolor{comment}{    /// is suppressed by default because not all processors may}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00986}00986 \textcolor{comment}{    /// execute the reach the relevant doc memory usage statements}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00987}00987 \textcolor{comment}{    /// causing the code to hang).}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00988}00988 \textcolor{comment}{}    \textcolor{keyword}{extern} \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a77ed83cae1c77e9a046bc6b1ff55645a}{Suppress\_mpi\_synchronisation}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00989}00989 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00990}00990 \textcolor{comment}{    /// String containing system command that obtains memory usage}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00991}00991 \textcolor{comment}{    /// of all processes.}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00992}00992 \textcolor{comment}{    /// Default assignment for Linux. [Disclaimer: works on my machine(s) -\/-\/}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00993}00993 \textcolor{comment}{    /// no guarantees for any other platform; Linux or not. MH]}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00994}00994 \textcolor{comment}{}    \textcolor{keyword}{extern} \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_ae5280b46bc1ce506ba96494d6dacbdbe}{My\_memory\_usage\_system\_string}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00995}00995 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00996}00996 \textcolor{comment}{    /// Bool allowing quick bypassing of ALL operations related}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00997}00997 \textcolor{comment}{    /// to memory usage monitoring -\/-\/ this allows the code to remain}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00998}00998 \textcolor{comment}{    /// "{}instrumented"{} without incurring the heavy penalties associated}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l00999}00999 \textcolor{comment}{    /// with the system calls and i/o. Default setting: false.}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01000}01000 \textcolor{comment}{}    \textcolor{keyword}{extern} \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a1b52934e2d3ddd6779f5f9581d14abc1}{Bypass\_all\_memory\_usage\_monitoring}};}
 \DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01001}01001 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01002}01002 \textcolor{comment}{    /// Function to empty file that records my memory usage in}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01003}01003 \textcolor{comment}{    /// file whose name is specified by My\_memory\_usage\_filename.}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01004}01004 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_aadcb42d5c4ca8099981d75b2d5adcd96}{empty\_my\_memory\_usage\_file}}();}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01005}01005 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01006}01006 \textcolor{preprocessor}{\#ifdef OOMPH\_HAS\_UNISTDH}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01007}01007 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01008}01008 \textcolor{comment}{    /// Doc my memory usage, prepended by string (which allows}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01009}01009 \textcolor{comment}{    /// identification from where the function is called, say) that records}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01010}01010 \textcolor{comment}{    /// memory usage in file whose name is specified by}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01011}01011 \textcolor{comment}{    /// My\_memory\_usage\_filename. Data is appended to that file; wipe it with}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01012}01012 \textcolor{comment}{    /// empty\_my\_memory\_usage\_file(). Note: This requires getpid() which is}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01013}01013 \textcolor{comment}{    /// defined in unistd.h so if you don't have that we won't build that}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01014}01014 \textcolor{comment}{    /// function!}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01015}01015 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a43f39ca6f2e6040903ec86b46eb760dd}{doc\_my\_memory\_usage}}(\textcolor{keyword}{const} \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}}\& prefix\_string = 0);}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01016}01016 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01017}01017 \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01018}01018 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01019}01019 \textcolor{comment}{    /// String containing system command that obtains total memory usage.}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01020}01020 \textcolor{comment}{    /// Default assignment for Linux. [Disclaimer: works on my machine(s) -\/-\/}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01021}01021 \textcolor{comment}{    /// no guarantees for any other platform; Linux or not. MH]}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01022}01022 \textcolor{comment}{}    \textcolor{keyword}{extern} \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a9b915316a3658a60e8fa86490c8d013a}{Total\_memory\_usage\_system\_string}};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01023}01023 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01024}01024 \textcolor{comment}{    /// String containing name of file in which we document total}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01025}01025 \textcolor{comment}{    /// memory usage -\/-\/ you may want to change this to allow different}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01026}01026 \textcolor{comment}{    /// processors to write to separate files (especially in mpi}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01027}01027 \textcolor{comment}{    /// context). Note that file is appended to}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01028}01028 \textcolor{comment}{    /// so it ought to be emptied (either manually or by calling}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01029}01029 \textcolor{comment}{    /// helper function empty\_memory\_usage\_file()}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01030}01030 \textcolor{comment}{}    \textcolor{keyword}{extern} \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_afd9a74c901df404ddb665921e408a3a3}{Total\_memory\_usage\_filename}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01002}01002 \textcolor{comment}{    /// String containing name of file in which we document}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01003}01003 \textcolor{comment}{    /// my memory usage -\/-\/ you may want to change this to allow different}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01004}01004 \textcolor{comment}{    /// processors to write to separate files (especially in mpi}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01005}01005 \textcolor{comment}{    /// context). Note that file is appended to}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01006}01006 \textcolor{comment}{    /// so it ought to be emptied (either manually or by calling}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01007}01007 \textcolor{comment}{    /// helper function empty\_memory\_usage\_file()}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01008}01008 \textcolor{comment}{}    \textcolor{keyword}{extern} \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_aa764cf2d9bfd321a3784aafdd32714bf}{My\_memory\_usage\_filename}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01009}01009 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01010}01010 \textcolor{comment}{    /// Function to empty file that records my memory usage in}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01011}01011 \textcolor{comment}{    /// file whose name is specified by My\_memory\_usage\_filename.}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01012}01012 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_aadcb42d5c4ca8099981d75b2d5adcd96}{empty\_my\_memory\_usage\_file}}();}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01013}01013 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01014}01014 \textcolor{preprocessor}{\#ifdef OOMPH\_HAS\_UNISTDH}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01015}01015 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01016}01016 \textcolor{comment}{    /// Doc my memory usage, prepended by string (which allows}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01017}01017 \textcolor{comment}{    /// identification from where the function is called, say) that records}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01018}01018 \textcolor{comment}{    /// memory usage in file whose name is specified by}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01019}01019 \textcolor{comment}{    /// My\_memory\_usage\_filename. Data is appended to that file; wipe it with}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01020}01020 \textcolor{comment}{    /// empty\_my\_memory\_usage\_file(). Note: This requires getpid() which is}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01021}01021 \textcolor{comment}{    /// defined in unistd.h so if you don't have that we won't build that}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01022}01022 \textcolor{comment}{    /// function!}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01023}01023 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a43f39ca6f2e6040903ec86b46eb760dd}{doc\_my\_memory\_usage}}(\textcolor{keyword}{const} \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}}\& prefix\_string = 0);}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01024}01024 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01025}01025 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01026}01026 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01027}01027 \textcolor{comment}{    /// String containing system command that obtains total memory usage.}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01028}01028 \textcolor{comment}{    /// Default assignment for Linux. [Disclaimer: works on my machine(s) -\/-\/}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01029}01029 \textcolor{comment}{    /// no guarantees for any other platform; Linux or not. MH]}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01030}01030 \textcolor{comment}{}    \textcolor{keyword}{extern} \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a9b915316a3658a60e8fa86490c8d013a}{Total\_memory\_usage\_system\_string}};}
 \DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01031}01031 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01032}01032 \textcolor{comment}{    /// Function to empty file that records total memory usage in}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01033}01033 \textcolor{comment}{    /// file whose name is specified by Total\_memory\_usage\_filename.}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01034}01034 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a8a0031773893f06aac876985e38940e4}{empty\_total\_memory\_usage\_file}}();}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01035}01035 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01036}01036 \textcolor{comment}{    /// Doc total memory usage, prepended by string (which allows}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01037}01037 \textcolor{comment}{    /// identification from where the function is called, say) that records}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01038}01038 \textcolor{comment}{    /// mem usage in file whose name is specified by}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01039}01039 \textcolor{comment}{    /// Total\_memory\_usage\_filename. Data is appended to that file; wipe it with}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01040}01040 \textcolor{comment}{    /// empty\_memory\_usage\_file().}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01041}01041 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a216dececd7087625de8e2211216cd861}{doc\_total\_memory\_usage}}(\textcolor{keyword}{const} \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}}\& prefix\_string = \textcolor{stringliteral}{"{}"{}});}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01042}01042 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01043}01043 \textcolor{comment}{    /// Function to empty file that records total and local memory usage}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01044}01044 \textcolor{comment}{    /// in appropriate files}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01045}01045 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a47bde23694eeafe80bdcffb3aaeb07a5}{empty\_memory\_usage\_files}}();}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01046}01046 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01047}01047 \textcolor{comment}{    /// Doc total and local memory usage, prepended by string (which}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01048}01048 \textcolor{comment}{    /// allows identification from where the function is called, say)}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01049}01049 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_aa714e9e49de96f4ca6a9fd7ae99dbeab}{doc\_memory\_usage}}(\textcolor{keyword}{const} \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}}\& prefix\_string = \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01032}01032 \textcolor{comment}{    /// String containing name of file in which we document total}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01033}01033 \textcolor{comment}{    /// memory usage -\/-\/ you may want to change this to allow different}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01034}01034 \textcolor{comment}{    /// processors to write to separate files (especially in mpi}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01035}01035 \textcolor{comment}{    /// context). Note that file is appended to}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01036}01036 \textcolor{comment}{    /// so it ought to be emptied (either manually or by calling}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01037}01037 \textcolor{comment}{    /// helper function empty\_memory\_usage\_file()}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01038}01038 \textcolor{comment}{}    \textcolor{keyword}{extern} \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_afd9a74c901df404ddb665921e408a3a3}{Total\_memory\_usage\_filename}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01039}01039 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01040}01040 \textcolor{comment}{    /// Function to empty file that records total memory usage in}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01041}01041 \textcolor{comment}{    /// file whose name is specified by Total\_memory\_usage\_filename.}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01042}01042 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a8a0031773893f06aac876985e38940e4}{empty\_total\_memory\_usage\_file}}();}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01043}01043 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01044}01044 \textcolor{comment}{    /// Doc total memory usage, prepended by string (which allows}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01045}01045 \textcolor{comment}{    /// identification from where the function is called, say) that records}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01046}01046 \textcolor{comment}{    /// mem usage in file whose name is specified by}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01047}01047 \textcolor{comment}{    /// Total\_memory\_usage\_filename. Data is appended to that file; wipe it with}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01048}01048 \textcolor{comment}{    /// empty\_memory\_usage\_file().}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01049}01049 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a216dececd7087625de8e2211216cd861}{doc\_total\_memory\_usage}}(\textcolor{keyword}{const} \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}}\& prefix\_string = \textcolor{stringliteral}{"{}"{}});}
 \DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01050}01050 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01051}01051 \textcolor{comment}{    /// String containing system command that runs "{}top"{} (or equivalent)}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01052}01052 \textcolor{comment}{    /// "{}indefinitely"{} and writes to file specified in Top\_output\_filename.}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01053}01053 \textcolor{comment}{    /// Default assignment for Linux. [Disclaimer: works on my machine(s) -\/-\/}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01054}01054 \textcolor{comment}{    /// no guarantees for any other platform; Linux or not. MH]}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01055}01055 \textcolor{comment}{}    \textcolor{keyword}{extern} \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a61c07afc6531dcc4f77ae2f2b738383f}{Top\_system\_string}};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01056}01056 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01057}01057 \textcolor{comment}{    ///  String containing name of file in which we document "{}continuous"{}}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01058}01058 \textcolor{comment}{    /// output from "{}top"{} (or equivalent)-\/-\/ you may want to change this to}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01059}01059 \textcolor{comment}{    /// allow different processors to write to separate files (especially in mpi}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01060}01060 \textcolor{comment}{    /// context). Note that file is appended to}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01061}01061 \textcolor{comment}{    /// so it ought to be emptied (either manually or by calling}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01062}01062 \textcolor{comment}{    /// helper function empty\_top\_file()}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01063}01063 \textcolor{comment}{}    \textcolor{keyword}{extern} \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a03231c21b4d9a8b4a08cecc3d688c7d3}{Top\_output\_filename}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01051}01051 \textcolor{comment}{    /// Function to empty file that records total and local memory usage}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01052}01052 \textcolor{comment}{    /// in appropriate files}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01053}01053 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a47bde23694eeafe80bdcffb3aaeb07a5}{empty\_memory\_usage\_files}}();}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01054}01054 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01055}01055 \textcolor{comment}{    /// Doc total and local memory usage, prepended by string (which}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01056}01056 \textcolor{comment}{    /// allows identification from where the function is called, say)}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01057}01057 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_aa714e9e49de96f4ca6a9fd7ae99dbeab}{doc\_memory\_usage}}(\textcolor{keyword}{const} \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}}\& prefix\_string = \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01058}01058 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01059}01059 \textcolor{comment}{    /// String containing system command that runs "{}top"{} (or equivalent)}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01060}01060 \textcolor{comment}{    /// "{}indefinitely"{} and writes to file specified in Top\_output\_filename.}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01061}01061 \textcolor{comment}{    /// Default assignment for Linux. [Disclaimer: works on my machine(s) -\/-\/}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01062}01062 \textcolor{comment}{    /// no guarantees for any other platform; Linux or not. MH]}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01063}01063 \textcolor{comment}{}    \textcolor{keyword}{extern} \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a61c07afc6531dcc4f77ae2f2b738383f}{Top\_system\_string}};}
 \DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01064}01064 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01065}01065 \textcolor{comment}{    /// Function to empty file that records continuous output from top in}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01066}01066 \textcolor{comment}{    /// file whose name is specified by Top\_output\_filename}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01067}01067 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a0034019640ac5f6ffe7e8e40fae1e453}{empty\_top\_file}}();}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01068}01068 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01069}01069 \textcolor{comment}{    /// Start running top continuously and output (append) into}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01070}01070 \textcolor{comment}{    /// file specified by Top\_output\_filename. Wipe that file  with}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01071}01071 \textcolor{comment}{    /// empty\_top\_file() first if you wish. Note that this is again}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01072}01072 \textcolor{comment}{    /// quite Linux specific and unlikely to work on other operating systems.}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01073}01073 \textcolor{comment}{    /// Insert optional comment into output file before starting.}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01074}01074 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a53c2afeb4ffd85dd771ace27fcb84136}{run\_continous\_top}}(\textcolor{keyword}{const} \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}}\& comment = \textcolor{stringliteral}{"{}"{}});}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01075}01075 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01076}01076 \textcolor{comment}{    /// Stop running top continuously. Note that this is}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01077}01077 \textcolor{comment}{    /// again quite Linux specific and unlikely to work on other operating}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01078}01078 \textcolor{comment}{    /// systems.}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01079}01079 \textcolor{comment}{    /// Insert optional comment into output file before stopping.}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01080}01080 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a64410078236ee55e630ee6416b4ccdb0}{stop\_continous\_top}}(\textcolor{keyword}{const} \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}}\& comment = \textcolor{stringliteral}{"{}"{}});}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01081}01081 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01082}01082 \textcolor{comment}{    /// Insert comment into running continuous top output}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01083}01083 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a3426ed2144d50ce7a0941555b911c701}{insert\_comment\_to\_continous\_top}}(\textcolor{keyword}{const} \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}}\& comment);}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01084}01084 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01085}01085   \} \textcolor{comment}{// end of namespace MemoryUsage}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01086}01086 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01087}01087 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01088}01088 \textcolor{comment}{  /// /////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01089}01089 \textcolor{comment}{  /// /////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01090}01090 \textcolor{comment}{  /// /////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01091}01091 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01092}01092   \textcolor{comment}{// Forward decl.}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01093}01093   \textcolor{keyword}{class }Problem;}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01094}01094   \textcolor{keyword}{template}<\textcolor{keyword}{class} T>}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01095}01095   \textcolor{keyword}{class }DenseMatrix;}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01096}01096 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01097}01097 \textcolor{comment}{  /// Function base class for exact solutions/initial conditions/boundary}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01098}01098 \textcolor{comment}{  /// conditions. This is needed so that we can have solutions that depend}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01099}01099 \textcolor{comment}{  /// on problem parameters with resorting to global variables.}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01100}\mbox{\hyperlink{classoomph_1_1SolutionFunctorBase}{01100}} \textcolor{comment}{}  \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1SolutionFunctorBase}{SolutionFunctorBase}}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01101}01101   \{}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01102}01102   \textcolor{keyword}{public}:}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01103}01103     \textcolor{comment}{// Some typedefs first:}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01065}01065 \textcolor{comment}{    ///  String containing name of file in which we document "{}continuous"{}}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01066}01066 \textcolor{comment}{    /// output from "{}top"{} (or equivalent)-\/-\/ you may want to change this to}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01067}01067 \textcolor{comment}{    /// allow different processors to write to separate files (especially in mpi}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01068}01068 \textcolor{comment}{    /// context). Note that file is appended to}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01069}01069 \textcolor{comment}{    /// so it ought to be emptied (either manually or by calling}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01070}01070 \textcolor{comment}{    /// helper function empty\_top\_file()}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01071}01071 \textcolor{comment}{}    \textcolor{keyword}{extern} \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a03231c21b4d9a8b4a08cecc3d688c7d3}{Top\_output\_filename}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01072}01072 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01073}01073 \textcolor{comment}{    /// Function to empty file that records continuous output from top in}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01074}01074 \textcolor{comment}{    /// file whose name is specified by Top\_output\_filename}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01075}01075 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a0034019640ac5f6ffe7e8e40fae1e453}{empty\_top\_file}}();}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01076}01076 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01077}01077 \textcolor{comment}{    /// Start running top continuously and output (append) into}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01078}01078 \textcolor{comment}{    /// file specified by Top\_output\_filename. Wipe that file  with}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01079}01079 \textcolor{comment}{    /// empty\_top\_file() first if you wish. Note that this is again}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01080}01080 \textcolor{comment}{    /// quite Linux specific and unlikely to work on other operating systems.}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01081}01081 \textcolor{comment}{    /// Insert optional comment into output file before starting.}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01082}01082 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a53c2afeb4ffd85dd771ace27fcb84136}{run\_continous\_top}}(\textcolor{keyword}{const} \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}}\& comment = \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01083}01083 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01084}01084 \textcolor{comment}{    /// Stop running top continuously. Note that this is}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01085}01085 \textcolor{comment}{    /// again quite Linux specific and unlikely to work on other operating}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01086}01086 \textcolor{comment}{    /// systems.}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01087}01087 \textcolor{comment}{    /// Insert optional comment into output file before stopping.}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01088}01088 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a64410078236ee55e630ee6416b4ccdb0}{stop\_continous\_top}}(\textcolor{keyword}{const} \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}}\& comment = \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01089}01089 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01090}01090 \textcolor{comment}{    /// Insert comment into running continuous top output}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01091}01091 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a3426ed2144d50ce7a0941555b911c701}{insert\_comment\_to\_continous\_top}}(\textcolor{keyword}{const} \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}}\& comment);}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01092}01092 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01093}01093   \} \textcolor{comment}{// end of namespace MemoryUsage}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01094}01094 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01095}01095 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01096}01096 \textcolor{comment}{  /// /////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01097}01097 \textcolor{comment}{  /// /////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01098}01098 \textcolor{comment}{  /// /////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01099}01099 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01100}01100   \textcolor{comment}{// Forward decl.}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01101}01101   \textcolor{keyword}{class }Problem;}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01102}01102   \textcolor{keyword}{template}<\textcolor{keyword}{class} T>}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01103}01103   \textcolor{keyword}{class }DenseMatrix;}
 \DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01104}01104 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01105}01105 \textcolor{comment}{    /// General function of space and time which returns a double.}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01106}\mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a6da5b9aea59f09e01378860ff559c3bb}{01106}} \textcolor{comment}{}    \textcolor{keyword}{typedef} double (*\mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a6da5b9aea59f09e01378860ff559c3bb}{TimeSpaceToDoubleFctPt}})(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}},}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01107}01107                                              \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x);}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01108}01108 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01109}01109 \textcolor{comment}{    /// General function of space and time which returns a vector of doubles.}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01110}\mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_ac78e613d81ff953916df7368c16b8360}{01110}} \textcolor{comment}{}    \textcolor{keyword}{typedef} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} (*\mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_ac78e613d81ff953916df7368c16b8360}{TimeSpaceToDoubleVectFctPt}})(}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01111}01111       \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x);}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01105}01105 \textcolor{comment}{  /// Function base class for exact solutions/initial conditions/boundary}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01106}01106 \textcolor{comment}{  /// conditions. This is needed so that we can have solutions that depend}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01107}01107 \textcolor{comment}{  /// on problem parameters with resorting to global variables.}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01108}\mbox{\hyperlink{classoomph_1_1SolutionFunctorBase}{01108}} \textcolor{comment}{}  \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1SolutionFunctorBase}{SolutionFunctorBase}}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01109}01109   \{}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01110}01110   \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01111}01111     \textcolor{comment}{// Some typedefs first:}}
 \DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01112}01112 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01113}01113 \textcolor{comment}{    /// General function of time, space and a value vector which returns a}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01114}01114 \textcolor{comment}{    /// vector of doubles.}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01115}\mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a2ea33a78d991c9e4eff2fe64fad34e95}{01115}} \textcolor{comment}{}    \textcolor{keyword}{typedef} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} (*\mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a2ea33a78d991c9e4eff2fe64fad34e95}{TimeSpaceValueToDoubleVectFctPt}})(}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01116}01116       \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x, \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& u);}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01117}01117 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01118}01118 \textcolor{comment}{    /// Virtual destructor}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01119}\mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a6c5ad348f7c2fa03ae7e9eaa845c6481}{01119}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a6c5ad348f7c2fa03ae7e9eaa845c6481}{\string~SolutionFunctorBase}}() \{\}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01113}01113 \textcolor{comment}{    /// General function of space and time which returns a double.}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01114}\mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a6da5b9aea59f09e01378860ff559c3bb}{01114}} \textcolor{comment}{}    \textcolor{keyword}{typedef} double (*\mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a6da5b9aea59f09e01378860ff559c3bb}{TimeSpaceToDoubleFctPt}})(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}},}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01115}01115                                              \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x);}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01116}01116 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01117}01117 \textcolor{comment}{    /// General function of space and time which returns a vector of doubles.}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01118}\mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_ac78e613d81ff953916df7368c16b8360}{01118}} \textcolor{comment}{}    \textcolor{keyword}{typedef} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} (*\mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_ac78e613d81ff953916df7368c16b8360}{TimeSpaceToDoubleVectFctPt}})(}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01119}01119       \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x);}
 \DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01120}01120 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01121}01121 \textcolor{comment}{    /// Call the function.}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01122}\mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a00bb0d93c9513771ab08bf2ca4be27db}{01122}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a00bb0d93c9513771ab08bf2ca4be27db}{operator()}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}},}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01123}01123                                       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x) \textcolor{keyword}{const} = 0;}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01124}01124 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01125}01125 \textcolor{comment}{    /// Call the derivative function.}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01126}\mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a794f59127c33dec7e177aade170b3584}{01126}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a794f59127c33dec7e177aade170b3584}{derivative}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}},}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01127}01127                                       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01128}01128                                       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& u) \textcolor{keyword}{const} = 0;}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01129}01129 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01130}01130 \textcolor{comment}{    /// The derivatives of the derivative function with respect to u (note}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01131}01131 \textcolor{comment}{    /// that this is not quite the jacobian of the residuals for an ODE}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01132}01132 \textcolor{comment}{    /// problem defined by this solution: you also need the time derivative}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01133}01133 \textcolor{comment}{    /// part there). Broken virtual function because not often needed.}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01134}\mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a53482fed2379500a8f279498aed07d56}{01134}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a53482fed2379500a8f279498aed07d56}{jacobian}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}},}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01135}01135                           \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01136}01136                           \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& u,}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01137}01137                           \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a53482fed2379500a8f279498aed07d56}{jacobian}})\textcolor{keyword}{ const}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01138}01138 \textcolor{keyword}{    }\{}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01139}01139       \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} err = \textcolor{stringliteral}{"{}No Jacobian function implemented"{}};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01140}01140       \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01141}01141         err, OOMPH\_CURRENT\_FUNCTION, OOMPH\_EXCEPTION\_LOCATION);}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01142}01142     \}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01143}01143 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01144}01144 \textcolor{comment}{    /// Is a jacobian function implemented?}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01145}\mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_af94ed993230c9b799ce6367b436e7e9e}{01145}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_af94ed993230c9b799ce6367b436e7e9e}{have\_jacobian}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01121}01121 \textcolor{comment}{    /// General function of time, space and a value vector which returns a}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01122}01122 \textcolor{comment}{    /// vector of doubles.}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01123}\mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a2ea33a78d991c9e4eff2fe64fad34e95}{01123}} \textcolor{comment}{}    \textcolor{keyword}{typedef} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} (*\mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a2ea33a78d991c9e4eff2fe64fad34e95}{TimeSpaceValueToDoubleVectFctPt}})(}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01124}01124       \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x, \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& u);}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01125}01125 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01126}01126 \textcolor{comment}{    /// Virtual destructor}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01127}\mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a6c5ad348f7c2fa03ae7e9eaa845c6481}{01127}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a6c5ad348f7c2fa03ae7e9eaa845c6481}{\string~SolutionFunctorBase}}() \{\}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01128}01128 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01129}01129 \textcolor{comment}{    /// Call the function.}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01130}\mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a00bb0d93c9513771ab08bf2ca4be27db}{01130}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a00bb0d93c9513771ab08bf2ca4be27db}{operator()}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}},}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01131}01131                                       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x) \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01132}01132 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01133}01133 \textcolor{comment}{    /// Call the derivative function.}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01134}\mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a794f59127c33dec7e177aade170b3584}{01134}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a794f59127c33dec7e177aade170b3584}{derivative}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}},}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01135}01135                                       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01136}01136                                       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& u) \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01137}01137 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01138}01138 \textcolor{comment}{    /// The derivatives of the derivative function with respect to u (note}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01139}01139 \textcolor{comment}{    /// that this is not quite the jacobian of the residuals for an ODE}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01140}01140 \textcolor{comment}{    /// problem defined by this solution: you also need the time derivative}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01141}01141 \textcolor{comment}{    /// part there). Broken virtual function because not often needed.}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01142}\mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a53482fed2379500a8f279498aed07d56}{01142}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a53482fed2379500a8f279498aed07d56}{jacobian}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}},}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01143}01143                           \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01144}01144                           \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& u,}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01145}01145                           \mbox{\hyperlink{classoomph_1_1DenseMatrix}{DenseMatrix<double>}}\& \mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a53482fed2379500a8f279498aed07d56}{jacobian}})\textcolor{keyword}{ const}}
 \DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01146}01146 \textcolor{keyword}{    }\{}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01147}01147       \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01148}01148     \}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01149}01149 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01150}01150 \textcolor{comment}{    /// Overload to grab data from the problem.}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01151}\mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a016f7f144cc563df9efb7d4679b18c46}{01151}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a016f7f144cc563df9efb7d4679b18c46}{initialise\_from\_problem}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}* problem\_pt) \{\}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01152}01152   \};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01153}01153 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01154}01154 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01155}01155 \textcolor{comment}{  /// Function class for a simple function with no external parameters (just}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01156}01156 \textcolor{comment}{  /// stores a function pointer, only needed for compatability).}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01157}\mbox{\hyperlink{classoomph_1_1SolutionFunctor}{01157}} \textcolor{comment}{}  \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1SolutionFunctor}{SolutionFunctor}} : \textcolor{keyword}{public} \mbox{\hyperlink{classoomph_1_1SolutionFunctorBase}{SolutionFunctorBase}}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01158}01158   \{}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01159}01159     \textcolor{comment}{// This could easily be extended to take}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01160}01160     \textcolor{comment}{// FiniteElement::UnsteadyExactSolutionFctPt function (i.e. functions}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01161}01161     \textcolor{comment}{// where the output is placed into a given vector rather than returned)}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01162}01162     \textcolor{comment}{// as well-\/-\/just add the appropriate storage pointers and constructors.}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01163}01163 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01164}01164   \textcolor{keyword}{public}:}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01165}01165     \textcolor{comment}{// Constructors:}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01166}01166 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01167}\mbox{\hyperlink{classoomph_1_1SolutionFunctor_a38ef9471c4f57552b50236c4598349b0}{01167}}     \mbox{\hyperlink{classoomph_1_1SolutionFunctor_a38ef9471c4f57552b50236c4598349b0}{SolutionFunctor}}()}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01168}01168     \{}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01169}01169       \mbox{\hyperlink{classoomph_1_1SolutionFunctor_ac00dd4dd85c4e9fedc87fdbc15537c42}{Solution\_fpt}} = 0;}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01170}01170       \mbox{\hyperlink{classoomph_1_1SolutionFunctor_a7ebbf961369283ab1f9a0cf54c841e46}{Derivative\_fpt}} = 0;}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01171}01171     \}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01172}01172 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01173}\mbox{\hyperlink{classoomph_1_1SolutionFunctor_affba272bc861b18cab3a1975496427c1}{01173}}     \mbox{\hyperlink{classoomph_1_1SolutionFunctor_affba272bc861b18cab3a1975496427c1}{SolutionFunctor}}(\mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_ac78e613d81ff953916df7368c16b8360}{TimeSpaceToDoubleVectFctPt}} solution\_fpt)}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01174}01174     \{}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01175}01175       \mbox{\hyperlink{classoomph_1_1SolutionFunctor_ac00dd4dd85c4e9fedc87fdbc15537c42}{Solution\_fpt}} = solution\_fpt;}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01176}01176       \mbox{\hyperlink{classoomph_1_1SolutionFunctor_a7ebbf961369283ab1f9a0cf54c841e46}{Derivative\_fpt}} = 0;}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01177}01177     \}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01178}01178 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01179}\mbox{\hyperlink{classoomph_1_1SolutionFunctor_a95e64ff5b9c4137a58002c6298ab452d}{01179}}     \mbox{\hyperlink{classoomph_1_1SolutionFunctor_a95e64ff5b9c4137a58002c6298ab452d}{SolutionFunctor}}(\mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_ac78e613d81ff953916df7368c16b8360}{TimeSpaceToDoubleVectFctPt}} solution\_fpt,}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01180}01180                     \mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a2ea33a78d991c9e4eff2fe64fad34e95}{TimeSpaceValueToDoubleVectFctPt}} derivative\_fpt)}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01181}01181     \{}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01182}01182       \mbox{\hyperlink{classoomph_1_1SolutionFunctor_ac00dd4dd85c4e9fedc87fdbc15537c42}{Solution\_fpt}} = solution\_fpt;}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01183}01183       \mbox{\hyperlink{classoomph_1_1SolutionFunctor_a7ebbf961369283ab1f9a0cf54c841e46}{Derivative\_fpt}} = derivative\_fpt;}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01184}01184     \}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01185}01185 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01186}\mbox{\hyperlink{classoomph_1_1SolutionFunctor_a1fba5654355a0974ec399ae09a9fb43c}{01186}}     \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1SolutionFunctor_a1fba5654355a0974ec399ae09a9fb43c}{\string~SolutionFunctor}}() \{\}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01187}01187 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01188}\mbox{\hyperlink{classoomph_1_1SolutionFunctor_ad3573f5322c41bc9bc56667393947774}{01188}}     \mbox{\hyperlink{classoomph_1_1SolutionFunctor_ad3573f5322c41bc9bc56667393947774}{SolutionFunctor}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1SolutionFunctor}{SolutionFunctor}}\& that)}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01147}01147       \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} err = \textcolor{stringliteral}{"{}No Jacobian function implemented"{}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01148}01148       \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01149}01149         err, OOMPH\_CURRENT\_FUNCTION, OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01150}01150     \}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01151}01151 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01152}01152 \textcolor{comment}{    /// Is a jacobian function implemented?}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01153}\mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_af94ed993230c9b799ce6367b436e7e9e}{01153}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_af94ed993230c9b799ce6367b436e7e9e}{have\_jacobian}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01154}01154 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01155}01155       \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01156}01156     \}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01157}01157 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01158}01158 \textcolor{comment}{    /// Overload to grab data from the problem.}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01159}\mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a016f7f144cc563df9efb7d4679b18c46}{01159}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a016f7f144cc563df9efb7d4679b18c46}{initialise\_from\_problem}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}* problem\_pt) \{\}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01160}01160   \};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01161}01161 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01162}01162 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01163}01163 \textcolor{comment}{  /// Function class for a simple function with no external parameters (just}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01164}01164 \textcolor{comment}{  /// stores a function pointer, only needed for compatability).}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01165}\mbox{\hyperlink{classoomph_1_1SolutionFunctor}{01165}} \textcolor{comment}{}  \textcolor{keyword}{class }\mbox{\hyperlink{classoomph_1_1SolutionFunctor}{SolutionFunctor}} : \textcolor{keyword}{public} \mbox{\hyperlink{classoomph_1_1SolutionFunctorBase}{SolutionFunctorBase}}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01166}01166   \{}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01167}01167     \textcolor{comment}{// This could easily be extended to take}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01168}01168     \textcolor{comment}{// FiniteElement::UnsteadyExactSolutionFctPt function (i.e. functions}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01169}01169     \textcolor{comment}{// where the output is placed into a given vector rather than returned)}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01170}01170     \textcolor{comment}{// as well-\/-\/just add the appropriate storage pointers and constructors.}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01171}01171 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01172}01172   \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01173}01173     \textcolor{comment}{// Constructors:}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01174}01174 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01175}\mbox{\hyperlink{classoomph_1_1SolutionFunctor_a38ef9471c4f57552b50236c4598349b0}{01175}}     \mbox{\hyperlink{classoomph_1_1SolutionFunctor_a38ef9471c4f57552b50236c4598349b0}{SolutionFunctor}}()}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01176}01176     \{}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01177}01177       \mbox{\hyperlink{classoomph_1_1SolutionFunctor_ac00dd4dd85c4e9fedc87fdbc15537c42}{Solution\_fpt}} = 0;}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01178}01178       \mbox{\hyperlink{classoomph_1_1SolutionFunctor_a7ebbf961369283ab1f9a0cf54c841e46}{Derivative\_fpt}} = 0;}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01179}01179     \}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01180}01180 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01181}\mbox{\hyperlink{classoomph_1_1SolutionFunctor_affba272bc861b18cab3a1975496427c1}{01181}}     \mbox{\hyperlink{classoomph_1_1SolutionFunctor_affba272bc861b18cab3a1975496427c1}{SolutionFunctor}}(\mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_ac78e613d81ff953916df7368c16b8360}{TimeSpaceToDoubleVectFctPt}} solution\_fpt)}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01182}01182     \{}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01183}01183       \mbox{\hyperlink{classoomph_1_1SolutionFunctor_ac00dd4dd85c4e9fedc87fdbc15537c42}{Solution\_fpt}} = solution\_fpt;}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01184}01184       \mbox{\hyperlink{classoomph_1_1SolutionFunctor_a7ebbf961369283ab1f9a0cf54c841e46}{Derivative\_fpt}} = 0;}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01185}01185     \}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01186}01186 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01187}\mbox{\hyperlink{classoomph_1_1SolutionFunctor_a95e64ff5b9c4137a58002c6298ab452d}{01187}}     \mbox{\hyperlink{classoomph_1_1SolutionFunctor_a95e64ff5b9c4137a58002c6298ab452d}{SolutionFunctor}}(\mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_ac78e613d81ff953916df7368c16b8360}{TimeSpaceToDoubleVectFctPt}} solution\_fpt,}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01188}01188                     \mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a2ea33a78d991c9e4eff2fe64fad34e95}{TimeSpaceValueToDoubleVectFctPt}} derivative\_fpt)}
 \DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01189}01189     \{}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01190}01190       \mbox{\hyperlink{classoomph_1_1SolutionFunctor_ac00dd4dd85c4e9fedc87fdbc15537c42}{Solution\_fpt}} = that.\mbox{\hyperlink{classoomph_1_1SolutionFunctor_ac00dd4dd85c4e9fedc87fdbc15537c42}{Solution\_fpt}};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01191}01191       \mbox{\hyperlink{classoomph_1_1SolutionFunctor_a7ebbf961369283ab1f9a0cf54c841e46}{Derivative\_fpt}} = that.\mbox{\hyperlink{classoomph_1_1SolutionFunctor_a7ebbf961369283ab1f9a0cf54c841e46}{Derivative\_fpt}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01190}01190       \mbox{\hyperlink{classoomph_1_1SolutionFunctor_ac00dd4dd85c4e9fedc87fdbc15537c42}{Solution\_fpt}} = solution\_fpt;}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01191}01191       \mbox{\hyperlink{classoomph_1_1SolutionFunctor_a7ebbf961369283ab1f9a0cf54c841e46}{Derivative\_fpt}} = derivative\_fpt;}
 \DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01192}01192     \}}
 \DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01193}01193 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01194}\mbox{\hyperlink{classoomph_1_1SolutionFunctor_a7ac79a73917fc149efad11d6a26e29f5}{01194}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1SolutionFunctor_a7ac79a73917fc149efad11d6a26e29f5}{operator=}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1SolutionFunctor}{SolutionFunctor}}\& that)}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01195}01195     \{}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01196}01196       this-\/>\mbox{\hyperlink{classoomph_1_1SolutionFunctor_ac00dd4dd85c4e9fedc87fdbc15537c42}{Solution\_fpt}} = that.\mbox{\hyperlink{classoomph_1_1SolutionFunctor_ac00dd4dd85c4e9fedc87fdbc15537c42}{Solution\_fpt}};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01197}01197       this-\/>\mbox{\hyperlink{classoomph_1_1SolutionFunctor_a7ebbf961369283ab1f9a0cf54c841e46}{Derivative\_fpt}} = that.\mbox{\hyperlink{classoomph_1_1SolutionFunctor_a7ebbf961369283ab1f9a0cf54c841e46}{Derivative\_fpt}};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01198}01198     \}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01199}01199 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01200}01200 \textcolor{comment}{    /// Call the function.}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01201}\mbox{\hyperlink{classoomph_1_1SolutionFunctor_a91f54e36f56c6b430e55b94e9db35685}{01201}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{classoomph_1_1SolutionFunctor_a91f54e36f56c6b430e55b94e9db35685}{operator()}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}},}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01202}01202                                       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x)\textcolor{keyword}{ const}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01203}01203 \textcolor{keyword}{    }\{}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01204}01204 \textcolor{preprocessor}{\#ifdef PARANOID}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01205}01205       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1SolutionFunctor_ac00dd4dd85c4e9fedc87fdbc15537c42}{Solution\_fpt}} == 0)}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01206}01206       \{}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01207}01207         \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} err = \textcolor{stringliteral}{"{}Solution\_fpt is null!"{}};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01208}01208         \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01209}01209           err, OOMPH\_CURRENT\_FUNCTION, OOMPH\_EXCEPTION\_LOCATION);}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01210}01210       \}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01211}01211 \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01212}01212       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1SolutionFunctor_ac00dd4dd85c4e9fedc87fdbc15537c42}{Solution\_fpt}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, x);}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01213}01213     \}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01214}01214 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01215}01215 \textcolor{comment}{    /// Call the derivative function.}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01216}\mbox{\hyperlink{classoomph_1_1SolutionFunctor_ad20676f44f5bcfb4f1b853ec52e69b08}{01216}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{classoomph_1_1SolutionFunctor_ad20676f44f5bcfb4f1b853ec52e69b08}{derivative}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}},}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01217}01217                                       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01218}01218                                       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& u)\textcolor{keyword}{ const}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01219}01219 \textcolor{keyword}{    }\{}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01220}01220 \textcolor{preprocessor}{\#ifdef PARANOID}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01221}01221       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1SolutionFunctor_a7ebbf961369283ab1f9a0cf54c841e46}{Derivative\_fpt}} == 0)}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01222}01222       \{}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01223}01223         \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} err = \textcolor{stringliteral}{"{}Derivative\_fpt is null!"{}};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01224}01224         \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01225}01225           err, OOMPH\_CURRENT\_FUNCTION, OOMPH\_EXCEPTION\_LOCATION);}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01226}01226       \}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01227}01227 \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01228}01228       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1SolutionFunctor_a7ebbf961369283ab1f9a0cf54c841e46}{Derivative\_fpt}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, x, u);}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01229}01229     \}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01230}01230 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01231}01231 \textcolor{comment}{    /// Storage for solution}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01232}\mbox{\hyperlink{classoomph_1_1SolutionFunctor_ac00dd4dd85c4e9fedc87fdbc15537c42}{01232}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_ac78e613d81ff953916df7368c16b8360}{TimeSpaceToDoubleVectFctPt}} \mbox{\hyperlink{classoomph_1_1SolutionFunctor_ac00dd4dd85c4e9fedc87fdbc15537c42}{Solution\_fpt}};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01233}01233 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01234}01234 \textcolor{comment}{    /// Storage for derivative}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01235}\mbox{\hyperlink{classoomph_1_1SolutionFunctor_a7ebbf961369283ab1f9a0cf54c841e46}{01235}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a2ea33a78d991c9e4eff2fe64fad34e95}{TimeSpaceValueToDoubleVectFctPt}} \mbox{\hyperlink{classoomph_1_1SolutionFunctor_a7ebbf961369283ab1f9a0cf54c841e46}{Derivative\_fpt}};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01236}01236   \};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01237}01237 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01238}01238 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01239}01239 \} \textcolor{comment}{// namespace oomph}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01240}01240 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01194}\mbox{\hyperlink{classoomph_1_1SolutionFunctor_a1fba5654355a0974ec399ae09a9fb43c}{01194}}     \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1SolutionFunctor_a1fba5654355a0974ec399ae09a9fb43c}{\string~SolutionFunctor}}() \{\}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01195}01195 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01196}\mbox{\hyperlink{classoomph_1_1SolutionFunctor_ad3573f5322c41bc9bc56667393947774}{01196}}     \mbox{\hyperlink{classoomph_1_1SolutionFunctor_ad3573f5322c41bc9bc56667393947774}{SolutionFunctor}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1SolutionFunctor}{SolutionFunctor}}\& that)}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01197}01197     \{}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01198}01198       \mbox{\hyperlink{classoomph_1_1SolutionFunctor_ac00dd4dd85c4e9fedc87fdbc15537c42}{Solution\_fpt}} = that.\mbox{\hyperlink{classoomph_1_1SolutionFunctor_ac00dd4dd85c4e9fedc87fdbc15537c42}{Solution\_fpt}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01199}01199       \mbox{\hyperlink{classoomph_1_1SolutionFunctor_a7ebbf961369283ab1f9a0cf54c841e46}{Derivative\_fpt}} = that.\mbox{\hyperlink{classoomph_1_1SolutionFunctor_a7ebbf961369283ab1f9a0cf54c841e46}{Derivative\_fpt}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01200}01200     \}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01201}01201 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01202}\mbox{\hyperlink{classoomph_1_1SolutionFunctor_a7ac79a73917fc149efad11d6a26e29f5}{01202}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1SolutionFunctor_a7ac79a73917fc149efad11d6a26e29f5}{operator=}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1SolutionFunctor}{SolutionFunctor}}\& that)}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01203}01203     \{}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01204}01204       this-\/>\mbox{\hyperlink{classoomph_1_1SolutionFunctor_ac00dd4dd85c4e9fedc87fdbc15537c42}{Solution\_fpt}} = that.\mbox{\hyperlink{classoomph_1_1SolutionFunctor_ac00dd4dd85c4e9fedc87fdbc15537c42}{Solution\_fpt}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01205}01205       this-\/>\mbox{\hyperlink{classoomph_1_1SolutionFunctor_a7ebbf961369283ab1f9a0cf54c841e46}{Derivative\_fpt}} = that.\mbox{\hyperlink{classoomph_1_1SolutionFunctor_a7ebbf961369283ab1f9a0cf54c841e46}{Derivative\_fpt}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01206}01206     \}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01207}01207 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01208}01208 \textcolor{comment}{    /// Call the function.}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01209}\mbox{\hyperlink{classoomph_1_1SolutionFunctor_a91f54e36f56c6b430e55b94e9db35685}{01209}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{classoomph_1_1SolutionFunctor_a91f54e36f56c6b430e55b94e9db35685}{operator()}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}},}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01210}01210                                       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01211}01211 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01212}01212 \textcolor{preprocessor}{\#ifdef PARANOID}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01213}01213       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1SolutionFunctor_ac00dd4dd85c4e9fedc87fdbc15537c42}{Solution\_fpt}} == 0)}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01214}01214       \{}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01215}01215         \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} err = \textcolor{stringliteral}{"{}Solution\_fpt is null!"{}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01216}01216         \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01217}01217           err, OOMPH\_CURRENT\_FUNCTION, OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01218}01218       \}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01219}01219 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01220}01220       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1SolutionFunctor_ac00dd4dd85c4e9fedc87fdbc15537c42}{Solution\_fpt}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, x);}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01221}01221     \}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01222}01222 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01223}01223 \textcolor{comment}{    /// Call the derivative function.}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01224}\mbox{\hyperlink{classoomph_1_1SolutionFunctor_ad20676f44f5bcfb4f1b853ec52e69b08}{01224}} \textcolor{comment}{}    \textcolor{keyword}{virtual} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} \mbox{\hyperlink{classoomph_1_1SolutionFunctor_ad20676f44f5bcfb4f1b853ec52e69b08}{derivative}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}},}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01225}01225                                       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& x,}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01226}01226                                       \textcolor{keyword}{const} \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}}\& u)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01227}01227 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01228}01228 \textcolor{preprocessor}{\#ifdef PARANOID}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01229}01229       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1SolutionFunctor_a7ebbf961369283ab1f9a0cf54c841e46}{Derivative\_fpt}} == 0)}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01230}01230       \{}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01231}01231         \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} err = \textcolor{stringliteral}{"{}Derivative\_fpt is null!"{}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01232}01232         \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01233}01233           err, OOMPH\_CURRENT\_FUNCTION, OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01234}01234       \}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01235}01235 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01236}01236       \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1SolutionFunctor_a7ebbf961369283ab1f9a0cf54c841e46}{Derivative\_fpt}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, x, u);}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01237}01237     \}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01238}01238 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01239}01239 \textcolor{comment}{    /// Storage for solution}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01240}\mbox{\hyperlink{classoomph_1_1SolutionFunctor_ac00dd4dd85c4e9fedc87fdbc15537c42}{01240}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_ac78e613d81ff953916df7368c16b8360}{TimeSpaceToDoubleVectFctPt}} \mbox{\hyperlink{classoomph_1_1SolutionFunctor_ac00dd4dd85c4e9fedc87fdbc15537c42}{Solution\_fpt}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01241}01241 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01242}01242 \textcolor{comment}{    /// Storage for derivative}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01243}\mbox{\hyperlink{classoomph_1_1SolutionFunctor_a7ebbf961369283ab1f9a0cf54c841e46}{01243}} \textcolor{comment}{}    \mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a2ea33a78d991c9e4eff2fe64fad34e95}{TimeSpaceValueToDoubleVectFctPt}} \mbox{\hyperlink{classoomph_1_1SolutionFunctor_a7ebbf961369283ab1f9a0cf54c841e46}{Derivative\_fpt}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01244}01244   \};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01245}01245 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01246}01246 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01247}01247 \} \textcolor{comment}{// namespace oomph}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8h_source_l01248}01248 \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

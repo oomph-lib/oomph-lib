@@ -7,7 +7,7 @@
 \DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l00003}00003 \textcolor{comment}{// LIC// multi-\/physics finite-\/element library, available}}
 \DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l00004}00004 \textcolor{comment}{// LIC// at http://www.oomph-\/lib.org.}}
 \DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l00005}00005 \textcolor{comment}{// LIC//}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l00006}00006 \textcolor{comment}{// LIC// Copyright (C) 2006-\/2021 Matthias Heil and Andrew Hazel}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l00006}00006 \textcolor{comment}{// LIC// Copyright (C) 2006-\/2022 Matthias Heil and Andrew Hazel}}
 \DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l00007}00007 \textcolor{comment}{// LIC//}}
 \DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l00008}00008 \textcolor{comment}{// LIC// This library is free software; you can redistribute it and/or}}
 \DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l00009}00009 \textcolor{comment}{// LIC// modify it under the terms of the GNU Lesser General Public}}
@@ -1310,351 +1310,395 @@
 \DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01306}01306         \textcolor{keywordflow}{return} double(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}) / double(CLOCKS\_PER\_SEC);}
 \DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01307}01307       \}}
 \DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01308}01308     \}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01309}01309   \} \textcolor{comment}{// end of namespace TimingHelpers}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01310}01310 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01311}01311 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01312}01312 \textcolor{comment}{  /// /////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01313}01313 \textcolor{comment}{  /// /////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01314}01314 \textcolor{comment}{  /// /////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01315}01315 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01316}01316 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01317}01317   \textcolor{comment}{//===============================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01318}01318 \textcolor{comment}{  /// Namespace with helper functions to assess total memory usage}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01319}01319 \textcolor{comment}{  /// on the fly using system() -\/-\/ details are very machine specific! This just}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01320}01320 \textcolor{comment}{  /// provides the overall machinery with default settings for}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01321}01321 \textcolor{comment}{  /// our own (linux machines). Uses the system command}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01322}01322 \textcolor{comment}{  /// to spawn a command that computes the total memory usage}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01323}01323 \textcolor{comment}{  /// on the machine where this is called.  [Disclaimer: works}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01324}01324 \textcolor{comment}{  /// on my machine(s) -\/-\/ no guarantees for any other platform;}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01325}01325 \textcolor{comment}{  /// linux or not. MH]}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01326}01326 \textcolor{comment}{}  \textcolor{comment}{//===============================================================}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01327}\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage}{01327}}   \textcolor{keyword}{namespace }MemoryUsage}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01328}01328   \{\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01329}01329 \textcolor{comment}{    /// Boolean to suppress synchronisation of doc memory}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01330}01330 \textcolor{comment}{    /// usage on processors (via mpi barriers). True (i.e. sync is}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01331}01331 \textcolor{comment}{    /// suppressed) by default because not all processors may}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01332}01332 \textcolor{comment}{    /// reach the relevant doc memory usage statements}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01333}01333 \textcolor{comment}{    /// causing the code to hang).}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01334}\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a77ed83cae1c77e9a046bc6b1ff55645a}{01334}} \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a77ed83cae1c77e9a046bc6b1ff55645a}{Suppress\_mpi\_synchronisation}} = \textcolor{keyword}{true};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01335}01335 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01336}01336 \textcolor{comment}{    /// String containing system command that obtains memory usage}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01337}01337 \textcolor{comment}{    /// of all processes.}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01338}01338 \textcolor{comment}{    /// Default assignment for linux. [Disclaimer: works on my machine(s) -\/-\/}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01339}01339 \textcolor{comment}{    /// no guarantees for any other platform; linux or not. MH]}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01340}\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_ae5280b46bc1ce506ba96494d6dacbdbe}{01340}} \textcolor{comment}{}    \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_ae5280b46bc1ce506ba96494d6dacbdbe}{My\_memory\_usage\_system\_string}} = \textcolor{stringliteral}{"{}ps aux"{}};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01341}01341 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01342}01342 \textcolor{comment}{    /// Bool allowing quick bypassing of ALL operations related}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01343}01343 \textcolor{comment}{    /// to memory usage monitoring -\/-\/ this allows the code to remain}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01344}01344 \textcolor{comment}{    /// "{}instrumented"{} without incurring the heavy penalties associated}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01345}01345 \textcolor{comment}{    /// with the system calls and i/o. Default setting: false.}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01346}\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a1b52934e2d3ddd6779f5f9581d14abc1}{01346}} \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a1b52934e2d3ddd6779f5f9581d14abc1}{Bypass\_all\_memory\_usage\_monitoring}} = \textcolor{keyword}{false};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01347}01347 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01348}01348 \textcolor{comment}{    /// String containing name of file in which we document}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01349}01349 \textcolor{comment}{    /// my memory usage -\/-\/ you may want to change this to allow different}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01350}01350 \textcolor{comment}{    /// processors to write to separate files (especially in mpi}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01351}01351 \textcolor{comment}{    /// context). Note that file is appended to}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01352}01352 \textcolor{comment}{    /// so it ought to be emptied (either manually or by calling}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01353}01353 \textcolor{comment}{    /// helper function empty\_memory\_usage\_file()}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01354}\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_aa764cf2d9bfd321a3784aafdd32714bf}{01354}} \textcolor{comment}{}    \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_aa764cf2d9bfd321a3784aafdd32714bf}{My\_memory\_usage\_filename}} = \textcolor{stringliteral}{"{}my\_memory\_usage.dat"{}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01309}01309 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01310}01310 \textcolor{comment}{    /// Returns a nicely formatted string from an input time in seconds;}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01311}01311 \textcolor{comment}{    /// the format depends on the size of time, e.g.:}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01312}01312 \textcolor{comment}{    /// 86510 will be printed as 1d 1m:50}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01313}01313 \textcolor{comment}{    ///  3710 will be printed as 1h:01:50}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01314}01314 \textcolor{comment}{    ///   700 will be printed as 11m:40}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01315}01315 \textcolor{comment}{    ///    59 will be printed as 59s}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01316}\mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_ae746b756dfb86c00c7cf37558a7870f3}{01316}} \textcolor{comment}{}    \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} \mbox{\hyperlink{namespaceoomph_1_1TimingHelpers_ae746b756dfb86c00c7cf37558a7870f3}{convert\_secs\_to\_formatted\_string}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time\_in\_sec)}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01317}01317     \{}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01318}01318       std::ostringstream ss;}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01319}01319 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01320}01320       \textcolor{keywordtype}{unsigned} sec\_within\_day = unsigned(time\_in\_sec) \% (3600 * 24);}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01321}01321 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01322}01322       \textcolor{keywordtype}{unsigned} days = unsigned(time\_in\_sec) / (3600 * 24);}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01323}01323       \textcolor{keywordtype}{unsigned} hours = sec\_within\_day / 3600;}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01324}01324       \textcolor{keywordtype}{unsigned} minutes = (sec\_within\_day \% 3600) / 60;}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01325}01325       \textcolor{keywordtype}{unsigned} seconds = (sec\_within\_day \% 3600) \% 60;}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01326}01326 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01327}01327       \textcolor{keywordflow}{if} (days > 0)}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01328}01328       \{}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01329}01329         ss << days << \textcolor{stringliteral}{"{}d "{}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01330}01330       \}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01331}01331 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01332}01332       \textcolor{keywordflow}{if} (hours > 0)}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01333}01333       \{}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01334}01334         ss << hours << \textcolor{stringliteral}{"{}h:"{}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01335}01335         ss << std::setw(2) << std::setfill(\textcolor{charliteral}{'0'});}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01336}01336         ss << minutes << \textcolor{stringliteral}{"{}:"{}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01337}01337         ss << seconds;}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01338}01338       \}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01339}01339       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (minutes > 0)}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01340}01340       \{}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01341}01341         ss << minutes << \textcolor{stringliteral}{"{}m:"{}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01342}01342         ss << std::setw(2) << std::setfill(\textcolor{charliteral}{'0'});}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01343}01343         ss << seconds;}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01344}01344       \}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01345}01345       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01346}01346       \{}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01347}01347         \textcolor{keywordtype}{double} seconds\_double = seconds + (time\_in\_sec -\/ double(seconds));}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01348}01348         ss << std::setprecision(1) << std::fixed << seconds\_double << \textcolor{stringliteral}{"{}s"{}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01349}01349       \}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01350}01350 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01351}01351       \textcolor{keywordflow}{return} ss.str();}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01352}01352     \}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01353}01353   \} \textcolor{comment}{// end of namespace TimingHelpers}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01354}01354 }
 \DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01355}01355 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01356}01356 \textcolor{comment}{    /// Function to empty file that records my memory usage in}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01357}01357 \textcolor{comment}{    /// file whose name is specified by My\_memory\_usage\_filename.}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01358}\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_aadcb42d5c4ca8099981d75b2d5adcd96}{01358}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_aadcb42d5c4ca8099981d75b2d5adcd96}{empty\_my\_memory\_usage\_file}}()}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01359}01359     \{}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01360}01360       \textcolor{comment}{// bail out straight away?}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01361}01361       \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a1b52934e2d3ddd6779f5f9581d14abc1}{Bypass\_all\_memory\_usage\_monitoring}}) \textcolor{keywordflow}{return};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01362}01362 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01363}01363       \textcolor{comment}{// Open without appending and write header}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01364}01364       std::ofstream the\_file;}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01365}01365       the\_file.open(\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_aa764cf2d9bfd321a3784aafdd32714bf}{My\_memory\_usage\_filename}}.c\_str());}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01366}01366       the\_file << \textcolor{stringliteral}{"{}\# My memory usage: \(\backslash\)n"{}};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01367}01367       the\_file.close();}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01368}01368     \}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01369}01369 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01370}01370 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01371}01371 \textcolor{preprocessor}{\#ifdef OOMPH\_HAS\_UNISTDH}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01372}01372 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01373}01373 \textcolor{comment}{    /// Doc my memory usage, prepended by string (which allows}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01374}01374 \textcolor{comment}{    /// identification from where the function is called, say) that records}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01375}01375 \textcolor{comment}{    /// memory usage in file whose name is specified by}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01376}01376 \textcolor{comment}{    /// My\_memory\_usage\_filename. Data is appended to that file; wipe it with}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01377}01377 \textcolor{comment}{    /// empty\_my\_memory\_usage\_file(). Note: This requires getpid() which is}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01378}01378 \textcolor{comment}{    /// defined in unistd.h so if you don't have that we won't build that}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01379}01379 \textcolor{comment}{    /// function!}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01380}\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a43f39ca6f2e6040903ec86b46eb760dd}{01380}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a43f39ca6f2e6040903ec86b46eb760dd}{doc\_my\_memory\_usage}}(\textcolor{keyword}{const} \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}}\& prefix\_string)}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01381}01381     \{}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01382}01382       \textcolor{comment}{// bail out straight away?}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01383}01383       \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a1b52934e2d3ddd6779f5f9581d14abc1}{Bypass\_all\_memory\_usage\_monitoring}}) \textcolor{keywordflow}{return};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01384}01384 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01385}01385       \textcolor{comment}{// Write prefix}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01386}01386       std::ofstream the\_file;}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01387}01387       the\_file.open(\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_aa764cf2d9bfd321a3784aafdd32714bf}{My\_memory\_usage\_filename}}.c\_str(), std::ios::app);}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01388}01388       the\_file << prefix\_string << \textcolor{stringliteral}{"{} "{}};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01389}01389       the\_file.close();}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01390}01390 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01391}01391       \textcolor{comment}{// Sync all processors if in parallel (unless suppressed)}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01392}01392 \textcolor{preprocessor}{\#ifdef OOMPH\_HAS\_MPI}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01393}01393       \textcolor{keywordflow}{if} ((\mbox{\hyperlink{classoomph_1_1MPI__Helpers_aa376d403f6bc99e8595d227135932b0e}{MPI\_Helpers::mpi\_has\_been\_initialised}}()) \&\&}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01394}01394           (!\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a77ed83cae1c77e9a046bc6b1ff55645a}{Suppress\_mpi\_synchronisation}}))}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01395}01395       \{}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01396}01396         MPI\_Barrier(\mbox{\hyperlink{classoomph_1_1MPI__Helpers_ac16964b22bfd4f657490802beb600ffe}{MPI\_Helpers::communicator\_pt}}()-\/>mpi\_comm());}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01397}01397       \}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01398}01398 \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01399}01399 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01400}01400       \textcolor{comment}{// Process memory usage command and write to file}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01401}01401       std::stringstream tmp;}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01402}01402       tmp << \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_ae5280b46bc1ce506ba96494d6dacbdbe}{My\_memory\_usage\_system\_string}} << \textcolor{stringliteral}{"{} | awk '\{if (\$2=="{}} << getpid()}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01403}01403           << \textcolor{stringliteral}{"{})\{print \$4\}\}' >> "{}} << \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_aa764cf2d9bfd321a3784aafdd32714bf}{My\_memory\_usage\_filename}};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01404}01404       \textcolor{keywordtype}{int} success = system(tmp.str().c\_str());}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01405}01405 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01406}01406       \textcolor{comment}{// Dummy command to shut up compiler warnings}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01407}01407       success += 1;}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01408}01408     \}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01409}01409 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01410}01410 \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01411}01411 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01412}01412 \textcolor{comment}{    /// String containing system command that obtains total memory usage.}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01413}01413 \textcolor{comment}{    /// Default assignment for linux. [Disclaimer: works on my machine(s) -\/-\/}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01414}01414 \textcolor{comment}{    /// no guarantees for any other platform; linux or not. MH]}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01415}\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a9b915316a3658a60e8fa86490c8d013a}{01415}} \textcolor{comment}{}    \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a9b915316a3658a60e8fa86490c8d013a}{Total\_memory\_usage\_system\_string}} =}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01416}01416       \textcolor{stringliteral}{"{}ps aux | awk 'BEGIN\{sum=0\}\{sum+=\$4\}END\{print sum\}'"{}};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01417}01417 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01418}01418 \textcolor{comment}{    /// String containing name of file in which we document total}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01419}01419 \textcolor{comment}{    /// memory usage -\/-\/ you may want to change this to allow different}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01420}01420 \textcolor{comment}{    /// processors to write to separate files (especially in mpi}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01421}01421 \textcolor{comment}{    /// context). Note that file is appended to}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01422}01422 \textcolor{comment}{    /// so it ought to be emptied (either manually or by calling}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01423}01423 \textcolor{comment}{    /// helper function empty\_memory\_usage\_file()}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01424}\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_afd9a74c901df404ddb665921e408a3a3}{01424}} \textcolor{comment}{}    \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_afd9a74c901df404ddb665921e408a3a3}{Total\_memory\_usage\_filename}} = \textcolor{stringliteral}{"{}memory\_usage.dat"{}};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01425}01425 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01426}01426 \textcolor{comment}{    /// Function to empty file that records total memory usage in}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01427}01427 \textcolor{comment}{    /// file whose name is specified by Total\_memory\_usage\_filename.}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01428}\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a8a0031773893f06aac876985e38940e4}{01428}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a8a0031773893f06aac876985e38940e4}{empty\_total\_memory\_usage\_file}}()}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01429}01429     \{}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01430}01430       \textcolor{comment}{// bail out straight away?}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01431}01431       \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a1b52934e2d3ddd6779f5f9581d14abc1}{Bypass\_all\_memory\_usage\_monitoring}}) \textcolor{keywordflow}{return};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01432}01432 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01433}01433       \textcolor{comment}{// Open without appending and write header}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01434}01434       std::ofstream the\_file;}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01435}01435       the\_file.open(\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_afd9a74c901df404ddb665921e408a3a3}{Total\_memory\_usage\_filename}}.c\_str());}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01436}01436       the\_file << \textcolor{stringliteral}{"{}\# Total memory usage: \(\backslash\)n"{}};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01437}01437       the\_file.close();}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01438}01438     \}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01439}01439 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01440}01440 \textcolor{comment}{    /// Doc total memory usage, prepended by string (which allows}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01441}01441 \textcolor{comment}{    /// identification from where the function is called, say) that records}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01442}01442 \textcolor{comment}{    /// memory usage in file whose name is specified by}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01443}01443 \textcolor{comment}{    /// Total\_memory\_usage\_filename. Data is appended to that file; wipe it with}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01444}01444 \textcolor{comment}{    /// empty\_memory\_usage\_file().}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01445}\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a216dececd7087625de8e2211216cd861}{01445}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a216dececd7087625de8e2211216cd861}{doc\_total\_memory\_usage}}(\textcolor{keyword}{const} \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}}\& prefix\_string)}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01446}01446     \{}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01447}01447       \textcolor{comment}{// bail out straight away?}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01448}01448       \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a1b52934e2d3ddd6779f5f9581d14abc1}{Bypass\_all\_memory\_usage\_monitoring}}) \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01356}01356 \textcolor{comment}{  /// /////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01357}01357 \textcolor{comment}{  /// /////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01358}01358 \textcolor{comment}{  /// /////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01359}01359 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01360}01360 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01361}01361   \textcolor{comment}{//===============================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01362}01362 \textcolor{comment}{  /// Namespace with helper functions to assess total memory usage}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01363}01363 \textcolor{comment}{  /// on the fly using system() -\/-\/ details are very machine specific! This just}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01364}01364 \textcolor{comment}{  /// provides the overall machinery with default settings for}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01365}01365 \textcolor{comment}{  /// our own (linux machines). Uses the system command}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01366}01366 \textcolor{comment}{  /// to spawn a command that computes the total memory usage}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01367}01367 \textcolor{comment}{  /// on the machine where this is called.  [Disclaimer: works}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01368}01368 \textcolor{comment}{  /// on my machine(s) -\/-\/ no guarantees for any other platform;}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01369}01369 \textcolor{comment}{  /// linux or not. MH]}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01370}01370 \textcolor{comment}{}  \textcolor{comment}{//===============================================================}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01371}\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage}{01371}}   \textcolor{keyword}{namespace }MemoryUsage}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01372}01372   \{\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01373}01373 \textcolor{comment}{    /// Boolean to suppress synchronisation of doc memory}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01374}01374 \textcolor{comment}{    /// usage on processors (via mpi barriers). True (i.e. sync is}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01375}01375 \textcolor{comment}{    /// suppressed) by default because not all processors may}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01376}01376 \textcolor{comment}{    /// reach the relevant doc memory usage statements}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01377}01377 \textcolor{comment}{    /// causing the code to hang).}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01378}\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a77ed83cae1c77e9a046bc6b1ff55645a}{01378}} \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a77ed83cae1c77e9a046bc6b1ff55645a}{Suppress\_mpi\_synchronisation}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01379}01379 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01380}01380 \textcolor{comment}{    /// String containing system command that obtains memory usage}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01381}01381 \textcolor{comment}{    /// of all processes.}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01382}01382 \textcolor{comment}{    /// Default assignment for linux. [Disclaimer: works on my machine(s) -\/-\/}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01383}01383 \textcolor{comment}{    /// no guarantees for any other platform; linux or not. MH]}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01384}\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_ae5280b46bc1ce506ba96494d6dacbdbe}{01384}} \textcolor{comment}{}    \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_ae5280b46bc1ce506ba96494d6dacbdbe}{My\_memory\_usage\_system\_string}} = \textcolor{stringliteral}{"{}ps aux"{}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01385}01385 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01386}01386 \textcolor{comment}{    /// Bool allowing quick bypassing of ALL operations related}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01387}01387 \textcolor{comment}{    /// to memory usage monitoring -\/-\/ this allows the code to remain}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01388}01388 \textcolor{comment}{    /// "{}instrumented"{} without incurring the heavy penalties associated}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01389}01389 \textcolor{comment}{    /// with the system calls and i/o. Default setting: false.}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01390}\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a1b52934e2d3ddd6779f5f9581d14abc1}{01390}} \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a1b52934e2d3ddd6779f5f9581d14abc1}{Bypass\_all\_memory\_usage\_monitoring}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01391}01391 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01392}01392 \textcolor{comment}{    /// String containing name of file in which we document}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01393}01393 \textcolor{comment}{    /// my memory usage -\/-\/ you may want to change this to allow different}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01394}01394 \textcolor{comment}{    /// processors to write to separate files (especially in mpi}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01395}01395 \textcolor{comment}{    /// context). Note that file is appended to}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01396}01396 \textcolor{comment}{    /// so it ought to be emptied (either manually or by calling}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01397}01397 \textcolor{comment}{    /// helper function empty\_memory\_usage\_file()}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01398}\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_aa764cf2d9bfd321a3784aafdd32714bf}{01398}} \textcolor{comment}{}    \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_aa764cf2d9bfd321a3784aafdd32714bf}{My\_memory\_usage\_filename}} = \textcolor{stringliteral}{"{}my\_memory\_usage.dat"{}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01399}01399 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01400}01400 \textcolor{comment}{    /// Function to empty file that records my memory usage in}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01401}01401 \textcolor{comment}{    /// file whose name is specified by My\_memory\_usage\_filename.}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01402}\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_aadcb42d5c4ca8099981d75b2d5adcd96}{01402}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_aadcb42d5c4ca8099981d75b2d5adcd96}{empty\_my\_memory\_usage\_file}}()}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01403}01403     \{}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01404}01404       \textcolor{comment}{// bail out straight away?}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01405}01405       \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a1b52934e2d3ddd6779f5f9581d14abc1}{Bypass\_all\_memory\_usage\_monitoring}}) \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01406}01406 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01407}01407       \textcolor{comment}{// Open without appending and write header}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01408}01408       std::ofstream the\_file;}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01409}01409       the\_file.open(\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_aa764cf2d9bfd321a3784aafdd32714bf}{My\_memory\_usage\_filename}}.c\_str());}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01410}01410       the\_file << \textcolor{stringliteral}{"{}\# My memory usage: \(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01411}01411       the\_file.close();}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01412}01412     \}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01413}01413 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01414}01414 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01415}01415 \textcolor{preprocessor}{\#ifdef OOMPH\_HAS\_UNISTDH}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01416}01416 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01417}01417 \textcolor{comment}{    /// Doc my memory usage, prepended by string (which allows}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01418}01418 \textcolor{comment}{    /// identification from where the function is called, say) that records}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01419}01419 \textcolor{comment}{    /// memory usage in file whose name is specified by}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01420}01420 \textcolor{comment}{    /// My\_memory\_usage\_filename. Data is appended to that file; wipe it with}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01421}01421 \textcolor{comment}{    /// empty\_my\_memory\_usage\_file(). Note: This requires getpid() which is}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01422}01422 \textcolor{comment}{    /// defined in unistd.h so if you don't have that we won't build that}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01423}01423 \textcolor{comment}{    /// function!}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01424}\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a43f39ca6f2e6040903ec86b46eb760dd}{01424}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a43f39ca6f2e6040903ec86b46eb760dd}{doc\_my\_memory\_usage}}(\textcolor{keyword}{const} \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}}\& prefix\_string)}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01425}01425     \{}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01426}01426       \textcolor{comment}{// bail out straight away?}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01427}01427       \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a1b52934e2d3ddd6779f5f9581d14abc1}{Bypass\_all\_memory\_usage\_monitoring}}) \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01428}01428 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01429}01429       \textcolor{comment}{// Write prefix}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01430}01430       std::ofstream the\_file;}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01431}01431       the\_file.open(\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_aa764cf2d9bfd321a3784aafdd32714bf}{My\_memory\_usage\_filename}}.c\_str(), std::ios::app);}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01432}01432       the\_file << prefix\_string << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01433}01433       the\_file.close();}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01434}01434 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01435}01435       \textcolor{comment}{// Sync all processors if in parallel (unless suppressed)}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01436}01436 \textcolor{preprocessor}{\#ifdef OOMPH\_HAS\_MPI}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01437}01437       \textcolor{keywordflow}{if} ((\mbox{\hyperlink{classoomph_1_1MPI__Helpers_aa376d403f6bc99e8595d227135932b0e}{MPI\_Helpers::mpi\_has\_been\_initialised}}()) \&\&}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01438}01438           (!\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a77ed83cae1c77e9a046bc6b1ff55645a}{Suppress\_mpi\_synchronisation}}))}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01439}01439       \{}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01440}01440         MPI\_Barrier(\mbox{\hyperlink{classoomph_1_1MPI__Helpers_ac16964b22bfd4f657490802beb600ffe}{MPI\_Helpers::communicator\_pt}}()-\/>mpi\_comm());}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01441}01441       \}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01442}01442 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01443}01443 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01444}01444       \textcolor{comment}{// Process memory usage command and write to file}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01445}01445       std::stringstream tmp;}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01446}01446       tmp << \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_ae5280b46bc1ce506ba96494d6dacbdbe}{My\_memory\_usage\_system\_string}} << \textcolor{stringliteral}{"{} | awk '\{if (\$2=="{}} << getpid()}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01447}01447           << \textcolor{stringliteral}{"{})\{print \$4\}\}' >> "{}} << \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_aa764cf2d9bfd321a3784aafdd32714bf}{My\_memory\_usage\_filename}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01448}01448       \textcolor{keywordtype}{int} success = system(tmp.str().c\_str());}
 \DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01449}01449 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01450}01450       \textcolor{comment}{// Write prefix}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01451}01451       std::ofstream the\_file;}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01452}01452       the\_file.open(\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_afd9a74c901df404ddb665921e408a3a3}{Total\_memory\_usage\_filename}}.c\_str(), std::ios::app);}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01453}01453       the\_file << prefix\_string << \textcolor{stringliteral}{"{} "{}};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01454}01454       the\_file.close();}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01455}01455 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01456}01456       \textcolor{comment}{// Sync all processors if in parallel}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01457}01457 \textcolor{preprocessor}{\#ifdef OOMPH\_HAS\_MPI}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01458}01458       \textcolor{keywordflow}{if} ((\mbox{\hyperlink{classoomph_1_1MPI__Helpers_aa376d403f6bc99e8595d227135932b0e}{MPI\_Helpers::mpi\_has\_been\_initialised}}()) \&\&}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01459}01459           (!\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a77ed83cae1c77e9a046bc6b1ff55645a}{Suppress\_mpi\_synchronisation}}))}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01460}01460       \{}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01461}01461         MPI\_Barrier(\mbox{\hyperlink{classoomph_1_1MPI__Helpers_ac16964b22bfd4f657490802beb600ffe}{MPI\_Helpers::communicator\_pt}}()-\/>mpi\_comm());}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01462}01462       \}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01463}01463 \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01464}01464 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01465}01465       \textcolor{comment}{// Process memory usage command and write to file}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01466}01466       std::stringstream tmp;}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01467}01467       tmp << \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a9b915316a3658a60e8fa86490c8d013a}{Total\_memory\_usage\_system\_string}} << \textcolor{stringliteral}{"{} >> "{}}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01468}01468           << \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_afd9a74c901df404ddb665921e408a3a3}{Total\_memory\_usage\_filename}};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01469}01469       \textcolor{keywordtype}{int} success = system(tmp.str().c\_str());}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01470}01470 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01471}01471       \textcolor{comment}{// Dummy command to shut up compiler warnings}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01472}01472       success += 1;}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01473}01473     \}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01474}01474 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01475}01475 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01476}01476 \textcolor{comment}{    /// Function to empty file that records total and local memory usage}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01477}01477 \textcolor{comment}{    /// in appropriate files}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01478}\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a47bde23694eeafe80bdcffb3aaeb07a5}{01478}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a47bde23694eeafe80bdcffb3aaeb07a5}{empty\_memory\_usage\_files}}()}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01479}01479     \{}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01480}01480       \textcolor{comment}{// bail out straight away?}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01481}01481       \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a1b52934e2d3ddd6779f5f9581d14abc1}{Bypass\_all\_memory\_usage\_monitoring}}) \textcolor{keywordflow}{return};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01482}01482 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01483}01483       \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_aadcb42d5c4ca8099981d75b2d5adcd96}{empty\_my\_memory\_usage\_file}}();}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01484}01484       \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a8a0031773893f06aac876985e38940e4}{empty\_total\_memory\_usage\_file}}();}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01485}01485       \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a0034019640ac5f6ffe7e8e40fae1e453}{empty\_top\_file}}();}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01486}01486     \}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01487}01487 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01488}01488 \textcolor{comment}{    /// Doc total and local memory usage, prepended by string (which}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01489}01489 \textcolor{comment}{    /// allows identification from where the function is called, say). NOTE:}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01490}01490 \textcolor{comment}{    /// Local memory usage only works if we have unistd.h header}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01491}\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_aa714e9e49de96f4ca6a9fd7ae99dbeab}{01491}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_aa714e9e49de96f4ca6a9fd7ae99dbeab}{doc\_memory\_usage}}(\textcolor{keyword}{const} \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}}\& prefix\_string)}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01492}01492     \{}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01493}01493       \textcolor{comment}{// bail out straight away?}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01494}01494       \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a1b52934e2d3ddd6779f5f9581d14abc1}{Bypass\_all\_memory\_usage\_monitoring}}) \textcolor{keywordflow}{return};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01495}01495 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01496}01496 \textcolor{preprocessor}{\#ifdef OOMPH\_HAS\_UNISTDH}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01497}01497       \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a43f39ca6f2e6040903ec86b46eb760dd}{doc\_my\_memory\_usage}}(prefix\_string);}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01498}01498 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01450}01450       \textcolor{comment}{// Dummy command to shut up compiler warnings}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01451}01451       success += 1;}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01452}01452     \}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01453}01453 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01454}01454 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01455}01455 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01456}01456 \textcolor{comment}{    /// String containing system command that obtains total memory usage.}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01457}01457 \textcolor{comment}{    /// Default assignment for linux. [Disclaimer: works on my machine(s) -\/-\/}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01458}01458 \textcolor{comment}{    /// no guarantees for any other platform; linux or not. MH]}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01459}\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a9b915316a3658a60e8fa86490c8d013a}{01459}} \textcolor{comment}{}    \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a9b915316a3658a60e8fa86490c8d013a}{Total\_memory\_usage\_system\_string}} =}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01460}01460       \textcolor{stringliteral}{"{}ps aux | awk 'BEGIN\{sum=0\}\{sum+=\$4\}END\{print sum\}'"{}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01461}01461 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01462}01462 \textcolor{comment}{    /// String containing name of file in which we document total}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01463}01463 \textcolor{comment}{    /// memory usage -\/-\/ you may want to change this to allow different}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01464}01464 \textcolor{comment}{    /// processors to write to separate files (especially in mpi}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01465}01465 \textcolor{comment}{    /// context). Note that file is appended to}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01466}01466 \textcolor{comment}{    /// so it ought to be emptied (either manually or by calling}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01467}01467 \textcolor{comment}{    /// helper function empty\_memory\_usage\_file()}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01468}\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_afd9a74c901df404ddb665921e408a3a3}{01468}} \textcolor{comment}{}    \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_afd9a74c901df404ddb665921e408a3a3}{Total\_memory\_usage\_filename}} = \textcolor{stringliteral}{"{}memory\_usage.dat"{}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01469}01469 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01470}01470 \textcolor{comment}{    /// Function to empty file that records total memory usage in}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01471}01471 \textcolor{comment}{    /// file whose name is specified by Total\_memory\_usage\_filename.}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01472}\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a8a0031773893f06aac876985e38940e4}{01472}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a8a0031773893f06aac876985e38940e4}{empty\_total\_memory\_usage\_file}}()}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01473}01473     \{}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01474}01474       \textcolor{comment}{// bail out straight away?}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01475}01475       \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a1b52934e2d3ddd6779f5f9581d14abc1}{Bypass\_all\_memory\_usage\_monitoring}}) \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01476}01476 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01477}01477       \textcolor{comment}{// Open without appending and write header}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01478}01478       std::ofstream the\_file;}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01479}01479       the\_file.open(\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_afd9a74c901df404ddb665921e408a3a3}{Total\_memory\_usage\_filename}}.c\_str());}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01480}01480       the\_file << \textcolor{stringliteral}{"{}\# Total memory usage: \(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01481}01481       the\_file.close();}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01482}01482     \}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01483}01483 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01484}01484 \textcolor{comment}{    /// Doc total memory usage, prepended by string (which allows}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01485}01485 \textcolor{comment}{    /// identification from where the function is called, say) that records}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01486}01486 \textcolor{comment}{    /// memory usage in file whose name is specified by}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01487}01487 \textcolor{comment}{    /// Total\_memory\_usage\_filename. Data is appended to that file; wipe it with}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01488}01488 \textcolor{comment}{    /// empty\_memory\_usage\_file().}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01489}\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a216dececd7087625de8e2211216cd861}{01489}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a216dececd7087625de8e2211216cd861}{doc\_total\_memory\_usage}}(\textcolor{keyword}{const} \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}}\& prefix\_string)}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01490}01490     \{}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01491}01491       \textcolor{comment}{// bail out straight away?}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01492}01492       \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a1b52934e2d3ddd6779f5f9581d14abc1}{Bypass\_all\_memory\_usage\_monitoring}}) \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01493}01493 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01494}01494       \textcolor{comment}{// Write prefix}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01495}01495       std::ofstream the\_file;}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01496}01496       the\_file.open(\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_afd9a74c901df404ddb665921e408a3a3}{Total\_memory\_usage\_filename}}.c\_str(), std::ios::app);}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01497}01497       the\_file << prefix\_string << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01498}01498       the\_file.close();}
 \DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01499}01499 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01500}01500       \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a216dececd7087625de8e2211216cd861}{doc\_total\_memory\_usage}}(prefix\_string);}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01501}01501     \}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01502}01502 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01503}01503 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01504}01504 \textcolor{comment}{    /// String containing system command that runs "{}top"{} (or equivalent)}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01505}01505 \textcolor{comment}{    /// "{}indefinitely"{} and writes to file specified in Top\_output\_filename.}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01506}01506 \textcolor{comment}{    /// Default assignment for linux. [Disclaimer: works on my machine(s) -\/-\/}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01507}01507 \textcolor{comment}{    /// no guarantees for any other platform; linux or not. MH]}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01508}\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a61c07afc6531dcc4f77ae2f2b738383f}{01508}} \textcolor{comment}{}    \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a61c07afc6531dcc4f77ae2f2b738383f}{Top\_system\_string}} = \textcolor{stringliteral}{"{}while true; do top -\/b -\/n 2 ; done  "{}};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01509}01509 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01510}01510 \textcolor{comment}{    ///  String containing name of file in which we document "{}continuous"{}}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01511}01511 \textcolor{comment}{    /// output from "{}top"{} (or equivalent)-\/-\/ you may want to change this to}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01512}01512 \textcolor{comment}{    /// allow different processors to write to separate files (especially in mpi}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01513}01513 \textcolor{comment}{    /// context). Note that file is appended to}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01514}01514 \textcolor{comment}{    /// so it ought to be emptied (either manually or by calling}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01515}01515 \textcolor{comment}{    /// helper function empty\_top\_file()}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01516}\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a03231c21b4d9a8b4a08cecc3d688c7d3}{01516}} \textcolor{comment}{}    \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a03231c21b4d9a8b4a08cecc3d688c7d3}{Top\_output\_filename}} = \textcolor{stringliteral}{"{}top\_output.dat"{}};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01517}01517 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01518}01518 \textcolor{comment}{    /// Function to empty file that records continuous output from top in}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01519}01519 \textcolor{comment}{    /// file whose name is specified by Top\_output\_filename}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01520}\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a0034019640ac5f6ffe7e8e40fae1e453}{01520}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a0034019640ac5f6ffe7e8e40fae1e453}{empty\_top\_file}}()}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01521}01521     \{}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01522}01522       \textcolor{comment}{// bail out straight away?}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01523}01523       \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a1b52934e2d3ddd6779f5f9581d14abc1}{Bypass\_all\_memory\_usage\_monitoring}}) \textcolor{keywordflow}{return};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01524}01524 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01525}01525       \textcolor{comment}{// Open without appending and write header}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01526}01526       std::ofstream the\_file;}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01527}01527       the\_file.open(\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a03231c21b4d9a8b4a08cecc3d688c7d3}{Top\_output\_filename}}.c\_str());}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01528}01528       the\_file << \textcolor{stringliteral}{"{}\# Continuous output from top obtained with: \(\backslash\)n"{}};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01529}01529       the\_file << \textcolor{stringliteral}{"{}\# "{}} << \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a61c07afc6531dcc4f77ae2f2b738383f}{Top\_system\_string}} << \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01530}01530       the\_file.close();}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01531}01531     \}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01532}01532 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01533}01533 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01534}01534 \textcolor{comment}{    /// Start running top continuously and output (append) into}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01535}01535 \textcolor{comment}{    /// file specified by Top\_output\_filename. Wipe that file  with}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01536}01536 \textcolor{comment}{    /// empty\_top\_file() if you wish. Note that this is again quite Linux}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01537}01537 \textcolor{comment}{    /// specific and unlikely to work on other operating systems. Insert}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01538}01538 \textcolor{comment}{    /// optional comment into output file before starting.}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01539}\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a53c2afeb4ffd85dd771ace27fcb84136}{01539}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a53c2afeb4ffd85dd771ace27fcb84136}{run\_continous\_top}}(\textcolor{keyword}{const} \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}}\& comment)}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01540}01540     \{}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01541}01541       \textcolor{comment}{// bail out straight away?}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01542}01542       \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a1b52934e2d3ddd6779f5f9581d14abc1}{Bypass\_all\_memory\_usage\_monitoring}}) \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01500}01500       \textcolor{comment}{// Sync all processors if in parallel}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01501}01501 \textcolor{preprocessor}{\#ifdef OOMPH\_HAS\_MPI}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01502}01502       \textcolor{keywordflow}{if} ((\mbox{\hyperlink{classoomph_1_1MPI__Helpers_aa376d403f6bc99e8595d227135932b0e}{MPI\_Helpers::mpi\_has\_been\_initialised}}()) \&\&}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01503}01503           (!\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a77ed83cae1c77e9a046bc6b1ff55645a}{Suppress\_mpi\_synchronisation}}))}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01504}01504       \{}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01505}01505         MPI\_Barrier(\mbox{\hyperlink{classoomph_1_1MPI__Helpers_ac16964b22bfd4f657490802beb600ffe}{MPI\_Helpers::communicator\_pt}}()-\/>mpi\_comm());}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01506}01506       \}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01507}01507 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01508}01508 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01509}01509       \textcolor{comment}{// Process memory usage command and write to file}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01510}01510       std::stringstream tmp;}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01511}01511       tmp << \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a9b915316a3658a60e8fa86490c8d013a}{Total\_memory\_usage\_system\_string}} << \textcolor{stringliteral}{"{} >> "{}}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01512}01512           << \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_afd9a74c901df404ddb665921e408a3a3}{Total\_memory\_usage\_filename}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01513}01513       \textcolor{keywordtype}{int} success = system(tmp.str().c\_str());}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01514}01514 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01515}01515       \textcolor{comment}{// Dummy command to shut up compiler warnings}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01516}01516       success += 1;}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01517}01517     \}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01518}01518 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01519}01519 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01520}01520 \textcolor{comment}{    /// Function to empty file that records total and local memory usage}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01521}01521 \textcolor{comment}{    /// in appropriate files}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01522}\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a47bde23694eeafe80bdcffb3aaeb07a5}{01522}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a47bde23694eeafe80bdcffb3aaeb07a5}{empty\_memory\_usage\_files}}()}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01523}01523     \{}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01524}01524       \textcolor{comment}{// bail out straight away?}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01525}01525       \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a1b52934e2d3ddd6779f5f9581d14abc1}{Bypass\_all\_memory\_usage\_monitoring}}) \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01526}01526 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01527}01527       \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_aadcb42d5c4ca8099981d75b2d5adcd96}{empty\_my\_memory\_usage\_file}}();}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01528}01528       \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a8a0031773893f06aac876985e38940e4}{empty\_total\_memory\_usage\_file}}();}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01529}01529       \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a0034019640ac5f6ffe7e8e40fae1e453}{empty\_top\_file}}();}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01530}01530     \}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01531}01531 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01532}01532 \textcolor{comment}{    /// Doc total and local memory usage, prepended by string (which}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01533}01533 \textcolor{comment}{    /// allows identification from where the function is called, say). NOTE:}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01534}01534 \textcolor{comment}{    /// Local memory usage only works if we have unistd.h header}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01535}\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_aa714e9e49de96f4ca6a9fd7ae99dbeab}{01535}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_aa714e9e49de96f4ca6a9fd7ae99dbeab}{doc\_memory\_usage}}(\textcolor{keyword}{const} \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}}\& prefix\_string)}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01536}01536     \{}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01537}01537       \textcolor{comment}{// bail out straight away?}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01538}01538       \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a1b52934e2d3ddd6779f5f9581d14abc1}{Bypass\_all\_memory\_usage\_monitoring}}) \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01539}01539 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01540}01540 \textcolor{preprocessor}{\#ifdef OOMPH\_HAS\_UNISTDH}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01541}01541       \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a43f39ca6f2e6040903ec86b46eb760dd}{doc\_my\_memory\_usage}}(prefix\_string);}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01542}01542 \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01543}01543 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01544}01544       \textcolor{comment}{// Sync all processors if in parallel}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01545}01545       \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} modifier = \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01544}01544       \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a216dececd7087625de8e2211216cd861}{doc\_total\_memory\_usage}}(prefix\_string);}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01545}01545     \}}
 \DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01546}01546 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01547}01547 \textcolor{preprocessor}{\#ifdef OOMPH\_HAS\_MPI}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01548}01548       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1MPI__Helpers_aa376d403f6bc99e8595d227135932b0e}{MPI\_Helpers::mpi\_has\_been\_initialised}}())}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01549}01549       \{}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01550}01550         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a77ed83cae1c77e9a046bc6b1ff55645a}{Suppress\_mpi\_synchronisation}})}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01551}01551         \{}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01552}01552           MPI\_Barrier(\mbox{\hyperlink{classoomph_1_1MPI__Helpers_ac16964b22bfd4f657490802beb600ffe}{MPI\_Helpers::communicator\_pt}}()-\/>mpi\_comm());}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01553}01553         \}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01554}01554         std::stringstream tmp;}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01555}01555         tmp << \textcolor{stringliteral}{"{}\_proc"{}} << \mbox{\hyperlink{classoomph_1_1MPI__Helpers_ac16964b22bfd4f657490802beb600ffe}{MPI\_Helpers::communicator\_pt}}()-\/>my\_rank();}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01556}01556         modifier = tmp.str();}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01557}01557       \}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01558}01558 \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01559}01559 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01560}01560       \textcolor{comment}{// Process memory usage command and write to file}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01561}01561       std::stringstream tmp;}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01562}01562 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01563}01563       \textcolor{comment}{// String stream seems unhappy about direct insertions of these}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01564}01564       \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} backslash = \textcolor{stringliteral}{"{}\(\backslash\)\(\backslash\)"{}};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01565}01565       \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} dollar = \textcolor{stringliteral}{"{}\$"{}};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01566}01566 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01567}01567       \textcolor{comment}{// Create files that spawn and kill continuous top}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01568}01568       tmp << \textcolor{stringliteral}{"{}echo \(\backslash\)"{}\#/bin/bash\(\backslash\)"{} > run\_continuous\_top"{}} << modifier << \textcolor{stringliteral}{"{}.bash; "{}}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01569}01569           << \textcolor{stringliteral}{"{}echo \(\backslash\)"{} echo "{}} << backslash << \textcolor{stringliteral}{"{}\(\backslash\)"{} kill "{}} << backslash << dollar}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01570}01570           << backslash << dollar << \textcolor{stringliteral}{"{} "{}} << backslash}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01571}01571           << \textcolor{stringliteral}{"{}\(\backslash\)"{} > kill\_continuous\_top"{}} << modifier}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01572}01572           << \textcolor{stringliteral}{"{}.bash; chmod a+x kill\_continuous\_top"{}} << modifier << \textcolor{stringliteral}{"{}.bash; "{}}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01573}01573           << \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a61c07afc6531dcc4f77ae2f2b738383f}{Top\_system\_string}} << \textcolor{stringliteral}{"{} \(\backslash\)"{} >> run\_continuous\_top"{}} << modifier}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01574}01574           << \textcolor{stringliteral}{"{}.bash; chmod a+x run\_continuous\_top"{}} << modifier << \textcolor{stringliteral}{"{}.bash "{}};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01575}01575       \textcolor{keywordtype}{int} success = system(tmp.str().c\_str());}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01547}01547 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01548}01548 \textcolor{comment}{    /// String containing system command that runs "{}top"{} (or equivalent)}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01549}01549 \textcolor{comment}{    /// "{}indefinitely"{} and writes to file specified in Top\_output\_filename.}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01550}01550 \textcolor{comment}{    /// Default assignment for linux. [Disclaimer: works on my machine(s) -\/-\/}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01551}01551 \textcolor{comment}{    /// no guarantees for any other platform; linux or not. MH]}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01552}\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a61c07afc6531dcc4f77ae2f2b738383f}{01552}} \textcolor{comment}{}    \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a61c07afc6531dcc4f77ae2f2b738383f}{Top\_system\_string}} = \textcolor{stringliteral}{"{}while true; do top -\/b -\/n 2 ; done  "{}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01553}01553 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01554}01554 \textcolor{comment}{    ///  String containing name of file in which we document "{}continuous"{}}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01555}01555 \textcolor{comment}{    /// output from "{}top"{} (or equivalent)-\/-\/ you may want to change this to}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01556}01556 \textcolor{comment}{    /// allow different processors to write to separate files (especially in mpi}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01557}01557 \textcolor{comment}{    /// context). Note that file is appended to}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01558}01558 \textcolor{comment}{    /// so it ought to be emptied (either manually or by calling}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01559}01559 \textcolor{comment}{    /// helper function empty\_top\_file()}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01560}\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a03231c21b4d9a8b4a08cecc3d688c7d3}{01560}} \textcolor{comment}{}    \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a03231c21b4d9a8b4a08cecc3d688c7d3}{Top\_output\_filename}} = \textcolor{stringliteral}{"{}top\_output.dat"{}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01561}01561 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01562}01562 \textcolor{comment}{    /// Function to empty file that records continuous output from top in}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01563}01563 \textcolor{comment}{    /// file whose name is specified by Top\_output\_filename}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01564}\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a0034019640ac5f6ffe7e8e40fae1e453}{01564}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a0034019640ac5f6ffe7e8e40fae1e453}{empty\_top\_file}}()}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01565}01565     \{}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01566}01566       \textcolor{comment}{// bail out straight away?}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01567}01567       \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a1b52934e2d3ddd6779f5f9581d14abc1}{Bypass\_all\_memory\_usage\_monitoring}}) \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01568}01568 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01569}01569       \textcolor{comment}{// Open without appending and write header}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01570}01570       std::ofstream the\_file;}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01571}01571       the\_file.open(\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a03231c21b4d9a8b4a08cecc3d688c7d3}{Top\_output\_filename}}.c\_str());}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01572}01572       the\_file << \textcolor{stringliteral}{"{}\# Continuous output from top obtained with: \(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01573}01573       the\_file << \textcolor{stringliteral}{"{}\# "{}} << \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a61c07afc6531dcc4f77ae2f2b738383f}{Top\_system\_string}} << \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01574}01574       the\_file.close();}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01575}01575     \}}
 \DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01576}01576 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01577}01577       \textcolor{comment}{// Add comment to annotate?}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01578}01578       \textcolor{keywordflow}{if} (comment != \textcolor{stringliteral}{"{}"{}})}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01579}01579       \{}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01580}01580         \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a3426ed2144d50ce7a0941555b911c701}{insert\_comment\_to\_continous\_top}}(comment);}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01581}01581       \}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01582}01582 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01583}01583       \textcolor{comment}{// Start spawning}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01584}01584       std::stringstream tmp2;}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01585}01585       tmp2 << \textcolor{stringliteral}{"{}./run\_continuous\_top"{}} << modifier << \textcolor{stringliteral}{"{}.bash  >> "{}}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01586}01586            << \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a03231c21b4d9a8b4a08cecc3d688c7d3}{Top\_output\_filename}} << \textcolor{stringliteral}{"{} \& "{}};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01587}01587       success = system(tmp2.str().c\_str());}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01588}01588 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01589}01589       \textcolor{comment}{// Dummy command to shut up compiler warnings}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01590}01590       success += 1;}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01591}01591     \}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01592}01592 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01593}01593 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01594}01594 \textcolor{comment}{    /// Stop running top continuously. Note that this is}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01595}01595 \textcolor{comment}{    /// again quite Linux specific and unlikely to work on other operating}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01596}01596 \textcolor{comment}{    /// systems. Insert optional comment into output file before stopping.}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01597}\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a64410078236ee55e630ee6416b4ccdb0}{01597}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a64410078236ee55e630ee6416b4ccdb0}{stop\_continous\_top}}(\textcolor{keyword}{const} \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}}\& comment)}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01598}01598     \{}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01599}01599       \textcolor{comment}{// bail out straight away?}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01600}01600       \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a1b52934e2d3ddd6779f5f9581d14abc1}{Bypass\_all\_memory\_usage\_monitoring}}) \textcolor{keywordflow}{return};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01601}01601 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01602}01602       \textcolor{comment}{// Sync all processors if in parallel}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01603}01603       \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} modifier = \textcolor{stringliteral}{"{}"{}};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01604}01604 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01605}01605 \textcolor{preprocessor}{\#ifdef OOMPH\_HAS\_MPI}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01606}01606       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1MPI__Helpers_aa376d403f6bc99e8595d227135932b0e}{MPI\_Helpers::mpi\_has\_been\_initialised}}())}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01607}01607       \{}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01608}01608         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a77ed83cae1c77e9a046bc6b1ff55645a}{Suppress\_mpi\_synchronisation}})}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01609}01609         \{}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01610}01610           MPI\_Barrier(\mbox{\hyperlink{classoomph_1_1MPI__Helpers_ac16964b22bfd4f657490802beb600ffe}{MPI\_Helpers::communicator\_pt}}()-\/>mpi\_comm());}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01611}01611         \}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01612}01612         std::stringstream tmp;}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01613}01613         tmp << \textcolor{stringliteral}{"{}\_proc"{}} << \mbox{\hyperlink{classoomph_1_1MPI__Helpers_ac16964b22bfd4f657490802beb600ffe}{MPI\_Helpers::communicator\_pt}}()-\/>my\_rank();}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01614}01614         modifier = tmp.str();}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01615}01615       \}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01616}01616 \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01617}01617 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01618}01618       \textcolor{comment}{// Add comment to annotate?}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01619}01619       \textcolor{keywordflow}{if} (comment != \textcolor{stringliteral}{"{}"{}})}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01620}01620       \{}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01621}01621         \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a3426ed2144d50ce7a0941555b911c701}{insert\_comment\_to\_continous\_top}}(comment);}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01622}01622       \}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01623}01623 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01624}01624       \textcolor{comment}{// Kill}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01625}01625       std::stringstream tmp2;}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01626}01626       tmp2 << \textcolor{stringliteral}{"{}./kill\_continuous\_top"{}} << modifier << \textcolor{stringliteral}{"{}.bash  >> "{}}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01627}01627            << \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a03231c21b4d9a8b4a08cecc3d688c7d3}{Top\_output\_filename}} << \textcolor{stringliteral}{"{} \& "{}};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01628}01628       \textcolor{keywordtype}{int} success = system(tmp2.str().c\_str());}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01629}01629 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01630}01630       \textcolor{comment}{// Dummy command to shut up compiler warnings}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01631}01631       success += 1;}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01632}01632     \}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01633}01633 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01634}01634 \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01635}01635 \textcolor{comment}{    /// Insert comment into running continuous top output}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01636}\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a3426ed2144d50ce7a0941555b911c701}{01636}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a3426ed2144d50ce7a0941555b911c701}{insert\_comment\_to\_continous\_top}}(\textcolor{keyword}{const} \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}}\& comment)}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01637}01637     \{}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01638}01638       \textcolor{comment}{// bail out straight away?}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01639}01639       \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a1b52934e2d3ddd6779f5f9581d14abc1}{Bypass\_all\_memory\_usage\_monitoring}}) \textcolor{keywordflow}{return};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01640}01640 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01641}01641       std::stringstream tmp;}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01642}01642       tmp << \textcolor{stringliteral}{"{} echo \(\backslash\)"{}OOMPH-\/LIB EVENT: "{}} << comment << \textcolor{stringliteral}{"{}\(\backslash\)"{}  >> "{}}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01643}01643           << \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a03231c21b4d9a8b4a08cecc3d688c7d3}{Top\_output\_filename}};}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01644}01644       \textcolor{keywordtype}{int} success = system(tmp.str().c\_str());}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01577}01577 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01578}01578 \textcolor{comment}{    /// Start running top continuously and output (append) into}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01579}01579 \textcolor{comment}{    /// file specified by Top\_output\_filename. Wipe that file  with}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01580}01580 \textcolor{comment}{    /// empty\_top\_file() if you wish. Note that this is again quite Linux}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01581}01581 \textcolor{comment}{    /// specific and unlikely to work on other operating systems. Insert}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01582}01582 \textcolor{comment}{    /// optional comment into output file before starting.}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01583}\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a53c2afeb4ffd85dd771ace27fcb84136}{01583}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a53c2afeb4ffd85dd771ace27fcb84136}{run\_continous\_top}}(\textcolor{keyword}{const} \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}}\& comment)}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01584}01584     \{}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01585}01585       \textcolor{comment}{// bail out straight away?}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01586}01586       \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a1b52934e2d3ddd6779f5f9581d14abc1}{Bypass\_all\_memory\_usage\_monitoring}}) \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01587}01587 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01588}01588       \textcolor{comment}{// Sync all processors if in parallel}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01589}01589       \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} modifier = \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01590}01590 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01591}01591 \textcolor{preprocessor}{\#ifdef OOMPH\_HAS\_MPI}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01592}01592       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1MPI__Helpers_aa376d403f6bc99e8595d227135932b0e}{MPI\_Helpers::mpi\_has\_been\_initialised}}())}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01593}01593       \{}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01594}01594         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a77ed83cae1c77e9a046bc6b1ff55645a}{Suppress\_mpi\_synchronisation}})}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01595}01595         \{}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01596}01596           MPI\_Barrier(\mbox{\hyperlink{classoomph_1_1MPI__Helpers_ac16964b22bfd4f657490802beb600ffe}{MPI\_Helpers::communicator\_pt}}()-\/>mpi\_comm());}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01597}01597         \}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01598}01598         std::stringstream tmp;}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01599}01599         tmp << \textcolor{stringliteral}{"{}\_proc"{}} << \mbox{\hyperlink{classoomph_1_1MPI__Helpers_ac16964b22bfd4f657490802beb600ffe}{MPI\_Helpers::communicator\_pt}}()-\/>my\_rank();}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01600}01600         modifier = tmp.str();}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01601}01601       \}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01602}01602 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01603}01603 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01604}01604       \textcolor{comment}{// Process memory usage command and write to file}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01605}01605       std::stringstream tmp;}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01606}01606 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01607}01607       \textcolor{comment}{// String stream seems unhappy about direct insertions of these}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01608}01608       \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} backslash = \textcolor{stringliteral}{"{}\(\backslash\)\(\backslash\)"{}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01609}01609       \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} dollar = \textcolor{stringliteral}{"{}\$"{}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01610}01610 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01611}01611       \textcolor{comment}{// Create files that spawn and kill continuous top}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01612}01612       tmp << \textcolor{stringliteral}{"{}echo \(\backslash\)"{}\#/bin/bash\(\backslash\)"{} > run\_continuous\_top"{}} << modifier << \textcolor{stringliteral}{"{}.bash; "{}}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01613}01613           << \textcolor{stringliteral}{"{}echo \(\backslash\)"{} echo "{}} << backslash << \textcolor{stringliteral}{"{}\(\backslash\)"{} kill "{}} << backslash << dollar}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01614}01614           << backslash << dollar << \textcolor{stringliteral}{"{} "{}} << backslash}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01615}01615           << \textcolor{stringliteral}{"{}\(\backslash\)"{} > kill\_continuous\_top"{}} << modifier}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01616}01616           << \textcolor{stringliteral}{"{}.bash; chmod a+x kill\_continuous\_top"{}} << modifier << \textcolor{stringliteral}{"{}.bash; "{}}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01617}01617           << \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a61c07afc6531dcc4f77ae2f2b738383f}{Top\_system\_string}} << \textcolor{stringliteral}{"{} \(\backslash\)"{} >> run\_continuous\_top"{}} << modifier}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01618}01618           << \textcolor{stringliteral}{"{}.bash; chmod a+x run\_continuous\_top"{}} << modifier << \textcolor{stringliteral}{"{}.bash "{}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01619}01619       \textcolor{keywordtype}{int} success = system(tmp.str().c\_str());}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01620}01620 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01621}01621       \textcolor{comment}{// Add comment to annotate?}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01622}01622       \textcolor{keywordflow}{if} (comment != \textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01623}01623       \{}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01624}01624         \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a3426ed2144d50ce7a0941555b911c701}{insert\_comment\_to\_continous\_top}}(comment);}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01625}01625       \}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01626}01626 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01627}01627       \textcolor{comment}{// Start spawning}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01628}01628       std::stringstream tmp2;}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01629}01629       tmp2 << \textcolor{stringliteral}{"{}./run\_continuous\_top"{}} << modifier << \textcolor{stringliteral}{"{}.bash  >> "{}}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01630}01630            << \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a03231c21b4d9a8b4a08cecc3d688c7d3}{Top\_output\_filename}} << \textcolor{stringliteral}{"{} \& "{}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01631}01631       success = system(tmp2.str().c\_str());}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01632}01632 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01633}01633       \textcolor{comment}{// Dummy command to shut up compiler warnings}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01634}01634       success += 1;}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01635}01635     \}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01636}01636 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01637}01637 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01638}01638 \textcolor{comment}{    /// Stop running top continuously. Note that this is}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01639}01639 \textcolor{comment}{    /// again quite Linux specific and unlikely to work on other operating}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01640}01640 \textcolor{comment}{    /// systems. Insert optional comment into output file before stopping.}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01641}\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a64410078236ee55e630ee6416b4ccdb0}{01641}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a64410078236ee55e630ee6416b4ccdb0}{stop\_continous\_top}}(\textcolor{keyword}{const} \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}}\& comment)}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01642}01642     \{}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01643}01643       \textcolor{comment}{// bail out straight away?}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01644}01644       \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a1b52934e2d3ddd6779f5f9581d14abc1}{Bypass\_all\_memory\_usage\_monitoring}}) \textcolor{keywordflow}{return};}
 \DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01645}01645 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01646}01646       \textcolor{comment}{// Dummy command to shut up compiler warnings}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01647}01647       success += 1;}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01648}01648     \}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01649}01649 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01650}01650 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01651}01651   \} \textcolor{comment}{// end of namespace MemoryUsage}}
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01652}01652 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01653}01653 }
-\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01654}01654 \} \textcolor{comment}{// namespace oomph}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01646}01646       \textcolor{comment}{// Sync all processors if in parallel}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01647}01647       \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} modifier = \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01648}01648 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01649}01649 \textcolor{preprocessor}{\#ifdef OOMPH\_HAS\_MPI}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01650}01650       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1MPI__Helpers_aa376d403f6bc99e8595d227135932b0e}{MPI\_Helpers::mpi\_has\_been\_initialised}}())}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01651}01651       \{}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01652}01652         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a77ed83cae1c77e9a046bc6b1ff55645a}{Suppress\_mpi\_synchronisation}})}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01653}01653         \{}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01654}01654           MPI\_Barrier(\mbox{\hyperlink{classoomph_1_1MPI__Helpers_ac16964b22bfd4f657490802beb600ffe}{MPI\_Helpers::communicator\_pt}}()-\/>mpi\_comm());}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01655}01655         \}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01656}01656         std::stringstream tmp;}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01657}01657         tmp << \textcolor{stringliteral}{"{}\_proc"{}} << \mbox{\hyperlink{classoomph_1_1MPI__Helpers_ac16964b22bfd4f657490802beb600ffe}{MPI\_Helpers::communicator\_pt}}()-\/>my\_rank();}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01658}01658         modifier = tmp.str();}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01659}01659       \}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01660}01660 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01661}01661 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01662}01662       \textcolor{comment}{// Add comment to annotate?}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01663}01663       \textcolor{keywordflow}{if} (comment != \textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01664}01664       \{}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01665}01665         \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a3426ed2144d50ce7a0941555b911c701}{insert\_comment\_to\_continous\_top}}(comment);}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01666}01666       \}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01667}01667 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01668}01668       \textcolor{comment}{// Kill}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01669}01669       std::stringstream tmp2;}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01670}01670       tmp2 << \textcolor{stringliteral}{"{}./kill\_continuous\_top"{}} << modifier << \textcolor{stringliteral}{"{}.bash  >> "{}}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01671}01671            << \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a03231c21b4d9a8b4a08cecc3d688c7d3}{Top\_output\_filename}} << \textcolor{stringliteral}{"{} \& "{}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01672}01672       \textcolor{keywordtype}{int} success = system(tmp2.str().c\_str());}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01673}01673 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01674}01674       \textcolor{comment}{// Dummy command to shut up compiler warnings}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01675}01675       success += 1;}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01676}01676     \}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01677}01677 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01678}01678 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01679}01679 \textcolor{comment}{    /// Insert comment into running continuous top output}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01680}\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a3426ed2144d50ce7a0941555b911c701}{01680}} \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a3426ed2144d50ce7a0941555b911c701}{insert\_comment\_to\_continous\_top}}(\textcolor{keyword}{const} \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}}\& comment)}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01681}01681     \{}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01682}01682       \textcolor{comment}{// bail out straight away?}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01683}01683       \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a1b52934e2d3ddd6779f5f9581d14abc1}{Bypass\_all\_memory\_usage\_monitoring}}) \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01684}01684 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01685}01685       std::stringstream tmp;}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01686}01686       tmp << \textcolor{stringliteral}{"{} echo \(\backslash\)"{}OOMPH-\/LIB EVENT: "{}} << comment << \textcolor{stringliteral}{"{}\(\backslash\)"{}  >> "{}}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01687}01687           << \mbox{\hyperlink{namespaceoomph_1_1MemoryUsage_a03231c21b4d9a8b4a08cecc3d688c7d3}{Top\_output\_filename}};}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01688}01688       \textcolor{keywordtype}{int} success = system(tmp.str().c\_str());}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01689}01689 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01690}01690       \textcolor{comment}{// Dummy command to shut up compiler warnings}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01691}01691       success += 1;}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01692}01692     \}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01693}01693 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01694}01694 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01695}01695   \} \textcolor{comment}{// end of namespace MemoryUsage}}
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01696}01696 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01697}01697 }
+\DoxyCodeLine{\Hypertarget{oomph__utilities_8cc_source_l01698}01698 \} \textcolor{comment}{// namespace oomph}}
 
 \end{DoxyCode}
