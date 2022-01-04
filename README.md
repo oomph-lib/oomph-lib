@@ -66,7 +66,8 @@ directory. In particular, `doc/html/index.html` is a local copy of the `oomph-li
 homepage.
 
 To learn more about contributing to `oomph-lib`, please see
-[`CONTRIBUTING.md`](CONTRIBUTING.md).
+[`CONTRIBUTING.md`](CONTRIBUTING.md) which contains a detailed description of 
+the workflow.
 
 
 ## Community

@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -1305,6 +1305,50 @@ namespace oomph
         time_t t = clock();
         return double(t) / double(CLOCKS_PER_SEC);
       }
+    }
+
+    /// Returns a nicely formatted string from an input time in seconds;
+    /// the format depends on the size of time, e.g.:
+    /// 86510 will be printed as 1d 1m:50
+    ///  3710 will be printed as 1h:01:50
+    ///   700 will be printed as 11m:40
+    ///    59 will be printed as 59s
+    std::string convert_secs_to_formatted_string(const double& time_in_sec)
+    {
+      std::ostringstream ss;
+
+      unsigned sec_within_day = unsigned(time_in_sec) % (3600 * 24);
+
+      unsigned days = unsigned(time_in_sec) / (3600 * 24);
+      unsigned hours = sec_within_day / 3600;
+      unsigned minutes = (sec_within_day % 3600) / 60;
+      unsigned seconds = (sec_within_day % 3600) % 60;
+
+      if (days > 0)
+      {
+        ss << days << "d ";
+      }
+
+      if (hours > 0)
+      {
+        ss << hours << "h:";
+        ss << std::setw(2) << std::setfill('0');
+        ss << minutes << ":";
+        ss << seconds;
+      }
+      else if (minutes > 0)
+      {
+        ss << minutes << "m:";
+        ss << std::setw(2) << std::setfill('0');
+        ss << seconds;
+      }
+      else
+      {
+        double seconds_double = seconds + (time_in_sec - double(seconds));
+        ss << std::setprecision(1) << std::fixed << seconds_double << "s";
+      }
+
+      return ss.str();
     }
   } // end of namespace TimingHelpers
 

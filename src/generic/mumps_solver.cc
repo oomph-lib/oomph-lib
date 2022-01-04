@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -352,8 +352,10 @@ namespace oomph
         {
           double t_end_copy = TimingHelpers::timer();
           oomph_info << "Time for copying matrix into MumpsSolver data "
-                        "structure [sec]       : "
-                     << t_end_copy - t_start_copy << std::endl;
+                        "structure : "
+                     << TimingHelpers::convert_secs_to_formatted_string(
+                          t_end_copy - t_start_copy)
+                     << std::endl;
         }
 
         // Call mumps factorisation
@@ -382,8 +384,9 @@ namespace oomph
         {
           double t_end_analyse = TimingHelpers::timer();
           oomph_info
-            << "Time for mumps analysis stage in MumpsSolver [sec]       : "
-            << t_end_analyse - t_start_analyse
+            << "Time for mumps analysis stage in MumpsSolver            : "
+            << TimingHelpers::convert_secs_to_formatted_string(t_end_analyse -
+                                                               t_start_analyse)
             << "\n(Ordering generated using: ";
 
           switch (Mumps_struc_pt->INFOG(7))
@@ -470,9 +473,11 @@ namespace oomph
             (this->distribution_pt()->communicator_pt()->my_rank() == 0))
         {
           double t_end_factor = TimingHelpers::timer();
-          oomph_info << "Time for actual mumps factorisation in MumpsSolver "
-                        "[sec]       : "
-                     << t_end_factor - t_start_factor << std::endl;
+          oomph_info << "Time for actual mumps factorisation in MumpsSolver"
+                        "      : "
+                     << TimingHelpers::convert_secs_to_formatted_string(
+                          t_end_factor - t_start_factor)
+                     << std::endl;
         }
       }
       // else the CRDoubleMatrix is not distributed
@@ -502,8 +507,10 @@ namespace oomph
         (this->distribution_pt()->communicator_pt()->my_rank() == 0))
     {
       double t_end = TimingHelpers::timer();
-      oomph_info << "Time for MumpsSolver factorisation [sec]       : "
-                 << t_end - t_start << std::endl;
+      oomph_info << "Time for MumpsSolver factorisation                      : "
+                 << TimingHelpers::convert_secs_to_formatted_string(t_end -
+                                                                    t_start)
+                 << std::endl;
     }
 
     // Switch off docing again by setting output stream for global info on
@@ -686,8 +693,10 @@ namespace oomph
         (this->distribution_pt()->communicator_pt()->my_rank() == 0))
     {
       double t_end = TimingHelpers::timer();
-      oomph_info << "Time for MumpsSolver backsub [sec]       : "
-                 << t_end - t_start << std::endl;
+      oomph_info << "Time for MumpsSolver backsub                            : "
+                 << TimingHelpers::convert_secs_to_formatted_string(t_end -
+                                                                    t_start)
+                 << std::endl;
     }
 
     // Switch off docing again by setting output stream for global info on
@@ -860,8 +869,10 @@ namespace oomph
     if ((Doc_time) &&
         (this->distribution_pt()->communicator_pt()->my_rank() == 0))
     {
-      oomph_info << "Time for MumpsSolver solve [sec]       : "
-                 << t_end - t_start << std::endl;
+      oomph_info << "Time for MumpsSolver solve                              : "
+                 << TimingHelpers::convert_secs_to_formatted_string(t_end -
+                                                                    t_start)
+                 << std::endl;
     }
 
     // Switch off docing again by setting output stream for global info on
@@ -940,8 +951,10 @@ namespace oomph
     int my_rank = this->distribution_pt()->communicator_pt()->my_rank();
     if ((Doc_time) && (my_rank == 0))
     {
-      oomph_info << "Time to set up CRDoubleMatrix Jacobian [sec]        : "
-                 << Jacobian_setup_time << std::endl;
+      oomph_info << "Time to set up CRDoubleMatrix Jacobian                  : "
+                 << TimingHelpers::convert_secs_to_formatted_string(
+                      Jacobian_setup_time)
+                 << std::endl;
     }
 
 
@@ -976,8 +989,10 @@ namespace oomph
       oomph_info << "Total time for MumpsSolver "
                  << "(np="
                  << this->distribution_pt()->communicator_pt()->nproc()
-                 << ",N=" << problem_pt->ndof()
-                 << ") [sec] : " << t_end - t_start << std::endl;
+                 << ",N=" << problem_pt->ndof() << ")                : "
+                 << TimingHelpers::convert_secs_to_formatted_string(t_end -
+                                                                    t_start)
+                 << std::endl;
     }
   }
 
@@ -1041,7 +1056,9 @@ namespace oomph
     if ((Doc_time) &&
         (this->distribution_pt()->communicator_pt()->my_rank() == 0))
     {
-      oomph_info << "Time for MumpsSolver solve [sec]: " << t_end - t_start
+      oomph_info << "Time for MumpsSolver solve: "
+                 << TimingHelpers::convert_secs_to_formatted_string(t_end -
+                                                                    t_start)
                  << std::endl;
     }
   }

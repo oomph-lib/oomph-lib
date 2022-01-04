@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -951,6 +951,14 @@ namespace oomph
   {
     /// returns the time in seconds after some point in past
     double timer();
+
+    /// Returns a nicely formatted string from an input time in seconds;
+    /// the format depends on the size of time, e.g.:
+    /// 86510 will be printed as 1d 1m:50
+    ///  3710 will be printed as 1h:01:50
+    ///   700 will be printed as 11m:40
+    /// 59.15 will be printed as 59.2s
+    std::string convert_secs_to_formatted_string(const double& time_in_sec);
 
   } // end of namespace TimingHelpers
 
