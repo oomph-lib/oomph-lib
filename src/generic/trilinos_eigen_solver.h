@@ -595,9 +595,6 @@ namespace oomph
     /// Number of Arnoldi vectors to compute
     int NArnoldi;
 
-    /// Set the shifted value
-    double Sigma; // hierher kill
-
     /// Boolean to set which part of the spectrum left (default) or right
     /// of the shifted value.
     bool Small;
@@ -613,7 +610,6 @@ namespace oomph
         Default_linear_solver_pt(0),
         Spectrum(0),
         NArnoldi(10),
-        Sigma(0.0),
         Compute_eigenvectors(true)
     {
       Output_manager_pt = new Anasazi::BasicOutputManager<ST>();
@@ -629,7 +625,7 @@ namespace oomph
     }
 
     /// Empty copy constructor
-    ANASAZI(const ANASAZI&) : Sigma(0.0) {}
+    ANASAZI(const ANASAZI&) {}
 
     /// Destructor, delete the linear solver
     virtual ~ANASAZI() {}
@@ -669,29 +665,29 @@ namespace oomph
     /// There's a convenience wrapper to this function that simply computes
     /// these eigenvalues regardless. That version may die in NaN checking is
     /// enabled (via the fenv.h header and the associated feenable function).
-    // hierher reverse engineered -- trilinos actually computes the eigenvalues
-    // directly
+    /// NOTE: While the above statement is true, the implementation of this
+    /// function is actually everse engineered -- trilinos actually computes the 
+    /// eigenvalues directly (and being an Arnoldi method it wouldn't be able to
+    /// obtain any infinite/NaN eigenvalues anyway
     void solve_eigenproblem(Problem* const& problem_pt,
                             const int& n_eval,
                             Vector<std::complex<double>>& alpha,
                             Vector<double>& beta,
                             Vector<Vector<std::complex<double>>>& eigenvector)
     {
-      oomph_info << "hierher in reverse engineered version\n";
-
-      // Reverse engineer the "safe" version of the eigenvalues
-      Vector<std::complex<double>> eigenvalue;
-      solve_eigenproblem(problem_pt, n_eval, eigenvalue, eigenvector);
-      unsigned n = eigenvalue.size();
-      alpha.resize(n);
-      beta.resize(n);
-      for (unsigned i = 0; i < n; i++)
+     // Reverse engineer the "safe" version of the eigenvalues
+     Vector<std::complex<double>> eigenvalue;
+     solve_eigenproblem(problem_pt, n_eval, eigenvalue, eigenvector);
+     unsigned n = eigenvalue.size();
+     alpha.resize(n);
+     beta.resize(n);
+     for (unsigned i = 0; i < n; i++)
       {
-        alpha[i] = eigenvalue[i];
-        beta[i] = 1.0;
+       alpha[i] = eigenvalue[i];
+       beta[i] = 1.0;
       }
     }
-
+   
     /// Solve the eigen problem
     void solve_eigenproblem(Problem* const& problem_pt,
                             const int& n_eval,
@@ -815,15 +811,10 @@ namespace oomph
         //     vectors: the real part in the i-1 column of Evecs and the
         //     negative imaginary part in the i column of Evecs
 
-
-        oomph_info << "hierher use index: " << i << " index_vector "
-                   << index_vector[i] << std::endl;
-
-
         // Real eigenvector
         if (index_vector[i] == 0)
         {
-          oomph_info << "eigenvector " << i << " is real.\n";
+          //oomph_info << "eigenvector " << i << " is real.\n";
           for (unsigned j = 0; j < nrow_local; j++)
           {
             eigenvector[i][j] = std::complex<double>((*evecs)(i, j), 0.0);
@@ -831,8 +822,8 @@ namespace oomph
         }
         else if (index_vector[i] == 1)
         {
-          oomph_info << "eigenvector " << i
-                     << " is complex and stored in cols i and i+1.\n";
+          //oomph_info << "eigenvector " << i
+          //           << " is complex and stored in cols i and i+1.\n";
           for (unsigned j = 0; j < nrow_local; j++)
           {
             eigenvector[i][j] =
@@ -841,8 +832,8 @@ namespace oomph
         }
         else if (index_vector[i] == -1)
         {
-          oomph_info << "eigenvector " << i
-                     << " is complex and stored in cols i-1 and i.\n";
+          //oomph_info << "eigenvector " << i
+          //           << " is complex and stored in cols i-1 and i.\n";
           for (unsigned j = 0; j < nrow_local; j++)
           {
             eigenvector[i][j] =
@@ -865,8 +856,6 @@ namespace oomph
                                    Vector<std::complex<double>>& eigenvalue,
                                    Vector<DoubleVector>& eigenvector)
     {
-      // No access to sigma, so set from sigma real
-      Sigma = Sigma_real;
 
       // Initially be dumb here
       Linear_solver_pt = problem_pt->linear_solver_pt();
@@ -879,7 +868,7 @@ namespace oomph
       // Make the operator
       Teuchos::RCP<DoubleMultiVectorOperator> Op_pt =
         Teuchos::rcp(new ProblemBasedShiftInvertOperator(
-          problem_pt, this->linear_solver_pt(), Sigma));
+          problem_pt, this->linear_solver_pt(), Sigma_real));
 
       // Create the basic problem
       Teuchos::RCP<Anasazi::BasicEigenproblem<double,
@@ -944,37 +933,25 @@ namespace oomph
       std::vector<Anasazi::Value<double>> evals = sol.Evals;
       Teuchos::RCP<DoubleMultiVector> evecs = sol.Evecs;
 
-
-      // std::vector<int> Anasazi::Eigensolution< ScalarType, MV >::index
-      std::vector<int> index_vector = sol.index;
-
-
       eigenvalue.resize(evals.size());
       eigenvector.resize(evals.size());
 
       for (unsigned i = 0; i < evals.size(); i++)
       {
-        // hierher what is this? And what about NaN and Inf eigenvalues?
-
         // Undo shift and invert
         double a = evals[i].realpart;
         double b = evals[i].imagpart;
         double det = a * a + b * b;
-        eigenvalue[i] = std::complex<double>(a / det + Sigma, -b / det);
+        eigenvalue[i] = std::complex<double>(a / det + Sigma_real, -b / det);
 
         // Now set the eigenvectors, I hope
         eigenvector[i].build(evecs->distribution_pt());
         unsigned nrow_local = evecs->nrow_local();
 
-        // hierher this is the legacy stuff. Use
+        // This is the legacy stuff. Use
         // std::vector<int> Anasazi::Eigensolution< ScalarType, MV >::index
         // to translate into proper complex vector; see
         // https://docs.trilinos.org/dev/packages/anasazi/doc/html/structAnasazi_1_1Eigensolution.html#ac9d141d98adcba85fbad011a7b7bda6e
-
-        oomph_info << "hierher index: " << i << " index_vector "
-                   << index_vector[i] << std::endl;
-
-        // Would be faster with pointers, but I'll sort that out later!
         for (unsigned n = 0; n < nrow_local; n++)
         {
           eigenvector[i][n] = (*evecs)(i, n);

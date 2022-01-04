@@ -76,40 +76,37 @@ namespace oomph
 
     /// Eigensolver. This takes a pointer to a problem and returns
     /// a vector of complex numbers representing the eigenvalues
-    /// and a corresponding vector of eigenvectors. n_eval specifies the
-    /// number of eigenvalues/vectors required. This primarily used in Arnoldi
+    /// and a corresponding vector of eigenvectors. n_eval specifies the min.
+    /// number of eigenvalues/vectors required. This is primarily used in Arnoldi
     /// type implementations; direct solvers such as QZ compute all the
     /// eigenvalues/vectors.
-    /// Note: this is actually a helper function that stores re & imag parts of
+    /// Note: this is a legacy version of this function that stores re & imag parts of
     /// eigenvectors in some solver-specific collection of real vectors.
-    /// hierher kill
-    virtual void solve_eigenproblem_legacy(
-      Problem* const& problem_pt,
-      const int& n_eval,
-      Vector<std::complex<double>>& eigenvalue,
-      Vector<DoubleVector>& eigenvector) = 0;
+   virtual void solve_eigenproblem_legacy(
+    Problem* const& problem_pt,
+    const int& n_eval,
+    Vector<std::complex<double>>& eigenvalue,
+    Vector<DoubleVector>& eigenvector) = 0;
 
 
     /// Solve the real eigenproblem that is assembled by elements in
     /// a mesh in a Problem object. Note that the assembled matrices include the
     /// shift and are real. The eigenvalues and eigenvectors are,
-    /// in general, complex, and the eigenvalues can be NaNs of Inf.
-    /// This function is therefore merely provided as a convience, to be
+    /// in general, complex, and the eigenvalues can be NaNs or Infs.
+    /// This function is therefore merely provided as a convenience, to be
     /// used if the user is confident that NaNs don't arise (e.g. in Arnoldi
     /// based solvers where typically only a small number of (finite)
-    /// eigenvalues are computed, or if the users is happy to deal with NaNs in
+    /// eigenvalues are computed), or if the users is happy to deal with NaNs in
     /// the subsequent post-processing.
-    /// hierher virtual so it can be overloaded for arnoldi type solvers
-    /// tha compute the eigenvalues directly
-    virtual void solve_eigenproblem(
-      Problem* const& problem_pt,
+    /// Function is virtual so it can be overloaded for arnoldi type solvers
+    /// that compute the (finite) eigenvalues directly
+    /// At least n_eval eigenvalues are computed.
+   virtual void solve_eigenproblem(
+    Problem* const& problem_pt,
       const int& n_eval,
       Vector<std::complex<double>>& eigenvalue,
       Vector<Vector<std::complex<double>>>& eigenvector)
     {
-      oomph_info << "hierher in helper version that computes eigenvalues from "
-                    "save version\n";
-
       Vector<std::complex<double>> alpha;
       Vector<double> beta;
 
@@ -136,6 +133,7 @@ namespace oomph
     /// There's a convenience wrapper to this function that simply computes
     /// these eigenvalues regardless. That version may die in NaN checking is
     /// enabled (via the fenv.h header and the associated feenable function).
+    /// At least n_eval eigenvalues are computed.
     virtual void solve_eigenproblem(
       Problem* const& problem_pt,
       const int& n_eval,
@@ -242,6 +240,7 @@ namespace oomph
     /// There's a convenience wrapper to this function that simply computes
     /// these eigenvalues regardless. That version may die in NaN checking is
     /// enabled (via the fenv.h header and the associated feenable function).
+    /// At least n_eval eigenvalues are computed.
     void solve_eigenproblem(Problem* const& problem_pt,
                             const int& n_eval,
                             Vector<std::complex<double>>& alpha,
@@ -310,9 +309,11 @@ namespace oomph
     /// Empty constructor
     LAPACK_QZ() : EigenSolver(), Tolerance_for_ccness_check(1.0e-13) {}
 
-    // hierher break
-    /// Empty copy constructor
-    LAPACK_QZ(const LAPACK_QZ&) {}
+    /// Broken copy constructor
+    LAPACK_QZ(const LAPACK_QZ&) = delete;
+
+    /// Broken assignment operator
+    void operator=(const LAPACK_QZ&) = delete;
 
     /// Empty desctructor
     virtual ~LAPACK_QZ() {}
@@ -321,11 +322,11 @@ namespace oomph
     /// by elements in a mesh in a Problem object. Note that the assembled
     /// matrices include the shift and are real. The eigenvalues and
     /// eigenvectors are, in general, complex.
-    /// This is actually a helper function that stores re & imag parts of
+    /// This is a legacy version of this function that stores re & imag parts of
     /// eigenvectors in some solver-specific collection of real vectors;
     /// they are disentangled in the alternative version of this function
     /// that returns Vectors of complex Vectors.
-    // hierher kill
+    /// At least n_eval eigenvalues are computed.
     void solve_eigenproblem_legacy(Problem* const& problem_pt,
                                    const int& n_eval,
                                    Vector<std::complex<double>>& eigenvalue,
@@ -342,6 +343,7 @@ namespace oomph
     /// There's a convenience wrapper to this function that simply computes
     /// these eigenvalues regardless. That version may die in NaN checking is
     /// enabled (via the fenv.h header and the associated feenable function).
+    /// At least n_eval eigenvalues are computed.
     void solve_eigenproblem(Problem* const& problem_pt,
                             const int& n_eval,
                             Vector<std::complex<double>>& alpha,
@@ -374,9 +376,9 @@ namespace oomph
     }
 
   private:
+   
     /// Helper function called from legacy and updated version from "raw" lapack
     /// code
-    // hierher elaborate on args
     void solve_eigenproblem_helper(Problem* const& problem_pt,
                                    const int& n_eval,
                                    Vector<std::complex<double>>& alpha,
@@ -414,6 +416,46 @@ namespace oomph
       else if (info == (n + 2))
       {
         error_stream << "error return from DTGEVC.\n";
+      }
+      error_stream
+        << "Aborting here; if you know how to proceed then\n"
+        << "then implement ability to catch this error and continue\n";
+
+      throw OomphLibError(
+        error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+    }
+
+    /// Provide diagonstic for ZGGEV error return
+    void ZGGEV_error(const int& info, const int& n)
+    {
+      // Throw an error
+      std::ostringstream error_stream;
+      error_stream << "Failure in LAPACK_ZGGEV(...).\n"
+                   << "info = " << info << std::endl;
+      error_stream
+        << "Diagnostics below are from \n\n"
+        << "http://www.netlib.org/lapack/explore-html/"
+        << "db/d55/group__complex16_g_eeigen_ga79fcce20c"
+        << "617429ccf985e6f123a6171.html"
+        << std::endl;
+      if (info < 0)
+      {
+        error_stream << -info << "-th input arg had an illegal value\n";
+      }
+      else if (info <= n)
+      {
+        error_stream << "The QZ iteration failed.  No eigenvectors have been\n"
+                     << "calculated, but ALPHAR(j), ALPHAI(j), and BETA(j)\n"
+                     << "should be correct for j=INFO+1,...,N, where \n"
+                     << "info = " << info << " and N = " << n << std::endl;
+      }
+      else if (info == (n + 1))
+      {
+        error_stream << "QZ iteration failed in ZHGEQZ.\n";
+      }
+      else if (info == (n + 2))
+      {
+        error_stream << "error return from ZTGEVC.\n";
       }
       error_stream
         << "Aborting here; if you know how to proceed then\n"
