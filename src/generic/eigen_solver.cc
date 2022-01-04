@@ -740,11 +740,11 @@ namespace oomph
   /// Use LAPACK QZ to solve the real eigenproblem that is assembled by elements
   /// in a mesh in a Problem object. Note that the assembled matrices include
   /// the shift and are real. The eigenvalues and eigenvectors are, in general,
-  /// complex. This is a legacy version of this function that stores re & imag parts of
-  /// eigenvectors in some solver-specific collection of real vectors; they
-  /// are disentangled in the alternative version of this function that returns
-  /// Vectors of complex vectors.
-  /// At least n_eval eigenvalues are computed.
+  /// complex. This is a legacy version of this function that stores re & imag
+  /// parts of eigenvectors in some solver-specific collection of real vectors;
+  /// they are disentangled in the alternative version of this function that
+  /// returns Vectors of complex vectors. At least n_eval eigenvalues are
+  /// computed.
   //==========================================================================
   void LAPACK_QZ::solve_eigenproblem_legacy(
     Problem* const& problem_pt,
@@ -772,20 +772,20 @@ namespace oomph
     }
   }
 
- //========================================================================== 
- /// Solve the real eigenproblem that is assembled by elements in
- /// a mesh in a Problem object. Note that the assembled matrices include the
- /// shift and are real. The eigenvalues and eigenvectors are,
- /// in general, complex. Eigenvalues may be infinite and are therefore
- /// returned as
- /// \f$ \lambda_i = \alpha_i / \beta_i \f$ where \f$ \alpha_i \f$ is complex
- /// while \f$ \beta_i \f$ is real. The actual eigenvalues may then be
- /// computed by doing the division, checking for zero betas to avoid NaNs.
- /// There's a convenience wrapper to this function that simply computes
- /// these eigenvalues regardless. That version may die in NaN checking is
- /// enabled (via the fenv.h header and the associated feenable function).
- /// At least n_eval eigenvalues are computed.
- //==========================================================================
+  //==========================================================================
+  /// Solve the real eigenproblem that is assembled by elements in
+  /// a mesh in a Problem object. Note that the assembled matrices include the
+  /// shift and are real. The eigenvalues and eigenvectors are,
+  /// in general, complex. Eigenvalues may be infinite and are therefore
+  /// returned as
+  /// \f$ \lambda_i = \alpha_i / \beta_i \f$ where \f$ \alpha_i \f$ is complex
+  /// while \f$ \beta_i \f$ is real. The actual eigenvalues may then be
+  /// computed by doing the division, checking for zero betas to avoid NaNs.
+  /// There's a convenience wrapper to this function that simply computes
+  /// these eigenvalues regardless. That version may die in NaN checking is
+  /// enabled (via the fenv.h header and the associated feenable function).
+  /// At least n_eval eigenvalues are computed.
+  //==========================================================================
   void LAPACK_QZ::solve_eigenproblem(
     Problem* const& problem_pt,
     const int& n_eval,
@@ -833,7 +833,6 @@ namespace oomph
       // http://www.netlib.org/lapack/explore-html/d9/d8e/group__double_g_eeigen_ga4f59e87e670a755b41cbdd7e97f36bea.html
       else
       {
-
 #ifdef PARANOID
 
         // Are the eigenvalues finite?
@@ -860,9 +859,9 @@ namespace oomph
               << "Their sum " << (lambda_this.imag() + lambda_next.imag())
               << " is greater than Tolerance_for_ccness_check = "
               << Tolerance_for_ccness_check << std::endl;
-            throw OomphLibError(
-             error_stream.str(), OOMPH_CURRENT_FUNCTION,
-             OOMPH_EXCEPTION_LOCATION);
+            throw OomphLibError(error_stream.str(),
+                                OOMPH_CURRENT_FUNCTION,
+                                OOMPH_EXCEPTION_LOCATION);
           }
           if (fabs(lambda_this.real() - lambda_next.real()) >
               Tolerance_for_ccness_check)
@@ -877,9 +876,9 @@ namespace oomph
               << (lambda_this.real() - lambda_next.real())
               << " is greater than Tolerance_for_ccness_check = "
               << Tolerance_for_ccness_check << std::endl;
-            throw OomphLibError(
-             error_stream.str(), OOMPH_CURRENT_FUNCTION,
-             OOMPH_EXCEPTION_LOCATION);
+            throw OomphLibError(error_stream.str(),
+                                OOMPH_CURRENT_FUNCTION,
+                                OOMPH_EXCEPTION_LOCATION);
           }
         }
         else
@@ -921,20 +920,17 @@ namespace oomph
     Vector<std::complex<double>>& eigenvalue,
     Vector<Vector<std::complex<double>>>& eigenvector)
   {
-
-
 #ifdef PARANOID
-   if(Sigma_real!=0.0)
+    if (Sigma_real != 0.0)
     {
-     std::stringstream error_stream;
-     error_stream
-      << "Non-zero shift Sigma_real = " << Sigma_real
-      << " ignored in LAPACK_QZ::find_eigenvalues\n";
-     OomphLibWarning(
-      error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      std::stringstream error_stream;
+      error_stream << "Non-zero shift Sigma_real = " << Sigma_real
+                   << " ignored in LAPACK_QZ::find_eigenvalues\n";
+      OomphLibWarning(
+        error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 #endif
-   
+
     // Some character identifiers for use in the LAPACK routine
     // Do not calculate the left eigenvectors
     char no_eigvecs[2] = "N";
@@ -1000,9 +996,9 @@ namespace oomph
 
     // Succesful completion?
     if (info != 0)
-     {
+    {
       ZGGEV_error(info, n);
-     }
+    }
 
 
     // Get the amount of requires workspace
@@ -1031,10 +1027,10 @@ namespace oomph
 
     // Succesful completion?
     if (info != 0)
-     {
+    {
       ZGGEV_error(info, n);
-     }
-    
+    }
+
     // Now resize storage for the eigenvalues and eigenvectors
     // We get them all!
     eigenvalue.resize(n);

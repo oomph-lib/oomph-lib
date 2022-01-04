@@ -1918,9 +1918,9 @@ namespace oomph
     //                                         &result);
 
     /// Solve an eigenproblem as assembled by the Problem's constituent
-    /// elements. Calculate (at least) n_eval eigenvalues and return the corresponding
-    /// eigenvectors. The boolean flag (default true) specifies whether
-    /// the steady jacobian should be assembled. If the flag is false
+    /// elements. Calculate (at least) n_eval eigenvalues and return the
+    /// corresponding eigenvectors. The boolean flag (default true) specifies
+    /// whether the steady jacobian should be assembled. If the flag is false
     /// then the weighted mass-matrix terms from the timestepper will
     /// be included in the jacobian --- this is almost certainly never
     /// wanted. Legacy version that returns real vectors which are
@@ -1931,10 +1931,10 @@ namespace oomph
                                    Vector<DoubleVector>& eigenvector,
                                    const bool& steady = true);
 
-    /// Solve an eigenproblem as assembled by the Problem's constituent 
-    /// elements. Calculate (at least) n_eval eigenvalues and return the corresponding
-    /// eigenvectors. The boolean flag (default true) specifies whether
-    /// the steady jacobian should be assembled. If the flag is false
+    /// Solve an eigenproblem as assembled by the Problem's constituent
+    /// elements. Calculate (at least) n_eval eigenvalues and return the
+    /// corresponding eigenvectors. The boolean flag (default true) specifies
+    /// whether the steady jacobian should be assembled. If the flag is false
     /// then the weighted mass-matrix terms from the timestepper will
     /// be included in the jacobian --- this is almost certainly never
     /// wanted. The eigenvalues and eigenvectors are, in general, complex.
@@ -1951,10 +1951,10 @@ namespace oomph
                             Vector<Vector<std::complex<double>>>& eigenvector,
                             const bool& steady = true);
 
-    /// Solve an eigenproblem as assembled by the Problem's constituent 
-    /// elements. Calculate (at least) n_eval eigenvalues and return the corresponding
-    /// eigenvectors. The boolean flag (default true) specifies whether
-    /// the steady jacobian should be assembled. If the flag is false
+    /// Solve an eigenproblem as assembled by the Problem's constituent
+    /// elements. Calculate (at least) n_eval eigenvalues and return the
+    /// corresponding eigenvectors. The boolean flag (default true) specifies
+    /// whether the steady jacobian should be assembled. If the flag is false
     /// then the weighted mass-matrix terms from the timestepper will
     /// be included in the jacobian --- this is almost certainly never
     /// wanted. Note that the eigenvalues and eigenvectors are,
@@ -1966,7 +1966,7 @@ namespace oomph
                             Vector<Vector<std::complex<double>>>& eigenvector,
                             const bool& steady = true);
 
-    /// Solve an eigenproblem as assembled by the Problem's constituent 
+    /// Solve an eigenproblem as assembled by the Problem's constituent
     /// elements but only return the eigenvalues, not the eigenvectors.
     /// At least n_eval eigenvalues are computed.
     /// The boolean flag (default true) is used to specify whether the
@@ -1980,11 +1980,11 @@ namespace oomph
                             const bool& steady = true)
     {
       // Create temporary storage for the eigenvectors (potentially wasteful)
-     Vector<Vector<std::complex<double>>> eigenvector;
-     solve_eigenproblem(n_eval, eigenvalue, eigenvector, steady);
+      Vector<Vector<std::complex<double>>> eigenvector;
+      solve_eigenproblem(n_eval, eigenvalue, eigenvector, steady);
     }
-   
-    /// Solve an eigenproblem as assembled by the Problem's constituent 
+
+    /// Solve an eigenproblem as assembled by the Problem's constituent
     /// elements but only return the eigenvalues, not the eigenvectors.
     /// At least n_eval eigenvalues are computed.
     /// The boolean flag (default true) is used to specify whether the
@@ -2000,9 +2000,9 @@ namespace oomph
                             Vector<double>& beta,
                             const bool& steady = true)
     {
-     // Create temporary storage for the eigenvectors (potentially wasteful)
-     Vector<Vector<std::complex<double>>> eigenvector;
-     solve_eigenproblem(n_eval, alpha, beta, eigenvector, steady);
+      // Create temporary storage for the eigenvectors (potentially wasteful)
+      Vector<Vector<std::complex<double>>> eigenvector;
+      solve_eigenproblem(n_eval, alpha, beta, eigenvector, steady);
     }
 
     /// Get the matrices required by a eigensolver. If the
@@ -3040,7 +3040,6 @@ namespace oomph
         maxres(Passed_maxres)
     {
     }
-
   };
 
 

@@ -666,7 +666,7 @@ namespace oomph
     /// these eigenvalues regardless. That version may die in NaN checking is
     /// enabled (via the fenv.h header and the associated feenable function).
     /// NOTE: While the above statement is true, the implementation of this
-    /// function is actually everse engineered -- trilinos actually computes the 
+    /// function is actually everse engineered -- trilinos actually computes the
     /// eigenvalues directly (and being an Arnoldi method it wouldn't be able to
     /// obtain any infinite/NaN eigenvalues anyway
     void solve_eigenproblem(Problem* const& problem_pt,
@@ -675,19 +675,19 @@ namespace oomph
                             Vector<double>& beta,
                             Vector<Vector<std::complex<double>>>& eigenvector)
     {
-     // Reverse engineer the "safe" version of the eigenvalues
-     Vector<std::complex<double>> eigenvalue;
-     solve_eigenproblem(problem_pt, n_eval, eigenvalue, eigenvector);
-     unsigned n = eigenvalue.size();
-     alpha.resize(n);
-     beta.resize(n);
-     for (unsigned i = 0; i < n; i++)
+      // Reverse engineer the "safe" version of the eigenvalues
+      Vector<std::complex<double>> eigenvalue;
+      solve_eigenproblem(problem_pt, n_eval, eigenvalue, eigenvector);
+      unsigned n = eigenvalue.size();
+      alpha.resize(n);
+      beta.resize(n);
+      for (unsigned i = 0; i < n; i++)
       {
-       alpha[i] = eigenvalue[i];
-       beta[i] = 1.0;
+        alpha[i] = eigenvalue[i];
+        beta[i] = 1.0;
       }
     }
-   
+
     /// Solve the eigen problem
     void solve_eigenproblem(Problem* const& problem_pt,
                             const int& n_eval,
@@ -814,7 +814,7 @@ namespace oomph
         // Real eigenvector
         if (index_vector[i] == 0)
         {
-          //oomph_info << "eigenvector " << i << " is real.\n";
+          // oomph_info << "eigenvector " << i << " is real.\n";
           for (unsigned j = 0; j < nrow_local; j++)
           {
             eigenvector[i][j] = std::complex<double>((*evecs)(i, j), 0.0);
@@ -822,7 +822,7 @@ namespace oomph
         }
         else if (index_vector[i] == 1)
         {
-          //oomph_info << "eigenvector " << i
+          // oomph_info << "eigenvector " << i
           //           << " is complex and stored in cols i and i+1.\n";
           for (unsigned j = 0; j < nrow_local; j++)
           {
@@ -832,7 +832,7 @@ namespace oomph
         }
         else if (index_vector[i] == -1)
         {
-          //oomph_info << "eigenvector " << i
+          // oomph_info << "eigenvector " << i
           //           << " is complex and stored in cols i-1 and i.\n";
           for (unsigned j = 0; j < nrow_local; j++)
           {
@@ -856,7 +856,6 @@ namespace oomph
                                    Vector<std::complex<double>>& eigenvalue,
                                    Vector<DoubleVector>& eigenvector)
     {
-
       // Initially be dumb here
       Linear_solver_pt = problem_pt->linear_solver_pt();
 

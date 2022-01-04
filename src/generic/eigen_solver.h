@@ -77,16 +77,17 @@ namespace oomph
     /// Eigensolver. This takes a pointer to a problem and returns
     /// a vector of complex numbers representing the eigenvalues
     /// and a corresponding vector of eigenvectors. n_eval specifies the min.
-    /// number of eigenvalues/vectors required. This is primarily used in Arnoldi
-    /// type implementations; direct solvers such as QZ compute all the
+    /// number of eigenvalues/vectors required. This is primarily used in
+    /// Arnoldi type implementations; direct solvers such as QZ compute all the
     /// eigenvalues/vectors.
-    /// Note: this is a legacy version of this function that stores re & imag parts of
-    /// eigenvectors in some solver-specific collection of real vectors.
-   virtual void solve_eigenproblem_legacy(
-    Problem* const& problem_pt,
-    const int& n_eval,
-    Vector<std::complex<double>>& eigenvalue,
-    Vector<DoubleVector>& eigenvector) = 0;
+    /// Note: this is a legacy version of this function that stores re & imag
+    /// parts of eigenvectors in some solver-specific collection of real
+    /// vectors.
+    virtual void solve_eigenproblem_legacy(
+      Problem* const& problem_pt,
+      const int& n_eval,
+      Vector<std::complex<double>>& eigenvalue,
+      Vector<DoubleVector>& eigenvector) = 0;
 
 
     /// Solve the real eigenproblem that is assembled by elements in
@@ -101,8 +102,8 @@ namespace oomph
     /// Function is virtual so it can be overloaded for arnoldi type solvers
     /// that compute the (finite) eigenvalues directly
     /// At least n_eval eigenvalues are computed.
-   virtual void solve_eigenproblem(
-    Problem* const& problem_pt,
+    virtual void solve_eigenproblem(
+      Problem* const& problem_pt,
       const int& n_eval,
       Vector<std::complex<double>>& eigenvalue,
       Vector<Vector<std::complex<double>>>& eigenvector)
@@ -376,7 +377,6 @@ namespace oomph
     }
 
   private:
-   
     /// Helper function called from legacy and updated version from "raw" lapack
     /// code
     void solve_eigenproblem_helper(Problem* const& problem_pt,
@@ -432,12 +432,10 @@ namespace oomph
       std::ostringstream error_stream;
       error_stream << "Failure in LAPACK_ZGGEV(...).\n"
                    << "info = " << info << std::endl;
-      error_stream
-        << "Diagnostics below are from \n\n"
-        << "http://www.netlib.org/lapack/explore-html/"
-        << "db/d55/group__complex16_g_eeigen_ga79fcce20c"
-        << "617429ccf985e6f123a6171.html"
-        << std::endl;
+      error_stream << "Diagnostics below are from \n\n"
+                   << "http://www.netlib.org/lapack/explore-html/"
+                   << "db/d55/group__complex16_g_eeigen_ga79fcce20c"
+                   << "617429ccf985e6f123a6171.html" << std::endl;
       if (info < 0)
       {
         error_stream << -info << "-th input arg had an illegal value\n";
