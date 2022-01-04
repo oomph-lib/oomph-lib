@@ -952,6 +952,14 @@ namespace oomph
     /// returns the time in seconds after some point in past
     double timer();
 
+    /// Returns a nicely formatted string from an input time in seconds;
+    /// the format depends on the size of time, e.g.:
+    /// 86510 will be printed as 1d 1m:50
+    ///  3710 will be printed as 1h:01:50
+    ///   700 will be printed as 11m:40
+    /// 59.15 will be printed as 59.2s
+    std::string convert_secs_to_formatted_string(const double& time_in_sec);
+
   } // end of namespace TimingHelpers
 
 
