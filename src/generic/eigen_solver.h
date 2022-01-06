@@ -99,7 +99,7 @@ namespace oomph
     /// based solvers where typically only a small number of (finite)
     /// eigenvalues are computed), or if the users is happy to deal with NaNs in
     /// the subsequent post-processing.
-    /// Function is virtual so it can be overloaded for arnoldi type solvers
+    /// Function is virtual so it can be overloaded for Arnoldi type solvers
     /// that compute the (finite) eigenvalues directly
     /// At least n_eval eigenvalues are computed.
     virtual void solve_eigenproblem(

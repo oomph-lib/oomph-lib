@@ -718,7 +718,7 @@ namespace oomph
       // for the real and imaginary parts of the real or complex conjugate
       // eigenvectors. They are translated into actual complex eigenvectors
       // (at the cost of some additional storage and the gain of considerable
-      // in the public version of this function.
+      // clarity) in the public version of this function.
       for (int k = 0; k < n; ++k)
       {
         eigenvector_aux[i][k] = vec_right[i * n + k];
@@ -835,7 +835,7 @@ namespace oomph
       {
 #ifdef PARANOID
 
-        // Are the eigenvalues finite?
+        // Are the eigenvalues finite? If not skip test.
         if ((beta_eval[eval_count] != 0.0) &&
             (beta_eval[eval_count + 1] != 0.0))
         {
@@ -845,7 +845,7 @@ namespace oomph
           std::complex<double> lambda_next =
             alpha_eval[eval_count + 1] / beta_eval[eval_count + 1];
 
-          // Check cc-ness to within tolerance
+          // Check failure of cc-ness to within tolerance
           if (fabs(lambda_this.imag() + lambda_next.imag()) >
               Tolerance_for_ccness_check)
           {
@@ -880,11 +880,6 @@ namespace oomph
                                 OOMPH_CURRENT_FUNCTION,
                                 OOMPH_EXCEPTION_LOCATION);
           }
-        }
-        else
-        {
-          // oomph_info << "supposed-to-be cc eigenvalues or both infinite; "
-          //               "skipping test.\n";
         }
 
 #endif
