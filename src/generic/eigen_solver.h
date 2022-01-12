@@ -102,20 +102,18 @@ namespace oomph
     /// Function is virtual so it can be overloaded for Arnoldi type solvers
     /// that compute the (finite) eigenvalues directly
     /// At least n_eval eigenvalues are computed.
-    virtual void solve_eigenproblem(
-      Problem* const& problem_pt,
-      const int& n_eval,
-      Vector<std::complex<double>>& eigenvalue,
-      Vector<DoubleVector>& eigenvector_real,
-      Vector<DoubleVector>& eigenvector_imag)
+    virtual void solve_eigenproblem(Problem* const& problem_pt,
+                                    const int& n_eval,
+                                    Vector<std::complex<double>>& eigenvalue,
+                                    Vector<DoubleVector>& eigenvector_real,
+                                    Vector<DoubleVector>& eigenvector_imag)
     {
       Vector<std::complex<double>> alpha;
       Vector<double> beta;
 
       // Call the "safe" version
-      solve_eigenproblem(problem_pt, n_eval, alpha, beta,
-                         eigenvector_real,
-                         eigenvector_imag);
+      solve_eigenproblem(
+        problem_pt, n_eval, alpha, beta, eigenvector_real, eigenvector_imag);
 
       // Now do the brute force conversion, possibly creating NaNs and Infs...
       unsigned n = alpha.size();
@@ -138,13 +136,12 @@ namespace oomph
     /// these eigenvalues regardless. That version may die in NaN checking is
     /// enabled (via the fenv.h header and the associated feenable function).
     /// At least n_eval eigenvalues are computed.
-    virtual void solve_eigenproblem(
-      Problem* const& problem_pt,
-      const int& n_eval,
-      Vector<std::complex<double>>& alpha,
-      Vector<double>& beta,
-      Vector<DoubleVector>& eigenvector_real,
-      Vector<DoubleVector>& eigenvector_imag) = 0;
+    virtual void solve_eigenproblem(Problem* const& problem_pt,
+                                    const int& n_eval,
+                                    Vector<std::complex<double>>& alpha,
+                                    Vector<double>& beta,
+                                    Vector<DoubleVector>& eigenvector_real,
+                                    Vector<DoubleVector>& eigenvector_imag) = 0;
 
 
     /// Set the value of the (real) shift
@@ -383,7 +380,6 @@ namespace oomph
     }
 
   private:
-   
     /// Helper function called from legacy and updated version from "raw" lapack
     /// code
     void solve_eigenproblem_helper(Problem* const& problem_pt,

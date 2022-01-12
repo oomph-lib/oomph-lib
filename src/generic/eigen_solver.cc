@@ -786,13 +786,12 @@ namespace oomph
   /// enabled (via the fenv.h header and the associated feenable function).
   /// At least n_eval eigenvalues are computed.
   //==========================================================================
-  void LAPACK_QZ::solve_eigenproblem(
-    Problem* const& problem_pt,
-    const int& n_eval,
-    Vector<std::complex<double>>& alpha_eval,
-    Vector<double>& beta_eval,
-    Vector<DoubleVector>& eigenvector_real,
-    Vector<DoubleVector>& eigenvector_imag)
+  void LAPACK_QZ::solve_eigenproblem(Problem* const& problem_pt,
+                                     const int& n_eval,
+                                     Vector<std::complex<double>>& alpha_eval,
+                                     Vector<double>& beta_eval,
+                                     Vector<DoubleVector>& eigenvector_real,
+                                     Vector<DoubleVector>& eigenvector_imag)
   {
     Vector<DoubleVector> eigenvector_aux;
 
@@ -817,19 +816,19 @@ namespace oomph
     unsigned eval_count = 0;
     while (eval_count < n)
     {
-     // i-th eigenvalue is real:
-     if (alpha_eval[eval_count].imag() == 0.0)
+      // i-th eigenvalue is real:
+      if (alpha_eval[eval_count].imag() == 0.0)
       {
-       // Resize the single eigenvector associated with this
-       // single real eigenvalue
-       eigenvector_real[eval_count].build(this->distribution_pt(), 0.0);
-       eigenvector_imag[eval_count].build(this->distribution_pt(), 0.0);
-       for (unsigned j = 0; j < n; ++j)
+        // Resize the single eigenvector associated with this
+        // single real eigenvalue
+        eigenvector_real[eval_count].build(this->distribution_pt(), 0.0);
+        eigenvector_imag[eval_count].build(this->distribution_pt(), 0.0);
+        for (unsigned j = 0; j < n; ++j)
         {
-         eigenvector_real[eval_count][j] = eigenvector_aux[j][eval_count];
-         eigenvector_imag[eval_count][j] = 0.0;
+          eigenvector_real[eval_count][j] = eigenvector_aux[j][eval_count];
+          eigenvector_imag[eval_count][j] = 0.0;
         }
-       eval_count++;
+        eval_count++;
       }
       // Assume (and check!) that complex conjugate pairs follow each other
       // as implied by
@@ -890,17 +889,18 @@ namespace oomph
 
         // Resize the two cc eigenvectors associated with the
         // two cc eigenvalues
-        eigenvector_real[eval_count  ].build(this->distribution_pt(), 0.0); 
-        eigenvector_imag[eval_count  ].build(this->distribution_pt(), 0.0); 
-        eigenvector_real[eval_count+1].build(this->distribution_pt(), 0.0); 
-        eigenvector_imag[eval_count+1].build(this->distribution_pt(), 0.0); 
+        eigenvector_real[eval_count].build(this->distribution_pt(), 0.0);
+        eigenvector_imag[eval_count].build(this->distribution_pt(), 0.0);
+        eigenvector_real[eval_count + 1].build(this->distribution_pt(), 0.0);
+        eigenvector_imag[eval_count + 1].build(this->distribution_pt(), 0.0);
         for (unsigned j = 0; j < n; ++j)
         {
-         eigenvector_real[eval_count][j] = eigenvector_aux[eval_count  ][j];
-         eigenvector_imag[eval_count][j] = eigenvector_aux[eval_count+1][j];
+          eigenvector_real[eval_count][j] = eigenvector_aux[eval_count][j];
+          eigenvector_imag[eval_count][j] = eigenvector_aux[eval_count + 1][j];
 
-         eigenvector_real[eval_count+1][j] =  eigenvector_aux[eval_count  ][j];
-         eigenvector_imag[eval_count+1][j] = -eigenvector_aux[eval_count+1][j];
+          eigenvector_real[eval_count + 1][j] = eigenvector_aux[eval_count][j];
+          eigenvector_imag[eval_count + 1][j] =
+            -eigenvector_aux[eval_count + 1][j];
         }
         eval_count += 2;
       }

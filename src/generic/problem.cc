@@ -292,96 +292,91 @@ namespace oomph
   }
 
 
+  //==================================================================
+  /// Build new LinearAlgebraDistribution. Note: you're in charge of
+  /// deleting it!
+  //==================================================================
+  void Problem::create_new_linear_algebra_distribution(
+    LinearAlgebraDistribution*& dist_pt)
+  {
+    // Find the number of rows
+    const unsigned nrow = this->ndof();
 
- 
-//==================================================================
-/// Build new LinearAlgebraDistribution. Note: you're in charge of
-/// deleting it!
-//==================================================================
- void Problem::create_new_linear_algebra_distribution(
- LinearAlgebraDistribution*& dist_pt)
-{
- // Find the number of rows
- const unsigned nrow = this->ndof();
-  
 #ifdef OOMPH_HAS_MPI
 
- unsigned nproc = Communicator_pt->nproc();
- 
- // if problem is only one one processor assemble non-distributed
- // distribution
- if (nproc == 1)
-  {
-   dist_pt = new LinearAlgebraDistribution(Communicator_pt, nrow, false);
-  }
- // if the problem is not distributed then assemble the jacobian with
- // a uniform distributed distribution
- else if (!Problem_has_been_distributed)
-  {
-   dist_pt = new LinearAlgebraDistribution(Communicator_pt, nrow, true);
-  }
- // otherwise the problem is a distributed problem
- else
-  {
-   switch (Dist_problem_matrix_distribution)
-    {
-    case Uniform_matrix_distribution:
-     
-     dist_pt =
-      new LinearAlgebraDistribution(Communicator_pt, nrow, true);
-     break;
-     
-    case Problem_matrix_distribution:
-     
-     dist_pt = new LinearAlgebraDistribution(Dof_distribution_pt);
-     break;
-     
-    case Default_matrix_distribution:
+    unsigned nproc = Communicator_pt->nproc();
 
-     // Put in its own scope to avoid warnings about "local" variables
+    // if problem is only one one processor assemble non-distributed
+    // distribution
+    if (nproc == 1)
     {
-     LinearAlgebraDistribution* uniform_dist_pt =
-      new LinearAlgebraDistribution(Communicator_pt, nrow, true);
-     bool use_problem_dist = true;
-     for (unsigned p = 0; p < nproc; p++)
-      {
-       // hierher Andrew: what's the logic behind this?
-       if ((double)Dof_distribution_pt->nrow_local(p) >
-           ((double)uniform_dist_pt->nrow_local(p)) * 1.1)
-        {
-         use_problem_dist = false;
-        }
-      }
-     if (use_problem_dist)
-      {
-       dist_pt = new LinearAlgebraDistribution(Dof_distribution_pt);
-      }
-     else
-      {
-       dist_pt = new LinearAlgebraDistribution(uniform_dist_pt);
-      }
-     delete uniform_dist_pt;
+      dist_pt = new LinearAlgebraDistribution(Communicator_pt, nrow, false);
     }
-     break;
-     
-    default:
-     
-     std::ostringstream error_stream;
-     error_stream << "Never get here. Dist_problem_matrix_distribution = "
-                  << Dist_problem_matrix_distribution
-                  << std::endl;
-     throw OomphLibError(
-      error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-     break;
-     
+    // if the problem is not distributed then assemble the jacobian with
+    // a uniform distributed distribution
+    else if (!Problem_has_been_distributed)
+    {
+      dist_pt = new LinearAlgebraDistribution(Communicator_pt, nrow, true);
     }
-  }
+    // otherwise the problem is a distributed problem
+    else
+    {
+      switch (Dist_problem_matrix_distribution)
+      {
+        case Uniform_matrix_distribution:
+
+          dist_pt = new LinearAlgebraDistribution(Communicator_pt, nrow, true);
+          break;
+
+        case Problem_matrix_distribution:
+
+          dist_pt = new LinearAlgebraDistribution(Dof_distribution_pt);
+          break;
+
+        case Default_matrix_distribution:
+
+          // Put in its own scope to avoid warnings about "local" variables
+          {
+            LinearAlgebraDistribution* uniform_dist_pt =
+              new LinearAlgebraDistribution(Communicator_pt, nrow, true);
+            bool use_problem_dist = true;
+            for (unsigned p = 0; p < nproc; p++)
+            {
+              // hierher Andrew: what's the logic behind this?
+              if ((double)Dof_distribution_pt->nrow_local(p) >
+                  ((double)uniform_dist_pt->nrow_local(p)) * 1.1)
+              {
+                use_problem_dist = false;
+              }
+            }
+            if (use_problem_dist)
+            {
+              dist_pt = new LinearAlgebraDistribution(Dof_distribution_pt);
+            }
+            else
+            {
+              dist_pt = new LinearAlgebraDistribution(uniform_dist_pt);
+            }
+            delete uniform_dist_pt;
+          }
+          break;
+
+        default:
+
+          std::ostringstream error_stream;
+          error_stream << "Never get here. Dist_problem_matrix_distribution = "
+                       << Dist_problem_matrix_distribution << std::endl;
+          throw OomphLibError(error_stream.str(),
+                              OOMPH_CURRENT_FUNCTION,
+                              OOMPH_EXCEPTION_LOCATION);
+          break;
+      }
+    }
 #else
- dist_pt = new LinearAlgebraDistribution(Communicator_pt, nrow, false);
+    dist_pt = new LinearAlgebraDistribution(Communicator_pt, nrow, false);
 #endif
-}
- 
- 
+  }
+
 
 #ifdef OOMPH_HAS_MPI
 
@@ -3845,7 +3840,7 @@ namespace oomph
     }
     else
     {
-     create_new_linear_algebra_distribution(dist_pt);
+      create_new_linear_algebra_distribution(dist_pt);
     }
 
     // Locally cache pointer to assembly handler
@@ -4103,9 +4098,9 @@ namespace oomph
       dist_pt = new LinearAlgebraDistribution(jacobian.distribution_pt());
     }
     else
-     {
+    {
       create_new_linear_algebra_distribution(dist_pt);
-     }
+    }
 
 
     // The matrix is in compressed row format
@@ -8348,13 +8343,12 @@ namespace oomph
   //==================================================================
   /// Solve the eigenproblem
   //==================================================================
-  void Problem::solve_eigenproblem(
-    const unsigned& n_eval,
-    Vector<std::complex<double>>& alpha,
-    Vector<double>& beta,
-    Vector<DoubleVector>& eigenvector_real,
-    Vector<DoubleVector>& eigenvector_imag,
-    const bool& steady)
+  void Problem::solve_eigenproblem(const unsigned& n_eval,
+                                   Vector<std::complex<double>>& alpha,
+                                   Vector<double>& beta,
+                                   Vector<DoubleVector>& eigenvector_real,
+                                   Vector<DoubleVector>& eigenvector_imag,
+                                   const bool& steady)
   {
     // If the boolean flag is steady, then make all the timesteppers steady
     // before solving the eigenproblem. This will "switch off" the
@@ -8377,7 +8371,7 @@ namespace oomph
 
       // Call the Eigenproblem for the eigensolver
       Eigen_solver_pt->solve_eigenproblem(
-        this, n_eval, alpha, beta, eigenvector_real,eigenvector_imag);
+        this, n_eval, alpha, beta, eigenvector_real, eigenvector_imag);
 
       // Reset the is_steady status of all timesteppers that
       // weren't already steady when we came in here and reset their
@@ -8396,7 +8390,7 @@ namespace oomph
     {
       // Call the Eigenproblem for the eigensolver
       Eigen_solver_pt->solve_eigenproblem(
-       this, n_eval, alpha, beta, eigenvector_real,eigenvector_imag);
+        this, n_eval, alpha, beta, eigenvector_real, eigenvector_imag);
     }
   }
 
@@ -8404,12 +8398,11 @@ namespace oomph
   //==================================================================
   /// Solve the eigenproblem
   //==================================================================
-  void Problem::solve_eigenproblem(
-    const unsigned& n_eval,
-    Vector<std::complex<double>>& eigenvalue,
-    Vector<DoubleVector>& eigenvector_real,
-    Vector<DoubleVector>& eigenvector_imag,
-    const bool& steady)
+  void Problem::solve_eigenproblem(const unsigned& n_eval,
+                                   Vector<std::complex<double>>& eigenvalue,
+                                   Vector<DoubleVector>& eigenvector_real,
+                                   Vector<DoubleVector>& eigenvector_imag,
+                                   const bool& steady)
   {
     // If the boolean flag is steady, then make all the timesteppers steady
     // before solving the eigenproblem. This will "switch off" the
@@ -8432,7 +8425,7 @@ namespace oomph
 
       // Call the Eigenproblem for the eigensolver
       Eigen_solver_pt->solve_eigenproblem(
-       this, n_eval, eigenvalue, eigenvector_real,eigenvector_imag);
+        this, n_eval, eigenvalue, eigenvector_real, eigenvector_imag);
 
       // Reset the is_steady status of all timesteppers that
       // weren't already steady when we came in here and reset their
@@ -8451,7 +8444,7 @@ namespace oomph
     {
       // Call the Eigenproblem for the eigensolver
       Eigen_solver_pt->solve_eigenproblem(
-       this, n_eval, eigenvalue, eigenvector_real,eigenvector_imag);
+        this, n_eval, eigenvalue, eigenvector_real, eigenvector_imag);
     }
   }
 
@@ -8540,9 +8533,9 @@ namespace oomph
       dist_pt = new LinearAlgebraDistribution(main_matrix.distribution_pt());
     }
     else
-     {
+    {
       create_new_linear_algebra_distribution(dist_pt);
-     }
+    }
 
 
     // The matrix is in compressed row format
