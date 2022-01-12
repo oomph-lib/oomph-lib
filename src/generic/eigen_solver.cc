@@ -791,7 +791,8 @@ namespace oomph
     const int& n_eval,
     Vector<std::complex<double>>& alpha_eval,
     Vector<double>& beta_eval,
-    Vector<Vector<std::complex<double>>>& eigenvector)
+    Vector<DoubleVector>& eigenvector_real,
+    Vector<DoubleVector>& eigenvector_imag)
   {
     Vector<DoubleVector> eigenvector_aux;
 
@@ -811,22 +812,24 @@ namespace oomph
     //        Each eigenvector is scaled so the largest component has
     //        abs(real part)+abs(imag. part)=1.
     unsigned n = problem_pt->ndof();
-    eigenvector.resize(n);
+    eigenvector_real.resize(n);
+    eigenvector_imag.resize(n);
     unsigned eval_count = 0;
     while (eval_count < n)
     {
-      // i-th eigenvalue is real:
-      if (alpha_eval[eval_count].imag() == 0.0)
+     // i-th eigenvalue is real:
+     if (alpha_eval[eval_count].imag() == 0.0)
       {
-        // Resize the single eigenvector associated with this
-        // single real eigenvalue
-        eigenvector[eval_count].resize(n);
-        for (unsigned j = 0; j < n; ++j)
+       // Resize the single eigenvector associated with this
+       // single real eigenvalue
+       eigenvector_real[eval_count].build(this->distribution_pt(), 0.0);
+       eigenvector_imag[eval_count].build(this->distribution_pt(), 0.0);
+       for (unsigned j = 0; j < n; ++j)
         {
-          eigenvector[eval_count][j] =
-            std::complex<double>(eigenvector_aux[j][eval_count], 0.0);
+         eigenvector_real[eval_count][j] = eigenvector_aux[j][eval_count];
+         eigenvector_imag[eval_count][j] = 0.0;
         }
-        eval_count++;
+       eval_count++;
       }
       // Assume (and check!) that complex conjugate pairs follow each other
       // as implied by
@@ -887,16 +890,17 @@ namespace oomph
 
         // Resize the two cc eigenvectors associated with the
         // two cc eigenvalues
-        eigenvector[eval_count].resize(n);
-        eigenvector[eval_count + 1].resize(n);
+        eigenvector_real[eval_count  ].build(this->distribution_pt(), 0.0); 
+        eigenvector_imag[eval_count  ].build(this->distribution_pt(), 0.0); 
+        eigenvector_real[eval_count+1].build(this->distribution_pt(), 0.0); 
+        eigenvector_imag[eval_count+1].build(this->distribution_pt(), 0.0); 
         for (unsigned j = 0; j < n; ++j)
         {
-          eigenvector[eval_count][j] = std::complex<double>(
-            eigenvector_aux[eval_count][j], eigenvector_aux[eval_count + 1][j]);
+         eigenvector_real[eval_count][j] = eigenvector_aux[eval_count  ][j];
+         eigenvector_imag[eval_count][j] = eigenvector_aux[eval_count+1][j];
 
-          eigenvector[eval_count + 1][j] =
-            std::complex<double>(eigenvector_aux[eval_count][j],
-                                 -eigenvector_aux[eval_count + 1][j]);
+         eigenvector_real[eval_count+1][j] =  eigenvector_aux[eval_count  ][j];
+         eigenvector_imag[eval_count+1][j] = -eigenvector_aux[eval_count+1][j];
         }
         eval_count += 2;
       }

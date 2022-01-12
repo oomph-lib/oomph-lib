@@ -292,6 +292,97 @@ namespace oomph
   }
 
 
+
+ 
+//==================================================================
+/// Build new LinearAlgebraDistribution. Note: you're in charge of
+/// deleting it!
+//==================================================================
+ void Problem::create_new_linear_algebra_distribution(
+ LinearAlgebraDistribution*& dist_pt)
+{
+ // Find the number of rows
+ const unsigned nrow = this->ndof();
+  
+#ifdef OOMPH_HAS_MPI
+
+ unsigned nproc = Communicator_pt->nproc();
+ 
+ // if problem is only one one processor assemble non-distributed
+ // distribution
+ if (nproc == 1)
+  {
+   dist_pt = new LinearAlgebraDistribution(Communicator_pt, nrow, false);
+  }
+ // if the problem is not distributed then assemble the jacobian with
+ // a uniform distributed distribution
+ else if (!Problem_has_been_distributed)
+  {
+   dist_pt = new LinearAlgebraDistribution(Communicator_pt, nrow, true);
+  }
+ // otherwise the problem is a distributed problem
+ else
+  {
+   switch (Dist_problem_matrix_distribution)
+    {
+    case Uniform_matrix_distribution:
+     
+     dist_pt =
+      new LinearAlgebraDistribution(Communicator_pt, nrow, true);
+     break;
+     
+    case Problem_matrix_distribution:
+     
+     dist_pt = new LinearAlgebraDistribution(Dof_distribution_pt);
+     break;
+     
+    case Default_matrix_distribution:
+
+     // Put in its own scope to avoid warnings about "local" variables
+    {
+     LinearAlgebraDistribution* uniform_dist_pt =
+      new LinearAlgebraDistribution(Communicator_pt, nrow, true);
+     bool use_problem_dist = true;
+     for (unsigned p = 0; p < nproc; p++)
+      {
+       // hierher Andrew: what's the logic behind this?
+       if ((double)Dof_distribution_pt->nrow_local(p) >
+           ((double)uniform_dist_pt->nrow_local(p)) * 1.1)
+        {
+         use_problem_dist = false;
+        }
+      }
+     if (use_problem_dist)
+      {
+       dist_pt = new LinearAlgebraDistribution(Dof_distribution_pt);
+      }
+     else
+      {
+       dist_pt = new LinearAlgebraDistribution(uniform_dist_pt);
+      }
+     delete uniform_dist_pt;
+    }
+     break;
+     
+    default:
+     
+     std::ostringstream error_stream;
+     error_stream << "Never get here. Dist_problem_matrix_distribution = "
+                  << Dist_problem_matrix_distribution
+                  << std::endl;
+     throw OomphLibError(
+      error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+     break;
+     
+    }
+  }
+#else
+ dist_pt = new LinearAlgebraDistribution(Communicator_pt, nrow, false);
+#endif
+}
+ 
+ 
+
 #ifdef OOMPH_HAS_MPI
 
   //==================================================================
@@ -3743,9 +3834,6 @@ namespace oomph
     }
 #endif
 
-    // Find the number of rows
-    const unsigned nrow = this->ndof();
-
     // Determine the distribution for the residuals vector
     // IF the vector has distribution setup then use that
     // ELSE determine the distribution based on the
@@ -3757,59 +3845,7 @@ namespace oomph
     }
     else
     {
-#ifdef OOMPH_HAS_MPI
-      // if problem is only one one processor assemble non-distributed
-      // distribution
-      if (Communicator_pt->nproc() == 1)
-      {
-        dist_pt = new LinearAlgebraDistribution(Communicator_pt, nrow, false);
-      }
-      // if the problem is not distributed then assemble the jacobian with
-      // a uniform distributed distribution
-      else if (!Problem_has_been_distributed)
-      {
-        dist_pt = new LinearAlgebraDistribution(Communicator_pt, nrow, true);
-      }
-      // otherwise the problem is a distributed problem
-      else
-      {
-        switch (Dist_problem_matrix_distribution)
-        {
-          case Uniform_matrix_distribution:
-            dist_pt =
-              new LinearAlgebraDistribution(Communicator_pt, nrow, true);
-            break;
-          case Problem_matrix_distribution:
-            dist_pt = new LinearAlgebraDistribution(Dof_distribution_pt);
-            break;
-          case Default_matrix_distribution:
-            LinearAlgebraDistribution* uniform_dist_pt =
-              new LinearAlgebraDistribution(Communicator_pt, nrow, true);
-            bool use_problem_dist = true;
-            unsigned nproc = Communicator_pt->nproc();
-            for (unsigned p = 0; p < nproc; p++)
-            {
-              if ((double)Dof_distribution_pt->nrow_local(p) >
-                  ((double)uniform_dist_pt->nrow_local(p)) * 1.1)
-              {
-                use_problem_dist = false;
-              }
-            }
-            if (use_problem_dist)
-            {
-              dist_pt = new LinearAlgebraDistribution(Dof_distribution_pt);
-            }
-            else
-            {
-              dist_pt = new LinearAlgebraDistribution(uniform_dist_pt);
-            }
-            delete uniform_dist_pt;
-            break;
-        }
-      }
-#else
-      dist_pt = new LinearAlgebraDistribution(Communicator_pt, nrow, false);
-#endif
+     create_new_linear_algebra_distribution(dist_pt);
     }
 
     // Locally cache pointer to assembly handler
@@ -4057,9 +4093,6 @@ namespace oomph
     // Allocate generalised storage format for passing to sparse_assemble()
     Vector<double*> res(1);
 
-    // number of rows
-    unsigned nrow = this->ndof();
-
     // determine the distribution for the jacobian.
     // IF the jacobian has distribution setup then use that
     // ELSE determine the distribution based on the
@@ -4070,60 +4103,9 @@ namespace oomph
       dist_pt = new LinearAlgebraDistribution(jacobian.distribution_pt());
     }
     else
-    {
-#ifdef OOMPH_HAS_MPI
-      // if problem is only one one processor
-      if (Communicator_pt->nproc() == 1)
-      {
-        dist_pt = new LinearAlgebraDistribution(Communicator_pt, nrow, false);
-      }
-      // if the problem is not distributed then assemble the jacobian with
-      // a uniform distributed distribution
-      else if (!Problem_has_been_distributed)
-      {
-        dist_pt = new LinearAlgebraDistribution(Communicator_pt, nrow, true);
-      }
-      // otherwise the problem is a distributed problem
-      else
-      {
-        switch (Dist_problem_matrix_distribution)
-        {
-          case Uniform_matrix_distribution:
-            dist_pt =
-              new LinearAlgebraDistribution(Communicator_pt, nrow, true);
-            break;
-          case Problem_matrix_distribution:
-            dist_pt = new LinearAlgebraDistribution(Dof_distribution_pt);
-            break;
-          case Default_matrix_distribution:
-            LinearAlgebraDistribution* uniform_dist_pt =
-              new LinearAlgebraDistribution(Communicator_pt, nrow, true);
-            bool use_problem_dist = true;
-            unsigned nproc = Communicator_pt->nproc();
-            for (unsigned p = 0; p < nproc; p++)
-            {
-              if ((double)Dof_distribution_pt->nrow_local(p) >
-                  ((double)uniform_dist_pt->nrow_local(p)) * 1.1)
-              {
-                use_problem_dist = false;
-              }
-            }
-            if (use_problem_dist)
-            {
-              dist_pt = new LinearAlgebraDistribution(Dof_distribution_pt);
-            }
-            else
-            {
-              dist_pt = new LinearAlgebraDistribution(uniform_dist_pt);
-            }
-            delete uniform_dist_pt;
-            break;
-        }
-      }
-#else
-      dist_pt = new LinearAlgebraDistribution(Communicator_pt, nrow, false);
-#endif
-    }
+     {
+      create_new_linear_algebra_distribution(dist_pt);
+     }
 
 
     // The matrix is in compressed row format
@@ -8370,7 +8352,8 @@ namespace oomph
     const unsigned& n_eval,
     Vector<std::complex<double>>& alpha,
     Vector<double>& beta,
-    Vector<Vector<std::complex<double>>>& eigenvector,
+    Vector<DoubleVector>& eigenvector_real,
+    Vector<DoubleVector>& eigenvector_imag,
     const bool& steady)
   {
     // If the boolean flag is steady, then make all the timesteppers steady
@@ -8394,7 +8377,7 @@ namespace oomph
 
       // Call the Eigenproblem for the eigensolver
       Eigen_solver_pt->solve_eigenproblem(
-        this, n_eval, alpha, beta, eigenvector);
+        this, n_eval, alpha, beta, eigenvector_real,eigenvector_imag);
 
       // Reset the is_steady status of all timesteppers that
       // weren't already steady when we came in here and reset their
@@ -8413,7 +8396,7 @@ namespace oomph
     {
       // Call the Eigenproblem for the eigensolver
       Eigen_solver_pt->solve_eigenproblem(
-        this, n_eval, alpha, beta, eigenvector);
+       this, n_eval, alpha, beta, eigenvector_real,eigenvector_imag);
     }
   }
 
@@ -8424,7 +8407,8 @@ namespace oomph
   void Problem::solve_eigenproblem(
     const unsigned& n_eval,
     Vector<std::complex<double>>& eigenvalue,
-    Vector<Vector<std::complex<double>>>& eigenvector,
+    Vector<DoubleVector>& eigenvector_real,
+    Vector<DoubleVector>& eigenvector_imag,
     const bool& steady)
   {
     // If the boolean flag is steady, then make all the timesteppers steady
@@ -8448,7 +8432,7 @@ namespace oomph
 
       // Call the Eigenproblem for the eigensolver
       Eigen_solver_pt->solve_eigenproblem(
-        this, n_eval, eigenvalue, eigenvector);
+       this, n_eval, eigenvalue, eigenvector_real,eigenvector_imag);
 
       // Reset the is_steady status of all timesteppers that
       // weren't already steady when we came in here and reset their
@@ -8467,7 +8451,7 @@ namespace oomph
     {
       // Call the Eigenproblem for the eigensolver
       Eigen_solver_pt->solve_eigenproblem(
-        this, n_eval, eigenvalue, eigenvector);
+       this, n_eval, eigenvalue, eigenvector_real,eigenvector_imag);
     }
   }
 
@@ -8546,9 +8530,6 @@ namespace oomph
     // Allocate pointer to residuals, although not used in these problems
     Vector<double*> residuals_vectors(0);
 
-    // total number of rows in each matrix
-    unsigned nrow = this->ndof();
-
     // determine the distribution for the jacobian (main matrix)
     // IF the jacobian has distribution setup then use that
     // ELSE determine the distribution based on the
@@ -8559,60 +8540,9 @@ namespace oomph
       dist_pt = new LinearAlgebraDistribution(main_matrix.distribution_pt());
     }
     else
-    {
-#ifdef OOMPH_HAS_MPI
-      // if problem is only one one processor
-      if (Communicator_pt->nproc() == 1)
-      {
-        dist_pt = new LinearAlgebraDistribution(Communicator_pt, nrow, false);
-      }
-      // if the problem is not distributed then assemble the matrices with
-      // a uniform distributed distribution
-      else if (!Problem_has_been_distributed)
-      {
-        dist_pt = new LinearAlgebraDistribution(Communicator_pt, nrow, true);
-      }
-      // otherwise the problem is a distributed problem
-      else
-      {
-        switch (Dist_problem_matrix_distribution)
-        {
-          case Uniform_matrix_distribution:
-            dist_pt =
-              new LinearAlgebraDistribution(Communicator_pt, nrow, true);
-            break;
-          case Problem_matrix_distribution:
-            dist_pt = new LinearAlgebraDistribution(Dof_distribution_pt);
-            break;
-          case Default_matrix_distribution:
-            LinearAlgebraDistribution* uniform_dist_pt =
-              new LinearAlgebraDistribution(Communicator_pt, nrow, true);
-            bool use_problem_dist = true;
-            unsigned nproc = Communicator_pt->nproc();
-            for (unsigned p = 0; p < nproc; p++)
-            {
-              if ((double)Dof_distribution_pt->nrow_local(p) >
-                  ((double)uniform_dist_pt->nrow_local(p)) * 1.1)
-              {
-                use_problem_dist = false;
-              }
-            }
-            if (use_problem_dist)
-            {
-              dist_pt = new LinearAlgebraDistribution(Dof_distribution_pt);
-            }
-            else
-            {
-              dist_pt = new LinearAlgebraDistribution(uniform_dist_pt);
-            }
-            delete uniform_dist_pt;
-            break;
-        }
-      }
-#else
-      dist_pt = new LinearAlgebraDistribution(Communicator_pt, nrow, false);
-#endif
-    }
+     {
+      create_new_linear_algebra_distribution(dist_pt);
+     }
 
 
     // The matrix is in compressed row format

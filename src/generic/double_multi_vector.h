@@ -45,13 +45,13 @@
 
 namespace oomph
 {
-  //=============================================================================
+  //===========================================================================
   /// A multi vector in the mathematical sense, initially developed for
   /// linear algebra type applications.
   /// If MPI then this multi vector can be distributed - its distribution is
   /// described by the LinearAlgebraDistribution object at Distribution_pt.
   /// Data is stored in a C-style pointer vector (double*)
-  //=============================================================================
+  //===========================================================================
   class DoubleMultiVector : public DistributableLinearAlgebraObject
   {
   public:

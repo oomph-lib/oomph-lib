@@ -1664,6 +1664,10 @@ namespace oomph
       Global_data_pt.resize(0);
     }
 
+   /// Get new linear algebra distribution (you're in charge of deleting it!)
+   void create_new_linear_algebra_distribution(
+    LinearAlgebraDistribution*& dist_pt);
+      
     /// Return the pointer to the dof distribution (read-only)
     LinearAlgebraDistribution* const& dof_distribution_pt() const
     {
@@ -1945,10 +1949,11 @@ namespace oomph
     /// There's a convenience wrapper to this function that simply computes
     /// these eigenvalues regardless. That version may die in NaN checking is
     /// enabled (via the fenv.h header and the associated feenable function).
-    void solve_eigenproblem(const unsigned& n_eval,
+   void solve_eigenproblem(const unsigned& n_eval,
                             Vector<std::complex<double>>& alpha,
                             Vector<double>& beta,
-                            Vector<Vector<std::complex<double>>>& eigenvector,
+                            Vector<DoubleVector>& eigenvector_real,
+                            Vector<DoubleVector>& eigenvector_imag,
                             const bool& steady = true);
 
     /// Solve an eigenproblem as assembled by the Problem's constituent
@@ -1963,7 +1968,8 @@ namespace oomph
     /// returns the eigenvalues in terms of a fractional representation.
     void solve_eigenproblem(const unsigned& n_eval,
                             Vector<std::complex<double>>& eigenvalue,
-                            Vector<Vector<std::complex<double>>>& eigenvector,
+                            Vector<DoubleVector>& eigenvector_real,
+                            Vector<DoubleVector>& eigenvector_imag,
                             const bool& steady = true);
 
     /// Solve an eigenproblem as assembled by the Problem's constituent
@@ -1980,8 +1986,12 @@ namespace oomph
                             const bool& steady = true)
     {
       // Create temporary storage for the eigenvectors (potentially wasteful)
-      Vector<Vector<std::complex<double>>> eigenvector;
-      solve_eigenproblem(n_eval, eigenvalue, eigenvector, steady);
+     Vector<DoubleVector> eigenvector_real;
+     Vector<DoubleVector> eigenvector_imag;
+     solve_eigenproblem(n_eval, eigenvalue,
+                        eigenvector_real,
+                        eigenvector_imag,
+                        steady);
     }
 
     /// Solve an eigenproblem as assembled by the Problem's constituent
@@ -2000,9 +2010,13 @@ namespace oomph
                             Vector<double>& beta,
                             const bool& steady = true)
     {
-      // Create temporary storage for the eigenvectors (potentially wasteful)
-      Vector<Vector<std::complex<double>>> eigenvector;
-      solve_eigenproblem(n_eval, alpha, beta, eigenvector, steady);
+     // Create temporary storage for the eigenvectors (potentially wasteful)
+     Vector<DoubleVector> eigenvector_real;
+     Vector<DoubleVector> eigenvector_imag;
+     solve_eigenproblem(n_eval, alpha, beta,
+                        eigenvector_real,
+                        eigenvector_imag,
+                        steady);
     }
 
     /// Get the matrices required by a eigensolver. If the

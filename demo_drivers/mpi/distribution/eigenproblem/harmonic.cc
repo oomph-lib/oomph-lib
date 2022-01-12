@@ -375,7 +375,11 @@ HarmonicProblem<ELEMENT,EIGEN_SOLVER>::HarmonicProblem(
  const unsigned& n_element)
 { 
  this->eigen_solver_pt() = new EIGEN_SOLVER;
- 
+
+
+ // // hierher Temporary work-around to keep the legacy version working
+ Anasazi::Use_temporary_code_for_andrew_legacy_version=true;
+   
  //Get the positive eigenvalues, shift is zero by default
  static_cast<EIGEN_SOLVER*>(eigen_solver_pt())
   ->get_eigenvalues_right_of_shift(); 

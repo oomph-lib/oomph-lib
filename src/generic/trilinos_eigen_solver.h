@@ -43,6 +43,11 @@
 
 namespace Anasazi
 {
+
+
+ // hierher Andrew get rid of this!
+ bool Use_temporary_code_for_andrew_legacy_version=false;
+ 
   //========================================================================
   /// Specialize the Anasazi traits class for the oomph-lib DoubleMultiVector.
   /// This provides the interfaces required by the Anasazi eigensolvers.
@@ -488,6 +493,7 @@ namespace oomph
   class ProblemBasedShiftInvertOperator : public DoubleMultiVectorOperator
   {
   private:
+   
     // Pointer to the problem
     Problem* Problem_pt;
 
@@ -509,11 +515,21 @@ namespace oomph
       // Before we get into the Arnoldi loop solve the shifted matrix problem
       // Allocated Row compressed matrices for the mass matrix and shifted main
       // matrix
-      M_pt = new CRDoubleMatrix(problem_pt->dof_distribution_pt());
-      AsigmaM_pt = new CRDoubleMatrix(problem_pt->dof_distribution_pt());
+     if (Anasazi::Use_temporary_code_for_andrew_legacy_version)
+      {
+       M_pt = new CRDoubleMatrix(problem_pt->dof_distribution_pt());
+       AsigmaM_pt = new CRDoubleMatrix(problem_pt->dof_distribution_pt());
+      }
+     else
+      {
+       // No need for a distribution; gets automatically set up by the Problem
+       M_pt = new CRDoubleMatrix;
+       AsigmaM_pt = new CRDoubleMatrix; 
+      }
 
-      // Assemble the matrices
-      problem_pt->get_eigenproblem_matrices(*M_pt, *AsigmaM_pt, Sigma);
+
+     // Assemble the matrices
+     problem_pt->get_eigenproblem_matrices(*M_pt, *AsigmaM_pt, Sigma);
 
       // Do not report the time taken
       Linear_solver_pt->disable_doc_time();
@@ -529,19 +545,23 @@ namespace oomph
       {
         Linear_solver_pt->enable_resolve();
       }
-      // Solve the first vector
-
-      DoubleVector X(x.distribution_pt());
+      
+      // Solve for the first vector (no need for a distribution)
+      DoubleVector X;
+      
       // Premultiply by mass matrix
       M_pt->multiply(x.doublevector(0), X);
+      
       // For some reason I need to create a new vector and copy here
       // This is odd and not expected, examine carefully
-      DoubleVector Y(x.distribution_pt());
+      DoubleVector Y; 
       Linear_solver_pt->solve(AsigmaM_pt, X, Y);
+
       // Need to synchronise
       //#ifdef OOMPH_HAS_MPI
       //   Problem_pt->synchronise_all_dofs();
       //#endif
+
       for (unsigned i = 0; i < n_row_local; i++)
       {
         y(0, i) = Y[i];
@@ -552,9 +572,11 @@ namespace oomph
       {
         M_pt->multiply(x.doublevector(v), X);
         Linear_solver_pt->resolve(X, Y);
+        
         //#ifdef OOMPH_HAS_MPI
         //     Problem_pt->synchronise_all_dofs();
         //#endif
+        
         for (unsigned i = 0; i < n_row_local; i++)
         {
           y(v, i) = Y[i];
@@ -614,8 +636,10 @@ namespace oomph
     {
       Output_manager_pt = new Anasazi::BasicOutputManager<ST>();
       // Set verbosity level
-      int verbosity =
-        Anasazi::Warnings + Anasazi::FinalSummary + Anasazi::TimingDetails;
+      int verbosity = 0;
+      verbosity+= Anasazi::Warnings ;
+      verbosity+=Anasazi::FinalSummary;
+      verbosity+=Anasazi::TimingDetails;
       Output_manager_pt->setVerbosity(verbosity);
 
       // print greeting
@@ -673,11 +697,14 @@ namespace oomph
                             const int& n_eval,
                             Vector<std::complex<double>>& alpha,
                             Vector<double>& beta,
-                            Vector<Vector<std::complex<double>>>& eigenvector)
+                            Vector<DoubleVector>& eigenvector_real,
+                            Vector<DoubleVector>& eigenvector_imag)
     {
       // Reverse engineer the "safe" version of the eigenvalues
       Vector<std::complex<double>> eigenvalue;
-      solve_eigenproblem(problem_pt, n_eval, eigenvalue, eigenvector);
+      solve_eigenproblem(problem_pt, n_eval, eigenvalue,
+                         eigenvector_real,
+                         eigenvector_imag);
       unsigned n = eigenvalue.size();
       alpha.resize(n);
       beta.resize(n);
@@ -692,14 +719,19 @@ namespace oomph
     void solve_eigenproblem(Problem* const& problem_pt,
                             const int& n_eval,
                             Vector<std::complex<double>>& eigenvalue,
-                            Vector<Vector<std::complex<double>>>& eigenvector)
+                            Vector<DoubleVector>& eigenvector_real,
+                            Vector<DoubleVector>& eigenvector_imag)
     {
       // Initially be dumb here
       Linear_solver_pt = problem_pt->linear_solver_pt();
 
+      // Get a shiny new linear algebra distribution from the problem
+      LinearAlgebraDistribution* dist_pt=0;
+      problem_pt->create_new_linear_algebra_distribution(dist_pt);
+      
       // Let's make the initial vector
       Teuchos::RCP<DoubleMultiVector> initial = Teuchos::rcp(
-        new DoubleMultiVector(1, problem_pt->dof_distribution_pt()));
+       new DoubleMultiVector(1, dist_pt)); 
       Anasazi::MultiVecTraits<double, DoubleMultiVector>::MvRandom(*initial);
 
       // Make the operator
@@ -735,8 +767,13 @@ namespace oomph
       // No need to have ncv specificed, Triliinos has a sensible default
       //  int ncv = 10;
       MT tol = 1.0e-10;
-      int verbosity =
-        Anasazi::Warnings + Anasazi::FinalSummary + Anasazi::TimingDetails;
+      int verbosity = 0;
+      verbosity+= Anasazi::Warnings;
+      // MH has switched off the (overly) verbose output
+      // Could introduce handle to switch it back on.
+      //verbosity+=Anasazi::FinalSummary; 
+      //verbosity+=Anasazi::TimingDetails;
+
 
       Teuchos::ParameterList MyPL;
       MyPL.set("Which", "LM");
@@ -768,14 +805,19 @@ namespace oomph
       std::vector<Anasazi::Value<double>> evals = sol.Evals;
       Teuchos::RCP<DoubleMultiVector> evecs = sol.Evecs;
 
-
+      // Here's the vector that contains the information
+      // about how to translate the vectors that are returned
+      // by anasazi into real and imag parts of the actual
+      // eigenvectors
       // std::vector<int> Anasazi::Eigensolution< ScalarType, MV >::index
       std::vector<int> index_vector = sol.index;
 
       // Here's what we're actually going to return.
       unsigned n_eval_avail = evals.size();
       eigenvalue.resize(n_eval_avail);
-      eigenvector.resize(n_eval_avail);
+      eigenvector_real.resize(n_eval_avail);
+      eigenvector_imag.resize(n_eval_avail);
+
       // Extract these from the raw data returned by trilinos
       for (unsigned i = 0; i < n_eval_avail; i++)
       {
@@ -786,9 +828,9 @@ namespace oomph
         eigenvalue[i] = std::complex<double>(a / det + Sigma_real, -b / det);
 
         // Now set the eigenvectors
-        // eigenvector[i].build(evecs->distribution_pt());
         unsigned nrow_local = evecs->nrow_local();
-        eigenvector[i].resize(nrow_local);
+        eigenvector_real[i].build(evecs->distribution_pt(), 0.0);
+        eigenvector_imag[i].build(evecs->distribution_pt(), 0.0);
 
         // std::vector<int> Anasazi::Eigensolution< ScalarType, MV >::index
         // to translate into proper complex vector; see
@@ -814,30 +856,26 @@ namespace oomph
         // Real eigenvector
         if (index_vector[i] == 0)
         {
-          // oomph_info << "eigenvector " << i << " is real.\n";
           for (unsigned j = 0; j < nrow_local; j++)
           {
-            eigenvector[i][j] = std::complex<double>((*evecs)(i, j), 0.0);
+           eigenvector_real[i][j] = (*evecs)(i, j);
+           eigenvector_imag[i][j] = 0.0;
           }
         }
         else if (index_vector[i] == 1)
         {
-          // oomph_info << "eigenvector " << i
-          //           << " is complex and stored in cols i and i+1.\n";
           for (unsigned j = 0; j < nrow_local; j++)
           {
-            eigenvector[i][j] =
-              std::complex<double>((*evecs)(i, j), (*evecs)(i + 1, j));
+           eigenvector_real[i][j] = (*evecs)(i, j);
+           eigenvector_imag[i][j] = (*evecs)(i + 1, j);
           }
         }
         else if (index_vector[i] == -1)
         {
-          // oomph_info << "eigenvector " << i
-          //           << " is complex and stored in cols i-1 and i.\n";
           for (unsigned j = 0; j < nrow_local; j++)
           {
-            eigenvector[i][j] =
-              std::complex<double>((*evecs)(i - 1, j), -(*evecs)(i, j));
+           eigenvector_real[i][j] =  (*evecs)(i - 1, j);
+           eigenvector_imag[i][j] = -(*evecs)(i, j);
           }
         }
         else
@@ -847,6 +885,9 @@ namespace oomph
           abort();
         }
       }
+
+      // Tidy up
+      delete dist_pt;
     }
 
 

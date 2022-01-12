@@ -106,13 +106,16 @@ namespace oomph
       Problem* const& problem_pt,
       const int& n_eval,
       Vector<std::complex<double>>& eigenvalue,
-      Vector<Vector<std::complex<double>>>& eigenvector)
+      Vector<DoubleVector>& eigenvector_real,
+      Vector<DoubleVector>& eigenvector_imag)
     {
       Vector<std::complex<double>> alpha;
       Vector<double> beta;
 
       // Call the "safe" version
-      solve_eigenproblem(problem_pt, n_eval, alpha, beta, eigenvector);
+      solve_eigenproblem(problem_pt, n_eval, alpha, beta,
+                         eigenvector_real,
+                         eigenvector_imag);
 
       // Now do the brute force conversion, possibly creating NaNs and Infs...
       unsigned n = alpha.size();
@@ -140,7 +143,8 @@ namespace oomph
       const int& n_eval,
       Vector<std::complex<double>>& alpha,
       Vector<double>& beta,
-      Vector<Vector<std::complex<double>>>& eigenvector) = 0;
+      Vector<DoubleVector>& eigenvector_real,
+      Vector<DoubleVector>& eigenvector_imag) = 0;
 
 
     /// Set the value of the (real) shift
@@ -246,7 +250,8 @@ namespace oomph
                             const int& n_eval,
                             Vector<std::complex<double>>& alpha,
                             Vector<double>& beta,
-                            Vector<Vector<std::complex<double>>>& eigenvector)
+                            Vector<DoubleVector>& eigenvector_real,
+                            Vector<DoubleVector>& eigenvector_imag)
     {
       oomph_info << "Broken, but then don't we want arpack to go anyway?\n";
       abort();
@@ -349,7 +354,8 @@ namespace oomph
                             const int& n_eval,
                             Vector<std::complex<double>>& alpha,
                             Vector<double>& beta,
-                            Vector<Vector<std::complex<double>>>& eigenvector);
+                            Vector<DoubleVector>& eigenvector_real,
+                            Vector<DoubleVector>& eigenvector_imag);
 
 
     /// Find the eigenvalues of a complex generalised eigenvalue problem
@@ -377,6 +383,7 @@ namespace oomph
     }
 
   private:
+   
     /// Helper function called from legacy and updated version from "raw" lapack
     /// code
     void solve_eigenproblem_helper(Problem* const& problem_pt,
