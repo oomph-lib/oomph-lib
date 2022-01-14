@@ -1934,7 +1934,7 @@ namespace oomph
                                    Vector<std::complex<double>>& eigenvalue,
                                    Vector<DoubleVector>& eigenvector,
                                    const bool& steady = true);
-   
+
     /// Solve an eigenproblem as assembled by the Problem's constituent
     /// elements. Calculate (at least) n_eval eigenvalues.
     /// The boolean flag (default true) specifies
@@ -1946,11 +1946,11 @@ namespace oomph
                                    Vector<std::complex<double>>& eigenvalue,
                                    const bool& steady = true)
     {
-     // Create temporary storage for the eigenvectors (potentially wasteful)
-     Vector<DoubleVector> eigenvector;
-     solve_eigenproblem_legacy(n_eval, eigenvalue, eigenvector, steady);
+      // Create temporary storage for the eigenvectors (potentially wasteful)
+      Vector<DoubleVector> eigenvector;
+      solve_eigenproblem_legacy(n_eval, eigenvalue, eigenvector, steady);
     }
-   
+
     /// Solve an eigenproblem as assembled by the Problem's constituent
     /// elements. Calculate (at least) n_eval eigenvalues and return the
     /// corresponding eigenvectors. The boolean flag (default true) specifies

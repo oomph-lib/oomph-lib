@@ -246,23 +246,23 @@ namespace oomph
     // each element only has internal data). In that case the
     // partition is irrelevant and we may as well distribute the
     // elements in round-robin fashion
-    if (adjacency_vector.size()==0)
-     {
+    if (adjacency_vector.size() == 0)
+    {
       unsigned n_proc = problem_pt->communicator_pt()->nproc();
       oomph_info
-       << "Note: All elements in the Problem's Mesh appear to be\n"
-       << "unconnected. This happens, e.g. if all elements only have\n"
-       << "internal Data. Bypassing metis and distributing elements\n"
-       << "in round-robin fashion amongst the " << n_proc
-       << " processors." << std::endl;
-      for(unsigned e=0;e<nelem;e++)
-       {
-        element_domain[e]=e%n_proc;
-       }
+        << "Note: All elements in the Problem's Mesh appear to be\n"
+        << "unconnected. This happens, e.g. if all elements only have\n"
+        << "internal Data. Bypassing metis and distributing elements\n"
+        << "in round-robin fashion amongst the " << n_proc << " processors."
+        << std::endl;
+      for (unsigned e = 0; e < nelem; e++)
+      {
+        element_domain[e] = e % n_proc;
+      }
       return;
-     }
+    }
 
-    
+
     // Call METIS graph partitioner
     //-----------------------------
 
