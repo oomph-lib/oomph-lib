@@ -151,7 +151,7 @@ namespace oomph
     Linear_solver_pt = Default_linear_solver_pt = new SuperLUSolver;
     Mass_matrix_solver_for_explicit_timestepper_pt = Linear_solver_pt;
 
-    Eigen_solver_pt = Default_eigen_solver_pt = new ARPACK;
+    Eigen_solver_pt = Default_eigen_solver_pt = new LAPACK_QZ;
 
     Assembly_handler_pt = Default_assembly_handler_pt = new AssemblyHandler;
 

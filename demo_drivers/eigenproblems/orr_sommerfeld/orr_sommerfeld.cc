@@ -24,7 +24,7 @@
 //LIC// 
 //LIC//====================================================================
 /// Diver to solve the orr-sommerfeld equation for Poiseuille flow
-/// using the ARPACK (default) eigensolver.
+/// using the default eigensolver.
 
 // Generic oomph-lib routines only
 #include "generic.h"
@@ -833,19 +833,24 @@ OrrSommerfeldProblem<ELEMENT>::OrrSommerfeldProblem(const unsigned& n_element,
                                                 double* const &A_REAL_PT)
  : A_real_pt(A_REAL_PT)
 { 
+ // hierher Andrew: switched this to anasazi because QZ dies (I assume the
+ // one of the two matrices doesn't have the required properties.
+ eigen_solver_pt()=new ANASAZI;
+  
  //Set the shift to be zero (the default)
  eigen_solver_pt()->set_shift(0.0);
- //We are going to track the magnitude of the eigenvalue. 
- //Actually, we want the real part, but the magnitude does and allows
- //us to use continuation, for some reason that I might eventaually
- //understand.
- static_cast<ARPACK*>(eigen_solver_pt())->track_eigenvalue_magnitude();
- //The eigenvalues to the right of the shift correspond to the eigenvalues
- //nearest the shift when tracking the magnitude.
- static_cast<ARPACK*>(eigen_solver_pt())->get_eigenvalues_right_of_shift();
- //Increase the dimension of the arnoldi subspace to 50 (otherwise the  
- //test fails on the Intel architecture)
- static_cast<ARPACK*>(eigen_solver_pt())->narnoldi()=50;
+
+ // //We are going to track the magnitude of the eigenvalue. 
+ // //Actually, we want the real part, but the magnitude does and allows
+ // //us to use continuation, for some reason that I might eventaually
+ // //understand.
+ // static_cast<ARPACK*>(eigen_solver_pt())->track_eigenvalue_magnitude();
+ // //The eigenvalues to the right of the shift correspond to the eigenvalues
+ // //nearest the shift when tracking the magnitude.
+ // static_cast<ARPACK*>(eigen_solver_pt())->get_eigenvalues_right_of_shift();
+ // //Increase the dimension of the arnoldi subspace to 50 (otherwise the  
+ // //test fails on the Intel architecture)
+ // static_cast<ARPACK*>(eigen_solver_pt())->narnoldi()=50;
 
  //Set the minimum arc-length to be quite large, so that the system bails
  //quickly if there are problems
@@ -1063,11 +1068,23 @@ public:
 //======start_of_main==================================================
 /// Driver for 1D Poisson problem
 //=====================================================================
-int main()
+int main(int argc, char* argv[])
 {
+ 
+//Want to test Trilinos if we have it, so we must initialise MPI
+//if we have compiled with it
+#ifdef OOMPH_HAS_MPI
+ MPI_Helpers::init(argc,argv);
+#endif
+
+ 
  ContinuationProblem problem(50);
 
  problem.solve();
+
+#ifdef OOMPH_HAS_MPI
+ MPI_Helpers::finalize();
+#endif
 
 } // end of main
 
