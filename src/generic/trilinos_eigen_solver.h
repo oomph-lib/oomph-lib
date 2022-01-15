@@ -606,30 +606,30 @@ namespace oomph
     /// Pointer to a default linear solver
     LinearSolver* Default_linear_solver_pt;
 
-    /// Integer to set whether the real, imaginary or magnitude is
-    /// required
-    /// to be small or large.
-    int Spectrum;
+    // /// Integer to set whether the real, imaginary or magnitude is
+    // /// required
+    // /// to be small or large.
+    // int Spectrum;
 
-    /// Number of Arnoldi vectors to compute
-    int NArnoldi;
+    // /// Number of Arnoldi vectors to compute
+    // int NArnoldi;
 
-    /// Boolean to set which part of the spectrum left (default) or right
-    /// of the shifted value.
-    bool Small;
+    // /// Boolean to set which part of the spectrum left (default) or right
+    // /// of the shifted value.
+    // bool Small;
 
-    /// Boolean to indicate whether or not to compute the eigenvectors
-    bool Compute_eigenvectors;
+    // /// Boolean to indicate whether or not to compute the eigenvectors
+    // bool Compute_eigenvectors;
 
 
   public:
     /// Constructor
     ANASAZI()
       : Linear_solver_pt(0),
-        Default_linear_solver_pt(0),
-        Spectrum(0),
-        NArnoldi(10),
-        Compute_eigenvectors(true)
+        Default_linear_solver_pt(0)
+        // Spectrum(0),
+        // NArnoldi(10),
+        //Compute_eigenvectors(true)
     {
       Output_manager_pt = new Anasazi::BasicOutputManager<ST>();
       // Set verbosity level
@@ -651,29 +651,29 @@ namespace oomph
     /// Destructor, delete the linear solver
     virtual ~ANASAZI() {}
 
-    /// Access function for the number of Arnoldi vectors
-    int& narnoldi()
-    {
-      return NArnoldi;
-    }
+    // /// Access function for the number of Arnoldi vectors
+    // int& narnoldi()
+    // {
+    //   return NArnoldi;
+    // }
 
-    /// Access function for the number of Arnoldi vectors (const version)
-    const int& narnoldi() const
-    {
-      return NArnoldi;
-    }
+    // /// Access function for the number of Arnoldi vectors (const version)
+    // const int& narnoldi() const
+    // {
+    //   return NArnoldi;
+    // }
 
-    /// Set to enable the computation of the eigenvectors (default)
-    void enable_compute_eigenvectors()
-    {
-      Compute_eigenvectors = true;
-    }
+    // /// Set to enable the computation of the eigenvectors (default)
+    // void enable_compute_eigenvectors()
+    // {
+    //   Compute_eigenvectors = true;
+    // }
 
-    /// Set to disable the computation of the eigenvectors
-    void disable_compute_eigenvectors()
-    {
-      Compute_eigenvectors = false;
-    }
+    // /// Set to disable the computation of the eigenvectors
+    // void disable_compute_eigenvectors()
+    // {
+    //   Compute_eigenvectors = false;
+    // }
 
     /// Solve the real eigenproblem that is assembled by elements in
     /// a mesh in a Problem object. Note that the assembled matrices include the
@@ -995,35 +995,35 @@ namespace oomph
       }
     }
 
-    /// Set the desired eigenvalues to be left of the shift
-    void get_eigenvalues_left_of_shift()
-    {
-      Small = true;
-    }
+    // /// Set the desired eigenvalues to be left of the shift
+    // void get_eigenvalues_left_of_shift()
+    // {
+    //   Small = true;
+    // }
 
-    /// Set the desired eigenvalues to be right of the shift
-    void get_eigenvalues_right_of_shift()
-    {
-      Small = false;
-    }
+    // /// Set the desired eigenvalues to be right of the shift
+    // void get_eigenvalues_right_of_shift()
+    // {
+    //   Small = false;
+    // }
 
-    /// Set the real part to be the quantity of interest (default)
-    void track_eigenvalue_real_part()
-    {
-      Spectrum = 1;
-    }
+    // /// Set the real part to be the quantity of interest (default)
+    // void track_eigenvalue_real_part()
+    // {
+    //   Spectrum = 1;
+    // }
 
-    /// Set the imaginary part fo the quantity of interest
-    void track_eigenvalue_imaginary_part()
-    {
-      Spectrum = -1;
-    }
+    // /// Set the imaginary part fo the quantity of interest
+    // void track_eigenvalue_imaginary_part()
+    // {
+    //   Spectrum = -1;
+    // }
 
-    /// Set the magnitude to be the quantity of interest
-    void track_eigenvalue_magnitude()
-    {
-      Spectrum = 0;
-    }
+    // /// Set the magnitude to be the quantity of interest
+    // void track_eigenvalue_magnitude()
+    // {
+    //   Spectrum = 0;
+    // }
 
     /// Return a pointer to the linear solver object
     LinearSolver*& linear_solver_pt()
