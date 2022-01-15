@@ -624,12 +624,10 @@ namespace oomph
 
   public:
     /// Constructor
-    ANASAZI()
-      : Linear_solver_pt(0),
-        Default_linear_solver_pt(0)
-        // Spectrum(0),
-        // NArnoldi(10),
-        //Compute_eigenvectors(true)
+    ANASAZI() : Linear_solver_pt(0), Default_linear_solver_pt(0)
+    // Spectrum(0),
+    // NArnoldi(10),
+    // Compute_eigenvectors(true)
     {
       Output_manager_pt = new Anasazi::BasicOutputManager<ST>();
       // Set verbosity level
