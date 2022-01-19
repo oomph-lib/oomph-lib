@@ -21,7 +21,7 @@ echo " "
 fi
 
 #Search string 
-search_string=RefineableTriangleMesh
+search_string=solve_eigenproblem
 if [ $# -ge 1 ]; then
     search_string=$1
 fi

@@ -380,9 +380,12 @@ ComplexHarmonicProblem<ELEMENT,EIGEN_SOLVER>::ComplexHarmonicProblem(
  //Create the eigen solver
  this->eigen_solver_pt() = new EIGEN_SOLVER;
  
- //Get the positive eigenvalues, shift is zero by default
- static_cast<EIGEN_SOLVER*>(eigen_solver_pt())
-  ->get_eigenvalues_right_of_shift(); 
+ // hierher Temporary work-around to keep the legacy version working
+ Anasazi::Use_temporary_code_for_andrew_legacy_version=true;
+   
+ // //Get the positive eigenvalues, shift is zero by default
+ // static_cast<EIGEN_SOLVER*>(eigen_solver_pt())
+ //  ->get_eigenvalues_right_of_shift(); 
 
  //Set domain length 
  double L=1.0;
@@ -449,7 +452,7 @@ solve(const unsigned& label)
  unsigned n_eval=7;
 
  //Solve the eigenproblem
- this->solve_eigenproblem(n_eval,eigenvalues,eigenvectors);
+ this->solve_eigenproblem_legacy(n_eval,eigenvalues,eigenvectors);
 
  //We now need to sort the output based on the size of the real part
  //of the eigenvalues.
@@ -538,7 +541,8 @@ int main(int argc, char **argv)
  clock_t t_start1 = clock();
  //Solve with ARPACK
  {
-  ComplexHarmonicProblem<QComplexHarmonicElement<3>,ARPACK> 
+  // hierher Andrew: now duplicate
+  ComplexHarmonicProblem<QComplexHarmonicElement<3>,LAPACK_QZ> //ARPACK> 
    problem(n_element);
   
   std::cout << "Matrix size " << problem.ndof() << std::endl;
@@ -550,6 +554,7 @@ int main(int argc, char **argv)
  clock_t t_start2 = clock();
  //Solve with LAPACK_QZ
  {
+ 
   ComplexHarmonicProblem<QComplexHarmonicElement<3>,LAPACK_QZ> 
    problem(n_element);
   
