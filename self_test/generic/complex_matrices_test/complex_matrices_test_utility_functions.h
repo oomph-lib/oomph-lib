@@ -29,9 +29,28 @@
 #include "generic.h"
 
 /// Print complex vector to console out
-void print_complex_vector(const oomph::Vector<std::complex<double>>& x);
+void print_complex_vector(const oomph::Vector<std::complex<double>>& x)
+{
+  unsigned vector_length = x.size();
+  for (unsigned i = 0; i < vector_length; i++)
+  {
+    std::cout << x[i] << std::endl;
+  }
+}
 
 /// Print a complex matrix in its dense form to console out
-void print_complex_matrix(const oomph::ComplexMatrixBase& matrix);
+void print_complex_matrix(const oomph::ComplexMatrixBase& matrix)
+{
+  unsigned n_row = matrix.nrow();
+  unsigned n_col = matrix.ncol();
+  for (unsigned i = 0; i < n_row; i++)
+  {
+    for (unsigned j = 0; j < n_col; j++)
+    {
+      std::cout << matrix(i, j) << ", ";
+    }
+    std::cout << std::endl;
+  }
+}
 
 #endif
