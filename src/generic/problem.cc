@@ -8497,7 +8497,7 @@ namespace oomph
     else
     {
       // Call the Eigenproblem for the eigensolver
-      Eigen_solver_pt->solve_eigenproblem(
+      Eigen_solver_pt->solve_adjoint_eigenproblem(
         this, n_eval, eigenvalue, eigenvector);
     }
   }
