@@ -8448,10 +8448,11 @@ namespace oomph
     }
   }
 
+
   //==================================================================
   /// Solve the adjoint eigenproblem
   //==================================================================
-  void Problem::solve_adjoint_eigenproblem(
+  void Problem::solve_adjoint_eigenproblem_legacy(
     const unsigned& n_eval,
     Vector<std::complex<double>>& eigenvalue,
     Vector<DoubleVector>& eigenvector,
@@ -8478,7 +8479,7 @@ namespace oomph
 
       // Call the Eigenproblem for the ajoint-problem eigensolver
       // NB Only different to solve_eigenproblem
-      Eigen_solver_pt->solve_adjoint_eigenproblem(
+      Eigen_solver_pt->solve_adjoint_eigenproblem_legacy(
         this, n_eval, eigenvalue, eigenvector);
 
       // Reset the is_steady status of all timesteppers that
@@ -8497,11 +8498,64 @@ namespace oomph
     else
     {
       // Call the Eigenproblem for the eigensolver
-      Eigen_solver_pt->solve_adjoint_eigenproblem(
+      Eigen_solver_pt->solve_adjoint_eigenproblem_legacy(
         this, n_eval, eigenvalue, eigenvector);
     }
   }
 
+
+  //==================================================================
+  /// Solve the adjoint eigenproblem
+  //==================================================================
+  void Problem::solve_adjoint_eigenproblem(const unsigned& n_eval,
+                                   Vector<std::complex<double>>& eigenvalue,
+                                   Vector<DoubleVector>& eigenvector_real,
+                                   Vector<DoubleVector>& eigenvector_imag,
+                                   const bool& make_timesteppers_steady)
+  {
+    // If the boolean flag is steady, then make all the timesteppers steady
+    // before solving the eigenproblem. This will "switch off" the
+    // time-derivative terms in the jacobian matrix
+    if (make_timesteppers_steady)
+    {
+      // Find out how many timesteppers there are
+      const unsigned n_time_steppers = ntime_stepper();
+
+      // Vector of bools to store the is_steady status of the various
+      // timesteppers when we came in here
+      std::vector<bool> was_steady(n_time_steppers);
+
+      // Loop over them all and make them (temporarily) static
+      for (unsigned i = 0; i < n_time_steppers; i++)
+      {
+        was_steady[i] = time_stepper_pt(i)->is_steady();
+        time_stepper_pt(i)->make_steady();
+      }
+
+      // Call the Eigenproblem for the eigensolver
+      Eigen_solver_pt->solve_adjoint_eigenproblem(
+        this, n_eval, eigenvalue, eigenvector_real, eigenvector_imag);
+
+      // Reset the is_steady status of all timesteppers that
+      // weren't already steady when we came in here and reset their
+      // weights
+      for (unsigned i = 0; i < n_time_steppers; i++)
+      {
+        if (!was_steady[i])
+        {
+          time_stepper_pt(i)->undo_make_steady();
+        }
+      }
+    }
+    // Otherwise if we don't want to make the problem steady, just
+    // assemble and solve the eigensystem
+    else
+    {
+      // Call the Eigenproblem for the eigensolver
+      Eigen_solver_pt->solve_adjoint_eigenproblem(
+        this, n_eval, eigenvalue, eigenvector_real, eigenvector_imag);
+    }
+  }
 
   //===================================================================
   /// Get the matrices required to solve an eigenproblem

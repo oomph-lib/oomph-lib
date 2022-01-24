@@ -143,15 +143,27 @@ namespace oomph
                                     Vector<DoubleVector>& eigenvector_real,
                                     Vector<DoubleVector>& eigenvector_imag) = 0;
 
-    /// \short Actual adjoint eigensolver. This takes a pointer to a problem and
+    /// Adjoint eigensolver. This takes a pointer to a problem and
     /// returns a vector of complex numbers representing the eigenvalues and a
-    /// corresponding vector of eigenvectors for the adjoint eigen problem
-    virtual void solve_adjoint_eigenproblem(
+    /// corresponding vector of eigenvectors for the adjoint eigenproblem
+    /// Note: this is a legacy version of this function that stores re & imag
+    /// parts of eigenvectors in some solver-specific collection of real
+    /// vectors.
+    virtual void solve_adjoint_eigenproblem_legacy(
       Problem* const& problem_pt,
       const int& n_eval,
       Vector<std::complex<double>>& eigenvalue,
       Vector<DoubleVector>& eigenvector) = 0;
 
+    /// Adjoint eigensolver. This takes a pointer to a problem and
+    /// returns a vector of complex numbers representing the eigenvalues and a
+    /// corresponding vector of eigenvectors for the adjoint eigenproblem
+    virtual void solve_adjoint_eigenproblem(
+      Problem* const& problem_pt,
+      const int& n_eval,
+      Vector<std::complex<double>>& eigenvalue,
+      Vector<DoubleVector>& eigenvector_real,
+      Vector<DoubleVector>& eigenvector_imag) = 0;
 
     /// Set the value of the (real) shift
     void set_shift(const double& shift_value)
@@ -264,7 +276,7 @@ namespace oomph
     }
 
     /// Solve the adjoint eigen problem
-    void solve_adjoint_eigenproblem(Problem* const& problem_pt,
+    void solve_adjoint_eigenproblem_legacy(Problem* const& problem_pt,
                                     const int& n_eval,
                                     Vector<std::complex<double>>& eigenvalue,
                                     Vector<DoubleVector>& eigenvector)
@@ -376,7 +388,7 @@ namespace oomph
                             Vector<DoubleVector>& eigenvector_imag);
 
     /// Solve the adjoint eigen problem
-    void solve_adjoint_eigenproblem(Problem* const& problem_pt,
+    void solve_adjoint_eigenproblem_legacy(Problem* const& problem_pt,
                                     const int& n_eval,
                                     Vector<std::complex<double>>& eigenvalue,
                                     Vector<DoubleVector>& eigenvector)
