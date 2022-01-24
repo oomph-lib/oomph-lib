@@ -276,10 +276,11 @@ namespace oomph
     }
 
     /// Solve the adjoint eigen problem
-    void solve_adjoint_eigenproblem_legacy(Problem* const& problem_pt,
-                                    const int& n_eval,
-                                    Vector<std::complex<double>>& eigenvalue,
-                                    Vector<DoubleVector>& eigenvector)
+    void solve_adjoint_eigenproblem_legacy(
+      Problem* const& problem_pt,
+      const int& n_eval,
+      Vector<std::complex<double>>& eigenvalue,
+      Vector<DoubleVector>& eigenvector)
     {
       throw OomphLibError("solve_adjoint_eigenproblem is not currently "
                           "implemented for ARPACK.",
@@ -388,10 +389,24 @@ namespace oomph
                             Vector<DoubleVector>& eigenvector_imag);
 
     /// Solve the adjoint eigen problem
-    void solve_adjoint_eigenproblem_legacy(Problem* const& problem_pt,
+    void solve_adjoint_eigenproblem_legacy(
+      Problem* const& problem_pt,
+      const int& n_eval,
+      Vector<std::complex<double>>& eigenvalue,
+      Vector<DoubleVector>& eigenvector)
+    {
+      throw OomphLibError("solve_adjoint_eigenproblem_legacy is not currently "
+                          "implemented for LAPACK_QZ.",
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+    };
+
+    /// Solve the adjoint eigen problem
+    void solve_adjoint_eigenproblem(Problem* const& problem_pt,
                                     const int& n_eval,
                                     Vector<std::complex<double>>& eigenvalue,
-                                    Vector<DoubleVector>& eigenvector)
+                                    Vector<DoubleVector>& eigenvector_real,
+                                    Vector<DoubleVector>& eigenvector_imag)
     {
       throw OomphLibError("solve_adjoint_eigenproblem is not currently "
                           "implemented for LAPACK_QZ.",

@@ -1,4 +1,6 @@
 SUBDIRS = \
 vector_matrix_test \
-block_selector_test
+block_selector_test \
+complex_matrices_test \
+eigensolver_test 
 
