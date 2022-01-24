@@ -1074,10 +1074,11 @@ namespace oomph
     }
 
     /// Solve the adjoint eigen problem
-    void solve_adjoint_eigenproblem_legacy(Problem* const& problem_pt,
-                                    const int& n_eval,
-                                    Vector<std::complex<double>>& eigenvalue,
-                                    Vector<DoubleVector>& eigenvector)
+    void solve_adjoint_eigenproblem_legacy(
+      Problem* const& problem_pt,
+      const int& n_eval,
+      Vector<std::complex<double>>& eigenvalue,
+      Vector<DoubleVector>& eigenvector)
     {
       // No access to sigma, so set from sigma real
       double Sigma = Sigma_real;
@@ -1180,10 +1181,10 @@ namespace oomph
     /// returns a vector of complex numbers representing the eigenvalues and a
     /// corresponding vector of eigenvectors for the adjoint eigenproblem
     void solve_adjoint_eigenproblem(Problem* const& problem_pt,
-                            const int& n_eval,
-                            Vector<std::complex<double>>& eigenvalue,
-                            Vector<DoubleVector>& eigenvector_real,
-                            Vector<DoubleVector>& eigenvector_imag)
+                                    const int& n_eval,
+                                    Vector<std::complex<double>>& eigenvalue,
+                                    Vector<DoubleVector>& eigenvector_real,
+                                    Vector<DoubleVector>& eigenvector_imag)
     {
       // Initially be dumb here
       Linear_solver_pt = problem_pt->linear_solver_pt();

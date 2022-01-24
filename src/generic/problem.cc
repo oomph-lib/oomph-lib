@@ -8507,11 +8507,12 @@ namespace oomph
   //==================================================================
   /// Solve the adjoint eigenproblem
   //==================================================================
-  void Problem::solve_adjoint_eigenproblem(const unsigned& n_eval,
-                                   Vector<std::complex<double>>& eigenvalue,
-                                   Vector<DoubleVector>& eigenvector_real,
-                                   Vector<DoubleVector>& eigenvector_imag,
-                                   const bool& make_timesteppers_steady)
+  void Problem::solve_adjoint_eigenproblem(
+    const unsigned& n_eval,
+    Vector<std::complex<double>>& eigenvalue,
+    Vector<DoubleVector>& eigenvector_real,
+    Vector<DoubleVector>& eigenvector_imag,
+    const bool& make_timesteppers_steady)
   {
     // If the boolean flag is steady, then make all the timesteppers steady
     // before solving the eigenproblem. This will "switch off" the
