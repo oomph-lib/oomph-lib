@@ -5,22 +5,16 @@ include $(top_srcdir)/config/makefile_templates/demo_drivers
 # DESCEND INTO THIS DIRECTORY
 
 # Name of executable
-check_PROGRAMS= dense_complex_matrix_test cr_complex_matrix_test cc_complex_matrix_test
+check_PROGRAMS= eigensolver_test
 
 #----------------------------------------------------------------------
 
 # Sources for executable
-dense_complex_matrix_test_SOURCES = dense_complex_matrix_test.cc
-cr_complex_matrix_test_SOURCES = cr_complex_matrix_test.cc
-cc_complex_matrix_test_SOURCES = cc_complex_matrix_test.cc
+eigensolver_test_SOURCES = eigensolver_test.cc
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
-dense_complex_matrix_test_LDADD = -L@libdir@ -lgeneric $(EXTERNAL_LIBS) \
-								  $(FLIBS)
-cr_complex_matrix_test_LDADD = -L@libdir@ -lgeneric $(EXTERNAL_LIBS) \
-								  $(FLIBS)
-cc_complex_matrix_test_LDADD = -L@libdir@ -lgeneric $(EXTERNAL_LIBS) \
+eigensolver_test_LDADD = -L@libdir@ -lgeneric $(EXTERNAL_LIBS) \
 								  $(FLIBS)
 
 #----------------------------------------------------------------------
