@@ -543,14 +543,15 @@ namespace oomph
         Linear_solver_pt->enable_resolve();
       }
 
-      // Solve the first vector
-      DoubleVector X(x.distribution_pt());
+      // Solve for the first vector (no need for a distribution)
+      DoubleVector X;
 
       // Premultiply by mass matrix
       M_pt->multiply(x.doublevector(0), X);
 
       // Create output vector
-      DoubleVector Y(x.distribution_pt());
+      DoubleVector Y;
+      Linear_solver_pt->solve(AsigmaM_pt, X, Y);
 
       // Need to synchronise
       //#ifdef OOMPH_HAS_MPI
