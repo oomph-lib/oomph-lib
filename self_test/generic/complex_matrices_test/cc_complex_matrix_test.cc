@@ -36,8 +36,8 @@ int main()
 {
   // test default constructor
   CCComplexMatrix matrix_default;
-  cout << matrix_default.nrow() << endl;
-  cout << matrix_default.ncol() << endl;
+  oomph_info << matrix_default.nrow() << endl;
+  oomph_info << matrix_default.ncol() << endl;
 
   constexpr unsigned long n_col_rect = 2;
   constexpr unsigned long n_row_rect = 4;
@@ -65,8 +65,8 @@ int main()
   // test full matrix constructor with a rectangular matrix
   CCComplexMatrix matrix_rect(
     value_rect, row_index_rect, column_start_rect, n_col_rect, n_row_rect);
-  cout << matrix_rect.nrow() << endl;
-  cout << matrix_rect.ncol() << endl;
+  oomph_info << matrix_rect.nrow() << endl;
+  oomph_info << matrix_rect.ncol() << endl;
   print_complex_matrix(matrix_rect);
 
   constexpr unsigned long n_col_square = 4;
@@ -105,12 +105,12 @@ int main()
                                 column_start_square,
                                 n_col_square,
                                 n_row_square);
-  cout << matrix_square.nrow() << endl;
-  cout << matrix_square.ncol() << endl;
+  oomph_info << matrix_square.nrow() << endl;
+  oomph_info << matrix_square.ncol() << endl;
   print_complex_matrix(matrix_square);
 
   // test LU decomposition
-  cout << matrix_square.ludecompose() << endl;
+  oomph_info << matrix_square.ludecompose() << endl;
 
   constexpr unsigned long vector_length = n_row_square;
 

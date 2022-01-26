@@ -36,8 +36,8 @@ int main()
 {
   // test default constructor
   CRComplexMatrix matrix_default;
-  cout << matrix_default.nrow() << endl;
-  cout << matrix_default.ncol() << endl;
+  oomph_info << matrix_default.nrow() << endl;
+  oomph_info << matrix_default.ncol() << endl;
 
   constexpr unsigned long n_col_rect = 2;
   constexpr unsigned long n_row_rect = 4;
@@ -65,8 +65,8 @@ int main()
   // test full matrix constructor with a rectangular matrix
   CRComplexMatrix matrix_rect(
     value_rect, column_index_rect, row_start_rect, n_col_rect, n_row_rect);
-  cout << matrix_rect.nrow() << endl;
-  cout << matrix_rect.ncol() << endl;
+  oomph_info << matrix_rect.nrow() << endl;
+  oomph_info << matrix_rect.ncol() << endl;
   print_complex_matrix(matrix_rect);
 
   constexpr unsigned long n_col_square = 4;
@@ -105,12 +105,12 @@ int main()
                                 row_start_square,
                                 n_col_square,
                                 n_row_square);
-  cout << matrix_square.nrow() << endl;
-  cout << matrix_square.ncol() << endl;
+  oomph_info << matrix_square.nrow() << endl;
+  oomph_info << matrix_square.ncol() << endl;
   print_complex_matrix(matrix_square);
 
   // test LU decomposition
-  cout << matrix_square.ludecompose() << endl;
+  oomph_info << matrix_square.ludecompose() << endl;
 
   constexpr unsigned long vector_length = n_row_square;
 
@@ -181,7 +181,7 @@ int main()
   print_complex_matrix(matrix_square);
 
   // Print input matrices
-  cout << "A" << endl;
+  oomph_info << "A" << endl;
   print_complex_matrix(matrix_square);
 
   CRComplexMatrix matrix_square_2(values_square,
@@ -190,7 +190,7 @@ int main()
                                   n_col_square,
                                   n_row_square);
 
-  cout << "B" << endl;
+  oomph_info << "B" << endl;
   print_complex_matrix(matrix_square_2);
 
   CRComplexMatrix matrix_result(values_square,
@@ -201,11 +201,11 @@ int main()
 
   // test multiply method Fastest (default)
   matrix_square.multiply(matrix_square_2, matrix_result);
-  cout << "A B" << endl;
+  oomph_info << "A B" << endl;
   print_complex_matrix(matrix_result);
 
   // test default method is set to 1 (equals Fastest in the enumeration)
-  cout << (matrix_square.serial_matrix_matrix_multiply_method() ==
+  oomph_info << (matrix_square.serial_matrix_matrix_multiply_method() ==
            CRComplexMatrix::SerialMatrixMultiplyMethod::Fastest)
        << endl;
 
@@ -213,20 +213,20 @@ int main()
   matrix_square.serial_matrix_matrix_multiply_method() =
     CRComplexMatrix::SerialMatrixMultiplyMethod::Memory_efficient;
   matrix_square.multiply(matrix_square_2, matrix_result);
-  cout << (matrix_square.serial_matrix_matrix_multiply_method() ==
+  oomph_info << (matrix_square.serial_matrix_matrix_multiply_method() ==
            CRComplexMatrix::SerialMatrixMultiplyMethod::Memory_efficient)
        << endl;
-  cout << "A B" << endl;
+  oomph_info << "A B" << endl;
   print_complex_matrix(matrix_result);
 
   // test multiply method 3
   matrix_square.serial_matrix_matrix_multiply_method() =
     CRComplexMatrix::SerialMatrixMultiplyMethod::Vector_of_vectors;
   matrix_square.multiply(matrix_square_2, matrix_result);
-  cout << (matrix_square.serial_matrix_matrix_multiply_method() ==
+  oomph_info << (matrix_square.serial_matrix_matrix_multiply_method() ==
            CRComplexMatrix::SerialMatrixMultiplyMethod::Vector_of_vectors)
        << endl;
-  cout << "A B" << endl;
+  oomph_info << "A B" << endl;
   print_complex_matrix(matrix_result);
 
   // Print cleanup messages for easier debugging

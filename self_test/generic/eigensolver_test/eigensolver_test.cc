@@ -90,12 +90,12 @@ int main()
   eigen_solver.find_eigenvalues(matrix_cr, matrix_cc, eval, evec);
   for (int i = 0; i < 2; i++)
   {
-    cout << eval[i] << ": ";
+    oomph_info << eval[i] << ": ";
     for (int j = 0; j < 2; j++)
     {
-      cout << evec[i][j] << ", ";
+      oomph_info << evec[i][j] << ", ";
     }
-    cout << endl;
+    oomph_info << endl;
   }
 
   return (EXIT_SUCCESS);

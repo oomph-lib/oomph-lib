@@ -28,29 +28,31 @@
 
 #include "generic.h"
 
-/// Print complex vector to console out
-void print_complex_vector(const oomph::Vector<std::complex<double>>& x)
+namespace oomph
 {
-  unsigned vector_length = x.size();
-  for (unsigned i = 0; i < vector_length; i++)
+  /// Print complex vector to console out
+  void print_complex_vector(const oomph::Vector<std::complex<double>>& x)
   {
-    std::cout << x[i] << std::endl;
-  }
-}
-
-/// Print a complex matrix in its dense form to console out
-void print_complex_matrix(const oomph::ComplexMatrixBase& matrix)
-{
-  unsigned n_row = matrix.nrow();
-  unsigned n_col = matrix.ncol();
-  for (unsigned i = 0; i < n_row; i++)
-  {
-    for (unsigned j = 0; j < n_col; j++)
+    unsigned vector_length = x.size();
+    for (unsigned i = 0; i < vector_length; i++)
     {
-      std::cout << matrix(i, j) << ", ";
+      oomph_info << x[i] << std::endl;
     }
-    std::cout << std::endl;
   }
-}
 
+  /// Print a complex matrix in its dense form to console out
+  void print_complex_matrix(const oomph::ComplexMatrixBase& matrix)
+  {
+    unsigned n_row = matrix.nrow();
+    unsigned n_col = matrix.ncol();
+    for (unsigned i = 0; i < n_row; i++)
+    {
+      for (unsigned j = 0; j < n_col; j++)
+      {
+        oomph_info << matrix(i, j) << ", ";
+      }
+      oomph_info << std::endl;
+    }
+  }
+} // namespace oomph
 #endif
