@@ -5,21 +5,23 @@ include $(top_srcdir)/config/makefile_templates/demo_drivers
 # DESCEND INTO THIS DIRECTORY
 
 # Name of executable
-check_PROGRAMS= eigensolver_test
+check_PROGRAMS= eigenproblem_test anasazi_mwe
 
 #----------------------------------------------------------------------
 
 # Sources for executable
-eigensolver_test_SOURCES = eigensolver_test.cc
+eigenproblem_test_SOURCES = eigenproblem_test.cc
+anasazi_mwe_SOURCES = anasazi_mwe.cc
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
-eigensolver_test_LDADD = -L@libdir@ -lgeneric $(EXTERNAL_LIBS) \
+eigenproblem_test_LDADD = -L@libdir@ -lgeneric $(EXTERNAL_LIBS) \
+								  $(FLIBS)
+anasazi_mwe_LDADD = -L@libdir@ -lgeneric $(EXTERNAL_LIBS) \
 								  $(FLIBS)
 
 #----------------------------------------------------------------------
 
 # Include path for library headers: All library headers live in
 # the include directory which we specify with -I
-AM_CPPFLAGS +=   -I@includedir@  
-
+AM_CPPFLAGS += -I@includedir@ -DPARANOID
