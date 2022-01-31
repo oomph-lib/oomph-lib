@@ -8439,8 +8439,12 @@ namespace oomph
 
       const bool do_adjoint_problem = false;
       // Call the Eigenproblem for the eigensolver
-      Eigen_solver_pt->solve_eigenproblem(
-        this, n_eval, eigenvalue, eigenvector_real, eigenvector_imag, do_adjoint_problem);
+      Eigen_solver_pt->solve_eigenproblem(this,
+                                          n_eval,
+                                          eigenvalue,
+                                          eigenvector_real,
+                                          eigenvector_imag,
+                                          do_adjoint_problem);
 
       // Reset the is_steady status of all timesteppers that
       // weren't already steady when we came in here and reset their
@@ -8459,8 +8463,12 @@ namespace oomph
     {
       const bool do_adjoint_problem = false;
       // Call the Eigenproblem for the eigensolver
-      Eigen_solver_pt->solve_eigenproblem(
-        this, n_eval, eigenvalue, eigenvector_real, eigenvector_imag, do_adjoint_problem);
+      Eigen_solver_pt->solve_eigenproblem(this,
+                                          n_eval,
+                                          eigenvalue,
+                                          eigenvector_real,
+                                          eigenvector_imag,
+                                          do_adjoint_problem);
     }
   }
 
@@ -8553,8 +8561,12 @@ namespace oomph
 
       const bool do_adjoint_problem = true;
       // Call the Eigenproblem for the eigensolver
-      Eigen_solver_pt->solve_eigenproblem(
-        this, n_eval, eigenvalue, eigenvector_real, eigenvector_imag, do_adjoint_problem);
+      Eigen_solver_pt->solve_eigenproblem(this,
+                                          n_eval,
+                                          eigenvalue,
+                                          eigenvector_real,
+                                          eigenvector_imag,
+                                          do_adjoint_problem);
 
       // Reset the is_steady status of all timesteppers that
       // weren't already steady when we came in here and reset their
@@ -8573,8 +8585,12 @@ namespace oomph
     {
       const bool do_adjoint_problem = true;
       // Call the Eigenproblem for the eigensolver
-      Eigen_solver_pt->solve_eigenproblem(
-        this, n_eval, eigenvalue, eigenvector_real, eigenvector_imag, do_adjoint_problem);
+      Eigen_solver_pt->solve_eigenproblem(this,
+                                          n_eval,
+                                          eigenvalue,
+                                          eigenvector_real,
+                                          eigenvector_imag,
+                                          do_adjoint_problem);
     }
   }
 
