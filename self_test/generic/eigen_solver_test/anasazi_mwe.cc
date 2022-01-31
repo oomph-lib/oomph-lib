@@ -117,14 +117,16 @@ public:
 void mwe()
 {
   const unsigned N = 256;
-  unsigned n_eval = N;
+  const unsigned n_eval = N;
+  const bool do_adjoint_problem = false;
 
   EigenSolver* Eigen_solver_pt = new ANASAZI;
   Problem* Problem_pt = new Eigenproblem<AsymmetricEigenElement>(N);
   Vector<complex<double>> eval(N);
   Vector<DoubleVector> evec(N);
 
-  Eigen_solver_pt->solve_eigenproblem_legacy(Problem_pt, n_eval, eval, evec);
+  Eigen_solver_pt->solve_eigenproblem_legacy(
+    Problem_pt, n_eval, eval, evec, do_adjoint_problem);
 
   for (unsigned i = 0; i < N; i++)
   {

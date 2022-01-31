@@ -73,8 +73,17 @@ namespace oomph
     Problem* const& problem_pt,
     const int& n_eval,
     Vector<std::complex<double>>& eigenvalue,
-    Vector<DoubleVector>& eigenvector)
+    Vector<DoubleVector>& eigenvector,
+    const bool& do_adjoint_problem)
   {
+    if (do_adjoint_problem)
+    {
+      throw OomphLibError("Solving an adjoint eigenproblem is not currently "
+                          "implemented for ARPACK.",
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+    }
+
     bool Verbose = false;
 
     // Control parameters
@@ -750,8 +759,16 @@ namespace oomph
     Problem* const& problem_pt,
     const int& n_eval,
     Vector<std::complex<double>>& eigenvalue,
-    Vector<DoubleVector>& eigenvector_aux)
+    Vector<DoubleVector>& eigenvector_aux,
+    const bool& do_adjoint_problem)
   {
+    if (do_adjoint_problem)
+    {
+      throw OomphLibError("Solving an adjoint eigenproblem is not currently "
+                          "implemented for LAPACK_QZ.",
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+    }
     Vector<std::complex<double>> alpha_eval;
     Vector<double> beta_eval;
 
@@ -791,8 +808,16 @@ namespace oomph
                                      Vector<std::complex<double>>& alpha_eval,
                                      Vector<double>& beta_eval,
                                      Vector<DoubleVector>& eigenvector_real,
-                                     Vector<DoubleVector>& eigenvector_imag)
+                                     Vector<DoubleVector>& eigenvector_imag,
+                                     const bool& do_adjoint_problem)
   {
+    if (do_adjoint_problem)
+    {
+      throw OomphLibError("Solving an adjoint eigenproblem is not currently "
+                          "implemented for LAPACK_QZ.",
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+    }
     Vector<DoubleVector> eigenvector_aux;
 
     // Call raw interface to lapack qz

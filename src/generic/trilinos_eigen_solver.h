@@ -777,12 +777,17 @@ namespace oomph
                             Vector<std::complex<double>>& alpha,
                             Vector<double>& beta,
                             Vector<DoubleVector>& eigenvector_real,
-                            Vector<DoubleVector>& eigenvector_imag)
+                            Vector<DoubleVector>& eigenvector_imag,
+                            const bool& do_adjoint_problem)
     {
       // Reverse engineer the "safe" version of the eigenvalues
       Vector<std::complex<double>> eigenvalue;
-      solve_eigenproblem(
-        problem_pt, n_eval, eigenvalue, eigenvector_real, eigenvector_imag);
+      solve_eigenproblem(problem_pt,
+                         n_eval,
+                         eigenvalue,
+                         eigenvector_real,
+                         eigenvector_imag,
+                         do_adjoint_problem);
       unsigned n = eigenvalue.size();
       alpha.resize(n);
       beta.resize(n);
@@ -798,7 +803,8 @@ namespace oomph
                             const int& n_eval,
                             Vector<std::complex<double>>& eigenvalue,
                             Vector<DoubleVector>& eigenvector_real,
-                            Vector<DoubleVector>& eigenvector_imag)
+                            Vector<DoubleVector>& eigenvector_imag,
+                            const bool& do_adjoint_problem)
     {
       // Initially be dumb here
       Linear_solver_pt = problem_pt->linear_solver_pt();
@@ -813,9 +819,17 @@ namespace oomph
       Anasazi::MultiVecTraits<double, DoubleMultiVector>::MvRandom(*initial);
 
       // Make the operator
-      Teuchos::RCP<DoubleMultiVectorOperator> Op_pt =
-        Teuchos::rcp(new ProblemBasedShiftInvertOperator(
+      Teuchos::RCP<DoubleMultiVectorOperator> Op_pt;
+      if (do_adjoint_problem)
+      {
+        Op_pt = Teuchos::rcp(new AdjointProblemBasedShiftInvertOperator(
           problem_pt, this->linear_solver_pt(), Sigma_real));
+      }
+      else
+      {
+        Op_pt = Teuchos::rcp(new ProblemBasedShiftInvertOperator(
+          problem_pt, this->linear_solver_pt(), Sigma_real));
+      }
 
       // Create the basic problem
       Teuchos::RCP<Anasazi::BasicEigenproblem<double,
@@ -973,7 +987,8 @@ namespace oomph
     void solve_eigenproblem_legacy(Problem* const& problem_pt,
                                    const int& n_eval,
                                    Vector<std::complex<double>>& eigenvalue,
-                                   Vector<DoubleVector>& eigenvector)
+                                   Vector<DoubleVector>& eigenvector,
+                                   const bool& do_adjoint_problem)
     {
       // Initially be dumb here
       Linear_solver_pt = problem_pt->linear_solver_pt();
@@ -986,9 +1001,17 @@ namespace oomph
       Anasazi::MultiVecTraits<double, DoubleMultiVector>::MvRandom(*initial);
 
       // Make the operator
-      Teuchos::RCP<DoubleMultiVectorOperator> Op_pt =
-        Teuchos::rcp(new ProblemBasedShiftInvertOperator(
+      Teuchos::RCP<DoubleMultiVectorOperator> Op_pt;
+      if (do_adjoint_problem)
+      {
+        Op_pt = Teuchos::rcp(new AdjointProblemBasedShiftInvertOperator(
           problem_pt, this->linear_solver_pt(), Sigma_real));
+      }
+      else
+      {
+        Op_pt = Teuchos::rcp(new ProblemBasedShiftInvertOperator(
+          problem_pt, this->linear_solver_pt(), Sigma_real));
+      }
 
       // Create the basic problem
       Teuchos::RCP<Anasazi::BasicEigenproblem<double,
@@ -1072,287 +1095,6 @@ namespace oomph
           eigenvector[i][n] = (*evecs)(i, n);
         }
       }
-    }
-
-    /// Solve the adjoint eigen problem
-    void solve_adjoint_eigenproblem_legacy(
-      Problem* const& problem_pt,
-      const int& n_eval,
-      Vector<std::complex<double>>& eigenvalue,
-      Vector<DoubleVector>& eigenvector)
-    {
-      // No access to sigma, so set from sigma real
-      double Sigma = Sigma_real;
-
-      // Initially be dumb here
-      Linear_solver_pt = problem_pt->linear_solver_pt();
-
-      // Let's make the initial one-dimensional vector
-      Teuchos::RCP<DoubleMultiVector> initial = Teuchos::rcp(
-        new DoubleMultiVector(1, problem_pt->dof_distribution_pt()));
-      Anasazi::MultiVecTraits<double, DoubleMultiVector>::MvRandom(*initial);
-
-      // Make the operator
-      // NB Using AdjointProblemBasedShiftInvertOperator
-      // This is the only difference to solve_eigenproblem
-      Teuchos::RCP<DoubleMultiVectorOperator> Op_pt =
-        Teuchos::rcp(new AdjointProblemBasedShiftInvertOperator(
-          problem_pt, this->linear_solver_pt(), Sigma));
-
-      // Create the basic problem
-      Teuchos::RCP<Anasazi::BasicEigenproblem<double,
-                                              DoubleMultiVector,
-                                              DoubleMultiVectorOperator>>
-        anasazi_pt = Teuchos::rcp(
-          new Anasazi::BasicEigenproblem<double,
-                                         DoubleMultiVector,
-                                         DoubleMultiVectorOperator>(Op_pt,
-                                                                    initial));
-
-      // The problem is not Hermitian in general
-      anasazi_pt->setHermitian(false);
-
-      // set the number of eigenvalues requested
-      anasazi_pt->setNEV(n_eval);
-
-      // Inform the eigenproblem that you are done passing it information
-      if (anasazi_pt->setProblem() != true)
-      {
-        oomph_info << "Anasazi::BasicEigenproblem::setProblem() had an error."
-                   << std::endl
-                   << "End Result: TEST FAILED" << std::endl;
-      }
-
-      // Create the solver manager
-      // No need to have ncv specified, Trilinos has a sensible default
-      //  int ncv = 10;
-      MT tol = 1.0e-10;
-      int verbosity =
-        Anasazi::Warnings + Anasazi::FinalSummary + Anasazi::TimingDetails;
-
-      Teuchos::ParameterList MyPL;
-      MyPL.set("Which", "LM");
-      MyPL.set("Block Size", 1);
-      //  MyPL.set( "Num Blocks", ncv );
-      MyPL.set("Maximum Restarts", 500);
-      MyPL.set("Orthogonalization", "DGKS");
-      MyPL.set("Verbosity", verbosity);
-      MyPL.set("Convergence Tolerance", tol);
-      Anasazi::BlockKrylovSchurSolMgr<double,
-                                      DoubleMultiVector,
-                                      DoubleMultiVectorOperator>
-        BKS(anasazi_pt, MyPL);
-
-      // Solve the problem to the specified tolerances or length
-      Anasazi::ReturnType ret = BKS.solve();
-
-      if (ret != Anasazi::Converged)
-      {
-        oomph_info << "Eigensolver not converged\n";
-      }
-
-      // Get the eigenvalues and eigenvectors from the eigenproblem
-      Anasazi::Eigensolution<double, DoubleMultiVector> sol =
-        anasazi_pt->getSolution();
-      std::vector<Anasazi::Value<double>> evals = sol.Evals;
-      Teuchos::RCP<DoubleMultiVector> evecs = sol.Evecs;
-
-      eigenvalue.resize(evals.size());
-      eigenvector.resize(evals.size());
-
-      for (unsigned i = 0; i < evals.size(); i++)
-      {
-        // Undo shift and invert
-        double a = evals[i].realpart;
-        double b = evals[i].imagpart;
-        double det = a * a + b * b;
-        eigenvalue[i] = std::complex<double>(a / det + Sigma, -b / det);
-
-        // Now set the eigenvectors
-        eigenvector[i].build(evecs->distribution_pt());
-        unsigned nrow_local = evecs->nrow_local();
-        for (unsigned n = 0; n < nrow_local; n++)
-        {
-          eigenvector[i][n] = (*evecs)(i, n);
-        }
-      }
-    }
-
-    /// Adjoint eigensolver. This takes a pointer to a problem and
-    /// returns a vector of complex numbers representing the eigenvalues and a
-    /// corresponding vector of eigenvectors for the adjoint eigenproblem
-    void solve_adjoint_eigenproblem(Problem* const& problem_pt,
-                                    const int& n_eval,
-                                    Vector<std::complex<double>>& eigenvalue,
-                                    Vector<DoubleVector>& eigenvector_real,
-                                    Vector<DoubleVector>& eigenvector_imag)
-    {
-      // Initially be dumb here
-      Linear_solver_pt = problem_pt->linear_solver_pt();
-
-      // Get a shiny new linear algebra distribution from the problem
-      LinearAlgebraDistribution* dist_pt = 0;
-      problem_pt->create_new_linear_algebra_distribution(dist_pt);
-
-      // Let's make the initial vector
-      Teuchos::RCP<DoubleMultiVector> initial =
-        Teuchos::rcp(new DoubleMultiVector(1, dist_pt));
-      Anasazi::MultiVecTraits<double, DoubleMultiVector>::MvRandom(*initial);
-
-      // Make the operator
-      Teuchos::RCP<DoubleMultiVectorOperator> Op_pt =
-        Teuchos::rcp(new AdjointProblemBasedShiftInvertOperator(
-          problem_pt, this->linear_solver_pt(), Sigma_real));
-
-      // Create the basic problem
-      Teuchos::RCP<Anasazi::BasicEigenproblem<double,
-                                              DoubleMultiVector,
-                                              DoubleMultiVectorOperator>>
-        anasazi_pt = Teuchos::rcp(
-          new Anasazi::BasicEigenproblem<double,
-                                         DoubleMultiVector,
-                                         DoubleMultiVectorOperator>(Op_pt,
-                                                                    initial));
-
-      // No assumptions about niceness of problem matrices
-      anasazi_pt->setHermitian(false);
-
-      // set the number of eigenvalues requested
-      anasazi_pt->setNEV(n_eval);
-
-      // Inform the eigenproblem that you are done passing it information
-      if (anasazi_pt->setProblem() != true)
-      {
-        oomph_info << "Anasazi::BasicEigenproblem::setProblem() had an error."
-                   << std::endl
-                   << "End Result: TEST FAILED" << std::endl;
-      }
-
-      // Create the solver manager
-      // No need to have ncv specificed, Triliinos has a sensible default
-      //  int ncv = 10;
-      MT tol = 1.0e-10;
-      int verbosity = 0;
-      verbosity += Anasazi::Warnings;
-      // MH has switched off the (overly) verbose output
-      // Could introduce handle to switch it back on.
-      // verbosity+=Anasazi::FinalSummary;
-      // verbosity+=Anasazi::TimingDetails;
-
-
-      Teuchos::ParameterList MyPL;
-      MyPL.set("Which", "LM");
-      MyPL.set("Block Size", 1);
-      //  MyPL.set( "Num Blocks", ncv );
-      MyPL.set("Maximum Restarts", 500);
-      MyPL.set("Orthogonalization", "DGKS");
-      MyPL.set("Verbosity", verbosity);
-      MyPL.set("Convergence Tolerance", tol);
-      Anasazi::BlockKrylovSchurSolMgr<double,
-                                      DoubleMultiVector,
-                                      DoubleMultiVectorOperator>
-        BKS(anasazi_pt, MyPL);
-
-      // Solve the problem to the specified tolerances or length
-      Anasazi::ReturnType ret = BKS.solve();
-      if (ret != Anasazi::Converged)
-      {
-        std::string error_message = "Eigensolver did not converge!\n";
-
-        throw OomphLibError(
-          error_message, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-      }
-
-
-      // Get the eigenvalues and eigenvectors from the eigenproblem
-      Anasazi::Eigensolution<double, DoubleMultiVector> sol =
-        anasazi_pt->getSolution();
-      std::vector<Anasazi::Value<double>> evals = sol.Evals;
-      Teuchos::RCP<DoubleMultiVector> evecs = sol.Evecs;
-
-      // Here's the vector that contains the information
-      // about how to translate the vectors that are returned
-      // by anasazi into real and imag parts of the actual
-      // eigenvectors
-      // std::vector<int> Anasazi::Eigensolution< ScalarType, MV >::index
-      std::vector<int> index_vector = sol.index;
-
-      // Here's what we're actually going to return.
-      unsigned n_eval_avail = evals.size();
-      eigenvalue.resize(n_eval_avail);
-      eigenvector_real.resize(n_eval_avail);
-      eigenvector_imag.resize(n_eval_avail);
-
-      // Extract these from the raw data returned by trilinos
-      for (unsigned i = 0; i < n_eval_avail; i++)
-      {
-        // Undo shift and invert
-        double a = evals[i].realpart;
-        double b = evals[i].imagpart;
-        double det = a * a + b * b;
-        eigenvalue[i] = std::complex<double>(a / det + Sigma_real, -b / det);
-
-        // Now set the eigenvectors
-        unsigned nrow_local = evecs->nrow_local();
-        eigenvector_real[i].build(evecs->distribution_pt(), 0.0);
-        eigenvector_imag[i].build(evecs->distribution_pt(), 0.0);
-
-        // std::vector<int> Anasazi::Eigensolution< ScalarType, MV >::index
-        // to translate into proper complex vector; see
-        // https://docs.trilinos.org/dev/packages/anasazi/doc/html/structAnasazi_1_1Eigensolution.html#ac9d141d98adcba85fbad011a7b7bda6e
-
-        // An index into Evecs to allow compressed storage of eigenvectors for
-        // real, non-Hermitian problems.
-
-        // index has length numVecs, where each entry is 0, +1, or -1. These
-        // have the following interpretation:
-
-        //     index[i] == 0: signifies that the corresponding eigenvector is
-        //     stored as the i column of Evecs. This will usually be the case
-        //     when ScalarType is complex, an eigenproblem is Hermitian, or a
-        //     real, non-Hermitian eigenproblem has a real eigenvector. index[i]
-        //     == +1: signifies that the corresponding eigenvector is stored in
-        //     two vectors: the real part in the i column of Evecs and the
-        //     positive imaginary part in the i+1 column of Evecs. index[i] ==
-        //     -1: signifies that the corresponding eigenvector is stored in two
-        //     vectors: the real part in the i-1 column of Evecs and the
-        //     negative imaginary part in the i column of Evecs
-
-        // Real eigenvector
-        if (index_vector[i] == 0)
-        {
-          for (unsigned j = 0; j < nrow_local; j++)
-          {
-            eigenvector_real[i][j] = (*evecs)(i, j);
-            eigenvector_imag[i][j] = 0.0;
-          }
-        }
-        else if (index_vector[i] == 1)
-        {
-          for (unsigned j = 0; j < nrow_local; j++)
-          {
-            eigenvector_real[i][j] = (*evecs)(i, j);
-            eigenvector_imag[i][j] = (*evecs)(i + 1, j);
-          }
-        }
-        else if (index_vector[i] == -1)
-        {
-          for (unsigned j = 0; j < nrow_local; j++)
-          {
-            eigenvector_real[i][j] = (*evecs)(i - 1, j);
-            eigenvector_imag[i][j] = -(*evecs)(i, j);
-          }
-        }
-        else
-        {
-          oomph_info << "Never get here: index_vector[ " << i
-                     << " ] = " << index_vector[i] << std::endl;
-          abort();
-        }
-      }
-
-      // Tidy up
-      delete dist_pt;
     }
 
     // /// Set the desired eigenvalues to be left of the shift

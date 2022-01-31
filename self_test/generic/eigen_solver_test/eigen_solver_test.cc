@@ -241,7 +241,8 @@ public:
   {
     // Set up additional arguments
     // Output all eigenvalues
-    unsigned n_eval = Matrix_size;
+    const unsigned n_eval = Matrix_size;
+    const bool do_adjoint_problem = false;
 
     // Store outputs
     Vector<complex<double>> eval(Matrix_size);
@@ -255,7 +256,7 @@ public:
       {
         // Call solve_eigenproblem_legacy
         Eigen_solver_pt->solve_eigenproblem_legacy(
-          Problem_pt, n_eval, eval, evec);
+          Problem_pt, n_eval, eval, evec, do_adjoint_problem);
       }
       catch (...)
       {
@@ -281,7 +282,8 @@ public:
   {
     // Set up additional arguments
     // Output all eigenvalues
-    unsigned n_eval = Matrix_size;
+    const unsigned n_eval = Matrix_size;
+    const bool do_adjoint_problem = false;
 
     // Store outputs
     Vector<complex<double>> eval(Matrix_size);
@@ -295,8 +297,12 @@ public:
       try
       {
         // Call solve_eigenproblem_legacy
-        Eigen_solver_pt->solve_eigenproblem(
-          Problem_pt, n_eval, eval, eigenvector_real, eigenvector_imag);
+        Eigen_solver_pt->solve_eigenproblem(Problem_pt,
+                                            n_eval,
+                                            eval,
+                                            eigenvector_real,
+                                            eigenvector_imag,
+                                            do_adjoint_problem);
       }
       catch (...)
       {
@@ -322,7 +328,8 @@ public:
   {
     // Set up additional arguments
     // Output all eigenvalues
-    unsigned n_eval = Matrix_size;
+    const unsigned n_eval = Matrix_size;
+    const bool do_adjoint_problem = true;
 
     // Store outputs
     Vector<complex<double>> eval(Matrix_size);
@@ -335,8 +342,8 @@ public:
       try
       {
         // Call solve_eigenproblem_legacy
-        Eigen_solver_pt->solve_adjoint_eigenproblem_legacy(
-          Problem_pt, n_eval, eval, evec);
+        Eigen_solver_pt->solve_eigenproblem_legacy(
+          Problem_pt, n_eval, eval, evec, do_adjoint_problem);
       }
       catch (...)
       {
@@ -364,7 +371,8 @@ public:
   {
     // Set up additional arguments
     // Output all eigenvalues
-    unsigned n_eval = Matrix_size;
+    const unsigned n_eval = Matrix_size;
+    const bool do_adjoint_problem = true;
 
     // Store outputs
     Vector<complex<double>> eval(Matrix_size);
@@ -378,8 +386,12 @@ public:
       try
       {
         // Call solve_eigenproblem_legacy
-        Eigen_solver_pt->solve_adjoint_eigenproblem(
-          Problem_pt, n_eval, eval, eigenvector_real, eigenvector_imag);
+        Eigen_solver_pt->solve_eigenproblem(Problem_pt,
+                                            n_eval,
+                                            eval,
+                                            eigenvector_real,
+                                            eigenvector_imag,
+                                            do_adjoint_problem);
       }
       catch (...)
       {
@@ -451,8 +463,7 @@ private:
 /// Main function. Apply solver tests to each eigensolver.
 int main()
 {
-  /// Temporary (minimum working example)
-  // mwe();
+  Anasazi::Use_temporary_code_for_andrew_legacy_version = true;
 
   // Number of times to repeat the operation for better timings
   const unsigned n_timing_loops = 2;
@@ -463,6 +474,8 @@ int main()
   TestSolver<LAPACK_QZ>(N, n_timing_loops);
 
   TestSolver<ANASAZI>(N, n_timing_loops);
+
+  //TestSolver<ARPACK>(N, n_timing_loops);
 
   return (EXIT_SUCCESS);
 }

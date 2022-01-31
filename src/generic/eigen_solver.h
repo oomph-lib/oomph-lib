@@ -87,7 +87,8 @@ namespace oomph
       Problem* const& problem_pt,
       const int& n_eval,
       Vector<std::complex<double>>& eigenvalue,
-      Vector<DoubleVector>& eigenvector) = 0;
+      Vector<DoubleVector>& eigenvector,
+      const bool& do_adjoint_problem = false) = 0;
 
 
     /// Solve the real eigenproblem that is assembled by elements in
@@ -106,14 +107,20 @@ namespace oomph
                                     const int& n_eval,
                                     Vector<std::complex<double>>& eigenvalue,
                                     Vector<DoubleVector>& eigenvector_real,
-                                    Vector<DoubleVector>& eigenvector_imag)
+                                    Vector<DoubleVector>& eigenvector_imag,
+                                    const bool& do_adjoint_problem = false)
     {
       Vector<std::complex<double>> alpha;
       Vector<double> beta;
 
       // Call the "safe" version
-      solve_eigenproblem(
-        problem_pt, n_eval, alpha, beta, eigenvector_real, eigenvector_imag);
+      solve_eigenproblem(problem_pt,
+                         n_eval,
+                         alpha,
+                         beta,
+                         eigenvector_real,
+                         eigenvector_imag,
+                         do_adjoint_problem);
 
       // Now do the brute force conversion, possibly creating NaNs and Infs...
       unsigned n = alpha.size();
@@ -141,29 +148,8 @@ namespace oomph
                                     Vector<std::complex<double>>& alpha,
                                     Vector<double>& beta,
                                     Vector<DoubleVector>& eigenvector_real,
-                                    Vector<DoubleVector>& eigenvector_imag) = 0;
-
-    /// Adjoint eigensolver. This takes a pointer to a problem and
-    /// returns a vector of complex numbers representing the eigenvalues and a
-    /// corresponding vector of eigenvectors for the adjoint eigenproblem
-    /// Note: this is a legacy version of this function that stores re & imag
-    /// parts of eigenvectors in some solver-specific collection of real
-    /// vectors.
-    virtual void solve_adjoint_eigenproblem_legacy(
-      Problem* const& problem_pt,
-      const int& n_eval,
-      Vector<std::complex<double>>& eigenvalue,
-      Vector<DoubleVector>& eigenvector) = 0;
-
-    /// Adjoint eigensolver. This takes a pointer to a problem and
-    /// returns a vector of complex numbers representing the eigenvalues and a
-    /// corresponding vector of eigenvectors for the adjoint eigenproblem
-    virtual void solve_adjoint_eigenproblem(
-      Problem* const& problem_pt,
-      const int& n_eval,
-      Vector<std::complex<double>>& eigenvalue,
-      Vector<DoubleVector>& eigenvector_real,
-      Vector<DoubleVector>& eigenvector_imag) = 0;
+                                    Vector<DoubleVector>& eigenvector_imag,
+                                    const bool& do_adjoint_problem = false) = 0;
 
     /// Set the value of the (real) shift
     void set_shift(const double& shift_value)
@@ -249,7 +235,8 @@ namespace oomph
     void solve_eigenproblem_legacy(Problem* const& problem_pt,
                                    const int& n_eval,
                                    Vector<std::complex<double>>& eigenvalue,
-                                   Vector<DoubleVector>& eigenvector);
+                                   Vector<DoubleVector>& eigenvector,
+                                   const bool& do_adjoint_problem = false);
 
 
     /// Solve the real eigenproblem that is assembled by elements in
@@ -269,25 +256,12 @@ namespace oomph
                             Vector<std::complex<double>>& alpha,
                             Vector<double>& beta,
                             Vector<DoubleVector>& eigenvector_real,
-                            Vector<DoubleVector>& eigenvector_imag)
+                            Vector<DoubleVector>& eigenvector_imag,
+                            const bool& do_adjoint_problem = false)
     {
       oomph_info << "Broken, but then don't we want arpack to go anyway?\n";
       abort();
     }
-
-    /// Solve the adjoint eigen problem
-    void solve_adjoint_eigenproblem_legacy(
-      Problem* const& problem_pt,
-      const int& n_eval,
-      Vector<std::complex<double>>& eigenvalue,
-      Vector<DoubleVector>& eigenvector)
-    {
-      throw OomphLibError("solve_adjoint_eigenproblem is not currently "
-                          "implemented for ARPACK.",
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-    }
-
 
     /// Set the desired eigenvalues to be left of the shift
     void get_eigenvalues_left_of_shift()
@@ -367,7 +341,8 @@ namespace oomph
     void solve_eigenproblem_legacy(Problem* const& problem_pt,
                                    const int& n_eval,
                                    Vector<std::complex<double>>& eigenvalue,
-                                   Vector<DoubleVector>& eigenvector);
+                                   Vector<DoubleVector>& eigenvector,
+                                   const bool& do_adjoint_problem = false);
 
     /// Solve the real eigenproblem that is assembled by elements in
     /// a mesh in a Problem object. Note that the assembled matrices include the
@@ -386,33 +361,8 @@ namespace oomph
                             Vector<std::complex<double>>& alpha,
                             Vector<double>& beta,
                             Vector<DoubleVector>& eigenvector_real,
-                            Vector<DoubleVector>& eigenvector_imag);
-
-    /// Solve the adjoint eigen problem
-    void solve_adjoint_eigenproblem_legacy(
-      Problem* const& problem_pt,
-      const int& n_eval,
-      Vector<std::complex<double>>& eigenvalue,
-      Vector<DoubleVector>& eigenvector)
-    {
-      throw OomphLibError("solve_adjoint_eigenproblem_legacy is not currently "
-                          "implemented for LAPACK_QZ.",
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-    };
-
-    /// Solve the adjoint eigen problem
-    void solve_adjoint_eigenproblem(Problem* const& problem_pt,
-                                    const int& n_eval,
-                                    Vector<std::complex<double>>& eigenvalue,
-                                    Vector<DoubleVector>& eigenvector_real,
-                                    Vector<DoubleVector>& eigenvector_imag)
-    {
-      throw OomphLibError("solve_adjoint_eigenproblem is not currently "
-                          "implemented for LAPACK_QZ.",
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-    };
+                            Vector<DoubleVector>& eigenvector_imag,
+                            const bool& do_adjoint_problem = false);
 
     /// Find the eigenvalues of a complex generalised eigenvalue problem
     /// specified by \f$ Ax = \lambda  Mx \f$. Note: the (real) shift

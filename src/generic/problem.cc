@@ -8315,9 +8315,10 @@ namespace oomph
         time_stepper_pt(i)->make_steady();
       }
 
+      const bool do_adjoint_problem = false;
       // Call the Eigenproblem for the eigensolver
       Eigen_solver_pt->solve_eigenproblem_legacy(
-        this, n_eval, eigenvalue, eigenvector);
+        this, n_eval, eigenvalue, eigenvector, do_adjoint_problem);
 
       // Reset the is_steady status of all timesteppers that
       // weren't already steady when we came in here and reset their
@@ -8334,9 +8335,10 @@ namespace oomph
     // assemble and solve the eigensystem
     else
     {
+      const bool do_adjoint_problem = false;
       // Call the Eigenproblem for the eigensolver
       Eigen_solver_pt->solve_eigenproblem_legacy(
-        this, n_eval, eigenvalue, eigenvector);
+        this, n_eval, eigenvalue, eigenvector, do_adjoint_problem);
     }
   }
 
@@ -8369,9 +8371,15 @@ namespace oomph
         time_stepper_pt(i)->make_steady();
       }
 
+      const bool do_adjoint_problem = false;
       // Call the Eigenproblem for the eigensolver
-      Eigen_solver_pt->solve_eigenproblem(
-        this, n_eval, alpha, beta, eigenvector_real, eigenvector_imag);
+      Eigen_solver_pt->solve_eigenproblem(this,
+                                          n_eval,
+                                          alpha,
+                                          beta,
+                                          eigenvector_real,
+                                          eigenvector_imag,
+                                          do_adjoint_problem);
 
       // Reset the is_steady status of all timesteppers that
       // weren't already steady when we came in here and reset their
@@ -8388,9 +8396,15 @@ namespace oomph
     // assemble and solve the eigensystem
     else
     {
+      const bool do_adjoint_problem = false;
       // Call the Eigenproblem for the eigensolver
-      Eigen_solver_pt->solve_eigenproblem(
-        this, n_eval, alpha, beta, eigenvector_real, eigenvector_imag);
+      Eigen_solver_pt->solve_eigenproblem(this,
+                                          n_eval,
+                                          alpha,
+                                          beta,
+                                          eigenvector_real,
+                                          eigenvector_imag,
+                                          do_adjoint_problem);
     }
   }
 
@@ -8423,9 +8437,10 @@ namespace oomph
         time_stepper_pt(i)->make_steady();
       }
 
+      const bool do_adjoint_problem = false;
       // Call the Eigenproblem for the eigensolver
       Eigen_solver_pt->solve_eigenproblem(
-        this, n_eval, eigenvalue, eigenvector_real, eigenvector_imag);
+        this, n_eval, eigenvalue, eigenvector_real, eigenvector_imag, do_adjoint_problem);
 
       // Reset the is_steady status of all timesteppers that
       // weren't already steady when we came in here and reset their
@@ -8442,9 +8457,10 @@ namespace oomph
     // assemble and solve the eigensystem
     else
     {
+      const bool do_adjoint_problem = false;
       // Call the Eigenproblem for the eigensolver
       Eigen_solver_pt->solve_eigenproblem(
-        this, n_eval, eigenvalue, eigenvector_real, eigenvector_imag);
+        this, n_eval, eigenvalue, eigenvector_real, eigenvector_imag, do_adjoint_problem);
     }
   }
 
@@ -8477,10 +8493,11 @@ namespace oomph
         time_stepper_pt(i)->make_steady();
       }
 
+      const bool do_adjoint_problem = true;
       // Call the Eigenproblem for the ajoint-problem eigensolver
       // NB Only different to solve_eigenproblem
-      Eigen_solver_pt->solve_adjoint_eigenproblem_legacy(
-        this, n_eval, eigenvalue, eigenvector);
+      Eigen_solver_pt->solve_eigenproblem_legacy(
+        this, n_eval, eigenvalue, eigenvector, do_adjoint_problem);
 
       // Reset the is_steady status of all timesteppers that
       // weren't already steady when we came in here and reset their
@@ -8497,9 +8514,10 @@ namespace oomph
     // assemble and solve the eigensystem
     else
     {
+      const bool do_adjoint_problem = true;
       // Call the Eigenproblem for the eigensolver
-      Eigen_solver_pt->solve_adjoint_eigenproblem_legacy(
-        this, n_eval, eigenvalue, eigenvector);
+      Eigen_solver_pt->solve_eigenproblem_legacy(
+        this, n_eval, eigenvalue, eigenvector, do_adjoint_problem);
     }
   }
 
@@ -8533,9 +8551,10 @@ namespace oomph
         time_stepper_pt(i)->make_steady();
       }
 
+      const bool do_adjoint_problem = true;
       // Call the Eigenproblem for the eigensolver
-      Eigen_solver_pt->solve_adjoint_eigenproblem(
-        this, n_eval, eigenvalue, eigenvector_real, eigenvector_imag);
+      Eigen_solver_pt->solve_eigenproblem(
+        this, n_eval, eigenvalue, eigenvector_real, eigenvector_imag, do_adjoint_problem);
 
       // Reset the is_steady status of all timesteppers that
       // weren't already steady when we came in here and reset their
@@ -8552,9 +8571,10 @@ namespace oomph
     // assemble and solve the eigensystem
     else
     {
+      const bool do_adjoint_problem = true;
       // Call the Eigenproblem for the eigensolver
-      Eigen_solver_pt->solve_adjoint_eigenproblem(
-        this, n_eval, eigenvalue, eigenvector_real, eigenvector_imag);
+      Eigen_solver_pt->solve_eigenproblem(
+        this, n_eval, eigenvalue, eigenvector_real, eigenvector_imag, do_adjoint_problem);
     }
   }
 

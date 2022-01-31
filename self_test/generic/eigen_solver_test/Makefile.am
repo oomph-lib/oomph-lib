@@ -24,4 +24,4 @@ anasazi_mwe_LDADD = -L@libdir@ -lgeneric $(EXTERNAL_LIBS) \
 
 # Include path for library headers: All library headers live in
 # the include directory which we specify with -I
-AM_CPPFLAGS += -I@includedir@ -DPARANOID
+AM_CPPFLAGS += -DPARANOID
