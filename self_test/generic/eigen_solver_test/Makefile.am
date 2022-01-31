@@ -5,17 +5,17 @@ include $(top_srcdir)/config/makefile_templates/demo_drivers
 # DESCEND INTO THIS DIRECTORY
 
 # Name of executable
-check_PROGRAMS= eigenproblem_test anasazi_mwe
+check_PROGRAMS= eigen_solver_test anasazi_mwe
 
 #----------------------------------------------------------------------
 
 # Sources for executable
-eigenproblem_test_SOURCES = eigenproblem_test.cc
+eigen_solver_test_SOURCES = eigen_solver_test.cc
 anasazi_mwe_SOURCES = anasazi_mwe.cc
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
-eigenproblem_test_LDADD = -L@libdir@ -lgeneric $(EXTERNAL_LIBS) \
+eigen_solver_test_LDADD = -L@libdir@ -lgeneric $(EXTERNAL_LIBS) \
 								  $(FLIBS)
 anasazi_mwe_LDADD = -L@libdir@ -lgeneric $(EXTERNAL_LIBS) \
 								  $(FLIBS)
