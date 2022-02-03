@@ -215,10 +215,12 @@ class TestProblem
 public:
   TestProblem(EigenSolver* const& eigen_solver_pt,
               const unsigned& N,
-              const unsigned& n_timing_loops)
+              const unsigned& n_timing_loops,
+              DocInfo* const& doc_info_pt)
     : Eigen_solver_pt(eigen_solver_pt),
       Matrix_size(N),
-      N_timing_loops(n_timing_loops)
+      N_timing_loops(n_timing_loops),
+      Doc_info_pt(doc_info_pt)
   {
     // Create eigenproblem
     Problem_pt = new Eigenproblem<ELEMENT>(Matrix_size);
@@ -258,9 +260,8 @@ public:
         Eigen_solver_pt->solve_eigenproblem_legacy(
           Problem_pt, n_eval, eval, evec, do_adjoint_problem);
       }
-      catch (...)
+      catch (const OomphLibError& error)
       {
-        oomph_info << "Failed to run test_solve_eigenproblem_legacy " << endl;
         return;
       }
     }
@@ -296,7 +297,7 @@ public:
     {
       try
       {
-        // Call solve_eigenproblem_legacy
+        // Call solve_eigenproblem
         Eigen_solver_pt->solve_eigenproblem(Problem_pt,
                                             n_eval,
                                             eval,
@@ -304,9 +305,8 @@ public:
                                             eigenvector_imag,
                                             do_adjoint_problem);
       }
-      catch (...)
+      catch (const OomphLibError& error)
       {
-        oomph_info << "Failed to run test_solve_eigenproblem " << endl;
         return;
       }
     }
@@ -345,10 +345,8 @@ public:
         Eigen_solver_pt->solve_eigenproblem_legacy(
           Problem_pt, n_eval, eval, evec, do_adjoint_problem);
       }
-      catch (...)
+      catch (const OomphLibError& error)
       {
-        oomph_info << "Failed to run test_solve_adjoint_eigenproblem_legacy "
-                   << endl;
         return;
       }
     }
@@ -385,7 +383,7 @@ public:
     {
       try
       {
-        // Call solve_eigenproblem_legacy
+        // Call solve_eigenproblem
         Eigen_solver_pt->solve_eigenproblem(Problem_pt,
                                             n_eval,
                                             eval,
@@ -393,9 +391,8 @@ public:
                                             eigenvector_imag,
                                             do_adjoint_problem);
       }
-      catch (...)
+      catch (const OomphLibError& error)
       {
-        oomph_info << "Failed to run test_solve_adjoint_eigenproblem " << endl;
         return;
       }
     }
@@ -415,11 +412,18 @@ public:
 
   void doc_solution(Vector<complex<double>> eval)
   {
+    string filename = Doc_info_pt->directory() + "test" +
+                      to_string(Doc_info_pt->number()) + ".dat";
+
+    ofstream output_stream;
+    output_stream.open(filename);
     for (unsigned i = 0; i < Matrix_size; i++)
     {
-      oomph_info << eval[i] << ", ";
+      output_stream << eval[i].real() << " " << eval[i].imag() << endl;
     }
-    oomph_info << endl;
+    output_stream.close();
+
+    Doc_info_pt->number()++;
   }
 
 private:
@@ -427,6 +431,7 @@ private:
   unsigned Matrix_size;
   unsigned N_timing_loops;
   Problem* Problem_pt;
+  DocInfo* Doc_info_pt;
 };
 
 /// TestSolver class. Tests the templated eigensolver against a series of
@@ -435,22 +440,24 @@ template<class SOLVER>
 class TestSolver
 {
 public:
-  TestSolver(const unsigned N, const unsigned n_timing_loops)
-    : Matrix_size(N), N_timing_loops(n_timing_loops)
+  TestSolver(const unsigned N,
+             const unsigned n_timing_loops,
+             DocInfo* const& doc_info_pt)
+    : Matrix_size(N), N_timing_loops(n_timing_loops), Doc_info_pt(doc_info_pt)
   {
     EigenSolver* eigen_solver_pt = new SOLVER;
 
     TestProblem<IdentityEigenElement>(
-      eigen_solver_pt, Matrix_size, N_timing_loops);
+      eigen_solver_pt, Matrix_size, N_timing_loops, Doc_info_pt);
 
     TestProblem<AsymmetricEigenElement>(
-      eigen_solver_pt, Matrix_size, N_timing_loops);
+      eigen_solver_pt, Matrix_size, N_timing_loops, Doc_info_pt);
 
     TestProblem<RosserSymmetricEigenElement>(
-      eigen_solver_pt, 8, N_timing_loops);
+      eigen_solver_pt, Matrix_size, N_timing_loops, Doc_info_pt);
 
     TestProblem<RandomAsymmetricEigenElement>(
-      eigen_solver_pt, Matrix_size, N_timing_loops);
+      eigen_solver_pt, Matrix_size, N_timing_loops, Doc_info_pt);
 
     delete eigen_solver_pt;
   }
@@ -458,6 +465,7 @@ public:
 private:
   unsigned Matrix_size;
   unsigned N_timing_loops;
+  DocInfo* Doc_info_pt;
 };
 
 /// Main function. Apply solver tests to each eigensolver.
@@ -471,11 +479,16 @@ int main()
   // Matrix dimensions
   const unsigned N = 32;
 
-  TestSolver<LAPACK_QZ>(N, n_timing_loops);
+  DocInfo* doc_info_pt = new DocInfo;
+  doc_info_pt->set_directory("RESLT/");
 
-  TestSolver<ANASAZI>(N, n_timing_loops);
+  TestSolver<LAPACK_QZ>(N, n_timing_loops, doc_info_pt);
 
-  //TestSolver<ARPACK>(N, n_timing_loops);
+  // TestSolver<ANASAZI>(N, n_timing_loops, doc_info_pt);
 
-  return (EXIT_SUCCESS);
+  // TestSolver<ARPACK>(N, n_timing_loops, doc_info_pt);
+
+  delete doc_info_pt;
+
+  return 0;
 }

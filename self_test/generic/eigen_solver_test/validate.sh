@@ -17,7 +17,8 @@ cd Validation
 # Validation for complex eigensolver
 #-----------------------------------------
 echo "Running complex eigensolver validation "
-../eigensolver_test > OUTPUT
+mkdir RESLT
+../eigen_solver_test > OUTPUT
 echo "done"
 echo " " >> validation.log
 echo "Complex eigensolver validation" >> validation.log
@@ -27,16 +28,16 @@ echo "Validation directory: " >> validation.log
 echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
-
+cat RESLT/* > eigen_solver_test.dat
 
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/eigensolver_test.dat.gz  \
-         OUTPUT >> validation.log
+../../../../bin/fpdiff.py ../validata/eigen_solver_test.dat.gz  \
+         eigen_solver_test.dat >> validation.log
 fi
+rm RESLT -rf
 
-mv OUTPUT OUTPUT_eigensolver_test
 #-----------------------------------------
 
 # Append log to main validation log
