@@ -222,6 +222,9 @@ public:
       N_timing_loops(n_timing_loops),
       Doc_info_pt(doc_info_pt)
   {
+    /// Set number of eigenvalues to compute
+    N_eval = 8;
+
     // Create eigenproblem
     Problem_pt = new Eigenproblem<ELEMENT>(Matrix_size);
 
@@ -243,12 +246,12 @@ public:
   {
     // Set up additional arguments
     // Output all eigenvalues
-    const unsigned n_eval = Matrix_size;
+    const unsigned n_eval = N_eval;
     const bool do_adjoint_problem = false;
 
     // Store outputs
-    Vector<complex<double>> eval(Matrix_size);
-    Vector<DoubleVector> evec(Matrix_size);
+    Vector<complex<double>> eval(N_eval);
+    Vector<DoubleVector> evec(N_eval);
 
     // Start clock
     clock_t t_start = clock();
@@ -283,13 +286,13 @@ public:
   {
     // Set up additional arguments
     // Output all eigenvalues
-    const unsigned n_eval = Matrix_size;
+    const unsigned n_eval = N_eval;
     const bool do_adjoint_problem = false;
 
     // Store outputs
-    Vector<complex<double>> eval(Matrix_size);
-    Vector<DoubleVector> eigenvector_real(Matrix_size);
-    Vector<DoubleVector> eigenvector_imag(Matrix_size);
+    Vector<complex<double>> eval(N_eval);
+    Vector<DoubleVector> eigenvector_real(N_eval);
+    Vector<DoubleVector> eigenvector_imag(N_eval);
 
     // Start clock
     clock_t t_start = clock();
@@ -328,12 +331,12 @@ public:
   {
     // Set up additional arguments
     // Output all eigenvalues
-    const unsigned n_eval = Matrix_size;
+    const unsigned n_eval = N_eval;
     const bool do_adjoint_problem = true;
 
     // Store outputs
-    Vector<complex<double>> eval(Matrix_size);
-    Vector<DoubleVector> evec(Matrix_size);
+    Vector<complex<double>> eval(N_eval);
+    Vector<DoubleVector> evec(N_eval);
 
     // Start clock
     clock_t t_start = clock();
@@ -369,13 +372,13 @@ public:
   {
     // Set up additional arguments
     // Output all eigenvalues
-    const unsigned n_eval = Matrix_size;
+    const unsigned n_eval = N_eval;
     const bool do_adjoint_problem = true;
 
     // Store outputs
-    Vector<complex<double>> eval(Matrix_size);
-    Vector<DoubleVector> eigenvector_real(Matrix_size);
-    Vector<DoubleVector> eigenvector_imag(Matrix_size);
+    Vector<complex<double>> eval(N_eval);
+    Vector<DoubleVector> eigenvector_real(N_eval);
+    Vector<DoubleVector> eigenvector_imag(N_eval);
 
     // Start clock
     clock_t t_start = clock();
@@ -417,7 +420,7 @@ public:
 
     ofstream output_stream;
     output_stream.open(filename);
-    for (unsigned i = 0; i < Matrix_size; i++)
+    for (unsigned i = 0; i < N_eval; i++)
     {
       output_stream << eval[i].real() << " " << eval[i].imag() << endl;
     }
@@ -429,6 +432,7 @@ public:
 private:
   EigenSolver* Eigen_solver_pt;
   unsigned Matrix_size;
+  unsigned N_eval;
   unsigned N_timing_loops;
   Problem* Problem_pt;
   DocInfo* Doc_info_pt;
