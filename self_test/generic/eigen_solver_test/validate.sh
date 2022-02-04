@@ -4,7 +4,7 @@
 OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
 
 #Set the number of tests to be checked
-NUM_TESTS=1
+NUM_TESTS=2
 
 # Setup validation directory
 #---------------------------
@@ -14,14 +14,14 @@ mkdir Validation
 
 cd Validation
 
-# Validation for complex eigensolver
+# Validation for eigensolver test
 #-----------------------------------------
-echo "Running complex eigensolver validation "
+echo "Running eigensolver validation "
 mkdir RESLT
 ../eigen_solver_test > OUTPUT
 echo "done"
 echo " " >> validation.log
-echo "Complex eigensolver validation" >> validation.log
+echo "Eigensolver validation" >> validation.log
 echo "--------------------------" >> validation.log
 echo " " >> validation.log
 echo "Validation directory: " >> validation.log
@@ -37,7 +37,31 @@ else
          eigen_solver_test.dat >> validation.log
 fi
 rm RESLT -rf
+#-----------------------------------------
 
+# Validation for eigensolver test
+#-----------------------------------------
+echo "Running find eigenvalues validation "
+mkdir RESLT
+../lapack_qz_find_eigenvalues_test > OUTPUT
+echo "done"
+echo " " >> validation.log
+echo "Find eigenvalues validation" >> validation.log
+echo "--------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat RESLT/* > lapack_qz_find_eigenvalues_test.dat
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/lapack_qz_find_eigenvalues_test.dat.gz  \
+         lapack_qz_find_eigenvalues_test.dat >> validation.log
+fi
+rm RESLT -rf
 #-----------------------------------------
 
 # Append log to main validation log

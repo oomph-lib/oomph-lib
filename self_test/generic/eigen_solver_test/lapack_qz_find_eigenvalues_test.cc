@@ -34,6 +34,9 @@ using namespace oomph;
 /// matrix eigenvalue problem
 int main()
 {
+  DocInfo doc_info;
+  doc_info.set_directory("RESLT/");
+
   // Create eigensolver
   LAPACK_QZ eigen_solver;
 
@@ -88,15 +91,20 @@ int main()
 
   // test eigen_solver with complex matrices
   eigen_solver.find_eigenvalues(matrix_cr, matrix_cc, eval, evec);
+
+  ofstream output_stream;
+  output_stream.open(doc_info.directory() +
+                     "lapack_qz_find_eigenvalues_test.dat");
   for (int i = 0; i < 2; i++)
   {
-    oomph_info << eval[i] << ": ";
+    output_stream << eval[i].real() << " , " << eval[i].imag() << endl << endl;
     for (int j = 0; j < 2; j++)
     {
-      oomph_info << evec[i][j] << ", ";
+      output_stream << evec[i][j].real() << " , " << evec[i][j].imag() << endl;
     }
-    oomph_info << endl;
+    output_stream << endl;
   }
+  output_stream.close();
 
   return (EXIT_SUCCESS);
 }
