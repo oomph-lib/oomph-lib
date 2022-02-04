@@ -104,59 +104,72 @@ public:
   }
 };
 
-void doc_solution(Vector<std::complex<double>>& eigenvalue,
+void doc_solution(string filename,
+                  Vector<std::complex<double>>& eigenvalue,
                   Vector<DoubleVector>& eigenvector_real,
                   Vector<DoubleVector>& eigenvector_imag)
 {
+  ofstream output_stream;
+  output_stream.open(filename);
   unsigned N = eigenvalue.size();
   for (unsigned i = 0; i < N; i++)
   {
-    oomph_info << eigenvalue[i] << ", ";
+    output_stream << eigenvalue[i].real() << " , " << eigenvalue[i].imag()
+                  << endl;
   }
-  oomph_info << endl;
+  output_stream << endl;
 
   for (unsigned i = 0; i < N; i++)
   {
     for (unsigned j = 0; j < N; j++)
     {
-      oomph_info << "(" << eigenvector_real[j][i] << ","
-                 << eigenvector_imag[j][i] << "), ";
+      output_stream << eigenvector_real[j][i] << " , " << eigenvector_imag[j][i]
+                    << endl;
     }
-    oomph_info << endl;
+    output_stream << endl;
   }
+  output_stream.close();
 }
 
-void doc_solution_legacy(Vector<std::complex<double>>& eigenvalue,
+void doc_solution_legacy(string filename,
+                         Vector<std::complex<double>>& eigenvalue,
                          Vector<DoubleVector>& eigenvector)
 {
+  ofstream output_stream;
+  output_stream.open(filename);
   unsigned N = eigenvalue.size();
   for (unsigned i = 0; i < N; i++)
   {
-    oomph_info << eigenvalue[i] << ", ";
+    output_stream << eigenvalue[i].real() << " , " << eigenvalue[i].imag()
+                  << endl;
   }
-  oomph_info << endl;
+  output_stream << endl;
 
   for (unsigned i = 0; i < N; i++)
   {
     for (unsigned j = 0; j < N; j++)
     {
-      oomph_info << eigenvector[j][i] << ", ";
+      output_stream << eigenvector[j][i] << endl;
     }
-    oomph_info << endl;
+    output_stream << endl;
   }
+  output_stream.close();
 }
 
 /// Main function. Apply solver tests to each eigensolver.
 int main()
 {
+  DocInfo doc_info;
+  doc_info.set_directory("RESLT/");
+
   // Matrix dimensions
   const unsigned N = 32;
 
   // Create eigenproblem
   Eigenproblem<RandomAsymmetricEigenElement> problem(N);
-  //problem.eigen_solver_pt() = new ANASAZI;
 
-  Anasazi::Use_temporary_code_for_andrew_legacy_version = true;
+  // problem.eigen_solver_pt() = new ANASAZI;
+  // Anasazi::Use_temporary_code_for_andrew_legacy_version = true;
 
   // Set up additional arguments
   // Output all eigenvalues
@@ -172,9 +185,12 @@ int main()
   {
     problem.solve_eigenproblem(
       n_eval, eigenvalue, eigenvector_real, eigenvector_imag);
-    doc_solution(eigenvalue, eigenvector_real, eigenvector_imag);
+    doc_solution(doc_info.directory() + "solve_eigenproblem_test.dat",
+                 eigenvalue,
+                 eigenvector_real,
+                 eigenvector_imag);
   }
-  catch (...)
+  catch (const OomphLibError& error)
   {
     oomph_info << "Failed to run solve_eigenproblem " << endl;
   }
@@ -184,9 +200,12 @@ int main()
   {
     problem.solve_adjoint_eigenproblem(
       n_eval, eigenvalue, eigenvector_real, eigenvector_imag);
-    doc_solution(eigenvalue, eigenvector_real, eigenvector_imag);
+    doc_solution(doc_info.directory() + "solve_adjoint_eigenproblem_test.dat",
+                 eigenvalue,
+                 eigenvector_real,
+                 eigenvector_imag);
   }
-  catch (...)
+  catch (const OomphLibError& error)
   {
     oomph_info << "Failed to run solve_adjoint_eigenproblem " << endl;
   }
@@ -201,9 +220,12 @@ int main()
   try
   {
     problem.solve_eigenproblem_legacy(n_eval, eigenvalue, eigenvector);
-    doc_solution_legacy(eigenvalue, eigenvector);
+    doc_solution_legacy(doc_info.directory() +
+                          "solve_eigenproblem_legacy_test.dat",
+                        eigenvalue,
+                        eigenvector);
   }
-  catch (...)
+  catch (const OomphLibError& error)
   {
     oomph_info << "Failed to run solve_eigenproblem_legacy " << endl;
   }
@@ -212,9 +234,12 @@ int main()
   try
   {
     problem.solve_adjoint_eigenproblem_legacy(n_eval, eigenvalue, eigenvector);
-    doc_solution_legacy(eigenvalue, eigenvector);
+    doc_solution_legacy(doc_info.directory() +
+                          "solve_adjoint_eigenproblem_legacy_test.dat",
+                        eigenvalue,
+                        eigenvector);
   }
-  catch (...)
+  catch (const OomphLibError& error)
   {
     oomph_info << "Failed to run solve_adjoint_eigenproblem_legacy" << endl;
   }
