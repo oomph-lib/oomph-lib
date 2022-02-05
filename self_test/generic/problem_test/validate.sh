@@ -36,7 +36,7 @@ else
 ../../../../bin/fpdiff.py ../validata/solve_eigenproblem_test.dat.gz  \
          solve_eigenproblem_test.dat >> validation.log
 fi
-rm RESLT -rf
+rm -rf RESLT
 
 #-----------------------------------------
 

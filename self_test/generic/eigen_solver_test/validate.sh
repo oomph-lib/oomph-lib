@@ -36,7 +36,7 @@ else
 ../../../../bin/fpdiff.py ../validata/eigen_solver_test.dat.gz  \
          eigen_solver_test.dat >> validation.log
 fi
-rm RESLT -rf
+rm -rf RESLT
 #-----------------------------------------
 
 # Validation for eigensolver test
@@ -61,7 +61,7 @@ else
 ../../../../bin/fpdiff.py ../validata/lapack_qz_find_eigenvalues_test.dat.gz  \
          lapack_qz_find_eigenvalues_test.dat >> validation.log
 fi
-rm RESLT -rf
+rm -rf RESLT
 #-----------------------------------------
 
 # Append log to main validation log

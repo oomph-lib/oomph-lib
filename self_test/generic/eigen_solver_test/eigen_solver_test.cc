@@ -488,6 +488,7 @@ int main(int argc, char** argv)
   const unsigned N = 32;
 
   DocInfo* doc_info_pt = new DocInfo;
+  doc_info_pt->set_directory("RESLT/");
   //doc_info_pt->set_directory("RESLT_lapack/");
 
   EigensolverTest<LAPACK_QZ>(N, n_timing_loops, doc_info_pt);
