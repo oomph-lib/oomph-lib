@@ -438,13 +438,13 @@ private:
   DocInfo* Doc_info_pt;
 };
 
-/// TestSolver class. Tests the templated eigensolver against a series of
+/// EigensolverTest class. Tests the templated eigensolver against a series of
 /// eigenelements.
 template<class SOLVER>
-class TestSolver
+class EigensolverTest
 {
 public:
-  TestSolver(const unsigned N,
+  EigensolverTest(const unsigned N,
              const unsigned n_timing_loops,
              DocInfo* const& doc_info_pt)
     : Matrix_size(N), N_timing_loops(n_timing_loops), Doc_info_pt(doc_info_pt)
@@ -473,9 +473,13 @@ private:
 };
 
 /// Main function. Apply solver tests to each eigensolver.
-int main()
+int main(int argc, char** argv)
 {
-  Anasazi::Use_temporary_code_for_andrew_legacy_version = true;
+// Want to test Trilinos if we have it, so we must initialise MPI
+// if we have compiled with it
+#ifdef OOMPH_HAS_MPI
+  MPI_Helpers::init(argc, argv);
+#endif
 
   // Number of times to repeat the operation for better timings
   const unsigned n_timing_loops = 2;
@@ -484,15 +488,26 @@ int main()
   const unsigned N = 32;
 
   DocInfo* doc_info_pt = new DocInfo;
-  doc_info_pt->set_directory("RESLT/");
+  //doc_info_pt->set_directory("RESLT_lapack/");
 
-  TestSolver<LAPACK_QZ>(N, n_timing_loops, doc_info_pt);
+  EigensolverTest<LAPACK_QZ>(N, n_timing_loops, doc_info_pt);
 
-  // TestSolver<ANASAZI>(N, n_timing_loops, doc_info_pt);
+#ifdef OOMPH_HAS_TRILINOS
+  //doc_info_pt->set_directory("RESLT_anasazi/");
+  //doc_info_pt->number() = 0;
 
-  // TestSolver<ARPACK>(N, n_timing_loops, doc_info_pt);
+  Anasazi::Use_temporary_code_for_andrew_legacy_version = true;
+
+  //EigensolverTest<ANASAZI>(N, n_timing_loops, doc_info_pt);
+#endif
+
+  // EigensolverTest<ARPACK>(N, n_timing_loops, doc_info_pt);
 
   delete doc_info_pt;
+
+#ifdef OOMPH_HAS_MPI
+  MPI_Helpers::finalize();
+#endif
 
   return 0;
 }
