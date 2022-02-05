@@ -127,6 +127,9 @@ void mwe()
 
   Eigen_solver_pt->solve_eigenproblem_legacy(
     Problem_pt, n_eval, eval, evec, do_adjoint_problem);
+  // Vector<DoubleVector> evecI(N);
+  // Eigen_solver_pt->solve_eigenproblem(
+  //  Problem_pt, n_eval, eval, evec, evecI, do_adjoint_problem);
 
   for (unsigned i = 0; i < N; i++)
   {
@@ -137,10 +140,20 @@ void mwe()
 
 
 /// Main function.
-int main()
+int main(int argc, char** argv)
 {
-  /// Temporary (minimum working example)
+#ifdef OOMPH_HAS_MPI
+  MPI_Helpers::init(argc, argv);
+#endif
+
+#ifdef OOMPH_HAS_TRILINOS
+  Anasazi::Use_temporary_code_for_andrew_legacy_version = true;
   mwe();
+#endif
+
+#ifdef OOMPH_HAS_MPI
+  MPI_Helpers::finalize();
+#endif
 
   return (EXIT_SUCCESS);
 }
