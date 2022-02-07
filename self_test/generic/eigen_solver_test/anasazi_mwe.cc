@@ -120,7 +120,12 @@ void mwe()
   const unsigned n_eval = N;
   const bool do_adjoint_problem = false;
 
-  EigenSolver* Eigen_solver_pt = new ANASAZI;
+EigenSolver* Eigen_solver_pt = 0;
+#ifdef OOMPH_HAS_TRILINOS
+   Eigen_solver_pt = new ANASAZI;
+#else
+   return;
+#endif
   Problem* Problem_pt = new Eigenproblem<AsymmetricEigenElement>(N);
   Vector<complex<double>> eval(N);
   Vector<DoubleVector> evec(N);
