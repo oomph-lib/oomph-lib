@@ -396,8 +396,10 @@ HarmonicProblem<ELEMENT, EIGEN_SOLVER>::HarmonicProblem(
   // Create the eigen solver
   this->eigen_solver_pt() = new EIGEN_SOLVER;
 
+#ifdef OOMPH_HAS_TRILINOS
   // hierher Temporary work-around to keep the legacy version working
   Anasazi::Use_temporary_code_for_andrew_legacy_version = true;
+#endif
 
   // //Get the positive eigenvalues, shift is zero by default
   // static_cast<EIGEN_SOLVER*>(eigen_solver_pt())
