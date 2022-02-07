@@ -42,7 +42,7 @@ mv OUTPUT OUTPUT_dense_complex_matrix_test
 # Validation for compressed row complex matrix
 #-----------------------------------------
 echo "Running compressed row complex matrix validation "
-../cr_complex_matrix_test > OUTPUT
+../cr_complex_matrix_test
 echo "done"
 echo " " >> validation.log
 echo "Compressed row complex matrix validation" >> validation.log
