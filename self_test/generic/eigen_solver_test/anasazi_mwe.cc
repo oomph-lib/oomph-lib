@@ -49,6 +49,8 @@ public:
     DenseMatrix<double>& jacobian,
     DenseMatrix<double>& mass_matrix) = 0;
 
+  void fill_in_contribution_to_residuals(oomph::Vector<double>& residuals) {}
+
 protected:
   unsigned N_value;
   unsigned Data_index;
@@ -64,24 +66,34 @@ public:
     DenseMatrix<double>& jacobian,
     DenseMatrix<double>& mass_matrix)
   {
+    cout << "N_value: " << N_value << endl;
     for (unsigned i = 0; i < N_value; i++)
     {
       unsigned local_eqn = internal_local_eqn(Data_index, i);
       for (unsigned j = 0; j < N_value; j++)
       {
         unsigned local_unknown = internal_local_eqn(Data_index, j);
-        if (i >= j)
+        cout << i << ", " << local_eqn << ", " << j << ", " << local_unknown
+             << endl;
+
+        if (i == j)
         {
-          if (i == j)
-          {
-            jacobian(local_eqn, local_unknown) += i;
-          }
-          else
-          {
-            jacobian(local_eqn, local_unknown) += 1;
-          }
+          jacobian(local_eqn, local_unknown) += 1;
           mass_matrix(local_eqn, local_unknown) += 1;
         }
+
+        // if (i >= j)
+        //{
+        //  if (i == j)
+        //  {
+        //    jacobian(local_eqn, local_unknown) += i;
+        //  }
+        //  else
+        //  {
+        //    jacobian(local_eqn, local_unknown) += 1;
+        //  }
+        //  mass_matrix(local_eqn, local_unknown) += 1;
+        //}
       }
     }
   }
@@ -103,7 +115,21 @@ public:
 
     this->mesh_pt()->add_element_pt(el_pt);
 
-    assign_eqn_numbers();
+    //   el_pt = new ELEMENT;
+
+    //   el_pt->set_size(size);
+
+    //   this->mesh_pt()->add_element_pt(el_pt);
+
+    //   el_pt = new ELEMENT;
+
+    //   el_pt->set_size(size);
+
+    //   this->mesh_pt()->add_element_pt(el_pt);
+
+    // build_global_mesh();
+
+    cout << "Number of equations:" << assign_eqn_numbers() << endl;
   }
 
   ~Eigenproblem()
@@ -116,20 +142,20 @@ public:
 /// ANASAZI.solve_eigenproblem_legacy
 void mwe()
 {
-  const unsigned N = 256;
-  const unsigned n_eval = N;
+  const unsigned N = 64;
+  const unsigned n_eval = 1;
   const bool do_adjoint_problem = false;
 
-EigenSolver* Eigen_solver_pt = 0;
+  EigenSolver* Eigen_solver_pt = 0;
 #ifdef OOMPH_HAS_TRILINOS
-   Eigen_solver_pt = new ANASAZI;
+  Eigen_solver_pt = new ANASAZI;
 #else
-   return;
+  return;
 #endif
   Problem* Problem_pt = new Eigenproblem<AsymmetricEigenElement>(N);
+
   Vector<complex<double>> eval(N);
   Vector<DoubleVector> evec(N);
-
   Eigen_solver_pt->solve_eigenproblem_legacy(
     Problem_pt, n_eval, eval, evec, do_adjoint_problem);
   // Vector<DoubleVector> evecI(N);

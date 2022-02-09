@@ -475,7 +475,7 @@ int main(int argc, char** argv)
 #endif
 
   // Set up the problem:
-  unsigned n_element = 10; // Number of elements
+  unsigned n_element = 8; // Number of elements
 
 #ifdef OOMPH_HAS_TRILINOS
   // Solve with Anasazi

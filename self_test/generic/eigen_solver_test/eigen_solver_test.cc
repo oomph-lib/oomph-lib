@@ -96,17 +96,15 @@ public:
       for (unsigned j = 0; j < N_value; j++)
       {
         unsigned local_unknown = internal_local_eqn(Data_index, j);
-        if (i >= j)
+        if (i == j)
         {
-          if (i == j)
-          {
-            jacobian(local_eqn, local_unknown) += i;
-          }
-          else
-          {
-            jacobian(local_eqn, local_unknown) += 1;
-          }
-          mass_matrix(local_eqn, local_unknown) += 1;
+          jacobian(local_eqn, local_unknown) += i + 1.0;
+          mass_matrix(local_eqn, local_unknown) += 1.0;
+        }
+        else if (i > j)
+        {
+          jacobian(local_eqn, local_unknown) += 1.0;
+          mass_matrix(local_eqn, local_unknown) += 1.0;
         }
       }
     }
@@ -223,7 +221,7 @@ public:
       Doc_info_pt(doc_info_pt)
   {
     /// Set number of eigenvalues to compute
-    N_eval = 8;
+    N_eval = 1;
 
     // Create eigenproblem
     Problem_pt = new Eigenproblem<ELEMENT>(Matrix_size);
@@ -445,8 +443,8 @@ class EigensolverTest
 {
 public:
   EigensolverTest(const unsigned N,
-             const unsigned n_timing_loops,
-             DocInfo* const& doc_info_pt)
+                  const unsigned n_timing_loops,
+                  DocInfo* const& doc_info_pt)
     : Matrix_size(N), N_timing_loops(n_timing_loops), Doc_info_pt(doc_info_pt)
   {
     EigenSolver* eigen_solver_pt = new SOLVER;
@@ -485,21 +483,21 @@ int main(int argc, char** argv)
   const unsigned n_timing_loops = 2;
 
   // Matrix dimensions
-  const unsigned N = 32;
+  const unsigned N = 64;
 
   DocInfo* doc_info_pt = new DocInfo;
   doc_info_pt->set_directory("RESLT/");
-  //doc_info_pt->set_directory("RESLT_lapack/");
+  // doc_info_pt->set_directory("RESLT_lapack/");
 
   EigensolverTest<LAPACK_QZ>(N, n_timing_loops, doc_info_pt);
 
 #ifdef OOMPH_HAS_TRILINOS
-  //doc_info_pt->set_directory("RESLT_anasazi/");
-  //doc_info_pt->number() = 0;
+  // doc_info_pt->set_directory("RESLT_anasazi/");
+  // doc_info_pt->number() = 0;
 
   Anasazi::Use_temporary_code_for_andrew_legacy_version = true;
 
-  //EigensolverTest<ANASAZI>(N, n_timing_loops, doc_info_pt);
+  EigensolverTest<ANASAZI>(N, n_timing_loops, doc_info_pt);
 #endif
 
   // EigensolverTest<ARPACK>(N, n_timing_loops, doc_info_pt);
