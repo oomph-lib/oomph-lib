@@ -37,6 +37,7 @@ class BaseEigenElement : public GeneralisedElement
 public:
   BaseEigenElement() {}
 
+  // Set problem size
   void set_size(const unsigned& n)
   {
     N_value = n;
@@ -44,12 +45,15 @@ public:
     Data_index = add_internal_data(new Data(N_value));
   }
 
+  // Create the matrices in the eigenproblem, equivalent to the Jacobian and
+  // mass matrix (virtual)
   void fill_in_contribution_to_jacobian_and_mass_matrix(
     Vector<double>& residuals,
     DenseMatrix<double>& jacobian,
     DenseMatrix<double>& mass_matrix) = 0;
 
 protected:
+  // Store the problem size and the data index
   unsigned N_value;
   unsigned Data_index;
 };
@@ -59,6 +63,7 @@ protected:
 class IdentityEigenElement : public BaseEigenElement
 {
 public:
+  // Implement the Jacobian and mass matrix construction
   void fill_in_contribution_to_jacobian_and_mass_matrix(
     Vector<double>& residuals,
     DenseMatrix<double>& jacobian,
@@ -80,11 +85,13 @@ public:
   }
 };
 
-/// AsymmetricEigenElement generates an eigenproblem whose Jacobian and mass
-/// matrices are simple asymmetric examples
+// AsymmetricEigenElement generates an eigenproblem whose Jacobian and mass
+// matrices are simple asymmetric examples such that the eigenvalues should be
+// the integers between 1 and 64 inclusive
 class AsymmetricEigenElement : public BaseEigenElement
 {
 public:
+  // Implement creation of the matrices
   void fill_in_contribution_to_jacobian_and_mass_matrix(
     Vector<double>& residuals,
     DenseMatrix<double>& jacobian,
@@ -96,11 +103,14 @@ public:
       for (unsigned j = 0; j < N_value; j++)
       {
         unsigned local_unknown = internal_local_eqn(Data_index, j);
+        // Set the elements of the Jacobian's diagonal to 1, 2, 3, ..., 64
+        // and the mass matrix's diagonal to 1, 1, ..., 1
         if (i == j)
         {
           jacobian(local_eqn, local_unknown) += i + 1.0;
           mass_matrix(local_eqn, local_unknown) += 1.0;
         }
+        // Set the upper diagonal elements to one for both matrices
         else if (i > j)
         {
           jacobian(local_eqn, local_unknown) += 1.0;
@@ -116,19 +126,23 @@ public:
 class RandomAsymmetricEigenElement : public BaseEigenElement
 {
 public:
+  // Implement creation of eigenproblem matrices
   void fill_in_contribution_to_jacobian_and_mass_matrix(
     Vector<double>& residuals,
     DenseMatrix<double>& jacobian,
     DenseMatrix<double>& mass_matrix)
   {
+    // Initialise the random number generator to a fixed seed
     unsigned seed = 0;
     srand(seed);
+
     for (unsigned i = 0; i < N_value; i++)
     {
       unsigned local_eqn = internal_local_eqn(Data_index, i);
       for (unsigned j = 0; j < N_value; j++)
       {
         unsigned local_unknown = internal_local_eqn(Data_index, j);
+        // Create two dense, random, asymmetric matrices
         jacobian(local_eqn, local_unknown) += rand() % 256 - 128;
         mass_matrix(local_eqn, local_unknown) += rand() % 256 - 128;
       }
@@ -141,6 +155,7 @@ public:
 class RosserSymmetricEigenElement : public BaseEigenElement
 {
 public:
+  // Override set_size to ensure the problem is 8x8
   void set_size(const unsigned& n)
   {
     /// Override the input argument as the Rosser matrix is fixed at 8x8
@@ -149,11 +164,15 @@ public:
     Data_index = add_internal_data(new Data(N_value));
   }
 
+  // Implement creation of Jacobian and mass matrices by setting the Jacobian
+  // equal to the Rosser matrix and the mass matrix to the identity matrix
   void fill_in_contribution_to_jacobian_and_mass_matrix(
     Vector<double>& residuals,
     DenseMatrix<double>& jacobian,
     DenseMatrix<double>& mass_matrix)
   {
+    // The Rosser matrix, eigenvalues = 10*sqrt(10405), 1020, 510 +
+    // 100*sqrt(26), 1000, 1000, 510 - 100*sqrt(26), 0, -10*sqrt(10405)
     int A[8][8] = {{611, 196, -192, 407, -8, -52, -49, 29},
                    {196, 899, 113, -192, -71, -43, -8, -44},
                    {-192, 113, 899, 196, 61, 49, 8, 52},
@@ -162,7 +181,6 @@ public:
                    {-52, -43, 49, 44, -599, 411, 208, 208},
                    {-49, -8, 8, 59, 208, 208, 99, -911},
                    {29, -44, 52, -23, 208, 208, -911, 99}};
-
 
     for (unsigned i = 0; i < N_value; i++)
     {
@@ -188,6 +206,7 @@ class Eigenproblem : public Problem
 public:
   Eigenproblem(const unsigned& size)
   {
+    // Create mesh
     this->mesh_pt() = new Mesh;
 
     // First element
@@ -200,16 +219,19 @@ public:
     el_pt->set_size(size);
     this->mesh_pt()->add_element_pt(el_pt);
 
+    // Assign eqn numbers
     assign_eqn_numbers();
   }
 
+  // Class destructor. Delete mesh
   ~Eigenproblem()
   {
     delete this->mesh_pt();
   }
 };
 
-
+// Solve Eigenproblem Test class. Create an eigenproblem on a templated ELEMENT
+// and call the solve_eigenproblem function of the passed eigen_solver_pt.
 template<class ELEMENT>
 class SolveEigenProblemTest
 {
@@ -225,13 +247,15 @@ public:
       Doc_info_pt(doc_info_pt),
       Do_adjoint_problem(do_adjoint_problem)
   {
+    // Create Eigenproblem
     Problem_pt = new Eigenproblem<ELEMENT>(Matrix_size);
+
+    // Distribute the problem
 #ifdef OOMPH_HAS_MPI
     Problem_pt->distribute();
 #endif
 
-    // Set up additional arguments
-    // Output all eigenvalues
+    // Output the first 8 eigenvalues
     N_eval = 8;
 
     // Store outputs
@@ -274,19 +298,32 @@ public:
     }
     output_stream.close();
 
+    // Increment doc info number
     Doc_info_pt->number()++;
   }
 
 private:
+  // Store the eigen solver pointer
   EigenSolver* Eigen_solver_pt;
-  unsigned Matrix_size;
-  unsigned N_eval;
-  unsigned N_timing_loops;
+
+  // Store the eigenproblem and required arguments for creating the eigenproblem
   Problem* Problem_pt;
-  DocInfo* Doc_info_pt;
+  unsigned Matrix_size;
+
+  // Store the required arguments for calling the solver
+  unsigned N_eval;
   bool Do_adjoint_problem;
+
+  // Store the number of times the function should be call for improved timing
+  unsigned N_timing_loops;
+
+  // Store a pointer to doc_info
+  DocInfo* Doc_info_pt;
 };
 
+// Solve Eigenproblem Test class (Legacy version). Create an eigenproblem on a
+// templated ELEMENT and call the solve_eigenproblem function of the passed
+// eigen_solver_pt.
 template<class ELEMENT>
 class SolveEigenProblemLegacyTest
 {
@@ -302,10 +339,15 @@ public:
       Doc_info_pt(doc_info_pt),
       Do_adjoint_problem(do_adjoint_problem)
   {
+    // Create Eigenproblem
     Problem_pt = new Eigenproblem<ELEMENT>(Matrix_size);
 
-    // Set up additional arguments
-    // Output all eigenvalues
+    // Distribute the problem
+#ifdef OOMPH_HAS_MPI
+    Problem_pt->distribute();
+#endif
+
+    // Output the first 8 eigenvalues
     N_eval = 8;
 
     // Store outputs
@@ -326,7 +368,7 @@ public:
     // Document duration
     double t_length = (double)(t_end - t_start) / CLOCKS_PER_SEC;
     ofstream timing_stream;
-    timing_stream.open("timing_distributed.dat", ios_base::app);
+    timing_stream.open("timing.dat", ios_base::app);
     timing_stream << "test" << Doc_info_pt->number()
                   << ", time: " << t_length / double(N_timing_loops) << endl;
     timing_stream.close();
@@ -343,27 +385,41 @@ public:
     }
     output_stream.close();
 
+    // Increment doc info number
     Doc_info_pt->number()++;
   }
 
 private:
+  // Store the eigen solver pointer
   EigenSolver* Eigen_solver_pt;
-  unsigned Matrix_size;
-  unsigned N_eval;
-  unsigned N_timing_loops;
+
+  // Store the eigenproblem and required arguments for creating the eigenproblem
   Problem* Problem_pt;
-  DocInfo* Doc_info_pt;
+  unsigned Matrix_size;
+
+  // Store the required arguments for calling the solver
+  unsigned N_eval;
   bool Do_adjoint_problem;
+
+  // Store the number of times the function should be call for improved timing
+  unsigned N_timing_loops;
+
+  // Store a pointer to doc_info
+  DocInfo* Doc_info_pt;
 };
 
+// Test the LAPACK_QZ solver against the appropriate problem and methods.
 void test_anasazi(const unsigned N,
                   const unsigned n_timing_loops,
                   DocInfo* doc_info_pt)
 {
+  // Create a new eigensolver
   EigenSolver* eigen_solver_pt = new ANASAZI;
 
+  // Do not test the adjoint problem
   const bool do_adjoint_problem = false;
 
+  // Test the regular solve_eigenproblem
   SolveEigenProblemTest<IdentityEigenElement>(
     eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem);
   SolveEigenProblemTest<AsymmetricEigenElement>(
@@ -371,6 +427,7 @@ void test_anasazi(const unsigned N,
   SolveEigenProblemTest<RandomAsymmetricEigenElement>(
     eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem);
 
+  // Test the legacy solve_eigenproblem
   SolveEigenProblemLegacyTest<IdentityEigenElement>(
     eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem);
   SolveEigenProblemLegacyTest<AsymmetricEigenElement>(
@@ -378,14 +435,14 @@ void test_anasazi(const unsigned N,
   SolveEigenProblemLegacyTest<RandomAsymmetricEigenElement>(
     eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem);
 
+  // Free the eigen_solver_pt
   delete eigen_solver_pt;
 }
 
-/// Main function. Apply solver tests to each eigensolver.
+/// Main function. Call all the testing functions
 int main(int argc, char** argv)
 {
-// Want to test Trilinos if we have it, so we must initialise MPI
-// if we have compiled with it
+// If we have MPI, we must initialise it
 #ifdef OOMPH_HAS_MPI
   MPI_Helpers::init(argc, argv);
 
@@ -395,22 +452,30 @@ int main(int argc, char** argv)
   // Matrix dimensions
   const unsigned N = 64;
 
+  // Create a DocInfo
   DocInfo* doc_info_pt = new DocInfo;
+
 #ifdef OOMPH_HAS_TRILINOS
+  // Set directory to anasazi and reset the numbering
   doc_info_pt->set_directory("RESLT_anasazi_distributed/");
-  doc_info_pt->number() = 0;
+
+  // Add a header to the timing data stream
   ofstream timing_stream;
   timing_stream.open("timing_distributed.dat", ios_base::app);
   timing_stream << "ANASAZI" << endl;
   timing_stream.close();
 
+  // Ensure legacy flag is enabled
   Anasazi::Use_temporary_code_for_andrew_legacy_version = true;
 
+  // Call test anasazi
   test_anasazi(N, n_timing_loops, doc_info_pt);
 #endif
 
+  // Delete doc_info_pt
   delete doc_info_pt;
 
+  // If we have MPI then we need to call finalize
   MPI_Helpers::finalize();
 #endif
 

@@ -34,6 +34,7 @@ using namespace oomph;
 /// matrix eigenvalue problem
 int main()
 {
+  // Create DocInfo and add an output directory
   DocInfo doc_info;
   doc_info.set_directory("RESLT/");
 
@@ -89,12 +90,14 @@ int main()
   Vector<complex<double>> eval;
   Vector<Vector<complex<double>>> evec;
 
-  // test eigen_solver with complex matrices
+  // Test eigen_solver with complex matrices
   eigen_solver.find_eigenvalues(matrix_cr, matrix_cc, eval, evec);
 
   ofstream output_stream;
   output_stream.open(doc_info.directory() +
                      "lapack_qz_find_eigenvalues_test.dat");
+
+  // Output real and imaginary parts of the eigenvalues and eigenvectors
   for (int i = 0; i < 2; i++)
   {
     output_stream << eval[i].real() << " , " << eval[i].imag() << endl << endl;
