@@ -4,7 +4,7 @@
 OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
 
 #Set the number of tests to be checked
-NUM_TESTS=2
+NUM_TESTS=3
 
 # Setup validation directory
 #---------------------------
@@ -17,7 +17,8 @@ cd Validation
 # Validation for eigensolver test
 #-----------------------------------------
 echo "Running eigensolver validation "
-mkdir RESLT
+mkdir RESLT_lapack
+mkdir RESLT_anasazi
 ../eigen_solver_test > OUTPUT
 echo "done"
 echo " " >> validation.log
@@ -28,15 +29,18 @@ echo "Validation directory: " >> validation.log
 echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
-cat RESLT/* > eigen_solver_test.dat
+cat RESLT_lapack/* > eigen_solver_test_lapack.dat
+cat RESLT_anasazi/* > eigen_solver_test_anasazi.dat
 
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/eigen_solver_test.dat.gz  \
-         eigen_solver_test.dat >> validation.log
+../../../../bin/fpdiff.py ../validata/eigen_solver_test_lapack.dat.gz  \
+         eigen_solver_test_lapack.dat >> validation.log
+../../../../bin/fpdiff.py ../validata/eigen_solver_test_anasazi.dat.gz  \
+         eigen_solver_test_anasazi.dat >> validation.log
 fi
-rm -rf RESLT
+rm -rf RESLT_lapack RESLT_anasazi
 #-----------------------------------------
 
 # Validation for eigensolver test

@@ -205,87 +205,27 @@ public:
   }
 };
 
-/// TestProblem class. Apply a series of tests upon a given eigensolver using
-/// the eigenelement provided as a template.
+
 template<class ELEMENT>
-class TestProblem
+class SolveEigenProblemTest
 {
 public:
-  TestProblem(EigenSolver* const& eigen_solver_pt,
-              const unsigned& N,
-              const unsigned& n_timing_loops,
-              DocInfo* const& doc_info_pt)
+  SolveEigenProblemTest(EigenSolver* const& eigen_solver_pt,
+                        const unsigned& N,
+                        const unsigned& n_timing_loops,
+                        DocInfo* const& doc_info_pt,
+                        bool do_adjoint_problem)
     : Eigen_solver_pt(eigen_solver_pt),
       Matrix_size(N),
       N_timing_loops(n_timing_loops),
-      Doc_info_pt(doc_info_pt)
+      Doc_info_pt(doc_info_pt),
+      Do_adjoint_problem(do_adjoint_problem)
   {
-    /// Set number of eigenvalues to compute
-    N_eval = 1;
-
-    // Create eigenproblem
     Problem_pt = new Eigenproblem<ELEMENT>(Matrix_size);
 
-    test_solve_eigenproblem_legacy();
-
-    test_solve_eigenproblem();
-
-    test_solve_adjoint_eigenproblem_legacy();
-
-    test_solve_adjoint_eigenproblem();
-  }
-
-  ~TestProblem()
-  {
-    delete Problem_pt;
-  }
-
-  void test_solve_eigenproblem_legacy()
-  {
     // Set up additional arguments
     // Output all eigenvalues
-    const unsigned n_eval = N_eval;
-    const bool do_adjoint_problem = false;
-
-    // Store outputs
-    Vector<complex<double>> eval(N_eval);
-    Vector<DoubleVector> evec(N_eval);
-
-    // Start clock
-    clock_t t_start = clock();
-    for (unsigned i = 0; i < N_timing_loops; i++)
-    {
-      try
-      {
-        // Call solve_eigenproblem_legacy
-        Eigen_solver_pt->solve_eigenproblem_legacy(
-          Problem_pt, n_eval, eval, evec, do_adjoint_problem);
-      }
-      catch (const OomphLibError& error)
-      {
-        return;
-      }
-    }
-    // Stop clock
-    clock_t t_end = clock();
-
-    // Document duration
-    double t_length = (double)(t_end - t_start) / CLOCKS_PER_SEC;
-    ofstream timing_stream;
-    timing_stream.open("timing.dat", ios_base::app);
-    timing_stream << "time: " << t_length / double(N_timing_loops) << endl;
-    timing_stream.close();
-
-    // Document solution
-    doc_solution(eval);
-  }
-
-  void test_solve_eigenproblem()
-  {
-    // Set up additional arguments
-    // Output all eigenvalues
-    const unsigned n_eval = N_eval;
-    const bool do_adjoint_problem = false;
+    N_eval = 8;
 
     // Store outputs
     Vector<complex<double>> eval(N_eval);
@@ -296,20 +236,13 @@ public:
     clock_t t_start = clock();
     for (unsigned i = 0; i < N_timing_loops; i++)
     {
-      try
-      {
-        // Call solve_eigenproblem
-        Eigen_solver_pt->solve_eigenproblem(Problem_pt,
-                                            n_eval,
-                                            eval,
-                                            eigenvector_real,
-                                            eigenvector_imag,
-                                            do_adjoint_problem);
-      }
-      catch (const OomphLibError& error)
-      {
-        return;
-      }
+      // Call solve_eigenproblem
+      Eigen_solver_pt->solve_eigenproblem(Problem_pt,
+                                          N_eval,
+                                          eval,
+                                          eigenvector_real,
+                                          eigenvector_imag,
+                                          Do_adjoint_problem);
     }
     // Stop clock
     clock_t t_end = clock();
@@ -318,101 +251,11 @@ public:
     double t_length = (double)(t_end - t_start) / CLOCKS_PER_SEC;
     ofstream timing_stream;
     timing_stream.open("timing.dat", ios_base::app);
-    timing_stream << "time: " << t_length / double(N_timing_loops) << endl;
+    timing_stream << "test" << Doc_info_pt->number()
+                  << ", time: " << t_length / double(N_timing_loops) << endl;
     timing_stream.close();
 
     // Document solution
-    doc_solution(eval);
-  }
-
-  void test_solve_adjoint_eigenproblem_legacy()
-  {
-    // Set up additional arguments
-    // Output all eigenvalues
-    const unsigned n_eval = N_eval;
-    const bool do_adjoint_problem = true;
-
-    // Store outputs
-    Vector<complex<double>> eval(N_eval);
-    Vector<DoubleVector> evec(N_eval);
-
-    // Start clock
-    clock_t t_start = clock();
-    for (unsigned i = 0; i < N_timing_loops; i++)
-    {
-      try
-      {
-        // Call solve_eigenproblem_legacy
-        Eigen_solver_pt->solve_eigenproblem_legacy(
-          Problem_pt, n_eval, eval, evec, do_adjoint_problem);
-      }
-      catch (const OomphLibError& error)
-      {
-        return;
-      }
-    }
-    // Stop clock
-    clock_t t_end = clock();
-
-    // Document duration
-    double t_length = (double)(t_end - t_start) / CLOCKS_PER_SEC;
-    ofstream timing_stream;
-    timing_stream.open("timing.dat", ios_base::app);
-    timing_stream << "time: " << t_length / double(N_timing_loops) << endl;
-    timing_stream.close();
-
-    // Document solution
-    doc_solution(eval);
-  }
-
-
-  void test_solve_adjoint_eigenproblem()
-  {
-    // Set up additional arguments
-    // Output all eigenvalues
-    const unsigned n_eval = N_eval;
-    const bool do_adjoint_problem = true;
-
-    // Store outputs
-    Vector<complex<double>> eval(N_eval);
-    Vector<DoubleVector> eigenvector_real(N_eval);
-    Vector<DoubleVector> eigenvector_imag(N_eval);
-
-    // Start clock
-    clock_t t_start = clock();
-    for (unsigned i = 0; i < N_timing_loops; i++)
-    {
-      try
-      {
-        // Call solve_eigenproblem
-        Eigen_solver_pt->solve_eigenproblem(Problem_pt,
-                                            n_eval,
-                                            eval,
-                                            eigenvector_real,
-                                            eigenvector_imag,
-                                            do_adjoint_problem);
-      }
-      catch (const OomphLibError& error)
-      {
-        return;
-      }
-    }
-    // Stop clock
-    clock_t t_end = clock();
-
-    // Document duration
-    double t_length = (double)(t_end - t_start) / CLOCKS_PER_SEC;
-    ofstream timing_stream;
-    timing_stream.open("timing.dat", ios_base::app);
-    timing_stream << "time: " << t_length / double(N_timing_loops) << endl;
-    timing_stream.close();
-
-    // Document solution
-    doc_solution(eval);
-  }
-
-  void doc_solution(Vector<complex<double>> eval)
-  {
     string filename = Doc_info_pt->directory() + "test" +
                       to_string(Doc_info_pt->number()) + ".dat";
 
@@ -434,41 +277,132 @@ private:
   unsigned N_timing_loops;
   Problem* Problem_pt;
   DocInfo* Doc_info_pt;
+  bool Do_adjoint_problem;
 };
 
-/// EigensolverTest class. Tests the templated eigensolver against a series of
-/// eigenelements.
-template<class SOLVER>
-class EigensolverTest
+template<class ELEMENT>
+class SolveEigenProblemLegacyTest
 {
 public:
-  EigensolverTest(const unsigned N,
-                  const unsigned n_timing_loops,
-                  DocInfo* const& doc_info_pt)
-    : Matrix_size(N), N_timing_loops(n_timing_loops), Doc_info_pt(doc_info_pt)
+  SolveEigenProblemLegacyTest(EigenSolver* const& eigen_solver_pt,
+                              const unsigned& N,
+                              const unsigned& n_timing_loops,
+                              DocInfo* const& doc_info_pt,
+                              bool do_adjoint_problem)
+    : Eigen_solver_pt(eigen_solver_pt),
+      Matrix_size(N),
+      N_timing_loops(n_timing_loops),
+      Doc_info_pt(doc_info_pt),
+      Do_adjoint_problem(do_adjoint_problem)
   {
-    EigenSolver* eigen_solver_pt = new SOLVER;
+    Problem_pt = new Eigenproblem<ELEMENT>(Matrix_size);
 
-    TestProblem<IdentityEigenElement>(
-      eigen_solver_pt, Matrix_size, N_timing_loops, Doc_info_pt);
+    // Set up additional arguments
+    // Output all eigenvalues
+    N_eval = 8;
 
-    TestProblem<AsymmetricEigenElement>(
-      eigen_solver_pt, Matrix_size, N_timing_loops, Doc_info_pt);
+    // Store outputs
+    Vector<complex<double>> eval(N_eval);
+    Vector<DoubleVector> evec(N_eval);
 
-    TestProblem<RosserSymmetricEigenElement>(
-      eigen_solver_pt, Matrix_size, N_timing_loops, Doc_info_pt);
+    // Start clock
+    clock_t t_start = clock();
+    for (unsigned i = 0; i < N_timing_loops; i++)
+    {
+      // Call solve_eigenproblem
+      Eigen_solver_pt->solve_eigenproblem_legacy(
+        Problem_pt, N_eval, eval, evec, Do_adjoint_problem);
+    }
+    // Stop clock
+    clock_t t_end = clock();
 
-    TestProblem<RandomAsymmetricEigenElement>(
-      eigen_solver_pt, Matrix_size, N_timing_loops, Doc_info_pt);
+    // Document duration
+    double t_length = (double)(t_end - t_start) / CLOCKS_PER_SEC;
+    ofstream timing_stream;
+    timing_stream.open("timing.dat", ios_base::app);
+    timing_stream << "test" << Doc_info_pt->number()
+                  << ", time: " << t_length / double(N_timing_loops) << endl;
+    timing_stream.close();
 
-    delete eigen_solver_pt;
+    // Document solution
+    string filename = Doc_info_pt->directory() + "test" +
+                      to_string(Doc_info_pt->number()) + ".dat";
+
+    ofstream output_stream;
+    output_stream.open(filename);
+    for (unsigned i = 0; i < N_eval; i++)
+    {
+      output_stream << eval[i].real() << " " << eval[i].imag() << endl;
+    }
+    output_stream.close();
+
+    Doc_info_pt->number()++;
   }
 
 private:
+  EigenSolver* Eigen_solver_pt;
   unsigned Matrix_size;
+  unsigned N_eval;
   unsigned N_timing_loops;
+  Problem* Problem_pt;
   DocInfo* Doc_info_pt;
+  bool Do_adjoint_problem;
 };
+
+void test_lapack_qz(const unsigned N,
+                    const unsigned n_timing_loops,
+                    DocInfo* doc_info_pt)
+{
+  EigenSolver* eigen_solver_pt = new LAPACK_QZ;
+
+  const bool do_adjoint_problem = false;
+  SolveEigenProblemTest<IdentityEigenElement>(
+    eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem);
+  SolveEigenProblemTest<RosserSymmetricEigenElement>(
+    eigen_solver_pt, 8, n_timing_loops, doc_info_pt, do_adjoint_problem);
+  SolveEigenProblemTest<AsymmetricEigenElement>(
+    eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem);
+  SolveEigenProblemTest<RandomAsymmetricEigenElement>(
+    eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem);
+
+  SolveEigenProblemLegacyTest<IdentityEigenElement>(
+    eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem);
+  SolveEigenProblemLegacyTest<RosserSymmetricEigenElement>(
+    eigen_solver_pt, 8, n_timing_loops, doc_info_pt, do_adjoint_problem);
+  SolveEigenProblemLegacyTest<AsymmetricEigenElement>(
+    eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem);
+  SolveEigenProblemLegacyTest<RandomAsymmetricEigenElement>(
+    eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem);
+
+  delete eigen_solver_pt;
+}
+
+void test_anasazi(const unsigned N,
+                  const unsigned n_timing_loops,
+                  DocInfo* doc_info_pt)
+{
+  EigenSolver* eigen_solver_pt = new ANASAZI;
+
+  bool const do_adjoint_problem[] = {false, true};
+  for (unsigned i = 0; i < 2; i++)
+  {
+    SolveEigenProblemTest<IdentityEigenElement>(
+      eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem[i]);
+    SolveEigenProblemTest<AsymmetricEigenElement>(
+      eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem[i]);
+    SolveEigenProblemTest<RandomAsymmetricEigenElement>(
+      eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem[i]);
+
+    SolveEigenProblemLegacyTest<IdentityEigenElement>(
+      eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem[i]);
+    SolveEigenProblemLegacyTest<AsymmetricEigenElement>(
+      eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem[i]);
+    SolveEigenProblemLegacyTest<RandomAsymmetricEigenElement>(
+      eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem[i]);
+  }
+
+  delete eigen_solver_pt;
+}
 
 /// Main function. Apply solver tests to each eigensolver.
 int main(int argc, char** argv)
@@ -486,21 +420,25 @@ int main(int argc, char** argv)
   const unsigned N = 64;
 
   DocInfo* doc_info_pt = new DocInfo;
-  doc_info_pt->set_directory("RESLT/");
-  // doc_info_pt->set_directory("RESLT_lapack/");
+  doc_info_pt->set_directory("RESLT_lapack/");
+  ofstream timing_stream;
+  timing_stream.open("timing.dat", ios_base::app);
+  timing_stream << "LAPACK_QZ" << endl;
+  timing_stream.close();
 
-  EigensolverTest<LAPACK_QZ>(N, n_timing_loops, doc_info_pt);
+  test_lapack_qz(N, n_timing_loops, doc_info_pt);
 
 #ifdef OOMPH_HAS_TRILINOS
-  // doc_info_pt->set_directory("RESLT_anasazi/");
-  // doc_info_pt->number() = 0;
+  doc_info_pt->set_directory("RESLT_anasazi/");
+  doc_info_pt->number() = 0;
+  timing_stream.open("timing.dat", ios_base::app);
+  timing_stream << "ANASAZI" << endl;
+  timing_stream.close();
 
   Anasazi::Use_temporary_code_for_andrew_legacy_version = true;
 
-  EigensolverTest<ANASAZI>(N, n_timing_loops, doc_info_pt);
+  test_anasazi(N, n_timing_loops, doc_info_pt);
 #endif
-
-  // EigensolverTest<ARPACK>(N, n_timing_loops, doc_info_pt);
 
   delete doc_info_pt;
 
