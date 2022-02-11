@@ -386,6 +386,12 @@ void test_anasazi(const unsigned N,
   bool const do_adjoint_problem[] = {false, true};
   for (unsigned i = 0; i < 2; i++)
   {
+#ifdef OOMPH_HAS_MPI
+    if (i == 1)
+    {
+      return;
+    }
+#endif
     SolveEigenProblemTest<IdentityEigenElement>(
       eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem[i]);
     SolveEigenProblemTest<AsymmetricEigenElement>(
