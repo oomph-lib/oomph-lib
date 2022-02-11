@@ -226,7 +226,9 @@ public:
       Do_adjoint_problem(do_adjoint_problem)
   {
     Problem_pt = new Eigenproblem<ELEMENT>(Matrix_size);
+#ifdef OOMPH_HAS_MPI
     Problem_pt->distribute();
+#endif
 
     // Set up additional arguments
     // Output all eigenvalues

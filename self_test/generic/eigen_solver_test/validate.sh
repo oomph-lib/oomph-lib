@@ -4,7 +4,7 @@
 OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
 
 #Set the number of tests to be checked
-if $OOMPH_HAS_MPI; then
+if test "$MPI_RUN_COMMAND" = ""; then
 NUM_TESTS=3
 else
 NUM_TESTS=3
@@ -41,7 +41,7 @@ if test "$1" = "no_fpdiff"; then
 else
 ../../../../bin/fpdiff.py ../validata/eigen_solver_test_lapack.dat.gz  \
          eigen_solver_test_lapack.dat >> validation.log
-if ! $OOMPH_HAS_MPI; then
+if test "$MPI_RUN_COMMAND" = ""; then
 ../../../../bin/fpdiff.py ../validata/eigen_solver_test_anasazi.dat.gz  \
          eigen_solver_test_anasazi.dat >> validation.log
 fi
@@ -74,10 +74,10 @@ fi
 rm -rf RESLT
 #-----------------------------------------
 
-if $OOMPH_HAS_MPI; then
+if test "$MPI_RUN_COMMAND" != ""; then
 # Validation for eigensolver test
 #-----------------------------------------
-echo "Running find eigenvalues validation "
+echo "Running ANASAZI distributed validation "
 mkdir RESLT_anasazi_distributed
 mpirun -n 2 ../eigen_solver_test_distributed > OUTPUT
 echo "done"
