@@ -4,7 +4,11 @@
 OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
 
 #Set the number of tests to be checked
+if $OOMPH_HAS_MPI; then
 NUM_TESTS=3
+else
+NUM_TESTS=3
+fi
 
 # Setup validation directory
 #---------------------------
@@ -37,9 +41,7 @@ if test "$1" = "no_fpdiff"; then
 else
 ../../../../bin/fpdiff.py ../validata/eigen_solver_test_lapack.dat.gz  \
          eigen_solver_test_lapack.dat >> validation.log
-if $OOMPH_HAS_MPI; then
-  echo "dummy [OK] -- ANASAZI tests not implemented for mpi fully" >> validation.log
-else
+if ! $OOMPH_HAS_MPI; then
 ../../../../bin/fpdiff.py ../validata/eigen_solver_test_anasazi.dat.gz  \
          eigen_solver_test_anasazi.dat >> validation.log
 fi
@@ -72,8 +74,34 @@ fi
 rm -rf RESLT
 #-----------------------------------------
 
+if $OOMPH_HAS_MPI; then
+# Validation for eigensolver test
+#-----------------------------------------
+echo "Running find eigenvalues validation "
+mkdir RESLT_anasazi_distributed
+mpirun -n 2 ../eigen_solver_test_distributed > OUTPUT
+echo "done"
+echo " " >> validation.log
+echo "Find eigenvalues validation" >> validation.log
+echo "--------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat RESLT_anasazi_distributed/* > eigen_solver_test_distributed_anasazi.dat
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/eigen_solver_test_distributed_anasazi.dat.gz  \
+         eigen_solver_test_distributed_anasazi.dat >> validation.log
+fi
+rm -rf RESLT
+#-----------------------------------------
 # Append log to main validation log
 cat validation.log >> ../../../../validation.log
+fi
 
 cd ..
 
