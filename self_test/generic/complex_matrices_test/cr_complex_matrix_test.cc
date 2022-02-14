@@ -59,7 +59,7 @@ void print_complex_matrix(const oomph::ComplexMatrixBase& matrix,
 }
 
 /// Main test function for the compressed-row complex matrix class
-int main()
+int main(int argc, char** argv)
 {
 #ifdef OOMPH_HAS_MPI
   MPI_Helpers::init(argc, argv);
