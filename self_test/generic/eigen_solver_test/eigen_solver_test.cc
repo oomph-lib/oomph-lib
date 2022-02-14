@@ -431,6 +431,7 @@ void test_lapack_qz(const unsigned N,
   delete eigen_solver_pt;
 }
 
+#ifdef OOMPH_HAS_TRILINOS
 // Test the LAPACK_QZ solver against the appropriate problem and methods.
 void test_anasazi(const unsigned N,
                   const unsigned n_timing_loops,
@@ -471,6 +472,7 @@ void test_anasazi(const unsigned N,
   // Free the eigen_solver_pt
   delete eigen_solver_pt;
 }
+#endif
 
 /// Main function. Call all the testing functions
 int main(int argc, char** argv)
