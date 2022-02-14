@@ -432,7 +432,7 @@ void test_lapack_qz(const unsigned N,
 }
 
 #ifdef OOMPH_HAS_TRILINOS
-// Test the LAPACK_QZ solver against the appropriate problem and methods.
+// Test the ANASAZI solver against the appropriate problem and methods.
 void test_anasazi(const unsigned N,
                   const unsigned n_timing_loops,
                   DocInfo* doc_info_pt)
