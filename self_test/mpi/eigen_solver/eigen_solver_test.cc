@@ -396,21 +396,19 @@ private:
   DocInfo* Doc_info_pt;
 };
 
-// Test the LAPACK_QZ solver against the appropriate problem and methods.
-void test_lapack_qz(const unsigned N,
-                    const unsigned n_timing_loops,
-                    DocInfo* doc_info_pt)
+// Test the ANASAZI solver against the appropriate problem and methods.
+void test_anasazi(const unsigned N,
+                  const unsigned n_timing_loops,
+                  DocInfo* doc_info_pt)
 {
   // Create a new eigensolver
-  EigenSolver* eigen_solver_pt = new LAPACK_QZ;
+  EigenSolver* eigen_solver_pt = new ANASAZI;
 
-  // Do not test the unimplement adjoint problem
+  // Test both the adjoint and regular problem
   const bool do_adjoint_problem = false;
 
   // Test the regular solve_eigenproblem
   SolveEigenProblemTest<IdentityEigenElement>(
-    eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem);
-  SolveEigenProblemTest<RosserSymmetricEigenElement>(
     eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem);
   SolveEigenProblemTest<AsymmetricEigenElement>(
     eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem);
@@ -419,8 +417,6 @@ void test_lapack_qz(const unsigned N,
 
   // Test the legacy solve_eigenproblem
   SolveEigenProblemLegacyTest<IdentityEigenElement>(
-    eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem);
-  SolveEigenProblemLegacyTest<RosserSymmetricEigenElement>(
     eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem);
   SolveEigenProblemLegacyTest<AsymmetricEigenElement>(
     eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem);
@@ -434,6 +430,8 @@ void test_lapack_qz(const unsigned N,
 /// Main function. Call all the testing functions
 int main(int argc, char** argv)
 {
+  MPI_Helpers::init(argc, argv);
+
   // Number of times to repeat the operation for better timings
   const unsigned n_timing_loops = 2;
 
@@ -443,20 +441,26 @@ int main(int argc, char** argv)
   // Create a DocInfo
   DocInfo* doc_info_pt = new DocInfo;
 
-  // Set directory to lapack
-  doc_info_pt->set_directory("RESLT_lapack/");
+  // Set directory to anasazi and reset the numbering
+  doc_info_pt->set_directory("RESLT_anasazi/");
+  doc_info_pt->number() = 0;
 
   // Add a header to the timing data stream
   ofstream timing_stream;
   timing_stream.open("timing.dat", ios_base::app);
-  timing_stream << "LAPACK_QZ" << endl;
+  timing_stream << "ANASAZI" << endl;
   timing_stream.close();
 
-  // Call test lapack qz
-  test_lapack_qz(N, n_timing_loops, doc_info_pt);
+  // Ensure legacy flag is enabled
+  Anasazi::Use_temporary_code_for_andrew_legacy_version = true;
+
+  // Call test anasazi
+  test_anasazi(N, n_timing_loops, doc_info_pt);
 
   // Delete doc_info_pt
   delete doc_info_pt;
+
+  MPI_Helpers::finalize();
 
   return 0;
 }

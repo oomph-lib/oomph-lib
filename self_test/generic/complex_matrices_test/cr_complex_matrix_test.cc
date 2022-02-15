@@ -267,9 +267,7 @@ int main(int argc, char** argv)
   output_stream << "A B" << endl;
   print_complex_matrix(matrix_result, output_stream);
 
-  // Print cleanup messages for easier debugging
   delete dist_pt;
-  dist_pt = nullptr;
 
 #ifdef OOMPH_HAS_MPI
   MPI_Helpers::finalize();

@@ -181,34 +181,12 @@ int main()
   Vector<DoubleVector> eigenvector_imag(N);
 
   /// Test solve_eigenproblem
-  try
-  {
-    problem.solve_eigenproblem(
-      n_eval, eigenvalue, eigenvector_real, eigenvector_imag);
-    doc_solution(doc_info.directory() + "solve_eigenproblem_test.dat",
-                 eigenvalue,
-                 eigenvector_real,
-                 eigenvector_imag);
-  }
-  catch (const OomphLibError& error)
-  {
-    oomph_info << "Failed to run solve_eigenproblem " << endl;
-  }
-
-  /// Test solve_adjoint_eigenproblem
-  try
-  {
-    problem.solve_adjoint_eigenproblem(
-      n_eval, eigenvalue, eigenvector_real, eigenvector_imag);
-    doc_solution(doc_info.directory() + "solve_adjoint_eigenproblem_test.dat",
-                 eigenvalue,
-                 eigenvector_real,
-                 eigenvector_imag);
-  }
-  catch (const OomphLibError& error)
-  {
-    oomph_info << "Failed to run solve_adjoint_eigenproblem " << endl;
-  }
+  problem.solve_eigenproblem(
+    n_eval, eigenvalue, eigenvector_real, eigenvector_imag);
+  doc_solution(doc_info.directory() + "solve_eigenproblem_test.dat",
+               eigenvalue,
+               eigenvector_real,
+               eigenvector_imag);
 
   /// ----------------------------------------
   ///              Legacy tests
@@ -217,32 +195,12 @@ int main()
   Vector<DoubleVector> eigenvector(N);
 
   /// Test solve_eigenproblem_legacy
-  try
-  {
-    problem.solve_eigenproblem_legacy(n_eval, eigenvalue, eigenvector);
-    doc_solution_legacy(doc_info.directory() +
-                          "solve_eigenproblem_legacy_test.dat",
-                        eigenvalue,
-                        eigenvector);
-  }
-  catch (const OomphLibError& error)
-  {
-    oomph_info << "Failed to run solve_eigenproblem_legacy " << endl;
-  }
+  problem.solve_eigenproblem_legacy(n_eval, eigenvalue, eigenvector);
+  doc_solution_legacy(doc_info.directory() +
+                        "solve_eigenproblem_legacy_test.dat",
+                      eigenvalue,
+                      eigenvector);
 
-  /// Test solve_adjoint_eigenproblem_legacy
-  try
-  {
-    problem.solve_adjoint_eigenproblem_legacy(n_eval, eigenvalue, eigenvector);
-    doc_solution_legacy(doc_info.directory() +
-                          "solve_adjoint_eigenproblem_legacy_test.dat",
-                        eigenvalue,
-                        eigenvector);
-  }
-  catch (const OomphLibError& error)
-  {
-    oomph_info << "Failed to run solve_adjoint_eigenproblem_legacy" << endl;
-  }
 
   return (EXIT_SUCCESS);
 }

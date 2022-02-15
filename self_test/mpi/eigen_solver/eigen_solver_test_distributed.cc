@@ -251,9 +251,7 @@ public:
     Problem_pt = new Eigenproblem<ELEMENT>(Matrix_size);
 
     // Distribute the problem
-#ifdef OOMPH_HAS_MPI
     Problem_pt->distribute();
-#endif
 
     // Output the first 8 eigenvalues
     N_eval = 8;
@@ -343,9 +341,7 @@ public:
     Problem_pt = new Eigenproblem<ELEMENT>(Matrix_size);
 
     // Distribute the problem
-#ifdef OOMPH_HAS_MPI
     Problem_pt->distribute();
-#endif
 
     // Output the first 8 eigenvalues
     N_eval = 8;
@@ -408,7 +404,6 @@ private:
   DocInfo* Doc_info_pt;
 };
 
-#ifdef OOMPH_HAS_TRILINOS
 // Test the LAPACK_QZ solver against the appropriate problem and methods.
 void test_anasazi(const unsigned N,
                   const unsigned n_timing_loops,
@@ -439,13 +434,11 @@ void test_anasazi(const unsigned N,
   // Free the eigen_solver_pt
   delete eigen_solver_pt;
 }
-#endif
 
 /// Main function. Call all the testing functions
 int main(int argc, char** argv)
 {
 // If we have MPI, we must initialise it
-#ifdef OOMPH_HAS_MPI
   MPI_Helpers::init(argc, argv);
 
   // Number of times to repeat the operation for better timings
@@ -457,7 +450,6 @@ int main(int argc, char** argv)
   // Create a DocInfo
   DocInfo* doc_info_pt = new DocInfo;
 
-#ifdef OOMPH_HAS_TRILINOS
   // Set directory to anasazi and reset the numbering
   doc_info_pt->set_directory("RESLT_anasazi_distributed/");
 
@@ -472,14 +464,12 @@ int main(int argc, char** argv)
 
   // Call test anasazi
   test_anasazi(N, n_timing_loops, doc_info_pt);
-#endif
 
   // Delete doc_info_pt
   delete doc_info_pt;
 
   // If we have MPI then we need to call finalize
   MPI_Helpers::finalize();
-#endif
 
   return 0;
 }
