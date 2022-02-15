@@ -5,9 +5,9 @@ OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
 
 #Set the number of tests to be checked
 if test "$MPI_RUN_COMMAND" = ""; then
-NUM_TESTS=3
+NUM_TESTS=2
 else
-NUM_TESTS=3
+NUM_TESTS=4
 fi
 
 # Setup validation directory
@@ -41,7 +41,7 @@ if test "$1" = "no_fpdiff"; then
 else
 ../../../../bin/fpdiff.py ../validata/eigen_solver_test_lapack.dat.gz  \
          eigen_solver_test_lapack.dat >> validation.log
-if test "$MPI_RUN_COMMAND" = ""; then
+if test "$MPI_RUN_COMMAND" != ""; then
 ../../../../bin/fpdiff.py ../validata/eigen_solver_test_anasazi.dat.gz  \
          eigen_solver_test_anasazi.dat >> validation.log
 fi

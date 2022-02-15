@@ -431,7 +431,7 @@ void test_lapack_qz(const unsigned N,
   delete eigen_solver_pt;
 }
 
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_MPI
 // Test the ANASAZI solver against the appropriate problem and methods.
 void test_anasazi(const unsigned N,
                   const unsigned n_timing_loops,
@@ -503,7 +503,10 @@ int main(int argc, char** argv)
   // Call test lapack qz
   test_lapack_qz(N, n_timing_loops, doc_info_pt);
 
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_MPI
+  // Only test ANASAZI if we have trilinos which is only compiled for MPI on
+  // the github automatic tests.
+
   // Set directory to anasazi and reset the numbering
   doc_info_pt->set_directory("RESLT_anasazi/");
   doc_info_pt->number() = 0;
