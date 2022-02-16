@@ -501,12 +501,13 @@ int main()
  
  //Assign memory for the eigenvalues and eigenvectors
  Vector<std::complex<double> > eigenvalues;
- Vector<DoubleVector> eigenvectors;
+ Vector<DoubleVector> eigenvector_real;
+ Vector<DoubleVector> eigenvector_imag;
  //Set the eigen solver to the LAPACK version which is
  //in every distributioin of oomph-lib
  problem.eigen_solver_pt() = new LAPACK_QZ;
  //Solve the eigenproblem
- problem.solve_eigenproblem_legacy(4,eigenvalues,eigenvectors);  
+ problem.solve_eigenproblem(4,eigenvalues,eigenvector_real,eigenvector_imag);  
 
  //Find the eigenvalue with greatest real part
  unsigned ev_crit_index=0;  double ev_crit_value=0.0;
@@ -536,7 +537,7 @@ int main()
   }
 
  problem.activate_pitchfork_tracking(&Global_Physical_Variables::Re,
-                                     eigenvectors[ev_crit_index]);
+                                     eigenvector_real[ev_crit_index]);
 
  //Solve with two rounds of adaptivity
  problem.steady_newton_solve(2);
