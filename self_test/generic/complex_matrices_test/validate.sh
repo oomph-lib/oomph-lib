@@ -4,7 +4,11 @@
 OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
 
 #Set the number of tests to be checked
-NUM_TESTS=3
+if [$MPI_RUN_COMMAND != ""]; then
+    NUM_TESTS=3
+else
+    NUM_TESTS=2
+fi
 
 # Setup validation directory
 #---------------------------
@@ -39,6 +43,7 @@ fi
 mv OUTPUT OUTPUT_dense_complex_matrix_test
 #-----------------------------------------
 
+if [$MPI_RUN_COMMAND != ""]; then
 # Validation for compressed row complex matrix
 #-----------------------------------------
 echo "Running compressed row complex matrix validation "
@@ -63,6 +68,7 @@ fi
 
 mv OUTPUT OUTPUT_cr_complex_matrix_test
 #-----------------------------------------
+fi
 
 # Validation for compressed column complex matrix
 #-----------------------------------------

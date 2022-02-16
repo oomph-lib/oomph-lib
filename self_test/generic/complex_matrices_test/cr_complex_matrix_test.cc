@@ -61,10 +61,6 @@ void print_complex_matrix(const oomph::ComplexMatrixBase& matrix,
 /// Main test function for the compressed-row complex matrix class
 int main(int argc, char** argv)
 {
-#ifdef OOMPH_HAS_MPI
-  MPI_Helpers::init(argc, argv);
-#endif
-
   string filename = "OUTPUT";
   ofstream output_stream;
   output_stream.open(filename);
@@ -178,11 +174,7 @@ int main(int argc, char** argv)
   /// Create linear algebra distribution with the right number of rows.
   /// Note that we are only testing the serial version here.
   OomphCommunicator* comm_pt = 0;
-#ifdef OOMPH_HAS_MPI
-  comm_pt = new OomphCommunicator(MPI_Helpers::communicator_pt());
-#else
   comm_pt = new OomphCommunicator();
-#endif
   const bool distributed = false;
   LinearAlgebraDistribution* dist_pt =
     new LinearAlgebraDistribution(comm_pt, n_row_square, distributed);
@@ -273,10 +265,6 @@ int main(int argc, char** argv)
   print_complex_matrix(matrix_result, output_stream);
 
   delete dist_pt;
-
-#ifdef OOMPH_HAS_MPI
-  MPI_Helpers::finalize();
-#endif
 
   return (EXIT_SUCCESS);
 }
