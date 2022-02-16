@@ -177,7 +177,12 @@ int main(int argc, char** argv)
 
   /// Create linear algebra distribution with the right number of rows.
   /// Note that we are only testing the serial version here.
-  const OomphCommunicator* comm_pt;
+  OomphCommunicator* comm_pt = 0;
+#ifdef OOMPH_HAS_MPI
+  comm_pt = new OomphCommunicator(MPI_Helpers::communicator_pt());
+#else
+  comm_pt = new OomphCommunicator();
+#endif
   const bool distributed = false;
   LinearAlgebraDistribution* dist_pt =
     new LinearAlgebraDistribution(comm_pt, n_row_square, distributed);
