@@ -26,6 +26,7 @@
 
 // Oomph-lib includes
 #include "generic.h"
+#include <random>
 
 using namespace std;
 using namespace oomph;
@@ -65,15 +66,15 @@ public:
     DenseMatrix<double>& mass_matrix)
   {
     unsigned seed = 0;
-    srand(seed);
+    mt19937 generator(seed);
     for (unsigned i = 0; i < N_value; i++)
     {
       unsigned local_eqn = internal_local_eqn(Data_index, i);
       for (unsigned j = 0; j < N_value; j++)
       {
         unsigned local_unknown = internal_local_eqn(Data_index, j);
-        jacobian(local_eqn, local_unknown) += rand() % 256 - 128;
-        mass_matrix(local_eqn, local_unknown) += rand() % 256 - 128;
+        jacobian(local_eqn, local_unknown) += generator() % 256 - 128;
+        mass_matrix(local_eqn, local_unknown) += generator() % 256 - 128;
       }
     }
   }

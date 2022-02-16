@@ -26,6 +26,7 @@
 
 // Oomph-lib includes
 #include "generic.h"
+#include <random>
 
 using namespace std;
 using namespace oomph;
@@ -134,8 +135,7 @@ public:
   {
     // Initialise the random number generator to a fixed seed
     unsigned seed = 0;
-    srand(seed);
-
+    mt19937 generator(seed);
     for (unsigned i = 0; i < N_value; i++)
     {
       unsigned local_eqn = internal_local_eqn(Data_index, i);
@@ -143,8 +143,8 @@ public:
       {
         unsigned local_unknown = internal_local_eqn(Data_index, j);
         // Create two dense, random, asymmetric matrices
-        jacobian(local_eqn, local_unknown) += rand() % 256 - 128;
-        mass_matrix(local_eqn, local_unknown) += rand() % 256 - 128;
+        jacobian(local_eqn, local_unknown) += generator() % 256 - 128;
+        mass_matrix(local_eqn, local_unknown) += generator() % 256 - 128;
       }
     }
   }
