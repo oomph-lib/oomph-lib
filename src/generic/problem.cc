@@ -8763,10 +8763,10 @@ namespace oomph
         error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    //Ensure that the eigenvector distribution matches the dof distribution
-    //Copy vector
+    // Ensure that the eigenvector distribution matches the dof distribution
+    // Copy vector
     DoubleVector eigenvector_dof = eigenvector;
-    //Redistribute the copy to the dof distribution
+    // Redistribute the copy to the dof distribution
     eigenvector_dof.redistribute(this->Dof_distribution_pt);
 
     // Loop over the dofs and assign the eigenvector
@@ -8801,10 +8801,10 @@ namespace oomph
         error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    //Ensure that the eigenvector distribution matches the dof distribution
-    //Copy vector
+    // Ensure that the eigenvector distribution matches the dof distribution
+    // Copy vector
     DoubleVector eigenvector_dof = eigenvector;
-    //Redistribute the copy to the dof distribution
+    // Redistribute the copy to the dof distribution
     eigenvector_dof.redistribute(this->Dof_distribution_pt);
 
 
