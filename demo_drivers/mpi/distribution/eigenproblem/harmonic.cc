@@ -461,7 +461,7 @@ solve(const unsigned& label)
    //sorted data, so should be fine
    if(eigenvalue[i] == temp_evalue) {second_smallest_index=i; break;}
   }
-
+ 
  //Normalise the eigenvector 
  {
   //Get the dimension of the eigenvector
@@ -473,8 +473,7 @@ solve(const unsigned& label)
     //Add the contribution to the length
     length += std::pow(eigenvector_real[second_smallest_index][i],2.0);
    }
-  //Now take the magnitude
-  length = sqrt(length);
+//Add contributions from all processors
 #ifdef OOMPH_HAS_MPI
   double length2 = length;
   if (eigenvector_real[second_smallest_index].distributed() && 
@@ -487,6 +486,8 @@ solve(const unsigned& label)
    }
   length = length2;
 #endif
+  //Now take the magnitude
+  length = sqrt(length);
   
   //Fix the sign
   int sign=1;
@@ -551,6 +552,7 @@ int main(int argc, char **argv)
  unsigned n_element=100; //Number of elements
 
 //Solve with Anasazi (non distributed)
+//Note that the linear algebra will still be distributed
  clock_t t_start1 = clock();
  {
   HarmonicProblem<QHarmonicElement<3>,ANASAZI> problem(n_element);
