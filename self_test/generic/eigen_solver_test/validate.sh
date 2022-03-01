@@ -18,6 +18,7 @@ cd Validation
 #-----------------------------------------
 echo "Running eigensolver validation "
 mkdir RESLT_lapack
+cp ../random_test_matrix.dat .
 ../eigen_solver_test > OUTPUT
 echo "done"
 echo " " >> validation.log

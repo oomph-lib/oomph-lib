@@ -4,7 +4,7 @@
 OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
 
 #Set the number of tests to be checked
-NUM_TESTS=2
+NUM_TESTS=1
 
 # Setup validation directory
 #---------------------------
@@ -18,7 +18,8 @@ cd Validation
 #-----------------------------------------
 echo "Running eigensolver validation "
 mkdir RESLT_anasazi
-../eigen_solver_test > OUTPUT
+cp ../random_test_matrix.dat .
+mpirun -n 1 ../eigen_solver_test > OUTPUT
 echo "done"
 echo " " >> validation.log
 echo "Eigensolver validation" >> validation.log
