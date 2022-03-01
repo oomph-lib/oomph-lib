@@ -31,6 +31,11 @@
 using namespace std;
 using namespace oomph;
 
+namespace global_parameters
+{
+  DenseMatrix<double> FixedRandomAsymmetricMatrix(64,64);
+};
+
 /// Base eigenproblem element class used to generate the Jacobian and mass
 /// matrix which correspond to the eigenproblem (J - lambda M) v = 0
 class BaseEigenElement : public GeneralisedElement
@@ -146,6 +151,42 @@ public:
         // Create two dense, random, asymmetric matrices
         jacobian(local_eqn, local_unknown) += generator() % 256 - 128;
         mass_matrix(local_eqn, local_unknown) += generator() % 256 - 128;
+      }
+    }
+  }
+};
+
+/// Fixed RandomAsymmetricEigenElement load an eigenproblem whose Jacobian
+/// has random integer elements between -128 and 127 and an identity mass
+/// matrix.
+class FixedRandomAsymmetricEigenElement : public BaseEigenElement
+{
+public:
+  // Override set_size to ensure the problem is 64x64
+  void set_size(const unsigned& n)
+  {
+    /// Override the input argument as the Rosser matrix is fixed at 8x8
+    N_value = 64;
+
+    Data_index = add_internal_data(new Data(N_value));
+  }
+
+  // Implement creation of eigenproblem matrices
+  void fill_in_contribution_to_jacobian_and_mass_matrix(
+    Vector<double>& residuals,
+    DenseMatrix<double>& jacobian,
+    DenseMatrix<double>& mass_matrix)
+  {
+    // Initialise the random number generator to a fixed seed
+    for (unsigned i = 0; i < N_value; i++)
+    {
+      unsigned local_eqn = internal_local_eqn(Data_index, i);
+      for (unsigned j = 0; j < N_value; j++)
+      {
+        unsigned local_unknown = internal_local_eqn(Data_index, j);
+        jacobian(local_eqn, local_unknown) +=
+          global_parameters::FixedRandomAsymmetricMatrix(i, j);
+        mass_matrix(local_eqn, local_unknown) += 1;
       }
     }
   }
@@ -421,7 +462,7 @@ void test_anasazi(const unsigned N,
     eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem);
   SolveEigenProblemTest<AsymmetricEigenElement>(
     eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem);
-  SolveEigenProblemTest<RandomAsymmetricEigenElement>(
+  SolveEigenProblemTest<FixedRandomAsymmetricEigenElement>(
     eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem);
 
   // Test the legacy solve_eigenproblem
@@ -429,7 +470,7 @@ void test_anasazi(const unsigned N,
     eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem);
   SolveEigenProblemLegacyTest<AsymmetricEigenElement>(
     eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem);
-  SolveEigenProblemLegacyTest<RandomAsymmetricEigenElement>(
+  SolveEigenProblemLegacyTest<FixedRandomAsymmetricEigenElement>(
     eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem);
 
   // Free the eigen_solver_pt
@@ -441,6 +482,36 @@ int main(int argc, char** argv)
 {
 // If we have MPI, we must initialise it
   MPI_Helpers::init(argc, argv);
+
+  int my_rank, size;
+  // Get number of MPI processes
+  MPI_Comm_size(MPI_COMM_WORLD, &size);
+  // Get current process rank id
+  MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
+
+  const unsigned FixedMatrixSize = 64;
+
+  // Load the Fixed Random matrix on a single process
+  if (my_rank == 0)
+  {
+    ifstream input_stream;
+    input_stream.open("random_test_matrix.dat");
+    for (unsigned i = 0; i < FixedMatrixSize; i++)
+    {
+      for (unsigned j = 0; j < FixedMatrixSize; j++)
+      {
+        string buffer;
+        getline(input_stream, buffer, ',');
+        int value = stoi(buffer);
+
+        global_parameters::FixedRandomAsymmetricMatrix(i, j) = value;
+      }
+    }
+  }
+
+  // Synchronise all process so they each have access to the global Fixed Random
+  // matrix
+  MPI_Barrier(MPI_COMM_WORLD);
 
   // Number of times to repeat the operation for better timings
   const unsigned n_timing_loops = 2;
