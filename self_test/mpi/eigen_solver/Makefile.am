@@ -5,19 +5,16 @@ include $(top_srcdir)/config/makefile_templates/demo_drivers
 # DESCEND INTO THIS DIRECTORY
 
 # Name of executable
-check_PROGRAMS= eigen_solver_test eigen_solver_test_distributed 
+check_PROGRAMS= eigen_solver_test 
 
 #----------------------------------------------------------------------
 
 # Sources for executable
 eigen_solver_test_SOURCES = eigen_solver_test.cc
-eigen_solver_test_distributed_SOURCES = eigen_solver_test_distributed.cc
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
 eigen_solver_test_LDADD = -L@libdir@ -lgeneric $(EXTERNAL_LIBS) \
-								  $(FLIBS)
-eigen_solver_test_distributed_LDADD = -L@libdir@ -lgeneric $(EXTERNAL_LIBS) \
 								  $(FLIBS)
 
 #----------------------------------------------------------------------
