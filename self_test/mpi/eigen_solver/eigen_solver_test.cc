@@ -449,19 +449,11 @@ void test_anasazi(const unsigned N,
   const bool do_adjoint_problem = false;
 
   // Test the regular solve_eigenproblem
-  SolveEigenProblemTest<IdentityEigenElement>(
-    eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem);
   SolveEigenProblemTest<AsymmetricEigenElement>(
-    eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem);
-  SolveEigenProblemTest<FixedRandomAsymmetricEigenElement>(
     eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem);
 
   // Test the legacy solve_eigenproblem
-  SolveEigenProblemLegacyTest<IdentityEigenElement>(
-    eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem);
   SolveEigenProblemLegacyTest<AsymmetricEigenElement>(
-    eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem);
-  SolveEigenProblemLegacyTest<FixedRandomAsymmetricEigenElement>(
     eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem);
 
   // Free the eigen_solver_pt
@@ -478,33 +470,6 @@ int main(int argc, char** argv)
   MPI_Comm_size(MPI_COMM_WORLD, &size);
   // Get current process rank id
   MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
-
-  const unsigned FixedMatrixSize = 64;
-
-  // Load the Fixed Random matrix on a single process
-  if (my_rank == 0)
-  {
-    ifstream input_stream;
-    input_stream.open("random_test_matrix.dat");
-    for (unsigned i = 0; i < FixedMatrixSize; i++)
-    {
-      for (unsigned j = 0; j < FixedMatrixSize; j++)
-      {
-        string buffer;
-        getline(input_stream, buffer, ',');
-        int value = stoi(buffer);
-
-        global_parameters::FixedRandomAsymmetricMatrix(j, i) = value;
-      }
-    }
-  }
-
-  cout << "Hello" << endl;
-  // Synchronise all process so they each have access to the global Fixed Random
-  // matrix
-  MPI_Barrier(MPI_COMM_WORLD);
-
-  cout << " world!" << endl;
 
   // Number of times to repeat the operation for better timings
   const unsigned n_timing_loops = 2;
