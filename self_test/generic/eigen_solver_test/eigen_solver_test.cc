@@ -150,7 +150,7 @@ public:
   }
 };
 
-/// Fixed RandomAsymmetricEigenElement load an eigenproblem whose Jacobian 
+/// Fixed RandomAsymmetricEigenElement load an eigenproblem whose Jacobian
 /// has random integer elements between -128 and 127 and an identity mass
 /// matrix.
 class FixedRandomAsymmetricEigenElement : public BaseEigenElement
@@ -183,10 +183,13 @@ public:
 
         string buffer;
         getline(input_stream, buffer, ',');
-        int jac = stoi(buffer);
+        double jac = stod(buffer);
 
         jacobian(local_eqn, local_unknown) += jac;
-        mass_matrix(local_eqn, local_unknown) += 1;
+        if (local_eqn == local_unknown)
+        {
+          mass_matrix(local_eqn, local_unknown) += 1;
+        }
       }
     }
   }
