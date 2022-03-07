@@ -1999,13 +1999,16 @@ namespace oomph
     /// returns the eigenvalues in terms of a fractional representation.
     void solve_eigenproblem(const unsigned& n_eval,
                             Vector<std::complex<double>>& eigenvalue,
-                            const bool& steady = true)
+                            const bool& make_timesteppers_steady = true)
     {
       // Create temporary storage for the eigenvectors (potentially wasteful)
       Vector<DoubleVector> eigenvector_real;
       Vector<DoubleVector> eigenvector_imag;
-      solve_eigenproblem(
-        n_eval, eigenvalue, eigenvector_real, eigenvector_imag, steady);
+      solve_eigenproblem(n_eval,
+                         eigenvalue,
+                         eigenvector_real,
+                         eigenvector_imag,
+                         make_timesteppers_steady);
     }
 
     /// Solve an eigenproblem as assembled by the Problem's constituent
@@ -2031,7 +2034,45 @@ namespace oomph
         n_eval, alpha, beta, eigenvector_real, eigenvector_imag, steady);
     }
 
-    /// Get the matrices required by a eigensolver. If the
+    /// Solve an adjoint eigenvalue problem using the same procedure as
+    /// solve_eigenproblem. See the documentation on that function for more
+    /// details.
+    /// Note: this is a legacy version of this function that stores re & imag
+    /// parts of eigenvectors in some solver-specific collection of real
+    /// vectors.
+    void solve_adjoint_eigenproblem_legacy(
+      const unsigned& n_eval,
+      Vector<std::complex<double>>& eigenvalue,
+      Vector<DoubleVector>& eigenvector,
+      const bool& make_timesteppers_steady = true);
+
+
+    /// Solve an adjoint eigenvalue problem using the same procedure as
+    /// solve_eigenproblem. See the documentation on that function for more
+    /// details.
+    void solve_adjoint_eigenproblem(const unsigned& n_eval,
+                                    Vector<std::complex<double>>& eigenvalue,
+                                    Vector<DoubleVector>& eigenvector_real,
+                                    Vector<DoubleVector>& eigenvector_imag,
+                                    const bool& steady = true);
+
+    /// Solve an adjoint eigenvalue problem using the same procedure as
+    /// solve_eigenproblem but only return the eigenvalues, not the
+    /// eigenvectors. At least n_eval eigenvalues are computed. See the
+    /// documentation on that function for more details.
+    void solve_adjoint_eigenproblem(const unsigned& n_eval,
+                                    Vector<std::complex<double>>& eigenvalue,
+                                    const bool& steady = true)
+    {
+      // Create temporary storage for the eigenvectors (potentially wasteful)
+      Vector<DoubleVector> eigenvector_real;
+      Vector<DoubleVector> eigenvector_imag;
+      solve_adjoint_eigenproblem(
+        n_eval, eigenvalue, eigenvector_real, eigenvector_imag, steady);
+    }
+
+
+    /// \short Get the matrices required by a eigensolver. If the
     /// shift parameter is non-zero the second matrix will be shifted
     virtual void get_eigenproblem_matrices(CRDoubleMatrix& mass_matrix,
                                            CRDoubleMatrix& main_matrix,
