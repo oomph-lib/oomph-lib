@@ -39,8 +39,8 @@ int main()
   oomph_info << matrix_default.nrow() << endl;
   oomph_info << matrix_default.ncol() << endl;
 
-  constexpr unsigned long n_col_rect = 2;
-  constexpr unsigned long n_row_rect = 4;
+  constexpr unsigned long n_col_rect = 4;
+  constexpr unsigned long n_row_rect = 2;
   // Number of non-zero entries
   constexpr unsigned n_nz_rect = 4;
 
