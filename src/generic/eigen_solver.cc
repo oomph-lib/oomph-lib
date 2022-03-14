@@ -73,8 +73,17 @@ namespace oomph
     Problem* const& problem_pt,
     const int& n_eval,
     Vector<std::complex<double>>& eigenvalue,
-    Vector<DoubleVector>& eigenvector)
+    Vector<DoubleVector>& eigenvector,
+    const bool& do_adjoint_problem)
   {
+    if (do_adjoint_problem)
+    {
+      throw OomphLibError("Solving an adjoint eigenproblem is not currently "
+                          "implemented for ARPACK.",
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+    }
+
     bool Verbose = false;
 
     // Control parameters
@@ -633,10 +642,16 @@ namespace oomph
     double* beta = new double[n];
     // Temporary eigenvector storage
     double* vec_left = new double[1];
+    const int leading_dimension_vec_left = 1;
     double* vec_right = new double[n * n];
+    const int leading_dimension_vec_right = n;
 
     // Workspace for the LAPACK routine
     std::vector<double> work(1, 0.0);
+    // The dimension of the workspace array. Set to -1 so that a workspace
+    // query is assumed and LAPACK calculates the optimum size which is
+    // returned as the first value of work.
+    const int query_workspace = -1;
     // Info flag for the LAPACK routine
     int info = 0;
 
@@ -653,11 +668,11 @@ namespace oomph
                  alpha_i,
                  beta,
                  vec_left,
-                 1,
+                 leading_dimension_vec_left,
                  vec_right,
-                 n,
+                 leading_dimension_vec_right,
                  &work[0],
-                 -1,
+                 query_workspace,
                  info);
 
     // Succesful completion?
@@ -665,7 +680,6 @@ namespace oomph
     {
       DGGEV_error(info, n);
     }
-
 
     // Get the amount of requires workspace
     int required_workspace = (int)work[0];
@@ -684,9 +698,9 @@ namespace oomph
                  alpha_i,
                  beta,
                  vec_left,
-                 1,
+                 leading_dimension_vec_left,
                  vec_right,
-                 n,
+                 leading_dimension_vec_right,
                  &work[0],
                  required_workspace,
                  info);
@@ -750,8 +764,16 @@ namespace oomph
     Problem* const& problem_pt,
     const int& n_eval,
     Vector<std::complex<double>>& eigenvalue,
-    Vector<DoubleVector>& eigenvector_aux)
+    Vector<DoubleVector>& eigenvector_aux,
+    const bool& do_adjoint_problem)
   {
+    if (do_adjoint_problem)
+    {
+      throw OomphLibError("Solving an adjoint eigenproblem is not currently "
+                          "implemented for LAPACK_QZ.",
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+    }
     Vector<std::complex<double>> alpha_eval;
     Vector<double> beta_eval;
 
@@ -791,8 +813,16 @@ namespace oomph
                                      Vector<std::complex<double>>& alpha_eval,
                                      Vector<double>& beta_eval,
                                      Vector<DoubleVector>& eigenvector_real,
-                                     Vector<DoubleVector>& eigenvector_imag)
+                                     Vector<DoubleVector>& eigenvector_imag,
+                                     const bool& do_adjoint_problem)
   {
+    if (do_adjoint_problem)
+    {
+      throw OomphLibError("Solving an adjoint eigenproblem is not currently "
+                          "implemented for LAPACK_QZ.",
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+    }
     Vector<DoubleVector> eigenvector_aux;
 
     // Call raw interface to lapack qz
@@ -965,10 +995,16 @@ namespace oomph
     double* beta = new double[2 * n];
     // Temporary eigenvector storage
     double* vec_left = new double[2];
+    const int leading_dimension_vec_left = 1;
     double* vec_right = new double[2 * n * n];
+    const int leading_dimension_vec_right = n;
 
     // Workspace for the LAPACK routine
     std::vector<double> work(2, 0.0);
+    // The dimension of the workspace array. Set to -1 so that a workspace
+    // query is assumed and LAPACK calculates the optimum size which is
+    // returned as the first value of work.
+    const int query_workspace = -1;
     std::vector<double> rwork(8 * n, 0.0);
 
     // Info flag for the LAPACK routine
@@ -985,11 +1021,11 @@ namespace oomph
                  alpha,
                  beta,
                  vec_left,
-                 1,
+                 leading_dimension_vec_left,
                  vec_right,
-                 n,
+                 leading_dimension_vec_right,
                  &work[0],
-                 -1,
+                 query_workspace,
                  &rwork[0],
                  info);
 

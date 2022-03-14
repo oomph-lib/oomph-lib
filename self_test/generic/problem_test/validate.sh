@@ -3,7 +3,6 @@
 # Get the OOPMH-LIB root directory from a makefile
 OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
 
-
 #Set the number of tests to be checked
 NUM_TESTS=1
 
@@ -15,29 +14,31 @@ mkdir Validation
 
 cd Validation
 
-# Validation for vector matrix multiplication
+# Validation for complex eigensolver
 #-----------------------------------------
-echo "Running VectorMatrix validation "
-../vector_matrix_test > OUTPUT
+echo "Running complex eigensolver validation "
+mkdir RESLT
+../solve_eigenproblem_test > OUTPUT
 echo "done"
 echo " " >> validation.log
-echo "VectorMatrix validation" >> validation.log
+echo "Complex eigensolver validation" >> validation.log
 echo "--------------------------" >> validation.log
 echo " " >> validation.log
 echo "Validation directory: " >> validation.log
 echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
-
+cat RESLT/* > solve_eigenproblem_test.dat
 
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/vector_matrix_test.dat.gz  \
-         OUTPUT >> validation.log
+../../../../bin/fpdiff.py ../validata/solve_eigenproblem_test.dat.gz  \
+         solve_eigenproblem_test.dat >> validation.log
 fi
+rm -rf RESLT
 
-mv OUTPUT OUTPUT_vector_matrix_test
+#-----------------------------------------
 
 # Append log to main validation log
 cat validation.log >> ../../../../validation.log
