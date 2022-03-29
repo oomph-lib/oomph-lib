@@ -80,6 +80,51 @@ public:
   }
 };
 
+/// Fixed RandomAsymmetricEigenElement load an eigenproblem whose Jacobian
+/// has random integer elements between -128 and 127 and an identity mass
+/// matrix.
+class FixedRandomAsymmetricEigenElement : public BaseEigenElement
+{
+public:
+  // Override set_size to ensure the problem is 64x64
+  void set_size(const unsigned& n)
+  {
+    /// Override the input argument as the Rosser matrix is fixed at 8x8
+    N_value = 64;
+
+    Data_index = add_internal_data(new Data(N_value));
+  }
+
+  // Implement creation of eigenproblem matrices
+  void fill_in_contribution_to_jacobian_and_mass_matrix(
+    Vector<double>& residuals,
+    DenseMatrix<double>& jacobian,
+    DenseMatrix<double>& mass_matrix)
+  {
+    // Initialise the random number generator to a fixed seed
+    ifstream input_stream;
+    input_stream.open("random_test_matrix.dat");
+    for (unsigned i = 0; i < N_value; i++)
+    {
+      unsigned local_eqn = internal_local_eqn(Data_index, i);
+      for (unsigned j = 0; j < N_value; j++)
+      {
+        unsigned local_unknown = internal_local_eqn(Data_index, j);
+
+        string buffer;
+        getline(input_stream, buffer, ',');
+        double jac = stod(buffer);
+
+        jacobian(local_eqn, local_unknown) += jac;
+        if (local_eqn == local_unknown)
+        {
+          mass_matrix(local_eqn, local_unknown) += 1;
+        }
+      }
+    }
+  }
+};
+
 /// Eigenproblem class. Creates a mesh with a single eigenelement and assigns
 /// the appropriate equation numbers.
 template<class ELEMENT>
@@ -167,7 +212,7 @@ int main()
   const unsigned N = 32;
 
   // Create eigenproblem
-  Eigenproblem<RandomAsymmetricEigenElement> problem(N);
+  Eigenproblem<FixedRandomAsymmetricEigenElement> problem(N);
 
   // problem.eigen_solver_pt() = new ANASAZI;
   // Anasazi::Use_temporary_code_for_andrew_legacy_version = true;
