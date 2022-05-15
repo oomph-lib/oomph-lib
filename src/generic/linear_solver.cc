@@ -39,7 +39,7 @@
 #include "linear_solver.h"
 #include "matrices.h"
 #include "problem.h"
-
+#include "external_src/oomph_superlu_4.3/slu_ddefs.h"
 
 namespace oomph
 {
@@ -805,6 +805,79 @@ namespace oomph
     }
   } // End of get_total_needed_memory
 
+  //==========================================================================
+  /// Wrapper to SuperLU's dgscon() which computes the (reciprocal of the)
+  /// condition number of a matrix. This version assumes we're computing the
+  /// condition number of a matrix which has already been factorised and who's
+  /// LU factors are in this object's internal storage; it therefore only
+  /// requires the infinity-norm to be passed in.
+  //==========================================================================
+  double SuperLUSolver::compute_condition_number(const double& inf_norm)
+  {
+    // SuperLU structure for storing the matrix factors
+    typedef struct
+    {
+      SuperMatrix* L;
+      SuperMatrix* U;
+      int* perm_c;
+      int* perm_r;
+    } factors_t;
+
+    int info = 0;
+    SuperLUStat_t stat;
+
+    /* Initialize the statistics variables. */
+    StatInit(&stat);
+
+    // set the norm to be the infinity-norm
+    char* norm = (char*)"I";
+
+    // extract the LU factors
+    SuperMatrix* L;
+    SuperMatrix* U;
+
+#ifdef OOMPH_HAS_MPI
+
+    if (Solver_type == Distributed)
+    {
+      L = ((factors_t*)Dist_solver_data_pt)->L;
+      U = ((factors_t*)Dist_solver_data_pt)->U;
+    }
+    else
+#endif
+    {
+      L = ((factors_t*)Serial_f_factors)->L;
+      U = ((factors_t*)Serial_f_factors)->U;
+    }
+
+    // get the (reciprocal) condition number
+    double reciprocal_condition_number = 0.0;
+
+    dgscon(norm, L, U, inf_norm, &reciprocal_condition_number, &stat, &info);
+
+    return 1.0 / reciprocal_condition_number;
+  }
+
+  //==========================================================================
+  /// Wrapper to SuperLU's dgscon() which computes the (reciprocal of the)
+  /// condition number of a matrix. This version assumes we haven't yet
+  /// factorised the matrix and so first performs the LU decomposition (the
+  /// factors of which are then stored internally), then computes the matrix
+  /// norm which is passed to the matrix-less overload of this function.
+  //==========================================================================
+  double SuperLUSolver::compute_condition_number(
+    DoubleMatrixBase* const& matrix_pt)
+  {
+    // perform the LU decomposition (this stores the factors internally)
+    factorise(matrix_pt);
+
+    // get the infinity-norm of the matrix
+    double inf_norm = matrix_pt->inf_norm();
+
+    // pass the norm to the overload of this function which assumes the
+    // LU factors are already in internal storage
+    return compute_condition_number(inf_norm);
+  }
 
   //==========================================================================
   /// Solver: Takes pointer to problem and returns the results Vector
