@@ -34583,10 +34583,9 @@ namespace oomph
         this->Boundary_curve_section_pt[bound] =
           polygon_pt->curve_section_pt(p);
 
-        if (delete_it_on_destructor)
-        {
-          this->Free_curve_section_pt.insert(polygon_pt->curve_section_pt(p));
-        }
+        //The new curve always needs to be added to the free section
+        //because we created it internally
+        this->Free_curve_section_pt.insert(polygon_pt->curve_section_pt(p));
 
       } // if(!check_only)
 
