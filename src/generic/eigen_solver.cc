@@ -855,7 +855,7 @@ namespace oomph
         eigenvector_imag[eval_count].build(this->distribution_pt(), 0.0);
         for (unsigned j = 0; j < n; ++j)
         {
-          eigenvector_real[eval_count][j] = eigenvector_aux[j][eval_count];
+          eigenvector_real[eval_count][j] = eigenvector_aux[eval_count][j];
           eigenvector_imag[eval_count][j] = 0.0;
         }
         eval_count++;
