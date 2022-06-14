@@ -198,16 +198,20 @@ This involves the following steps:
    (Note: If you only want to add files that were changed and that are
    already under Git version control, you can use `git add -u`; this command will not add any newly created files.)
  
-   (Second Note: As soon as you have added any files to the commit then git diff will no longer show and differences.)
+   (Second Note: As soon as you have staged any files then git diff will no longer show any differences between them and the current versions in the repository.)
 
 
-   # Accidentally added a file or changed your mind and want to remove new-file2.h
+    ```bash
+    # Accidentally added a file or changed your mind and want to remove new-file2.h
     >>> git reset new-file2.h
-
+    ```
     or
-    
-    >>> git restore --staged new-file2.h
 
+    ```bash
+    >>> git restore --staged new-file2.h
+    ```
+
+    ```
     >>> git status
     On branch feature-add-new-important-headers
     Changes to be committed:
@@ -219,7 +223,7 @@ This involves the following steps:
          new-file2.h
          new-file3.h
          new-file4.h 
-
+   ```
 
 4. Now commit. A one-line commit message can be provided from the command line.
    The first 50 characters should be self-contained and written in "imperative"
@@ -500,15 +504,21 @@ Described below is an alternative way to pull changes from the official reposito
 
  1. Make sure that you fetch the upstream copy of repository that includes the changes pulled in
    from the external source. 
-  >>> git pull upstream exernal-feature-branch
+   ```bash
+    >>> git pull upstream exernal-feature-branch
+    ```
 
  2. Resolve any merge conflicts. If you have created a separate branch there should be no merge conflicts, but if you have pulled changes into an existing branch then there could be conflicts.
 
  3. Use git checkout to switch to the branch into which you want to bring the changes
-  >>> git checkout my-cool-feature
+    ```bash
+    >>> git checkout my-cool-feature
+    ```
 
  4. Now use git merge to bring in the changes from the other branch
-  >>> git merge external-feature-branch
+    ```bash
+     >>> git merge external-feature-branch
+    ```
 
  5. Resolve any merge conflicts.
 
