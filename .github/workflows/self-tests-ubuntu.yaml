@@ -12,7 +12,7 @@ jobs:
         # MPI case, respectively
         mpi_options: [
           {enable: false, config_file: default},
-          {enable: true,  config_file: mpi_default_ci}
+          {enable: true, config_file: mpi_default_ci}
         ]
 
     runs-on: ubuntu-latest
@@ -26,10 +26,47 @@ jobs:
       - name: Install MPI requirements (if required)
         if: ${{ matrix.mpi_options.enable == true }}
         run: sudo apt-get install openmpi-bin libopenmpi-dev
-        
+
+      - name: Find MPI include directory path, if required
+        if: ${{ matrix.mpi_options.enable == true }}
+        run: |
+          printf "\nFULL MPICC SHOWME:\n    $(mpicc --showme)\n\n"
+
+          found_mpi_header=0
+          for pth in $(mpicc --showme:incdirs); do
+            printf "INCLUDE PATH: $pth\n"
+            printf "SEARCHING FOR MPI.H: "
+            if [ ! -z $(find "$pth" -iname mpi.h) ]; then
+              printf "...found mpi.h!\n"
+              echo "::set-output name=mpi_h_loc::$pth"
+              printf "EXPORTING INCLUDE PATH!\n"
+              found_mpi_header=1
+              break
+            else
+              printf "...couldn't find mpi.h!\n"
+              printf "FILES INSIDE MPI INCLUDE DIRECTORY:\n\n"
+              ls -l "$pth"
+              printf "\n"
+            fi
+          done
+          if [ ${found_mpi_header} -eq 0 ]; then
+            exit 1
+          fi
+        id: find_mpi_header
+
+      - name: Add MPI include path into config file
+        if: ${{ matrix.mpi_options.enable == true }}
+        run: |
+          printf '%s\n' '--with-mpi-include-directory=${{ steps.find_mpi_header.outputs.mpi_h_loc }}' >> config/configure_options/${{ matrix.mpi_options.config_file }} && \
+          ( export LC_ALL=C; sort -o config/configure_options/${{ matrix.mpi_options.config_file }} config/configure_options/${{ matrix.mpi_options.config_file }})
+
+      - name: Print updated config file (without comments)
+        if: ${{ matrix.mpi_options.enable == true }}
+        run: cat config/configure_options/${{ matrix.mpi_options.config_file }} | sed '/^#/d'
+
       - name: Get external distribution tar files (if MPI is used)
         if: ${{ matrix.mpi_options.enable == true }}
-        run: bin/get_external_distribution_tar_files.bash 
+        run: bin/get_external_distribution_tar_files.bash
 
       - name: Build
         run: |
