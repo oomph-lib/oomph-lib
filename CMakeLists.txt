@@ -34,11 +34,11 @@
 # format CMake files. Do not delete them.
 # ==============================================================================
 # cmake-format: on
-cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.24 FATAL_ERROR)
 project(
   oomphlib
   DESCRIPTION "A finite-element library for simulating multi-physics problems."
-  VERSION 2.5.0
+  VERSION 3.0.0
   HOMEPAGE_URL "http://oomph-lib.maths.man.ac.uk/doc/html/index.html"
   LANGUAGES C CXX Fortran)
 
@@ -359,13 +359,13 @@ include(OomphExportPackage)
 # the demo drivers are built with the library then we don't need to call
 # "find_package(oomphlib REQUIRED)" in each demo_driver subdirectory to locate
 # the generated oomph-lib libraries, as they'll already be visible to that scope
-set(BUILDING_DEMO_DRIVERS_WITH_LIBRARY OFF)
+set(BUILD_DEMO_DRIVERS_WITH_LIBRARY OFF)
 
 # Enable testing for the current directory and all child directories but ONLY
 # when this is the root project, i.e. it isn't being built as part of some
 # larger project hierarchy
 if(OOMPH_IS_MAIN_PROJECT AND OOMPH_ENABLE_IN_BUILD_TESTING)
-  set(BUILDING_DEMO_DRIVERS_WITH_LIBRARY ON)
+  set(BUILD_DEMO_DRIVERS_WITH_LIBRARY ON)
   if(NOT OOMPH_DONT_SILENCE_USELESS_WARNINGS)
     include(OomphSilenceWarnings)
   endif()

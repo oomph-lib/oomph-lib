@@ -2,15 +2,15 @@
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(VERBOSE "Entered demo_drivers subdirectory")
 
-cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.24 FATAL_ERROR)
 project(demo_drivers C CXX Fortran)
-if(NOT BUILDING_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT BUILD_DEMO_DRIVERS_WITH_LIBRARY)
   find_package(oomphlib REQUIRED)
 endif()
 include(CTest)
 
 # Add code coverage compiler flags, if requested
-if(OOMPH_ENABLE_CODE_COVERAGE AND NOT OOMPH_BUILDING_DEMO_DRIVERS_WITH_LIBRARY)
+if(OOMPH_ENABLE_CODE_COVERAGE AND NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
   oomph_enable_code_coverage()
 endif()
 

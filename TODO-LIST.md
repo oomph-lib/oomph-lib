@@ -2,6 +2,10 @@
 
 ## Requirements for minimum viable product
 
+- Documentation for:
+  - [ ] Installing CMake (3.24)
+  - [ ] Downloading and installing oomph-lib
+- [ ] Change 'oomphlib' -> 'oomph_lib' (carefully! avoid changing headers/sources)
 - MUST ADD:
   - [ ] `spdlog::spdlog`
   - [ ] `nlohmann::json`

@@ -1,31 +1,31 @@
 //LIC// ====================================================================
-//LIC// This file forms part of oomph-lib, the object-oriented, 
-//LIC// multi-physics finite-element library, available 
+//LIC// This file forms part of oomph-lib, the object-oriented,
+//LIC// multi-physics finite-element library, available
 //LIC// at http://www.oomph-lib.org.
-//LIC// 
+//LIC//
 //LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
-//LIC// 
+//LIC//
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
 //LIC// License as published by the Free Software Foundation; either
 //LIC// version 2.1 of the License, or (at your option) any later version.
-//LIC// 
+//LIC//
 //LIC// This library is distributed in the hope that it will be useful,
 //LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
 //LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 //LIC// Lesser General Public License for more details.
-//LIC// 
+//LIC//
 //LIC// You should have received a copy of the GNU Lesser General Public
 //LIC// License along with this library; if not, write to the Free Software
 //LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 //LIC// 02110-1301  USA.
-//LIC// 
+//LIC//
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
-//LIC// 
+//LIC//
 //LIC//====================================================================
 // Driver for Anne's MSc project
 
-// The oomphlib headers
+// The oomph-lib headers
 #include "generic.h"
 #include "navier_stokes.h"
 
@@ -54,7 +54,7 @@ namespace GlobalParameters
  //----------------------
  /// The value of the kinematic viscosity (assumed to be the same everywhere)
  double Kinematic_viscosity=1.0;
- 
+
  /// Returns the velocity field associated with the Taylor-Green vortex
  /// solution (for validation of vorticity projection)
  void sin_cos_velocity_field(const Vector<double>& x,
@@ -62,22 +62,22 @@ namespace GlobalParameters
  {
   // Time remains fixed so set to zero
   double t=0.0;
-  
+
   // Calculate the temporal component
   double temporal_component=exp(-2.0*Kinematic_viscosity*t);
-  
+
   // Frequency in the x-direction
   double omega_x=2.0*MathematicalConstants::Pi/Length;
-  
+
   // Frequency in the y-direction
   double omega_y=2.0*MathematicalConstants::Pi/Height;
 
   // The phase shift
   double phi=MathematicalConstants::Pi/2.0;
-  
+
   // First velocity component
   u[0]=cos(omega_x*x[0]+phi)*sin(omega_y*x[1]+phi)*temporal_component;
-  
+
   // Second velocity component
   u[1]=-sin(omega_x*x[0]+phi)*cos(omega_y*x[1]+phi)*temporal_component;
  } // End of sin_cos_velocity_field
@@ -85,18 +85,18 @@ namespace GlobalParameters
 
  /// Returns the vorticity field associated with the Taylor-Green vortex
  /// solution (for validation of vorticity projection)
- void sin_cos_vorticity(const Vector<double>& x, 
+ void sin_cos_vorticity(const Vector<double>& x,
                         Vector<Vector<double> >& vort_and_derivs)
  {
   // Time remains fixed so set to zero
   double t=0.0;
-  
+
   // Calculate the temporal component
   double temporal_component=exp(-2.0*Kinematic_viscosity*t);
-  
+
   // Frequency in the x-direction
   double omega_x=2.0*MathematicalConstants::Pi/Length;
-  
+
   // Frequency in the y-direction
   double omega_y=2.0*MathematicalConstants::Pi/Height;
 
@@ -107,7 +107,7 @@ namespace GlobalParameters
   vort_and_derivs[0][0]=(-1.0*(omega_x+omega_y)*
 			 cos(omega_x*x[0]+phi)*cos(omega_y*x[1]+phi)*
 			 temporal_component);
-  
+
   // The first derivative of the vorticity: dw/dx
   vort_and_derivs[1][0]=(omega_x*(omega_x+omega_y)*
 			 sin(omega_x*x[0]+phi)*cos(omega_y*x[1]+phi)*
@@ -117,7 +117,7 @@ namespace GlobalParameters
   vort_and_derivs[1][1]=(omega_y*(omega_x+omega_y)*
 			 cos(omega_x*x[0]+phi)*sin(omega_y*x[1]+phi)*
 			 temporal_component);
-  
+
   // The second derivative of the vorticity: dw^2/dx^2
   vort_and_derivs[2][0]=(omega_x*omega_x*(omega_x+omega_y)*
 			 cos(omega_x*x[0]+phi)*cos(omega_y*x[1]+phi)*
@@ -137,26 +137,26 @@ namespace GlobalParameters
   vort_and_derivs[3][0]=(-1.0*omega_x*omega_x*omega_x*(omega_x+omega_y)*
 			 sin(omega_x*x[0]+phi)*cos(omega_y*x[1]+phi)*
 			 temporal_component);
-  
+
   // The third derivative of the vorticity: dw^3/dx^2dy
   vort_and_derivs[3][1]=(-1.0*omega_x*omega_x*omega_y*(omega_x+omega_y)*
 			 cos(omega_x*x[0]+phi)*sin(omega_y*x[1]+phi)*
 			 temporal_component);
-  
+
   // The third derivative of the vorticity: dw^3/dxdy^2
   vort_and_derivs[3][2]=(-1.0*omega_x*omega_y*omega_y*(omega_x+omega_y)*
 			 sin(omega_x*x[0]+phi)*cos(omega_y*x[1]+phi)*
 			 temporal_component);
-  
+
   // The third derivative of the vorticity: dw^3/dy^3
   vort_and_derivs[3][3]=(-1.0*omega_y*omega_y*omega_y*(omega_x+omega_y)*
 			 cos(omega_x*x[0]+phi)*sin(omega_y*x[1]+phi)*
 			 temporal_component);
-  
+
   // The derivatives of the velocity: du/dx
   vort_and_derivs[4][0]=(-1.0*omega_x*sin(omega_x*x[0]+phi)*
 			 sin(omega_y*x[1]+phi)*temporal_component);
-  
+
   // The derivatives of the velocity: du/dy
   vort_and_derivs[4][1]=(omega_y*cos(omega_x*x[0]+phi)*
 			 cos(omega_y*x[1]+phi)*temporal_component);
@@ -164,22 +164,22 @@ namespace GlobalParameters
   // The derivatives of the velocity: dv/dx
   vort_and_derivs[4][2]=(-1.0*omega_x*cos(omega_x*x[0]+phi)*
 			 cos(omega_y*x[1]+phi)*temporal_component);
-  
+
   // The derivatives of the velocity: dv/dy
   vort_and_derivs[4][3]=(omega_y*sin(omega_x*x[0]+phi)*
 			 sin(omega_y*x[1]+phi)*temporal_component);
  } // End of sin_cos_vorticity
 
- 
+
  /// Synthetic velocity field for validation
- void synthetic_velocity_field(const Vector<double>& x, 
+ void synthetic_velocity_field(const Vector<double>& x,
                                Vector<double>& veloc)
  {
   // Get the sin/cos velocity field
   sin_cos_velocity_field(x,veloc);
  } // End of synthetic_velocity_field
 
- 
+
  /// Synthetic vorticity field and derivs for validation
  void synthetic_vorticity(const Vector<double>& x,
                           Vector<Vector<double> >& vort_and_derivs)
@@ -188,7 +188,7 @@ namespace GlobalParameters
   sin_cos_vorticity(x,vort_and_derivs);
  } // End of synthetic_vorticity
 
- 
+
  /// Initial condition for velocity
  void initial_condition(const Vector<double>& x,
 			Vector<double>& u)
@@ -215,26 +215,26 @@ public:
 
  /// Update after solve is empty
  void actions_after_newton_solve(){}
- 
+
  /// Actions before adapt: empty
- void actions_before_adapt(){} 
+ void actions_before_adapt(){}
 
  /// After adaptation
  void actions_after_adapt()
  {
   // Apply the appropriate boundary conditions
   apply_boundary_conditions();
-  
+
   // Do everything that needs to be done to complete the problem setup
   complete_problem_setup();
  } // End of actions_after_adapt
-   
+
  /// Apply Dirichlet conditions on all of the boundaries
  void apply_boundary_conditions();
 
  /// Complete problem setup
  void complete_problem_setup();
- 
+
  /// Assign the synthetic flow field
  void assign_synthetic_veloc_field();
 
@@ -259,12 +259,12 @@ VorticityRecoveryProblem<ELEMENT>::VorticityRecoveryProblem()
 {
  // Set the order of vorticity recovery
  unsigned nrecovery_order=2;
- 
+
  // Make an instance of the vorticity recoverer
  Vorticity_recoverer_pt=new VorticitySmoother<ELEMENT>(nrecovery_order);
 
  // Allocate the timestepper
- add_time_stepper_pt(new BDF<2>); 
+ add_time_stepper_pt(new BDF<2>);
 
  // Number of elements in x direction.
  // purely nominal initial value
@@ -272,45 +272,45 @@ VorticityRecoveryProblem<ELEMENT>::VorticityRecoveryProblem()
 
  // Number of elements in y direction
  // purely nominal initial value
- unsigned n_y=4; 
+ unsigned n_y=4;
 
  // Left end of computational domain
  double x_min=0.0;
- 
+
  // Right end of computational domain
  double x_max=GlobalParameters::Length;
- 
+
  // Botton of computational domain
  double y_min=0.0;
 
  // Height of computational domain
  double y_max=GlobalParameters::Height;
- 
+
  // Set the maximum order of vorticity derivatives to calculate to
  // zero -- only calculate the vorticity itself!
  VorticityRecoveryHelpers::Recovery_helper.
   set_maximum_order_of_vorticity_derivative(3);
- 
+
  // Set the maximum order of velocity derivatives to calculate to
  // zero -- don't enable the recovery of the velocity derivatives!
  VorticityRecoveryHelpers::Recovery_helper.
   set_maximum_order_of_velocity_derivative(1);
-  
- // Now create the mesh 
+
+ // Now create the mesh
  mesh_pt()=new RefineableRectangularQuadMesh<ELEMENT>(n_x,n_y,
 						      x_min,x_max,
 						      y_min,y_max,
 						      time_stepper_pt());
- 
+
  // Apply the appropriate boundary conditions
  apply_boundary_conditions();
- 
+
  // Complete the problem setup to make the elements fully functional
  complete_problem_setup();
- 
+
  // Assign equation numbers
  assign_eqn_numbers();
- 
+
  // Assign the initial condition
  assign_synthetic_veloc_field();
 } // End of VorticityRecoveryProblem
@@ -321,34 +321,34 @@ VorticityRecoveryProblem<ELEMENT>::VorticityRecoveryProblem()
 //========================================================================
 template<class ELEMENT>
 void VorticityRecoveryProblem<ELEMENT>::assign_synthetic_veloc_field()
-{ 
+{
  // The number of dimensions in the mesh
  unsigned n_dim=2;
-   
+
  // Storage for the (Eulerian) coordinates of the node
  Vector<double> x(n_dim,0.0);
-   
+
  // Storage for the velocity components
  Vector<double> u(n_dim,0.0);
- 
+
  // Get the number of nodes in the mesh
  unsigned num_nod=mesh_pt()->nnode();
- 
+
  // Loop over nodes
  for (unsigned n=0;n<num_nod;n++)
  {
   // Get a pointer to the n-th node in the mesh
   Node* node_pt=mesh_pt()->node_pt(n);
-  
+
   // Get the nodal coordinates of the n-th node in the mesh
   node_pt->position(x);
-   
+
   // Get initial velocity field
   GlobalParameters::synthetic_velocity_field(x,u);
-   
+
   // Loop over the velocity components
   for (unsigned i=0;i<n_dim;i++)
-  {    
+  {
    // Set the i-th velocity component value
    node_pt->set_value(i,u[i]);
   }
@@ -360,16 +360,16 @@ void VorticityRecoveryProblem<ELEMENT>::assign_synthetic_veloc_field()
 //========================================================================
 template<class ELEMENT>
 void VorticityRecoveryProblem<ELEMENT>::apply_boundary_conditions()
-{ 
+{
  // The number of dimensions in the mesh
  unsigned n_dim=2;
-   
+
  // Storage for the (Eulerian) coordinates of the node
  Vector<double> x(n_dim,0.0);
-   
+
  // Storage for the velocity components
  Vector<double> u(n_dim,0.0);
-   
+
  // Get the number of boundaries in the mesh
  unsigned num_bound=mesh_pt()->nboundary();
 
@@ -384,22 +384,22 @@ void VorticityRecoveryProblem<ELEMENT>::apply_boundary_conditions()
   {
    // Get a pointer to the inod-th node on the ibound-th boundary
    Node* node_pt=mesh_pt()->boundary_node_pt(ibound,inod);
-   
+
    // Get the global coordinates of this node
    node_pt->position(x);
-   
+
    // Get the exact velocity field values at this node
    GlobalParameters::synthetic_velocity_field(x,u);
 
    // Loop over the velocity components
    for (unsigned i=0;i<n_dim;i++)
-   {    
+   {
     // Pin the i-th velocity component
     node_pt->pin(i);
 
     // Set the i-th velocity component value
     node_pt->set_value(i,u[i]);
-   } 
+   }
   } // for (unsigned inod=0;inod<num_nod;inod++)
  } // for (unsigned ibound=0;ibound<num_bound;ibound++)
 } // End of apply_boundary_conditions
@@ -417,7 +417,7 @@ void VorticityRecoveryProblem<ELEMENT>::complete_problem_setup()
 
  // Get the number of elements in the mesh
  unsigned n_el=mesh_pt()->nelement();
- 
+
  // Loop over the elements
  for (unsigned e=0;e<n_el;e++)
  {
@@ -435,7 +435,7 @@ void VorticityRecoveryProblem<ELEMENT>::complete_problem_setup()
 
   // Pin the smoothed vorticity
   el_pt->pin_smoothed_vorticity();
- } 
+ }
 
  // Upcast the first element to a fluid element
  ELEMENT* el_pt=dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(0));
@@ -445,7 +445,7 @@ void VorticityRecoveryProblem<ELEMENT>::complete_problem_setup()
 
  // Assign it!
  GlobalParameters::Kinematic_viscosity=kinematic_viscosity;
- 
+
  // Pin the redundant pressure dofs
  RefineableNavierStokesEquations<2>::
   pin_redundant_nodal_pressures(mesh_pt()->element_pt());
@@ -458,7 +458,7 @@ void VorticityRecoveryProblem<ELEMENT>::complete_problem_setup()
 template<class ELEMENT>
 void VorticityRecoveryProblem<ELEMENT>::
 check_smoothed_vorticity(DocInfo& doc_info)
-{ 
+{
  // Get any element in the mesh
  ELEMENT* const el_pt=dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(0));
 
@@ -498,39 +498,39 @@ check_smoothed_vorticity(DocInfo& doc_info)
 	    << "\"Error(dv/dy)\",";
  }
  some_file << "\"Area\"\n";
- 
+
  // Number of derivatives to be recovered
  unsigned n_recovered_derivs=(el_pt->nvorticity_derivatives_to_recover()+
 			      el_pt->nvelocity_derivatives_to_recover());
- 
+
  // Uniform mesh refinements
  unsigned n=4;
- 
+
  // Loop over mesh refinements
  for (unsigned ii=0;ii<n;ii++)
- {  
+ {
   // Refine the mesh if we've already recovered the vorticity with this mesh
   if (ii>0)
   {
    // Refine the mesh
    refine_uniformly();
   }
-  
+
   // Assign the synthetic velocity field
   assign_synthetic_veloc_field();
 
   // Create some space in the output
   oomph_info << std::endl;
-  
+
   // Recover the vorticity field from the velocity field
   Vorticity_recoverer_pt->recover_vorticity(mesh_pt());
 
   // Create some space in the output
   oomph_info << std::endl;
-  
+
   // Storage for the area of the mesh
   double full_area=0.0;
-  
+
   // Storage for the error in the projection
   Vector<double> full_error(n_recovered_derivs,0.0);
 
@@ -572,7 +572,7 @@ check_smoothed_vorticity(DocInfo& doc_info)
 
   // Output the total area of the mesh
   some_file << full_area << " " << std::endl;
-   
+
   // Document the solution and indicate that we've recovered the vorticity
   doc_solution(doc_info,true);
  } // for (unsigned ii=0;ii<n;ii++)
@@ -588,7 +588,7 @@ check_smoothed_vorticity(DocInfo& doc_info)
 template<class ELEMENT>
 void VorticityRecoveryProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
 					const bool& vorticity_recovered)
-{ 
+{
  // Check if we've recovered the vorticity
  if (!vorticity_recovered)
  {
@@ -603,7 +603,7 @@ void VorticityRecoveryProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
  char filename[100];
 
  // Number of plot points
- unsigned npts=2; 
+ unsigned npts=2;
 
  // Create the file name
  sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
@@ -611,8 +611,8 @@ void VorticityRecoveryProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
 
  // Open a file with the chosen file name
  some_file.open(filename);
- 
- // Output solution 
+
+ // Output solution
  mesh_pt()->output(some_file,npts);
 
  // Now close the file; we're done with it
@@ -645,18 +645,18 @@ void VorticityRecoveryProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
 
  // Increment the Doc_info object counter
  doc_info.number()++;
-} // End of doc_solution   
+} // End of doc_solution
 
 
 //===start_of_main======================================================
 /// Driver code for Anne channel problem
 //======================================================================
-int main(int argc, char* argv[]) 
+int main(int argc, char* argv[])
 {
 
 #ifdef OOMPH_HAS_MPI
  MPI_Helpers::init(argc,argv);
- 
+
  // Switch off output modifier
  oomph_info.output_modifier_pt()=&default_output_modifier;
 
@@ -684,13 +684,13 @@ int main(int argc, char* argv[])
 
  // Typedef element
  typedef ProjectableTaylorHoodElement<RefineableQTaylorHoodElement<2> > ELEMENT;
- 
+
  // Set up problem
  VorticityRecoveryProblem<VorticitySmootherElement<ELEMENT> > problem;
 
  // Check/document the smoothed vorticity field
  problem.check_smoothed_vorticity(doc_info);
- 
+
 #ifdef OOMPH_HAS_MPI
  MPI_Helpers::finalize();
 #endif

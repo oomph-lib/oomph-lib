@@ -2,9 +2,9 @@
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(VERBOSE "Entered b_convection_sphere subdirectory")
 
-cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.24 FATAL_ERROR)
 project(b_convection_sphere C CXX Fortran)
-if(NOT BUILDING_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT BUILD_DEMO_DRIVERS_WITH_LIBRARY)
   find_package(oomphlib REQUIRED)
 endif()
 include(CTest)

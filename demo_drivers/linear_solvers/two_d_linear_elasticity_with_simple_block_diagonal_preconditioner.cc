@@ -1,31 +1,31 @@
 //LIC// ====================================================================
-//LIC// This file forms part of oomph-lib, the object-oriented, 
-//LIC// multi-physics finite-element library, available 
+//LIC// This file forms part of oomph-lib, the object-oriented,
+//LIC// multi-physics finite-element library, available
 //LIC// at http://www.oomph-lib.org.
-//LIC// 
+//LIC//
 //LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
-//LIC// 
+//LIC//
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
 //LIC// License as published by the Free Software Foundation; either
 //LIC// version 2.1 of the License, or (at your option) any later version.
-//LIC// 
+//LIC//
 //LIC// This library is distributed in the hope that it will be useful,
 //LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
 //LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 //LIC// Lesser General Public License for more details.
-//LIC// 
+//LIC//
 //LIC// You should have received a copy of the GNU Lesser General Public
 //LIC// License along with this library; if not, write to the Free Software
 //LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 //LIC// 02110-1301  USA.
-//LIC// 
+//LIC//
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
-//LIC// 
+//LIC//
 //LIC//====================================================================
 // Driver for a periodically loaded elastic body
 
-// The oomphlib headers
+// The oomph-lib headers
 #include "generic.h"
 #include "linear_elasticity.h"
 
@@ -51,13 +51,13 @@ namespace oomph
 
 //==start_of_mylinearelasticityelement===============================
 /// Wrapper to make quadratic linear elasticity element block
-/// preconditionable 
+/// preconditionable
 //===================================================================
 template<unsigned DIM>
 class MyLinearElasticityElement : public virtual QLinearElasticityElement<DIM,3>
 {
- 
-public: 
+
+public:
 
  /// \short The number of "DOF types" that degrees of freedom in this element
  /// are sub-divided into: The displacement components
@@ -65,28 +65,28 @@ public:
   {
    return DIM;
   }
- 
+
 /// Create a list of pairs for all unknowns in this element,
 /// so the first entry in each pair contains the global equation
 /// number of the unknown, while the second one contains the number
 /// of the "DOF type" that this unknown is associated with.
 /// (Function can obviously only be called if the equation numbering
 /// scheme has been set up.)
-/// 
+///
 /// The dof type enumeration (in 3D) is as follows:
 /// S_x = 0
 /// S_y = 1
 /// S_z = 2
-/// 
+///
  void get_dof_numbers_for_unknowns(
   std::list<std::pair<unsigned long,unsigned> >& dof_lookup_list) const
   {
    // number of nodes
    unsigned n_node = this->nnode();
-   
+
    // temporary pair (used to store dof lookup prior to being added to list)
    std::pair<unsigned,unsigned> dof_lookup;
-   
+
    // loop over the nodes
    for (unsigned j=0;j<n_node;j++)
     {
@@ -95,8 +95,8 @@ public:
       {
        // determine local eqn number
        int local_eqn_number = this->nodal_local_eqn(j,i);
-       
-       // ignore pinned values - far away degrees of freedom resulting 
+
+       // ignore pinned values - far away degrees of freedom resulting
        // from hanging nodes can be ignored since these are be dealt
        // with by the element containing their master nodes
        if (local_eqn_number >= 0)
@@ -104,10 +104,10 @@ public:
          // store dof lookup in temporary pair: Global equation number
          // is the first entry in pair
          dof_lookup.first = this->eqn_number(local_eqn_number);
-         
+
          // set dof numbers: Dof number is the second entry in pair
          dof_lookup.second = i;
-         
+
          // add to list
          dof_lookup_list.push_front(dof_lookup);
         }
@@ -124,7 +124,7 @@ public:
 //=======================================================================
 template<unsigned DIM>
 class FaceGeometry<MyLinearElasticityElement<DIM> >
- : public virtual QElement<DIM-1,3> 
+ : public virtual QElement<DIM-1,3>
  {
  public:
   FaceGeometry() : QElement<DIM-1,3>() {}
@@ -194,9 +194,9 @@ class PeriodicLoadProblem : public Problem
 {
 public:
 
- /// \short Constructor: Pass number of elements in x and y directions 
+ /// \short Constructor: Pass number of elements in x and y directions
  /// and lengths
- PeriodicLoadProblem(const unsigned &nx, const unsigned &ny, 
+ PeriodicLoadProblem(const unsigned &nx, const unsigned &ny,
                      const double &lx, const double &ly);
 
  /// Update before solve is empty
@@ -212,7 +212,7 @@ private:
 
  /// Allocate traction elements on the top surface
  void assign_traction_elements();
- 
+
  /// Pointer to the bulk mesh
  Mesh* Bulk_mesh_pt;
 
@@ -220,7 +220,7 @@ private:
  Mesh* Surface_mesh_pt;
 
  /// Solver
- IterativeLinearSolver* Solver_pt; 
+ IterativeLinearSolver* Solver_pt;
 
  /// Preconditioner
  SimpleBlockDiagonalPreconditioner<CRDoubleMatrix>* Prec_pt;
@@ -239,7 +239,7 @@ PeriodicLoadProblem<ELEMENT>::PeriodicLoadProblem
 {
  //Now create the mesh with periodic boundary conditions in x direction
  bool periodic_in_x=true;
- Bulk_mesh_pt = 
+ Bulk_mesh_pt =
   new RectangularQuadMesh<ELEMENT>(nx,ny,lx,ly,periodic_in_x);
 
  //Create the surface mesh of traction elements
@@ -247,7 +247,7 @@ PeriodicLoadProblem<ELEMENT>::PeriodicLoadProblem
  assign_traction_elements();
 
  // Set the boundary conditions for this problem: All nodes are
- // free by default -- just pin & set the ones that have Dirichlet 
+ // free by default -- just pin & set the ones that have Dirichlet
  // conditions here
  unsigned ibound=0;
  unsigned num_nod=Bulk_mesh_pt->nboundary_node(ibound);
@@ -302,10 +302,10 @@ PeriodicLoadProblem<ELEMENT>::PeriodicLoadProblem
  for(unsigned e=0;e<n_traction;e++)
   {
    // Cast to a surface element
-   LinearElasticityTractionElement<ELEMENT> *el_pt = 
+   LinearElasticityTractionElement<ELEMENT> *el_pt =
     dynamic_cast<LinearElasticityTractionElement<ELEMENT>* >
     (Surface_mesh_pt->element_pt(e));
-   
+
    // Set the applied traction
    el_pt->traction_fct_pt() = &Global_Parameters::periodic_traction;
   }// end loop over traction elements
@@ -318,7 +318,7 @@ PeriodicLoadProblem<ELEMENT>::PeriodicLoadProblem
  build_global_mesh();
 
  // Assign equation numbers
- cout << assign_eqn_numbers() << " equations assigned" << std::endl; 
+ cout << assign_eqn_numbers() << " equations assigned" << std::endl;
 
  // Create the solver.
  Solver_pt = new GMRES<CRDoubleMatrix>;
@@ -339,7 +339,7 @@ PeriodicLoadProblem<ELEMENT>::PeriodicLoadProblem
 
  // Block preconditioner can work with just the bulk mesh
  // since its elements contain all the degrees of freedom that
- // need to be classified. 
+ // need to be classified.
  Prec_pt->add_mesh(Bulk_mesh_pt);
 
  // Set the preconditioner
@@ -359,21 +359,21 @@ void PeriodicLoadProblem<ELEMENT>::assign_traction_elements()
 
  // How many bulk elements are next to boundary 2 (the top boundary)?
  unsigned bound=2;
- unsigned n_neigh = Bulk_mesh_pt->nboundary_element(bound); 
- 
+ unsigned n_neigh = Bulk_mesh_pt->nboundary_element(bound);
+
  // Now loop over bulk elements and create the face elements
  for(unsigned n=0;n<n_neigh;n++)
   {
    // Create the face element
-   FiniteElement *traction_element_pt 
+   FiniteElement *traction_element_pt
     = new LinearElasticityTractionElement<ELEMENT>
     (Bulk_mesh_pt->boundary_element_pt(bound,n),
      Bulk_mesh_pt->face_index_at_boundary(bound,n));
- 
+
    // Add to mesh
    Surface_mesh_pt->add_element_pt(traction_element_pt);
   }
- 
+
 } // end of assign_traction_elements
 
 //==start_of_doc_solution=================================================
@@ -381,24 +381,24 @@ void PeriodicLoadProblem<ELEMENT>::assign_traction_elements()
 //========================================================================
 template<class ELEMENT>
 void PeriodicLoadProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
-{ 
+{
  ofstream some_file;
  char filename[100];
 
  // Number of plot points
- unsigned npts=5; 
+ unsigned npts=5;
 
- // Output solution 
+ // Output solution
  sprintf(filename,"%s/soln.dat",doc_info.directory().c_str());
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,npts);
  some_file.close();
 
- // Output exact solution 
+ // Output exact solution
  sprintf(filename,"%s/exact_soln.dat",doc_info.directory().c_str());
  some_file.open(filename);
  Bulk_mesh_pt->output_fct(some_file,npts,
-                          Global_Parameters::exact_solution); 
+                          Global_Parameters::exact_solution);
  some_file.close();
 
  // Doc error
@@ -407,23 +407,23 @@ void PeriodicLoadProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  sprintf(filename,"%s/error.dat",doc_info.directory().c_str());
  some_file.open(filename);
  Bulk_mesh_pt->compute_error(some_file,
-                             Global_Parameters::exact_solution, 
+                             Global_Parameters::exact_solution,
                              error,norm);
  some_file.close();
 
 // Doc error norm:
- cout << "\nNorm of error    " << sqrt(error) << std::endl; 
+ cout << "\nNorm of error    " << sqrt(error) << std::endl;
  cout << "Norm of solution : " << sqrt(norm) << std::endl << std::endl;
  cout << std::endl;
 
 
-} // end_of_doc_solution   
+} // end_of_doc_solution
 
 
 //===start_of_main======================================================
 /// Driver code for PeriodicLoad linearly elastic problem
 //======================================================================
-int main(int argc, char* argv[]) 
+int main(int argc, char* argv[])
 {
 #ifdef OOMPH_HAS_MPI
  // Initialise MPI
@@ -432,23 +432,23 @@ int main(int argc, char* argv[])
 
  // Number of elements in x-direction
  unsigned nx=5;
- 
+
  // Number of elements in y-direction (for (approximately) square elements)
  unsigned ny=unsigned(double(nx)*Global_Parameters::Ly/Global_Parameters::Lx);
- 
+
  // Set up doc info
  DocInfo doc_info;
- 
+
  // Set output directory
  doc_info.set_directory("RESLT");
- 
+
  //Build the problem
- PeriodicLoadProblem<MyLinearElasticityElement<2> > 
+ PeriodicLoadProblem<MyLinearElasticityElement<2> >
   problem(nx,ny,Global_Parameters::Lx, Global_Parameters::Ly);
- 
+
  // Solve
  problem.newton_solve();
- 
+
  // Output the solution
  problem.doc_solution(doc_info);
 
@@ -457,5 +457,5 @@ int main(int argc, char* argv[])
  MPI_Helpers::finalize();
 #endif
 
- return(EXIT_SUCCESS);  
+ return(EXIT_SUCCESS);
 } // end_of_main
