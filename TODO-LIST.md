@@ -1,37 +1,57 @@
 # Task list
 
-## Urgent and important
+## Requirements for minimum viable product
+
+- MUST ADD:
+  - [ ] `spdlog::spdlog`
+  - [ ] `nlohmann::json`
+  - [ ] `backward::backward`(?)
+  - [ ] `MUMPS`
+- [ ] Breakdown of what has been completed and what features are missing
+  - [ ] `src/`
+  - [ ] `external_src/`
+  - [ ] `demo_drivers/`
+  - [ ] `private/`
+  - [ ] Docker build
+  - [ ] 64-bit `int` support
+- [ ] Remove CUDA crap
+- [ ] Remove all `if(DEFINED OOMPH_WITH_...)` if-blocks
+- [ ] Remove non-working `external_distributions/` crap
+- [ ] Talk to MH about updating to latest Trilinos
+
+## Important
+
 - [ ] Switch to mpic++ and mpicxx compilers for MPI-enabled code
 - [ ] Fix broken MPI-enabled demo drivers
 
-## Urgent but not important
-- [ ] Empty.
+## Less urgent
 
-## Not urgent but important
-- [ ] Add Spack support.
 - [ ] Fix issue with not being able to rerun `ctest` in a directory twice (at least for `mpi/distribution/adaptive_driven_cavity`).
 - [ ] Add notes on how to use `CMakePresets.json` and how they can define their own `CMakeUserPresets.json` file.
-- [ ] Add function `add_oomphlib(<your-target>)` that implements `target_compile_definitions(<your-target> ${OOMPH_COMPILE_DEFINITIONS})` if the user doesn't use the oomph-lib CMake commands to add drivers, see e.g. `cotire()`.
-- [ ] Add Docker support; see https://github.com/FEniCS/dolfinx
-- [ ] Add sanitiser support (e.g. address/memory, etc.).
+- [ ] Add function `add_oomphlib(<your-target>)` that implements `target_compile_definitions(<your-target> ${OOMPH_COMPILE_DEFINITIONS})` if the user doesn't use the `oomph-lib` CMake commands to add drivers, see e.g. `cotire()`.
 - [ ] Sort out external distribution build
 - [ ] Add check_...() calls to make sure the C/C++/Fortran compiler work
-- [ ] Add (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME) in conditionals where appropriate. See: https://cliutils.gitlab.io/modern-cmake/chapters/testing.html
+- [ ] Add (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME) in conditionals where appropriate. See: <https://cliutils.gitlab.io/modern-cmake/chapters/testing.html>
 - [ ] Sort out *sequential* build of MUMPS
 - [ ] Sort out a subproject build of private/
 - [ ] Find and doc. how users can build a Debug and Release version and easily switch between the two.
 - [ ] Download CMake oomph-lib in a folder that has a space in the name.
 - [ ] Sort out building of oomph-lib with shared libraries. Currently breaks when it gets to oomph_superlu
+- [ ] Add Spack support.
+- [ ] Add Docker support; see <https://github.com/FEniCS/dolfinx>
+- [ ] Add sanitiser support (e.g. address/memory, etc.).
 
 ## Not urgent and not important
+
 - [ ] Sort out external distribution build with up-to-date sources.
 - [ ] Sort out external sources build with up-to-date sources.
 - [ ] Consider replacing bash scripts with Python scripts for demo_driver tests to make them platform-independent.
 - [ ] Address MUMPS 64-bit int (i.e. long long) compatibility issue
+- [ ] Add support for the Google benchmark library.
 
 ## Finished
+
 - [x] Remove OomphPrintCompilerDefinitions.cmake. [EDIT: Changed mind -- it's helpful, so leave it!]
-- [x] Add support for the Google benchmark library.
 - [x] Test and fix the build of the demo_drivers with the main build (i.e. add_subdirectory(demo_drivers)).
 - [x] Add code coverage.
 - [x] Remove warnings for external sources on a target basis; see e.g. OomphWarnings.cmake.
@@ -73,5 +93,4 @@
 - [x] Sort out a subproject build of demo_drivers
 - [x] Add a config header and export it with the library!
 - [x] Add an "include_guard()" to CMake modules files likely to be included multiple times.
-- [x] Specify required dependencies of the package. See: https://cmake.org/cmake/help/git-master/guide/importing-exporting/index.html#id8
-
+- [x] Specify required dependencies of the package. See: <https://cmake.org/cmake/help/git-master/guide/importing-exporting/index.html#id8>

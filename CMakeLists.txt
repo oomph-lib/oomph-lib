@@ -100,9 +100,6 @@ option(OOMPH_ENABLE_SYMBOLIC_LINKS_FOR_HEADERS "Replace headers by symbolic link
 # Testing [PM: not sure if this is needed; should build self-tests separately]
 option(OOMPH_ENABLE_IN_BUILD_TESTING "Build tests with library build" OFF)
 
-# Benchmarking
-option(OOMPH_ENABLE_GOOGLE_BENCHMARK "Provide Google benchmark support" OFF)
-
 # Multiprocessing/GPU usage. Note: CUDA functionality is current very(!) limited
 # and only accessible through certain third-party libraries
 option(OOMPH_ENABLE_MPI "Enable the use of MPI for parallel processing" OFF)
@@ -234,17 +231,6 @@ if(OOMPH_ENABLE_MPI)
   include(OomphMPI)
 endif()
 
-# Set up CUDA functionality. Nothing in the library uses CUDA yet. However, the
-# plan is to support SuperLU Dist 7.0.0 in the future, which is capable of
-# harnessing CUDA functionality for (hopefully damn fast) computations.
-if(OOMPH_ENABLE_CUDA)
-  find_package(CUDA REQUIRED)
-endif()
-
-# TODO: PLACE ALL OF THE PARSING OF THIRD-PARTY LIBRARY PATHS BELOW INTO
-# OomphParseThirdPartyLibraryPathInputs.cmake:
-include(OomphParseThirdPartyLibraryPathInputs)
-
 # TODO: FINISH OFF INTEGRATION OF THIS VARIABLES INTO BUILD TODO: ADD OOMPH_
 # PREFIXES TO THESE VARIABLES! FIXME: Not currently used!
 if(DEFINED OOMPH_WITH_BLACS)
@@ -334,16 +320,6 @@ if(OOMPH_ENABLE_CODE_COVERAGE)
   oomph_enable_code_coverage()
 endif()
 
-# Has the user specified the path to a directory which contains the benchmark
-# library?
-if(OOMPH_WITH_GOOGLE_BENCHMARK)
-  if(NOT (IS_DIRECTORY OOMPH_WITH_GOOGLE_BENCHMARK))
-    message(
-      FATAL_ERROR "Input 'OOMPH_WITH_GOOGLE_BENCHMARK' is not a directory!")
-  endif()
-  set(OOMPH_ALREADY_HAVE_GOOGLE_BENCHMARK TRUE)
-endif()
-
 # --------------------------[ FIND REQUIRED HEADERS ]---------------------------
 
 include(OomphCheckForRequiredHeaders)
@@ -376,14 +352,6 @@ message(VERBOSE "<====== Finished oomph-lib library configuration ======>")
 
 # Now export the package so it can be found using find_package(...)
 include(OomphExportPackage)
-
-# -------------------------------[ BENCHMARKING ]-------------------------------
-
-set(BUILDING_BENCHMARKS_WITH_LIBRARY OFF)
-if(OOMPH_ENABLE_GOOGLE_BENCHMARK)
-  set(BUILDING_BENCHMARKS_WITH_LIBRARY ON)
-  add_subdirectory(benchmark)
-endif()
 
 # ---------------------------------[ TESTING ]----------------------------------
 

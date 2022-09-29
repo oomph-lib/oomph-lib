@@ -67,7 +67,7 @@ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/oomphlibUninstall.cmake"
 
 # The list of modules to export
 set(CMAKE_MODULES_TO_INSTALL OomphAddExecutable.cmake OomphAddTest.cmake
-    OomphEnableCodeCoverage.cmake OomphGetGoogleBenchmark.cmake)
+    OomphEnableCodeCoverage.cmake)
 
 # Place each module in the same build/install directory that we place the
 # oomphlibConfig.cmake file

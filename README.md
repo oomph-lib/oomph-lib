@@ -126,7 +126,6 @@ Finish documenting the following:
 - [ ] Adding a new library.
 - [ ] Adding a new demo-driver.
 - [ ] Packaging with CPack.
-- [ ] Adding a benchmark.
 
 ## Recommended
 
