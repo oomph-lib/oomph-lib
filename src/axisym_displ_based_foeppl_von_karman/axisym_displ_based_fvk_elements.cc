@@ -311,7 +311,7 @@ namespace oomph
 
   //======================================================================
   /// Output function:
-  ///   r, w, sigma_r_r, sigma_phi_phi
+  ///   r, w, u, sigma_r_r, sigma_phi_phi
   /// nplot points
   //======================================================================
   void AxisymFoepplvonKarmanEquations::output(std::ostream& outfile,
@@ -345,7 +345,7 @@ namespace oomph
 
   //======================================================================
   /// C-style output function:
-  ///   r,w
+  ///   r,w,u
   /// nplot points
   //======================================================================
   void AxisymFoepplvonKarmanEquations::output(FILE* file_pt,
