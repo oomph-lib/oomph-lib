@@ -1,4 +1,4 @@
-# ------------------------------------------------------------------------------
+--- # ------------------------------------------------------------------------------
 name: macOS
 
 on: push
@@ -6,7 +6,7 @@ on: push
 # Environment variable(s) that can be read during jobs
 env:
   # The oomph-lib installation location
-  OOMPH_INSTALL_PATH: '${{ github.workspace }}/.local'
+  OOMPH_INSTALL_PATH: "${{ github.workspace }}/.local"
 
 # ------------------------------------------------------------------------------
 
@@ -19,9 +19,7 @@ jobs:
         #   {status: "OFF", preset: CI-build},
         #   {status: "ON",  preset: CI-mpi-build}
         # ]
-        mpi_info: [
-          {status: "OFF", cmake_preset: CI-build}
-        ]
+        mpi_info: [{ status: "OFF", cmake_preset: CI-build }]
 
     runs-on: macos-latest
     steps:
@@ -38,6 +36,7 @@ jobs:
       - name: Configure, build & install
         run: |
           cmake --preset ${{ matrix.mpi_info.cmake_preset }} \
+          -D CMAKE_PREFIX_PATH="/usr/local/Cellar/openblas/0.3.21" \
           -D CMAKE_INSTALL_PREFIX='${{ env.OOMPH_INSTALL_PATH }}' \
           -D OOMPH_USE_OPENBLAS=ON \
           -B build && cd build && ninja && ninja install
@@ -60,5 +59,4 @@ jobs:
       - name: Propagate CTest status
         if: steps.self_tests.outcome == 'failure'
         run: exit 8
-
 # ------------------------------------------------------------------------------
