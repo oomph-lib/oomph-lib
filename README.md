@@ -12,7 +12,7 @@
     <img alt="Documentation" src="../../actions/workflows/build-and-publish-docs.yaml/badge.svg?branch=main">
   </a>
   <a href="https://codecov.io/gh/puneetmatharu/oomph-lib">
-    <img alt="Code coverage" src="https://codecov.io/gh/puneetmatharu/oomph-lib/branch/feature-convert-to-cmake-build-system/graph/badge.svg?token=ZYGR7Q26I1"/>
+    <img alt="Code coverage" src="https://codecov.io/gh/puneetmatharu/oomph-lib/branch/development/graph/badge.svg?token=ZYGR7Q26I1"/>
   </a>
   <a href="https://www.codacy.com/gh/puneetmatharu/oomph-lib/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=puneetmatharu/oomph-lib&amp;utm_campaign=Badge_Grade">
     <img src="https://app.codacy.com/project/badge/Grade/f64cf70e1f784fc9838f929af4257b41"/>
