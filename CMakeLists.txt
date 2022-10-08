@@ -98,7 +98,7 @@ option(OOMPH_SUPPRESS_DOC_BUILD "Suppress Doxygen creation of API documentation"
 option(OOMPH_ENABLE_SYMBOLIC_LINKS_FOR_HEADERS "Replace headers by symbolic links" ON)
 
 # Testing [PM: not sure if this is needed; should build self-tests separately]
-option(OOMPH_ENABLE_IN_BUILD_TESTING "Build tests with library build" OFF)
+option(OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY "Build tests with library build" OFF)
 
 # Multiprocessing/GPU usage. Note: CUDA functionality is current very(!) limited
 # and only accessible through certain third-party libraries
@@ -184,7 +184,10 @@ if(OOMPH_USE_OPENBLAS)
   # Need path to OpenBLAS on macOS
   #
   # FIXME: Find out how to get rid of this. Could build OpenBLAS with oomph-lib
-  list(APPEND CMAKE_PREFIX_PATH "/usr/local/Cellar/openblas/0.3.17")
+  message(
+    WARNING
+      "We are currently hardcoding the path to the OpenBLAS install directory!")
+  list(APPEND CMAKE_PREFIX_PATH "/usr/local/Cellar/openblas/0.3.18")
 
   # Ideally, the user will install OpenBLAS via 'sudo apt-get' or 'brew install'
   # and they will simply set 'CMAKE_PREFIX_PATH' in their CMakeUserPresets.json
@@ -222,7 +225,7 @@ endif()
 # The demo_driver self-tests use shell scripts and symbolic links, both of which
 # require a Unix-based system
 if(NOT UNIX)
-  set(OOMPH_ENABLE_IN_BUILD_TESTING OFF)
+  set(OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY OFF)
   set(SYMBOLIC_LINKS_FOR_HEADERS OFF)
 endif()
 
@@ -306,14 +309,14 @@ if(OOMPH_ENABLE_CLANG_TIDY)
   include(OomphStaticAnalysers)
 endif()
 
-# Add code coverage compiler flags, if requested
+# FIXME: Add code coverage compiler flags, if requested
 if(OOMPH_ENABLE_CODE_COVERAGE)
   # We can only get coverage for the library sources if the demo drivers are
-  # built with the library itself, which requires OOMPH_ENABLE_IN_BUILD_TESTING
-  # to be enabled
-  if(NOT OOMPH_ENABLE_IN_BUILD_TESTING)
-    # set(OOMPH_ENABLE_IN_BUILD_TESTING ON CACHE BOOL "Build tests with library
-    # build" FORCE)
+  # built with the library itself, which requires
+  # OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY to be enabled
+  if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+    # set(OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY ON CACHE BOOL "Build tests with
+    # library build" FORCE)
   endif()
 
   include(OomphEnableCodeCoverage)
@@ -359,12 +362,14 @@ include(OomphExportPackage)
 # the demo drivers are built with the library then we don't need to call
 # "find_package(oomphlib REQUIRED)" in each demo_driver subdirectory to locate
 # the generated oomph-lib libraries, as they'll already be visible to that scope
+# FIXME: Remove "duplicated" BUILD_DEMO_DRIVERS_WITH_LIBRARY flag (with and
+# without OOMPH_ prefix)
 set(BUILD_DEMO_DRIVERS_WITH_LIBRARY OFF)
 
 # Enable testing for the current directory and all child directories but ONLY
 # when this is the root project, i.e. it isn't being built as part of some
 # larger project hierarchy
-if(OOMPH_IS_MAIN_PROJECT AND OOMPH_ENABLE_IN_BUILD_TESTING)
+if(OOMPH_IS_MAIN_PROJECT AND OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
   set(BUILD_DEMO_DRIVERS_WITH_LIBRARY ON)
   if(NOT OOMPH_DONT_SILENCE_USELESS_WARNINGS)
     include(OomphSilenceWarnings)
