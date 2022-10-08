@@ -111,7 +111,7 @@ function(oomph_library_config)
   # Create the library and specify the library type. If no sources are provided,
   # we assume it is a header-only library, in which case it should be created as
   # an INTERFACE library. Note, in this case, it makes no sense to specify the
-  # library type as the library itself will not be built/compiled.
+  # library type, as the library itself will not be built/compiled.
   if(SOURCES)
     add_library(${LIBNAME} ${LIBTYPE} ${LIBRARY_DEPS})
     set(INCLUDE_TYPE PUBLIC)
@@ -178,6 +178,11 @@ function(oomph_library_config)
                                   CXX_COMPILE_FLAGS -Wno-undefined-var-template)
   endif()
 
+  if(APPLE)
+    target_link_options(${LIBNAME} ${LINK_TYPE} -Wl,-no_compact_unwind
+                        -Wl,-keep_dwarf_unwind)
+  endif()
+
   # ----------------------------------------------------------------------------
   # The install rules: we want to do the following
   #
@@ -236,7 +241,7 @@ function(oomph_library_config)
 
   # Define the installation locations and export target. Although this only
   # installs the library, it's important that the includes directory is added so
-  # that anything linking to the exported library, knows where the associated
+  # that anything linking to the exported library knows where the associated
   # headers live.
   install(
     TARGETS ${LIBNAME}
