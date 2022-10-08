@@ -1,4 +1,4 @@
-# ------------------------------------------------------------------------------
+--- # ------------------------------------------------------------------------------
 name: Ubuntu
 
 on: push
@@ -6,7 +6,7 @@ on: push
 # Environment variable(s) that can be read during jobs
 env:
   # The oomph-lib installation location
-  OOMPH_INSTALL_PATH: '${{ github.workspace }}/.local'
+  OOMPH_INSTALL_PATH: "${{ github.workspace }}/.local"
 
 # ------------------------------------------------------------------------------
 
@@ -19,9 +19,7 @@ jobs:
         #   {status: "OFF", preset: CI-build},
         #   {status: "ON",  preset: CI-mpi-build}
         # ]
-        mpi_info: [
-          {status: "OFF", cmake_preset: CI-build}
-        ]
+        mpi_info: [{ status: "OFF", cmake_preset: CI-build }]
 
     runs-on: ubuntu-latest
     steps:
@@ -32,7 +30,7 @@ jobs:
         run: sudo apt-get install -y gfortran ninja-build libopenblas-dev
 
       - name: Install MPI dependencies (if required)
-        if: ${{ matrix.mpi_info.status }} == "ON"
+        if: matrix.mpi_info.status == 'ON'
         run: sudo apt-get install openmpi-bin libopenmpi-dev
 
       - name: Configure, build & install
@@ -60,5 +58,4 @@ jobs:
       - name: Propagate CTest status
         if: steps.self_tests.outcome == 'failure'
         run: exit 8
-
 # ------------------------------------------------------------------------------
