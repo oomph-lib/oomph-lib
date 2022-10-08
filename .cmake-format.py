@@ -82,7 +82,9 @@ with section("parse"):
             }
         },
         'oomph_target_silence_warnings': {
-            'flags': [],
+            'flags': [
+                "WARN_IF_FLAG_NOT_FOUND"
+            ],
             'kwargs': {
                 'CXX_COMPILE_FLAGS': '*',
                 'C_COMPILE_FLAGS': '*',

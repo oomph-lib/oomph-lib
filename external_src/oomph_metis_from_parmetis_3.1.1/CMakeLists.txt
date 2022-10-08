@@ -106,7 +106,8 @@ include(OomphTargetSilenceWarnings)
 oomph_target_silence_warnings(
   TARGET ${LIBNAME}
   C_COMPILE_FLAGS -Wno-implicit-function-declaration -Wno-shift-op-parentheses
-                  -Wno-format-security)
+                  -Wno-format-security
+  WARN_IF_FLAG_NOT_FOUND)
 
 # Add the library to the list of external source libraries and make the updated
 # variable value visible to the parent scope

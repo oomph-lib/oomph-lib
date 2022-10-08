@@ -11,7 +11,8 @@
 #    oomph_target_silence_warnings(TARGET                   <target-name>
 #                                  [C_COMPILE_FLAGS         <c-flags>]
 #                                  [CXX_COMPILE_FLAGS       <c++-flags>]
-#                                  [FORTRAN_COMPILE_FLAGS   <fortran-flags>])
+#                                  [FORTRAN_COMPILE_FLAGS   <fortran-flags>]
+#                                  [WARN_IF_FLAG_NOT_FOUND])
 #
 # NOTE (1): At least one of the *_COMPILE_FLAGS arguments needs to be specified.
 # NOTE (2): This module is intended for usage in cases that the warnings need
@@ -25,7 +26,7 @@ include_guard()
 function(oomph_target_silence_warnings)
   # Define the supported set of keywords
   set(PREFIX ARG)
-  set(FLAGS "")
+  set(FLAGS WARN_IF_FLAG_NOT_FOUND)
   set(SINGLE_VALUE_ARGS TARGET)
   set(MULTI_VALUE_ARGS C_COMPILE_FLAGS CXX_COMPILE_FLAGS FORTRAN_COMPILE_FLAGS)
 
@@ -37,6 +38,7 @@ function(oomph_target_silence_warnings)
   # Redefine the headers, sources, and the name of the library in this scope but
   # with clearer variable names
   set(TARGET ${${PREFIX}_TARGET})
+  set(WARN_IF_FLAG_NOT_FOUND ${${PREFIX}_WARN_IF_FLAG_NOT_FOUND})
   set(C_COMPILE_FLAGS ${${PREFIX}_C_COMPILE_FLAGS})
   set(CXX_COMPILE_FLAGS ${${PREFIX}_CXX_COMPILE_FLAGS})
   set(FORTRAN_COMPILE_FLAGS ${${PREFIX}_FORTRAN_COMPILE_FLAGS})
@@ -66,6 +68,8 @@ function(oomph_target_silence_warnings)
     if(C_COMPILER_HAS_FLAG)
       target_compile_options(${TARGET}
                              PRIVATE $<$<COMPILE_LANGUAGE:C>:${C_COMPILE_FLAG}>)
+    elseif(WARN_IF_FLAG_NOT_FOUND)
+      message(WARNING "Unrecognised C compiler flag: '${C_COMPILE_FLAG}'")
     endif()
   endforeach()
 
@@ -75,6 +79,8 @@ function(oomph_target_silence_warnings)
     if(CXX_COMPILER_HAS_FLAG)
       target_compile_options(
         ${TARGET} PRIVATE $<$<COMPILE_LANGUAGE:CXX>:${CXX_COMPILE_FLAG}>)
+    elseif(WARN_IF_FLAG_NOT_FOUND)
+      message(WARNING "Unrecognised C++ compiler flag: '${CXX_COMPILE_FLAG}'")
     endif()
   endforeach()
 
@@ -86,6 +92,9 @@ function(oomph_target_silence_warnings)
       target_compile_options(
         ${TARGET}
         PRIVATE $<$<COMPILE_LANGUAGE:Fortran>:${FORTRAN_COMPILE_FLAG}>)
+    elseif(WARN_IF_FLAG_NOT_FOUND)
+      message(
+        WARNING "Unrecognised Fortran compiler flag: '${FORTRAN_COMPILE_FLAG}'")
     endif()
   endforeach()
 endfunction()
