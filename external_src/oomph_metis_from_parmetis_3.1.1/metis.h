@@ -22,10 +22,9 @@
 #include <dmalloc.h>
 #endif
 
-#include "../parmetis.h"  /* Get the idxtype definition */
+#include "../parmetis.h" /* Get the idxtype definition */
 #include <defs.h>
 #include <struct.h>
 #include <macros.h>
 #include <rename.h>
 #include <proto.h>
-

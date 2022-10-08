@@ -101,12 +101,15 @@ oomph_library_config(
   HEADERS_NO_COMBINE ${HEADERS_NO_COMBINE}
   SOURCES ${SOURCES})
 
-# Silence the annoying warnings produced by this library
+# Silence the annoying warnings produced by this library. N.B. The
+# '-Wno-incompatible-pointer-types' flag is necessary to address the warnings
+# arising from uncommenting the GKfree declaration in proto.h
 include(OomphTargetSilenceWarnings)
 oomph_target_silence_warnings(
   TARGET ${LIBNAME}
-  C_COMPILE_FLAGS -Wno-implicit-function-declaration -Wno-shift-op-parentheses
-                  -Wno-format-security
+  C_COMPILE_FLAGS
+    -Wno-shift-op-parentheses -Wno-format-security
+    -Wno-incompatible-pointer-types # -Wno-implicit-function-declaration
   WARN_IF_FLAG_NOT_FOUND)
 
 # Add the library to the list of external source libraries and make the updated
