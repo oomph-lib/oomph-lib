@@ -133,12 +133,12 @@ function(oomph_add_test)
   foreach(REQUIREMENT IN LISTS REQUIREMENTS_WITH_PATHS)
     if(SYMLINK_TEST_DATA_INSTEAD_OF_COPY)
       add_custom_command(
-        TARGET copy_${PATH_HASH} COMMAND ln -s "${REQUIREMENT}"
+        TARGET copy_${PATH_HASH} COMMAND ln -sf "${REQUIREMENT}"
                                          "${CMAKE_CURRENT_BINARY_DIR}")
     else()
       if(IS_DIRECTORY "${REQUIREMENT}")
         add_custom_command(
-          TARGET copy_${PATH_HASH} COMMAND cp -r "${REQUIREMENT}"
+          TARGET copy_${PATH_HASH} COMMAND cp -ur "${REQUIREMENT}"
                                            "${CMAKE_CURRENT_BINARY_DIR}")
       else()
         add_custom_command(
