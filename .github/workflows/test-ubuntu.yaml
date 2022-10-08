@@ -23,6 +23,9 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
+      - name: Stop early
+        run: exit 1
+
       - name: Check out repository
         uses: actions/checkout@v2
 

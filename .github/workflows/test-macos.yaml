@@ -7,9 +7,8 @@ on: push
 env:
   # The oomph-lib installation location
   OOMPH_INSTALL_PATH: "${{ github.workspace }}/.local"
-  CC: gcc
-  CXX: g++
-  FC: gfortran
+  CC: clang
+  CXX: clang++
 
 # ------------------------------------------------------------------------------
 
@@ -30,7 +29,19 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install dependencies
-        run: brew install cmake ninja openblas && brew reinstall gcc
+        run: brew install cmake ninja openblas fd && brew reinstall gcc
+
+      - name: List all gcc execs
+        run: |
+          which -a gcc
+          which -a gcc-12
+          cd /usr/local/Cellar/gcc
+          fd gcc
+          echo "Built-in gcc"
+          gcc --version
+          echo "Homebrew gcc"
+          ./12.2.0/bin/gcc-12 --version
+          exit 1
 
       - name: Install MPI dependencies (if required)
         if: matrix.mpi_info.status == 'ON'
