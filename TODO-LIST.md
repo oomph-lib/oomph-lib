@@ -2,26 +2,29 @@
 
 ## Requirements for minimum viable product
 
+- [ ] Handle M1 Macs gracefully and update GitHub Actions...
+- [ ] Update instructions for how to run demo drivers (need to set CMAKE_APPLE_SILICON_PROCESSOR...?)
 - Documentation for:
   - [ ] Installing CMake (3.24)
   - [ ] Downloading and installing oomph-lib
-- [ ] Change 'oomphlib' -> 'oomph_lib' (carefully! avoid changing headers/sources)
+- [ ] Change 'oomphlib' -> 'oomph_lib' (carefully(!) avoid changing headers/sources)
+- [ ] Test out include-what-you-use; see https://stackoverflow.com/questions/30951492/how-to-use-the-tool-include-what-you-use-together-with-cmake-to-detect-unused-he
 - MUST ADD:
   - [ ] `spdlog::spdlog`
   - [ ] `nlohmann::json`
-  - [ ] `backward::backward`(?)
+  - [ ] `Backward::Backward`
   - [ ] `MUMPS`
 - [ ] Breakdown of what has been completed and what features are missing
   - [ ] `src/`
   - [ ] `external_src/`
   - [ ] `demo_drivers/`
   - [ ] `private/`
-  - [ ] Docker build
-  - [ ] 64-bit `int` support
-- [ ] Remove CUDA crap
-- [ ] Remove all `if(DEFINED OOMPH_WITH_...)` if-blocks
+- [ ] Remove Docker build (can be brought back after beta release)
+- [x] Remove CUDA crap
+- [x] Remove all `if(DEFINED OOMPH_WITH_...)` if-blocks
 - [ ] Remove non-working `external_distributions/` crap
-- [ ] Talk to MH about updating to latest Trilinos
+- [ ] Talk to MH about updating to latest MUMPS
+- [ ] Update minimum CMake version
 
 ## Important
 
@@ -30,9 +33,9 @@
 
 ## Less urgent
 
-- [ ] Fix issue with not being able to rerun `ctest` in a directory twice (at least for `mpi/distribution/adaptive_driven_cavity`).
+- [x] Fix issue with not being able to rerun `ctest` in a directory twice (at least for `mpi/distribution/adaptive_driven_cavity`).
 - [ ] Add notes on how to use `CMakePresets.json` and how they can define their own `CMakeUserPresets.json` file.
-- [ ] Add function `add_oomphlib(<your-target>)` that implements `target_compile_definitions(<your-target> ${OOMPH_COMPILE_DEFINITIONS})` if the user doesn't use the `oomph-lib` CMake commands to add drivers, see e.g. `cotire()`.
+- [ ] Add(?) function `add_oomphlib(<your-target>)` that implements `target_compile_definitions(<your-target> ${OOMPH_COMPILE_DEFINITIONS})` if the user doesn't use the `oomph-lib` CMake commands to add drivers, see e.g. `cotire()`.
 - [ ] Sort out external distribution build
 - [ ] Add check_...() calls to make sure the C/C++/Fortran compiler work
 - [ ] Add (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME) in conditionals where appropriate. See: <https://cliutils.gitlab.io/modern-cmake/chapters/testing.html>
