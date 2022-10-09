@@ -1,3 +1,28 @@
+# ===============================================================================
+# A template configuration file to be processed by configure_file(...). We rely
+# on this file to make the oomph-lib library available to other CMake projects
+# after it has been installed. It contains information about oomph-lib's
+# dependencies and the project configuration.
+#
+# CMake will replace variables enclosed by "@" by their values during the
+# configuration step and the populated config file will be placed in the build
+# folder under the same filename but without the .in suffix. After the CMake
+# installation step, the newly-generated config file will, by default, be
+# installed to the user's lib/cmake/ directory (e.g. /usr/lib/cmake/). If the
+# user specified a custom installation path, it will be placed there instead,
+# but again under the lib/cmake/ subdirectory.
+#
+# Once the library has been installed, the configuration file can found using
+# find_package(oomphlib). If a custom installation path was used, the user will
+# need to append that path to the CMAKE_PREFIX_PATH so that the generated config
+# can be found by CMake.
+#
+# WARNING: Do NOT change the name of this file unless the name of the package
+# changes! The name of this file MUST match <package-name>Config.cmake or
+# <lowercase-package-name>-config.cmake so that it can to be found by
+# find_package(...).
+# ===============================================================================
+
 # ---------------------------[ INITIAL BOILERPLATE ]---------------------------
 
 @PACKAGE_INIT@
@@ -82,6 +107,16 @@ if(OOMPH_HAS_BACKWARD AND NOT Backward_FOUND)
   find_dependency(Backward REQUIRED)
 endif()
 
+# nlohmann_json
+if(OOMPH_HAS_NLOHMANN_JSON AND NOT nlohmann_json_FOUND)
+  find_dependency(nlohmann_json 3.11.2 REQUIRED)
+endif()
+
+# spdlog
+if(OOMPH_HAS_SPDLOG AND NOT spdlog_FOUND)
+  find_dependency(spdlog 1.10.0 REQUIRED)
+endif()
+
 # CGAL
 if(OOMPH_HAS_CGAL AND NOT CGAL_FOUND)
   find_dependency(CGAL 5.2.2 REQUIRED)
@@ -92,12 +127,9 @@ if(OOMPH_HAS_MUMPS AND NOT MUMPS_FOUND)
   find_dependency(MUMPS 5.4.0 REQUIRED)
 endif()
 
-# nlohmann_json
-if(OOMPH_HAS_NLOHMANN_JSON AND NOT nlohmann_json_FOUND)
-  find_dependency(nlohmann_json 3.9.1 REQUIRED)
-endif()
-
 # Trilinos
+#
+# FIXME: This doesn't work -- it's a work in progress
 if(OOMPH_HAS_TRILINOS AND NOT Trilinos_FOUND)
   # Extract important information from the Trilinos build
   set(OOMPH_TRILINOS_VERSION "@TRILINOS_VERSION@")
@@ -129,11 +161,6 @@ if(OOMPH_HAS_TRILINOS AND NOT Trilinos_FOUND)
                INTERFACE_LINK_LIBRARIES "${TRILINOS_LIBRARIES}")
 endif()
 
-# spdlog
-if(OOMPH_HAS_SPDLOG AND NOT spdlog_FOUND)
-  find_dependency(spdlog 1.9.2 REQUIRED)
-endif()
-
 # --------------------------[ REMAINING BOILERPLATE ]--------------------------
 
 include("${CMAKE_CURRENT_LIST_DIR}/@PROJECT_NAME@Exports.cmake")
@@ -143,6 +170,8 @@ check_required_components("@PROJECT_NAMESPACE@")
 
 # -------------------[ INCLUDE EXTRA INSTALLED CMAKE FILES ]-------------------
 
+# FIXME: Explain why we export these CMake modules add_executable and add_test
+# are obvious, by why enable_code_coverage?
 include("${CMAKE_CURRENT_LIST_DIR}/OomphAddExecutable.cmake")
 include("${CMAKE_CURRENT_LIST_DIR}/OomphAddTest.cmake")
 include("${CMAKE_CURRENT_LIST_DIR}/OomphEnableCodeCoverage.cmake")
