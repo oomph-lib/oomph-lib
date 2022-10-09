@@ -60,7 +60,7 @@ set(OOMPH_SUPPRESSED_TETGEN_LIB @SUPPRESS_TETGEN_LIB@)
 # set(HAVE_DARWIN, ...) set(WANT_MPI_VARIABLENP ...)
 
 # Capture user's decision to use/build OpenBLAS/LAPACK
-set(OOMPH_USE_OPENBLAS @OOMPH_USE_OPENBLAS@)
+set(OOMPH_ENABLE_USE_OPENBLAS @OOMPH_ENABLE_USE_OPENBLAS@)
 
 # Capture values from the configuration step to determine which dependencies
 # should be forwarded to the user
@@ -74,7 +74,7 @@ set(OOMPH_HAS_SPDLOG @OOMPH_HAS_SPDLOG@)
 set(OOMPH_HAS_GOOGLE_BENCHMARK @OOMPH_HAS_GOOGLE_BENCHMARK@)
 
 # Search for OpenBLAS/LAPACK libraries
-if(OOMPH_USE_OPENBLAS)
+if(OOMPH_ENABLE_USE_OPENBLAS)
   set(BLAS_DIRS @BLAS_DIRS@)
   set(LAPACK_DIRS @LAPACK_DIRS@)
   list(APPEND CMAKE_PREFIX_PATH "${BLAS_DIRS};${LAPACK_DIRS}")

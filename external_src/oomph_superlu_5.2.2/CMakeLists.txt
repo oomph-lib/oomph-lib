@@ -241,7 +241,7 @@ if(ENABLE_COMPLEX16)
 endif()
 
 # Specify the libraries that we depend on
-if(OOMPH_USE_OPENBLAS AND BLAS_FOUND)
+if(OOMPH_ENABLE_USE_OPENBLAS AND BLAS_FOUND)
   set(LINKLIBS BLAS::BLAS)
 else()
   set(LINKLIBS oomph_blas)
@@ -268,8 +268,8 @@ oomph_library_config(
 # Silence the (annoying) warnings produced by this library
 include(OomphTargetSilenceWarnings)
 oomph_target_silence_warnings(
-  TARGET ${LIBNAME} C_COMPILE_FLAGS -Wno-deprecated-non-prototype
-                                    -Wno-unused-result)
+  TARGET ${LIBNAME} C_COMPILE_FLAGS -Wno-unused-result
+)# -Wno-deprecated-non-prototype)
 
 # Update list of external sources preprocessor definitions and list of libraries
 list(APPEND EXTERNAL_SRC_CXX_DEFINITIONS USING_OOMPH_SUPERLU)

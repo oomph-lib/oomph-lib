@@ -3,7 +3,7 @@
 # oomph-lib using find_package(...) or find_package(... CONFIG).
 #
 # NOTE: A number of the key OOMPH_... values referenced here will have been
-# defined in OomphConfigureProjectEnvironment.cmake.
+# defined in OomphConfigureProject.cmake.
 # =============================================================================
 # Introduce the variables CMAKE_INSTALL_{LIBDIR,BINDIR,INCLUDEDIR} and functions
 # write_basic_package_version_file(...) and configure_package_config_file(...)

@@ -6,9 +6,6 @@
 file(READ "${CMAKE_CURRENT_LIST_DIR}/AsciiLogo.txt" ASCII_OOMPH_LIB_LOGO)
 message("${ASCII_OOMPH_LIB_LOGO}")
 
-# Introduce CMAKE_INSTALL_LIBDIR, CMAKE_INSTALL_BINDIR, CMAKE_INSTALL_INCLUDEDIR
-include(GNUInstallDirs)
-
 # Important: prohibit in-source builds!
 if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
   message(
@@ -62,8 +59,6 @@ set(OOMPH_INSTALL_LIB_DIR "${CMAKE_INSTALL_FULL_LIBDIR}/${PROJECT_NAME}")
 if(APPLE)
   set(CMAKE_C_ARCHIVE_CREATE "<CMAKE_AR> Scr <TARGET> <LINK_FLAGS> <OBJECTS>")
   set(CMAKE_CXX_ARCHIVE_CREATE "<CMAKE_AR> Scr <TARGET> <LINK_FLAGS> <OBJECTS>")
-  set(CMAKE_C_ARCHIVE_FINISH "<CMAKE_RANLIB> -no_warning_for_no_symbols -c <TARGET>")
-  set(CMAKE_CXX_ARCHIVE_FINISH "<CMAKE_RANLIB> -no_warning_for_no_symbols -c <TARGET>")
 endif(APPLE)
 
 # Define the namespace for libraries to be exported within

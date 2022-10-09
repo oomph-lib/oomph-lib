@@ -88,7 +88,7 @@ endif()
 
 # Specify the libraries that we depend on
 set(LINKLIBS oomph_metis_from_parmetis_3.1.1)
-if(OOMPH_USE_OPENBLAS AND BLAS_FOUND)
+if(OOMPH_ENABLE_USE_OPENBLAS AND BLAS_FOUND)
   list(APPEND LINKLIBS BLAS::BLAS)
 else()
   list(APPEND LINKLIBS oomph_blas)

@@ -40,7 +40,7 @@ if(NOT SUPPRESS_TETGEN_LIB)
 endif()
 
 # Add BLAS
-if(NOT OOMPH_USE_OPENBLAS)
+if(NOT OOMPH_ENABLE_USE_OPENBLAS)
   if(NOT ALREADY_HAVE_BLAS)
     add_subdirectory(oomph_blas)
   endif()

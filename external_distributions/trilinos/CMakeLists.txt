@@ -32,7 +32,7 @@ set(TRILINOS_C_FLAGS ${CMAKE_C_FLAGS} -Wno-implicit-function-declaration)
 # the actual library artifact is generated)
 set(OOMPH_BLAS_LIBRARIES)
 set(OOMPH_LAPACK_LIBRARIES)
-if(OOMPH_USE_OPENBLAS AND BLAS_FOUND)
+if(OOMPH_ENABLE_USE_OPENBLAS AND BLAS_FOUND)
   set(OOMPH_BLAS_LIBRARIES "${BLAS_LIBRARIES}")
   set(OOMPH_LAPACK_LIBRARIES "${LAPACK_LIBRARIES}")
 else()
@@ -122,7 +122,7 @@ set(OOMPH_TRILINOS_LIBRARIES_WITH_PATHS ${TRILINOS_LIBRARIES_WITH_PATHS} CACHE
 # own. To ensure that they're built before Trilinos is (so that Trilinos can
 # link against them), we need to list them as Trilinos dependencies
 set(OOMPH_TRILINOS_DEPENDS oomph::oomph_blas oomph::oomph_lapack)
-if(OOMPH_USE_OPENBLAS AND BLAS_FOUND)
+if(OOMPH_ENABLE_USE_OPENBLAS AND BLAS_FOUND)
   set(OOMPH_TRILINOS_DEPENDS)
 endif()
 

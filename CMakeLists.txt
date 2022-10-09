@@ -42,12 +42,17 @@ project(
   HOMEPAGE_URL "http://oomph-lib.maths.man.ac.uk/doc/html/index.html"
   LANGUAGES C CXX Fortran)
 
+# ---------------------------[ INITIAL PROJECT SETUP ]--------------------------
+
+# FIXME: Temporary patch; find out how to handle this one properly...
+if(APPLE)
+  set(CMAKE_OSX_DEPLOYMENT_TARGET 12.3)
+endif()
+
 # Specify the location of non-standard CMake modules and the C++ standard
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/")
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/")
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
-
-# ---------------------------[ INITIAL PROJECT SETUP ]--------------------------
 
 # Build in debugging mode by default
 if(NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
@@ -55,7 +60,7 @@ if(NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
 endif()
 
 # Sort out config files
-include(OomphConfigureProjectEnvironment)
+include(OomphConfigureProject)
 
 # Select level of verbosity (e.g. STATUS, VERBOSE, etc.). Only valid from CMake
 # 3.17 onwards. For earlier CMake versions, setting this variable has no effect
@@ -71,92 +76,53 @@ find_package(Python3 REQUIRED)
 # ------------------------------[ BUILD OPTIONS ]-------------------------------
 # cmake-format: off
 
-# FIXME: TIDY UP GROUPING OF BUILD OPTIONS
-
-# We silence a few harmless warnings in external_src/ and in src/. If you want,
-# you can choose to have them displayed during the build
-option(OOMPH_DONT_SILENCE_USELESS_WARNINGS "Display all warnings" OFF)
-
-# Attempt to build and use up-to-date external sources. [WORK IN PROGRESS]
-# CHANGES WITH 'OOMPH_TRANSITION_TO_VERSION_3'
-option(OOMPH_TRANSITION_TO_VERSION_3 "Try to build with up-to-date external sources" OFF)
-option(OOMPH_ENABLE_64BIT_INTS "Use 64-bit ints for matrix indices" OFF)
-option(OOMPH_USE_OPENBLAS "Use the OpenBLAS implementation of BLAS/LAPACK" OFF)
-# option(OOMPH_USE_MKL_BLAS_AND_LAPACK "Use the MKL implementation of BLAS and LAPACK" OFF)
-
-# Extra debugging compile options; only used by Debug configurations
-option(OOMPH_ENABLE_PARANOID "Enable the PARANOID flag in Debug" OFF)
-option(OOMPH_ENABLE_RANGE_CHECKING "Enable RANGE_CHECKING flag in Debug" OFF)
-
-# Enable the use of 'ccache', which is a compiler cache that can drastically
-# improve build times for C and C++ projects
-option(OOMPH_ENABLE_CCACHE "Enable 'ccache' compiler caching support" OFF)
-
 # General options
 option(BUILD_SHARED_LIBS "Build using shared libraries; static otherwise" OFF)
-option(OOMPH_SUPPRESS_DOC_BUILD "Suppress Doxygen creation of API documentation" ON)
-option(OOMPH_ENABLE_SYMBOLIC_LINKS_FOR_HEADERS "Replace headers by symbolic links" ON)
-
-# Testing [PM: not sure if this is needed; should build self-tests separately]
 option(OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY "Build tests with library build" OFF)
-
-# Multiprocessing/GPU usage. Note: CUDA functionality is current very(!) limited
-# and only accessible through certain third-party libraries
+option(OOMPH_DONT_SILENCE_USELESS_WARNINGS "Display (harmless) warnings from external_src/ and src/ that are silenced" OFF)
 option(OOMPH_ENABLE_MPI "Enable the use of MPI for parallel processing" OFF)
-option(OOMPH_ENABLE_CUDA "Enable the use of CUDA where possible" OFF)
+option(OOMPH_ENABLE_PARANOID "Enable the PARANOID flag in Debug" OFF)
+option(OOMPH_ENABLE_RANGE_CHECKING "Enable RANGE_CHECKING flag in Debug" OFF)
+option(OOMPH_ENABLE_SYMBOLIC_LINKS_FOR_HEADERS "Replace headers by symbolic links" ON)
+option(OOMPH_ENABLE_USE_OPENBLAS "Use the OpenBLAS implementation of BLAS/LAPACK" OFF)
+option(OOMPH_SUPPRESS_DOC_BUILD "Suppress Doxygen creation of API documentation [DOESN'T WORK YET!]" ON)
+option(OOMPH_TRANSITION_TO_VERSION_3 "Try to build with up-to-date external sources" OFF)
+option(OOMPH_USE_DEPRECATED_SUPERLU "Use oomph-lib's deprecated version of SuperLU (4.3)" OFF)
 
-# Optionally build third-party libraries. [WORK IN PROGRESS.]
-# FIXME: spdlog and Backward need to be "exported"(?!) with 'generic'. Not sure
-# what this means yet...
-option(OOMPH_WANT_BACKWARD "Use the Backward library for stack trace pretty-printing" OFF)
-option(OOMPH_WANT_CGAL "Do we want to build the CGAL library?" OFF)
-option(OOMPH_WANT_HYPRE "Use Hypre library" OFF)
-option(OOMPH_WANT_MUMPS "Use MUMPS library" OFF)
-option(OOMPH_WANT_NLOHMANN_JSON "Use the nlohmann JSON library" OFF)
-option(OOMPH_WANT_TRILINOS "Use Trilinos library" OFF)
-option(OOMPH_WANT_SPDLOG "Use the spdlog logging library" OFF)
-
-# Fine-grained control of build of external_srcs. NOTE: These should be set on
-# the fly after checking whether the appropriate variable WITH_* has been set!
+# Fine-grained control of build of external_srcs.
+# FIXME: Make sure the SUPPRESS variables below actually work
+# TODO: These should be set on the fly after checking whether the appropriate variable WITH_* has been set!
 option(SUPPRESS_TRIANGLE_LIB "Suppress build of oomph-lib's copy of the triangle library" OFF)
 option(SUPPRESS_TETGEN_LIB "Suppress build of oomph-lib's copy of the tetgen library" OFF)
 
-# Support for deprecated packages:
-option(OOMPH_USE_DEPRECATED_SUPERLU "Use oomph-lib's deprecated version of SuperLU" OFF)
+# Third-party libraries. [WORK IN PROGRESS.]
+# FIXME: issues with "exporting" libraries with 'generic'
+option(OOMPH_WANT_BACKWARD "Use the Backward library for stack trace pretty-printing" OFF)
+option(OOMPH_WANT_SPDLOG "Use the spdlog logging library" OFF)
+option(OOMPH_WANT_NLOHMANN_JSON "Use the nlohmann JSON library" OFF)
+option(OOMPH_WANT_CGAL "Do we want to build the CGAL library?" OFF)
+option(OOMPH_WANT_HYPRE "Use Hypre library" OFF)
+option(OOMPH_WANT_MUMPS "Use MUMPS library" OFF)
+option(OOMPH_WANT_TRILINOS "Use Trilinos library" OFF)
 
 # Enable the use of code coverage flags so that coverage data can be collected
 option(OOMPH_ENABLE_CODE_COVERAGE "Enable collection of code coverage results" OFF)
 
-# Extra, clever stuff that isn't really necessary...
-#
-# Integrate the use of static code analysers/formatting with the build of the
-# library itself. [WORK IN PROGRESS]
-#
-# WARNING: If you enable clang-tidy, you MUST NOT(!) run the Makefile/Ninja
-# build in parallel as it will lead to data races and the source files will
-# become mangled as a result. Also, if you want to enable clang-tidy, you should
-# enable as many options as possible for the build so that most, if not all, of
-# the library code is visible to the build and able to get formatted.
-#
-# This functionality is intended for use by a CI server to run.
-# TODO: Add to Codacy functionality.
-option(OOMPH_ENABLE_CLANG_TIDY "Enable clang-tidy C++ static code analysis" OFF)
-option(OOMPH_ENABLE_CLANG_FORMAT "Enable Clang-based C++ code formatting" OFF)
-option(OOMPH_ENABLE_INCLUDE_WHAT_YOU_USE "Enable 'Include What You Use' sanitisation" OFF)
-
 # cmake-format: on
 # -------------------------[ PROCESS SELECTED OPTIONS ]-------------------------
 
-# Add ccache support to the build
-if(OOMPH_ENABLE_CCACHE)
-  include(OomphCcache)
+# Let CMake take care of the famous -fPIC flag
+if(BUILD_SHARED_LIBS)
+  set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 endif()
 
-# Set the matrix integer index size
-if(OOMPH_ENABLE_64BIT_INTS)
-  set(OOMPH_INTSIZE 64)
-else()
-  set(OOMPH_INTSIZE 32)
+if(NOT OOMPH_DONT_SILENCE_USELESS_WARNINGS)
+  include(OomphSilenceWarnings)
+endif()
+
+# Set up MPI functionality (see cmake/OomphMPI.cmake)
+if(OOMPH_ENABLE_MPI)
+  include(OomphMPI)
 endif()
 
 # Add PARANOID and RANGE_CHECKING for Debug configurations (ONLY!) if desired.
@@ -179,16 +145,37 @@ if(OOMPH_USE_DEPRECATED_SUPERLU)
   add_compile_definitions(OOMPH_USE_DEPRECATED_SUPERLU)
 endif()
 
-# If we want to use up-to-date OpenBLAS/LAPACK libraries
-if(OOMPH_USE_OPENBLAS)
-  # Need path to OpenBLAS on macOS
-  #
-  # FIXME: Find out how to get rid of this. Could build OpenBLAS with oomph-lib
-  message(
-    WARNING
-      "We are currently hardcoding the path to the OpenBLAS install directory!")
-  list(APPEND CMAKE_PREFIX_PATH "/usr/local/Cellar/openblas/0.3.18")
+# The demo_driver self-tests use shell scripts and symbolic links, both of which
+# require a Unix-based system
+if(NOT UNIX)
+  set(OOMPH_ENABLE_CODE_COVERAGE OFF CACHE BOOL
+      "Build tests with library build" FORCE)
+  set(OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY OFF)
+  set(SYMBOLIC_LINKS_FOR_HEADERS OFF)
+endif()
 
+if(OOMPH_ENABLE_CODE_COVERAGE)
+  # We can only get coverage for the library sources if the demo drivers are
+  # built with the library itself, which requires
+  # OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY to be enabled
+  if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+    message(
+      WARNING
+        "Code coverage was requested which requires building the demo drivers with the library\n"
+        "but you have not enabled it. I'm going to enable it now.")
+    set(OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY ON CACHE BOOL
+        "Build tests with library build" FORCE)
+  endif()
+
+  include(OomphEnableCodeCoverage)
+  oomph_enable_code_coverage()
+endif()
+
+# If we want to use up-to-date OpenBLAS/LAPACK libraries
+#
+# FIXME: We should try to find BLAS/LAPACK by find_package(), and if we can't,
+# build it from source (with an appropriate message)
+if(OOMPH_ENABLE_USE_OPENBLAS)
   # Ideally, the user will install OpenBLAS via 'sudo apt-get' or 'brew install'
   # and they will simply set 'CMAKE_PREFIX_PATH' in their CMakeUserPresets.json
   # NOTE: You can override the BLAS/LAPACK vendor by setting it's value as a
@@ -217,111 +204,12 @@ if(OOMPH_USE_OPENBLAS)
   endforeach()
 endif()
 
-# Let CMake take care of the famous -fPIC flag
-if(BUILD_SHARED_LIBS)
-  set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-endif()
-
-# The demo_driver self-tests use shell scripts and symbolic links, both of which
-# require a Unix-based system
-if(NOT UNIX)
-  set(OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY OFF)
-  set(SYMBOLIC_LINKS_FOR_HEADERS OFF)
-endif()
-
-# Set up MPI functionality (see cmake/OomphMPI.cmake)
-if(OOMPH_ENABLE_MPI)
-  include(OomphMPI)
-endif()
-
-# TODO: FINISH OFF INTEGRATION OF THIS VARIABLES INTO BUILD TODO: ADD OOMPH_
-# PREFIXES TO THESE VARIABLES! FIXME: Not currently used!
-if(DEFINED OOMPH_WITH_BLACS)
-  set(OOMPH_ALREADY_HAVE_BLACS TRUE)
-endif()
-# FIXME: Not currently used!
-if(DEFINED OOMPH_WITH_BLAS)
-  set(OOMPH_ALREADY_HAVE_BLAS TRUE)
-endif()
-# FIXME: Not currently used!
-if(DEFINED OOMPH_WITH_LAPACK)
-  set(OOMPH_ALREADY_HAVE_LAPACK TRUE)
-endif()
-# FIXME: Not currently used!
-if(DEFINED OOMPH_WITH_SCALAPACK)
-  set(OOMPH_ALREADY_HAVE_SCALAPACK TRUE)
-endif()
-# FIXME: Not currently used!
-if(DEFINED OOMPH_WITH_PORD)
-  set(OOMPH_ALREADY_HAVE_PORD TRUE)
-endif()
-# FIXME: Not currently used!
-if(DEFINED OOMPH_WITH_MUMPS)
-  if(NOT (IS_DIRECTORY OOMPH_WITH_HYPRE))
-    message(FATAL_ERROR "Input 'OOMPH_WITH_HYPRE' is not a directory!")
-  endif()
-  set(OOMPH_ALREADY_HAVE_MUMPS TRUE)
-endif()
-if(DEFINED OOMPH_WITH_HYPRE)
-  if(NOT (IS_DIRECTORY OOMPH_WITH_HYPRE))
-    message(FATAL_ERROR "Input 'OOMPH_WITH_HYPRE' is not a directory!")
-  endif()
-  set(OOMPH_ALREADY_HAVE_HYPRE TRUE)
-endif()
-if(DEFINED OOMPH_WITH_TRILINOS)
-  if(NOT (IS_DIRECTORY OOMPH_WITH_TRILINOS))
-    message(FATAL_ERROR "Input 'OOMPH_WITH_TRILINOS' is not a directory!")
-  endif()
-  set(OOMPH_ALREADY_HAVE_TRILINOS TRUE)
-endif()
-if(DEFINED OOMPH_WITH_BOOST)
-  if(NOT (IS_DIRECTORY OOMPH_WITH_BOOST))
-    message(FATAL_ERROR "Input 'OOMPH_WITH_BOOST' is not a directory!")
-  endif()
-  set(OOMPH_ALREADY_HAVE_BOOST TRUE)
-endif()
-if(DEFINED OOMPH_WITH_GMP)
-  if(NOT (IS_DIRECTORY OOMPH_WITH_GMP))
-    message(FATAL_ERROR "Input 'OOMPH_WITH_GMP' is not a directory!")
-  endif()
-  set(OOMPH_ALREADY_HAVE_GMP TRUE)
-endif()
-if(DEFINED OOMPH_WITH_MPFR)
-  if(NOT (IS_DIRECTORY OOMPH_WITH_MPFR))
-    message(FATAL_ERROR "Input 'OOMPH_WITH_MPFR' is not a directory!")
-  endif()
-  set(OOMPH_ALREADY_HAVE_MPFR TRUE)
-endif()
-if(DEFINED OOMPH_WITH_CGAL)
-  if(NOT (IS_DIRECTORY OOMPH_WITH_CGAL))
-    message(FATAL_ERROR "Input 'OOMPH_WITH_CGAL' is not a directory!")
-  endif()
-  set(OOMPH_ALREADY_HAVE_CGAL TRUE)
-endif()
-
-# Run clang-format during the build if the user requires
-if(OOMPH_ENABLE_CLANG_FORMAT)
-  include(OomphClangFormat)
-endif()
-
-# Run clang-tidy during the build if the user requires
-if(OOMPH_ENABLE_CLANG_TIDY)
-  include(OomphStaticAnalysers)
-endif()
-
-# FIXME: Add code coverage compiler flags, if requested
-if(OOMPH_ENABLE_CODE_COVERAGE)
-  # We can only get coverage for the library sources if the demo drivers are
-  # built with the library itself, which requires
-  # OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY to be enabled
-  if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
-    # set(OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY ON CACHE BOOL "Build tests with
-    # library build" FORCE)
-  endif()
-
-  include(OomphEnableCodeCoverage)
-  oomph_enable_code_coverage()
-endif()
+# ~~~
+# TODO:
+# * Add OOMPH_WITH_* variables to specify custom drop-ins for specific
+#   libraries, e.g. BLAS, MUMPS, CGAL, etc. (and maybe think of a different name
+#   for the flags)
+# ~~~
 
 # --------------------------[ FIND REQUIRED HEADERS ]---------------------------
 
@@ -371,9 +259,6 @@ set(BUILD_DEMO_DRIVERS_WITH_LIBRARY OFF)
 # larger project hierarchy
 if(OOMPH_IS_MAIN_PROJECT AND OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
   set(BUILD_DEMO_DRIVERS_WITH_LIBRARY ON)
-  if(NOT OOMPH_DONT_SILENCE_USELESS_WARNINGS)
-    include(OomphSilenceWarnings)
-  endif()
   include(CTest)
   include(OomphAddTest)
   include(OomphAddExecutable)
