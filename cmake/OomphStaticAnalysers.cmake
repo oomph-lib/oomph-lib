@@ -113,13 +113,11 @@ if(OOMPH_ENABLE_INCLUDE_WHAT_YOU_USE)
   list(JOIN OOMPH_IWYU_CHECKS "," OOMPH_IWYU_CHECKS)
 
   # Search the system paths for the clang-tidy tool
-  find_program(INCLUDE_WHAT_YOU_USE_PROGRAM "iwyu")
+  find_program(INCLUDE_WHAT_YOU_USE_PATH NAMES include-what-you-use iwyu
+                                               REQUIRED)
 
-  # Run clang-tidy during the build if found
-  if(INCLUDE_WHAT_YOU_USE_PROGRAM)
-    message(
-      STATUS
-        "Requested static code analysis with the tool 'iwyu' but you don't have it!"
-    )
-  endif()
+  # FIXME: Should really limit this to oomph-lib sources... Enable IWYU for all
+  # C++ sources
+  set(CMAKE_CXX_INCLUDE_WHAT_YOU_USE "${INCLUDE_WHAT_YOU_USE_PATH}")
+  # set(CMAKE_C_INCLUDE_WHAT_YOU_USE ${INCLUDE_WHAT_YOU_USE_PATH})
 endif()
