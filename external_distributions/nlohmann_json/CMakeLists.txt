@@ -6,13 +6,14 @@ message(STATUS "Entered nlohmann_json subdirectory")
 
 # Disable the build of tests
 set(JSON_BuildTests OFF)
+set(JSON_MultipleHeaders OFF)
 
 # Download and populate the nlohmann JSON library
 FetchContent_Declare(
   nlohmann_json
   GIT_REPOSITORY https://github.com/nlohmann/json.git
   GIT_SHALLOW TRUE
-  GIT_TAG v3.9.1)
+  GIT_TAG v3.11.2)
 FetchContent_MakeAvailable(nlohmann_json)
 
 # ------------------------------------------------------------------------------
