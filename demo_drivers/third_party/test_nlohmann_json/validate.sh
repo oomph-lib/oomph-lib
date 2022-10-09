@@ -19,14 +19,18 @@ cd Validation
 echo "Running nlohmann/json validation "
 mkdir RESLT
 cd RESLT
-../../test_nlohmann_json >../OUTPUT_test_nlohmann_json || {
-  echo 'Failed to run ./test_nlohmann_json!'
-  exit 1
-}
-cd ..
+../../test_nlohmann_json >../OUTPUT_test_nlohmann_json
 echo "done"
-echo " " >>validation.log
-echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >>validation.log
+
+if [ $? -eq 0 ]; then
+  echo " " >>validation.log
+  echo "[OK]" >>validation.log
+else
+  echo "[FAILED] Test 'test_nlohmann_json' failed!" >>validation.log
+  exit 1
+fi
+
+cd ..
 
 # Append output to global validation log file
 #--------------------------------------------

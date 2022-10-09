@@ -23,14 +23,11 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
+#include <iostream>
 #include <nlohmann/json.hpp>
 
 using json = nlohmann::json;
 
-
-//======start_of_main==================================================
-/// Driver for 1D Poisson problem
-//=====================================================================
 int main()
 {
   // Using (raw) string literals and json::parse
@@ -40,6 +37,7 @@ int main()
         "happy": true
     }
     )");
+  std::cout << "ex1: " << ex1 << std::endl;
 
   // Using user-defined (raw) string literals
   using namespace nlohmann::literals;
@@ -49,10 +47,12 @@ int main()
     "happy": true
   }
     )"_json;
+  std::cout << "ex2: " << ex1 << std::endl;
 
   // Using initializer lists
   json ex3 = {
     {"happy", true},
     {"pi", 3.141},
   };
+  std::cout << "ex3: " << ex1 << std::endl;
 } // end of main
