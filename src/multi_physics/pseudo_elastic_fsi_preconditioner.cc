@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -47,7 +47,7 @@ namespace oomph
   }
 
   //=============================================================================
-  /// \short Setup the precoonditioner.
+  /// Setup the precoonditioner.
   //=============================================================================
   void PseudoElasticFSIPreconditioner::setup()
   {
@@ -275,7 +275,7 @@ namespace oomph
   }
 
   //=============================================================================
-  /// \short Apply the preconditioner
+  /// Apply the preconditioner
   //=============================================================================
   void PseudoElasticFSIPreconditioner::preconditioner_solve(
     const DoubleVector& r, DoubleVector& z)

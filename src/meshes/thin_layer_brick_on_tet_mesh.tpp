@@ -3,11 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC//    Version 1.0; svn revision $LastChangedRevision$
-// LIC//
-// LIC// $LastChangedDate$
-// LIC//
-// LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -39,7 +35,7 @@
 namespace oomph
 {
   //=====================================================================
-  /// \short Constructor: Specify (quadratic) tet mesh, boundary IDs of
+  /// Constructor: Specify (quadratic) tet mesh, boundary IDs of
   /// boundary on which the current mesh is to be erected (in an FSI context
   /// this boundary tends to be the FSI boundary of the fluid mesh. Also
   /// specify the uniform thickness of layer, and the number of element layers.

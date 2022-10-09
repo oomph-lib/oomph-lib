@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -98,7 +98,7 @@ public:
 
 
  //-------------------------------------------------------------------------
- ///Fix pressure in element ielem at pressure dof jpdof and set to pvalue
+ /// Fix pressure in element ielem at pressure dof jpdof and set to pvalue
  //-------------------------------------------------------------------------
  void fix_pressure(const unsigned &ielem, const unsigned &jpdof, 
                    const double &pvalue)
@@ -114,7 +114,7 @@ public:
   {}
 
  //-------------------------------------------------------------------------
- /// \short Update the problem specs before solve. 
+ /// Update the problem specs before solve. 
  /// Re-set velocity boundary conditions. 
  //-------------------------------------------------------------------------
  void actions_before_newton_solve()
@@ -147,7 +147,7 @@ public:
  //-------------------------------------------------------------------------
 
 
- /// \short Finish problem setup: Setup element-specific things 
+ /// Finish problem setup: Setup element-specific things 
  /// (source fct pointers etc.)
  void actions_after_adapt();
 
@@ -390,7 +390,7 @@ void DrivenCavityProblem<ELEMENT,MESH>::doc_solution(DocInfo& doc_info,
 
 
 //========================================================================
-/// \short Run parameter study. Pass number of next step for consecutive
+/// Run parameter study. Pass number of next step for consecutive
 /// numbering of result files.
 ///
 //========================================================================

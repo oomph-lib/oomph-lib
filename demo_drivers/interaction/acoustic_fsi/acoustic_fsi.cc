@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -48,10 +48,10 @@ using namespace oomph;
 namespace Global_Parameters
 {
 
- /// \short Square of wavenumber for the Helmholtz equation
+ /// Square of wavenumber for the Helmholtz equation
  double K_squared=10.0;
  
- /// \short Radius of outer boundary of Helmholtz domain
+ /// Radius of outer boundary of Helmholtz domain
  double Outer_radius=4.0; 
 
  /// FSI parameter
@@ -78,11 +78,11 @@ namespace Global_Parameters
   Omega_sq=Density_ratio*Q;
  }
 
- /// \short Azimuthal wavenumber for imposed displacement of coating
+ /// Azimuthal wavenumber for imposed displacement of coating
  /// on inner boundary 
  unsigned N=0; 
 
- /// \short Displacement field on inner boundary of solid
+ /// Displacement field on inner boundary of solid
  void solid_boundary_displacement(const Vector<double>& x,
                                   Vector<std::complex<double> >& u)
  {
@@ -128,7 +128,7 @@ namespace Global_Parameters
  }
  
 
- /// \short Coefficient in front of Hankel function for axisymmetric solution 
+ /// Coefficient in front of Hankel function for axisymmetric solution 
  /// of Helmholtz potential
  std::complex<double> axisym_coefficient()
  {
@@ -263,16 +263,16 @@ public:
 
 private:
 
- /// \short Create FSI traction elements
+ /// Create FSI traction elements
  void create_fsi_traction_elements();
  
- /// \short Create Helmholtz FSI flux elements
+ /// Create Helmholtz FSI flux elements
  void create_helmholtz_fsi_flux_elements();
  
  /// Delete (face) elements in specified mesh 
  void delete_face_elements(Mesh* const & boundary_mesh_pt);
  
- /// \short Create DtN face elements 
+ /// Create DtN face elements 
  void create_helmholtz_DtN_elements();
 
  /// Setup interaction
@@ -290,7 +290,7 @@ private:
  /// Pointer to mesh of Helmholtz FSI flux elements
  Mesh* Helmholtz_fsi_flux_mesh_pt;
  
- /// \short Pointer to mesh containing the DtN elements
+ /// Pointer to mesh containing the DtN elements
  HelmholtzDtNMesh<HELMHOLTZ_ELEMENT>* Helmholtz_outer_boundary_mesh_pt;
  
  /// DocInfo object for output

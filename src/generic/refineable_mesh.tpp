@@ -3,11 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC//    Version 1.0; svn revision $LastChangedRevision$
-// LIC//
-// LIC// $LastChangedDate$
-// LIC//
-// LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -731,15 +727,15 @@ namespace oomph
       // This problem should now be avoided because we are using existing
       // communication methods to locate nodes in this case. The error used
       // to arise as follows:
-      //// Let my_rank==A. If this has happened then it means that
-      //// duplicate haloed nodes exist on another processor (B). This
-      //// problem arises if a master of a haloed node with a discrepancy
-      //// is haloed with a different processor (C). A copy is constructed
-      //// in the external halo storage on processor (B) because that node
-      //// is not found in the (internal) haloed storage on (A) with (B)
-      //// but that node already exists on processor (B) in the (internal)
-      //// halo storage with processor (C). Thus two copies of this master
-      //// node now exist on processor (B).
+      /// / Let my_rank==A. If this has happened then it means that
+      /// / duplicate haloed nodes exist on another processor (B). This
+      /// / problem arises if a master of a haloed node with a discrepancy
+      /// / is haloed with a different processor (C). A copy is constructed
+      /// / in the external halo storage on processor (B) because that node
+      /// / is not found in the (internal) haloed storage on (A) with (B)
+      /// / but that node already exists on processor (B) in the (internal)
+      /// / halo storage with processor (C). Thus two copies of this master
+      /// / node now exist on processor (B).
 
       std::ostringstream err_stream;
       err_stream << "Duplicate halo nodes exist on another processor!"

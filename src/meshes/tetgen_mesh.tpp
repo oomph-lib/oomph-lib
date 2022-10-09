@@ -3,11 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC//    Version 1.0; svn revision $LastChangedRevision$
-// LIC//
-// LIC// $LastChangedDate$
-// LIC//
-// LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -813,6 +809,38 @@ namespace oomph
     } // end for e
 
   } // end function
+
+  //=====================================================================
+  /// Helper function to set up the reverse look up scheme for facets.
+  /// This is used to set up boundary coordinates.
+  //=====================================================================
+  template<class ELEMENT>
+  void TetgenMesh<ELEMENT>::setup_reverse_lookup_schemes_for_faceted_surface(
+    TetMeshFacetedSurface* const& faceted_surface_pt)
+  {
+    // Set up reverse lookup scheme for a given faceted surface
+    // Assumption is that there there is one boundary ID per facet.
+    unsigned n_facet = faceted_surface_pt->nfacet();
+    for (unsigned f = 0; f < n_facet; f++)
+    {
+      unsigned b = faceted_surface_pt->one_based_facet_boundary_id(f);
+      if (b != 0)
+      {
+        this->Tet_mesh_faceted_surface_pt[b - 1] = faceted_surface_pt;
+        this->Tet_mesh_facet_pt[b - 1] = faceted_surface_pt->facet_pt(f);
+      }
+      else
+      {
+        std::ostringstream error_message;
+        error_message << "Boundary IDs have to be one-based. Yours is " << b
+                      << "\n";
+        throw OomphLibError(error_message.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+    }
+  }
+
 
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////

@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -55,7 +55,7 @@ namespace oomph
     /// Broken assignment operator.
     void operator=(const SuperLUPreconditioner&) = delete;
 
-    /// \short Function to set up a preconditioner for the linear
+    /// Function to set up a preconditioner for the linear
     /// system defined by matrix_pt. This function must be called
     /// before using preconditioner_solve.
     /// Note: matrix_pt must point to an object of class
@@ -85,14 +85,14 @@ namespace oomph
       }
     }
 
-    /// \short Function applies SuperLU to vector r for (exact) preconditioning,
+    /// Function applies SuperLU to vector r for (exact) preconditioning,
     /// this requires a call to setup(...) first.
     void preconditioner_solve(const DoubleVector& r, DoubleVector& z)
     {
       Solver.resolve(r, z);
     }
 
-    /// \short Function applies SuperLU to vector r for (exact) preconditioning
+    /// Function applies SuperLU to vector r for (exact) preconditioning
     /// (of the transposed matrix system) this requires a call to setup(...)
     /// first.
     void preconditioner_solve_transpose(const DoubleVector& r, DoubleVector& z)
@@ -100,7 +100,8 @@ namespace oomph
       Solver.resolve_transpose(r, z);
     }
 
-    /// \short Clean up memory -- forward the call to the version in
+
+    /// Clean up memory -- forward the call to the version in
     /// SuperLU in its LinearSolver incarnation.
     virtual void clean_up_memory()
     {
@@ -114,7 +115,8 @@ namespace oomph
       return Solver.get_memory_usage_for_lu_factors();
     } // End of get_memory_usage_for_lu_factors
 
-    /// \short Get the total memory needed by SuperLU to store AND calculate
+
+    /// Get the total memory needed by SuperLU to store AND calculate
     /// the LU factors
     double get_total_memory_needed_for_superlu()
     {
@@ -122,7 +124,8 @@ namespace oomph
       return Solver.get_total_needed_memory();
     } // End of get_memory_usage_for_superlu
 
-    /// \short Get the amount of memory taken up by SuperLU. The first entry
+
+    /// Get the amount of memory taken up by SuperLU. The first entry
     /// of the returned result contains the memory used to store the LU
     /// factors and the second entry contains the total memory used to
     /// store AND calculate the LU factors
@@ -157,7 +160,7 @@ namespace oomph
     } // End of disable_doc_stats
 
   private:
-    /// \short the SuperLU solver emplyed by this preconditioner
+    /// the SuperLU solver emplyed by this preconditioner
     SuperLUSolver Solver;
   };
 

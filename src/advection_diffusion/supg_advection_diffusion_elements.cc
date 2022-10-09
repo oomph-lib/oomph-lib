@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -29,7 +29,7 @@
 namespace oomph
 {
   //======================================================================
-  /// \short QSUPGAdvectionDiffusionElement<DIM,NNODE_1D> elements are
+  /// QSUPGAdvectionDiffusionElement<DIM,NNODE_1D> elements are
   /// SUPG-stabilised Advection Diffusion elements with
   /// NNODE_1D nodal points in each coordinate direction. Inherits
   /// from QAdvectionDiffusionElement and overwrites their
@@ -38,7 +38,7 @@ namespace oomph
   //======================================================================
 
   //======================================================================
-  /// \short Define the shape functions and test functions and derivatives
+  /// Define the shape functions and test functions and derivatives
   /// w.r.t. global coordinates and return Jacobian of mapping.
   ///
   /// SUPG stabilisation: Petrov-Galerkin, i.e. test functions \f$ \ne \f$
@@ -96,7 +96,7 @@ namespace oomph
 
 
   //======================================================================
-  /// \short Define the shape functions and test functions and derivatives
+  /// Define the shape functions and test functions and derivatives
   /// w.r.t. global coordinates and return Jacobian of mapping.
   ///
   /// SUPG stabilisation: Petrov-Galerkin, i.e. test functions \f$ \ne \f$

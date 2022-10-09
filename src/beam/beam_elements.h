@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -45,26 +45,14 @@ namespace oomph
   /// large-displacement (but linearly-elastic) thin-beam theory.
   ///
   /// The variational principle has the form
-  /// \f[
-  /// \int_0^{L}   \left[
-  /// (\sigma_0 + \gamma) \ \delta
-  /// \gamma +
-  /// \frac{1}{12} \left(\frac{h}{R_0}\right)^2 \kappa
-  ///  \ \delta \kappa   -
-  /// \left( \left(\frac{R_0}{h}\right)  {\bf f} - \Lambda^2
-  /// \frac{\partial^2 {\bf R}_w}{\partial t^2} \right) \cdot
-  /// \delta {\bf R}_w
-  ///  \right] \ d\xi  = 0,
-  /// \f]
+  /// \f[ \int_0^{L} \left[ (\sigma_0 + \gamma) \ \delta \gamma + \frac{1}{12} \left(\frac{h}{R_0}\right)^2 \kappa \ \delta \kappa - \left( \left(\frac{R_0}{h}\right) {\bf f} - \Lambda^2 \frac{\partial^2 {\bf R}_w}{\partial t^2} \right) \cdot \delta {\bf R}_w \right] \ d\xi = 0, \f]
   /// where all lengths have been non-dimensionalised w.r.t. \f$ R_0 \f$.
   /// The strain and and bending "tensors" \f$\gamma\f$ and \f$\kappa\f$
   /// are computed relative to the shape of the beam's undeformed shape
   /// which is specified as a GeomObject.
   ///
   /// Time is scaled on the timescale \f$T\f$ and
-  /// \f[
-  /// \Lambda = \frac{a}{T} \sqrt{\frac{\rho}{E_{eff}}},
-  /// \f]
+  /// \f[ \Lambda = \frac{a}{T} \sqrt{\frac{\rho}{E_{eff}}}, \f]
   /// the ratio of the timescale used in the non-dimensionalisation of the
   /// equations to the natural timescale of the wall oscillations (in the
   /// wall's in-plane mode). \f$ \Lambda^2 \f$ can be interpreted as
@@ -96,11 +84,7 @@ namespace oomph
   /// beam to deform into a shape specified by a SolidInitialCondition object.
   /// If \c SolidFiniteElement::solid_ic_pt()!=0 we solve the
   /// the equations
-  /// \f[
-  /// \int_0^{L}   \left(
-  /// \frac{\partial^i {\bf R}_{IC}}{\partial t^i} -  {\bf R}_w
-  /// \right) \psi_{jk} \ d\xi  = 0,
-  /// \f]
+  /// \f[ \int_0^{L} \left( \frac{\partial^i {\bf R}_{IC}}{\partial t^i} - {\bf R}_w \right) \psi_{jk} \ d\xi = 0, \f]
   /// where  \f$ \partial^i {\bf R}_{IC}/\partial t^i\f$ is
   /// implemented by the SolidInitialCondition object, pointed to by
   /// \c SolidFiniteElement::shell_ic_pt().
@@ -136,7 +120,7 @@ namespace oomph
                                   const Vector<double>& N,
                                   Vector<double>& load);
 
-    /// \short Pointer to load vector function: Its arguments are:
+    /// Pointer to load vector function: Its arguments are:
     /// Lagrangian coordinate, Eulerian coordinate, normal vector and
     /// load vector itself (not all of the input arguments will be
     /// required for all specific load functions but the list should
@@ -151,7 +135,7 @@ namespace oomph
                                  const Vector<double>& x,
                                  double& h_ratio);
 
-    /// \short Pointer to wall profile function: Its arguments are:
+    /// Pointer to wall profile function: Its arguments are:
     /// Lagrangian coordinate, Eulerian coordinate, and
     /// profile itself (not all of the input arguments will be
     /// required for all specific profile functions but the list should
@@ -160,12 +144,12 @@ namespace oomph
                                 const Vector<double>& x,
                                 double& h_ratio);
 
-    /// \short Pointer to the GeomObject that specifies the beam's
+    /// Pointer to the GeomObject that specifies the beam's
     /// undeformed midplane
     GeomObject* Undeformed_beam_pt;
 
   public:
-    /// \short Constructor. Set default values for all physical parameters
+    /// Constructor. Set default values for all physical parameters
     /// and zero traction.
     KirchhoffLoveBeamEquations() : Undeformed_beam_pt(0)
     {
@@ -191,7 +175,7 @@ namespace oomph
     }
 
 
-    /// \short Get the load vector: Pass number of integration point (dummy),
+    /// Get the load vector: Pass number of integration point (dummy),
     /// Lagr. and Eulerian coordinate and normal vector and return the load
     /// vector (not all of the input arguments will be required for all specific
     /// load functions but the list should cover all cases). This function is
@@ -214,7 +198,7 @@ namespace oomph
     }
 
 
-    /// \short Get the wall profile: Pass Lagrangian & Eulerian coordinate
+    /// Get the wall profile: Pass Lagrangian & Eulerian coordinate
     /// and return the wall profile (not all of the input arguments will be
     /// required for all specific thickness functions but the list should cover
     /// all cases).
@@ -264,7 +248,7 @@ namespace oomph
       return Lambda_sq_pt;
     }
 
-    /// \short Return a Pointer to geometric object that specifies the beam's
+    /// Return a Pointer to geometric object that specifies the beam's
     /// undeformed geometry
     GeomObject*& undeformed_beam_pt()
     {
@@ -284,13 +268,13 @@ namespace oomph
                     Vector<double>& r,
                     Vector<double>& N);
 
-    /// \short Get position vector to and non-unit tangent vector on wall:
+    /// Get position vector to and non-unit tangent vector on wall:
     /// dr/ds
     void get_non_unit_tangent(const Vector<double>& s,
                               Vector<double>& r,
                               Vector<double>& drds);
 
-    /// \short Return the residuals for the equations of Kirchhoff-Love beam
+    /// Return the residuals for the equations of Kirchhoff-Love beam
     /// theory with linear constitutive equations; if  Solid_ic_pt!=0, we
     /// assign residuals which force the assignement of an initial shape/
     /// veloc/accel to the dofs. This overloads the standard interface.
@@ -300,7 +284,7 @@ namespace oomph
     }
 
 
-    /// \short Return the residuals for the equations of Kirchhoff-Love beam
+    /// Return the residuals for the equations of Kirchhoff-Love beam
     /// theory with linear constitutive equations; if  Solid_ic_pt!=0, we
     /// assign residuals which force the assignement of an initial shape/
     /// veloc/accel to the dofs.
@@ -311,17 +295,17 @@ namespace oomph
     virtual void fill_in_contribution_to_jacobian(
       Vector<double>& residuals, DenseMatrix<double>& jacobian);
 
-    /// \short Get potential (strain) and kinetic energy of the element
+    /// Get potential (strain) and kinetic energy of the element
     void get_energy(double& pot_en, double& kin_en);
 
-    /// \short Get the potential energy due to stretching and bending and the
+    /// Get the potential energy due to stretching and bending and the
     /// kinetic energy of the element
     void get_energy(double& stretch, double& bend, double& kin_en);
   };
 
 
   //=========================================================================
-  /// \short Hermite Kirchhoff Love beam. Implements KirchhoffLoveBeamEquations
+  /// Hermite Kirchhoff Love beam. Implements KirchhoffLoveBeamEquations
   /// using 2-node Hermite elements as the underlying geometrical elements.
   //=========================================================================
   class HermiteBeamElement : public virtual SolidQHermiteElement<1>,
@@ -342,7 +326,7 @@ namespace oomph
     /// Output function with specified number of plot points
     void output(std::ostream& outfile, const unsigned& n_plot);
 
-    /// \short Output at previous time (t=0: present; t>0: previous)
+    /// Output at previous time (t=0: present; t>0: previous)
     /// with specified number of plot points
     void output(const unsigned& t,
                 std::ostream& outfile,
@@ -354,7 +338,7 @@ namespace oomph
     /// C-style output function with specified number of plot points
     void output(FILE* file_pt, const unsigned& n_plot);
 
-    /// \short C-style output at previous time (t=0: present; t>0: previous)
+    /// C-style output at previous time (t=0: present; t>0: previous)
     /// with specified number of plot points
     void output(const unsigned& t, FILE* file_pt, const unsigned& n_plot) const;
   };
@@ -371,7 +355,7 @@ namespace oomph
     bool Normal_points_into_fluid;
 
   public:
-    /// \short Constructor: Create beam element as FSIWallElement (and thus,
+    /// Constructor: Create beam element as FSIWallElement (and thus,
     /// by inheritance, a GeomObject). By default, we assume that the
     /// normal vector computed by KirchhoffLoveBeamEquations::get_normal(...)
     /// points into the fluid. If this is not the case, overwrite this
@@ -385,17 +369,17 @@ namespace oomph
       setup_fsi_wall_element(n_lagr, n_dim);
     }
 
-    /// \short Destructor: empty
+    /// Destructor: empty
     ~FSIHermiteBeamElement() {}
 
-    /// \short Set the normal computed by
+    /// Set the normal computed by
     /// KirchhoffLoveBeamEquations::get_normal(...) to point into the fluid
     void set_normal_pointing_into_fluid()
     {
       Normal_points_into_fluid = true;
     }
 
-    /// \short Set the normal computed by
+    /// Set the normal computed by
     /// KirchhoffLoveBeamEquations::get_normal(...) to point out of the fluid
     void set_normal_pointing_out_of_fluid()
     {
@@ -403,12 +387,12 @@ namespace oomph
     }
 
 
-    /// \short Derivative of position vector w.r.t. the SolidFiniteElement's
+    /// Derivative of position vector w.r.t. the SolidFiniteElement's
     /// Lagrangian coordinates; evaluated at current time.
     void dposition_dlagrangian_at_local_coordinate(
       const Vector<double>& s, DenseMatrix<double>& drdxi) const;
 
-    /// \short Get the load vector: Pass number of the integration point,
+    /// Get the load vector: Pass number of the integration point,
     /// Lagr. coordinate, Eulerian coordinate and normal vector
     /// and return the load vector. (Not all of the input arguments will be
     /// required for all specific load functions but the list should
@@ -447,7 +431,7 @@ namespace oomph
       }
     }
 
-    /// \short Get the Jacobian and residuals. Wrapper to generic FSI version;
+    /// Get the Jacobian and residuals. Wrapper to generic FSI version;
     /// that catches the case when we replace the Jacobian by the
     /// mass matrix (for the consistent assignment of initial conditions).
     virtual void fill_in_contribution_to_jacobian(Vector<double>& residuals,
@@ -459,7 +443,7 @@ namespace oomph
       this->fill_in_jacobian_from_external_interaction_by_fd(jacobian);
     }
 
-    /// \short Find the local coordinate s in this element
+    /// Find the local coordinate s in this element
     /// that corresponds to the global "intrinsic" coordinate \f$ \zeta \f$
     /// (here identical to the Lagrangian coordinate \f$ \xi \f$).
     /// If the coordinate is contained within this element, the
@@ -473,14 +457,14 @@ namespace oomph
                      const bool& use_coordinate_as_initial_guess = false);
 
 
-    /// \short The number of "DOF types" that degrees of freedom in this element
+    /// The number of "DOF types" that degrees of freedom in this element
     /// are sub-divided into: Just the solid degrees of freedom themselves.
     unsigned ndof_types() const
     {
       return 1;
     }
 
-    /// \short Create a list of pairs for all unknowns in this element,
+    /// Create a list of pairs for all unknowns in this element,
     /// so that the first entry in each pair contains the global equation
     /// number of the unknown, while the second one contains the number
     /// of the "DOF type" that this unknown is associated with.
@@ -503,7 +487,7 @@ namespace oomph
   class FaceGeometry<HermiteBeamElement> : public virtual SolidPointElement
   {
   public:
-    /// \short Constructor [this was only required explicitly
+    /// Constructor [this was only required explicitly
     /// from gcc 4.5.2 onwards...]
     FaceGeometry() {}
   };
@@ -527,7 +511,7 @@ namespace oomph
       public virtual SolidFaceElement
   {
   public:
-    /// \short Constructor, takes the pointer to the "bulk" element, the
+    /// Constructor, takes the pointer to the "bulk" element, the
     /// index of the fixed local coordinate and its value represented
     /// by an integer (+/- 1), indicating that the face is located
     /// at the max. or min. value of the "fixed" local coordinate
@@ -535,7 +519,7 @@ namespace oomph
     ClampedSlidingHermiteBeamBoundaryConditionElement(
       FiniteElement* const& bulk_el_pt, const int& face_index);
 
-    ///\short  Broken empty constructor
+    /// Broken empty constructor
     ClampedSlidingHermiteBeamBoundaryConditionElement()
     {
       throw OomphLibError("Don't call empty constructor for "
@@ -559,7 +543,7 @@ namespace oomph
       delete;*/
 
 
-    /// \short Set vectors to some point on the symmetry line, and
+    /// Set vectors to some point on the symmetry line, and
     /// normal to that line along which the end of the beam is sliding.
     void set_symmetry_line(const Vector<double>& vector_to_symmetry_line,
                            const Vector<double>& normal_to_symmetry_line)
@@ -582,7 +566,7 @@ namespace oomph
       FiniteElement::output(outfile);
     }
 
-    /// \short Output function -- forward to broken version in FiniteElement
+    /// Output function -- forward to broken version in FiniteElement
     /// until somebody decides what exactly they want to plot here...
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
@@ -596,7 +580,7 @@ namespace oomph
       FiniteElement::output(file_pt);
     }
 
-    /// \short C-style output function -- forward to broken version in
+    /// C-style output function -- forward to broken version in
     /// FiniteElement until somebody decides what exactly they want to plot
     /// here...
     void output(FILE* file_pt, const unsigned& n_plot)
@@ -605,11 +589,11 @@ namespace oomph
     }
 
   private:
-    /// \short Vector to some point on the symmetry line along which the
+    /// Vector to some point on the symmetry line along which the
     /// end of the beam is sliding
     Vector<double> Vector_to_symmetry_line;
 
-    /// \short Normal vector to the symmetry line along which the
+    /// Normal vector to the symmetry line along which the
     /// end of the beam is sliding
     Vector<double> Normal_to_symmetry_line;
   };

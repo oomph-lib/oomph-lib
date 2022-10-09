@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -74,13 +74,13 @@ namespace Global_Physical_Variables
  /// Free surface cosine deformation parameter
  double Epsilon = 1.0e-3;
 
- /// \short Surface Elasticity number (weak case)
+ /// Surface Elasticity number (weak case)
  double Beta = 3.6e-3;
 
- /// \short Surface Peclet number
+ /// Surface Peclet number
  double Peclet_S = 4032.0;
 
- /// \short Sufrace Peclet number multiplied by Strouhal number
+ /// Sufrace Peclet number multiplied by Strouhal number
  double Peclet_St_S = 1.0; 
  
 } // End of namespace

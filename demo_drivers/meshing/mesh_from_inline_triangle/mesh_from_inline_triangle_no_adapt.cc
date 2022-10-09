@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -67,7 +67,7 @@ namespace TanhSolnForPoisson
  }
  
 
- /// \short Zero function -- used to compute norm of the computed solution by 
+ /// Zero function -- used to compute norm of the computed solution by 
  /// computing the norm of the error when compared against this.
  void zero(const Vector<double>& x, Vector<double>& u)
  {
@@ -119,7 +119,7 @@ private:
  /// Helper function to apply boundary conditions
  void apply_boundary_conditions();
 
- /// \short Helper function to (re-)set boundary condition
+ /// Helper function to (re-)set boundary condition
  /// and complete the build of  all elements
  void complete_problem_setup();
 
@@ -568,7 +568,7 @@ void UnstructuredPoissonProblem<ELEMENT>::doc_solution(const
 
 
 //=======start_of_main========================================
-///Driver code for demo of inline triangle mesh generation
+/// Driver code for demo of inline triangle mesh generation
 //============================================================
 int main(int argc, char **argv)
 {

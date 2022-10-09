@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -55,11 +55,11 @@ using namespace oomph;
 namespace Flags
 {
 
- /// \short Solver flag [0: direct; 1: exact; 2: simple; 3: Schur/Superlu; 
+ /// Solver flag [0: direct; 1: exact; 2: simple; 3: Schur/Superlu; 
  /// 4: Schur/Hypre]
  unsigned Solver_flag=0;
 
- /// \short Solver sub flag [0: diag; 1: retain fluid on solid; 
+ /// Solver sub flag [0: diag; 1: retain fluid on solid; 
  /// 2: retain solid on fluid]
  unsigned Solver_sub_flag=0;
 
@@ -75,7 +75,7 @@ namespace Flags
 
 
 //====start_of_problem_class==========================================
-///Problem class
+/// Problem class
 //====================================================================
 template <class ELEMENT>
 class PreconditionedFSICollapsibleChannelProblem : 
@@ -84,7 +84,7 @@ class PreconditionedFSICollapsibleChannelProblem :
 
 public :
 
-/// \short Constructor: The arguments are the number of elements and
+/// Constructor: The arguments are the number of elements and
 /// the lengths of the domain.
 PreconditionedFSICollapsibleChannelProblem(const unsigned& nup, 
                                            const unsigned& ncollapsible,
@@ -541,7 +541,7 @@ PreconditionedFSICollapsibleChannelProblem(const unsigned& nup,
 
 
 
- /// \short Update before checking Newton convergence: Update the
+ /// Update before checking Newton convergence: Update the
  /// nodal positions in the fluid mesh in response to possible 
  /// changes in the wall shape.
  void actions_before_newton_convergence_check()

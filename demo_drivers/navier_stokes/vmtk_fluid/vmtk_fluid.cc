@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -111,15 +111,15 @@ private:
  /// Bulk fluid mesh
  TetgenMesh<ELEMENT>* Fluid_mesh_pt;
 
- /// \short Meshes of FaceElements imposing parallel outflow 
+ /// Meshes of FaceElements imposing parallel outflow 
  /// and a pressure at the in/outflow
  Vector<Mesh*> Parallel_outflow_lagrange_multiplier_mesh_pt;
 
- /// \short IDs of fluid mesh boundaries along which inflow boundary conditions
+ /// IDs of fluid mesh boundaries along which inflow boundary conditions
  /// are applied
  Vector<unsigned> Inflow_boundary_id;
 
- /// \short IDs of fluid mesh boundaries along which inflow boundary conditions
+ /// IDs of fluid mesh boundaries along which inflow boundary conditions
  /// are applied
  Vector<unsigned> Outflow_boundary_id;
 

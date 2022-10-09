@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -34,12 +34,12 @@
 namespace oomph
 {
   //=================================================================
-  /// \short Annular domain
+  /// Annular domain
   //=================================================================
   class AnnularDomain : public Domain
   {
   public:
-    /// \short Constructor: Specify azimuthal fraction (1.0 is 360 degrees)
+    /// Constructor: Specify azimuthal fraction (1.0 is 360 degrees)
     /// number of macro elements in azimuthal and radial direction,
     /// inner radius and thickness. Rotate mesh by angle phi.
     AnnularDomain(const double& azimuthal_fraction,
@@ -74,7 +74,8 @@ namespace oomph
     /// Destructor: Empty; cleanup done in base class
     ~AnnularDomain() {}
 
-    /// \short Vector representation of the  i_macro-th macro element
+
+    /// Vector representation of the  i_macro-th macro element
     /// boundary i_direct (N/S/W/E) at time level t
     /// (t=0: present; t>0: previous):
     /// f(s).
@@ -104,12 +105,13 @@ namespace oomph
     double Phi;
   };
 
+
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
 
   //=================================================================
-  /// \short Vector representation of the  imacro-th macro element
+  /// Vector representation of the  imacro-th macro element
   /// boundary idirect (N/S/W/E) at time level t
   /// (t=0: present; t>0: previous): f(s)
   //=================================================================

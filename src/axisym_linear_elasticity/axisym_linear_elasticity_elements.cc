@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -31,7 +31,7 @@
 
 namespace oomph
 {
-  /// \short Static default value for Young's modulus (1.0 -- for natural
+  /// Static default value for Young's modulus (1.0 -- for natural
   /// scaling, i.e. all stresses have been non-dimensionalised by
   /// the same reference Young's modulus. Setting the "non-dimensional"
   /// Young's modulus (obtained by de-referencing Youngs_modulus_pt)

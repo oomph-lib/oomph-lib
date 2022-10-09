@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -143,7 +143,7 @@ public:
  /// Destructor to clean up memory
  ~PolarNSProblem();
 
- ///Fix pressure in element e at pressure dof pdof and set to pvalue
+ /// Fix pressure in element e at pressure dof pdof and set to pvalue
  void fix_pressure(const unsigned int &e, const unsigned int &pdof, 
                    const double &pvalue)
   {
@@ -156,7 +156,7 @@ public:
  /// Update the after solve (empty)
  void actions_after_solve(){}
 
- /// \short Update the problem specs before solve. 
+ /// Update the problem specs before solve. 
  /// Re-set velocity boundary conditions just to be on the safe side...
  void actions_before_solve()
  {
@@ -272,7 +272,7 @@ public:
 
   } // end_of_actions_after_adapt
 
- ///Pin boundaries
+ /// Pin boundaries
  void pin_boundaries()
   {
    // Inlet/Outlet perturbation  
@@ -328,7 +328,7 @@ public:
 
   } // end_of_pin_boundaries
 
- ///Set up external pressure and pass to traction elements
+ /// Set up external pressure and pass to traction elements
  void setup_external_pressure()
   {
     //Create a Data object whose single value stores the
@@ -343,7 +343,7 @@ public:
 
   } // end of setup_external_pressure
 
- ///Set up external pressure and pass to traction elements
+ /// Set up external pressure and pass to traction elements
  void assign_external_pressure()
   {
    // Regard the external pressure as an unknown and add
@@ -821,7 +821,7 @@ int main()
 
  //Solve the eigenproblem
  cout << "facking" << endl;
- problem.solve_eigenproblem(n_eval,eigenvalues,eigenvectors);
+ problem.solve_eigenproblem_legacy(n_eval,eigenvalues,eigenvectors);
  for(unsigned k=0;k<n_eval;k++)  cout << "eigenvalue: " << eigenvalues[k] << endl;
  cout << "arpack" << endl;
  //Activate pitchfork tracking
@@ -885,7 +885,7 @@ int main()
  cout << "========================================================" << endl;
  cout << endl << "Computing eigenvalue at pitchfork.  Re = " << Re << endl << endl;
  //Solve the eigenproblem
- problem.solve_eigenproblem(n_eval,eigenvalues,eigenvectors);
+ problem.solve_eigenproblem_legacy(n_eval,eigenvalues,eigenvectors);
  for(unsigned k=0;k<n_eval;k++)  cout << "eigenvalue: " << eigenvalues[k] << endl;
 
  // OUTPUT THE EIGENMODE

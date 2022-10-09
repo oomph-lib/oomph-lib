@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -57,7 +57,7 @@ class ElasticCubicMesh : public virtual SimpleCubicMesh<ELEMENT>,
 
 public:
 
- /// \short Constructor: 
+ /// Constructor: 
  ElasticCubicMesh(const unsigned &nx, const unsigned &ny, 
                   const unsigned &nz,
                   const double &a, const double &b, 
@@ -90,7 +90,7 @@ class RefineableElasticCubicMesh : public virtual SimpleCubicMesh<ELEMENT>,
 
 public:
 
- /// \short Constructor: 
+ /// Constructor: 
  RefineableElasticCubicMesh(const unsigned &nx, const unsigned &ny, 
                             const unsigned &nz,
                             const double &a, const double &b, 
@@ -296,7 +296,7 @@ public:
    
   }
 
- /// \short Update before solve: Empty
+ /// Update before solve: Empty
  void actions_before_newton_solve(){}
 
 private:

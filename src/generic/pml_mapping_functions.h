@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -48,7 +48,7 @@ namespace oomph
     /// Default constructor (empty)
     PMLMapping(){};
 
-    /// \short Pure virtual to return Pml mapping gamma, where gamma is the
+    /// Pure virtual to return Pml mapping gamma, where gamma is the
     /// \f$d\tilde x / d x\f$ as  function of \f$\nu\f$ where \f$\nu = x - h\f$
     /// where h is the vector from the origin to the start of the Pml
     virtual std::complex<double> gamma(const double& nu_i,
@@ -68,7 +68,7 @@ namespace oomph
     /// Default constructor (empty)
     BermudezPMLMapping(){};
 
-    /// \short Overwrite the pure Pml mapping coefficient function to return the
+    /// Overwrite the pure Pml mapping coefficient function to return the
     /// coeffcients proposed by Bermudez et al
     std::complex<double> gamma(const double& nu_i,
                                const double& pml_width_i,
@@ -93,7 +93,7 @@ namespace oomph
     /// Default constructor (empty)
     ContinuousBermudezPMLMapping(){};
 
-    /// \short Overwrite the pure Pml mapping coefficient function to return the
+    /// Overwrite the pure Pml mapping coefficient function to return the
     /// coeffcients proposed by Bermudez et al
     std::complex<double> gamma(const double& nu_i,
                                const double& pml_width_i,

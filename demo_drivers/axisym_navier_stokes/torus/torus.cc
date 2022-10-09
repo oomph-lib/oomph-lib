@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -72,7 +72,7 @@ public:
 /// Destructor
 virtual ~FilledCircle(){}
 
-///Lagrangian coordinate xi
+/// Lagrangian coordinate xi
 void position (const Vector<double>& xi, Vector<double>& r) const
 {
  r[0] = Centre_x + Radius*xi[0]*cos(xi[1]);
@@ -90,13 +90,13 @@ void position(const unsigned& t,
 
 private:
 
- ///Storage for the x-coordinate of the centre
+ /// Storage for the x-coordinate of the centre
  double Centre_x;
  
- ///Storage for the y-coordinate of the centre
+ /// Storage for the y-coordinate of the centre
  double Centre_y;
 
- ///Storage for the radius of the circle
+ /// Storage for the radius of the circle
  double Radius;
 
 };
@@ -124,7 +124,7 @@ template<class ELEMENT>
 class TorusProblem : public Problem
 {
 public:
- /// \short Constructor taking the maximum refinement level and
+ /// Constructor taking the maximum refinement level and
  /// the minimum and maximum error targets.
  TorusProblem(const unsigned &max_refinement_level,
               const double &min_error_target, 
@@ -152,7 +152,7 @@ void set_initial_condition()
  /// Return a pointer to the specific mesh used
  RefineableFullCircleMesh<ELEMENT>* mesh_pt() 
   {return dynamic_cast<RefineableFullCircleMesh<ELEMENT>*>(Problem::mesh_pt());}
- /// \short Update the problem specs before next timestep: 
+ /// Update the problem specs before next timestep: 
  void actions_before_implicit_timestep() 
   {set_boundary_conditions(time());}
 
@@ -359,7 +359,7 @@ void TorusProblem<ELEMENT>::set_boundary_conditions(const double &time)
 
 
 //==========================================================================
-///Solve the system for a number of different values of the Reynolds number
+/// Solve the system for a number of different values of the Reynolds number
 //==========================================================================
 template<class ELEMENT>
 void TorusProblem<ELEMENT>::solve_system(const double &dt, 

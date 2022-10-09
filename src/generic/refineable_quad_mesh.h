@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -73,14 +73,14 @@ namespace oomph
     virtual ~RefineableQuadMesh() {}
 
 
-    /// \short Set up the tree forest associated with the Mesh.
+    /// Set up the tree forest associated with the Mesh.
     /// Forwards call to setup_quadtree_forest()
     virtual void setup_tree_forest()
     {
       setup_quadtree_forest();
     }
 
-    /// \short Set up QuadTreeForest. Wipes any existing tree structure below
+    /// Set up QuadTreeForest. Wipes any existing tree structure below
     /// the minimum refinement level and regards the elements at that level
     /// as the root trees in the forest.
     void setup_quadtree_forest()

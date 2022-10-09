@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -36,7 +36,7 @@ namespace oomph
 
 
   //======================================================================
-  /// \short Compute element residual Vector and/or element Jacobian matrix
+  /// Compute element residual Vector and/or element Jacobian matrix
   ///
   /// flag=1: compute both
   /// flag=0: compute only residual Vector
@@ -234,7 +234,7 @@ namespace oomph
 
 
   //======================================================================
-  /// \short Output function:
+  /// Output function:
   ///
   ///   r,z,u,w_r,w_z
   ///
@@ -328,7 +328,7 @@ namespace oomph
   }
 
   //======================================================================
-  /// \short  Output exact solution
+  ///  Output exact solution
   ///
   /// Solution is provided via function pointer.
   /// Plot at a given number of plot points.
@@ -380,7 +380,7 @@ namespace oomph
 
 
   //======================================================================
-  /// \short Validate against exact solution
+  /// Validate against exact solution
   ///
   /// Solution is provided via function pointer.
   /// Plot error at a given number of plot points.

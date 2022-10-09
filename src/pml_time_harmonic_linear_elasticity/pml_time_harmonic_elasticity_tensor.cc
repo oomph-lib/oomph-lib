@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -28,31 +28,12 @@
 
 namespace oomph
 {
-  ///\short Translation scheme that takes account of the symmetries of the
+  /// Translation scheme that takes account of the symmetries of the
   /// tensor. The independent coefficients are related to the coefficients of
   /// the elasticity tensor as follows:
-  /**\f[\begin{array}{cc}    0 & E_{1111} \\
-                             1 & E_{1112} \\
-                             2 & E_{1122} \\
-                             3 & E_{1212} \\
-                             4 & E_{1222} \\
-                             5 & E_{2222} \\
-                             6 & E_{1113} \\
-                             7 & E_{1123} \\
-                             8 & E_{1133} \\
-                             9 & E_{1213} \\
-                             10 & E_{1223} \\
-                             11 & E_{1233} \\
-                             12 & E_{1313} \\
-                             13 & E_{1322} \\
-                             14 & E_{1323} \\
-                             15 & E_{1333} \\
-                             16 & E_{2223} \\
-                             17 & E_{2233} \\
-                             18 & E_{2323} \\
-                             19 & E_{2333} \\
-                             20 & E_{3333}
-                             \end{array}\f] **/
+  /**
+  /// \f[\begin{array}{cc} 0 & E_{1111} \\ 1 & E_{1112} \\ 2 & E_{1122} \\ 3 & E_{1212} \\ 4 & E_{1222} \\ 5 & E_{2222} \\ 6 & E_{1113} \\ 7 & E_{1123} \\ 8 & E_{1133} \\ 9 & E_{1213} \\ 10 & E_{1223} \\ 11 & E_{1233} \\ 12 & E_{1313} \\ 13 & E_{1322} \\ 14 & E_{1323} \\ 15 & E_{1333} \\ 16 & E_{2223} \\ 17 & E_{2233} \\ 18 & E_{2323} \\ 19 & E_{2333} \\ 20 & E_{3333} \end{array}\f]
+  /// **/
   const unsigned PMLTimeHarmonicElasticityTensor::Index[3][3][3][3] = {
     {{{0, 1, 6}, {1, 2, 7}, {6, 7, 8}},
      {{1, 3, 9}, {3, 4, 10}, {9, 10, 11}},
@@ -67,7 +48,7 @@ namespace oomph
      {{8, 11, 15}, {11, 17, 19}, {15, 19, 20}}}};
 
 
-  ///\short Translation scheme for the isotropic elasticity tensor
+  /// Translation scheme for the isotropic elasticity tensor
   const unsigned PMLTimeHarmonicIsotropicElasticityTensor::StaticIndex[21] = {
     1, 0, 2, 3, 0, 1, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0, 0, 2, 3, 0, 1};
 

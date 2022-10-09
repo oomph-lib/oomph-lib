@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -28,7 +28,7 @@
 namespace oomph
 {
   //=====================================================================
-  /// \short Constructor: Pass the filename of the mesh files
+  /// Constructor: Pass the filename of the mesh files
   //=====================================================================
   GeompackQuadScaffoldMesh::GeompackQuadScaffoldMesh(
     const std::string& mesh_file_name, const std::string& curve_file_name)

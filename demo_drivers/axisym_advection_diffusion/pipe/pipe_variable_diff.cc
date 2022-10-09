@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -82,8 +82,8 @@ namespace Global_Physical_Variables
   swim[2] = 0.0;
  }
 
- ///Diffusivity tensor (again 3x3 but only the upper 2x2 block affects
- ///the axisymmetric advection diffusion equations)
+ /// Diffusivity tensor (again 3x3 but only the upper 2x2 block affects
+ /// the axisymmetric advection diffusion equations)
  void diff_function(const Vector<double> &x, DenseMatrix<double> &D)
  {
   //Radial component
@@ -127,13 +127,13 @@ public:
  /// Destructor. Empty
  ~RefineableAdvectionDiffusionPipeProblem(){}
 
- /// \short Set the initial state of the system
+ /// Set the initial state of the system
  void set_initial_condition();
 
- /// \short Doc the solution.
+ /// Doc the solution.
  void doc_solution();
 
- /// \short Overloaded version of the problem's access function to 
+ /// Overloaded version of the problem's access function to 
  /// the mesh. Recasts the pointer to the base Mesh object to 
  /// the actual mesh type.
  RefineableRectangularQuadMesh<ELEMENT>* mesh_pt() 
@@ -152,7 +152,7 @@ private:
 
 
 //=====start_of_constructor===============================================
-/// \short Constructor for AdvectionDiffusion problem
+/// Constructor for AdvectionDiffusion problem
 //========================================================================
 template<class ELEMENT>
 RefineableAdvectionDiffusionPipeProblem<ELEMENT>::
@@ -268,7 +268,7 @@ RefineableAdvectionDiffusionPipeProblem()
 
 
 //=============================start_of_set_concentration_profile=======
-///Set a specified inlet concentration profile
+/// Set a specified inlet concentration profile
 //========================================================================
 template<class ELEMENT>
 void RefineableAdvectionDiffusionPipeProblem<ELEMENT>::

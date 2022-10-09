@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -45,7 +45,7 @@ namespace GlobalFct
  /// Max. displacement
  double U_max=5.5;
 
- /// \short Number of primary variables. Equal to number of raw "displacement"
+ /// Number of primary variables. Equal to number of raw "displacement"
  /// variables for contact problem; total number of degrees of freedom
  /// in that case is twice as big because of the unknown contact forces.
  unsigned N_primary=1;

@@ -3,11 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC//    Version 1.0; svn revision $LastChangedRevision$
-// LIC//
-// LIC// $LastChangedDate$
-// LIC//
-// LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -57,7 +53,7 @@ namespace oomph
   class ChannelWithLeafletMesh : public SimpleRectangularQuadMesh<ELEMENT>
   {
   public:
-    ///\short Constructor: Pass pointer to GeomObject that represents the
+    /// Constructor: Pass pointer to GeomObject that represents the
     /// leaflet,
     /// the length of the domain to left and right of the leaflet, the
     /// height of the leaflet and the overall height of the channel,
@@ -95,6 +91,7 @@ namespace oomph
     GeomObject* Leaflet_pt;
   };
 
+
   /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////
@@ -108,7 +105,7 @@ namespace oomph
       public RefineableQuadMesh<ELEMENT>
   {
   public:
-    ///\short Constructor: Pass pointer to GeomObject that represents the
+    /// Constructor: Pass pointer to GeomObject that represents the
     /// leaflet,
     /// the length of the domain to left and right of the leaflet, the
     /// height of the leaflet and the overall height of the channel,
@@ -147,6 +144,7 @@ namespace oomph
     virtual ~RefineableChannelWithLeafletMesh() {}
   };
 
+
   /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////
@@ -167,7 +165,7 @@ namespace oomph
       public virtual ChannelWithLeafletMesh<ELEMENT>
   {
   public:
-    ///\short Constructor: Pass pointer to GeomObject that represents the
+    /// Constructor: Pass pointer to GeomObject that represents the
     /// leaflet,
     /// the length of the domain to left and right of the leaflet, the
     /// height of the leaflet and the overall height of the channel,
@@ -271,10 +269,12 @@ namespace oomph
 
     } // end of constructor
 
-    /// \short Destructor: empty
+
+    /// Destructor: empty
     virtual ~MacroElementNodeUpdateChannelWithLeafletMesh() {}
 
   }; // end of mesh
+
 
   ////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////
@@ -289,7 +289,7 @@ namespace oomph
       public virtual RefineableQuadMesh<ELEMENT>
   {
   public:
-    ///\short Constructor: Pass pointer to GeomObject that represents the
+    /// Constructor: Pass pointer to GeomObject that represents the
     /// leaflet,
     /// the length of the domain to left and right of the leaflet, the
     /// height of the leaflet and the overall height of the channel,
@@ -334,10 +334,12 @@ namespace oomph
       this->setup_quadtree_forest();
     }
 
-    /// \short Destructor: empty
+
+    /// Destructor: empty
     virtual ~MacroElementNodeUpdateRefineableChannelWithLeafletMesh() {}
 
   }; // end of mesh
+
 
   ///////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
@@ -354,7 +356,7 @@ namespace oomph
       public virtual ChannelWithLeafletMesh<ELEMENT>
   {
   public:
-    ///\short Constructor: Pass pointer to GeomObject that represents the
+    /// Constructor: Pass pointer to GeomObject that represents the
     /// leaflet,
     /// the length of the domain to left and right of the leaflet, the
     /// height of the leaflet and the overall height of the channel,
@@ -403,15 +405,17 @@ namespace oomph
       setup_algebraic_node_update();
     }
 
-    /// \short Destructor: empty
+
+    /// Destructor: empty
     virtual ~AlgebraicChannelWithLeafletMesh() {}
 
-    /// \short Update the geometric references that are used
+
+    /// Update the geometric references that are used
     /// to update node after mesh adaptation.
     /// Empty -- no update of node update required without adaptivity
     void update_node_update(AlgebraicNode*& node_pt) {}
 
-    /// \short Update nodal position at time level t (t=0: present;
+    /// Update nodal position at time level t (t=0: present;
     /// t>0: previous)
     void algebraic_node_update(const unsigned& t, AlgebraicNode*& node_pt);
 
@@ -460,7 +464,7 @@ namespace oomph
       public virtual AlgebraicChannelWithLeafletMesh<ELEMENT>
   {
   public:
-    ///\short Constructor: Pass pointer to GeomObject that represents the
+    /// Constructor: Pass pointer to GeomObject that represents the
     /// leaflet,
     /// the length of the domain to left and right of the leaflet, the
     /// height of the leaflet and the overall height of the channel,
@@ -505,10 +509,11 @@ namespace oomph
       this->setup_quadtree_forest();
     }
 
-    /// \short Update the node update data for specified node following
+    /// Update the node update data for specified node following
     /// any mesh adapation
     void update_node_update(AlgebraicNode*& node_pt);
   };
+
 
   /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////
@@ -523,7 +528,7 @@ namespace oomph
       public virtual SolidMesh
   {
   public:
-    ///\short Constructor: Pass pointer to GeomObject that represents the
+    /// Constructor: Pass pointer to GeomObject that represents the
     /// leaflet, the length of the domain to left and right of the leaflet, the
     /// height of the leaflet and the overall height of the channel,
     /// the number of element columns to the left and right of the leaflet,

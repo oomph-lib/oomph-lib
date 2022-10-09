@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -90,7 +90,7 @@ class SegregatedFSICollapsibleChannelProblem :
 
 public :
  
- /// \short Constructor: The arguments are the same as the original
+ /// Constructor: The arguments are the same as the original
  /// (non-segregated) problem, namely, numbers of elements and lengths
  /// of different sections of the domain.
  SegregatedFSICollapsibleChannelProblem(const unsigned& nup, 
@@ -108,7 +108,7 @@ public :
  ~SegregatedFSICollapsibleChannelProblem(){}
 
 
- /// \short Identify the fluid and solid Data and meshes that
+ /// Identify the fluid and solid Data and meshes that
  /// contain only elements involved in the respective sub-problems. 
  /// This is a specific implementation of a pure virtual function in the 
  /// SegregatableFSIProblem base class.
@@ -119,7 +119,7 @@ public :
 
  // start_of_convergence_checks
 
- /// \short Update nodal positions in the fluid mesh in
+ /// Update nodal positions in the fluid mesh in
  /// response to changes in the wall displacement field after every
  /// Newton step in a monolithic or segregated solid solve. Note
  /// the use of the (protected) flag Solve_type, which can take the

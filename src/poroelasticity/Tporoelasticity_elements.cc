@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -29,7 +29,7 @@ namespace oomph
 {
   /// Lowest-order Raviart-Thomas based Darcy equation element
 
-  /// \short Constructor. Order 0 elements have 1 pressure dof and no internal
+  /// Constructor. Order 0 elements have 1 pressure dof and no internal
   /// velocity dofs
   template<>
   TPoroelasticityElement<0>::TPoroelasticityElement()
@@ -127,7 +127,7 @@ namespace oomph
 
   /// Second-order Raviart-Thomas based Darcy equation element
 
-  /// \short Constructor. Order 1 elements have 3 pressure dofs and 2 internal
+  /// Constructor. Order 1 elements have 3 pressure dofs and 2 internal
   /// velocity dofs
   template<>
   TPoroelasticityElement<1>::TPoroelasticityElement()

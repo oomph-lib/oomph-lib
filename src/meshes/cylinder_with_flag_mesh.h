@@ -3,11 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC//    Version 1.0; svn revision $LastChangedRevision$
-// LIC//
-// LIC// $LastChangedDate$
-// LIC//
-// LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -50,7 +46,7 @@ namespace oomph
   class CylinderWithFlagMesh : public virtual Mesh, public virtual QuadMeshBase
   {
   public:
-    /// \short Constructor. Pass the pointers to the GeomObjects that
+    /// Constructor. Pass the pointers to the GeomObjects that
     /// parametrise the cylinder, the three edges of the flag, the length and
     /// height of the domain, the length and height of the flag, the coordinates
     /// of the centre of the cylinder and its radius. Timestepper defaults to
@@ -87,6 +83,7 @@ namespace oomph
 
   }; // end of mesh class
 
+
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
@@ -99,7 +96,7 @@ namespace oomph
                                          public RefineableQuadMesh<ELEMENT>
   {
   public:
-    /// \short Constructor. Pass the pointers to the GeomObjects that
+    /// Constructor. Pass the pointers to the GeomObjects that
     /// parametrise the cylinder, the three edges of the flag, the length and
     /// height of the domain, the length and height of the flag, the coordinates
     /// of the centre of the cylinder and its radius. Timestepper defaults to
@@ -137,9 +134,11 @@ namespace oomph
       this->setup_quadtree_forest();
     }
 
-    /// \short Destructor: Empty
+
+    /// Destructor: Empty
     virtual ~RefineableCylinderWithFlagMesh() {}
   };
+
 
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
@@ -154,7 +153,7 @@ namespace oomph
       public virtual CylinderWithFlagMesh<ELEMENT>
   {
   public:
-    /// \short Constructor. Pass the pointers to the GeomObjects that
+    /// Constructor. Pass the pointers to the GeomObjects that
     /// parametrise the cylinder, the three edges of the flag, the length and
     /// height of the domain, the length and height of the flag, the coordinates
     /// of the centre of the cylinder and its radius. Timestepper defaults to
@@ -207,10 +206,11 @@ namespace oomph
       setup_algebraic_node_update();
     }
 
-    /// \short Destructor: empty
+    /// Destructor: empty
     virtual ~AlgebraicCylinderWithFlagMesh() {}
 
-    /// \short Set geometric object that defines the
+
+    /// Set geometric object that defines the
     /// bottom face of the flag
     void set_bottom_flag_pt(GeomObject* bottom_flag_pt)
     {
@@ -219,7 +219,7 @@ namespace oomph
       Bottom_flag_pt = bottom_flag_pt;
     }
 
-    /// \short Set the geometric object that defines the
+    /// Set the geometric object that defines the
     /// top face of the flag
     void set_top_flag_pt(GeomObject* top_flag_pt)
     {
@@ -227,7 +227,8 @@ namespace oomph
       Top_flag_pt = top_flag_pt;
     }
 
-    /// \short Set the geometric object that defines the
+
+    /// Set the geometric object that defines the
     /// tip of the flag
     void set_tip_flag_pt(GeomObject* tip_flag_pt)
     {
@@ -235,33 +236,37 @@ namespace oomph
       Tip_flag_pt = tip_flag_pt;
     }
 
-    /// \short Read-only access to geometric object that defines the
+
+    /// Read-only access to geometric object that defines the
     /// bottom face of the flag
     GeomObject* bottom_flag_pt() const
     {
       return Bottom_flag_pt;
     }
 
-    /// \short Read-only access to geometric object that defines the
+
+    /// Read-only access to geometric object that defines the
     /// top face of the flag
     GeomObject* top_flag_pt() const
     {
       return Top_flag_pt;
     }
 
-    /// \short Read-only access to geometric object that defines the
+    /// Read-only access to geometric object that defines the
     /// tip of the flag
     GeomObject* tip_flag_pt() const
     {
       return Tip_flag_pt;
     }
 
-    /// \short Update the geometric references that are used
+
+    /// Update the geometric references that are used
     /// to update node after mesh adaptation.
     /// Empty -- no update of node update required without adaptativity
     void update_node_update(AlgebraicNode*& node_pt) {}
 
-    /// \short Update nodal position at time level t (t=0: present;
+
+    /// Update nodal position at time level t (t=0: present;
     /// t>0: previous)
     void algebraic_node_update(const unsigned& t, AlgebraicNode*& node_pt);
 
@@ -330,6 +335,7 @@ namespace oomph
     double A;
   };
 
+
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
@@ -343,7 +349,7 @@ namespace oomph
       public virtual AlgebraicCylinderWithFlagMesh<ELEMENT>
   {
   public:
-    /// \short Constructor: Pass the pointers to the GeomObjects that
+    /// Constructor: Pass the pointers to the GeomObjects that
     /// parametrise the cylinder, the three edges of the flag, the length and
     /// height of the domain, the length and height of the flag, the coordinates
     /// of the centre of the cylinder and its radius. Timestepper defaults to
@@ -390,7 +396,7 @@ namespace oomph
       this->setup_quadtree_forest();
     }
 
-    /// \short Update the node update data for specified node following
+    /// Update the node update data for specified node following
     /// any mesh adapation
     void update_node_update(AlgebraicNode*& node_pt);
   };

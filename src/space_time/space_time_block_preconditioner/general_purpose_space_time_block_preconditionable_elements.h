@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -77,7 +77,7 @@ namespace oomph
     } // End of set_time_slab_id
 
 
-    /// \short Access function to assign the number of dof types in the mesh
+    /// Access function to assign the number of dof types in the mesh
     /// NOTE: We have an access function for this as N_dof_types relies
     /// on the number of time slices in the mesh which isn't something one
     /// individual element should know...
@@ -88,7 +88,7 @@ namespace oomph
     } // End of set_ndof_types
 
 
-    /// \short Return the number of "DOF types" that the degrees of freedom in
+    /// Return the number of "DOF types" that the degrees of freedom in
     /// this element are sub-divided into
     unsigned ndof_types() const
     {
@@ -97,7 +97,7 @@ namespace oomph
     } // End of ndof_types
 
 
-    /// \short Pure virtual function to be implemented in a derived class.
+    /// Pure virtual function to be implemented in a derived class.
     /// Create a list of pairs for all unknowns in this element,
     /// so the first entry in each pair contains the global equation
     /// number of the unknown, while the second one contains the number

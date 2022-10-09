@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -42,7 +42,7 @@ using namespace oomph;
 
 
 //=============================================================================
-/// \short Simple implementation of LSC preconditioner.\n
+/// Simple implementation of LSC preconditioner.\n
 /// This is demo code that shows how write preconditioners. There's
 /// a more sophisticated version of this preconditioner in the 
 /// library!
@@ -93,7 +93,7 @@ public :
  /// Setup the preconditioner
  void setup();
  
- /// \short for some reason we have to remind the compiler that there is a
+ /// for some reason we have to remind the compiler that there is a
  /// setup() function in Preconditioner base class.
  // hierher using Preconditioner::setup;
  
@@ -107,7 +107,7 @@ public :
    Navier_stokes_mesh_pt = mesh_pt;
   }
  
- /// \short Helper function to delete preconditioner data.
+ /// Helper function to delete preconditioner data.
  void clean_up_memory();
  
  
@@ -126,7 +126,7 @@ private:
  
  
  // hierher
- // /// \short Helper function to assemble the inverse diagonals of the pressure
+ // /// Helper function to assemble the inverse diagonals of the pressure
  // /// and velocity mass matrices from the elemental contributions defined in
  // /// NavierStokesEquations<DIM>.
  // /// If do_both=true, both are computed, otherwise only the velocity
@@ -137,7 +137,7 @@ private:
  //  CRDoubleMatrix*& inv_v_mass_pt, 
  //  const bool& do_both);
    
- /// \short Boolean indicating whether the momentum system preconditioner 
+ /// Boolean indicating whether the momentum system preconditioner 
  /// is a block preconditioner
  bool F_preconditioner_is_block_preconditioner; // hierher
  
@@ -150,7 +150,7 @@ private:
  /// MatrixVectorProduct operator for F
  MatrixVectorProduct* F_mat_vec_pt;
  
- /// \short the pointer to the mesh of block preconditionable Navier
+ /// the pointer to the mesh of block preconditionable Navier
  /// Stokes elements. 
  Mesh* Navier_stokes_mesh_pt;
  
@@ -590,7 +590,7 @@ template<unsigned DIM>
 class MyTaylorHoodElement :  public virtual QTaylorHoodElement<DIM>
 {
  
- /// \short The number of "DOF types" that degrees of freedom in this element
+ /// The number of "DOF types" that degrees of freedom in this element
  /// are sub-divided into: Velocity and pressure.
  unsigned ndof_types() const
   {
@@ -696,7 +696,7 @@ class RectangularDrivenCavityProblem : public Problem
 public:
 
 
- /// \short Constructor: Specify multiplier for number of element 
+ /// Constructor: Specify multiplier for number of element 
  /// rows/columns and solver flag.
  RectangularDrivenCavityProblem();
  
@@ -720,7 +720,7 @@ public:
 
   };
 
- ///Fix pressure in element e at pressure dof pdof and set to pvalue
+ /// Fix pressure in element e at pressure dof pdof and set to pvalue
  void fix_pressure(const unsigned &e, const unsigned &pdof, 
                    const double &pvalue)
   {
@@ -734,7 +734,7 @@ public:
  void actions_after_newton_solve(){}
 
 
- /// \short Update the problem specs before solve. 
+ /// Update the problem specs before solve. 
  /// Re-set velocity boundary conditions just to be on the safe side...
  void actions_before_newton_solve()
  {

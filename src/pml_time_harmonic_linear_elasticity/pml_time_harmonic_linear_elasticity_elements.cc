@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -308,7 +308,7 @@ namespace oomph
       double W = w * J;
 
 
-      /// \short All the PML weights that participate in the assemby process
+      /// All the PML weights that participate in the assemby process
       /// are computed here. pml_inverse_jacobian_diagonals are are used to
       /// transform derivatives in real x to derivatives in transformed space
       /// \f$\tilde x \f$.

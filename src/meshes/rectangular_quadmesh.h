@@ -3,11 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC//    Version 1.0; svn revision $LastChangedRevision$
-// LIC//
-// LIC// $LastChangedDate$
-// LIC//
-// LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -80,14 +76,14 @@ namespace oomph
     /// Maximum value of y coordinate
     double Ymax;
 
-    /// \short Boolean variable used to determine whether the mesh
+    /// Boolean variable used to determine whether the mesh
     /// is periodic in the x-direction
     bool Xperiodic;
 
     /// Generic mesh construction function: contains all the hard work
     void build_mesh(TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
-    /// \short Constructor that allows the specification of minimum and maximum
+    /// Constructor that allows the specification of minimum and maximum
     /// values of x and y coordinates and does not build the mesh
     /// This is intend to be used in derived classes that overload the
     /// spacing functions. THis is scheduled to be changed, however.
@@ -120,7 +116,7 @@ namespace oomph
     }
 
   public:
-    /// \short Simple constructor: nx: number of elements in x direction;
+    /// Simple constructor: nx: number of elements in x direction;
     /// ny: number of elements in y direction; lx, length of domain in x
     /// direction (0,lx); ly, length of domain in y direction (0,ly)
     /// Also pass pointer to timestepper (defaults to Steady)
@@ -145,7 +141,7 @@ namespace oomph
       build_mesh(time_stepper_pt);
     }
 
-    /// \short Constructor that allows the specification of minimum and maximum
+    /// Constructor that allows the specification of minimum and maximum
     /// values of x and y coordinates
     RectangularQuadMesh(
       const unsigned& nx,
@@ -170,7 +166,7 @@ namespace oomph
       build_mesh(time_stepper_pt);
     }
 
-    /// \short Simple constructor: nx: number of elements in x direction;
+    /// Simple constructor: nx: number of elements in x direction;
     /// ny: number of elements in y direction; lx, length of domain in x
     /// direction (0,lx); ly, length of domain in y direction (0,ly)
     /// Boolean flag specifies if the mesh is periodic in the x-direction.
@@ -197,7 +193,7 @@ namespace oomph
       build_mesh(time_stepper_pt);
     }
 
-    /// \short Constructor that allows the specification of minimum and maximum
+    /// Constructor that allows the specification of minimum and maximum
     /// values of x and y coordinates.
     /// Boolean flag specifies if the mesh is periodic in the x-direction.
     RectangularQuadMesh(
@@ -266,7 +262,7 @@ namespace oomph
       return Ymax;
     }
 
-    /// \short Reorder the elements: By default they are ordered
+    /// Reorder the elements: By default they are ordered
     /// in "horizontal" layers (increasing in x, then in y). This
     /// function changes this to an ordering in the vertical direction
     /// (y first, then x). This is more efficient if a frontal solver
@@ -274,7 +270,7 @@ namespace oomph
     /// Can be overloaded in specific derived meshes.
     virtual void element_reorder();
 
-    /// \short Return the value of the x-coordinate at the node given by the
+    /// Return the value of the x-coordinate at the node given by the
     /// local node number (xnode, ynode) in the element (xelement,yelement).
     /// The description is in a "psudeo" two-dimensional coordinate system,
     /// so the range of xelement is [0,Nx-1], yelement is [0,Ny-1], and
@@ -291,7 +287,7 @@ namespace oomph
       return (Xmin + xstep * ((Np - 1) * xelement + xnode));
     }
 
-    /// \short Return the value of the y-coordinate at the node given by the
+    /// Return the value of the y-coordinate at the node given by the
     /// local node number (xnode, ynode) in the element (xelement,yelement).
     /// The description is in a "psudeo" two-dimensional coordinate system,
     /// so the range of xelement is [0,Nx-1], yelement is [0,Ny-1], and
@@ -328,7 +324,7 @@ namespace oomph
       public RefineableQuadMesh<ELEMENT>
   {
   public:
-    /// \short Simple constructor: nx: number of elements in x direction;
+    /// Simple constructor: nx: number of elements in x direction;
     /// ny: number of elements in y direction; lx, length of domain in x
     /// direction (0,lx); ly, length of domain in y direction (0,ly).
     /// Also pass pointer to timestepper (defaults to Steady)
@@ -345,7 +341,7 @@ namespace oomph
       this->setup_quadtree_forest();
     }
 
-    /// \short Simple constructor: nx: number of elements in x direction;
+    /// Simple constructor: nx: number of elements in x direction;
     /// ny: number of elements in y direction; lx, length of domain in x
     /// direction (0,lx); ly, length of domain in y direction (0,ly);
     /// periodic_in_x, periodicity in x.
@@ -365,7 +361,7 @@ namespace oomph
       this->setup_quadtree_forest();
     }
 
-    /// \short Constructor that allows the specification of minimum and maximum
+    /// Constructor that allows the specification of minimum and maximum
     /// values of x and y coordinates
     /// Also pass pointer to timestepper (defaults to Steady)
     RefineableRectangularQuadMesh(
@@ -384,7 +380,7 @@ namespace oomph
       this->setup_quadtree_forest();
     }
 
-    /// \short Constructor that allows the specification of minimum and maximum
+    /// Constructor that allows the specification of minimum and maximum
     /// values of x and y coordinates and periodicity
     /// Also pass pointer to timestepper (defaults to Steady)
     RefineableRectangularQuadMesh(
@@ -405,6 +401,7 @@ namespace oomph
     }
   };
 
+
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
@@ -423,7 +420,7 @@ namespace oomph
       public virtual SolidMesh
   {
   public:
-    /// \short Constructor: Build mesh and copy Eulerian coords to Lagrangian
+    /// Constructor: Build mesh and copy Eulerian coords to Lagrangian
     /// ones so that the initial configuration is the stress-free one and
     /// assign boundary coordinates. Origin specifies
     /// an additional rigid-body displacement.
@@ -453,7 +450,8 @@ namespace oomph
       set_boundary_coordinates(origin);
     }
 
-    /// \short Constructor: Build mesh and copy Eulerian coords to Lagrangian
+
+    /// Constructor: Build mesh and copy Eulerian coords to Lagrangian
     /// ones so that the initial configuration is the stress-free one and
     /// assign boundary coordinates
     ElasticRectangularQuadMesh<ELEMENT>(
@@ -476,7 +474,8 @@ namespace oomph
       set_boundary_coordinates(origin);
     }
 
-    /// \short Constructor: Build mesh and copy Eulerian coords to Lagrangian
+
+    /// Constructor: Build mesh and copy Eulerian coords to Lagrangian
     /// ones so that the initial configuration is the stress-free one and
     /// assign boundary coordinates. This includes a boolean flag to specify
     /// if the mesh is periodic in the x-direction
@@ -503,7 +502,7 @@ namespace oomph
     }
 
   private:
-    /// \short Setup the boundary coordinates. Vector
+    /// Setup the boundary coordinates. Vector
     /// origin specifies the coordinates of the lower left corner of
     /// the mesh.
     void set_boundary_coordinates(const Vector<double>& origin)
@@ -548,6 +547,7 @@ namespace oomph
     }
   };
 
+
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
@@ -568,7 +568,7 @@ namespace oomph
       public RefineableQuadMesh<ELEMENT>
   {
   public:
-    /// \short Constructor: Build mesh and copy Eulerian coords to Lagrangian
+    /// Constructor: Build mesh and copy Eulerian coords to Lagrangian
     /// ones so that the initial configuration is the stress-free one and
     /// assign boundary coordinates (variable Lagrangian coordinates along
     /// the relevant boundaries).
@@ -587,7 +587,8 @@ namespace oomph
       this->setup_quadtree_forest();
     }
 
-    /// \short Constructor: Build mesh and copy Eulerian coords to Lagrangian
+
+    /// Constructor: Build mesh and copy Eulerian coords to Lagrangian
     /// ones so that the initial configuration is the stress-free one and
     /// assign boundary coordinates. This includes a boolean flag to specify
     /// if the mesh is periodic in the x-direction
@@ -608,7 +609,8 @@ namespace oomph
       this->setup_quadtree_forest();
     }
 
-    /// \short Constructor: Build mesh and copy Eulerian coords to Lagrangian
+
+    /// Constructor: Build mesh and copy Eulerian coords to Lagrangian
     /// ones so that the initial configuration is the stress-free one and
     /// assign boundary coordinates (variable Lagrangian coordinates along
     /// the relevant boundaries). Origin specifies an additional rigid-body

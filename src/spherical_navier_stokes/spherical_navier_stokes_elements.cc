@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -1365,7 +1365,7 @@ namespace oomph
 
 
   //==============================================================
-  ///  \short Get integral of kinetic energy over element:
+  ///  Get integral of kinetic energy over element:
   //==============================================================
   double SphericalNavierStokesEquations::kin_energy() const
   {
@@ -1409,7 +1409,7 @@ namespace oomph
 
 
   //==========================================================================
-  ///  \short Get integral of time derivative of kinetic energy over element:
+  ///  Get integral of time derivative of kinetic energy over element:
   //==========================================================================
   double SphericalNavierStokesEquations::d_kin_energy_dt() const
   {

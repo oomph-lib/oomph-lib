@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -238,7 +238,7 @@ namespace oomph
 
 
   //============================================================================
-  /// \short preconditioner solve for the biharmonic preconditioner
+  /// preconditioner solve for the biharmonic preconditioner
   //============================================================================
   void BiharmonicPreconditioner::preconditioner_solve(const DoubleVector& r,
                                                       DoubleVector& z)
@@ -330,7 +330,7 @@ namespace oomph
 
 
   //============================================================================
-  /// \short preconditioner solve for the exact sub biharmonic preconditioner
+  /// preconditioner solve for the exact sub biharmonic preconditioner
   //============================================================================
   void ExactSubBiharmonicPreconditioner::preconditioner_solve(
     const DoubleVector& r, DoubleVector& z)
@@ -440,7 +440,7 @@ namespace oomph
   }
 
   //============================================================================
-  /// \short computes the schur complement for the inexact sub biharmonic
+  /// computes the schur complement for the inexact sub biharmonic
   /// preconditioner
   //============================================================================
   void InexactSubBiharmonicPreconditioner::compute_inexact_schur_complement()
@@ -652,7 +652,7 @@ namespace oomph
 
 
   //============================================================================
-  /// \short preconditioner solve for the inexact sub biharmonic preconditioner
+  /// preconditioner solve for the inexact sub biharmonic preconditioner
   //============================================================================
   void InexactSubBiharmonicPreconditioner::preconditioner_solve(
     const DoubleVector& r, DoubleVector& z)

@@ -3,11 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC//    Version 1.0; svn revision $LastChangedRevision$
-// LIC//
-// LIC// $LastChangedDate$
-// LIC//
-// LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -39,7 +35,7 @@
 namespace oomph
 {
   //=============================================================
-  /// \short Constructor. Pass the pointers to the GeomObjects that parametrise
+  /// Constructor. Pass the pointers to the GeomObjects that parametrise
   /// the cylinder, the three edges of the flag, the length and height of the
   /// domain, the length and height of the flag, the coordinates of the
   /// centre of the cylinder and its radius. Timestepper defaults to Steady
@@ -875,6 +871,7 @@ namespace oomph
         ->set_macro_elem_pt(this->Domain_pt->macro_element_pt(e));
     }
   }
+
 
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
@@ -1831,6 +1828,7 @@ namespace oomph
     node_pt->x(t, 0) += (ref_point_on_flag[0] - r_top[0]) * omega_vertical;
     node_pt->x(t, 1) += (ref_point_on_flag[1] - r_top[1]) * omega_vertical;
   }
+
 
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////

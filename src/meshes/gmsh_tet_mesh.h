@@ -3,11 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC//    Version 1.0; svn revision $LastChangedRevision: 1174 $
-// LIC//
-// LIC// $LastChangedDate: 2016-05-11 10:03:56 +0100 (Wed, 11 May 2016) $
-// LIC//
-// LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -53,7 +49,7 @@ namespace oomph
   class GmshParameters
   {
   public:
-    /// \short Specify outer boundary of domain to be meshed.
+    /// Specify outer boundary of domain to be meshed.
     /// Other parameters get default values and can be set via
     /// member functions
     GmshParameters(TetMeshFacetedClosedSurface* const& outer_boundary_pt,
@@ -95,7 +91,7 @@ namespace oomph
       return Element_volume;
     }
 
-    /// \short Filename for target volumes (for system-call based transfer to
+    /// Filename for target volumes (for system-call based transfer to
     /// gmsh during mesh adaptation). Default:
     /// .gmsh_target_size_for_adaptation.dat
     std::string& target_size_file_name()
@@ -109,7 +105,7 @@ namespace oomph
       return Gmsh_command_line_invocation;
     }
 
-    /// \short Stem for geo and msh files (input/output to command-line gmsh
+    /// Stem for geo and msh files (input/output to command-line gmsh
     /// invocation)
     std::string& geo_and_msh_file_stem()
     {
@@ -140,7 +136,7 @@ namespace oomph
       return Dx_for_target_size_transfer;
     }
 
-    /// \short Target size is transferred onto regular grid (for gmsh) by
+    /// Target size is transferred onto regular grid (for gmsh) by
     /// locate zeta. We try to find the exact point in the existing
     /// mesh but if we fail to converge from the nearest specified number
     /// of sample points we use the nearest of those.
@@ -149,7 +145,7 @@ namespace oomph
       return Max_sample_points_for_limited_locate_zeta_during_target_size_transfer;
     }
 
-    /// \short Stem for filename used to doc target element sizes on
+    /// Stem for filename used to doc target element sizes on
     /// gmsh grid. No doc if stem is equal to empty string (or counter
     /// is negative)
     std::string& stem_for_filename_gmsh_size_transfer()
@@ -157,7 +153,7 @@ namespace oomph
       return Stem_for_filename_gmsh_size_transfer;
     }
 
-    /// \short Counter for filename used to doc target element sizes on
+    /// Counter for filename used to doc target element sizes on
     /// gmsh grid. No doc if stem is equal to empty string (or counter
     /// is negative)
     int& counter_for_filename_gmsh_size_transfer()
@@ -183,13 +179,13 @@ namespace oomph
       Projection_is_disabled = false;
     }
 
-    /// \short Output filename for gmsh on-screen output
+    /// Output filename for gmsh on-screen output
     std::string& gmsh_onscreen_output_file_name()
     {
       return Gmsh_onscreen_output_file_name;
     }
 
-    /// \short Counter for marker that indicates where we are
+    /// Counter for marker that indicates where we are
     /// in gmsh on-screen output
     unsigned& gmsh_onscreen_output_counter()
     {
@@ -206,11 +202,11 @@ namespace oomph
     /// Uniform element volume
     double Element_volume;
 
-    /// \short  Filename for target volume (for system-call based transfer
+    ///  Filename for target volume (for system-call based transfer
     /// to gmsh during mesh adaptation)
     std::string Target_size_file_name;
 
-    /// \short Stem for geo and msh files (input/output to command-line gmsh
+    /// Stem for geo and msh files (input/output to command-line gmsh
     /// invocation)
     std::string Geo_and_msh_file_stem;
 
@@ -229,19 +225,19 @@ namespace oomph
     /// (Isotropic) grid spacing for target size transfer
     double Dx_for_target_size_transfer;
 
-    /// \short Target size is transferred onto regular grid (for gmsh) by
+    /// Target size is transferred onto regular grid (for gmsh) by
     /// locate zeta. We try to find the exact point in the existing
     /// mesh but if we fail to converge from the nearest specified number of
     /// sample points we use the nearest of those.
     unsigned
       Max_sample_points_for_limited_locate_zeta_during_target_size_transfer;
 
-    /// \short Stem for filename used to doc target element sizes on
+    /// Stem for filename used to doc target element sizes on
     /// gmsh grid. No doc if stem is equal to empty string (or counter
     /// is negative)
     std::string Stem_for_filename_gmsh_size_transfer;
 
-    /// \short Counter for filename used to doc target element sizes on
+    /// Counter for filename used to doc target element sizes on
     /// gmsh grid. No doc if stem is equal to empty string (or counter
     /// is negative)
     int Counter_for_filename_gmsh_size_transfer;
@@ -249,10 +245,10 @@ namespace oomph
     /// Is projection of old solution onto new mesh disabled?
     bool Projection_is_disabled;
 
-    /// \short Output filename for gmsh on-screen output
+    /// Output filename for gmsh on-screen output
     std::string Gmsh_onscreen_output_file_name;
 
-    /// \short Counter for marker that indicates where we are
+    /// Counter for marker that indicates where we are
     /// in gmsh on-screen output
     unsigned Gmsh_onscreen_output_counter;
   };
@@ -267,7 +263,7 @@ namespace oomph
   class TetEdge
   {
   public:
-    /// \short Constructor: Pass two vertices, identified by their indices
+    /// Constructor: Pass two vertices, identified by their indices
     ///  Edge "direction" is from lower vertex to higher vertex id so
     /// can compare if we're dealing with the same one...
     TetEdge(const unsigned& vertex1, const unsigned& vertex2)
@@ -303,14 +299,15 @@ namespace oomph
       return Vertex_pair.second;
     }
 
-    /// \short Edge is reversed in the sense that vertex1 actually has a higher
+
+    /// Edge is reversed in the sense that vertex1 actually has a higher
     /// id than vertex2 (when specified in the constructor)
     bool is_reversed() const
     {
       return Reversed;
     }
 
-    /// \short Comparison operator: Edges are identical if their sorted
+    /// Comparison operator: Edges are identical if their sorted
     /// (and therefore possibly reversed) vertex ids agree
     bool operator==(const TetEdge& tet_edge) const
     {
@@ -318,7 +315,7 @@ namespace oomph
               (tet_edge.second_vertex_id() == Vertex_pair.second));
     }
 
-    /// \short Comparison operator. Lexicographic comparison based on
+    /// Comparison operator. Lexicographic comparison based on
     /// vertex ids
     bool operator<(const TetEdge& tet_edge) const
     {
@@ -344,10 +341,11 @@ namespace oomph
     /// The vertices (sorted by vertex ids)
     std::pair<unsigned, unsigned> Vertex_pair;
 
-    /// \short Is it reversed? I.e. is the first input vertex stored after
+    /// Is it reversed? I.e. is the first input vertex stored after
     /// the second one?
     bool Reversed;
   };
+
 
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
@@ -367,7 +365,7 @@ namespace oomph
     template<class ELEMENT>
     friend class GmshTetMesh;
 
-    /// \short Build mesh, based on specified parameters. If boolean is set
+    /// Build mesh, based on specified parameters. If boolean is set
     /// to true, the target element sizes are read from file (used during
     /// adaptation; otherwise uniform target size is used).
     GmshTetScaffoldMesh(GmshParameters* gmsh_parameters_pt,
@@ -1618,6 +1616,7 @@ namespace oomph
     GmshParameters* Gmsh_parameters_pt;
   };
 
+
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
@@ -1629,7 +1628,7 @@ namespace oomph
   class GmshTetMesh : public virtual TetMeshBase, public virtual Mesh
   {
   public:
-    /// \short Constructor
+    /// Constructor
     GmshTetMesh(GmshParameters* gmsh_parameters_pt,
                 TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
       : Gmsh_parameters_pt(gmsh_parameters_pt)
@@ -1638,7 +1637,7 @@ namespace oomph
       build_it(time_stepper_pt, use_mesh_grading_from_file);
     }
 
-    /// \short Constructor. If boolean is set
+    /// Constructor. If boolean is set
     /// to true, the target element sizes are read from file (used during
     /// adaptation; otherwise uniform target size is used).
     GmshTetMesh(GmshParameters* gmsh_parameters_pt,
@@ -2231,6 +2230,7 @@ namespace oomph
     }
   };
 
+
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
@@ -2243,7 +2243,7 @@ namespace oomph
                                 public virtual RefineableTetMeshBase
   {
   public:
-    /// \short Constructor. If boolean is set
+    /// Constructor. If boolean is set
     /// to true, the target element sizes are read from file (used during
     /// adaptation; otherwise uniform target size is used).
     RefineableGmshTetMesh(
@@ -2256,7 +2256,7 @@ namespace oomph
       initialise_adaptation_data();
     }
 
-    /// \short Constructor
+    /// Constructor
     RefineableGmshTetMesh(
       GmshParameters* gmsh_parameters_pt,
       TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
@@ -2300,6 +2300,7 @@ namespace oomph
         this->Gmsh_parameters_pt->max_permitted_edge_ratio();
     }
   };
+
 
   /////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////

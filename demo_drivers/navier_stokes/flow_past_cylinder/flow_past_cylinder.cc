@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -73,16 +73,16 @@ class GeneralEllipse : public GeomObject
 
 public:
  
- ///Constructor
+ /// Constructor
  GeneralEllipse(const double &centre_x, const double &centre_y,
                 const double &a, const double &b)
   : GeomObject(1,2), Centre_x(centre_x), Centre_y(centre_y), A(a), B(b)
   {}
 
- ///Destructor (empty)
+ /// Destructor (empty)
  ~GeneralEllipse(){}
 
- ///Return the position
+ /// Return the position
  void position(const Vector<double> &xi, Vector<double> &r) const
   {
    r[0] = Centre_x + A*cos(xi[0]);
@@ -224,7 +224,7 @@ public:
  /// Destructor: Empty; cleanup done in base class
  ~RectangleWithHoleDomain() {}
 
- /// \short Helper function to interpolate linearly between the
+ /// Helper function to interpolate linearly between the
  /// "right" and "left" points; \f$ s \in [-1,1] \f$
  void linear_interpolate(Vector<double> left, Vector<double> right,
                          const double &s, Vector<double> &f)
@@ -237,7 +237,7 @@ public:
 
    
 
- /// \short Parametrisation of macro element boundaries: f(s) is the position
+ /// Parametrisation of macro element boundaries: f(s) is the position
  /// vector to macro-element m's boundary in the specified direction [N/S/E/W]
  /// at the specfied discrete time level (time=0: present; time>0: previous)
  void macro_element_boundary(const unsigned &time,
@@ -958,7 +958,7 @@ public:
   }
  
  
- /// \short Destructor: Empty
+ /// Destructor: Empty
  virtual ~RefineableRectangleWithHoleMesh() {}
  
 };
@@ -985,7 +985,7 @@ public:
  /// Update the problem specs after solve (empty)
  void actions_after_newton_solve() {}
 
- /// \short Update the problem specs before solve (empty; all prescribed
+ /// Update the problem specs before solve (empty; all prescribed
  /// velocities are constant along their respective boundares, therefore
  /// their FE interpolation onto the newly created nodes is sufficiently
  /// accurate)

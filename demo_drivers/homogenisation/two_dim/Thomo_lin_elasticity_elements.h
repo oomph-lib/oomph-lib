@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -65,7 +65,7 @@ namespace oomph
  
  public:
  
- ///\short  Constructor: Call constructors for TElement and 
+ /// Constructor: Call constructors for TElement and 
  /// HomogenisedLinearElasticity equations
  THomogenisedLinearElasticityElement() : TElement<DIM,NNODE_1D>(), 
   HomogenisedLinearElasticityEquations<DIM>() { }
@@ -79,14 +79,14 @@ namespace oomph
    BrokenCopy::broken_copy("THomogenisedLinearElasticityElement");
   } 
  
- /// \short Output function:  
+ /// Output function:  
  ///  x,y,u   or    x,y,z,u
  void output(std::ostream &outfile)
   {
    HomogenisedLinearElasticityEquations<DIM>::output(outfile);
   }
 
- ///  \short Output function:  
+ ///  Output function:  
  ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
  void output(std::ostream &outfile, const unsigned &nplot)
   {
@@ -120,14 +120,14 @@ namespace oomph
   }
 
 
- /// \short C-style output function:  
+ /// C-style output function:  
  ///  x,y,u   or    x,y,z,u
  void output(FILE* file_pt)
   {
    HomogenisedLinearElasticityEquations<DIM>::output(file_pt);
   }
 
- ///  \short C-style output function:  
+ ///  C-style output function:  
  ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
  void output(FILE* file_pt, const unsigned &n_plot)
   {
@@ -149,7 +149,7 @@ namespace oomph
 
   public:
  
- /// \short Constructor: Call the constructor for the
+ /// Constructor: Call the constructor for the
  /// appropriate lower-dimensional QElement
  FaceGeometry() : TElement<DIM-1,NNODE_1D>() {}
 

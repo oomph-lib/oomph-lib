@@ -45,7 +45,7 @@ using namespace oomph;
 namespace oomph
 {
   //======================================================================
-  /// \short Build the full mesh with the help of the scaffold mesh coming
+  /// Build the full mesh with the help of the scaffold mesh coming
   /// from the triangle mesh generator, Triangle. To build this quad
   /// element based mesh we make use of the fact that a triangle element
   /// can be split as shown in the diagram below:
@@ -337,9 +337,8 @@ namespace oomph
       }
 
 #ifdef PARANOID
-      // If any of the edges have been set up, make sure that that the
-      // endpoints in the returned vectors have the same address as those on
-      // the vertices
+      // If any of the edges have been set up, make sure that that the endpoints
+      // in the returned vectors have the same address as those on the vertices
 
       // Come back and finish this off.
       // To check:

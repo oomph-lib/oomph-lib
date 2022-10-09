@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -50,7 +50,7 @@ public:
  /// Return pointer to vector of all Fluid elements
  Vector<GeneralisedElement*> fluid_elt_vector() {return Fluid_elt_pt;}
 
- /// \short Constructor, which "builds" the mesh. The arguments are the number
+ /// Constructor, which "builds" the mesh. The arguments are the number
  /// of elements in each direction.
  Refineable_r_mesh(const unsigned int &nx,const unsigned int &ny) :
  RectangularQuadMesh<ELEMENT>(nx,ny,Global_Physical_Variables::R_l,

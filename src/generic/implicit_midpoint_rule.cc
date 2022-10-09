@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -34,7 +34,7 @@
 
 namespace oomph
 {
-  /// \short This function advances the Data's time history so that
+  /// This function advances the Data's time history so that
   /// we can move on to the next timestep
   void IMRBase::shift_time_values(Data* const& data_pt)
   {
@@ -52,7 +52,7 @@ namespace oomph
     }
   }
 
-  ///\short This function advances the time history of the positions
+  /// This function advances the time history of the positions
   /// at a node. ??ds Untested: I have no problems with moving nodes.
   void IMRBase::shift_time_positions(Node* const& node_pt)
   {

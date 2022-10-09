@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -40,12 +40,12 @@ using namespace oomph;
 ////////////////////////////////////////////////////////////////////////
 
 //======start_of_OscillatingCylinder_class================================
-/// \short Oscillating cylinder class
+/// Oscillating cylinder class
 //========================================================================
 class OscillatingCylinder : public GeomObject
 {
 public:
-  /// \short Constructor: Pass in the radius, the amplitude of the cylinder
+  /// Constructor: Pass in the radius, the amplitude of the cylinder
   /// motion, the simulation Strouhal number and a pointer to time object.
   OscillatingCylinder(double* radius_pt,
                       double* amplitude_pt,
@@ -73,7 +73,7 @@ public:
     return Time_pt;
   } // End of time_pt
 
-  /// \short Current position vector to material point at Lagrangian
+  /// Current position vector to material point at Lagrangian
   /// coordinate xi (steady version)
   void position(const Vector<double>& xi,
                 Vector<double>& r) const
@@ -85,7 +85,7 @@ public:
     r[1]=(*Radius_pt)*sin(xi[0]);
   } // End of position
 
-  /// \short Current position vector to material point at Lagrangian
+  /// Current position vector to material point at Lagrangian
   /// coordinate xi (unsteady version). Implementation includes a
   /// transition phase where the cylinder oscillates to a smaller
   /// amplitude than the target value. Used to ensure that the solution
@@ -128,7 +128,7 @@ public:
     r[1]+=translation;
   } // End of position
 
-  /// \short Parametrised position on object: r(zeta). Evaluated at
+  /// Parametrised position on object: r(zeta). Evaluated at
   /// the continuous time value, t.
   virtual void position(const double& t,
                         const Vector<double>& xi,
@@ -147,7 +147,7 @@ public:
     r[1]+=translation;
   } // End of position
 
-  /// \short Velocity at any given point on the rigid cylinder at time, t
+  /// Velocity at any given point on the rigid cylinder at time, t
   virtual void velocity(const double& t, Vector<double>& u) const
   {
     // Scaling factor
@@ -243,7 +243,7 @@ namespace TanhSolnForPoisson
 //========================================================================
 namespace GlobalParameters
 {
-  ///-------------------------Cylinder Properties-------------------------
+  /// -------------------------Cylinder Properties-------------------------
   /// Pointer to the cylinder
   OscillatingCylinder* Cylinder_pt=0;
 
@@ -252,9 +252,9 @@ namespace GlobalParameters
 
   /// Amplitude of the cylinder motion
   double Amplitude=0.50;
-  ///-------------------------Cylinder Properties-------------------------
+  /// -------------------------Cylinder Properties-------------------------
 
-  ///-------------------------Domain Properties---------------------------
+  /// -------------------------Domain Properties---------------------------
   /// Length of square central box domain
   double Length_of_box=10.0;
 
@@ -277,12 +277,12 @@ namespace GlobalParameters
     Annular_region_radius=
       Radius+std::min(2.0*Radius,0.5*((0.5*Length_of_box)-Radius));
   } // End of update_parameters
-  ///-------------------------Domain Properties-------------------------
+  /// -------------------------Domain Properties-------------------------
 
-  ///-----------------------Documentation Helpers-----------------------
+  /// -----------------------Documentation Helpers-----------------------
   /// Doc info object
   DocInfo Doc_info;
-  ///-----------------------Documentation Helpers-----------------------
+  /// -----------------------Documentation Helpers-----------------------
 } // End of GlobalParameters namespace
 
 ///////////////////////////////////////////////////////////////////////

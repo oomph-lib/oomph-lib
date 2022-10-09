@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -114,8 +114,8 @@ class DragNusseltCalculationElement :
  
 public:
 
- ///Constructor, which takes a "bulk" element and the value of the index
- ///and its limit
+ /// Constructor, which takes a "bulk" element and the value of the index
+ /// and its limit
  DragNusseltCalculationElement(FiniteElement* const &element_pt, 
                                       const int &face_index) : 
   FaceGeometry<ELEMENT>(), FaceElement()
@@ -235,7 +235,7 @@ public:
  /// Update the problem specs after solve (empty)
  void actions_after_newton_solve() {}
 
- /// \short Update the problem specs before solve (empty; all prescribed
+ /// Update the problem specs before solve (empty; all prescribed
  /// velocities are constant along their respective boundares, therefore
  /// their FE interpolation onto the newly created nodes is sufficiently
  /// accurate)

@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -105,19 +105,19 @@ namespace oomph
       return 4;
     }
 
-    /// \short This function advances the Data's time history so that
+    /// This function advances the Data's time history so that
     /// we can move on to the next timestep
     void shift_time_values(Data* const& data_pt);
 
-    /// \short This function advances the time history of the positions
+    /// This function advances the time history of the positions
     /// at a node.
     void shift_time_positions(Node* const& node_pt);
 
-    /// \short Set the weights for the error computation. This is not used
+    /// Set the weights for the error computation. This is not used
     /// by midpoint rule.
     void set_error_weights() {}
 
-    /// \short Set the weights for the predictor previous timestep. This is not
+    /// Set the weights for the predictor previous timestep. This is not
     /// used by midpint rule.
     void set_predictor_weights() {}
 
@@ -193,7 +193,7 @@ namespace oomph
       Weight(1, 1) = -1.0 / dt;
     }
 
-    /// \short Number of history values to interpolate over to get the
+    /// Number of history values to interpolate over to get the
     /// "current" value.
     unsigned nprev_values_for_value_at_evaluation_time() const
     {
@@ -237,7 +237,7 @@ namespace oomph
       Weight(1, 1) = -1.0 / dt;
     }
 
-    /// \short Number of history values to interpolate over to get the
+    /// Number of history values to interpolate over to get the
     /// "current" value. Evaluation time is the end of the bdf1 "half-step",
     /// so only need one value as normal.
     unsigned nprev_values_for_value_at_evaluation_time() const

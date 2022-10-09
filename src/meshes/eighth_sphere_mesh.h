@@ -3,11 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC//    Version 1.0; svn revision $LastChangedRevision$
-// LIC//
-// LIC// $LastChangedDate$
-// LIC//
-// LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -57,7 +53,7 @@ namespace oomph
   class EighthSphereMesh : public virtual BrickMeshBase
   {
   public:
-    /// \short Constructor: Pass radius and timestepper; defaults to
+    /// Constructor: Pass radius and timestepper; defaults to
     /// static default timestepper
     EighthSphereMesh(const double& radius,
                      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
@@ -92,7 +88,7 @@ namespace oomph
                                      public virtual RefineableBrickMesh<ELEMENT>
   {
   public:
-    /// \short Constructor: Pass radius and timestepper; defaults to
+    /// Constructor: Pass radius and timestepper; defaults to
     /// static default timestepper
     RefineableEighthSphereMesh(
       const double& radius,

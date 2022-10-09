@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -58,7 +58,7 @@ public:
  /// Destructor (empty)
  ~RefineableYoungLaplaceProblem(){};
 
- /// \short Update the problem specs before solve: Empty
+ /// Update the problem specs before solve: Empty
  void actions_before_newton_solve(){};
 
  /// Update the problem after solve: Empty
@@ -108,13 +108,13 @@ public:
  /// Increase the problem parameters before each solve
  void increment_parameters();
 
- /// \short Doc the solution. DocInfo object stores flags/labels for where the
+ /// Doc the solution. DocInfo object stores flags/labels for where the
  /// output gets written to and the trace file
  void doc_solution(DocInfo& doc_info, ofstream& trace_file);
 
 private:
 
- /// \short Create YoungLaplace contact angle elements on the 
+ /// Create YoungLaplace contact angle elements on the 
  /// b-th boundary of the bulk mesh and add them to contact angle mesh
  void create_contact_angle_elements(const unsigned& b);
  

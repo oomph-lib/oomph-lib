@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -104,15 +104,15 @@ private:
 
 
 //=====start_of_constructor===============================================
-/// \short Constructor for 1D Poisson problem in unit interval.
+/// Constructor for 1D Poisson problem in unit interval.
 /// Discretise the 1D domain with n_element elements of type ELEMENT.
 /// Specify function pointer to source function.
 //========================================================================
 template<class ELEMENT>
 OneDPoissonProblem<ELEMENT>::OneDPoissonProblem(
   const unsigned& n_element,
-  PoissonEquations<1>::PoissonSourceFctPt source_fct_pt) :
-  Source_fct_pt(source_fct_pt)
+  PoissonEquations<1>::PoissonSourceFctPt source_fct_pt)
+  : Source_fct_pt(source_fct_pt)
 {
   // Set domain length
   double L = 1.0;
@@ -152,7 +152,7 @@ OneDPoissonProblem<ELEMENT>::OneDPoissonProblem(
 
 
 //===start_of_actions_before_newton_solve========================================
-/// \short Update the problem specs before solve: (Re)set boundary values
+/// Update the problem specs before solve: (Re)set boundary values
 /// from the exact solution.
 //========================================================================
 template<class ELEMENT>

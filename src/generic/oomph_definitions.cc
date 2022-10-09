@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -38,12 +38,12 @@ namespace oomph
   ///////////////////////////////////////////////////////////////////////
 
 
-  ///=====================================================================
+  /// =====================================================================
   /// Namespace to control level of comprehensive timings
   //======================================================================
   namespace Global_timings
   {
-    /// \short Global boolean to switch on comprehensive timing -- can
+    /// Global boolean to switch on comprehensive timing -- can
     /// probably be declared const false when development on hector
     /// is complete
     bool Doc_comprehensive_timings = false;
@@ -56,7 +56,7 @@ namespace oomph
   //=======================================================================
   /// Helper namespace for set_terminate function -- used to spawn
   /// messages from uncaught errors
-  ///=======================================================================
+  /// =======================================================================
   namespace TerminateHelper
   {
     /// Setup terminate helper
@@ -67,7 +67,7 @@ namespace oomph
       std::set_terminate(spawn_errors_from_uncaught_errors);
     }
 
-    /// \short Flush string stream of error messages (call when error has been
+    /// Flush string stream of error messages (call when error has been
     /// caught)
     void suppress_exception_error_messages()
     {
@@ -81,7 +81,7 @@ namespace oomph
       (*Error_message_stream_pt) << (*Exception_stringstream_pt).str();
     }
 
-    /// \short Clean up function that deletes anything dynamically allocated
+    /// Clean up function that deletes anything dynamically allocated
     /// in this namespace
     void clean_up_memory()
     {
@@ -108,7 +108,7 @@ namespace oomph
   ///////////////////////////////////////////////////////////////////////
 
 
-  ///=====================================================================
+  /// =====================================================================
   /// A class for handling oomph-lib run-time exceptions quietly.
   //======================================================================
   OomphLibQuietException::OomphLibQuietException() : std::runtime_error("") {}
@@ -281,7 +281,7 @@ namespace oomph
   //=======================================================================
   namespace Global_string_for_annotation
   {
-    /// \short Return the i-th string or "" if the relevant string hasn't
+    /// Return the i-th string or "" if the relevant string hasn't
     /// been defined
     std::string string(const unsigned& i)
     {
@@ -295,7 +295,7 @@ namespace oomph
       }
     }
 
-    /// \short Storage for strings that may be used for global annotations.
+    /// Storage for strings that may be used for global annotations.
     /// This is global data and you use it at your own risk!
     std::vector<std::string> String;
 

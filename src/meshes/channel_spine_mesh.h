@@ -3,11 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC//    Version 1.0; svn revision $LastChangedRevision$
-// LIC//
-// LIC// $LastChangedDate$
-// LIC//
-// LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -46,7 +42,7 @@ namespace oomph
   class ChannelSpineMesh : public RectangularQuadMesh<ELEMENT>, public SpineMesh
   {
   public:
-    /// \short Constructor: Pass number of elements in x-direction in regions
+    /// Constructor: Pass number of elements in x-direction in regions
     /// 0,1 and 2, number of elements in y-direction, length in x direction in
     /// regions 0,1 and 2, height mesh, pointer to the GeomObject defining the
     /// heightof the central region and pointer to timestepper (defaults to
@@ -62,7 +58,7 @@ namespace oomph
                      GeomObject* wall_pt,
                      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
-    /// \short Constructor: Pass number of elements in x-direction in regions
+    /// Constructor: Pass number of elements in x-direction in regions
     /// 0,1 and 2, number of elements in y-direction, length in x direction in
     /// regions 0,1 and 2, height mesh, pointer to the GeomObject defining the
     /// heightof the central region, a boolean flag to indicate whether or not
@@ -80,21 +76,21 @@ namespace oomph
                      const bool& periodic_in_x,
                      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
-    /// \short Access functions for pointers to the \f$ i \f$ -th element in
+    /// Access functions for pointers to the \f$ i \f$ -th element in
     /// the left region.
     FiniteElement*& left_element_pt(const unsigned long& i)
     {
       return Left_element_pt[i];
     }
 
-    /// \short Access functions for pointers to the \f$ i \f$ -th element in
+    /// Access functions for pointers to the \f$ i \f$ -th element in
     /// the centre region.
     FiniteElement*& centre_element_pt(const unsigned long& i)
     {
       return Centre_element_pt[i];
     }
 
-    /// \short Access functions for pointers to the \f$ i \f$ -th element in
+    /// Access functions for pointers to the \f$ i \f$ -th element in
     /// the right region.
     FiniteElement*& right_element_pt(const unsigned long& i)
     {
@@ -127,11 +123,11 @@ namespace oomph
       return Nbulk;
     }
 
-    /// \short Reorder the elements so we loop over them vertically first
+    /// Reorder the elements so we loop over them vertically first
     /// (advantageous in "wide" domains if a frontal solver is used).
     void element_reorder();
 
-    /// \short General node update function implements pure virtual function
+    /// General node update function implements pure virtual function
     /// defined in SpineMesh base class and performs specific node update
     /// actions: along vertical spines
     virtual void spine_node_update(SpineNode* spine_node_pt)
@@ -151,7 +147,7 @@ namespace oomph
       spine_node_pt->x(1) = this->Ymin + W * position[1];
     }
 
-    /// \short Return the value of the x-coordinate at the node given by the
+    /// Return the value of the x-coordinate at the node given by the
     /// local node number (xnode, ynode) in the element (xelement,yelement).
     /// The description is in a "psudeo" two-dimensional coordinate system,
     /// so the range of xelement is [0,Nx-1], yelement is [0,Ny-1], and
@@ -284,7 +280,7 @@ namespace oomph
     /// Vector of pointers to element in the right region
     Vector<FiniteElement*> Right_element_pt;
 
-    /// \short Helper function to actually build the channel-spine mesh
+    /// Helper function to actually build the channel-spine mesh
     /// (called from various constructors)
     virtual void build_channel_spine_mesh(TimeStepper* time_stepper_pt);
 

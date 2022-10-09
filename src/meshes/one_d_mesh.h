@@ -3,11 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC//    Version 1.0; svn revision $LastChangedRevision$
-// LIC//
-// LIC// $LastChangedDate$
-// LIC//
-// LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -55,7 +51,7 @@ namespace oomph
   class OneDMesh : public virtual LineMeshBase
   {
   public:
-    /// \short Constructor: Pass number of elements, n_element, length of
+    /// Constructor: Pass number of elements, n_element, length of
     /// domain, length, and pointer to timestepper (defaults to a Steady
     /// timestepper so we don't need to specify one in problems without
     /// time-dependence).
@@ -69,7 +65,7 @@ namespace oomph
       build_mesh(time_stepper_pt);
     }
 
-    /// \short Constructor: Pass number of elements, n_element, minimum
+    /// Constructor: Pass number of elements, n_element, minimum
     /// coordinate, xmin, maximum coordinate, xmax, and a pointer to a
     /// timestepper.
     OneDMesh(const unsigned& n_element,
@@ -113,7 +109,7 @@ namespace oomph
     /// Number of elements
     unsigned N;
 
-    /// \short Generic mesh constuction routine, called by all constructors
+    /// Generic mesh constuction routine, called by all constructors
     void build_mesh(TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
   };
 
@@ -125,7 +121,7 @@ namespace oomph
                              public RefineableLineMesh<ELEMENT>
   {
   public:
-    /// \short Constructor: Pass number of elements, n_element, length of
+    /// Constructor: Pass number of elements, n_element, length of
     /// domain, length, and pointer to timestepper (defaults to Steady)
     RefineableOneDMesh(
       const unsigned& n_element,
@@ -138,7 +134,7 @@ namespace oomph
       this->setup_binary_tree_forest();
     }
 
-    /// \short Constructor that allows the specification of minimum and
+    /// Constructor that allows the specification of minimum and
     /// maximum values of x coordinates. Also pass pointer to timestepper
     /// (defaults to Steady).
     RefineableOneDMesh(

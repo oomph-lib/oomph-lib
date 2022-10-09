@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -35,13 +35,13 @@
 namespace oomph
 {
   //=================================================================
-  /// \short Eighth sphere as domain. Domain is
+  /// Eighth sphere as domain. Domain is
   /// parametrised by four macro elements
   //=================================================================
   class EighthSphereDomain : public Domain
   {
   public:
-    /// \short Constructor: Pass the radius of the sphere.
+    /// Constructor: Pass the radius of the sphere.
     EighthSphereDomain(const double& radius) : Radius(radius)
     {
       // There are four macro elements
@@ -66,7 +66,8 @@ namespace oomph
     /// Destructor: Empty; cleanup done in base class
     ~EighthSphereDomain() {}
 
-    /// \short Vector representation of the  imacro-th macro element
+
+    /// Vector representation of the  imacro-th macro element
     /// boundary idirect (L/R/D/U/B/F) at time level t
     /// (t=0: present; t>0: previous):
     /// f(s).
@@ -268,145 +269,145 @@ namespace oomph
     // Radius of the sphere
     double Radius;
 
-    /// \short Boundary of central box macro element
+    /// Boundary of central box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
     void r_centr_L(const unsigned& t,
                    const Vector<double>& zeta,
                    Vector<double>& f);
 
-    /// \short Boundary of central box macro element
+    /// Boundary of central box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
     void r_centr_R(const unsigned& t,
                    const Vector<double>& zeta,
                    Vector<double>& f);
 
-    /// \short Boundary of central box macro element
+    /// Boundary of central box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
     void r_centr_D(const unsigned& t,
                    const Vector<double>& zeta,
                    Vector<double>& f);
 
-    /// \short Boundary of central box macro element
+    /// Boundary of central box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
     void r_centr_U(const unsigned& t,
                    const Vector<double>& zeta,
                    Vector<double>& f);
 
-    /// \short Boundary of central box macro element
+    /// Boundary of central box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
     void r_centr_B(const unsigned& t,
                    const Vector<double>& zeta,
                    Vector<double>& f);
 
-    /// \short Boundary of central box macro element
+    /// Boundary of central box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
     void r_centr_F(const unsigned& t,
                    const Vector<double>& zeta,
                    Vector<double>& f);
 
-    /// \short Boundary of right box macro element
+    /// Boundary of right box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
     void r_right_L(const unsigned& t,
                    const Vector<double>& zeta,
                    Vector<double>& f);
 
-    /// \short Boundary of right box macro element
+    /// Boundary of right box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
     void r_right_R(const unsigned& t,
                    const Vector<double>& zeta,
                    Vector<double>& f);
 
-    /// \short Boundary of  right box macro element
+    /// Boundary of  right box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
     void r_right_D(const unsigned& t,
                    const Vector<double>& zeta,
                    Vector<double>& f);
 
-    /// \short Boundary of right box macro element
+    /// Boundary of right box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
     void r_right_U(const unsigned& t,
                    const Vector<double>& zeta,
                    Vector<double>& f);
 
-    /// \short Boundary of  right box macro element
+    /// Boundary of  right box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
     void r_right_B(const unsigned& t,
                    const Vector<double>& zeta,
                    Vector<double>& f);
 
-    /// \short Boundary of  right box macro element
+    /// Boundary of  right box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
     void r_right_F(const unsigned& t,
                    const Vector<double>& zeta,
                    Vector<double>& f);
 
-    /// \short Boundary of top left box macro element
+    /// Boundary of top left box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
     void r_up_L(const unsigned& t,
                 const Vector<double>& zeta,
                 Vector<double>& f);
 
-    /// \short Boundary of top left box macro element
+    /// Boundary of top left box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
     void r_up_R(const unsigned& t,
                 const Vector<double>& zeta,
                 Vector<double>& f);
 
-    /// \short Boundary of top left box macro element
+    /// Boundary of top left box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
     void r_up_D(const unsigned& t,
                 const Vector<double>& zeta,
                 Vector<double>& f);
 
-    /// \short Boundary of top left box macro element
+    /// Boundary of top left box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
     void r_up_U(const unsigned& t,
                 const Vector<double>& zeta,
                 Vector<double>& f);
 
-    /// \short Boundary of top left box macro element
+    /// Boundary of top left box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
     void r_up_B(const unsigned& t,
                 const Vector<double>& zeta,
                 Vector<double>& f);
 
-    /// \short Boundary of top left box macro element
+    /// Boundary of top left box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
     void r_up_F(const unsigned& t,
                 const Vector<double>& zeta,
                 Vector<double>& f);
 
-    /// \short Boundary of top left box macro element
+    /// Boundary of top left box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
     void r_front_L(const unsigned& t,
                    const Vector<double>& zeta,
                    Vector<double>& f);
 
-    /// \short Boundary of top left box macro element
+    /// Boundary of top left box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
     void r_front_R(const unsigned& t,
                    const Vector<double>& zeta,
                    Vector<double>& f);
 
-    /// \short Boundary of top left box macro element
+    /// Boundary of top left box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
     void r_front_D(const unsigned& t,
                    const Vector<double>& zeta,
                    Vector<double>& f);
 
-    /// \short Boundary of top left box macro element
+    /// Boundary of top left box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
     void r_front_U(const unsigned& t,
                    const Vector<double>& zeta,
                    Vector<double>& f);
 
-    /// \short Boundary of top left box macro element
+    /// Boundary of top left box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
     void r_front_B(const unsigned& t,
                    const Vector<double>& zeta,
                    Vector<double>& f);
 
-    /// \short Boundary of top left box macro element
+    /// Boundary of top left box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
     void r_front_F(const unsigned& t,
                    const Vector<double>& zeta,

@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -51,7 +51,7 @@ namespace Global
   wind[0] = 1.0; wind[1] = 1.0;
  }
 
- ///Function that determines the initial conditions
+ /// Function that determines the initial conditions
   void initial_condition(const double &time, const Vector<double> &x,
                         Vector<double> &u)
  {
@@ -262,7 +262,7 @@ public:
    std::cout << "How many " << assign_eqn_numbers() << std::endl;
   }
  
- ///Compute the complete errors in the problem
+ /// Compute the complete errors in the problem
  void compute_error(const double &t, Vector<double> &error)
   {
    error[0] = 0.0;

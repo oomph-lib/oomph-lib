@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -36,7 +36,7 @@
 namespace oomph
 {
   //=============================================================
-  /// \short Setup diagonal preconditioner: Store the inverse of the
+  /// Setup diagonal preconditioner: Store the inverse of the
   /// diagonal entries from the fully
   /// assembled matrix.
   //=============================================================
@@ -161,7 +161,7 @@ namespace oomph
   }
 
   //=============================================================================
-  /// \short Setup the lumped preconditioner. Specialisation for CCDoubleMatrix.
+  /// Setup the lumped preconditioner. Specialisation for CCDoubleMatrix.
   //=============================================================================
   template<>
   void MatrixBasedLumpedPreconditioner<CCDoubleMatrix>::setup()
@@ -218,7 +218,7 @@ namespace oomph
   }
 
   //=============================================================================
-  /// \short Setup the lumped preconditioner. Specialisation for CRDoubleMatrix.
+  /// Setup the lumped preconditioner. Specialisation for CRDoubleMatrix.
   //=============================================================================
   template<>
   void MatrixBasedLumpedPreconditioner<CRDoubleMatrix>::setup()
@@ -618,7 +618,7 @@ namespace oomph
 
 
   //=============================================================================
-  /// \short Apply ILU(0) preconditioner for CCDoubleMatrix: Solve Ly=r then
+  /// Apply ILU(0) preconditioner for CCDoubleMatrix: Solve Ly=r then
   /// Uz=y and return z
   //=============================================================================
   void ILUZeroPreconditioner<CCDoubleMatrix>::preconditioner_solve(
@@ -675,7 +675,7 @@ namespace oomph
   }
 
   //=============================================================================
-  /// \short Apply ILU(0) preconditioner for CRDoubleMatrix: Solve Ly=r then
+  /// Apply ILU(0) preconditioner for CRDoubleMatrix: Solve Ly=r then
   /// Uz=y
   ///  and return z
   //=============================================================================

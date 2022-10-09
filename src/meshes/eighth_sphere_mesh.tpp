@@ -3,11 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC//    Version 1.0; svn revision $LastChangedRevision$
-// LIC//
-// LIC// $LastChangedDate$
-// LIC//
-// LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -339,19 +335,21 @@ namespace oomph
                                                              (nnode1d - 1));
             }
             else
+            {
               // else if i==nnode1d-1 the node already exists in element 1
               if (i == nnode1d - 1)
-            {
-              this->finite_element_pt(3)->node_pt(jnod) =
-                this->finite_element_pt(1)->node_pt(k + i * nnode1d * nnode1d +
-                                                    j * nnode1d);
-            }
-            else
-            // else, the node exists in element 2
-            {
-              this->finite_element_pt(3)->node_pt(jnod) =
-                this->finite_element_pt(2)->node_pt(i + k * nnode1d +
-                                                    j * nnode1d * nnode1d);
+              {
+                this->finite_element_pt(3)->node_pt(jnod) =
+                  this->finite_element_pt(1)->node_pt(
+                    k + i * nnode1d * nnode1d + j * nnode1d);
+              }
+              else
+              // else, the node exists in element 2
+              {
+                this->finite_element_pt(3)->node_pt(jnod) =
+                  this->finite_element_pt(2)->node_pt(i + k * nnode1d +
+                                                      j * nnode1d * nnode1d);
+              }
             }
           }
         }

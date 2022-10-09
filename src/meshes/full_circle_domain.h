@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -35,7 +35,7 @@
 namespace oomph
 {
   //=================================================================
-  /// \short Topologically circular domain, e.g. a tube cross section.
+  /// Topologically circular domain, e.g. a tube cross section.
   /// The entire domain must be defined by a GeomObject with the
   /// following convention: zeta[0] is the radial coordinate and
   /// zeta[1] is the theta coordinate around the cross-sectin.
@@ -68,7 +68,7 @@ namespace oomph
   class FullCircleDomain : public Domain
   {
   public:
-    /// \short Constructor: Pass geometric  object; the theta locations
+    /// Constructor: Pass geometric  object; the theta locations
     /// marking the division between
     /// the elements of the outer ring, labelled from the lower left to the
     /// upper left in order, theta should be in the range \f$-\pi\f$ to
@@ -101,7 +101,8 @@ namespace oomph
     /// Destructor: Empty; cleanup done in base class
     ~FullCircleDomain() {}
 
-    /// \short Vector representation of the  i_macro-th macro element
+
+    /// Vector representation of the  i_macro-th macro element
     /// boundary i_direct (N/S/W/E) at time level t
     /// (t=0: present; t>0: previous):
     /// f(s).
@@ -112,7 +113,7 @@ namespace oomph
                                 Vector<double>& f);
 
   private:
-    /// \short Storage for the dividing lines on the boundary
+    /// Storage for the dividing lines on the boundary
     /// starting from the lower left and proceeding anticlockwise to
     /// the upper left
     Vector<double> Theta_positions;
@@ -124,7 +125,7 @@ namespace oomph
     /// Pointer to geometric object that represents the domain
     GeomObject* Area_pt;
 
-    /// \short  A very little linear interpolation helper.
+    ///  A very little linear interpolation helper.
     /// Interpolate from the low
     /// point to the high point using the coordinate s, which is
     /// assumed to run from -1 to 1.
@@ -141,12 +142,13 @@ namespace oomph
     }
   };
 
+
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
 
   //=================================================================
-  /// \short Vector representation of the  imacro-th macro element
+  /// Vector representation of the  imacro-th macro element
   /// boundary idirect (N/S/W/E) at time level t
   /// (t=0: present; t>0: previous): f(s)
   //=================================================================

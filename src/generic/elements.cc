@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -539,7 +539,7 @@ namespace oomph
 
 
   //==========================================================================
-  /// \short Function to describe the dofs of the Element. The ostream
+  /// Function to describe the dofs of the Element. The ostream
   /// specifies the output stream to which the description
   /// is written; the string stores the currently
   /// assembled output that is ultimately written to the
@@ -561,7 +561,7 @@ namespace oomph
   }
 
   //==========================================================================
-  /// \short Function to describe the local dofs of the element. The ostream
+  /// Function to describe the local dofs of the element. The ostream
   /// specifies the output stream to which the description
   /// is written; the string stores the currently
   /// assembled output that is ultimately written to the
@@ -1282,7 +1282,7 @@ namespace oomph
   }
 
   //=====================================================================
-  /// \short Add the elemental contribution to the mass matrix
+  /// Add the elemental contribution to the mass matrix
   /// and the residuals vector. Note that
   /// this function will NOT initialise the residuals vector or the mass
   /// matrix. It must be called after the residuals vector and
@@ -1312,7 +1312,7 @@ namespace oomph
   }
 
   //=====================================================================
-  /// \short Add the elemental contribution to the jacobian matrix,
+  /// Add the elemental contribution to the jacobian matrix,
   /// mass matrix and the residuals vector. Note that
   /// this function should NOT initialise any entries.
   /// It must be called after the residuals vector and
@@ -1440,7 +1440,7 @@ namespace oomph
 
 
   //=====================================================================
-  /// \short Add the elemental contribution to the derivative of the
+  /// Add the elemental contribution to the derivative of the
   /// jacobian matrix,
   /// mass matrix and the residuals vector with respect to a parameter.
   /// Note that
@@ -1564,7 +1564,7 @@ namespace oomph
   }
 
   //========================================================================
-  /// \short Fill in the contributions to the vectors that when taken
+  /// Fill in the contributions to the vectors that when taken
   /// as dot product with other history values give the inner product
   /// over the element
   //==========================================================================
@@ -1653,7 +1653,7 @@ namespace oomph
     /// Maximum number of newton iterations
     unsigned Max_newton_iterations = 10;
 
-    /// \short Multiplier for (zeta-based) outer radius of element used for
+    /// Multiplier for (zeta-based) outer radius of element used for
     /// deciding that point is outside element. Set to negative value
     /// to suppress test.
     double Radius_multiplier_for_fast_exit_from_locate_zeta = 1.5;
@@ -1697,7 +1697,7 @@ namespace oomph
 
 
   //======================================================================
-  /// \short Function to describe the local dofs of the element. The ostream
+  /// Function to describe the local dofs of the element. The ostream
   /// specifies the output stream to which the description
   /// is written; the string stores the currently
   /// assembled output that is ultimately written to the
@@ -1715,7 +1715,7 @@ namespace oomph
   }
 
   //======================================================================
-  // \short Function to describe the local dofs of the element. The ostream
+  // Function to describe the local dofs of the element. The ostream
   /// specifies the output stream to which the description
   /// is written; the string stores the currently
   /// assembled output that is ultimately written to the
@@ -1742,7 +1742,7 @@ namespace oomph
   } // End describe_nodal_local_dofs
 
   //========================================================================
-  /// \short Internal function used to check for singular or negative values
+  /// Internal function used to check for singular or negative values
   /// of the determinant of the Jacobian of the mapping between local and
   /// global or lagrangian coordinates. Negative jacobians are allowed if the
   /// Accept_negative_jacobian flag is set to true.
@@ -2546,7 +2546,7 @@ namespace oomph
   const unsigned FiniteElement::Default_Initial_Nvalue = 0;
 
   //======================================================================
-  /// \short Default value that is used for the tolerance required when
+  /// Default value that is used for the tolerance required when
   /// locating nodes via local coordinates
   const double FiniteElement::Node_location_tolerance = 1.0e-14;
 
@@ -2735,17 +2735,13 @@ namespace oomph
   /// coordinates \f$ X_{pq} \f$ of the derivative of the shape functions
   /// \f$ \psi_j \f$ w.r.t. the global eulerian coordinates \f$ x_i \f$.
   /// I.e. this function calculates
-  /// \f[
-  /// \frac{\partial}{\partial X_{pq}}
-  /// \left( \frac{\partial \psi_j}{\partial x_i} \right).
-  /// \f]
+  /// \f[ \frac{\partial}{\partial X_{pq}} \left( \frac{\partial \psi_j}{\partial x_i} \right). \f]
   /// To do this it requires the determinant of the jacobian mapping, its
   /// derivative w.r.t. the nodal coordinates \f$ X_{pq} \f$, the inverse
   /// jacobian and the derivatives of the shape functions w.r.t. the local
   /// coordinates. The result is returned as a tensor of rank four.
   ///  Numbering:
-  /// d_dpsidx_dX(p,q,j,i) = \f$ \frac{\partial}{\partial X_{pq}}
-  /// \left( \frac{\partial \psi_j}{\partial x_i} \right) \f$
+  /// d_dpsidx_dX(p,q,j,i) = \f$ \frac{\partial}{\partial X_{pq}} \left( \frac{\partial \psi_j}{\partial x_i} \right) \f$
   /// This function is slightly inefficient, given that it uses a switch
   /// statement. It can always be overloaded in specific geometric elements,
   /// for efficiency reasons.
@@ -3120,7 +3116,7 @@ namespace oomph
 
 
   //=============================================================================
-  /// \short Convert derivatives and second derivatives w.r.t. local coordiantes
+  /// Convert derivatives and second derivatives w.r.t. local coordiantes
   /// to derivatives and second derivatives w.r.t. the coordinates used to
   /// assemble the jacobian, inverse jacobian and jacobian2 passed to the
   /// function. This is a template-free general interface, that should be
@@ -3169,7 +3165,7 @@ namespace oomph
 
 
   //======================================================================
-  /// \short The destructor cleans up the memory allocated
+  /// The destructor cleans up the memory allocated
   /// for storage of pointers to nodes. Internal and external data get
   /// wiped by the GeneralisedElement destructor; nodes get
   /// killed in mesh destructor.
@@ -3218,7 +3214,7 @@ namespace oomph
   }
 
   //=========================================================================
-  /// \short Return the shape function stored at the ipt-th integration
+  /// Return the shape function stored at the ipt-th integration
   /// point.
   //=========================================================================
   void FiniteElement::shape_at_knot(const unsigned& ipt, Shape& psi) const
@@ -3237,7 +3233,7 @@ namespace oomph
   }
 
   //=========================================================================
-  /// \short Return the shape function and its derivatives w.r.t. the local
+  /// Return the shape function and its derivatives w.r.t. the local
   /// coordinates at the ipt-th integration point.
   //=========================================================================
   void FiniteElement::dshape_local_at_knot(const unsigned& ipt,
@@ -3294,7 +3290,7 @@ namespace oomph
   }
 
   //=========================================================================
-  /// \short Compute the geometric shape functions and also
+  /// Compute the geometric shape functions and also
   /// first derivatives w.r.t. global coordinates at local coordinate s;
   /// Returns Jacobian of mapping from global to local coordinates.
   /// Most general form of the function, but may be over-loaded, if desired
@@ -3322,7 +3318,7 @@ namespace oomph
   }
 
   //========================================================================
-  /// \short Compute the geometric shape functions and also first
+  /// Compute the geometric shape functions and also first
   /// derivatives w.r.t. global coordinates at integration point ipt.
   /// Most general form of function, but may be over-loaded if desired
   //========================================================================
@@ -3350,7 +3346,7 @@ namespace oomph
 
 
   //========================================================================
-  /// \short Compute the geometric shape functions (psi) at integration point
+  /// Compute the geometric shape functions (psi) at integration point
   /// ipt. Return the determinant of the jacobian of the mapping (detJ).
   /// Additionally calculate the derivatives of "detJ" w.r.t. the
   /// nodal coordinates.
@@ -3384,7 +3380,7 @@ namespace oomph
 
 
   //========================================================================
-  /// \short Compute the geometric shape functions (psi) and first
+  /// Compute the geometric shape functions (psi) and first
   /// derivatives w.r.t. global coordinates (dpsidx) at integration point
   /// ipt. Return the determinant of the jacobian of the mapping (detJ).
   /// Additionally calculate the derivatives of both "detJ" and "dpsidx"
@@ -3431,11 +3427,11 @@ namespace oomph
 
 
   //===========================================================================
-  /// \short Compute the geometric shape functions and also first
+  /// Compute the geometric shape functions and also first
   /// and second derivatives w.r.t. global coordinates at local coordinate s;
   /// Also returns Jacobian of mapping from global to local coordinates.
   /// Numbering:
-  ///\b 1D:
+  /// \b 1D:
   /// d2psidx(i,0) = \f$ d^2 \psi_j / d x^2 \f$
   /// \b 2D:
   /// d2psidx(i,0) = \f$ \partial^2 \psi_j / \partial x_0^2 \f$
@@ -3483,7 +3479,7 @@ namespace oomph
   }
 
   //===========================================================================
-  /// \short Compute the geometric shape functions and also first
+  /// Compute the geometric shape functions and also first
   /// and second derivatives w.r.t. global coordinates at ipt-th integration
   /// point
   /// Returns Jacobian of mapping from global to local coordinates.
@@ -3744,7 +3740,7 @@ namespace oomph
   /// to nodal coordinates. Default implementation by FD can be overwritten
   /// for specific elements.
   /// dresidual_dnodal_coordinates(l,i,j) = d res(l) / dX_{ij}
-  ////=======================================================================
+  /// /=======================================================================
   void FiniteElement::get_dresidual_dnodal_coordinates(
     RankThreeTensor<double>& dresidual_dnodal_coordinates)
   {
@@ -3878,7 +3874,7 @@ namespace oomph
 
 
   //==========================================================================
-  /// \short If there is a node at the local coordinate, s, return the pointer
+  /// If there is a node at the local coordinate, s, return the pointer
   /// to  the node. If not return 0. Note that this is a default, brute
   /// force implementation, can almost certainly be made more efficient for
   /// specific elements.
@@ -4096,7 +4092,7 @@ namespace oomph
   }
 
   //========================================================================
-  /// \short Calculate the determinant of the
+  /// Calculate the determinant of the
   /// Jacobian of the mapping between local and global
   /// coordinates at the position. Works directly from the base vectors
   /// without assuming that coordinates match spatial dimension. Will
@@ -4166,7 +4162,7 @@ namespace oomph
   }
 
   //========================================================================
-  /// \short Compute the Jacobian of the mapping between the local and global
+  /// Compute the Jacobian of the mapping between the local and global
   /// coordinates at the ipt-th integration point
   //========================================================================
   double FiniteElement::J_eulerian_at_knot(const unsigned& ipt) const
@@ -4235,7 +4231,7 @@ namespace oomph
   }
 
   //========================================================================
-  /// \short Check that Jacobian of mapping between local and Eulerian
+  /// Check that Jacobian of mapping between local and Eulerian
   /// coordinates at all integration points is positive.
   //========================================================================
   void FiniteElement::check_J_eulerian_at_knots(bool& passed) const
@@ -5239,7 +5235,7 @@ namespace oomph
 
 
   //========================================================================
-  /// \short Calculate the determinant of the
+  /// Calculate the determinant of the
   /// Jacobian of the mapping between local and global
   /// coordinates at the position s. Overloaded from FiniteElement.
   //========================================================================
@@ -5325,7 +5321,7 @@ namespace oomph
 
 
   //========================================================================
-  /// \short Compute the Jacobian of the mapping between the local and global
+  /// Compute the Jacobian of the mapping between the local and global
   /// coordinates at the ipt-th integration point. Overloaded from
   /// FiniteElement.
   //========================================================================
@@ -5408,7 +5404,7 @@ namespace oomph
   }
 
   //========================================================================
-  /// \short Check that Jacobian of mapping between local and Eulerian
+  /// Check that Jacobian of mapping between local and Eulerian
   /// coordinates at all integration points is positive.
   //========================================================================
   void FaceElement::check_J_eulerian_at_knots(bool& passed) const
@@ -5505,7 +5501,7 @@ namespace oomph
   }
 
   //=======================================================================
-  /// \short Compute the tangent vector(s) and the outer unit normal
+  /// Compute the tangent vector(s) and the outer unit normal
   /// vector at the specified local coordinate.
   /// In two spatial dimensions, a "tangent direction" is not required.
   /// In three spatial dimensions, a tangent direction is required
@@ -5982,7 +5978,7 @@ namespace oomph
   }
 
   //=======================================================================
-  /// \short Compute the tangent vector(s) and the outer unit normal
+  /// Compute the tangent vector(s) and the outer unit normal
   /// vector at the ipt-th integration point. This is a wrapper around
   /// continuous_tangent_and_outer_unit_normal(...) with the integration points
   /// converted into local coordinates.
@@ -6506,7 +6502,7 @@ namespace oomph
 
 
   //=========================================================================
-  /// \short Function to describe the local dofs of the element. The ostream
+  /// Function to describe the local dofs of the element. The ostream
   /// specifies the output stream to which the description
   /// is written; the string stores the currently
   /// assembled output that is ultimately written to the
@@ -6628,7 +6624,7 @@ namespace oomph
   }
 
   //============================================================================
-  /// \short Destructor for SolidFiniteElement:
+  /// Destructor for SolidFiniteElement:
   //============================================================================
   SolidFiniteElement::~SolidFiniteElement()
   {
@@ -6763,7 +6759,7 @@ namespace oomph
   }
 
   //========================================================================
-  /// \short Compute the geometric shape functions and also first
+  /// Compute the geometric shape functions and also first
   /// and second derivatives w.r.t. Lagrangian coordinates at
   /// local coordinate s;
   /// Returns Jacobian of mapping from Lagrangian to local coordinates.
@@ -6814,7 +6810,7 @@ namespace oomph
   }
 
   //==========================================================================
-  /// \short Compute the geometric shape functions and also first
+  /// Compute the geometric shape functions and also first
   /// and second derivatives w.r.t. Lagrangian coordinates at
   /// the ipt-th integration point
   /// Returns Jacobian of mapping from Lagrangian to local coordinates.
@@ -6866,7 +6862,7 @@ namespace oomph
   }
 
   //============================================================================
-  /// \short Function to describe the local dofs of the element. The ostream
+  /// Function to describe the local dofs of the element. The ostream
   /// specifies the output stream to which the description
   /// is written; the string stores the currently
   /// assembled output that is ultimately written to the
@@ -7369,12 +7365,7 @@ namespace oomph
   //=======================================================================
   /// Helper function to fill in the residuals and (if flag==1) the Jacobian
   /// for the setup of an initial condition. The global equations are:
-  /// \f[
-  /// 0 = \int \left( \sum_{j=1}^N \sum_{k=1}^K X_{ijk} \psi_{jk}(\xi_n)
-  /// - \frac{\partial^D R^{(IC)}_i(\xi_n)}{\partial t^D}
-  /// \right) \psi_{lm}(\xi_n) \ dv
-  /// \mbox{ \ \ \ \ for \ \ \ $l=1,...,N, \ \ m=1,...,K$}
-  /// \f]
+  /// \f[ 0 = \int \left( \sum_{j=1}^N \sum_{k=1}^K X_{ijk} \psi_{jk}(\xi_n) - \frac{\partial^D R^{(IC)}_i(\xi_n)}{\partial t^D} \right) \psi_{lm}(\xi_n) \ dv \mbox{ \ \ \ \ for \ \ \ $l=1,...,N, \ \ m=1,...,K$} \f]
   /// where \f$ N \f$ is the number of nodes in the mesh and \f$ K \f$
   /// the number of generalised nodal coordinates. The initial shape
   /// of the solid body, \f$ {\bf R}^{(IC)},\f$ and its time-derivatives

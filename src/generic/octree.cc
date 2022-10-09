@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -77,7 +77,7 @@ namespace oomph
   Vector<Vector<int>> OcTree::Direction_to_vector;
 
   //====================================================================
-  /// \short Storage for the up/right-equivalents corresponding to two
+  /// Storage for the up/right-equivalents corresponding to two
   /// pairs of vertices along an element edge:
   /// - The first pair contains
   ///   -# the vertex in the reference element
@@ -485,7 +485,7 @@ namespace oomph
 
 
   //==================================================================
-  /// \short Return the vertex of local (vertex) node n
+  /// Return the vertex of local (vertex) node n
   /// in an element with nnode1d nodes in each coordinate direction.
   //==================================================================
   int OcTree::node_number_to_vertex(const unsigned& n, const unsigned& nnode1d)
@@ -2763,7 +2763,7 @@ namespace oomph
 
 
   //================================================================
-  /// \short Is the edge neighbour (for edge "edge")  specified via the pointer
+  /// Is the edge neighbour (for edge "edge")  specified via the pointer
   /// also a face neighbour for one of the two adjacent faces?
   //================================================================
   bool OcTree::edge_neighbour_is_face_neighbour(const int& edge,
@@ -5890,7 +5890,7 @@ namespace oomph
   //================================================================
   /// Open output files that will stored any hanging nodes that are
   /// created in the mesh refinement process.
-  ///===============================================================
+  /// ===============================================================
   void OcTreeForest::open_hanging_node_files(
     DocInfo& doc_info, Vector<std::ofstream*>& output_stream)
   {

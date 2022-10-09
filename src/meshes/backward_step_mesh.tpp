@@ -3,11 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC//    Version 1.0; svn revision $LastChangedRevision$
-// LIC//
-// LIC// $LastChangedDate$
-// LIC//
-// LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -40,7 +36,7 @@
 namespace oomph
 {
   //=================================================================
-  /// \short Actual build function. Pass overall number of elements in the
+  /// Actual build function. Pass overall number of elements in the
   /// horizontal and vertical directions, nx and ny, and the corresponding
   /// dimensions, lx and ly. nx_cut_out and ny_cut_out elements
   /// are cut out from the lower right corner to create the

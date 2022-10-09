@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -40,7 +40,7 @@ namespace oomph
   class CollapsibleChannelDomain : public Domain
   {
   public:
-    /// \short Constructor: Pass the number of (macro-)elements,
+    /// Constructor: Pass the number of (macro-)elements,
     /// the domain lengths in the x- and y-direction
     /// and the pointer to the geometric object that specifies
     /// the shape of the "collapsible" segment.
@@ -111,7 +111,7 @@ namespace oomph
       return Lup;
     }
 
-    ///\short Length of collapsible segment
+    /// Length of collapsible segment
     double l_collapsible()
     {
       return Lcollapsible;
@@ -129,33 +129,35 @@ namespace oomph
       return Ly;
     }
 
-    /// \short Access to pointer to the geometric object that parametrises
+    /// Access to pointer to the geometric object that parametrises
     /// the collapsible wall
     GeomObject*& wall_pt()
     {
       return Wall_pt;
     }
 
-    /// \short Access to pointer to the geometric object that parametrises
+
+    /// Access to pointer to the geometric object that parametrises
     /// the collapsible wall (const version)
     GeomObject* wall_pt() const
     {
       return Wall_pt;
     }
 
-    /// \short Typedef for function pointer for function that squashes
+    /// Typedef for function pointer for function that squashes
     /// the macro elements near the wall to help resolution of any
     /// wall boundary layers.
     typedef double (*BLSquashFctPt)(const double& s);
 
-    /// \short Default for function that squashes
+
+    /// Default for function that squashes
     /// the macro elements near the walls. Identity.
     static double default_BL_squash_fct(const double& s)
     {
       return s;
     }
 
-    /// \short Function pointer for function that squashes
+    /// Function pointer for function that squashes
     /// the macro elements near wall. Default mapping (identity)
     /// leaves the y-coordinate of the nodal points unchanged.
     BLSquashFctPt& bl_squash_fct_pt()
@@ -163,7 +165,7 @@ namespace oomph
       return BL_squash_fct_pt;
     }
 
-    /// \short Function that squashes the macro elements near the wall.
+    /// Function that squashes the macro elements near the wall.
     /// Input argument should vary between 0 and 1; function should return
     /// stretched/squashed coordinate in the same range. Default implementation
     /// is the identity; can be overloaded by specifying a different
@@ -173,25 +175,26 @@ namespace oomph
       return BL_squash_fct_pt(s);
     }
 
-    /// \short Typedef for function pointer for function that implements
+    /// Typedef for function pointer for function that implements
     /// axial spacing of macro elements
     typedef double (*AxialSpacingFctPt)(const double& xi);
 
-    /// \short Function pointer for function that  implements
+    /// Function pointer for function that  implements
     /// axial spacing of macro elements
     AxialSpacingFctPt& axial_spacing_fct_pt()
     {
       return Axial_spacing_fct_pt;
     }
 
-    /// \short Function that implements
+    /// Function that implements
     /// axial spacing of macro elements
     double axial_spacing_fct(const double& xi)
     {
       return Axial_spacing_fct_pt(xi);
     }
 
-    /// \short Vector representation of the  imacro-th macro element
+
+    /// Vector representation of the  imacro-th macro element
     /// boundary idirect (N/S/W/E) at time level t
     /// (t=0: present; t>0: previous): \f$ {\bf r}({\bf zeta}) \f$
     /// Note that the local coordinate \b zeta is a 1D
@@ -216,69 +219,72 @@ namespace oomph
     }
 
   private:
+    /// Northern boundary of the macro element imacro in the
+    /// upstream (part=0) or downstream (part=1) sections
     void r_N_straight(const Vector<double>& zeta,
                       Vector<double>& r,
                       const unsigned& imacro,
                       const unsigned& part);
 
-    /// \short Western boundary of the macro element imacro in the
+    /// Western boundary of the macro element imacro in the
     /// upstream (part=0) or downstream (part=1) sections
     void r_W_straight(const Vector<double>& zeta,
                       Vector<double>& r,
                       const unsigned& imacro,
                       const unsigned& part);
 
-    /// \short Southern boundary of the macro element imacro in the
+    /// Southern boundary of the macro element imacro in the
     ///  upstream (part=0) or downstream (part=1) sections
     void r_S_straight(const Vector<double>& zeta,
                       Vector<double>& r,
                       const unsigned& imacro,
                       const unsigned& part);
 
-    /// \short Eastern boundary of the macro element imacro in the
+    /// Eastern boundary of the macro element imacro in the
     /// upstream (part=0) or downstream (part=1) sections
     void r_E_straight(const Vector<double>& zeta,
                       Vector<double>& r,
                       const unsigned& imacro,
                       const unsigned& part);
 
-    /// \short Northern boundary of the macro element imacro in the collapsible
+    /// Northern boundary of the macro element imacro in the collapsible
     /// section
     void r_N_collapsible(const unsigned& t,
                          const Vector<double>& zeta,
                          Vector<double>& r,
                          const unsigned& imacro);
 
-    /// \short Western boundary of the macro element imacro in the collapsible
+    /// Western boundary of the macro element imacro in the collapsible
     /// section
     void r_W_collapsible(const unsigned& t,
                          const Vector<double>& zeta,
                          Vector<double>& r,
                          const unsigned& imacro);
 
-    /// \short Southern boundary of the macro element imacro in the collapsible
+    /// Southern boundary of the macro element imacro in the collapsible
     /// section
     void r_S_collapsible(const unsigned& t,
                          const Vector<double>& zeta,
                          Vector<double>& r,
                          const unsigned& imacro);
 
-    /// \short Eastern boundary of the macro element imacro in the collapsible
+    /// Eastern boundary of the macro element imacro in the collapsible
     /// section
     void r_E_collapsible(const unsigned& t,
                          const Vector<double>& zeta,
                          Vector<double>& r,
                          const unsigned& imacro);
 
-    /// \short Function pointer for function that squashes
+
+    /// Function pointer for function that squashes
     /// the macro elements near the walls
     BLSquashFctPt BL_squash_fct_pt;
 
-    /// \short Function pointer for function that implements
+    /// Function pointer for function that implements
     /// axial spacing of macro elements
     AxialSpacingFctPt Axial_spacing_fct_pt;
 
-    /// \short Default for function that  implements
+    /// Default for function that  implements
     /// axial spacing of macro elements
     static double default_axial_spacing_fct(const double& xi)
     {
@@ -315,6 +321,7 @@ namespace oomph
     /// Rotate domain (for axisymmetric problems, say)
     bool Rotate_domain;
   };
+
 
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
@@ -472,7 +479,7 @@ namespace oomph
   }
 
   //===========================================================================
-  /// \short Western edge of the  macro element in the upstream (part=0)
+  /// Western edge of the  macro element in the upstream (part=0)
   /// or downstream (part=1) parts of the channel; \f$ \zeta \in [-1,1] \f$
   //===========================================================================
   void CollapsibleChannelDomain::r_W_straight(const Vector<double>& zeta,
@@ -522,7 +529,7 @@ namespace oomph
   }
 
   //===========================================================================
-  /// \short Eastern  edge of the  macro element in the straight parts
+  /// Eastern  edge of the  macro element in the straight parts
   /// of the channel; \f$ \zeta \in [-1,1] \f$
   /// part=0 in the upstream part, part=1 in the downstream part
   //===========================================================================
@@ -573,7 +580,7 @@ namespace oomph
   }
 
   //==========================================================================
-  /// \short Northern edge of the  macro element in the straight parts of
+  /// Northern edge of the  macro element in the straight parts of
   /// the channel; \f$ \zeta \in [-1,1] \f$
   /// part=0 in the left part, part=1 in the right part
   //==========================================================================
@@ -626,7 +633,7 @@ namespace oomph
   }
 
   //=========================================================================
-  /// \short Southern  edge of the  macro element in the straight parts of
+  /// Southern  edge of the  macro element in the straight parts of
   /// the channel; \f$ \zeta \in [-1,1] \f$
   /// part=0 in the left part, part=1 in the right part
   //=========================================================================

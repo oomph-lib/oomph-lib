@@ -3,11 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC//    Version 1.0; svn revision $LastChangedRevision$
-// LIC//
-// LIC// $LastChangedDate$
-// LIC//
-// LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -229,6 +225,7 @@ namespace oomph
     this->Boundary_coordinate_exists[5] = true;
 
   } // end of constructor
+
 
   ///////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
@@ -533,7 +530,7 @@ namespace oomph
   void AlgebraicChannelWithLeafletMesh<ELEMENT>::slanted_bound_up(
     const unsigned& t, const Vector<double>& zeta, Vector<double>& r)
   {
-    ///\short Coordinates of the point on the boundary beetween the upper
+    /// Coordinates of the point on the boundary beetween the upper
     /// and the lower part, in the same column, at the east.
     double htot = this->domain_pt()->htot();
 
@@ -616,6 +613,7 @@ namespace oomph
     node_pt->x(t, 0) = r_line[0] + r * (x0 - r_line[0]);
     node_pt->x(t, 1) = r_line[1] + r * (y0 - r_line[1]);
   }
+
 
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////

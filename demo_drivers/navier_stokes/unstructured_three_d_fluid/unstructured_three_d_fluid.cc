@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -137,11 +137,11 @@ public:
  /// Meshes of fluid traction elements that apply pressure at in/outflow
  Vector<Mesh*> Fluid_traction_mesh_pt;
 
- /// \short IDs of fluid mesh boundaries along which inflow boundary conditions
+ /// IDs of fluid mesh boundaries along which inflow boundary conditions
  /// are applied
  Vector<unsigned> Inflow_boundary_id;
 
- /// \short IDs of fluid mesh boundaries along which inflow boundary conditions
+ /// IDs of fluid mesh boundaries along which inflow boundary conditions
  /// are applied
  Vector<unsigned> Outflow_boundary_id;
 

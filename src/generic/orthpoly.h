@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -51,7 +51,7 @@ namespace oomph
   {
     const double eps = 1.0e-15;
 
-    ///\short Calculates Legendre polynomial of degree p at x
+    /// Calculates Legendre polynomial of degree p at x
     /// using the three term recurrence relation
     /// \f$ (n+1) P_{n+1} = (2n+1)xP_{n} - nP_{n-1} \f$
     inline double legendre(const unsigned& p, const double& x)
@@ -82,7 +82,7 @@ namespace oomph
     }
 
 
-    /// \short Calculates Legendre polynomial of degree p at x
+    /// Calculates Legendre polynomial of degree p at x
     /// using three term recursive formula. Returns all polynomials up to
     /// order p in the vector
     inline void legendre_vector(const unsigned& p,
@@ -114,7 +114,7 @@ namespace oomph
     }
 
 
-    /// \short  Calculates first derivative of Legendre
+    ///  Calculates first derivative of Legendre
     /// polynomial of degree p at x
     /// using three term recursive formula.
     /// \f$ nP_{n+1}^{'} = (2n+1)xP_{n}^{'} - (n+1)P_{n-1}^{'} \f$
@@ -138,7 +138,7 @@ namespace oomph
       }
     }
 
-    /// \short Calculates second derivative of Legendre
+    /// Calculates second derivative of Legendre
     /// polynomial of degree p at x
     /// using three term recursive formula.
     inline double ddlegendre(const unsigned& p, const double& x)
@@ -164,7 +164,7 @@ namespace oomph
       }
     }
 
-    /// \short Calculate the Jacobi polnomials
+    /// Calculate the Jacobi polnomials
     inline double jacobi(const int& alpha,
                          const int& beta,
                          const unsigned& p,
@@ -196,7 +196,7 @@ namespace oomph
       }
     }
 
-    /// \short Calculate the Jacobi polnomials all in one goe
+    /// Calculate the Jacobi polnomials all in one goe
     inline void jacobi(const int& alpha,
                        const int& beta,
                        const unsigned& p,

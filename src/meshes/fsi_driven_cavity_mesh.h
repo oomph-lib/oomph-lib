@@ -3,11 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC//    Version 1.0; svn revision $LastChangedRevision$
-// LIC//
-// LIC// $LastChangedDate$
-// LIC//
-// LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -47,7 +43,7 @@
 namespace oomph
 {
   //========================================================================
-  /// \short Mesh for W. Wall's FSI driven cavity problem.
+  /// Mesh for W. Wall's FSI driven cavity problem.
   /// The mesh is derived from the \c SimpleRectangularQuadMesh
   /// so it's node and element numbering scheme is the same
   /// as in that mesh. Only the boundaries are numbered differently
@@ -67,7 +63,7 @@ namespace oomph
   class FSIDrivenCavityMesh : public SimpleRectangularQuadMesh<ELEMENT>
   {
   public:
-    /// \short Constructor: Pass number of elements, number of elements,
+    /// Constructor: Pass number of elements, number of elements,
     /// fractional height of the gap above the moving wall,
     /// pointer to GeomObject that defines the collapsible segment and pointer
     /// to TimeStepper (defaults to the default timestepper, Steady).
@@ -87,13 +83,14 @@ namespace oomph
     /// Number of elements in y direction
     unsigned Ny;
 
-    /// \short Fraction of the gap next to moving lid, relative to the
+    /// Fraction of the gap next to moving lid, relative to the
     /// height of the domain
     double Gap_fraction;
 
     /// Pointer to geometric object that represents the moving wall
     GeomObject* Wall_pt;
   };
+
 
   /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////
@@ -122,7 +119,7 @@ namespace oomph
       public RefineableQuadMesh<ELEMENT>
   {
   public:
-    /// \short Constructor: Pass number of elements, lengths, pointer to
+    /// Constructor: Pass number of elements, lengths, pointer to
     /// geometric object that describes the wall and timestepper
     RefineableFSIDrivenCavityMesh(
       const unsigned& nx,
@@ -144,7 +141,7 @@ namespace oomph
   };
 
   //=================================================================
-  //// Alebraic node update version of FSIDrivenCavityMesh
+  /// / Alebraic node update version of FSIDrivenCavityMesh
   /// - Boundary 0 is the moving lid.
   /// - Boundary 1 is the gap above the moving lid on the right wall
   /// - Boundary 2 is the rigid part of the right wall
@@ -158,7 +155,7 @@ namespace oomph
       public AlgebraicMesh
   {
   public:
-    /// \short Constructor: Pass number of elements, lengths, pointer to
+    /// Constructor: Pass number of elements, lengths, pointer to
     /// GeomObject that defines the collapsible segment and pointer to
     /// TimeStepper (defaults to the default timestepper, Steady).
     AlgebraicFSIDrivenCavityMesh(
@@ -179,14 +176,14 @@ namespace oomph
       setup_algebraic_node_update();
     }
 
-    /// \short Destructor: empty
+    /// Destructor: empty
     virtual ~AlgebraicFSIDrivenCavityMesh() {}
 
-    /// \short Update nodal position at time level t (t=0: present;
+    /// Update nodal position at time level t (t=0: present;
     /// t>0: previous)
     void algebraic_node_update(const unsigned& t, AlgebraicNode*& node_pt);
 
-    /// \short Update the node-udate data after mesh adaptation.
+    /// Update the node-udate data after mesh adaptation.
     /// Empty -- no update of node update required as this is
     /// non-refineable mesh.
     void update_node_update(AlgebraicNode*& node_pt) {}
@@ -195,6 +192,7 @@ namespace oomph
     /// Function to setup the algebraic node update
     void setup_algebraic_node_update();
   };
+
 
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
@@ -215,7 +213,7 @@ namespace oomph
       public virtual AlgebraicFSIDrivenCavityMesh<ELEMENT>
   {
   public:
-    /// \short Constructor: Pass number of elements, lengths, pointer to
+    /// Constructor: Pass number of elements, lengths, pointer to
     /// GeomObject that defines the collapsible segment and pointer to
     /// TimeStepper (defaults to the default timestepper, Steady).
     RefineableAlgebraicFSIDrivenCavityMesh(
@@ -235,7 +233,7 @@ namespace oomph
       this->setup_quadtree_forest();
     }
 
-    /// \short Update the node update data for specified node following
+    /// Update the node update data for specified node following
     /// any mesh adapation
     void update_node_update(AlgebraicNode*& node_pt);
   };

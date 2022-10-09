@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -158,7 +158,7 @@ namespace oomph
   }
 
   //==================================================================
-  /// \short Function to describe the local dofs of the element[s]. The ostream
+  /// Function to describe the local dofs of the element[s]. The ostream
   /// specifies the output stream to which the description
   /// is written; the string stores the currently
   /// assembled output that is ultimately written to the
@@ -530,7 +530,7 @@ namespace oomph
 
 
   //======================================================================
-  /// \short Compute derivatives of the nodal coordinates w.r.t.
+  /// Compute derivatives of the nodal coordinates w.r.t.
   /// to the geometric dofs. Default implementation by FD can be overwritten
   /// for specific elements.
   /// dnodal_coordinates_dgeom_dofs(l,i,j) = dX_{ij} / d s_l

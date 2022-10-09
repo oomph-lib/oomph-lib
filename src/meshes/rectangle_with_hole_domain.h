@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -40,7 +40,7 @@ namespace oomph
   class RectangleWithHoleDomain : public Domain
   {
   public:
-    /// \short Constructor. Pass pointer to geometric object that
+    /// Constructor. Pass pointer to geometric object that
     /// represents the cylinder, the length of the (square) domain.
     /// The GeomObject must be parametrised such that
     /// \f$\zeta \in [0,2\pi]\f$ sweeps around the circumference
@@ -96,7 +96,7 @@ namespace oomph
     /// Destructor: Empty; cleanup done in base class
     ~RectangleWithHoleDomain() {}
 
-    /// \short Helper function to interpolate linearly between the
+    /// Helper function to interpolate linearly between the
     /// "right" and "left" points; \f$ s \in [-1,1] \f$
     void linear_interpolate(Vector<double> left,
                             Vector<double> right,
@@ -109,7 +109,8 @@ namespace oomph
       }
     }
 
-    /// \short Parametrisation of macro element boundaries: f(s) is the position
+
+    /// Parametrisation of macro element boundaries: f(s) is the position
     /// vector to macro-element m's boundary in the specified direction
     /// [N/S/E/W] at the specfied discrete time level (time=0: present; time>0:
     /// previous)

@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -62,7 +62,7 @@ namespace oomph
     /// Empty destructor
     ~BlockPrecQUnsteadyHeatSpaceTimeElement() {}
 
-    /// \short Overload the pure virtual base class implementation.
+    /// Overload the pure virtual base class implementation.
     /// Create a list of pairs for all unknowns in this element,
     /// so the first entry in each pair contains the global equation
     /// number of the unknown, while the second one contains the number
@@ -91,7 +91,7 @@ namespace oomph
     /// Empty destructor
     ~BlockPrecRefineableQUnsteadyHeatSpaceTimeElement() {}
 
-    /// \short Overload the pure virtual base class implementation.
+    /// Overload the pure virtual base class implementation.
     /// Create a list of pairs for all unknowns in this element,
     /// so the first entry in each pair contains the global equation
     /// number of the unknown, while the second one contains the number

@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -48,7 +48,7 @@ namespace oomph
   //========================================================================
   namespace MeshAsGeomObject_Helper
   {
-    /// \short Default sample point container type. Must currently be one of
+    /// Default sample point container type. Must currently be one of
     /// UseCGALSamplePointContainer, UseRefineableBinArray or
     /// UseNonRefineableBinArray
 #ifdef OOMPH_HAS_CGAL
@@ -58,7 +58,7 @@ namespace oomph
     unsigned Default_sample_point_container_version = UseRefineableBinArray;
 #endif
 
-    /// \short "Factory" for SamplePointContainerParameters of the
+    /// "Factory" for SamplePointContainerParameters of the
     /// right type as selected
     /// by Default_sample_point_container_version
     void create_sample_point_container_parameters(

@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -57,7 +57,7 @@ namespace Global_Physical_Variables
 ////////////////////////////////////////////////////////////////////////
 
 //============================================================================
-/// \short A class to do comparison of the nodes based on
+/// A class to do comparison of the nodes based on
 /// lexicographical ordering in the Cartesian coordinates.
 /// This is required to symmetrise eigenfunction (which is a bit of a hack)
 //============================================================================
@@ -65,7 +65,7 @@ namespace Global_Physical_Variables
  {
  public:
   
-  ///Define the comparison operator using the round brackets
+  /// Define the comparison operator using the round brackets
   int operator() (Node* const &node1_pt,
                   Node* const &node2_pt)
    {
@@ -132,18 +132,18 @@ public:
  /// Destructor to clean up memory
  ~RefineablePorousChannelProblem();
 
- /// \short Set the boundary conditions
+ /// Set the boundary conditions
  void set_boundary_conditions();
 
- ///\short No actions are required after the change in bifurcation parameter.
- ///This overloads the default which calls actions before and after 
- ///newton solve.
+ /// No actions are required after the change in bifurcation parameter.
+ /// This overloads the default which calls actions before and after 
+ /// newton solve.
  void actions_after_change_in_bifurcation_parameter() {}
  
- /// \short Update the boundary conditions before next timestep: 
+ /// Update the boundary conditions before next timestep: 
  void actions_before_implicit_timestep() {set_boundary_conditions();}
 
- ///\short Hacky function to symmetrise the problem
+ /// Hacky function to symmetrise the problem
  /// The idea is to sort all nodes in the mesh lexicographically
  /// Then we can loop over all nodes with the same x value and
  /// apply the appropriate symmetry conditions.
@@ -422,7 +422,7 @@ RefineablePorousChannelProblem<ELEMENT>::RefineablePorousChannelProblem()
 
 
 //=========start of actions_before_implicit_timestep======================
-/// \short Actions before timestep: update the domain, then reset the 
+/// Actions before timestep: update the domain, then reset the 
 /// boundary conditions for the current time.
 //========================================================================
 template<class ELEMENT>
@@ -506,7 +506,7 @@ int main()
  //in every distributioin of oomph-lib
  problem.eigen_solver_pt() = new LAPACK_QZ;
  //Solve the eigenproblem
- problem.solve_eigenproblem(4,eigenvalues,eigenvectors);  
+ problem.solve_eigenproblem_legacy(4,eigenvalues,eigenvectors);  
 
  //Find the eigenvalue with greatest real part
  unsigned ev_crit_index=0;  double ev_crit_value=0.0;

@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -44,9 +44,9 @@ using namespace oomph;
 
 
 
-///=============================================================
+/// =============================================================
 /// Demonstrate mesh smoothing with linear elasticity
-///=============================================================
+/// =============================================================
  void demo_smoothing_with_linear_elasticity()
  {
 
@@ -343,9 +343,9 @@ using namespace oomph;
 //////////////////////////////////////////////////////////////////
 
 
-///=============================================================
+/// =============================================================
 /// Demonstrate smoothing with Poisson
-///=============================================================
+/// =============================================================
  void demo_smoothing_with_poisson()
  {
 
@@ -643,9 +643,9 @@ using namespace oomph;
 
 
 
-///=============================================================
+/// =============================================================
 /// Demonstrate smoothing with nonlinear elasticity
-///=============================================================
+/// =============================================================
  void demo_smoothing_with_nonlinear_elasticity()
  {
 

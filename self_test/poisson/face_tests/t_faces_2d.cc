@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -67,7 +67,7 @@ namespace MeshDeformation
    }
  }
 
- /// \short The outer unit normal of the mesh boundaries
+ /// The outer unit normal of the mesh boundaries
  /// that have been deformed into parabolas. The normal is different
  /// for each boundary, so the input arguments are the boundary and
  /// the global Cartesian coordinate on that boundary, x. The outer
@@ -166,13 +166,13 @@ public:
 };
 
 
-///The QPoissonElement<2,2> is linear
+/// The QPoissonElement<2,2> is linear
 template<>
 string FileStem<TPoissonElement<2,2> >::Stem = "linear"; 
-///The QPoissonElement<2,3> is quadratic
+/// The QPoissonElement<2,3> is quadratic
 template<>
 string FileStem<TPoissonElement<2,3> >::Stem = "quadratic"; 
-///The QPoissonElement<2,4> is cubic
+/// The QPoissonElement<2,4> is cubic
 template<>
 string FileStem<TPoissonElement<2,4> >::Stem = "cubic"; 
 

@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -45,7 +45,7 @@ class Leaflet : public GeomObject
 
 public:
 
- /// \short Constructor: Pass length (in Lagrangian coordinates),
+ /// Constructor: Pass length (in Lagrangian coordinates),
  /// the amplitude of the horizontal and vertical deflection of the tip,
  /// the x-coordinate of the origin and the period of the oscillation.
  /// Passes the number of Lagrangian and Eulerian coordinates to the
@@ -59,7 +59,7 @@ public:
  /// Destructor -- emtpy
  virtual ~Leaflet(){}
 
- /// \short Position vector, r, to the point identified by  
+ /// Position vector, r, to the point identified by  
  /// its 1D Lagrangian coordinate, xi (passed as a 1D Vector) at discrete time
  /// level t (t=0: present; t>0: previous).
  void position(const unsigned& t, const Vector<double>& xi, 
@@ -98,19 +98,19 @@ private :
  /// Length in terms of Lagrangian coordinates
  double Length;
  
- ///\short Horizontal displacement of tip
+ /// Horizontal displacement of tip
  double D_x;
  
- ///\short Vertical displacement of tip
+ /// Vertical displacement of tip
  double D_y;
  
-///\short Origin
+/// Origin
  double X_0;
  
- ///Period of the oscillations
+ /// Period of the oscillations
  double T;
 
- ///Pointer to the global time object
+ /// Pointer to the global time object
  Time* Time_pt;
 
 }; //end_of_the_GeomObject

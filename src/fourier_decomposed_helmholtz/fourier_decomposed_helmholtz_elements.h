@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -72,13 +72,9 @@ namespace oomph
   //=============================================================
   /// A class for all isoparametric elements that solve the
   /// Helmholtz equations.
-  /// \f[
-  /// \nabla^2 U + k^2 U = f
-  /// \f]
+  /// \f[ \nabla^2 U + k^2 U = f \f]
   /// in Fourier decomposed form (cylindrical polars):
-  /// \f[
-  /// U(r,\varphi,z) = \Re( u^{(n)}(r,z) \exp(-i n \varphi))
-  /// \f]
+  /// \f[ U(r,\varphi,z) = \Re( u^{(n)}(r,z) \exp(-i n \varphi)) \f]
   /// We are solving for \f$ u^{(n)}(r,z)\f$ for given parameters
   /// \f$ k^2 \f$ and \f$ n \f$ .
   /// This contains the generic maths. Shape functions, geometric
@@ -87,7 +83,7 @@ namespace oomph
   class FourierDecomposedHelmholtzEquations : public virtual FiniteElement
   {
   public:
-    /// \short Function pointer to source function fct(x,f(x)) --
+    /// Function pointer to source function fct(x,f(x)) --
     /// x is a Vector!
     typedef void (*FourierDecomposedHelmholtzSourceFctPt)(
       const Vector<double>& x, std::complex<double>& f);
@@ -112,7 +108,7 @@ namespace oomph
     /*void operator=(const FourierDecomposedHelmholtzEquations&) = delete;*/
 
 
-    /// \short Return the index at which the unknown value
+    /// Return the index at which the unknown value
     /// is stored: Real/imag part of index contains (real) index of
     /// real/imag part.
     virtual inline std::complex<unsigned> u_index_fourier_decomposed_helmholtz()
@@ -167,11 +163,11 @@ namespace oomph
       output(outfile, n_plot);
     }
 
-    /// \short Output FE representation of soln: x,y,u_re,u_im or
+    /// Output FE representation of soln: x,y,u_re,u_im or
     /// x,y,z,u_re,u_im at  n_plot^2 plot points
     void output(std::ostream& outfile, const unsigned& n_plot);
 
-    /// \short Output function for real part of full time-dependent solution
+    /// Output function for real part of full time-dependent solution
     /// u = Re( (u_r +i u_i) exp(-i omega t)
     /// at phase angle omega t = phi.
     /// r,z,u at n_plot plot points in each coordinate
@@ -187,7 +183,7 @@ namespace oomph
       output(file_pt, n_plot);
     }
 
-    /// \short C-style output FE representation of soln: r,z,u_re,u_im or
+    /// C-style output FE representation of soln: r,z,u_re,u_im or
     /// at n_plot^2 plot points
     void output(FILE* file_pt, const unsigned& n_plot);
 
@@ -197,7 +193,7 @@ namespace oomph
                     const unsigned& n_plot,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
 
-    /// \short Output exact soln: (dummy time-dependent version to
+    /// Output exact soln: (dummy time-dependent version to
     /// keep intel compiler happy)
     virtual void output_fct(
       std::ostream& outfile,
@@ -212,7 +208,7 @@ namespace oomph
     }
 
 
-    /// \short Output function for real part of full time-dependent fct
+    /// Output function for real part of full time-dependent fct
     /// u = Re( (u_r +i u_i) exp(-i omega t)
     /// at phase angle omega t = phi.
     /// r,z,u at n_plot plot points in each coordinate
@@ -328,7 +324,7 @@ namespace oomph
     }
 
 
-    /// \short Add the element's contribution to its residual vector and
+    /// Add the element's contribution to its residual vector and
     /// element Jacobian matrix (wrapper)
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                           DenseMatrix<double>& jacobian)
@@ -339,7 +335,7 @@ namespace oomph
     }
 
 
-    /// \short Return FE representation of function value u(s)
+    /// Return FE representation of function value u(s)
     /// at local coordinate s
     inline std::complex<double> interpolated_u_fourier_decomposed_helmholtz(
       const Vector<double>& s) const
@@ -376,12 +372,12 @@ namespace oomph
     }
 
 
-    /// \short Self-test: Return 0 for OK
+    /// Self-test: Return 0 for OK
     unsigned self_test();
 
 
   protected:
-    /// \short Shape/test functions and derivs w.r.t. to global coords at
+    /// Shape/test functions and derivs w.r.t. to global coords at
     /// local coord. s; return  Jacobian of mapping
     virtual double dshape_and_dtest_eulerian_fourier_decomposed_helmholtz(
       const Vector<double>& s,
@@ -391,7 +387,7 @@ namespace oomph
       DShape& dtestdx) const = 0;
 
 
-    /// \short Shape/test functions and derivs w.r.t. to global coords at
+    /// Shape/test functions and derivs w.r.t. to global coords at
     /// integration point ipt; return  Jacobian of mapping
     virtual double dshape_and_dtest_eulerian_at_knot_fourier_decomposed_helmholtz(
       const unsigned& ipt,
@@ -400,7 +396,7 @@ namespace oomph
       Shape& test,
       DShape& dtestdx) const = 0;
 
-    /// \short Compute element residual Vector only (if flag=and/or element
+    /// Compute element residual Vector only (if flag=and/or element
     /// Jacobian matrix
     virtual void fill_in_generic_residual_contribution_fourier_decomposed_helmholtz(
       Vector<double>& residuals,
@@ -434,12 +430,12 @@ namespace oomph
       public virtual FourierDecomposedHelmholtzEquations
   {
   private:
-    /// \short Static int that holds the number of variables at
+    /// Static int that holds the number of variables at
     /// nodes: always the same
     static const unsigned Initial_Nvalue;
 
   public:
-    ///\short  Constructor: Call constructors for QElement and
+    /// Constructor: Call constructors for QElement and
     /// FourierDecomposedHelmholtz equations
     QFourierDecomposedHelmholtzElement()
       : QElement<2, NNODE_1D>(), FourierDecomposedHelmholtzEquations()
@@ -455,27 +451,27 @@ namespace oomph
      * delete;*/
 
 
-    /// \short  Required  # of `values' (pinned or dofs)
+    ///  Required  # of `values' (pinned or dofs)
     /// at node n
     inline unsigned required_nvalue(const unsigned& n) const
     {
       return Initial_Nvalue;
     }
 
-    /// \short Output function: r,z,u
+    /// Output function: r,z,u
     void output(std::ostream& outfile)
     {
       FourierDecomposedHelmholtzEquations::output(outfile);
     }
 
-    ///  \short Output function:
+    ///  Output function:
     ///   r,z,u at n_plot^2 plot points
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
       FourierDecomposedHelmholtzEquations::output(outfile, n_plot);
     }
 
-    /// \short Output function for real part of full time-dependent solution
+    /// Output function for real part of full time-dependent solution
     /// u = Re( (u_r +i u_i) exp(-i omega t)
     /// at phase angle omega t = phi.
     /// r,z,u  at n_plot plot points in each coordinate
@@ -487,20 +483,20 @@ namespace oomph
       FourierDecomposedHelmholtzEquations::output_real(outfile, phi, n_plot);
     }
 
-    /// \short C-style output function:  r,z,u
+    /// C-style output function:  r,z,u
     void output(FILE* file_pt)
     {
       FourierDecomposedHelmholtzEquations::output(file_pt);
     }
 
-    ///  \short C-style output function:
+    ///  C-style output function:
     ///   r,z,u  at n_plot^2 plot points
     void output(FILE* file_pt, const unsigned& n_plot)
     {
       FourierDecomposedHelmholtzEquations::output(file_pt, n_plot);
     }
 
-    /// \short Output function for an exact solution:
+    /// Output function for an exact solution:
     /// r,z,u_exact at n_plot^2 plot points
     void output_fct(std::ostream& outfile,
                     const unsigned& n_plot,
@@ -510,7 +506,7 @@ namespace oomph
         outfile, n_plot, exact_soln_pt);
     }
 
-    /// \short Output function for real part of full time-dependent fct
+    /// Output function for real part of full time-dependent fct
     /// u = Re( (u_r +i u_i) exp(-i omega t)
     /// at phase angle omega t = phi.
     /// r,z,u  at n_plot plot points in each coordinate
@@ -525,7 +521,7 @@ namespace oomph
     }
 
 
-    /// \short Output function for a time-dependent exact solution.
+    /// Output function for a time-dependent exact solution.
     ///  r,z,u_exact at n_plot^2 plot points
     /// (Calls the steady version)
     void output_fct(std::ostream& outfile,
@@ -548,7 +544,7 @@ namespace oomph
       DShape& dtestdx) const;
 
 
-    /// \short Shape, test functions & derivs. w.r.t. to global coords. at
+    /// Shape, test functions & derivs. w.r.t. to global coords. at
     /// integration point ipt. Return Jacobian.
     inline double dshape_and_dtest_eulerian_at_knot_fourier_decomposed_helmholtz(
       const unsigned& ipt,
@@ -631,7 +627,7 @@ namespace oomph
     : public virtual QElement<1, NNODE_1D>
   {
   public:
-    /// \short Constructor: Call the constructor for the
+    /// Constructor: Call the constructor for the
     /// appropriate lower-dimensional QElement
     FaceGeometry() : QElement<1, NNODE_1D>() {}
   };
@@ -650,11 +646,11 @@ namespace oomph
     : public virtual ProjectableElement<FOURIER_DECOMPOSED_HELMHOLTZ_ELEMENT>
   {
   public:
-    /// \short Constructor [this was only required explicitly
+    /// Constructor [this was only required explicitly
     /// from gcc 4.5.2 onwards...]
     ProjectableFourierDecomposedHelmholtzElement() {}
 
-    /// \short Specify the values associated with field fld.
+    /// Specify the values associated with field fld.
     /// The information is returned in a vector of pairs which comprise
     /// the Data object and the value within it, that correspond to field fld.
     Vector<std::pair<Data*, unsigned>> data_values_of_field(const unsigned& fld)
@@ -686,13 +682,13 @@ namespace oomph
       return data_values;
     }
 
-    /// \short Number of fields to be projected: 2 (real and imag part)
+    /// Number of fields to be projected: 2 (real and imag part)
     unsigned nfields_for_projection()
     {
       return 2;
     }
 
-    /// \short Number of history values to be stored for fld-th field.
+    /// Number of history values to be stored for fld-th field.
     /// (Note: count includes current value!)
     unsigned nhistory_values_for_projection(const unsigned& fld)
     {
@@ -709,14 +705,14 @@ namespace oomph
       return this->node_pt(0)->ntstorage();
     }
 
-    ///\short Number of positional history values
+    /// Number of positional history values
     /// (Note: count includes current value!)
     unsigned nhistory_values_for_coordinate_projection()
     {
       return this->node_pt(0)->position_time_stepper_pt()->ntstorage();
     }
 
-    /// \short Return Jacobian of mapping and shape functions of field fld
+    /// Return Jacobian of mapping and shape functions of field fld
     /// at local coordinate s
     double jacobian_and_shape_of_field(const unsigned& fld,
                                        const Vector<double>& s,
@@ -742,7 +738,7 @@ namespace oomph
     }
 
 
-    /// \short Return interpolated field fld at local coordinate s, at time
+    /// Return interpolated field fld at local coordinate s, at time
     /// level t (t=0: present; t>0: history values)
     double get_field(const unsigned& t,
                      const unsigned& fld,
@@ -836,7 +832,7 @@ namespace oomph
     }
 
 
-    /// \short Output FE representation of soln: x,y,u or x,y,z,u at
+    /// Output FE representation of soln: x,y,u or x,y,z,u at
     /// n_plot^DIM plot points
     void output(std::ostream& outfile, const unsigned& nplot)
     {

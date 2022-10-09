@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -43,11 +43,7 @@ namespace oomph
 {
   //=========================================================
   /// Generic class for numerical integration schemes:
-  /// \f[
-  /// \int f(x_0,x_1...)\  dx_0 \ dx_1...  =
-  /// \sum_{i_{int}=0}^{\mbox{\tt nweight()} }
-  /// f( x_j=\mbox{\tt knot($i_{int}$,j)} )  \ \ \ \mbox{\tt weight($i_{int}$)}
-  /// \f]
+  /// \f[ \int f(x_0,x_1...)\ dx_0 \ dx_1... = \sum_{i_{int}=0}^{\mbox{\tt nweight()} } f( x_j=\mbox{\tt knot($i_{int}$,j)} ) \ \ \ \mbox{\tt weight($i_{int}$)} \f]
   //=========================================================
   class Integral
   {
@@ -107,7 +103,7 @@ namespace oomph
       return 1;
     }
 
-    /// \short Return coordinate s[j] (j=0) of integration point i --
+    /// Return coordinate s[j] (j=0) of integration point i --
     /// deliberately broken!
     double knot(const unsigned& i, const unsigned& j) const
     {
@@ -566,7 +562,7 @@ namespace oomph
   };
 
   //=========================================================
-  ///\short Class for multidimensional Gaussian integration rules,
+  /// Class for multidimensional Gaussian integration rules,
   /// over intervals other than -1 to 1, all intervals are
   /// rescaled in this case
   //=========================================================

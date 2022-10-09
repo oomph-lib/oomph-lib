@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -105,7 +105,7 @@ class ElasticRefineableQuarterCircleSectorMesh :
 
 public:
 
- /// \short Constructor: Build mesh and copy Eulerian coords to Lagrangian
+ /// Constructor: Build mesh and copy Eulerian coords to Lagrangian
  /// ones so that the initial configuration is the stress-free one.
  ElasticRefineableQuarterCircleSectorMesh<ELEMENT>(GeomObject* wall_pt,
                                          const double& xi_lo,
@@ -212,7 +212,7 @@ public:
  /// Constructor:
  DiskShockWaveProblem();
 
- /// \short Run the problem; specify case_number to label output
+ /// Run the problem; specify case_number to label output
  /// directory
  void run(const unsigned& case_number);
  
@@ -237,18 +237,18 @@ public:
  /// Update function (empty)
  void actions_before_newton_solve() {}
 
- /// \short Actions after adaption: Kill and then re-build the traction 
+ /// Actions after adaption: Kill and then re-build the traction 
  /// elements on boundary 1 and re-assign the equation numbers
  void actions_after_adapt();
 
- /// \short Doc displacement and velocity: label file with before and after
+ /// Doc displacement and velocity: label file with before and after
  void doc_displ_and_veloc(const int& stage=0);
 
- /// \short Dump problem-specific parameters values, then dump
+ /// Dump problem-specific parameters values, then dump
  /// generic problem data.
  void dump_it(ofstream& dump_file);
 
- /// \short Read problem-specific parameter values, then recover
+ /// Read problem-specific parameter values, then recover
  /// generic problem data.
  void restart(ifstream& restart_file);
 

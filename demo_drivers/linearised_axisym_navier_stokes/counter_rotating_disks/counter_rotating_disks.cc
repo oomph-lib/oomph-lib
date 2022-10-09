@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -118,7 +118,7 @@ public:
  /// Update the problem specs after solve (empty)
  void actions_after_newton_solve() {}
 
- /// \short Actions before the timestep (update the the time-dependent 
+ /// Actions before the timestep (update the the time-dependent 
  /// boundary conditions)
  void actions_before_implicit_timestep()
   {
@@ -128,10 +128,10 @@ public:
  /// Update the problem specs after solve (empty)
  void actions_after_implicit_timestep() {}
 
- /// \short Set initial condition (incl previous timesteps)
+ /// Set initial condition (incl previous timesteps)
  void set_initial_condition();
 
- /// \short Set the boundary conditions
+ /// Set the boundary conditions
  void set_boundary_conditions();
 
  /// Access function for the specific mesh

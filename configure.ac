@@ -439,8 +439,8 @@ else \
   # accomodate up to three digits for each part version id
   doxygen_version=`doxygen --version | \
     $AWK 'BEGIN { FS = "."; } { printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
-  # Need at least version 1.3.4 --> 1003004
-  if test "$doxygen_version" -ge 1003004; then
+  # Need at least version 1.9.2 --> 1009002
+  if test "$doxygen_version" -ge 1009002; then
     echo "Congratulations!"
     echo "I have located a (sufficiently) up-to-date version of doxygen:" \
          `doxygen --version`
@@ -449,7 +449,7 @@ else \
     echo " "; \
     echo "==============================================================="; \
     echo "Trouble: Your version of doxygen is: " `doxygen --version`
-    echo "Please upgrade to version 1.3.4 or higher."
+    echo "Please upgrade to version 1.9.3 or higher."
     echo " "; \
     echo "          http://www.doxygen.org/ "; \
     echo " "; \
@@ -572,7 +572,7 @@ AM_CONDITIONAL(HAVE_PDF_LATEX, test x$have_pdf_latex = xtrue)
 
 # Do we have python installed?
 #-----------------------------
-AC_CHECK_PROG(have_python,python,true,false)
+AC_CHECK_PROG(have_python,python3,true,false)
 if test x$have_python = xfalse; then \
   echo " "; \
   echo "================================================================="; \

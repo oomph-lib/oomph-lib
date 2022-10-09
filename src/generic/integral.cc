@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -335,7 +335,7 @@ namespace oomph
 
   const double TGauss<1, 5>::Weight[5] = {};
 
-  //// Define the positions and weights of the 2D Gauss points for triangles
+  /// / Define the positions and weights of the 2D Gauss points for triangles
   //
   //------------------------------------------------------------
   // "Full integration" weights for linear triangles
@@ -727,7 +727,7 @@ namespace oomph
                                            2 * 0.0375097224552317};
 
   //------------------------------------------------------------
-  //// Define the positions and weights of the 3D Gauss points for tets
+  /// / Define the positions and weights of the 3D Gauss points for tets
 
   //------------------------------------------------------------
   // "Full integration" weights for linear tets

@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -89,10 +89,10 @@ public:
  /// Destructor. Empty
  ~RefineableAdvectionDiffusionPipeProblem(){}
 
- /// \short Set the inlet concentration condition
+ /// Set the inlet concentration condition
  void set_inlet_concentration();
 
- /// \short Update the problem specs before solve: Reset boundary conditions
+ /// Update the problem specs before solve: Reset boundary conditions
  /// to the values from the tanh solution.
  void actions_before_newton_solve();
 
@@ -109,10 +109,10 @@ public:
    Doc_info.number()++;
   }
 
- /// \short Doc the solution.
+ /// Doc the solution.
  void doc_solution();
 
- /// \short Overloaded version of the problem's access function to 
+ /// Overloaded version of the problem's access function to 
  /// the mesh. Recasts the pointer to the base Mesh object to 
  /// the actual mesh type.
  RefineableRectangularQuadMesh<ELEMENT>* mesh_pt() 
@@ -131,7 +131,7 @@ private:
 
 
 //=====start_of_constructor===============================================
-/// \short Constructor for AdvectionDiffusion problem
+/// Constructor for AdvectionDiffusion problem
 //========================================================================
 template<class ELEMENT>
 RefineableAdvectionDiffusionPipeProblem<ELEMENT>::
@@ -212,7 +212,7 @@ actions_before_newton_solve()
 
 
 //=============================start_of_set_concentration_profile=======
-///Set a specified inlet concentration profile
+/// Set a specified inlet concentration profile
 //========================================================================
 template<class ELEMENT>
 void RefineableAdvectionDiffusionPipeProblem<ELEMENT>::

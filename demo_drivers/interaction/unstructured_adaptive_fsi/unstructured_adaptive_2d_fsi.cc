@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -110,7 +110,7 @@ class UnstructuredFSIProblem : public Problem
 
 public:
 
- /// \short Constructor: 
+ /// Constructor: 
  UnstructuredFSIProblem();
 
  /// Destructor (empty)
@@ -267,8 +267,8 @@ public:
  
   }
 
- ///Output function to compute the strain energy in the solid and the 
- ///dissipation in the fluid and write to the output stream trace
+ /// Output function to compute the strain energy in the solid and the 
+ /// dissipation in the fluid and write to the output stream trace
  void output_strain_and_dissipation(std::ostream &trace)
   {
    double strain_energy = this->get_solid_strain_energy();
@@ -335,8 +335,8 @@ private:
     }
   }
 
-///Create the multipliers that add lagrange multipliers to the fluid
-///elements that apply the solid displacement conditions
+/// Create the multipliers that add lagrange multipliers to the fluid
+/// elements that apply the solid displacement conditions
  void create_lagrange_multiplier_elements() 
   {
    //Loop over the FSI boundaries

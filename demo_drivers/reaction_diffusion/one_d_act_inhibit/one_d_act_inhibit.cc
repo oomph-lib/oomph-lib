@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -62,7 +62,7 @@ namespace GlobalVariables
   R[1] = C[1]*C[1]*C[1] - C[1] - C[0];
  }
 
- ///Derivative of simple reaction kinetics above
+ /// Derivative of simple reaction kinetics above
  void activator_inhibitor_reaction_derivative(const Vector<double> &C,
                                  DenseMatrix<double> &dRdC)
  {
@@ -97,7 +97,7 @@ public:
  /// Perform nstep timesteps of size dt
  void timestep(const double &dt, const unsigned &nstep);
 
- /// \short Overloaded Problem's access function to the mesh.
+ /// Overloaded Problem's access function to the mesh.
  /// Recasts the pointer to the base Mesh object to the actual mesh type.
  /// This is required so that we can call specific RefineableMesh functions
  RefineableOneDMesh<ELEMENT>* mesh_pt() 
@@ -107,7 +107,7 @@ public:
 
 private:
 
- ///Internal storage for the timestep
+ /// Internal storage for the timestep
  double Dt;
  
 }; // End of problem class

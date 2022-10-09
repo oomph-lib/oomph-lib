@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -87,7 +87,7 @@ namespace Flag_definition
  /// Amplitude of tip deflection
  double Amplitude=0.33;
 
- ///Pointer to the global time object
+ /// Pointer to the global time object
  Time* Time_pt=0;
  
 
@@ -128,13 +128,13 @@ namespace Flag_definition
   
  public:
   
-  ///Constructor: It's a 1D object in 2D space 
+  /// Constructor: It's a 1D object in 2D space 
   TopOfFlag() : GeomObject(1,2) {}
 
-  ///Destructor (empty)
+  /// Destructor (empty)
   ~TopOfFlag(){}
   
-  /// \short Return the position along the top of the flag (xi[0] varies 
+  /// Return the position along the top of the flag (xi[0] varies 
   /// between 0 and Lx)
   void position(const unsigned& t,const Vector<double> &xi, Vector<double> &r)
    const
@@ -178,14 +178,14 @@ namespace Flag_definition
   
  public:
   
-  ///Constructor: 
+  /// Constructor: 
   BottomOfFlag() : GeomObject(1,2) {}
   
-  ///Destructor (empty)
+  /// Destructor (empty)
   ~BottomOfFlag(){}
   
 
-  /// \short Return the position along the bottom of the flag (xi[0] varies 
+  /// Return the position along the bottom of the flag (xi[0] varies 
   /// between 0 and Lx)
   void position(const unsigned& t,const Vector<double> &xi, Vector<double> &r)
    const
@@ -229,13 +229,13 @@ namespace Flag_definition
    
   public:
    
-   ///Constructor
+   /// Constructor
    TipOfFlag() : GeomObject(1,2) {}
    
-   ///Destructor (empty)
+   /// Destructor (empty)
    ~TipOfFlag(){}
    
-   /// \short Return the position
+   /// Return the position
    /// This object links the tips of the top and bottom by a straight line
    /// whilst xi[0] goes from -H/2 to H/2.
    void position(const unsigned& t,const Vector<double> &xi, Vector<double> &r)
@@ -269,7 +269,7 @@ namespace Flag_definition
  /// Pointer to GeomObject that bounds the tip edge of the flag
  TipOfFlag* Tip_flag_pt=0;
 
- /// \short Pointer to GeomObject of type Circle that defines the
+ /// Pointer to GeomObject of type Circle that defines the
  /// central cylinder.
  Circle* Cylinder_pt=0;
 
@@ -313,7 +313,7 @@ class TurekNonFSIProblem : public Problem
 
 public:
 
- /// \short Constructor: Pass length and height of domain.
+ /// Constructor: Pass length and height of domain.
  TurekNonFSIProblem(const double &length, 
                          const double &height);
  

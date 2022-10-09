@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -44,7 +44,7 @@
 namespace oomph
 {
   //=============================================================================
-  /// \short General purpose block triangular preconditioner. By default this is
+  /// General purpose block triangular preconditioner. By default this is
   /// Upper triangular. Also, by default SuperLUPreconditioner (or
   /// SuperLUDistPreconditioner) is used to solve the subsidiary systems, but
   /// other preconditioners can be used by setting them using passing a pointer
@@ -124,11 +124,11 @@ namespace oomph
     void operator=(const SpaceTimeNavierStokesSubsidiaryPreconditioner&) =
       delete;
 
-    /// \short For some reason we need to remind the compiler that there is
+    /// For some reason we need to remind the compiler that there is
     /// also a function named setup in the base class.
     using Preconditioner::setup;
 
-    /// \short Setup the preconditioner
+    /// Setup the preconditioner
     void setup();
 
     /// Apply preconditioner to r
@@ -216,15 +216,15 @@ namespace oomph
     /// Flag indicating whether the default P preconditioner is used
     bool Using_default_p_preconditioner;
 
-    /// \short Control flag is true if the preconditioner has been setup
+    /// Control flag is true if the preconditioner has been setup
     /// (used so we can wipe the data when the preconditioner is called again)
     bool Preconditioner_has_been_setup;
 
-    /// \short Flag to indicate whether or not to record the memory statistics
+    /// Flag to indicate whether or not to record the memory statistics
     /// this preconditioner
     bool Compute_memory_statistics;
 
-    /// \short Storage for the memory usage of the solver if the flag above
+    /// Storage for the memory usage of the solver if the flag above
     /// is set to true (in bytes)
     double Memory_usage_in_bytes;
 
@@ -237,7 +237,7 @@ namespace oomph
 
 
   //=============================================================================
-  /// \short The block preconditioner form of GMRES. This version extracts
+  /// The block preconditioner form of GMRES. This version extracts
   /// the blocks from the global systems and assembles the system by
   /// concatenating all the matrices together
   //=============================================================================
@@ -295,17 +295,17 @@ namespace oomph
     /// Broken assignment operator
     void operator=(const GMRESBlockPreconditioner&) = delete;
 
-    /// \short For some reason we need to remind the compiler that there is
+    /// For some reason we need to remind the compiler that there is
     /// also a function named setup in the base class.
     using Preconditioner::setup;
 
-    /// \short Setup the preconditioner
+    /// Setup the preconditioner
     void setup();
 
     /// Apply preconditioner to r
     void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
-    /// \short Solver: Takes pointer to problem and returns the results vector
+    /// Solver: Takes pointer to problem and returns the results vector
     /// which contains the solution of the linear system defined by
     /// the problem's fully assembled Jacobian and residual vector.
     void solve(Problem* const& problem_pt, DoubleVector& result)
@@ -323,13 +323,13 @@ namespace oomph
       return Iterations;
     } // End of iterations
 
-    /// \short Set left preconditioning (the default)
+    /// Set left preconditioning (the default)
     void set_preconditioner_LHS()
     {
       Preconditioner_LHS = true;
     }
 
-    /// \short Enable right preconditioning
+    /// Enable right preconditioning
     void set_preconditioner_RHS()
     {
       Preconditioner_LHS = false;
@@ -504,33 +504,15 @@ namespace oomph
       }
     } // End of update
 
-    /// \short Helper function: Generate a plane rotation. This is done by
+    /// Helper function: Generate a plane rotation. This is done by
     /// finding the values of \f$ \cos(\theta) \f$ (i.e. cs) and \sin(\theta)
     /// (i.e. sn) such that:
-    /// \f[
-    /// \begin{bmatrix}
-    /// \cos\theta & \sin\theta \newline
-    /// -\sin\theta & \cos\theta
-    /// \end{bmatrix}
-    /// \begin{bmatrix}
-    /// dx \newline
-    /// dy
-    /// \end{bmatrix}
-    /// =
-    /// \begin{bmatrix}
-    /// r \newline
-    /// 0
-    /// \end{bmatrix},
-    /// \f]
+    /// \f[ \begin{bmatrix} \cos\theta & \sin\theta \newline -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} dx \newline dy \end{bmatrix} = \begin{bmatrix} r \newline 0 \end{bmatrix}, \f]
     /// where \f$ r=\sqrt{pow(dx,2)+pow(dy,2)} \f$. The values of a and b are
     /// given by:
-    /// \f[
-    /// \cos\theta&=\dfrac{dx}{\sqrt{pow(dx,2)+pow(dy,2)}},
-    /// \f]
+    /// \f[ \cos\theta&=\dfrac{dx}{\sqrt{pow(dx,2)+pow(dy,2)}}, \f]
     /// and
-    /// \f[
-    /// \sin\theta&=\dfrac{dy}{\sqrt{pow(dx,2)+pow(dy,2)}}.
-    /// \f]
+    /// \f[ \sin\theta&=\dfrac{dy}{\sqrt{pow(dx,2)+pow(dy,2)}}. \f]
     /// Taken from: Saad Y."Iterative methods for sparse linear systems", p.192
     void generate_plane_rotation(double& dx, double& dy, double& cs, double& sn)
     {
@@ -574,23 +556,9 @@ namespace oomph
       }
     } // End of generate_plane_rotation
 
-    /// \short Helper function: Apply plane rotation. This is done using the
+    /// Helper function: Apply plane rotation. This is done using the
     /// update:
-    /// \f[
-    ///\begin{bmatrix}
-    /// dx \newline
-    /// dy
-    /// \end{bmatrix}
-    /// \leftarrow
-    /// \begin{bmatrix}
-    /// \cos\theta & \sin\theta \newline
-    /// -\sin\theta & \cos\theta
-    /// \end{bmatrix}
-    /// \begin{bmatrix}
-    /// dx \newline
-    /// dy
-    /// \end{bmatrix}.
-    /// \f]
+    /// \f[ \begin{bmatrix} dx \newline dy \end{bmatrix} \leftarrow \begin{bmatrix} \cos\theta & \sin\theta \newline -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} dx \newline dy \end{bmatrix}. \f]
     void apply_plane_rotation(double& dx, double& dy, double& cs, double& sn)
     {
       // Calculate the value of dx but don't update it yet
@@ -613,19 +581,19 @@ namespace oomph
     /// Number of iterations taken
     unsigned Iterations;
 
-    /// \short Flag to indicate whether or not to record the memory statistics
+    /// Flag to indicate whether or not to record the memory statistics
     /// this preconditioner
     bool Compute_memory_statistics;
 
-    /// \short Storage for the memory usage of the solver if the flag above
+    /// Storage for the memory usage of the solver if the flag above
     /// is set to true (in bytes)
     double Memory_usage_in_bytes;
 
-    /// \short Control flag is true if the preconditioner has been setup (used
+    /// Control flag is true if the preconditioner has been setup (used
     /// so we can wipe the data when the preconditioner is called again)
     bool Preconditioner_has_been_setup;
 
-    /// \short boolean indicating use of left hand preconditioning (if true)
+    /// boolean indicating use of left hand preconditioning (if true)
     /// or right hand preconditioning (if false)
     bool Preconditioner_LHS;
   };

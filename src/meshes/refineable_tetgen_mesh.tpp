@@ -3,11 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC//    Version 1.0; svn revision $LastChangedRevision: 1174 $
-// LIC//
-// LIC// $LastChangedDate: 2016-05-11 10:03:56 +0100 (Wed, 11 May 2016) $
-// LIC//
-// LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -48,6 +44,408 @@
 
 namespace oomph
 {
+  /// Helper function that updates the input faceted surface
+  /// by using the flattened elements from FaceMesh(es) that are
+  /// constructed for the boundaries associated with the segments of the
+  /// polygon.
+  template<class ELEMENT>
+  void RefineableTetgenMesh<ELEMENT>::update_faceted_surface_using_face_mesh(
+    TetMeshFacetedSurface*& faceted_surface_pt)
+  {
+    // The easiest thing to do is simply to update the
+    // positions of the key control nodes, leaving the connectivity alone,
+    // but that doesn't allow for any surface remeshing
+
+    /// List of vertex nodes
+    std::list<Node*> new_vertex_nodes;
+    // List of facets and boundary ids
+    std::list<std::pair<Vector<unsigned>, unsigned>> new_facet_list;
+
+    // Loop over the number of old facets
+    unsigned n_old_facet = faceted_surface_pt->nfacet();
+    for (unsigned f = 0; f < n_old_facet; f++)
+    {
+      // Get the boundary id of the facet. Need to subtract one,
+      // which is confusing now I think about it.
+      // ALH: Should fix this.
+      unsigned bound = faceted_surface_pt->one_based_facet_boundary_id(f) - 1;
+
+      // Create a face mesh adjacent to the fluid mesh's bound-th boundary.
+      // The face mesh consists of FaceElements that may also be
+      // interpreted as GeomObjects
+      Mesh* face_mesh_pt = new Mesh;
+      this->template build_face_mesh<ELEMENT, FaceElementAsGeomObject>(
+        bound, face_mesh_pt);
+
+      // Loop over these new face elements and tell them the boundary number
+      // from the bulk fluid mesh -- this is required to they can
+      // get access to the boundary coordinates!
+      unsigned n_face_element = face_mesh_pt->nelement();
+      for (unsigned e = 0; e < n_face_element; e++)
+      {
+        // Cast the element pointer to the correct thing!
+        FaceElementAsGeomObject<ELEMENT>* el_pt =
+          dynamic_cast<FaceElementAsGeomObject<ELEMENT>*>(
+            face_mesh_pt->element_pt(e));
+
+        // Set bulk boundary number
+        el_pt->set_boundary_number_in_bulk_mesh(bound);
+      }
+
+      // In order to set up the new faceted representation
+      // Need to know the positions of the corner nodes
+      // and the connectivity
+
+      // Storage for the connectivity information
+      Vector<unsigned> new_local_facet(3);
+
+      // Now we have the face mesh loop over the face elements and
+      // print out the end points
+      for (unsigned e = 0; e < n_face_element; ++e)
+      {
+        // Cache pointer to the element
+        FiniteElement const* elem_pt = face_mesh_pt->finite_element_pt(e);
+
+        // Just use the three primary (corner) nodes to define the facet
+        unsigned n_vertex_node = 3;
+        for (unsigned n = 0; n < n_vertex_node; n++)
+        {
+          // Cache the pointer to the node
+          Node* const nod_pt = elem_pt->node_pt(n);
+          // If the vertex node is in the list return the number
+          unsigned counter = 0;
+          bool found_it = false;
+          for (std::list<Node*>::iterator it = new_vertex_nodes.begin();
+               it != new_vertex_nodes.end();
+               ++it, ++counter)
+          {
+            // If we have found the node then store it
+            if (*it == nod_pt)
+            {
+              new_local_facet[n] = counter;
+              found_it = true;
+              break;
+            }
+          }
+
+          // If we haven't found it
+          // then add the node to the list and fill in the counter
+          if (!found_it)
+          {
+            new_vertex_nodes.push_back(nod_pt);
+            // We know where it is
+            new_local_facet[n] = counter;
+          }
+        }
+
+        // Add the new facet connectivity to the list
+        new_facet_list.push_back(std::make_pair(new_local_facet, bound + 1));
+      }
+    } // End of loop over old facets
+
+
+    // Probably want the surface mesh in a better data structure so
+    // that we can perform refinement or coarsening on it
+    // i.e. want neighbours, edge flips all that fun stuff
+    // That will go here!
+
+    // Now we need to put the information into the appropriate data structures
+    // for the Surface
+
+    // Now sort out the facet nodes
+    unsigned n_facet_vertex = new_vertex_nodes.size();
+    // Vector<Vector<double> > facet_point(n_facet_vertex);
+    Vector<Node*> facet_nodes_pt(n_facet_vertex);
+    unsigned count = 0;
+    for (std::list<Node*>::iterator it = new_vertex_nodes.begin();
+         it != new_vertex_nodes.end();
+         ++it)
+    {
+      facet_nodes_pt[count] = *it;
+      // facet_point[count].resize(3);
+      //   for(unsigned i=0;i<3;i++)
+      //    {
+      //     facet_point[count][i] = (*it)->x(i);
+      //    }
+      ++count;
+    }
+
+    // And also the facets
+    unsigned n_facet = new_facet_list.size();
+    Vector<Vector<unsigned>> new_facet(n_facet);
+    Vector<unsigned> new_facet_boundary_id(n_facet);
+    count = 0;
+    for (std::list<std::pair<Vector<unsigned>, unsigned>>::iterator it =
+           new_facet_list.begin();
+         it != new_facet_list.end();
+         ++it)
+    {
+      new_facet[count] = (*it).first;
+      new_facet_boundary_id[count] = (*it).second;
+      ++count;
+    }
+
+    for (unsigned f = 0; f < n_facet; f++)
+    {
+      for (unsigned i = 0; i < 3; i++)
+      {
+        oomph_info << new_facet[f][i] << " ";
+      }
+      oomph_info << " : ";
+      oomph_info << new_facet_boundary_id[f] << "\n";
+    }
+
+    // Now just create the new boundary
+    delete faceted_surface_pt;
+    faceted_surface_pt = new TetMeshFacetedClosedSurfaceForRemesh(
+      facet_nodes_pt, new_facet, new_facet_boundary_id);
+
+    // Also need to setup the reverse look-up scheme again
+    this->setup_reverse_lookup_schemes_for_faceted_surface(faceted_surface_pt);
+
+    // Take average to get a new hole position (Won't always work)
+    Vector<double> inner_point(3, 0.0);
+    for (unsigned n = 0; n < n_facet_vertex; n++)
+    {
+      for (unsigned i = 0; i < 3; i++)
+      {
+        inner_point[i] += facet_nodes_pt[n]->x(i);
+      }
+    }
+
+    for (unsigned i = 0; i < 3; i++)
+    {
+      inner_point[i] /= n_facet_vertex;
+    }
+
+    // Now set the hole if required
+    dynamic_cast<TetMeshFacetedClosedSurface*>(faceted_surface_pt)
+      ->set_hole_for_tetgen(inner_point);
+  }
+
+
+  /// Generate a new faceted representation of the inner hole
+  /// boundaries
+  template<class ELEMENT>
+  void RefineableTetgenMesh<ELEMENT>::surface_remesh_for_inner_hole_boundaries()
+  {
+    // Loop over the number of internal boundarys
+    unsigned n_hole = this->Internal_surface_pt.size();
+    for (unsigned ihole = 0; ihole < n_hole; ihole++)
+    {
+      // Now can the surface update its own representation goes in here
+
+      // If not we have to generate it from the new mesh
+      {
+        // Update the faceted surface associated with the ihole-th hole
+        this->update_faceted_surface_using_face_mesh(
+          this->Internal_surface_pt[ihole]);
+      }
+    }
+  }
+
+  /// Snap the boundary nodes onto any curvilinear boundaries
+  template<class ELEMENT>
+  void RefineableTetgenMesh<ELEMENT>::snap_nodes_onto_boundary(
+    RefineableTetgenMesh<ELEMENT>*& new_mesh_pt, const unsigned& b)
+  {
+    // Quick return
+    if (!Boundary_coordinate_exists[b])
+    {
+      oomph_info << "Not snapping nodes on boundary " << b
+                 << " because no boundary coordinate has been set up.\n";
+      return;
+    }
+
+    // Firstly we set the boundary coordinates of the new nodes
+    // In case the mapping between the geometric object's intrinsic coordiante
+    // and the arc-length coordinate is nonlinear.
+    // This is only an approximation,
+    // but it will ensure that the nodes that were input to triangle will
+    // retain exactly the same boundary coordinates and
+    // then linear interpolation
+    // is used between those values for any newly created nodes.
+
+
+    // Create a face mesh adjacent to the fluid mesh's b-th boundary.
+    // The face mesh consists of FaceElements that may also be
+    // interpreted as GeomObjects
+    Mesh* face_mesh_pt = new Mesh;
+    this->template build_face_mesh<ELEMENT, FaceElementAsGeomObject>(
+      b, face_mesh_pt);
+
+    // Loop over these new face elements and tell them the boundary number
+    // from the bulk fluid mesh -- this is required to they can
+    // get access to the boundary coordinates!
+    unsigned n_face_element = face_mesh_pt->nelement();
+    for (unsigned e = 0; e < n_face_element; e++)
+    {
+      // Cast the element pointer to the correct thing!
+      FaceElementAsGeomObject<ELEMENT>* el_pt =
+        dynamic_cast<FaceElementAsGeomObject<ELEMENT>*>(
+          face_mesh_pt->element_pt(e));
+
+      // Set bulk boundary number
+      el_pt->set_boundary_number_in_bulk_mesh(b);
+    }
+
+
+    // Compare face meshes
+    {
+      Mesh* new_face_mesh_pt = new Mesh;
+      new_mesh_pt->template build_face_mesh<ELEMENT, FaceElementAsGeomObject>(
+        b, new_face_mesh_pt);
+
+      std::ostringstream filestring;
+      filestring << "old_mesh_boundary" << b << ".dat";
+      face_mesh_pt->output(filestring.str().c_str());
+      filestring.clear();
+      filestring << "new_mesh_boundary" << b << ".dat";
+      new_face_mesh_pt->output(filestring.str().c_str());
+
+      Vector<double> b_coo(2);
+      std::cout << "OLD---\n";
+      // Now let's look at the boundary coordinates
+      unsigned n_tmp_node = this->nboundary_node(b);
+      for (unsigned n = 0; n < n_tmp_node; ++n)
+      {
+        Node* const nod_pt = this->boundary_node_pt(b, n);
+        nod_pt->get_coordinates_on_boundary(b, b_coo);
+        std::cout << nod_pt->x(0) << " " << nod_pt->x(1) << " " << nod_pt->x(2)
+                  << " " << b_coo[0] << " " << b_coo[1] << "\n";
+      }
+
+      std::cout << "NEW-----------\n";
+      // Now let's look at the boundary coordinates
+      n_tmp_node = new_mesh_pt->nboundary_node(b);
+      for (unsigned n = 0; n < n_tmp_node; ++n)
+      {
+        Node* const nod_pt = new_mesh_pt->boundary_node_pt(b, n);
+        nod_pt->get_coordinates_on_boundary(b, b_coo);
+        std::cout << nod_pt->x(0) << " " << nod_pt->x(1) << " " << nod_pt->x(2)
+                  << " " << b_coo[0] << " " << b_coo[1] << "\n";
+      }
+    }
+
+
+    // Now make the mesh as geometric object
+    MeshAsGeomObject* mesh_geom_obj_pt = new MeshAsGeomObject(face_mesh_pt);
+
+    // Now assign the new nodes positions based on the old meshes
+    // potentially curvilinear boundary (its geom object incarnation)
+    Vector<double> new_x(3);
+    Vector<double> b_coord(2);
+    unsigned n_new_boundary_node = new_mesh_pt->nboundary_node(b);
+    for (unsigned n = 0; n < n_new_boundary_node; n++)
+    {
+      // Get the boundary coordinate of all new nodes
+      Node* const nod_pt = new_mesh_pt->boundary_node_pt(b, n);
+      nod_pt->get_coordinates_on_boundary(b, b_coord);
+      // Let's find boundary coordinates of the new node
+      mesh_geom_obj_pt->position(b_coord, new_x);
+      // Now snap to the boundary
+      for (unsigned i = 0; i < 3; i++)
+      {
+        nod_pt->x(i) = new_x[i];
+      }
+    }
+
+
+    // Delete the allocated memory for the geometric object and face mesh
+    delete mesh_geom_obj_pt;
+    face_mesh_pt->flush_element_and_node_storage();
+    delete face_mesh_pt;
+
+    // Loop over the elements adjacent to the boundary
+    unsigned n_element = new_mesh_pt->nboundary_element(b);
+    if (n_element > 0)
+    {
+      // Make a dummy simplex element
+      TElement<3, 2> dummy_four_node_element;
+      // Make a dummy quadratic element
+      TElement<3, 3> dummy_ten_node_element;
+      Vector<double> s(3);
+      Vector<double> x_new(3);
+      for (unsigned n = 0; n < 4; n++)
+      {
+        dummy_four_node_element.construct_node(n);
+      }
+      for (unsigned n = 0; n < 10; n++)
+      {
+        dummy_ten_node_element.construct_node(n);
+      }
+      for (unsigned e = 0; e < n_element; e++)
+      {
+        // Cache the element pointer
+        ELEMENT* elem_pt =
+          dynamic_cast<ELEMENT*>(new_mesh_pt->boundary_element_pt(b, e));
+
+        // Find the number of nodes
+        const unsigned n_node = elem_pt->nnode();
+        // Only do something if not simplex element
+        if (n_node > 4)
+        {
+          // Copy the nodes into the dummy
+          for (unsigned n = 0; n < 4; n++)
+          {
+            for (unsigned i = 0; i < 3; i++)
+            {
+              dummy_four_node_element.node_pt(n)->x(i) =
+                elem_pt->node_pt(n)->x(i);
+            }
+          }
+
+          // Now sort out the mid-side nodes
+          for (unsigned n = 4; n < 10; n++)
+          {
+            // If it's not on a boundary then reset to be interpolated
+            // from the simplex
+            if (!elem_pt->node_pt(n)->is_on_boundary())
+            {
+              elem_pt->local_coordinate_of_node(n, s);
+              dummy_four_node_element.interpolated_x(s, x_new);
+              for (unsigned i = 0; i < 3; i++)
+              {
+                elem_pt->node_pt(n)->x(i) = x_new[i];
+              }
+            }
+          }
+        }
+
+        // If we have more than 10 nodes interpolate from the quadratic shape
+        if (n_node > 10)
+        {
+          // Copy the nodes into the dummy
+          for (unsigned n = 0; n < 10; n++)
+          {
+            for (unsigned i = 0; i < 3; i++)
+            {
+              dummy_ten_node_element.node_pt(n)->x(i) =
+                elem_pt->node_pt(n)->x(i);
+            }
+          }
+
+          // Now sort out the mid-face and central nodes
+          for (unsigned n = 10; n < n_node; n++)
+          {
+            // If it's not on a boundary then reset to be interpolated
+            // from the simplex
+            if (!elem_pt->node_pt(n)->is_on_boundary())
+            {
+              elem_pt->local_coordinate_of_node(n, s);
+              dummy_ten_node_element.interpolated_x(s, x_new);
+              for (unsigned i = 0; i < 3; i++)
+              {
+                elem_pt->node_pt(n)->x(i) = x_new[i];
+              }
+            }
+          }
+        }
+      }
+    } // End of fix up of elements
+  }
+
+
   //======================================================================
   /// Adapt problem based on specified elemental error estimates
   //======================================================================
@@ -91,6 +489,14 @@ namespace oomph
       << "adapt: Time for getting volume targets                      : "
       << TimingHelpers::timer() - t_start << " sec " << std::endl;
     //##################################################################
+
+    //===============================================================
+    // END: Compute target volumes
+    //===============================================================
+
+    // Check if boundaries need to be updated (regardless of
+    // requirements of bulk error estimator) but don't do anything!
+    bool inner_boundary_update_necessary = false; // true;
 
     // Should we bother to adapt?
     if ((Nrefined > 0) || (Nunrefined > this->max_keep_unrefined()) ||

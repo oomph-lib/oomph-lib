@@ -3,11 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC//    Version 1.0; svn revision $LastChangedRevision$
-// LIC//
-// LIC// $LastChangedDate$
-// LIC//
-// LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -44,11 +40,11 @@ namespace oomph
   class ThinLayerBrickOnTetMesh : public virtual BrickMeshBase
   {
   public:
-    /// \short Function pointer to function that specifies the wall thickness
+    /// Function pointer to function that specifies the wall thickness
     /// as a fct of the coordinates of the inner surface
     typedef void (*ThicknessFctPt)(const Vector<double>& x, double& h_thick);
 
-    /// \short Constructor: Specify (quadratic) tet mesh, boundary IDs of
+    /// Constructor: Specify (quadratic) tet mesh, boundary IDs of
     /// boundary on which the current mesh is to be erected (in an FSI context
     /// this boundary tends to be the FSI boundary of the fluid mesh. Also
     /// specify the uniform thickness of layer, and the number of element
@@ -70,7 +66,8 @@ namespace oomph
       const Vector<Vector<unsigned>>& in_out_boundary_id,
       TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
-    /// \short Access functions to the Vector of oomph-lib boundary ids
+
+    /// Access functions to the Vector of oomph-lib boundary ids
     /// that make up boundary on which the mesh was erected (typically
     /// the FSI interface in an FSI problem)
     Vector<unsigned> fsi_boundary_id()
@@ -78,7 +75,7 @@ namespace oomph
       return FSI_boundary_id;
     }
 
-    /// \short Boundary ID of the "outer" surface -- in an FSI context
+    /// Boundary ID of the "outer" surface -- in an FSI context
     /// this is the non-wetted tube surface at a distance h_thick from
     /// the FSI surface
     unsigned outer_boundary_id()
@@ -86,7 +83,7 @@ namespace oomph
       return Outer_boundary_id;
     }
 
-    /// \short Access function to the vector containing the ids of the oomph-lib
+    /// Access function to the vector containing the ids of the oomph-lib
     /// mesh boundaries that make up the specified in/outflow boundaries
     /// as specified in constructor.
     Vector<unsigned> in_out_boundary_id(const unsigned& boundary_id)
@@ -95,23 +92,24 @@ namespace oomph
     }
 
   private:
-    /// \short Vector of oomph-lib boundary ids
+    /// Vector of oomph-lib boundary ids
     /// that make up boundary on which the mesh was erected (typically
     /// the FSI interface in an FSI problem)
     Vector<unsigned> FSI_boundary_id;
 
-    /// \short Boundary ID of the "outer" surface -- the non-wetted
+    /// Boundary ID of the "outer" surface -- the non-wetted
     /// tube surface at a distance h_thick from the FSI surface
     unsigned Outer_boundary_id;
 
-    /// \short Vector of vectors containing the ids of the oomph-lib
+    /// Vector of vectors containing the ids of the oomph-lib
     /// mesh boundaries that make up the specified in/outflow boundaries
     Vector<Vector<unsigned>> In_out_boundary_id;
 
-    /// \short Function pointer to function that specifies the wall thickness
+    /// Function pointer to function that specifies the wall thickness
     /// as a fct of the coordinates of the inner surface
     ThicknessFctPt Thickness_fct_pt;
   };
+
 
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
@@ -128,11 +126,11 @@ namespace oomph
       public virtual RefineableBrickMesh<ELEMENT>
   {
   public:
-    /// \short Function pointer to function that specifies the wall thickness
+    /// Function pointer to function that specifies the wall thickness
     /// as a fct of the coordinates of the inner surface
     typedef void (*ThicknessFctPt)(const Vector<double>& x, double& h_thick);
 
-    /// \short Constructor: Specify (quadratic) tet mesh, boundary IDs of
+    /// Constructor: Specify (quadratic) tet mesh, boundary IDs of
     /// boundary on which the current mesh is to be erected (in an FSI context
     /// this boundary tends to be the FSI boundary of the fluid mesh. Also
     /// specify the uniform thickness of layer, and the number of element
@@ -166,6 +164,7 @@ namespace oomph
     }
   };
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
@@ -181,11 +180,11 @@ namespace oomph
       public virtual SolidMesh
   {
   public:
-    /// \short Function pointer to function that specifies the wall thickness
+    /// Function pointer to function that specifies the wall thickness
     /// as a fct of the coordinates of the inner surface
     typedef void (*ThicknessFctPt)(const Vector<double>& x, double& h_thick);
 
-    /// \short Constructor: Specify (quadratic) tet mesh, boundary IDs of
+    /// Constructor: Specify (quadratic) tet mesh, boundary IDs of
     /// boundary on which the current mesh is to be erected (in an FSI context
     /// this boundary tends to be the FSI boundary of the fluid mesh. Also
     /// specify the uniform thickness of layer, and the number of element
@@ -220,6 +219,7 @@ namespace oomph
     }
   };
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
@@ -236,11 +236,11 @@ namespace oomph
       public virtual SolidMesh
   {
   public:
-    /// \short Function pointer to function that specifies the wall thickness
+    /// Function pointer to function that specifies the wall thickness
     /// as a fct of the coordinates of the inner surface
     typedef void (*ThicknessFctPt)(const Vector<double>& x, double& h_thick);
 
-    /// \short Constructor: Specify (quadratic) tet mesh, boundary IDs of
+    /// Constructor: Specify (quadratic) tet mesh, boundary IDs of
     /// boundary on which the current mesh is to be erected (in an FSI context
     /// this boundary tends to be the FSI boundary of the fluid mesh. Also
     /// specify the uniform thickness of layer, and the number of element

@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -49,7 +49,7 @@
 namespace oomph
 {
   //=============================================================================
-  /// \short Biharmonic Equation Class - contains the equations
+  /// Biharmonic Equation Class - contains the equations
   //=============================================================================
   template<unsigned DIM>
   class BiharmonicEquations : public virtual FiniteElement
@@ -266,7 +266,7 @@ namespace oomph
       this->write_tecplot_zone_footer(outfile, nplot);
     }
 
-    /// \short Output exact solution specified via function pointer
+    /// Output exact solution specified via function pointer
     /// at a given time and at a given number of plot points.
     /// Function prints as many components as are returned in solution Vector.
     /// Implement broken FiniteElement base class version
@@ -356,10 +356,9 @@ namespace oomph
     }
 
 
-    /// \short Plot the error when compared
-    /// against a given time-dependent exact solution \f$ {\bf f}(t,{\bf x})
-    /// \f$. Also calculates the norm of the error and that of the exact
-    /// solution. Call broken base-class version.
+    /// Plot the error when compared against a given time-dependent exact
+    /// solution \f$ {\bf f}(t,{\bf x}) \f$. Also calculates the norm of the
+    /// error and that of the exact solution. Call broken base-class version.
     void compute_error(std::ostream& outfile,
                        FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
                        const double& time,
@@ -431,7 +430,7 @@ namespace oomph
     }
 
 
-    /// \short The number of "DOF types" that degrees of freedom in this element
+    /// The number of "DOF types" that degrees of freedom in this element
     /// are sub-divided into (for block preconditioning)
     unsigned ndof_types() const
     {
@@ -439,7 +438,7 @@ namespace oomph
     }
 
 
-    /// \short Create a list of pairs for all unknowns in this element,
+    /// Create a list of pairs for all unknowns in this element,
     /// so that the first entry in each pair contains the global equation
     /// number of the unknown, while the second one contains the number
     /// of the "DOF types" that this unknown is associated with.
@@ -495,7 +494,7 @@ namespace oomph
 
 
   protected:
-    /// \short Compute element residual Vector only (if JFLAG=and/or element
+    /// Compute element residual Vector only (if JFLAG=and/or element
     /// Jacobian matrix
     virtual void fill_in_generic_residual_contribution_biharmonic(
       Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned JFLAG);
@@ -534,7 +533,7 @@ namespace oomph
     }
 
 
-    ///\short  Constructor: Call constructors for QElement and
+    /// Constructor: Call constructors for QElement and
     /// Poisson equations
     BiharmonicElement() : QHermiteElement<DIM>(), BiharmonicEquations<DIM>() {}
 
@@ -542,7 +541,7 @@ namespace oomph
     ~BiharmonicElement(){};
 
 
-    /// \short  Required  # of `values' (pinned or dofs)
+    ///  Required  # of `values' (pinned or dofs)
     /// at node n
     inline unsigned required_nvalue(const unsigned& n) const
     {

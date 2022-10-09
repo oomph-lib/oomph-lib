@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -95,7 +95,7 @@ class SUPGAdvectionDiffusionProblem : public Problem
 
 public:
 
- /// \short Constructor: Pass pointer to source and wind functions, and
+ /// Constructor: Pass pointer to source and wind functions, and
  /// flag to indicate if stabilisation is to be used.
  SUPGAdvectionDiffusionProblem(
   AdvectionDiffusionEquations<2>::AdvectionDiffusionSourceFctPt source_fct_pt,
@@ -105,7 +105,7 @@ public:
  /// Destructor. Empty
  ~SUPGAdvectionDiffusionProblem(){}
 
- /// \short Update the problem specs before solve: Reset boundary conditions
+ /// Update the problem specs before solve: Reset boundary conditions
  /// to the values from the tanh solution and compute stabilisation
  /// parameter.
  void actions_before_newton_solve();
@@ -113,10 +113,10 @@ public:
  /// Update the problem after solve (empty)
  void actions_after_newton_solve(){}
 
- /// \short Doc the solution.
+ /// Doc the solution.
  void doc_solution();
 
- /// \short Overloaded version of the problem's access function to 
+ /// Overloaded version of the problem's access function to 
  /// the mesh. Recasts the pointer to the base Mesh object to 
  /// the actual mesh type.
  RectangularQuadMesh<ELEMENT>* mesh_pt() 
@@ -144,7 +144,7 @@ private:
 
 
 //=====start_of_constructor===============================================
-/// \short Constructor for AdvectionDiffusion problem: Pass pointer to 
+/// Constructor for AdvectionDiffusion problem: Pass pointer to 
 /// source function and wind functions and flag to indicate 
 /// if stabilisation is to be used.
 //========================================================================

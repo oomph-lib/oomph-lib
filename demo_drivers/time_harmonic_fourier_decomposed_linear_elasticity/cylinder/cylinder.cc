@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -54,7 +54,7 @@ namespace Global_Parameters
  /// Define Fourier wavenumber
  int Fourier_wavenumber = 3;
 
- /// \short Define the non-dimensional square angular frequency of 
+ /// Define the non-dimensional square angular frequency of 
  /// time-harmonic motion
  std::complex<double> Omega_sq (10.0,5.0);
 
@@ -87,7 +87,7 @@ namespace Global_Parameters
  }
  
  
- /// \short The body force function; returns vector of complex doubles
+ /// The body force function; returns vector of complex doubles
  /// in the order (b_r, b_z, b_theta)
  void body_force(const Vector<double> &x,
                  Vector<std::complex<double> > &result)
@@ -134,7 +134,7 @@ class FourierDecomposedTimeHarmonicLinearElasticityProblem : public Problem
 {
 public:
 
- /// \short Constructor: Pass number of elements in r and z directions 
+ /// Constructor: Pass number of elements in r and z directions 
  /// and boundary locations
  FourierDecomposedTimeHarmonicLinearElasticityProblem(
  const unsigned &nr, const unsigned &nz,

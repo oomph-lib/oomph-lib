@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -74,7 +74,7 @@ public:
   /// Destructor (empty)
   ~MovingBlockProblem() {}
 
-  /// \short Update the problem specs before solve. Reset velocity boundary
+  /// Update the problem specs before solve. Reset velocity boundary
   /// conditions just to be on the safe side...
   void actions_before_newton_solve()
   {
@@ -101,7 +101,7 @@ private:
   /// Generate a 2D mesh and "extrude" it to create a 3D mesh
   void create_extruded_mesh();
 
-  /// \short Set the chosen boundary conditions
+  /// Set the chosen boundary conditions
   void apply_boundary_conditions();
 
   /// Finish the build of the elements: assign their problem parameter pointers
@@ -217,7 +217,7 @@ void MovingBlockProblem<ELEMENT>::create_extruded_mesh()
 
 
 //=====start_of_apply_boundary_conditions===================================
-/// \short Set the chosen boundary conditions
+/// Set the chosen boundary conditions
 //==========================================================================
 template<class ELEMENT>
 void MovingBlockProblem<ELEMENT>::apply_boundary_conditions()
@@ -311,7 +311,7 @@ void MovingBlockProblem<ELEMENT>::complete_element_build()
 
 
 //======start_of_actions_after_adapt========================================
-/// \short After adaptation: Unpin pressure and pin redudant pressure dofs.
+/// After adaptation: Unpin pressure and pin redudant pressure dofs.
 //==========================================================================
 template<class ELEMENT>
 void MovingBlockProblem<ELEMENT>::actions_after_adapt()

@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -37,15 +37,15 @@
 using namespace oomph;
 using namespace std;
 
-///===========================================================
-///Strong Stability preserving Runge Kutta Timestepping
+/// ===========================================================
+/// Strong Stability preserving Runge Kutta Timestepping
 //============================================================
 template<unsigned ORDER>
 class SSP_RungeKutta : public ExplicitTimeStepper
 {
 public:
  
- ///Constructor, set the type
+ /// Constructor, set the type
  SSP_RungeKutta()
   {
    Type="SSP_RungeKutta";
@@ -86,7 +86,7 @@ void SSP_RungeKutta<ORDER>::timestep(
 }
 
 //===================================================================
-///Explicit specialisation for second-order RK scheme
+/// Explicit specialisation for second-order RK scheme
 //==================================================================
 template<>
 void SSP_RungeKutta<2>::timestep(ExplicitTimeSteppableObject* const &object_pt,

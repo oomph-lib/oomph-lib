@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -64,7 +64,7 @@ namespace GlobalVariables
   R[1] = C[1]*C[1]*C[1] - C[1] - C[0];
  }
 
- ///Derivative of simple reaction kinetics above
+ /// Derivative of simple reaction kinetics above
  void activator_inhibitor_reaction_derivative(const Vector<double> &C,
                                  DenseMatrix<double> &dRdC)
  {
@@ -89,7 +89,7 @@ public:
  /// Update the problem specs after solve (empty)
  void actions_after_newton_solve() {}
 
- /// \short Update the problem specs before solve: 
+ /// Update the problem specs before solve: 
  void actions_before_newton_solve() {}
 
  /// Timestep the problem with constant timestep dt for nstep steps

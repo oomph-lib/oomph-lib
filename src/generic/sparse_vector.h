@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -89,7 +89,7 @@ namespace oomph
       Has_entry[i] = true;
     }
 
-    /// \short Number of nonzero entries stored in here (specifying the
+    /// Number of nonzero entries stored in here (specifying the
     /// size of the vector (as a mathematical object)
     /// doesn't really make sense -- the thing could be infinitely
     /// big and we wouldn't know or care)
@@ -110,13 +110,13 @@ namespace oomph
       return &Data;
     }
 
-    /// \short Check if the bin has entries
+    /// Check if the bin has entries
     bool has_entry(const unsigned& nbin)
     {
       return Has_entry[nbin];
     }
 
-    /// \short Return vector containing all values
+    /// Return vector containing all values
     /// (without reference to their specific indices)
     /// for fast direct access
     void get_all_values(Vector<T>& all_values) const

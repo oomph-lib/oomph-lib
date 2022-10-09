@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -187,7 +187,7 @@ namespace GlobalParameters
  // Spine functions
  //----------------
 
- /// \short Spine basis: The position vector to the basis of the spine
+ /// Spine basis: The position vector to the basis of the spine
  /// as a function of the two coordinates x_1 and x_2, and its
  /// derivatives w.r.t. to these coordinates. 
  /// dspine_B[i][j] = d spine_B[j] / dx_i
@@ -211,7 +211,7 @@ namespace GlobalParameters
  } // End of bspine functions
 
   
- /// \short Spine: The spine vector field as a function of the two 
+ /// Spine: The spine vector field as a function of the two 
  /// coordinates x_1 and x_2, and its derivatives w.r.t. to these coordinates:
  /// dspine[i][j] = d spine[j] / dx_i
  void spine_function(const Vector<double>& xx, 

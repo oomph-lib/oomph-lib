@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -41,7 +41,7 @@
 namespace oomph
 {
   //=====================================================================
-  /// \short Base class for strain energy functions to be used in solid
+  /// Base class for strain energy functions to be used in solid
   /// mechanics computations.
   //====================================================================
   class StrainEnergyFunction
@@ -83,7 +83,7 @@ namespace oomph
     }
 
 
-    /// \short Return the derivatives of the strain energy function with
+    /// Return the derivatives of the strain energy function with
     /// respect to the components of the strain tensor (default is to use
     /// finite differences).
     virtual void derivative(const DenseMatrix<double>& gamma,
@@ -96,7 +96,7 @@ namespace oomph
     }
 
 
-    /// \short Return the derivatives of the strain energy function with
+    /// Return the derivatives of the strain energy function with
     /// respect to the strain invariants. Default version is to use finite
     /// differences
     virtual void derivatives(Vector<double>& I, Vector<double>& dWdI)
@@ -122,7 +122,7 @@ namespace oomph
       }
     }
 
-    /// \short Pure virtual function in which the user must declare if the
+    /// Pure virtual function in which the user must declare if the
     /// constitutive equation requires an incompressible formulation
     /// in which the volume constraint is enforced explicitly.
     /// Used as a sanity check in PARANOID mode.
@@ -136,11 +136,9 @@ namespace oomph
 
 
   //=====================================================================
-  /// \short MooneyRivlin strain-energy function.
+  /// MooneyRivlin strain-energy function.
   /// with constitutive parameters C1 and C2:
-  /// \f[
-  /// W = C_1 (I_0 - 3) + C_2 (I_1 - 3)
-  /// \f]
+  /// \f[ W = C_1 (I_0 - 3) + C_2 (I_1 - 3) \f]
   /// where incompressibility (\f$ I_2 \equiv 1\f$) is assumed.
   //====================================================================
   class MooneyRivlin : public StrainEnergyFunction
@@ -168,7 +166,7 @@ namespace oomph
     }
 
 
-    /// \short Return the derivatives of the strain energy function with
+    /// Return the derivatives of the strain energy function with
     /// respect to the strain invariants
     void derivatives(Vector<double>& I, Vector<double>& dWdI)
     {
@@ -177,7 +175,7 @@ namespace oomph
       dWdI[2] = 0.0;
     }
 
-    /// \short Pure virtual function in which the user must declare if the
+    /// Pure virtual function in which the user must declare if the
     /// constitutive equation requires an incompressible formulation
     /// in which the volume constraint is enforced explicitly.
     /// Used as a sanity check in PARANOID mode. True
@@ -202,7 +200,7 @@ namespace oomph
 
 
   //=====================================================================
-  /// \short Generalisation of Mooney Rivlin constitutive law to compressible
+  /// Generalisation of Mooney Rivlin constitutive law to compressible
   /// media as suggested on p. 553 of Fung, Y.C. & Tong, P. "Classical and
   /// Computational Solid Mechanics" World Scientific (2001).
   /// Input parameters are Young's modulus E, Poisson ratio nu and
@@ -216,7 +214,7 @@ namespace oomph
   class GeneralisedMooneyRivlin : public StrainEnergyFunction
   {
   public:
-    /// \short Constructor takes the pointers to the constitutive parameters:
+    /// Constructor takes the pointers to the constitutive parameters:
     /// Poisson's ratio, the Mooney-Rivlin parameter. Young's modulus is set
     /// to 1, implying that it has been used to scale the stresses
     GeneralisedMooneyRivlin(double* nu_pt, double* c1_pt)
@@ -228,7 +226,7 @@ namespace oomph
     {
     }
 
-    /// \short Constructor takes the pointers to the constitutive parameters:
+    /// Constructor takes the pointers to the constitutive parameters:
     /// Poisson's ratio, the Mooney-Rivlin parameter and Young's modulus
     GeneralisedMooneyRivlin(double* nu_pt, double* c1_pt, double* e_pt)
       : StrainEnergyFunction(),
@@ -264,7 +262,7 @@ namespace oomph
     }
 
 
-    /// \short Return the derivatives of the strain energy function with
+    /// Return the derivatives of the strain energy function with
     /// respect to the strain invariants
     void derivatives(Vector<double>& I, Vector<double>& dWdI)
     {
@@ -277,7 +275,7 @@ namespace oomph
     }
 
 
-    /// \short Pure virtual function in which the user must declare if the
+    /// Pure virtual function in which the user must declare if the
     /// constitutive equation requires an incompressible formulation
     /// in which the volume constraint is enforced explicitly.
     /// Used as a sanity check in PARANOID mode. False.
@@ -296,7 +294,7 @@ namespace oomph
     /// Young's modulus
     double* E_pt;
 
-    /// \short Boolean flag to indicate if storage for elastic modulus
+    /// Boolean flag to indicate if storage for elastic modulus
     /// must be deleted in destructor
     bool Must_delete_e;
   };
@@ -314,13 +312,9 @@ namespace oomph
   /// constitutive law is the (2nd Piola-Kirchhoff) stress tensor
   /// \f$ \sigma^{ij} \f$ as a function of the (Green) strain
   /// \f$ \gamma^{ij} \f$:
-  /// \f[
-  /// \sigma^{ij} = \sigma^{ij}(\gamma_{ij}).
-  /// \f]
+  /// \f[ \sigma^{ij} = \sigma^{ij}(\gamma_{ij}). \f]
   /// The Green strain is defined as
-  /// \f[
-  /// \gamma_{ij} = \frac{1}{2} (G_{ij} - g_{ij}), \ \ \ \ \ \ \ \ \ \ \ (1)
-  /// \f]
+  /// \f[ \gamma_{ij} = \frac{1}{2} (G_{ij} - g_{ij}), \ \ \ \ \ \ \ \ \ \ \ (1) \f]
   /// where \f$G_{ij} \f$ and \f$ g_{ij}\f$ are the metric tensors
   /// in the deformed and undeformed (stress-free) configurations, respectively.
   /// A specific ConstitutiveLaw needs to be implement the pure
@@ -342,10 +336,8 @@ namespace oomph
   /// -# \b Compressible \b Behaviour: \n If the material is compressible,
   ///    the stress can be computed from the deformed and undeformed
   ///    metric tensors,
-  ///    \f[
-  ///   \sigma^{ij} = \sigma^{ij}(\gamma_{ij}) =
-  ///   \sigma^{ij}\bigg( \frac{1}{2} (G_{ij} - g_{ij})\bigg),
-  ///   \f]
+  ///
+  /// \f[ \sigma^{ij} = \sigma^{ij}(\gamma_{ij}) = \sigma^{ij}\bigg( \frac{1}{2} (G_{ij} - g_{ij})\bigg), \f]
   ///   using the interface
   ///   \code
   ///   // 2nd Piola Kirchhoff stress tensor
@@ -363,20 +355,15 @@ namespace oomph
   ///   \n \n  \n
   /// -# \b Incompressible \b Behaviour: \n If the material is incompressible,
   ///    its deformation is constrained by the condition that
-  ///    \f[
-  ///    \det G_{ij} - \det g_{ij}= 0
-  ///    \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2)
-  ///    \f]
+  ///
+  /// \f[ \det G_{ij} - \det g_{ij}= 0 \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2) \f]
   ///    which ensures that the volume of infinitesimal material
   ///    elements remains constant during the deformation. This
   ///    condition is typically enforced by a Lagrange multiplier which
   ///    plays the role of a pressure. In such cases, the
   ///    stress tensor has form
-  ///    \f[
-  ///    \sigma^{ij} = -p G^{ij} +
-  ///    \overline{\sigma}^{ij}\big(\gamma_{kl}\big),
-  ///    \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3)
-  ///    \f]
+  ///
+  /// \f[ \sigma^{ij} = -p G^{ij} + \overline{\sigma}^{ij}\big(\gamma_{kl}\big), \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3) \f]
   ///    where only the deviatoric part of the stress tensor,
   ///    \f$ \overline{\sigma}^{ij}, \f$ depends directly on the
   ///    strain. The pressure \f$ p \f$ needs to be determined
@@ -418,11 +405,8 @@ namespace oomph
   ///    incompressible, it is advantageous to split the stress into
   ///    its deviatoric and hydrostatic parts by writing the
   ///    constitutive law in the form
-  ///    \f[
-  ///    \sigma^{ij} = -p G^{ij} +
-  ///    \overline{\sigma}^{ij}\big(\gamma_{kl}\big),
-  ///    \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3)
-  ///    \f]
+  ///
+  ///    \f[ \sigma^{ij} = -p G^{ij} + \overline{\sigma}^{ij}\big(\gamma_{kl}\big), \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3) \f]
   ///    where the deviatoric part of the stress tensor,
   ///    \f$ \overline{\sigma}^{ij}, \f$ depends on the
   ///    strain. This form of the constitutive
@@ -433,10 +417,8 @@ namespace oomph
   ///    constraint (2). Here, we need to augment the constitutive law (3) by
   ///    a separate equation for the pressure. Generally this takes the
   ///    form
-  ///    \f[
-  ///    p = - \kappa \ d
-  ///    \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4)
-  ///    \f]
+  ///
+  ///    \f[ p = - \kappa \ d \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4) \f]
   ///    where \f$ \kappa \f$ is the "bulk modulus", a material property
   ///    that needs to be specified by the constitutive law.
   ///    \f$ d \f$ is the (generalised) dilatation, i.e. the relative change
@@ -445,8 +427,8 @@ namespace oomph
   ///    material approaches incompressibility, \f$ \kappa \to \infty\f$, so
   ///    that infinitely large pressures would be required to achieve any change
   ///    in volume. To facilitate the implementation of (4) as the equation for
-  ///    the pressure, we re-write it in the form \f[ p \ \frac{1}{\kappa} +
-  ///    d\big(g_{ij},G_{ij}\big) = 0 \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5) \f]
+  ///    the pressure, we re-write it in the form
+  ///    \f[ p \ \frac{1}{\kappa} + d\big(g_{ij},G_{ij}\big) = 0 \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5) \f]
   ///    which only involves quantities that remain finite
   ///    as we approach true incompressibility.
   ///    \n
@@ -488,25 +470,25 @@ namespace oomph
   class ConstitutiveLaw
   {
   protected:
-    /// \short Test whether a matrix is square
+    /// Test whether a matrix is square
     bool is_matrix_square(const DenseMatrix<double>& M);
 
-    /// \short Test whether two matrices are of equal dimensions
+    /// Test whether two matrices are of equal dimensions
     bool are_matrices_of_equal_dimensions(const DenseMatrix<double>& M1,
                                           const DenseMatrix<double>& M2);
 
-    /// \short Check for errors in the input,
+    /// Check for errors in the input,
     /// i.e. check that the dimensions of the arrays are all consistent
     void error_checking_in_input(const DenseMatrix<double>& g,
                                  const DenseMatrix<double>& G,
                                  DenseMatrix<double>& sigma);
 
-    /// \short Calculate a contravariant tensor from a covariant tensor,
+    /// Calculate a contravariant tensor from a covariant tensor,
     /// and return the determinant of the covariant tensor.
     double calculate_contravariant(const DenseMatrix<double>& Gcov,
                                    DenseMatrix<double>& Gcontra);
 
-    /// \short Calculate the derivatives of the contravariant tensor
+    /// Calculate the derivatives of the contravariant tensor
     /// and the derivatives of the determinant of the covariant tensor
     /// with respect to the components of the covariant tensor
     void calculate_d_contravariant_dG(const DenseMatrix<double>& Gcov,
@@ -523,7 +505,7 @@ namespace oomph
     virtual ~ConstitutiveLaw() {}
 
 
-    /// \short Calculate the contravariant 2nd Piola Kirchhoff
+    /// Calculate the contravariant 2nd Piola Kirchhoff
     /// stress tensor. Arguments are the
     /// covariant undeformed and deformed metric tensor and the
     /// matrix in which to return the stress tensor
@@ -532,7 +514,7 @@ namespace oomph
       const DenseMatrix<double>& G,
       DenseMatrix<double>& sigma) = 0;
 
-    /// \short Calculate the derivatives of the contravariant
+    /// Calculate the derivatives of the contravariant
     /// 2nd Piola Kirchhoff stress tensor with respect to the deformed metric
     /// tensor. Arguments are the
     /// covariant undeformed and deformed metric tensor, the current value of
@@ -552,7 +534,7 @@ namespace oomph
       const bool& symmetrize_tensor = true);
 
 
-    /// \short Calculate the deviatoric part
+    /// Calculate the deviatoric part
     /// \f$ \overline{ \sigma^{ij}}\f$  of the contravariant
     /// 2nd Piola Kirchhoff stress tensor \f$ \sigma^{ij}\f$.
     /// Also return the contravariant deformed metric
@@ -575,7 +557,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Calculate the derivatives of the contravariant
+    /// Calculate the derivatives of the contravariant
     /// 2nd Piola Kirchhoff stress tensor \f$ \sigma^{ij}\f$.
     /// with respect to the deformed metric tensor.
     /// Also return the derivatives of the determinant of the
@@ -585,7 +567,7 @@ namespace oomph
     /// The default implementation uses finite differences for the
     /// derivatives that depend on the constitutive law, but not
     /// for the derivatives of the determinant, which are generic.
-    //// If the boolean flag symmetrize_tensor is false, only the
+    /// / If the boolean flag symmetrize_tensor is false, only the
     /// "upper  triangular" entries of the tensor will be filled in. This is
     /// a useful efficiency when using the derivatives in Jacobian calculations.
     virtual void calculate_d_second_piola_kirchhoff_stress_dG(
@@ -599,7 +581,7 @@ namespace oomph
       const bool& symmetrize_tensor = true);
 
 
-    /// \short Calculate the deviatoric part of the contravariant
+    /// Calculate the deviatoric part of the contravariant
     /// 2nd Piola Kirchoff stress tensor. Also return the contravariant
     /// deformed metric tensor, the generalised dilatation, \f$ d, \f$ and
     /// the inverse of the bulk modulus \f$ \kappa\f$. This form is appropriate
@@ -621,7 +603,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Calculate the derivatives of the contravariant
+    /// Calculate the derivatives of the contravariant
     /// 2nd Piola Kirchoff stress tensor with respect to the deformed metric
     /// tensor. Also return the derivatives of the generalised dilatation,
     /// \f$ d, \f$ with respect to the deformed metric tensor.
@@ -643,7 +625,7 @@ namespace oomph
       const bool& symmetrize_tensor = true);
 
 
-    /// \short Pure virtual function in which the user must declare if the
+    /// Pure virtual function in which the user must declare if the
     /// constitutive equation requires an incompressible formulation
     /// in which the volume constraint is enforced explicitly.
     /// Used as a sanity check in PARANOID mode.
@@ -661,9 +643,7 @@ namespace oomph
   /// to large displacements:
   /// \f[ \sigma^{ij} = E^{ijkl} \gamma_{kl} \f]
   /// where
-  /// \f[ E^{ijkl} = \frac{E}{(1+\nu)} \left( \frac{\nu}{(1-2\nu)} G^{ij} G^{kl}
-  ///                + \frac{1}{2} \left(
-  ///                G^{ik} G^{jl} + G^{il} G^{jk} \right) \right) \f]
+  /// \f[ E^{ijkl} = \frac{E}{(1+\nu)} \left( \frac{\nu}{(1-2\nu)} G^{ij} G^{kl} + \frac{1}{2} \left( G^{ik} G^{jl} + G^{il} G^{jk} \right) \right) \f]
   /// For small strains \f$ (| G_{ij} - g_{ij} | \ll 1)\f$ this approaches
   /// the version appropriate for linear elasticity, obtained
   /// by replacing \f$ G^{ij}\f$ with \f$ g^{ij}\f$.
@@ -676,44 +656,43 @@ namespace oomph
   ///    the first term in the above expression for  \f$ E^{ijkl} \f$
   ///    is singular. We re-write the constitutive equation for this
   ///    case as
-  ///    \f[ \sigma^{ij} = -p G^{ij}
-  ///                + \frac{E}{3} \left(
-  ///                G^{ik} G^{jl} + G^{il} G^{jk} \right) \gamma_{kl} \f]
+  ///
+  ///    \f[ \sigma^{ij} = -p G^{ij} + \frac{E}{3} \left( G^{ik} G^{jl} + G^{il} G^{jk} \right) \gamma_{kl} \f]
   ///    where the pressure \f$ p \f$ needs to be determined independently
   ///    via the incompressibility constraint.
   ///    In this case, the stress returned by
   ///    \c calculate_second_piola_kirchhoff_stress()
   ///    contains only the deviatoric part of the 2nd Piola Kirchhoff stress,
-  ///    \f[ \overline{\sigma}^{ij} =
-  ///                \frac{E}{3} \left(
-  ///                G^{ik} G^{jl} + G^{il} G^{jk} \right) \gamma_{kl}. \f]
+  ///
+  ///    \f[ \overline{\sigma}^{ij} = \frac{E}{3} \left( G^{ik} G^{jl} + G^{il} G^{jk} \right) \gamma_{kl}. \f]
   ///    The function also returns the contravariant metric tensor
   ///    \f$ G^{ij}\f$ (since it is needed to form the complete stress
   ///    tensor), and the determinant of the deformed covariant metric
   ///    tensor \f$ {\tt detG} = \det G_{ij} \f$ (since it is needed
   ///    in the equation that enforces the incompressibility).
-  /// -# If  \f$ \nu \approx 1/2 \f$, the original form of the
-  ///     constitutive equation could be used, but the resulting
-  ///     equations tend to be ill-conditioned since they contain
-  ///     the product of the large "bulk modulus"
-  ///     \f[ \kappa = \frac{E\nu}{(1+\nu)(1-2\nu)} \f]
-  ///     and the small "generalised dilatation"
-  ///     \f[ d = \frac{1}{2} G^{ij} (G_{ij}-g_{ij}). \f]
-  ///     [\f$ d \f$ represents the actual dilatation in the small
-  ///     strain limit; for large deformations it doesn't have
-  ///     any sensible interpretation (or does it?). It is simply
-  ///     the term that needs to go to zero as \f$ \kappa \to \infty\f$.]
-  ///     In this case, the stress returned by
-  ///     \c calculate_second_piola_kirchhoff_stress()
-  ///     contains only the deviatoric part of the 2nd Piola Kirchhoff stress,
-  ///     \f[ \overline{\sigma}^{ij} =
-  ///                  \frac{E}{3} \left(
-  ///                 G^{ik} G^{jl} + G^{il} G^{jk} \right) \gamma_{kl}. \f]
-  ///     The function also returns the contravariant metric tensor
-  ///     \f$ G^{ij}\f$ (since it is needed to form the complete stress
-  ///     tensor), the inverse of the bulk modulus, and the generalised
-  ///     dilatation (since they are needed in the equation
-  ///     that determines the pressure).
+  /// -# If \f$ \nu \approx 1/2 \f$, the original form of the
+  ///    constitutive equation could be used, but the resulting
+  ///    equations tend to be ill-conditioned since they contain
+  ///    the product of the large "bulk modulus"
+  ///
+  ///    \f[ \kappa = \frac{E\nu}{(1+\nu)(1-2\nu)} \f]
+  ///    and the small "generalised dilatation"
+  ///
+  ///    \f[ d = \frac{1}{2} G^{ij} (G_{ij}-g_{ij}). \f]
+  ///    [\f$ d \f$ represents the actual dilatation in the small
+  ///    strain limit; for large deformations it doesn't have
+  ///    any sensible interpretation (or does it?). It is simply
+  ///    the term that needs to go to zero as \f$ \kappa \to \infty\f$.]
+  ///    In this case, the stress returned by
+  ///    \c calculate_second_piola_kirchhoff_stress()
+  ///    contains only the deviatoric part of the 2nd Piola Kirchhoff stress,
+  ///
+  ///    \f[ \overline{\sigma}^{ij} = \frac{E}{3} \left( G^{ik} G^{jl} + G^{il} G^{jk} \right) \gamma_{kl}. \f]
+  ///    The function also returns the contravariant metric tensor
+  ///    \f$ G^{ij}\f$ (since it is needed to form the complete stress
+  ///    tensor), the inverse of the bulk modulus, and the generalised
+  ///    dilatation (since they are needed in the equation
+  ///    that determines the pressure).
   ///
   //=========================================================================
   class GeneralisedHookean : public ConstitutiveLaw
@@ -745,7 +724,7 @@ namespace oomph
       if (Must_delete_e) delete E_pt;
     }
 
-    /// \short Calculate the contravariant 2nd Piola Kirchhoff
+    /// Calculate the contravariant 2nd Piola Kirchhoff
     /// stress tensor. Arguments are the
     /// covariant undeformed and deformed metric tensor and the
     /// matrix in which to return the stress tensor
@@ -754,7 +733,7 @@ namespace oomph
                                                  DenseMatrix<double>& sigma);
 
 
-    /// \short Calculate the deviatoric part
+    /// Calculate the deviatoric part
     /// \f$ \overline{ \sigma^{ij}}\f$  of the contravariant
     /// 2nd Piola Kirchhoff stress tensor \f$ \sigma^{ij}\f$.
     /// Also return the contravariant deformed metric
@@ -771,7 +750,7 @@ namespace oomph
                                                  double& Gdet);
 
 
-    /// \short Calculate the deviatoric part of the contravariant
+    /// Calculate the deviatoric part of the contravariant
     /// 2nd Piola Kirchoff stress tensor. Also return the contravariant
     /// deformed metric tensor, the generalised dilatation, \f$ d, \f$ and
     /// the inverse of the bulk modulus \f$ \kappa\f$. This form is appropriate
@@ -787,7 +766,7 @@ namespace oomph
                                                  double& inv_kappa);
 
 
-    /// \short Pure virtual function in which the writer must declare if the
+    /// Pure virtual function in which the writer must declare if the
     /// constitutive equation requires an incompressible formulation
     /// in which the volume constraint is enforced explicitly.
     /// Used as a sanity check in PARANOID mode. False.
@@ -803,7 +782,7 @@ namespace oomph
     /// Young's modulus
     double* E_pt;
 
-    /// \short Boolean flag to indicate if storage for elastic modulus
+    /// Boolean flag to indicate if storage for elastic modulus
     /// must be deleted in destructor
     bool Must_delete_e;
   };
@@ -832,7 +811,7 @@ namespace oomph
     {
     }
 
-    /// \short Calculate the contravariant 2nd Piola Kirchhoff
+    /// Calculate the contravariant 2nd Piola Kirchhoff
     /// stress tensor. Arguments are the
     /// covariant undeformed and deformed metric tensor and the
     /// matrix in which to return the stress tensor.
@@ -842,7 +821,7 @@ namespace oomph
                                                  DenseMatrix<double>& sigma);
 
 
-    /// \short Calculate the deviatoric part
+    /// Calculate the deviatoric part
     /// \f$ \overline{ \sigma^{ij}}\f$  of the contravariant
     /// 2nd Piola Kirchhoff stress tensor \f$ \sigma^{ij}\f$.
     /// Also return the contravariant deformed metric
@@ -859,7 +838,7 @@ namespace oomph
                                                  double& Gdet);
 
 
-    /// \short Calculate the deviatoric part of the contravariant
+    /// Calculate the deviatoric part of the contravariant
     /// 2nd Piola Kirchoff stress tensor. Also return the contravariant
     /// deformed metric tensor, the generalised dilatation, \f$ d, \f$ and
     /// the inverse of the bulk modulus \f$ \kappa\f$. This form is appropriate
@@ -875,7 +854,7 @@ namespace oomph
                                                  double& inv_kappa);
 
 
-    /// \short State if the constitutive equation requires an incompressible
+    /// State if the constitutive equation requires an incompressible
     /// formulation in which the volume constraint is enforced explicitly.
     /// Used as a sanity check in PARANOID mode. This is determined
     /// by interrogating the associated strain energy function.

@@ -3,11 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC//    Version 1.0; svn revision $LastChangedRevision$
-// LIC//
-// LIC// $LastChangedDate$
-// LIC//
-// LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -58,7 +54,7 @@ namespace oomph
     void assign_undeformed_positions();
 
   public:
-    /// \short Constructor: Pass number of elements, length,
+    /// Constructor: Pass number of elements, length,
     /// pointer to GeomObject that defines the undeformed Eulerian position,
     /// and the timestepper -- defaults to (Steady) default timestepper defined
     /// in the Mesh base class
@@ -68,7 +64,7 @@ namespace oomph
       GeomObject* undef_eulerian_posn_pt,
       TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
-    /// \short Constructor: Pass number of elements, xmin, xmax
+    /// Constructor: Pass number of elements, xmin, xmax
     /// pointer to GeomObject that defines the undeformed Eulerian position,
     /// and the timestepper -- defaults to (Steady) default timestepper defined
     /// in the Mesh base class

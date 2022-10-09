@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -71,7 +71,7 @@ namespace MeshDeformation
  }
 
 
- ///The exact normal vector for each face at global coordinate x.
+ /// The exact normal vector for each face at global coordinate x.
  void exact_normal(const unsigned &face,
                    const Vector<double> &x, Vector<double> &n)
  {
@@ -121,13 +121,13 @@ public:
 
 };
 
-///The QPoissonElement<2,2> is linear
+/// The QPoissonElement<2,2> is linear
 template<>
 string FileStem<QPoissonElement<2,2> >::Stem = "linear"; 
-///The QPoissonElement<2,3> is quadratic
+/// The QPoissonElement<2,3> is quadratic
 template<>
 string FileStem<QPoissonElement<2,3> >::Stem = "quadratic"; 
-///The QPoissonElement<2,4> is cubic
+/// The QPoissonElement<2,4> is cubic
 template<>
 string FileStem<QPoissonElement<2,4> >::Stem = "cubic"; 
 

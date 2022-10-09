@@ -3,11 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC//    Version 1.0; svn revision $LastChangedRevision$
-// LIC//
-// LIC// $LastChangedDate$
-// LIC//
-// LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -520,6 +516,7 @@ namespace oomph
     setup_boundary_element_info();
   }
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   // Algebraic-mesh-version of RefineableQuarterCircleSectorMesh
@@ -829,7 +826,7 @@ namespace oomph
   }
 
   //======================================================================
-  /// \short Algebraic update function: Update in central box according
+  /// Algebraic update function: Update in central box according
   /// to wall shape at time level t (t=0: present; t>0: previous)
   //======================================================================
   template<class ELEMENT>

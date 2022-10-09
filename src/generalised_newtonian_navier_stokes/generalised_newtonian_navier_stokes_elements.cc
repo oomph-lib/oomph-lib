@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -1355,7 +1355,7 @@ namespace oomph
 
 
   //==============================================================
-  ///  \short Get integral of kinetic energy over element:
+  ///  Get integral of kinetic energy over element:
   /// Note that this is the "raw" kinetic energy in the sense
   /// that the density ratio has not been included. In problems
   /// with two or more fluids the user will have to remember
@@ -1409,7 +1409,7 @@ namespace oomph
 
 
   //==========================================================================
-  ///  \short Get integral of time derivative of kinetic energy over element:
+  ///  Get integral of time derivative of kinetic energy over element:
   //==========================================================================
   template<unsigned DIM>
   double GeneralisedNewtonianNavierStokesEquations<DIM>::d_kin_energy_dt() const
@@ -2104,7 +2104,7 @@ namespace oomph
   }
 
   //==================================================================
-  /// \short Compute the hessian tensor vector products required to
+  /// Compute the hessian tensor vector products required to
   /// perform continuation of bifurcations analytically
   //================================================================
   template<unsigned DIM>
@@ -2881,7 +2881,7 @@ namespace oomph
 
 
   //====================================================================
-  //// Force build of templates
+  /// / Force build of templates
   //====================================================================
   template class GeneralisedNewtonianNavierStokesEquations<2>;
   template class GeneralisedNewtonianQCrouzeixRaviartElement<2>;

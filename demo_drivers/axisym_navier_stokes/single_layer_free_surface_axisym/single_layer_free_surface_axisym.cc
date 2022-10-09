@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -104,7 +104,7 @@ public:
  // Update before solve (empty)
  void actions_before_newton_solve() {}
 
- /// \short Update after solve can remain empty, because the update 
+ /// Update after solve can remain empty, because the update 
  /// is performed automatically after every Newton step.
  void actions_after_newton_solve() {}
 
@@ -133,10 +133,10 @@ public:
 
   } // End of set_initial_condition
 
- /// \short Access function for the specific mesh
+ /// Access function for the specific mesh
  SingleLayerSpineMesh<ELEMENT> *Bulk_mesh_pt;
 
- /// \short Mesh for the interface elements
+ /// Mesh for the interface elements
  Mesh* Surface_mesh_pt;
 
  /// Doc the solution

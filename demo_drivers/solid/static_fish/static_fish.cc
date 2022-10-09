@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -56,7 +56,7 @@ class ElasticFishMesh : public virtual RefineableFishMesh<ELEMENT>,
 
 public:
 
- /// \short Constructor: Build underlying adaptive fish mesh and then 
+ /// Constructor: Build underlying adaptive fish mesh and then 
  /// set current Eulerian coordinates to be the Lagrangian ones.
  /// Pass pointer to geometric objects that specify the 
  /// fish's back in the "current" and "undeformed" configurations,
@@ -199,7 +199,7 @@ public:
  /// Update function (empty)
  void actions_after_newton_solve() {}
 
- /// \short Update before solve: We're dealing with a static problem so
+ /// Update before solve: We're dealing with a static problem so
  /// the nodal positions before the next solve merely serve as
  /// initial conditions. For meshes that are very strongly refined
  /// near the boundary, the update of the displacement boundary

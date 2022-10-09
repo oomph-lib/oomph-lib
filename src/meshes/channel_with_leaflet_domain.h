@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -40,7 +40,7 @@ namespace oomph
   class ChannelWithLeafletDomain : public Domain
   {
   public:
-    ///\short Constructor: Pass pointer to GeomObject that represents the
+    /// Constructor: Pass pointer to GeomObject that represents the
     /// leaflet,
     /// the length of the domain to left and right of the leaflet, the
     /// height of the leaflet and the overall height of the channel,
@@ -268,7 +268,7 @@ namespace oomph
     /// Number of macro element rows above the leaflet
     unsigned Ny2;
 
-    /// \short Center of the domain : origin of the leaflet, extracted
+    /// Center of the domain : origin of the leaflet, extracted
     /// from GeomObject and stored for fast access.
     double X_0;
 
@@ -397,6 +397,7 @@ namespace oomph
       }
     }
   }
+
 
   /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////
@@ -531,6 +532,7 @@ namespace oomph
     r[0] = r_left[0] + (1.0 + zeta[0]) / 2.0 * (r_right[0] - r_left[0]);
     r[1] = r_left[1] + (1.0 + zeta[0]) / 2.0 * (r_right[1] - r_left[1]);
   }
+
 
   /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////
@@ -668,6 +670,7 @@ namespace oomph
     r[0] = r_left[0] + (1.0 + zeta[0]) / 2.0 * (r_right[0] - r_left[0]);
     r[1] = r_left[1] + (1.0 + zeta[0]) / 2.0 * (r_right[1] - r_left[1]);
   }
+
 
   /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////
@@ -827,6 +830,7 @@ namespace oomph
     r[0] = r_left[0] + (1.0 + zeta[0]) / 2.0 * (r_right[0] - r_left[0]);
     r[1] = r_left[1] + (1.0 + zeta[0]) / 2.0 * (r_right[1] - r_left[1]);
   }
+
 
   /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////

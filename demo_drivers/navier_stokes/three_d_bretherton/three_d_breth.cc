@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -23,7 +23,7 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
-///Driver code for the 3D Bretherton problem in a square tube
+/// Driver code for the 3D Bretherton problem in a square tube
 
 // Standard includes
 #include <algorithm>
@@ -54,7 +54,7 @@ namespace Global_Physical_Variables
  /// Reynolds number
  double Re= 0.0;
  
- ///Capillary number
+ /// Capillary number
  double Ca= 0.1;
  
  //Bond Nunber
@@ -122,7 +122,7 @@ public:
  /// Destructor to clean up memory
  ~ThreeDimBethertonProblem();
 
- ///Fix pressure in element e at pressure dof pdof and set to pvalue
+ /// Fix pressure in element e at pressure dof pdof and set to pvalue
  void fix_pressure(const unsigned int &e, const unsigned int &pdof, 
                    const double &pvalue)
   {

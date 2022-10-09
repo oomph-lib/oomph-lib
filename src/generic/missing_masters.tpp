@@ -3,11 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC//    Version 1.0; svn revision $LastChangedRevision$
-// LIC//
-// LIC// $LastChangedDate$
-// LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -53,7 +49,7 @@
 
 namespace oomph
 {
-  //// Templated helper functions for missing master methods,
+  /// / Templated helper functions for missing master methods,
 
 #ifdef OOMPH_HAS_MPI
 
@@ -920,7 +916,7 @@ namespace oomph
       macro_master_nod_pt->node_update_element_pt() = new_node_update_f_el_pt;
 
 
-      ////print out nodes
+      /// /print out nodes
       // std::cout << "nodes are:" << std::endl;
       // for(unsigned j=0; j<new_node_update_f_el_pt->nnode(); j++)
       // {
@@ -950,7 +946,7 @@ namespace oomph
         // BENFLAG:
         if (j == n_node - 1)
         {
-          //// Check if sons...
+          /// / Check if sons...
           // RefineableElement* ref_el_pt =
           // dynamic_cast<RefineableElement*>(new_node_update_f_el_pt);
           // if(ref_el_pt->tree_pt()->nsons()!=0)

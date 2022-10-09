@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -41,16 +41,16 @@ class HalfEllipse : public GeomObject
 
 public:
  
- ///Constructor
+ /// Constructor
  HalfEllipse(const double &centre_z,
                 const double &a, const double &b)
   : GeomObject(1,2), Centre_z(centre_z), A(a), B(b)
   {}
 
- ///Destructor (empty)
+ /// Destructor (empty)
  ~HalfEllipse(){}
 
- ///Return the position of the Half Ellipse
+ /// Return the position of the Half Ellipse
  void position(const Vector<double> &xi, Vector<double> &r) const
   {
    r[0] = A*sin(xi[0]);
@@ -194,7 +194,7 @@ public:
  /// Destructor: Empty; cleanup done in base class
  ~HalfRectangleWithHoleDomain() {}
 
- /// \short Helper function to interpolate linearly between the
+ /// Helper function to interpolate linearly between the
  /// "right" and "left" points; \f$ s \in [-1,1] \f$
  void linear_interpolate(Vector<double> left, Vector<double> right,
                          const double &s, Vector<double> &f)
@@ -207,7 +207,7 @@ public:
 
    
 
- /// \short Parametrisation of macro element boundaries: f(s) is the position
+ /// Parametrisation of macro element boundaries: f(s) is the position
  /// vector to macro-element m's boundary in the specified direction [N/S/E/W]
  /// at the specfied discrete time level (time=0: present; time>0: previous)
  void macro_element_boundary(const unsigned &time,
@@ -972,7 +972,7 @@ public:
   }
  
  
- /// \short Destructor: Empty
+ /// Destructor: Empty
  virtual ~RefineableHalfRectangleWithHoleMesh() {}
  
 };

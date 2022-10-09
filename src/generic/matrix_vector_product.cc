@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -28,7 +28,7 @@
 namespace oomph
 {
   //============================================================================
-  /// \short Setup the matrix vector product operator.
+  /// Setup the matrix vector product operator.
   /// WARNING: This class is wrapper to Trilinos Epetra matrix vector
   /// multiply methods, if Trilinos is not installed then this class will
   /// function as expected, but there will be no computational speed gain.
@@ -102,7 +102,7 @@ namespace oomph
   }
 
   //============================================================================
-  /// \short Apply the operator to the vector x and return the result in
+  /// Apply the operator to the vector x and return the result in
   /// the vector y
   //============================================================================
   void MatrixVectorProduct::multiply(const DoubleVector& x,
@@ -171,7 +171,7 @@ namespace oomph
   }
 
   //============================================================================
-  /// \short Apply the transpose of the operator to the vector x and return
+  /// Apply the transpose of the operator to the vector x and return
   /// the result in the vector y
   //============================================================================
   void MatrixVectorProduct::multiply_transpose(const DoubleVector& x,
@@ -236,7 +236,7 @@ namespace oomph
 
 #ifdef OOMPH_HAS_TRILINOS
   //============================================================================
-  /// \short Apply the operator to the vector x and return
+  /// Apply the operator to the vector x and return
   /// the result in the vector y (helper function)
   //============================================================================
   void MatrixVectorProduct::trilinos_multiply_helper(const DoubleVector& x,
@@ -281,7 +281,7 @@ namespace oomph
   }
 
   //============================================================================
-  /// \short Apply the transpose of the operator to the vector x and return
+  /// Apply the transpose of the operator to the vector x and return
   /// the result in the vector y (helper function)
   //============================================================================
   void MatrixVectorProduct::trilinos_multiply_transpose_helper(

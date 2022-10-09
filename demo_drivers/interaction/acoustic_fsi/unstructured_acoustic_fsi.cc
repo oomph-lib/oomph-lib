@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -76,7 +76,7 @@ public:
  /// Destructor:  Empty
  ~MyStraightLine(){}
  
- /// \short Position Vector at Lagrangian coordinate zeta 
+ /// Position Vector at Lagrangian coordinate zeta 
  void position(const Vector<double>& zeta, Vector<double>& r) const
   {
    // Position Vector
@@ -107,10 +107,10 @@ private:
 namespace Global_Parameters
 {
 
- /// \short Square of wavenumber for the Helmholtz equation
+ /// Square of wavenumber for the Helmholtz equation
  double K_squared=10.0;
  
- /// \short Radius of outer boundary of Helmholtz domain
+ /// Radius of outer boundary of Helmholtz domain
  double Outer_radius=4.0; 
 
  /// Order of absorbing/appproximate boundary condition
@@ -204,19 +204,19 @@ private:
  // Complete problem setup
  void complete_problem_setup(); 
 
- /// \short Create solid traction elements
+ /// Create solid traction elements
  void create_solid_traction_elements();
 
- /// \short Create FSI traction elements
+ /// Create FSI traction elements
  void create_fsi_traction_elements();
  
- /// \short Create Helmholtz FSI flux elements
+ /// Create Helmholtz FSI flux elements
  void create_helmholtz_fsi_flux_elements();
 
  /// Delete (face) elements in specified mesh 
  void delete_face_elements(Mesh* const & boundary_mesh_pt);
  
- /// \short Create ABC face elements 
+ /// Create ABC face elements 
  void create_helmholtz_ABC_elements();
 
  /// Setup interaction
@@ -237,7 +237,7 @@ private:
  /// Pointer to mesh of Helmholtz FSI flux elements
  Mesh* Helmholtz_fsi_flux_mesh_pt;
  
- /// \short Pointer to mesh containing the ABC elements
+ /// Pointer to mesh containing the ABC elements
  Mesh* Helmholtz_outer_boundary_mesh_pt;
  
  /// Boundary ID of upper symmetry boundary

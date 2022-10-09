@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -766,7 +766,7 @@ namespace oomph
   }
 
   //==============================================================
-  /// \short Compute traction (on the viscous scale) at local
+  /// Compute traction (on the viscous scale) at local
   /// coordinate s for outer unit normal N
   //==============================================================
   void PolarNavierStokesEquations::get_traction(const Vector<double>& s,
@@ -1001,7 +1001,7 @@ namespace oomph
   }
 
   //==============================================================
-  ///  \short Get integral of kinetic energy over element:
+  ///  Get integral of kinetic energy over element:
   //==============================================================
   double PolarNavierStokesEquations::kin_energy() const
   {
@@ -1085,7 +1085,7 @@ namespace oomph
   }
 
   //////////////////////////////////////////////////////////////////////
-  //// The finished version of the new equations                   /////
+  /// / The finished version of the new equations                   /////
   //////////////////////////////////////////////////////////////////////
 
   //==============================================================

@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -52,7 +52,7 @@ class ElasticQuadFromTriangleMesh : public virtual QuadFromTriangleMesh<ELEMENT>
  
 public:
  
- /// \short Constructor: 
+ /// Constructor: 
  ElasticQuadFromTriangleMesh(const std::string& node_file_name,
 			     const std::string& element_file_name,
 			     const std::string& poly_file_name,
@@ -225,7 +225,7 @@ namespace Global_Physical_Variables
  /// Uniform pressure
  double P = 0.0;
 
- /// \short Constant pressure load. The arguments to this function are imposed
+ /// Constant pressure load. The arguments to this function are imposed
  /// on us by the SolidTractionElements which allow the traction to 
  /// depend on the Lagrangian and Eulerian coordinates x and xi, and on the 
  /// outer unit normal to the surface. Here we only need the outer unit
@@ -253,7 +253,7 @@ class UnstructuredSolidProblem : public Problem
 
 public:
 
- /// \short Constructor: 
+ /// Constructor: 
  UnstructuredSolidProblem();
 
  /// Destructor (empty)

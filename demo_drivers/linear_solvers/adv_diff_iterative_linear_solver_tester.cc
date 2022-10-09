@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -129,14 +129,14 @@ public:
  /// Destructor (empty)
  ~TwoMeshFluxAdvectionDiffusionProblem(){}
 
- /// \short Doc the solution. DocInfo object stores flags/labels for where the
+ /// Doc the solution. DocInfo object stores flags/labels for where the
  /// output gets written to
  void doc_solution(DocInfo& doc_info);
 
 
 private:
 
- /// \short Update the problem specs before solve: Reset boundary conditions
+ /// Update the problem specs before solve: Reset boundary conditions
  /// to the values from the exact solution.
  void actions_before_newton_solve();
 
@@ -149,13 +149,13 @@ private:
  /// Actions after adapt: Rebuild the mesh of prescribed flux elements
  void actions_after_adapt();
 
- /// \short Create Advection Diffusion flux elements on boundary b of 
+ /// Create Advection Diffusion flux elements on boundary b of 
  /// the Mesh pointed to by bulk_mesh_pt and add them to the Mesh 
  /// object pointed to by surface_mesh_pt
  void create_flux_elements(const unsigned &b, Mesh* const &bulk_mesh_pt,
                            Mesh* const &surface_mesh_pt);
 
- /// \short Delete Advection Diffusion flux elements and wipe the surface mesh
+ /// Delete Advection Diffusion flux elements and wipe the surface mesh
  void delete_flux_elements(Mesh* const &surface_mesh_pt);
 
  /// Pointer to the "bulk" mesh

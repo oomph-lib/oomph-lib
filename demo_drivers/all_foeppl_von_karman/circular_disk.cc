@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -112,7 +112,7 @@ private:
  /// Doc info object for labeling output
  DocInfo Doc_info;
 
- /// \short Helper function to (re-)set boundary condition
+ /// Helper function to (re-)set boundary condition
  /// and complete the build of  all elements
  void complete_problem_setup();
 
@@ -493,7 +493,7 @@ void UnstructuredFvKProblem<ELEMENT>::doc_solution()
 
 
 //=======start_of_main========================================
-///Driver code for demo of inline triangle mesh generation
+/// Driver code for demo of inline triangle mesh generation
 //============================================================
 int main(int argc, char **argv)
 {

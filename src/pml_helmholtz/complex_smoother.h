@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -51,7 +51,7 @@ namespace oomph
     /// Virtual empty destructor
     virtual ~HelmholtzSmoother(){};
 
-    /// \short The smoother_solve function performs fixed number of iterations
+    /// The smoother_solve function performs fixed number of iterations
     /// on the system A*result=rhs. The number of (smoothing) iterations is
     /// the same as the max. number of iterations in the underlying
     /// IterativeLinearSolver class.
@@ -62,7 +62,7 @@ namespace oomph
     /// Setup the smoother for the matrix specified by the pointer
     virtual void complex_smoother_setup(Vector<CRDoubleMatrix*> matrix_pt) = 0;
 
-    /// \short Helper function to calculate a complex matrix-vector product.
+    /// Helper function to calculate a complex matrix-vector product.
     /// Assumes the matrix has been provided as a Vector of length two; the
     /// first entry containing the real part of the system matrix and the
     /// second entry containing the imaginary part
@@ -158,7 +158,7 @@ namespace oomph
       soln[1] += temp;
     } // End of complex_matrix_multiplication
 
-    /// \short Self-test to check that all the dimensions of the inputs to
+    /// Self-test to check that all the dimensions of the inputs to
     /// solve helper are consistent and everything that needs to be built, is.
     template<typename MATRIX>
     void check_validity_of_solve_helper_inputs(
@@ -169,7 +169,7 @@ namespace oomph
       const double& n_dof);
 
   protected:
-    /// \short When a derived class object is being used as a smoother in
+    /// When a derived class object is being used as a smoother in
     /// the MG algorithm the residual norm
     /// does not need to be calculated. This boolean is used as a flag to
     /// indicate this in solve_helper(...)
@@ -177,7 +177,7 @@ namespace oomph
   };
 
   //==================================================================
-  /// \short Self-test to be called inside solve_helper to ensure
+  /// Self-test to be called inside solve_helper to ensure
   /// that all inputs are consistent and everything that needs to
   /// be built, is.
   //==================================================================
@@ -321,13 +321,13 @@ namespace oomph
       }
     } // End of clean_up_memory
 
-    /// \short Broken copy constructor
+    /// Broken copy constructor
     ComplexDampedJacobi(const ComplexDampedJacobi&) = delete;
 
-    /// \short Broken assignment operator
+    /// Broken assignment operator
     void operator=(const ComplexDampedJacobi&) = delete;
 
-    /// \short Function to calculate the value of Omega by passing in the
+    /// Function to calculate the value of Omega by passing in the
     /// value of k and h [see Elman et al. "A multigrid method enhanced by
     /// Krylov subspace iteration for discrete Helmholtz equations", p.1303]
     void calculate_omega(const double& k, const double& h)
@@ -465,7 +465,7 @@ namespace oomph
       }
     } // End of complex_smoother_setup
 
-    /// \short The smoother_solve function performs fixed number of iterations
+    /// The smoother_solve function performs fixed number of iterations
     /// on the system A*result=rhs. The number of (smoothing) iterations is
     /// the same as the max. number of iterations in the underlying
     /// IterativeLinearSolver class.
@@ -479,7 +479,7 @@ namespace oomph
       complex_solve_helper(rhs, solution);
     } // End of complex_smoother_solve
 
-    /// \short Use damped Jacobi iteration as an IterativeLinearSolver:
+    /// Use damped Jacobi iteration as an IterativeLinearSolver:
     /// This obtains the Jacobian matrix J and the residual vector r
     /// (needed for the Newton method) from the problem's get_jacobian
     /// function and returns the result of Jx=r.
@@ -495,11 +495,11 @@ namespace oomph
     }
 
   private:
-    /// \short This is where the actual work is done
+    /// This is where the actual work is done
     void complex_solve_helper(const Vector<DoubleVector>& rhs,
                               Vector<DoubleVector>& solution);
 
-    /// \short Boolean flag to indicate if the matrices pointed to by
+    /// Boolean flag to indicate if the matrices pointed to by
     /// Matrix_real_pt and Matrix_imag_pt can be deleted.
     bool Matrix_can_be_deleted;
 
@@ -526,7 +526,7 @@ namespace oomph
   };
 
   //======================================================================
-  /// \short This is where the actual work is done.
+  /// This is where the actual work is done.
   //======================================================================
   template<typename MATRIX>
   void ComplexDampedJacobi<MATRIX>::complex_solve_helper(
@@ -681,13 +681,9 @@ namespace oomph
       // Calculate the 2-norm (noting that the 2-norm of a complex vector a of
       // length n is simply the square root of the sum of the squares of each
       // real and imaginary component). That is:
-      // \f[
-      // \|a\|_2^2=\sum_{i=0}^{i=n-1}\real(a[i])^2+\imag(a[i])^2.
-      // \f]
+      /// \f[ \|a\|_2^2=\sum_{i=0}^{i=n-1}\real(a[i])^2+\imag(a[i])^2. \f]
       // can be written as:
-      // \f[
-      // \|a\|_2^2=\|\real(a)\|_2^2+\|\imag(a)\|_2^2.
-      // \f]
+      /// \f[ \|a\|_2^2=\|\real(a)\|_2^2+\|\imag(a)\|_2^2. \f]
       double res_real_norm = residual_real.norm();
       double res_imag_norm = residual_imag.norm();
       double norm_res =
@@ -852,7 +848,7 @@ namespace oomph
   } // End of complex_solve_helper function
 
   //======================================================================
-  /// \short The GMRES method rewritten for complex matrices
+  /// The GMRES method rewritten for complex matrices
   //======================================================================
   template<typename MATRIX>
   class ComplexGMRES : public HelmholtzSmoother
@@ -890,7 +886,7 @@ namespace oomph
       clean_up_memory();
     } // End of disable resolve
 
-    /// \short Solver: Takes pointer to problem and returns the results vector
+    /// Solver: Takes pointer to problem and returns the results vector
     /// which contains the solution of the linear system defined by
     /// the problem's fully assembled Jacobian and residual vector.
     void solve(Problem* const& problem_pt, DoubleVector& result)
@@ -907,7 +903,7 @@ namespace oomph
         error_message, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     } // End of solve
 
-    /// \short Linear-algebra-type solver: Takes pointer to a matrix
+    /// Linear-algebra-type solver: Takes pointer to a matrix
     /// and rhs vector and returns the solution of the linear system
     /// Call the broken base-class version. If you want this, please
     /// implement it
@@ -984,7 +980,7 @@ namespace oomph
 #endif
     } // End of complex_smoother_setup
 
-    /// \short The smoother_solve function performs fixed number of iterations
+    /// The smoother_solve function performs fixed number of iterations
     /// on the system A*result=rhs. The number of (smoothing) iterations is
     /// the same as the max. number of iterations in the underlying
     /// IterativeLinearSolver class.
@@ -1094,34 +1090,16 @@ namespace oomph
       } // for (unsigned j=0;j<=k;j++)
     } // End of update
 
-    /// \short Helper function: Generate a plane rotation. This is done by
+    /// Helper function: Generate a plane rotation. This is done by
     /// finding the value of \f$ \cos(\theta) \f$ (i.e. cs) and the value of
     /// \f$ \sin(\theta) \f$ (i.e. sn) such that:
-    /// \f[
-    /// \begin{bmatrix}
-    /// \overline{\cos\theta} & \overline{\sin\theta} \cr
-    /// -\sin\theta & \cos\theta
-    /// \end{bmatrix}
-    /// \begin{bmatrix}
-    /// dx
-    /// \\ dy
-    /// \end{bmatrix}
-    /// =
-    /// \begin{bmatrix}
-    /// r
-    /// \\ 0
-    /// \end{bmatrix},
-    /// \f]
+    /// \f[ \begin{bmatrix} \overline{\cos\theta} & \overline{\sin\theta} \cr -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} dx \\ dy \end{bmatrix} = \begin{bmatrix} r \\ 0 \end{bmatrix}, \f]
     /// where \f$ r=\sqrt{pow(|dx|,2)+pow(|dy|,2)} \f$. The values of a and b
     /// are given by:
     /// The values of dx and dy are given by:
-    /// \f[
-    /// \cos\theta&=\dfrac{dx}{\sqrt{|dx|^2+|dy|^2}},
-    /// \f]
+    /// \f[ \cos\theta&=\dfrac{dx}{\sqrt{|dx|^2+|dy|^2}}, \f]
     /// and
-    /// \f[
-    /// \sin\theta&=\dfrac{dy}{\sqrt{|dx|^2+|dy|^2}}.
-    /// \f]
+    /// \f[ \sin\theta&=\dfrac{dy}{\sqrt{|dx|^2+|dy|^2}}. \f]
     /// Taken from: Saad Y."Iterative methods for sparse linear systems", p.193.
     /// We also check to see that sn is always a real (nonnegative) number. See
     /// pp.193-194 for an explanation.
@@ -1200,23 +1178,9 @@ namespace oomph
       }
     } // End of generate_plane_rotation
 
-    /// \short Helper function: Apply plane rotation. This is done using the
+    /// Helper function: Apply plane rotation. This is done using the
     /// update:
-    /// \f[
-    /// \begin{bmatrix}
-    /// dx
-    /// \\ dy
-    /// \end{bmatrix}
-    /// \leftarrow
-    /// \begin{bmatrix}
-    /// \overline{\cos\theta} & \overline{\sin\theta}
-    /// \\ -\sin\theta & \cos\theta
-    /// \end{bmatrix}
-    /// \begin{bmatrix}
-    /// dx
-    /// \\ dy
-    /// \end{bmatrix}.
-    /// \f]
+    /// \f[ \begin{bmatrix} dx \\ dy \end{bmatrix} \leftarrow \begin{bmatrix} \overline{\cos\theta} & \overline{\sin\theta} \\ -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} dx \\ dy \end{bmatrix}. \f]
     /// Taken from: Saad Y."Iterative methods for sparse linear systems", p.193.
     void apply_plane_rotation(std::complex<double>& dx,
                               std::complex<double>& dy,
@@ -1239,17 +1203,17 @@ namespace oomph
     /// Vector of pointers to the real and imaginary part of the system matrix
     Vector<CRDoubleMatrix*> Matrices_storage_pt;
 
-    /// \short Boolean flag to indicate if the solve is done in re-solve mode,
+    /// Boolean flag to indicate if the solve is done in re-solve mode,
     /// bypassing setup of matrix and preconditioner
     bool Resolving;
 
-    /// \short Boolean flag to indicate if the real and imaginary system
+    /// Boolean flag to indicate if the real and imaginary system
     /// matrices can be deleted
     bool Matrix_can_be_deleted;
   };
 
   //======================================================================
-  /// \short This is where the actual work is done
+  /// This is where the actual work is done
   //======================================================================
   template<typename MATRIX>
   void ComplexGMRES<MATRIX>::complex_solve_helper(
@@ -1764,7 +1728,7 @@ namespace oomph
 
 
   //======================================================================
-  /// \short The GMRES method for the Helmholtz solver.
+  /// The GMRES method for the Helmholtz solver.
   //======================================================================
   template<typename MATRIX>
   class HelmholtzGMRESMG : public IterativeLinearSolver,
@@ -1800,7 +1764,7 @@ namespace oomph
       clean_up_memory();
     }
 
-    /// \short Implementation of the pure virtual base class function. The
+    /// Implementation of the pure virtual base class function. The
     /// function has been broken because this is meant to be used as a linear
     /// solver
     void preconditioner_solve(const DoubleVector& r, DoubleVector& z)
@@ -1819,7 +1783,7 @@ namespace oomph
                           OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Implementation of the pure virtual base class function. This
+    /// Implementation of the pure virtual base class function. This
     /// accompanies the preconditioner_solve function and so is also broken
     void setup()
     {
@@ -1836,7 +1800,7 @@ namespace oomph
                           OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Solver: Takes pointer to problem and returns the results vector
+    /// Solver: Takes pointer to problem and returns the results vector
     /// which contains the solution of the linear system defined by
     /// the problem's fully assembled Jacobian and residual vector.
     void solve(Problem* const& problem_pt, DoubleVector& result)
@@ -1994,7 +1958,7 @@ namespace oomph
       }
     } // End of solve
 
-    /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs
+    /// Linear-algebra-type solver: Takes pointer to a matrix and rhs
     /// vector and returns the solution of the linear system.
     void solve(DoubleMatrixBase* const& matrix_pt,
                const DoubleVector& rhs,
@@ -2015,7 +1979,7 @@ namespace oomph
     }
 
 
-    /// \short Linear-algebra-type solver: Takes pointer to a matrix
+    /// Linear-algebra-type solver: Takes pointer to a matrix
     /// and rhs vector and returns the solution of the linear system
     /// Call the broken base-class version. If you want this, please
     /// implement it
@@ -2026,7 +1990,7 @@ namespace oomph
       LinearSolver::solve(matrix_pt, rhs, result);
     }
 
-    /// \short Re-solve the system defined by the last assembled Jacobian
+    /// Re-solve the system defined by the last assembled Jacobian
     /// and the rhs vector specified here. Solution is returned in the
     /// vector result.
     void resolve(const DoubleVector& rhs, DoubleVector& result)
@@ -2067,13 +2031,13 @@ namespace oomph
       return Iterations;
     }
 
-    /// \short Set left preconditioning (the default)
+    /// Set left preconditioning (the default)
     void set_preconditioner_LHS()
     {
       Preconditioner_LHS = true;
     }
 
-    /// \short Enable right preconditioning
+    /// Enable right preconditioning
     void set_preconditioner_RHS()
     {
       Preconditioner_LHS = false;
@@ -2115,7 +2079,7 @@ namespace oomph
       }
     } // End of clean_up_memory
 
-    /// \short Helper function to calculate a complex matrix-vector product.
+    /// Helper function to calculate a complex matrix-vector product.
     /// Assumes the matrix has been provided as a Vector of length two; the
     /// first entry containing the real part of the system matrix and the
     /// second entry containing the imaginary part
@@ -2347,34 +2311,16 @@ namespace oomph
       } // if(Preconditioner_LHS) else
     } // End of update
 
-    /// \short Helper function: Generate a plane rotation. This is done by
+    /// Helper function: Generate a plane rotation. This is done by
     /// finding the value of \f$ \cos(\theta) \f$ (i.e. cs) and the value of
     /// \f$ \sin(\theta) \f$ (i.e. sn) such that:
-    /// \f[
-    /// \begin{bmatrix}
-    /// \overline{\cos\theta} & \overline{\sin\theta}
-    /// \\ -\sin\theta & \cos\theta
-    /// \end{bmatrix}
-    /// \begin{bmatrix}
-    /// dx
-    /// \\ dy
-    /// \end{bmatrix}
-    /// =
-    /// \begin{bmatrix}
-    /// r
-    /// \\ 0
-    /// \end{bmatrix},
-    /// \f]
+    /// \f[ \begin{bmatrix} \overline{\cos\theta} & \overline{\sin\theta} \\ -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} dx \\ dy \end{bmatrix} = \begin{bmatrix} r \\ 0 \end{bmatrix}, \f]
     /// where \f$ r=\sqrt{pow(|dx|,2)+pow(|dy|,2)} \f$. The values of a and b
     /// are given by:
     /// The values of dx and dy are given by:
-    /// \f[
-    /// \cos\theta&=\dfrac{dx}{\sqrt{|dx|^2+|dy|^2}},
-    /// \f]
+    /// \f[ \cos\theta&=\dfrac{dx}{\sqrt{|dx|^2+|dy|^2}}, \f]
     /// and
-    /// \f[
-    /// \sin\theta&=\dfrac{dy}{\sqrt{|dx|^2+|dy|^2}}.
-    /// \f]
+    /// \f[ \sin\theta&=\dfrac{dy}{\sqrt{|dx|^2+|dy|^2}}. \f]
     /// Taken from: Saad Y."Iterative methods for sparse linear systems", p.193.
     /// We also check to see that sn is always a real (nonnegative) number. See
     /// pp.193-194 for an explanation.
@@ -2453,23 +2399,9 @@ namespace oomph
       }
     } // End of generate_plane_rotation
 
-    /// \short Helper function: Apply plane rotation. This is done using the
+    /// Helper function: Apply plane rotation. This is done using the
     /// update:
-    /// \f[
-    /// \begin{bmatrix}
-    /// dx
-    /// \\ dy
-    /// \end{bmatrix}
-    /// \leftarrow
-    /// \begin{bmatrix}
-    /// \overline{\cos\theta} & \overline{\sin\theta}
-    /// \\ -\sin\theta & \cos\theta
-    /// \end{bmatrix}
-    /// \begin{bmatrix}
-    /// dx
-    /// \\ dy
-    /// \end{bmatrix}.
-    /// \f]
+    /// \f[ \begin{bmatrix} dx \\ dy \end{bmatrix} \leftarrow \begin{bmatrix} \overline{\cos\theta} & \overline{\sin\theta} \\ -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} dx \\ dy \end{bmatrix}. \f]
     /// Taken from: Saad Y."Iterative methods for sparse linear systems", p.193.
     void apply_plane_rotation(std::complex<double>& dx,
                               std::complex<double>& dy,
@@ -2492,15 +2424,15 @@ namespace oomph
     /// Vector of pointers to the real and imaginary part of the system matrix
     Vector<CRDoubleMatrix*> Matrices_storage_pt;
 
-    /// \short Boolean flag to indicate if the solve is done in re-solve mode,
+    /// Boolean flag to indicate if the solve is done in re-solve mode,
     /// bypassing setup of matrix and preconditioner
     bool Resolving;
 
-    /// \short Boolean flag to indicate if the matrix pointed to be Matrix_pt
+    /// Boolean flag to indicate if the matrix pointed to be Matrix_pt
     /// can be deleted.
     bool Matrix_can_be_deleted;
 
-    /// \short boolean indicating use of left hand preconditioning (if true)
+    /// boolean indicating use of left hand preconditioning (if true)
     /// or right hand preconditioning (if false)
     bool Preconditioner_LHS;
   };
@@ -3298,7 +3230,7 @@ namespace oomph
 
 
   //======================================================================
-  /// \short The FGMRES method, i.e. the flexible variant of the GMRES
+  /// The FGMRES method, i.e. the flexible variant of the GMRES
   /// method which allows for nonconstant preconditioners [see Saad Y,
   /// "Iterative methods for sparse linear systems", p.287]. Note, FGMRES
   /// can only cater to right preconditioning; if the user tries to switch
@@ -3328,7 +3260,7 @@ namespace oomph
     /// Broken assignment operator
     void operator=(const HelmholtzFGMRESMG&) = delete;
 
-    /// \short Overloaded function to let the user know that left
+    /// Overloaded function to let the user know that left
     /// preconditioning is not possible with FGMRES, only right preconditioning
     void set_preconditioner_LHS()
     {
@@ -3346,7 +3278,7 @@ namespace oomph
                           OOMPH_EXCEPTION_LOCATION);
     } // End of set_preconditioner_LHS
 
-    /// \short Solver: Takes pointer to problem and returns the results vector
+    /// Solver: Takes pointer to problem and returns the results vector
     /// which contains the solution of the linear system defined by
     /// the problem's fully assembled Jacobian and residual vector.
     void solve(Problem* const& problem_pt, DoubleVector& result)

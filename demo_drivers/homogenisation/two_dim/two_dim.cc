@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -51,7 +51,7 @@ using namespace oomph;
 class CompareNodeCoordinatesX
 {
 public:
-///The actual comparison operator
+/// The actual comparison operator
  int operator() (Node* const &node1_pt,
                  Node* const &node2_pt)
   {
@@ -72,7 +72,7 @@ public:
 class CompareNodeCoordinatesY
 {
 public:
-///The actual comparison operator
+/// The actual comparison operator
  int operator() (Node* const &node1_pt,
                  Node* const &node2_pt)
   {
@@ -111,16 +111,16 @@ public:
   //Pointer to the tensor for the fibre
   ElasticityTensor *E_fibre_pt;
 
-  ///Function that returns a pointer to the elasticity tensor
-  ///associated with the bulk at position x
+  /// Function that returns a pointer to the elasticity tensor
+  /// associated with the bulk at position x
   void bulk_elasticity_tensor_pt(const Vector<double> &x, 
                                  ElasticityTensor* &E_pt)
   {
    E_pt = E_bulk_pt;
   }
 
-  ////Function that returns a pointer to the elasticity tensor
-  ///associated with the fibre at position x
+  /// /Function that returns a pointer to the elasticity tensor
+  /// associated with the fibre at position x
   void fibre_elasticity_tensor_pt(const Vector<double> &x, 
                                   ElasticityTensor* &E_pt)
   {
@@ -183,10 +183,10 @@ public:
  /// Update the problem specs after solve (empty)
  void actions_after_newton_solve() {}
 
- /// \short Update the problem specs before solve: 
+ /// Update the problem specs before solve: 
  void actions_before_newton_solve() {}
 
- /// \short Calculate the values of the effective modulus by
+ /// Calculate the values of the effective modulus by
  /// integrating over each element
  void calculate_coefficients()
   {
@@ -202,8 +202,8 @@ public:
     }
   }
  
- ///Solve the sub-problems
- ///This will only solve the problem if the first_solve flag is true
+ /// Solve the sub-problems
+ /// This will only solve the problem if the first_solve flag is true
  void sub_solve(const unsigned &n_dofs, DoubleVector &dx, DoubleVector &res,
                 const bool &first_solve)
   {
@@ -261,7 +261,7 @@ public:
   }
 
 
- /// \short Make our own solve function
+ /// Make our own solve function
  void solve() 
   {
    //Enable the resolve
@@ -722,7 +722,7 @@ void HomogenisationProblem<ELEMENT>::doc_solution()
 }
 
 //============================================================
-///Driver code for moving block problem
+/// Driver code for moving block problem
 //============================================================
 int main(int argc, char **argv)
 {

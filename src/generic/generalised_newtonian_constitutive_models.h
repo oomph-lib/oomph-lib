@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -371,7 +371,7 @@ namespace oomph
 
     /// We use a quadratic function to smoothly blend from the Herschel Bulkley
     /// model at the cut-off to a constant viscosity as the strain rate
-    ////approaches zero; this way we avoid the
+    /// /approaches zero; this way we avoid the
     /// discontinuity of the gradient at the cut-off, which is present in the
     /// classic Tanner Milthorpe regularisation
     double a;

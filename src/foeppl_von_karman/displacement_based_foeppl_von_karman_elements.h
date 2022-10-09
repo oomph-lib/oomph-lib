@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -45,33 +45,26 @@ namespace oomph
   //=============================================================
   /// A class for all isoparametric elements that solve the
   /// Foeppl von Karman equations.
-  /// \f[
-  /// \nabla^4 w -  \eta  \frac{\partial}{\partial x_{\beta}}
-  ///                     \left( \sigma^{\alpha \beta}
-  ///                            \frac{\partial w}{\partial x_{\alpha}}
-  ///                     \right) = p(x,y)
-  /// \f]
+  /// \f[ \nabla^4 w - \eta \frac{\partial}{\partial x_{\beta}} \left( \sigma^{\alpha \beta} \frac{\partial w}{\partial x_{\alpha}} \right) = p(x,y) \f]
   /// and
-  /// \f[
-  /// \frac{\sigma^{\alpha \beta}}{\partial x_{\beta}} = \tau_\alpha
-  /// \f]
+  /// \f[ \frac{\sigma^{\alpha \beta}}{\partial x_{\beta}} = \tau_\alpha \f]
   /// This contains the generic maths. Shape functions, geometric
   /// mapping etc. must get implemented in derived class.
   //=============================================================
   class DisplacementBasedFoepplvonKarmanEquations : public virtual FiniteElement
   {
   public:
-    /// \short Function pointer to pressure function fct(x,f(x)) --
+    /// Function pointer to pressure function fct(x,f(x)) --
     /// x is a Vector!
     typedef void (*FoepplvonKarmanPressureFctPt)(const Vector<double>& x,
                                                  double& f);
 
-    /// \short Function pointer to traction function fct(x,f(x)) --
+    /// Function pointer to traction function fct(x,f(x)) --
     /// x is a Vector!
     typedef void (*FoepplvonKarmanTractionFctPt)(const Vector<double>& x,
                                                  Vector<double>& f);
 
-    /// \short Constructor (must initialise the Pressure_fct_pt and the
+    /// Constructor (must initialise the Pressure_fct_pt and the
     /// Traction_fct_pt. Also set physical parameters to their default
     /// values.
     DisplacementBasedFoepplvonKarmanEquations()
@@ -118,7 +111,7 @@ namespace oomph
       return Eta_pt;
     }
 
-    /// \short Return the index at which the i-th unknown value
+    /// Return the index at which the i-th unknown value
     /// is stored. The default value, i, is appropriate for single-physics
     /// problems. By default, these are:
     /// 0: w
@@ -140,7 +133,7 @@ namespace oomph
       output(outfile, n_plot);
     }
 
-    /// \short Output FE representation of soln: x,y,w at
+    /// Output FE representation of soln: x,y,w at
     /// n_plot^DIM plot points
     void output(std::ostream& outfile, const unsigned& n_plot);
 
@@ -151,7 +144,7 @@ namespace oomph
       output(file_pt, n_plot);
     }
 
-    /// \short C-style output FE representation of soln: x,y,w at
+    /// C-style output FE representation of soln: x,y,w at
     /// n_plot^DIM plot points
     void output(FILE* file_pt, const unsigned& n_plot);
 
@@ -160,7 +153,7 @@ namespace oomph
                     const unsigned& n_plot,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
 
-    /// \short Output exact soln: x,y,w_exact at
+    /// Output exact soln: x,y,w_exact at
     /// n_plot^DIM plot points (dummy time-dependent version to
     /// keep intel compiler happy)
     virtual void output_fct(
@@ -222,7 +215,7 @@ namespace oomph
       return Traction_fct_pt;
     }
 
-    /// \short Get pressure term at (Eulerian) position x. This function
+    /// Get pressure term at (Eulerian) position x. This function
     /// is virtual to allow overloading in multi-physics problems where
     /// the strength of the pressure function might be determined by
     /// another system of equations.
@@ -242,7 +235,7 @@ namespace oomph
       }
     }
 
-    /// \short Get in-plane traction term at (Eulerian) position x.
+    /// Get in-plane traction term at (Eulerian) position x.
     inline virtual void get_traction_fvk(Vector<double>& x,
                                          Vector<double>& traction) const
     {
@@ -659,7 +652,7 @@ namespace oomph
     }
 
 
-    /// \short Return FE representation of function value w_fvk(s)
+    /// Return FE representation of function value w_fvk(s)
     /// at local coordinate s (by default - if index > 0, returns
     /// FE representation of valued stored at index^th nodal index
     inline double interpolated_w_fvk(const Vector<double>& s,
@@ -689,10 +682,10 @@ namespace oomph
       return (interpolated_w);
     }
 
-    /// \short Self-test: Return 0 for OK
+    /// Self-test: Return 0 for OK
     unsigned self_test();
 
-    /// \short Sets a flag to signify that we are solving the linear, pure
+    /// Sets a flag to signify that we are solving the linear, pure
     /// bending equations, and pin all the nodal values that will not be used in
     /// this case
     void use_linear_bending_model()
@@ -727,7 +720,7 @@ namespace oomph
 
 
   protected:
-    /// \short Shape/test functions and derivs w.r.t. to global coords at
+    /// Shape/test functions and derivs w.r.t. to global coords at
     /// local coord. s; return  Jacobian of mapping
     virtual double dshape_and_dtest_eulerian_fvk(const Vector<double>& s,
                                                  Shape& psi,
@@ -736,7 +729,7 @@ namespace oomph
                                                  DShape& dtestdx) const = 0;
 
 
-    /// \short Shape/test functions and derivs w.r.t. to global coords at
+    /// Shape/test functions and derivs w.r.t. to global coords at
     /// integration point ipt; return  Jacobian of mapping
     virtual double dshape_and_dtest_eulerian_at_knot_fvk(
       const unsigned& ipt,
@@ -765,7 +758,7 @@ namespace oomph
     /// Default value for physical constants
     static double Default_Physical_Constant_Value;
 
-    /// \short Flag which stores whether we are using a linear, pure
+    /// Flag which stores whether we are using a linear, pure
     /// bending model instead of the full non-linear Foeppl-von Karman
     bool Linear_bending_model;
   };
@@ -779,7 +772,7 @@ namespace oomph
     : public virtual ProjectableElement<FVK_ELEMENT>
   {
   public:
-    /// \short Specify the values associated with field fld.  The
+    /// Specify the values associated with field fld.  The
     /// information is returned in a vector of pairs which comprise the
     /// Data object and the value within it, that correspond to field
     /// fld.
@@ -812,13 +805,13 @@ namespace oomph
       return data_values;
     }
 
-    /// \short Number of fields to be projected: Just two
+    /// Number of fields to be projected: Just two
     unsigned nfields_for_projection()
     {
       return 4;
     }
 
-    /// \short Number of history values to be stored for fld-th field.
+    /// Number of history values to be stored for fld-th field.
     /// (Note: count includes current value!)
     unsigned nhistory_values_for_projection(const unsigned& fld)
     {
@@ -837,14 +830,14 @@ namespace oomph
     }
 
 
-    ///\short Number of positional history values
+    /// Number of positional history values
     /// (Note: count includes current value!)
     unsigned nhistory_values_for_coordinate_projection()
     {
       return this->node_pt(0)->position_time_stepper_pt()->ntstorage();
     }
 
-    /// \short Return Jacobian of mapping and shape functions of field fld
+    /// Return Jacobian of mapping and shape functions of field fld
     /// at local coordinate s
     double jacobian_and_shape_of_field(const unsigned& fld,
                                        const Vector<double>& s,
@@ -871,7 +864,7 @@ namespace oomph
     }
 
 
-    /// \short Return interpolated field fld at local coordinate s, at
+    /// Return interpolated field fld at local coordinate s, at
     /// time level t (t=0: present; t>0: history values)
     double get_field(const unsigned& t,
                      const unsigned& fld,

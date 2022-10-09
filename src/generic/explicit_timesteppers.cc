@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -35,7 +35,7 @@ namespace oomph
   double ExplicitTimeSteppableObject::Dummy_time_value = 0.0;
 
   //==================================================================
-  ///\short A single virtual function that returns the residuals
+  /// A single virtual function that returns the residuals
   /// vector multiplied by the inverse mass matrix
   //=================================================================
   void ExplicitTimeSteppableObject::get_dvaluesdt(DoubleVector& minv_res)
@@ -126,7 +126,7 @@ namespace oomph
   }
 
   //==================================================================
-  ///\short Virtual function that should be overloaded to return access
+  /// Virtual function that should be overloaded to return access
   /// to the local time in the object
   //=================================================================
   double& ExplicitTimeSteppableObject::time()
@@ -142,7 +142,7 @@ namespace oomph
     return Dummy_time_value;
   }
 
-  /// \short Virtual function that should be overloaded to return a pointer to a
+  /// Virtual function that should be overloaded to return a pointer to a
   /// Time object.
   Time* ExplicitTimeSteppableObject::time_pt() const
   {

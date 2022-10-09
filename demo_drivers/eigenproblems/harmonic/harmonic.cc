@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -74,7 +74,7 @@ public:
  /// Empty Constructor
  HarmonicEquations() {}
  
- /// \short Access function: Eigenfunction value at local node n
+ /// Access function: Eigenfunction value at local node n
  /// Note that solving the eigenproblem does not assign values
  /// to this storage space. It is used for output purposes only.
  virtual inline double u(const unsigned& n) const 
@@ -87,7 +87,7 @@ public:
    output(outfile,nplot);
   }
 
- /// \short Output FE representation of soln: x,y,u or x,y,z,u at 
+ /// Output FE representation of soln: x,y,u or x,y,z,u at 
  /// Nplot  plot points
  void output(ostream &outfile, const unsigned &nplot)
   {
@@ -110,7 +110,7 @@ public:
    write_tecplot_zone_footer(outfile,nplot);
   }
 
- /// \short Assemble the contributions to the jacobian and mass
+ /// Assemble the contributions to the jacobian and mass
  /// matrices
  void fill_in_contribution_to_jacobian_and_mass_matrix(
   Vector<double> &residuals,
@@ -189,19 +189,19 @@ public:
 
 protected:
 
- /// \short Shape/test functions and derivs w.r.t. to global coords at 
+ /// Shape/test functions and derivs w.r.t. to global coords at 
  /// local coord. s; return  Jacobian of mapping
  virtual double dshape_eulerian(const Vector<double> &s, 
                                 Shape &psi, 
                                 DShape &dpsidx) const=0;
 
- /// \short Shape/test functions and derivs w.r.t. to global coords at 
+ /// Shape/test functions and derivs w.r.t. to global coords at 
  /// integration point ipt; return  Jacobian of mapping
  virtual double dshape_eulerian_at_knot(const unsigned &ipt, 
                                         Shape &psi, 
                                         DShape &dpsidx) const=0;
  
- /// \short Access function that returns the local equation number
+ /// Access function that returns the local equation number
  /// of the unknown in the problem. Default is to assume that it is the
  /// first (only) value stored at the node.
  virtual inline int u_local_eqn(const unsigned &n)
@@ -225,19 +225,19 @@ class QHarmonicElement : public virtual QElement<1,NNODE_1D>,
  
   public:
 
- ///\short  Constructor: Call constructors for QElement and 
+ /// Constructor: Call constructors for QElement and 
  /// Poisson equations
  QHarmonicElement() : QElement<1,NNODE_1D>(), HarmonicEquations() {}
 
- /// \short  Required  # of `values' (pinned or dofs) 
+ ///  Required  # of `values' (pinned or dofs) 
  /// at node n
  inline unsigned required_nvalue(const unsigned &n) const {return 1;}
 
- /// \short Output function overloaded from HarmonicEquations
+ /// Output function overloaded from HarmonicEquations
  void output(ostream &outfile) 
   {HarmonicEquations::output(outfile);}
 
- ///  \short Output function overloaded from HarmonicEquations
+ ///  Output function overloaded from HarmonicEquations
  void output(ostream &outfile, const unsigned &Nplot) 
   {HarmonicEquations::output(outfile,Nplot);}
 
@@ -251,7 +251,7 @@ protected:
   {return QElement<1,NNODE_1D>::dshape_eulerian(s,psi,dpsidx);}
  
 
- /// \short Shape, test functions & derivs. w.r.t. to global coords. at
+ /// Shape, test functions & derivs. w.r.t. to global coords. at
  /// integration point ipt. Return Jacobian.
  inline double dshape_eulerian_at_knot(const unsigned& ipt,
                                        Shape &psi, 
@@ -278,7 +278,7 @@ public:
  /// Solve the problem
  void solve(const unsigned &label);
 
- /// \short Doc the solution, pass the number of the case considered,
+ /// Doc the solution, pass the number of the case considered,
  /// so that output files can be distinguished.
  void doc_solution(const unsigned& label);
 
@@ -287,7 +287,7 @@ public:
 
 
 //=====start_of_constructor===============================================
-/// \short Constructor for 1D Harmonic problem in unit interval.
+/// Constructor for 1D Harmonic problem in unit interval.
 /// Discretise the 1D domain with n_element elements of type ELEMENT.
 /// Specify function pointer to source function. 
 //========================================================================
@@ -298,9 +298,12 @@ HarmonicProblem<ELEMENT,EIGEN_SOLVER>::HarmonicProblem(
  //Create the eigen solver
  this->eigen_solver_pt() = new EIGEN_SOLVER;
  
- //Get the positive eigenvalues, shift is zero by default
- static_cast<EIGEN_SOLVER*>(eigen_solver_pt())
-  ->get_eigenvalues_right_of_shift(); 
+ // hierher Temporary work-around to keep the legacy version working
+ Anasazi::Use_temporary_code_for_andrew_legacy_version=true;
+   
+ // //Get the positive eigenvalues, shift is zero by default
+ // static_cast<EIGEN_SOLVER*>(eigen_solver_pt())
+ //  ->get_eigenvalues_right_of_shift(); 
 
  //Set domain length 
  double L=1.0;
@@ -364,7 +367,7 @@ solve(const unsigned& label)
  unsigned n_eval=4;
 
  //Solve the eigenproblem
- this->solve_eigenproblem(n_eval,eigenvalues,eigenvectors);
+ this->solve_eigenproblem_legacy(n_eval,eigenvalues,eigenvectors);
 
  //We now need to sort the output based on the size of the real part
  //of the eigenvalues.
@@ -453,7 +456,8 @@ int main(int argc, char **argv)
  clock_t t_start1 = clock();
  //Solve with ARPACK
  {
-  HarmonicProblem<QHarmonicElement<3>,ARPACK> 
+  // hierher Andrew: now duplicate
+  HarmonicProblem<QHarmonicElement<3>,LAPACK_QZ> //ARPACK> 
    problem(n_element);
   
   std::cout << "Matrix size " << problem.ndof() << std::endl;
@@ -476,6 +480,7 @@ int main(int argc, char **argv)
  clock_t t_start3 = clock();
 //Solve with Anasazi
  {
+  // hierher Andrew: This doesn't seem to be included in the self tests
   HarmonicProblem<QHarmonicElement<3>,ANASAZI> problem(n_element);
   problem.solve(3);
  }

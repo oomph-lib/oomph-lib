@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -85,7 +85,7 @@ class PoissonProblem : public Problem
 
 public:
 
- /// \short Constructor: Pass pointer to source function and flag to indicate
+ /// Constructor: Pass pointer to source function and flag to indicate
  /// if order of elements should be messed up. nel_1d is the number of 
  /// elements along the 1d mesh edges -- total number of elements is 
  /// nel_1d x nel_1d. 
@@ -96,14 +96,14 @@ public:
  /// Destructor (empty)
  ~PoissonProblem(){}
 
- /// \short Update the problem specs before solve: Reset boundary conditions
+ /// Update the problem specs before solve: Reset boundary conditions
  /// to the values from the exact solution.
  void actions_before_newton_solve();
 
  /// Update the problem after solve (empty)
  void actions_after_newton_solve(){}
 
- /// \short Doc the solution. DocInfo object stores flags/labels for where the
+ /// Doc the solution. DocInfo object stores flags/labels for where the
  /// output gets written to
  void doc_solution(DocInfo& doc_info);
 

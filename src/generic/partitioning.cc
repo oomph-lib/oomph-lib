@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -45,7 +45,7 @@ namespace oomph
   //====================================================================
   namespace METIS
   {
-    /// \short Default function that translates spatial
+    /// Default function that translates spatial
     /// error into weight for METIS partitioning (unit weight regardless
     /// of input).
     void default_error_to_weight_fct(const double& spatial_error,
@@ -56,7 +56,7 @@ namespace oomph
       weight = 1;
     }
 
-    /// \short Function pointer to to function that translates spatial
+    /// Function pointer to to function that translates spatial
     /// error into weight for METIS partitioning.
     ErrorToWeightFctPt Error_to_weight_fct_pt = &default_error_to_weight_fct;
 
@@ -237,6 +237,28 @@ namespace oomph
     oomph_info
       << "CPU time for setup of METIS data structures            [nelem="
       << nelem << "]: " << cpu0 << " sec" << std::endl;
+
+
+    // If the adjacency vector is empty then the elements are
+    // actually unconnected (can happen in dummy problems where
+    // each element only has internal data). In that case the
+    // partition is irrelevant and we may as well distribute the
+    // elements in round-robin fashion
+    if (adjacency_vector.size() == 0)
+    {
+      unsigned n_proc = problem_pt->communicator_pt()->nproc();
+      oomph_info
+        << "Note: All elements in the Problem's Mesh appear to be\n"
+        << "unconnected. This happens, e.g. if all elements only have\n"
+        << "internal Data. Bypassing metis and distributing elements\n"
+        << "in round-robin fashion amongst the " << n_proc << " processors."
+        << std::endl;
+      for (unsigned e = 0; e < nelem; e++)
+      {
+        element_domain[e] = e % n_proc;
+      }
+      return;
+    }
 
 
     // Call METIS graph partitioner
@@ -540,7 +562,7 @@ namespace oomph
 
 
   //==================================================================
-  /// \short Use METIS to assign each element in an already-distributed mesh
+  /// Use METIS to assign each element in an already-distributed mesh
   /// to a domain. On return, element_domain_on_this_proc[e] contains the number
   /// of the domain [0,1,...,ndomain-1] to which non-halo element e on THE
   /// CURRENT PROCESSOR ONLY has been assigned. The order of the non-halo

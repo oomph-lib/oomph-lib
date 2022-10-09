@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -110,7 +110,7 @@ class LinearWaveProblem : public Problem
 
 public:
 
- /// \short Constructor: pass number of elements in x and y directions,
+ /// Constructor: pass number of elements in x and y directions,
  /// bool indicating impulsive or "smooth" start,
  /// and pointer to source function
  LinearWaveProblem(const unsigned& nx, const unsigned& ny, 
@@ -123,13 +123,13 @@ public:
  /// Update the problem specs after solve (empty)
  void actions_after_newton_solve() {}
 
- /// \short Update the problem specs before solve (empty)
+ /// Update the problem specs before solve (empty)
  void actions_before_newton_solve() {}
 
  /// Update the problem specs after solve (empty)
  void actions_after_implicit_timestep() {}
 
- /// \short Update the problem specs before next timestep: 
+ /// Update the problem specs before next timestep: 
  /// Set time-dependent Dirchlet boundary from exact solution.
  void actions_before_implicit_timestep()
   {
@@ -190,7 +190,7 @@ public:
  /// Doc the solution
  void doc_solution(DocInfo& doc_info);
 
- /// \short Do unsteady run 
+ /// Do unsteady run 
  void unsteady_run();
 
 private:

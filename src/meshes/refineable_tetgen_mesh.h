@@ -3,11 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC//    Version 1.0; svn revision $LastChangedRevision: 1174 $
-// LIC//
-// LIC// $LastChangedDate: 2016-05-11 10:03:56 +0100 (Wed, 11 May 2016) $
-// LIC//
-// LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -51,7 +47,7 @@ namespace oomph
                                public virtual RefineableTetMeshBase
   {
   public:
-    /// \short Build mesh, based on a TetMeshFacetedClosedSurface that specifies
+    /// Build mesh, based on a TetMeshFacetedClosedSurface that specifies
     /// the outer boundary of the domain and any number of internal
     /// closed curves, specified by TetMeshFacetedSurfaces.
     /// Also specify target volume for uniform element size.
@@ -76,8 +72,9 @@ namespace oomph
       initialise_adaptation_data();
     }
 
-  private:
-    /// \short Specialised constructor used during adaptation only.
+
+  protected:
+    /// Specialised constructor used during adaptation only.
     /// Element sizes are specified by vector tetgen_io is passed in
     /// from previous mesh (is then modified to build new mesh)
     /// Ditto with use_attributes, which comes from the previous mesh
@@ -235,7 +232,7 @@ namespace oomph
                           OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Unrefine mesh uniformly: Return 0 for success,
+    /// Unrefine mesh uniformly: Return 0 for success,
     /// 1 for failure (if unrefinement has reached the coarsest permitted
     /// level)
     unsigned unrefine_uniformly()
@@ -282,10 +279,21 @@ namespace oomph
       Projection_is_disabled = false;
     }
 
+    // Update the surface
+    void update_faceted_surface_using_face_mesh(
+      TetMeshFacetedSurface*& faceted_surface_pt);
+
+    // Update the inner hole
+    void surface_remesh_for_inner_hole_boundaries();
+
+    /// Snap the boundary nodes onto any curvilinear boundaries
+    void snap_nodes_onto_boundary(RefineableTetgenMesh<ELEMENT>*& new_mesh_pt,
+                                  const unsigned& b);
+
     /// Disable projection of solution onto new mesh during adaptation
     bool Projection_is_disabled;
 
-    /// \short Corner elements which have all of their nodes on the outer
+    /// Corner elements which have all of their nodes on the outer
     /// boundary are to be split into elements which have some non-boundary
     /// nodes
     bool Corner_elements_must_be_split;
@@ -294,6 +302,71 @@ namespace oomph
   /////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////
+
+
+  //=========================================================================
+  // Unstructured refineable Tetgen Mesh upgraded to solid mesh
+  //=========================================================================
+  template<class ELEMENT>
+  class RefineableSolidTetgenMesh
+    : public virtual RefineableTetgenMesh<ELEMENT>,
+      public virtual SolidMesh
+  {
+  public:
+    /// Build mesh, based on closed curve that specifies
+    /// the outer boundary of the domain and any number of internal
+    /// closed curves. Specify target area for uniform element size.
+    RefineableSolidTetgenMesh(
+      TetMeshFacetedClosedSurface* const& outer_boundary_pt,
+      Vector<TetMeshFacetedSurface*>& internal_closed_surface_pt,
+      const double& element_volume,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
+      const bool& use_attributes = false,
+      const bool& split_corner_elements = false)
+      : TetgenMesh<ELEMENT>(outer_boundary_pt,
+                            internal_closed_surface_pt,
+                            element_volume,
+                            time_stepper_pt,
+                            use_attributes,
+                            split_corner_elements),
+        RefineableTetgenMesh<ELEMENT>(outer_boundary_pt,
+                                      internal_closed_surface_pt,
+                                      element_volume,
+                                      time_stepper_pt,
+                                      use_attributes,
+                                      split_corner_elements)
+
+    {
+      // Assign the Lagrangian coordinates
+      set_lagrangian_nodal_coordinates();
+    }
+
+
+    /// Build mesh from specified triangulation and
+    /// associated target areas for elements in it.
+    RefineableSolidTetgenMesh(
+      const Vector<double>& target_volume,
+      tetgenio* const& tetgen_io_pt,
+      TetMeshFacetedClosedSurface* const& outer_boundary_pt,
+      Vector<TetMeshFacetedSurface*>& internal_surface_pt,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
+      const bool& use_attributes = false)
+      : RefineableTetgenMesh<ELEMENT>(target_volume,
+                                      tetgen_io_pt,
+                                      outer_boundary_pt,
+                                      internal_surface_pt,
+                                      time_stepper_pt,
+                                      use_attributes)
+
+    {
+      // Assign the Lagrangian coordinates
+      set_lagrangian_nodal_coordinates();
+    }
+
+    /// Empty Destructor
+    virtual ~RefineableSolidTetgenMesh() {}
+  };
+
 
 } // namespace oomph
 

@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -104,7 +104,7 @@ namespace oomph
   }
 
   //========================================================================
-  /// \short Extract the elements at a particular refinement level in
+  /// Extract the elements at a particular refinement level in
   /// the refinement pattern (used in Mesh::redistribute or whatever it's
   /// going to be called (RefineableMeshBase::reduce_halo_layers or something)
   //========================================================================
@@ -903,7 +903,7 @@ namespace oomph
   ///   - "hang_nodes_*.dat"
   ///     where the * denotes a direction (n,s,e,w) in 2D
   ///     or (r,l,u,d,f,b) in 3D
-  ///.
+  /// .
   ///   can be viewed with
   ///   - QHangingNodes.mcr
   ///   .
@@ -1878,7 +1878,7 @@ namespace oomph
 
 
   //========================================================================
-  /// \short Refine to same degree as the reference mesh.
+  /// Refine to same degree as the reference mesh.
   //========================================================================
   void TreeBasedRefineableMeshBase::refine_base_mesh_as_in_reference_mesh(
     TreeBasedRefineableMeshBase* const& ref_mesh_pt)
@@ -1895,7 +1895,7 @@ namespace oomph
 
 
   //========================================================================
-  /// \short Refine to same degree as the reference mesh minus one. Useful
+  /// Refine to same degree as the reference mesh minus one. Useful
   /// function for multigrid solvers; allows the easy copy of a mesh
   /// to the level of refinement just below the current one. Returns
   /// a boolean variable which indicates if the reference mesh has not
@@ -4036,7 +4036,7 @@ namespace oomph
             n_unrefine++;
           }
           // Don't mark as overruled - it's misleading
-          //// ... otherwise mark it as having been over-ruled
+          /// / ... otherwise mark it as having been over-ruled
           // else
           // {
           //  this->nrefinement_overruled()+=1;
@@ -4410,7 +4410,7 @@ namespace oomph
   ///   - "hang_nodes_*.dat"
   ///     where the * denotes a direction (n,s,e,w) in 2D
   ///     or (r,l,u,d,f,b) in 3D
-  ///.
+  /// .
   ///   can be viewed with
   ///   - QHangingNodes.mcr
   ///   .
@@ -5190,7 +5190,7 @@ namespace oomph
       } // End of documentation
     } // End if (this->nelement()>0)
 
-    ////BENFLAG: Check that all the nodes belong to their update elements
+    /// /BENFLAG: Check that all the nodes belong to their update elements
     // std::cout << "p_adapt_mesh(): Checking stuff works!" << std::endl;
     // for(unsigned j=0; j<this->nnode(); j++)
     // {

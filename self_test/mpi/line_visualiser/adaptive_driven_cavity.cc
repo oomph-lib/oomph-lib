@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -73,7 +73,7 @@ public:
  /// Update the after solve (empty)
  void actions_after_newton_solve() {}
 
- /// \short Update the problem specs before solve. 
+ /// Update the problem specs before solve. 
  /// (Re-)set velocity boundary conditions just to be on the safe side...
  void actions_before_newton_solve()
   { 
@@ -173,7 +173,7 @@ public:
  
 private:
 
- ///Fix pressure in element e at pressure dof pdof and set to pvalue
+ /// Fix pressure in element e at pressure dof pdof and set to pvalue
  void fix_pressure(const unsigned &e, const unsigned &pdof, 
                    const double &pvalue)
   {

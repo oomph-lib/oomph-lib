@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -44,7 +44,7 @@ namespace oomph
 
 
 //=======================================================================
-/// \short Update function: Call the update function in the Node's
+/// Update function: Call the update function in the Node's
 /// PerturbedSpineMesh
 //=======================================================================
 void PerturbedSpineNode::node_update(
@@ -139,7 +139,7 @@ void PerturbedSpineElement<ELEMENT>::complete_setup_of_dependencies()
 
 
 //=======================================================================
-/// \short Update function to update all nodes of mesh.
+/// Update function to update all nodes of mesh.
 /// [Doesn't make sense to use this mesh with SolidElements anyway,
 /// so we buffer the case if update_all_solid_nodes (which defaults
 /// to false) is set to true.]

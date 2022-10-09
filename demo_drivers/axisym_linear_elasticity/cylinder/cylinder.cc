@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -91,7 +91,7 @@ namespace Global_Parameters
   result[2] = cos(time)*(-Mu*pow(x[0],2)*(2*pow(x[1],3)));
  }
  
- /// \short The body force function; returns vector of doubles
+ /// The body force function; returns vector of doubles
  /// in the order (b_r, b_z, b_theta)
  void body_force(const double &time,
                  const Vector<double> &x,
@@ -109,7 +109,7 @@ namespace Global_Parameters
    -x[0]*(8.0*Mu*pow(x[1],3)+pow(x[0],2)*(pow(x[1],3)*Omega_sq+6.0*Mu*x[1])));
  } // end of body force
  
- /// \short Helper function - spatial components of the exact solution in a
+ /// Helper function - spatial components of the exact solution in a
  /// vector. This is necessary because we need to multiply this by different
  /// things to obtain the velocity and acceleration
  /// 0: u_r, 1: u_z, 2: u_theta
@@ -228,7 +228,7 @@ class AxisymmetricLinearElasticityProblem : public Problem
 {
 public:
 
- /// \short Constructor: Pass number of elements in r and z directions,
+ /// Constructor: Pass number of elements in r and z directions,
  /// boundary locations and whether we are doing an impulsive start or not
  AxisymmetricLinearElasticityProblem();
 
@@ -245,7 +245,7 @@ public:
    set_boundary_conditions();
   }
 
- /// \short Set the initial conditions, either for an impulsive start or
+ /// Set the initial conditions, either for an impulsive start or
  /// with history values for the time stepper
  void set_initial_conditions();
 

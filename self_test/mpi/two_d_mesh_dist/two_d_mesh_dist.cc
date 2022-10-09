@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -119,17 +119,17 @@ public:
  /// Destructor. Empty
  ~RefineablePoissonProblem() {};
 
- /// \short Update the problem specs before solve: Reset boundary conditions
+ /// Update the problem specs before solve: Reset boundary conditions
  /// to the values from the tanh solution.
  void actions_before_newton_solve();
 
  /// Update the problem after solve (empty)
  void actions_after_newton_solve(){}
 
- /// \short Doc the solution.
+ /// Doc the solution.
  void doc_solution(DocInfo& doc_info);
 
- /// \short Overloaded version of the problem's access function to 
+ /// Overloaded version of the problem's access function to 
  /// the mesh. Recasts the pointer to the base Mesh object to 
  /// the actual mesh type.
  MyRefineableRectangularQuadMesh<ELEMENT>* mesh_pt() 
@@ -149,7 +149,7 @@ private:
 
 
 //=====start_of_constructor===============================================
-/// \short Constructor for Poisson problem: Pass pointer to 
+/// Constructor for Poisson problem: Pass pointer to 
 /// source function.
 //========================================================================
 template<class ELEMENT>

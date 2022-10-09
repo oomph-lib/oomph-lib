@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -35,14 +35,14 @@
 namespace oomph
 {
   //===========start_of_fish_domain=======================================
-  /// \short Fish shaped domain, represented by four
+  /// Fish shaped domain, represented by four
   /// MacroElements. Shape is parametrised by GeomObject
   /// that represents the fish's back.
   //=======================================================================
   class FishDomain : public Domain
   {
   public:
-    /// \short Constructor: Pass pointer to GeomObject that represents the
+    /// Constructor: Pass pointer to GeomObject that represents the
     /// (upper) curved boundary of the fish's body, and the start and end values
     /// of the Lagrangian coordinates along the GeomObject.
     FishDomain(GeomObject* back_pt,
@@ -107,7 +107,7 @@ namespace oomph
       return Xi_tail;
     }
 
-    /// \short Vector representation of the  i_macro-th macro element
+    /// Vector representation of the  i_macro-th macro element
     /// boundary i_direct (N/S/W/E) at the discrete time level t
     /// (t=0: present; t>0: previous): \f$ {\bf r}({\bf zeta}) \f$
     /// Note that the local coordinate \b zeta is a 1D
@@ -139,47 +139,48 @@ namespace oomph
     /// Pointer to the fish's back
     GeomObject* Back_pt;
 
-    /// \short Boundary of upper body macro element zeta \f$ \in [-1,1] \f$
+    /// Boundary of upper body macro element zeta \f$ \in [-1,1] \f$
     void r_upper_body_N(const unsigned& t,
                         const Vector<double>& zeta,
                         Vector<double>& f);
 
-    /// \short Boundary of upper body macro element zeta \f$ \in [-1,1] \f$
+    /// Boundary of upper body macro element zeta \f$ \in [-1,1] \f$
     void r_upper_body_W(const unsigned& t,
                         const Vector<double>& zeta,
                         Vector<double>& f);
 
-    /// \short Boundary of upper body macro element zeta \f$ \in [-1,1] \f$
+    /// Boundary of upper body macro element zeta \f$ \in [-1,1] \f$
     void r_upper_body_S(const unsigned& t,
                         const Vector<double>& zeta,
                         Vector<double>& f);
 
-    /// \short Boundary of upper body macro element zeta \f$ \in [-1,1] \f$
+    /// Boundary of upper body macro element zeta \f$ \in [-1,1] \f$
     void r_upper_body_E(const unsigned& t,
                         const Vector<double>& zeta,
                         Vector<double>& f);
 
-    /// \short Boundary of upper fin macro element zeta \f$ \in [-1,1] \f$
+    /// Boundary of upper fin macro element zeta \f$ \in [-1,1] \f$
     void r_upper_fin_N(const unsigned& t,
                        const Vector<double>& zeta,
                        Vector<double>& f);
 
-    /// \short Boundary of upper fin macro element zeta \f$ \in [-1,1] \f$
+    /// Boundary of upper fin macro element zeta \f$ \in [-1,1] \f$
     void r_upper_fin_W(const unsigned& t,
                        const Vector<double>& zeta,
                        Vector<double>& f);
 
-    /// \short Boundary of upper fin macro element zeta \f$ \in [-1,1] \f$
+    /// Boundary of upper fin macro element zeta \f$ \in [-1,1] \f$
     void r_upper_fin_S(const unsigned& t,
                        const Vector<double>& zeta,
                        Vector<double>& f);
 
-    /// \short Boundary of upper fin macro element zeta \f$ \in [-1,1] \f$
+    /// Boundary of upper fin macro element zeta \f$ \in [-1,1] \f$
     void r_upper_fin_E(const unsigned& t,
                        const Vector<double>& zeta,
                        Vector<double>& f);
 
-    /// \short Boundary of lower body macro element zeta \f$ \in [-1,1] \f$
+
+    /// Boundary of lower body macro element zeta \f$ \in [-1,1] \f$
     void r_lower_body_N(const unsigned& t,
                         const Vector<double>& zeta,
                         Vector<double>& f)
@@ -191,7 +192,8 @@ namespace oomph
       f[1] = -f[1];
     }
 
-    /// \short Boundary of lower body macro element zeta \f$ \in [-1,1] \f$
+
+    /// Boundary of lower body macro element zeta \f$ \in [-1,1] \f$
     void r_lower_body_W(const unsigned& t,
                         const Vector<double>& zeta,
                         Vector<double>& f)
@@ -205,8 +207,7 @@ namespace oomph
       f[1] = -f[1];
     }
 
-    ///\short Southern boundary of lower body macro element zeta \f$\in [-1,1]
-    ///\f$
+    /// Southern boundary of lower body macro element zeta \f$\in [-1,1] \f$
     void r_lower_body_S(const unsigned& t,
                         const Vector<double>& zeta,
                         Vector<double>& f)
@@ -218,7 +219,7 @@ namespace oomph
       f[1] = -f[1];
     }
 
-    /// \short Boundary of lower body macro element zeta \f$ \in [-1,1] \f$
+    /// Boundary of lower body macro element zeta \f$ \in [-1,1] \f$
     void r_lower_body_E(const unsigned& t,
                         const Vector<double>& zeta,
                         Vector<double>& f)
@@ -232,7 +233,8 @@ namespace oomph
       f[1] = -f[1];
     }
 
-    /// \short Boundary of lower fin macro element zeta \f$ \in [-1,1] \f$
+
+    /// Boundary of lower fin macro element zeta \f$ \in [-1,1] \f$
     void r_lower_fin_N(const unsigned& t,
                        const Vector<double>& zeta,
                        Vector<double>& f)
@@ -244,7 +246,8 @@ namespace oomph
       f[1] = -f[1];
     }
 
-    /// \short Boundary of lower fin macro element zeta \f$ \in [-1,1] \f$
+
+    /// Boundary of lower fin macro element zeta \f$ \in [-1,1] \f$
     void r_lower_fin_W(const unsigned& t,
                        const Vector<double>& zeta,
                        Vector<double>& f)
@@ -258,7 +261,7 @@ namespace oomph
       f[1] = -f[1];
     }
 
-    /// \short Boundary of lower fin macro element zeta \f$ \in [-1,1] \f$
+    /// Boundary of lower fin macro element zeta \f$ \in [-1,1] \f$
     void r_lower_fin_S(const unsigned& t,
                        const Vector<double>& zeta,
                        Vector<double>& f)
@@ -270,7 +273,7 @@ namespace oomph
       f[1] = -f[1];
     }
 
-    /// \short Boundary of lower fin macro element zeta \f$ \in [-1,1] \f$
+    /// Boundary of lower fin macro element zeta \f$ \in [-1,1] \f$
     void r_lower_fin_E(const unsigned& t,
                        const Vector<double>& zeta,
                        Vector<double>& f)
@@ -285,12 +288,13 @@ namespace oomph
     }
   };
 
+
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
 
   //==========start_of_macro_element_boundary========================
-  /// \short Vector representation of the  imacro-th macro element
+  /// Vector representation of the  imacro-th macro element
   /// boundary idirect (N/S/W/E) at time level t
   /// (t=0: present; t>0: previous): \f$ {\bf r}({\bf zeta}) \f$
   /// Note that the local coordinate \b zeta is a 1D

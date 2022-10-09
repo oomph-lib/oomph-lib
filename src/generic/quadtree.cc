@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -1314,7 +1314,7 @@ namespace oomph
   //================================================================
   /// Open output files that will stored any hanging nodes that are
   /// created in the mesh refinement process.
-  ///===============================================================
+  /// ===============================================================
   void QuadTreeForest::open_hanging_node_files(
     DocInfo& doc_info, Vector<std::ofstream*>& output_stream)
   {

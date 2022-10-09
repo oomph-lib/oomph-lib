@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -329,7 +329,7 @@ namespace oomph
   }
 
   //===============================================================
-  ///\short Calculate the derivative of the
+  /// Calculate the derivative of the
   /// normal flux, which is the dot product of our
   /// approximation to the flux with the outer unit normal,
   /// with respect to the interior and exterior variables
@@ -573,7 +573,7 @@ namespace oomph
   }
 
   //========================================================================
-  ///\short Function that computes and stores the (inverse) mass matrix
+  /// Function that computes and stores the (inverse) mass matrix
   //========================================================================
   void DGElement::pre_compute_mass_matrix()
   {

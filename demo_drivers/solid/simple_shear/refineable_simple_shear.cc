@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -58,7 +58,7 @@ class RefineableElasticCubicMesh : public virtual SimpleCubicMesh<ELEMENT>,
 
 public:
 
- /// \short Constructor: 
+ /// Constructor: 
  RefineableElasticCubicMesh(const unsigned &nx, const unsigned &ny, 
                             const unsigned &nz,
                             const double &a, const double &b, 
@@ -200,7 +200,7 @@ public:
     mesh_pt()->element_pt());
   }
 
- /// \short Update before solve: We're dealing with a static problem so
+ /// Update before solve: We're dealing with a static problem so
  /// the nodal positions before the next solve merely serve as
  /// initial conditions. For meshes that are very strongly refined
  /// near the boundary, the update of the displacement boundary
@@ -216,7 +216,7 @@ public:
    mesh_pt()->node_update(update_all_solid_nodes);
   }   
 
- ///Shear the top
+ /// Shear the top
  void apply_boundary_conditions()
   {
    unsigned ibound = 5;

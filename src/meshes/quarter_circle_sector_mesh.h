@@ -3,11 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC//    Version 1.0; svn revision $LastChangedRevision$
-// LIC//
-// LIC// $LastChangedDate$
-// LIC//
-// LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -87,7 +83,7 @@ namespace oomph
   class QuarterCircleSectorMesh : public virtual QuadMeshBase
   {
   public:
-    /// \short Constructor: Pass pointer to geometric object that
+    /// Constructor: Pass pointer to geometric object that
     /// specifies the wall, start and end coordinates on the
     /// geometric object, and the fraction along
     /// which the dividing line is to be placed, and the timestepper
@@ -99,7 +95,7 @@ namespace oomph
       const double& xi_hi,
       TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
-    /// \short Destructor:
+    /// Destructor:
     virtual ~QuarterCircleSectorMesh() {}
 
     /// Access function to GeomObject representing wall
@@ -114,7 +110,7 @@ namespace oomph
       return Domain_pt;
     }
 
-    /// \short Function pointer for function that squashes
+    /// Function pointer for function that squashes
     /// the outer two macro elements towards
     /// the wall by mapping the input value of the "radial" macro element
     /// coordinate to the return value (defined in the underlying Domain object)
@@ -127,7 +123,7 @@ namespace oomph
     /// Pointer to Domain
     QuarterCircleSectorDomain* Domain_pt;
 
-    /// \short Pointer to the geometric object that represents the curved wall
+    /// Pointer to the geometric object that represents the curved wall
     /// (mesh boundary 1)
     GeomObject* Wall_pt;
 
@@ -140,6 +136,7 @@ namespace oomph
     /// Upper limit for the (1D) coordinates along the wall
     double Xi_hi;
   };
+
 
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
@@ -185,7 +182,7 @@ namespace oomph
       public virtual RefineableQuadMesh<ELEMENT>
   {
   public:
-    /// \short Constructor: Pass pointer to geometric object that
+    /// Constructor: Pass pointer to geometric object that
     /// specifies the wall, start and end coordinates on the
     /// geometric object, and the fraction along
     /// which the dividing line is to be placed, and the timestepper
@@ -207,9 +204,10 @@ namespace oomph
       this->setup_quadtree_forest();
     }
 
-    /// \short Destructor: Empty
+    /// Destructor: Empty
     virtual ~RefineableQuarterCircleSectorMesh() {}
   };
+
 
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
@@ -257,7 +255,7 @@ namespace oomph
       public virtual RefineableQuarterCircleSectorMesh<ELEMENT>
   {
   public:
-    /// \short Constructor: Pass pointer to geometric object, start and
+    /// Constructor: Pass pointer to geometric object, start and
     /// end coordinates on the geometric object and the fraction along
     /// which the dividing line is to be placed when updating the nodal
     /// positions, and timestepper (defaults to (Steady) default timestepper
@@ -304,10 +302,10 @@ namespace oomph
       this->setup_macro_element_node_update();
     }
 
-    /// \short Destructor: empty
+    /// Destructor: empty
     virtual ~MacroElementNodeUpdateRefineableQuarterCircleSectorMesh() {}
 
-    /// \short Resolve mesh update: Update current nodal
+    /// Resolve mesh update: Update current nodal
     /// positions via sparse MacroElement-based update.
     /// [Doesn't make sense to use this mesh with SolidElements anyway,
     /// so we buffer the case if update_all_solid_nodes is set to
@@ -335,7 +333,7 @@ namespace oomph
     }
 
   private:
-    /// \short Setup all the information that's required for MacroElement-based
+    /// Setup all the information that's required for MacroElement-based
     /// node update: Tell the elements that their geometry depends on the
     /// geometric object that parametrises the wall
     void setup_macro_element_node_update()
@@ -387,6 +385,7 @@ namespace oomph
     }
   };
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   // Algebraic-mesh-version of RefineableQuarterCircleSectorMesh
@@ -436,7 +435,7 @@ namespace oomph
       public RefineableQuarterCircleSectorMesh<ELEMENT>
   {
   public:
-    /// \short Constructor: Pass pointer to geometric object, start and
+    /// Constructor: Pass pointer to geometric object, start and
     /// end coordinates on the geometric object and the fraction along
     /// which the dividing line is to be placed when updating the nodal
     /// positions, and timestepper (defaults to (Steady) default timestepper
@@ -488,7 +487,7 @@ namespace oomph
       return AlgebraicMesh::self_test();
     }
 
-    /// \short Resolve mesh update: Update current nodal
+    /// Resolve mesh update: Update current nodal
     /// positions via algebraic node update.
     /// [Doesn't make sense to use this mesh with SolidElements anyway,
     /// so we buffer the case if update_all_solid_nodes is set to
@@ -515,7 +514,8 @@ namespace oomph
       AlgebraicMesh::node_update();
     }
 
-    /// \short Implement the algebraic node update function for a node
+
+    /// Implement the algebraic node update function for a node
     /// at time level t (t=0: present; t>0: previous): Update with
     /// the node's first (default) update function.
     void algebraic_node_update(const unsigned& t, AlgebraicNode*& node_pt)
@@ -561,7 +561,7 @@ namespace oomph
       }
     }
 
-    /// \short Update the node update info for specified algebraic node
+    /// Update the node update info for specified algebraic node
     /// following any spatial mesh adaptation.
     void update_node_update(AlgebraicNode*& node_pt)
     {
@@ -627,28 +627,29 @@ namespace oomph
     /// Fractional height of central box
     double Lambda_y;
 
-    /// \short Algebraic update function for a node that is located
+    /// Algebraic update function for a node that is located
     /// in the central box
     void node_update_in_central_box(const unsigned& t, AlgebraicNode*& node_pt);
 
-    /// \short Algebraic update function for a node that is located
+    /// Algebraic update function for a node that is located
     /// in the lower right box
     void node_update_in_lower_right_box(const unsigned& t,
                                         AlgebraicNode*& node_pt);
 
-    /// \short Algebraic update function for a node that is located
+    /// Algebraic update function for a node that is located
     /// in the upper left box
     void node_update_in_upper_left_box(const unsigned& t,
                                        AlgebraicNode*& node_pt);
 
-    /// \short Setup algebraic update operation for all nodes
+    /// Setup algebraic update operation for all nodes
     void setup_algebraic_node_update();
 
-    /// \short Update algebraic node update function for nodes in
+
+    /// Update algebraic node update function for nodes in
     /// lower right box
     void update_node_update_in_lower_right_box(AlgebraicNode*& node_pt);
 
-    /// \short Update algebraic node update function for nodes
+    /// Update algebraic node update function for nodes
     /// in upper left box
     void update_node_update_in_upper_left_box(AlgebraicNode*& node_pt);
   };

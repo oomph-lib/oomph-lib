@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -46,7 +46,7 @@
 namespace oomph
 {
   //===========================================================================
-  /// \short The least-squares commutator (LSC; formerly BFBT)
+  /// The least-squares commutator (LSC; formerly BFBT)
   /// preconditioner. It uses blocks corresponding to the displacement/position
   /// and pressure unknowns, i.e. there are a total of 2x2 blocks,
   /// and all displacement/position components are treated as a
@@ -54,23 +54,7 @@ namespace oomph
   ///
   /// Here are the details: An "ideal" preconditioner
   /// would solve the saddle point system
-  /// \f[
-  /// \left(
-  /// \begin{array}{cc}
-  /// {\bf F} & {\bf G} \\ {\bf D} & {\bf 0}
-  /// \end{array}
-  /// \right)
-  /// \left(
-  /// \begin{array}{c}
-  /// {\bf z}_u \\ {\bf z}_p
-  /// \end{array}
-  /// \right) =
-  /// \left(
-  /// \begin{array}{c}
-  /// {\bf r}_u \\ {\bf r}_p
-  /// \end{array}
-  /// \right)
-  /// \f]
+  /// \f[ \left( \begin{array}{cc} {\bf F} & {\bf G} \\ {\bf D} & {\bf 0} \end{array} \right) \left( \begin{array}{c} {\bf z}_u \\ {\bf z}_p \end{array} \right) = \left( \begin{array}{c} {\bf r}_u \\ {\bf r}_p \end{array} \right) \f]
   /// where \f$ {\bf F}\f$,  \f$ {\bf G} \f$, and \f$ {\bf D}\f$ are
   /// the blocks that arise in the Jacobian of the pressure-based
   /// equations of linear and nonlinear elasticity (with dofs in order
@@ -80,59 +64,27 @@ namespace oomph
   /// application is, of course, exactly as expensive as a direct solve.
   /// The LSC/BFBT preconditioner replaces the exact Jacobian by
   /// a block-triangular approximation
-  /// \f[
-  /// \left(
-  /// \begin{array}{cc}
-  /// {\bf F} & {\bf G} \\ {\bf 0} & -{\bf M}_s
-  /// \end{array}
-  /// \right)
-  /// \left(
-  /// \begin{array}{c}
-  /// {\bf z}_u \\ {\bf z}_p
-  /// \end{array}
-  /// \right) =
-  /// \left(
-  /// \begin{array}{c}
-  /// {\bf r}_u \\ {\bf r}_p
-  /// \end{array}
-  /// \right),
-  /// \f]
+  /// \f[ \left( \begin{array}{cc} {\bf F} & {\bf G} \\ {\bf 0} & -{\bf M}_s \end{array} \right) \left( \begin{array}{c} {\bf z}_u \\ {\bf z}_p \end{array} \right) = \left( \begin{array}{c} {\bf r}_u \\ {\bf r}_p \end{array} \right), \f]
   /// where \f${\bf M}_s\f$ is an approximation to the pressure
   /// Schur-complement \f$ {\bf S} = {\bf D} {\bf F}^{-1}{\bf G}. \f$
   /// This system can be solved in two steps:
   /// -# Solve the second row for \f$ {\bf z}_p\f$ via
-  ///    \f[
-  ///    {\bf z}_p = - {\bf M}_s^{-1} {\bf r}_p
-  ///    \f]
+  /// \f[ {\bf z}_p = - {\bf M}_s^{-1} {\bf r}_p \f]
   /// -# Given \f$ {\bf z}_p \f$ , solve the first row for \f$ {\bf z}_u\f$ via
-  ///    \f[
-  ///    {\bf z}_u = {\bf F}^{-1} \big( {\bf r}_u - {\bf G} {\bf z}_p \big)
-  ///    \f]
-  /// .
+  /// \f[ {\bf z}_u = {\bf F}^{-1} \big( {\bf r}_u - {\bf G} {\bf z}_p \big) \f].
   /// In the LSC/BFBT preconditioner, the action of the inverse pressure
   /// Schur complement
-  /// \f[
-  /// {\bf z}_p = - {\bf M}_s^{-1} {\bf r}_p
-  /// \f]
+  /// \f[ {\bf z}_p = - {\bf M}_s^{-1} {\bf r}_p \f]
   /// is approximated by
-  /// \f[
-  /// {\bf z}_p = -
-  /// \big({\bf D} \widehat{\bf Q}^{-1}{\bf G} \big)^{-1}
-  /// \big({\bf D} \widehat{\bf Q}^{-1}{\bf F} \widehat{\bf Q}^{-1}{\bf G}\big)
-  /// \big({\bf D} \widehat{\bf Q}^{-1}{\bf G} \big)^{-1}
-  /// {\bf r}_p,
-  /// \f]
+  /// \f[ {\bf z}_p = - \big({\bf D} \widehat{\bf Q}^{-1}{\bf G} \big)^{-1} \big({\bf D} \widehat{\bf Q}^{-1}{\bf F} \widehat{\bf Q}^{-1}{\bf G}\big) \big({\bf D} \widehat{\bf Q}^{-1}{\bf G} \big)^{-1} {\bf r}_p, \f]
   /// where  \f$ \widehat{\bf Q} \f$ is the diagonal of the
   /// displacement/position mass matrix. The evaluation of this expression
-  /// involves two linear solves involving the matrix \f[
-  /// {\bf P} = \big({\bf D} \widehat{\bf Q}^{-1}{\bf G} \big)
-  /// \f]
+  /// involves two linear solves involving the matrix
+  /// \f[ {\bf P} = \big({\bf D} \widehat{\bf Q}^{-1}{\bf G} \big) \f]
   /// which has the character of a matrix arising from the discretisation
   /// of a Poisson problem on the pressure space. We also have
   /// to evaluate matrix-vector products with the matrix
-  /// \f[
-  /// {\bf E}={\bf D}\widehat{\bf Q}^{-1}{\bf F}\widehat{\bf Q}^{-1}{\bf G}
-  /// \f]
+  /// \f[ {\bf E}={\bf D}\widehat{\bf Q}^{-1}{\bf F}\widehat{\bf Q}^{-1}{\bf G} \f]
   /// Details of the theory can be found in "Finite Elements and
   /// Fast Iterative Solvers with Applications in Incompressible Fluid
   /// Dynamics" by Howard C. Elman, David J. Silvester, and Andrew J. Wathen,
@@ -232,21 +184,21 @@ namespace oomph
       Solid_mesh_pt = mesh_pt;
     }
 
-    /// \short Enable mass matrix diagonal scaling in the
+    /// Enable mass matrix diagonal scaling in the
     /// Schur complement approximation
     void enable_p_matrix_scaling()
     {
       P_matrix_using_scaling = true;
     }
 
-    /// \short Enable mass matrix diagonal scaling in the
+    /// Enable mass matrix diagonal scaling in the
     /// Schur complement approximation
     void disable_p_matrix_scaling()
     {
       P_matrix_using_scaling = false;
     }
 
-    /// \short Return whether the mass matrix is using diagonal
+    /// Return whether the mass matrix is using diagonal
     /// scaling or not
     bool is_p_matrix_using_scaling() const
     {
@@ -266,7 +218,7 @@ namespace oomph
       Using_default_p_preconditioner = false;
     }
 
-    /// \short Function to (re-)set pressure matrix preconditioner  (inexact
+    /// Function to (re-)set pressure matrix preconditioner  (inexact
     /// solver) to SuperLU
     void set_p_superlu_preconditioner()
     {
@@ -290,7 +242,7 @@ namespace oomph
       Using_default_f_preconditioner = false;
     }
 
-    ///\short Function to (re-)set momentum matrix preconditioner (inexact
+    /// Function to (re-)set momentum matrix preconditioner (inexact
     /// solver) to SuperLU
     void set_f_superlu_preconditioner()
     {
@@ -314,7 +266,7 @@ namespace oomph
       Doc_time = false;
     }
 
-    /// \short If this function is called then:
+    /// If this function is called then:
     /// in setup(...) : BFBt is computed.
     /// in preconditioner_solve(...) : a single matrix vector product with
     /// BFBt is performed.
@@ -323,7 +275,7 @@ namespace oomph
       Form_BFBt_product = true;
     }
 
-    /// \short if this function is called  then:
+    /// if this function is called  then:
     /// in setup(...) : the matrices B, F are assembled and stored
     /// (the default behaviour) .
     /// in preconditioner_solve(...) : a sequence of matrix vector products
@@ -335,7 +287,7 @@ namespace oomph
       Form_BFBt_product = false;
     }
 
-    /// \short Helper function to delete preconditioner data.
+    /// Helper function to delete preconditioner data.
     void clean_up_memory();
 
   private:
@@ -356,12 +308,12 @@ namespace oomph
     /// flag indicating whether the default P preconditioner is used
     bool Using_default_p_preconditioner;
 
-    /// \short Control flag is true if the preconditioner has been setup
+    /// Control flag is true if the preconditioner has been setup
     /// (used so we can wipe the data when the preconditioner is
     /// called again)
     bool Preconditioner_has_been_setup;
 
-    /// \short Control flag is true if mass matrix diagonal scaling
+    /// Control flag is true if mass matrix diagonal scaling
     /// is used in the Schur complement approximation
     bool P_matrix_using_scaling;
 
@@ -370,7 +322,7 @@ namespace oomph
     /// PressureBasedSolidEquations<DIM>::get_mass_matrix_diagonal(...).
     CRDoubleMatrix* assemble_mass_matrix_diagonal();
 
-    /// \short Boolean indicating whether the momentum system preconditioner
+    /// Boolean indicating whether the momentum system preconditioner
     /// is a block preconditioner
     bool F_preconditioner_is_block_preconditioner;
 
@@ -389,7 +341,7 @@ namespace oomph
     /// MatrixVectorProduct operator for E (BFBt) if BFBt is to be formed.
     MatrixVectorProduct* E_mat_vec_pt;
 
-    /// \short indicates whether BFBt should be formed or the component matrices
+    /// indicates whether BFBt should be formed or the component matrices
     /// should be retained.
     /// If true then:
     /// in setup(...) : BFBt is computed.
@@ -403,7 +355,7 @@ namespace oomph
     ///  are replaced with BQ and QBt with scaling)
     bool Form_BFBt_product;
 
-    /// \short the pointer to the mesh of block preconditionable solid
+    /// the pointer to the mesh of block preconditionable solid
     /// elements.
     Mesh* Solid_mesh_pt;
   };
@@ -415,7 +367,7 @@ namespace oomph
 
 
   //============================================================================
-  /// \short The exact solid preconditioner. This extracts 2x2 blocks
+  /// The exact solid preconditioner. This extracts 2x2 blocks
   /// (corresponding to the displacement/position and pressure unknowns)
   /// and uses these to
   /// build a single preconditioner matrix for testing purposes.

@@ -3,11 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC//    Version 1.0; svn revision $LastChangedRevision$
-// LIC//
-// LIC// $LastChangedDate$
-// LIC//
-// LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -207,7 +203,7 @@ namespace oomph
   }
 
   //==================================================================
-  /// \short The spacing function for the x co-ordinate, which is the
+  /// The spacing function for the x co-ordinate, which is the
   /// same as the default function.
   //==================================================================
   template<class ELEMENT>
@@ -223,7 +219,7 @@ namespace oomph
   }
 
   //==================================================================
-  /// \short The spacing function for the y co-ordinates, which splits
+  /// The spacing function for the y co-ordinates, which splits
   /// the region into two regions (1 and 2), according to the
   /// heights H1 and H2, with Ny1 and Ny2 elements respectively.
   template<class ELEMENT>

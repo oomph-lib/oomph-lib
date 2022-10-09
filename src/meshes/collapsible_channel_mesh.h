@@ -3,11 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC//    Version 1.0; svn revision $LastChangedRevision$
-// LIC//
-// LIC// $LastChangedDate$
-// LIC//
-// LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -53,7 +49,7 @@
 namespace oomph
 {
   //========================================================================
-  /// \short Basic collapsible channel mesh.
+  /// Basic collapsible channel mesh.
   /// The mesh is derived from the \c SimpleRectangularQuadMesh
   /// so it's node and element numbering scheme is the same
   /// as in that mesh. Only the boundaries are numbered differently
@@ -67,7 +63,7 @@ namespace oomph
   class CollapsibleChannelMesh : public SimpleRectangularQuadMesh<ELEMENT>
   {
   public:
-    /// \short Constructor: Pass number of elements in upstream/collapsible/
+    /// Constructor: Pass number of elements in upstream/collapsible/
     /// downstream segment and across the channel; lengths of upstream/
     /// collapsible/downstream segments and width of channel, pointer to
     /// GeomObject that defines the collapsible segment and pointer to
@@ -84,7 +80,7 @@ namespace oomph
       GeomObject* wall_pt,
       TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
-    /// \short destructor
+    /// destructor
     ~CollapsibleChannelMesh()
     {
       delete Domain_pt;
@@ -102,7 +98,7 @@ namespace oomph
       return Domain_pt;
     }
 
-    /// \short Function pointer for function that squashes
+    /// Function pointer for function that squashes
     /// the mesh near the walls. Default trivial mapping (the identity)
     /// leaves vertical nodal positions unchanged. Mapping is
     /// used in underlying CollapsibleChannelDomain. Virtual
@@ -114,7 +110,8 @@ namespace oomph
       return Domain_pt->bl_squash_fct_pt();
     }
 
-    /// \short Function pointer for function that squashes
+
+    /// Function pointer for function that squashes
     /// the mesh near the walls. Default trivial mapping (the identity)
     /// leaves vertical nodal positions unchanged. Mapping is
     /// used in underlying CollapsibleChannelDomain. Const version.
@@ -123,7 +120,8 @@ namespace oomph
       return Domain_pt->bl_squash_fct_pt();
     }
 
-    /// \short Function pointer for function that redistributes the
+
+    /// Function pointer for function that redistributes the
     /// elements in the axial direction. Virtual
     /// so we can break it in derived classes (e.g. the Algebraic
     /// versions of this mesh where it doesn't make any sense
@@ -133,7 +131,8 @@ namespace oomph
       return Domain_pt->axial_spacing_fct_pt();
     }
 
-    /// \short Function pointer for function that redistributes the
+
+    /// Function pointer for function that redistributes the
     /// elements in the axial direction. Const version
     virtual CollapsibleChannelDomain::AxialSpacingFctPt& axial_spacing_fct_pt()
       const
@@ -161,6 +160,7 @@ namespace oomph
     GeomObject* Wall_pt;
   };
 
+
   /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////
@@ -182,7 +182,7 @@ namespace oomph
       public RefineableQuadMesh<ELEMENT>
   {
   public:
-    /// \short Constructor: Pass number of elements, lengths, pointer to
+    /// Constructor: Pass number of elements, lengths, pointer to
     /// geometric object that describes the wall and timestepper
     RefineableCollapsibleChannelMesh(
       const unsigned& nup,
@@ -214,6 +214,7 @@ namespace oomph
     ~RefineableCollapsibleChannelMesh() {}
   };
 
+
   /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////
@@ -234,7 +235,7 @@ namespace oomph
       public virtual CollapsibleChannelMesh<ELEMENT>
   {
   public:
-    /// \short Constructor: Pass numbers of elements and dimensions of the
+    /// Constructor: Pass numbers of elements and dimensions of the
     /// various parts of the collapsible channel, pointer to
     /// geometric object that represents the wall and pointer to
     /// timestepper (defaults to Steady).
@@ -333,10 +334,12 @@ namespace oomph
 
     } // end of constructor
 
-    /// \short Destructor: empty
+
+    /// Destructor: empty
     virtual ~MacroElementNodeUpdateCollapsibleChannelMesh() {}
 
   }; // end of mesh
+
 
   ////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////
@@ -358,7 +361,7 @@ namespace oomph
       public virtual RefineableQuadMesh<ELEMENT>
   {
   public:
-    /// \short Constructor: Pass numbers of elements and dimensions of the
+    /// Constructor: Pass numbers of elements and dimensions of the
     /// various parts of the collapsible channel, pointer to
     /// geometric object that represents the wall and pointer to
     /// timestepper (defaults to Steady).
@@ -398,10 +401,11 @@ namespace oomph
       this->setup_quadtree_forest();
     }
 
-    /// \short Destructor: empty
+    /// Destructor: empty
     virtual ~MacroElementNodeUpdateRefineableCollapsibleChannelMesh() {}
 
   }; // end of mesh
+
 
   /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////
@@ -416,7 +420,7 @@ namespace oomph
       public AlgebraicMesh
   {
   public:
-    /// \short Constructor: Pass number of elements in upstream/collapsible/
+    /// Constructor: Pass number of elements in upstream/collapsible/
     /// downstream segment and across the channel; lengths of upstream/
     /// collapsible/downstream segments and width of channel, pointer to
     /// GeomObject that defines the collapsible segment and pointer to
@@ -450,10 +454,11 @@ namespace oomph
       setup_algebraic_node_update();
     }
 
-    /// \short Destructor: empty
+    /// Destructor: empty
     virtual ~AlgebraicCollapsibleChannelMesh() {}
 
-    /// \short Constructor: Pass number of elements in upstream/collapsible/
+
+    /// Constructor: Pass number of elements in upstream/collapsible/
     /// downstream segment and across the channel; lengths of upstream/
     /// collapsible/downstream segments and width of channel, pointer to
     /// GeomObject that defines the collapsible segment and pointer to
@@ -494,7 +499,7 @@ namespace oomph
       setup_algebraic_node_update();
     }
 
-    /// \short Function pointer for function that squashes
+    /// Function pointer for function that squashes
     /// the mesh near the walls. Default trivial mapping (the identity)
     /// leaves vertical nodal positions unchanged. Mapping is
     /// used in underlying CollapsibleChannelDomain. Broken function
@@ -518,7 +523,8 @@ namespace oomph
       return Dummy_fct_pt;
     }
 
-    /// \short Function pointer for function that redistributes nodes
+
+    /// Function pointer for function that redistributes nodes
     /// axially. Default trivial mapping (the identity)
     /// leaves vertical nodal positions unchanged. Mapping is
     /// used in underlying CollapsibleChannelDomain. Broken function
@@ -542,11 +548,12 @@ namespace oomph
       return Dummy_fct_pt;
     }
 
-    /// \short Update nodal position at time level t (t=0: present;
+
+    /// Update nodal position at time level t (t=0: present;
     /// t>0: previous)
     void algebraic_node_update(const unsigned& t, AlgebraicNode*& node_pt);
 
-    /// \short Update the node-udate data after mesh adaptation.
+    /// Update the node-udate data after mesh adaptation.
     /// Empty -- no update of node update required as this is
     /// non-refineable mesh.
     void update_node_update(AlgebraicNode*& node_pt) {}
@@ -558,6 +565,7 @@ namespace oomph
     /// Dummy function pointer
     CollapsibleChannelDomain::BLSquashFctPt Dummy_fct_pt;
   };
+
 
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
@@ -573,7 +581,7 @@ namespace oomph
       public virtual AlgebraicCollapsibleChannelMesh<ELEMENT>
   {
   public:
-    /// \short Constructor: Pass number of elements in upstream/collapsible/
+    /// Constructor: Pass number of elements in upstream/collapsible/
     /// downstream segment and across the channel; lengths of upstream/
     /// collapsible/downstream segments and width of channel, pointer to
     /// GeomObject that defines the collapsible segment and pointer to
@@ -614,7 +622,8 @@ namespace oomph
       this->setup_quadtree_forest();
     }
 
-    /// \short Constructor: Pass number of elements in upstream/collapsible/
+
+    /// Constructor: Pass number of elements in upstream/collapsible/
     /// downstream segment and across the channel; lengths of upstream/
     /// collapsible/downstream segments and width of channel, pointer to
     /// GeomObject that defines the collapsible segment and pointer to
@@ -657,7 +666,7 @@ namespace oomph
       this->setup_quadtree_forest();
     }
 
-    /// \short Update the node update data for specified node following
+    /// Update the node update data for specified node following
     /// any mesh adapation
     void update_node_update(AlgebraicNode*& node_pt);
   };

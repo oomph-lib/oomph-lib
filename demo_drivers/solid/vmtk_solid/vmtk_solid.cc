@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -106,7 +106,7 @@ namespace Global_Parameters
  /// Uniform pressure
  double P = 0.0;
 
- /// \short Constant pressure load. The arguments to this function are imposed
+ /// Constant pressure load. The arguments to this function are imposed
  /// on us by the SolidTractionElements which allow the traction to 
  /// depend on the Lagrangian and Eulerian coordinates x and xi, and on the 
  /// outer unit normal to the surface. Here we only need the outer unit
@@ -167,7 +167,7 @@ private:
  /// IDs of solid mesh boundaries where displacements are pinned
  Vector<unsigned> Pinned_solid_boundary_id;
 
- /// \short IDs of solid mesh boundaries which make up the traction interface
+ /// IDs of solid mesh boundaries which make up the traction interface
  Vector<unsigned> Solid_traction_boundary_id;
 
 };

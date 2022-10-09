@@ -3,9 +3,10 @@ include $(top_srcdir)/config/makefile_templates/demo_drivers
 
 
 #==================================
-# These all need arpack
+#  Currently need anasazi
 #==================================
-if HAVE_ARPACK_SOURCES
+if OOMPH_HAS_TRILINOS
+
 
 # Name of executable
 check_PROGRAMS=orr_sommerfeld

@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -168,7 +168,7 @@ namespace oomph
   }
 
   //============================================================================
-  /// \short Uniformly distribute global_nrow over all processors where
+  /// Uniformly distribute global_nrow over all processors where
   /// processors 0 holds approximately the first
   /// global_nrow/n_proc, processor 1 holds the next
   /// global_nrow/n_proc and so on...
@@ -330,7 +330,7 @@ namespace oomph
   namespace LinearAlgebraDistributionHelpers
   {
     //===========================================================================
-    /// \short Takes a vector of LinearAlgebraDistribution objects and
+    /// Takes a vector of LinearAlgebraDistribution objects and
     /// concatenates them such that the nrow_local of the out_distribution
     /// is the sum of the nrow_local of all the in_distributions and the number
     /// of global rows of the out_distribution is the sum of the number of

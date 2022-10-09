@@ -3,11 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC//    Version 1.0; svn revision $LastChangedRevision$
-// LIC//
-// LIC// $LastChangedDate$
-// LIC//
-// LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -51,7 +47,7 @@ namespace oomph
   class SimpleRectangularTriMesh : public virtual TriangleMeshBase
   {
   public:
-    /// \short Constructor
+    /// Constructor
     /// n_x  : number of elements in the x direction;
     /// n_y  : number of elements in the y direction;
     /// l_x  : length in the x direction

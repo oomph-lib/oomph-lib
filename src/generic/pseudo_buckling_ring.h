@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -43,20 +43,10 @@
 namespace oomph
 {
   //=========================================================================
-  /// \short Pseudo buckling ring: Circular ring deformed by the
+  /// Pseudo buckling ring: Circular ring deformed by the
   /// N-th buckling mode of a thin-wall elastic ring.
-  /// \f[
-  /// x = R_0 \cos(\zeta) +
-  ///     \epsilon \left( \cos(N \zeta) \cos(\zeta) - A \sin(N \zeta)
-  ///     \sin(\zeta)
-  ///              \right) sin(2 \pi t/T)
-  /// \f]
-  /// \f[
-  /// y = R_0 \sin(\zeta) +
-  ///     \epsilon \left( \cos(N \zeta) \sin(\zeta) + A \sin(N \zeta)
-  ///     \cos(\zeta)
-  ///              \right) sin(2 \pi t/T)
-  /// \f]
+  /// \f[ x = R_0 \cos(\zeta) + \epsilon \left( \cos(N \zeta) \cos(\zeta) - A \sin(N \zeta) \sin(\zeta) \right) sin(2 \pi t/T) \f]
+  /// \f[ y = R_0 \sin(\zeta) + \epsilon \left( \cos(N \zeta) \sin(\zeta) + A \sin(N \zeta) \cos(\zeta) \right) sin(2 \pi t/T) \f]
   /// where A is the ratio of the aziumuthal to the radial buckling
   /// amplitude (A=-1/N for statically buckling rings) and epsilon
   /// is the buckling amplitude.
@@ -74,7 +64,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Constructor: 1 Lagrangian coordinate, 2 Eulerian coords. Pass
+    /// Constructor: 1 Lagrangian coordinate, 2 Eulerian coords. Pass
     /// buckling amplitude, ratio of of buckling amplitudes, buckling
     /// wavenumber (as a double), undeformed ring radius (all as Data)
     /// and pointer to global timestepper.
@@ -119,7 +109,7 @@ namespace oomph
     }
 
 
-    /// \short Constructor: 1 Lagrangian coordinate, 2 Eulerian coords. Pass
+    /// Constructor: 1 Lagrangian coordinate, 2 Eulerian coords. Pass
     /// buckling amplitude, ratio of of buckling amplitudes, buckling
     /// wavenumber, undeformed ring radius, period of osc and pointer
     /// to global timestepper. All geometric data is pinned by default.
@@ -167,7 +157,7 @@ namespace oomph
     }
 
 
-    /// \short Constructor: 1 Lagrangian coordinate, 2 Eulerian coords. Pass
+    /// Constructor: 1 Lagrangian coordinate, 2 Eulerian coords. Pass
     /// buckling amplitude, h/R, buckling wavenumbe and pointer
     /// to global timestepper. Other parameters get set up to represent
     /// oscillating ring with mode imode (1 or 2). All geometric data is
@@ -323,7 +313,7 @@ namespace oomph
       Geom_data_pt[0]->set_value(0, eps_buckl);
     }
 
-    /// \short Set amplitude ratio between radial and azimuthal
+    /// Set amplitude ratio between radial and azimuthal
     /// buckling displacements
     void set_ampl_ratio(const double& ampl_ratio)
     {
@@ -349,7 +339,7 @@ namespace oomph
     }
 
 
-    /// \short Position Vector at Lagrangian coordinate zeta at present
+    /// Position Vector at Lagrangian coordinate zeta at present
     /// time
     void position(const Vector<double>& zeta, Vector<double>& r) const
     {
@@ -386,7 +376,7 @@ namespace oomph
     }
 
 
-    ///\short Parametrised velocity on object at current time: veloc = d
+    /// Parametrised velocity on object at current time: veloc = d
     /// r(zeta)/dt.
     void veloc(const Vector<double>& zeta, Vector<double>& veloc) // const
     {
@@ -421,7 +411,7 @@ namespace oomph
     }
 
 
-    /// \short Parametrised acceleration on object at current time:
+    /// Parametrised acceleration on object at current time:
     /// accel = d^2 r(zeta)/dt^2.
     void accel(const Vector<double>& zeta, Vector<double>& accel) // const
     {
@@ -457,7 +447,7 @@ namespace oomph
     }
 
 
-    /// \short Position Vector at Lagrangian coordinate zeta at discrete
+    /// Position Vector at Lagrangian coordinate zeta at discrete
     /// previous time (t=0: present time; t>0: previous time)
     void position(const unsigned& t,
                   const Vector<double>& zeta,
@@ -510,7 +500,7 @@ namespace oomph
     }
 
 
-    /// \short j-th time-derivative on object at current time:
+    /// j-th time-derivative on object at current time:
     /// \f$ \frac{d^{j} r(\zeta)}{dt^j} \f$.
     void dposition_dt(const Vector<double>& zeta,
                       const unsigned& j,
@@ -550,7 +540,7 @@ namespace oomph
       return Geom_data_pt.size();
     }
 
-    /// \short Return pointer to the j-th Data item that the object's
+    /// Return pointer to the j-th Data item that the object's
     /// shape depends on
     Data* geom_data_pt(const unsigned& j)
     {
@@ -559,7 +549,7 @@ namespace oomph
 
 
   protected:
-    /// \short Vector of pointers to Data items that affects the object's shape
+    /// Vector of pointers to Data items that affects the object's shape
     Vector<Data*> Geom_data_pt;
 
     /// Do I need to clean up?
@@ -575,29 +565,17 @@ namespace oomph
 
 
   //=========================================================================
-  /// \short Pseudo buckling ring: Circular ring deformed by the
+  /// Pseudo buckling ring: Circular ring deformed by the
   /// N-th buckling mode of a thin-wall elastic ring.
-  /// \f[
-  /// x = R_0 \cos(\zeta) +
-  ///     \epsilon \left( \cos(N \zeta) \cos(\zeta) - A \sin(N \zeta)
-  ///     \sin(\zeta)
-  ///              \right) sin(2 \pi t/T)
-  /// \f]
-  /// \f[
-  /// y = R_0 \sin(\zeta) +
-  ///     \epsilon \left( \cos(N \zeta) \sin(\zeta) + A \sin(N \zeta)
-  ///     \cos(\zeta)
-  ///              \right) sin(2 \pi t/T)
-  /// \f]
+  /// \f[ x = R_0 \cos(\zeta) + \epsilon \left( \cos(N \zeta) \cos(\zeta) - A \sin(N \zeta) \sin(\zeta) \right) sin(2 \pi t/T) \f]
+  /// \f[ y = R_0 \sin(\zeta) + \epsilon \left( \cos(N \zeta) \sin(\zeta) + A \sin(N \zeta) \cos(\zeta) \right) sin(2 \pi t/T) \f]
   /// where A is the ratio of the aziumuthal to the radial buckling
   /// amplitude (A=-1/N for statically buckling rings) and epsilon
   /// is the buckling amplitude.
   /// Scale R_0 is adjusted to ensure conservation of (computational)
   /// volume/area. This is implemented by a
   /// pseudo-elasticity approach: The governing equation for \f$ R_0 \f$ is:
-  /// \f[
-  /// p_{ref} = R_0 - 1.0
-  /// \f]
+  /// \f[ p_{ref} = R_0 - 1.0 \f]
   /// The pointer to the reference pressure needs to be set with
   /// reference_pressure_pt().
   //=========================================================================
@@ -605,11 +583,11 @@ namespace oomph
                                     public PseudoBucklingRing
   {
   private:
-    /// \short Index of the value stored in the single geometric object that has
+    /// Index of the value stored in the single geometric object that has
     /// become an unknown
     unsigned Internal_geometric_variable_index;
 
-    /// \short The Data object that represents the reference pressure is stored
+    /// The Data object that represents the reference pressure is stored
     /// at the location indexed by this integer in the external data storage.
     unsigned External_reference_pressure_index;
 
@@ -631,7 +609,7 @@ namespace oomph
 
 
   public:
-    /// \short Constructor: Build  pseudo buckling ring
+    /// Constructor: Build  pseudo buckling ring
     /// from doubles that describe the geometry.
     PseudoBucklingRingElement(const double& eps_buckl,
                               const double& ampl_ratio,
@@ -662,7 +640,7 @@ namespace oomph
     }
 
 
-    /// \short Constructor: Pass
+    /// Constructor: Pass
     /// buckling amplitude, h/R, buckling wavenumbe and pointer
     /// to global timestepper. Other parameters get set up to represent
     /// oscillating ring with mode imode (1 or 2). All geometric data is
@@ -730,13 +708,13 @@ namespace oomph
       get_residuals_generic(residuals, jacobian, 1);
     }
 
-    /// \short Pointer to pressure data that is used as reference pressure
+    /// Pointer to pressure data that is used as reference pressure
     Data* const& reference_pressure_pt() const
     {
       return external_data_pt(0);
     }
 
-    /// \short Return the reference pressure
+    /// Return the reference pressure
     double reference_pressure() const
     {
       // If there is no external pressure, return 0.0
@@ -750,7 +728,7 @@ namespace oomph
       }
     }
 
-    /// \short Set the pressure data that is used as reference pressure
+    /// Set the pressure data that is used as reference pressure
     void set_reference_pressure_pt(Data* const& data_pt)
     {
       // Clear the existing external data, if there is any
@@ -762,7 +740,7 @@ namespace oomph
     }
 
   protected:
-    /// \short Compute element residual Vector (only if flag=0) and also
+    /// Compute element residual Vector (only if flag=0) and also
     /// element Jacobian matrix (if flag=1)
     virtual void get_residuals_generic(Vector<double>& residuals,
                                        DenseMatrix<double>& jacobian,

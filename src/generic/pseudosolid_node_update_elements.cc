@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -30,7 +30,7 @@ namespace oomph
   //===========================================================================
   namespace PseudoSolidHelper
   {
-    /// \short Static variable to hold the default value for the pseudo-solid's
+    /// Static variable to hold the default value for the pseudo-solid's
     /// inertia parameter Lambda^2.
     double Zero = 0.0;
 
