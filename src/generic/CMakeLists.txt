@@ -218,10 +218,6 @@ set(LINKLIBS ${EXTERNAL_SRC_LIBS})
 # all of the external libs as they might not all be required by the generic
 # library (e.g. the nlohmann_json library).
 
-if(OOMPH_HAS_BACKWARD)
-  list(APPEND LINKLIBS backward)
-endif()
-
 if(OOMPH_HAS_HYPRE)
   list(APPEND SOURCES hypre_solver.cc)
   list(APPEND HEADERS hypre_solver.h)
@@ -236,10 +232,6 @@ if(OOMPH_HAS_MUMPS)
   list(APPEND HEADERS mumps_solver.h)
   list(APPEND SOURCES mumps_fortran_solver.F mumps_solver.cc)
   list(APPEND LINKLIBS MUMPS::MUMPS)
-endif()
-
-if(OOMPH_HAS_SPDLOG)
-  list(APPEND LINKLIBS spdlog::spdlog)
 endif()
 
 if(OOMPH_HAS_TRILINOS)
@@ -270,6 +262,29 @@ oomph_library_config(
   SOURCES_NO_BUILD ${TEMPLATES}
   HEADERS_NO_INSTALL ${HEADERS_NO_COMBINE}
   LINKLIBS ${LINKLIBS})
+
+# ------------------------------------------------------------------------------
+# Handle third-party library stuff:
+
+# PM: Handle external distribution dependencies more carefully; don't "glob" add
+# all of the external libs as they might not all be required by the generic
+# library (e.g. the nlohmann_json library).
+
+if(OOMPH_HAS_BACKWARD)
+  find_package(Backward 1.6 REQUIRED)
+  target_link_libraries(${LIBNAME} PUBLIC Backward::Backward)
+endif()
+
+if(OOMPH_HAS_NLOHMANN_JSON)
+  find_package(nlohmann_json 3.11.2 REQUIRED)
+  target_link_libraries(${LIBNAME} PUBLIC nlohmann_json::nlohmann_json)
+endif()
+
+if(OOMPH_HAS_SPDLOG)
+  find_package(spdlog 1.10.0 REQUIRED)
+  target_link_libraries(${LIBNAME} PUBLIC spdlog::spdlog)
+endif()
+# ------------------------------------------------------------------------------
 
 # Specify the location of the external_src headers at build time. We don't need
 # to worry about the location of the headers at install time because they'll all
