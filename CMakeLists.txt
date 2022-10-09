@@ -38,7 +38,7 @@ cmake_minimum_required(VERSION 3.24 FATAL_ERROR)
 project(
   oomphlib
   DESCRIPTION "A finite-element library for simulating multi-physics problems."
-  VERSION 3.0.0
+  VERSION 2.6.0
   HOMEPAGE_URL "http://oomph-lib.maths.man.ac.uk/doc/html/index.html"
   LANGUAGES C CXX Fortran)
 
