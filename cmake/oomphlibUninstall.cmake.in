@@ -11,9 +11,8 @@ function(delete_folder_if_empty DIR)
   endif()
 
   # Check if folder is empty
-  file(GLOB RESULT "${DIR}/*")
-  list(LENGTH RESULT RES_LEN)
-  if(RES_LEN EQUAL 0)
+  file(GLOB_RECURSE RESULT "${DIR}/*")
+  if(NOT RESULT)
     message(STATUS "Deleted empty folder ${DIR}")
     file(REMOVE_RECURSE ${DIR})
   endif()
@@ -30,41 +29,61 @@ endif()
 # Remove files from 'install_manifest.txt'
 message(STATUS "")
 message(STATUS "Removing files from 'install_manifest.txt'")
-file(READ "${CMAKE_CURRENT_SOURCE_DIR}/install_manifest.txt" files)
-string(REGEX REPLACE "\n" ";" files "${files}")
-foreach(file ${files})
-  message(STATUS "Uninstalling $ENV{DESTDIR}${file}")
-  if(IS_SYMLINK "$ENV{DESTDIR}${file}" OR EXISTS "$ENV{DESTDIR}${file}")
-    exec_program(
-      "@CMAKE_COMMAND@" ARGS
-      "-E remove \"$ENV{DESTDIR}${file}\""
-      OUTPUT_VARIABLE rm_out
-      RETURN_VALUE rm_retval)
-    if(NOT "${rm_retval}" STREQUAL 0)
-      message(FATAL_ERROR "Problem when removing $ENV{DESTDIR}${file}")
+file(READ "${CMAKE_CURRENT_SOURCE_DIR}/install_manifest.txt" INSTALLED_FILES)
+string(REGEX REPLACE "\n" ";" INSTALLED_FILES "${INSTALLED_FILES}")
+foreach(FILE IN LISTS INSTALLED_FILES)
+  message(STATUS "Uninstalling $ENV{DESTDIR}${FILE}")
+  if(IS_SYMLINK "$ENV{DESTDIR}${FILE}" OR EXISTS "$ENV{DESTDIR}${FILE}")
+    file(REMOVE "$ENV{DESTDIR}${FILE}")
+    if(EXISTS "$ENV{DESTDIR}${FILE}")
+      message(FATAL_ERROR "Problem when removing $ENV{DESTDIR}${FILE}")
     endif()
   else()
-    message(STATUS "File $ENV{DESTDIR}${file} does not exist.")
+    message(STATUS "File $ENV{DESTDIR}${FILE} does not exist.")
   endif()
 
-  # Create list of folders
-  get_filename_component(FOLDER ${file} DIRECTORY)
-  set(FOLDERS ${FOLDERS} ${FOLDER})
-endforeach(file)
+  # Store parent folders to possibly delete (will only delete it if empty)
+  if(NOT (FILE MATCHES ".+.pc"))
+    cmake_path(GET FILE PARENT_PATH PARENT_DIR)
+    set(ALL_PARENT_DIRS ${ALL_PARENT_DIRS} ${PARENT_DIR})
+  endif()
+endforeach()
+
+# The list of auto-generated combined headers
+set(OOMPHLIB_COMBINED_HEADERS "@OOMPHLIB_COMBINED_HEADERS@")
+
+# Remove auto-generated combined headers
+message(STATUS "")
+message(STATUS "Removing installed (auto-generated) combined headers")
+foreach(HEADER IN LISTS OOMPHLIB_COMBINED_HEADERS)
+  message(STATUS "Removing ${HEADER}")
+  if(IS_SYMLINK "${HEADER}" OR EXISTS "${HEADER}")
+    file(REMOVE ${HEADER})
+    if(EXISTS ${HEADER})
+      message(FATAL_ERROR "Problem when removing ${HEADER}")
+    endif()
+  else()
+    message(STATUS "File ${HEADER} does not exist.")
+  endif()
+
+  # Update parent folders to possibly delete (will only delete it if empty)
+  cmake_path(GET HEADER PARENT_PATH PARENT_DIR)
+  list(APPEND ALL_PARENT_DIRS ${PARENT_DIR})
+endforeach()
 
 # Remove empty folders
 message(STATUS "")
 message(STATUS "Removing empty folders")
 
-list(REMOVE_DUPLICATES FOLDERS)
-foreach(dir ${FOLDERS})
-  delete_folder_if_empty(${dir})
-endforeach(dir)
+list(REMOVE_DUPLICATES ALL_PARENT_DIRS)
+foreach(PARENT_DIR IN LISTS ALL_PARENT_DIRS)
+  delete_folder_if_empty(${PARENT_DIR})
+endforeach()
 
-delete_folder_if_empty("@OOMPH_INSTALL_INCLUDE_DIR@")
-delete_folder_if_empty("@OOMPH_INSTALL_BIN_DIR@")
-delete_folder_if_empty("@OOMPH_INSTALL_LIB_DIR@/cmake")
-delete_folder_if_empty("@OOMPH_INSTALL_LIB_DIR@")
+delete_folder_if_empty("/usr/local/lib/oomphlib")
+delete_folder_if_empty("/usr/local/lib/cmake/oomphlib")
+delete_folder_if_empty("/usr/local/include/oomphlib")
+delete_folder_if_empty("/usr/local/bin/oomphlib")
 
 message(STATUS "Uninstall complete.")
 # ------------------------------------------------------------------------------

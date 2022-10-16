@@ -272,7 +272,7 @@ function(oomph_library_config)
   set(ALL_HEADERS ${HEADERS} ${HEADERS_NO_COMBINE} ${SOURCES_NO_BUILD})
 
   # Install (or symlink) the headers
-  if(${OOMPH_ENABLE_SYMBOLIC_LINKS_FOR_HEADERS})
+  if(OOMPH_ENABLE_SYMBOLIC_LINKS_FOR_HEADERS)
     include(OomphCreateSymlinksForHeaders)
     oomph_create_symlinks_for_headers(
       REAL_DIR ${CMAKE_CURRENT_SOURCE_DIR}
@@ -281,6 +281,16 @@ function(oomph_library_config)
   else()
     install(FILES ${ALL_HEADERS} DESTINATION ${LIBRARY_INCLUDE_DIR})
   endif()
+
+  # Since we're installing/symlinking the combined headers, we need to remember
+  # them so that we can clean them up later. First we loop over the variables to
+  # update the variable locally, then we overwrite the cached variable to update
+  # it globally
+  foreach(HEADER IN LISTS ALL_HEADERS)
+    list(APPEND OOMPHLIB_COMBINED_HEADERS "${LIBRARY_INCLUDE_DIR}/${HEADER}")
+  endforeach()
+  set(OOMPHLIB_COMBINED_HEADERS ${OOMPHLIB_COMBINED_HEADERS} CACHE INTERNAL ""
+      FORCE)
   # ----------------------------------------------------------------------------
 endfunction()
 # ------------------------------------------------------------------------------
