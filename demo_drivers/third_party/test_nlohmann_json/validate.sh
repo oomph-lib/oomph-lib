@@ -21,6 +21,7 @@ mkdir RESLT
 cd RESLT
 ../../test_nlohmann_json >../OUTPUT_test_nlohmann_json
 echo "done"
+cd ..
 
 if [ $? -eq 0 ]; then
   echo " " >>validation.log
@@ -30,10 +31,11 @@ else
   exit 1
 fi
 
-cd ..
-
 # Append output to global validation log file
 #--------------------------------------------
+cat validation.log
+echo "${OOMPH_ROOT_DIR}"
+pwd
 cat validation.log >>$OOMPH_ROOT_DIR/validation.log || {
   echo 'Failed to append validation.log to global validation.log!'
   exit 1
