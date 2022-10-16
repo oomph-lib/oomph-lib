@@ -242,7 +242,7 @@ message(VERBOSE "<====== Finished oomph-lib library configuration ======>")
 # --------------------------------[ EXPORTING ]---------------------------------
 
 # Now export the package so it can be found using find_package(...)
-include(OomphExportPackage)
+include(OomphInstallLibrary)
 
 # ---------------------------------[ TESTING ]----------------------------------
 
@@ -269,7 +269,7 @@ if(OOMPH_IS_MAIN_PROJECT AND OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
   # add_subdirectory(self_test)
 endif()
 
-# -----------------------[ CONFIGURE oomph-lib-config.h ]-----------------------
+# ---------[ CONFIGURE oomph-lib-config.h AND oomphlibUninstall.cmake ]---------
 
 # Construct a oomph-lib-specific config file. Currently
 if(OOMPH_ADD_CONFIG_H)
@@ -280,6 +280,18 @@ if(OOMPH_ADD_CONFIG_H)
   install(FILES ${CMAKE_BINARY_DIR}/src/oomph-lib-config.h
           DESTINATION "${OOMPH_INSTALL_INCLUDE_DIR}")
 endif()
+
+message(STATUS "OOMPHLIB_COMBINED_HEADERS: ${OOMPHLIB_COMBINED_HEADERS}")
+
+# Define the 'uninstall' command to handle uninstalling the installed targets,
+# to be used, e.g. with the commands 'make uninstall' or 'ninja install'
+# (depending on the user-selected generator)
+configure_file(
+  "${CMAKE_SOURCE_DIR}/cmake/${PROJECT_NAME}Uninstall.cmake.in"
+  "${CMAKE_BINARY_DIR}/${PROJECT_NAME}Uninstall.cmake" IMMEDIATE @ONLY)
+add_custom_target(
+  uninstall COMMAND ${CMAKE_COMMAND} -P
+                    ${CMAKE_BINARY_DIR}/${PROJECT_NAME}Uninstall.cmake)
 
 # -------------------[ DEBUG SHIT: DELETE AFTER OVERHAUL ]----------------------
 
