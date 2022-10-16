@@ -4,14 +4,19 @@
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(STATUS "Entered nlohmann_json subdirectory")
 
-# Disable the build of tests
+# Disable the build of tests, amalgamate the library into a single header,
+# disable the CI build targets and install the library, so that we can find it
+# via find_package(...)
 set(JSON_BuildTests OFF)
 set(JSON_MultipleHeaders OFF)
+set(JSON_CI OFF)
+set(JSON_Install ON)
 
 # Download and populate the nlohmann JSON library
 FetchContent_Declare(
   nlohmann_json
   GIT_REPOSITORY https://github.com/nlohmann/json.git
+  GIT_PROGRESS TRUE
   GIT_SHALLOW TRUE
   GIT_TAG v3.11.2)
 FetchContent_MakeAvailable(nlohmann_json)
