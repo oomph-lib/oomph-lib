@@ -99,9 +99,42 @@ with section("parse"):
         'set': {
             'flags': [],
             'kwargs': {}
+        },
+        "find_package": {
+            'flags': [
+                'REQUIRED',
+                'EXACT',
+                'QUIET',
+                'CONFIG',
+                'NO_MODULE',
+                'GLOBAL',
+                'NO_POLICY_SCOPE',
+                'BYPASS_PROVIDER',
+                'NO_DEFAULT_PATH',
+                'NO_PACKAGE_ROOT_PATH',
+                'NO_CMAKE_PATH',
+                'NO_CMAKE_ENVIRONMENT_PATH',
+                'NO_SYSTEM_ENVIRONMENT_PATH',
+                'NO_CMAKE_PACKAGE_REGISTRY',
+                'NO_CMAKE_SYSTEM_PATH',
+                'NO_CMAKE_INSTALL_PREFIX',
+                'NO_CMAKE_SYSTEM_PACKAGE_REGISTRY',
+                'CMAKE_FIND_ROOT_PATH_BOTH',
+                'ONLY_CMAKE_FIND_ROOT_PATH',
+                'NO_CMAKE_FIND_ROOT_PATH',
+            ],
+            "kwargs": {
+                "COMPONENTS": "*",
+                "OPTIONAL_COMPONENTS": "*",
+                "NAMES": "*",
+                "CONFIGS": "*",
+                "HINTS": "*",
+                "PATHS": "*",
+                "REGISTRY_VIEW": 1,
+                "PATH_SUFFIXES": '*',
+            },
         }
     }
-
     # Override configurations per-command where available
     override_spec = {}
 
