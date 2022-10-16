@@ -211,6 +211,26 @@ set_source_files_properties(${TEMPLATES} PROPERTIES HEADER_FILE_ONLY TRUE)
 # The generic library relies on the external sources
 set(LINKLIBS ${EXTERNAL_SRC_LIBS})
 
+# Set the name of the library
+set(LIBNAME generic)
+
+# ------------------------------------------------------------------------------
+# NOTE: The TEMPLATES are getting passed in as SOURCES_NO_BUILD and will be set
+# as library dependencies but marked as HEADER_FILE_ONLY. Under the keyword
+# SOURCES_NO_BUILD, the templates will be installed to build/include/ and will
+# not be built. This is similar to what was done before with the Autotools
+# framework but the TEMPLATES were not marked as library dependencies.
+# ------------------------------------------------------------------------------
+# Import the OomphLibraryConfig module to handle the library creation
+include(OomphLibraryConfig)
+oomph_library_config(
+  LIBNAME ${LIBNAME}
+  HEADERS ${HEADERS}
+  SOURCES ${SOURCES}
+  SOURCES_NO_BUILD ${TEMPLATES}
+  HEADERS_NO_INSTALL ${HEADERS_NO_COMBINE}
+  LINKLIBS ${LINKLIBS})
+
 # ------------------------------------------------------------------------------
 # Handle third-party library stuff:
 
@@ -243,26 +263,6 @@ if(OOMPH_HAS_TRILINOS)
 endif()
 # ------------------------------------------------------------------------------
 
-# Set the name of the library
-set(LIBNAME generic)
-
-# ------------------------------------------------------------------------------
-# NOTE: The TEMPLATES are getting passed in as SOURCES_NO_BUILD and will be set
-# as library dependencies but marked as HEADER_FILE_ONLY. Under the keyword
-# SOURCES_NO_BUILD, the templates will be installed to build/include/ and will
-# not be built. This is similar to what was done before with the Autotools
-# framework but the TEMPLATES were not marked as library dependencies.
-# ------------------------------------------------------------------------------
-# Import the OomphLibraryConfig module to handle the library creation
-include(OomphLibraryConfig)
-oomph_library_config(
-  LIBNAME ${LIBNAME}
-  HEADERS ${HEADERS}
-  SOURCES ${SOURCES}
-  SOURCES_NO_BUILD ${TEMPLATES}
-  HEADERS_NO_INSTALL ${HEADERS_NO_COMBINE}
-  LINKLIBS ${LINKLIBS})
-
 # ------------------------------------------------------------------------------
 # Handle third-party library stuff:
 
@@ -276,7 +276,13 @@ if(OOMPH_HAS_BACKWARD)
 endif()
 
 if(OOMPH_HAS_NLOHMANN_JSON)
-  find_package(nlohmann_json 3.11.2 REQUIRED)
+  find_package(
+    nlohmann_json 3.11.2 REQUIRED HINTS "${nlohmann_json_BINARY_DIR}"
+                                        "${NLOHMANN_JSON_CONFIG_INSTALL_DIR}>")
+  message(
+    STATUS
+      "Found nlohmann_json: ${nlohmann_json_DIR} (found version ${nlohmann_json_VERSION})"
+  )
   target_link_libraries(${LIBNAME} PUBLIC nlohmann_json::nlohmann_json)
 endif()
 
