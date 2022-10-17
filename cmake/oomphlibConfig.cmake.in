@@ -62,6 +62,9 @@ set(OOMPH_SUPPRESSED_TETGEN_LIB @SUPPRESS_TETGEN_LIB@)
 # Capture user's decision to use/build OpenBLAS/LAPACK
 set(OOMPH_ENABLE_USE_OPENBLAS @OOMPH_ENABLE_USE_OPENBLAS@)
 
+# FIXME: Shouldn't the _HAS_ variables be ones that are captures? (Not the
+# _WANT_ ones!)
+#
 # Capture values from the configuration step to determine which dependencies
 # should be forwarded to the user
 set(OOMPH_HAS_MPI @OOMPH_ENABLE_MPI@)
@@ -69,9 +72,9 @@ set(OOMPH_HAS_CGAL @OOMPH_WANT_CGAL@)
 set(OOMPH_HAS_HYPRE @OOMPH_WANT_HYPRE@)
 set(OOMPH_HAS_MUMPS @OOMPH_WANT_MUMPS@)
 set(OOMPH_HAS_TRILINOS @OOMPH_WANT_TRILINOS@)
+
 set(OOMPH_HAS_NLOHMANN_JSON @OOMPH_WANT_NLOHMANN_JSON@)
 set(OOMPH_HAS_SPDLOG @OOMPH_HAS_SPDLOG@)
-set(OOMPH_HAS_GOOGLE_BENCHMARK @OOMPH_HAS_GOOGLE_BENCHMARK@)
 
 # Search for OpenBLAS/LAPACK libraries
 if(OOMPH_ENABLE_USE_OPENBLAS)
@@ -101,11 +104,6 @@ endif()
 # Third-party libraries we built. Make sure to also check whether the dependency
 # has already been found otherwise these dependency checks can be called again
 # and again unnecessarily
-
-# Backward
-if(OOMPH_HAS_BACKWARD AND NOT Backward_FOUND)
-  find_dependency(Backward REQUIRED)
-endif()
 
 # nlohmann_json
 if(OOMPH_HAS_NLOHMANN_JSON AND NOT nlohmann_json_FOUND)

@@ -11,10 +11,6 @@ include(FetchContent)
 # Targets to store the accumulated compiler flags and external libs to link
 set(EXTERNAL_DIST_CXX_DEFINITIONS "")
 
-if(OOMPH_WANT_BACKWARD)
-  add_subdirectory(backward)
-endif()
-
 if(OOMPH_WANT_CGAL AND (NOT DONT_BUILD_CGAL))
   # FIXME: if(NOT DONT_BUILD_GMP) add_subdirectory(gmp) endif() if(NOT
   # DONT_BUILD_MPFR) add_subdirectory(mpfr) endif()
