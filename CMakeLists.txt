@@ -44,11 +44,6 @@ project(
 
 # ---------------------------[ INITIAL PROJECT SETUP ]--------------------------
 
-# FIXME: Temporary patch; find out how to handle this one properly...
-if(APPLE)
-  set(CMAKE_OSX_DEPLOYMENT_TARGET 12.3)
-endif()
-
 # Specify the location of non-standard CMake modules and the C++ standard
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/")
 set(CMAKE_CXX_STANDARD 14)
@@ -96,10 +91,8 @@ option(SUPPRESS_TRIANGLE_LIB "Suppress build of oomph-lib's copy of the triangle
 option(SUPPRESS_TETGEN_LIB "Suppress build of oomph-lib's copy of the tetgen library" OFF)
 
 # Third-party libraries. [WORK IN PROGRESS.]
-# FIXME: issues with "exporting" libraries with 'generic'
-option(OOMPH_WANT_BACKWARD "Use the Backward library for stack trace pretty-printing" OFF)
-option(OOMPH_WANT_SPDLOG "Use the spdlog logging library" OFF)
 option(OOMPH_WANT_NLOHMANN_JSON "Use the nlohmann JSON library" OFF)
+option(OOMPH_WANT_SPDLOG "Use the spdlog logging library" OFF)
 option(OOMPH_WANT_CGAL "Do we want to build the CGAL library?" OFF)
 option(OOMPH_WANT_HYPRE "Use Hypre library" OFF)
 option(OOMPH_WANT_MUMPS "Use MUMPS library" OFF)
@@ -280,8 +273,6 @@ if(OOMPH_ADD_CONFIG_H)
   install(FILES ${CMAKE_BINARY_DIR}/src/oomph-lib-config.h
           DESTINATION "${OOMPH_INSTALL_INCLUDE_DIR}")
 endif()
-
-message(STATUS "OOMPHLIB_COMBINED_HEADERS: ${OOMPHLIB_COMBINED_HEADERS}")
 
 # Define the 'uninstall' command to handle uninstalling the installed targets,
 # to be used, e.g. with the commands 'make uninstall' or 'ninja install'
