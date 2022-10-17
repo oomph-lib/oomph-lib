@@ -6,6 +6,10 @@
 # ==============================================================================
 # Define the function 'delete_folder_if_empty'
 function(delete_folder_if_empty DIR)
+  # Set this policy to make sure that GLOB_RECURSE does NOT follow symlinks!
+  cmake_policy(SET CMP0009 NEW)
+
+  # If the directory doesn't exist, don't do anything
   if(NOT EXISTS ${DIR})
     return()
   endif()
