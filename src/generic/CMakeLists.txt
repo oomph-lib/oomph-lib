@@ -270,24 +270,16 @@ endif()
 # all of the external libs as they might not all be required by the generic
 # library (e.g. the nlohmann_json library).
 
-if(OOMPH_HAS_BACKWARD)
-  find_package(Backward 1.6 REQUIRED)
-  target_link_libraries(${LIBNAME} PUBLIC Backward::Backward)
-endif()
-
 if(OOMPH_HAS_NLOHMANN_JSON)
-  find_package(
-    nlohmann_json 3.11.2 REQUIRED HINTS "${nlohmann_json_BINARY_DIR}"
-                                        "${NLOHMANN_JSON_CONFIG_INSTALL_DIR}>")
-  message(
-    STATUS
-      "Found nlohmann_json: ${nlohmann_json_DIR} (found version ${nlohmann_json_VERSION})"
-  )
+  # find_package( nlohmann_json 3.11.2 REQUIRED HINTS
+  # "${nlohmann_json_BINARY_DIR}"
+  # "${NLOHMANN_JSON_CONFIG_INSTALL_DIR}")
   target_link_libraries(${LIBNAME} PUBLIC nlohmann_json::nlohmann_json)
 endif()
 
 if(OOMPH_HAS_SPDLOG)
-  find_package(spdlog 1.10.0 REQUIRED)
+  # find_package(spdlog 1.10.0 REQUIRED HINTS "${spdlog_BINARY_DIR}") message(
+  # STATUS "Found spdlog: ${spdlog_DIR} (found version ${spdlog_VERSION})")
   target_link_libraries(${LIBNAME} PUBLIC spdlog::spdlog)
 endif()
 # ------------------------------------------------------------------------------
