@@ -37,7 +37,7 @@ jobs:
         run: |
           cmake --preset ${{ matrix.mpi_info.cmake_preset }} \
           -D CMAKE_INSTALL_PREFIX='${{ env.OOMPH_INSTALL_PATH }}' \
-          -D OOMPH_USE_OPENBLAS=ON \
+          -D OOMPH_ENABLE_USE_OPENBLAS=ON \
           -B build && cd build && ninja && ninja install
 
       - name: Run self-tests
