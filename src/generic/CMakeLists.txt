@@ -231,59 +231,6 @@ oomph_library_config(
   HEADERS_NO_INSTALL ${HEADERS_NO_COMBINE}
   LINKLIBS ${LINKLIBS})
 
-# ------------------------------------------------------------------------------
-# Handle third-party library stuff:
-
-# PM: Handle external distribution dependencies more carefully; don't "glob" add
-# all of the external libs as they might not all be required by the generic
-# library (e.g. the nlohmann_json library).
-
-if(OOMPH_HAS_HYPRE)
-  list(APPEND SOURCES hypre_solver.cc)
-  list(APPEND HEADERS hypre_solver.h)
-  list(APPEND LINKLIBS HYPRE::HYPRE)
-endif()
-
-if(OOMPH_HAS_MPI)
-  list(APPEND SOURCES superlu_dist.c)
-endif()
-
-if(OOMPH_HAS_MUMPS)
-  list(APPEND HEADERS mumps_solver.h)
-  list(APPEND SOURCES mumps_fortran_solver.F mumps_solver.cc)
-  list(APPEND LINKLIBS MUMPS::MUMPS)
-endif()
-
-if(OOMPH_HAS_TRILINOS)
-  list(APPEND SOURCES trilinos_helpers.cc trilinos_preconditioners.cc
-       trilinos_solver.cc trilinos_eigen_solver.cc)
-  list(APPEND HEADERS trilinos_helpers.h trilinos_preconditioners.h
-       trilinos_solver.h trilinos_eigen_solver.h)
-  list(APPEND LINKLIBS Trilinos::Trilinos)
-endif()
-# ------------------------------------------------------------------------------
-
-# ------------------------------------------------------------------------------
-# Handle third-party library stuff:
-
-# PM: Handle external distribution dependencies more carefully; don't "glob" add
-# all of the external libs as they might not all be required by the generic
-# library (e.g. the nlohmann_json library).
-
-if(OOMPH_HAS_NLOHMANN_JSON)
-  # find_package( nlohmann_json 3.11.2 REQUIRED HINTS
-  # "${nlohmann_json_BINARY_DIR}"
-  # "${NLOHMANN_JSON_CONFIG_INSTALL_DIR}")
-  target_link_libraries(${LIBNAME} PUBLIC nlohmann_json::nlohmann_json)
-endif()
-
-if(OOMPH_HAS_SPDLOG)
-  # find_package(spdlog 1.10.0 REQUIRED HINTS "${spdlog_BINARY_DIR}") message(
-  # STATUS "Found spdlog: ${spdlog_DIR} (found version ${spdlog_VERSION})")
-  target_link_libraries(${LIBNAME} PUBLIC spdlog::spdlog)
-endif()
-# ------------------------------------------------------------------------------
-
 # Specify the location of the external_src headers at build time. We don't need
 # to worry about the location of the headers at install time because they'll all
 # be bundled together in build/include/.
@@ -301,9 +248,51 @@ oomph_target_silence_warnings(
     -Wno-potentially-evaluated-expression
     -Wno-instantiation-after-specialization -Wno-tautological-compare)
 
-set_source_files_properties(
-  superlu_dist.c PROPERTIES COMPILE_FLAGS -Wno-implicit-function-declaration
-                            -Wno-enum-conversion -Wno-switch)
+# ------------------------------------------------------------------------------
+# Handle third-party library stuff:
+
+# NOTE: We publicly link third-party that generic may not even rely on to ensure
+# that these libraries will be propagated to the user. For example, if a user
+# links against, say, the poisson library, they will automatically gain access
+# to the generic library and thus the third-party libraries. (Here, we assume
+# that the user will always link to the generic library in some way, which is a
+# reasonable assumption.)
+
+if(OOMPH_HAS_HYPRE)
+  list(APPEND SOURCES hypre_solver.cc)
+  list(APPEND HEADERS hypre_solver.h)
+  list(APPEND LINKLIBS HYPRE::HYPRE)
+endif()
+
+if(OOMPH_HAS_MPI)
+  list(APPEND SOURCES superlu_dist.c)
+  set_source_files_properties(
+    superlu_dist.c PROPERTIES COMPILE_FLAGS -Wno-implicit-function-declaration
+                              -Wno-enum-conversion -Wno-switch)
+endif()
+
+if(OOMPH_HAS_MUMPS)
+  list(APPEND HEADERS mumps_solver.h)
+  list(APPEND SOURCES mumps_fortran_solver.F mumps_solver.cc)
+  list(APPEND LINKLIBS MUMPS::MUMPS)
+endif()
+
+if(OOMPH_HAS_TRILINOS)
+  list(APPEND SOURCES trilinos_helpers.cc trilinos_preconditioners.cc
+       trilinos_solver.cc trilinos_eigen_solver.cc)
+  list(APPEND HEADERS trilinos_helpers.h trilinos_preconditioners.h
+       trilinos_solver.h trilinos_eigen_solver.h)
+  list(APPEND LINKLIBS Trilinos::Trilinos)
+endif()
+
+if(OOMPH_HAS_NLOHMANN_JSON)
+  target_link_libraries(${LIBNAME} PUBLIC nlohmann_json::nlohmann_json)
+endif()
+
+if(OOMPH_HAS_SPDLOG)
+  target_link_libraries(${LIBNAME} PUBLIC spdlog::spdlog)
+endif()
+# ------------------------------------------------------------------------------
 
 message(VERBOSE "Leaving generic subdirectory")
 # ------------------------------------------------------------------------------
