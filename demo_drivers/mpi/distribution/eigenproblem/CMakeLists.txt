@@ -19,19 +19,14 @@ endif()
 
 # ---------------------------------- TESTING ----------------------------------
 
-set(TEST_TARGET_DEPS)
 if(OOMPH_HAS_TRILINOS)
-  list(APPEND TEST_TARGET_DEPS harmonic)
-endif()
+  oomph_add_test(
+    TEST_NAME mpi.eigenproblem
+    TARGET_DEPENDENCIES harmonic
+    EXTRA_REQUIRES
+    LABELS "mpi;eigenproblem"
+    REQUIRES_MPI_RUN_COMMAND)
 
-oomph_add_test(
-  TEST_NAME mpi.eigenproblem
-  TARGET_DEPENDENCIES ${TEST_TARGET_DEPS}
-  EXTRA_REQUIRES
-  LABELS "mpi;eigenproblem"
-  REQUIRES_MPI_RUN_COMMAND)
-
-if(OOMPH_HAS_TRILINOS)
   # Indicate that this test requires the resource REQUIRES_SOLE_USE_OF_CPU_MPI.
   # We'll pass this to all other MPI-enabled self-tests to ensure that parallel
   # self-test do NOT run at the same time!
