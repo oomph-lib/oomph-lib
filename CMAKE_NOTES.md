@@ -29,7 +29,7 @@ To override options in `CMakePresets.json` with your own, create a `CMakeUserPre
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
         "CMAKE_PREFIX_PATH": "/usr/local/Cellar/openblas/0.3.17;${sourceDir}/build/",
         "OOMPH_ENABLE_MPI": "ON",
-        "OOMPH_USE_OPENBLAS": "ON"
+        "OOMPH_ENABLE_USE_OPENBLAS": "ON"
       },
       // Provide your custom C/C++ compilers
       "environment": {
