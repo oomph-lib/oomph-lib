@@ -602,7 +602,8 @@ namespace oomph
           // double * relaxweight = new double[AMG_max_levels];
 
           // This is how they do it in a hypre demo code
-          double* relaxweight = hypre_CTAlloc(double, AMG_max_levels);
+          double* relaxweight =
+            hypre_CTAlloc(double, AMG_max_levels, HYPRE_MEMORY_HOST);
 
           for (unsigned i = 0; i < AMG_max_levels; i++)
           {
@@ -720,7 +721,8 @@ namespace oomph
         // double * relaxweight = new double[AMG_max_levels];
 
         // This is how they do it in a hypre demo code
-        double* relaxweight = hypre_CTAlloc(double, AMG_max_levels);
+        double* relaxweight =
+          hypre_CTAlloc(double, AMG_max_levels, HYPRE_MEMORY_HOST);
 
         for (unsigned i = 0; i < AMG_max_levels; i++)
         {

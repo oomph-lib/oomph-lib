@@ -33,6 +33,8 @@ include(CMakeFindDependencyMacro)
 
 # -------------------[ EXTRACT IMPORTANT DEFINED VARIABLES ]-------------------
 
+# FIXME: Tidy up file
+
 # Package root directory
 set(OOMPH_PROJECT_NAME "@PROJECT_NAME@")
 set(OOMPH_ROOT_DIR "@OOMPH_ROOT_DIR@")
@@ -59,12 +61,12 @@ set(OOMPH_SUPPRESSED_TRIANGLE_LIB @SUPPRESS_TRIANGLE_LIB@)
 set(OOMPH_SUPPRESSED_TETGEN_LIB @SUPPRESS_TETGEN_LIB@)
 # set(HAVE_DARWIN, ...) set(WANT_MPI_VARIABLENP ...)
 
+# FIXME: Shouldn't the _HAS_ variables be the ones that are captured? (Not the
+# _WANT_ or ENABLE_USE_ ones!)
+
 # Capture user's decision to use/build OpenBLAS/LAPACK
 set(OOMPH_ENABLE_USE_OPENBLAS @OOMPH_ENABLE_USE_OPENBLAS@)
 
-# FIXME: Shouldn't the _HAS_ variables be ones that are captures? (Not the
-# _WANT_ ones!)
-#
 # Capture values from the configuration step to determine which dependencies
 # should be forwarded to the user
 set(OOMPH_HAS_MPI @OOMPH_ENABLE_MPI@)
@@ -122,7 +124,12 @@ endif()
 
 # MUMPS
 if(OOMPH_HAS_MUMPS AND NOT MUMPS_FOUND)
-  find_dependency(MUMPS 5.4.0 REQUIRED)
+  find_dependency(MUMPS 5.5.1.10 REQUIRED)
+endif()
+
+# HYPRE
+if(OOMPH_HAS_HYPRE AND NOT HYPRE_FOUND)
+  find_dependency(HYPRE 2.26.0 REQUIRED)
 endif()
 
 # Trilinos

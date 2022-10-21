@@ -199,6 +199,25 @@ set(SOURCES
     extruded_domain.cc
     black_box_newton_solver.cc)
 
+if(OOMPH_HAS_MPI)
+  list(APPEND SOURCES superlu_dist.c)
+  set_source_files_properties(
+    superlu_dist.c PROPERTIES COMPILE_FLAGS -Wno-implicit-function-declaration
+                              -Wno-enum-conversion -Wno-switch)
+endif()
+
+if(OOMPH_HAS_HYPRE)
+  list(APPEND HEADERS hypre_solver.h)
+  list(APPEND SOURCES hypre_solver.cc)
+endif()
+
+if(OOMPH_HAS_TRILINOS)
+  list(APPEND HEADERS trilinos_helpers.h trilinos_preconditioners.h
+       trilinos_solver.h trilinos_eigen_solver.h)
+  list(APPEND SOURCES trilinos_helpers.cc trilinos_preconditioners.cc
+       trilinos_solver.cc trilinos_eigen_solver.cc)
+endif()
+
 # Need to worry about these for dependency but they shouldn't be included into
 # the include directory
 set(HEADERS_NO_COMBINE cfortran.h frontal.h arpack.h lapack_qz.h mumps.h)
@@ -206,20 +225,27 @@ set(HEADERS_NO_COMBINE cfortran.h frontal.h arpack.h lapack_qz.h mumps.h)
 # Template-only files: Need to be installed to include directory but should not
 # be listed in combined header file
 set(TEMPLATES tree.tpp refineable_mesh.tpp multi_domain.tpp missing_masters.tpp)
-set_source_files_properties(${TEMPLATES} PROPERTIES HEADER_FILE_ONLY TRUE)
+
+# FIXME: Delete once you're sure oomph-lib builds (this should automatically be
+# done in OomphLibraryConfig.cmake) set_source_files_properties(${TEMPLATES}
+# PROPERTIES HEADER_FILE_ONLY TRUE)
 
 # The generic library relies on the external sources
 set(LINKLIBS ${EXTERNAL_SRC_LIBS})
+if(OOMPH_HAS_MPI)
+  list(APPEND LINKLIBS MPI::MPI_C MPI::MPI_CXX)
+endif()
 
 # Set the name of the library
 set(LIBNAME generic)
 
 # ------------------------------------------------------------------------------
-# NOTE: The TEMPLATES are getting passed in as SOURCES_NO_BUILD and will be set
-# as library dependencies but marked as HEADER_FILE_ONLY. Under the keyword
-# SOURCES_NO_BUILD, the templates will be installed to build/include/ and will
-# not be built. This is similar to what was done before with the Autotools
-# framework but the TEMPLATES were not marked as library dependencies.
+# NOTE: The files under TEMPLATES are specified as SOURCES_NO_BUILD to ensure
+# they will be set as library dependencies but marked as HEADER_FILE_ONLY. As a
+# result, the templates will be installed to build/include/ and will not be
+# built into the generic library artefact. This is similar to what was done
+# before with the Autotools framework but the TEMPLATES were not marked as
+# library dependencies.
 # ------------------------------------------------------------------------------
 # Import the OomphLibraryConfig module to handle the library creation
 include(OomphLibraryConfig)
@@ -231,12 +257,11 @@ oomph_library_config(
   HEADERS_NO_INSTALL ${HEADERS_NO_COMBINE}
   LINKLIBS ${LINKLIBS})
 
-# Specify the location of the external_src headers at build time. We don't need
-# to worry about the location of the headers at install time because they'll all
-# be bundled together in build/include/.
-#
-# TODO: Test whether this can just be replaced with linking to the required
-# oomph_ libraries...
+# Headers in external_src are typically #include-ed by files in src/generic/
+# like they sit in the generic folder, but that isn't the case at build-time. It
+# is only true once the library has been installed because they'll all be
+# bundled together in build/include/. To make things work at build time, we need
+# to specify the location of the external_src headers.
 target_include_directories(
   ${LIBNAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/external_src>)
 
@@ -259,22 +284,7 @@ oomph_target_silence_warnings(
 # reasonable assumption.)
 
 if(OOMPH_HAS_HYPRE)
-  list(APPEND SOURCES hypre_solver.cc)
-  list(APPEND HEADERS hypre_solver.h)
-  list(APPEND LINKLIBS HYPRE::HYPRE)
-endif()
-
-if(OOMPH_HAS_MPI)
-  list(APPEND SOURCES superlu_dist.c)
-  set_source_files_properties(
-    superlu_dist.c PROPERTIES COMPILE_FLAGS -Wno-implicit-function-declaration
-                              -Wno-enum-conversion -Wno-switch)
-endif()
-
-if(OOMPH_HAS_MUMPS)
-  list(APPEND HEADERS mumps_solver.h)
-  list(APPEND SOURCES mumps_fortran_solver.F mumps_solver.cc)
-  list(APPEND LINKLIBS MUMPS::MUMPS)
+  target_link_libraries(${LIBNAME} PUBLIC HYPRE::HYPRE)
 endif()
 
 if(OOMPH_HAS_TRILINOS)
@@ -283,6 +293,13 @@ if(OOMPH_HAS_TRILINOS)
   list(APPEND HEADERS trilinos_helpers.h trilinos_preconditioners.h
        trilinos_solver.h trilinos_eigen_solver.h)
   list(APPEND LINKLIBS Trilinos::Trilinos)
+endif()
+
+if(OOMPH_HAS_MUMPS)
+  list(APPEND HEADERS mumps_solver.h)
+  list(APPEND SOURCES mumps_fortran_solver.F mumps_solver.cc)
+  # find_package(MUMPS 5.5.1.10 REQUIRED HINTS ${MUMPS_BINARY_DIR})
+  target_link_libraries(${LIBNAME} PUBLIC MUMPS::MUMPS MPI::MPI_C)
 endif()
 
 if(OOMPH_HAS_NLOHMANN_JSON)

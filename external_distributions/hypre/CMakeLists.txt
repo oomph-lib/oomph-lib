@@ -11,8 +11,8 @@ set(HYPRE_ENABLE_MIXEDINT OFF)
 set(HYPRE_ENABLE_SINGLE OFF)
 set(HYPRE_ENABLE_LONG_DOUBLE OFF)
 set(HYPRE_ENABLE_COMPLEX OFF)
-set(HYPRE_WITH_MPI ON)
-set(HYPRE_WITH_OPENMP ${OOMPH_ENABLE_MPI})
+set(HYPRE_WITH_MPI ${OOMPH_ENABLE_MPI})
+set(HYPRE_WITH_OPENMP OFF)
 set(HYPRE_ENABLE_HOPSCOTCH OFF)
 set(HYPRE_WITH_DSUPERLU OFF)
 set(HYPRE_PRINT_ERRORS OFF)
@@ -51,22 +51,26 @@ if(HYPRE_ENABLE_HYPRE_LAPACK)
   endif()
 endif()
 
-# Configuration/build commands
-set(OOMPH_CONFIGURE_COMMAND_FOR_HYPRE
-    "cd src && cmake -G ${CMAKE_GENERATOR} -B cmbuild")
-set(OOMPH_BUILD_COMMAND_FOR_HYPRE "cd cmbuild && ${CMAKE_MAKE_PROGRAM}")
+# Make it look like we've changed the installation path so that Hypre won't try
+# to set it's own custom installation path...
+if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+  set(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT FALSE)
+endif()
+
+# TODO: Fork Hypre repo and update install paths so they are in the lib/hypre,
+# include/hypre directories...
 
 # Download HYPRE repo
 # cmake-format: off
 include(FetchContent)
 FetchContent_Declare(
-  hypre_project
+  hypre
   GIT_REPOSITORY https://github.com/hypre-space/hypre.git
-  GIT_TAG v2.21.0
+  GIT_TAG v2.26.0
+  GIT_PROGRESS TRUE
   GIT_SHALLOW TRUE
-  CONFIGURE_COMMAND ${OOMPH_CONFIGURE_COMMAND_FOR_HYPRE}
-  BUILD_COMMAND ${OOMPH_BUILD_COMMAND_FOR_HYPRE})
-FetchContent_MakeAvailable(hypre_project)
+  SOURCE_SUBDIR "src")
+FetchContent_MakeAvailable(hypre)
 # cmake-format: on
 
 # ------------------------------------------------------------------------------
