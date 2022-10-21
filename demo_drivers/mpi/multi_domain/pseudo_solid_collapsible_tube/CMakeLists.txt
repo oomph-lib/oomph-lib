@@ -20,20 +20,14 @@ endif()
 
 # ---------------------------------- TESTING ----------------------------------
 
-set(TEST_TARGET_DEPS)
-
 if(OOMPH_HAS_HYPRE AND OOMPH_HAS_TRILINOS)
-  list(APPEND TEST_TARGET_DEPS pseudo_solid_collapsible_tube)
-endif()
+  oomph_add_test(
+    TEST_NAME mpi.pseudo_solid_collapsible_tube
+    TARGET_DEPENDENCIES pseudo_solid_collapsible_tube
+    EXTRA_REQUIRES pseudo_solid_collapsible_tube.mcr make_dummy_solid_solns.bash
+    LABELS "mpi;pseudo_solid_collapsible_tube"
+    REQUIRES_MPI_RUN_COMMAND)
 
-oomph_add_test(
-  TEST_NAME mpi.pseudo_solid_collapsible_tube
-  TARGET_DEPENDENCIES ${TEST_TARGET_DEPS}
-  EXTRA_REQUIRES pseudo_solid_collapsible_tube.mcr make_dummy_solid_solns.bash
-  LABELS "mpi;pseudo_solid_collapsible_tube"
-  REQUIRES_MPI_RUN_COMMAND)
-
-if(OOMPH_HAS_HYPRE AND OOMPH_HAS_TRILINOS)
   # Indicate that this test requires the resource REQUIRES_SOLE_USE_OF_CPU_MPI.
   # We'll pass this to all other MPI-enabled self-tests to ensure that parallel
   # self-test do NOT run at the same time!
