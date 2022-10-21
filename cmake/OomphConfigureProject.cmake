@@ -34,6 +34,7 @@ endif()
 # fpdiff.py script from the scripts/ subdirectory.
 set(OOMPH_ROOT_DIR "${PROJECT_SOURCE_DIR}")
 
+# FIXME: CONFIG_DIR is confusing. Maybe call it build dir or just remove it...
 # Define the export information
 set(OOMPH_EXPORTS_TARGET_NAME "${PROJECT_NAME}Exports")
 set(OOMPH_CMAKE_CONFIG_DIR "${CMAKE_CURRENT_BINARY_DIR}")
