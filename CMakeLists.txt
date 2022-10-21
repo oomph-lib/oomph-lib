@@ -42,6 +42,15 @@ project(
   HOMEPAGE_URL "http://oomph-lib.maths.man.ac.uk/doc/html/index.html"
   LANGUAGES C CXX Fortran)
 
+# ~~~
+# **********************************************************************
+# FIXME: Temporary patch; find out how to handle this one properly...
+if(APPLE)
+  set(CMAKE_OSX_DEPLOYMENT_TARGET 12.3)
+endif()
+# **********************************************************************
+# ~~~
+
 # ---------------------------[ INITIAL PROJECT SETUP ]--------------------------
 
 # Specify the location of non-standard CMake modules and the C++ standard
@@ -80,7 +89,7 @@ option(OOMPH_ENABLE_PARANOID "Enable the PARANOID flag in Debug" OFF)
 option(OOMPH_ENABLE_RANGE_CHECKING "Enable RANGE_CHECKING flag in Debug" OFF)
 option(OOMPH_ENABLE_SYMBOLIC_LINKS_FOR_HEADERS "Replace headers by symbolic links" ON)
 option(OOMPH_ENABLE_USE_OPENBLAS "Use the OpenBLAS implementation of BLAS/LAPACK" OFF)
-option(OOMPH_SUPPRESS_DOC_BUILD "Suppress Doxygen creation of API documentation [DOESN'T WORK YET!]" ON)
+option(OOMPH_ENABLE_DOC_BUILD "Suppress Doxygen creation of API documentation [DOESN'T WORK YET!]" OFF)
 option(OOMPH_TRANSITION_TO_VERSION_3 "Try to build with up-to-date external sources" OFF)
 option(OOMPH_USE_DEPRECATED_SUPERLU "Use oomph-lib's deprecated version of SuperLU (4.3)" OFF)
 
@@ -256,7 +265,9 @@ if(OOMPH_IS_MAIN_PROJECT AND OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
   include(OomphAddTest)
   include(OomphAddExecutable)
   add_subdirectory(demo_drivers)
-  add_subdirectory(tests)
+
+  #
+  # add_subdirectory(tests)
 
   # FIXME: Need to integrate self_test files into the self-test framework
   # add_subdirectory(self_test)
