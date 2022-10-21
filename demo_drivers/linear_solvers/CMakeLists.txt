@@ -98,7 +98,7 @@ oomph_add_test(
   TEST_NAME linear_solvers.linear_solvers
   TARGET_DEPENDENCIES ${TEST_TARGET_DEPS}
   EXTRA_REQUIRES
-  LABELS "linear_solvers;linear_solvers")
+  LABELS "linear_solvers")
 
 message(VERBOSE "Leaving linear_solvers subdirectory")
 # ------------------------------------------------------------------------------
