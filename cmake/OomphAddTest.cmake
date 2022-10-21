@@ -26,12 +26,14 @@
 #
 # Example:
 #
-#     oomph_add_test(TEST_NAME one_d_poisson
+#     oomph_add_test(TEST_NAME poisson.one_d_poisson
 #                    TARGET_DEPENDENCIES one_d_poisson
 #                    EXTRA_REQUIRES my_extra_data_file.dat
 #                    LABELS "poisson;one_d_poisson"
 #                    REQUIRES_MPI_RUN_COMMAND)
 #
+# NOTE 1: Arguments to TARGET_DEPENDENCIES must be already-defined executables
+# or targets (i.e. defined via add_executable() or oomph_add_executable()).
 # =============================================================================
 # cmake-format: on
 include_guard()
