@@ -65,20 +65,23 @@ endif()
 # enough version of CMake, I'm not going to perform these tests so\n\ you should
 # be aware that MPI *may* not work.\n") endif()
 
+# ~~~
 # Make MPI libraries available project-wide. Directory-wide assignments are
 # typically a bad design decision with modern CMake, but it makes sense to use
 # it here to add MPI libraries to the entire build if we want it
 include_directories(SYSTEM ${MPI_C_INCLUDE_PATH} ${MPI_CXX_INCLUDE_PATH})
 # include_directories(SYSTEM ${MPI_CXX_INCLUDE_PATH})
 link_libraries(${MPI_C_LIBRARIES} ${MPI_CXX_LIBRARIES})
+# ~~~
 
 # Set the command used to run MPI-enabled self-tests if the user didn't specify
 # the commands to use
 if(NOT DEFINED MPI_RUN_COMMAND)
-  set(MPI_RUN_COMMAND "mpirun -np 2")
+  set(MPI_RUN_COMMAND "${MPIEXEC_EXECUTABLE} ${MPIEXEC_NUMPROC_FLAG} 2")
 endif()
 if(NOT DEFINED MPI_VARIABLENP_RUN_COMMAND)
-  set(MPI_VARIABLENP_RUN_COMMAND "mpirun -np OOMPHNP ")
+  set(MPI_VARIABLENP_RUN_COMMAND
+      "${MPIEXEC_EXECUTABLE} ${MPIEXEC_NUMPROC_FLAG} OOMPHNP ")
 endif()
 
 # Add a preprocessor definition and a CMake cache variable to indicate that MPI
