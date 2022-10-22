@@ -43,6 +43,14 @@ project(
   LANGUAGES C CXX Fortran)
 
 message(WARNING "CMAKE_INSTALL_PREFIX: ${CMAKE_INSTALL_PREFIX}")
+# ~~~
+# # **********************************************************************
+# # FIXME: Temporary patch; find out how to handle this one properly...
+# if(APPLE)
+#   set(CMAKE_OSX_DEPLOYMENT_TARGET 12.3)
+# endif()
+# # **********************************************************************
+# ~~~
 
 # ---------------------------[ INITIAL PROJECT SETUP ]--------------------------
 
