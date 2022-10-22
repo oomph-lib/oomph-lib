@@ -48,14 +48,14 @@ jobs:
         run: cmake --install build
 
       - name: Configure self-tests
-        run: cmake --preset CI-demo-drivers -S demo_drivers -B demo_drivers/build .
+        run: cmake -S demo_drivers -B demo_drivers/build
         env:
           # Tell the demo drivers where to find the installed oomph-lib library
           CMAKE_PREFIX_PATH: ${{ env.OOMPH_INSTALL_PATH }}
 
       - name: Run self-tests
         id: self_tests
-        run: ctest --preset CI-demo-drivers --test-dir demo_drivers/build -j $(sysctl -n hw.logicalcpu)
+        run: ctest --test-dir demo_drivers/build -j $(sysctl -n hw.logicalcpu)
         continue-on-error: true
 
       - name: Upload validation log file
