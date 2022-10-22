@@ -8,16 +8,8 @@ message(STATUS "Entered cgal subdirectory")
 find_package(Boost)
 
 # Specify build options
-set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_LIST_DIR}/cgal_default_installation")
 set(BUILD_SHARED_LIBS ${BUILD_SHARED_LIBS})
-set(CMAKE_BUILD_TYPE Release)
 set(CMAKE_VERBOSE_MAKEFILE OFF)
-set(CMAKE_C_COMPILER ${CMAKE_C_COMPILER})
-set(CMAKE_CXX_COMPILER ${CMAKE_CXX_COMPILER})
-set(CMAKE_Fortran_COMPILER ${CMAKE_Fortran_COMPILER})
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
-set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}")
 # set(OOMPH_WITH_GMP TRUE) set(GMP_INCLUDE_DIR "${GMP_INCLUDES}")
 # set(GMP_LIBRARIES
 # "${GMP_LINK}"))
