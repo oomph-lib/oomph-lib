@@ -283,16 +283,22 @@ oomph_target_silence_warnings(
 # that the user will always link to the generic library in some way, which is a
 # reasonable assumption.)
 
+if(OOMPH_HAS_NLOHMANN_JSON)
+  target_link_libraries(${LIBNAME} PUBLIC nlohmann_json::nlohmann_json)
+endif()
+
+if(OOMPH_HAS_SPDLOG)
+  target_link_libraries(${LIBNAME} PUBLIC spdlog::spdlog)
+endif()
+
 if(OOMPH_HAS_HYPRE)
   target_link_libraries(${LIBNAME} PUBLIC HYPRE::HYPRE)
 endif()
 
 if(OOMPH_HAS_TRILINOS)
-  list(APPEND SOURCES trilinos_helpers.cc trilinos_preconditioners.cc
-       trilinos_solver.cc trilinos_eigen_solver.cc)
-  list(APPEND HEADERS trilinos_helpers.h trilinos_preconditioners.h
-       trilinos_solver.h trilinos_eigen_solver.h)
-  list(APPEND LINKLIBS Trilinos::Trilinos)
+  # set(CMAKE_PREFIX_PATH ${Trilinos_PATH} ${CMAKE_PREFIX_PATH})
+  find_package(Trilinos REQUIRED PATHS "${Trilinos_BINARY_DIR}")
+  target_link_libraries(${LIBNAME} PUBLIC Trilinos::all_libs)
 endif()
 
 if(OOMPH_HAS_MUMPS)
@@ -302,13 +308,6 @@ if(OOMPH_HAS_MUMPS)
   target_link_libraries(${LIBNAME} PUBLIC MUMPS::MUMPS MPI::MPI_C)
 endif()
 
-if(OOMPH_HAS_NLOHMANN_JSON)
-  target_link_libraries(${LIBNAME} PUBLIC nlohmann_json::nlohmann_json)
-endif()
-
-if(OOMPH_HAS_SPDLOG)
-  target_link_libraries(${LIBNAME} PUBLIC spdlog::spdlog)
-endif()
 # ------------------------------------------------------------------------------
 
 message(VERBOSE "Leaving generic subdirectory")
