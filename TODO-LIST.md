@@ -2,11 +2,10 @@
 
 ## Requirements for minimum viable product
 
+* [ ] Discuss option naming!! E.g. `WANT_` or `ENABLE_` etc.
+* [ ] Try using Accelerate.Framework BLAS library on M1 Mac
+* [ ] Update GitHub self-tests to only run after pushing .h, .c, .cc, CMakeLists.txt code (see e.g. [here](https://github.com/scivision/mumps/blob/v5.5.1.7/.github/workflows/ci.yml)).
 * [ ] Convert external library version numbers into variables (for ODR)
-* [ ] Decide whether to link against *all* external libs when creating an executable or test
-  * Need to enable the flags to ensure the library isn't linked against if it isn't used. See e.g.:
-    * `-Wl,--no-as-needed`
-    * `LINK_WHAT_YOU_USE`
 * [ ] Make oomph_add_test() a wrapper around oomph_add_executable()?
   * Need to be very careful about how we set up test names and output names to avoid clashes...
   * Will be helpful to create a separate test per executable and so we know whether a specific executable is actually included in a test... (although we'll know automatically from NUM_TESTS)
@@ -29,6 +28,8 @@
   * [x] `nlohmann::json`
   * [x] `Hypre`
   * [ ] `MUMPS`
+  * [ ] `Trilinos`
+    * For Trilinos, link against `Trilinos::all_libs`
   * [ ] Sequential build of `MUMPS`
 * [ ] Remove non-working `external_distributions/` crap
 * [ ] Patch OomphMPI.cmake to avoid doing a global link_libraries()
