@@ -87,7 +87,7 @@ if(BUILD_SHARED_LIBS)
 endif()
 
 # Specify the libraries that we depend on
-set(LINKLIBS oomph_metis_from_parmetis_3.1.1)
+set(LINKLIBS oomph_metis_from_parmetis_3.1.1 MPI::MPI_C)
 if(OOMPH_ENABLE_USE_OPENBLAS AND BLAS_FOUND)
   list(APPEND LINKLIBS BLAS::BLAS)
 else()
@@ -108,8 +108,19 @@ include(OomphTargetSilenceWarnings)
 oomph_target_silence_warnings(
   TARGET ${LIBNAME}
   C_COMPILE_FLAGS
-    -Wno-format -Wno-dangling-else -Wno-implicit-function-declaration
-    -Wno-enum-conversion -Wno-parentheses)
+    -Wno-compare-distinct-pointer-types
+    -Wno-dangling-else
+    -Wno-enum-conversion
+    -Wno-format
+    -Wno-format-security
+    -Wno-implicit-function-declaration
+    -Wno-incompatible-pointer-types
+    -Wno-int-conversion
+    -Wno-unsequenced
+    -Wno-parentheses
+    -Wno-return-type
+    -Wno-switch
+    -Wno-unused-value)
 
 # Update list of external sources preprocessor definitions and list of libraries
 list(APPEND EXTERNAL_SRC_CXX_DEFINITIONS USING_OOMPH_SUPERLU_DIST)

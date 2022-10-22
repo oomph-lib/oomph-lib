@@ -238,10 +238,6 @@ endforeach()
 set(LINKLIBS ${MPI_C_LIBRARIES} ${MPI_CXX_LIBRARIES} oomph_blas oomph_lapack
     oomph_parmetis_4.0.3) # ${COMBBLAS_LIB}
 
-if(OOMPH_ENABLE_CUDA)
-  list(APPEND LINKLIBS ${CUDA_LIBRARIES} ${CUDA_CUBLAS_LIBRARIES})
-endif()
-
 # See:
 # https://github.com/xiaoyeli/superlu_dist#dependent-external-libraries-blas-and-parmetis
 # Might be able to link against OpenBLAS...
