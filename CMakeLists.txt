@@ -42,14 +42,7 @@ project(
   HOMEPAGE_URL "http://oomph-lib.maths.man.ac.uk/doc/html/index.html"
   LANGUAGES C CXX Fortran)
 
-# ~~~
-# **********************************************************************
-# FIXME: Temporary patch; find out how to handle this one properly...
-if(APPLE)
-  set(CMAKE_OSX_DEPLOYMENT_TARGET 12.3)
-endif()
-# **********************************************************************
-# ~~~
+message(WARNING "CMAKE_INSTALL_PREFIX: ${CMAKE_INSTALL_PREFIX}")
 
 # ---------------------------[ INITIAL PROJECT SETUP ]--------------------------
 

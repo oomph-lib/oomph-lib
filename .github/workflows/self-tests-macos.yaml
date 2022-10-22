@@ -3,10 +3,9 @@ name: macOS
 
 on: push
 
-# Environment variable(s) that can be read during jobs
+# Environment variables that can be read during jobs
 env:
-  # The oomph-lib installation location
-  OOMPH_INSTALL_PATH: "${{ github.workspace }}/.local"
+  HOMEBREW_NO_INSTALL_CLEANUP: 1
   CC: clang
   CXX: clang++
 
@@ -19,8 +18,7 @@ jobs:
       matrix:
         # NOTE: The main options are: [
         #   {status: "OFF", preset: CI-build},
-        #   {status: "ON",  preset: CI-mpi-build}
-        # ]
+        #   {status: "ON",  preset: CI-mpi-build}]
         mpi_info: [{ status: "OFF", cmake_preset: CI-build }]
 
     runs-on: macos-latest
@@ -35,21 +33,29 @@ jobs:
         if: matrix.mpi_info.status == 'ON'
         run: brew install open-mpi
 
-      - name: Configure, build & install
-        run: |
-          cmake --preset ${{ matrix.mpi_info.cmake_preset }} \
-          -D CMAKE_PREFIX_PATH="/usr/local/Cellar/openblas/0.3.21" \
-          -D CMAKE_INSTALL_PREFIX='${{ env.OOMPH_INSTALL_PATH }}' \
-          -D OOMPH_ENABLE_USE_OPENBLAS=ON \
-          -B build && cd build && ninja && ninja install
+      - name: Configure
+        run: cmake --preset ${{ matrix.mpi_info.cmake_preset }} -B build
+        env:
+          # The desired oomph-lib installation location and where to look to find
+          # the Homebrew-installed OpenBLAS libraries
+          CMAKE_INSTALL_PREFIX: "${{ github.workspace }}/.local"
+          CMAKE_PREFIX_PATH: "/usr/local/Cellar/openblas/0.3.21"
+
+      - name: Build & install
+        run: cmake --build build
+
+      - name: Install
+        run: cmake --install build
+
+      - name: Configure self-tests
+        run: cmake --preset CI-demo-drivers -S demo_drivers -B demo_drivers/build .
+        env:
+          # Tell the demo drivers where to find the installed oomph-lib library
+          CMAKE_PREFIX_PATH: ${{ env.CMAKE_INSTALL_PREFIX }}
 
       - name: Run self-tests
         id: self_tests
-        run: |
-          cd demo_drivers && cp ../CMakePresets.json ./
-          cmake --preset CI-demo-drivers -D CMAKE_PREFIX_PATH='${{ env.OOMPH_INSTALL_PATH }}' -B build
-          cd build && cp ../CMakePresets.json ./
-          ctest --preset CI-demo-drivers -j $(sysctl -n hw.logicalcpu)
+        run: ctest --preset CI-demo-drivers -j $(sysctl -n hw.logicalcpu)
         continue-on-error: true
 
       - name: Upload validation log file

@@ -9,12 +9,13 @@
     {
       "name": "base",
       "hidden": true,
+      "binaryDir": "${sourceDir}/build",
       "cacheVariables": {
-        "BUILD_SHARED_LIBS": "OFF",
         "CMAKE_BUILD_TYPE": "Release",
+        "BUILD_SHARED_LIBS": "OFF",
         "OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY": "OFF",
-        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
         "OOMPH_DONT_SILENCE_USELESS_WARNINGS": "OFF",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
         "OOMPH_ENABLE_CODE_COVERAGE": "OFF",
         "OOMPH_ENABLE_DOC_BUILD": "OFF",
         "OOMPH_ENABLE_MPI": "OFF",
@@ -38,7 +39,9 @@
       "displayName": "Build Config for CI/CD",
       "generator": "Ninja",
       "cacheVariables": {
-        "CMAKE_INSTALL_PREFIX": "$penv{OOMPH_INSTALL_PATH}"
+        "OOMPH_ENABLE_USE_OPENBLAS": "ON",
+        "OOMPH_WANT_TRILINOS": "ON",
+        "OOMPH_WANT_MUMPS": "ON"
       }
     },
     {
@@ -47,7 +50,7 @@
       "displayName": "MPI Build Config for CI/CD",
       "generator": "Ninja",
       "cacheVariables": {
-        "CMAKE_INSTALL_PREFIX": "$penv{OOMPH_INSTALL_PATH}",
+        "OOMPH_ENABLE_USE_OPENBLAS": "ON",
         "OOMPH_ENABLE_MPI": "ON",
         "OOMPH_WANT_TRILINOS": "ON",
         "OOMPH_WANT_MUMPS": "ON"
@@ -61,10 +64,7 @@
     {
       "name": "CI-demo-drivers",
       "displayName": "Demo Drivers Build Config for CI/CD",
-      "generator": "Ninja",
-      "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Release"
-      }
+      "generator": "Ninja"
     },
     {
       "name": "CI-build-with-coverage",
@@ -87,8 +87,7 @@
       "inherits": "CI-demo-drivers",
       "displayName": "Demo Drivers Build Config for CI/CD code coverage",
       "cacheVariables": {
-        "OOMPH_ENABLE_CODE_COVERAGE": "ON",
-        "CMAKE_PREFIX_PATH": "$penv{OOMPH_BUILD_PATH}"
+        "OOMPH_ENABLE_CODE_COVERAGE": "ON"
       }
     },
     {
