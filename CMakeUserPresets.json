@@ -1,0 +1,73 @@
+{
+  "version": 5,
+  "configurePresets": [
+    {
+      "name": "custom_build",
+      "inherits": "base",
+      "displayName": "custom_build",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build",
+      "cacheVariables": {
+        "CMAKE_APPLE_SILICON_PROCESSOR": "arm64",
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "CMAKE_PREFIX_PATH": "/opt/homebrew/opt/openblas/;${sourceDir}/build/",
+        "OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY": "ON",
+        "OOMPH_TRANSITION_TO_VERSION_3": "OFF",
+        "OOMPH_ENABLE_MPI": "OFF",
+        "OOMPH_ENABLE_DOC_BUILD": "OFF",
+        "OOMPH_ENABLE_USE_OPENBLAS": "ON",
+        "OOMPH_WANT_NLOHMANN_JSON": "OFF",
+        "OOMPH_WANT_SPDLOG": "OFF",
+        "OOMPH_WANT_HYPRE": "OFF",
+        "OOMPH_WANT_MUMPS": "OFF",
+        "OOMPH_WANT_TRILINOS": "OFF"
+      },
+      "warnings": {
+        "unusedCli": true
+      }
+    },
+    {
+      "name": "custom_mpi_build",
+      "inherits": "custom_build",
+      "displayName": "custom_mpi_build",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build",
+      "cacheVariables": {
+        "OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY": "ON",
+        "OOMPH_ENABLE_USE_OPENBLAS": "ON",
+        "OOMPH_ENABLE_MPI": "ON",
+        "OOMPH_WANT_MUMPS": "OFF"
+      },
+      "environment": {
+        "CC": "mpicc",
+        "CXX": "mpic++"
+      },
+      "warnings": {
+        "unusedCli": true
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "custom_build",
+      "configurePreset": "custom_build",
+      "jobs": 4
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "custom_build",
+      "configurePreset": "custom_build",
+      "output": {
+        "outputOnFailure": true,
+        "labelSummary": false
+      },
+      "execution": {
+        "timeout": 10000,
+        "noTestsAction": "error",
+        "jobs": 4
+      }
+    }
+  ]
+}
