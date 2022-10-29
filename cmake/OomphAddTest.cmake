@@ -90,9 +90,13 @@ function(oomph_add_test)
   string(SHA1 PATH_HASH "${CMAKE_CURRENT_LIST_DIR}")
   string(SUBSTRING ${PATH_HASH} 0 7 PATH_HASH)
 
-  # We always need a validate.sh script
-  set(REQUIREMENTS_WITH_PATHS "${CMAKE_CURRENT_LIST_DIR}/validate.sh")
-  set(TEST_BYPRODUCTS "${CMAKE_CURRENT_BINARY_DIR}/validate.sh")
+  # Grab the validate.sh script if we have one
+  set(REQUIREMENTS_WITH_PATHS)
+  set(TEST_BYPRODUCTS)
+  if(NOT NO_VALIDATE_SH)
+    set(REQUIREMENTS_WITH_PATHS "${CMAKE_CURRENT_LIST_DIR}/validate.sh")
+    set(TEST_BYPRODUCTS "${CMAKE_CURRENT_BINARY_DIR}/validate.sh")
+  endif()
 
   # We *nearly* always need validata, so warn if we don't have it, just incase
   # the user's forgotten to provide it
@@ -166,8 +170,6 @@ function(oomph_add_test)
 
   # Add on commands to build the targets we need
   foreach(TARGET_DEPENDENCY IN LISTS TARGET_DEPENDENCIES)
-    # FIXME: Need to fix the issue with not being to rerun "ctest" twice without
-    # wiping the "build/" directory
     add_custom_command(
       TARGET build_targets_${PATH_HASH}
       COMMAND ${CMAKE_MAKE_PROGRAM} ${TARGET_DEPENDENCY}_${PATH_HASH}
@@ -188,7 +190,15 @@ function(oomph_add_test)
   endif()
   list(JOIN EXTRA_VALIDATE_SH_ARGS " " EXTRA_VALIDATE_SH_ARGS)
 
-  # Run the dependencies to copies the test data, build the (sub)project(s)
+  # TODO: Try rewriting with POST_BUILD actions:
+  # https://cmake.org/cmake/help/latest/command/add_custom_command.html?highlight=add_custom_command#build-events
+  # It will simply append the new command (with &&; check build.ninja) and not
+  # overwrite the previous ones!
+
+  # FIXME: If we move away from validate.sh scripts, we need to run executables
+  # with our own mpirun command if needed
+
+  # Run the dependencies to copy the test data, build the (sub)project(s)
   # targets then run the validate.sh script and pass the location of the
   # oomph-lib root directory so they have access to the scripts they require,
   # like fpdiff.py and validate_ok_count, and so it knows where to place the
@@ -203,12 +213,17 @@ function(oomph_add_test)
       DEPENDS copy_${PATH_HASH} build_targets_${PATH_HASH}
       VERBATIM)
   else()
-    # TODO: Delete VERBATIM if not needed
+    # Run all of the dependent targets and then append the validation.log output
+    # to the global one.
+    list(JOIN TARGET_DEPENDENCIES " ./" RUN_DEPENDENCIES_STRING)
     add_custom_target(
       check_${PATH_HASH}
-      COMMAND ${BASH_PROGRAM} ${TARGET_DEPENDENCIES}
+      COMMAND ${BASH_PROGRAM} -c ./${RUN_DEPENDENCIES_STRING}
+      COMMAND cat "${CMAKE_CURRENT_BINARY_DIR}/Validation/validation.log" >>
+              "${OOMPH_ROOT_DIR}/validation.log"
       WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
-      DEPENDS copy_${PATH_HASH} build_targets_${PATH_HASH})
+      DEPENDS copy_${PATH_HASH} build_targets_${PATH_HASH}
+      VERBATIM)
   endif()
 
   # Create the test to be run by CTest. Through the dependencies requirements,
